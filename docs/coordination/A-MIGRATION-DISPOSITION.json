@@ -1,0 +1,23 @@
+{
+  "contract_version": "AB-CONTRACT-1.0",
+  "front": "A",
+  "issuer": "ORQ-A",
+  "date": "2026-10-24",
+  "profile_version": "0.1.0a1",
+  "profile_sha256": "76ae9be325866895e6bcefeefbc7d0f35e295969a7263e71db6d774be1bf794e",
+  "scope": "Candidate viewer dependencies only; not external-consumer closure or retirement authority",
+  "inventory_status": "B_INVENTORY_NOT_PROVIDED",
+  "individual_source_dispositions": [],
+  "unidentified_sources_reported_by_mission": 8,
+  "unidentified_sources_disposition": "UNKNOWN",
+  "historical_directory_runtime_dependency": {
+    "disposition": "NOT_REQUIRED_BY_A",
+    "evidence_scope": "New viewer installed without legacy producer; explicit synthetic packages only"
+  },
+  "prior_operational_reference": "NEEDED_UNTIL_PARITY_AND_HUMAN_PROMOTION",
+  "human_protocol_acceptance": "PENDING",
+  "real_data_migration": "NOT_AUTHORIZED_NOT_EXECUTED",
+  "canonical_promotion": "NOT_APPROVED",
+  "physical_retirement": "NOT_AUTHORIZED_BY_A",
+  "drift_policy": "Reassess when profile, adapter, reader or consumers change; exact published SHAs are in the private append-only handoff"
+}

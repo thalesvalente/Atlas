@@ -1,0 +1,11 @@
+{
+  "contexts": {
+    "https://w3id.org/ro/crate/1.3/context": {
+      "filename": "ro-crate-1.3-context.jsonld",
+      "sha256": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+      "source_commit": "22fbd7e098ccd2839c80967e363a2201528a2efe",
+      "license": "Apache-2.0"
+    }
+  },
+  "policy": "Never download or execute contexts. Catalog identifies a pinned local semantic map."
+}

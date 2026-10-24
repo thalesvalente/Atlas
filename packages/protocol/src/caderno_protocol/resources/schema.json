@@ -1,0 +1,355 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/thalesvalente/Atlas/feat/atlas021-interface-protocol/packages/protocol/src/caderno_protocol/resources/schema.json",
+  "title": "Caderno 0.1.0a1 restricted RO-Crate serialization (structure only)",
+  "type": "object",
+  "required": [
+    "@context",
+    "@graph"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "@context": {
+      "const": [
+        "https://w3id.org/ro/crate/1.3/context",
+        {
+          "cp": "https://github.com/thalesvalente/Atlas/ns/caderno#",
+          "prov": "http://www.w3.org/ns/prov#"
+        }
+      ]
+    },
+    "@graph": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    }
+  },
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "required": [
+        "@id"
+      ],
+      "properties": {
+        "@id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "additionalProperties": false
+    },
+    "refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ref"
+      },
+      "maxItems": 10000
+    },
+    "entity": {
+      "type": "object",
+      "required": [
+        "@id",
+        "@type"
+      ],
+      "properties": {
+        "@id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "@type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          ]
+        }
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean",
+              "null"
+            ]
+          },
+          {
+            "$ref": "#/$defs/ref"
+          },
+          {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": [
+                    "string",
+                    "number",
+                    "integer",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                {
+                  "$ref": "#/$defs/ref"
+                }
+              ]
+            },
+            "maxItems": 10000
+          }
+        ]
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "@type": {
+                "anyOf": [
+                  {
+                    "const": "CreateAction"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "CreateAction"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "instrument",
+              "agent",
+              "cp:experiment",
+              "cp:executionStatus",
+              "cp:reviewStatus",
+              "cp:synthetic",
+              "cp:timestampOrigin",
+              "actionStatus"
+            ],
+            "properties": {
+              "cp:executionStatus": {
+                "enum": [
+                  "COMPLETED",
+                  "PARTIAL",
+                  "FAILED",
+                  "RUNNING",
+                  "UNKNOWN"
+                ]
+              },
+              "cp:reviewStatus": {
+                "enum": [
+                  "UNKNOWN",
+                  "HOLD",
+                  "ACCEPTED",
+                  "REJECTED",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "cp:synthetic": {
+                "type": "boolean"
+              },
+              "cp:timestampOrigin": {
+                "enum": [
+                  "DECLARED",
+                  "OBSERVED",
+                  "UNKNOWN"
+                ]
+              },
+              "instrument": {
+                "$ref": "#/$defs/ref"
+              },
+              "agent": {
+                "$ref": "#/$defs/ref"
+              },
+              "cp:experiment": {
+                "$ref": "#/$defs/ref"
+              },
+              "actionStatus": {
+                "$ref": "#/$defs/ref"
+              },
+              "cp:metrics": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ref"
+                },
+                "maxItems": 10000
+              },
+              "cp:parameters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ref"
+                },
+                "maxItems": 10000
+              },
+              "object": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ref"
+                },
+                "maxItems": 10000
+              },
+              "result": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ref"
+                },
+                "maxItems": 10000
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "@type": {
+                "anyOf": [
+                  {
+                    "const": "PropertyValue"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "PropertyValue"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "propertyID",
+              "cp:valueType"
+            ],
+            "properties": {
+              "propertyID": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cp:valueType": {
+                "enum": [
+                  "number",
+                  "integer",
+                  "string",
+                  "boolean"
+                ]
+              },
+              "unitText": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cp:precision": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "cp:missingReason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "@type": {
+                "anyOf": [
+                  {
+                    "const": "File"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "File"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "cp:availability"
+            ],
+            "properties": {
+              "cp:availability": {
+                "enum": [
+                  "PRESENT",
+                  "MISSING",
+                  "EXTERNAL",
+                  "UNKNOWN"
+                ]
+              },
+              "cp:sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "contentSize": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "@type": {
+                "anyOf": [
+                  {
+                    "const": "SoftwareApplication"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "SoftwareApplication"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "name",
+              "url",
+              "version"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "url": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

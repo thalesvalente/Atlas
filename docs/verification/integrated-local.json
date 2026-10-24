@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-24",
+  "scope": "Public candidate integrated source and independently installed wheels",
+  "status": "PASS_SCOPED",
+  "python": "3.12.14",
+  "normal": {"sdk": 11, "independent_qa": 41, "viewer_http": 12, "total": 64, "failed": 0, "skipped": 0},
+  "optimized": {"sdk": 11, "independent_qa": 41, "viewer_http": 12, "total": 64, "failed": 0, "skipped": 0},
+  "architecture_audit": "PASS_SCOPED_NO_FINDINGS",
+  "profile_manifest_hashes": "4_OF_4_MATCH",
+  "independent_build_source_hashes": "ALL_MATCH_A4_LOCAL_VERIFICATION",
+  "independent_receipt": "../reviews/A4-local-verification.json",
+  "reference_scope": "../protocol/conformance.md",
+  "commands": ["python scripts/run_checks.py", "python -O scripts/run_checks.py"],
+  "execution_note": "Integrator used explicit public source paths; independent A4 used installed wheels with isolated Python outside source tree",
+  "remote_ci_and_codex": "PENDING_AT_DOCUMENT_CREATION_SEE_PR_EXACT_SHA",
+  "human_protocol_acceptance": "PENDING",
+  "canonical_promotion": "NOT_APPROVED"
+}
