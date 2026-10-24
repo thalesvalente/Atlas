@@ -132,7 +132,9 @@ Uso local por uma pessoa, sem serviço SaaS, conta ou acesso remoto. Fontes de e
 sintéticas; produção real não está autorizada. A proposta de protocolo pode ser
 implementada/testada em pré-release antes de aceite, como permite a missão.
 O runtime histórico segue referência provisória até paridade e promoção explícitas.
-O inventário B não foi fornecido nesta sessão; não se inferem identidades ou permissões.
+O inventário lógico B foi recebido pela coordenação privada; identidades individuais
+e disposições ficam no registro privado. Receber IDs não confere acesso ao conteúdo,
+dispensa de consumidores ou autorização física. Necessidades históricas permanecem UNKNOWN.
 
 ## Clarifications
 

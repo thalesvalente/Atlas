@@ -52,7 +52,7 @@ CI/review e handoff; resultados finais devem ser registrados nos canais reais.
 | A3 | PASS_SCOPED | Produto instalado, browser real e fontes intactas |
 | A4 | PASS_SCOPED_LOCAL | Dois produtores sintéticos; detalhes/evidências privados |
 | A5 | PENDING_EXTERNAL | T026: CI/review/Codex exatos após publicação |
-| A6 | PARTIAL | T027; oito fontes individuais UNKNOWN sem B-INVENTORY |
+| A6 | PARTIAL | Inventário lógico privado reconciliado; necessidades históricas por fonte permanecem UNKNOWN |
 | A7 | NOT_APPROVED | Sem decisão de produto/release/rollback/migração |
 
 Aceite humano e disponibilidade do inventário não são falhas a esconder. A candidata
@@ -83,3 +83,22 @@ os registros. Snapshot, dossiê e rebuild preservam a outra fonte e todos os byt
 FR-001/013 e US1/AC2 recebem essa regressão. T026 continua exigindo nova CI e Codex
 no SHA corrigido; o handoff anterior recebeu adendo HOLD em vez de ser sobrescrito.
 T027 será atualizado por novo comentário com o par exato após essa convergência.
+
+## Reconciliação documental do handoff B
+
+A releitura da coordenação privada encontrou o B-INVENTORY que não havia sido
+incorporado ao primeiro registro de A. A referência anterior à ausência do inventário
+foi corrigida. O handoff agora utiliza os IDs lógicos efetivamente fornecidos, mantendo
+os estados B e os vínculos pai/filho no registro privado. Nenhum ID ou mapa privado
+é transportado para esta árvore pública.
+
+O conteúdo das fontes não foi compartilhado nem acessado. A disposição total por ID
+permanece UNKNOWN; a afirmação de que o viewer instalado não depende de diretórios
+históricos continua limitada ao runtime sintético ensaiado. A6 permanece PARTIAL:
+o handoff documental está entregue, mas necessidades históricas, consumidores e
+recuperabilidade não foram esclarecidos por esse inventário. A7 não foi aprovado.
+
+Esta revisão altera somente documentos. Perfil, schema, SDK, interface, exportadores,
+testes e workflows públicos mantêm os mesmos bytes da revisão técnica concluída.
+O novo SHA documental receberá as verificações remotas aplicáveis e será vinculado
+ao handoff final; nenhuma evidência anterior é retroativamente atribuída a ele.

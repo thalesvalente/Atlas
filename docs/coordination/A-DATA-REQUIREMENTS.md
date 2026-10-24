@@ -29,12 +29,19 @@ essa transformação. Mudanças de fonte são sinalizadas e exigem reconstruçã
 | Fonte original de qualquer transformação futura | UNKNOWN | Nenhuma transformação de acervo real foi aprovada ou executada |
 | Diretórios históricos para o runtime novo | NOT_REQUIRED_BY_A | Apenas o runtime sintético ensaiado; não encerra outros consumidores |
 | Ferramenta operacional anterior | NEEDED | Mantém a referência provisória até paridade e promoção humana |
-| Oito fontes históricas individuais mencionadas na missão | UNKNOWN | B-INVENTORY não recebido; não se inventam IDs, paths ou disposições |
+| Fontes históricas identificadas na coordenação privada | UNKNOWN | Inventário lógico recebido; conteúdo e consumidores ainda não demonstram dispensa por A |
 
-Estas linhas são classes de requisitos, não uma disposição de oito fontes
-identificadas. O registro de IDs individuais permanecerá vazio até existir um
-inventário compartilhado com autorização compatível. O mapa concreto do adaptador,
-as perdas e a ferramenta de conversão ficam na branch privada do produtor.
+Estas linhas são classes de requisitos. O handoff lógico de B foi recebido e
+reconciliado na coordenação privada; o registro individual usa os IDs efetivamente
+fornecidos e permanece privado. Receber IDs não autoriza acesso ao conteúdo nem
+comprova que uma fonte histórica deixou de ser necessária. As disposições totais
+permanecem UNKNOWN; a independência demonstrada do runtime é um escopo separado.
+O mapa concreto do adaptador, as perdas e a ferramenta de conversão ficam na
+branch privada do produtor.
+
+O registro inicial de A ainda não havia incorporado esse handoff de B. Esta revisão
+corrige a referência anterior à ausência de inventário, sem inferir preservação,
+recuperabilidade, paridade ou autorização física a partir de um inventário documental.
 
 ## Uso permitido da evidência por B
 
