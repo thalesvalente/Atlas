@@ -11,6 +11,16 @@ import stat
 from typing import Any
 from urllib.parse import urlsplit
 import zipfile
+import zlib
+
+# Match zipfile's optional LZMA support without requiring that Python extension
+# on hosts that only read other supported archive compression methods.
+try:
+    import lzma
+except ImportError:
+    _LZMA_ERRORS = ()
+else:
+    _LZMA_ERRORS = (lzma.LZMAError,)
 
 from .model import Package, ValidationIssue, ValidationReport, safe_relative_path, types, validate_document
 
@@ -193,7 +203,7 @@ def load_package(path: str | os.PathLike[str]) -> Package:
                 entry["status"] = "MISSING"
                 report.warnings.append(ValidationIssue("PAYLOAD_MISSING", eid, "The record exists but its local payload is absent."))
                 continue
-            except (OSError, UnsafeSource, zipfile.BadZipFile, RuntimeError) as exc:
+            except (OSError, UnsafeSource, zipfile.BadZipFile, zlib.error, *_LZMA_ERRORS, RuntimeError) as exc:
                 entry["status"] = "UNAVAILABLE"
                 report.warnings.append(ValidationIssue("PAYLOAD_UNAVAILABLE", eid, str(exc)))
                 continue
@@ -212,7 +222,7 @@ def load_package(path: str | os.PathLike[str]) -> Package:
         return Package(document, hashlib.sha256(raw).hexdigest(), report, statuses, source_name)
     except FileNotFoundError:
         return Package({}, "", ValidationReport(errors=[ValidationIssue("SOURCE_INACCESSIBLE", "$", "The supplied source or metadata file is absent.")]), source_name=source_name)
-    except (PermissionError, OSError, ValueError, UnicodeError, zipfile.BadZipFile, RuntimeError, RecursionError) as exc:
+    except (PermissionError, OSError, ValueError, UnicodeError, zipfile.BadZipFile, zlib.error, *_LZMA_ERRORS, RuntimeError, RecursionError) as exc:
         code = "SOURCE_UNSAFE" if isinstance(exc, UnsafeSource) else "SOURCE_INVALID"
         return Package({}, "", ValidationReport(errors=[ValidationIssue(code, "$", str(exc))]), source_name=source_name)
     finally:

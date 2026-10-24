@@ -4,6 +4,7 @@ import importlib.util
 import json
 from pathlib import Path
 import shutil
+import struct
 import tempfile
 import unittest
 import zipfile
@@ -49,6 +50,40 @@ class ContractAndRoundTrip(unittest.TestCase):
             base = exporter.export(Path(temp) / "crate")
             with self.assertRaises(FileExistsError):
                 exporter.export(base)
+
+    def test_corrupt_lzma_stream_is_reported_without_losing_readable_records(self):
+        try:
+            import lzma
+        except ImportError:
+            self.skipTest("This Python build has no optional LZMA compression support")
+        for target in ["ro-crate-metadata.json", "data/water.csv"]:
+            with self.subTest(target=target), tempfile.TemporaryDirectory() as temp:
+                base = exporter.export(Path(temp) / "crate")
+                archive = Path(temp) / "corrupt-lzma.zip"
+                with zipfile.ZipFile(archive, "w", zipfile.ZIP_LZMA) as z:
+                    for path in base.rglob("*"):
+                        if path.is_file():
+                            z.write(path, path.relative_to(base).as_posix())
+                    offset = z.getinfo(target).header_offset
+                damaged = bytearray(archive.read_bytes())
+                name_length, extra_length = struct.unpack_from("<HH", damaged, offset + 26)
+                compressed_start = offset + 30 + name_length + extra_length
+                # Leave ZIP framing intact but invalidate the LZMA filter properties.
+                damaged[compressed_start + 4] = 255
+                archive.write_bytes(damaged)
+                with zipfile.ZipFile(archive) as z:
+                    with self.assertRaises(lzma.LZMAError):
+                        z.read(target)
+                package = load_package(archive)
+                self.assertEqual(archive.read_bytes(), bytes(damaged))
+                if target == "ro-crate-metadata.json":
+                    self.assertFalse(package.report.valid)
+                    self.assertIn("SOURCE_INVALID", {x.code for x in package.report.errors})
+                else:
+                    self.assertTrue(package.report.valid, package.report.to_dict())
+                    self.assertEqual(package.payload_status[target]["status"], "UNAVAILABLE")
+                    self.assertIn("PAYLOAD_UNAVAILABLE", {x.code for x in package.report.warnings})
+                    self.assertEqual(len(to_read_model(package)["runs"]), 4)
 
     def test_complete_profiles_and_software_metadata_required(self):
         document, _ = exporter.build_document()

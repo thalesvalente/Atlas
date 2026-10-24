@@ -59,3 +59,27 @@ Aceite humano e disponibilidade do inventário não são falhas a esconder. A ca
 pode ser revisada; estabilização, uso real, promoção e retirada mantêm seus gates.
 Registros append-only na PR e coordenação privada podem concluir T021/T026/T027 sem
 alterar retroativamente os resultados locais deste documento.
+
+## Adendo após CI e review Codex
+
+O CI público 40116249982 passou em seis jobs e o privado 40116391856 em quatro,
+nos SHAs registrados na coordenação. O Codex então identificou um P2 real no SDK:
+ZIP DEFLATE corrompido escapava como exceção. A investigação independente confirmou
+a mesma classe de falha no codec LZMA. O autor corrigiu as duas fronteiras de leitura
+com exceções específicas e LZMA opcional, sem captura genérica ou alteração de perfil.
+
+A4 reproduziu quatro falhas no wheel anterior e verificou os quatro subcasos
+corrigidos, normal/otimizado, além de fonte saudável no mesmo catálogo. Evidência:
+`docs/reviews/A4-decompression-review.json`. O recibo de wheel anterior permanece
+histórico; seu hash não é atribuído à revisão corrigida. Commits de autoria citados
+no recibo são revisões locais dos agentes; o commit público agregado é registrado
+na PR e pode ser conciliado pelo hash de arquivo.
+
+A suíte integrada agora tem **68 testes por modo: 12 SDK + 43 QA + 13 viewer**,
+todos PASS normal e `-O`, zero skips neste host. Uma fonte com metadados corrompidos
+fica INVALID/SOURCE_INVALID; payload corrompido fica UNAVAILABLE com aviso, mantendo
+os registros. Snapshot, dossiê e rebuild preservam a outra fonte e todos os bytes.
+
+FR-001/013 e US1/AC2 recebem essa regressão. T026 continua exigindo nova CI e Codex
+no SHA corrigido; o handoff anterior recebeu adendo HOLD em vez de ser sobrescrito.
+T027 será atualizado por novo comentário com o par exato após essa convergência.

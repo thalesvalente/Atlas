@@ -7,9 +7,11 @@ import json
 import os
 from pathlib import Path
 import shutil
+import struct
 import tempfile
 import threading
 import unittest
+import zipfile
 
 from atlas_viewer.catalog import Catalog, MAX_SOURCES
 from atlas_viewer.server import make_server
@@ -101,6 +103,39 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(observed["value"], 9007199254740993)
         self.assertEqual(observed["display_value"], "9007199254740993")
         self.assertIn('9007199254740993', json.dumps(catalog.dossier()))
+
+    def test_corrupt_zip_does_not_hide_other_sources_or_invent_payload_availability(self):
+        before = digests(self.source)
+        for member in ("ro-crate-metadata.json", "data/water.csv"):
+            with self.subTest(corrupt_member=member):
+                archive = self.root / ("bad-metadata.zip" if member.endswith(".json") else "bad-payload.zip")
+                with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as stream:
+                    for path in self.source.rglob("*"):
+                        if path.is_file():
+                            stream.write(path, path.relative_to(self.source).as_posix())
+                with zipfile.ZipFile(archive) as stream:
+                    info = stream.getinfo(member)
+                raw = bytearray(archive.read_bytes())
+                name_length, extra_length = struct.unpack_from("<HH", raw, info.header_offset + 26)
+                raw[info.header_offset + 30 + name_length + extra_length] = 0xff
+                archive.write_bytes(raw)
+                corrupt_bytes = archive.read_bytes()
+                catalog = Catalog([self.source, archive])
+                for observed in (catalog.snapshot(), catalog.dossier(), catalog.rebuild()):
+                    self.assertEqual(len(observed["sources"]), 2)
+                    good, damaged = observed["sources"]
+                    self.assertEqual(good["status"], "READY")
+                    self.assertEqual(len(good["read_model"]["runs"]), 4)
+                    if member.endswith(".json"):
+                        self.assertEqual(damaged["status"], "INVALID")
+                        self.assertIsNone(damaged["read_model"])
+                        self.assertIn("SOURCE_INVALID", {e["code"] for e in damaged["report"]["errors"]})
+                    else:
+                        self.assertEqual(damaged["status"], "READY")
+                        self.assertEqual(len(damaged["read_model"]["runs"]), 4)
+                        self.assertIn("PAYLOAD_UNAVAILABLE", {e["code"] for e in damaged["report"]["warnings"]})
+                self.assertEqual(archive.read_bytes(), corrupt_bytes)
+        self.assertEqual(digests(self.source), before)
 
 
 class HTTPTests(unittest.TestCase):

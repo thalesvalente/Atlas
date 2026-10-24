@@ -4,6 +4,8 @@
 
 Este parecer cobre a candidata técnica e suas fronteiras. O aceite humano da ADR-0002, a promoção canônica, release, migração e retirada continuam separados. A revisão local não substitui CI nem Codex no SHA publicado.
 
+**Atualização posterior:** o Codex encontrou um P2 de descompressão no SHA então publicado. O adendo abaixo registra a reprodução independente, a variante LZMA e a correção local verificada. Os resultados originais mantêm seus hashes e alcance; a conclusão remota depende do novo SHA.
+
 ## Resultado e escopo
 
 Foram construídos wheels a partir de cópias do código e instalados em dois ambientes novos, fora da árvore de fontes. O primeiro contém somente o SDK; nele a interface e qualquer produtor legado estão ausentes. O segundo contém SDK e interface, sem o produtor legado. Os comandos foram executados com isolamento Python (`-I`) e sem `PYTHONPATH` de produto.
@@ -46,3 +48,15 @@ As verificações locais foram realizadas em Linux. Windows depende da matriz CI
 ## Conclusão para integração
 
 Não permanece achado de arquitetura aberto no conjunto local revisado. É adequado publicar a candidata como Draft, com a proposta de protocolo e os limites acima. O integrador deve conferir os hashes de fonte do recibo contra sua árvore final e vincular CI/Codex ao SHA publicado. A declaração de `A5 CI_REVIEW_EXACT_PASS` exige esses resultados reais. `A1 PROTOCOL_DECISION_ACCEPTED` e `A7 CANONICAL_PROMOTION_APPROVED` exigem as decisões humanas respectivas; nenhum teste desta revisão as substitui.
+
+## Adendo — erros de descompressão, 24/10/2026
+
+O [review Codex no SHA `6da9f056b21952072e385e54d2877ebea956b244`](https://github.com/thalesvalente/Atlas/pull/1#discussion_r4367903804) identificou um **P2**: dados DEFLATE corrompidos faziam `zlib.error` escapar do leitor e interromper o catálogo, inclusive quando outra fonte era válida. A4 reproduziu a falha em metadados e payload no wheel anterior. Na mesma fronteira, confirmou a variante de ZIP LZMA corrompido, com `LZMAError` não tratado.
+
+A1 corrigiu as duas fronteiras em `ee02bd10a94fdd088244321e36cc03315c244663` e `39cf6e4fbbf7cc66ae37de22dd867810fd91512e`. A revisão independente confirmou capturas específicas dos erros, com importação opcional do codec LZMA. Não há captura genérica de todas as exceções nem alteração do perfil. O arquivo `storage.py` revisado possui SHA-256 `1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67`.
+
+As duas novas regressões independentes criam ZIPs válidos pelo exportador ambiental, corrompem os bytes comprimidos e comprovam que o decoder real falha antes de testar o contrato do SDK. São **quatro casos concretos** — metadados e payload, cada um com DEFLATE e LZMA — executados em modo normal e `-O`, sem skips neste ambiente. Todos falham no wheel anterior e passam no código corrigido. O LZMA recebe skip explícito somente se o Python não possuir esse codec opcional.
+
+Metadados ilegíveis passam a produzir `SOURCE_INVALID`; payload ilegível produz `UNAVAILABLE` e `PAYLOAD_UNAVAILABLE`, preservando os quatro registros e os outros anexos legíveis. A4 também executou os quatro cenários no viewer já instalado, selecionando explicitamente o SDK corrigido por caminho de fonte: `snapshot`, dossiê e reconstrução mantiveram a fonte boa e localizaram o diagnóstico na fonte danificada. Os ZIPs e a fonte original permaneceram byte a byte intactos. Isso é um ensaio focal de integração com o código corrigido, sem alegar nova instalação limpa ou novo browser.
+
+O [recibo complementar](A4-decompression-review.json) preserva a identidade do código e o alcance dos ensaios. O [recibo anterior](A4-local-verification.json), os wheels e as capturas anteriores permanecem históricos, com seus hashes originais. A4 considera o reparo **`PASS_SCOPED` local**. A5 permanece pendente de CI e conclusão efetiva do Codex no próximo SHA publicado; este adendo não resolve a conversa remota nem concede os gates humanos A1/A7.

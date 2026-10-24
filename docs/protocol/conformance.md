@@ -15,7 +15,7 @@ fontes, alternativas, licenças, métodos e limites completos.
 | ZIP ELN → quatro checks oficiais | 4 PASS | Estrutura, parser `rocrate==0.14.0`, metadados, schema |
 | Projeção comparada RO/ELN | Igualdade de 2 projetos, 3 experimentos, 4 runs, 12 relações | Campos selecionados; não identidade RDF/bytes |
 | Exemplo oficial Process Run 0.6 preservado | 58 PASS, 5 FAIL, 3 SKIP | Negativo conhecido da base1.3; seis mensagens |
-| SDK e JSON Schema | 11 PASS normal, 11 PASS `-O` | Contrato restrito, transporte, IDs, precisão e preservação da origem |
+| SDK e JSON Schema | 12 PASS normal, 12 PASS `-O` | Contrato restrito, transporte, IDs, precisão e preservação da origem |
 
 Os recibos estão em [research/evidence](../../research/evidence). Os positivos
 foram verificados com payloads locais. Não foi usado `--metadata-only`.

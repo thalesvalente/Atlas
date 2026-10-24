@@ -1,0 +1,76 @@
+{
+  "kind": "ATLAS021_INDEPENDENT_FOCAL_REVIEW",
+  "reviewer": "A4 independent from SDK and viewer authors",
+  "observed_date": "2026-10-24",
+  "platform": "Linux",
+  "status": "PASS_SCOPED_LOCAL",
+  "finding": {
+    "severity": "P2",
+    "url": "https://github.com/thalesvalente/Atlas/pull/1#discussion_r4367903804",
+    "reviewed_public_sha": "6da9f056b21952072e385e54d2877ebea956b244",
+    "codex_reported_case": "corrupted DEFLATE escapes load_package and aborts the catalog",
+    "independent_extension": "corrupted LZMA escapes the same metadata and payload boundaries"
+  },
+  "reviewed_fix": {
+    "author": "A1",
+    "commits": [
+      "ee02bd10a94fdd088244321e36cc03315c244663",
+      "39cf6e4fbbf7cc66ae37de22dd867810fd91512e"
+    ],
+    "file": "packages/protocol/src/caderno_protocol/storage.py",
+    "sha256": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67",
+    "previous_file_sha256": "6fd7fbc658f312bc295369409916ef640875892115085085f41e068874ed92dd",
+    "specific_decoder_exceptions": true,
+    "lzma_import_optional": true,
+    "profile_changed": false
+  },
+  "independent_regressions": {
+    "file": "tests/qa/test_protocol_adversarial.py",
+    "sha256": "af44e5b3729f2bcc870e73bcb2d5e4ce3d22d59b4ac2905d7f70ed9225c44cfa",
+    "test_methods": 2,
+    "negative_cases_per_execution": 4,
+    "cases": [
+      "metadata DEFLATE corruption",
+      "metadata LZMA corruption",
+      "payload DEFLATE corruption",
+      "payload LZMA corruption"
+    ],
+    "baseline_real_zip_valid_before_corruption": true,
+    "real_decoder_error_confirmed_without_mock": true,
+    "previous_installed_sdk": {
+      "wheel_sha256": "8e8ff54a287deb26acac978cfb6400ed3feea9fedded077fd45791b388c4bf5a",
+      "mode": "Python -I",
+      "expected_failure": true,
+      "observed_unhandled_errors": 4
+    },
+    "corrected_source_normal": {"status": "PASS", "cases": 4, "skips": 0},
+    "corrected_source_optimized": {"status": "PASS", "cases": 4, "skips": 0},
+    "metadata_result": "SOURCE_INVALID",
+    "payload_result": "UNAVAILABLE with PAYLOAD_UNAVAILABLE and scientific records retained",
+    "source_and_archive_bytes_unchanged": true,
+    "optional_codec_policy": "LZMA subcases explicitly skip only if this Python lacks the optional codec"
+  },
+  "catalog_focal_integration": {
+    "status": "PASS_SCOPED",
+    "sdk_mode": "corrected source selected by explicit sys.path entry",
+    "viewer_mode": "previous installed wheel, unchanged",
+    "viewer_wheel_sha256": "360a01715eab016cb0a53484153881e3ef5f5bb3ee87d51bcf9652c07a856575",
+    "scenarios": 4,
+    "operations": ["snapshot", "dossier", "rebuild"],
+    "healthy_source_preserved": true,
+    "corrupt_metadata_source_has_no_fabricated_read_model": true,
+    "corrupt_payload_preserves_four_runs": true,
+    "source_bytes_unchanged": true
+  },
+  "scope_limits": {
+    "new_clean_wheel_installation_performed_by_this_receipt": false,
+    "browser_repeated_for_this_fix": false,
+    "previous_receipts_and_wheel_hashes_preserved": true,
+    "new_published_sha": null,
+    "ci_at_new_published_sha": "PENDING",
+    "codex_at_new_published_sha": "PENDING",
+    "remote_finding_resolved_by_this_receipt": false,
+    "A1_human_protocol_acceptance": "PENDING",
+    "A7_human_promotion": "NOT_GRANTED"
+  }
+}

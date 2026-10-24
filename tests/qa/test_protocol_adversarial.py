@@ -12,12 +12,19 @@ import os
 from pathlib import Path
 import shutil
 import stat
+import struct
 import subprocess
 import sys
 import tempfile
 import unittest
 from unittest.mock import patch
 import zipfile
+import zlib
+
+try:
+    import lzma
+except ImportError:
+    lzma = None
 
 from caderno_protocol import PROFILE_ID, load_package, to_read_model, validate_document
 
@@ -62,6 +69,32 @@ class ProtocolAdversarialTests(unittest.TestCase):
 
     def codes(self, report):
         return {e.code for e in report.errors}
+
+    def corrupted_compressed_archive(self, member, compression):
+        archive = self.base / f"corrupted-compression-{compression}.zip"
+        with zipfile.ZipFile(archive, "w", compression=compression) as stream:
+            for path in self.source.rglob("*"):
+                if path.is_file():
+                    stream.write(path, path.relative_to(self.source).as_posix())
+        self.assertTrue(load_package(archive).report.valid)
+        with zipfile.ZipFile(archive) as stream:
+            info = stream.getinfo(member)
+        raw = bytearray(archive.read_bytes())
+        name_length, extra_length = struct.unpack_from("<HH", raw, info.header_offset + 26)
+        data_offset = info.header_offset + 30 + name_length + extra_length
+        if compression == zipfile.ZIP_DEFLATED:
+            raw[data_offset] = 0xff  # Reserved block type, before any JSON or CRC checks.
+            error_type = zlib.error
+        else:
+            self.assertEqual(zipfile.ZIP_LZMA, compression)
+            self.assertIsNotNone(lzma)
+            raw[data_offset + 4] = 0xff  # Invalid LZMA filter properties.
+            error_type = lzma.LZMAError
+        archive.write_bytes(raw)
+        with zipfile.ZipFile(archive) as stream:
+            with self.assertRaises(error_type):
+                stream.read(member)
+        return archive
 
     def test_real_exporter_produces_valid_complete_partial_failed_and_unknown(self):
         package = load_package(self.source)
@@ -221,6 +254,44 @@ class ProtocolAdversarialTests(unittest.TestCase):
         package = load_package(archive)
         self.assertIn("SOURCE_UNSAFE", self.codes(package.report))
         self.assertFalse((self.base / "outside.txt").exists())
+
+    def test_corrupted_compression_metadata_returns_source_diagnostic_without_writes(self):
+        for compression in (zipfile.ZIP_DEFLATED, zipfile.ZIP_LZMA):
+            with self.subTest(compression=compression):
+                if compression == zipfile.ZIP_LZMA and lzma is None:
+                    self.skipTest("CPython lacks the optional LZMA codec")
+                source_before = file_hashes(self.source)
+                archive = self.corrupted_compressed_archive("ro-crate-metadata.json", compression)
+                archive_before = archive.read_bytes()
+                package = load_package(archive)
+                self.assertFalse(package.report.valid)
+                self.assertIn("SOURCE_INVALID", self.codes(package.report))
+                self.assertEqual({}, package.document)
+                self.assertEqual([], to_read_model(package)["runs"])
+                self.assertTrue(load_package(self.source).report.valid)
+                self.assertEqual(source_before, file_hashes(self.source))
+                self.assertEqual(archive_before, archive.read_bytes())
+
+    def test_corrupted_compression_payload_preserves_records_and_reports_unavailable(self):
+        for compression in (zipfile.ZIP_DEFLATED, zipfile.ZIP_LZMA):
+            with self.subTest(compression=compression):
+                if compression == zipfile.ZIP_LZMA and lzma is None:
+                    self.skipTest("CPython lacks the optional LZMA codec")
+                source_before = file_hashes(self.source)
+                archive = self.corrupted_compressed_archive("data/water.csv", compression)
+                archive_before = archive.read_bytes()
+                package = load_package(archive)
+                self.assertTrue(package.report.valid, package.report.to_dict())
+                self.assertEqual("UNAVAILABLE", package.payload_status["data/water.csv"]["status"])
+                self.assertNotIn("sha256", package.payload_status["data/water.csv"])
+                self.assertTrue(any(issue.code == "PAYLOAD_UNAVAILABLE" and issue.path == "data/water.csv"
+                                    for issue in package.report.warnings))
+                model = to_read_model(package)
+                self.assertEqual(4, len(model["runs"]))
+                self.assertTrue(any(item["id"] == "data/water.csv" for item in model["artifacts"]))
+                self.assertEqual("AVAILABLE", package.payload_status["data/partial.csv"]["status"])
+                self.assertEqual(source_before, file_hashes(self.source))
+                self.assertEqual(archive_before, archive.read_bytes())
 
     def test_zip_symlink_is_rejected(self):
         archive = self.base / "link.zip"
