@@ -16,7 +16,8 @@ import sys
 
 
 def run(command, *, cwd, env):
-    result = subprocess.run([str(x) for x in command], cwd=cwd, env=env, capture_output=True, text=True)
+    result = subprocess.run([str(x) for x in command], cwd=cwd, env=env,
+                            capture_output=True, text=True, encoding="utf-8")
     if result.returncode:
         raise RuntimeError("Command failed: " + str(command[:4]) + "\n" + result.stdout[-4000:] + result.stderr[-4000:])
     return result.stdout
@@ -48,7 +49,8 @@ def main():
     env = dict(os.environ)
     for key in ("PYTHONPATH", "PYTHONHOME"):
         env.pop(key, None)
-    env.update(PYTHONNOUSERSITE="1", PIP_DISABLE_PIP_VERSION_CHECK="1", PIP_CONFIG_FILE=os.devnull)
+    env.update(PYTHONNOUSERSITE="1", PYTHONUTF8="1",
+               PIP_DISABLE_PIP_VERSION_CHECK="1", PIP_CONFIG_FILE=os.devnull)
     empty = work / "outside-source"
     empty.mkdir()
     wheels = work / "wheels"
@@ -67,13 +69,13 @@ def main():
     sdk_python, viewer_python = python_in(sdk_env), python_in(viewer_env)
     run([sdk_python, "-m", "pip", "install", "--no-index", "--no-deps", protocol_wheel], cwd=empty, env=env)
     run([viewer_python, "-m", "pip", "install", "--no-index", "--no-deps", protocol_wheel, viewer_wheel], cwd=empty, env=env)
-    sdk_check = json.loads(run([sdk_python, "-I", "-c", "import importlib.util,json,caderno_protocol; from pathlib import Path; import sys; print(json.dumps({'sdk_imported': True, 'viewer_absent': importlib.util.find_spec('atlas_viewer') is None, 'r4_absent': importlib.util.find_spec('r4') is None, 'installed_module': Path(caderno_protocol.__file__).is_relative_to(Path(sys.prefix))}))"], cwd=empty, env=env))
+    sdk_check = json.loads(run([sdk_python, "-I", "-X", "utf8", "-c", "import importlib.util,json,caderno_protocol; from pathlib import Path; import sys; print(json.dumps({'sdk_imported': True, 'viewer_absent': importlib.util.find_spec('atlas_viewer') is None, 'r4_absent': importlib.util.find_spec('r4') is None, 'installed_module': Path(caderno_protocol.__file__).is_relative_to(Path(sys.prefix))}))"], cwd=empty, env=env))
     if not all(sdk_check.values()):
         raise RuntimeError("SDK isolation failed: " + str(sdk_check))
-    viewer_check = json.loads(run([viewer_python, "-I", "-c", "import importlib.util,json,atlas_viewer,caderno_protocol; from pathlib import Path; import sys; print(json.dumps({'r4_absent': importlib.util.find_spec('r4') is None, 'installed_viewer': Path(atlas_viewer.__file__).is_relative_to(Path(sys.prefix)), 'installed_sdk': Path(caderno_protocol.__file__).is_relative_to(Path(sys.prefix))}))"], cwd=empty, env=env))
+    viewer_check = json.loads(run([viewer_python, "-I", "-X", "utf8", "-c", "import importlib.util,json,atlas_viewer,caderno_protocol; from pathlib import Path; import sys; print(json.dumps({'r4_absent': importlib.util.find_spec('r4') is None, 'installed_viewer': Path(atlas_viewer.__file__).is_relative_to(Path(sys.prefix)), 'installed_sdk': Path(caderno_protocol.__file__).is_relative_to(Path(sys.prefix))}))"], cwd=empty, env=env))
     if not all(viewer_check.values()):
         raise RuntimeError("Viewer isolation failed: " + str(viewer_check))
-    isolated = ["-I"] + (["-O"] if sys.flags.optimize else [])
+    isolated = ["-I", "-X", "utf8"] + (["-O"] if sys.flags.optimize else [])
     source = work / "environmental-crate"
     run([sdk_python, *isolated, producer, source], cwd=empty, env=env)
     before = hashes(source)
