@@ -1,0 +1,122 @@
+{
+  "mission": "ATLAS021-A-POC-R4-FOCO01",
+  "status": "PASS_SCOPED",
+  "scope": "new-local-public-regressions-on-integrated-source-bytes",
+  "platform": "linux",
+  "python": "3.12.14",
+  "test_source_commit": "cbadc5e3c04c154e84e5939a74af84a5a8ca0e1a",
+  "source_file_sha256": {
+    ".github/workflows/atlas021.yml": "c9169b862a1df607fec9470ec34b9e0f6f0c54abfcd58135d0748c26bbe9d5a0",
+    "examples/environmental/README.md": "cdf9f8f8d5c02031df4fb5d00ff314709a661dfb9f54c5f2c816441b1c84f7de",
+    "examples/environmental/export.py": "5b930887d6a375d3ed180c958e8ad59f1057add64c824633c05b1b46ea212ccf",
+    "examples/environmental/sample/data/calibration.csv": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+    "examples/environmental/sample/data/partial.csv": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+    "examples/environmental/sample/data/water.csv": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+    "examples/environmental/sample/ro-crate-metadata.json": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25",
+    "examples/upstream/process-run-0.6/LICENSE.txt": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+    "examples/upstream/process-run-0.6/NOTICE.md": "a7c72f5e9d8b2ffa6536e2806e9e469ad191b137199a599fbbac95e99c20c96d",
+    "examples/upstream/process-run-0.6/ro-crate-metadata.json": "8a8a14ff60eb1f32c30856b3962fc1ccc40d5f6eb6359c4e8961e8a5fbe86c14",
+    "packages/atlas/pyproject.toml": "3b2fa0a244415d867078f3869b3e81e2b88081338f74590d1393e971869f1ae4",
+    "packages/atlas/src/atlas_viewer/__init__.py": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f",
+    "packages/atlas/src/atlas_viewer/__main__.py": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf",
+    "packages/atlas/src/atlas_viewer/catalog.py": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3",
+    "packages/atlas/src/atlas_viewer/server.py": "1208a3e0cd129a31397a8b81afef5031d081cef8c8dda610467e6bb08dc446ca",
+    "packages/atlas/src/atlas_viewer/static/app.js": "7d873764fbbb0578719be7c98bddce5b84916568883edad7cb158556c0b8cac7",
+    "packages/atlas/src/atlas_viewer/static/index.html": "28b58b748539df8158b83eb50a943d7be3af32f93d55e1fd9d1b403f8cb1bef1",
+    "packages/atlas/src/atlas_viewer/static/style.css": "6bba616b207c45a6863d641e918cca8083d97e8651789906989138502c79c900",
+    "packages/protocol/pyproject.toml": "29292b6cc43253628f8639106703927e7e930d78eed0607bbb419901f8302caa",
+    "packages/protocol/src/caderno_protocol/__init__.py": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f",
+    "packages/protocol/src/caderno_protocol/__main__.py": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2",
+    "packages/protocol/src/caderno_protocol/model.py": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6",
+    "packages/protocol/src/caderno_protocol/read_model.py": "3fd4682322cc4ec772349848f10a1cfdc21e3d1ed46fc4774bca242c5ec30e4c",
+    "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+    "packages/protocol/src/caderno_protocol/resources/NOTICE.txt": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd",
+    "packages/protocol/src/caderno_protocol/resources/context-catalog.json": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a",
+    "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+    "packages/protocol/src/caderno_protocol/resources/schema.json": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66",
+    "packages/protocol/src/caderno_protocol/storage.py": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67",
+    "packages/protocol/tests/test_sdk.py": "19f65ab70a36dc269ab8a4ac3ea76961cb36408f5dbeae704fd4ad88632284c9",
+    "scripts/ci/run_browser.py": "039dd75e1277fe2b5dcd7d3d5e38a24625fe77295dd4147ed97f9b7ba80510c6",
+    "scripts/qa/architecture_audit.py": "6468dd834a39047b206668d38354fd1dd670cc2fc1fd3fa95806f95b7139a022",
+    "scripts/qa/browser.mjs": "e476087d9deed38863e93a5809f24763e265513dfebef08a7e6186bc1afb7131",
+    "scripts/qa/clean_install.py": "df0ccf3b35963c7b9d4e580b780bb6c54ecbe3180214aebbf3fd297e11c909da",
+    "scripts/qa/make_adversarial_fixture.py": "3e8223764992f497c9c6deafd4e8b7f73982625333e78de876b5834cf4794eca",
+    "scripts/run_checks.py": "87f4adb90dfc8281033e25e52f0b37d13ea662d3151ce8f697629850a247568a",
+    "tests/qa/test_architecture_boundaries.py": "a578a847c0199663997e73a87030cfba98d8dc7510e880e229c26a590c52729c",
+    "tests/qa/test_poc_required_boundaries.py": "454a8237ccb19dd63898f70d0587e2479464cc34369d4f8bf23c3ab19fbeb13f",
+    "tests/qa/test_protocol_adversarial.py": "af44e5b3729f2bcc870e73bcb2d5e4ce3d22d59b4ac2905d7f70ed9225c44cfa",
+    "tests/viewer/test_catalog_server.py": "887279b0643c7e872ff84f1e22bcf80690b5dff9c9b55d0f5c731cb9f764c20d"
+  },
+  "results": [
+    {
+      "command": "python -u scripts/run_checks.py",
+      "result": {
+        "optimized": false,
+        "suites": [
+          {
+            "suite": "packages/protocol/tests",
+            "tests": 12,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          {
+            "suite": "tests/qa",
+            "tests": 46,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          {
+            "suite": "tests/viewer",
+            "tests": 13,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        ],
+        "status": "PASS"
+      },
+      "total_tests": 71,
+      "evidence": "Complete stdout captured by exec chunk 561a43, exit_code=0; filesystem mirror of the redirected log was incomplete and is not used as the completion receipt."
+    },
+    {
+      "command": "python -O scripts/run_checks.py",
+      "result": {
+        "optimized": true,
+        "suites": [
+          {
+            "suite": "packages/protocol/tests",
+            "tests": 12,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          {
+            "suite": "tests/qa",
+            "tests": 46,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          {
+            "suite": "tests/viewer",
+            "tests": 13,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        ],
+        "status": "PASS"
+      },
+      "total_tests": 71,
+      "log_sha256": "29f9a62af64199adb455f5f2daa3267ed6403fc2442b33310af78d8fa4bc9eab"
+    }
+  ],
+  "test_count_interpretation": "71 tests per interpreter mode; same suite repeated, not 142 unique tests",
+  "windows": "NOT_RUN_LOCALLY_REQUIRES_FINAL_CI",
+  "remote_ci_and_codex": "PENDING_FINAL_SHA_APPEND_ONLY_PR_RECEIPT",
+  "profile_digest": "76ae9be325866895e6bcefeefbc7d0f35e295969a7263e71db6d774be1bf794e",
+  "human_protocol_acceptance": "PENDING_HUMAN",
+  "public_source_transfer": []
+}

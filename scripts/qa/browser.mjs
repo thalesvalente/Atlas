@@ -94,6 +94,48 @@ try {
     assert.ok(await page.locator('#empty').isVisible());
     record('empty_state_has_no_fabricated_records');
   }
+  // Inspect every source/run: a second producer must not pass only because the
+  // first producer's detail view works. Expected values come from the public API.
+  const coverage={detail_runs:0,missing_values:0,artifacts:0,relations:0,compatible_comparisons:0,
+    compatible_comparisons_by_source:Object.fromEntries(catalog.sources.map(s=>[s.id,0]))};
+  report.semantic_coverage=coverage;
+  for(let index=0;index<runs.length;index++) {
+    const run=runs[index];
+    await page.getByTestId('run-open').nth(index).click();
+    const detail=page.getByTestId('detail');
+    assert.equal(await detail.locator('code').first().innerText(),run.id);
+    const text=await detail.innerText();
+    for(const value of [run.status,run.review_status,run.timestamp_origin,run.project_id,run.experiment_id])
+      assert.ok(text.includes(value),'Every run retains its identity, states and time origin');
+    if(run.synthetic)assert.ok(text.includes('SINTÉTICO'));
+    const properties=[...run.metrics,...run.parameters];
+    const rows=detail.locator('table tbody tr');
+    assert.equal(await rows.count(),properties.length);
+    for(let p=0;p<properties.length;p++) {
+      const metric=properties[p],cells=rows.nth(p).locator('td');
+      assert.equal(await cells.nth(0).innerText(),metric.name);
+      const expected=metricText(metric)+(metric.missing_reason?' — '+metric.missing_reason:'');
+      assert.equal(await cells.nth(1).innerText(),expected,'Values and reasons for absence survive the UI');
+      assert.equal(await cells.nth(2).innerText(),[metric.type,metric.unit].filter(Boolean).join(' / ')||'Não declarada');
+      if(metric.value===null||metric.value===undefined) {
+        assert.ok(metric.missing_reason,'An absent value needs its declared reason');
+        assert.ok((await cells.nth(1).innerText()).startsWith('Ausente'),'Absence must not become zero');
+        coverage.missing_values++;
+      }
+    }
+    for(const artifact of run.artifacts) {
+      const cards=detail.locator('.panel');
+      const card=cards.filter({has:page.locator('p').filter({hasText:artifact.id})}).first();
+      assert.ok(await card.isVisible());
+      const artifactText=await card.innerText();
+      assert.ok(artifactText.includes(artifact.availability?.status||'UNVERIFIED'));
+      if(artifact.declared_digest)assert.ok(artifactText.includes(artifact.declared_digest));
+      coverage.artifacts++;
+    }
+    assert.equal(await detail.locator('script,img').count(),0);
+    coverage.detail_runs++;
+  }
+  if(runs.length)record('all_source_details_preserve_values_absence_and_availability');
   if(runs.length>=2) {
     await page.getByTestId('run-select').nth(0).check();
     await page.getByTestId('run-select').nth(1).check();
@@ -129,6 +171,40 @@ try {
     if(expectedInteger){assert.ok(comparison.includes(expectedInteger));record('comparison_preserves_large_integer_text');}
     record('comparison_preserves_states_and_units');
   }
+  // Exercise a comparable pair in each source that declares one. An unrelated
+  // producer cannot stand in for the producer whose PoC receipt is being checked.
+  for(const source of catalog.sources) {
+   let pair;
+   for(let left=0;left<runs.length&&!pair;left++)for(let right=left+1;right<runs.length&&!pair;right++) {
+    if(runs[left].source!==source.id||runs[right].source!==source.id)continue;
+    for(const a of runs[left].metrics) {
+      if(!['integer','number'].includes(a.type)||a.value===null||a.value===undefined)continue;
+      const b=runs[right].metrics.find(m=>m.property_id===a.property_id&&m.type===a.type&&m.unit===a.unit&&m.value!==null&&m.value!==undefined);
+      if(b){pair={left,right,a,b};break;}
+    }
+   }
+   if(pair) {
+    await page.locator('[data-view="explore"]').click();
+    for(const selector of await page.getByTestId('run-select').all())await selector.uncheck();
+    await page.getByTestId('run-select').nth(pair.left).check();
+    await page.getByTestId('run-select').nth(pair.right).check();
+    await page.getByTestId('compare-selected').click();
+    const matching=page.getByTestId('compare').locator('tbody tr').filter({has:page.locator('small').filter({hasText:pair.a.property_id})});
+    const expectedIdentity=[pair.a.property_id,pair.a.type,pair.a.unit||'sem unidade'].join(' · ');
+    const rows=await matching.all();
+    let comparableRow;
+    for(const row of rows)if(await row.locator('small').innerText()===expectedIdentity){comparableRow=row;break;}
+    assert.ok(comparableRow,'Compatible measurements share one comparison row');
+    for(const [column,metric] of [[1,pair.a],[2,pair.b]]) {
+      const text=await comparableRow.locator('td').nth(column).innerText();
+      assert.ok(text.includes(metricText(metric)));
+      assert.ok(text.includes(metric.unit));
+    }
+    coverage.compatible_comparisons++;
+    coverage.compatible_comparisons_by_source[source.id]++;
+   }
+  }
+  if(coverage.compatible_comparisons)record('compatible_metric_pairs_values_and_units_match_per_source');
   await page.getByTestId('timeline-nav').click();
   assert.ok(await page.getByTestId('timeline').isVisible());
   for(const run of runs)assert.ok((await page.getByTestId('timeline').innerText()).includes(run.name||run.id));
@@ -136,6 +212,19 @@ try {
   record('timeline_preserves_declared_and_missing_times');
   await page.getByTestId('lineage-nav').click();
   assert.ok(await page.getByTestId('lineage').isVisible());
+  const relations=catalog.sources.flatMap(source=>(source.read_model?.relations||[]).map(relation=>({source,relation})));
+  const relationRows=page.getByTestId('lineage').locator('tbody tr');
+  assert.equal(await relationRows.count(),relations.length);
+  for(let index=0;index<relations.length;index++) {
+    const {source,relation}=relations[index],cells=relationRows.nth(index).locator('td');
+    for(const [column,id] of [[0,relation.source],[2,relation.target]]) {
+      const entity=source.read_model.entities.find(e=>e['@id']===id);
+      assert.ok((await cells.nth(column).innerText()).includes(entity?.name||id));
+    }
+    assert.equal(await cells.nth(1).innerText(),{input:'entrada de',output:'produziu',derived_from:'derivado de'}[relation.kind]||relation.kind);
+    assert.ok((await cells.nth(3).innerText()).includes(source.name));
+    coverage.relations++;
+  }
   record('lineage_navigation_uses_declared_relations');
   await page.getByTestId('sources-nav').click();
   const sourcesText=await page.locator('#sources-content').innerText();
