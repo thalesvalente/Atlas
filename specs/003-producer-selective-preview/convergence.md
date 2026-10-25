@@ -168,3 +168,15 @@ Isso é prova parcial, não PASS visual integral. A captura de 200% ainda não e
 pois a assertiva antecedia sua emissão. T030 acrescenta diagnóstico de geometria
 e captura antes dessa assertiva, preservando o requisito e o gate; a correção do
 layout será limitada à causa demonstrada. Não há nova aquisição ou piloto.
+
+No diagnóstico `16c7c4889a9e475f6e10a3a7dd1f8963008f8ac7`, o
+[artefato da CI](https://github.com/thalesvalente/Atlas/actions/runs/40246475202/artifacts/12618603547)
+mostra viewport de 1440 px e documento de 1550 px: o quarto contador (`sources-count`)
+ultrapassa o viewport. A seção relacionada já cabe (borda direita 1308 px,
+`scrollWidth=clientWidth=356`). A causa é o mínimo intrínseco das quatro colunas
+do quadro de contadores, não um identificador da seção nova.
+
+Correção material: grade `.stats` usa `repeat(4,minmax(0,1fr))`; seus itens permitem
+`min-width:0` e quebra de texto. Fontes, espaçamentos e a regra móvel de duas colunas
+permanecem. O gate global e o gate da seção continuam iguais. T030 aguarda a prova
+visual da candidata corrigida; não se atribui PASS à mera alteração do CSS.
