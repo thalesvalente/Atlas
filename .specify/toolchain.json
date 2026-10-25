@@ -4,6 +4,10 @@
   "mode": "skills",
   "script": "py",
   "invocation": "$speckit-*",
-  "native_codex_cli_available": false,
-  "application": "agent reads installed skills; official helper scripts executed; no fabricated slash-command invocation"
+  "manager": "uv",
+  "manager_version": "0.13.5",
+  "distribution": "specify-cli==1.2.3 (official PyPI)",
+  "initialization": "specify init --here --force --non-interactive --integration codex --integration-options=--skills --script py",
+  "native_codex_cli_available": true,
+  "application": "official generated skills and helpers; version and integration status verified; feature state owned by ORQ"
 }

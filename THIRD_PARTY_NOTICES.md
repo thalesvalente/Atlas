@@ -36,6 +36,9 @@ de ResearchObject/workflow-run-crate, tag `0.6.0`, commit
 Spec Kit `1.2.3` foi instalado separadamente da aplicação, a partir da distribuição
 oficial. Os auxiliares e skills gerados localmente não compõem o runtime distribuído.
 Fonte/licença upstream: https://github.com/github/spec-kit/tree/v1.2.3 (MIT).
+A infraestrutura oficial gerada em `.specify/` e as skills em `.agents/skills/`
+são versionadas para revisão e reprodução, sem alteração de seu conteúdo gerenciado.
+O texto MIT upstream acompanha a infraestrutura em `.specify/UPSTREAM-LICENSE.txt`.
 
 `jsonschema`, `roc-validator`, `rocrate`, Playwright e ferramentas de build são
 dependências explícitas dos ensaios. Não são incorporadas como código do viewer
