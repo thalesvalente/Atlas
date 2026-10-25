@@ -69,3 +69,7 @@ T027–T029 têm implementação/harness entregues e revisão nativa pré-public
 seu fechamento depende das evidências pós-commit. O recibo append-only CLOSE01 na
 PR #5, por SHA integral, registra o resultado final sem gerar commit apenas para
 checkbox/PASS. Ver `convergence.md` para alcance e estados reais.
+
+## Phase 7: Convergence — reflow em 200%
+
+- [ ] T030 [US4] Diagnosticar a geometria do transbordamento em 200% no navegador da CI em scripts/qa/browser.mjs e corrigir somente o layout responsável em packages/atlas/src/atlas_viewer/static/style.css; conservar o gate e obter prova visual final (FR-19/SC-05, partial).

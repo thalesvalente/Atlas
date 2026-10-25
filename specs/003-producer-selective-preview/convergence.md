@@ -152,3 +152,19 @@ como protótipo autorizado enquanto essa escolha específica segue PENDING_HUMAN
 `USER_HOST_WRITES=0`; `USER_WORKTREES_CREATED=0`;
 `REAL_PILOT_RERUN_BY_THIS_SESSION=NOT_RUN`; `ADR_0002_ACCEPTANCE=PENDING_HUMAN`;
 `MERGE_RELEASE_CLEANUP=NOT_RUN`. Demais estados dependem do recibo final por SHA.
+
+### Convergência focal após a primeira CI CLOSE01
+
+No HEAD `b0b3e5f474beae98fc7c901c67cd08a176175714`,
+[Spec Kit](https://github.com/thalesvalente/Atlas/actions/runs/40246194666) passou
+2/2 jobs. Na [CI de produto](https://github.com/thalesvalente/Atlas/actions/runs/40246194796),
+os quatro jobs Windows/Ubuntu normal/-O e a referência pública passaram; navegador
+falhou somente em `References remain within viewport at CSS zoom 200%`.
+
+O recibo real da CI registra 20 checks anteriores aprovados, 8 execuções/22
+referências de duas fontes, duas navegações internas, quatro estados vazios,
+390 pixels, zero erros de página/tráfego externo e bytes das fontes iguais.
+Isso é prova parcial, não PASS visual integral. A captura de 200% ainda não existia,
+pois a assertiva antecedia sua emissão. T030 acrescenta diagnóstico de geometria
+e captura antes dessa assertiva, preservando o requisito e o gate; a correção do
+layout será limitada à causa demonstrada. Não há nova aquisição ou piloto.

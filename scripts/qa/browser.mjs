@@ -394,6 +394,22 @@ try {
     await page.evaluate(()=>{document.documentElement.style.zoom='2';});
     assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).zoom),'2');
     await page.getByTestId('related-references').scrollIntoViewIfNeeded();
+    report.zoom={factor:2,method:'document.documentElement.style.zoom',scope:'CSS rendering zoom; not native browser toolbar zoom or full WCAG conformance'};
+    report.zoom.geometry=await page.evaluate(()=>{
+      const dimensions=node=>{const rect=node.getBoundingClientRect();return {left:rect.left,right:rect.right,width:rect.width,client_width:node.clientWidth,scroll_width:node.scrollWidth};};
+      const section=document.querySelector('[data-testid="related-references"]');
+      return {
+        viewport_width:innerWidth,document:dimensions(document.documentElement),related_section:dimensions(section),
+        overflowing_elements:[...document.querySelectorAll('body *')].filter(node=>{
+          const rect=node.getBoundingClientRect();
+          return rect.width>0&&rect.height>0&&rect.right>innerWidth+1&&!node.closest('.table-wrap');
+        }).slice(0,10).map(node=>({tag:node.tagName.toLowerCase(),id:node.id,class:node.className,...dimensions(node)}))
+      };
+    });
+    // Preserve the failing rendering as evidence before the same overflow gate.
+    const zoomPath=reportPath.replace(/\.json$/,'')+'-zoom200.png';
+    await page.screenshot({path:zoomPath,fullPage:true});
+    screenshots.push(path.basename(zoomPath));
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'References remain within viewport at CSS zoom 200%');
     const section=page.getByTestId('related-references');
     assert.ok(await section.isVisible());
@@ -404,10 +420,6 @@ try {
     await page.keyboard.press('Shift+Tab');
     assert.ok(await internal.evaluate(node=>node===document.activeElement));
     assert.ok(await internal.evaluate(node=>parseFloat(getComputedStyle(node).outlineWidth)>=2));
-    const zoomPath=reportPath.replace(/\.json$/,'')+'-zoom200.png';
-    await page.screenshot({path:zoomPath,fullPage:true});
-    screenshots.push(path.basename(zoomPath));
-    report.zoom={factor:2,method:'document.documentElement.style.zoom',scope:'CSS rendering zoom; not native browser toolbar zoom or full WCAG conformance'};
     record('related_references_css_zoom_200_percent_reflow_and_keyboard');
     await page.evaluate(()=>{document.documentElement.style.zoom='1';});
   }
