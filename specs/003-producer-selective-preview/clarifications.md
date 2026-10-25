@@ -7,3 +7,6 @@
 5. Referência a evidência não significa entrada experimental. Sem direção declarada, mantê-la como menção/referência e documentar o limite de apresentação do viewer atual.
 6. Reutilizar não significa publicar bibliotecas privadas no Atlas nem voltar a incorporar o R4 à interface.
 7. Não criar outra frente ou outra numeração: atualizar feature 003, a candidata existente e sua rastreabilidade.
+
+## LOCAL-REAL01 — esclarecimentos fornecidos pelo operador
+Leitura local de código, configuração e metadados necessários e obtenção autenticada do adaptador estão autorizadas no escopo do piloto. Fonte histórica permanece somente leitura. Distribuição privada e evidências operacionais ficam na raiz ignorada escolhida pelo operador, sem importação de módulos no produto público. Nenhum novo Caderno, reader, ambiente consumidor ou worktree é necessário. Bloqueio de leitura real é específico ao mecanismo observado; não amplia nem cancela por inferência outras permissões. Zero perguntas adicionais: identidade ausente, limites de leitura, browser indisponível e revisão científica pendente já têm tratamento definido no pedido.

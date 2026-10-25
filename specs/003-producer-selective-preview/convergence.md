@@ -22,3 +22,19 @@ A prova nova cobre SDK e inspeção pelo viewer instalado; não houve nova sess�
 Sem delegador nativo nesta sessão. Revisão independente pelo Codex no GitHub. Autoria dos artefatos aplicou as skills oficiais; CLI Spec Kit1.2.3 e helpers reais foram executados em CI. Não se afirma dispatch nativo de skills ou instalação do CLI no host do usuário por esta sessão.
 
 Este commit apenas reconcilia tarefas/convergência. O resultado de sua própria CI/review será acrescentado na PR por SHA, sem reatribuir provas anteriores. Merge, promoção, acervo real e interoperabilidade universal permanecem decisões/validações distintas.
+
+## Incremento local LOCAL-REAL01 — 2026-10-25
+
+O piloto operacional reutilizou o pipeline existente do produtor e seu adaptador de representação, preservando o pacote Caderno 0.1.0a1. O SDK/CLI instalados validaram o pacote; a execução selecionada foi conferida no navegador real do Atlas independente. Não foi necessário alterar código do consumidor, protocolo ou produtor.
+
+A distribuição privada foi obtida por mecanismo autenticado na revisão escolhida, com manifesto e prova de imports; não foi incorporada ao produto público. Aquisição permaneceu delimitada aos controles permitidos antes da seleção. O modo de compatibilidade já existente foi explícito e não recebeu autoridade do Caderno central. A reconversão dos bytes capturados reproduziu o pacote byte a byte, sem sobrescrita nem releitura da fonte.
+
+Revisores nativos reais de aquisição, QA e semântica/privacidade trabalharam somente leitura; o coordenador foi o único escritor. A revisão de requisitos encontrou dois problemas documentais, corrigidos antes da execução. QA e semântica finais: PASS_SCOPED, com limites declarados. As capturas, comandos e evidências completas ficam na raiz operacional ignorada; nenhum dado privado é publicado aqui.
+
+Conservados os literais originais e as lacunas da projeção. Datas não foram promovidas a timestamps experimentais. Ausência de métricas na projeção não prova ausência em toda a experiência; referências neutras continuam mentions e podem não aparecer no detalhe. Avisos de payload ausente no pacote não atestam ausência da fonte. Autenticidade e aceite científico permanecem distintos da validação técnica.
+
+Comparação final limitada aos controles efetivamente observados e aos arquivos instalados declarados no manifesto de instalação: sem divergência nesse escopo. Não há atestação universal do host, do acervo, do índice ou HEAD histórico. O servidor usa loopback e processo supervisionado, sem serviço permanente; há comandos de repetição/reinício/encerramento e a sobrevivência ao término da sessão não é garantida.
+
+Skills oficiais aplicadas pelo agente sobre a feature existente, com artefatos redigidos pelo coordenador. Helpers efetivamente executados: resolve_template (constituição/spec), check_prerequisites (paths/checklist/analyze/implement/converge), setup_plan e setup_tasks; CLI1.2.3/integration status e auditoria de preservação conferidos. Não houve reinicialização, nova feature ou persistência de ponteiro compartilhado. Revisão constitucional sem alteração de governança.
+
+Convergência operacional: nenhuma lacuna de código que impeça o objetivo no escopo autorizado. T020 aguarda a conciliação da publicação/revisão externa do novo HEAD documental; recibos pós-commit informam SHA e estado reais. CI/review desse delta não são antecipados. R012/ADR-0002 e merge/release/promoção permanecem gates humanos separados.
