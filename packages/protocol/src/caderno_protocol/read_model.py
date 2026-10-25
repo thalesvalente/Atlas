@@ -24,6 +24,19 @@ def to_read_model(package: Package) -> dict[str, Any]:
                         "unit": e.get("unitText"), "precision": e.get("cp:precision"),
                         "missing_reason": e.get("cp:missingReason")})
         return out
+    def related_references(value: Any) -> list[dict[str, Any]]:
+        # Identity is local to this Package. A mention carries no input, output,
+        # derivation, authenticity or approval claim. Keep its first occurrence.
+        out = []
+        for eid in dict.fromkeys(refs(value)):
+            e = entities.get(eid, {})
+            name, description = e.get("name"), e.get("description")
+            out.append({"id": eid, "name": name if isinstance(name, str) and name else eid,
+                        "types": types(e),
+                        "description": description if isinstance(description, str) else "",
+                        "declared_digest": deepcopy(e.get("cp:sha256")),
+                        "availability": deepcopy(package.payload_status.get(eid, {"status": "UNVERIFIED"}))})
+        return out
     projects = [{"id": eid, "name": e.get("name", eid), "description": e.get("description", "")}
                 for eid, e in entities.items() if "cp:Project" in types(e)]
     experiments = [{"id": eid, "name": e.get("name", eid), "description": e.get("description", ""),
@@ -55,6 +68,7 @@ def to_read_model(package: Package) -> dict[str, Any]:
                      "started_at": e.get("startTime"), "ended_at": e.get("endTime"),
                      "metrics": properties(e.get("cp:metrics")), "parameters": properties(e.get("cp:parameters")),
                      "inputs": inputs, "outputs": outputs,
+                     "related_references": related_references(e.get("mentions")),
                      "artifacts": [artifact_by_id[x] for x in inputs + outputs if x in artifact_by_id],
                      "agent_id": first(e.get("agent")), "instrument_id": first(e.get("instrument")),
                      "derived_from": refs(e.get("prov:wasDerivedFrom"))})

@@ -7,6 +7,11 @@ on:
       - '.specify/**'
       - '.agents/skills/**'
       - '.github/workflows/atlas003-speckit.yml'
+      - 'packages/protocol/src/caderno_protocol/read_model.py'
+      - 'packages/atlas/src/atlas_viewer/static/**'
+      - 'scripts/qa/speckit_audit.py'
+      - 'tests/qa/test_speckit_presentation_audit.py'
+      - 'tests/viewer/test_related_references.py'
   workflow_dispatch:
 
 permissions:
@@ -25,7 +30,10 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
+      - name: Record exact candidate
+        run: git rev-parse HEAD
       - name: Setup Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
@@ -37,7 +45,7 @@ jobs:
           specify version --json
           specify integration status --json
       - name: Check generated Spec Kit assets and preserved architecture
-        run: python scripts/qa/speckit_audit.py
+        run: python scripts/qa/speckit_audit.py --allow-presentation-delta
       - name: Verify feature 003 requirements and tasks without active-pointer writes
         env:
           SPECIFY_FEATURE_NO_PERSIST: '1'

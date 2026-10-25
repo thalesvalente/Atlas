@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import ast
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -13,11 +14,23 @@ SKILLS = {"analyze", "checklist", "clarify", "constitution", "converge",
           "implement", "plan", "specify", "tasks", "taskstoissues"}
 EDITABLE_ORIGINALS = {".gitignore", ".specify/toolchain.json", "README.md",
                       "THIRD_PARTY_NOTICES.md"}
+# CLOSE01 authorizes only presentation and its existing browser/CI harness.
+# The default setup audit remains strict; persisted contracts and governance
+# are never exempted by this feature-specific opt-in.
+PRESENTATION_ORIGINALS = {
+    "packages/protocol/src/caderno_protocol/read_model.py",
+    "packages/atlas/src/atlas_viewer/static/app.js",
+    "packages/atlas/src/atlas_viewer/static/style.css",
+    "scripts/qa/browser.mjs",
+    "scripts/ci/run_browser.py",
+    ".github/workflows/atlas021.yml",
+}
 
 
-def audit(root: Path) -> dict:
+def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dict:
     errors: list[str] = []
     preserved = 0
+    authorized_changes: list[str] = []
     paths = subprocess.check_output(
         ["git", "ls-tree", "-rz", "--name-only", BASELINE], cwd=root,
     ).decode("utf-8").rstrip("\0").split("\0")
@@ -27,9 +40,19 @@ def audit(root: Path) -> dict:
         expected = subprocess.check_output(["git", "show", f"{BASELINE}:{name}"], cwd=root)
         path = root / name
         if not path.is_file() or path.read_bytes() != expected:
-            errors.append(f"Preserved baseline changed: {name}")
+            if allow_presentation_delta and name in PRESENTATION_ORIGINALS and path.is_file():
+                authorized_changes.append(name)
+            else:
+                errors.append(f"Preserved baseline changed: {name}")
         else:
             preserved += 1
+    return {"errors": errors, "preserved_original_files": preserved,
+            "authorized_presentation_changes": authorized_changes}
+
+
+def audit(root: Path, *, allow_presentation_delta: bool = False) -> dict:
+    baseline = audit_baseline(root, allow_presentation_delta=allow_presentation_delta)
+    errors = baseline["errors"]
 
     managed = 0
     for integration, expected_count in (("codex", 10), ("speckit", 18)):
@@ -74,15 +97,22 @@ def audit(root: Path) -> dict:
     }.items()):
         errors.append("Initialization options differ from the approved setup")
     return {"status": "PASS" if not errors else "FAIL", "baseline": BASELINE,
-            "preserved_original_files": preserved, "managed_files": managed,
+            "preserved_original_files": baseline["preserved_original_files"],
+            "authorized_presentation_changes": baseline["authorized_presentation_changes"],
+            "presentation_delta_enabled": allow_presentation_delta, "managed_files": managed,
             "official_skills": len(actual_skills), "python_scripts": len(scripts),
             "errors": errors,
             "scope": "repository integrity and generated assets; no operational or scientific approval"}
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--allow-presentation-delta", action="store_true",
+                        help="Allow only the six existing presentation/test files authorized by feature 003 CLOSE01.")
+    args = parser.parse_args()
     try:
-        report = audit(Path(__file__).resolve().parents[2])
+        report = audit(Path(__file__).resolve().parents[2],
+                       allow_presentation_delta=args.allow_presentation_delta)
     except (OSError, ValueError, KeyError, SyntaxError, subprocess.CalledProcessError) as exc:
         report = {"status": "FAIL", "errors": [str(exc)]}
     print(json.dumps(report, ensure_ascii=True, indent=2))

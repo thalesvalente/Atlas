@@ -10,3 +10,13 @@
 
 ## LOCAL-REAL01 — esclarecimentos fornecidos pelo operador
 Leitura local de código, configuração e metadados necessários e obtenção autenticada do adaptador estão autorizadas no escopo do piloto. Fonte histórica permanece somente leitura. Distribuição privada e evidências operacionais ficam na raiz ignorada escolhida pelo operador, sem importação de módulos no produto público. Nenhum novo Caderno, reader, ambiente consumidor ou worktree é necessário. Bloqueio de leitura real é específico ao mecanismo observado; não amplia nem cancela por inferência outras permissões. Zero perguntas adicionais: identidade ausente, limites de leitura, browser indisponível e revisão científica pendente já têm tratamento definido no pedido.
+
+## CLOSE01 — 2026-10-25
+
+O incremento resolve a limitação visual histórica do item 5 sem mudar a menção.
+Identidade é fonte + ID; duplicações locais conservam a primeira ordem. O contrato
+vigente aceita objeto `@id` ou lista e rejeita alvo ausente; não será flexibilizado.
+Não há rota genérica nova para abrir arquivos: reutiliza-se navegação interna de
+execuções quando existente, com outras referências como texto. Hash declarado e
+hash calculado ficam distintos. Zero perguntas: escopo, segurança, compatibilidade,
+estados vazios e prova visual foram definidos pelo operador.

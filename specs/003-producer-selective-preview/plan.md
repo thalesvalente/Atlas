@@ -1,7 +1,39 @@
 # Plano — REUSE-01
 
-## Contexto técnico
+## Contexto técnico histórico — REUSE-01 / LOCAL-REAL01
 Atlas e SDK públicos preservados. Perfil candidato 0.1.0a1 preservado. Produtor privado responsável pela leitura/normalização existentes e pelo adaptador. Python e bibliotecas já usadas pelo produto; sem dependência nova de domínio.
+
+## Plano do incremento CLOSE01
+
+O runtime preservado acima descreve o piloto anterior. CLOSE01 autoriza apresentação
+genérica e campo aditivo no modelo derivado, sem alterar contrato persistido.
+
+1. Reconciliar T020 e PR #5 com recibos de LOCAL-REAL01; conferir topologia da cadeia.
+2. Especificar FR-14–21/US4, contrato derivado, checklist, tarefas e análise antes do código.
+3. B registra RED da omissão em consumidor instalado da baseline; A e coordenador
+   só então implementam o delta. A: `packages/protocol/src/caderno_protocol/read_model.py`.
+   Coordenador: `packages/atlas/src/atlas_viewer/static/app.js` e `style.css`.
+4. Reutilizar `refs()`, `types()`, `Package.payload_status`, `entityLink()` e a identidade
+   `_sourceId`; nenhuma consulta a produtor/carrier. `Catalog` só tem índice em memória:
+   startup/reindex reconstrói a projeção; não há cache persistido a migrar.
+5. B mantém `tests/viewer/test_related_references.py`, gerador sintético e scripts de
+   navegador existentes. Provar consumo instalado, byte-identidade e normal/`-O`.
+   Reutilizar matriz Windows/Ubuntu e Chromium da CI; não acrescentar plataforma.
+6. C revisa o delta sem autoria de código/testes. Coordenador corrige achados,
+   publica fast-forward na #5 e solicita Codex uma vez por HEAD pertinente.
+7. Fechamento pós-commit em comentário append-only; não criar commit apenas para
+   registrar PASS. Pendências humanas continuam em R012.
+
+O audit histórico de setup preservava todo o runtime. CLOSE01 usa opt-in explícito
+`--allow-presentation-delta` em `scripts/qa/speckit_audit.py`, limitado aos seis
+arquivos existentes de apresentação/harness listados no código. O modo padrão
+continua estrito; schema, perfil, constituição, ADRs e skills não recebem exceção.
+`tests/qa/test_speckit_presentation_audit.py` comprova a fronteira e a rejeição de
+exclusões. O gate Spec Kit fixa checkout no HEAD e registra esse SHA no log.
+
+Constitution Check do desenho: ARC-01–09 preservados. SDK não depende da UI;
+identidade é local ao pacote; revisão científica, disponibilidade e digest continuam
+distintos. Nenhum schema, recurso persistido, ADR, aquisição ou adaptador muda.
 
 ## Constitution Check
 ARC-01 interface; ARC-02 protocolo independente; ARC-03 índices derivados; ARC-04 produtores específicos fora do núcleo; ARC-05 prova com instalação isolada; ARC-06 validade não equivale a ciência; ARC-07 nenhuma manutenção física; ARC-08 promoção separada; ARC-09 sem desvio arquitetural. Resultado da análise: compatível.
