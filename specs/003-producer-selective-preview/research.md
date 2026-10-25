@@ -1,7 +1,16 @@
-# Pesquisa focal e reutilização
-- SDK público `caderno-protocol` 0.1.0a1: validar pacote RO-Crate restrito, sem busca remota.
-- Viewer `atlas-viewer`: índice reconstruível, leitura e visualização independentes do produtor.
-- Adaptador privado anterior: somente entradas sintéticas, explicitamente proibida a conversão de dados reais por aquela API.
-- Índice de origem histórico: projeção registrada, não prova de autenticidade de todo o ledger nem garantia de que payloads referenciados estejam disponíveis.
+# Pesquisa focal de reaproveitamento — REUSE-01
 
-**Escolha:** ponte privada nova e somente leitura sobre um índice explícito, preservando o exportador original; o Atlas consome metadados por contrato público. Não reconstruir os padrões nem introduzir segundo formato concorrente.
+## Decisão
+Usar a projeção normalizada existente do produtor como fronteira do adaptador e manter Caderno 0.1.0a1 como formato de interoperabilidade. A análise detalhada das APIs privadas e seus hashes fica no repositório privado.
+
+## Fundamentação
+A candidata anterior interpretava novamente um índice nativo. Isso duplicava regras e já exigiu correção de tipos que o legado conhecia. O pipeline existente distingue estado técnico, revisão, fontes, relações e lacunas; a ponte deve transformar seus resultados, não recalculá-los.
+
+## Alternativas descartadas
+- Reimplementar leitor nativo: duplica semântica e amplia o risco de regressão.
+- Embutir o produtor no viewer: viola independência e privacidade.
+- Abandonar o Caderno e abrir apenas HTML antigo: atende visualização legada, mas não interoperabilidade.
+- Reexecutar automaticamente a aquisição histórica: excede o escopo de transformação e os limites operacionais conhecidos.
+
+## Incertezas explícitas
+A projeção disponível no host real e sua cobertura ainda não foram observadas nesta sessão. Uma prova sintética não demonstra recuperação histórica. Recursos não representáveis no perfil mínimo ficam preservados como evidência da transformação e limitações, sem mudança unilateral do padrão.

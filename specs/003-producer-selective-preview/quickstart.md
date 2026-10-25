@@ -1,13 +1,10 @@
-# Guia de uso da feature 003
-O viewer não importa código nem formatos privados de produtores. A saída do produtor deve ser um pacote Caderno 0.1.0a1 derivado, selecionado e validado em contexto privado.
+# Validação da ponte reaproveitada
 
-Depois que o produtor gerar e validar um pacote pequeno, abra-o com a instalação existente:
+1. No contexto privado do produtor, obtenha uma projeção pelo pipeline existente, somente onde essa aquisição já estiver permitida.
+2. Entregue a projeção capturada ao adaptador, com seleção explícita e digest. Ele não deve reabrir fontes.
+3. Valide o pacote com o SDK Caderno e abra-o com a instalação Atlas já existente, usando `atlas_viewer inspect` e `serve --source`.
+4. Confira IDs, estados originais, revisão independente do resultado, métricas, referências e perdas do recorte.
 
-```powershell
-$viewer = 'G:\projetos\meu\atlas\.local\install-02\viewer-env\Scripts\python.exe'
-$source = 'G:\projetos\meu\atlas\.local\campaigns-preview\rnf-pilot-01'
-& $viewer -I -m atlas_viewer inspect $source
-& $viewer -I -m atlas_viewer serve --source $source --port 8765
-```
+Não executar novamente os comandos antigos de interpretação direta de índice. O guia privado acompanha a revisão da ponte e define as pré-condições; este documento não autoriza leitura de acervo, publicação, migração ou exclusão.
 
-Origem, exportador, SHA e instruções específicas permanecem no guia **privado** R4. Nenhuma leitura direta do R4 é realizada pelo Atlas. Esta feature não cria nem apaga arquivos no host do operador.
+O runtime, o perfil e o schema públicos permanecem inalterados. Nenhum requisito de BIM ou SHACL é adicionado.
