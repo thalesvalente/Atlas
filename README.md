@@ -52,6 +52,16 @@ somente loopback. A interface não recebe paths de requisições do navegador. `
 retorna código 2 para fonte inválida; `dossier` escreve JSON derivado no stdout.
 Para testar o SDK sozinho, instale apenas `./packages/protocol`.
 
+### Demonstração reproduzível instalada
+
+O [roteiro da PoC](docs/poc-reproducible.md) reutiliza o produtor ambiental público
+e a instalação limpa já verificada. Ele fornece o comando para construir/instalar
+wheels em ambientes vazios, abrir a interface, percorrer os cenários e inspecionar
+os recibos. Funciona sem repositório privado. A prova R4 → Caderno → Atlas usa a
+mesma interface de snapshots, com exportação e evidências mantidas no produtor.
+O harness de browser confere detalhes de todas as execuções, ausências, relações
+e pares de métricas compatíveis por fonte, sem nomes de domínio embutidos.
+
 ## Contrato de dados candidato
 
 A recomendação é um perfil restrito sobre **RO-Crate 1.3 + Process Run Crate 0.6**.
