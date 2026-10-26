@@ -28,6 +28,8 @@ const record = name => checks.push({name,status:'PASS'});
 const screenshots = [];
 const expectedInteger=args.get('--expected-exact-integer');
 const metricText=m=>m.display_value??String(m.value??'Ausente');
+const referenceIds=value=>Array.isArray(value)?value.flatMap(referenceIds):
+  value&&typeof value==='object'&&Object.keys(value).length===1&&typeof value['@id']==='string'?[value['@id']]:[];
 try {
   browser=await playwright.chromium.launch({headless:true,...(process.env.ATLAS_BROWSER_BINARY?{executablePath:process.env.ATLAS_BROWSER_BINARY}:{})});
   report.browser_version=browser.version();
@@ -96,7 +98,7 @@ try {
   }
   // Inspect every source/run: a second producer must not pass only because the
   // first producer's detail view works. Expected values come from the public API.
-  const coverage={detail_runs:0,missing_values:0,artifacts:0,relations:0,compatible_comparisons:0,
+  const coverage={detail_runs:0,missing_values:0,artifacts:0,relations:0,related_references:0,empty_related_references:0,compatible_comparisons:0,
     compatible_comparisons_by_source:Object.fromEntries(catalog.sources.map(s=>[s.id,0]))};
   report.semantic_coverage=coverage;
   for(let index=0;index<runs.length;index++) {
@@ -132,10 +134,78 @@ try {
       if(artifact.declared_digest)assert.ok(artifactText.includes(artifact.declared_digest));
       coverage.artifacts++;
     }
+    // Expectations come from the persisted graph, independently of the new
+    // projection field. Missing projection and wrong-source lookup must fail.
+    const source=catalog.sources.find(s=>s.id===run.source);
+    const entity=source.read_model.entities.find(e=>e['@id']===run.id);
+    const expectedIds=[...new Set(referenceIds(entity.mentions))];
+    const references=detail.getByTestId('related-references');
+    assert.ok(await references.isVisible());
+    assert.equal(await references.getByRole('heading',{name:'Referências relacionadas',exact:true}).count(),1);
+    const cards=references.getByTestId('related-reference');
+    assert.equal(await cards.count(),expectedIds.length);
+    if(!expectedIds.length){assert.ok((await references.innerText()).includes('Nenhuma referência'));coverage.empty_related_references++;}
+    for(let r=0;r<expectedIds.length;r++) {
+      const id=expectedIds[r],card=cards.nth(r);
+      assert.equal(await card.getAttribute('data-reference-id'),id);
+      const target=source.read_model.entities.find(e=>e['@id']===id);
+      assert.ok(target,'The validated contract requires declared mention targets');
+      const cardText=await card.innerText();
+      const expectedTitle=typeof target.name==='string'&&target.name?target.name:id;
+      assert.equal(await card.locator('h4 > button, h4 > span > span').innerText(),expectedTitle,'The visible title uses the ID fallback for non-text names');
+      for(const expected of [id,expectedTitle,target.description||''])
+        assert.ok(cardText.includes(expected),'Related reference title, description and ID stay source scoped');
+      const types=Array.isArray(target['@type'])?target['@type']:[target['@type']];
+      for(const type of types)assert.ok(cardText.includes(type));
+      const artifact=source.read_model.artifacts.find(a=>a.id===id);
+      assert.ok(cardText.includes(artifact?.availability?.status||'UNVERIFIED'));
+      if(target['cp:sha256'])assert.ok(cardText.includes(target['cp:sha256']));
+      if(artifact?.availability?.sha256)assert.ok(cardText.includes(artifact.availability.sha256));
+      coverage.related_references++;
+    }
+    assert.equal(await references.locator('script,img,iframe,object,a[href]').count(),0);
+    assert.equal(await page.evaluate(()=>window.__atlasRelatedQA),undefined);
     assert.equal(await detail.locator('script,img').count(),0);
     coverage.detail_runs++;
   }
   if(runs.length)record('all_source_details_preserve_values_absence_and_availability');
+  if(runs.length)record('related_references_match_source_graph_and_keep_empty_state');
+  if(args.has('--expect-related-references')) {
+    assert.equal(catalog.sources.length,2);
+    assert.ok(catalog.collisions.length>0);
+    assert.ok(coverage.related_references>0&&coverage.empty_related_references>0);
+    let navigations=0;
+    const downloads=[];
+    const trackDownload=download=>downloads.push(download.suggestedFilename());
+    page.on('download',trackDownload);
+    for(const source of catalog.sources) {
+      const index=runs.findIndex(r=>r.source===source.id&&r.related_references?.length>1);
+      assert.ok(index>=0);
+      await page.getByTestId('run-open').nth(index).click();
+      const section=page.getByTestId('related-references');
+      const raw=source.read_model.entities.find(e=>e['@id']===runs[index].id);
+      assert.ok(referenceIds(raw.mentions).length>new Set(referenceIds(raw.mentions)).size,'Fixture exercises duplication');
+      const relatedRun=source.read_model.runs.find(r=>r.id!==runs[index].id&&referenceIds(raw.mentions).includes(r.id));
+      assert.ok(relatedRun,'Fixture includes an internal run target');
+      const button=section.getByRole('button',{name:relatedRun.name||relatedRun.id,exact:true});
+      await button.focus();
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Shift+Tab');
+      assert.ok(await button.evaluate(node=>node===document.activeElement));
+      assert.ok(await button.evaluate(node=>parseFloat(getComputedStyle(node).outlineWidth)>=2));
+      await page.keyboard.press('Enter');
+      const detail=page.getByTestId('detail');
+      assert.equal(await detail.locator('code').first().innerText(),relatedRun.id);
+      assert.ok((await detail.innerText()).includes(source.name));
+      assert.ok((await detail.innerText()).includes(relatedRun.name));
+      navigations++;
+    }
+    page.off('download',trackDownload);
+    assert.deepEqual(downloads,[]);
+    report.related_internal_navigations=navigations;
+    record('related_reference_keyboard_navigation_is_source_scoped_with_visible_focus');
+    record('related_references_do_not_open_external_uris_or_download_content');
+  }
   if(runs.length>=2) {
     await page.getByTestId('run-select').nth(0).check();
     await page.getByTestId('run-select').nth(1).check();
@@ -291,6 +361,10 @@ try {
   assert.ok(controls.every(c=>c.label),'Every visible form control has an accessible text label');
   record('visible_controls_have_names');
   await fs.mkdir(path.dirname(reportPath),{recursive:true});
+  if(args.has('--expect-related-references')) {
+    await page.getByTestId('run-open').first().click();
+    await page.getByTestId('related-references').scrollIntoViewIfNeeded();
+  }
   const desktopPath=reportPath.replace(/\.json$/,'')+'-desktop.png';
   await page.screenshot({path:desktopPath,fullPage:true});
   screenshots.push(path.basename(desktopPath));
@@ -302,12 +376,53 @@ try {
     await page.getByTestId('run-open').first().click();
     assert.ok(await page.getByTestId('detail').isVisible());
   }
-  await page.getByTestId('lineage-nav').click();
-  assert.ok(await page.getByTestId('lineage').isVisible());
+  if(args.has('--expect-related-references')) {
+    assert.ok(await page.getByTestId('related-references').isVisible());
+    await page.getByTestId('related-references').scrollIntoViewIfNeeded();
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Long reference IDs must wrap at 390px');
+    assert.ok(await page.getByTestId('related-references').evaluate(node=>node.getBoundingClientRect().right<=innerWidth+1&&node.scrollWidth<=node.clientWidth+1),'Related cards must not overflow their narrow container');
+  } else {
+    await page.getByTestId('lineage-nav').click();
+    assert.ok(await page.getByTestId('lineage').isVisible());
+  }
   const mobilePath=reportPath.replace(/\.json$/,'')+'-mobile.png';
   await page.screenshot({path:mobilePath,fullPage:true});
   screenshots.push(path.basename(mobilePath));
   record('mobile_390px_detail_and_navigation');
+  if(args.has('--expect-related-references')) {
+    await page.setViewportSize({width:1440,height:1000});
+    await page.evaluate(()=>{document.documentElement.style.zoom='2';});
+    assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).zoom),'2');
+    await page.getByTestId('related-references').scrollIntoViewIfNeeded();
+    report.zoom={factor:2,method:'document.documentElement.style.zoom',scope:'CSS rendering zoom; not native browser toolbar zoom or full WCAG conformance'};
+    report.zoom.geometry=await page.evaluate(()=>{
+      const dimensions=node=>{const rect=node.getBoundingClientRect();return {left:rect.left,right:rect.right,width:rect.width,client_width:node.clientWidth,scroll_width:node.scrollWidth};};
+      const section=document.querySelector('[data-testid="related-references"]');
+      return {
+        viewport_width:innerWidth,document:dimensions(document.documentElement),related_section:dimensions(section),
+        overflowing_elements:[...document.querySelectorAll('body *')].filter(node=>{
+          const rect=node.getBoundingClientRect();
+          return rect.width>0&&rect.height>0&&rect.right>innerWidth+1&&!node.closest('.table-wrap');
+        }).slice(0,10).map(node=>({tag:node.tagName.toLowerCase(),id:node.id,class:node.className,...dimensions(node)}))
+      };
+    });
+    // Preserve the failing rendering as evidence before the same overflow gate.
+    const zoomPath=reportPath.replace(/\.json$/,'')+'-zoom200.png';
+    await page.screenshot({path:zoomPath,fullPage:true});
+    screenshots.push(path.basename(zoomPath));
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'References remain within viewport at CSS zoom 200%');
+    const section=page.getByTestId('related-references');
+    assert.ok(await section.isVisible());
+    assert.ok(await section.evaluate(node=>node.getBoundingClientRect().right<=innerWidth+1&&node.scrollWidth<=node.clientWidth+1),'Related cards must not overflow their zoomed container');
+    const internal=section.getByRole('button').first();
+    await internal.focus();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Shift+Tab');
+    assert.ok(await internal.evaluate(node=>node===document.activeElement));
+    assert.ok(await internal.evaluate(node=>parseFloat(getComputedStyle(node).outlineWidth)>=2));
+    record('related_references_css_zoom_200_percent_reflow_and_keyboard');
+    await page.evaluate(()=>{document.documentElement.style.zoom='1';});
+  }
   assert.deepEqual(pageErrors,[]);
   assert.deepEqual(externalRequests,[]);
   record('no_page_errors_or_external_requests');
