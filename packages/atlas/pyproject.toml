@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atlas-viewer"
+version = "0.1.0a1"
+description = "Local read-only scientific record explorer using an independent public protocol"
+requires-python = ">=3.11"
+dependencies = ["caderno-protocol==0.1.0a1"]
+
+[project.scripts]
+atlas = "atlas_viewer.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+atlas_viewer = ["static/*.html", "static/*.css", "static/*.js"]

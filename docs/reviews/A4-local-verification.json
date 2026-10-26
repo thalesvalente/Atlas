@@ -1,0 +1,186 @@
+{
+  "reviewer": "A4-independent-qa",
+  "candidate": "0.1.0a1",
+  "date": "2026-10-24",
+  "status": "PASS_SCOPED",
+  "clean_install": {
+    "status": "PASS_SCOPED",
+    "scope": "installed-wheels-isolation-cli-rebuild-immutability",
+    "python": "3.12.14",
+    "optimization": 0,
+    "sdk": {
+      "sdk_imported": true,
+      "viewer_absent": true,
+      "r4_absent": true,
+      "installed_module": true
+    },
+    "viewer": {
+      "r4_absent": true,
+      "installed_viewer": true,
+      "installed_sdk": true
+    },
+    "run_count": 4,
+    "source_bytes_unchanged": true,
+    "reindex": {
+      "rebuild_same_records": true,
+      "generation_advanced": true
+    },
+    "wheel_sha256": {
+      "atlas_viewer-0.1.0a1-py3-none-any.whl": "360a01715eab016cb0a53484153881e3ef5f5bb3ee87d51bcf9652c07a856575",
+      "caderno_protocol-0.1.0a1-py3-none-any.whl": "8e8ff54a287deb26acac978cfb6400ed3feea9fedded077fd45791b388c4bf5a"
+    },
+    "source_file_sha256": {
+      "protocol": {
+        "pyproject.toml": "29292b6cc43253628f8639106703927e7e930d78eed0607bbb419901f8302caa",
+        "tests/test_sdk.py": "2365f4771bb075606ec109f348b339b30a44a433afa3b013f9a9a6ba33e96a83",
+        "src/caderno_protocol/storage.py": "6fd7fbc658f312bc295369409916ef640875892115085085f41e068874ed92dd",
+        "src/caderno_protocol/__main__.py": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2",
+        "src/caderno_protocol/model.py": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6",
+        "src/caderno_protocol/__init__.py": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f",
+        "src/caderno_protocol/read_model.py": "3fd4682322cc4ec772349848f10a1cfdc21e3d1ed46fc4774bca242c5ec30e4c",
+        "src/caderno_protocol/resources/APACHE-2.0.txt": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+        "src/caderno_protocol/resources/schema.json": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66",
+        "src/caderno_protocol/resources/context-catalog.json": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a",
+        "src/caderno_protocol/resources/ro-crate-1.3-context.jsonld": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+        "src/caderno_protocol/resources/NOTICE.txt": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd"
+      },
+      "atlas": {
+        "pyproject.toml": "3b2fa0a244415d867078f3869b3e81e2b88081338f74590d1393e971869f1ae4",
+        "src/atlas_viewer/__main__.py": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf",
+        "src/atlas_viewer/__init__.py": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f",
+        "src/atlas_viewer/catalog.py": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3",
+        "src/atlas_viewer/server.py": "1208a3e0cd129a31397a8b81afef5031d081cef8c8dda610467e6bb08dc446ca",
+        "src/atlas_viewer/static/index.html": "28b58b748539df8158b83eb50a943d7be3af32f93d55e1fd9d1b403f8cb1bef1",
+        "src/atlas_viewer/static/style.css": "6bba616b207c45a6863d641e918cca8083d97e8651789906989138502c79c900",
+        "src/atlas_viewer/static/app.js": "7d873764fbbb0578719be7c98bddce5b84916568883edad7cb158556c0b8cac7"
+      }
+    },
+    "browser": "NOT_RUN_BY_THIS_SCRIPT",
+    "windows": "NOT_RUN",
+    "human_protocol_acceptance": "PENDING",
+    "canonical_promotion": "NOT_AUTHORIZED"
+  },
+  "independent_tests": {
+    "normal": {
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0
+    },
+    "optimized": {
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0
+    },
+    "execution": "installed SDK, isolated Python, outside source tree"
+  },
+  "browser": {
+    "status": "PASS_SCOPED",
+    "scope": "installed-live-ui",
+    "checks": [
+      {
+        "name": "catalog_records_match_parsed_source",
+        "status": "PASS"
+      },
+      {
+        "name": "record_labels_render_as_text",
+        "status": "PASS"
+      },
+      {
+        "name": "search_and_clear",
+        "status": "PASS"
+      },
+      {
+        "name": "project_experiment_status_filters",
+        "status": "PASS"
+      },
+      {
+        "name": "detail_preserves_large_integer_text",
+        "status": "PASS"
+      },
+      {
+        "name": "run_detail_metrics_states_and_synthetic_identity",
+        "status": "PASS"
+      },
+      {
+        "name": "comparison_preserves_repeated_metric_identity_values",
+        "status": "PASS"
+      },
+      {
+        "name": "comparison_explains_incompatible_units_or_types",
+        "status": "PASS"
+      },
+      {
+        "name": "comparison_preserves_large_integer_text",
+        "status": "PASS"
+      },
+      {
+        "name": "comparison_preserves_states_and_units",
+        "status": "PASS"
+      },
+      {
+        "name": "timeline_preserves_declared_and_missing_times",
+        "status": "PASS"
+      },
+      {
+        "name": "lineage_navigation_uses_declared_relations",
+        "status": "PASS"
+      },
+      {
+        "name": "source_validity_is_distinct_from_authenticity",
+        "status": "PASS"
+      },
+      {
+        "name": "dossier_preserves_large_integer_raw_json",
+        "status": "PASS"
+      },
+      {
+        "name": "dossier_download_contains_real_records_and_limits",
+        "status": "PASS"
+      },
+      {
+        "name": "http_host_origin_and_fixed_source_allowlist",
+        "status": "PASS"
+      },
+      {
+        "name": "explicit_reindex_preserves_source_records",
+        "status": "PASS"
+      },
+      {
+        "name": "keyboard_skip_link_filters_and_visible_focus",
+        "status": "PASS"
+      },
+      {
+        "name": "visible_controls_have_names",
+        "status": "PASS"
+      },
+      {
+        "name": "mobile_390px_detail_and_navigation",
+        "status": "PASS"
+      },
+      {
+        "name": "no_page_errors_or_external_requests",
+        "status": "PASS"
+      }
+    ],
+    "external_requests": [],
+    "page_errors": [],
+    "browser_version": "151.0.7922.34",
+    "sources": 1,
+    "runs": 4,
+    "executed_checks": 21,
+    "human_protocol_acceptance": "PENDING",
+    "canonical_promotion": "NOT_AUTHORIZED"
+  },
+  "architecture_audit": {
+    "status": "PASS_SCOPED",
+    "findings": []
+  },
+  "optimized_installed_viewer_precision": {
+    "exact_integer": true,
+    "raw_dossier_integer": true
+  },
+  "ci_exact_sha": "PENDING_EXTERNAL",
+  "codex_exact_sha": "PENDING_EXTERNAL",
+  "human_protocol_acceptance": "PENDING",
+  "canonical_promotion": "NOT_AUTHORIZED"
+}

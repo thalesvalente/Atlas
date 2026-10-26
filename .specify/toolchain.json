@@ -1,0 +1,9 @@
+{
+  "specify-cli": "1.2.3",
+  "integration": "codex",
+  "mode": "skills",
+  "script": "py",
+  "invocation": "$speckit-*",
+  "native_codex_cli_available": false,
+  "application": "agent reads installed skills; official helper scripts executed; no fabricated slash-command invocation"
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "caderno-protocol"
+version = "0.1.0a1"
+description = "Offline candidate profile and validator for scientific RO-Crate snapshots"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+caderno-validate = "caderno_protocol.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+caderno_protocol = ["resources/*.json", "resources/*.jsonld", "resources/*.txt"]

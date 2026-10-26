@@ -1,0 +1,30 @@
+{
+  "profile_version": "0.1.0a1",
+  "profile_id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+  "status": "CANDIDATE_PENDING_HUMAN",
+  "canonical_promotion": "NOT_APPROVED",
+  "standard_versions": {
+    "ro-crate": "1.3.0",
+    "process-run-crate": "0.6.0",
+    "json-schema": "2020-12"
+  },
+  "artifacts": [
+    {
+      "path": "docs/protocol/0.1.0a1.md",
+      "sha256": "76ae9be325866895e6bcefeefbc7d0f35e295969a7263e71db6d774be1bf794e"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+      "sha256": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+      "sha256": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+      "sha256": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91"
+    }
+  ],
+  "digest_scope": "Exact bytes; no authorship, historical time or scientific acceptance authentication."
+}

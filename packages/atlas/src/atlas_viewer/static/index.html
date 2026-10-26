@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Atlas — registros científicos</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Atlas, página inicial"><span class="brand-mark" aria-hidden="true">A</span><span>Atlas<small>CADERNO CIENTÍFICO</small></span></a>
+    <div class="top-actions"><span class="local-label"><span class="dot" aria-hidden="true"></span> Consulta local</span><span class="version">Candidata 0.1</span></div>
+  </header>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Navegação">
+      <p class="eyebrow">ESPAÇO DE PESQUISA</p>
+      <nav aria-label="Visualizações">
+        <button class="nav-button active" data-view="explore" aria-current="page"><span aria-hidden="true">◫</span> Explorar <span id="nav-count" class="count">0</span></button>
+        <button class="nav-button" data-view="compare" data-testid="compare-nav"><span aria-hidden="true">⇄</span> Comparar</button>
+        <button class="nav-button" data-view="timeline" data-testid="timeline-nav"><span aria-hidden="true">◷</span> Linha do tempo</button>
+        <button class="nav-button" data-view="lineage" data-testid="lineage-nav"><span aria-hidden="true">⌘</span> Linhagem</button>
+        <button class="nav-button" data-view="sources" data-testid="sources-nav"><span aria-hidden="true">▤</span> Fontes e validade</button>
+        <button class="nav-button" data-view="dossier" data-testid="dossier-nav"><span aria-hidden="true">↗</span> Dossiê</button>
+      </nav>
+      <div class="sidebar-note"><span class="eyebrow">A FONTE É PRESERVADA</span><p>Explore os registros sem alterar o acervo.</p><p class="muted">Validação técnica não representa aprovação científica.</p></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <section class="page-heading">
+        <div><p class="eyebrow">DO REGISTRO À EVIDÊNCIA</p><h1>Uma visão conectada<br>da sua pesquisa.</h1><p class="lead">Explore execuções, compare resultados e acompanhe a origem de cada evidência.</p></div>
+        <button id="refresh" class="button secondary" data-testid="reindex">↻ Reconstruir índice</button>
+      </section>
+      <div id="notice" class="notice" role="status" aria-live="polite">Abrindo fontes declaradas…</div>
+      <div id="change-notice" class="notice warning" hidden role="alert"></div>
+      <section class="stats" aria-label="Resumo do acervo">
+        <div><span>Projetos</span><strong id="projects-count">0</strong><small>fontes independentes</small></div>
+        <div><span>Experimentos</span><strong id="experiments-count">0</strong><small>perguntas em investigação</small></div>
+        <div><span>Execuções</span><strong id="runs-count">0</strong><small>com estados preservados</small></div>
+        <div><span>Fontes válidas</span><strong id="sources-count">0</strong><small>conformidade do perfil candidato</small></div>
+      </section>
+
+      <section id="view-explore" class="view">
+        <div class="section-heading"><div><p class="eyebrow">ACERVO</p><h2>Execuções</h2></div><span id="result-count" class="muted"></span></div>
+        <form class="filters" id="filters" aria-label="Filtrar execuções">
+          <label class="search-label">Buscar registros<input id="search" data-testid="search" type="search" placeholder="Nome, identificador ou descrição…" autocomplete="off"></label>
+          <label>Projeto<select id="project-filter" data-testid="project-filter"><option value="">Todos os projetos</option></select></label>
+          <label>Experimento<select id="experiment-filter" data-testid="experiment-filter"><option value="">Todos os experimentos</option></select></label>
+          <label>Execução<select id="status-filter" data-testid="status-filter"><option value="">Todos os estados</option><option>COMPLETED</option><option>PARTIAL</option><option>FAILED</option><option>UNKNOWN</option><option>RUNNING</option><option>PLANNED</option><option>CANCELLED</option></select></label>
+          <button type="button" id="clear-filters" class="text-button">Limpar</button>
+        </form>
+        <div class="table-wrap"><table data-testid="run-table"><caption class="sr-only">Execuções das fontes válidas. Selecione até quatro para comparar.</caption><thead><tr><th scope="col">Comparar</th><th scope="col">Execução / experimento</th><th scope="col">Estado</th><th scope="col">Revisão científica</th><th scope="col">Métricas registradas</th></tr></thead><tbody id="run-rows"></tbody></table></div>
+        <div id="empty" class="empty" hidden><span aria-hidden="true">◫</span><h3>Nenhuma execução nesta seleção</h3><p>Abra uma fonte pelo comando Atlas ou ajuste os filtros para encontrar seus registros.</p></div>
+        <div class="table-footer"><span id="selected-count">Nenhuma execução selecionada</span><button id="compare-selected" class="button primary" data-testid="compare-selected">Comparar seleção →</button></div>
+      </section>
+
+      <section id="detail" class="detail panel" data-testid="detail" hidden tabindex="-1" aria-label="Detalhe da execução"><div class="section-heading"><h2>Detalhe da execução</h2><button id="close-detail" class="text-button">Fechar detalhe</button></div><div id="detail-content"></div></section>
+
+      <section id="view-compare" class="view" hidden><div class="section-heading"><div><p class="eyebrow">LEITURA LADO A LADO</p><h2>Comparar execuções</h2></div></div><p class="muted">Métricas são agrupadas por identidade, tipo e unidade. Valores ausentes permanecem ausentes.</p><div id="compare-content" data-testid="compare"></div></section>
+      <section id="view-timeline" class="view" hidden><div class="section-heading"><div><p class="eyebrow">SEQUÊNCIA DECLARADA</p><h2>Linha do tempo</h2></div></div><p class="muted">Datas são apresentadas com sua origem declarada. Ausência de data não é preenchida por inferência.</p><ol id="timeline-content" class="timeline" data-testid="timeline"></ol></section>
+      <section id="view-lineage" class="view" hidden><div class="section-heading"><div><p class="eyebrow">RASTREABILIDADE</p><h2>Linhagem das evidências</h2></div></div><p class="muted">Entradas, saídas e derivações registradas. Cada relação mantém o vínculo com sua fonte.</p><div id="lineage-content" data-testid="lineage"></div></section>
+      <section id="view-sources" class="view" hidden><div class="section-heading"><div><p class="eyebrow">TRANSPARÊNCIA</p><h2>Fontes e validade</h2></div></div><p class="muted">Conformidade, integridade, origem e aprovação científica são verificações diferentes.</p><div id="sources-content" class="source-grid" data-testid="sources"></div></section>
+      <section id="view-dossier" class="view" hidden><div class="section-heading"><div><p class="eyebrow">APRESENTAÇÃO DERIVADA</p><h2>Dossiê de consulta</h2></div></div><div class="panel"><h3>Compartilhe o contexto dos resultados</h3><p>O dossiê inclui os registros das fontes válidas, referências, estados, validação e limitações. Fontes inválidas aparecem com seus erros.</p><p><strong>Este documento é derivado e não constitui autenticação nem aceite científico.</strong></p><p id="dossier-summary" data-testid="dossier"></p><button id="download-dossier" class="button primary" data-testid="download-dossier">Exportar dossiê JSON ↓</button><button id="print-view" class="button secondary">Imprimir esta visão</button><ul id="limitations"></ul></div></section>
+      <footer class="footer"><span>Atlas · explorar, comparar, compreender.</span><span id="indexed-at"></span></footer>
+    </main>
+  </div>
+</body>
+</html>

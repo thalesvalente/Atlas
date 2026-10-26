@@ -1,0 +1,11 @@
+The ro-crate-1.3-context.jsonld resource is copied without modification from
+ResearchObject/ro-crate, tag 1.3.0, commit
+22fbd7e098ccd2839c80967e363a2201528a2efe,
+docs/_specification/1.3/context.jsonld.
+Source: https://github.com/ResearchObject/ro-crate/blob/1.3.0/docs/_specification/1.3/context.jsonld
+Copyright remains with the RO-Crate contributors and organizations identified
+in the upstream specification. Licensed under the Apache License, Version 2.0;
+see APACHE-2.0.txt.
+This third-party resource license is not a license selection for Atlas or this SDK.
+The local catalogue fixes bytes used for vocabulary checks; it authorizes no
+network access and executes no code.

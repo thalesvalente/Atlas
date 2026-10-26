@@ -1,0 +1,35 @@
+{
+  "source": "https://github.com/TheELNConsortium/TheELNFileFormat/blob/2379f5131d543cd8a771a06403de9fb427039a91/tests/checks.py",
+  "library_versions": {
+    "rocrate": "0.14.0",
+    "jsonschema": "4.25.1",
+    "roc-validator": "0.13.0"
+  },
+  "checks": [
+    {
+      "check": "Archive structure",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "check": "Pypi RO-Crate",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "check": "Parameters metadata json",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "check": "Schema",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "scope": "Official first four checks only; checkValidator pins RO-Crate1.1 and was not used. External base1.2 report is separate.",
+  "synthetic_only": true,
+  "archive_sha256": "0a3015ae4e53abef5df68d7840e8ae5874339269910b48d2f8b194fbbc5ed805",
+  "source_checks_sha256": "5736114ca2394737feffd4af6e6634429ec215a0a61edd0c8ae7b92587e0e07d",
+  "source_schema_sha256": "aa4a58d2a579b75c3bc4d609f8d9073e7864f7bd4c3f10def69ea97fb11d1e75"
+}
