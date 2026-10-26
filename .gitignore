@@ -6,13 +6,14 @@ build/
 dist/
 node_modules/
 .test-output/
-.agents/
-.specify/scripts/
-.specify/templates/
-.specify/integrations/
-.specify/workflows/
-.specify/init-options.json
-.specify/integration.json
+# Only reviewed official repository skills are shared; agent sessions stay local.
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/speckit-*/
+.agents/skills/speckit-*/*
+!.agents/skills/speckit-*/SKILL.md
+.local/
 
 .ci-*/
 .specify/memory/.constitution-template.json

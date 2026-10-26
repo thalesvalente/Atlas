@@ -102,10 +102,12 @@ reconstrução e bytes intactos. O browser verifica a aplicação instalada, nã
 O diretório `--work` deve ser novo. A CI cobre Windows/Ubuntu, normal/`-O`, browser
 real e o validador de referência no escopo declarado em [conformidade](docs/protocol/conformance.md).
 
-Spec Kit **1.2.3** foi instalado em ambiente isolado. A integração Codex em modo
-skills foi inicializada; seus auxiliares oficiais e artefatos foram utilizados.
-O Codex CLI não estava instalado nesta sessão: não se alega invocação nativa de
-comandos `$speckit-*` em outro processo. [Registro do ciclo](specs/001-atlas021-protocol-interface/execution-log.md).
+O ambiente de engenharia usa Spec Kit **1.2.3**, instalado com `uv tool` em
+ambiente isolado persistente. Scripts Python, templates e as 10 skills oficiais
+Codex estão versionados. Consulte a [configuração de um clone novo](docs/engineering/speckit-setup.md)
+e o [registro de validação desta instalação](docs/verification/SPECKIT-SETUP01.md).
+O [registro do ciclo anterior](specs/001-atlas021-protocol-interface/execution-log.md)
+permanece preservado como evidência histórica.
 
 ## Limites da candidata
 

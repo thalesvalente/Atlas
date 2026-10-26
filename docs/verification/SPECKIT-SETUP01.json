@@ -1,0 +1,183 @@
+{
+  "mission": "ATLAS-SPECKIT-SETUP01",
+  "date": "2026-10-25",
+  "baseline": "a6e57c9c6748b4a0d50b554613c93e2b8a785554",
+  "initial_git_status": "clean; detached at reference SHA",
+  "branch": "codex/atlas-speckit-setup01",
+  "pr_base": "feat/atlas021-poc-r4-foco01-20261024",
+  "toolchain": {
+    "uv": "0.13.5",
+    "specify_cli": "1.2.3",
+    "python": "3.14.3",
+    "codex_cli": "0.149.0",
+    "source": "official PyPI specify-cli==1.2.3"
+  },
+  "initialization": {
+    "command": "specify init --here --force --non-interactive --integration codex --integration-options=\"--skills\" --script py",
+    "exit_code": 0,
+    "repeated_in_same_checkout": true,
+    "repeated_exit_code": 0,
+    "managed_and_preserved_contents_compared": 30,
+    "content_changes_after_repeat": [],
+    "scope": "same-checkout regeneration; no extra clone or worktree"
+  },
+  "integration": {
+    "status": "ok",
+    "default_integration": "codex",
+    "installed_integrations": [
+      "codex"
+    ],
+    "recorded_installed_integrations": [
+      "codex"
+    ],
+    "manifest_checked_integrations": [
+      "codex",
+      "speckit"
+    ],
+    "multi_install_safe": true,
+    "shared_templates_target_alignment": "codex",
+    "missing_managed_files": 0,
+    "modified_managed_files": 0,
+    "invalid_manifest_paths": 0,
+    "unchecked_manifests": 0,
+    "manifests": {
+      "codex": {
+        "manifest": ".specify/integrations/codex.manifest.json",
+        "readable": true,
+        "tracked_files": 10,
+        "missing_files": [],
+        "modified_files": [],
+        "invalid_files": []
+      },
+      "speckit": {
+        "manifest": ".specify/integrations/speckit.manifest.json",
+        "readable": true,
+        "tracked_files": 18,
+        "missing_files": [],
+        "modified_files": [],
+        "invalid_files": []
+      }
+    },
+    "findings": []
+  },
+  "repository_audit": {
+    "status": "PASS",
+    "baseline": "a6e57c9c6748b4a0d50b554613c93e2b8a785554",
+    "preserved_original_files": 105,
+    "managed_files": 28,
+    "official_skills": 10,
+    "python_scripts": 6,
+    "errors": [],
+    "scope": "repository integrity and generated assets; no operational or scientific approval"
+  },
+  "prerequisites": {
+    "positive": [
+      {
+        "feature": "001-atlas021-protocol-interface",
+        "exit_code": 0,
+        "available_docs": [
+          "research.md",
+          "data-model.md",
+          "contracts/",
+          "quickstart.md",
+          "tasks.md"
+        ],
+        "template_resolved": true
+      },
+      {
+        "feature": "002-atlas021-poc-r4",
+        "exit_code": 0,
+        "available_docs": [
+          "research.md",
+          "data-model.md",
+          "contracts/",
+          "quickstart.md",
+          "tasks.md"
+        ],
+        "template_resolved": true
+      }
+    ],
+    "negative": {
+      "no_feature_selected_exit_code": 1,
+      "feature_json_still_absent": true
+    }
+  },
+  "atlas_tests": {
+    "optimized": false,
+    "suites": [
+      {
+        "suite": "packages/protocol/tests",
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "suite": "tests/qa",
+        "tests": 46,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "suite": "tests/viewer",
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ],
+    "status": "PASS"
+  },
+  "installed_cli_smoke": {
+    "viewer_inspect_exit_code": 0,
+    "protocol_validation_exit_code": 0,
+    "fixture": "examples/environmental/sample",
+    "runtime_reinstalled": false
+  },
+  "preservation": {
+    "original_files_before": 109,
+    "preserved_original_files": 105,
+    "allowed_original_changes": [
+      ".gitignore",
+      ".specify/toolchain.json",
+      "README.md",
+      "THIRD_PARTY_NOTICES.md"
+    ],
+    "runtime_files": 1845,
+    "runtime_changed_files": 0,
+    "runtime_added_files": 0,
+    "worktree_count_before": 1,
+    "worktree_count_after": 1,
+    "worktree_roots_unchanged": true,
+    "feature_pointer_before": "absent",
+    "feature_pointer_after": "absent"
+  },
+  "independent_review": {
+    "agent": "/root/independent_review",
+    "status": "PASS",
+    "blocking_findings": 0,
+    "scope": "read-only review of generated infrastructure, procedure, audit, ignores and baseline/runtime preservation",
+    "final_report_review": "PASS"
+  },
+  "limitations": [
+    "python3 resolves to an unusable Windows Store alias; real python was used for helpers; official skills remain unmodified",
+    "No model execution or feature-mutating skill workflow was invoked",
+    "No independent fresh-clone local installation; official regeneration tested in the existing checkout",
+    "Transitive dependencies resolved by uv; not a cross-platform binary lock",
+    "Initial sandbox attempts were blocked by temporary-directory and loopback access; tests passed with workspace temporary storage and approved loopback access",
+    "No new browser session or clean runtime reinstall; existing CLI smoke and 71 source tests were executed",
+    "R4 integration and human protocol acceptance remain outside this setup"
+  ],
+  "acceptance": {
+    "SPECKIT_VERSION": "1.2.3",
+    "OFFICIAL_INITIALIZATION": "PASS",
+    "CODEX_INTEGRATION": "PASS",
+    "CONSTITUTION_UNCHANGED": true,
+    "EXISTING_SPECS_PRESERVED": true,
+    "ATLAS_RUNTIME_UNCHANGED": true,
+    "NO_EXTRA_WORKTREES": true,
+    "REPRODUCIBLE_SETUP": true,
+    "GIT_REVIEW": "PASS"
+  }
+}
