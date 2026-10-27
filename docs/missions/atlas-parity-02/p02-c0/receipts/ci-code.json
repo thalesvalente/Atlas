@@ -1,0 +1,610 @@
+{
+  "kind": "P02_CODE_SHA_GITHUB_ACTIONS_OBSERVATION",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "observation_policy": "Read after own material event (code publication); terminal jobs and failure logs retrieved for diagnosis; no polling.",
+  "source": "GitHub connector GET workflow runs, jobs and failing job logs",
+  "runs": [
+    {
+      "id": 40526560195,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195",
+      "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 122267640040,
+          "name": "Public standards comparison and RO-Crate 1.3 reference",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195/job/122267640040",
+          "started_at": "2026-10-27T14:59:51Z",
+          "completed_at": "2026-10-27T15:00:16Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install pinned reference tooling",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Compare public candidates",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify declared RO-Crate reference scope",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122267640480,
+          "name": "ubuntu-latest / Python optimize=0",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195/job/122267640480",
+          "started_at": "2026-10-27T14:59:51Z",
+          "completed_at": "2026-10-27T15:00:12Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record exact candidate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install pinned build and validation tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install separate protocol and viewer packages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify contracts, architecture, safe reading and viewer",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels again in new empty environments",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122267640520,
+          "name": "windows-latest / Python optimize=0",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195/job/122267640520",
+          "started_at": "2026-10-27T14:59:51Z",
+          "completed_at": "2026-10-27T15:00:50Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record exact candidate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install pinned build and validation tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install separate protocol and viewer packages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify contracts, architecture, safe reading and viewer",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels again in new empty environments",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122267640521,
+          "name": "windows-latest / Python optimize=1",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195/job/122267640521",
+          "started_at": "2026-10-27T14:59:52Z",
+          "completed_at": "2026-10-27T15:00:56Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record exact candidate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install pinned build and validation tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install separate protocol and viewer packages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify contracts, architecture, safe reading and viewer",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels again in new empty environments",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122267640615,
+          "name": "ubuntu-latest / Python optimize=1",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195/job/122267640615",
+          "started_at": "2026-10-27T14:59:52Z",
+          "completed_at": "2026-10-27T15:00:22Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record exact candidate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install pinned build and validation tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install separate protocol and viewer packages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify contracts, architecture, safe reading and viewer",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install wheels again in new empty environments",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122267640802,
+          "name": "Installed viewer / Chromium desktop and mobile",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195/job/122267640802",
+          "started_at": "2026-10-27T14:59:52Z",
+          "completed_at": "2026-10-27T15:00:26Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build and install in isolated environments",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install pinned browser test tooling",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Exercise installed product in a real browser",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Regress precision, repeated metrics and untrusted labels",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Verify related references, source identity, keyboard and 200 percent zoom",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Preserve synthetic browser evidence for the tested candidate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40526560524,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560524",
+      "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 122267640808,
+          "name": "atlas003-specification (windows-latest)",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560524/job/122267640808",
+          "started_at": "2026-10-27T14:59:53Z",
+          "completed_at": "2026-10-27T15:00:43Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout exact candidate, with baseline history",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record exact candidate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Setup Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install official Spec Kit pinned version",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify official CLI and Codex integration",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check generated Spec Kit assets and preserved architecture",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Verify feature 003 requirements and tasks without active-pointer writes",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Setup Python",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Checkout exact candidate, with baseline history",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 122267641255,
+          "name": "atlas003-specification (ubuntu-latest)",
+          "head_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560524/job/122267641255",
+          "started_at": "2026-10-27T14:59:52Z",
+          "completed_at": "2026-10-27T15:00:06Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout exact candidate, with baseline history",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record exact candidate",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Setup Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install official Spec Kit pinned version",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify official CLI and Codex integration",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check generated Spec Kit assets and preserved architecture",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Verify feature 003 requirements and tasks without active-pointer writes",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Setup Python",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Checkout exact candidate, with baseline history",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "id": "P06-GATE-01",
+      "run_id": 40526560524,
+      "jobs": [
+        122267640808,
+        122267641255
+      ],
+      "finding": "Historical preserved-baseline allowlist rejects authorized P02 catalog.py, server.py and static/index.html.",
+      "official_speckit_version": "1.2.3",
+      "cli_and_integration_steps": "PASS_BOTH_OS",
+      "managed_files": 28,
+      "official_skills": 10,
+      "missing_or_modified_managed_files": [],
+      "prerequisites_feature003_step": "SKIPPED_AFTER_AUDIT_FAILURE",
+      "owner": "P06",
+      "next_action": "Add strict P02-scoped allowance and regression tests in global audit; preserve protocol and governance."
+    },
+    {
+      "id": "P06-GATE-02",
+      "run_id": 40526560195,
+      "job_id": 122267640802,
+      "check": "Legacy browser property cell exact-text assertion",
+      "actual": "temperature\nurn:environmental:quantity:temperature",
+      "expected": "temperature",
+      "browser_version": "151.0.7922.34",
+      "completed_checks": 5,
+      "external_requests": [],
+      "page_errors": [],
+      "later_adversarial_and_related_reference_steps": "SKIPPED_AFTER_FAILURE",
+      "artifact": {
+        "id": 12742879106,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526560195/artifacts/12742879106",
+        "sha256": "8ae4fe1e932ad45688d2e36fb22c406bea94972b2e2a2e5f705c82ba74927400",
+        "files": 2,
+        "screenshots": 0
+      },
+      "owner": "P06",
+      "next_action": "Adapt global harness to source-scoped identity and semantic metric cells; explicitly wire new P02 browser wrapper and preserve reports/screenshots."
+    }
+  ],
+  "interpretation": "Four product OS/optimization jobs and reference job passed; product workflow and both Spec Kit jobs failed. Local P02 browser PASS does not convert these CI failures to PASS.",
+  "future_documentation_sha": "NOT_ATTRIBUTED; this receipt belongs only to code_sha."
+}

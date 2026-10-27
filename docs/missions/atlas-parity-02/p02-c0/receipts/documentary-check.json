@@ -1,0 +1,15 @@
+{
+  "kind": "P02_DOCUMENTARY_INTEGRITY_CHECK",
+  "executed_at": "2026-10-27T15:13:38.233051+00:00",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "status": "PASS_SCOPED",
+  "frozen_code_test_fixture_and_protected_files_compared": 87,
+  "byte_differences": 0,
+  "documentary_delta_only": true,
+  "json_files_parsed_before_receipt": 14,
+  "markdown_local_targets": "ALL_EXIST; manifest generated after this check",
+  "scan_private_workspace_paths_and_token_patterns": "NO_MATCHES",
+  "git_diff_cached_check_exit_code": 0,
+  "outside_ownership_paths": [],
+  "scope": "Code/fixtures and protected bytes compared to CODE_SHA; documentation-only commit prepared; no repeated functional tests because executable bytes are unchanged."
+}

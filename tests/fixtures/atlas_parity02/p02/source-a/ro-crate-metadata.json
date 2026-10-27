@@ -1,0 +1,1019 @@
+{
+  "@context": [
+    "https://w3id.org/ro/crate/1.3/context",
+    {
+      "cp": "https://github.com/thalesvalente/Atlas/ns/caderno#",
+      "prov": "http://www.w3.org/ns/prov#"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.3"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "Coorte sintética — fonte A",
+      "description": "Fixture pública gerada para C0. Recorte e universo de origem não declarados.",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "datePublished": "2026-10-27",
+      "conformsTo": [
+        {
+          "@id": "https://w3id.org/ro/wfrun/process/0.6"
+        },
+        {
+          "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+        }
+      ],
+      "hasPart": [
+        {
+          "@id": "data/input.csv"
+        },
+        {
+          "@id": "data/output.csv"
+        },
+        {
+          "@id": "https://example.invalid/p02-reference.txt"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:project:0"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:project:1"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:experiment:0"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:experiment:1"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:experiment:2"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:00"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:02"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:03"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:04"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:05"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:06"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:07"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:08"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:09"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:10"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:11"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:12"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:13"
+        }
+      ]
+    },
+    {
+      "@id": "https://w3id.org/ro/wfrun/process/0.6",
+      "@type": [
+        "CreativeWork",
+        "http://www.w3.org/ns/dx/prof/Profile"
+      ],
+      "name": "Perfil público fixado"
+    },
+    {
+      "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+      "@type": [
+        "CreativeWork",
+        "http://www.w3.org/ns/dx/prof/Profile"
+      ],
+      "name": "Perfil público fixado"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:producer",
+      "@type": "Organization",
+      "name": "Produtor de fixtures sintéticas"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:software",
+      "@type": "SoftwareApplication",
+      "name": "Gerador público C0",
+      "version": "fixture-1",
+      "url": "https://example.invalid/synthetic-p02"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:note",
+      "@type": "CreativeWork",
+      "name": "Nota da fonte A",
+      "description": "Menção de contexto, sem relação causal, consumo ou produção."
+    },
+    {
+      "@id": "javascript:window.__atlasP02QA=1",
+      "@type": "CreativeWork",
+      "name": "<img src=\"https://example.invalid/p02.png\" onerror=\"window.__atlasP02QA=1\"> A",
+      "description": "<script>window.__atlasP02QA=1</script> file:///not-requested.txt"
+    },
+    {
+      "@id": "data/input.csv",
+      "@type": "File",
+      "name": "Entrada sintética A",
+      "encodingFormat": "text/csv",
+      "cp:availability": "PRESENT",
+      "contentSize": 28,
+      "cp:sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53"
+    },
+    {
+      "@id": "data/output.csv",
+      "@type": "File",
+      "name": "Saída não incluída A",
+      "cp:availability": "MISSING",
+      "cp:sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "@id": "https://example.invalid/p02-reference.txt",
+      "@type": "File",
+      "name": "Referência externa não acessada A",
+      "cp:availability": "EXTERNAL",
+      "cp:sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:project:0",
+      "@type": [
+        "Dataset",
+        "cp:Project"
+      ],
+      "name": "Projeto 1 — A",
+      "description": "Projeto sintético."
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:project:1",
+      "@type": [
+        "Dataset",
+        "cp:Project"
+      ],
+      "name": "Projeto 2 — A",
+      "description": "Projeto sintético."
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:experiment:0",
+      "@type": [
+        "Dataset",
+        "cp:Experiment"
+      ],
+      "name": "Hidrologia — fonte A",
+      "isPartOf": {
+        "@id": "urn:atlas:synthetic:parity02:p02:project:0"
+      }
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:experiment:1",
+      "@type": [
+        "Dataset",
+        "cp:Experiment"
+      ],
+      "name": "Modelagem α — fonte A",
+      "isPartOf": {
+        "@id": "urn:atlas:synthetic:parity02:p02:project:1"
+      }
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:experiment:2",
+      "@type": [
+        "Dataset",
+        "cp:Experiment"
+      ],
+      "name": "Validação química — fonte A",
+      "isPartOf": {
+        "@id": "urn:atlas:synthetic:parity02:p02:project:0"
+      }
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:00",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 3,
+      "value": 1.25
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:parameter:00",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:method",
+      "name": "Método",
+      "cp:valueType": "string",
+      "value": "Método α — A"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:00",
+      "@type": "CreateAction",
+      "name": "Execução 00 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:0"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "COMPLETED",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "cp:reviewStatus": "UNKNOWN",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:00"
+        }
+      ],
+      "cp:parameters": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:parameter:00"
+        }
+      ],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-01T10:00:00-03:00",
+      "endTime": "2026-10-01T10:05:00-03:00",
+      "mentions": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:note"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        },
+        {
+          "@id": "javascript:window.__atlasP02QA=1"
+        },
+        {
+          "@id": "https://example.invalid/p02-reference.txt"
+        },
+        {
+          "@id": "data/output.csv"
+        }
+      ]
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:01",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "µg/L",
+      "cp:precision": 3,
+      "value": 2.5
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:01",
+      "@type": "CreateAction",
+      "name": "Execução 01 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:1"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "PARTIAL",
+      "actionStatus": {
+        "@id": "http://schema.org/FailedActionStatus"
+      },
+      "cp:reviewStatus": "HOLD",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:01"
+        }
+      ],
+      "cp:parameters": [],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-02T10:00:00-03:00",
+      "endTime": "2026-10-02T10:05:00-03:00"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:02",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "integer",
+      "unitText": "mg/L",
+      "cp:precision": 0,
+      "value": 3
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:02",
+      "@type": "CreateAction",
+      "name": "Execução 02 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:2"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "FAILED",
+      "actionStatus": {
+        "@id": "http://schema.org/FailedActionStatus"
+      },
+      "cp:reviewStatus": "REJECTED",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:02"
+        }
+      ],
+      "cp:parameters": [],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-03T10:00:00-03:00",
+      "endTime": "2026-10-03T10:05:00-03:00",
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:note"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        },
+        {
+          "@id": "javascript:window.__atlasP02QA=1"
+        },
+        {
+          "@id": "https://example.invalid/p02-reference.txt"
+        },
+        {
+          "@id": "data/output.csv"
+        }
+      ]
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:parameter:03",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:method",
+      "name": "Método",
+      "cp:valueType": "string",
+      "value": "Método α — A"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:03",
+      "@type": "CreateAction",
+      "name": "Execução 03 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:0"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "RUNNING",
+      "actionStatus": {
+        "@id": "http://schema.org/ActiveActionStatus"
+      },
+      "cp:reviewStatus": "NOT_APPLICABLE",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [],
+      "cp:parameters": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:parameter:03"
+        }
+      ],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-04T10:00:00-03:00",
+      "endTime": "2026-10-04T10:05:00-03:00"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:04",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 3,
+      "value": null,
+      "cp:missingReason": "Não medido; desconhecido não é zero"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:04",
+      "@type": "CreateAction",
+      "name": "Execução 04 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:1"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "UNKNOWN",
+      "actionStatus": {
+        "@id": "http://schema.org/PotentialActionStatus"
+      },
+      "cp:reviewStatus": "UNKNOWN",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:04"
+        }
+      ],
+      "cp:parameters": [],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-05T10:00:00-03:00",
+      "endTime": "2026-10-05T10:05:00-03:00",
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:03"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:note"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        },
+        {
+          "@id": "javascript:window.__atlasP02QA=1"
+        },
+        {
+          "@id": "https://example.invalid/p02-reference.txt"
+        },
+        {
+          "@id": "data/output.csv"
+        }
+      ]
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:05",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:exact-count",
+      "name": "Contagem exata",
+      "cp:valueType": "integer",
+      "unitText": "1",
+      "cp:precision": 0,
+      "value": 9007199254740993
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:05",
+      "@type": "CreateAction",
+      "name": "Execução 05 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:2"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "COMPLETED",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "cp:reviewStatus": "HOLD",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:05"
+        }
+      ],
+      "cp:parameters": [],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-06T10:00:00-03:00",
+      "endTime": "2026-10-06T10:05:00-03:00"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:06",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 3,
+      "value": 8.75
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:parameter:06",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:method",
+      "name": "Método",
+      "cp:valueType": "string",
+      "value": "Método α — A"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:06",
+      "@type": "CreateAction",
+      "name": "Execução 06 — A · Ação, água, 日本語, αβγ, 🧪 TítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaçosTítuloSemEspaços",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:0"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "PARTIAL",
+      "actionStatus": {
+        "@id": "http://schema.org/FailedActionStatus"
+      },
+      "cp:reviewStatus": "REJECTED",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:06"
+        }
+      ],
+      "cp:parameters": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:parameter:06"
+        }
+      ],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-07T10:00:00-03:00",
+      "endTime": "2026-10-07T10:05:00-03:00",
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:05"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:note"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        },
+        {
+          "@id": "javascript:window.__atlasP02QA=1"
+        },
+        {
+          "@id": "https://example.invalid/p02-reference.txt"
+        },
+        {
+          "@id": "data/output.csv"
+        }
+      ]
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:07",
+      "@type": "CreateAction",
+      "name": "Execução 07 — A <img src=\"https://example.invalid/p02.png\" onerror=\"window.__atlasP02QA=1\">",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:1"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "FAILED",
+      "actionStatus": {
+        "@id": "http://schema.org/FailedActionStatus"
+      },
+      "cp:reviewStatus": "NOT_APPLICABLE",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [],
+      "cp:parameters": [],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-08T10:00:00-03:00",
+      "endTime": "2026-10-08T10:05:00-03:00"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:08",
+      "@type": "CreateAction",
+      "name": "Execução 08 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:2"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "RUNNING",
+      "actionStatus": {
+        "@id": "http://schema.org/ActiveActionStatus"
+      },
+      "cp:reviewStatus": "UNKNOWN",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "UNKNOWN",
+      "cp:metrics": [],
+      "cp:parameters": [],
+      "object": [],
+      "result": []
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:09",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 3,
+      "value": 12.5
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:parameter:09",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:method",
+      "name": "Método",
+      "cp:valueType": "string",
+      "value": "Método α — A"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:09",
+      "@type": "CreateAction",
+      "name": "Execução 09 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:0"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "UNKNOWN",
+      "actionStatus": {
+        "@id": "http://schema.org/PotentialActionStatus"
+      },
+      "cp:reviewStatus": "HOLD",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "OBSERVED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:09"
+        }
+      ],
+      "cp:parameters": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:parameter:09"
+        }
+      ],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-10T10:00:00-03:00",
+      "endTime": "2026-10-10T10:05:00-03:00"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:10",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 3,
+      "value": 13.75
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:10",
+      "@type": "CreateAction",
+      "name": "Execução 10 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:1"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "COMPLETED",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "cp:reviewStatus": "REJECTED",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:10"
+        }
+      ],
+      "cp:parameters": [],
+      "object": [],
+      "result": [],
+      "endTime": "2026-10-11T10:05:00-03:00",
+      "mentions": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:note"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        },
+        {
+          "@id": "javascript:window.__atlasP02QA=1"
+        },
+        {
+          "@id": "https://example.invalid/p02-reference.txt"
+        },
+        {
+          "@id": "data/output.csv"
+        }
+      ]
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:11",
+      "@type": "CreateAction",
+      "name": "Execução 11 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:2"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "PARTIAL",
+      "actionStatus": {
+        "@id": "http://schema.org/FailedActionStatus"
+      },
+      "cp:reviewStatus": "NOT_APPLICABLE",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [],
+      "cp:parameters": [],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-12T10:00:00-03:00",
+      "endTime": "2026-10-12T10:05:00-03:00"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:12",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 9007199254740993,
+      "value": 16.25
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:parameter:12",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:method",
+      "name": "Método",
+      "cp:valueType": "string",
+      "value": "Método α — A"
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:12",
+      "@type": "CreateAction",
+      "name": "Execução 12 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:0"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "FAILED",
+      "actionStatus": {
+        "@id": "http://schema.org/FailedActionStatus"
+      },
+      "cp:reviewStatus": "UNKNOWN",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "DECLARED",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:12"
+        }
+      ],
+      "cp:parameters": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:parameter:12"
+        }
+      ],
+      "object": [
+        {
+          "@id": "data/input.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/output.csv"
+        }
+      ],
+      "startTime": "2026-10-13T10:00:00-03:00",
+      "endTime": "2026-10-13T10:05:00-03:00",
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:11"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:note"
+        },
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:run:01"
+        },
+        {
+          "@id": "javascript:window.__atlasP02QA=1"
+        },
+        {
+          "@id": "https://example.invalid/p02-reference.txt"
+        },
+        {
+          "@id": "data/output.csv"
+        }
+      ]
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:metric:13",
+      "@type": "PropertyValue",
+      "propertyID": "urn:synthetic:concentration",
+      "name": "Concentração",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 3,
+      "value": 17.5
+    },
+    {
+      "@id": "urn:atlas:synthetic:parity02:p02:run:13",
+      "@type": "CreateAction",
+      "name": "Execução 13 — A",
+      "description": "Registro integralmente sintético. Não representa ciência aceita.",
+      "cp:experiment": {
+        "@id": "urn:atlas:synthetic:parity02:p02:experiment:1"
+      },
+      "agent": {
+        "@id": "urn:atlas:synthetic:parity02:p02:producer"
+      },
+      "instrument": {
+        "@id": "urn:atlas:synthetic:parity02:p02:software"
+      },
+      "cp:executionStatus": "RUNNING",
+      "actionStatus": {
+        "@id": "http://schema.org/ActiveActionStatus"
+      },
+      "cp:reviewStatus": "HOLD",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "UNKNOWN",
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:synthetic:parity02:p02:metric:13"
+        }
+      ],
+      "cp:parameters": [],
+      "object": [],
+      "result": []
+    }
+  ]
+}

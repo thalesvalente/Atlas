@@ -1,0 +1,59 @@
+{
+  "status": "PASS_SCOPED",
+  "scope": "installed-wheels-isolation-cli-rebuild-immutability",
+  "python": "3.12.14",
+  "optimization": 0,
+  "sdk": {
+    "sdk_imported": true,
+    "viewer_absent": true,
+    "r4_absent": true,
+    "installed_module": true
+  },
+  "viewer": {
+    "r4_absent": true,
+    "installed_viewer": true,
+    "installed_sdk": true
+  },
+  "run_count": 4,
+  "source_bytes_unchanged": true,
+  "reindex": {
+    "rebuild_same_records": true,
+    "generation_advanced": true
+  },
+  "wheel_sha256": {
+    "atlas_viewer-0.1.0a1-py3-none-any.whl": "d60fdc8cf915e6c70a060f7a4eda07536fe02d78616ee9abf4ca08681b3b9fc8",
+    "caderno_protocol-0.1.0a1-py3-none-any.whl": "f23ca538e46f30962b66b59b25f1c33047fb4004e34ecb227c4cc2a6caf5c09e"
+  },
+  "source_file_sha256": {
+    "protocol": {
+      "pyproject.toml": "29292b6cc43253628f8639106703927e7e930d78eed0607bbb419901f8302caa",
+      "tests/test_sdk.py": "19f65ab70a36dc269ab8a4ac3ea76961cb36408f5dbeae704fd4ad88632284c9",
+      "src/caderno_protocol/model.py": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6",
+      "src/caderno_protocol/read_model.py": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013",
+      "src/caderno_protocol/storage.py": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67",
+      "src/caderno_protocol/__init__.py": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f",
+      "src/caderno_protocol/__main__.py": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2",
+      "src/caderno_protocol/resources/context-catalog.json": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a",
+      "src/caderno_protocol/resources/NOTICE.txt": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd",
+      "src/caderno_protocol/resources/ro-crate-1.3-context.jsonld": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+      "src/caderno_protocol/resources/schema.json": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66",
+      "src/caderno_protocol/resources/APACHE-2.0.txt": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c"
+    },
+    "atlas": {
+      "pyproject.toml": "3b2fa0a244415d867078f3869b3e81e2b88081338f74590d1393e971869f1ae4",
+      "src/atlas_viewer/server.py": "a608bf20df53e00ae03accf8e6837ffb5847a697fb4344ff8597a81a4c9ee630",
+      "src/atlas_viewer/parity02_p02_navigation.py": "692a7674152d0e2222b14074dd2f5ba047a8d2efb0fd06cac3d377752474a385",
+      "src/atlas_viewer/__init__.py": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f",
+      "src/atlas_viewer/catalog.py": "0c2eae91f34a24b6d9ebc8447c9cc4d4ee6d92eb1d4a5364e761077bd3e46fed",
+      "src/atlas_viewer/__main__.py": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf",
+      "src/atlas_viewer/static/parity02_p02_state.js": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+      "src/atlas_viewer/static/app.js": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9",
+      "src/atlas_viewer/static/style.css": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0",
+      "src/atlas_viewer/static/index.html": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262"
+    }
+  },
+  "browser": "NOT_RUN_BY_THIS_SCRIPT",
+  "windows": "NOT_RUN",
+  "human_protocol_acceptance": "PENDING",
+  "canonical_promotion": "NOT_AUTHORIZED"
+}
