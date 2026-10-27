@@ -1,0 +1,1618 @@
+{
+  "scope": "Read-only topology/manifests review; agent authored Spec Kit repair, not independent final reviewer",
+  "sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+  "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+  "recorded_at_utc": "2026-10-27T17:01:44.478083+00:00",
+  "initial_merge": {
+    "sha": "4bfe0040c273d35719fc6e3de5e81d1fe9e40b65",
+    "tree": "d02432046d4bb7945cfd39581f674d7252bc415b",
+    "parents": [
+      "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48"
+    ]
+  },
+  "r1": {
+    "sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+    "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+    "parents": [
+      "4bfe0040c273d35719fc6e3de5e81d1fe9e40b65"
+    ]
+  },
+  "input_checks": [
+    {
+      "role": "baseline",
+      "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "tree_equal": true,
+      "parents_equal": true,
+      "paths_equal": true,
+      "path_count": 162,
+      "ancestor_of_original": true,
+      "ancestor_of_r1": true
+    },
+    {
+      "role": "p02_code",
+      "sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "tree_equal": true,
+      "parents_equal": true,
+      "paths_equal": true,
+      "path_count": 27,
+      "ancestor_of_original": true,
+      "ancestor_of_r1": true
+    },
+    {
+      "role": "p02_documentary",
+      "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "tree_equal": true,
+      "parents_equal": true,
+      "paths_equal": true,
+      "path_count": 56,
+      "ancestor_of_original": true,
+      "ancestor_of_r1": true
+    },
+    {
+      "role": "p06_code",
+      "sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+      "tree_equal": true,
+      "parents_equal": true,
+      "paths_equal": true,
+      "path_count": 14,
+      "ancestor_of_original": true,
+      "ancestor_of_r1": true
+    },
+    {
+      "role": "p06_documentary",
+      "sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "tree_equal": true,
+      "parents_equal": true,
+      "paths_equal": true,
+      "path_count": 23,
+      "ancestor_of_original": true,
+      "ancestor_of_r1": true
+    }
+  ],
+  "source_manifests": [
+    {
+      "role": "P02",
+      "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "documentary_sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "path": "docs/missions/atlas-parity-02/p02-c0/MANIFEST.sha256",
+      "manifest_sha256": "7c27b4a93c7a02399b350262f2dd21f34e1350291a3ec8da292cced463b63178",
+      "manifest_present_at_code_sha": false,
+      "manifest_preserved_in_r1": true,
+      "source_all_match": true,
+      "merge_all_match": true,
+      "entry_count": 55,
+      "r1_preserved_count": 53,
+      "r1_deviations": [
+        {
+          "source": "p02_documentary",
+          "path": "scripts/qa/atlas_parity02_p02_browser.mjs",
+          "input_sha256": "a85aaa8eea48c97dda626fe916765f121271043446bd986d36f10be2a060841f",
+          "composed_sha256": "994c3b0fc9382e011791dc0e34f6b79b66360c33e0ff6b4c180eed1e89c881c9"
+        },
+        {
+          "source": "p02_documentary",
+          "path": "scripts/qa/atlas_parity02_p02_run_browser.py",
+          "input_sha256": "6ce367d7eafceef1e44f9722aae07887665687189a86940c064d6509886bbad1",
+          "composed_sha256": "ac7317ba576188a582d7ecbe3375a26f94b5d93055e9838368f974e68e9a0b5d"
+        }
+      ],
+      "code_existing_manifest_paths": 27,
+      "code_existing_manifest_paths_match": 24,
+      "code_existing_manifest_paths_differ": [
+        "specs/004-atlas-parity-c0/workstreams/p02-c0/analysis.md",
+        "specs/004-atlas-parity-c0/workstreams/p02-c0/research.md",
+        "specs/004-atlas-parity-c0/workstreams/p02-c0/tasks.md"
+      ],
+      "entries": [
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/ACCEPTANCE-MAP.md",
+          "manifest_sha256": "00d35cddd9d4aefd907f561e7372af2acc5c16af31b63d0723de6b61a4d39279",
+          "source_sha256": "00d35cddd9d4aefd907f561e7372af2acc5c16af31b63d0723de6b61a4d39279",
+          "source_matches": true,
+          "merge_sha256": "00d35cddd9d4aefd907f561e7372af2acc5c16af31b63d0723de6b61a4d39279",
+          "merge_matches": true,
+          "r1_sha256": "00d35cddd9d4aefd907f561e7372af2acc5c16af31b63d0723de6b61a4d39279",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/HANDOFF.json",
+          "manifest_sha256": "c43d9ed1fbb65b245e3770f7c0720e1cdcafc16a031ab7018b4076b7612c439e",
+          "source_sha256": "c43d9ed1fbb65b245e3770f7c0720e1cdcafc16a031ab7018b4076b7612c439e",
+          "source_matches": true,
+          "merge_sha256": "c43d9ed1fbb65b245e3770f7c0720e1cdcafc16a031ab7018b4076b7612c439e",
+          "merge_matches": true,
+          "r1_sha256": "c43d9ed1fbb65b245e3770f7c0720e1cdcafc16a031ab7018b4076b7612c439e",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/P06-INTEGRATION.md",
+          "manifest_sha256": "79a45ae8c16819379b2b5e7ac1043fed3423437b3d8092acb4fd30142b968f43",
+          "source_sha256": "79a45ae8c16819379b2b5e7ac1043fed3423437b3d8092acb4fd30142b968f43",
+          "source_matches": true,
+          "merge_sha256": "79a45ae8c16819379b2b5e7ac1043fed3423437b3d8092acb4fd30142b968f43",
+          "merge_matches": true,
+          "r1_sha256": "79a45ae8c16819379b2b5e7ac1043fed3423437b3d8092acb4fd30142b968f43",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/REPRODUCE.md",
+          "manifest_sha256": "0e11786a04c404863801627210e4ad8e79709c6dd98a1bc5eb2f639e52cd3405",
+          "source_sha256": "0e11786a04c404863801627210e4ad8e79709c6dd98a1bc5eb2f639e52cd3405",
+          "source_matches": true,
+          "merge_sha256": "0e11786a04c404863801627210e4ad8e79709c6dd98a1bc5eb2f639e52cd3405",
+          "merge_matches": true,
+          "r1_sha256": "0e11786a04c404863801627210e4ad8e79709c6dd98a1bc5eb2f639e52cd3405",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/RESULT.md",
+          "manifest_sha256": "c7f3d29855e3d58369b3d4d8e6183457deab5b09494c1a5fe5394321849448b6",
+          "source_sha256": "c7f3d29855e3d58369b3d4d8e6183457deab5b09494c1a5fe5394321849448b6",
+          "source_matches": true,
+          "merge_sha256": "c7f3d29855e3d58369b3d4d8e6183457deab5b09494c1a5fe5394321849448b6",
+          "merge_matches": true,
+          "r1_sha256": "c7f3d29855e3d58369b3d4d8e6183457deab5b09494c1a5fe5394321849448b6",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/REVIEW.md",
+          "manifest_sha256": "c22f462ffef583596327681b232ec4aed8229cf1ea0ca522480504c092aace85",
+          "source_sha256": "c22f462ffef583596327681b232ec4aed8229cf1ea0ca522480504c092aace85",
+          "source_matches": true,
+          "merge_sha256": "c22f462ffef583596327681b232ec4aed8229cf1ea0ca522480504c092aace85",
+          "merge_matches": true,
+          "r1_sha256": "c22f462ffef583596327681b232ec4aed8229cf1ea0ca522480504c092aace85",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/ENV-01-result.json",
+          "manifest_sha256": "24707b8209ecce932b2ad99d80ab25affe4e7a90a5e71f94461f0cdeecda1047",
+          "source_sha256": "24707b8209ecce932b2ad99d80ab25affe4e7a90a5e71f94461f0cdeecda1047",
+          "source_matches": true,
+          "merge_sha256": "24707b8209ecce932b2ad99d80ab25affe4e7a90a5e71f94461f0cdeecda1047",
+          "merge_matches": true,
+          "r1_sha256": "24707b8209ecce932b2ad99d80ab25affe4e7a90a5e71f94461f0cdeecda1047",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/browser.json",
+          "manifest_sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+          "source_sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+          "source_matches": true,
+          "merge_sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+          "merge_matches": true,
+          "r1_sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/ci-code.json",
+          "manifest_sha256": "bb0128083a7f72ff49178a9c8fd13bdac5c65c449201bc8bbb2a52f4e285d1d6",
+          "source_sha256": "bb0128083a7f72ff49178a9c8fd13bdac5c65c449201bc8bbb2a52f4e285d1d6",
+          "source_matches": true,
+          "merge_sha256": "bb0128083a7f72ff49178a9c8fd13bdac5c65c449201bc8bbb2a52f4e285d1d6",
+          "merge_matches": true,
+          "r1_sha256": "bb0128083a7f72ff49178a9c8fd13bdac5c65c449201bc8bbb2a52f4e285d1d6",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/clean-install-original.json",
+          "manifest_sha256": "93d92e367ca950bafdae64a4e6514a46a31f4848f86b449153b4bdc69b157b00",
+          "source_sha256": "93d92e367ca950bafdae64a4e6514a46a31f4848f86b449153b4bdc69b157b00",
+          "source_matches": true,
+          "merge_sha256": "93d92e367ca950bafdae64a4e6514a46a31f4848f86b449153b4bdc69b157b00",
+          "merge_matches": true,
+          "r1_sha256": "93d92e367ca950bafdae64a4e6514a46a31f4848f86b449153b4bdc69b157b00",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/documentary-check.json",
+          "manifest_sha256": "d82ed4958889016c1ae9ebdbba9f9908d41c73ce56a5b2925b078717a8f1ea04",
+          "source_sha256": "d82ed4958889016c1ae9ebdbba9f9908d41c73ce56a5b2925b078717a8f1ea04",
+          "source_matches": true,
+          "merge_sha256": "d82ed4958889016c1ae9ebdbba9f9908d41c73ce56a5b2925b078717a8f1ea04",
+          "merge_matches": true,
+          "r1_sha256": "d82ed4958889016c1ae9ebdbba9f9908d41c73ce56a5b2925b078717a8f1ea04",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/environment.json",
+          "manifest_sha256": "eea2229106d6a2fe956ca9c66e02adf5dd1a289976ea186742193bda56906870",
+          "source_sha256": "eea2229106d6a2fe956ca9c66e02adf5dd1a289976ea186742193bda56906870",
+          "source_matches": true,
+          "merge_sha256": "eea2229106d6a2fe956ca9c66e02adf5dd1a289976ea186742193bda56906870",
+          "merge_matches": true,
+          "r1_sha256": "eea2229106d6a2fe956ca9c66e02adf5dd1a289976ea186742193bda56906870",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/font-provenance.json",
+          "manifest_sha256": "6205dc8f44f81645d86b1df9a200c683402d60515b577e868f90565211d768b9",
+          "source_sha256": "6205dc8f44f81645d86b1df9a200c683402d60515b577e868f90565211d768b9",
+          "source_matches": true,
+          "merge_sha256": "6205dc8f44f81645d86b1df9a200c683402d60515b577e868f90565211d768b9",
+          "merge_matches": true,
+          "r1_sha256": "6205dc8f44f81645d86b1df9a200c683402d60515b577e868f90565211d768b9",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/independent-review.json",
+          "manifest_sha256": "ab0eb97e9cc346b020f6c96c5c7810beedef195a005c96a8d660081c24cbda1c",
+          "source_sha256": "ab0eb97e9cc346b020f6c96c5c7810beedef195a005c96a8d660081c24cbda1c",
+          "source_matches": true,
+          "merge_sha256": "ab0eb97e9cc346b020f6c96c5c7810beedef195a005c96a8d660081c24cbda1c",
+          "merge_matches": true,
+          "r1_sha256": "ab0eb97e9cc346b020f6c96c5c7810beedef195a005c96a8d660081c24cbda1c",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/inputs.json",
+          "manifest_sha256": "d1fcbfc3778db0febd8557db2e93414657575c084d5911aec87bc00aa38be513",
+          "source_sha256": "d1fcbfc3778db0febd8557db2e93414657575c084d5911aec87bc00aa38be513",
+          "source_matches": true,
+          "merge_sha256": "d1fcbfc3778db0febd8557db2e93414657575c084d5911aec87bc00aa38be513",
+          "merge_matches": true,
+          "r1_sha256": "d1fcbfc3778db0febd8557db2e93414657575c084d5911aec87bc00aa38be513",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-normal.json",
+          "manifest_sha256": "91589988d689e6ff06f74ed627bc94150cbfd33ebed9ebca465dd73954bdeb1d",
+          "source_sha256": "91589988d689e6ff06f74ed627bc94150cbfd33ebed9ebca465dd73954bdeb1d",
+          "source_matches": true,
+          "merge_sha256": "91589988d689e6ff06f74ed627bc94150cbfd33ebed9ebca465dd73954bdeb1d",
+          "merge_matches": true,
+          "r1_sha256": "91589988d689e6ff06f74ed627bc94150cbfd33ebed9ebca465dd73954bdeb1d",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-normal.log",
+          "manifest_sha256": "ab754aacc6149732e68f4d07a48786410360578d72c68f8bc659057221e6b98d",
+          "source_sha256": "ab754aacc6149732e68f4d07a48786410360578d72c68f8bc659057221e6b98d",
+          "source_matches": true,
+          "merge_sha256": "ab754aacc6149732e68f4d07a48786410360578d72c68f8bc659057221e6b98d",
+          "merge_matches": true,
+          "r1_sha256": "ab754aacc6149732e68f4d07a48786410360578d72c68f8bc659057221e6b98d",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-optimized.json",
+          "manifest_sha256": "c057c7561b8f94f885966fbd167f90c44d8e3bc7d634d2fd34e87909c33429cd",
+          "source_sha256": "c057c7561b8f94f885966fbd167f90c44d8e3bc7d634d2fd34e87909c33429cd",
+          "source_matches": true,
+          "merge_sha256": "c057c7561b8f94f885966fbd167f90c44d8e3bc7d634d2fd34e87909c33429cd",
+          "merge_matches": true,
+          "r1_sha256": "c057c7561b8f94f885966fbd167f90c44d8e3bc7d634d2fd34e87909c33429cd",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-optimized.log",
+          "manifest_sha256": "7794d4cc9d3e137154eb6417e7c1f35bb952cbb85d93d4b3327ea460ce7a8dd9",
+          "source_sha256": "7794d4cc9d3e137154eb6417e7c1f35bb952cbb85d93d4b3327ea460ce7a8dd9",
+          "source_matches": true,
+          "merge_sha256": "7794d4cc9d3e137154eb6417e7c1f35bb952cbb85d93d4b3327ea460ce7a8dd9",
+          "merge_matches": true,
+          "r1_sha256": "7794d4cc9d3e137154eb6417e7c1f35bb952cbb85d93d4b3327ea460ce7a8dd9",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/method-architecture.json",
+          "manifest_sha256": "9f6b5966b54effacc3c92d92d3d25fbb9a95e808eb833eb70929c9a605ceb9da",
+          "source_sha256": "9f6b5966b54effacc3c92d92d3d25fbb9a95e808eb833eb70929c9a605ceb9da",
+          "source_matches": true,
+          "merge_sha256": "9f6b5966b54effacc3c92d92d3d25fbb9a95e808eb833eb70929c9a605ceb9da",
+          "merge_matches": true,
+          "r1_sha256": "9f6b5966b54effacc3c92d92d3d25fbb9a95e808eb833eb70929c9a605ceb9da",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/ownership.json",
+          "manifest_sha256": "d4d2394b6afc414b513dc5b2dd9d5c05bb513a278f1093e9c3411bfbbc71a0d7",
+          "source_sha256": "d4d2394b6afc414b513dc5b2dd9d5c05bb513a278f1093e9c3411bfbbc71a0d7",
+          "source_matches": true,
+          "merge_sha256": "d4d2394b6afc414b513dc5b2dd9d5c05bb513a278f1093e9c3411bfbbc71a0d7",
+          "merge_matches": true,
+          "r1_sha256": "d4d2394b6afc414b513dc5b2dd9d5c05bb513a278f1093e9c3411bfbbc71a0d7",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/receipts/wheel-code-equivalence.json",
+          "manifest_sha256": "9f1b0a9f9ac8faadd4aba0cc465af0f7c15b0996972970ba5d0bde46a5152843",
+          "source_sha256": "9f1b0a9f9ac8faadd4aba0cc465af0f7c15b0996972970ba5d0bde46a5152843",
+          "source_matches": true,
+          "merge_sha256": "9f1b0a9f9ac8faadd4aba0cc465af0f7c15b0996972970ba5d0bde46a5152843",
+          "merge_matches": true,
+          "r1_sha256": "9f1b0a9f9ac8faadd4aba0cc465af0f7c15b0996972970ba5d0bde46a5152843",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-1440.png",
+          "manifest_sha256": "033ce5b8f69a35e63c21f756257760fd702778458bde74f0502c1e84006024ef",
+          "source_sha256": "033ce5b8f69a35e63c21f756257760fd702778458bde74f0502c1e84006024ef",
+          "source_matches": true,
+          "merge_sha256": "033ce5b8f69a35e63c21f756257760fd702778458bde74f0502c1e84006024ef",
+          "merge_matches": true,
+          "r1_sha256": "033ce5b8f69a35e63c21f756257760fd702778458bde74f0502c1e84006024ef",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-320-text-spacing.png",
+          "manifest_sha256": "da346cc6f796831c36d7f02501897a7a65bc326aaee0dedfd4763de0e2a63903",
+          "source_sha256": "da346cc6f796831c36d7f02501897a7a65bc326aaee0dedfd4763de0e2a63903",
+          "source_matches": true,
+          "merge_sha256": "da346cc6f796831c36d7f02501897a7a65bc326aaee0dedfd4763de0e2a63903",
+          "merge_matches": true,
+          "r1_sha256": "da346cc6f796831c36d7f02501897a7a65bc326aaee0dedfd4763de0e2a63903",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-320.png",
+          "manifest_sha256": "1ea4dab971429ba51ee38320c54e1f9a19beaf100ba5b0916234635ed892cb5d",
+          "source_sha256": "1ea4dab971429ba51ee38320c54e1f9a19beaf100ba5b0916234635ed892cb5d",
+          "source_matches": true,
+          "merge_sha256": "1ea4dab971429ba51ee38320c54e1f9a19beaf100ba5b0916234635ed892cb5d",
+          "merge_matches": true,
+          "r1_sha256": "1ea4dab971429ba51ee38320c54e1f9a19beaf100ba5b0916234635ed892cb5d",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-390.png",
+          "manifest_sha256": "3a61c501f15fea55870d030803029ccc1100f1c346553fa99cdfbb6ae720b1e3",
+          "source_sha256": "3a61c501f15fea55870d030803029ccc1100f1c346553fa99cdfbb6ae720b1e3",
+          "source_matches": true,
+          "merge_sha256": "3a61c501f15fea55870d030803029ccc1100f1c346553fa99cdfbb6ae720b1e3",
+          "merge_matches": true,
+          "r1_sha256": "3a61c501f15fea55870d030803029ccc1100f1c346553fa99cdfbb6ae720b1e3",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-detail-390.png",
+          "manifest_sha256": "b88154f32cc1bc8543098575e6e01d8aed6e97fc0ff002e7e12100af0b3c6472",
+          "source_sha256": "b88154f32cc1bc8543098575e6e01d8aed6e97fc0ff002e7e12100af0b3c6472",
+          "source_matches": true,
+          "merge_sha256": "b88154f32cc1bc8543098575e6e01d8aed6e97fc0ff002e7e12100af0b3c6472",
+          "merge_matches": true,
+          "r1_sha256": "b88154f32cc1bc8543098575e6e01d8aed6e97fc0ff002e7e12100af0b3c6472",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-overview-1440.png",
+          "manifest_sha256": "54f2afefe87e48bd9ec19299cf3657b92ff8beacf5dcc1482bbee4a98220d069",
+          "source_sha256": "54f2afefe87e48bd9ec19299cf3657b92ff8beacf5dcc1482bbee4a98220d069",
+          "source_matches": true,
+          "merge_sha256": "54f2afefe87e48bd9ec19299cf3657b92ff8beacf5dcc1482bbee4a98220d069",
+          "merge_matches": true,
+          "r1_sha256": "54f2afefe87e48bd9ec19299cf3657b92ff8beacf5dcc1482bbee4a98220d069",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/catalog.py",
+          "manifest_sha256": "0c2eae91f34a24b6d9ebc8447c9cc4d4ee6d92eb1d4a5364e761077bd3e46fed",
+          "source_sha256": "0c2eae91f34a24b6d9ebc8447c9cc4d4ee6d92eb1d4a5364e761077bd3e46fed",
+          "source_matches": true,
+          "merge_sha256": "0c2eae91f34a24b6d9ebc8447c9cc4d4ee6d92eb1d4a5364e761077bd3e46fed",
+          "merge_matches": true,
+          "r1_sha256": "0c2eae91f34a24b6d9ebc8447c9cc4d4ee6d92eb1d4a5364e761077bd3e46fed",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "0c2eae91f34a24b6d9ebc8447c9cc4d4ee6d92eb1d4a5364e761077bd3e46fed",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+          "manifest_sha256": "692a7674152d0e2222b14074dd2f5ba047a8d2efb0fd06cac3d377752474a385",
+          "source_sha256": "692a7674152d0e2222b14074dd2f5ba047a8d2efb0fd06cac3d377752474a385",
+          "source_matches": true,
+          "merge_sha256": "692a7674152d0e2222b14074dd2f5ba047a8d2efb0fd06cac3d377752474a385",
+          "merge_matches": true,
+          "r1_sha256": "692a7674152d0e2222b14074dd2f5ba047a8d2efb0fd06cac3d377752474a385",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "692a7674152d0e2222b14074dd2f5ba047a8d2efb0fd06cac3d377752474a385",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/server.py",
+          "manifest_sha256": "a608bf20df53e00ae03accf8e6837ffb5847a697fb4344ff8597a81a4c9ee630",
+          "source_sha256": "a608bf20df53e00ae03accf8e6837ffb5847a697fb4344ff8597a81a4c9ee630",
+          "source_matches": true,
+          "merge_sha256": "a608bf20df53e00ae03accf8e6837ffb5847a697fb4344ff8597a81a4c9ee630",
+          "merge_matches": true,
+          "r1_sha256": "a608bf20df53e00ae03accf8e6837ffb5847a697fb4344ff8597a81a4c9ee630",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "a608bf20df53e00ae03accf8e6837ffb5847a697fb4344ff8597a81a4c9ee630",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/app.js",
+          "manifest_sha256": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9",
+          "source_sha256": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9",
+          "source_matches": true,
+          "merge_sha256": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9",
+          "merge_matches": true,
+          "r1_sha256": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/index.html",
+          "manifest_sha256": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262",
+          "source_sha256": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262",
+          "source_matches": true,
+          "merge_sha256": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262",
+          "merge_matches": true,
+          "r1_sha256": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+          "manifest_sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+          "source_sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+          "source_matches": true,
+          "merge_sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+          "merge_matches": true,
+          "r1_sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/style.css",
+          "manifest_sha256": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0",
+          "source_sha256": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0",
+          "source_matches": true,
+          "merge_sha256": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0",
+          "merge_matches": true,
+          "r1_sha256": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p02_browser.mjs",
+          "manifest_sha256": "a85aaa8eea48c97dda626fe916765f121271043446bd986d36f10be2a060841f",
+          "source_sha256": "a85aaa8eea48c97dda626fe916765f121271043446bd986d36f10be2a060841f",
+          "source_matches": true,
+          "merge_sha256": "a85aaa8eea48c97dda626fe916765f121271043446bd986d36f10be2a060841f",
+          "merge_matches": true,
+          "r1_sha256": "994c3b0fc9382e011791dc0e34f6b79b66360c33e0ff6b4c180eed1e89c881c9",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "a85aaa8eea48c97dda626fe916765f121271043446bd986d36f10be2a060841f",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p02_fixture.py",
+          "manifest_sha256": "e838157821b845382eae317c3bf160b7eea34b642d8ee8050c15f9233fba0261",
+          "source_sha256": "e838157821b845382eae317c3bf160b7eea34b642d8ee8050c15f9233fba0261",
+          "source_matches": true,
+          "merge_sha256": "e838157821b845382eae317c3bf160b7eea34b642d8ee8050c15f9233fba0261",
+          "merge_matches": true,
+          "r1_sha256": "e838157821b845382eae317c3bf160b7eea34b642d8ee8050c15f9233fba0261",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "e838157821b845382eae317c3bf160b7eea34b642d8ee8050c15f9233fba0261",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p02_run_browser.py",
+          "manifest_sha256": "6ce367d7eafceef1e44f9722aae07887665687189a86940c064d6509886bbad1",
+          "source_sha256": "6ce367d7eafceef1e44f9722aae07887665687189a86940c064d6509886bbad1",
+          "source_matches": true,
+          "merge_sha256": "6ce367d7eafceef1e44f9722aae07887665687189a86940c064d6509886bbad1",
+          "merge_matches": true,
+          "r1_sha256": "ac7317ba576188a582d7ecbe3375a26f94b5d93055e9838368f974e68e9a0b5d",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "6ce367d7eafceef1e44f9722aae07887665687189a86940c064d6509886bbad1",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p02_state_tests.mjs",
+          "manifest_sha256": "6b3faf65dd5af861e4cc0cc89889326d8981784120bdea0c6037466ca336c67e",
+          "source_sha256": "6b3faf65dd5af861e4cc0cc89889326d8981784120bdea0c6037466ca336c67e",
+          "source_matches": true,
+          "merge_sha256": "6b3faf65dd5af861e4cc0cc89889326d8981784120bdea0c6037466ca336c67e",
+          "merge_matches": true,
+          "r1_sha256": "6b3faf65dd5af861e4cc0cc89889326d8981784120bdea0c6037466ca336c67e",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "6b3faf65dd5af861e4cc0cc89889326d8981784120bdea0c6037466ca336c67e",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/analysis.md",
+          "manifest_sha256": "23cb7ec6cf0c0b20718e4b69cf781b9fb04a6e8b4a536631e63ab3a82469f2c4",
+          "source_sha256": "23cb7ec6cf0c0b20718e4b69cf781b9fb04a6e8b4a536631e63ab3a82469f2c4",
+          "source_matches": true,
+          "merge_sha256": "23cb7ec6cf0c0b20718e4b69cf781b9fb04a6e8b4a536631e63ab3a82469f2c4",
+          "merge_matches": true,
+          "r1_sha256": "23cb7ec6cf0c0b20718e4b69cf781b9fb04a6e8b4a536631e63ab3a82469f2c4",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "e529341e33bea0e152ccbf6a2dbe7d69b3a401e723187eb99fb7dc6f33bb4af5",
+          "code_matches_when_present": false
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/checklists/requirements.md",
+          "manifest_sha256": "2f6af6531b945defdb4322e57f1c9f9c82564ef4cd0c948533b3b93d85b69cf4",
+          "source_sha256": "2f6af6531b945defdb4322e57f1c9f9c82564ef4cd0c948533b3b93d85b69cf4",
+          "source_matches": true,
+          "merge_sha256": "2f6af6531b945defdb4322e57f1c9f9c82564ef4cd0c948533b3b93d85b69cf4",
+          "merge_matches": true,
+          "r1_sha256": "2f6af6531b945defdb4322e57f1c9f9c82564ef4cd0c948533b3b93d85b69cf4",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "2f6af6531b945defdb4322e57f1c9f9c82564ef4cd0c948533b3b93d85b69cf4",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/contracts/navigation.md",
+          "manifest_sha256": "d3e7c3f4c75fd251757bac86149299ac7775cb4ed1436f9a3ee27f52987cb3c2",
+          "source_sha256": "d3e7c3f4c75fd251757bac86149299ac7775cb4ed1436f9a3ee27f52987cb3c2",
+          "source_matches": true,
+          "merge_sha256": "d3e7c3f4c75fd251757bac86149299ac7775cb4ed1436f9a3ee27f52987cb3c2",
+          "merge_matches": true,
+          "r1_sha256": "d3e7c3f4c75fd251757bac86149299ac7775cb4ed1436f9a3ee27f52987cb3c2",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "d3e7c3f4c75fd251757bac86149299ac7775cb4ed1436f9a3ee27f52987cb3c2",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/data-model.md",
+          "manifest_sha256": "320390da241b3cdb287423d0cca3b597900f2a4f4024197e642dbdfc86695a75",
+          "source_sha256": "320390da241b3cdb287423d0cca3b597900f2a4f4024197e642dbdfc86695a75",
+          "source_matches": true,
+          "merge_sha256": "320390da241b3cdb287423d0cca3b597900f2a4f4024197e642dbdfc86695a75",
+          "merge_matches": true,
+          "r1_sha256": "320390da241b3cdb287423d0cca3b597900f2a4f4024197e642dbdfc86695a75",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "320390da241b3cdb287423d0cca3b597900f2a4f4024197e642dbdfc86695a75",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/plan.md",
+          "manifest_sha256": "6b22b987c28212f344340ffa72948e949f014e7be15c964f3ddd40d7d4f1c135",
+          "source_sha256": "6b22b987c28212f344340ffa72948e949f014e7be15c964f3ddd40d7d4f1c135",
+          "source_matches": true,
+          "merge_sha256": "6b22b987c28212f344340ffa72948e949f014e7be15c964f3ddd40d7d4f1c135",
+          "merge_matches": true,
+          "r1_sha256": "6b22b987c28212f344340ffa72948e949f014e7be15c964f3ddd40d7d4f1c135",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "6b22b987c28212f344340ffa72948e949f014e7be15c964f3ddd40d7d4f1c135",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/quickstart.md",
+          "manifest_sha256": "1c6f951b58abe5048d76ae9d1fcaa63f30dd868c7919e9e4b3497de55e6625b4",
+          "source_sha256": "1c6f951b58abe5048d76ae9d1fcaa63f30dd868c7919e9e4b3497de55e6625b4",
+          "source_matches": true,
+          "merge_sha256": "1c6f951b58abe5048d76ae9d1fcaa63f30dd868c7919e9e4b3497de55e6625b4",
+          "merge_matches": true,
+          "r1_sha256": "1c6f951b58abe5048d76ae9d1fcaa63f30dd868c7919e9e4b3497de55e6625b4",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "1c6f951b58abe5048d76ae9d1fcaa63f30dd868c7919e9e4b3497de55e6625b4",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/research.md",
+          "manifest_sha256": "e418d7e6cdda59231ca633772409b23d2618a4b85235b581af6e48db3d77b17a",
+          "source_sha256": "e418d7e6cdda59231ca633772409b23d2618a4b85235b581af6e48db3d77b17a",
+          "source_matches": true,
+          "merge_sha256": "e418d7e6cdda59231ca633772409b23d2618a4b85235b581af6e48db3d77b17a",
+          "merge_matches": true,
+          "r1_sha256": "e418d7e6cdda59231ca633772409b23d2618a4b85235b581af6e48db3d77b17a",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "223ab42a11cfdc312c022bec9f49bbcfee1e50f7dfdaf4aee2dc73e364b4b114",
+          "code_matches_when_present": false
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/spec.md",
+          "manifest_sha256": "4680758c80a8b991d459a9dadcff0ccb974ce9b6af2556da12b6a62734df8738",
+          "source_sha256": "4680758c80a8b991d459a9dadcff0ccb974ce9b6af2556da12b6a62734df8738",
+          "source_matches": true,
+          "merge_sha256": "4680758c80a8b991d459a9dadcff0ccb974ce9b6af2556da12b6a62734df8738",
+          "merge_matches": true,
+          "r1_sha256": "4680758c80a8b991d459a9dadcff0ccb974ce9b6af2556da12b6a62734df8738",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "4680758c80a8b991d459a9dadcff0ccb974ce9b6af2556da12b6a62734df8738",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/tasks.md",
+          "manifest_sha256": "4a4d68a77976d494abee780673ead3e627ad5c8c80ed831d36500a8d1f2dd6bd",
+          "source_sha256": "4a4d68a77976d494abee780673ead3e627ad5c8c80ed831d36500a8d1f2dd6bd",
+          "source_matches": true,
+          "merge_sha256": "4a4d68a77976d494abee780673ead3e627ad5c8c80ed831d36500a8d1f2dd6bd",
+          "merge_matches": true,
+          "r1_sha256": "4a4d68a77976d494abee780673ead3e627ad5c8c80ed831d36500a8d1f2dd6bd",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "7baead1a921333215282739f3417aee7c04dd66e0bc202ad80eb8ef3ab20ca50",
+          "code_matches_when_present": false
+        },
+        {
+          "path": "tests/fixtures/atlas_parity02/p02/README.md",
+          "manifest_sha256": "ed9ac478e4bc41d8abb736cbe360dd53f0f8afd75fa5ed13cb4c95d98437a72b",
+          "source_sha256": "ed9ac478e4bc41d8abb736cbe360dd53f0f8afd75fa5ed13cb4c95d98437a72b",
+          "source_matches": true,
+          "merge_sha256": "ed9ac478e4bc41d8abb736cbe360dd53f0f8afd75fa5ed13cb4c95d98437a72b",
+          "merge_matches": true,
+          "r1_sha256": "ed9ac478e4bc41d8abb736cbe360dd53f0f8afd75fa5ed13cb4c95d98437a72b",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "ed9ac478e4bc41d8abb736cbe360dd53f0f8afd75fa5ed13cb4c95d98437a72b",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/fixtures/atlas_parity02/p02/source-a/data/input.csv",
+          "manifest_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "source_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "source_matches": true,
+          "merge_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "merge_matches": true,
+          "r1_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/fixtures/atlas_parity02/p02/source-a/ro-crate-metadata.json",
+          "manifest_sha256": "fcd8913a702ab32b6071e056eac40688c4b22d73dc7dbaedccd5fa9cddd7b8dc",
+          "source_sha256": "fcd8913a702ab32b6071e056eac40688c4b22d73dc7dbaedccd5fa9cddd7b8dc",
+          "source_matches": true,
+          "merge_sha256": "fcd8913a702ab32b6071e056eac40688c4b22d73dc7dbaedccd5fa9cddd7b8dc",
+          "merge_matches": true,
+          "r1_sha256": "fcd8913a702ab32b6071e056eac40688c4b22d73dc7dbaedccd5fa9cddd7b8dc",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "fcd8913a702ab32b6071e056eac40688c4b22d73dc7dbaedccd5fa9cddd7b8dc",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/fixtures/atlas_parity02/p02/source-b/data/input.csv",
+          "manifest_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "source_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "source_matches": true,
+          "merge_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "merge_matches": true,
+          "r1_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/fixtures/atlas_parity02/p02/source-b/ro-crate-metadata.json",
+          "manifest_sha256": "fd73a5923f37af33206689b2125a6891f362f9c1d8271ec1dc9e54d00dbafd84",
+          "source_sha256": "fd73a5923f37af33206689b2125a6891f362f9c1d8271ec1dc9e54d00dbafd84",
+          "source_matches": true,
+          "merge_sha256": "fd73a5923f37af33206689b2125a6891f362f9c1d8271ec1dc9e54d00dbafd84",
+          "merge_matches": true,
+          "r1_sha256": "fd73a5923f37af33206689b2125a6891f362f9c1d8271ec1dc9e54d00dbafd84",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "fd73a5923f37af33206689b2125a6891f362f9c1d8271ec1dc9e54d00dbafd84",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/viewer/test_atlas_parity02_p02_catalog.py",
+          "manifest_sha256": "13adc1b1b60f9b3217796abcb8a1a2ee70eef0acc682f17dbcdbbf616f95719e",
+          "source_sha256": "13adc1b1b60f9b3217796abcb8a1a2ee70eef0acc682f17dbcdbbf616f95719e",
+          "source_matches": true,
+          "merge_sha256": "13adc1b1b60f9b3217796abcb8a1a2ee70eef0acc682f17dbcdbbf616f95719e",
+          "merge_matches": true,
+          "r1_sha256": "13adc1b1b60f9b3217796abcb8a1a2ee70eef0acc682f17dbcdbbf616f95719e",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "13adc1b1b60f9b3217796abcb8a1a2ee70eef0acc682f17dbcdbbf616f95719e",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/viewer/test_atlas_parity02_p02_state.py",
+          "manifest_sha256": "65935ca0aaa5f13e085abd5cdb83d18fbad33c87db09d5e715aad95fa3003864",
+          "source_sha256": "65935ca0aaa5f13e085abd5cdb83d18fbad33c87db09d5e715aad95fa3003864",
+          "source_matches": true,
+          "merge_sha256": "65935ca0aaa5f13e085abd5cdb83d18fbad33c87db09d5e715aad95fa3003864",
+          "merge_matches": true,
+          "r1_sha256": "65935ca0aaa5f13e085abd5cdb83d18fbad33c87db09d5e715aad95fa3003864",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "65935ca0aaa5f13e085abd5cdb83d18fbad33c87db09d5e715aad95fa3003864",
+          "code_matches_when_present": true
+        }
+      ]
+    },
+    {
+      "role": "P06",
+      "code_sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+      "documentary_sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "path": "docs/missions/atlas-parity-02/p06-qa/MANIFEST.sha256",
+      "manifest_sha256": "2802e604cfc33508fb4f57ad15d8a58f40d859975f4d3d9fa891d2d333502236",
+      "manifest_present_at_code_sha": false,
+      "manifest_preserved_in_r1": true,
+      "source_all_match": true,
+      "merge_all_match": true,
+      "entry_count": 22,
+      "r1_preserved_count": 15,
+      "r1_deviations": [
+        {
+          "source": "p06_documentary",
+          "path": ".github/workflows/atlas-parity02.yml",
+          "input_sha256": "00d5a1925f1ead8ddcdb582bda4d8a3f287e368a3a84c1102b042e43c9be2ca9",
+          "composed_sha256": "ae3d9de4a613ebfdf7fb0ecfc90a4f6429b948c3879ff2f0b314fcf5d10d1ce9"
+        },
+        {
+          "source": "p06_documentary",
+          "path": "scripts/qa/atlas_parity02_p06_browser.mjs",
+          "input_sha256": "49ee944819d33f3b2fe246e4e2ee63e3b05b843eebe35a27d81855b64f228543",
+          "composed_sha256": "d92a086a8453f3483e1820994a2dae6258f687e79fda681999b60f2a87e3131a"
+        },
+        {
+          "source": "p06_documentary",
+          "path": "specs/004-atlas-parity-c0/analysis.md",
+          "input_sha256": "17f8da3a820f90ca5529782d2daa796591e5492147726844f9fa93543e9188e3",
+          "composed_sha256": "3eb714eea12d14daf495e718cd774c10db02e82ea1519878f660bcd93b1ed116"
+        },
+        {
+          "source": "p06_documentary",
+          "path": "specs/004-atlas-parity-c0/checklists/requirements.md",
+          "input_sha256": "be38af56179b093e5975c8a25dccf0dd764339a0aa2115eff10d89adae9de318",
+          "composed_sha256": "26f82f39d4d593c3a351923fd4bf94c7301d7c43d4eb18016980387d9e8440c1"
+        },
+        {
+          "source": "p06_documentary",
+          "path": "specs/004-atlas-parity-c0/plan.md",
+          "input_sha256": "7223bc0ce0e998ce2d85fd7a0cd36868b732aa83d9a303852832c4c187c188bc",
+          "composed_sha256": "cc3545743115ace8d4e47520bd35d00e436a8e06761f3ce4c8a02e5142f8f2e0"
+        },
+        {
+          "source": "p06_documentary",
+          "path": "specs/004-atlas-parity-c0/spec.md",
+          "input_sha256": "07b626a50b15ba7fc455a844a5521ecec9b636d4483440a41cc32e702d550fc9",
+          "composed_sha256": "ee1877cb40b187b78bf5f7325dae040ed844362a21fc55d8cb8add79be9fef8a"
+        },
+        {
+          "source": "p06_documentary",
+          "path": "specs/004-atlas-parity-c0/tasks.md",
+          "input_sha256": "9ebef4b53d4f69e90c21865341491719b10915f961bafa1875ea1c30c1e50d73",
+          "composed_sha256": "75653607e350bbd46f73bce37ee3537335ecb3e1659e59042fbc8a18fa11855c"
+        }
+      ],
+      "code_existing_manifest_paths": 14,
+      "code_existing_manifest_paths_match": 11,
+      "code_existing_manifest_paths_differ": [
+        "specs/004-atlas-parity-c0/analysis.md",
+        "specs/004-atlas-parity-c0/plan.md",
+        "specs/004-atlas-parity-c0/tasks.md"
+      ],
+      "entries": [
+        {
+          "path": ".github/workflows/atlas-parity02.yml",
+          "manifest_sha256": "00d5a1925f1ead8ddcdb582bda4d8a3f287e368a3a84c1102b042e43c9be2ca9",
+          "source_sha256": "00d5a1925f1ead8ddcdb582bda4d8a3f287e368a3a84c1102b042e43c9be2ca9",
+          "source_matches": true,
+          "merge_sha256": "00d5a1925f1ead8ddcdb582bda4d8a3f287e368a3a84c1102b042e43c9be2ca9",
+          "merge_matches": true,
+          "r1_sha256": "ae3d9de4a613ebfdf7fb0ecfc90a4f6429b948c3879ff2f0b314fcf5d10d1ce9",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "00d5a1925f1ead8ddcdb582bda4d8a3f287e368a3a84c1102b042e43c9be2ca9",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/ACCEPTANCE-MATRIX.md",
+          "manifest_sha256": "5c855a618be2b32c3baf93ccd68a6ca5523f9ec4d8e6d502cccbac7816a7fce6",
+          "source_sha256": "5c855a618be2b32c3baf93ccd68a6ca5523f9ec4d8e6d502cccbac7816a7fce6",
+          "source_matches": true,
+          "merge_sha256": "5c855a618be2b32c3baf93ccd68a6ca5523f9ec4d8e6d502cccbac7816a7fce6",
+          "merge_matches": true,
+          "r1_sha256": "5c855a618be2b32c3baf93ccd68a6ca5523f9ec4d8e6d502cccbac7816a7fce6",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/ARCHITECTURE-REVIEW.md",
+          "manifest_sha256": "e2c12ffd89941c8735dab04c4907f0799523a620f28d9120130b33850a9d6c72",
+          "source_sha256": "e2c12ffd89941c8735dab04c4907f0799523a620f28d9120130b33850a9d6c72",
+          "source_matches": true,
+          "merge_sha256": "e2c12ffd89941c8735dab04c4907f0799523a620f28d9120130b33850a9d6c72",
+          "merge_matches": true,
+          "r1_sha256": "e2c12ffd89941c8735dab04c4907f0799523a620f28d9120130b33850a9d6c72",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "e2c12ffd89941c8735dab04c4907f0799523a620f28d9120130b33850a9d6c72",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/CI-EVIDENCE.json",
+          "manifest_sha256": "8b89c58e24d8eb86293ad246bfddf76aa17e46202143f296aa711b1a802820ab",
+          "source_sha256": "8b89c58e24d8eb86293ad246bfddf76aa17e46202143f296aa711b1a802820ab",
+          "source_matches": true,
+          "merge_sha256": "8b89c58e24d8eb86293ad246bfddf76aa17e46202143f296aa711b1a802820ab",
+          "merge_matches": true,
+          "r1_sha256": "8b89c58e24d8eb86293ad246bfddf76aa17e46202143f296aa711b1a802820ab",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/HANDOFF.json",
+          "manifest_sha256": "48cb6dd1102ead2d9f42afaf53bf533e166bf6287fc7e0a78aca18994e047ca0",
+          "source_sha256": "48cb6dd1102ead2d9f42afaf53bf533e166bf6287fc7e0a78aca18994e047ca0",
+          "source_matches": true,
+          "merge_sha256": "48cb6dd1102ead2d9f42afaf53bf533e166bf6287fc7e0a78aca18994e047ca0",
+          "merge_matches": true,
+          "r1_sha256": "48cb6dd1102ead2d9f42afaf53bf533e166bf6287fc7e0a78aca18994e047ca0",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/INDEPENDENT-REVIEW.md",
+          "manifest_sha256": "99e43682987ec6fe0d279af4f05f16c33cbf329fd9f6f1e08a1db7f1bd829bce",
+          "source_sha256": "99e43682987ec6fe0d279af4f05f16c33cbf329fd9f6f1e08a1db7f1bd829bce",
+          "source_matches": true,
+          "merge_sha256": "99e43682987ec6fe0d279af4f05f16c33cbf329fd9f6f1e08a1db7f1bd829bce",
+          "merge_matches": true,
+          "r1_sha256": "99e43682987ec6fe0d279af4f05f16c33cbf329fd9f6f1e08a1db7f1bd829bce",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/INPUT-SHAS.json",
+          "manifest_sha256": "2dc68a0457f98895fe974c34a81eb6f00c12e16c8389a7b0890aede3b9b98671",
+          "source_sha256": "2dc68a0457f98895fe974c34a81eb6f00c12e16c8389a7b0890aede3b9b98671",
+          "source_matches": true,
+          "merge_sha256": "2dc68a0457f98895fe974c34a81eb6f00c12e16c8389a7b0890aede3b9b98671",
+          "merge_matches": true,
+          "r1_sha256": "2dc68a0457f98895fe974c34a81eb6f00c12e16c8389a7b0890aede3b9b98671",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/INTEGRATION-DECISION.md",
+          "manifest_sha256": "28d27c5bb65dd2c044841cad0892c1d5587c2ff96003022f5cf12fdadbae6d46",
+          "source_sha256": "28d27c5bb65dd2c044841cad0892c1d5587c2ff96003022f5cf12fdadbae6d46",
+          "source_matches": true,
+          "merge_sha256": "28d27c5bb65dd2c044841cad0892c1d5587c2ff96003022f5cf12fdadbae6d46",
+          "merge_matches": true,
+          "r1_sha256": "28d27c5bb65dd2c044841cad0892c1d5587c2ff96003022f5cf12fdadbae6d46",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/RESULT.md",
+          "manifest_sha256": "824239e5d6f4942a0c7ea61ceeb4c480458e54f858f58bf379e9dbc23c18e8c9",
+          "source_sha256": "824239e5d6f4942a0c7ea61ceeb4c480458e54f858f58bf379e9dbc23c18e8c9",
+          "source_matches": true,
+          "merge_sha256": "824239e5d6f4942a0c7ea61ceeb4c480458e54f858f58bf379e9dbc23c18e8c9",
+          "merge_matches": true,
+          "r1_sha256": "824239e5d6f4942a0c7ea61ceeb4c480458e54f858f58bf379e9dbc23c18e8c9",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "docs/missions/atlas-parity-02/p06-qa/TREE-VERIFICATION.json",
+          "manifest_sha256": "719ff6bb4ab2f2449072a8875f5aacb3dc40aecb6aa0ac851654d3701810f788",
+          "source_sha256": "719ff6bb4ab2f2449072a8875f5aacb3dc40aecb6aa0ac851654d3701810f788",
+          "source_matches": true,
+          "merge_sha256": "719ff6bb4ab2f2449072a8875f5aacb3dc40aecb6aa0ac851654d3701810f788",
+          "merge_matches": true,
+          "r1_sha256": "719ff6bb4ab2f2449072a8875f5aacb3dc40aecb6aa0ac851654d3701810f788",
+          "r1_matches": true,
+          "present_at_code_sha": false,
+          "code_sha256": null,
+          "code_matches_when_present": null
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p06_audit.py",
+          "manifest_sha256": "7a44db74e4ecbf1938e5d13c06552f6b0be2220fad75f559f3dd10e9adab8c6b",
+          "source_sha256": "7a44db74e4ecbf1938e5d13c06552f6b0be2220fad75f559f3dd10e9adab8c6b",
+          "source_matches": true,
+          "merge_sha256": "7a44db74e4ecbf1938e5d13c06552f6b0be2220fad75f559f3dd10e9adab8c6b",
+          "merge_matches": true,
+          "r1_sha256": "7a44db74e4ecbf1938e5d13c06552f6b0be2220fad75f559f3dd10e9adab8c6b",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "7a44db74e4ecbf1938e5d13c06552f6b0be2220fad75f559f3dd10e9adab8c6b",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p06_browser.mjs",
+          "manifest_sha256": "49ee944819d33f3b2fe246e4e2ee63e3b05b843eebe35a27d81855b64f228543",
+          "source_sha256": "49ee944819d33f3b2fe246e4e2ee63e3b05b843eebe35a27d81855b64f228543",
+          "source_matches": true,
+          "merge_sha256": "49ee944819d33f3b2fe246e4e2ee63e3b05b843eebe35a27d81855b64f228543",
+          "merge_matches": true,
+          "r1_sha256": "d92a086a8453f3483e1820994a2dae6258f687e79fda681999b60f2a87e3131a",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "49ee944819d33f3b2fe246e4e2ee63e3b05b843eebe35a27d81855b64f228543",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p06_browser.py",
+          "manifest_sha256": "31ce7ea3b04ee678cbe31faf091186a7eacdd2a28913c8c0a7915d1f6924d528",
+          "source_sha256": "31ce7ea3b04ee678cbe31faf091186a7eacdd2a28913c8c0a7915d1f6924d528",
+          "source_matches": true,
+          "merge_sha256": "31ce7ea3b04ee678cbe31faf091186a7eacdd2a28913c8c0a7915d1f6924d528",
+          "merge_matches": true,
+          "r1_sha256": "31ce7ea3b04ee678cbe31faf091186a7eacdd2a28913c8c0a7915d1f6924d528",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "31ce7ea3b04ee678cbe31faf091186a7eacdd2a28913c8c0a7915d1f6924d528",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity02_p06_wheel.py",
+          "manifest_sha256": "24839cf4ac03a8eee790317baaf4ca900ed90d6cacd4197b03395c66310a5393",
+          "source_sha256": "24839cf4ac03a8eee790317baaf4ca900ed90d6cacd4197b03395c66310a5393",
+          "source_matches": true,
+          "merge_sha256": "24839cf4ac03a8eee790317baaf4ca900ed90d6cacd4197b03395c66310a5393",
+          "merge_matches": true,
+          "r1_sha256": "24839cf4ac03a8eee790317baaf4ca900ed90d6cacd4197b03395c66310a5393",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "24839cf4ac03a8eee790317baaf4ca900ed90d6cacd4197b03395c66310a5393",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/analysis.md",
+          "manifest_sha256": "17f8da3a820f90ca5529782d2daa796591e5492147726844f9fa93543e9188e3",
+          "source_sha256": "17f8da3a820f90ca5529782d2daa796591e5492147726844f9fa93543e9188e3",
+          "source_matches": true,
+          "merge_sha256": "17f8da3a820f90ca5529782d2daa796591e5492147726844f9fa93543e9188e3",
+          "merge_matches": true,
+          "r1_sha256": "3eb714eea12d14daf495e718cd774c10db02e82ea1519878f660bcd93b1ed116",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "bd7d5302bc616184d6912bb4d274553356b000edc9fe76abe570c4da1696f780",
+          "code_matches_when_present": false
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/checklists/requirements.md",
+          "manifest_sha256": "be38af56179b093e5975c8a25dccf0dd764339a0aa2115eff10d89adae9de318",
+          "source_sha256": "be38af56179b093e5975c8a25dccf0dd764339a0aa2115eff10d89adae9de318",
+          "source_matches": true,
+          "merge_sha256": "be38af56179b093e5975c8a25dccf0dd764339a0aa2115eff10d89adae9de318",
+          "merge_matches": true,
+          "r1_sha256": "26f82f39d4d593c3a351923fd4bf94c7301d7c43d4eb18016980387d9e8440c1",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "be38af56179b093e5975c8a25dccf0dd764339a0aa2115eff10d89adae9de318",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/plan.md",
+          "manifest_sha256": "7223bc0ce0e998ce2d85fd7a0cd36868b732aa83d9a303852832c4c187c188bc",
+          "source_sha256": "7223bc0ce0e998ce2d85fd7a0cd36868b732aa83d9a303852832c4c187c188bc",
+          "source_matches": true,
+          "merge_sha256": "7223bc0ce0e998ce2d85fd7a0cd36868b732aa83d9a303852832c4c187c188bc",
+          "merge_matches": true,
+          "r1_sha256": "cc3545743115ace8d4e47520bd35d00e436a8e06761f3ce4c8a02e5142f8f2e0",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "4820f9acde2a39dd33d949cfd335fcedb8a989d0cc4efde9e36a1d5c490ee7ce",
+          "code_matches_when_present": false
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/spec.md",
+          "manifest_sha256": "07b626a50b15ba7fc455a844a5521ecec9b636d4483440a41cc32e702d550fc9",
+          "source_sha256": "07b626a50b15ba7fc455a844a5521ecec9b636d4483440a41cc32e702d550fc9",
+          "source_matches": true,
+          "merge_sha256": "07b626a50b15ba7fc455a844a5521ecec9b636d4483440a41cc32e702d550fc9",
+          "merge_matches": true,
+          "r1_sha256": "ee1877cb40b187b78bf5f7325dae040ed844362a21fc55d8cb8add79be9fef8a",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "07b626a50b15ba7fc455a844a5521ecec9b636d4483440a41cc32e702d550fc9",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/tasks.md",
+          "manifest_sha256": "9ebef4b53d4f69e90c21865341491719b10915f961bafa1875ea1c30c1e50d73",
+          "source_sha256": "9ebef4b53d4f69e90c21865341491719b10915f961bafa1875ea1c30c1e50d73",
+          "source_matches": true,
+          "merge_sha256": "9ebef4b53d4f69e90c21865341491719b10915f961bafa1875ea1c30c1e50d73",
+          "merge_matches": true,
+          "r1_sha256": "75653607e350bbd46f73bce37ee3537335ecb3e1659e59042fbc8a18fa11855c",
+          "r1_matches": false,
+          "present_at_code_sha": true,
+          "code_sha256": "79c510a8883eb3c5b28672ad92ec8c44251de27d5894546fad440fd74cd83304",
+          "code_matches_when_present": false
+        },
+        {
+          "path": "specs/004-atlas-parity-c0/workstreams/p06-qa/plan.md",
+          "manifest_sha256": "fb064eab0faa8c0952f054d5209afaf32a2370acdd1f44052d377768ee286f1d",
+          "source_sha256": "fb064eab0faa8c0952f054d5209afaf32a2370acdd1f44052d377768ee286f1d",
+          "source_matches": true,
+          "merge_sha256": "fb064eab0faa8c0952f054d5209afaf32a2370acdd1f44052d377768ee286f1d",
+          "merge_matches": true,
+          "r1_sha256": "fb064eab0faa8c0952f054d5209afaf32a2370acdd1f44052d377768ee286f1d",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "fb064eab0faa8c0952f054d5209afaf32a2370acdd1f44052d377768ee286f1d",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/qa/test_atlas_parity02_p06_invariance.py",
+          "manifest_sha256": "11d5556e51a74238c1249c3b1c4e934da5ccc1c50267d4e38479799a16635804",
+          "source_sha256": "11d5556e51a74238c1249c3b1c4e934da5ccc1c50267d4e38479799a16635804",
+          "source_matches": true,
+          "merge_sha256": "11d5556e51a74238c1249c3b1c4e934da5ccc1c50267d4e38479799a16635804",
+          "merge_matches": true,
+          "r1_sha256": "11d5556e51a74238c1249c3b1c4e934da5ccc1c50267d4e38479799a16635804",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "11d5556e51a74238c1249c3b1c4e934da5ccc1c50267d4e38479799a16635804",
+          "code_matches_when_present": true
+        },
+        {
+          "path": "tests/qa/test_atlas_parity02_p06_semantics.py",
+          "manifest_sha256": "f928721a1f2b195a1d4ca14c926e216f14d69780b21fdd6b5065ece5fdc5a3ec",
+          "source_sha256": "f928721a1f2b195a1d4ca14c926e216f14d69780b21fdd6b5065ece5fdc5a3ec",
+          "source_matches": true,
+          "merge_sha256": "f928721a1f2b195a1d4ca14c926e216f14d69780b21fdd6b5065ece5fdc5a3ec",
+          "merge_matches": true,
+          "r1_sha256": "f928721a1f2b195a1d4ca14c926e216f14d69780b21fdd6b5065ece5fdc5a3ec",
+          "r1_matches": true,
+          "present_at_code_sha": true,
+          "code_sha256": "f928721a1f2b195a1d4ca14c926e216f14d69780b21fdd6b5065ece5fdc5a3ec",
+          "code_matches_when_present": true
+        }
+      ]
+    }
+  ],
+  "document_consistency_errors": [],
+  "recommendations": [
+    {
+      "id": "DOC-MANIFEST-LINK",
+      "priority": "required_documentary_clarity",
+      "instruction": "For each code input, keep NOT_PRESENT_AT_CODE_SHA and add an explicit documentary_successor reference with source SHA/tree/path/manifest SHA-256. Do not imply the manifest existed at the code SHA or all documentary hashes match code."
+    },
+    {
+      "id": "DOC-BASELINE-MANIFEST",
+      "priority": "clarification",
+      "instruction": "Clarify baseline NOT_PRESENT means no mission/source handoff manifest; baseline includes an unrelated protocol profile-manifest.json and official Spec Kit manifests."
+    },
+    {
+      "id": "DOC-DEVIATION-REASONS",
+      "priority": "recommended",
+      "instruction": "Replace generic H06/CI/browser text for P02 instrumentation and P06 snapshot expectation with their specific purposes and link revalidation receipts/run/step at the tested SHA."
+    },
+    {
+      "id": "DOC-MANIFEST-SCOPE",
+      "priority": "required_documentary_clarity",
+      "instruction": "State input manifests validate input documentary SHAs and initial merge; at R1 P02 preserves 53/55 and P06 15/22 declared hashes. Both source manifest files remain unchanged. Nine authorized deviations need C1 manifest and SHA-bound revalidation."
+    },
+    {
+      "id": "DOC-TOPOLOGY-VS-AUTHORITY",
+      "priority": "clarification",
+      "instruction": "Local object/ancestry/byte checks do not prove remote branches remained unchanged; retain root preflight/final GitHub receipts for that claim. Neither integrity nor ancestry grants scientific approval."
+    }
+  ],
+  "deviation_list_matches_document": true,
+  "p02_runtime": {
+    "paths": [
+      "packages/atlas/src/atlas_viewer/catalog.py",
+      "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+      "packages/atlas/src/atlas_viewer/server.py",
+      "packages/atlas/src/atlas_viewer/static/app.js",
+      "packages/atlas/src/atlas_viewer/static/index.html",
+      "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+      "packages/atlas/src/atlas_viewer/static/style.css"
+    ],
+    "all_byte_identical": true
+  },
+  "protocol": {
+    "source_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "path_count": 12,
+    "path_set_equal": true,
+    "all_bytes_equal": true,
+    "differences": []
+  },
+  "p02_synthetic_sources": {
+    "source_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+    "path_count": 5,
+    "path_set_equal": true,
+    "all_bytes_equal": true,
+    "differences": []
+  },
+  "baseline_synthetic_examples": {
+    "source_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "path_count": 9,
+    "path_set_equal": true,
+    "all_bytes_equal": true,
+    "differences": []
+  },
+  "p02_workstream": {
+    "source_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+    "path_count": 9,
+    "path_set_equal": true,
+    "all_bytes_equal": false,
+    "differences": [
+      "specs/004-atlas-parity-c0/workstreams/p02-c0/analysis.md",
+      "specs/004-atlas-parity-c0/workstreams/p02-c0/research.md",
+      "specs/004-atlas-parity-c0/workstreams/p02-c0/tasks.md"
+    ],
+    "documentary_source_sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+    "all_bytes_equal_to_documentary": true
+  },
+  "p06_workstream": {
+    "source_sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+    "path_count": 1,
+    "path_set_equal": true,
+    "all_bytes_equal": true,
+    "differences": []
+  },
+  "r1_delta_paths": [
+    ".github/workflows/atlas-parity02.yml",
+    ".github/workflows/atlas003-speckit.yml",
+    ".github/workflows/atlas021.yml",
+    "scripts/qa/atlas_parity02_p02_browser.mjs",
+    "scripts/qa/atlas_parity02_p02_run_browser.py",
+    "scripts/qa/atlas_parity02_p06_browser.mjs",
+    "scripts/qa/atlas_parity02_p06_composed_state_tests.mjs",
+    "scripts/qa/atlas_parity02_p06_installed_checks.py",
+    "scripts/qa/browser.mjs",
+    "scripts/qa/speckit_audit.py",
+    "specs/004-atlas-parity-c0/analysis.md",
+    "specs/004-atlas-parity-c0/checklists/requirements.md",
+    "specs/004-atlas-parity-c0/plan.md",
+    "specs/004-atlas-parity-c0/spec.md",
+    "specs/004-atlas-parity-c0/tasks.md",
+    "tests/qa/test_atlas_parity02_p06_composed_navigation.py",
+    "tests/qa/test_speckit_presentation_audit.py"
+  ],
+  "new_paths_outside_source_manifests": [
+    ".github/workflows/atlas003-speckit.yml",
+    ".github/workflows/atlas021.yml",
+    "scripts/qa/atlas_parity02_p06_composed_state_tests.mjs",
+    "scripts/qa/atlas_parity02_p06_installed_checks.py",
+    "scripts/qa/browser.mjs",
+    "scripts/qa/speckit_audit.py",
+    "tests/qa/test_atlas_parity02_p06_composed_navigation.py",
+    "tests/qa/test_speckit_presentation_audit.py"
+  ],
+  "p06_protected_bytes_at_r1": {
+    "baseline_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "path_count": 64,
+    "path_sets_equal": true,
+    "all_byte_identical": true,
+    "entries": [
+      {
+        "path": ".agents/skills/speckit-analyze/SKILL.md",
+        "sha256": "1b1233a3a92cba277cc3f80533b3999a3194f2566b569e1deefad304fad3530a",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-checklist/SKILL.md",
+        "sha256": "cf754e4fdb350bac26b0955b0af06bf4ac8f8ff0907e6db696e8f93b06844273",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-clarify/SKILL.md",
+        "sha256": "569c830d56f4d7b6a0ee6f6c6741820472724a8d1f6021912b44cd55888a8fcd",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-constitution/SKILL.md",
+        "sha256": "06bf15100066a86df4c5edfac35b16ecfe216751bdbc68db2d98357e9e751508",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-converge/SKILL.md",
+        "sha256": "dc28f28b48f7c74f3828404f0832504358da358d631b12d7dab06266546504a0",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-implement/SKILL.md",
+        "sha256": "ca79e1f816ede6230466e04249be8d3a1f396a9ea2f4c8e8ffc4af3ca5afda8e",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-plan/SKILL.md",
+        "sha256": "dffe72852101b265bd93461691caec528b3e0d06459fc7f8d543191cdabe714e",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-specify/SKILL.md",
+        "sha256": "a505028de7f6489878696d6656c7d057f3a66119ebb8c0cc82d69fabb7b344ff",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-tasks/SKILL.md",
+        "sha256": "50612808eaee6c5fe32c64329661ba4d833d03fcbf9d7d318ea158e89eb30712",
+        "byte_identical": true
+      },
+      {
+        "path": ".agents/skills/speckit-taskstoissues/SKILL.md",
+        "sha256": "87ef487de6a939971de3f2d508d18ea8086a839ff00d44ef9e616d95e9019e38",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/UPSTREAM-LICENSE.txt",
+        "sha256": "2510b446bc1f0cf9702453075d20cd88631e20e5642658edb7325d9c1eb534f7",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/init-options.json",
+        "sha256": "080346beed26c749132692de2fcd87eb86c82eabb71ea6a96b1999eddc5a4d6a",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/integration.json",
+        "sha256": "976306f1f2ca586abc751302c6e87eedbc10fa94bc1643c981e94402fae189e4",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/integrations/codex.manifest.json",
+        "sha256": "2b6c33bf3fe2c7fbe1736aaf43e87a263d0b884005cb028a83eb73a82a0b0e8d",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/integrations/speckit.manifest.json",
+        "sha256": "defd3d8a5849d991df297428f9fb86c8a7c32a93e3c6da551daae87fc0a19b98",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/memory/constitution.md",
+        "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/powershell/check-prerequisites.ps1",
+        "sha256": "f48e586b57cc049ea83ade5acecb466f861aee4fb444dab54bbafc813222da10",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/powershell/common.ps1",
+        "sha256": "54b59523b13fd8f884ff8b6b4e74fded922cdcc884965ff720392ca64ec1aa47",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/powershell/create-new-feature.ps1",
+        "sha256": "481c7368541a816b1679e5ed65fa9e5aea84b09f8be3a02ff8a340e3b48dd58a",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/powershell/resolve-template.ps1",
+        "sha256": "e49c565a09902e4ebd4b5a51c4e014d5067fdee5b1592f15cb44ef31f430d745",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/powershell/setup-plan.ps1",
+        "sha256": "5939ef98418e8dc8cc722ef53ba359fc814f3d2a9fd7620f04e8d145a7041f1a",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/powershell/setup-tasks.ps1",
+        "sha256": "a1a5002280b3016e5f5b150719eb5442b8505abf325ef266139becde2c070d33",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/python/check_prerequisites.py",
+        "sha256": "367e0e7cf8d384167aa60d2a99ba8d40ef9ca1e49b8a35f3ec44c9c759416600",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/python/common.py",
+        "sha256": "ae2331bc1fd4da497c4e3a36076f7239ae2d2a7766de89bdc2b59711eb9a84b5",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/python/create_new_feature.py",
+        "sha256": "bbea1d8d3c3275fccb4fb02c40a244446657385caf72211c1853376ca78f7295",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/python/resolve_template.py",
+        "sha256": "9e383c7f1e4cdbb2367e390457d5f47839bf96ca76451be87bd89465e638c2f3",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/python/setup_plan.py",
+        "sha256": "3738fbdc16a1418a12079c974208123c815866fc0401060e9c41a37d2c8e9eaa",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/scripts/python/setup_tasks.py",
+        "sha256": "124a0a2ea5f213edf90c01b34d9f68d2609b20d1a1964c06106ed91ccb490ae1",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/templates/checklist-template.md",
+        "sha256": "70bbc48e884fab372ffb09e83e78ff983e28b69caebf8cd9964a02b6836683ac",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/templates/constitution-template.md",
+        "sha256": "ce7549540fa45543cca797a150201d868e64495fdff39dc38246fb17bd4024b3",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/templates/plan-template.md",
+        "sha256": "a828ad6206526574ab3fc99be6d0154588cb1c9774c5919d71b81ab5b2dbffa0",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/templates/spec-template.md",
+        "sha256": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/templates/tasks-template.md",
+        "sha256": "b0f527d41e546af0c31903e04f9b20965b6b497b573792198f663a64ce128863",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/toolchain.json",
+        "sha256": "ae47f66efe51a71a8da2d04dd48a66a544463460309c77ba7505ea5b94a33983",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/workflows/speckit/workflow.yml",
+        "sha256": "177761c5e7df28126beea043b5cb45aeaf7958090c022dc11ac71399422fcfbc",
+        "byte_identical": true
+      },
+      {
+        "path": ".specify/workflows/workflow-registry.json",
+        "sha256": "8d8c383ea4afa92ef33363ee9d669056546b08e6101b67536f1315532906c605",
+        "byte_identical": true
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256": "83c362467736d67364342fdd0777bd8de171755ffb676ad38a5b0f000b89eb1e",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+        "sha256": "5f9a44e6b773bad819a33bef32a6e5ab34694fa4d9760624f94587c7f17bb662",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+        "sha256": "67a539e23d5d369f5e242069a29d9ea8d05315ee82b4e23faaa68dea0a27bac8",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/protocol/0.1.0a1.md",
+        "sha256": "76ae9be325866895e6bcefeefbc7d0f35e295969a7263e71db6d774be1bf794e",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/protocol/SDK.md",
+        "sha256": "341e8dcf85895e06f2d9e2174795783b3015e58585eda4b7f8bd1ef231d84870",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/protocol/conformance.md",
+        "sha256": "0b37988d5de924c12e2037e8fdbe9c729a8907e4638f62152c3f55f6be527a37",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/protocol/profile-manifest.json",
+        "sha256": "cd2d3b596453c2deafe096bef7c82c65c317fda7531f1a5a4ffbd0acb644de80",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/environmental/README.md",
+        "sha256": "cdf9f8f8d5c02031df4fb5d00ff314709a661dfb9f54c5f2c816441b1c84f7de",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/environmental/export.py",
+        "sha256": "5b930887d6a375d3ed180c958e8ad59f1057add64c824633c05b1b46ea212ccf",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/environmental/sample/data/calibration.csv",
+        "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/environmental/sample/data/partial.csv",
+        "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/environmental/sample/data/water.csv",
+        "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/environmental/sample/ro-crate-metadata.json",
+        "sha256": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/upstream/process-run-0.6/LICENSE.txt",
+        "sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/upstream/process-run-0.6/NOTICE.md",
+        "sha256": "a7c72f5e9d8b2ffa6536e2806e9e469ad191b137199a599fbbac95e99c20c96d",
+        "byte_identical": true
+      },
+      {
+        "path": "examples/upstream/process-run-0.6/ro-crate-metadata.json",
+        "sha256": "8a8a14ff60eb1f32c30856b3962fc1ccc40d5f6eb6359c4e8961e8a5fbe86c14",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/pyproject.toml",
+        "sha256": "29292b6cc43253628f8639106703927e7e930d78eed0607bbb419901f8302caa",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/__init__.py",
+        "sha256": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/__main__.py",
+        "sha256": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/model.py",
+        "sha256": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/read_model.py",
+        "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt",
+        "sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/NOTICE.txt",
+        "sha256": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+        "sha256": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+        "sha256": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+        "sha256": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/storage.py",
+        "sha256": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67",
+        "byte_identical": true
+      },
+      {
+        "path": "packages/protocol/tests/test_sdk.py",
+        "sha256": "19f65ab70a36dc269ab8a4ac3ea76961cb36408f5dbeae704fd4ad88632284c9",
+        "byte_identical": true
+      }
+    ]
+  }
+}

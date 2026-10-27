@@ -1,0 +1,902 @@
+{
+  "kind": "ATLAS_PARITY02_P02_BROWSER",
+  "status": "PASS_SCOPED",
+  "scope": "public-synthetic-installed-viewer",
+  "code_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+  "checks": [
+    {
+      "name": "two_public_synthetic_sources_and_28_runs",
+      "status": "PASS"
+    },
+    {
+      "name": "loaded_scope_snapshot_and_unknown_coverage_are_separate",
+      "status": "PASS"
+    },
+    {
+      "name": "source_scoped_detail_and_hash_keep_duplicate_ids_distinct",
+      "status": "PASS"
+    },
+    {
+      "name": "back_forward_reload_and_close_preserve_context",
+      "status": "PASS"
+    },
+    {
+      "name": "neutral_reference_navigation_and_back_remain_in_the_same_source",
+      "status": "PASS"
+    },
+    {
+      "name": "source_review_state_presence_and_unicode_filters",
+      "status": "PASS"
+    },
+    {
+      "name": "all_sort_orders_survive_reload",
+      "status": "PASS"
+    },
+    {
+      "name": "comparison_selection_persists_across_hidden_filters_and_reload",
+      "status": "PASS"
+    },
+    {
+      "name": "incompatible_metrics_keep_types_units_and_declared_precision_without_ranking",
+      "status": "PASS"
+    },
+    {
+      "name": "detail_preserves_direction_availability_mentions_and_inert_adversarial_content",
+      "status": "PASS"
+    },
+    {
+      "name": "declared_precision_exceeding_js_integer_range_is_exact_text",
+      "status": "PASS"
+    },
+    {
+      "name": "end_only_timestamp_is_visible_without_inventing_start",
+      "status": "PASS"
+    },
+    {
+      "name": "undated_and_unrelated_runs_remain_reachable_from_time_and_relations",
+      "status": "PASS"
+    },
+    {
+      "name": "stale_snapshot_never_retargets_entity_or_selection",
+      "status": "PASS"
+    },
+    {
+      "name": "missing_entity_and_malformed_url_have_explanatory_safe_fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "sampled_visible_solid_color_text_meets_contrast_threshold",
+      "status": "PASS"
+    },
+    {
+      "name": "first_tab_reaches_visible_skip_link_and_enter_focuses_main",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard_navigation_search_open_close_and_visible_focus",
+      "status": "PASS"
+    },
+    {
+      "name": "document_reflow_and_scoped_tables_1440_css_px",
+      "status": "PASS"
+    },
+    {
+      "name": "document_reflow_and_scoped_tables_390_css_px",
+      "status": "PASS"
+    },
+    {
+      "name": "document_reflow_and_scoped_tables_320_css_px",
+      "status": "PASS"
+    },
+    {
+      "name": "text_spacing_does_not_overflow_page_or_hide_close_control",
+      "status": "PASS"
+    },
+    {
+      "name": "no_external_requests_or_browser_errors",
+      "status": "PASS"
+    }
+  ],
+  "screenshots": [
+    "c0-overview-1440.png",
+    "c0-1440.png",
+    "c0-390.png",
+    "c0-detail-390.png",
+    "c0-320.png",
+    "c0-320-text-spacing.png"
+  ],
+  "external_requests": [],
+  "page_errors": [],
+  "native_zoom": "NOT_RUN",
+  "css_zoom_used": false,
+  "wcag_certification": false,
+  "browser_version": "151.0.7922.34",
+  "playwright_version": "1.62.1",
+  "source_count": 2,
+  "run_count": 28,
+  "solid_color_contrast_samples": [
+    {
+      "selector": ".nav-button.active",
+      "ratio": 6.5665062245861785,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".nav-button",
+      "ratio": 5.271980411281777,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".nav-button",
+      "ratio": 5.271980411281777,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".nav-button",
+      "ratio": 5.271980411281777,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".nav-button",
+      "ratio": 5.271980411281777,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".nav-button",
+      "ratio": 5.271980411281777,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": "#refresh",
+      "ratio": 12.25246077640815,
+      "minimum": 4.5
+    },
+    {
+      "selector": "#notice",
+      "ratio": 6.360205890004817,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": "#result-count",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".search-label",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": "#clear-filters",
+      "ratio": 6.028175647829895,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.completed",
+      "ratio": 5.995014263981615,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 8.900636348028748,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.completed",
+      "ratio": 5.995014263981615,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.partial",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.partial",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.failed",
+      "ratio": 5.487056152831825,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.rejected",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.failed",
+      "ratio": 5.487056152831825,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.rejected",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.running",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.not_applicable",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.running",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.not_applicable",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.completed",
+      "ratio": 5.995014263981615,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.completed",
+      "ratio": 5.995014263981615,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.partial",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.rejected",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.partial",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.rejected",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.failed",
+      "ratio": 5.487056152831825,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.not_applicable",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.failed",
+      "ratio": 5.487056152831825,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.not_applicable",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.running",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.running",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.completed",
+      "ratio": 5.995014263981615,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.rejected",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.completed",
+      "ratio": 5.995014263981615,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.rejected",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.partial",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.not_applicable",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.partial",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.not_applicable",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".muted",
+      "ratio": 6.253674229683727,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.failed",
+      "ratio": 5.487056152831825,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.failed",
+      "ratio": 5.487056152831825,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.unknown",
+      "ratio": 4.743206113526496,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.running",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".run-open",
+      "ratio": 9.341644419417126,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.synthetic",
+      "ratio": 5.235009925529328,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.running",
+      "ratio": 5.603053517092539,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".badge.hold",
+      "ratio": 5.324304007643743,
+      "minimum": 4.5
+    },
+    {
+      "selector": "#selection-summary",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    },
+    {
+      "selector": "#compare-selected",
+      "ratio": 12.25246077640815,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".footer",
+      "ratio": 5.804937940618463,
+      "minimum": 4.5
+    }
+  ],
+  "source_tree_dirty": false,
+  "font_provenance": {
+    "status": "PASS_SCOPED",
+    "fonts": [
+      {
+        "requested_glyph": "CJK U+65E5",
+        "family": "WenQuanYi Zen Hei,文泉驛正黑,文泉驿正黑",
+        "style": "Regular",
+        "filename": "wqy-zenhei.ttc",
+        "sha256": "79c18ebe7b811951e8311bad7103ebeae8c337ed9988ea69e8a78a66cfe029b9",
+        "charset_contains_requested_glyph": true
+      },
+      {
+        "requested_glyph": "emoji U+1F9EA",
+        "family": "Unifont Upper",
+        "style": "Regular",
+        "filename": "unifont_upper.otf",
+        "sha256": "f9a49517cb5a06e02692b403bc21f96ea767128db52f089d31261a8968d3ace8",
+        "charset_contains_requested_glyph": true
+      }
+    ],
+    "scope": "fontconfig-selected installed fonts and declared glyph coverage; not accessibility certification"
+  },
+  "screenshot_sha256": {
+    "c0-overview-1440.png": "8391475559bed79a9d7f4608af579a1f2a5bd43978489a2abb88f72049edb337",
+    "c0-1440.png": "9739cdf8090e8f453fd7cbbe56e68d2e039e6838e9c7a9b1ac55a4fecdb37b47",
+    "c0-390.png": "f4449f80e801c29723283c74bb9e8c3fd62cf2f1c0fe65800d6aa429f0ec85a7",
+    "c0-detail-390.png": "fe02a03aeef11358bbe93fefba9b508d253c617a39d116f7ea9808d12c668b4a",
+    "c0-320.png": "03458492be7c6a06e4b12b91e852be2aef0ccb2b92033aad2b24859b10ca6229",
+    "c0-320-text-spacing.png": "683099fb7dfc442865bc68e4c732fb8de0053ce2de24fa0560bf17d5f8243e9d"
+  },
+  "consumer": {
+    "viewer_import_outside_checkout": true,
+    "sdk_import_outside_checkout": true,
+    "r4_installed": false,
+    "python_optimized": false
+  },
+  "source_package_sha256": {
+    "source-a": {
+      "data/input.csv": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+      "ro-crate-metadata.json": "fcd8913a702ab32b6071e056eac40688c4b22d73dc7dbaedccd5fa9cddd7b8dc"
+    },
+    "source-b": {
+      "data/input.csv": "50883c36552dfc65eb0283b32c990891204c86306fa0cb429784c221dcf7ef53",
+      "ro-crate-metadata.json": "fd73a5923f37af33206689b2125a6891f362f9c1d8271ec1dc9e54d00dbafd84"
+    }
+  },
+  "source_package_bytes_unchanged": true
+}

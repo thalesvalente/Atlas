@@ -58,3 +58,7 @@ T017/T018 só fecham após execução/revisão reais; checkboxes anteriores não
 substituem evidência. Source binding global P02 prevalece ao receber snapshot
 novo: detalhe e seleção antigos expiram; a expectativa anterior P06 de seleção
 sobrevivente exige atualização do harness, com RED de estado registrado.
+
+## Convergência C1 observada
+
+Código `af393e4c0cca19161f49bf9d847bd22617be15fb`, tree `e2a5731d0057f1676e4112d57061773a72e4fc6e`: três workflows SUCCESS; 122 casos únicos em quatro células OS/modo sem skips; cinco jornadas browser PASS com fontes sintéticas conferidas e seis capturas P02. Auditoria deny-by-default e 64 fronteiras P06 preservadas. Revisão nativa independente sem finding bloqueante. Os gaps de engenharia recebidos em T012–T017 foram resolvidos e a publicação T018 registra os inputs/recibos. O head documental mantém gates próprios: CI e revisão terminal por SHA na PR #11, sem estado concorrente no ponteiro global.

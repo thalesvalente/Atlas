@@ -1,0 +1,171 @@
+{
+  "merge": {
+    "sha": "4bfe0040c273d35719fc6e3de5e81d1fe9e40b65",
+    "tree": "d02432046d4bb7945cfd39581f674d7252bc415b",
+    "parents": [
+      "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48"
+    ],
+    "method": "three-parent merge of disjoint frozen deltas",
+    "conflicts": [],
+    "p02_manifest_preserved_entries": 55,
+    "p06_manifest_preserved_entries": 22
+  },
+  "code": {
+    "sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+    "tree": "e2a5731d0057f1676e4112d57061773a72e4fc6e",
+    "parents": [
+      "df56eb6338626d1671d1882d0d745c02a1f48406"
+    ]
+  },
+  "ancestry_checks": [
+    {
+      "input": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "is_ancestor_of_merge": true,
+      "is_ancestor_of_code": true
+    },
+    {
+      "input": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "is_ancestor_of_merge": true,
+      "is_ancestor_of_code": true
+    },
+    {
+      "input": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "is_ancestor_of_merge": true,
+      "is_ancestor_of_code": true
+    },
+    {
+      "input": "d21d8a490b89995ae5707a7a53b469685416a383",
+      "is_ancestor_of_merge": true,
+      "is_ancestor_of_code": true
+    },
+    {
+      "input": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "is_ancestor_of_merge": true,
+      "is_ancestor_of_code": true
+    }
+  ],
+  "frozen_manifest_deviations_in_composed_code": [
+    {
+      "source": "p02_documentary",
+      "path": "scripts/qa/atlas_parity02_p02_browser.mjs",
+      "input_sha256": "a85aaa8eea48c97dda626fe916765f121271043446bd986d36f10be2a060841f",
+      "composed_sha256": "994c3b0fc9382e011791dc0e34f6b79b66360c33e0ff6b4c180eed1e89c881c9",
+      "justification": "Record actual Playwright version alongside Chromium, retaining all P02 behavioral checks and limitations.",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p02_documentary",
+      "path": "scripts/qa/atlas_parity02_p02_run_browser.py",
+      "input_sha256": "6ce367d7eafceef1e44f9722aae07887665687189a86940c064d6509886bbad1",
+      "composed_sha256": "ac7317ba576188a582d7ecbe3375a26f94b5d93055e9838368f974e68e9a0b5d",
+      "justification": "Validate declared code SHA against HEAD; record font glyph coverage and hashes; require exactly six PNG receipts without relaxing installed isolation.",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p06_documentary",
+      "path": ".github/workflows/atlas-parity02.yml",
+      "input_sha256": "00d5a1925f1ead8ddcdb582bda4d8a3f287e368a3a84c1102b042e43c9be2ca9",
+      "composed_sha256": "ae3d9de4a613ebfdf7fb0ecfc90a4f6429b948c3879ff2f0b314fcf5d10d1ce9",
+      "justification": "Run installed consumer outside checkout; combine exact P02 audit opt-in; preserve matrix and real P06 browser with per-SHA artifacts.",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p06_documentary",
+      "path": "scripts/qa/atlas_parity02_p06_browser.mjs",
+      "input_sha256": "49ee944819d33f3b2fe246e4e2ee63e3b05b843eebe35a27d81855b64f228543",
+      "composed_sha256": "d92a086a8453f3483e1820994a2dae6258f687e79fda681999b60f2a87e3131a",
+      "justification": "Select by source+run identity; reject external traffic; after snapshot change require cleared old selection and warning, prove B unchanged, then fresh explicit B selection; real state RED/green precedes browser CI.",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p06_documentary",
+      "path": "specs/004-atlas-parity-c0/analysis.md",
+      "input_sha256": "17f8da3a820f90ca5529782d2daa796591e5492147726844f9fa93543e9188e3",
+      "composed_sha256": "3eb714eea12d14daf495e718cd774c10db02e82ea1519878f660bcd93b1ed116",
+      "justification": "Feature 004 current aggregation; frozen source workstream and historical documents preserved",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p06_documentary",
+      "path": "specs/004-atlas-parity-c0/checklists/requirements.md",
+      "input_sha256": "be38af56179b093e5975c8a25dccf0dd764339a0aa2115eff10d89adae9de318",
+      "composed_sha256": "26f82f39d4d593c3a351923fd4bf94c7301d7c43d4eb18016980387d9e8440c1",
+      "justification": "Feature 004 current aggregation; frozen source workstream and historical documents preserved",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p06_documentary",
+      "path": "specs/004-atlas-parity-c0/plan.md",
+      "input_sha256": "7223bc0ce0e998ce2d85fd7a0cd36868b732aa83d9a303852832c4c187c188bc",
+      "composed_sha256": "cc3545743115ace8d4e47520bd35d00e436a8e06761f3ce4c8a02e5142f8f2e0",
+      "justification": "Feature 004 current aggregation; frozen source workstream and historical documents preserved",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p06_documentary",
+      "path": "specs/004-atlas-parity-c0/spec.md",
+      "input_sha256": "07b626a50b15ba7fc455a844a5521ecec9b636d4483440a41cc32e702d550fc9",
+      "composed_sha256": "ee1877cb40b187b78bf5f7325dae040ed844362a21fc55d8cb8add79be9fef8a",
+      "justification": "Feature 004 current aggregation; frozen source workstream and historical documents preserved",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    },
+    {
+      "source": "p06_documentary",
+      "path": "specs/004-atlas-parity-c0/tasks.md",
+      "input_sha256": "9ebef4b53d4f69e90c21865341491719b10915f961bafa1875ea1c30c1e50d73",
+      "composed_sha256": "75653607e350bbd46f73bce37ee3537335ecb3e1659e59042fbc8a18fa11855c",
+      "justification": "Feature 004 current aggregation; frozen source workstream and historical documents preserved",
+      "revalidation_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "ci_status": "SUCCESS"
+    }
+  ],
+  "runtime_p02_unchanged": true,
+  "protocol_unchanged": true,
+  "source_manifests_not_rewritten": true,
+  "original_branches_not_updated": true,
+  "no_squash_no_rebase_no_force_push": true,
+  "input_manifest_coverage_at_code": {
+    "p02": {
+      "preserved": 53,
+      "total": 55
+    },
+    "p06": {
+      "preserved": 15,
+      "total": 22
+    }
+  },
+  "code_to_documentary_manifest_differences": "See INPUT-SHAS.json documentary_successor links; no claim that documentary hashes all existed at code SHA.",
+  "prior_code_history": [
+    {
+      "sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "parent": "4bfe0040c273d35719fc6e3de5e81d1fe9e40b65",
+      "terminal_evidence": "receipts/r1-terminal-and-r2-repair.json"
+    }
+  ],
+  "documentary_overlay": {
+    "sha": "CONTAINING_COMMIT_RECORDED_EXTERNALLY_IN_PR_11",
+    "ci_status_at_write": "NOT_YET_RUN",
+    "no_code_CI_transfer": true,
+    "changed_aggregators": [
+      {
+        "path": "specs/004-atlas-parity-c0/tasks.md",
+        "sha256": "0c6017d69f7096343bcfeadf0fff4cd42d643b6d4bb43f8366637c6c025d3aab"
+      },
+      {
+        "path": "specs/004-atlas-parity-c0/analysis.md",
+        "sha256": "2bbe5ab8d57c0eaaad99c6df5d63537a7d5c36da3bbd09948f75a8cab2d8cadb"
+      }
+    ]
+  }
+}
