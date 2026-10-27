@@ -1,0 +1,149 @@
+{
+  "mission": "ATLAS-PARITY-02-P06",
+  "status": "P06_QA_READY_AWAITING_INPUTS",
+  "recorded_at": "2026-10-27T11:45:07-03:00",
+  "timezone": "America/Fortaleza",
+  "repository": "thalesvalente/Atlas",
+  "branch": "work/atlas-parity02-p06-qa-20261027",
+  "draft_pr": "https://github.com/thalesvalente/Atlas/pull/6",
+  "base": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59"
+  },
+  "code_tested": {
+    "sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+    "tree": "1014bda4d0d2006f2216e103a0b5110fd48e26fe",
+    "source_branch_qa_sha_explicit_in_inputs": true
+  },
+  "documentation_commit": {
+    "sha": null,
+    "record": "Exact SHA/tree in PR #6 description and final response",
+    "reason": "The documentation commit cannot embed its own defining SHA",
+    "runtime_and_test_bytes_equal_to_tested_code": true,
+    "full_tree_equal_to_code_commit": false
+  },
+  "inputs": "INPUT-SHAS.json",
+  "inputs_hashes": {
+    "prompt_sha256": "4f6e03536e8d93a91507b75406dcf3fdf427c15575372efcb9a905df22c0290f",
+    "source_git_tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+    "studies": "Declared C digests are UNVERIFIED; full A/B/C/D INPUT_MISSING"
+  },
+  "paths_changed": [
+    ".github/workflows/atlas-parity02.yml",
+    "docs/missions/atlas-parity-02/p06-qa/ACCEPTANCE-MATRIX.md",
+    "docs/missions/atlas-parity-02/p06-qa/ARCHITECTURE-REVIEW.md",
+    "docs/missions/atlas-parity-02/p06-qa/CI-EVIDENCE.json",
+    "docs/missions/atlas-parity-02/p06-qa/HANDOFF.json",
+    "docs/missions/atlas-parity-02/p06-qa/INDEPENDENT-REVIEW.md",
+    "docs/missions/atlas-parity-02/p06-qa/INPUT-SHAS.json",
+    "docs/missions/atlas-parity-02/p06-qa/INTEGRATION-DECISION.md",
+    "docs/missions/atlas-parity-02/p06-qa/MANIFEST.sha256",
+    "docs/missions/atlas-parity-02/p06-qa/RESULT.md",
+    "docs/missions/atlas-parity-02/p06-qa/TREE-VERIFICATION.json",
+    "scripts/qa/atlas_parity02_p06_audit.py",
+    "scripts/qa/atlas_parity02_p06_browser.mjs",
+    "scripts/qa/atlas_parity02_p06_browser.py",
+    "scripts/qa/atlas_parity02_p06_wheel.py",
+    "specs/004-atlas-parity-c0/analysis.md",
+    "specs/004-atlas-parity-c0/checklists/requirements.md",
+    "specs/004-atlas-parity-c0/plan.md",
+    "specs/004-atlas-parity-c0/spec.md",
+    "specs/004-atlas-parity-c0/tasks.md",
+    "specs/004-atlas-parity-c0/workstreams/p06-qa/plan.md",
+    "tests/qa/test_atlas_parity02_p06_invariance.py",
+    "tests/qa/test_atlas_parity02_p06_semantics.py"
+  ],
+  "tests_executed": {
+    "environment": "GitHub-hosted Ubuntu/Windows Python3.12",
+    "runs": [
+      40523433511,
+      40523433530
+    ],
+    "jobs_success": 13,
+    "unique_unittest_per_cell": 98,
+    "new_unittest_included": 12,
+    "skips": 0,
+    "modes": [
+      "normal",
+      "-O"
+    ],
+    "browser": {
+      "environment": "Ubuntu engineering CI Chromium",
+      "existing_scenarios_checks": [
+        19,
+        23,
+        22
+      ],
+      "new_replacement_checks": 10,
+      "external_requests": 0,
+      "page_errors": 0
+    },
+    "installed_isolation_and_assets": "PASS_SCOPED",
+    "frozen_protected_files": 64
+  },
+  "tests_reused": {
+    "historical_baseline": {
+      "tested_sha": "e985ea3124b7a3cd241ee2dbc88b5ad50688373c",
+      "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+      "runs": [
+        40246678115,
+        40246678113
+      ],
+      "attribution": "Compatibility subagent read same-tree historical evidence; new P06 runs separately listed"
+    }
+  },
+  "review": {
+    "reviewer": "/root/independent_review",
+    "native": true,
+    "authored_delta": false,
+    "code_sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+    "verdict": "PASS_SCOPED",
+    "open_blocking_findings": [],
+    "documentation_review": "Post-commit exact-SHA receipt in PR #6; pending at document creation"
+  },
+  "native_agents": [
+    {
+      "id": "/root/compatibility",
+      "exclusive": "ARCHITECTURE-REVIEW.md"
+    },
+    {
+      "id": "/root/security_tests",
+      "exclusive": "test_atlas_parity02_p06_semantics.py"
+    },
+    {
+      "id": "/root/independent_review",
+      "exclusive": "Read-only final review, no authorship"
+    }
+  ],
+  "reasoning": {
+    "requested": "Max; fallback xhigh",
+    "effective": "UNVERIFIED",
+    "selector_telemetry_available": false
+  },
+  "gates": {
+    "CODE_CANDIDATE_VERIFIED": false,
+    "QA_BASELINE_VERIFIED": true,
+    "CI_FINAL_SHA": "External exact documentation-SHA status in PR #6; these results are d21 only",
+    "BROWSER_ENGINEERING": "PASS_SCOPED@d21",
+    "REAL_COHORT_PACKAGE": "INPUT_MISSING",
+    "LOCAL_BASELINE_OPERATION": "NOT_RUN_BY_P06",
+    "FINAL_CANDIDATE_ON_USER_HOST": "NOT_RUN",
+    "HUMAN_PROMOTION": "NOT_AUTHORIZED_NOT_RUN"
+  },
+  "blockers": [
+    {
+      "scope": "composed C0 candidate only",
+      "missing": "P02 frozen code SHA/tree, paths, tests and sanitized handoff"
+    }
+  ],
+  "limitations": [
+    "Full studies absent; no full parity denominator",
+    "No new P04/P05 receipts",
+    "No user host operational/browser tests",
+    "No formal review approval, merge, release or promotion",
+    "Desktop frontend observed; requested Chat frontend not changed; reasoning selector unverified"
+  ],
+  "next_minimal_action": "Receive P02 sanitized pinned handoff; freeze it with P06 delivery SHA recorded in PR; compose smallest C0 set, exercise composed bytes and obtain a new independent review",
+  "manifest": "MANIFEST.sha256",
+  "manifest_self_included": false
+}
