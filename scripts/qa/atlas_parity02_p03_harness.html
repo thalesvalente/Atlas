@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas · P03 · componentes isolados</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/harness.css">
+  <link rel="stylesheet" href="/parity02_p03_table.css">
+  <link rel="stylesheet" href="/parity02_p03_artifacts.css">
+</head>
+<body>
+  <header>
+    <p class="eyebrow">ATLAS / PARITY 02 / P03</p>
+    <h1>Informação com contexto.</h1>
+    <p>Harness isolado, alimentado somente por fixtures sintéticas. Estes componentes
+      ainda não estão integrados ao aplicativo principal.</p>
+  </header>
+  <main>
+    <section aria-labelledby="table-title" class="demo-panel">
+      <h2 id="table-title">Tabela candidata</h2>
+      <p>Identidade, tipos e valores permanecem explícitos. Ordenar e filtrar altera apenas a apresentação.</p>
+      <div class="controls">
+        <label>Exemplo
+          <select id="example"><option value="table">Valores e precisão</option>
+            <option value="empty">Tabela vazia</option><option value="malicious">Conteúdo hostil como texto</option>
+            <option value="large">Limite: 1000 linhas × 20 colunas</option></select>
+        </label>
+        <label>Ordem do inteiro
+          <select id="order"><option value="declared">Declarada</option>
+            <option value="asc">Crescente</option><option value="desc">Decrescente</option></select>
+        </label>
+        <label class="checkbox"><input type="checkbox" id="missing"> Somente inteiros ausentes</label>
+      </div>
+      <p id="feedback" role="status" aria-live="polite"></p>
+      <div id="table-mount"></div>
+    </section>
+    <section class="demo-panel" aria-label="Metadados representáveis">
+      <p class="eyebrow">Contrato atual · projeção de fixture sintética</p>
+      <div id="metadata-mount"></div>
+    </section>
+    <section class="demo-panel" aria-label="Produto candidato"><div id="product-mount"></div></section>
+    <section class="demo-panel" aria-label="Documento candidato"><div id="document-mount"></div></section>
+  </main>
+  <footer>Dados sintéticos. Digest não é autenticidade. Validação não é aprovação científica.</footer>
+  <script type="module" src="/harness.mjs"></script>
+</body>
+</html>

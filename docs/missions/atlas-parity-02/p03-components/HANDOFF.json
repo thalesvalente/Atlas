@@ -1,0 +1,359 @@
+{
+  "mission": "ATLAS-PARITY-02-P03",
+  "wave": "ATLAS-PARITY-02",
+  "tag": "seai.pipeline@llm-sec,agentic-pac/seai.qa:",
+  "timestamp": "2026-10-27T12:04:20.585411-03:00",
+  "timezone": "America/Fortaleza",
+  "status": "P03_COMPONENTS_VERIFIED_NOT_COMPOSED",
+  "visible_in_main_app": false,
+  "repository": "thalesvalente/Atlas",
+  "branch": "work/atlas-parity02-p03-components-20261027",
+  "draft_pr": {
+    "number": 7,
+    "url": "https://github.com/thalesvalente/Atlas/pull/7",
+    "draft": true,
+    "merged": false
+  },
+  "base": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59"
+  },
+  "code": {
+    "sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+    "tree": "f9cac8cba86763c2ff98f883e33962648fc01004",
+    "tested_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+    "reviewed_sha_via_exact_bytes_binding": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+    "binding": "evidence/CODE-BINDING.json",
+    "unchanged_runtime_test_fixture_files": 25
+  },
+  "documentation_commit": {
+    "sha": null,
+    "reason": "The commit containing this receipt is identified by Git; no self-referential commit SHA is fabricated. Exact documentation SHA is supplied in final PR body and conversation.",
+    "resolve": "git log -1 --format=%H -- docs/missions/atlas-parity-02/p03-components/HANDOFF.json",
+    "parent_code_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad"
+  },
+  "reasoning": {
+    "requested": "Max; fallback Extra High/xhigh",
+    "effective": "UNVERIFIED",
+    "selector_telemetry": "NOT_AVAILABLE"
+  },
+  "inputs": {
+    "verified_sources": [
+      {
+        "path": "AGENTS.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "83c362467736d67364342fdd0777bd8de171755ffb676ad38a5b0f000b89eb1e"
+      },
+      {
+        "path": ".specify/memory/constitution.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b"
+      },
+      {
+        "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "5f9a44e6b773bad819a33bef32a6e5ab34694fa4d9760624f94587c7f17bb662"
+      },
+      {
+        "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "67a539e23d5d369f5e242069a29d9ea8d05315ee82b4e23faaa68dea0a27bac8"
+      },
+      {
+        "path": "docs/protocol/0.1.0a1.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "76ae9be325866895e6bcefeefbc7d0f35e295969a7263e71db6d774be1bf794e"
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/read_model.py",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013"
+      },
+      {
+        "path": "packages/atlas/pyproject.toml",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "3b2fa0a244415d867078f3869b3e81e2b88081338f74590d1393e971869f1ae4"
+      },
+      {
+        "path": "packages/atlas/src/atlas_viewer/catalog.py",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3"
+      },
+      {
+        "path": "packages/atlas/src/atlas_viewer/server.py",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "1208a3e0cd129a31397a8b81afef5031d081cef8c8dda610467e6bb08dc446ca"
+      },
+      {
+        "path": "specs/001-atlas021-protocol-interface/spec.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "8b3edcff89de737cfaf330824d9013fbc5eb2023959c224b37a5c6399475eae3"
+      },
+      {
+        "path": "specs/002-atlas021-poc-r4/spec.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "67aca7d9b069874cb60a4b2b8b1be2ef0795eb7641c7b02d8a66abfb2778bc5b"
+      },
+      {
+        "path": "specs/003-producer-selective-preview/spec.md",
+        "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+        "sha256": "5bb61f6cae016fcbb202ed494e38938df26c531d8da405fb8bc66d6b50e36225"
+      }
+    ],
+    "missing": [
+      {
+        "id": "ATLAS-PARITY-01-A",
+        "status": "INPUT_MISSING"
+      },
+      {
+        "id": "ATLAS-PARITY-01-B",
+        "status": "INPUT_MISSING"
+      },
+      {
+        "id": "ATLAS-PARITY-01-C-study",
+        "status": "INPUT_MISSING",
+        "provided_unverified_sha256": "f8d274ffe5ac043005b2c27779286638a86c7c2aff3e30ee64a4497b434b110b"
+      },
+      {
+        "id": "ATLAS-PARITY-01-C-handoff",
+        "status": "INPUT_MISSING",
+        "provided_unverified_sha256": "e8c7b1b3a8eb0a276d94e98f94b9d1477e555d305ebee62d99ec48ee93f5650e"
+      },
+      {
+        "id": "ATLAS-PARITY-01-D",
+        "status": "INPUT_MISSING"
+      },
+      {
+        "id": "ATLAS-PARITY-02-P01",
+        "status": "INPUT_NOT_RECEIVED_VERSIONED"
+      }
+    ],
+    "search_scope": "files provided in this turn and pinned public baseline; no claim that unavailable studies do not exist elsewhere"
+  },
+  "operator_prompt_sha256": "f5847a07c33a296526432c47b6bb4208f3fccebb0e1f49213e807c051e7bd8f4",
+  "changed_paths": [
+    "docs/missions/atlas-parity-02/p03-components/COMPONENT-API.md",
+    "docs/missions/atlas-parity-02/p03-components/HANDOFF.json",
+    "docs/missions/atlas-parity-02/p03-components/INTEGRATION-CONTRACT.md",
+    "docs/missions/atlas-parity-02/p03-components/MANIFEST.sha256",
+    "docs/missions/atlas-parity-02/p03-components/REPRESENTABILITY.md",
+    "docs/missions/atlas-parity-02/p03-components/RESULT.md",
+    "docs/missions/atlas-parity-02/p03-components/evidence/CI-CODE-CHECKPOINT.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/CODE-BINDING.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/DOCUMENTARY-REVIEW.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/FREEZE.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/INDEPENDENT-PROBES.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/INDEPENDENT-REVIEW.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/INPUTS.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/INSTALL.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/LIMITATIONS.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/PREFLIGHT.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/RECEIPT-PROVENANCE.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/REGRESSION.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/SPEC-KIT-PREFLIGHT.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/SPEC-KIT-TASKS.json",
+    "docs/missions/atlas-parity-02/p03-components/evidence/VERIFICATION-SUMMARY.json",
+    "packages/atlas/src/atlas_viewer/parity02_p03_metadata.py",
+    "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.css",
+    "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.js",
+    "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+    "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+    "scripts/qa/atlas_parity02_p03_artifacts_test.mjs",
+    "scripts/qa/atlas_parity02_p03_browser.mjs",
+    "scripts/qa/atlas_parity02_p03_dom_test.mjs",
+    "scripts/qa/atlas_parity02_p03_harness.css",
+    "scripts/qa/atlas_parity02_p03_harness.html",
+    "scripts/qa/atlas_parity02_p03_harness.mjs",
+    "scripts/qa/atlas_parity02_p03_harness.py",
+    "scripts/qa/atlas_parity02_p03_table_test.mjs",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/analysis.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/checklists/requirements.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/clarifications.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/convergence.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/data-model.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/method.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/plan.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/quickstart.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/research.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/spec.md",
+    "specs/004-atlas-parity-c0/workstreams/p03-components/tasks.md",
+    "tests/fixtures/atlas_parity02/p03/artifact-descriptor.json",
+    "tests/fixtures/atlas_parity02/p03/artifact-product-candidate.json",
+    "tests/fixtures/atlas_parity02/p03/artifact-read-model.json",
+    "tests/fixtures/atlas_parity02/p03/document-candidate.json",
+    "tests/fixtures/atlas_parity02/p03/table-empty.json",
+    "tests/fixtures/atlas_parity02/p03/table-invalid.json",
+    "tests/fixtures/atlas_parity02/p03/table-malicious.json",
+    "tests/fixtures/atlas_parity02/p03/table-positive.json",
+    "tests/viewer/test_atlas_parity02_p03_harness.py",
+    "tests/viewer/test_atlas_parity02_p03_metadata.py",
+    "tests/viewer/test_atlas_parity02_p03_renderers.py",
+    "tests/viewer/test_atlas_parity02_p03_table.py"
+  ],
+  "preservation": {
+    "baseline_blobs_identical": 162,
+    "protocol_unchanged": true,
+    "shell_catalog_server_package_data_workflows_unchanged": true,
+    "shared_feature_pointer_written": false,
+    "other_workstream_paths_written": false,
+    "private_payload_access": false,
+    "user_host_access": false,
+    "merge_release_deploy": false
+  },
+  "agents": [
+    {
+      "id": "/root/p03_tables",
+      "role": "table author"
+    },
+    {
+      "id": "/root/p03_artifacts",
+      "role": "metadata author; attributed regression and installation"
+    },
+    {
+      "id": "/root/p03_independent_review",
+      "role": "independent reviewer",
+      "authorship": false
+    }
+  ],
+  "verification": {
+    "environment": {
+      "os": "Linux engineering runtime",
+      "python": "3.12.14",
+      "node": "24.22.1"
+    },
+    "focal_python": {
+      "methods": 35,
+      "passed": 30,
+      "skipped": 5,
+      "node_suite_wrappers": 3,
+      "executed_by": "/root/p03_independent_review",
+      "receipt": "evidence/INDEPENDENT-REVIEW.json"
+    },
+    "node_cases": {
+      "table": 42,
+      "metadata": 14,
+      "dom_recorder": 6,
+      "all_passed": true,
+      "real_browser": false
+    },
+    "selected_regression": {
+      "methods": 117,
+      "passed": 111,
+      "skipped": 6,
+      "baseline_http_excluded": 4,
+      "failed": 0,
+      "errors": 0,
+      "receipt": "evidence/REGRESSION.json",
+      "reused": "SDK/QA and architecture from attributed earlier execution on identical baseline bytes; viewer rerun after freeze"
+    },
+    "installation": {
+      "status": "PASS_SCOPED",
+      "components_match_installed_wheel": true,
+      "runtime_without_r4": true,
+      "source_bytes_preserved": true,
+      "setuptools_actual": "84.1.0",
+      "setuptools_declared": "80.9.0",
+      "pinned_build_equivalence": false,
+      "receipt": "evidence/INSTALL.json"
+    },
+    "independent_probes": {
+      "count": 15,
+      "status": "PASS_SCOPED",
+      "oracle": "Python decimal.Decimal, 176 lexical numeric values plus 2 missing rows",
+      "receipt": "evidence/INDEPENDENT-PROBES.json"
+    },
+    "counting": "No sum of Node leafcases with their Python wrappers, focal/full selections, or reruns. Counts measure their explicitly named suites.",
+    "ci": {
+      "status": "PENDING_EXTERNAL_RESULT",
+      "commit_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+      "runs": [
+        {
+          "id": 40526464073,
+          "name": "ATLAS021 candidate verification",
+          "head_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526464073",
+          "created_at": "2026-10-27T14:59:14Z",
+          "updated_at": "2026-10-27T14:59:17Z"
+        },
+        {
+          "id": 40526464161,
+          "name": "ATLAS003 Spec Kit contract checks",
+          "head_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526464161",
+          "created_at": "2026-10-27T14:59:14Z",
+          "updated_at": "2026-10-27T15:00:10Z"
+        }
+      ],
+      "checkpoint": "evidence/CI-CODE-CHECKPOINT.json",
+      "reason": "One read after own code publication; Spec Kit success, product run in_progress. These results are not assigned to the later documentation SHA; final PR head gets its own checkpoint."
+    }
+  },
+  "independent_review": {
+    "reviewer": "/root/p03_independent_review",
+    "verdict": "PASS_SCOPED",
+    "authored_delta": false,
+    "freeze_sha256": "5d656a75e89cf2834f3217724b8014bd75aa8dda1d162ba3ecd0f6b4df377d43",
+    "open_findings": [],
+    "resolved_findings": [
+      "P03-IR-001"
+    ],
+    "original_receipt_sha256": "99ba60556fc489c10f6c0df4762434898418b0eba8c1c534b01e86ed2696b2cc",
+    "code_binding": "evidence/CODE-BINDING.json",
+    "documentary_review": {
+      "verdict": "PASS_SCOPED",
+      "reviewed_documents": 30,
+      "code_binding_independently_verified": true,
+      "original_receipt_sha256": "35d85b53baa9373d4e7b64cde69b0b86a00cf76a0ddeed011b000ccbf63bd7bc",
+      "receipt": "evidence/DOCUMENTARY-REVIEW.json",
+      "scope": "Final substantive docs/evidence before mechanical receipt insertion, manifest generation and doc commit publication"
+    }
+  },
+  "blockers": [
+    {
+      "id": "HTTP_SOCKET_EPERM",
+      "scope": "actual HTTP validation",
+      "status": "NOT_RUN",
+      "evidence": "ThreadingHTTPServer socket creation PermissionError errno1; no permission change",
+      "next_act": "P06 executes HTTP gate in already authorized environment with sockets"
+    },
+    {
+      "id": "CHROMIUM_MISSING",
+      "scope": "visual/keyboard/reflow",
+      "status": "NOT_RUN",
+      "next_act": "Run delivered browser gate where Playwright/Chromium already available and authorized"
+    },
+    {
+      "id": "JSONSCHEMA_MISSING",
+      "scope": "one SDK reference-validator test",
+      "status": "SKIPPED",
+      "next_act": "Run existing pinned CI dependency gate"
+    },
+    {
+      "id": "BUILD_PIN_NOT_REPRODUCED",
+      "scope": "setuptools80.9.0 build",
+      "status": "UNVERIFIED",
+      "next_act": "Run existing pinned package build in CI"
+    },
+    {
+      "id": "STUDIES_AND_P01_NOT_RECEIVED",
+      "scope": "legacy parity and future contract convergence",
+      "status": "INPUT_MISSING",
+      "next_act": "Reconcile received versioned bytes separately; not a dependency for these isolated components"
+    }
+  ],
+  "next_minimum_act": {
+    "owner": "P06",
+    "action": "Receive code plus documentary commit from Draft #7 by exact SHAs, verify manifest, compose in separate candidate with P02 shell ownership, and execute actual HTTP/browser gates on composed SHA",
+    "contract": "INTEGRATION-CONTRACT.md",
+    "new_persisted_contract_authorized": false
+  },
+  "manifest": {
+    "path": "MANIFEST.sha256",
+    "includes_itself": false,
+    "paths_relative_to": "repository root"
+  }
+}

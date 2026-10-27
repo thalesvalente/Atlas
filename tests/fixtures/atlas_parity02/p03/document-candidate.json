@@ -1,0 +1,36 @@
+{
+  "version": "p03-candidate/1",
+  "semantic_status": "CANDIDATE_PRESENTATION",
+  "synthetic": true,
+  "semantic_kind": "document",
+  "identity": {
+    "source_key": "synthetic-fixture",
+    "id": "urn:synthetic:document"
+  },
+  "title": "Memória técnica — candidato sintético",
+  "description": "Semântica declarada nesta fixture, sem extensão persistida do Caderno.",
+  "fields": [
+    {
+      "label": "Situação declarada",
+      "value": "Proposta"
+    },
+    {
+      "label": "Responsável",
+      "value": null
+    },
+    {
+      "label": "Conteúdo inerte",
+      "value": "<img src=x onerror=\"globalThis.P03_ATTACK=true\">"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Escopo",
+      "text": "Exemplo sintético de apresentação. Não executa atividades."
+    },
+    {
+      "title": "Referência como texto",
+      "text": "https://example.invalid/private-payload\njavascript:globalThis.P03_ATTACK=true"
+    }
+  ]
+}
