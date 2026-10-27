@@ -23,3 +23,15 @@ Achados: A1/HIGH/partial — inputs P02 ausentes impedem declarar composição;
 A2/MEDIUM/partial — estudos integrais ausentes limitam escopo de paridade;
 A3/HIGH/partial — CI nova e revisão final ainda necessárias. Todos têm recibo
 ou tarefa de fechamento; nenhuma exceção aos contratos é usada.
+
+Convergência manual: lacuna material FR-002/links obsoletos gerou T011 append-only;
+harness de browser implementado e revisado sem autoria. A1 continua dependência
+externa de composição; A2 é limite de estudo; A3 foi resolvido no f200 e a prova
+do novo incremento d21 permanece vinculada ao run exato.
+
+Verificação concluída do d21: 13/13 jobs SUCCESS; 98 unittest por célula nas quatro
+combinações OS/modo, sem skips;10 checks de troca em Chromium e 19/23/22 checks
+nos três cenários anteriores. Sem findings estáticos do revisor independente.
+P06 implementado e verificado no seu escopo; composição permanece não realizada
+por ausência de P02. Não se acrescenta tarefa de implementação artificial por
+uma dependência externa ou por estudos ausentes.

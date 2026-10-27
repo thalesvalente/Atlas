@@ -38,3 +38,7 @@ Novo atlas-parity02: unittest P06 quatro células, invariância por blobs Git,
 wheel/assets/HTTP no consumidor isolado; Spec Kit 1.2.3 e helpers em dois OS.
 Auditoria `speckit_audit.py --allow-presentation-delta` preservada, com sua
 exceção histórica exata; nenhuma auditoria é reduzida para obter verde.
+
+Incremento material P06: cenário Chromium de troca de pacote válido, cache CHANGED,
+detalhe/seleção obsoletos e navegação fonte+ID, com mutação atribuída ao driver
+sintético e checagem de bytes contra o estado intencional, em job próprio.
