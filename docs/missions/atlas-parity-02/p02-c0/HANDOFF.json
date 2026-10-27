@@ -1,0 +1,447 @@
+{
+  "schema": "atlas-parity02-p02-handoff/1",
+  "mission": "ATLAS-PARITY-02-P02",
+  "title": "C0, navegação e composição da interface",
+  "tag": "seai.pipeline@llm-sec,agentic-pac/seai.qa:",
+  "status": "P02_IMPLEMENTED_VERIFICATION_PENDING",
+  "recorded_at": "2026-10-27T12:13:04.060186-03:00",
+  "timezone": "America/Fortaleza",
+  "recorded_at_utc": "2026-10-27T15:13:04.060186+00:00",
+  "git": {
+    "only_destination": "thalesvalente/Atlas",
+    "branch": "work/atlas-parity02-p02-c0-20261027",
+    "pull_request": "https://github.com/thalesvalente/Atlas/pull/8",
+    "pull_request_state": "DRAFT_OPEN",
+    "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "base_tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+    "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+    "code_tree": "3a6c4f1b486f47e78c1ab26643dc30ddb28d631a",
+    "documentation_commit": "CONTAINING_COMMIT; exact SHA published externally in PR/final handoff, not recursively embedded",
+    "documentation_delta_scope": "Only mission docs and P02 workstream docs; no executable/fixture changes after CODE_SHA",
+    "ci_attribution": "CI receipt ci-code.json belongs only to CODE_SHA. Final publication read is reported separately by exact documentation SHA.",
+    "merge_performed": false,
+    "force_push_performed": false
+  },
+  "reasoning": {
+    "requested": "Max",
+    "fallback": "Extra High/xhigh",
+    "effective": "UNVERIFIED",
+    "note": "Runtime does not expose trustworthy selector telemetry."
+  },
+  "inputs": {
+    "kind": "P02_INPUT_PROVENANCE",
+    "prompt": {
+      "description": "User-attached P02 execution prompt; full text not republished",
+      "sha256": "8c39f28dc8450d3730968ef7236fb59d01cb01f7ab34ffd5acb7737c688872e4",
+      "bytes_available": true
+    },
+    "baseline": {
+      "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+      "preflight_main_equal": true,
+      "verified_against_remote": true
+    },
+    "studies": {
+      "A": "INPUT_MISSING",
+      "B": "INPUT_MISSING",
+      "C": "INPUT_MISSING",
+      "D": "INPUT_MISSING"
+    },
+    "provided_unverified_hashes": {
+      "C-study.md": "f8d274ffe5ac043005b2c27779286638a86c7c2aff3e30ee64a4497b434b110b",
+      "C-handoff.json": "e8c7b1b3a8eb0a276d94e98f94b9d1477e555d305ebee62d99ec48ee93f5650e"
+    },
+    "c_hash_verification": "NOT_POSSIBLE_WITHOUT_BYTES; no authenticity or approval inferred",
+    "p03_frozen_handoff": "NOT_RECEIVED",
+    "adr0002_direction": {
+      "status": "ACCEPTED_AS_STABILIZATION_DIRECTION",
+      "source": "https://github.com/thalesvalente/Atlas/pull/5",
+      "merge_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "historical_bytes_preserved": true
+    },
+    "reasoning_requested": "Max; fallback xhigh",
+    "reasoning_effective": "UNVERIFIED",
+    "user_host_access": "NOT_PERFORMED",
+    "private_corpus_access": "NOT_PERFORMED"
+  },
+  "paths_changed_from_base": [
+    "docs/missions/atlas-parity-02/p02-c0/ACCEPTANCE-MAP.md",
+    "docs/missions/atlas-parity-02/p02-c0/HANDOFF.json",
+    "docs/missions/atlas-parity-02/p02-c0/MANIFEST.sha256",
+    "docs/missions/atlas-parity-02/p02-c0/P06-INTEGRATION.md",
+    "docs/missions/atlas-parity-02/p02-c0/REPRODUCE.md",
+    "docs/missions/atlas-parity-02/p02-c0/RESULT.md",
+    "docs/missions/atlas-parity-02/p02-c0/REVIEW.md",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/ENV-01-result.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/browser.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/ci-code.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/clean-install-original.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/documentary-check.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/environment.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/font-provenance.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/independent-review.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/inputs.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-normal.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-normal.log",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-optimized.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/integrated-optimized.log",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/method-architecture.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/ownership.json",
+    "docs/missions/atlas-parity-02/p02-c0/receipts/wheel-code-equivalence.json",
+    "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-1440.png",
+    "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-320-text-spacing.png",
+    "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-320.png",
+    "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-390.png",
+    "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-detail-390.png",
+    "docs/missions/atlas-parity-02/p02-c0/screenshots/c0-overview-1440.png",
+    "packages/atlas/src/atlas_viewer/catalog.py",
+    "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+    "packages/atlas/src/atlas_viewer/server.py",
+    "packages/atlas/src/atlas_viewer/static/app.js",
+    "packages/atlas/src/atlas_viewer/static/index.html",
+    "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+    "packages/atlas/src/atlas_viewer/static/style.css",
+    "scripts/qa/atlas_parity02_p02_browser.mjs",
+    "scripts/qa/atlas_parity02_p02_fixture.py",
+    "scripts/qa/atlas_parity02_p02_run_browser.py",
+    "scripts/qa/atlas_parity02_p02_state_tests.mjs",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/analysis.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/checklists/requirements.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/contracts/navigation.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/data-model.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/plan.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/quickstart.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/research.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/spec.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/tasks.md",
+    "tests/fixtures/atlas_parity02/p02/README.md",
+    "tests/fixtures/atlas_parity02/p02/source-a/data/input.csv",
+    "tests/fixtures/atlas_parity02/p02/source-a/ro-crate-metadata.json",
+    "tests/fixtures/atlas_parity02/p02/source-b/data/input.csv",
+    "tests/fixtures/atlas_parity02/p02/source-b/ro-crate-metadata.json",
+    "tests/viewer/test_atlas_parity02_p02_catalog.py",
+    "tests/viewer/test_atlas_parity02_p02_state.py"
+  ],
+  "production_paths_changed": [
+    "packages/atlas/src/atlas_viewer/catalog.py",
+    "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+    "packages/atlas/src/atlas_viewer/server.py",
+    "packages/atlas/src/atlas_viewer/static/app.js",
+    "packages/atlas/src/atlas_viewer/static/index.html",
+    "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+    "packages/atlas/src/atlas_viewer/static/style.css"
+  ],
+  "protected_contracts": {
+    "ARC_01_to_09": "PRESERVED",
+    "packages/protocol/**": "BYTE_IDENTICAL_TO_BASE",
+    "schema_context_persisted_version": "UNCHANGED",
+    "producer_imports": "NONE_ADDED",
+    "r4_present_in_consumer": false,
+    "governance_historical_adrs": "UNCHANGED",
+    "global_workflows_runner_audits": "UNCHANGED",
+    "feature_registry": "NOT_WRITTEN",
+    "package_version": "UNCHANGED",
+    "pyproject": "UNCHANGED; existing static glob included new JS"
+  },
+  "agents": [
+    {
+      "id": "/root/navigation_state",
+      "role": "Author: catalog.py, server.py, new navigation Python helper and static state JS; later read-only P06 composition handoff",
+      "exclusive_ownership": [
+        "packages/atlas/src/atlas_viewer/catalog.py",
+        "packages/atlas/src/atlas_viewer/server.py",
+        "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+        "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js"
+      ]
+    },
+    {
+      "id": "/root/fixtures_browser",
+      "role": "Author: new P02 fixtures/tests/QA scripts; browser environment-only font correction and rerun",
+      "exclusive_ownership": [
+        "tests/viewer/test_atlas_parity02_p02_*.py",
+        "scripts/qa/atlas_parity02_p02_*",
+        "tests/fixtures/atlas_parity02/p02/**"
+      ]
+    },
+    {
+      "id": "/root/independent_review",
+      "role": "Independent read-only reviewer; zero delta authorship; final visual and byte-equivalence checks",
+      "exclusive_ownership": []
+    }
+  ],
+  "coordinator": {
+    "id": "/root",
+    "ownership": [
+      "static/app.js",
+      "static/index.html",
+      "static/style.css",
+      "mission documents",
+      "P02 workstream documents",
+      "Git publication"
+    ],
+    "note": "No author/reviewer overlap. Document transcripts are authored by coordinator and attributed to the real reviewer."
+  },
+  "verification": {
+    "normal": {
+      "kind": "P02_INSTALLED_INTEGRATED_TESTS",
+      "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "executed_at": "2026-10-27T15:00:26.260362+00:00",
+      "python": "3.12.14",
+      "platform": "linux",
+      "command": "python -I scripts/run_checks.py",
+      "cwd": "OUTSIDE_CHECKOUT",
+      "sdk_viewer": "INSTALLED_LOCAL_WHEELS",
+      "exit_code": 0,
+      "optimized": false,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 50,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "status": "PASS",
+      "receipt": "receipts/integrated-normal.json",
+      "log": "receipts/integrated-normal.log",
+      "unique_test_cases": 98
+    },
+    "optimized": {
+      "kind": "P02_INSTALLED_INTEGRATED_TESTS",
+      "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "executed_at": "2026-10-27T15:00:31.999843+00:00",
+      "python": "3.12.14",
+      "platform": "linux",
+      "command": "python -I -O scripts/run_checks.py",
+      "cwd": "OUTSIDE_CHECKOUT",
+      "sdk_viewer": "INSTALLED_LOCAL_WHEELS",
+      "exit_code": 0,
+      "optimized": true,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 50,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "status": "PASS",
+      "receipt": "receipts/integrated-optimized.json",
+      "log": "receipts/integrated-optimized.log",
+      "same_unique_cases_as_normal": true
+    },
+    "counting": {
+      "unique_unittest_cases": 98,
+      "normal_plus_optimized_executions": 196,
+      "focal_p02_unittest_cases_included": 12,
+      "node_state_checks_nested_in_one_unittest": 22,
+      "browser_checks": 23,
+      "reruns_os_modes_not_added_as_unique_cases": true
+    },
+    "clean_install": {
+      "status": "PASS_SCOPED",
+      "environment": "isolated Linux engineering runtime; Python 3.12.14; SDK-only env and viewer env outside checkout; R4 absent",
+      "receipt": "receipts/clean-install-original.json",
+      "reused": true,
+      "attribution": "Run before publication; 22 declared source hashes and 9 viewer+10 SDK wheel members verified equal to CODE_SHA; separate byte-equivalence receipt",
+      "equivalence_receipt": "receipts/wheel-code-equivalence.json",
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "d60fdc8cf915e6c70a060f7a4eda07536fe02d78616ee9abf4ca08681b3b9fc8",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "f23ca538e46f30962b66b59b25f1c33047fb4004e34ecb227c4cc2a6caf5c09e"
+      }
+    },
+    "browser": {
+      "status": "PASS_SCOPED",
+      "executed_at": "2026-10-27T12:09:16.680343-03:00",
+      "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "checks": 23,
+      "screenshots": 6,
+      "chromium": "153.0.8010.0",
+      "playwright": "1.62.1",
+      "source_count": 2,
+      "run_count": 28,
+      "source_package_bytes_unchanged": true,
+      "external_requests": 0,
+      "page_errors": 0,
+      "consumer": {
+        "viewer_import_outside_checkout": true,
+        "sdk_import_outside_checkout": true,
+        "r4_installed": false,
+        "python_optimized": false
+      },
+      "receipt": "receipts/browser.json",
+      "receipt_sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+      "environment_receipt": "receipts/environment.json",
+      "font_provenance": "receipts/font-provenance.json",
+      "screenshots_directory": "screenshots/",
+      "env_01": "RESOLVED_SCOPED; same 23 checks rerun at same CODE_SHA after isolated font fix",
+      "native_zoom": "NOT_RUN",
+      "css_zoom_used": false,
+      "wcag_certification": false
+    },
+    "method": {
+      "reference": "Spec Kit 1.2.3",
+      "manual_stages": [
+        "constitution/read constraints",
+        "specify/clarify",
+        "plan",
+        "checklist/tasks",
+        "analyze",
+        "implement/execute",
+        "verify",
+        "scope convergence",
+        "independent review"
+      ],
+      "executed_helpers": [
+        "setup_plan.py --json",
+        "setup_tasks.py --json",
+        "check_prerequisites.py --json --require-spec --require-tasks --include-tasks"
+      ],
+      "no_persist": true,
+      "local_cli": "UNAVAILABLE",
+      "official_cli_in_ci": "1.2.3 version/integration successful on both OS at CODE_SHA",
+      "receipt": "receipts/method-architecture.json"
+    },
+    "architecture": {
+      "status": "PASS_SCOPED",
+      "receipt": "receipts/method-architecture.json"
+    },
+    "ownership": {
+      "status": "PASS_SCOPED",
+      "code_changed_paths": 27,
+      "outside_ownership_paths": 0,
+      "receipt": "receipts/ownership.json"
+    },
+    "ci": {
+      "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+      "product_run": 40526560195,
+      "product_conclusion": "failure",
+      "product_passed_jobs": "Ubuntu/Windows x optimize0/1; public reference comparison",
+      "product_failed_job": 122267640802,
+      "speckit_run": 40526560524,
+      "speckit_conclusion": "failure",
+      "speckit_failed_jobs": [
+        122267640808,
+        122267641255
+      ],
+      "receipt": "receipts/ci-code.json",
+      "local_pass_does_not_override_ci_failure": true
+    },
+    "documentation_integrity": {
+      "status": "PASS_SCOPED",
+      "receipt": "receipts/documentary-check.json"
+    }
+  },
+  "review": {
+    "agent": "/root/independent_review",
+    "authored_delta": false,
+    "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+    "code_verdict": "PASS_SCOPED",
+    "visual_verdict": "PASS_SCOPED_IN_TESTED_SCENARIOS",
+    "closed_findings": [
+      "F01",
+      "F02",
+      "F04",
+      "ENV-01"
+    ],
+    "open_code_findings": [],
+    "receipt": "receipts/independent-review.json",
+    "narrative": "REVIEW.md",
+    "independence_note": "Reviewer directly checked bytes/ownership/captures and examined run receipts; did not rerun the unit/browser suites."
+  },
+  "blockers": [
+    {
+      "id": "P06-GATE-01",
+      "owner": "P06",
+      "status": "OPEN",
+      "observed": "Both Spec Kit CI jobs reject catalog.py, server.py and static/index.html under historical preserved-baseline audit.",
+      "paths": [
+        "scripts/qa/speckit_audit.py",
+        "tests/qa/test_speckit_presentation_audit.py",
+        ".github/workflows/atlas003-speckit.yml"
+      ],
+      "minimum_action": "Add strict scoped P02 allowance preserving protected files and negative tests; validate aggregated 004 only after P06 owns its aggregators/pointer."
+    },
+    {
+      "id": "P06-GATE-02",
+      "owner": "P06",
+      "status": "OPEN",
+      "observed": "Legacy browser fails metric property-cell exact text: name plus ID versus name only. Further positional/th/precision assumptions identified by inspection.",
+      "paths": [
+        "scripts/qa/browser.mjs"
+      ],
+      "minimum_action": "Select by source+run identity; assert property name/ID separately; handle th scope=row and per-cell precision; rerun normal/adversarial/related-reference scenarios."
+    },
+    {
+      "id": "P06-GATE-03",
+      "owner": "P06",
+      "status": "OPEN",
+      "observed": "New P02 browser script not connected to current CI. Existing .ci-clean is inside checkout, incompatible with explicit outside-checkout assertion.",
+      "paths": [
+        ".github/workflows/atlas021.yml"
+      ],
+      "minimum_action": "Create installed consumer under RUNNER_TEMP, invoke P02 wrapper with actual candidate SHA, upload JSON and six PNGs; retain font/zoom limitations."
+    }
+  ],
+  "limits": [
+    "A/B/C/D full inputs unavailable; C hashes supplied but not verified without bytes",
+    "No frozen P03 handoff received or integrated",
+    "Links intentionally scoped to session/snapshot and expire after restart",
+    "Native browser zoom NOT_RUN; no WCAG certification",
+    "Read-only synthetic engineering proof only; no user-host/private-corpus operation",
+    "Direction ADR-0002 accepted by PR5 does not approve release/science/canonical promotion"
+  ],
+  "next_minimum_action": {
+    "owner": "P06",
+    "instruction": "Consume frozen P02 object; implement strict audit/harness/CI adaptations in P06-owned paths; test the resulting candidate and issue new SHA-bound receipts. Compose P03 only after receiving frozen compatible objects.",
+    "technical_handoff": "P06-INTEGRATION.md"
+  },
+  "artifacts": {
+    "result": "RESULT.md",
+    "acceptance_map": "ACCEPTANCE-MAP.md",
+    "reproduction": "REPRODUCE.md",
+    "review": "REVIEW.md",
+    "handoff": "HANDOFF.json",
+    "manifest": "MANIFEST.sha256",
+    "manifest_excludes_itself": true,
+    "manifest_paths_relative_to_repository_root": true
+  },
+  "publication_policy": {
+    "sanitized_public_synthetic_only": true,
+    "no_raw_user_prompt_or_private_paths": true,
+    "no_polling": true,
+    "preflight_done": true,
+    "additional_reads_only_after_own_material_events": true,
+    "final_remote_read": "After documentation publication; report exact head/main/CI snapshot externally, no repeated wait loop."
+  }
+}

@@ -6,6 +6,7 @@
   <meta name="color-scheme" content="light">
   <title>Atlas — registros científicos</title>
   <link rel="stylesheet" href="/style.css">
+  <script src="/parity02_p02_state.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
@@ -29,7 +30,7 @@
     </aside>
     <main id="main" tabindex="-1">
       <section class="page-heading">
-        <div><p class="eyebrow">DO REGISTRO À EVIDÊNCIA</p><h1>Uma visão conectada<br>da sua pesquisa.</h1><p class="lead">Explore execuções, compare resultados e acompanhe a origem de cada evidência.</p></div>
+        <div><p class="eyebrow">DO REGISTRO À EVIDÊNCIA</p><h1>Explore sua coorte.<br>Preserve o contexto.</h1><p class="lead">Encontre execuções, compare resultados e confira o que cada pacote realmente declara.</p></div>
         <button id="refresh" class="button secondary" data-testid="reindex">↻ Reconstruir índice</button>
       </section>
       <div id="notice" class="notice" role="status" aria-live="polite">Abrindo fontes declaradas…</div>
@@ -41,25 +42,35 @@
         <div><span>Fontes válidas</span><strong id="sources-count">0</strong><small>conformidade do perfil candidato</small></div>
       </section>
 
+      <section class="scope-panel" aria-label="Escopo do conjunto aberto">
+        <h2>O que está carregado</h2>
+        <p id="scope-summary" role="status" aria-live="polite"></p>
+        <details><summary>Snapshot e alcance dos links</summary><p>Endereços preservam a consulta nesta sessão e snapshot. Reiniciar o servidor ou atualizar o conteúdo expira referências antigas; a tela avisa antes de resolver outra entidade.</p><p>Snapshot da consulta: <code id="snapshot-id"></code></p><p>O pacote pode conter somente um recorte da fonte original. População da fonte, elegíveis, selecionados e convertidos pelo produtor: <strong>não informado</strong> quando não há declaração contratual.</p></details>
+      </section>
       <section id="view-explore" class="view">
         <div class="section-heading"><div><p class="eyebrow">ACERVO</p><h2>Execuções</h2></div><span id="result-count" class="muted"></span></div>
         <form class="filters" id="filters" aria-label="Filtrar execuções">
-          <label class="search-label">Buscar registros<input id="search" data-testid="search" type="search" placeholder="Nome, identificador ou descrição…" autocomplete="off"></label>
+          <label class="search-label">Buscar registros<input id="search" data-testid="search" type="search" placeholder="Título, ID, fonte ou descrição…" maxlength="1024" autocomplete="off"></label>
           <label>Projeto<select id="project-filter" data-testid="project-filter"><option value="">Todos os projetos</option></select></label>
           <label>Experimento<select id="experiment-filter" data-testid="experiment-filter"><option value="">Todos os experimentos</option></select></label>
-          <label>Execução<select id="status-filter" data-testid="status-filter"><option value="">Todos os estados</option><option>COMPLETED</option><option>PARTIAL</option><option>FAILED</option><option>UNKNOWN</option><option>RUNNING</option><option>PLANNED</option><option>CANCELLED</option></select></label>
+          <label>Execução<select id="status-filter" data-testid="status-filter"><option value="">Todos os estados</option><option>COMPLETED</option><option>PARTIAL</option><option>FAILED</option><option>UNKNOWN</option><option>RUNNING</option></select></label>
+          <label>Fonte / pacote<select id="source-filter" data-testid="source-filter"><option value="">Todas as fontes</option></select></label>
+          <label>Revisão científica<select id="review-filter" data-testid="review-filter"><option value="">Todas as revisões</option></select></label>
+          <label>Métricas<select id="metrics-filter" data-testid="metrics-filter"><option value="any">Com ou sem métricas</option><option value="yes">Com métricas</option><option value="no">Sem métricas</option></select></label>
+          <label>Referências relacionadas<select id="references-filter" data-testid="references-filter"><option value="any">Com ou sem referências</option><option value="yes">Com referências</option><option value="no">Sem referências</option></select></label>
+          <label>Ordenar por<select id="sort-order" data-testid="sort-order"><option value="title">Título</option><option value="id">Identificador</option><option value="source">Fonte</option><option value="status">Estado</option><option value="review">Revisão</option><option value="time-asc">Início crescente</option><option value="time-desc">Início decrescente</option></select></label>
           <button type="button" id="clear-filters" class="text-button">Limpar</button>
         </form>
-        <div class="table-wrap"><table data-testid="run-table"><caption class="sr-only">Execuções das fontes válidas. Selecione até quatro para comparar.</caption><thead><tr><th scope="col">Comparar</th><th scope="col">Execução / experimento</th><th scope="col">Estado</th><th scope="col">Revisão científica</th><th scope="col">Métricas registradas</th></tr></thead><tbody id="run-rows"></tbody></table></div>
-        <div id="empty" class="empty" hidden><span aria-hidden="true">◫</span><h3>Nenhuma execução nesta seleção</h3><p>Abra uma fonte pelo comando Atlas ou ajuste os filtros para encontrar seus registros.</p></div>
-        <div class="table-footer"><span id="selected-count">Nenhuma execução selecionada</span><button id="compare-selected" class="button primary" data-testid="compare-selected">Comparar seleção →</button></div>
+        <div class="table-wrap" role="region" aria-label="Execuções filtradas, tabela com rolagem própria" tabindex="0"><table data-testid="run-table"><caption class="sr-only">Execuções das fontes válidas. Selecione até quatro para comparar.</caption><thead><tr><th scope="col">Comparar</th><th scope="col">Execução / experimento</th><th scope="col">Fonte / pacote</th><th scope="col">Estado</th><th scope="col">Revisão científica</th><th scope="col">Métricas registradas</th></tr></thead><tbody id="run-rows"></tbody></table></div>
+        <div id="empty" class="empty" hidden><span aria-hidden="true">◫</span><h3>Nenhuma execução nesta seleção</h3><p id="empty-reason">Abra uma fonte pelo comando Atlas ou ajuste os filtros para encontrar seus registros.</p></div>
+        <div class="table-footer"><div><span id="selected-count" role="status" aria-live="polite">Nenhuma execução selecionada</span><p id="selection-summary" class="muted"></p><button id="clear-selection" type="button" class="text-button">Limpar seleção</button></div><button id="compare-selected" class="button primary" data-testid="compare-selected">Comparar seleção →</button></div>
       </section>
 
       <section id="detail" class="detail panel" data-testid="detail" hidden tabindex="-1" aria-label="Detalhe da execução"><div class="section-heading"><h2>Detalhe da execução</h2><button id="close-detail" class="text-button">Fechar detalhe</button></div><div id="detail-content"></div></section>
 
       <section id="view-compare" class="view" hidden><div class="section-heading"><div><p class="eyebrow">LEITURA LADO A LADO</p><h2>Comparar execuções</h2></div></div><p class="muted">Métricas são agrupadas por identidade, tipo e unidade. Valores ausentes permanecem ausentes.</p><div id="compare-content" data-testid="compare"></div></section>
-      <section id="view-timeline" class="view" hidden><div class="section-heading"><div><p class="eyebrow">SEQUÊNCIA DECLARADA</p><h2>Linha do tempo</h2></div></div><p class="muted">Datas são apresentadas com sua origem declarada. Ausência de data não é preenchida por inferência.</p><ol id="timeline-content" class="timeline" data-testid="timeline"></ol></section>
-      <section id="view-lineage" class="view" hidden><div class="section-heading"><div><p class="eyebrow">RASTREABILIDADE</p><h2>Linhagem das evidências</h2></div></div><p class="muted">Entradas, saídas e derivações registradas. Cada relação mantém o vínculo com sua fonte.</p><div id="lineage-content" data-testid="lineage"></div></section>
+      <section id="view-timeline" class="view" hidden><div class="section-heading"><div><p class="eyebrow">SEQUÊNCIA DECLARADA</p><h2>Linha do tempo</h2></div></div><p class="muted">Execuções dos filtros atuais, incluindo aquelas sem data. Datas de observação mantêm sua origem e não são promovidas a datas do evento.</p><ol id="timeline-content" class="timeline" data-testid="timeline"></ol></section>
+      <section id="view-lineage" class="view" hidden><div class="section-heading"><div><p class="eyebrow">RASTREABILIDADE</p><h2>Linhagem das evidências</h2></div></div><p class="muted">Entradas, saídas e derivações de todos os registros carregados. A direção é a declarada; relações não demonstram causalidade. Execuções isoladas continuam disponíveis abaixo.</p><div id="lineage-content" data-testid="lineage"></div></section>
       <section id="view-sources" class="view" hidden><div class="section-heading"><div><p class="eyebrow">TRANSPARÊNCIA</p><h2>Fontes e validade</h2></div></div><p class="muted">Conformidade, integridade, origem e aprovação científica são verificações diferentes.</p><div id="sources-content" class="source-grid" data-testid="sources"></div></section>
       <section id="view-dossier" class="view" hidden><div class="section-heading"><div><p class="eyebrow">APRESENTAÇÃO DERIVADA</p><h2>Dossiê de consulta</h2></div></div><div class="panel"><h3>Compartilhe o contexto dos resultados</h3><p>O dossiê inclui os registros das fontes válidas, referências, estados, validação e limitações. Fontes inválidas aparecem com seus erros.</p><p><strong>Este documento é derivado e não constitui autenticação nem aceite científico.</strong></p><p id="dossier-summary" data-testid="dossier"></p><button id="download-dossier" class="button primary" data-testid="download-dossier">Exportar dossiê JSON ↓</button><button id="print-view" class="button secondary">Imprimir esta visão</button><ul id="limitations"></ul></div></section>
       <footer class="footer"><span>Atlas · explorar, comparar, compreender.</span><span id="indexed-at"></span></footer>

@@ -1,0 +1,40 @@
+{
+  "kind": "P02_METHOD_AND_ARCHITECTURE_EXECUTION",
+  "executed_at": "2026-10-27T15:06:05.188700+00:00",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "environment": "isolated engineering runtime; Linux; Python 3.12.14",
+  "feature_selection_environment": {
+    "SPECIFY_FEATURE_NO_PERSIST": "1",
+    "SPECIFY_FEATURE_DIRECTORY": "specs/004-atlas-parity-c0/workstreams/p02-c0"
+  },
+  "dispatch": "versioned helpers executed; other Spec Kit stages applied manually",
+  "commands": [
+    {
+      "command": "python .specify/scripts/python/setup_plan.py --json",
+      "exit_code": 0,
+      "output": "{\"FEATURE_SPEC\":\"<REPOSITORY_ROOT>/specs/004-atlas-parity-c0/workstreams/p02-c0/spec.md\",\"IMPL_PLAN\":\"<REPOSITORY_ROOT>/specs/004-atlas-parity-c0/workstreams/p02-c0/plan.md\",\"FEATURE_DIR\":\"<REPOSITORY_ROOT>/specs/004-atlas-parity-c0/workstreams/p02-c0\",\"BRANCH\":\"p02-c0\"}\nPlan already exists at <REPOSITORY_ROOT>/specs/004-atlas-parity-c0/workstreams/p02-c0/plan.md, skipping template copy\n"
+    },
+    {
+      "command": "python .specify/scripts/python/setup_tasks.py --json",
+      "exit_code": 0,
+      "output": "{\n  \"FEATURE_DIR\": \"<REPOSITORY_ROOT>/specs/004-atlas-parity-c0/workstreams/p02-c0\",\n  \"AVAILABLE_DOCS\": [\n    \"research.md\",\n    \"data-model.md\",\n    \"contracts/\",\n    \"quickstart.md\"\n  ],\n  \"TASKS_TEMPLATE\": \"<REPOSITORY_ROOT>/.specify/templates/tasks-template.md\",\n  \"TASKS_TEMPLATE_CONTENT_SHA256\": \"b0f527d41e546af0c31903e04f9b20965b6b497b573792198f663a64ce128863\"\n}"
+    },
+    {
+      "command": "python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks",
+      "exit_code": 0,
+      "output": "{\"FEATURE_DIR\":\"<REPOSITORY_ROOT>/specs/004-atlas-parity-c0/workstreams/p02-c0\",\"AVAILABLE_DOCS\":[\"research.md\",\"data-model.md\",\"contracts/\",\"quickstart.md\",\"tasks.md\"]}\n"
+    },
+    {
+      "command": "python scripts/qa/architecture_audit.py . --protocol packages/protocol/src/caderno_protocol --viewer packages/atlas/src/atlas_viewer --viewer-module atlas_viewer",
+      "exit_code": 0,
+      "output": "{\n  \"status\": \"PASS_SCOPED\",\n  \"findings\": []\n}\n"
+    },
+    {
+      "command": "python scripts/qa/speckit_audit.py --allow-presentation-delta",
+      "exit_code": 1,
+      "output": "{\n  \"status\": \"FAIL\",\n  \"baseline\": \"a6e57c9c6748b4a0d50b554613c93e2b8a785554\",\n  \"preserved_original_files\": 96,\n  \"authorized_presentation_changes\": [\n    \".github/workflows/atlas021.yml\",\n    \"packages/atlas/src/atlas_viewer/static/app.js\",\n    \"packages/atlas/src/atlas_viewer/static/style.css\",\n    \"packages/protocol/src/caderno_protocol/read_model.py\",\n    \"scripts/ci/run_browser.py\",\n    \"scripts/qa/browser.mjs\"\n  ],\n  \"presentation_delta_enabled\": true,\n  \"managed_files\": 28,\n  \"official_skills\": 10,\n  \"python_scripts\": 6,\n  \"errors\": [\n    \"Preserved baseline changed: packages/atlas/src/atlas_viewer/catalog.py\",\n    \"Preserved baseline changed: packages/atlas/src/atlas_viewer/server.py\",\n    \"Preserved baseline changed: packages/atlas/src/atlas_viewer/static/index.html\"\n  ],\n  \"scope\": \"repository integrity and generated assets; no operational or scientific approval\"\n}\n"
+    }
+  ],
+  "active_pointer_exists": false,
+  "cli_local": "NOT_AVAILABLE; official 1.2.3 CLI executed in GitHub CI on same CODE_SHA"
+}

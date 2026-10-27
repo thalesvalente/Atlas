@@ -1,0 +1,25 @@
+{
+  "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "base_tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+  "qa_sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+  "qa_tree": "1014bda4d0d2006f2216e103a0b5110fd48e26fe",
+  "truncated": false,
+  "unchanged_baseline_blobs": 162,
+  "changed_or_missing_baseline_blobs": [],
+  "added": [
+    ".github/workflows/atlas-parity02.yml",
+    "docs/missions/atlas-parity-02/p06-qa/ARCHITECTURE-REVIEW.md",
+    "scripts/qa/atlas_parity02_p06_audit.py",
+    "scripts/qa/atlas_parity02_p06_browser.mjs",
+    "scripts/qa/atlas_parity02_p06_browser.py",
+    "scripts/qa/atlas_parity02_p06_wheel.py",
+    "specs/004-atlas-parity-c0/analysis.md",
+    "specs/004-atlas-parity-c0/checklists/requirements.md",
+    "specs/004-atlas-parity-c0/plan.md",
+    "specs/004-atlas-parity-c0/spec.md",
+    "specs/004-atlas-parity-c0/tasks.md",
+    "specs/004-atlas-parity-c0/workstreams/p06-qa/plan.md",
+    "tests/qa/test_atlas_parity02_p06_invariance.py",
+    "tests/qa/test_atlas_parity02_p06_semantics.py"
+  ]
+}

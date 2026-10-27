@@ -1,0 +1,104 @@
+{
+  "mission": "ATLAS-PARITY-02-P06",
+  "tag": "orq.audit@agentic-pac:",
+  "repository": "thalesvalente/Atlas",
+  "recorded_at": "2026-10-27T11:45:07-03:00",
+  "timezone": "America/Fortaleza",
+  "base": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+    "main_successor_at_final_input_lookup": null
+  },
+  "received_prompt": {
+    "kind": "user-provided attachment",
+    "bytes": 12535,
+    "sha256": "4f6e03536e8d93a91507b75406dcf3fdf427c15575372efcb9a905df22c0290f"
+  },
+  "selected_inputs": [
+    {
+      "owner": "P06",
+      "branch": "work/atlas-parity02-p06-qa-20261027",
+      "sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+      "tree": "1014bda4d0d2006f2216e103a0b5110fd48e26fe",
+      "parents": [
+        "f200674ec8d02c99455b138f5b5df47145958cc1"
+      ],
+      "authorship": {
+        "coordination_harness_workflow_spec": "/root",
+        "semantic_tests": "/root/security_tests",
+        "architecture_report": "/root/compatibility"
+      },
+      "paths": [
+        ".github/workflows/atlas-parity02.yml",
+        "docs/missions/atlas-parity-02/p06-qa/ARCHITECTURE-REVIEW.md",
+        "scripts/qa/atlas_parity02_p06_audit.py",
+        "scripts/qa/atlas_parity02_p06_browser.mjs",
+        "scripts/qa/atlas_parity02_p06_browser.py",
+        "scripts/qa/atlas_parity02_p06_wheel.py",
+        "specs/004-atlas-parity-c0/analysis.md",
+        "specs/004-atlas-parity-c0/checklists/requirements.md",
+        "specs/004-atlas-parity-c0/plan.md",
+        "specs/004-atlas-parity-c0/spec.md",
+        "specs/004-atlas-parity-c0/tasks.md",
+        "specs/004-atlas-parity-c0/workstreams/p06-qa/plan.md",
+        "tests/qa/test_atlas_parity02_p06_invariance.py",
+        "tests/qa/test_atlas_parity02_p06_semantics.py"
+      ],
+      "reviewer": "/root/independent_review",
+      "static_review": "PASS_SCOPED",
+      "tests": {
+        "product_run": 40523433511,
+        "qa_run": 40523433530,
+        "jobs_success": 13,
+        "unique_unittest_per_cell": 98,
+        "browser_replacement_checks": 10
+      },
+      "documentation": "Post-code documentation child recorded by exact SHA in PR #6 description; no self-SHA is embedded in its own defining commit"
+    }
+  ],
+  "composition": {
+    "performed": false,
+    "branch": null,
+    "selected_minimum": "P02 + P06 under the existing Caderno contract",
+    "missing_required": [
+      {
+        "owner": "P02",
+        "required": "Concrete frozen commit/tree, changed paths, tests and sanitized handoff",
+        "sha": null
+      }
+    ],
+    "optional_missing": [
+      "P01",
+      "P03"
+    ],
+    "reason": "No new P02 object received; optional P01/P03 do not block C0 by themselves"
+  },
+  "external_receipts": {
+    "P04": "INPUT_MISSING",
+    "P05": "INPUT_MISSING",
+    "historical_LOCAL_REAL01": "Attributed to PR #5; not current execution or new P04/P05 receipt"
+  },
+  "studies": {
+    "A": "INPUT_MISSING",
+    "B": "INPUT_MISSING",
+    "D": "INPUT_MISSING",
+    "C": {
+      "state": "INPUT_MISSING_FULL_STUDY_AND_HANDOFF",
+      "available": "Prompt summary only: C0 without protocol changes, 12 journeys, presentation contracts",
+      "hashes_supplied_not_verified": {
+        "study_sha256": "f8d274ffe5ac043005b2c27779286638a86c7c2aff3e30ee64a4497b434b110b",
+        "handoff_sha256": "e8c7b1b3a8eb0a276d94e98f94b9d1477e555d305ebee62d99ec48ee93f5650e"
+      }
+    }
+  },
+  "final_input_lookup": {
+    "at": "2026-10-27T11:45:07-03:00",
+    "main_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "branches_count": 6,
+    "open_prs": [
+      6
+    ],
+    "new_P01_P02_P03_refs": [],
+    "note": "Subsequent own QA commits do not represent another front's handoff"
+  }
+}

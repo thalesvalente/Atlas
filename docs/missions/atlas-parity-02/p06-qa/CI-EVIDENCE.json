@@ -1,0 +1,749 @@
+{
+  "mission": "ATLAS-PARITY-02-P06",
+  "recorded_at": "2026-10-27T11:45:07-03:00",
+  "tested_code_sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+  "tested_tree": "1014bda4d0d2006f2216e103a0b5110fd48e26fe",
+  "environment": "GitHub-hosted Actions engineering runners; Python3.12; Ubuntu/Windows; no user host operational tests",
+  "runs": [
+    {
+      "run_id": 40523433511,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40523433511",
+      "jobs": [
+        {
+          "id": 122256410021,
+          "name": "Installed viewer / Chromium desktop and mobile",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256410030,
+          "name": "windows-latest / Python optimize=0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256410074,
+          "name": "Public standards comparison and RO-Crate 1.3 reference",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256410177,
+          "name": "windows-latest / Python optimize=1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256410218,
+          "name": "ubuntu-latest / Python optimize=1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256410228,
+          "name": "ubuntu-latest / Python optimize=0",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "run_id": 40523433530,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40523433530",
+      "jobs": [
+        {
+          "id": 122256409542,
+          "name": "Spec Kit 004 / windows-latest",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256409743,
+          "name": "P06 / ubuntu-latest / optimize=1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256409802,
+          "name": "P06 / windows-latest / optimize=0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256409872,
+          "name": "P06 / windows-latest / optimize=1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256409906,
+          "name": "P06 / ubuntu-latest / optimize=0",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256410008,
+          "name": "Spec Kit 004 / ubuntu-latest",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122256410225,
+          "name": "P06 / installed Chromium / valid package replacement",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "runner_suites": [
+    {
+      "job_id": 122256410030,
+      "optimized": false,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 62,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "job_id": 122256410177,
+      "optimized": true,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 62,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "job_id": 122256410218,
+      "optimized": true,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 62,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "job_id": 122256410228,
+      "optimized": false,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 62,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "test_count_policy": {
+    "unique_unittest_per_cell": 98,
+    "SDK": 12,
+    "QA": 62,
+    "viewer": 24,
+    "new_P06_included": 12,
+    "zero_skips": true,
+    "do_not_add": "OS/modes, focal collection, reruns and browser checks overlap"
+  },
+  "invariance": {
+    "protected_files": 64,
+    "all_baseline_blobs_unchanged": 162,
+    "counterexamples": "byte change, deletion, protected addition; product/governance untouched"
+  },
+  "installed_wheel_probe": [
+    {
+      "status": "PASS_SCOPED",
+      "scope": "installed-wheels-isolation-cli-rebuild-immutability",
+      "python": "3.12.15",
+      "optimization": 1,
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "run_count": 4,
+      "source_bytes_unchanged": true,
+      "reindex": {
+        "rebuild_same_records": true,
+        "generation_advanced": true
+      },
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "0309b2309ce3dcdee7ac68fba76d401504c5c8ff6248bcc4e19df8e5fa31e203",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "5349237dd4eb4252fc1b21558fe4cf9dde272c822cc240f047a1731335f50e94"
+      },
+      "browser": "NOT_RUN_BY_THIS_SCRIPT",
+      "windows": "NOT_RUN",
+      "human_protocol_acceptance": "PENDING",
+      "canonical_promotion": "NOT_AUTHORIZED"
+    },
+    {
+      "status": "PASS_SCOPED",
+      "assets": [
+        {
+          "route": "/",
+          "status": 200,
+          "sha256": "28b58b748539df8158b83eb50a943d7be3af32f93d55e1fd9d1b403f8cb1bef1"
+        },
+        {
+          "route": "/app.js",
+          "status": 200,
+          "sha256": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb"
+        },
+        {
+          "route": "/style.css",
+          "status": 200,
+          "sha256": "b25e6b06629a2ce5d848c6fa742458d25b8caf520162f45770e52fc178bc97fb"
+        }
+      ],
+      "wheel_sha256": "0309b2309ce3dcdee7ac68fba76d401504c5c8ff6248bcc4e19df8e5fa31e203",
+      "isolated_installed_viewer": true,
+      "r4_absent": true,
+      "scope": "wheel bytes, fixed HTTP assets, CSP/origin; no browser claim",
+      "tested_sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+      "optimization": 1,
+      "platform": "linux"
+    }
+  ],
+  "browser_scenarios": [
+    {
+      "scope": "installed-live-ui",
+      "status": "PASS_SCOPED",
+      "checks": [
+        {
+          "name": "catalog_records_match_parsed_source",
+          "status": "PASS"
+        },
+        {
+          "name": "record_labels_render_as_text",
+          "status": "PASS"
+        },
+        {
+          "name": "search_and_clear",
+          "status": "PASS"
+        },
+        {
+          "name": "project_experiment_status_filters",
+          "status": "PASS"
+        },
+        {
+          "name": "run_detail_metrics_states_and_synthetic_identity",
+          "status": "PASS"
+        },
+        {
+          "name": "all_source_details_preserve_values_absence_and_availability",
+          "status": "PASS"
+        },
+        {
+          "name": "related_references_match_source_graph_and_keep_empty_state",
+          "status": "PASS"
+        },
+        {
+          "name": "comparison_preserves_states_and_units",
+          "status": "PASS"
+        },
+        {
+          "name": "compatible_metric_pairs_values_and_units_match_per_source",
+          "status": "PASS"
+        },
+        {
+          "name": "timeline_preserves_declared_and_missing_times",
+          "status": "PASS"
+        },
+        {
+          "name": "lineage_navigation_uses_declared_relations",
+          "status": "PASS"
+        },
+        {
+          "name": "source_validity_is_distinct_from_authenticity",
+          "status": "PASS"
+        },
+        {
+          "name": "dossier_download_contains_real_records_and_limits",
+          "status": "PASS"
+        },
+        {
+          "name": "http_host_origin_and_fixed_source_allowlist",
+          "status": "PASS"
+        },
+        {
+          "name": "explicit_reindex_preserves_source_records",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard_skip_link_filters_and_visible_focus",
+          "status": "PASS"
+        },
+        {
+          "name": "visible_controls_have_names",
+          "status": "PASS"
+        },
+        {
+          "name": "mobile_390px_detail_and_navigation",
+          "status": "PASS"
+        },
+        {
+          "name": "no_page_errors_or_external_requests",
+          "status": "PASS"
+        }
+      ],
+      "browser_version": "151.0.7922.34",
+      "external_requests": [],
+      "page_errors": [],
+      "semantic_coverage": {
+        "detail_runs": 4,
+        "missing_values": 2,
+        "artifacts": 7,
+        "relations": 12,
+        "related_references": 0,
+        "empty_related_references": 4,
+        "compatible_comparisons": 1,
+        "compatible_comparisons_by_source": {
+          "source-1": 1
+        }
+      }
+    },
+    {
+      "scope": "installed-live-ui",
+      "status": "PASS_SCOPED",
+      "checks": [
+        {
+          "name": "catalog_records_match_parsed_source",
+          "status": "PASS"
+        },
+        {
+          "name": "record_labels_render_as_text",
+          "status": "PASS"
+        },
+        {
+          "name": "search_and_clear",
+          "status": "PASS"
+        },
+        {
+          "name": "project_experiment_status_filters",
+          "status": "PASS"
+        },
+        {
+          "name": "detail_preserves_large_integer_text",
+          "status": "PASS"
+        },
+        {
+          "name": "run_detail_metrics_states_and_synthetic_identity",
+          "status": "PASS"
+        },
+        {
+          "name": "all_source_details_preserve_values_absence_and_availability",
+          "status": "PASS"
+        },
+        {
+          "name": "related_references_match_source_graph_and_keep_empty_state",
+          "status": "PASS"
+        },
+        {
+          "name": "comparison_preserves_repeated_metric_identity_values",
+          "status": "PASS"
+        },
+        {
+          "name": "comparison_explains_incompatible_units_or_types",
+          "status": "PASS"
+        },
+        {
+          "name": "comparison_preserves_large_integer_text",
+          "status": "PASS"
+        },
+        {
+          "name": "comparison_preserves_states_and_units",
+          "status": "PASS"
+        },
+        {
+          "name": "timeline_preserves_declared_and_missing_times",
+          "status": "PASS"
+        },
+        {
+          "name": "lineage_navigation_uses_declared_relations",
+          "status": "PASS"
+        },
+        {
+          "name": "source_validity_is_distinct_from_authenticity",
+          "status": "PASS"
+        },
+        {
+          "name": "dossier_preserves_large_integer_raw_json",
+          "status": "PASS"
+        },
+        {
+          "name": "dossier_download_contains_real_records_and_limits",
+          "status": "PASS"
+        },
+        {
+          "name": "http_host_origin_and_fixed_source_allowlist",
+          "status": "PASS"
+        },
+        {
+          "name": "explicit_reindex_preserves_source_records",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard_skip_link_filters_and_visible_focus",
+          "status": "PASS"
+        },
+        {
+          "name": "visible_controls_have_names",
+          "status": "PASS"
+        },
+        {
+          "name": "mobile_390px_detail_and_navigation",
+          "status": "PASS"
+        },
+        {
+          "name": "no_page_errors_or_external_requests",
+          "status": "PASS"
+        }
+      ],
+      "browser_version": "151.0.7922.34",
+      "external_requests": [],
+      "page_errors": [],
+      "semantic_coverage": {
+        "detail_runs": 4,
+        "missing_values": 2,
+        "artifacts": 7,
+        "relations": 14,
+        "related_references": 0,
+        "empty_related_references": 4,
+        "compatible_comparisons": 0,
+        "compatible_comparisons_by_source": {
+          "source-1": 0
+        }
+      }
+    },
+    {
+      "scope": "installed-live-ui",
+      "status": "PASS_SCOPED",
+      "checks": [
+        {
+          "name": "catalog_records_match_parsed_source",
+          "status": "PASS"
+        },
+        {
+          "name": "record_labels_render_as_text",
+          "status": "PASS"
+        },
+        {
+          "name": "search_and_clear",
+          "status": "PASS"
+        },
+        {
+          "name": "project_experiment_status_filters",
+          "status": "PASS"
+        },
+        {
+          "name": "run_detail_metrics_states_and_synthetic_identity",
+          "status": "PASS"
+        },
+        {
+          "name": "all_source_details_preserve_values_absence_and_availability",
+          "status": "PASS"
+        },
+        {
+          "name": "related_references_match_source_graph_and_keep_empty_state",
+          "status": "PASS"
+        },
+        {
+          "name": "related_reference_keyboard_navigation_is_source_scoped_with_visible_focus",
+          "status": "PASS"
+        },
+        {
+          "name": "related_references_do_not_open_external_uris_or_download_content",
+          "status": "PASS"
+        },
+        {
+          "name": "comparison_preserves_states_and_units",
+          "status": "PASS"
+        },
+        {
+          "name": "compatible_metric_pairs_values_and_units_match_per_source",
+          "status": "PASS"
+        },
+        {
+          "name": "timeline_preserves_declared_and_missing_times",
+          "status": "PASS"
+        },
+        {
+          "name": "lineage_navigation_uses_declared_relations",
+          "status": "PASS"
+        },
+        {
+          "name": "source_validity_is_distinct_from_authenticity",
+          "status": "PASS"
+        },
+        {
+          "name": "dossier_download_contains_real_records_and_limits",
+          "status": "PASS"
+        },
+        {
+          "name": "http_host_origin_and_fixed_source_allowlist",
+          "status": "PASS"
+        },
+        {
+          "name": "explicit_reindex_preserves_source_records",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard_skip_link_filters_and_visible_focus",
+          "status": "PASS"
+        },
+        {
+          "name": "visible_controls_have_names",
+          "status": "PASS"
+        },
+        {
+          "name": "mobile_390px_detail_and_navigation",
+          "status": "PASS"
+        },
+        {
+          "name": "related_references_css_zoom_200_percent_reflow_and_keyboard",
+          "status": "PASS"
+        },
+        {
+          "name": "no_page_errors_or_external_requests",
+          "status": "PASS"
+        }
+      ],
+      "browser_version": "151.0.7922.34",
+      "external_requests": [],
+      "page_errors": [],
+      "semantic_coverage": {
+        "detail_runs": 8,
+        "missing_values": 4,
+        "artifacts": 14,
+        "relations": 24,
+        "related_references": 22,
+        "empty_related_references": 4,
+        "compatible_comparisons": 2,
+        "compatible_comparisons_by_source": {
+          "source-1": 1,
+          "source-2": 1
+        }
+      },
+      "zoom": {
+        "factor": 2,
+        "method": "document.documentElement.style.zoom",
+        "scope": "CSS rendering zoom; not native browser toolbar zoom or full WCAG conformance",
+        "geometry": {
+          "viewport_width": 1440,
+          "document": {
+            "left": 0,
+            "right": 1440,
+            "width": 1440,
+            "client_width": 1440,
+            "scroll_width": 1440
+          },
+          "related_section": {
+            "left": 596,
+            "right": 1308,
+            "width": 712,
+            "client_width": 356,
+            "scroll_width": 356
+          },
+          "overflowing_elements": []
+        }
+      }
+    }
+  ],
+  "browser_replacement": {
+    "status": "PASS_SCOPED",
+    "scope": "synthetic valid-package replacement on installed viewer",
+    "checks": [
+      {
+        "name": "fixture_has_repeated_ids_and_distinct_source_labels",
+        "status": "PASS"
+      },
+      {
+        "name": "old_detail_opened_from_source_A",
+        "status": "PASS"
+      },
+      {
+        "name": "valid_replacement_is_marked_changed_without_silent_cache_substitution",
+        "status": "PASS"
+      },
+      {
+        "name": "obsolete_detail_is_closed_instead_of_resolving_same_id_in_source_B",
+        "status": "PASS"
+      },
+      {
+        "name": "only_unaffected_source_selection_survives_reindex",
+        "status": "PASS"
+      },
+      {
+        "name": "replacement_has_new_ids_and_other_source_keeps_original_ids",
+        "status": "PASS"
+      },
+      {
+        "name": "source_B_related_link_receives_keyboard_focus",
+        "status": "PASS"
+      },
+      {
+        "name": "keyboard_reference_remains_scoped_after_other_package_is_replaced",
+        "status": "PASS"
+      },
+      {
+        "name": "replacement_navigation_reflows_at_390_pixels",
+        "status": "PASS"
+      },
+      {
+        "name": "no_page_error_or_external_request",
+        "status": "PASS"
+      }
+    ],
+    "external_requests": [],
+    "page_errors": [],
+    "browser_version": "151.0.7922.34",
+    "tested_sha": "d21d8a490b89995ae5707a7a53b469685416a383",
+    "source_mutation": "SYNTHETIC_FIXTURE_DRIVER_METADATA_ONLY",
+    "source_bytes_equal_to_driver_expected": true,
+    "installed_wheels": {
+      "atlas_viewer-0.1.0a1-py3-none-any.whl": "0309b2309ce3dcdee7ac68fba76d401504c5c8ff6248bcc4e19df8e5fa31e203",
+      "caderno_protocol-0.1.0a1-py3-none-any.whl": "5349237dd4eb4252fc1b21558fe4cf9dde272c822cc240f047a1731335f50e94"
+    },
+    "host_browser": "NOT_RUN",
+    "full_parity_denominator": "UNKNOWN"
+  },
+  "artifacts": [
+    {
+      "run_id": 40523433511,
+      "id": 12742383863,
+      "scope": "three existing synthetic browser scenarios",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40523433511/artifacts/12742383863"
+    },
+    {
+      "run_id": 40523433530,
+      "id": 12741904490,
+      "scope": "new synthetic package-replacement report and screenshot",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40523433530/artifacts/12741904490"
+    },
+    {
+      "run_id": 40523433530,
+      "id": 12741784708,
+      "scope": "Ubuntu optimized installed wheels/invariance receipts",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40523433530/artifacts/12741784708"
+    }
+  ],
+  "speckit": {
+    "official_cli": "1.2.3",
+    "OS": [
+      "ubuntu-latest",
+      "windows-latest"
+    ],
+    "jobs": [
+      122256410008,
+      122256409542
+    ],
+    "helpers": [
+      "check_prerequisites.py --json --require-spec --require-tasks --include-tasks",
+      "resolve_template.py spec-template --json"
+    ],
+    "no_persist": true,
+    "shared_pointer_changed": false,
+    "method": "manual artifact authoring/analysis/convergence; official helpers/CLI actually run in CI; native skill dispatch NOT_RUN"
+  },
+  "historical_reuse": {
+    "code_sha": "e985ea3124b7a3cd241ee2dbc88b5ad50688373c",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+    "run_ids": [
+      40246678115,
+      40246678113
+    ],
+    "basis": "architecture subagent reconsulted completed/success and equality to baseline; P06 additionally executed new CI above"
+  },
+  "limits": {
+    "host_browser": "NOT_RUN",
+    "private_cohort": "INPUT_MISSING",
+    "composed_candidate": "NOT_CREATED",
+    "full_parity_denominator": "UNKNOWN",
+    "screenshots_pixel_review": "NOT_PERFORMED_BY_THIS_CHAT",
+    "future_documentation_head_CI": "Read separate exact-SHA status in PR description; do not transfer these run conclusions"
+  }
+}
