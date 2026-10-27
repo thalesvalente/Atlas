@@ -1,0 +1,23 @@
+{
+  "status": "SOURCE_MAPPING_STRUCTURALLY_VALIDATED_AT_AUTHORING",
+  "source": "docs/missions/atlas-parity-02/p01-contracts/CAPABILITY-PARITY.csv",
+  "source_document_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+  "matrix": "TRACEABILITY-MATRIX.csv",
+  "unique_ids": 28,
+  "counts": {
+    "EXISTING": 11,
+    "PARTIAL": 10,
+    "REPRESENTABLE_NOT_PRESENTED": 3,
+    "NOT_REPRESENTED_CURRENT_CONTRACT": 3,
+    "UNKNOWN_UPSTREAM": 1
+  },
+  "exact_source_rows": true,
+  "source_3a_p01_status_preserved": true,
+  "upstream_unknown_count": 1,
+  "complete_legacy_parity_denominator": null,
+  "ratio_0_over_0": null,
+  "p02_implementation_isolated": true,
+  "p03_components_isolated": true,
+  "ci_runtime_validation": "PENDING_FINAL_SHA",
+  "no_cross_population_sum": true
+}

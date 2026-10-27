@@ -1,0 +1,51 @@
+{
+  "mission": "ATLAS-PARITY-03-C3",
+  "repository": "thalesvalente/Atlas",
+  "head_branch": "qa/atlas-parity03-c3-contract-gate-20261027",
+  "base_branch": "work/atlas-parity02-p01-contracts-20261027",
+  "base_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+  "final_head_sha": null,
+  "head_resolution": "Read the GitHub PR head; no self-referential SHA in own commit",
+  "status": "PENDING_FINAL_CI_AND_INDEPENDENT_REVIEW",
+  "target_status": "C3_CONTRACT_GATE_READY",
+  "fallback_status": "C3_BLOCKED_EXACT",
+  "p01_manifest_sha256": "88f64b8ab62d60e4355a3f29553173638f4d7e3844ce0e8126dc1484713c353c",
+  "ci": {
+    "workflow": ".github/workflows/atlas-parity03-contracts.yml",
+    "status": "NOT_OBSERVED_ON_FINAL_SHA",
+    "run_id": null
+  },
+  "matrix": {
+    "path": "docs/missions/atlas-parity-03/c3-contract-gate/TRACEABILITY-MATRIX.csv",
+    "rows": 28,
+    "evidence": "C3 structural source binding, runtime validation in workflow",
+    "upstream": "UNKNOWN_UPSTREAM",
+    "legacy_denominator": null
+  },
+  "owned_paths": [
+    "docs/contracts/atlas-parity-02/p01/run_contract_gate.py",
+    ".github/workflows/atlas-parity03-contracts.yml",
+    "docs/missions/atlas-parity-03/c3-contract-gate/**",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/c3-contract-gate.md"
+  ],
+  "native_agents": {
+    "available": false,
+    "author": "CHAT single agent",
+    "independent_reviewer": "NOT_PERFORMED",
+    "simulation": false
+  },
+  "decision_gates": {
+    "adr_0002_direction": "PRIOR_ACCEPTANCE_RETAINED_NOT_REVOKED",
+    "scientific_approval": "NOT_GRANTED",
+    "validity": "SEPARATE",
+    "integrity": "SEPARATE",
+    "authenticity": "NOT_ATTESTED",
+    "merge": "NOT_AUTHORIZED",
+    "release": "NOT_AUTHORIZED"
+  },
+  "next_acts": [
+    "Observe terminal CI on exact final SHA",
+    "Obtain independent reviewer not author of delta",
+    "Compose P02/P03/P06 in their own branches/ownership without changing P01"
+  ]
+}
