@@ -1,0 +1,75 @@
+{
+  "task": "ENV-01",
+  "status": "RESOLVED_SCOPED",
+  "time": "2026-10-27T12:09:16.680343-03:00",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "product_delta": false,
+  "repository_script_delta": false,
+  "prior_evidence_overwritten": false,
+  "global_font_configuration_modified": false,
+  "unit_tests_rerun": false,
+  "environment": {
+    "python": "3.12.14",
+    "node": "v24.22.1",
+    "chromium": "153.0.8010.0",
+    "chromium_binary_sha256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+    "playwright_launch": "defaults; executablePath only; no package security-disabling args",
+    "variables": {
+      "ATLAS_BROWSER_BINARY": "<isolated-chromium-runtime>/chromium",
+      "TMPDIR": "<isolated-chromium-runtime>",
+      "FONTCONFIG_FILE": "<isolated-evidence>/fonts.conf",
+      "FONTCONFIG_PATH": "<isolated-evidence>"
+    }
+  },
+  "font_provenance_file": "font-provenance.json",
+  "fontconfig_sha256": "d7842e438d277305fc2bbb6cd5140c274b727e7667463744e2286bc3f929255a",
+  "fontconfig_matches": {
+    "U+65E5": "Noto Sans CJK JP",
+    "U+1F9EA": "Noto Color Emoji"
+  },
+  "browser_receipt": {
+    "file": "browser.json",
+    "sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+    "status": "PASS_SCOPED",
+    "checks": 23,
+    "screenshots": 6,
+    "external_requests": 0,
+    "page_errors": 0,
+    "source_package_bytes_unchanged": true,
+    "consumer": {
+      "viewer_import_outside_checkout": true,
+      "sdk_import_outside_checkout": true,
+      "r4_installed": false,
+      "python_optimized": false
+    }
+  },
+  "visual_inspection": {
+    "reviewer": "/root/fixtures_browser",
+    "role": "QA author; independent final review remains with /root/independent_review",
+    "images": [
+      "c0-detail-390.png",
+      "c0-overview-1440.png"
+    ],
+    "observed": "Japanese 日本語, Greek αβγ and test-tube emoji 🧪 are visibly rendered without missing-glyph boxes in c0-detail-390.png; long title wraps within the detail."
+  },
+  "limits": [
+    "Same 23 browser checks repeated on the same code SHA with a changed font environment; do not count as new unique test cases.",
+    "Native browser zoom NOT_RUN; no CSS zoom; no full WCAG certification.",
+    "Fonts are runtime-only evidence dependencies and were not added to the product."
+  ],
+  "artifacts": {
+    "browser.json": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+    "font-provenance.json": "6205dc8f44f81645d86b1df9a200c683402d60515b577e868f90565211d768b9",
+    "fonts.conf": "d7842e438d277305fc2bbb6cd5140c274b727e7667463744e2286bc3f929255a",
+    "c0-overview-1440.png": "54f2afefe87e48bd9ec19299cf3657b92ff8beacf5dcc1482bbee4a98220d069",
+    "c0-1440.png": "033ce5b8f69a35e63c21f756257760fd702778458bde74f0502c1e84006024ef",
+    "c0-390.png": "3a61c501f15fea55870d030803029ccc1100f1c346553fa99cdfbb6ae720b1e3",
+    "c0-detail-390.png": "b88154f32cc1bc8543098575e6e01d8aed6e97fc0ff002e7e12100af0b3c6472",
+    "c0-320.png": "1ea4dab971429ba51ee38320c54e1f9a19beaf100ba5b0916234635ed892cb5d",
+    "c0-320-text-spacing.png": "da346cc6f796831c36d7f02501897a7a65bc326aaee0dedfd4763de0e2a63903"
+  },
+  "installed_wheel_sha256": {
+    "atlas_viewer-0.1.0a1-py3-none-any.whl": "d60fdc8cf915e6c70a060f7a4eda07536fe02d78616ee9abf4ca08681b3b9fc8",
+    "caderno_protocol-0.1.0a1-py3-none-any.whl": "f23ca538e46f30962b66b59b25f1c33047fb4004e34ecb227c4cc2a6caf5c09e"
+  }
+}

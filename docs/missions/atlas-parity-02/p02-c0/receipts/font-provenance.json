@@ -1,0 +1,53 @@
+{
+  "task": "ENV-01",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "time": "2026-10-27T12:07:27.755105-03:00",
+  "fonts": [
+    {
+      "filename": "NotoSansCJKjp-Regular.otf",
+      "repository": "notofonts/noto-cjk",
+      "commit": "f8d157532fbfaeda587e826d4cd5b21a49186f7c",
+      "path": "Sans/OTF/Japanese/NotoSansCJKjp-Regular.otf",
+      "expected_git_blob": "f56224957fb13a81b4c14bac34f2f058a017f9fb",
+      "expected_bytes": 16467736,
+      "coverage": {
+        "U+65E5": "cid20220",
+        "U+672C": "cid20758",
+        "U+8A9E": "cid37860"
+      },
+      "sha256": "68a3fc98800b2a27b371f2fb79991daf3633bd89309d4ffaa6946fd587f375b5",
+      "verified_git_blob": "f56224957fb13a81b4c14bac34f2f058a017f9fb",
+      "bytes": 16467736,
+      "family": "Noto Sans CJK JP",
+      "font_version": "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603",
+      "source_url": "https://raw.githubusercontent.com/notofonts/noto-cjk/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/OTF/Japanese/NotoSansCJKjp-Regular.otf",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "filename": "NotoColorEmoji.ttf",
+      "repository": "googlefonts/noto-emoji",
+      "commit": "99701e07d3d1fe1bdbcdb14964547f0fd592966f",
+      "path": "2D/fonts/NotoColorEmoji.ttf",
+      "expected_git_blob": "e605743d05f261634f0b3f68a439d9b557d8f335",
+      "expected_bytes": 10730124,
+      "coverage": {
+        "U+1F9EA": "u1F9EA"
+      },
+      "sha256": "15671215ab769fdc7162a045d56fd7d7e477c51b04e6b3c761d914d8fdd6cc44",
+      "verified_git_blob": "e605743d05f261634f0b3f68a439d9b557d8f335",
+      "bytes": 10730124,
+      "family": "Noto Color Emoji",
+      "font_version": "Version 2.057;GOOG;noto-emoji:20260911:fc4ca365e7c20e78278ae702aa20434bfe704c8f",
+      "source_url": "https://raw.githubusercontent.com/googlefonts/noto-emoji/99701e07d3d1fe1bdbcdb14964547f0fd592966f/2D/fonts/NotoColorEmoji.ttf",
+      "license": "SIL Open Font License 1.1"
+    }
+  ],
+  "fontconfig_sha256": "d7842e438d277305fc2bbb6cd5140c274b727e7667463744e2286bc3f929255a",
+  "global_configuration_modified": false,
+  "source": "official repositories, immutable commit URLs; git blob identities verified independently after download",
+  "repository_modified_by_this_agent": false,
+  "license_copies": {
+    "NotoColorEmoji-LICENSE.txt": "d7d9b7661c484a62bbe7b4a5c3dc7789af1712bb20dcd92d2c1a6c87d56d6b37",
+    "NotoSansCJK-LICENSE.txt": "0e22ba35da45f9dfc194dd2f5dd7cbc2169c19d01aa42597ce1e7c01c2b88a13"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "PASS_SCOPED",
+  "assets": [
+    {
+      "route": "/",
+      "status": 200,
+      "sha256": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262"
+    },
+    {
+      "route": "/app.js",
+      "status": 200,
+      "sha256": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9"
+    },
+    {
+      "route": "/parity02_p02_state.js",
+      "status": 200,
+      "sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1"
+    },
+    {
+      "route": "/style.css",
+      "status": 200,
+      "sha256": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0"
+    }
+  ],
+  "wheel_sha256": "aa2fbbbbe0f9e34bf322992c2f1da7f27b7317fdc363747ded205e4805da551e",
+  "isolated_installed_viewer": true,
+  "r4_absent": true,
+  "scope": "wheel bytes, fixed HTTP assets, CSP/origin; no browser claim",
+  "tested_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+  "optimization": 1,
+  "platform": "linux"
+}

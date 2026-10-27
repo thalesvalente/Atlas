@@ -1,0 +1,22 @@
+{
+  "status": "PASS_SCOPED",
+  "fonts": [
+    {
+      "requested_glyph": "CJK U+65E5",
+      "family": "WenQuanYi Zen Hei,\u6587\u6cc9\u9a5b\u6b63\u9ed1,\u6587\u6cc9\u9a7f\u6b63\u9ed1",
+      "style": "Regular",
+      "filename": "wqy-zenhei.ttc",
+      "sha256": "79c18ebe7b811951e8311bad7103ebeae8c337ed9988ea69e8a78a66cfe029b9",
+      "charset_contains_requested_glyph": true
+    },
+    {
+      "requested_glyph": "emoji U+1F9EA",
+      "family": "Unifont Upper",
+      "style": "Regular",
+      "filename": "unifont_upper.otf",
+      "sha256": "f9a49517cb5a06e02692b403bc21f96ea767128db52f089d31261a8968d3ace8",
+      "charset_contains_requested_glyph": true
+    }
+  ],
+  "scope": "fontconfig-selected installed fonts and declared glyph coverage; not accessibility certification"
+}

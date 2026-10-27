@@ -1,0 +1,36 @@
+{
+  "kind": "P02_INSTALLED_INTEGRATED_TESTS",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "executed_at": "2026-10-27T15:00:31.999843+00:00",
+  "python": "3.12.14",
+  "platform": "linux",
+  "command": "python -I -O scripts/run_checks.py",
+  "cwd": "OUTSIDE_CHECKOUT",
+  "sdk_viewer": "INSTALLED_LOCAL_WHEELS",
+  "exit_code": 0,
+  "optimized": true,
+  "suites": [
+    {
+      "suite": "packages/protocol/tests",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "tests/qa",
+      "tests": 50,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "tests/viewer",
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "status": "PASS"
+}

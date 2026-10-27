@@ -7,14 +7,17 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import secrets
 from threading import RLock
 from typing import Any
 
 from caderno_protocol import PROFILE_VERSION, load_package, to_read_model
 
+from .parity02_p02_navigation import coverage, snapshot_binding
+
 MAX_SOURCES = 16
 LIMITATIONS = [
-    "Perfil candidato; estabilização ainda depende de aceite humano.",
+    "Direção da ADR-0002 aceita; o perfil permanece pré-release, sem promoção canônica ou release estável.",
     "Validação e digest não autenticam autoria, data nem aprovação científica.",
     "Referências externas permanecem não resolvidas; anexos não são executados.",
     "Índice e dossiê são derivados; a fonte permanece a autoridade dos registros.",
@@ -47,6 +50,9 @@ def presentation_values(model: dict[str, Any]) -> dict[str, Any]:
             original = value.get("value")
             value["display_value"] = (None if original is None else original if isinstance(original, str)
                                       else json.dumps(original, ensure_ascii=False, allow_nan=False))
+            precision = value.get("precision")
+            value["display_precision"] = (None if precision is None else precision if isinstance(precision, str)
+                                          else json.dumps(precision, ensure_ascii=False, allow_nan=False))
     return model
 
 
@@ -68,6 +74,11 @@ class Catalog:
         self._fingerprints: dict[str, str] = {}
         self._generation = 0
         self._indexed_at = ""
+        # Session binding deliberately expires links after a process restart,
+        # even if two separately configured sources contain identical bytes.
+        # It contains neither source paths nor a claim of authenticity.
+        self._navigation_nonce = secrets.token_hex(32)
+        self._snapshot_id = ""
         self.rebuild()
 
     def rebuild(self) -> dict[str, Any]:
@@ -83,21 +94,24 @@ class Catalog:
                 status = "READY" if package.report.valid else "INVALID"
                 if codes & {"SOURCE_INACCESSIBLE", "SOURCE_INVALID", "SOURCE_UNSAFE"}:
                     status = "UNAVAILABLE" if "SOURCE_INACCESSIBLE" in codes else "INVALID"
+                observed[source.id] = fingerprint(package)
                 index[source.id] = {
                     "id": source.id,
                     "name": model["source"]["name"] if model else source.path.name,
                     "status": status,
                     "version": PROFILE_VERSION if model else "UNSUPPORTED_OR_INVALID",
                     "metadata_sha256": package.metadata_sha256,
+                    "snapshot_id": observed[source.id],
+                    "coverage": coverage(model),
                     "report": report,
                     "read_model": model,
                     "changed": False,
                     "authenticity": "NOT_VERIFIED",
                     "scientific_approval": "NOT_EVALUATED",
                 }
-                observed[source.id] = fingerprint(package)
             self._index = index
             self._fingerprints = observed
+            self._snapshot_id = snapshot_binding(self._navigation_nonce, list(observed.items()))
             self._generation += 1
             self._indexed_at = now()
             return self.snapshot(check_changes=False)
@@ -128,6 +142,14 @@ class Catalog:
                 "viewer_version": "0.1.0a1",
                 "candidate": True,
                 "generation": self._generation,
+                "snapshot_id": self._snapshot_id,
+                "navigation_policy": "SESSION_AND_SNAPSHOT",
+                "navigation_notice": (
+                    "Links valem para esta sessão e o snapshot carregado. Reiniciar o servidor "
+                    "ou reconstruir fontes alteradas invalida os links; recarregar a página "
+                    "e reconstruir os mesmos bytes preserva o contexto. O identificador "
+                    "não autentica a fonte."
+                ),
                 "indexed_at": self._indexed_at,
                 "observed_at": now(),
                 "sources": sources,
@@ -146,6 +168,8 @@ class Catalog:
             "authority": catalog["authority"],
             "limitations": LIMITATIONS,
             "indexed_at": catalog["indexed_at"],
+            "snapshot_id": catalog["snapshot_id"],
+            "navigation_policy": catalog["navigation_policy"],
             "sources": catalog["sources"],
             "collisions": catalog["collisions"],
             "notice": "Relatório derivado de consulta. Não constitui aceite científico ou autenticação.",

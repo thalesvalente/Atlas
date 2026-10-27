@@ -1,0 +1,103 @@
+{
+  "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+  "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+  "runs": [
+    {
+      "id": 40546244411,
+      "name": "ATLAS021 candidate verification",
+      "head_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "head_tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "run_attempt": 1,
+      "created_at": "2026-10-27T16:59:16Z",
+      "updated_at": "2026-10-27T17:14:37Z",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546244411"
+    },
+    {
+      "id": 40546244275,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "head_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "head_tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "created_at": "2026-10-27T16:59:16Z",
+      "updated_at": "2026-10-27T17:00:11Z",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546244275"
+    },
+    {
+      "id": 40546244646,
+      "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+      "head_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "head_tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "created_at": "2026-10-27T16:59:16Z",
+      "updated_at": "2026-10-27T17:01:04Z",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546244646"
+    }
+  ],
+  "summary": {
+    "jobs_total": 15,
+    "jobs_success": 14,
+    "jobs_cancelled": 1,
+    "global_candidate_ready": false,
+    "installed_suite": {
+      "platform_modes": 4,
+      "unique_cases": 122,
+      "skips": 0
+    },
+    "p06_browser": {
+      "checks": 14,
+      "status": "PASS_SCOPED"
+    },
+    "global_and_P02_browser": "NOT_RUN_DUE_TO_JOB_CANCELLATION"
+  },
+  "blocker": {
+    "run_id": 40546244411,
+    "job_id": 122337532297,
+    "job_name": "Installed viewer / Chromium desktop and mobile",
+    "step": "Install pinned browser test tooling",
+    "conclusion": "cancelled",
+    "job_timeout_minutes": 15,
+    "download": {
+      "package": "fonts-noto-cjk",
+      "bytes_approx": 61200000,
+      "started_at": "2026-10-27T17:05:46Z",
+      "cancelled_at": "2026-10-27T17:14:32.8987069Z"
+    },
+    "evidence_log": "https://github.com/thalesvalente/Atlas/actions/runs/40546244411/job/122337532297",
+    "already_installed_by_playwright": [
+      "WQY Zen Hei",
+      "IPA Gothic",
+      "Noto Color Emoji"
+    ],
+    "browser_scenarios_executed": false,
+    "log_sha256": "4668f2a67fc3b6bfac760128af3a5120a273dff73448b773a4ced3945533a840"
+  },
+  "repair": {
+    "sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+    "tree": "e2a5731d0057f1676e4112d57061773a72e4fc6e",
+    "parent": "df56eb6338626d1671d1882d0d745c02a1f48406",
+    "path": ".github/workflows/atlas021.yml",
+    "removed_lines": [
+      "sudo apt-get update",
+      "sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji"
+    ],
+    "assertions_weakened": false,
+    "font_glyph_hash_gate_preserved": true,
+    "new_exact_sha_CI_required": true
+  },
+  "cancelled_job_artifact": {
+    "id": 12753413127,
+    "size_in_bytes": 1769,
+    "digest": "sha256:ec82f040f072e4c3cc064ad88b523b02a0d8249eee2bf88f602f9ce69cc2a34b",
+    "contents_not_downloaded": true,
+    "no_browser_proof_inferred": true
+  }
+}

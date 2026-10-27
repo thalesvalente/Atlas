@@ -1,0 +1,480 @@
+{
+  "sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+  "tree": "e2a5731d0057f1676e4112d57061773a72e4fc6e",
+  "artifacts": [
+    {
+      "id": 12755240040,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157553,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12754242448,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157553,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12754226741,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157553,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12754067621,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157553,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12755000473,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157548,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12754776303,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157548,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12754760913,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157548,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12754092291,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157548,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    },
+    {
+      "id": 12753831935,
+      "sha256_matches_recorded_api_digest": true,
+      "size_matches": true,
+      "run": 40549157548,
+      "sha_matches": true,
+      "extraction_mismatches": []
+    }
+  ],
+  "suites": [
+    {
+      "artifact": "12754067621/parity02-p06-installed-checks.json",
+      "sha_matches": true,
+      "tree_matches": true,
+      "status": "PASS_SCOPED",
+      "platform": "linux",
+      "optimization": 1,
+      "collected": 122,
+      "unique": 122,
+      "tests": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "log_run_counts": [
+        "12",
+        "74",
+        "36"
+      ],
+      "log_OK_count": 3,
+      "schema_tool": {
+        "jsonschema": "4.25.1"
+      },
+      "imports": {
+        "viewer": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/atlas_viewer/__init__.py",
+        "sdk": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/caderno_protocol/__init__.py"
+      },
+      "outside_checkout": true,
+      "r4_absent": true
+    },
+    {
+      "artifact": "12754226741/parity02-p06-installed-checks.json",
+      "sha_matches": true,
+      "tree_matches": true,
+      "status": "PASS_SCOPED",
+      "platform": "win32",
+      "optimization": 0,
+      "collected": 122,
+      "unique": 122,
+      "tests": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "log_run_counts": [
+        "12",
+        "74",
+        "36"
+      ],
+      "log_OK_count": 3,
+      "schema_tool": {
+        "jsonschema": "4.25.1"
+      },
+      "imports": {
+        "viewer": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\atlas_viewer\\__init__.py",
+        "sdk": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\caderno_protocol\\__init__.py"
+      },
+      "outside_checkout": true,
+      "r4_absent": true
+    },
+    {
+      "artifact": "12754242448/parity02-p06-installed-checks.json",
+      "sha_matches": true,
+      "tree_matches": true,
+      "status": "PASS_SCOPED",
+      "platform": "linux",
+      "optimization": 0,
+      "collected": 122,
+      "unique": 122,
+      "tests": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "log_run_counts": [
+        "12",
+        "74",
+        "36"
+      ],
+      "log_OK_count": 3,
+      "schema_tool": {
+        "jsonschema": "4.25.1"
+      },
+      "imports": {
+        "viewer": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/atlas_viewer/__init__.py",
+        "sdk": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/caderno_protocol/__init__.py"
+      },
+      "outside_checkout": true,
+      "r4_absent": true
+    },
+    {
+      "artifact": "12755240040/parity02-p06-installed-checks.json",
+      "sha_matches": true,
+      "tree_matches": true,
+      "status": "PASS_SCOPED",
+      "platform": "win32",
+      "optimization": 1,
+      "collected": 122,
+      "unique": 122,
+      "tests": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "log_run_counts": [
+        "12",
+        "74",
+        "36"
+      ],
+      "log_OK_count": 3,
+      "schema_tool": {
+        "jsonschema": "4.25.1"
+      },
+      "imports": {
+        "viewer": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\atlas_viewer\\__init__.py",
+        "sdk": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\caderno_protocol\\__init__.py"
+      },
+      "outside_checkout": true,
+      "r4_absent": true
+    }
+  ],
+  "clean_installs": [
+    {
+      "artifact": "12753831935/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12754067621/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12754092291/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12754226741/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12754242448/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12754760913/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12754776303/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12755000473/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    },
+    {
+      "artifact": "12755240040/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "isolation_pass": true,
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true
+    }
+  ],
+  "wheels": [
+    {
+      "artifact": "12753831935/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12754067621/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12754226741/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12754242448/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12754760913/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12754776303/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12755000473/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12755240040/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    }
+  ],
+  "invariance": [
+    {
+      "artifact": "12753831935/Atlas/Atlas/.ci-clean-inputs.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "tree_matches": true,
+      "protected_files": 64,
+      "errors": []
+    },
+    {
+      "artifact": "12754760913/Atlas/Atlas/.ci-clean-inputs.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "tree_matches": true,
+      "protected_files": 64,
+      "errors": []
+    },
+    {
+      "artifact": "12754776303/Atlas/Atlas/.ci-clean-inputs.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "tree_matches": true,
+      "protected_files": 64,
+      "errors": []
+    },
+    {
+      "artifact": "12755000473/Atlas/Atlas/.ci-clean-inputs.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "tree_matches": true,
+      "protected_files": 64,
+      "errors": []
+    }
+  ],
+  "browser": [
+    {
+      "artifact": "12754092291/parity02-p06-browser-report.json",
+      "status": "PASS_SCOPED",
+      "sha_matches": true,
+      "checks": 14,
+      "all_checks_pass": true,
+      "external_requests": [],
+      "page_errors": [],
+      "browser_version": "151.0.7922.34",
+      "source_mutation": "SYNTHETIC_FIXTURE_DRIVER_METADATA_ONLY",
+      "source_bytes_equal_to_driver_expected": true,
+      "wheel_digests_match_clean_receipt": true,
+      "host_browser": "NOT_RUN",
+      "screenshot_sha256": "19ee285b685df57a30eae72353372dab2f0e8ddae43a5484305c4fb23235ae8c"
+    }
+  ],
+  "all_four_cells_same_122_case_set": true
+}

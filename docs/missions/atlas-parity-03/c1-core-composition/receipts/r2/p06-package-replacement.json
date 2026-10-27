@@ -1,0 +1,74 @@
+{
+  "status": "PASS_SCOPED",
+  "scope": "synthetic valid-package replacement on installed viewer",
+  "checks": [
+    {
+      "name": "fixture_has_repeated_ids_and_distinct_source_labels",
+      "status": "PASS"
+    },
+    {
+      "name": "exact_source_run_identity_source-1",
+      "status": "PASS"
+    },
+    {
+      "name": "exact_source_run_identity_source-2",
+      "status": "PASS"
+    },
+    {
+      "name": "old_detail_opened_from_source_A",
+      "status": "PASS"
+    },
+    {
+      "name": "valid_replacement_is_marked_changed_without_silent_cache_substitution",
+      "status": "PASS"
+    },
+    {
+      "name": "obsolete_detail_is_closed_instead_of_resolving_same_id_in_source_B",
+      "status": "PASS"
+    },
+    {
+      "name": "changed_snapshot_expires_all_stale_selection_with_explicit_warning",
+      "status": "PASS"
+    },
+    {
+      "name": "replacement_has_new_ids_and_other_source_keeps_original_ids",
+      "status": "PASS"
+    },
+    {
+      "name": "source_B_snapshot_and_records_remain_unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "fresh_explicit_B_selection_is_bound_to_new_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "source_B_related_link_receives_keyboard_focus",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard_reference_remains_scoped_after_other_package_is_replaced",
+      "status": "PASS"
+    },
+    {
+      "name": "replacement_navigation_reflows_at_390_pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "no_page_error_or_external_request",
+      "status": "PASS"
+    }
+  ],
+  "external_requests": [],
+  "page_errors": [],
+  "browser_version": "151.0.7922.34",
+  "tested_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+  "source_mutation": "SYNTHETIC_FIXTURE_DRIVER_METADATA_ONLY",
+  "source_bytes_equal_to_driver_expected": true,
+  "installed_wheels": {
+    "atlas_viewer-0.1.0a1-py3-none-any.whl": "0a64e485c78e6ce07f6a1fe9928699f217ca3e7f84470ff2283f81ce0079d6ad",
+    "caderno_protocol-0.1.0a1-py3-none-any.whl": "8f64538bbce5fe53fe31bfd791f26d9a4a394c108a02a686769850dbc2d78379"
+  },
+  "host_browser": "NOT_RUN",
+  "full_parity_denominator": "UNKNOWN"
+}

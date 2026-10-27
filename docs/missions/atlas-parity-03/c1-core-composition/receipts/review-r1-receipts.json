@@ -1,0 +1,492 @@
+{
+  "sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+  "artifact_zips": [
+    {
+      "id": 12753560820,
+      "sha256_matches_api_digest": true,
+      "name_pins_sha": true,
+      "zip_bytes": 6107
+    },
+    {
+      "id": 12753376391,
+      "sha256_matches_api_digest": true,
+      "name_pins_sha": true,
+      "zip_bytes": 6074
+    },
+    {
+      "id": 12753301213,
+      "sha256_matches_api_digest": true,
+      "name_pins_sha": true,
+      "zip_bytes": 6075
+    },
+    {
+      "id": 12753052055,
+      "sha256_matches_api_digest": true,
+      "name_pins_sha": true,
+      "zip_bytes": 6109
+    },
+    {
+      "id": 12752632881,
+      "sha256_matches_api_digest": true,
+      "name_pins_sha": true,
+      "zip_bytes": 10476
+    },
+    {
+      "id": 12751964434,
+      "sha256_matches_api_digest": true,
+      "name_pins_sha": true,
+      "zip_bytes": 10524
+    },
+    {
+      "id": 12751444152,
+      "sha256_matches_api_digest": true,
+      "name_pins_sha": true,
+      "zip_bytes": 10474
+    }
+  ],
+  "suites": [
+    {
+      "artifact": "12751444152/parity02-p06-installed-checks.json",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "status": "PASS_SCOPED",
+      "platform": "linux",
+      "optimization": 1,
+      "collection": 122,
+      "unique": 122,
+      "tests": 122,
+      "suite_counts": [
+        [
+          "packages/protocol/tests",
+          12,
+          12,
+          0,
+          0,
+          0
+        ],
+        [
+          "tests/qa",
+          74,
+          74,
+          0,
+          0,
+          0
+        ],
+        [
+          "tests/viewer",
+          36,
+          36,
+          0,
+          0,
+          0
+        ]
+      ],
+      "log_run_counts": [
+        "12",
+        "74",
+        "36"
+      ],
+      "log_OK_count": 3,
+      "schema_tool": {
+        "jsonschema": "4.25.1"
+      },
+      "import_paths": {
+        "viewer": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/atlas_viewer/__init__.py",
+        "sdk": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/caderno_protocol/__init__.py"
+      },
+      "outside_checkout": true,
+      "r4_absent": true
+    },
+    {
+      "artifact": "12751964434/parity02-p06-installed-checks.json",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "status": "PASS_SCOPED",
+      "platform": "win32",
+      "optimization": 1,
+      "collection": 122,
+      "unique": 122,
+      "tests": 122,
+      "suite_counts": [
+        [
+          "packages/protocol/tests",
+          12,
+          12,
+          0,
+          0,
+          0
+        ],
+        [
+          "tests/qa",
+          74,
+          74,
+          0,
+          0,
+          0
+        ],
+        [
+          "tests/viewer",
+          36,
+          36,
+          0,
+          0,
+          0
+        ]
+      ],
+      "log_run_counts": [
+        "12",
+        "74",
+        "36"
+      ],
+      "log_OK_count": 3,
+      "schema_tool": {
+        "jsonschema": "4.25.1"
+      },
+      "import_paths": {
+        "viewer": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\atlas_viewer\\__init__.py",
+        "sdk": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\caderno_protocol\\__init__.py"
+      },
+      "outside_checkout": true,
+      "r4_absent": true
+    },
+    {
+      "artifact": "12752632881/parity02-p06-installed-checks.json",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "status": "PASS_SCOPED",
+      "platform": "linux",
+      "optimization": 0,
+      "collection": 122,
+      "unique": 122,
+      "tests": 122,
+      "suite_counts": [
+        [
+          "packages/protocol/tests",
+          12,
+          12,
+          0,
+          0,
+          0
+        ],
+        [
+          "tests/qa",
+          74,
+          74,
+          0,
+          0,
+          0
+        ],
+        [
+          "tests/viewer",
+          36,
+          36,
+          0,
+          0,
+          0
+        ]
+      ],
+      "log_run_counts": [
+        "12",
+        "74",
+        "36"
+      ],
+      "log_OK_count": 3,
+      "schema_tool": {
+        "jsonschema": "4.25.1"
+      },
+      "import_paths": {
+        "viewer": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/atlas_viewer/__init__.py",
+        "sdk": "/home/runner/work/_temp/atlas-c1-portable/viewer-env/lib/python3.12/site-packages/caderno_protocol/__init__.py"
+      },
+      "outside_checkout": true,
+      "r4_absent": true
+    }
+  ],
+  "clean_installs": [
+    {
+      "artifact": "12751444152/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 1
+    },
+    {
+      "artifact": "12751964434/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 1
+    },
+    {
+      "artifact": "12752632881/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 0
+    },
+    {
+      "artifact": "12753052055/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 0
+    },
+    {
+      "artifact": "12753301213/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 0
+    },
+    {
+      "artifact": "12753376391/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 1
+    },
+    {
+      "artifact": "12753560820/_temp/atlas-c1-p06/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 1
+    },
+    {
+      "artifact": "p06-browser/clean-install-report.json",
+      "status": "PASS_SCOPED",
+      "sdk": {
+        "sdk_imported": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "installed_module": true
+      },
+      "viewer": {
+        "r4_absent": true,
+        "installed_viewer": true,
+        "installed_sdk": true
+      },
+      "source_file_count": 22,
+      "source_hash_mismatches": [],
+      "source_bytes_unchanged": true,
+      "optimization": 0
+    }
+  ],
+  "wheels": [
+    {
+      "artifact": "12751444152/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12751964434/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12752632881/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12753052055/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12753301213/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12753376391/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    },
+    {
+      "artifact": "12753560820/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "status": "PASS_SCOPED",
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "asset_count": 4,
+      "assets_git_mismatches": [],
+      "wheel_digest_in_clean_receipt": true
+    }
+  ],
+  "same_122_test_id_set_in_each_available_cell": true,
+  "p06_browser": {
+    "status": "PASS_SCOPED",
+    "scope": "synthetic valid-package replacement on installed viewer",
+    "checks": [
+      {
+        "name": "fixture_has_repeated_ids_and_distinct_source_labels",
+        "status": "PASS"
+      },
+      {
+        "name": "exact_source_run_identity_source-1",
+        "status": "PASS"
+      },
+      {
+        "name": "exact_source_run_identity_source-2",
+        "status": "PASS"
+      },
+      {
+        "name": "old_detail_opened_from_source_A",
+        "status": "PASS"
+      },
+      {
+        "name": "valid_replacement_is_marked_changed_without_silent_cache_substitution",
+        "status": "PASS"
+      },
+      {
+        "name": "obsolete_detail_is_closed_instead_of_resolving_same_id_in_source_B",
+        "status": "PASS"
+      },
+      {
+        "name": "changed_snapshot_expires_all_stale_selection_with_explicit_warning",
+        "status": "PASS"
+      },
+      {
+        "name": "replacement_has_new_ids_and_other_source_keeps_original_ids",
+        "status": "PASS"
+      },
+      {
+        "name": "source_B_snapshot_and_records_remain_unchanged",
+        "status": "PASS"
+      },
+      {
+        "name": "fresh_explicit_B_selection_is_bound_to_new_snapshot",
+        "status": "PASS"
+      },
+      {
+        "name": "source_B_related_link_receives_keyboard_focus",
+        "status": "PASS"
+      },
+      {
+        "name": "keyboard_reference_remains_scoped_after_other_package_is_replaced",
+        "status": "PASS"
+      },
+      {
+        "name": "replacement_navigation_reflows_at_390_pixels",
+        "status": "PASS"
+      },
+      {
+        "name": "no_page_error_or_external_request",
+        "status": "PASS"
+      }
+    ],
+    "external_requests": [],
+    "page_errors": [],
+    "browser_version": "151.0.7922.34",
+    "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+    "source_mutation": "SYNTHETIC_FIXTURE_DRIVER_METADATA_ONLY",
+    "source_bytes_equal_to_driver_expected": true,
+    "installed_wheels": {
+      "atlas_viewer-0.1.0a1-py3-none-any.whl": "f6cdba9ca26544273696308db851af49e7aec05d35a8fa2a5491075271d22d80",
+      "caderno_protocol-0.1.0a1-py3-none-any.whl": "be0d7e74c2beb1910bc16a5d299792011dd34730b432e5ef03cf3e763d78b4bf"
+    },
+    "host_browser": "NOT_RUN",
+    "full_parity_denominator": "UNKNOWN"
+  }
+}

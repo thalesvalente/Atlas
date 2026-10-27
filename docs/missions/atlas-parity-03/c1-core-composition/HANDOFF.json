@@ -1,0 +1,118 @@
+{
+  "mission": "ATLAS-PARITY-03-C1",
+  "tag": "orq.phase@llm-sec,agentic-pac/seai.qa:",
+  "repository": "thalesvalente/Atlas",
+  "branch": "integrate/atlas-parity03-c1-core-20261027",
+  "draft_pr": "https://github.com/thalesvalente/Atlas/pull/11",
+  "recorded_at": "2026-10-27T14:30:05.584691-03:00",
+  "status_at_document_creation": "CODE_CANDIDATE_VERIFIED_FINAL_SHA_RECEIPT_REQUIRED",
+  "required_final_outcome": "C1_CORE_CANDIDATE_READY",
+  "code_tested": {
+    "sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+    "tree": "e2a5731d0057f1676e4112d57061773a72e4fc6e"
+  },
+  "composition": {
+    "sha": "4bfe0040c273d35719fc6e3de5e81d1fe9e40b65",
+    "tree": "d02432046d4bb7945cfd39581f674d7252bc415b"
+  },
+  "baseline": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59"
+  },
+  "documentary_commit": {
+    "sha": null,
+    "reason": "A commit cannot embed its own defining SHA",
+    "ci_status_at_write": "NOT_YET_RUN_FOR_DOCUMENTARY_COMMIT",
+    "identity_and_terminal_evidence": "External exact-SHA receipt in PR #11 and conversation",
+    "code_results_not_transferred_to_documentary_commit": true
+  },
+  "inputs": "INPUT-SHAS.json",
+  "topology": "MERGE-TOPOLOGY.json",
+  "ci": "CI-EVIDENCE.json",
+  "acceptance": "ACCEPTANCE-MATRIX.md",
+  "review": "INDEPENDENT-REVIEW.md",
+  "manifest": {
+    "path": "MANIFEST.sha256",
+    "paths_relative_to_repository_root": true,
+    "excludes_self": true,
+    "coverage": "Entire tracked candidate file tree, excluding MANIFEST.sha256 itself",
+    "entries": 283
+  },
+  "observed_code_gates": {
+    "all_global_runs": "SUCCESS",
+    "unique_test_cases": 122,
+    "OS": [
+      "Ubuntu",
+      "Windows"
+    ],
+    "modes": [
+      "normal",
+      "-O"
+    ],
+    "skips": 0,
+    "installed_outside_checkout": true,
+    "SDK_without_viewer_R4": true,
+    "viewer_without_R4": true,
+    "runtime_P02_unchanged": true,
+    "protocol_unchanged": true,
+    "sources_preserved": true,
+    "P06_boundary_files": 64,
+    "browser_complete": true,
+    "independent_code_review": "PASS_SCOPED"
+  },
+  "agents": [
+    {
+      "id": "/root/topology_speckit",
+      "role": "Author of audit and negatives; topology validation"
+    },
+    {
+      "id": "/root/ci_browser",
+      "role": "Author of workflows/browser/install proofs"
+    },
+    {
+      "id": "/root/independent_review",
+      "role": "Read-only reviewer; no candidate authorship"
+    }
+  ],
+  "reasoning": {
+    "requested": "Max",
+    "effective": "UNVERIFIED",
+    "selector_observable": false
+  },
+  "separate_gates": {
+    "validity": "technical validation only",
+    "integrity": "byte hashes and frozen boundaries",
+    "authenticity": "NOT_ESTABLISHED_BY_HASHES",
+    "scientific_approval": "NOT_GRANTED",
+    "ADR_0002_direction": "ACCEPTED_IN_PR5_BASELINE",
+    "host_operation": "NOT_RUN",
+    "private_P04": "NOT_USED",
+    "human_promotion": "NOT_AUTHORIZED_NOT_RUN",
+    "native_zoom": "NOT_RUN",
+    "css_zoom_used_P02": false,
+    "wcag_certification": false
+  },
+  "publication_controls": {
+    "PR_must_remain_draft": true,
+    "main_merge": false,
+    "source_refs_updated": false,
+    "force_push": false,
+    "release": false,
+    "deploy": false,
+    "protocol_schema_version_adapter_changes": false
+  },
+  "closure_rule": "Require new CI SUCCESS and read-only review at the exact documentary HEAD; record its SHA/tree externally. Otherwise C1_BLOCKED_EXACT with exact condition; do not reuse code CI as final-SHA CI.",
+  "independent_artifact_review": {
+    "reviewer": "/root/independent_review",
+    "code_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+    "verdict": "PASS_SCOPED",
+    "blocking_findings": [],
+    "receipts": [
+      "receipts/review-r2-receipts.json",
+      "receipts/review-r2-browser.json"
+    ],
+    "P02_six_actual_PNGs_opened": true,
+    "font_scope": "Fontconfig selection and declared coverage; not exact Chromium per-glyph font choice",
+    "future_documentary_SHA_review": "EXTERNAL_RECEIPT_REQUIRED"
+  }
+}

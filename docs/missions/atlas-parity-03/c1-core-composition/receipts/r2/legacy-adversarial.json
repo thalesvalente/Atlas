@@ -1,0 +1,141 @@
+{
+  "status": "PASS_SCOPED",
+  "scope": "installed-live-ui",
+  "checks": [
+    {
+      "name": "source_and_run_key_identity_unique_independent_of_order",
+      "status": "PASS"
+    },
+    {
+      "name": "catalog_records_match_parsed_source",
+      "status": "PASS"
+    },
+    {
+      "name": "record_labels_render_as_text",
+      "status": "PASS"
+    },
+    {
+      "name": "search_and_clear",
+      "status": "PASS"
+    },
+    {
+      "name": "project_experiment_status_filters",
+      "status": "PASS"
+    },
+    {
+      "name": "detail_preserves_large_integer_text",
+      "status": "PASS"
+    },
+    {
+      "name": "run_detail_metrics_states_and_synthetic_identity",
+      "status": "PASS"
+    },
+    {
+      "name": "all_source_details_preserve_values_absence_and_availability",
+      "status": "PASS"
+    },
+    {
+      "name": "related_references_match_source_graph_and_keep_empty_state",
+      "status": "PASS"
+    },
+    {
+      "name": "comparison_preserves_repeated_metric_identity_values",
+      "status": "PASS"
+    },
+    {
+      "name": "comparison_explains_incompatible_units_or_types",
+      "status": "PASS"
+    },
+    {
+      "name": "comparison_preserves_large_integer_text",
+      "status": "PASS"
+    },
+    {
+      "name": "comparison_preserves_states_and_units",
+      "status": "PASS"
+    },
+    {
+      "name": "timeline_preserves_declared_and_missing_times",
+      "status": "PASS"
+    },
+    {
+      "name": "lineage_navigation_uses_declared_relations",
+      "status": "PASS"
+    },
+    {
+      "name": "source_validity_is_distinct_from_authenticity",
+      "status": "PASS"
+    },
+    {
+      "name": "dossier_preserves_large_integer_raw_json",
+      "status": "PASS"
+    },
+    {
+      "name": "dossier_download_contains_real_records_and_limits",
+      "status": "PASS"
+    },
+    {
+      "name": "http_host_origin_and_fixed_source_allowlist",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit_reindex_preserves_source_records",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard_skip_link_filters_and_visible_focus",
+      "status": "PASS"
+    },
+    {
+      "name": "visible_controls_have_names",
+      "status": "PASS"
+    },
+    {
+      "name": "mobile_390px_detail_and_navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "no_page_errors_or_external_requests",
+      "status": "PASS"
+    }
+  ],
+  "external_requests": [],
+  "page_errors": [],
+  "browser_version": "151.0.7922.34",
+  "sources": 1,
+  "runs": 4,
+  "semantic_coverage": {
+    "detail_runs": 4,
+    "missing_values": 2,
+    "artifacts": 7,
+    "relations": 14,
+    "related_references": 0,
+    "empty_related_references": 4,
+    "compatible_comparisons": 0,
+    "compatible_comparisons_by_source": {
+      "source-1": 0
+    }
+  },
+  "screenshots": [
+    "browser-adversarial-report-desktop.png",
+    "browser-adversarial-report-mobile.png"
+  ],
+  "executed_checks": 24,
+  "native_zoom": "NOT_RUN",
+  "css_zoom_used": false,
+  "wcag_certification": false,
+  "human_protocol_acceptance": "PENDING",
+  "canonical_promotion": "NOT_AUTHORIZED",
+  "tested_head": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+  "source_tree_dirty": false,
+  "installed_wheel_sha256": {
+    "atlas_viewer-0.1.0a1-py3-none-any.whl": "0a64e485c78e6ce07f6a1fe9928699f217ca3e7f84470ff2283f81ce0079d6ad",
+    "caderno_protocol-0.1.0a1-py3-none-any.whl": "8f64538bbce5fe53fe31bfd791f26d9a4a394c108a02a686769850dbc2d78379"
+  },
+  "installed_consumer": {
+    "r4_absent": true,
+    "installed_viewer": true,
+    "installed_sdk": true
+  },
+  "source_package_bytes_unchanged": true
+}

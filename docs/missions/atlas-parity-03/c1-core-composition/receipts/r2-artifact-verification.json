@@ -1,0 +1,651 @@
+{
+  "scope": "read-only downloaded artifact and exact-SHA source verification",
+  "expected_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+  "errors": [],
+  "missing": [],
+  "artifacts": [
+    {
+      "id": 12755240040,
+      "name": "atlas-c1-installed-windows-latest-O1-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157553,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "d2ef9fcb25da7b7d159bc04aa648e3fdbeae3943a570e1c609842518d124b179",
+      "bytes": 10524,
+      "files": 4
+    },
+    {
+      "id": 12754242448,
+      "name": "atlas-c1-installed-ubuntu-latest-O0-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157553,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "bae49597f664601d9b766da77bca68ca19b6713454cda3ea3b1364c0cf367061",
+      "bytes": 10475,
+      "files": 4
+    },
+    {
+      "id": 12754226741,
+      "name": "atlas-c1-installed-windows-latest-O0-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157553,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "6d2455b8221e5070391120bf4f553d6ca402290e5ef0f76494e6c6b053c4df46",
+      "bytes": 10521,
+      "files": 4
+    },
+    {
+      "id": 12754067621,
+      "name": "atlas-c1-installed-ubuntu-latest-O1-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157553,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "f0853321c0e4817825ab8ba1ac9c886ae3a83b0c890821027fb1ea8f93d63290",
+      "bytes": 10474,
+      "files": 4
+    },
+    {
+      "id": 12755000473,
+      "name": "parity02-p06-windows-latest-O0-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157548,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "b180ace283f9514882a420c10aca31085418fa8388f76b4dc14b3e2c40e70380",
+      "bytes": 6110,
+      "files": 3
+    },
+    {
+      "id": 12754776303,
+      "name": "parity02-p06-ubuntu-latest-O1-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157548,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "413450a2cc035f36133f1114e365696ad2c5f78cb1ecc367f231abb75cc3c363",
+      "bytes": 6076,
+      "files": 3
+    },
+    {
+      "id": 12754760913,
+      "name": "parity02-p06-ubuntu-latest-O0-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157548,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "12259b67946fb3f01784e1062257ce301ffba133cac5040c6400e52937d8638c",
+      "bytes": 6076,
+      "files": 3
+    },
+    {
+      "id": 12754092291,
+      "name": "parity02-p06-browser-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157548,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "cb36244e0bd4ccd1bd5e81b8bd0d02673a9307e957789f57b009a57042534a43",
+      "bytes": 409666,
+      "files": 3
+    },
+    {
+      "id": 12753831935,
+      "name": "parity02-p06-windows-latest-O1-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157548,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "4a58b2ce1fd5df51e1af45376f0d36a367a3d254daf3d601f8daa4a44a9f4f98",
+      "bytes": 6108,
+      "files": 3
+    },
+    {
+      "id": 12755316139,
+      "name": "atlas003-browser-af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "run_id": 40549157553,
+      "head_sha": "af393e4c0cca19161f49bf9d847bd22617be15fb",
+      "sha256": "efe77cd9e84615d00d25b790b2dc8a8dbb3aa0a405af7cef2a2f2533181821ce",
+      "bytes": 8261871,
+      "files": 19
+    }
+  ],
+  "installed": [
+    {
+      "path": "12755240040/parity02-p06-installed-checks.json",
+      "platform": "win32",
+      "optimization": 1,
+      "unique_cases": 122,
+      "python": "3.12.10",
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "test_id_set_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1"
+    },
+    {
+      "path": "12754242448/parity02-p06-installed-checks.json",
+      "platform": "linux",
+      "optimization": 0,
+      "unique_cases": 122,
+      "python": "3.12.15",
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "test_id_set_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1"
+    },
+    {
+      "path": "12754226741/parity02-p06-installed-checks.json",
+      "platform": "win32",
+      "optimization": 0,
+      "unique_cases": 122,
+      "python": "3.12.10",
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "test_id_set_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1"
+    },
+    {
+      "path": "12754067621/parity02-p06-installed-checks.json",
+      "platform": "linux",
+      "optimization": 1,
+      "unique_cases": 122,
+      "python": "3.12.15",
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "test_id_set_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1"
+    }
+  ],
+  "wheels": [
+    {
+      "path": "12755240040/parity02-p06-wheel-report.json",
+      "artifact_id": "12755240040",
+      "platform": "win32",
+      "optimization": 1,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "9c6849820df8f63f83018888f5cffb654bff39959fef2a997f814688930d55bc"
+    },
+    {
+      "path": "12754242448/parity02-p06-wheel-report.json",
+      "artifact_id": "12754242448",
+      "platform": "linux",
+      "optimization": 0,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "9cbb96617ee7fa7292b3a88e9053650e6ab9df45d482fa9048626b342e3815a8"
+    },
+    {
+      "path": "12754226741/parity02-p06-wheel-report.json",
+      "artifact_id": "12754226741",
+      "platform": "win32",
+      "optimization": 0,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "bbef9a4346c1fef54d354016800713eb9b3afc3fe995825904597bf8e2ce8551"
+    },
+    {
+      "path": "12754067621/parity02-p06-wheel-report.json",
+      "artifact_id": "12754067621",
+      "platform": "linux",
+      "optimization": 1,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "aa2fbbbbe0f9e34bf322992c2f1da7f27b7317fdc363747ded205e4805da551e"
+    },
+    {
+      "path": "12755000473/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "artifact_id": "12755000473",
+      "platform": "win32",
+      "optimization": 0,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "4dd1ebe91b3d4eb5cbcc23fc6ad6b123d4f167cc5de94e8d55ba5431b4c5fdcd"
+    },
+    {
+      "path": "12754776303/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "artifact_id": "12754776303",
+      "platform": "linux",
+      "optimization": 1,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "446a47f0bfebbb383ca40003fca6f622dcbbb76af5d4adcc77da97d5fb0c1e89"
+    },
+    {
+      "path": "12754760913/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "artifact_id": "12754760913",
+      "platform": "linux",
+      "optimization": 0,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "34dd997214c5881dcf8198c9b1b7c4cb9f7a2311ae838949172dc793bca72aec"
+    },
+    {
+      "path": "12753831935/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "artifact_id": "12753831935",
+      "platform": "win32",
+      "optimization": 1,
+      "assets": 4,
+      "assets_match_source": true,
+      "wheel_sha256": "3efed9da3501d4f6d2898b7e82f614af5405ea648e1b94309c8665a92a330eaa"
+    }
+  ],
+  "boundaries": [
+    {
+      "path": "12755000473/Atlas/Atlas/.ci-clean-inputs.json",
+      "protected_files": 64,
+      "all_reported_hashes_match_baseline_and_R2": true
+    },
+    {
+      "path": "12754776303/Atlas/Atlas/.ci-clean-inputs.json",
+      "protected_files": 64,
+      "all_reported_hashes_match_baseline_and_R2": true
+    },
+    {
+      "path": "12754760913/Atlas/Atlas/.ci-clean-inputs.json",
+      "protected_files": 64,
+      "all_reported_hashes_match_baseline_and_R2": true
+    },
+    {
+      "path": "12753831935/Atlas/Atlas/.ci-clean-inputs.json",
+      "protected_files": 64,
+      "all_reported_hashes_match_baseline_and_R2": true
+    }
+  ],
+  "clean_installs": [
+    {
+      "path": "12755240040/clean-install-report.json",
+      "artifact_id": "12755240040",
+      "optimization": 1,
+      "python": "3.12.10",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "9c6849820df8f63f83018888f5cffb654bff39959fef2a997f814688930d55bc",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "f5702f97d71c3c7e5ad2f7fb5ba1df519dc0a5e885a6ea3db02e4a9a3a633192"
+      }
+    },
+    {
+      "path": "12754242448/clean-install-report.json",
+      "artifact_id": "12754242448",
+      "optimization": 0,
+      "python": "3.12.15",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "9cbb96617ee7fa7292b3a88e9053650e6ab9df45d482fa9048626b342e3815a8",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "7e00c62856f5891caaeb7516b7b445bcce65df71604708f5266e96c5e0ff851c"
+      }
+    },
+    {
+      "path": "12754226741/clean-install-report.json",
+      "artifact_id": "12754226741",
+      "optimization": 0,
+      "python": "3.12.10",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "bbef9a4346c1fef54d354016800713eb9b3afc3fe995825904597bf8e2ce8551",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "b2fd6356a96ff656c4ce91b6e6723c3fbc47f5e61ef3d34b04df868bffafb9a6"
+      }
+    },
+    {
+      "path": "12754067621/clean-install-report.json",
+      "artifact_id": "12754067621",
+      "optimization": 1,
+      "python": "3.12.15",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "aa2fbbbbe0f9e34bf322992c2f1da7f27b7317fdc363747ded205e4805da551e",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "983ef6dd017f682fd4f49f35b6e8943e49ef2681ffabccd1ee1332d7461df9ea"
+      }
+    },
+    {
+      "path": "12755000473/_temp/atlas-c1-p06/clean-install-report.json",
+      "artifact_id": "12755000473",
+      "optimization": 0,
+      "python": "3.12.10",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "4dd1ebe91b3d4eb5cbcc23fc6ad6b123d4f167cc5de94e8d55ba5431b4c5fdcd",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "dcea55382b1617d27b4fb6343ce9ca893200d44008f384e8f5bda6a9fb245585"
+      }
+    },
+    {
+      "path": "12754776303/_temp/atlas-c1-p06/clean-install-report.json",
+      "artifact_id": "12754776303",
+      "optimization": 1,
+      "python": "3.12.15",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "446a47f0bfebbb383ca40003fca6f622dcbbb76af5d4adcc77da97d5fb0c1e89",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "ef65fea0b98643a2fe00f1a7834bd7933af944bdf391c5c9ff2be25c78fbd6e5"
+      }
+    },
+    {
+      "path": "12754760913/_temp/atlas-c1-p06/clean-install-report.json",
+      "artifact_id": "12754760913",
+      "optimization": 0,
+      "python": "3.12.15",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "34dd997214c5881dcf8198c9b1b7c4cb9f7a2311ae838949172dc793bca72aec",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "b4598bd72ec1dd002883133cb65fae8e844add232d795d3a74d45a97cc2fbe7f"
+      }
+    },
+    {
+      "path": "12754092291/clean-install-report.json",
+      "artifact_id": "12754092291",
+      "optimization": 0,
+      "python": "3.12.15",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "0a64e485c78e6ce07f6a1fe9928699f217ca3e7f84470ff2283f81ce0079d6ad",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "8f64538bbce5fe53fe31bfd791f26d9a4a394c108a02a686769850dbc2d78379"
+      }
+    },
+    {
+      "path": "12753831935/_temp/atlas-c1-p06/clean-install-report.json",
+      "artifact_id": "12753831935",
+      "optimization": 1,
+      "python": "3.12.10",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "3efed9da3501d4f6d2898b7e82f614af5405ea648e1b94309c8665a92a330eaa",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "e747876809fe9d60b5ead14cb219dc46d55b5067734103aa671e4b40544e8604"
+      }
+    },
+    {
+      "path": "12755316139/clean-install-report.json",
+      "artifact_id": "12755316139",
+      "optimization": 0,
+      "python": "3.12.15",
+      "source_hashes_match_exact_sha": true,
+      "wheel_sha256": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "0a64e485c78e6ce07f6a1fe9928699f217ca3e7f84470ff2283f81ce0079d6ad",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "8f64538bbce5fe53fe31bfd791f26d9a4a394c108a02a686769850dbc2d78379"
+      }
+    }
+  ],
+  "browsers": {
+    "p06-package-replacement": {
+      "path": "12754092291/parity02-p06-browser-report.json",
+      "artifact_id": "12754092291",
+      "checks": 14,
+      "chromium": "151.0.7922.34",
+      "playwright": null,
+      "external_requests": 0,
+      "page_errors": 0,
+      "native_zoom": null,
+      "css_zoom_used": null,
+      "wcag_certification": null,
+      "source_mutation": "SYNTHETIC_FIXTURE_DRIVER_METADATA_ONLY",
+      "screenshots": [
+        {
+          "path": "12754092291/parity02-p06-browser-report.png",
+          "sha256": "19ee285b685df57a30eae72353372dab2f0e8ddae43a5484305c4fb23235ae8c",
+          "dimensions": [
+            390,
+            7029
+          ]
+        }
+      ]
+    },
+    "legacy-adversarial": {
+      "path": "12755316139/browser-adversarial-report.json",
+      "artifact_id": "12755316139",
+      "checks": 24,
+      "chromium": "151.0.7922.34",
+      "playwright": null,
+      "external_requests": 0,
+      "page_errors": 0,
+      "native_zoom": "NOT_RUN",
+      "css_zoom_used": false,
+      "wcag_certification": false,
+      "screenshots": [
+        {
+          "path": "12755316139/browser-adversarial-report-desktop.png",
+          "sha256": "0c5c1f97ec72e108993ccfa6f066a4d40bec4170454d9d6ca23e02a9f710ff60",
+          "dimensions": [
+            1440,
+            2007
+          ]
+        },
+        {
+          "path": "12755316139/browser-adversarial-report-mobile.png",
+          "sha256": "063eb988b410520e054ef4987a560b13f3c818758330d93a5693893513bf3354",
+          "dimensions": [
+            390,
+            3074
+          ]
+        }
+      ]
+    },
+    "legacy-related-references": {
+      "path": "12755316139/browser-related-references-report.json",
+      "artifact_id": "12755316139",
+      "checks": 23,
+      "chromium": "151.0.7922.34",
+      "playwright": null,
+      "external_requests": 0,
+      "page_errors": 0,
+      "native_zoom": "NOT_RUN",
+      "css_zoom_used": true,
+      "wcag_certification": false,
+      "screenshots": [
+        {
+          "path": "12755316139/browser-related-references-report-desktop.png",
+          "sha256": "9ffc333f66bb69ab17b852f2510b5f3cc0bede691ad7556b9f7b5c242461e7f8",
+          "dimensions": [
+            1440,
+            8784
+          ]
+        },
+        {
+          "path": "12755316139/browser-related-references-report-mobile.png",
+          "sha256": "3af0d2575cd52768dfecc78b94b090d0c7cefbbb483257e48415eb924b82290f",
+          "dimensions": [
+            390,
+            13224
+          ]
+        },
+        {
+          "path": "12755316139/browser-related-references-report-zoom200.png",
+          "sha256": "936be33a3ae054bb7d98d5489a2603ea69136c89866aaccdc2c8f158a2c72f1c",
+          "dimensions": [
+            1440,
+            24397
+          ]
+        }
+      ]
+    },
+    "legacy-normal": {
+      "path": "12755316139/browser-report.json",
+      "artifact_id": "12755316139",
+      "checks": 20,
+      "chromium": "151.0.7922.34",
+      "playwright": null,
+      "external_requests": 0,
+      "page_errors": 0,
+      "native_zoom": "NOT_RUN",
+      "css_zoom_used": false,
+      "wcag_certification": false,
+      "screenshots": [
+        {
+          "path": "12755316139/browser-report-desktop.png",
+          "sha256": "0198856b809252e08d7c59b7ffc29d6e14571e19ab73c7b94d49760ac255207a",
+          "dimensions": [
+            1440,
+            1949
+          ]
+        },
+        {
+          "path": "12755316139/browser-report-mobile.png",
+          "sha256": "e5827543bd1d64a838a51ab4c85ac5e03b2eb1ef01aa49ab7e41ce00ad0002e2",
+          "dimensions": [
+            390,
+            2530
+          ]
+        }
+      ]
+    },
+    "p02-c0": {
+      "path": "12755316139/p02/browser-report.json",
+      "artifact_id": "12755316139",
+      "checks": 23,
+      "chromium": "151.0.7922.34",
+      "playwright": "1.62.1",
+      "external_requests": 0,
+      "page_errors": 0,
+      "native_zoom": "NOT_RUN",
+      "css_zoom_used": false,
+      "wcag_certification": false,
+      "fonts": {
+        "status": "PASS_SCOPED",
+        "fonts": [
+          {
+            "requested_glyph": "CJK U+65E5",
+            "family": "WenQuanYi Zen Hei,文泉驛正黑,文泉驿正黑",
+            "style": "Regular",
+            "filename": "wqy-zenhei.ttc",
+            "sha256": "79c18ebe7b811951e8311bad7103ebeae8c337ed9988ea69e8a78a66cfe029b9",
+            "charset_contains_requested_glyph": true
+          },
+          {
+            "requested_glyph": "emoji U+1F9EA",
+            "family": "Unifont Upper",
+            "style": "Regular",
+            "filename": "unifont_upper.otf",
+            "sha256": "f9a49517cb5a06e02692b403bc21f96ea767128db52f089d31261a8968d3ace8",
+            "charset_contains_requested_glyph": true
+          }
+        ],
+        "scope": "fontconfig-selected installed fonts and declared glyph coverage; not accessibility certification"
+      },
+      "screenshots": [
+        {
+          "path": "12755316139/p02/screenshots/c0-overview-1440.png",
+          "sha256": "8391475559bed79a9d7f4608af579a1f2a5bd43978489a2abb88f72049edb337",
+          "dimensions": [
+            1440,
+            1000
+          ]
+        },
+        {
+          "path": "12755316139/p02/screenshots/c0-1440.png",
+          "sha256": "9739cdf8090e8f453fd7cbbe56e68d2e039e6838e9c7a9b1ac55a4fecdb37b47",
+          "dimensions": [
+            1440,
+            9999
+          ]
+        },
+        {
+          "path": "12755316139/p02/screenshots/c0-390.png",
+          "sha256": "f4449f80e801c29723283c74bb9e8c3fd62cf2f1c0fe65800d6aa429f0ec85a7",
+          "dimensions": [
+            390,
+            13885
+          ]
+        },
+        {
+          "path": "12755316139/p02/screenshots/c0-detail-390.png",
+          "sha256": "fe02a03aeef11358bbe93fefba9b508d253c617a39d116f7ea9808d12c668b4a",
+          "dimensions": [
+            390,
+            1000
+          ]
+        },
+        {
+          "path": "12755316139/p02/screenshots/c0-320.png",
+          "sha256": "03458492be7c6a06e4b12b91e852be2aef0ccb2b92033aad2b24859b10ca6229",
+          "dimensions": [
+            320,
+            14489
+          ]
+        },
+        {
+          "path": "12755316139/p02/screenshots/c0-320-text-spacing.png",
+          "sha256": "683099fb7dfc442865bc68e4c732fb8de0053ce2de24fa0560bf17d5f8243e9d",
+          "dimensions": [
+            320,
+            16137
+          ]
+        }
+      ]
+    }
+  },
+  "visual_review": "NOT_PERFORMED_BY_PARSER; independent visual review required",
+  "ci_conclusion": "NOT_QUERIED_BY_PARSER; parent must bind workflow conclusions separately",
+  "expected_tree": "e2a5731d0057f1676e4112d57061773a72e4fc6e",
+  "source_asset_sha256": {
+    "/": "ff6f14192a415480c499b82b994097ca8e0252332e22fdf3e4ff5ac87323e262",
+    "/app.js": "769f727978de28fc0f28f697ab0b7457616ac26bd1e2929db15f4bb80ce81bb9",
+    "/parity02_p02_state.js": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+    "/style.css": "7c137a66c8b69277f613682d6265666be638578a565496b2b59460ea3440aef0"
+  },
+  "unique_unittest_cases": 122,
+  "installed_case_executions": 488,
+  "status": "PASS_SCOPED"
+}
