@@ -1,0 +1,12 @@
+{
+  "command": "python -B -m unittest discover -s tests/viewer -p test_related_references.py -v",
+  "code_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "scope": "source checkout, public synthetic fixtures, no browser",
+  "environment": {
+    "os": "Linux",
+    "python": "3.12.14",
+    "installed_distribution": false
+  },
+  "exit_code": 0,
+  "log_sha256": "e0857f91e1dc8e8b58cd3ff2696b810841457c754ea0428593ec22a15ad6920b"
+}

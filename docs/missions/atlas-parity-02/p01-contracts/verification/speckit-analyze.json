@@ -1,0 +1,8 @@
+{
+  "phase": "ANALYZE",
+  "helper": "check_prerequisites.py --json --require-spec --require-tasks --include-tasks",
+  "exit_code": 0,
+  "stdout": "{\"FEATURE_DIR\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p01-contracts\",\"AVAILABLE_DOCS\":[\"research.md\",\"data-model.md\",\"quickstart.md\",\"tasks.md\"]}\n",
+  "stderr": "",
+  "feature_pointer_present_after": false
+}

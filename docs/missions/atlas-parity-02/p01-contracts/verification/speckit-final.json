@@ -1,0 +1,33 @@
+{
+  "stage": "CONVERGE_POST_QA",
+  "helpers": [
+    {
+      "command": "python -B .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks",
+      "exit_code": 0,
+      "result": {
+        "FEATURE_DIR": "<REPO>/specs/004-atlas-parity-c0/workstreams/p01-contracts",
+        "AVAILABLE_DOCS": [
+          "research.md",
+          "data-model.md",
+          "quickstart.md",
+          "tasks.md"
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "command": "python -B .specify/scripts/python/resolve_template.py spec-template --json",
+      "exit_code": 0,
+      "result": {
+        "TEMPLATE_NAME": "spec-template",
+        "template_sha256": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e",
+        "template_bytes": 4556
+      },
+      "stderr": ""
+    }
+  ],
+  "pointer_written": false,
+  "hooks_present": false,
+  "native_skill_dispatch": "NOT_RUN",
+  "method": "Manual application of repository Spec Kit 1.2.3 instructions; actual official helper execution"
+}

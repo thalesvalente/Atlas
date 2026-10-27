@@ -1,0 +1,472 @@
+{
+  "mission": "ATLAS-PARITY-02-P01",
+  "tag": "seai.designdoc@llm-sec,agentic-pac/seai.qa:",
+  "observed_at": "2026-10-27T12:03:16-03:00",
+  "timezone": "America/Fortaleza",
+  "status": "P01_CONTRACT_PACKET_READY",
+  "input_status": "P01_PARTIAL_INPUTS_EXPLICIT",
+  "repository": "thalesvalente/Atlas",
+  "branch": "work/atlas-parity02-p01-contracts-20261027",
+  "pull_request": {
+    "number": 9,
+    "url": "https://github.com/thalesvalente/Atlas/pull/9",
+    "state_observed": "open",
+    "draft_observed": true,
+    "merged": false
+  },
+  "baseline": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+    "successor_at_preflight": null
+  },
+  "tested_product_code_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "tested_documentary_payload": {
+    "sha": "3a308ee78e185912959920d85a97cd511a70a764",
+    "tree": "03894a33271c030a72ccb7b016aeed943b11f525",
+    "validator_sha256": "1075fc8e6531caaeccaa957bfe2ada5f9a86809853d34acccf7cb8a73cac3791",
+    "cases_manifest_sha256": "323ae7c6f1da3b8f69610bfd6ac7f586cdf1622e0fa0536616396363f4e1a57c"
+  },
+  "closing_documentary_commit": {
+    "sha": null,
+    "reason": "SELF_REFERENCE_INTENTIONALLY_OMITTED",
+    "resolve_from": "Final PR #9 head and its description; must descend from the tested payload commit.",
+    "allowed_delta_from_payload": [
+      "closing result/handoff/manifest",
+      "publication and preservation receipts",
+      "completed task status"
+    ]
+  },
+  "environment": {
+    "channel": "CHAT / connected GitHub",
+    "execution": "isolated engineering sandbox",
+    "os": "Linux",
+    "python": "3.12.14",
+    "reasoning_requested": "Max; fallback Extra High/xhigh",
+    "reasoning_effective": "UNVERIFIED",
+    "host_access": false,
+    "native_skill_dispatch": "NOT_RUN",
+    "spec_kit_version_from_repository": "1.2.3",
+    "method": "Manual Spec Kit cycle plus actual existing official helpers with explicit workstream and NO_PERSIST"
+  },
+  "inputs": {
+    "mission_sha256": "06504e440516bc84659d3343c8f0795eefb112aeb85d5797dac6d9632b3adec8",
+    "inventory_path": "docs/missions/atlas-parity-02/p01-contracts/INPUT-INVENTORY.json",
+    "inventory_sha256": "9da15eec155d48890b72a8a248d0614cf661084ff5fd58de56cd241bb8d11d31",
+    "public_files": [
+      {
+        "path": "AGENTS.md",
+        "sha256": "83c362467736d67364342fdd0777bd8de171755ffb676ad38a5b0f000b89eb1e"
+      },
+      {
+        "path": ".specify/memory/constitution.md",
+        "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b"
+      },
+      {
+        "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+        "sha256": "5f9a44e6b773bad819a33bef32a6e5ab34694fa4d9760624f94587c7f17bb662"
+      },
+      {
+        "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+        "sha256": "67a539e23d5d369f5e242069a29d9ea8d05315ee82b4e23faaa68dea0a27bac8"
+      },
+      {
+        "path": "specs/001-atlas021-protocol-interface/spec.md",
+        "sha256": "8b3edcff89de737cfaf330824d9013fbc5eb2023959c224b37a5c6399475eae3"
+      },
+      {
+        "path": "specs/001-atlas021-protocol-interface/contracts/interface.md",
+        "sha256": "9048be669ccb08af12a922d3bf8712c72e53ae1b825a908f75c7aab026027633"
+      },
+      {
+        "path": "specs/001-atlas021-protocol-interface/data-model.md",
+        "sha256": "e53b403b6739e61670ba89d6811f1e36023679b4cc201f72704a4b8a85d4190f"
+      },
+      {
+        "path": "specs/002-atlas021-poc-r4/spec.md",
+        "sha256": "67aca7d9b069874cb60a4b2b8b1be2ef0795eb7641c7b02d8a66abfb2778bc5b"
+      },
+      {
+        "path": "specs/002-atlas021-poc-r4/contracts/demo.md",
+        "sha256": "9be83bc47ebb3b0d729438774e037650761bb1988e04d42d90a462e02be41ab9"
+      },
+      {
+        "path": "specs/003-producer-selective-preview/contracts/reader.md",
+        "sha256": "13e5ebfd680d7cb29cbe61e748077b9e767f8b4666c167bb4c6ec4cf5e564fba"
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/read_model.py",
+        "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013"
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/model.py",
+        "sha256": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6"
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/storage.py",
+        "sha256": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67"
+      },
+      {
+        "path": "packages/atlas/src/atlas_viewer/catalog.py",
+        "sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3"
+      },
+      {
+        "path": "packages/atlas/src/atlas_viewer/static/app.js",
+        "sha256": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb"
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+        "sha256": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66"
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+        "sha256": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a"
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+        "sha256": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91"
+      },
+      {
+        "path": "specs/003-producer-selective-preview/spec.md",
+        "sha256": "5bb61f6cae016fcbb202ed494e38938df26c531d8da405fb8bc66d6b50e36225"
+      },
+      {
+        "path": "specs/003-producer-selective-preview/data-model.md",
+        "sha256": "b35b81edab4448a312e1c8ba5ba2dee31bdee3a4e1fd094c77756d8617635a82"
+      },
+      {
+        "path": "docs/protocol/0.1.0a1.md",
+        "sha256": "76ae9be325866895e6bcefeefbc7d0f35e295969a7263e71db6d774be1bf794e"
+      },
+      {
+        "path": "docs/protocol/profile-manifest.json",
+        "sha256": "cd2d3b596453c2deafe096bef7c82c65c317fda7531f1a5a4ffbd0acb644de80"
+      },
+      {
+        "path": ".specify/toolchain.json",
+        "sha256": "ae47f66efe51a71a8da2d04dd48a66a544463460309c77ba7505ea5b94a33983"
+      },
+      {
+        "path": ".specify/integration.json",
+        "sha256": "976306f1f2ca586abc751302c6e87eedbc10fa94bc1643c981e94402fae189e4"
+      },
+      {
+        "path": "tests/viewer/test_related_references.py",
+        "sha256": "c0f24d5fb49ba1076cec8237c7860ae5297ebdfc7fe6f40b2b1c95dd8de1741d"
+      },
+      {
+        "path": "tests/viewer/test_catalog_server.py",
+        "sha256": "887279b0643c7e872ff84f1e22bcf80690b5dff9c9b55d0f5c731cb9f764c20d"
+      }
+    ],
+    "studies": [
+      {
+        "id": "S-A",
+        "study": "ATLAS-PARITY-01 A",
+        "availability": "INPUT_MISSING",
+        "full_text_read": false,
+        "origin_observed": "Mission names the prior study; study bytes not identified",
+        "author": "UNKNOWN",
+        "version": "UNKNOWN",
+        "sha256_observed": null,
+        "sha256_expected": null,
+        "hash_verification": "NOT_POSSIBLE_WITHOUT_BYTES",
+        "decisions_reused": []
+      },
+      {
+        "id": "S-B",
+        "study": "ATLAS-PARITY-01 B",
+        "availability": "INPUT_MISSING",
+        "full_text_read": false,
+        "origin_observed": "Mission names the prior study; study bytes not identified",
+        "author": "UNKNOWN",
+        "version": "UNKNOWN",
+        "sha256_observed": null,
+        "sha256_expected": null,
+        "hash_verification": "NOT_POSSIBLE_WITHOUT_BYTES",
+        "decisions_reused": []
+      },
+      {
+        "id": "S-C",
+        "study": "ATLAS-PARITY-01 C",
+        "availability": "INPUT_MISSING",
+        "full_text_read": false,
+        "origin_observed": "Mission names the prior study; study bytes not identified",
+        "author": "UNKNOWN",
+        "version": "UNKNOWN",
+        "sha256_observed": null,
+        "sha256_expected": "f8d274ffe5ac043005b2c27779286638a86c7c2aff3e30ee64a4497b434b110b",
+        "hash_verification": "NOT_POSSIBLE_WITHOUT_BYTES",
+        "decisions_reused": [],
+        "summary_in_mission": {
+          "source": "I001",
+          "claims": [
+            "C0 without protocol change",
+            "12 journeys",
+            "presentation contracts"
+          ],
+          "status": "REPORTED_SUMMARY_ONLY_NOT_VERIFIED_STUDY_CONTENT",
+          "requirements_imported": []
+        }
+      },
+      {
+        "id": "S-D",
+        "study": "ATLAS-PARITY-01 D",
+        "availability": "INPUT_MISSING",
+        "full_text_read": false,
+        "origin_observed": "Mission names the prior study; study bytes not identified",
+        "author": "UNKNOWN",
+        "version": "UNKNOWN",
+        "sha256_observed": null,
+        "sha256_expected": null,
+        "hash_verification": "NOT_POSSIBLE_WITHOUT_BYTES",
+        "decisions_reused": []
+      },
+      {
+        "id": "S-C-HANDOFF",
+        "study": "ATLAS-PARITY-01 C handoff",
+        "availability": "INPUT_MISSING",
+        "full_text_read": false,
+        "origin_observed": "Expected filename/hash stated in mission only",
+        "author": "UNKNOWN",
+        "version": "UNKNOWN",
+        "sha256_observed": null,
+        "sha256_expected": "e8c7b1b3a8eb0a276d94e98f94b9d1477e555d305ebee62d99ec48ee93f5650e",
+        "hash_verification": "NOT_POSSIBLE_WITHOUT_BYTES",
+        "decisions_reused": []
+      }
+    ],
+    "receipt": {
+      "url": "https://github.com/thalesvalente/Atlas/pull/5#issuecomment-6406839421",
+      "body_sha256": "52f6b013ddedeb17bb98a0acfa10f84f98b08d3789486cf766e96cf8783cefde",
+      "accepted_scope": "ADR-0002 v1.0 STABILIZATION_DIRECTION ONLY"
+    }
+  },
+  "paths_changed": [
+    "docs/contracts/atlas-parity-02/p01/COVERAGE-CONTRACT.md",
+    "docs/contracts/atlas-parity-02/p01/PRESENTATION-CONTRACTS.md",
+    "docs/contracts/atlas-parity-02/p01/VALIDATION.md",
+    "docs/contracts/atlas-parity-02/p01/examples/cases.json",
+    "docs/contracts/atlas-parity-02/p01/examples/coverage-denominator-unknown.json",
+    "docs/contracts/atlas-parity-02/p01/examples/coverage-empty-universe.json",
+    "docs/contracts/atlas-parity-02/p01/examples/coverage-minimal.json",
+    "docs/contracts/atlas-parity-02/p01/examples/current-profile-minimal.json",
+    "docs/contracts/atlas-parity-02/p01/examples/current-profile-second-source.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-boolean-count.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-denominator-scope.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-denominator-unit.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-fractional-count.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-inferred-collection.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-known-without-evidence.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-loss-mismatch.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-negative-count.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-no-unknown-reason.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-required-sidecar.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-subset-exceeds.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-unknown-zero.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-coverage-zero-denominator-percent.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-cross-source-resolution.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-current-missing-reference.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-current-missing-value-reason.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-current-synthetic-approval.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-document-as-run.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-duplicate-contextual-id.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-event-from-file-time.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-input-subject-document.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-json-numeric-overflow.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-mention-as-input.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-stable-ordinal-link.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-column-order.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-comparison-missing.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-comparison-unit.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-lexical-loss.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-missing-reason.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-order.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-promoted-protocol.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-type.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-table-unknown-semantic.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-timezone-missing.json",
+    "docs/contracts/atlas-parity-02/p01/examples/negative-unknown-time-precision.json",
+    "docs/contracts/atlas-parity-02/p01/examples/presentation-contextual-collision.json",
+    "docs/contracts/atlas-parity-02/p01/examples/presentation-explicit-input.json",
+    "docs/contracts/atlas-parity-02/p01/examples/presentation-minimal.json",
+    "docs/contracts/atlas-parity-02/p01/examples/table-incompatible-explicit.json",
+    "docs/contracts/atlas-parity-02/p01/examples/table-semantic-unknown.json",
+    "docs/contracts/atlas-parity-02/p01/examples/table-typed-minimal.json",
+    "docs/contracts/atlas-parity-02/p01/validate_examples.py",
+    "docs/missions/atlas-parity-02/p01-contracts/CAPABILITY-PARITY.csv",
+    "docs/missions/atlas-parity-02/p01-contracts/DECISIONS-AND-GAPS.md",
+    "docs/missions/atlas-parity-02/p01-contracts/EVIDENCE-REGISTER.md",
+    "docs/missions/atlas-parity-02/p01-contracts/HANDOFF.json",
+    "docs/missions/atlas-parity-02/p01-contracts/INDEPENDENT-REVIEW.md",
+    "docs/missions/atlas-parity-02/p01-contracts/INPUT-INVENTORY.json",
+    "docs/missions/atlas-parity-02/p01-contracts/MANIFEST.sha256",
+    "docs/missions/atlas-parity-02/p01-contracts/RESULT.md",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/architecture.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/examples-final-normal.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/examples-final-optimized.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/examples-first-run.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/examples-optimized.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/final-packet-audit.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/packet-prepublication.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/published-payload.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/related-references.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/related-references.log",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/speckit-analyze.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/speckit-final.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/speckit-setup.json",
+    "docs/missions/atlas-parity-02/p01-contracts/verification/speckit-tasks.json",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/analysis.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/checklists/requirements.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/clarifications.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/convergence.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/data-model.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/plan.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/quickstart.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/research.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/spec.md",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/tasks.md"
+  ],
+  "tests_executed": [
+    {
+      "id": "P01-EXAMPLES",
+      "unique_cases": 46,
+      "positive": 11,
+      "negative": 35,
+      "result": "PASS",
+      "code_sha": "3a308ee78e185912959920d85a97cd511a70a764",
+      "evidence": "verification/published-payload.json",
+      "environment": "Linux/Python 3.12.14 source checkout, offline",
+      "modes": [
+        "normal",
+        "optimized"
+      ],
+      "mode_note": "Same 46 cases, not summed; exact published payload rerun also not additional cases"
+    },
+    {
+      "id": "P01-READER-PROBES",
+      "count": 9,
+      "result": "PASS",
+      "product_code_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "validation_code_sha": "3a308ee78e185912959920d85a97cd511a70a764",
+      "evidence": "verification/examples-final-normal.json",
+      "scope": "public reader/catalog; synthetic fixtures; no browser"
+    },
+    {
+      "id": "BASELINE-RELATED-REFERENCES",
+      "tests": 11,
+      "failures": 0,
+      "skips": 0,
+      "result": "PASS",
+      "product_code_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "evidence": "verification/related-references.json",
+      "environment": "Linux/Python 3.12.14 source checkout; not a fresh installed distribution"
+    },
+    {
+      "id": "ARCHITECTURE",
+      "result": "PASS_SCOPED",
+      "product_code_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "evidence": "verification/architecture.json"
+    },
+    {
+      "id": "SPECKIT-HELPERS",
+      "result": "PASS",
+      "evidence": [
+        "verification/speckit-setup.json",
+        "verification/speckit-tasks.json",
+        "verification/speckit-analyze.json",
+        "verification/speckit-final.json"
+      ],
+      "pointer_writes": 0
+    },
+    {
+      "id": "PRESERVATION-OWNERSHIP",
+      "result": "PASS",
+      "baseline_files": 162,
+      "protocol_files": 12,
+      "evidence": "verification/final-packet-audit.json"
+    }
+  ],
+  "historical_evidence_reused": [
+    {
+      "kind": "PUBLIC_RECEIPT_NOT_REEXECUTED_CURRENT_CI",
+      "tested_sha": "e985ea3124b7a3cd241ee2dbc88b5ad50688373c",
+      "reported_tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+      "reported_runs": [
+        40246678115,
+        40246678113
+      ],
+      "source": "https://github.com/thalesvalente/Atlas/pull/5#issuecomment-6406839421",
+      "used_for": "baseline context only; no CI pass attributed to P01"
+    }
+  ],
+  "review": {
+    "reviewer_native_id": "/root/independent_qa",
+    "authors_native_ids": [
+      "/root",
+      "/root/archaeology",
+      "/root/semantics"
+    ],
+    "status": "PASS_SCOPED",
+    "code_and_corpus_hash_binding": "INDEPENDENT-REVIEW.md",
+    "finding": {
+      "id": "QA-P01-01",
+      "severity": "MEDIUM",
+      "status": "CLOSED",
+      "fix": "Reject float overflow at JSON parse, explicit negative fixture, independent recheck"
+    },
+    "envelope_review": {
+      "status": "PASS_STRUCTURAL_SCOPED",
+      "reviewer_native_id": "/root/independent_qa",
+      "recorded_at": "2026-10-27T12:04:49-03:00",
+      "reviewed_snapshot_sha256": {
+        "RESULT.md": "8dd5f2cd3077f31997f27b7cf273196bfdad853d83a29faab0e2ccaa9c23d06a",
+        "HANDOFF.json": "c3354979c4c9e79baeae3822c2f5eb2f17dba1ceb703eea81d35c4c630075557",
+        "MANIFEST.sha256": "8ee4b608baf5b6f6a324547ebeae9515fe668c8282bdd503dc3e98d6b9441882",
+        "INDEPENDENT-REVIEW.md": "3c26ba6b9c43d9389e43b5d097b9435f0481c0a86d33b6b32909092a360dd7f3"
+      },
+      "checks": {
+        "handoff_paths": 83,
+        "manifest_entries": 82,
+        "manifest_valid": true,
+        "baseline_files_preserved": 162,
+        "protocol_files_preserved": 12,
+        "technical_payload_unchanged": true,
+        "local_links_resolve": true
+      },
+      "limits": "Own receipt update, regenerated manifest, final commit publication and later CI observed by coordinator; not retroactively attributed to reviewer."
+    },
+    "envelope_review_self_receipt_excluded": true
+  },
+  "blockers_for_p01": [],
+  "nonblocking_input_gaps": [
+    "A/B/C/D full texts not identified in permitted input search",
+    "C-study/C-handoff expected hashes cannot be verified without bytes",
+    "Legacy upstream counts and real parity unobserved"
+  ],
+  "external_results": {
+    "status": "POST_COMMIT_OBSERVATION_REQUIRED",
+    "current_ci_run_id": null,
+    "note": "After final publication, one observation of exact SHA/run is recorded in PR body and final answer. No polling, workflow change or dispatch. Existing workflows do not run the P01 documentary corpus."
+  },
+  "next_minimum_act": "P02/P03 consume compatible presentation candidates; P06 review/integrate received objects and run documentary corpus at its exact candidate SHA. Receive missing studies when available without blocking C0.",
+  "decisions_not_granted": [
+    "new persisted protocol/schema/context/version",
+    "stable release",
+    "scientific approval",
+    "canonical promotion",
+    "merge",
+    "host operation or migration"
+  ],
+  "publication_scope": {
+    "authored_public_and_synthetic_only": true,
+    "private_attachments_transferred": false,
+    "other_repositories_written": false
+  },
+  "manifest": {
+    "path": "docs/missions/atlas-parity-02/p01-contracts/MANIFEST.sha256",
+    "algorithm": "SHA-256",
+    "path_base": "repository root",
+    "excludes_itself": true,
+    "scope": "all authored P01 artifacts in the three allowed roots"
+  }
+}

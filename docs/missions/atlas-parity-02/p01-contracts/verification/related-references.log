@@ -1,0 +1,16 @@
+test_availability_and_digest_keep_observed_and_declared_meanings (test_related_references.RelatedReferenceTests.test_availability_and_digest_keep_observed_and_declared_meanings) ... ok
+test_declared_mention_is_visible_without_input_or_output_invention (test_related_references.RelatedReferenceTests.test_declared_mention_is_visible_without_input_or_output_invention) ... ok
+test_expanded_reference_objects_are_not_silently_normalized (test_related_references.RelatedReferenceTests.test_expanded_reference_objects_are_not_silently_normalized) ... ok
+test_html_and_unsafe_uri_context_stay_data_without_arbitrary_read (test_related_references.RelatedReferenceTests.test_html_and_unsafe_uri_context_stay_data_without_arbitrary_read) ... ok
+test_index_rebuild_adds_projection_to_legacy_index_without_source_write (test_related_references.RelatedReferenceTests.test_index_rebuild_adds_projection_to_legacy_index_without_source_write) ... ok
+test_missing_empty_and_long_titles_keep_declared_identity (test_related_references.RelatedReferenceTests.test_missing_empty_and_long_titles_keep_declared_identity) ... ok
+test_mixed_inputs_outputs_and_mentions_do_not_create_extra_lineage (test_related_references.RelatedReferenceTests.test_mixed_inputs_outputs_and_mentions_do_not_create_extra_lineage) ... ok
+test_packages_without_run_mentions_continue_with_empty_references (test_related_references.RelatedReferenceTests.test_packages_without_run_mentions_continue_with_empty_references) ... ok
+test_same_ids_in_two_sources_resolve_inside_their_own_package (test_related_references.RelatedReferenceTests.test_same_ids_in_two_sources_resolve_inside_their_own_package) ... ok
+test_single_reference_and_list_forms_preserve_first_occurrence_order (test_related_references.RelatedReferenceTests.test_single_reference_and_list_forms_preserve_first_occurrence_order) ... ok
+test_unresolved_mentions_are_rejected_without_source_fallback (test_related_references.RelatedReferenceTests.test_unresolved_mentions_are_rejected_without_source_fallback) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.094s
+
+OK
