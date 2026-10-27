@@ -61,6 +61,11 @@ try {
   }
   report.status = 'FAIL';
   report.browser_version = browser.version();
+  let packagePath;
+  try {packagePath = require.resolve('playwright/package.json');}
+  catch {packagePath = require.resolve('playwright/package.json', {
+    paths: [process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES].filter(Boolean)});}
+  report.playwright_version = require(packagePath).version;
   context = await browser.newContext({viewport: {width: 1440, height: 1000}});
   await context.route('**/*', async request => {
     const target = request.request().url();

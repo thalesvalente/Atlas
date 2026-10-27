@@ -35,3 +35,26 @@ nos três cenários anteriores. Sem findings estáticos do revisor independente.
 P06 implementado e verificado no seu escopo; composição permanece não realizada
 por ausência de P02. Não se acrescenta tarefa de implementação artificial por
 uma dependência externa ou por estudos ausentes.
+
+
+## Análise atual C1 — substitui somente o estado de composição pendente acima
+
+Método Spec Kit 1.2.3 aplicado; skills oficiais consultadas, sem alegar dispatch
+nativo. Não há extensions.yml ou hooks registrados. Os inputs agora são concretos:
+P02 db6e8b6 e P06 9b0a500, manifests 55/55 e 22/22 conferidos.
+
+| Requisitos | Tarefas C1 | Critério observado ou exigido |
+|---|---|---|
+| FR-001/006 | T013 | default RED; ambos opt-ins PASS; negativas protegidas |
+| FR-002/003/009 | T014/T017 | controles/valores por identidade; cinco jornadas reais |
+| FR-004/005/010 | T015/T017 | wheels externos, quatro células, zero skips e seis PNGs |
+| FR-007/008 | T012/T018 | ancestry, manifests, CI por SHA e reviewer sem autoria |
+| FR-011 | T016 | helpers 003/004 com NO_PERSIST; feature.json ausente |
+
+Convergência inicial: três gaps HIGH/partial (auditoria, oráculos globais,
+instalação/browser conectado) e um gap MEDIUM/partial (agregação 004).
+Nenhum desvio ARC-01–09 e nenhum gap depende de P01/P03 ou acervo privado.
+T017/T018 só fecham após execução/revisão reais; checkboxes anteriores não
+substituem evidência. Source binding global P02 prevalece ao receber snapshot
+novo: detalhe e seleção antigos expiram; a expectativa anterior P06 de seleção
+sobrevivente exige atualização do harness, com RED de estado registrado.

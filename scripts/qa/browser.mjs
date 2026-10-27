@@ -28,6 +28,90 @@ const record = name => checks.push({name,status:'PASS'});
 const screenshots = [];
 const expectedInteger=args.get('--expected-exact-integer');
 const metricText=m=>m.display_value??String(m.value??'Ausente');
+const precisionText=m=>typeof m.display_precision==='string'?m.display_precision:
+  m.precision===null||m.precision===undefined?'Não informado':
+  typeof m.precision==='object'?JSON.stringify(m.precision):String(m.precision);
+const runKey=run=>JSON.stringify([run.source,run.id]);
+// The key is a JSON string (no literal control characters); quoting it again
+// escapes its quotes/backslashes for an exact CSS attribute selector.
+async function controlFor(page,kind,run) {
+  const key=runKey(run);
+  const control=page.locator('[data-testid="'+kind+'"][data-run-key='+JSON.stringify(key)+']');
+  assert.equal(await control.count(),1,'Exactly one '+kind+' for source + run ID '+key);
+  assert.deepEqual(JSON.parse(await control.getAttribute('data-run-key')),[run.source,run.id]);
+  return control;
+}
+async function openRun(page,run) {await (await controlFor(page,'run-open',run)).click();}
+async function selectRun(page,run) {await (await controlFor(page,'run-select',run)).check();}
+const directText=locator=>locator.evaluate(node=>[...node.childNodes]
+  .filter(child=>child.nodeType===Node.TEXT_NODE).map(child=>child.textContent).join(''));
+async function comparisonColumns(page,selected) {
+  const headers=page.getByTestId('compare').locator('thead th[scope="col"]');
+  assert.equal(await headers.count(),selected.length+1);
+  const keys=[];
+  for(let column=1;column<=selected.length;column++) {
+    const link=headers.nth(column).locator('[data-run-key]');
+    assert.equal(await link.count(),1);
+    const key=await link.getAttribute('data-run-key');
+    assert.ok(!keys.includes(key),'Comparison columns must have unique source + run identities');
+    const run=selected.find(candidate=>runKey(candidate)===key);
+    assert.ok(run,'Every comparison column belongs to a selected identity');
+    assert.equal(await link.innerText(),run.name||run.id);
+    assert.equal(await headers.nth(column).locator('small').first().innerText(),run.source_name);
+    assert.equal(await headers.nth(column).locator('small').last().innerText(),run.id);
+    keys.push(key);
+  }
+  assert.deepEqual(new Set(keys),new Set(selected.map(runKey)));
+  return keys;
+}
+async function comparisonRow(page,metric) {
+  const identity=[metric.property_id||metric.name,metric.type,metric.unit||'sem unidade'].join(' · ');
+  const rows=page.getByTestId('compare').locator('tbody tr');
+  let found;
+  for(const row of await rows.all()) {
+    const header=row.locator('th[scope="row"]');
+    assert.equal(await header.count(),1,'A comparison metric has a row header, not a value td');
+    const secondary=header.locator(':scope > small');
+    if(await secondary.count()===1&&await secondary.innerText()===identity) {
+      assert.equal(found,undefined,'Metric/type/unit identity is unique');
+      found=row;
+    }
+  }
+  assert.ok(found,'Comparison contains exact metric/type/unit identity '+identity);
+  return found;
+}
+async function checkComparisonValues(page,selected) {
+  const columns=await comparisonColumns(page,selected);
+  const identities=new Map();
+  for(const run of selected)for(const metric of run.metrics) {
+    const identity=JSON.stringify([metric.property_id||metric.name,metric.type,metric.unit]);
+    if(!identities.has(identity))identities.set(identity,metric);
+  }
+  for(const metric of identities.values()) {
+    const row=await comparisonRow(page,metric);
+    const cells=row.locator('td');
+    assert.equal(await cells.count(),selected.length);
+    for(const run of selected) {
+      const values=run.metrics.filter(candidate=>
+        (candidate.property_id||candidate.name)===(metric.property_id||metric.name)&&
+        candidate.type===metric.type&&candidate.unit===metric.unit);
+      const cell=cells.nth(columns.indexOf(runKey(run)));
+      if(!values.length) {
+        assert.equal(await cell.innerText(),'Ausente / incompatível');
+        continue;
+      }
+      assert.deepEqual(await cell.locator(':scope > div').allTextContents(),values.map(value=>
+        metricText(value)+(value.unit?' '+value.unit:'')+(value.missing_reason?' — '+value.missing_reason:'')));
+      const secondary=[];
+      for(const value of values) {
+        secondary.push('Precisão declarada: '+precisionText(value));
+        if(values.length>1)secondary.push(value.id);
+      }
+      assert.deepEqual(await cell.locator(':scope > small').allTextContents(),secondary,
+        'Precision and repeated measurement IDs remain in the correct source/run column');
+    }
+  }
+}
 const referenceIds=value=>Array.isArray(value)?value.flatMap(referenceIds):
   value&&typeof value==='object'&&Object.keys(value).length===1&&typeof value['@id']==='string'?[value['@id']]:[];
 try {
@@ -41,7 +125,7 @@ try {
       await route.abort();
     } else await route.continue();
   });
-  const page=await context.newPage();
+  let page=await context.newPage();
   page.on('pageerror', error=>pageErrors.push(error.message));
   const response=await page.goto(url,{waitUntil:'networkidle'});
   assert.equal(response.status(),200);
@@ -49,14 +133,28 @@ try {
   const api=await page.request.get(origin+'/api/catalog');
   assert.equal(api.status(),200);
   catalog=await api.json();
-  const runs=catalog.sources.flatMap(s=>(s.read_model?.runs||[]).map(r=>({...r,source:s.id})));
+  const runs=catalog.sources.flatMap(s=>(s.read_model?.runs||[]).map(r=>({...r,source:s.id,source_name:s.name})));
   report.sources=catalog.sources.length;
   report.runs=runs.length;
   if(args.has('--expected-sources')) assert.equal(catalog.sources.length,Number(args.get('--expected-sources')));
   if(args.has('--expected-runs')) assert.equal(runs.length,Number(args.get('--expected-runs')));
   await page.waitForFunction(n=>document.getElementById('runs-count').textContent===String(n),runs.length);
   assert.equal(await page.getByTestId('run-table').locator('tbody tr').count(),runs.length);
-  for(const run of runs) assert.ok((await page.getByTestId('run-table').innerText()).includes(run.name||run.id));
+  const expectedKeys=runs.map(runKey);
+  assert.equal(new Set(expectedKeys).size,runs.length,'API source + run IDs are unique');
+  const displayedKeys=await page.getByTestId('run-open').evaluateAll(nodes=>nodes.map(node=>node.dataset.runKey));
+  assert.equal(new Set(displayedKeys).size,runs.length,'Displayed source + run IDs are unique');
+  assert.deepEqual(new Set(displayedKeys),new Set(expectedKeys),'UI identities equal the API independently of ordering');
+  for(const run of runs) {
+    const control=await controlFor(page,'run-open',run);
+    assert.equal(await control.innerText(),run.name||run.id);
+    await controlFor(page,'run-select',run);
+    const row=control.locator('xpath=ancestor::tr');
+    assert.equal(await row.getAttribute('data-run-key'),runKey(run));
+    assert.equal(await directText(row.locator('td').nth(2)),run.source_name);
+    assert.equal(await row.locator('td').nth(2).locator('small').innerText(),run.source);
+  }
+  record('source_and_run_key_identity_unique_independent_of_order');
   record('catalog_records_match_parsed_source');
   assert.equal(await page.locator('#run-rows script, #run-rows img, #detail script, #detail img').count(),0);
   assert.equal(await page.evaluate(()=>window.__atlasQA),undefined);
@@ -83,7 +181,7 @@ try {
     assert.equal(await page.getByTestId('run-table').locator('tbody tr').count(),runs.filter(r=>r.status===first.status).length);
     await page.getByRole('button',{name:'Limpar',exact:true}).click();
     record('project_experiment_status_filters');
-    await page.getByTestId('run-open').first().click();
+    await openRun(page,first);
     assert.ok(await page.getByTestId('detail').isVisible());
     const detail=await page.getByTestId('detail').innerText();
     for(const text of [first.id,first.status,first.review_status])assert.ok(detail.includes(text));
@@ -103,9 +201,13 @@ try {
   report.semantic_coverage=coverage;
   for(let index=0;index<runs.length;index++) {
     const run=runs[index];
-    await page.getByTestId('run-open').nth(index).click();
+    await openRun(page,run);
     const detail=page.getByTestId('detail');
     assert.equal(await detail.locator('code').first().innerText(),run.id);
+    assert.equal(await detail.locator('dt').filter({hasText:/^Identidade da fonte$/})
+      .locator('xpath=following-sibling::dd[1]').innerText(),run.source);
+    assert.equal(await detail.locator('dt').filter({hasText:/^Fonte \/ pacote$/})
+      .locator('xpath=following-sibling::dd[1]').innerText(),run.source_name);
     const text=await detail.innerText();
     for(const value of [run.status,run.review_status,run.timestamp_origin,run.project_id,run.experiment_id])
       assert.ok(text.includes(value),'Every run retains its identity, states and time origin');
@@ -115,10 +217,15 @@ try {
     assert.equal(await rows.count(),properties.length);
     for(let p=0;p<properties.length;p++) {
       const metric=properties[p],cells=rows.nth(p).locator('td');
-      assert.equal(await cells.nth(0).innerText(),metric.name);
+      assert.equal(await directText(cells.nth(0)),metric.name,'Metric name is the primary text');
+      assert.equal(await cells.nth(0).locator(':scope > small').count(),1);
+      assert.equal(await cells.nth(0).locator(':scope > small').innerText(),metric.property_id||metric.id,
+        'Metric identity is separate from its name');
       const expected=metricText(metric)+(metric.missing_reason?' — '+metric.missing_reason:'');
       assert.equal(await cells.nth(1).innerText(),expected,'Values and reasons for absence survive the UI');
       assert.equal(await cells.nth(2).innerText(),[metric.type,metric.unit].filter(Boolean).join(' / ')||'Não declarada');
+      assert.equal(await cells.count(),4);
+      assert.equal(await cells.nth(3).innerText(),precisionText(metric),'Declared precision is preserved exactly');
       if(metric.value===null||metric.value===undefined) {
         assert.ok(metric.missing_reason,'An absent value needs its declared reason');
         assert.ok((await cells.nth(1).innerText()).startsWith('Ausente'),'Absence must not become zero');
@@ -181,7 +288,7 @@ try {
     for(const source of catalog.sources) {
       const index=runs.findIndex(r=>r.source===source.id&&r.related_references?.length>1);
       assert.ok(index>=0);
-      await page.getByTestId('run-open').nth(index).click();
+      await openRun(page,runs[index]);
       const section=page.getByTestId('related-references');
       const raw=source.read_model.entities.find(e=>e['@id']===runs[index].id);
       assert.ok(referenceIds(raw.mentions).length>new Set(referenceIds(raw.mentions)).size,'Fixture exercises duplication');
@@ -207,10 +314,11 @@ try {
     record('related_references_do_not_open_external_uris_or_download_content');
   }
   if(runs.length>=2) {
-    await page.getByTestId('run-select').nth(0).check();
-    await page.getByTestId('run-select').nth(1).check();
+    await selectRun(page,runs[0]);
+    await selectRun(page,runs[1]);
     await page.getByTestId('compare-selected').click();
     assert.ok(await page.getByTestId('compare').isVisible());
+    await checkComparisonValues(page,runs.slice(0,2));
     const comparison=await page.getByTestId('compare').innerText();
     for(const run of runs.slice(0,2)) {
       assert.ok(comparison.includes(run.name||run.id));
@@ -256,20 +364,10 @@ try {
    if(pair) {
     await page.locator('[data-view="explore"]').click();
     for(const selector of await page.getByTestId('run-select').all())await selector.uncheck();
-    await page.getByTestId('run-select').nth(pair.left).check();
-    await page.getByTestId('run-select').nth(pair.right).check();
+    await selectRun(page,runs[pair.left]);
+    await selectRun(page,runs[pair.right]);
     await page.getByTestId('compare-selected').click();
-    const matching=page.getByTestId('compare').locator('tbody tr').filter({has:page.locator('small').filter({hasText:pair.a.property_id})});
-    const expectedIdentity=[pair.a.property_id,pair.a.type,pair.a.unit||'sem unidade'].join(' · ');
-    const rows=await matching.all();
-    let comparableRow;
-    for(const row of rows)if(await row.locator('small').innerText()===expectedIdentity){comparableRow=row;break;}
-    assert.ok(comparableRow,'Compatible measurements share one comparison row');
-    for(const [column,metric] of [[1,pair.a],[2,pair.b]]) {
-      const text=await comparableRow.locator('td').nth(column).innerText();
-      assert.ok(text.includes(metricText(metric)));
-      assert.ok(text.includes(metric.unit));
-    }
+    await checkComparisonValues(page,[runs[pair.left],runs[pair.right]]);
     coverage.compatible_comparisons++;
     coverage.compatible_comparisons_by_source[source.id]++;
    }
@@ -342,6 +440,11 @@ try {
   assert.ok(after.generation>catalog.generation);
   assert.deepEqual(after.sources.map(s=>s.read_model),catalog.sources.map(s=>s.read_model));
   record('explicit_reindex_preserves_source_records');
+  // A new document starts sequential keyboard focus at the beginning. A
+  // hash-only navigation must not masquerade as a fresh keyboard session.
+  await page.close();
+  page=await context.newPage();
+  page.on('pageerror', error=>pageErrors.push(error.message));
   await page.goto(url,{waitUntil:'networkidle'});
   await page.keyboard.press('Tab');
   assert.ok(await page.evaluate(()=>document.activeElement.classList.contains('skip')));
@@ -362,7 +465,7 @@ try {
   record('visible_controls_have_names');
   await fs.mkdir(path.dirname(reportPath),{recursive:true});
   if(args.has('--expect-related-references')) {
-    await page.getByTestId('run-open').first().click();
+    await openRun(page,runs[0]);
     await page.getByTestId('related-references').scrollIntoViewIfNeeded();
   }
   const desktopPath=reportPath.replace(/\.json$/,'')+'-desktop.png';
@@ -373,7 +476,7 @@ try {
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Mobile page must not overflow the viewport');
   assert.equal(await page.getByTestId('run-table').locator('tbody tr').count(),runs.length);
   if(runs.length) {
-    await page.getByTestId('run-open').first().click();
+    await openRun(page,runs[0]);
     assert.ok(await page.getByTestId('detail').isVisible());
   }
   if(args.has('--expect-related-references')) {
@@ -434,6 +537,9 @@ try {
   if(browser)await browser.close();
   report.screenshots=screenshots;
   report.executed_checks=checks.length;
+  report.native_zoom='NOT_RUN';
+  report.css_zoom_used=Boolean(report.zoom);
+  report.wcag_certification=false;
   report.human_protocol_acceptance='PENDING';
   report.canonical_promotion='NOT_AUTHORIZED';
   await fs.mkdir(path.dirname(reportPath),{recursive:true});

@@ -22,3 +22,17 @@ ser registradas com run/SHA exatos; ausência de inputs não exige espera contí
 - [X] T011 Fechar a lacuna FR-002 de pacote válido trocado/links obsoletos com
   scripts/qa/atlas_parity02_p06_browser.py e .mjs e chamada explícita em CI.
   Revisão estática PASS_SCOPED no d21; execução PASS_SCOPED pertence ao run 40523433530,10 checks.
+
+
+## Phase 5: Convergence — ATLAS-PARITY-03-C1
+
+T001–T011 acima são recibos históricos da frente P06, atribuídos aos seus SHAs.
+Esta fase registra os gaps recebidos pela composição C1, sem reescrever aqueles IDs.
+
+- [X] T012 Congelar P02/P06 por SHA/tree/manifests e preservar ancestry por merge (FR-007; missing).
+- [X] T013 Reparar auditoria com autorização exata dos três blobs P02 e negativas de governança/protocolo (FR-001/006; partial).
+- [X] T014 Reparar H06-01/02/03 por identidade fonte+ID, métrica e coluna (FR-002/003/009; partial).
+- [X] T015 Conectar consumidor externo, coleção zero-skips e browser P02 com fontes/recibos (FR-004/005/010; missing).
+- [X] T016 Validar agregadores 004 e helpers oficiais sem ponteiro concorrente (FR-011; partial).
+- [ ] T017 Executar todos os gates no SHA composto e resolver RED reproduzível P06 sem alterar runtime congelado (FR-005/009; partial).
+- [ ] T018 Obter revisão independente por SHA e publicar os oito artefatos finais, distinguindo recibo externo do commit autorreferente (FR-007/008; partial).

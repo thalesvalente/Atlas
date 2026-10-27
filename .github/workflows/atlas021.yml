@@ -24,6 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -38,7 +39,23 @@ jobs:
       - name: Verify contracts, architecture, safe reading and viewer
         run: python scripts/run_checks.py
       - name: Install wheels again in new empty environments
-        run: python scripts/qa/clean_install.py --repo . --work .ci-clean
+        run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-portable"
+      - name: Install test-only schema tooling and run the installed suite outside checkout with zero skips
+        run: python scripts/qa/atlas_parity02_p06_installed_checks.py --repo . --work "${{ runner.temp }}/atlas-c1-portable" --install-test-tools
+      - name: Verify installed wheel assets and fixed routes
+        run: python scripts/qa/atlas_parity02_p06_wheel.py --work "${{ runner.temp }}/atlas-c1-portable"
+      - name: Preserve exact-SHA installed verification receipts and collection
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-c1-installed-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/atlas-c1-portable/clean-install-report.json
+            ${{ runner.temp }}/atlas-c1-portable/parity02-p06-installed-checks.json
+            ${{ runner.temp }}/atlas-c1-portable/parity02-p06-installed-checks.log
+            ${{ runner.temp }}/atlas-c1-portable/parity02-p06-wheel-report.json
+          if-no-files-found: error
+          retention-days: 14
 
   browser:
     name: Installed viewer / Chromium desktop and mobile
@@ -47,6 +64,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -59,27 +77,37 @@ jobs:
         run: |
           git rev-parse HEAD
           python -m pip install build==1.3.0 setuptools==80.9.0 wheel==0.45.1
-          python scripts/qa/clean_install.py --repo . --work .ci-clean
+          python scripts/qa/clean_install.py --repo . --work "$RUNNER_TEMP/atlas-c1-browser"
       - name: Install pinned browser test tooling
         run: |
           npm install --no-save playwright@1.62.1
           npx playwright install --with-deps chromium
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-color-emoji
       - name: Exercise installed product in a real browser
-        run: python scripts/ci/run_browser.py --work .ci-clean
+        run: python scripts/ci/run_browser.py --work "$RUNNER_TEMP/atlas-c1-browser"
       - name: Regress precision, repeated metrics and untrusted labels
-        run: python scripts/ci/run_browser.py --work .ci-clean --adversarial
-      - name: Verify related references, source identity, keyboard and 200 percent zoom
-        run: python scripts/ci/run_browser.py --work .ci-clean --related-references
+        if: ${{ !cancelled() }}
+        run: python scripts/ci/run_browser.py --work "$RUNNER_TEMP/atlas-c1-browser" --adversarial
+      - name: Verify related references, source identity, keyboard and legacy CSS zoom
+        if: ${{ !cancelled() }}
+        run: python scripts/ci/run_browser.py --work "$RUNNER_TEMP/atlas-c1-browser" --related-references
+      - name: Exercise P02 C0 from the installed consumer outside the checkout
+        if: ${{ !cancelled() }}
+        run: |
+          "$RUNNER_TEMP/atlas-c1-browser/viewer-env/bin/python" -I scripts/qa/atlas_parity02_p02_run_browser.py --repo "$GITHUB_WORKSPACE" --report "$RUNNER_TEMP/atlas-c1-browser/p02/browser-report.json" --screenshots "$RUNNER_TEMP/atlas-c1-browser/p02/screenshots" --code-sha "$(git rev-parse HEAD)" --require-fonts
       - name: Preserve synthetic browser evidence for the tested candidate
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: atlas003-browser-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
-            .ci-clean/browser*.json
-            .ci-clean/browser*.png
-            .ci-clean/clean-install-report.json
-          if-no-files-found: warn
+            ${{ runner.temp }}/atlas-c1-browser/browser*.json
+            ${{ runner.temp }}/atlas-c1-browser/browser*.png
+            ${{ runner.temp }}/atlas-c1-browser/clean-install-report.json
+            ${{ runner.temp }}/atlas-c1-browser/p02/**/*.json
+            ${{ runner.temp }}/atlas-c1-browser/p02/screenshots/*.png
+          if-no-files-found: error
           include-hidden-files: true
           retention-days: 14
 
@@ -90,6 +118,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065

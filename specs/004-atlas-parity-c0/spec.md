@@ -1,52 +1,67 @@
-# Feature 004 — Atlas parity C0
-Branch P06: `work/atlas-parity02-p06-qa-20261027`.
-Base fixada: `c2d00fb137cac1d62d6b7cb045ddbe055355a4c5`;
-tree `5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59`.
-Reserva 004: livre na árvore e na consulta inicial de branches parity.
-Esta especificação agregadora delimita o trabalho P06 recebido; não inventa
-requisitos dos estudos A/B/C/D nem tarefas das outras frentes.
+# Feature 004 — Atlas parity C0: composição mínima C1
 
-## Intenção e clarificações
-Entregar QA independente do Atlas sobre o Caderno interoperável vigente.
-C0 pode compor P02+P06 sem exigir P01/P03, quando o delta concreto couber no
-contrato existente. P02 novo ainda não foi recebido por SHA no preflight.
-P01/P03 são opcionais conforme o conjunto escolhido; P04/P05 são evidência
-externa atribuída. UNKNOWN não é zero; digest não é autenticidade; CI não é
-aprovação científica ou promoção humana.
-O aceite ADR-0002 v1.0 como direção de estabilização foi recebido na PR #5,
-recibo 6406839421 e merge da base. Preservar os bytes históricos PENDING_HUMAN.
+Missão atual: ATLAS-PARITY-03-C1. Branch exclusiva:
+`integrate/atlas-parity03-c1-core-20261027`.
+Baseline: `c2d00fb137cac1d62d6b7cb045ddbe055355a4c5`, árvore
+`5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59`.
 
-## Requisitos verificáveis do escopo P06
-- FR-001: preservar byte a byte todos os arquivos versionados do protocolo,
-  entradas públicas e governança; detectar alteração, remoção e adição protegida.
-- FR-002: exercer APIs reais com duas fontes de IDs repetidos e conteúdo distinto,
-  pacote inválido/trocado e cache obsoleto sem cruzar identidade ou inventar preview.
-- FR-003: preservar estado técnico/revisão, UNKNOWN, ausência, precisão e tempo;
-  mentions neutras não mudam direção de relações nem provocam leitura/execução.
-- FR-004: verificar wheel instalado fora do checkout, SDK sem viewer/R4 e viewer
-  sem R4; assets no wheel iguais aos servidos, HTTP limitado à allowlist e origem.
-- FR-005: executar testes descobertos pelo runner em Windows/Ubuntu, normal/-O;
-  o navegador de engenharia usa explicitamente os três cenários do harness vigente.
-- FR-006: manter auditorias anteriores intactas e acrescentar contraprovas.
-- FR-007: compor somente SHAs congelados, incluindo P06; testar a composição e
-  obter revisor nativo sem autoria antes de declarar candidata verificada.
-- FR-008: entregar matriz, decisão, inputs, resultado, handoff e manifesto;
-  distinguir todas as dimensões de código, CI, browser, coorte, host e promoção.
+## Intenção e entradas
 
-## Jornadas e critérios
-US1: o integrador lê um recibo e sabe quais bytes, ambiente e prova foram usados.
-Aceite: FR-008 lista SHA/tree, execução/reuso e NOT_RUN/PENDING por dimensão.
-US2: um delta incompatível não é promovido por suite verde.
-Aceite: FR-001/006 rejeitam contraprovas; nenhuma exceção de protocolo é aceita.
-US3: a candidata mínima não depende de componente opcional ausente.
-Aceite: FR-007 seleciona entradas por necessidade real e lista capacidades ausentes.
-SC-001: todos os novos unittest são coletados pelo runner existente, sem asserts
-desativáveis por -O; contagens por cenário/modo não são somadas como casos únicos.
-SC-002: nenhuma fonte privada, dependência de produtor, versão nova de protocolo,
-merge em main, release, deploy ou promoção integra este escopo.
+Compor exatamente P02 + P06, reparar os gates globais diagnosticados e verificar
+os bytes compostos. P02: código `b443f9eb25f118e6a68c2ad17c8e21ab7aa99990`,
+handoff `db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533`. P06: código
+`d21d8a490b89995ae5707a7a53b469685416a383`, handoff
+`9b0a500b6612d260a9f9bd8a4c8da1be4841cf48`.
+Os workstreams P02/P06 e seus documentos congelados continuam sendo fontes
+atribuídas; o estado histórico P06 aguardando input não descreve esta composição.
 
-## Limites de evidência
-Estudos A/B/D completos: INPUT_MISSING. C integral e handoff: INPUT_MISSING;
-apenas resumo com C0/12 jornadas e hashes informados, não verificados sem bytes.
-Não há denominador de paridade completa. Não derivar cobertura percentual do
-número de cenários sintéticos. Host e coorte reais exigem recibos de suas frentes.
+P01 e P03 não integram C1. P04 privado não é acessado nem necessário. C0 não
+declara paridade completa: estudos A/B/C/D integrais e denominador permanecem
+ausentes. O aceite ADR-0002 v1.0 como direção de estabilização está registrado
+na PR #5 e na baseline; bytes históricos PENDING_HUMAN são preservados, sem
+reabertura de aceite nem alegação de release, promoção ou aprovação científica.
+
+## Requisitos verificáveis
+
+- FR-001: preservar byte a byte protocolo, fontes sintéticas e governança;
+  rejeitar alteração, remoção e adição protegida. A troca deliberada de pacote
+  do driver P06 é comparada ao estado esperado, sem alegação falsa de imutabilidade.
+- FR-002: usar APIs reais com fontes de IDs repetidos, pacote inválido/trocado e
+  cache obsoleto; a identidade é o par fonte + ID, nunca a posição da linha.
+- FR-003: preservar UNKNOWN, revisão, ausência, tipo, unidade, precisão e tempo;
+  mentions são neutras. Nome da métrica e seu identificador têm provas distintas.
+- FR-004: instalar wheels e executar em raiz externa ao checkout; SDK sem
+  viewer/R4 e viewer sem R4; assets iguais ao Git e às respostas HTTP permitidas.
+- FR-005: executar suíte integrada em Windows e Ubuntu, Python normal e -O,
+  zero skips; publicar IDs da coleção real sem somar focais, OS, modos ou reruns.
+- FR-006: auditoria deny-by-default; opt-in P02 só para catalog.py, server.py e
+  static/index.html com bytes do código congelado, sem exceção por diretório;
+  preservar negativas de protocolo, constituição, ADRs e skills.
+- FR-007: preservar ancestry dos heads documentais e dos códigos testados;
+  testar SHA composto e obter revisão nativa independente sem autoria.
+- FR-008: entregar resultado, inputs, topologia, CI, matriz, parecer, handoff e
+  manifesto. Evidências distinguem SHA, ambiente, execução real e limites.
+- FR-009: reexecutar os três browsers legados, a troca P06 e C0 P02;
+  seletores por data-run-key = JSON.stringify([sourceId, runId]), unicidade,
+  valores mapeados pelos cabeçalhos de coluna e th scope=row da métrica.
+- FR-010: P02 gera JSON, seis PNGs e recibos com Chromium/Playwright, fontes
+  CJK/emoji, reflow, teclado e foco; zero requisições externas/erros de página.
+  native_zoom=NOT_RUN, css_zoom_used=false, wcag_certification=false.
+- FR-011: os helpers oficiais Spec Kit 1.2.3 validam 003 e 004 sem persistir
+  .specify/feature.json; a branch própria e as PRs fonte permanecem separadas.
+
+## Jornadas e aceite
+
+US1: o integrador identifica bytes, proveniência, ambiente e resultado pelo recibo.
+US2: uma alteração arbitrária em path protegido permanece RED apesar dos opt-ins.
+US3: IDs repetidos em duas fontes selecionam e comparam a execução correta.
+US4: uma troca de snapshot invalida detalhe e seleção antigos explicitamente;
+o pacote B preservado conserva seus bytes e pode ser selecionado de novo por
+ação explícita. Binding global P02 precede resolução de IDs; token não autentica.
+
+SC-001: C1_CORE_CANDIDATE_READY somente após todos os runs globais SUCCESS no
+SHA final, browsers exigidos PASS, invariância e revisão sem finding bloqueante.
+SC-002: nenhuma operação no host do usuário, pacote privado, mudança de protocolo,
+merge em main, release, deploy, force-push ou aprovação científica.
+SC-003: C1_BLOCKED_EXACT identifica job/step/path/precondição real; preserva o
+incremento e o menor próximo ato, sem baseline substituta ou resultado antecipado.
