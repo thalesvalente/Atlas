@@ -1,7 +1,7 @@
 # Reprodução P03
 
 Execute no checkout do SHA de componentes informado no INTEGRATION-CONTRACT.
-Requisitos: Python>=3.11 e Node.js24; Playwright/Chromium só para o gate visual.
+Requisitos: Python >=3.11 e Node.js24; Playwright/Chromium só para o gate visual.
 Não há instalação de ferramenta ou downloads implícitos nos comandos de teste.
 
 ## Testes de comportamento
@@ -13,7 +13,7 @@ node --test-reporter=tap scripts/qa/atlas_parity02_p03_artifacts_test.mjs
 node --test-reporter=tap scripts/qa/atlas_parity02_p03_dom_test.mjs
 ```
 
-Os três wrappers Python reexecutam os mesmos42+14+6 casos Node. Não somar como casos únicos.
+Os três wrappers Python reexecutam os mesmos 42+14+6 casos Node. Não somar como casos únicos.
 DOM recorder é teste de contrato/estrutura, não navegador. Testes HTTP reais tentam loopback.
 Somente após um impedimento efetivamente comprovado, a execução offline pode registrar:
 
@@ -40,8 +40,8 @@ Ctrl+C encerra. Nenhuma instância do aplicativo principal é alterada.
 node scripts/qa/atlas_parity02_p03_browser.mjs /tmp/p03-browser/report.json
 ```
 
-Com Playwright e Chromium já disponíveis: testa desktop1440, largura390, zoom200%, cabeçalhos,
-teclado/foco, ordenação/filtro, tabela20000 células e ausência de requisições externas. Salva
+Com Playwright e Chromium já disponíveis: testa desktop 1440, largura 390, zoom 200%, cabeçalhos,
+teclado/foco, ordenação/filtro, tabela 20000 células e ausência de requisições externas. Salva
 relatório e capturas sintéticas no diretório explicitamente informado. Ausência de Chromium
 produz NOT_RUN/exit2. Nesta sessão não foi possível abrir sockets e não havia executável
 Chromium: não existe prova visual local. O harness não está na rota principal do Atlas.

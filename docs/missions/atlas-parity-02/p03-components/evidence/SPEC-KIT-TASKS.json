@@ -1,0 +1,21 @@
+{
+  "setup_tasks": {
+    "exit": 0,
+    "data": {
+      "FEATURE_DIR": "<REPO>/specs/004-atlas-parity-c0/workstreams/p03-components",
+      "AVAILABLE_DOCS": [
+        "research.md",
+        "data-model.md"
+      ],
+      "TASKS_TEMPLATE": "<REPO>/.specify/templates/tasks-template.md",
+      "template_sha256": "b0f527d41e546af0c31903e04f9b20965b6b497b573792198f663a64ce128863"
+    },
+    "stderr": ""
+  },
+  "check_prerequisites": {
+    "exit": 0,
+    "stdout": "{\"FEATURE_DIR\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p03-components\",\"AVAILABLE_DOCS\":[\"research.md\",\"data-model.md\",\"tasks.md\"]}\n",
+    "stderr": ""
+  },
+  "pointer_exists": false
+}

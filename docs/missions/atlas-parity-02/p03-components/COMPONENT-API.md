@@ -154,7 +154,7 @@ renderCandidate(document, descriptor);
 Obrigatórios: version=p03-candidate/1, semantic_status=CANDIDATE_PRESENTATION,
 synthetic=true, semantic_kind=product|document, identity={source_key,id}, title.
 Opcionais: description; fields=[{label,value}]; sections=[{title,text}]. Textos podem ser
-null; números em campos ricos devem ser explicitamente strings. Máximo100 campos e100
+null; números em campos ricos devem ser explicitamente strings. Máximo 100 campos e 100
 seções, com limites de texto acima. synthetic diferente de true gera SYNTHETIC_REQUIRED.
 
 `document-candidate.json` e `artifact-product-candidate.json` declaram semântica sintética;
@@ -165,7 +165,7 @@ ativo, HTML ativo, anexos abertos, navegação externa ou execução de document
 
 `python scripts/qa/atlas_parity02_p03_harness.py --port 8766` monta só fixtures nomeadas e
 serve allowlist fixa em 127.0.0.1. Não acessa catálogo/carrier/fontes privadas. A página mostra
-contrato atual versus candidatos e controles de ordem/filtro; exemplo máximo gera1000×20
+contrato atual versus candidatos e controles de ordem/filtro; exemplo máximo gera 1000×20
 células sintéticas. Ctrl+C encerra o processo. Não há persistência ou serviço instalado.
 
 `node scripts/qa/atlas_parity02_p03_browser.mjs <saida.json>` executa prova Playwright se

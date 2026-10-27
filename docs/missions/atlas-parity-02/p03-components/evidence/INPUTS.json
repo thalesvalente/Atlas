@@ -1,0 +1,93 @@
+{
+  "verified_sources": [
+    {
+      "path": "AGENTS.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "83c362467736d67364342fdd0777bd8de171755ffb676ad38a5b0f000b89eb1e"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b"
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "5f9a44e6b773bad819a33bef32a6e5ab34694fa4d9760624f94587c7f17bb662"
+    },
+    {
+      "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "67a539e23d5d369f5e242069a29d9ea8d05315ee82b4e23faaa68dea0a27bac8"
+    },
+    {
+      "path": "docs/protocol/0.1.0a1.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "76ae9be325866895e6bcefeefbc7d0f35e295969a7263e71db6d774be1bf794e"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/read_model.py",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013"
+    },
+    {
+      "path": "packages/atlas/pyproject.toml",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "3b2fa0a244415d867078f3869b3e81e2b88081338f74590d1393e971869f1ae4"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/catalog.py",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/server.py",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "1208a3e0cd129a31397a8b81afef5031d081cef8c8dda610467e6bb08dc446ca"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/spec.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "8b3edcff89de737cfaf330824d9013fbc5eb2023959c224b37a5c6399475eae3"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/spec.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "67aca7d9b069874cb60a4b2b8b1be2ef0795eb7641c7b02d8a66abfb2778bc5b"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/spec.md",
+      "source_commit": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "sha256": "5bb61f6cae016fcbb202ed494e38938df26c531d8da405fb8bc66d6b50e36225"
+    }
+  ],
+  "missing": [
+    {
+      "id": "ATLAS-PARITY-01-A",
+      "status": "INPUT_MISSING"
+    },
+    {
+      "id": "ATLAS-PARITY-01-B",
+      "status": "INPUT_MISSING"
+    },
+    {
+      "id": "ATLAS-PARITY-01-C-study",
+      "status": "INPUT_MISSING",
+      "provided_unverified_sha256": "f8d274ffe5ac043005b2c27779286638a86c7c2aff3e30ee64a4497b434b110b"
+    },
+    {
+      "id": "ATLAS-PARITY-01-C-handoff",
+      "status": "INPUT_MISSING",
+      "provided_unverified_sha256": "e8c7b1b3a8eb0a276d94e98f94b9d1477e555d305ebee62d99ec48ee93f5650e"
+    },
+    {
+      "id": "ATLAS-PARITY-01-D",
+      "status": "INPUT_MISSING"
+    },
+    {
+      "id": "ATLAS-PARITY-02-P01",
+      "status": "INPUT_NOT_RECEIVED_VERSIONED"
+    }
+  ],
+  "search_scope": "files provided in this turn and pinned public baseline; no claim that unavailable studies do not exist elsewhere"
+}

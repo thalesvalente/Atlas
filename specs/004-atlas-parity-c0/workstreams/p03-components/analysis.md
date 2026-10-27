@@ -12,7 +12,7 @@ artefato ou prova; composição não é promovida a implementação concluída.
 | FR-P03-007/008 | project_metadata, renderMetadata/renderCandidate e seus testes |
 | FR-P03-009 | fixtures positivas/negativas e limites, testes comportamentais |
 | FR-P03-010 | harness próprio, gate HTTP/browser, INTEGRATION-CONTRACT |
-| FR-P03-011 | comparação de todos os162 arquivos baseline e allowlist P03 |
+| FR-P03-011 | comparação de todos os 162 arquivos baseline e allowlist P03 |
 | FR-P03-012 | revisão independente, RESULT/HANDOFF/MANIFEST, commits distintos |
 
 Não há alteração de protocolo ou dependência de produtor. O ambiente não expõe selector de
