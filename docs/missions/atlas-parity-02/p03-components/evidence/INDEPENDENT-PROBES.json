@@ -1,0 +1,91 @@
+{
+  "reviewer": "/root/p03_independent_review",
+  "scope": "ADDITIONAL_INDEPENDENT_PROBES",
+  "freeze_manifest_sha256": "5d656a75e89cf2834f3217724b8014bd75aa8dda1d162ba3ecd0f6b4df377d43",
+  "status": "PASS_SCOPED",
+  "checks": [
+    {
+      "name": "frozen_component_bytes_before",
+      "status": "PASS",
+      "details": 25
+    },
+    {
+      "name": "node_probe_execution",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "name": "exact_decimal_asc_against_independent_Decimal_oracle",
+      "status": "PASS",
+      "details": {
+        "numeric_rows": 176,
+        "missing_rows": 2
+      }
+    },
+    {
+      "name": "exact_decimal_desc_against_independent_Decimal_oracle",
+      "status": "PASS",
+      "details": {
+        "numeric_rows": 176,
+        "missing_rows": 2
+      }
+    },
+    {
+      "name": "numeric_zero_keeps_distinct_lexical_rows",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "near_neighbor_filter_against_Decimal_oracle",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "declared_precision_does_not_change_lexical_value",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "unsafe_native_integer_explicitly_rejected",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "documented_prior_decimal_loss_is_not_detectable",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "published_descriptor_exactly_matches_actual_adapter",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "multiple_mentions_remain_neutral_and_source_scoped",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "explicit_custom_document_type_is_not_rich_document_contract",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "unresolved_declared_mention_has_predictable_error",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "protected_versioned_paths_unchanged_from_baseline",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "frozen_component_bytes_after",
+      "status": "PASS",
+      "details": 25
+    }
+  ],
+  "browser": "NOT_RUN",
+  "socket": "NOT_RUN"
+}

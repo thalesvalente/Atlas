@@ -1,0 +1,646 @@
+{
+  "status": "PASS",
+  "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+  "tested_tree": "0dd3331f1f873a634f286fdfdb703c1a76a87406",
+  "actions_run_id": 40546494721,
+  "scope": "ISOLATED_P03_QUALIFICATION",
+  "visible_in_main_app": false,
+  "matrix": [
+    {
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "python": "3.12.15",
+      "optimization": 0,
+      "status": "PASS",
+      "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "attribution": "GIT_COMMIT",
+      "skips": 0,
+      "build_tools": {
+        "setuptools": "80.9.0",
+        "build": "1.3.0",
+        "wheel": "0.45.1"
+      },
+      "wheels": {
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "c4a9d8114f3a985980aae3b346fded37bc555b2be163256272909f3501a787f0",
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "6bc42a29f98ca30b556e047b3e8c8716003eadbd69bd16a9eac6fcbda4e2b3ee"
+      },
+      "sdk": {
+        "sdk_installed": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "checkout_absent_from_sys_path": true,
+        "isolated": true,
+        "optimization": 0
+      },
+      "viewer": {
+        "checks": {
+          "viewer_installed": true,
+          "sdk_installed": true,
+          "r4_absent": true,
+          "checkout_absent_from_sys_path": true,
+          "isolated": true,
+          "model_unchanged": true,
+          "file_not_product": true,
+          "mentions_neutral": true
+        },
+        "assets": {
+          "parity02_p03_table.js": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+          "parity02_p03_table.css": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+          "parity02_p03_artifacts.js": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+          "parity02_p03_artifacts.css": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c"
+        },
+        "item_count": 7,
+        "optimization": 0
+      },
+      "outside_checkout": true,
+      "installs_offline": true,
+      "source_bytes_unchanged": true,
+      "fixture_bytes_unchanged": true,
+      "wheel_file_count": 22,
+      "artifact_id": 12752767872,
+      "artifact_name": "p03-portable-ubuntu-latest-O0-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12752767872",
+      "artifact_zip_sha256": "7d1fbec56f59548b161c7239fda5e1345a9b448ae6a169adc8b3ff598c41c0e2",
+      "expires_at": "2026-11-26T17:01:53Z",
+      "source_receipt_sha256": "b5a1ec55a1e61169aeeecf593924a4b035f8d53745c9d198659173cacfb38f7a"
+    },
+    {
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "python": "3.12.15",
+      "optimization": 1,
+      "status": "PASS",
+      "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "attribution": "GIT_COMMIT",
+      "skips": 0,
+      "build_tools": {
+        "setuptools": "80.9.0",
+        "build": "1.3.0",
+        "wheel": "0.45.1"
+      },
+      "wheels": {
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "52b28ddf6c9417ab5bafdacc833b6889bfe61e1942329cd677dd88473d8d276f",
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "e24b3927188251e5e8dde6c98f7a51b150bb9d92dd6c2aa3daa57930f6b37d98"
+      },
+      "sdk": {
+        "sdk_installed": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "checkout_absent_from_sys_path": true,
+        "isolated": true,
+        "optimization": 1
+      },
+      "viewer": {
+        "checks": {
+          "viewer_installed": true,
+          "sdk_installed": true,
+          "r4_absent": true,
+          "checkout_absent_from_sys_path": true,
+          "isolated": true,
+          "model_unchanged": true,
+          "file_not_product": true,
+          "mentions_neutral": true
+        },
+        "assets": {
+          "parity02_p03_table.js": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+          "parity02_p03_table.css": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+          "parity02_p03_artifacts.js": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+          "parity02_p03_artifacts.css": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c"
+        },
+        "item_count": 7,
+        "optimization": 1
+      },
+      "outside_checkout": true,
+      "installs_offline": true,
+      "source_bytes_unchanged": true,
+      "fixture_bytes_unchanged": true,
+      "wheel_file_count": 22,
+      "artifact_id": 12752259290,
+      "artifact_name": "p03-portable-ubuntu-latest-O1-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12752259290",
+      "artifact_zip_sha256": "47025214ac212a08056852c05a601c2f18971e5b5e44e70a22abc5d45bb640a5",
+      "expires_at": "2026-11-26T17:02:49Z",
+      "source_receipt_sha256": "ef494b1168fb4a1a98eeb6bf98e6fcee879d30ee778c71427e18ae1b57938c9e"
+    },
+    {
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "python": "3.12.10",
+      "optimization": 0,
+      "status": "PASS",
+      "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "attribution": "GIT_COMMIT",
+      "skips": 0,
+      "build_tools": {
+        "setuptools": "80.9.0",
+        "build": "1.3.0",
+        "wheel": "0.45.1"
+      },
+      "wheels": {
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "ece981ac596f357187f487b7ec04ccf15fee6733238a3016514c4dfedeca03eb",
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "bdf72fbaf7b3fdf6d586600c842569994147c59a9ddefa5aeedc88223c606d6d"
+      },
+      "sdk": {
+        "sdk_installed": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "checkout_absent_from_sys_path": true,
+        "isolated": true,
+        "optimization": 0
+      },
+      "viewer": {
+        "checks": {
+          "viewer_installed": true,
+          "sdk_installed": true,
+          "r4_absent": true,
+          "checkout_absent_from_sys_path": true,
+          "isolated": true,
+          "model_unchanged": true,
+          "file_not_product": true,
+          "mentions_neutral": true
+        },
+        "assets": {
+          "parity02_p03_table.js": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+          "parity02_p03_table.css": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+          "parity02_p03_artifacts.js": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+          "parity02_p03_artifacts.css": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c"
+        },
+        "item_count": 7,
+        "optimization": 0
+      },
+      "outside_checkout": true,
+      "installs_offline": true,
+      "source_bytes_unchanged": true,
+      "fixture_bytes_unchanged": true,
+      "wheel_file_count": 22,
+      "artifact_id": 12751729286,
+      "artifact_name": "p03-portable-windows-latest-O0-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12751729286",
+      "artifact_zip_sha256": "62f228b68b38df82bf86eb52b2269578f7e9559a278c239580f09d20ed8d7a22",
+      "expires_at": "2026-11-26T17:03:39Z",
+      "source_receipt_sha256": "d6452c38e311e7180e97cc3f88fe1c45dec2bdfb9f7539bd29aa6dad72f387c7"
+    },
+    {
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "python": "3.12.10",
+      "optimization": 1,
+      "status": "PASS",
+      "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "attribution": "GIT_COMMIT",
+      "skips": 0,
+      "build_tools": {
+        "setuptools": "80.9.0",
+        "build": "1.3.0",
+        "wheel": "0.45.1"
+      },
+      "wheels": {
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "eb69f3aecfd49b4fc490b5e09ef278d70af01c5e5049440b08d7222c4e42ad9c",
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "5d3d5e2f479e258689d2792cc74ec335242726fcddf52908ef7463ee31a0bf07"
+      },
+      "sdk": {
+        "sdk_installed": true,
+        "viewer_absent": true,
+        "r4_absent": true,
+        "checkout_absent_from_sys_path": true,
+        "isolated": true,
+        "optimization": 1
+      },
+      "viewer": {
+        "checks": {
+          "viewer_installed": true,
+          "sdk_installed": true,
+          "r4_absent": true,
+          "checkout_absent_from_sys_path": true,
+          "isolated": true,
+          "model_unchanged": true,
+          "file_not_product": true,
+          "mentions_neutral": true
+        },
+        "assets": {
+          "parity02_p03_table.js": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+          "parity02_p03_table.css": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+          "parity02_p03_artifacts.js": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+          "parity02_p03_artifacts.css": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c"
+        },
+        "item_count": 7,
+        "optimization": 1
+      },
+      "outside_checkout": true,
+      "installs_offline": true,
+      "source_bytes_unchanged": true,
+      "fixture_bytes_unchanged": true,
+      "wheel_file_count": 22,
+      "artifact_id": 12753251934,
+      "artifact_name": "p03-portable-windows-latest-O1-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12753251934",
+      "artifact_zip_sha256": "9978d33588970a128dd9b690515e997f215cc848016d655dd3c10cff130b848b",
+      "expires_at": "2026-11-26T17:04:13Z",
+      "source_receipt_sha256": "f71e37b6dcd56a045f908bcd7516670739af95ef7e2ac2221b068903c4f76da3"
+    }
+  ],
+  "representative_receipt": {
+    "status": "PASS",
+    "scope": "P03_PINNED_BUILD_AND_INSTALLED_WHEELS",
+    "observed_head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+    "head_tree": "0dd3331f1f873a634f286fdfdb703c1a76a87406",
+    "timestamp_utc": "2026-10-27T17:01:44.443711+00:00",
+    "python": "3.12.15",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "optimization": 0,
+    "skips": 0,
+    "visible_in_main_app": false,
+    "gate_script_sha256": "fa9cfa267e03efeb277bdcaed28d00df75e089f9ba742f952464d409c03cb094",
+    "wheel_files": [
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/__init__.py",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/__init__.py",
+        "git_blob": "6c119a2ba9b5707dd4f4ef3f65061c19cb615259",
+        "sha256": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/__main__.py",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/__main__.py",
+        "git_blob": "eb1d136bc0a96b00ae1753ed9a4d3b5ea4deca45",
+        "sha256": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/model.py",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/model.py",
+        "git_blob": "4f477966dd6adb7a819d7d9b934a39cab7ba8122",
+        "sha256": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/read_model.py",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/read_model.py",
+        "git_blob": "5988b605760ab242e99de6ce484ed57569f8f475",
+        "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/resources/APACHE-2.0.txt",
+        "git_blob": "57bc88a15a0ee8266c259b2667e64608d3f7e292",
+        "sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/resources/NOTICE.txt",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/resources/NOTICE.txt",
+        "git_blob": "f755d7ff816dfe9f91c6b77ab2d9039e0123e363",
+        "sha256": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/resources/context-catalog.json",
+        "git_blob": "ac6bd4b0f064d836a670698424d390682a03235c",
+        "sha256": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+        "git_blob": "1f453d63522479c58f259a897015e51c0223b162",
+        "sha256": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/resources/schema.json",
+        "git_blob": "dbba84967bfa3c3dd828ec2800cabdbe292da0d8",
+        "sha256": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/protocol/src/caderno_protocol/storage.py",
+        "wheel": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "caderno_protocol/storage.py",
+        "git_blob": "cc6114458778945b2cd1a8719e955151a3291fdd",
+        "sha256": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/__init__.py",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/__init__.py",
+        "git_blob": "dc3faa628b6946a65449193789a7124bc61540ea",
+        "sha256": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/__main__.py",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/__main__.py",
+        "git_blob": "dbd1701744007f60c6482edd243df83a53831458",
+        "sha256": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/catalog.py",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/catalog.py",
+        "git_blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+        "sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/parity02_p03_metadata.py",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/parity02_p03_metadata.py",
+        "git_blob": "2150d3140f4c89f70f73c9e6e05883bb39f6ce0a",
+        "sha256": "90368cc2df6b886d08f92fbb5f88b0924a886f3233a51a07ad1863e07965df95",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/server.py",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/server.py",
+        "git_blob": "799d2460e5349780332c3e0ff5c0bb571ab34264",
+        "sha256": "1208a3e0cd129a31397a8b81afef5031d081cef8c8dda610467e6bb08dc446ca",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/static/app.js",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/static/app.js",
+        "git_blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+        "sha256": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/static/index.html",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/static/index.html",
+        "git_blob": "70b63dadefe18950110484616ad78b563924b322",
+        "sha256": "28b58b748539df8158b83eb50a943d7be3af32f93d55e1fd9d1b403f8cb1bef1",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.css",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/static/parity02_p03_artifacts.css",
+        "git_blob": "ef2df7f584233271b64d4d13fd2c0ee60e7709f3",
+        "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.js",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/static/parity02_p03_artifacts.js",
+        "git_blob": "ed5a770160b243dae4f01415b44828241f890dab",
+        "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/static/parity02_p03_table.css",
+        "git_blob": "0fe2568ec80e40825bcd3e08e0d1eade09d03c5f",
+        "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/static/parity02_p03_table.js",
+        "git_blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+        "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+        "bytes_equal": true
+      },
+      {
+        "source_path": "packages/atlas/src/atlas_viewer/static/style.css",
+        "wheel": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+        "wheel_path": "atlas_viewer/static/style.css",
+        "git_blob": "dbe75a93fea96bc8493acff7f200d9fb39cf461d",
+        "sha256": "b25e6b06629a2ce5d848c6fa742458d25b8caf520162f45770e52fc178bc97fb",
+        "bytes_equal": true
+      }
+    ],
+    "build_tools": {
+      "setuptools": "80.9.0",
+      "build": "1.3.0",
+      "wheel": "0.45.1"
+    },
+    "wheels": {
+      "caderno_protocol-0.1.0a1-py3-none-any.whl": "c4a9d8114f3a985980aae3b346fded37bc555b2be163256272909f3501a787f0",
+      "atlas_viewer-0.1.0a1-py3-none-any.whl": "6bc42a29f98ca30b556e047b3e8c8716003eadbd69bd16a9eac6fcbda4e2b3ee"
+    },
+    "sdk": {
+      "sdk_installed": true,
+      "viewer_absent": true,
+      "r4_absent": true,
+      "checkout_absent_from_sys_path": true,
+      "isolated": true,
+      "optimization": 0
+    },
+    "viewer": {
+      "checks": {
+        "viewer_installed": true,
+        "sdk_installed": true,
+        "r4_absent": true,
+        "checkout_absent_from_sys_path": true,
+        "isolated": true,
+        "model_unchanged": true,
+        "file_not_product": true,
+        "mentions_neutral": true
+      },
+      "assets": {
+        "parity02_p03_table.js": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+        "parity02_p03_table.css": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+        "parity02_p03_artifacts.js": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+        "parity02_p03_artifacts.css": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c"
+      },
+      "item_count": 7,
+      "optimization": 0
+    },
+    "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+    "attribution": "GIT_COMMIT",
+    "execution_binding": {
+      "attribution": "GIT_COMMIT",
+      "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "tracked_worktree_clean": true,
+      "files": [
+        {
+          "path": "packages/atlas/pyproject.toml",
+          "sha256": "3b2fa0a244415d867078f3869b3e81e2b88081338f74590d1393e971869f1ae4",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/__init__.py",
+          "sha256": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/__main__.py",
+          "sha256": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/catalog.py",
+          "sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/parity02_p03_metadata.py",
+          "sha256": "90368cc2df6b886d08f92fbb5f88b0924a886f3233a51a07ad1863e07965df95",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/server.py",
+          "sha256": "1208a3e0cd129a31397a8b81afef5031d081cef8c8dda610467e6bb08dc446ca",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/app.js",
+          "sha256": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/index.html",
+          "sha256": "28b58b748539df8158b83eb50a943d7be3af32f93d55e1fd9d1b403f8cb1bef1",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.css",
+          "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.js",
+          "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+          "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+          "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+          "matches_head": true
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/style.css",
+          "sha256": "b25e6b06629a2ce5d848c6fa742458d25b8caf520162f45770e52fc178bc97fb",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/pyproject.toml",
+          "sha256": "29292b6cc43253628f8639106703927e7e930d78eed0607bbb419901f8302caa",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/__init__.py",
+          "sha256": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/__main__.py",
+          "sha256": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/model.py",
+          "sha256": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/read_model.py",
+          "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt",
+          "sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/resources/NOTICE.txt",
+          "sha256": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+          "sha256": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+          "sha256": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+          "sha256": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/src/caderno_protocol/storage.py",
+          "sha256": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67",
+          "matches_head": true
+        },
+        {
+          "path": "packages/protocol/tests/test_sdk.py",
+          "sha256": "19f65ab70a36dc269ab8a4ac3ea76961cb36408f5dbeae704fd4ad88632284c9",
+          "matches_head": true
+        },
+        {
+          "path": "scripts/qa/atlas_parity03_p03_build.py",
+          "sha256": "fa9cfa267e03efeb277bdcaed28d00df75e089f9ba742f952464d409c03cb094",
+          "matches_head": true
+        },
+        {
+          "path": "tests/fixtures/atlas_parity02/p03/artifact-read-model.json",
+          "sha256": "dfc05406fe7bee9558485b75b25b92a32e7e88327feab2c495f6de6f79a4ab31",
+          "matches_head": true
+        }
+      ]
+    },
+    "source_bytes_unchanged": true,
+    "fixture_bytes_unchanged": true,
+    "package_source_sha256": {
+      "packages/protocol/pyproject.toml": "29292b6cc43253628f8639106703927e7e930d78eed0607bbb419901f8302caa",
+      "packages/protocol/src/caderno_protocol/__init__.py": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f",
+      "packages/protocol/src/caderno_protocol/__main__.py": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2",
+      "packages/protocol/src/caderno_protocol/model.py": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6",
+      "packages/protocol/src/caderno_protocol/read_model.py": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013",
+      "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+      "packages/protocol/src/caderno_protocol/resources/NOTICE.txt": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd",
+      "packages/protocol/src/caderno_protocol/resources/context-catalog.json": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a",
+      "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91",
+      "packages/protocol/src/caderno_protocol/resources/schema.json": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66",
+      "packages/protocol/src/caderno_protocol/storage.py": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67",
+      "packages/protocol/tests/test_sdk.py": "19f65ab70a36dc269ab8a4ac3ea76961cb36408f5dbeae704fd4ad88632284c9",
+      "packages/atlas/pyproject.toml": "3b2fa0a244415d867078f3869b3e81e2b88081338f74590d1393e971869f1ae4",
+      "packages/atlas/src/atlas_viewer/__init__.py": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f",
+      "packages/atlas/src/atlas_viewer/__main__.py": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf",
+      "packages/atlas/src/atlas_viewer/catalog.py": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3",
+      "packages/atlas/src/atlas_viewer/parity02_p03_metadata.py": "90368cc2df6b886d08f92fbb5f88b0924a886f3233a51a07ad1863e07965df95",
+      "packages/atlas/src/atlas_viewer/server.py": "1208a3e0cd129a31397a8b81afef5031d081cef8c8dda610467e6bb08dc446ca",
+      "packages/atlas/src/atlas_viewer/static/app.js": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb",
+      "packages/atlas/src/atlas_viewer/static/index.html": "28b58b748539df8158b83eb50a943d7be3af32f93d55e1fd9d1b403f8cb1bef1",
+      "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.css": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+      "packages/atlas/src/atlas_viewer/static/parity02_p03_artifacts.js": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+      "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+      "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+      "packages/atlas/src/atlas_viewer/static/style.css": "b25e6b06629a2ce5d848c6fa742458d25b8caf520162f45770e52fc178bc97fb"
+    },
+    "outside_checkout": true,
+    "installs_offline": true,
+    "build_isolation": false,
+    "network": "PIP_NO_INDEX=1; --no-isolation build; --no-index --no-deps local wheel installs",
+    "main_application_composition": "NOT_PERFORMED"
+  },
+  "representative_source_receipt_sha256": "b5a1ec55a1e61169aeeecf593924a4b035f8d53745c9d198659173cacfb38f7a",
+  "note": "Four matrix executions of the same checks; no attribution to a later SHA without its own CI receipts."
+}

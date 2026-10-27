@@ -1,0 +1,18 @@
+:root { color-scheme: light; font: 16px/1.6 system-ui, sans-serif; color: #183241; background: #edf2f3; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 0; }
+header, main, footer { width: min(100%, 1100px); margin: auto; padding: 24px; min-width: 0; }
+header { padding-top: 48px; }
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.15; letter-spacing: -.04em; margin: 12px 0 20px; }
+h2 { line-height: 1.3; }
+.eyebrow { color: #395d6c; font-size: .8rem; font-weight: 700; letter-spacing: .12em; }
+.demo-panel { min-width: 0; padding: 24px; margin-bottom: 24px; border: 1px solid #c5d3d9; border-radius: 12px; background: white; }
+.controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; padding: 12px 0; }
+.controls label { display: grid; gap: 6px; min-width: 0; max-width: 100%; }
+.controls .checkbox { display: flex; align-items: center; padding-bottom: 8px; }
+select { padding: 10px; max-width: 100%; font: inherit; background: white; color: inherit; border: 1px solid #647e8a; border-radius: 5px; }
+:focus-visible { outline: 3px solid #16669a; outline-offset: 3px; }
+p, h1, h2, h3, h4, label, footer { overflow-wrap: anywhere; }
+#feedback { min-height: 1.6em; }
+footer { font-size: .9rem; padding-bottom: 40px; }
+@media (max-width: 550px) { header, main, footer { padding: 16px; } .demo-panel { padding: 14px; } }

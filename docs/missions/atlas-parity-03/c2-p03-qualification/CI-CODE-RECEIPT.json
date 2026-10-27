@@ -1,0 +1,809 @@
+{
+  "run_id": 40546494721,
+  "sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+  "tree": "0dd3331f1f873a634f286fdfdb703c1a76a87406",
+  "jobs": [
+    {
+      "id": 122338395892,
+      "name": "P03 Chromium / ubuntu-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338395892",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned test driver without downloading Chromium",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bind frozen inputs and ownership to exact candidate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise P03 in existing runner Chromium",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Require browser receipts for this exact SHA",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve browser receipts and screenshots",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 122338396241,
+      "name": "P03 Chromium / windows-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338396241",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned test driver without downloading Chromium",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bind frozen inputs and ownership to exact candidate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise P03 in existing runner Chromium",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Require browser receipts for this exact SHA",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve browser receipts and screenshots",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 122338396328,
+      "name": "P03 Spec Kit 1.2.3 / ubuntu-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338396328",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install official pinned Spec Kit CLI",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify CLI and Codex integration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check C2 workstream without shared-pointer writes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve specification input evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 122338396346,
+      "name": "P03 portable / ubuntu-latest / optimize=0",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338396346",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Supply pinned test-only build and JSON Schema tooling",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install SDK and viewer for focal collection",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bind frozen inputs and ownership to exact candidate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Collect SDK and P03 tests with zero skips",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build with setuptools 80.9.0 and install outside checkout",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise isolated harness over real loopback HTTP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Require all portable receipts for this exact SHA",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve portable receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 122338396472,
+      "name": "P03 portable / ubuntu-latest / optimize=1",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338396472",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Supply pinned test-only build and JSON Schema tooling",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install SDK and viewer for focal collection",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bind frozen inputs and ownership to exact candidate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Collect SDK and P03 tests with zero skips",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build with setuptools 80.9.0 and install outside checkout",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise isolated harness over real loopback HTTP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Require all portable receipts for this exact SHA",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve portable receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 122338396535,
+      "name": "P03 portable / windows-latest / optimize=1",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338396535",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Supply pinned test-only build and JSON Schema tooling",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install SDK and viewer for focal collection",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bind frozen inputs and ownership to exact candidate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Collect SDK and P03 tests with zero skips",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build with setuptools 80.9.0 and install outside checkout",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise isolated harness over real loopback HTTP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Require all portable receipts for this exact SHA",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve portable receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 122338396548,
+      "name": "P03 Spec Kit 1.2.3 / windows-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338396548",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install official pinned Spec Kit CLI",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify CLI and Codex integration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check C2 workstream without shared-pointer writes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve specification input evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 122338396708,
+      "name": "P03 portable / windows-latest / optimize=0",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/job/122338396708",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Supply pinned test-only build and JSON Schema tooling",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install SDK and viewer for focal collection",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Bind frozen inputs and ownership to exact candidate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Collect SDK and P03 tests with zero skips",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build with setuptools 80.9.0 and install outside checkout",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise isolated harness over real loopback HTTP",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Require all portable receipts for this exact SHA",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve portable receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12753835041,
+      "name": "p03-specification-windows-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 5020,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12753835041",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12753835041/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:03:21Z",
+      "expires_at": "2026-11-26T17:03:20Z",
+      "updated_at": "2026-10-27T17:03:21Z",
+      "digest": "sha256:942eeabef2687af21fc9a714b6e0253ae25dfb0d393de0f3dbb22e158bc59c37",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    },
+    {
+      "id": 12753401386,
+      "name": "p03-specification-ubuntu-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 5025,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12753401386",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12753401386/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:02:19Z",
+      "expires_at": "2026-11-26T17:02:18Z",
+      "updated_at": "2026-10-27T17:02:19Z",
+      "digest": "sha256:a3ba945941b9b7f6764aaa1f667c016c48b3fe4219e224f1d4fe173c501dbda7",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    },
+    {
+      "id": 12753251934,
+      "name": "p03-portable-windows-latest-O1-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 14215,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12753251934",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12753251934/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:04:14Z",
+      "expires_at": "2026-11-26T17:04:13Z",
+      "updated_at": "2026-10-27T17:04:14Z",
+      "digest": "sha256:9978d33588970a128dd9b690515e997f215cc848016d655dd3c10cff130b848b",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    },
+    {
+      "id": 12752997612,
+      "name": "p03-browser-windows-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 2828585,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752997612",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752997612/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:03:49Z",
+      "expires_at": "2026-11-26T17:03:47Z",
+      "updated_at": "2026-10-27T17:03:49Z",
+      "digest": "sha256:99f772ecfdfe4f3048ca1b7d04e4bde4018792eac7f635f4d79c0e434f883980",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    },
+    {
+      "id": 12752767872,
+      "name": "p03-portable-ubuntu-latest-O0-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 14231,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752767872",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752767872/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:01:54Z",
+      "expires_at": "2026-11-26T17:01:53Z",
+      "updated_at": "2026-10-27T17:01:54Z",
+      "digest": "sha256:7d1fbec56f59548b161c7239fda5e1345a9b448ae6a169adc8b3ff598c41c0e2",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    },
+    {
+      "id": 12752478506,
+      "name": "p03-browser-ubuntu-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 4559008,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752478506",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752478506/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:01:48Z",
+      "expires_at": "2026-11-26T17:01:47Z",
+      "updated_at": "2026-10-27T17:01:48Z",
+      "digest": "sha256:880418483a7911b0aa7380ac1934fea8584e0afa5a65bae0af6abb6d2bf2e312",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    },
+    {
+      "id": 12752259290,
+      "name": "p03-portable-ubuntu-latest-O1-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 14237,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752259290",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12752259290/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:02:49Z",
+      "expires_at": "2026-11-26T17:02:49Z",
+      "updated_at": "2026-10-27T17:02:49Z",
+      "digest": "sha256:47025214ac212a08056852c05a601c2f18971e5b5e44e70a22abc5d45bb640a5",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    },
+    {
+      "id": 12751729286,
+      "name": "p03-portable-windows-latest-O0-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "size_in_bytes": 14215,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12751729286",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/12751729286/zip",
+      "expired": false,
+      "created_at": "2026-10-27T17:03:40Z",
+      "expires_at": "2026-11-26T17:03:39Z",
+      "updated_at": "2026-10-27T17:03:40Z",
+      "digest": "sha256:62f228b68b38df82bf86eb52b2269578f7e9559a278c239580f09d20ed8d7a22",
+      "workflow_run": {
+        "id": 40546494721,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+        "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "id": 40546494687,
+      "name": "ATLAS021 candidate verification",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494687"
+    },
+    {
+      "id": 40546494736,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494736"
+    },
+    {
+      "id": 40546494721,
+      "name": "ATLAS-PARITY03 P03 isolated qualification",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721"
+    }
+  ]
+}

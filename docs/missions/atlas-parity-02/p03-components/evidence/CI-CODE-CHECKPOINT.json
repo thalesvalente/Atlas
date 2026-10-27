@@ -1,0 +1,28 @@
+{
+  "event": "READ_ONCE_AFTER_OWN_CODE_PUBLICATION",
+  "code_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+  "runs": [
+    {
+      "id": 40526464073,
+      "name": "ATLAS021 candidate verification",
+      "head_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526464073",
+      "created_at": "2026-10-27T14:59:14Z",
+      "updated_at": "2026-10-27T14:59:17Z"
+    },
+    {
+      "id": 40526464161,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "head_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40526464161",
+      "created_at": "2026-10-27T14:59:14Z",
+      "updated_at": "2026-10-27T15:00:10Z"
+    }
+  ],
+  "overall": "PENDING_EXTERNAL_RESULT",
+  "documentation_sha_reuse_claimed": false
+}

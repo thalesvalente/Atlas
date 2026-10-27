@@ -1,0 +1,419 @@
+{
+  "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+  "run_id": 40546494721,
+  "artifacts": [
+    {
+      "artifact_id": 12753835041,
+      "artifact_name": "p03-specification-windows-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12753835041",
+      "artifact_zip_sha256": "942eeabef2687af21fc9a714b6e0253ae25dfb0d393de0f3dbb22e158bc59c37",
+      "expires_at": "2026-11-26T17:03:20Z",
+      "receipts": {
+        "INPUT-SHAS.json": {
+          "sha256": "32d28496a5258aded212ef6b6ec9ff9dc874d8b06bc13322756eed0a0be4f275",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": null
+        }
+      }
+    },
+    {
+      "artifact_id": 12753401386,
+      "artifact_name": "p03-specification-ubuntu-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12753401386",
+      "artifact_zip_sha256": "a3ba945941b9b7f6764aaa1f667c016c48b3fe4219e224f1d4fe173c501dbda7",
+      "expires_at": "2026-11-26T17:02:18Z",
+      "receipts": {
+        "INPUT-SHAS.json": {
+          "sha256": "44e37b3846fdb1aaf0aa40ba8dfe84fd69d2c9e6d895cb96617e03fe1eeafbfc",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": null
+        }
+      }
+    },
+    {
+      "artifact_id": 12753251934,
+      "artifact_name": "p03-portable-windows-latest-O1-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12753251934",
+      "artifact_zip_sha256": "9978d33588970a128dd9b690515e997f215cc848016d655dd3c10cff130b848b",
+      "expires_at": "2026-11-26T17:04:13Z",
+      "receipts": {
+        "JOB-SUMMARY.json": {
+          "sha256": "21330dea037575b72ebe6bb9cb5456e997b2b4247802d3d2579069c1eb0f4635",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.10",
+          "node": null
+        },
+        "HTTP-RECEIPT.json": {
+          "sha256": "c6cca507f6a1677ec6223b1c9749141231e73b14fb6791423912c688c63e29f6",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": 47,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.10",
+          "node": null
+        },
+        "BUILD-AND-INSTALL.json": {
+          "sha256": "f71e37b6dcd56a045f908bcd7516670739af95ef7e2ac2221b068903c4f76da3",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 22,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.10",
+          "node": null
+        },
+        "TEST-RECEIPT.json": {
+          "sha256": "ae4ffd932915ea12a56608be989562d6d7a0c373d92dd4133b2c3b1992f09528",
+          "status": "PASS",
+          "tests": 47,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.10",
+          "node": "v24.22.1"
+        },
+        "INPUT-SHAS.json": {
+          "sha256": "b65229a35f6c3462843fa3ff7c350786f81d8304c01be3d08d3f8a700111ebeb",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.10",
+          "node": null
+        }
+      }
+    },
+    {
+      "artifact_id": 12752997612,
+      "artifact_name": "p03-browser-windows-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12752997612",
+      "artifact_zip_sha256": "99f772ecfdfe4f3048ca1b7d04e4bde4018792eac7f635f4d79c0e434f883980",
+      "expires_at": "2026-11-26T17:03:47Z",
+      "receipts": {
+        "JOB-SUMMARY.json": {
+          "sha256": "24a2e3dd52b9d70fd6e8e050231709d41847b8c5ae263f422f1c64531cd8269b",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": null
+        },
+        "BROWSER-RECEIPT.json": {
+          "sha256": "10189c6e97e431decb444644774cbf5559b2442dfd16d4e91fdddbfbd923303c",
+          "status": "PASS_SCOPED",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": 19,
+          "wheel_files": 0,
+          "browser_version": "156.0.8078.48",
+          "optimization": null,
+          "python": null,
+          "node": "v24.22.1"
+        },
+        "INPUT-SHAS.json": {
+          "sha256": "c6f06f6995f4670be9157d245bac1465608d476e5c33cf2cd24373b8f224036d",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": null
+        }
+      }
+    },
+    {
+      "artifact_id": 12752767872,
+      "artifact_name": "p03-portable-ubuntu-latest-O0-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12752767872",
+      "artifact_zip_sha256": "7d1fbec56f59548b161c7239fda5e1345a9b448ae6a169adc8b3ff598c41c0e2",
+      "expires_at": "2026-11-26T17:01:53Z",
+      "receipts": {
+        "JOB-SUMMARY.json": {
+          "sha256": "d94dd485e26acfb2ef6fe3ba3ddbe29639904a471bc3be68584d58ff5ba62b88",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": null
+        },
+        "HTTP-RECEIPT.json": {
+          "sha256": "ad551e1e7914343ab459decf6d8be04a8c522633575474d3828b78495f5883c7",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": 47,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": null
+        },
+        "BUILD-AND-INSTALL.json": {
+          "sha256": "b5a1ec55a1e61169aeeecf593924a4b035f8d53745c9d198659173cacfb38f7a",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 22,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": null
+        },
+        "TEST-RECEIPT.json": {
+          "sha256": "60b37227dd2f88768782c83671e247c938ccd62fcb1fec7548f57f1d6a1528f7",
+          "status": "PASS",
+          "tests": 47,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": "v24.21.0"
+        },
+        "INPUT-SHAS.json": {
+          "sha256": "191937df337d5cc73f9aad1de6a873b5bb7706b03263cb9fd310dbb239b1fe7e",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": null
+        }
+      }
+    },
+    {
+      "artifact_id": 12752478506,
+      "artifact_name": "p03-browser-ubuntu-latest-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12752478506",
+      "artifact_zip_sha256": "880418483a7911b0aa7380ac1934fea8584e0afa5a65bae0af6abb6d2bf2e312",
+      "expires_at": "2026-11-26T17:01:47Z",
+      "receipts": {
+        "JOB-SUMMARY.json": {
+          "sha256": "7bf380df41e527be9b0c0b0c76c8ace62b276380398289465f41712a69759c05",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": null
+        },
+        "BROWSER-RECEIPT.json": {
+          "sha256": "4ed19463cb161961fed4a8a35e15b93bdafc0dd831c8746bde02efafc1326f3e",
+          "status": "PASS_SCOPED",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": 19,
+          "wheel_files": 0,
+          "browser_version": "156.0.8078.47",
+          "optimization": null,
+          "python": null,
+          "node": "v24.22.1"
+        },
+        "INPUT-SHAS.json": {
+          "sha256": "a823427a6e3e7fa5abc5e705da47fd5acad625edb0f2d1fb17748f05e1c72bc4",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.15",
+          "node": null
+        }
+      }
+    },
+    {
+      "artifact_id": 12752259290,
+      "artifact_name": "p03-portable-ubuntu-latest-O1-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12752259290",
+      "artifact_zip_sha256": "47025214ac212a08056852c05a601c2f18971e5b5e44e70a22abc5d45bb640a5",
+      "expires_at": "2026-11-26T17:02:49Z",
+      "receipts": {
+        "JOB-SUMMARY.json": {
+          "sha256": "c91071cedca3b7789dff0e51e98243b7821dc1ace713296a79305390e05b3938",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.15",
+          "node": null
+        },
+        "HTTP-RECEIPT.json": {
+          "sha256": "84fbbc8a7af9e0c0e8cdbf388582a12a15928986cdb8b45184013e7677353cb0",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": 47,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.15",
+          "node": null
+        },
+        "BUILD-AND-INSTALL.json": {
+          "sha256": "ef494b1168fb4a1a98eeb6bf98e6fcee879d30ee778c71427e18ae1b57938c9e",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 22,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.15",
+          "node": null
+        },
+        "TEST-RECEIPT.json": {
+          "sha256": "6c9e4d962de9f4baf48026ce6611d9128aa9f6a17ea4a4d7c6ee5f4002732847",
+          "status": "PASS",
+          "tests": 47,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.15",
+          "node": "v24.21.0"
+        },
+        "INPUT-SHAS.json": {
+          "sha256": "b4a6cbbff72a553250c815ce9d1a72146b89cfcf32b9b643362760db68938dc2",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 1,
+          "python": "3.12.15",
+          "node": null
+        }
+      }
+    },
+    {
+      "artifact_id": 12751729286,
+      "artifact_name": "p03-portable-windows-latest-O0-dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "artifact_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721/artifacts/12751729286",
+      "artifact_zip_sha256": "62f228b68b38df82bf86eb52b2269578f7e9559a278c239580f09d20ed8d7a22",
+      "expires_at": "2026-11-26T17:03:39Z",
+      "receipts": {
+        "JOB-SUMMARY.json": {
+          "sha256": "74da8511cef87fe1a9a10ae20241ca6f320d29ecd61f81c96c0f3feb8115a22a",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": null
+        },
+        "HTTP-RECEIPT.json": {
+          "sha256": "292effb941e5140117acd578d4195c78724837526760d2eb248767d51b4853e0",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": 47,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": null
+        },
+        "BUILD-AND-INSTALL.json": {
+          "sha256": "d6452c38e311e7180e97cc3f88fe1c45dec2bdfb9f7539bd29aa6dad72f387c7",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 22,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": null
+        },
+        "TEST-RECEIPT.json": {
+          "sha256": "7fecc46e1f6c201e5c666aad57b7b47dfffc85ed1dff4e1271d1c68201f5bbe2",
+          "status": "PASS",
+          "tests": 47,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": "v24.22.1"
+        },
+        "INPUT-SHAS.json": {
+          "sha256": "9805544c21661d51b69490795f36b31a66178ac0379858c22745e8a7395925e6",
+          "status": "PASS",
+          "tests": null,
+          "http_cases": null,
+          "browser_checks": null,
+          "wheel_files": 0,
+          "browser_version": null,
+          "optimization": 0,
+          "python": "3.12.10",
+          "node": null
+        }
+      }
+    }
+  ],
+  "all_zip_digests_verified": true,
+  "all_referenced_receipt_digests_verified": true,
+  "all_12_png_digests_verified": true,
+  "retention_days": 30,
+  "note": "Screenshots and original per-job receipts remain downloadable from their exact Actions artifacts; this index records SHA256 and expiry."
+}

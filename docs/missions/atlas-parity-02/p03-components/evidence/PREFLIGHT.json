@@ -1,0 +1,71 @@
+{
+  "mission": "ATLAS-PARITY-02-P03",
+  "tag": "seai.pipeline@llm-sec,agentic-pac/seai.qa:",
+  "timezone": "America/Fortaleza",
+  "reasoning_requested": "Max; fallback Extra High/xhigh",
+  "reasoning_effective": "UNVERIFIED",
+  "environment_observed": {
+    "surface": "ChatGPT Work with GitHub connector and engineering runtime",
+    "os": "Linux x86_64",
+    "python": "3.12.14",
+    "node": "24.22.1",
+    "user_host_access": false
+  },
+  "baseline": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+    "main_preflight_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "successor_at_preflight": false,
+    "hydrated_blobs": 162,
+    "all_blob_hashes_verified": true,
+    "exact_commit_object_verified": true,
+    "network_git_clone": "FAILED_PROXY_UNAVAILABLE",
+    "snapshot_transport": "GitHub connector, files pinned to baseline SHA"
+  },
+  "adr_0002": {
+    "decision": "DIRECTION_ACCEPTED",
+    "version": "1.0",
+    "receipt": "https://github.com/thalesvalente/Atlas/pull/5",
+    "merge_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "historical_bytes_preserved": true
+  },
+  "spec_kit": {
+    "version": "1.2.3",
+    "official_managed_files_verified": 28,
+    "cli_available": false,
+    "native_skill_dispatch": false,
+    "method": "manual application plus actual installed repository helpers",
+    "feature_pointer_written": false,
+    "feature_number_collision_on_pinned_base": false,
+    "hooks_registered": false,
+    "helper_receipts": [
+      "SPEC-KIT-PREFLIGHT.json",
+      "SPEC-KIT-TASKS.json"
+    ]
+  },
+  "operator_prompt_sha256": "f5847a07c33a296526432c47b6bb4208f3fccebb0e1f49213e807c051e7bd8f4",
+  "tag_manual_sha256": "06c75d66c90563e82a83a5ffa91baa9c357e8988e78f704e8f1f8cc0f3999790",
+  "authorization": {
+    "isolated_code_fixtures_tests_commits_draft_pr": true,
+    "git_destination": "thalesvalente/Atlas",
+    "merge_release_deploy": false,
+    "private_source_transfer": false,
+    "new_persisted_contract": false
+  },
+  "agents": [
+    {
+      "id": "/root/p03_tables",
+      "role": "table component author"
+    },
+    {
+      "id": "/root/p03_artifacts",
+      "role": "metadata/document component author and attributed installation/regression checks"
+    },
+    {
+      "id": "/root/p03_independent_review",
+      "role": "independent read-only reviewer, no delta authorship"
+    }
+  ],
+  "receipt_created_at": "2026-10-27T12:01:23.852962-03:00",
+  "preflight_observation_precision": "Earlier in the same session; exact connector request timestamp not retained"
+}

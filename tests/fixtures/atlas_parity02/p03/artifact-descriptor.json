@@ -1,0 +1,254 @@
+{
+  "version": "p03-metadata/1",
+  "semantic_status": "DERIVED_CURRENT_CONTRACT",
+  "source": {
+    "key": "synthetic-source-A",
+    "name": "Fixture sintética P03",
+    "metadata_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "items": [
+    {
+      "identity": {
+        "source_key": "synthetic-source-A",
+        "id": "data/source.csv"
+      },
+      "kind": "artifact",
+      "name": "Origem sintética",
+      "types": [
+        "File"
+      ],
+      "description": null,
+      "media_type": "text/csv",
+      "availability": {
+        "declared": "MISSING",
+        "observed": "MISSING"
+      },
+      "digests": {
+        "declared_sha256": null,
+        "calculated_sha256": null
+      },
+      "relations": [
+        {
+          "source": {
+            "source_key": "synthetic-source-A",
+            "id": "data/result.csv"
+          },
+          "target": {
+            "source_key": "synthetic-source-A",
+            "id": "data/source.csv"
+          },
+          "kind": "derived_from"
+        },
+        {
+          "source": {
+            "source_key": "synthetic-source-A",
+            "id": "data/source.csv"
+          },
+          "target": {
+            "source_key": "synthetic-source-A",
+            "id": "urn:synthetic:run"
+          },
+          "kind": "input"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "identity": {
+        "source_key": "synthetic-source-A",
+        "id": "data/result.csv"
+      },
+      "kind": "artifact",
+      "name": "Resultado α — água 🌱",
+      "types": [
+        "File"
+      ],
+      "description": "Somente metadados sintéticos.",
+      "media_type": "text/csv",
+      "availability": {
+        "declared": "PRESENT",
+        "observed": "AVAILABLE"
+      },
+      "digests": {
+        "declared_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "calculated_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "relations": [
+        {
+          "source": {
+            "source_key": "synthetic-source-A",
+            "id": "data/result.csv"
+          },
+          "target": {
+            "source_key": "synthetic-source-A",
+            "id": "data/source.csv"
+          },
+          "kind": "derived_from"
+        },
+        {
+          "source": {
+            "source_key": "synthetic-source-A",
+            "id": "urn:synthetic:run"
+          },
+          "target": {
+            "source_key": "synthetic-source-A",
+            "id": "data/result.csv"
+          },
+          "kind": "output"
+        }
+      ],
+      "mentions": []
+    },
+    {
+      "identity": {
+        "source_key": "synthetic-source-A",
+        "id": "report.pdf"
+      },
+      "kind": "artifact",
+      "name": "Documento no nome não atribui semântica",
+      "types": [
+        "File"
+      ],
+      "description": null,
+      "media_type": "application/pdf",
+      "availability": {
+        "declared": "UNKNOWN",
+        "observed": "UNVERIFIED"
+      },
+      "digests": {
+        "declared_sha256": null,
+        "calculated_sha256": null
+      },
+      "relations": [],
+      "mentions": [
+        {
+          "source": {
+            "source_key": "synthetic-source-A",
+            "id": "urn:synthetic:run"
+          },
+          "target": {
+            "source_key": "synthetic-source-A",
+            "id": "report.pdf"
+          },
+          "kind": "mention"
+        }
+      ]
+    },
+    {
+      "identity": {
+        "source_key": "synthetic-source-A",
+        "id": "https://example.invalid/payload.html"
+      },
+      "kind": "artifact",
+      "name": "<img src=x onerror=\"globalThis.P03_ATTACK=true\">",
+      "types": [
+        "File"
+      ],
+      "description": "javascript:globalThis.P03_ATTACK=true",
+      "media_type": "text/html",
+      "availability": {
+        "declared": "EXTERNAL",
+        "observed": "EXTERNAL_UNRESOLVED"
+      },
+      "digests": {
+        "declared_sha256": null,
+        "calculated_sha256": null
+      },
+      "relations": [],
+      "mentions": [
+        {
+          "source": {
+            "source_key": "synthetic-source-A",
+            "id": "urn:synthetic:run"
+          },
+          "target": {
+            "source_key": "synthetic-source-A",
+            "id": "https://example.invalid/payload.html"
+          },
+          "kind": "mention"
+        }
+      ]
+    },
+    {
+      "identity": {
+        "source_key": "synthetic-source-A",
+        "id": "data/unverified.csv"
+      },
+      "kind": "artifact",
+      "name": "Digest calculado sem digest declarado",
+      "types": [
+        "File"
+      ],
+      "description": null,
+      "media_type": null,
+      "availability": {
+        "declared": "PRESENT",
+        "observed": "AVAILABLE_UNVERIFIED"
+      },
+      "digests": {
+        "declared_sha256": null,
+        "calculated_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "relations": [],
+      "mentions": []
+    },
+    {
+      "identity": {
+        "source_key": "synthetic-source-A",
+        "id": "data/tampered.csv"
+      },
+      "kind": "artifact",
+      "name": "Divergência sintética",
+      "types": [
+        "File"
+      ],
+      "description": null,
+      "media_type": null,
+      "availability": {
+        "declared": "PRESENT",
+        "observed": "INTEGRITY_MISMATCH"
+      },
+      "digests": {
+        "declared_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "calculated_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "relations": [],
+      "mentions": []
+    },
+    {
+      "identity": {
+        "source_key": "synthetic-source-A",
+        "id": "urn:synthetic:note"
+      },
+      "kind": "entity",
+      "name": "Nota relacionada",
+      "types": [
+        "CreativeWork"
+      ],
+      "description": "<script>globalThis.P03_ATTACK=true</script>",
+      "media_type": null,
+      "availability": {
+        "declared": null,
+        "observed": "UNVERIFIED"
+      },
+      "digests": {
+        "declared_sha256": null,
+        "calculated_sha256": null
+      },
+      "relations": [],
+      "mentions": [
+        {
+          "source": {
+            "source_key": "synthetic-source-A",
+            "id": "urn:synthetic:run"
+          },
+          "target": {
+            "source_key": "synthetic-source-A",
+            "id": "urn:synthetic:note"
+          },
+          "kind": "mention"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "helper": "resolve_template.py",
+    "template": "spec-template",
+    "exit": 0,
+    "template_sha256": "3945437fc35cd30a5b2bf7beea680337c3516826d3efa5a6b92c4a7eca1ba28e",
+    "stderr": ""
+  },
+  {
+    "helper": "resolve_template.py",
+    "template": "constitution-template",
+    "exit": 0,
+    "template_sha256": "ce7549540fa45543cca797a150201d868e64495fdff39dc38246fb17bd4024b3",
+    "stderr": ""
+  },
+  {
+    "helper": "resolve_template.py",
+    "template": "checklist-template",
+    "exit": 0,
+    "template_sha256": "70bbc48e884fab372ffb09e83e78ff983e28b69caebf8cd9964a02b6836683ac",
+    "stderr": ""
+  },
+  {
+    "helper": "setup_plan.py",
+    "exit": 0,
+    "stdout": "{\"FEATURE_SPEC\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p03-components/spec.md\",\"IMPL_PLAN\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p03-components/plan.md\",\"FEATURE_DIR\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p03-components\",\"BRANCH\":\"p03-components\"}\n",
+    "stderr": "Copied plan template to <REPO>/specs/004-atlas-parity-c0/workstreams/p03-components/plan.md\n"
+  }
+]

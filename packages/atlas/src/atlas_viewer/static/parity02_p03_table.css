@@ -1,0 +1,69 @@
+/* Scoped presentation styles; this stylesheet does not activate a component. */
+.atlas-p03-table {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  color: #182f3e;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+.atlas-p03-table *,
+.atlas-p03-table *::before,
+.atlas-p03-table *::after { box-sizing: border-box; }
+.atlas-p03-table__status,
+.atlas-p03-table__description,
+.atlas-p03-table__summary {
+  margin: 0 0 0.65rem;
+  overflow-wrap: anywhere;
+}
+.atlas-p03-table__status { font-weight: 650; color: #365464; }
+.atlas-p03-table__summary { font-size: 0.9rem; }
+.atlas-p03-table__scroll {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #a0b1bc;
+  border-radius: 0.4rem;
+  scrollbar-gutter: stable;
+}
+.atlas-p03-table__scroll:focus-visible {
+  outline: 3px solid #0b62a4;
+  outline-offset: 3px;
+}
+.atlas-p03-table__grid {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+  background: #fff;
+}
+.atlas-p03-table__caption {
+  padding: 0.85rem;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 650;
+  background: #edf3f6;
+  overflow-wrap: anywhere;
+}
+.atlas-p03-table__grid th,
+.atlas-p03-table__grid td {
+  min-width: 6rem;
+  max-width: 28rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid #cbd6dd;
+  vertical-align: top;
+  text-align: left;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.atlas-p03-table__grid thead th { background: #e4edf2; }
+.atlas-p03-table__grid tbody th { font-weight: 550; background: #f5f8fa; }
+.atlas-p03-table__heading,
+.atlas-p03-table__metadata { display: block; }
+.atlas-p03-table__metadata {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #365464;
+}
+.atlas-p03-table__missing { color: #57503f; background: #fff9ec; }
+.atlas-p03-table__empty { text-align: center; color: #365464; }

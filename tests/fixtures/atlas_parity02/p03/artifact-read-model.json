@@ -1,0 +1,199 @@
+{
+  "source": {
+    "name": "Fixture sintética P03",
+    "metadata_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "entities": [
+    {
+      "@id": "data/source.csv",
+      "@type": "File",
+      "name": "Origem sintética",
+      "cp:availability": "MISSING",
+      "encodingFormat": "text/csv"
+    },
+    {
+      "@id": "data/result.csv",
+      "@type": "File",
+      "name": "Resultado α — água 🌱",
+      "description": "Somente metadados sintéticos.",
+      "cp:availability": "PRESENT",
+      "cp:sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "encodingFormat": "text/csv",
+      "prov:wasDerivedFrom": {
+        "@id": "data/source.csv"
+      }
+    },
+    {
+      "@id": "report.pdf",
+      "@type": "File",
+      "name": "Documento no nome não atribui semântica",
+      "cp:availability": "UNKNOWN",
+      "encodingFormat": "application/pdf"
+    },
+    {
+      "@id": "https://example.invalid/payload.html",
+      "@type": "File",
+      "name": "<img src=x onerror=\"globalThis.P03_ATTACK=true\">",
+      "description": "javascript:globalThis.P03_ATTACK=true",
+      "cp:availability": "EXTERNAL",
+      "encodingFormat": "text/html"
+    },
+    {
+      "@id": "urn:synthetic:note",
+      "@type": "CreativeWork",
+      "name": "Nota relacionada",
+      "description": "<script>globalThis.P03_ATTACK=true</script>"
+    },
+    {
+      "@id": "data/unverified.csv",
+      "@type": "File",
+      "name": "Digest calculado sem digest declarado",
+      "cp:availability": "PRESENT"
+    },
+    {
+      "@id": "data/tampered.csv",
+      "@type": "File",
+      "name": "Divergência sintética",
+      "cp:availability": "PRESENT",
+      "cp:sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "@id": "urn:synthetic:run",
+      "@type": "CreateAction",
+      "name": "Execução declaradamente sintética",
+      "cp:synthetic": true,
+      "cp:executionStatus": "PARTIAL",
+      "cp:reviewStatus": "UNKNOWN",
+      "object": [
+        {
+          "@id": "data/source.csv"
+        }
+      ],
+      "result": [
+        {
+          "@id": "data/result.csv"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "report.pdf"
+        },
+        {
+          "@id": "urn:synthetic:note"
+        },
+        {
+          "@id": "https://example.invalid/payload.html"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "data/source.csv",
+      "name": "Origem sintética",
+      "declared_digest": null,
+      "availability": {
+        "declared": "MISSING",
+        "status": "MISSING"
+      }
+    },
+    {
+      "id": "data/result.csv",
+      "name": "Resultado α — água 🌱",
+      "declared_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "availability": {
+        "declared": "PRESENT",
+        "status": "AVAILABLE",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "id": "report.pdf",
+      "name": "Documento no nome não atribui semântica",
+      "declared_digest": null,
+      "availability": {
+        "declared": "UNKNOWN",
+        "status": "UNVERIFIED"
+      }
+    },
+    {
+      "id": "https://example.invalid/payload.html",
+      "name": "<img src=x onerror=\"globalThis.P03_ATTACK=true\">",
+      "declared_digest": null,
+      "availability": {
+        "declared": "EXTERNAL",
+        "status": "EXTERNAL_UNRESOLVED"
+      }
+    },
+    {
+      "id": "data/unverified.csv",
+      "name": "Digest calculado sem digest declarado",
+      "declared_digest": null,
+      "availability": {
+        "declared": "PRESENT",
+        "status": "AVAILABLE_UNVERIFIED",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    {
+      "id": "data/tampered.csv",
+      "name": "Divergência sintética",
+      "declared_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "availability": {
+        "declared": "PRESENT",
+        "status": "INTEGRITY_MISMATCH",
+        "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "source": "data/source.csv",
+      "target": "urn:synthetic:run",
+      "kind": "input"
+    },
+    {
+      "source": "urn:synthetic:run",
+      "target": "data/result.csv",
+      "kind": "output"
+    },
+    {
+      "source": "data/result.csv",
+      "target": "data/source.csv",
+      "kind": "derived_from"
+    }
+  ],
+  "runs": [
+    {
+      "id": "urn:synthetic:run",
+      "related_references": [
+        {
+          "id": "report.pdf",
+          "name": "Documento no nome não atribui semântica",
+          "declared_digest": null,
+          "availability": {
+            "declared": "UNKNOWN",
+            "status": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "urn:synthetic:note",
+          "name": "Nota relacionada",
+          "declared_digest": null,
+          "availability": {
+            "status": "UNVERIFIED"
+          }
+        },
+        {
+          "id": "https://example.invalid/payload.html",
+          "name": "<img src=x onerror=\"globalThis.P03_ATTACK=true\">",
+          "declared_digest": null,
+          "availability": {
+            "declared": "EXTERNAL",
+            "status": "EXTERNAL_UNRESOLVED"
+          }
+        }
+      ]
+    }
+  ]
+}
