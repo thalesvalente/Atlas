@@ -13,3 +13,18 @@
 - Reutilizar glob package-data atual. Novo asset requer adição explícita a ASSETS.
 - CLI `specify` e navegador não encontrados no preflight. Helpers Python versionados
   podem ser executados sem instalação nem mudança de `.specify/feature.json`.
+
+## Atualização após execução, sem apagar o preflight
+
+Chromium 153.0.8010.0 real foi disponibilizado no runtime isolado com
+`@sparticuz/chromium@153.0.0`, após os arquivos de download padrão do Playwright
+chegarem truncados. A jornada instalada passou 23 checks. A revisão identificou
+glifos CJK/emoji ausentes; fontes compatíveis foram fornecidas somente no ambiente
+de evidência e a mesma jornada foi repetida no mesmo CODE_SHA. Recibos e hashes em
+`docs/missions/atlas-parity-02/p02-c0/receipts/`. Não houve alteração de produto por isso.
+
+Helpers setup_plan, setup_tasks e check_prerequisites executados com NO_PERSIST.
+O CLI oficial Spec Kit 1.2.3 e sua integração passaram nos jobs CI do CODE_SHA;
+a auditoria histórica falhou para três arquivos de shell/catalog/server P02.
+O harness browser global falhou em expectativa antiga de texto da célula de métrica.
+Ambos os ajustes globais são P06, com diagnóstico e próximos atos exatos no handoff.
