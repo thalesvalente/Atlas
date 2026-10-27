@@ -1,0 +1,33 @@
+{
+  "mission": "ATLAS-PARITY-03-C3",
+  "repository": "thalesvalente/Atlas",
+  "branch": "qa/atlas-parity03-c3-contract-gate-20261027",
+  "baseline": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59"
+  },
+  "p01_technical": {
+    "sha": "3a308ee78e185912959920d85a97cd511a70a764",
+    "tree": "03894a33271c030a72ccb7b016aeed943b11f525"
+  },
+  "p01_documentary": {
+    "sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "tree": "e27541f68039dc09b3e29198be937f50978752a2",
+    "pull_request": 9
+  },
+  "p01_manifest": {
+    "sha256": "88f64b8ab62d60e4355a3f29553173638f4d7e3844ce0e8126dc1484713c353c",
+    "entries": 82,
+    "handoff_paths": 83
+  },
+  "tech_contract_blobs_compared": 51,
+  "p02_code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "p03_code_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+  "upstream_status": "UNKNOWN_UPSTREAM",
+  "reasons": [
+    "A/B/C/D full studies absent from permitted evidence",
+    "C legacy journey denominator not established"
+  ],
+  "ci_precommit": "NOT_RUN",
+  "reasoning_effective": "UNVERIFIED"
+}
