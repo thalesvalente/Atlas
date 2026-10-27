@@ -1,12 +1,51 @@
 {
+  "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
   "visible_in_main_app": false,
   "main_server_assets_qualified": false,
-  "browser_zoom_200": {
-    "status": "NOT_RUN",
-    "reason": "No verified native browser zoom controller available to this gate; no CSS zoom, device scale factor or CDP scale substitution."
-  },
-  "network_scope": "Browser context requests/WebSockets and Python harness audit; Chromium process background traffic not captured. Dependencies are installed before the isolated test phase.",
   "synthetic_demonstrators": true,
   "reasoning_effective": "UNVERIFIED",
-  "scope": "Fixed P03 snapshot and isolated embedding, not the future composition or global app browser."
+  "native_browser_zoom_200": {
+    "status": "NOT_RUN",
+    "reason": "The available Playwright controller does not prove native browser zoom; no native zoom UI/extension controller was installed.",
+    "css_zoom_used_as_substitute": false,
+    "device_scale_factor_used_as_substitute": false,
+    "cdp_page_scale_used_as_substitute": false,
+    "minimum_next_act": "Use an available native browser zoom controller on an exact candidate SHA; record actual browser zoom setting and viewport transformation at200%.",
+    "disposition": "Allowed conditional limitation in the operator prompt, not promoted to PASS."
+  },
+  "network_scope": {
+    "python_http": "Python audit guard observes and permits only loopback IP socket operations. No firewall or host policy modification.",
+    "browser": "Requests and WebSocket attempts in the observed Playwright context; service workers blocked. No packet capture of Chromium process background traffic.",
+    "dependency_setup": "Pinned tools are installed before the isolated focal test phase; provisioning is not claimed network-free."
+  },
+  "composition": {
+    "status": "NOT_PERFORMED",
+    "vertical_scroll": "The new focal embedding CSS constrains table max-block-size:min(60vh,28rem); integrators must retain an explicit bounded table region to inherit that layout behavior.",
+    "frozen_gate": "The input gate intentionally requires this exact219-file snapshot. It is not a generic gate for a composed C1 tree.",
+    "native_semantics": "Product/document renderers remain synthetic candidates; File and mentions receive no inferred semantics.",
+    "zoom_or_global_browser_substitution": false
+  },
+  "baseline_invariants": [
+    "ARC-01–09",
+    "Caderno independent of Atlas and R4",
+    "Validity,integrity,authenticity and scientific acceptance separate",
+    "Accepted ADR-0002 direction preserved",
+    "No schema/context/protocol/version changes"
+  ],
+  "artifacts": {
+    "retention_days": 30,
+    "expiry_record": "ARTIFACT-INDEX.json"
+  },
+  "not_claimed": [
+    "main app visibility",
+    "main server assets routes",
+    "global product browser equivalence",
+    "legacy parity",
+    "scientific approval",
+    "merge",
+    "release",
+    "deploy",
+    "canonical promotion",
+    "user host execution"
+  ]
 }

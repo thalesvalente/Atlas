@@ -4,8 +4,8 @@
 
 Preservar integralmente os 25 arquivos P03 e os 219 arquivos do handoff. Acrescentar
 harness/gates com prefixo atlas_parity03_p03, workflow próprio e este subworkstream.
-Nenhuma dependência de teste entra no produto. Reusar pins build1.3.0,
-setuptools80.9.0, wheel0.45.1, jsonschema4.25.1 e Playwright1.62.1 já usados no repo.
+Nenhuma dependência de teste entra no produto. Reusar pins build 1.3.0,
+setuptools 80.9.0, wheel 0.45.1, jsonschema 4.25.1 e Playwright 1.62.1 já usados no repo.
 
 O harness reutiliza os oito recursos P03, substituindo apenas sua CSS de embedding
 para limitar a altura da região tabular; o CSS congelado do componente não ganha
@@ -14,7 +14,7 @@ Host/Origin e o request-target bruto são validados; nenhuma rota de payload exi
 
 Browser usa Chrome/Chromium existente do runner, sem download. Requests/WebSockets
 do contexto são observados e impedidos fora da origem loopback. Isso não é captura
-de tráfego background de todo Chromium. Zoom nativo200 sem prova recebe NOT_RUN.
+de tráfego background de todo Chromium. Zoom nativo a 200 sem prova recebe NOT_RUN.
 
 ## Ownership exclusivo real
 
@@ -41,6 +41,6 @@ de tráfego background de todo Chromium. Zoom nativo200 sem prova recebe NOT_RUN
 Método e skills oficiais do repo orientam specify/clarify/plan/checklist/tasks/
 analyze/implement/verify/converge/review. Helpers reais usam
 SPECIFY_FEATURE_NO_PERSIST=1 e SPECIFY_FEATURE_DIRECTORY deste subworkstream.
-CLI1.2.3 em venv/job isolado, sem reinitialização e sem escrever ponteiro global.
+CLI 1.2.3 em venv/job isolado, sem reinitialização e sem escrever ponteiro global.
 Redação/análise humana-assistida são diferenciadas de execução CLI.
 REASONING_EFFECTIVE=UNVERIFIED: o seletor solicitado não é observável.

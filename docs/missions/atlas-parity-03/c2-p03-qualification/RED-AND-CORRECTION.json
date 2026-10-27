@@ -1,6 +1,6 @@
 {
   "id": "C2-BROWSER-320",
-  "status": "CORRECTION_IMPLEMENTED_PENDING_REEXECUTION",
+  "status": "CLOSED_BY_REAL_REEXECUTION",
   "red_sha": "97151e0e17c3d8afc70aad91a5c488cd831eb171",
   "run_id": 40546112894,
   "linux_job_id": 122337065378,
@@ -22,5 +22,16 @@
   "overflow_hidden_or_clip_added": false,
   "frozen_25_changed": false,
   "reviewer": "/root/independent_review",
-  "review": "Static correction reviewed with no blocking finding; requires fresh browser run on new SHA."
+  "review": "Independent review confirmed structural CSS correction, unchanged oracle and passing full reexecution on Linux/Windows.",
+  "green_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+  "green_tree": "0dd3331f1f873a634f286fdfdb703c1a76a87406",
+  "green_run_id": 40546494721,
+  "green_browser_jobs": [
+    122338395892,
+    122338396241
+  ],
+  "green_required_checks_per_platform": 19,
+  "windows_red_job_id": 122337065421,
+  "windows_red_control_client_width": 258,
+  "windows_red_control_scroll_width": 268
 }

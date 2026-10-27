@@ -17,7 +17,7 @@
       "effect": "spec/plan/tasks found"
     }
   ],
-  "cli_local": "NOT_INSTALLED; pinned CLI is executed in dedicated Actions jobs",
+  "cli_local": "NOT_INSTALLED locally; official pinned1.2.3 CLI executed in isolated Actions jobs",
   "feature_directory": "specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification",
   "feature_no_persist": true,
   "global_pointer_written": false,
@@ -28,5 +28,13 @@
     "/root/browser_semantics",
     "/root/independent_review"
   ],
-  "reviewer_authored_delta": false
+  "reviewer_authored_delta": false,
+  "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+  "actions_run_id": 40546494721,
+  "cli_actions": "PASS",
+  "specification_jobs": [
+    122338396328,
+    122338396548
+  ],
+  "native_skill_invocations_simulated": false
 }
