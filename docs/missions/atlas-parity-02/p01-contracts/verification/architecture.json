@@ -1,0 +1,7 @@
+{
+  "command": "python -B scripts/qa/architecture_audit.py . --protocol packages/protocol/src/caderno_protocol --viewer packages/atlas/src/atlas_viewer --viewer-module atlas_viewer",
+  "exit_code": 0,
+  "stdout": "{\n  \"status\": \"PASS_SCOPED\",\n  \"findings\": []\n}\n",
+  "stderr": "",
+  "code_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5"
+}

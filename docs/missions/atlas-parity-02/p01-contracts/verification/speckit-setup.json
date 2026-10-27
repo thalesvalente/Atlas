@@ -1,0 +1,10 @@
+{
+  "helper": "setup_plan.py --json",
+  "exit_code": 0,
+  "stdout": "{\"FEATURE_SPEC\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p01-contracts/spec.md\",\"IMPL_PLAN\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p01-contracts/plan.md\",\"FEATURE_DIR\":\"<REPO>/specs/004-atlas-parity-c0/workstreams/p01-contracts\",\"BRANCH\":\"p01-contracts\"}\n",
+  "stderr": "Copied plan template to <REPO>/specs/004-atlas-parity-c0/workstreams/p01-contracts/plan.md\n",
+  "feature_pointer_present_before": false,
+  "feature_pointer_present_after": false,
+  "hooks_file_present": false,
+  "dispatch_native_skill": false
+}

@@ -1,0 +1,9 @@
+{
+  "command": "python -B -O docs/contracts/atlas-parity-02/p01/validate_examples.py --suite",
+  "exit_code": 0,
+  "same_result_as_normal": true,
+  "unique_examples": 45,
+  "status": "PASS",
+  "validator_sha256": "72ac155939a1f9e5d81a0a370a79b0dd8d1d5100dec90640a1b2414872757047",
+  "note": "Rerun in optimized mode; not additional unique cases."
+}

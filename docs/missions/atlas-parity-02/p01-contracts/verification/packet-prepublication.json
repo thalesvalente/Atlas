@@ -1,0 +1,38 @@
+{
+  "phase": "PREPUBLICATION_PAYLOAD",
+  "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "base_tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+  "baseline_files_compared": 162,
+  "baseline_files_changed": [],
+  "protocol_files_compared": 12,
+  "new_files_at_observation": 71,
+  "out_of_scope_paths": [],
+  "feature_pointer_present": false,
+  "matrix": {
+    "rows": 28,
+    "columns": 18,
+    "support": {
+      "EXISTING": 11,
+      "PARTIAL": 10,
+      "REPRESENTABLE_NOT_PRESENTED": 3,
+      "NOT_REPRESENTED_CURRENT_CONTRACT": 3,
+      "UNKNOWN_UPSTREAM": 1
+    },
+    "classes": {
+      "CURRENT_CONTRACT": 11,
+      "COMPATIBLE_PRESENTATION_CANDIDATE": 14,
+      "PERSISTED_EVOLUTION_REQUIRED": 3
+    },
+    "seven_layers_populated": true
+  },
+  "publication_scan": {
+    "result": "PASS_SCOPED",
+    "findings": [],
+    "scope": "new authored files; no exhaustive secret-detector claim"
+  },
+  "status": "PASS",
+  "environment": {
+    "os": "Linux",
+    "python": "3.12.14"
+  }
+}
