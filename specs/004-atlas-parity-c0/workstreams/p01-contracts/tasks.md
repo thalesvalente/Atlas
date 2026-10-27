@@ -25,8 +25,8 @@ distintos; não concede escrita em outro workstream. IDs globais são qualificad
 
 ## Fase 4 — Convergir e entregar
 
-- [ ] T011 [US4] Convergir spec/plano/tarefas e emitir RESULT/HANDOFF/MANIFEST em `docs/missions/atlas-parity-02/p01-contracts/` (FR-P01-012).
-- [ ] T012 [US4] Publicar candidata em commit e PR Draft somente no Atlas e verificar estado remoto final (FR-P01-012).
+- [x] T011 [US4] Convergir spec/plano/tarefas e emitir RESULT/HANDOFF/MANIFEST em `docs/missions/atlas-parity-02/p01-contracts/` (FR-P01-012).
+- [x] T012 [US4] Publicar candidata em commit e PR Draft somente no Atlas e verificar estado remoto final (FR-P01-012).
 
 ## Dependências
 
