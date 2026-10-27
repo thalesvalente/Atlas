@@ -9,7 +9,7 @@ setuptools80.9.0, wheel0.45.1, jsonschema4.25.1 e Playwright1.62.1 já usados no
 
 O harness reutiliza os oito recursos P03, substituindo apenas sua CSS de embedding
 para limitar a altura da região tabular; o CSS congelado do componente não ganha
-essa garantia automaticamente. CSP permite somente o favicon data: constante.
+essa garantia automaticamente. CSP permite o esquema data: para o favicon constante; nenhuma imagem HTTP(S) é permitida.
 Host/Origin e o request-target bruto são validados; nenhuma rota de payload existe.
 
 Browser usa Chrome/Chromium existente do runner, sem download. Requests/WebSockets

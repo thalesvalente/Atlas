@@ -25,3 +25,18 @@ footer { font-size: .9rem; padding-bottom: 40px; }
   overflow: auto;
   overscroll-behavior: contain;
 }
+
+/* The RED Chromium run at 320 CSS px exposed the native select's intrinsic
+   width escaping an auto-minimum grid track in the harness controls. Make the
+   track and select shrink to their actual host width; keep text wrapping rather
+   than concealing overflow. The checkbox label uses normal inline text flow. */
+.controls { min-inline-size: 0; }
+.controls label:not(.checkbox) {
+  flex: 1 1 14rem;
+  grid-template-columns: minmax(0, 1fr);
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.controls select { inline-size: 100%; min-inline-size: 0; }
+.controls .checkbox { display: block; flex: 1 1 100%; }
+.controls .checkbox input { margin-inline-end: 0.5rem; vertical-align: middle; }
