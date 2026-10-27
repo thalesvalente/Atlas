@@ -1,0 +1,7 @@
+{
+  "status": "NOT_RUN_ON_PUBLISHED_CANDIDATE",
+  "scope": "P03_REAL_CHROMIUM",
+  "tested_sha": null,
+  "visible_in_main_app": false,
+  "note": "Pending exact candidate Actions execution; prior offline/precommit evidence is not attributed here."
+}

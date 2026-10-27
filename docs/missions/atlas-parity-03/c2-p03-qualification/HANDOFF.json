@@ -1,0 +1,12 @@
+{
+  "status": "IN_PROGRESS_NOT_QUALIFIED",
+  "repository": "thalesvalente/Atlas",
+  "branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+  "parent_sha": "ead1f753f52f22035326b7366dd2231c62775765",
+  "code_input_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+  "implementation_tested_sha": null,
+  "final_document_commit": "Resolve as the commit containing this file; final terminal CI and independent review must explicitly name that SHA in the Draft PR delivery record.",
+  "visible_in_main_app": false,
+  "main_server_assets_qualified": false,
+  "next_act": "Run dedicated Actions workflow on published exact candidate and review final SHA."
+}

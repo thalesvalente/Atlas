@@ -1,0 +1,27 @@
+{
+  "status": "RECONCILED",
+  "timestamp_utc": "2026-10-27T16:57:43.132174+00:00",
+  "main_sha_at_initial_clone": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "source_pr": {
+    "number": 7,
+    "state": "open",
+    "draft": true,
+    "head_sha": "ead1f753f52f22035326b7366dd2231c62775765"
+  },
+  "source_runs": [
+    {
+      "id": 40528431374,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "ead1f753f52f22035326b7366dd2231c62775765"
+    },
+    {
+      "id": 40528431454,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "ead1f753f52f22035326b7366dd2231c62775765"
+    }
+  ],
+  "own_branch_created_from": "ead1f753f52f22035326b7366dd2231c62775765",
+  "reasoning_effective": "UNVERIFIED"
+}

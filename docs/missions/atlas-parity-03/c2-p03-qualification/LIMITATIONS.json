@@ -1,0 +1,12 @@
+{
+  "visible_in_main_app": false,
+  "main_server_assets_qualified": false,
+  "browser_zoom_200": {
+    "status": "NOT_RUN",
+    "reason": "No verified native browser zoom controller available to this gate; no CSS zoom, device scale factor or CDP scale substitution."
+  },
+  "network_scope": "Browser context requests/WebSockets and Python harness audit; Chromium process background traffic not captured. Dependencies are installed before the isolated test phase.",
+  "synthetic_demonstrators": true,
+  "reasoning_effective": "UNVERIFIED",
+  "scope": "Fixed P03 snapshot and isolated embedding, not the future composition or global app browser."
+}
