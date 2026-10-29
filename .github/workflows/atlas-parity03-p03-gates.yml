@@ -89,7 +89,7 @@ jobs:
       - name: Bind frozen inputs and ownership to exact candidate
         run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py' || 'scripts/qa/atlas_parity03_p03_ci.py' }} inputs --output-dir .test-output/atlas-parity03-p03
       - name: Exercise P03 in existing runner Chromium
-        run: python scripts/qa/atlas_parity03_p03_ci.py browser
+        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py p03-browser' || 'scripts/qa/atlas_parity03_p03_ci.py browser' }} --output-dir .test-output/atlas-parity03-p03
       - name: Require browser receipts for this exact SHA
         if: always()
         run: python scripts/qa/atlas_parity03_p03_ci.py summary

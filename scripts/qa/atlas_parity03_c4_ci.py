@@ -280,6 +280,18 @@ def installed(work):
     require(report["status"] == "PASS", report.get("error", "Installed suite failed"))
 
 
+def p03_browser(output):
+    spec = importlib.util.spec_from_file_location("c4_p03_browser_selection",
+        ROOT / "scripts/qa/atlas_parity03_p03_ci.py")
+    p03 = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(p03)
+    env = {**os.environ, "P03_PYTHON": sys.executable,
+           "P03_BROWSER_EXECUTABLE": p03.installed_browser()}
+    subprocess.run(["node", str(ROOT / "scripts/qa/atlas_parity03_p03_browser.mjs"),
+                    "--output-dir", str(output), "--c4-composition"],
+                   cwd=ROOT, env=env, check=True)
+
+
 def browser(work, output):
     spec = importlib.util.spec_from_file_location("c4_browser_selection",
         ROOT / "scripts/qa/atlas_parity03_p03_ci.py")
@@ -305,7 +317,7 @@ def browser(work, output):
 
 def main():
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument("stage", choices=["inputs", "installed", "browser"])
+    cli.add_argument("stage", choices=["inputs", "installed", "browser", "p03-browser"])
     cli.add_argument("--repo", type=Path, default=ROOT)
     cli.add_argument("--work", type=Path)
     cli.add_argument("--install-test-tools", action="store_true")
@@ -314,6 +326,8 @@ def main():
     require(args.repo.resolve() == ROOT, "An alternate checkout cannot supply C4 evidence")
     if args.stage == "inputs":
         inputs(args.output_dir.resolve())
+    elif args.stage == "p03-browser":
+        p03_browser(args.output_dir.resolve())
     else:
         require(args.work is not None, "Installed/browser gate requires --work outside checkout")
         work = args.work.resolve()

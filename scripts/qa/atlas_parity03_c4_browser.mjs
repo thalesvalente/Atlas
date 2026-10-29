@@ -193,9 +193,12 @@ try {
     !await page.locator('#detail').isVisible()
     && await runControl('run-open', sourceB, runB).evaluate(node => node === document.activeElement));
   await page.goto(deepLinkA, {waitUntil: 'networkidle'});
+  // A fragment-only goto may stay in the current document; reload explicitly
+  // before asserting the initial opt-in state of a newly opened deep link.
+  await page.reload({waitUntil: 'networkidle'});
   check('fresh_document_deep_link_opens_correct_source_and_leaves_P03_opt_in',
     await page.locator('#detail').isVisible()
-    && (await page.locator('#detail-content > h3').textContent()) === runA.name
+    && (await page.locator('#detail-content > h3').first().textContent()) === runA.name
     && await tables().count() === 0);
   await selectAll();
   await runControl('run-select', sourceA, runA).check();

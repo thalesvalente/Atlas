@@ -11,8 +11,9 @@ import {createInterface} from 'node:readline';
 const require = createRequire(import.meta.url);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const argumentsList = process.argv.slice(2);
-if (argumentsList.length !== 2 || argumentsList[0] !== '--output-dir') {
-  throw new Error('Usage: node scripts/qa/atlas_parity03_p03_browser.mjs --output-dir DIRECTORY');
+const c4Composition = argumentsList.length === 3 && argumentsList[2] === '--c4-composition';
+if ((!c4Composition && argumentsList.length !== 2) || argumentsList[0] !== '--output-dir') {
+  throw new Error('Usage: node scripts/qa/atlas_parity03_p03_browser.mjs --output-dir DIRECTORY [--c4-composition]');
 }
 const output = path.resolve(argumentsList[1]);
 mkdirSync(output, {recursive:true});
@@ -20,6 +21,10 @@ const git = (...args) => execFileSync('git', args, {cwd:root, encoding:'utf8'}).
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const freezePath = 'docs/missions/atlas-parity-02/p03-components/evidence/FREEZE.json';
 const frozenFiles = JSON.parse(readFileSync(path.join(root, freezePath), 'utf8')).files;
+const c2Source = 'f625f8be40156fd9fe4572a0ac2074910efd96cf';
+const c4AdapterPath = 'tests/viewer/test_atlas_parity02_p03_harness.py';
+const c4AdapterHash = '3bed307fb7f9aec6b4d4929be2865a8344c66b3f0f2a7c0c9aa749661b9c7689';
+const contextualAdapters = c4Composition ? {[c4AdapterPath]: c4AdapterHash} : {};
 const hashFrozen = () => Object.fromEntries(frozenFiles.map(entry =>
   [entry.path, sha256(readFileSync(path.join(root, entry.path)))]));
 const sourcePaths = [...frozenFiles.map(entry => entry.path),
@@ -39,6 +44,7 @@ const report = {
   visible_in_main_app:false,
   main_server_assets_qualified:false,
   synthetic:true,
+  contextual_test_adapters:contextualAdapters,
   checks:[],
   skipped:0,
   screenshots:[],
@@ -185,13 +191,23 @@ async function main() {
     await check('frozen_inputs_and_exact_git_binding', async () => {
       before = hashFrozen();
       assert.equal(frozenFiles.length, 25);
-      for (const entry of frozenFiles) assert.equal(before[entry.path], entry.sha256, entry.path);
+      if (c4Composition) {
+        git('merge-base', '--is-ancestor', c2Source, report.tested_head);
+        assert.deepEqual(readFileSync(path.join(root, freezePath)),
+          execFileSync('git', ['show', c2Source + ':' + freezePath], {cwd:root}));
+        const original = frozenFiles.find(entry => entry.path === c4AdapterPath);
+        assert.equal(original.sha256, '8dcb8a7656044cb3af896b9838f5529991151814201fe51e171cb51507e24a35');
+        assert.equal(sha256(execFileSync('git', ['show', c2Source + ':' + c4AdapterPath], {cwd:root})), original.sha256);
+      }
+      for (const entry of frozenFiles) assert.equal(before[entry.path],
+        contextualAdapters[entry.path] ?? entry.sha256, entry.path);
       report.input_hashes = Object.fromEntries(sourcePaths.map(filename => {
         const bytes = readFileSync(path.join(root, filename));
         assert.deepEqual(bytes, execFileSync('git', ['show', `${report.tested_head}:${filename}`], {cwd:root}), filename);
         return [filename, sha256(bytes)];
       }));
-      return {frozen_files:25, exact_git_bytes:true};
+      return {frozen_source_files:25, unchanged_against_C2:c4Composition ? 24 : 25,
+        contextual_test_adapters:contextualAdapters, exact_git_bytes:true};
     });
     browser = await playwright.chromium.launch({headless:true, executablePath:executable, chromiumSandbox:true});
     report.browser_version = browser.version();
@@ -495,9 +511,10 @@ async function main() {
       for (const route of allowed) assert.ok(requested.has(route), `Asset not requested by real browser: ${route}`);
       return {external_requests:0,websocket_attempts:0,page_errors:0,console_errors:0,served_asset_paths:[...requested].sort()};
     });
-    await check('sources_fixtures_and_all_25_frozen_bytes_preserved', async () => {
+    await check('sources_fixtures_and_all_current_input_bytes_preserved', async () => {
       assert.deepEqual(hashFrozen(),before);
-      return {files:25,bytes_preserved:true};
+      return {files:25,bytes_preserved_during_test:true,
+        unchanged_against_C2:c4Composition ? 24 : 25, contextual_test_adapters:contextualAdapters};
     });
     report.status='PASS_SCOPED';
     report.required_checks_passed=report.checks.length;

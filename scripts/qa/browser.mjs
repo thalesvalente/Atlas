@@ -204,9 +204,9 @@ try {
     await openRun(page,run);
     const detail=page.getByTestId('detail');
     assert.equal(await detail.locator('code').first().innerText(),run.id);
-    assert.equal(await detail.locator('dt').filter({hasText:/^Identidade da fonte$/})
+    assert.equal(await detail.locator('#detail-content > dl > dt').filter({hasText:/^Identidade da fonte$/})
       .locator('xpath=following-sibling::dd[1]').innerText(),run.source);
-    assert.equal(await detail.locator('dt').filter({hasText:/^Fonte \/ pacote$/})
+    assert.equal(await detail.locator('#detail-content > dl > dt').filter({hasText:/^Fonte \/ pacote$/})
       .locator('xpath=following-sibling::dd[1]').innerText(),run.source_name);
     const text=await detail.innerText();
     for(const value of [run.status,run.review_status,run.timestamp_origin,run.project_id,run.experiment_id])
