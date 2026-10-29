@@ -213,8 +213,10 @@ try {
       && response.request().method() === 'POST' && response.status() === 200),
     page.locator('#refresh').click(),
   ]);
-  await page.waitForFunction(old => new URLSearchParams(location.hash.slice(1)).get('scope') !== old, initial.snapshot_id);
   const fresh = await model();
+  // C0 deliberately leaves a rejected old URL visible with an explanation.
+  // Wait for the rendered snapshot rather than requiring URL canonicalization.
+  await page.waitForFunction(expected => document.querySelector('#snapshot-id')?.textContent === expected, fresh.snapshot_id);
   check('new_snapshot_discards_old_C0_and_P03_detail_selection_with_visible_notice',
     fresh.snapshot_id !== initial.snapshot_id && !await page.locator('#detail').isVisible()
     && await page.locator('#run-rows input:checked').count() === 0
