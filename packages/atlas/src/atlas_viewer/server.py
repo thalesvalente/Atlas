@@ -11,6 +11,11 @@ from .catalog import Catalog
 ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/app.js": ("app.js", "text/javascript; charset=utf-8"),
           "/parity02_p02_state.js": ("parity02_p02_state.js", "text/javascript; charset=utf-8"),
+          "/parity02_p03_table.js": ("parity02_p03_table.js", "text/javascript; charset=utf-8"),
+          "/parity02_p03_artifacts.js": ("parity02_p03_artifacts.js", "text/javascript; charset=utf-8"),
+          "/parity03_p03_composition.js": ("parity03_p03_composition.js", "text/javascript; charset=utf-8"),
+          "/parity02_p03_table.css": ("parity02_p03_table.css", "text/css; charset=utf-8"),
+          "/parity02_p03_artifacts.css": ("parity02_p03_artifacts.css", "text/css; charset=utf-8"),
           "/style.css": ("style.css", "text/css; charset=utf-8")}
 CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; "
        "img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'; form-action 'none'")

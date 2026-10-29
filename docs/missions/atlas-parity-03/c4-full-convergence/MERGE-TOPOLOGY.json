@@ -1,0 +1,22 @@
+{
+  "merge": {
+    "sha": "c120f8ae9e455e19b4e0bcd35f47ec0fd7a0117c",
+    "tree": "3f1f378a3e39b0f148effdc010177144fe29e7c4",
+    "parents": [
+      "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "c0b42a17710fdf3cef3ec4ea13c840796d57d18f"
+    ]
+  },
+  "method": "Three-way per-path comparison with pinned main; identical inherited paths kept; disjoint additions from C2 and C3 applied on C1; explicit three-parent Git commit",
+  "conflicts": [],
+  "input_blob_count": 464,
+  "no_squash": true,
+  "no_rebase": true,
+  "no_force_push": true,
+  "original_branches_updated": false,
+  "protocol_changed": false,
+  "overlay_identity": "Read enclosing commit and external exact-SHA PR receipt",
+  "composition_map": "COMPOSITION-MAP.md",
+  "blob_provenance": "BLOB-PROVENANCE.csv"
+}

@@ -79,9 +79,21 @@ class HarnessStreamTests(unittest.TestCase):
         after = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
         self.assertEqual(before, after)
 
-    def test_existing_app_does_not_load_p03(self):
-        for filename in ("app.js", "index.html"):
-            self.assertNotIn("parity02_p03", (HARNESS.STATIC / filename).read_text(encoding="utf-8"))
+    def test_C4_app_loads_only_representable_p03_components(self):
+        """C4 explicitly replaces C2's historical shell-isolation assertion."""
+        app = (HARNESS.STATIC / "app.js").read_text(encoding="utf-8")
+        index = (HARNESS.STATIC / "index.html").read_text(encoding="utf-8")
+        composition = (HARNESS.STATIC / "parity03_p03_composition.js").read_text(encoding="utf-8")
+        self.assertIn("from './parity03_p03_composition.js'", app)
+        self.assertIn('type="module" src="/app.js"', index)
+        for name in ("parity02_p03_table", "parity02_p03_artifacts"):
+            self.assertIn('href="/' + name + '.css"', index)
+            self.assertIn("from './" + name + ".js'", composition)
+        self.assertIn("renderMetadata", composition)
+        self.assertIn("renderTable", composition)
+        for text in (app, index, composition):
+            for rich in ("renderCandidate", "validateCandidate", "p03-candidate/1"):
+                self.assertNotIn(rich, text)
 
 
 @unittest.skipIf(os.environ.get("P03_SKIP_LOOPBACK_REASON"),

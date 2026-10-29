@@ -49,7 +49,7 @@ jobs:
           specify version --json
           specify integration status --json
       - name: Check generated Spec Kit assets and preserved architecture
-        run: python scripts/qa/speckit_audit.py --allow-presentation-delta --allow-p02-c0-delta
+        run: python scripts/qa/speckit_audit.py --allow-presentation-delta ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && '--allow-p03-c4-delta' || '--allow-p02-c0-delta' }}
       - name: Verify feature 003 requirements and tasks without active-pointer writes
         env:
           SPECIFY_FEATURE_NO_PERSIST: '1'

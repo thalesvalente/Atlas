@@ -39,6 +39,14 @@ P02_AUTHORIZATION = (
     "ATLAS-PARITY-03-C1; "
     "docs/missions/atlas-parity-02/p02-c0/P06-INTEGRATION.md section 1"
 )
+# C4 is an explicit composition authorization, independent of the frozen P02
+# opt-in. No path, baseline, manifest or hash can be supplied by the caller.
+P03_C4_ORIGINALS = {
+    "packages/atlas/src/atlas_viewer/catalog.py": "c2066ead521ad8a1c02f0824e8d14b225ae98f2dcb28b1a4ba5d0ba8f5308b63",
+    "packages/atlas/src/atlas_viewer/server.py": "8c3e0ffbe74a9d62bb2ac9bb4b6e97c013e1a4d92500d7b042750981d8a87d90",
+    "packages/atlas/src/atlas_viewer/static/index.html": "61bd9a62a5df83f00dc787fbd2bd2cde9c8f798a5101c4d090992f8cefe1e030",
+}
+P03_C4_AUTHORIZATION = "ATLAS-PARITY-03-C4R; representable P03 presentation in C1"
 
 
 def audit_protocol_baseline(root: Path) -> dict:
@@ -71,12 +79,20 @@ def audit_protocol_baseline(root: Path) -> dict:
 
 
 def audit_baseline(root: Path, *, allow_presentation_delta: bool = False,
-                   allow_p02_c0_delta: bool = False) -> dict:
+                   allow_p02_c0_delta: bool = False,
+                   allow_p03_c4_delta: bool = False) -> dict:
     errors: list[str] = []
     preserved = 0
     authorized_changes: list[str] = []
     authorized_p02_changes: list[str] = []
+    authorized_c4_changes: list[str] = []
     p02_blobs = {}
+    if allow_p03_c4_delta:
+        for name, expected_hash in P03_C4_ORIGINALS.items():
+            path = root / name
+            if (path.is_symlink() or not path.is_file()
+                    or hashlib.sha256(path.read_bytes()).hexdigest() != expected_hash):
+                errors.append(f"Frozen C4 presentation changed: {name}")
     if allow_p02_c0_delta:
         p02_blobs = {
             name: subprocess.check_output(["git", "show", f"{P02_CODE_SHA}:{name}"], cwd=root)
@@ -96,7 +112,10 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False,
         path = root / name
         regular = path.is_file() and not path.is_symlink()
         if not regular or path.read_bytes() != expected:
-            if (allow_p02_c0_delta and name in P02_C0_ORIGINALS and regular
+            if (allow_p03_c4_delta and name in P03_C4_ORIGINALS and regular
+                    and hashlib.sha256(path.read_bytes()).hexdigest() == P03_C4_ORIGINALS[name]):
+                authorized_c4_changes.append(name)
+            elif (allow_p02_c0_delta and name in P02_C0_ORIGINALS and regular
                     and path.read_bytes() == p02_blobs[name]):
                 authorized_p02_changes.append(name)
             elif allow_presentation_delta and name in PRESENTATION_ORIGINALS and regular:
@@ -105,12 +124,17 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False,
                 errors.append(f"Preserved baseline changed: {name}")
         else:
             preserved += 1
-    protocol = audit_protocol_baseline(root) if allow_p02_c0_delta else None
+    protocol = audit_protocol_baseline(root) if allow_p02_c0_delta or allow_p03_c4_delta else None
     if protocol:
         errors.extend(protocol["errors"])
     return {"errors": errors, "preserved_original_files": preserved,
             "authorized_presentation_changes": authorized_changes,
             "authorized_p02_c0_changes": authorized_p02_changes,
+            "authorized_p03_c4_changes": authorized_c4_changes,
+            "p03_c4_authorization": {
+                "contract": P03_C4_AUTHORIZATION,
+                "exact_paths_sha256": dict(P03_C4_ORIGINALS),
+            } if allow_p03_c4_delta else None,
             "p02_c0_authorization": {
                 "contract": P02_AUTHORIZATION, "frozen_code_sha": P02_CODE_SHA,
                 "exact_paths_sha256": {name: hashlib.sha256(blob).hexdigest()
@@ -120,9 +144,11 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False,
 
 
 def audit(root: Path, *, allow_presentation_delta: bool = False,
-          allow_p02_c0_delta: bool = False) -> dict:
+          allow_p02_c0_delta: bool = False,
+          allow_p03_c4_delta: bool = False) -> dict:
     baseline = audit_baseline(root, allow_presentation_delta=allow_presentation_delta,
-                              allow_p02_c0_delta=allow_p02_c0_delta)
+                              allow_p02_c0_delta=allow_p02_c0_delta,
+                              allow_p03_c4_delta=allow_p03_c4_delta)
     errors = baseline["errors"]
 
     managed = 0
@@ -171,6 +197,9 @@ def audit(root: Path, *, allow_presentation_delta: bool = False,
             "preserved_original_files": baseline["preserved_original_files"],
             "authorized_presentation_changes": baseline["authorized_presentation_changes"],
             "authorized_p02_c0_changes": baseline["authorized_p02_c0_changes"],
+            "authorized_p03_c4_changes": baseline["authorized_p03_c4_changes"],
+            "p03_c4_delta_enabled": allow_p03_c4_delta,
+            "p03_c4_authorization": baseline["p03_c4_authorization"],
             "p02_c0_delta_enabled": allow_p02_c0_delta,
             "p02_c0_authorization": baseline["p02_c0_authorization"],
             "protocol_invariance": baseline["protocol_invariance"],
@@ -186,6 +215,8 @@ def build_parser() -> argparse.ArgumentParser:
                         help="Allow only the six existing presentation/test files authorized by feature 003 CLOSE01.")
     parser.add_argument("--allow-p02-c0-delta", action="store_true",
                         help="Allow exactly three P02 C0 paths at their frozen input bytes; require C1 protocol invariance.")
+    parser.add_argument("--allow-p03-c4-delta", action="store_true",
+                        help="Allow only three exact C4 presentation hashes; require frozen protocol bytes.")
     return parser
 
 
@@ -194,7 +225,8 @@ if __name__ == "__main__":
     try:
         report = audit(Path(__file__).resolve().parents[2],
                        allow_presentation_delta=args.allow_presentation_delta,
-                       allow_p02_c0_delta=args.allow_p02_c0_delta)
+                       allow_p02_c0_delta=args.allow_p02_c0_delta,
+                       allow_p03_c4_delta=args.allow_p03_c4_delta)
     except (OSError, ValueError, KeyError, SyntaxError, subprocess.CalledProcessError) as exc:
         report = {"status": "FAIL", "errors": [str(exc)]}
     print(json.dumps(report, ensure_ascii=True, indent=2))

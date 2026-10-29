@@ -14,6 +14,7 @@ from typing import Any
 from caderno_protocol import PROFILE_VERSION, load_package, to_read_model
 
 from .parity02_p02_navigation import coverage, snapshot_binding
+from .parity02_p03_metadata import MetadataError, project_metadata
 
 MAX_SOURCES = 16
 LIMITATIONS = [
@@ -95,6 +96,15 @@ class Catalog:
                 if codes & {"SOURCE_INACCESSIBLE", "SOURCE_INVALID", "SOURCE_UNSAFE"}:
                     status = "UNAVAILABLE" if "SOURCE_INACCESSIBLE" in codes else "INVALID"
                 observed[source.id] = fingerprint(package)
+                presentation: dict[str, Any] = {"metadata": None, "errors": []}
+                if model is not None:
+                    # Explicit structured source/snapshot identity; never a new
+                    # persisted protocol entity or an authenticity assertion.
+                    presentation_key = json.dumps([source.id, observed[source.id]], separators=(",", ":"))
+                    try:
+                        presentation["metadata"] = project_metadata(model, presentation_key)
+                    except MetadataError as error:
+                        presentation["errors"].append({"component": "metadata", "code": error.code, "path": error.path})
                 index[source.id] = {
                     "id": source.id,
                     "name": model["source"]["name"] if model else source.path.name,
@@ -105,6 +115,7 @@ class Catalog:
                     "coverage": coverage(model),
                     "report": report,
                     "read_model": model,
+                    "presentation": presentation,
                     "changed": False,
                     "authenticity": "NOT_VERIFIED",
                     "scientific_approval": "NOT_EVALUATED",

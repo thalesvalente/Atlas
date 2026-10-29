@@ -1,0 +1,72 @@
+{
+  "mission": "ATLAS-PARITY-03-C4R",
+  "repository": "thalesvalente/Atlas",
+  "branch": "integrate/atlas-parity03-c4-full-candidate-20261027",
+  "status": "ENGINEERING_IN_PROGRESS",
+  "target": "C4_FULL_CANDIDATE_READY_HOST_GATE_DEFERRED",
+  "inputs": [
+    {
+      "role": "C1",
+      "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "tree": "7a9bbc1765bbbf3897760ccc50a0b22aec3ee239",
+      "pr": 11
+    },
+    {
+      "role": "C2",
+      "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "tree": "d60783a212b3593e7677ca8761557ad7b758e763",
+      "pr": 10
+    },
+    {
+      "role": "C3",
+      "sha": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "tree": "928fec43fb493387a48789a226f59988587a19a2",
+      "pr": 12
+    }
+  ],
+  "composition_sha": "c120f8ae9e455e19b4e0bcd35f47ec0fd7a0117c",
+  "composition_tree": "3f1f378a3e39b0f148effdc010177144fe29e7c4",
+  "runtime_tested_sha": null,
+  "enclosing_commit": {
+    "sha": null,
+    "identity": "Resolve from GitHub head and terminal external exact-SHA PR receipt",
+    "own_ci_required": true,
+    "own_independent_review_required": true,
+    "no_automatic_evidence_transfer": true
+  },
+  "local_evidence": {
+    "candidate_sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+    "l2_status": "L2_BLOCKED_EXACT",
+    "receipt_hashes": {
+      "result": "96b69a7272edadd7a731232cfad993ef94beaa9f119288cb7d30e945b007af91",
+      "handoff": "d020ad8486ce09d5bca2b78a23085030f34237bc70f0a35b4f60fe40d279b8d6"
+    },
+    "LOCAL_C1_INSTALLATION": "PASS",
+    "LOCAL_C1_OFFLINE": "PASS",
+    "LOCAL_C1_HTTP_BROWSER": "BLOCKED_EXTERNAL_WINERROR_10013",
+    "LOCAL_C4_INSTALLATION": "NOT_RUN",
+    "LOCAL_C4_OFFLINE": "NOT_RUN",
+    "LOCAL_C4_HTTP_BROWSER": "NOT_RUN",
+    "HOST_OPERATIONAL_READINESS": false
+  },
+  "independent_review": {
+    "reviewer": "/root/independent_review",
+    "authored_delta": false,
+    "status": "PENDING_FINAL_C4_SHA_CI"
+  },
+  "visible_in_main_app": "PENDING_C4_RUNTIME_CI",
+  "rich_demonstrators_active": false,
+  "protocol_changed": false,
+  "paid_calls": false,
+  "reasoning_effective": "UNVERIFIED",
+  "authorizations_not_granted": [
+    "merge",
+    "release",
+    "deploy",
+    "promotion",
+    "scientific approval",
+    "license change",
+    "host remediation"
+  ],
+  "next_minimum_act": "Finish exact-SHA Actions validation and independent C4 review, then reconcile immutable documentary head externally."
+}

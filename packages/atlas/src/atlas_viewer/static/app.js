@@ -1,10 +1,12 @@
 'use strict';
 
+import {p03ContextKey, renderP03Metadata, renderPropertySelection} from './parity03_p03_composition.js';
+
 // Records are untrusted text. Routes are validated before resolving source + ID.
 const $ = id => document.getElementById(id);
 const navigation = window.AtlasParity02State;
 const initial = navigation.defaults();
-const state = {catalog:null,runs:[],selected:new Set(),view:initial.view,detail:null,filters:initial.filters,returnFocus:null};
+const state = {catalog:null,runs:[],selected:new Set(),view:initial.view,detail:null,filters:initial.filters,returnFocus:null,p03Selections:new Map(),renderedDetail:null};
 const key = navigation.key;
 const filterControls = {query:'search',project:'project-filter',experiment:'experiment-filter',status:'status-filter',source:'source-filter',review:'review-filter',metrics:'metrics-filter',references:'references-filter',sort:'sort-order'};
 const element = (tag,text,cls) => {const node=document.createElement(tag);if(text!==undefined)node.textContent=String(text);if(cls)node.className=cls;return node;};
@@ -44,6 +46,7 @@ function entityLink(sourceId,id,label){const run=state.runs.find(x=>x._sourceId=
 function setOptions(id,items,title){const control=$(id);control.replaceChildren();const all=element('option',title);all.value='';control.append(all);for(const item of items){const option=element('option',item.name);option.value=item.key;control.append(option);}}
 function updateCatalog(catalog){
   const focus=currentControl();state.catalog=catalog;state.runs=navigation.flatten(catalog);
+  const contexts=new Set();for(const source of catalog.sources)for(const run of source.read_model?.runs||[])contexts.add(p03ContextKey(catalog,source,run));for(const context of state.p03Selections.keys())if(!contexts.has(context))state.p03Selections.delete(context);
   const projects=[],experiments=[];
   for(const source of catalog.sources){for(const item of source.read_model?.projects||[])projects.push({key:key(source.id,item.id),name:(item.name||item.id)+' · '+source.name});for(const item of source.read_model?.experiments||[])experiments.push({key:key(source.id,item.id),name:(item.name||item.id)+' · '+source.name});}
   const byName=(a,b)=>a.name<b.name?-1:a.name>b.name?1:a.key<b.key?-1:a.key>b.key?1:0;
@@ -138,16 +141,20 @@ function propertyTable(properties,label='Propriedades declaradas'){
 }
 function appendRelationList(host,title,ids,sourceId,empty){host.append(element('h3',title));if(!ids?.length){host.append(element('p',empty,'muted'));return;}const list=element('ul','', 'entity-list');for(const id of ids){const item=element('li');item.append(entityLink(sourceId,id));list.append(item);}host.append(list);}
 function renderDetail(){
-  clear('detail-content');const run=state.runs.find(r=>r._key===state.detail);$('detail').hidden=!run;if(!run)return;
-  const target=$('detail-content'),source=sourceFor(run._sourceId);target.append(element('h3',runName(run)),element('code',run.id));
+  const run=state.runs.find(r=>r._key===state.detail);$('detail').hidden=!run;if(!run){clear('detail-content');state.renderedDetail=null;return;}
+  const source=sourceFor(run._sourceId),context=p03ContextKey(state.catalog,source,run);if(state.renderedDetail===context)return;
+  clear('detail-content');state.renderedDetail=context;
+  const target=$('detail-content');target.append(element('h3',runName(run)),element('code',run.id));
   const meta=element('div','', 'metadata');meta.append(badge(run.status),badge('Revisão: '+run.review_status,run.review_status));if(run.synthetic)meta.append(badge('SINTÉTICO','synthetic'));target.append(meta,element('p',run.description||'Sem descrição adicional.'));
   const dl=element('dl');for(const [label,value] of [['Fonte / pacote',run._sourceName],['Identidade da fonte',run._sourceId],['Snapshot do pacote',source?.snapshot_id],['Projeto',run.project_id],['Experimento',run.experiment_id],['Início declarado',run.started_at],['Fim declarado',run.ended_at],['Origem das datas',run.timestamp_origin],['Agente declarado',run.agent_id],['Software declarado',run.instrument_id]])addDefinition(dl,label,value);target.append(dl,element('p','Datas de observação não são promovidas a datas do evento. Origem temporal preservada conforme declarada.','muted'),sourceLink(run._sourceId));
   for(const [title,properties] of [['Métricas',run.metrics],['Parâmetros',run.parameters]]){target.append(element('h3',title));target.append(properties.length?propertyTable(properties,title+' da execução'):element('p','Nenhum valor declarado.','muted'));}
+  if(!state.p03Selections.has(context))state.p03Selections.set(context,new Set());target.append(renderPropertySelection(document,source,run,state.p03Selections.get(context)));
   appendRelationList(target,'Entradas declaradas',run.inputs,run._sourceId,'Nenhuma entrada declarada.');
   appendRelationList(target,'Saídas declaradas',run.outputs,run._sourceId,'Nenhuma saída declarada.');
   target.append(element('h3','Artefatos e evidências'));if(!run.artifacts.length)target.append(element('p','Nenhum artefato vinculado.','muted'));
   for(const artifact of run.artifacts){const item=element('div','', 'panel'),availability=artifact.availability||{};item.append(element('strong',artifact.name),element('p',artifact.id),badge(availability.status||'UNVERIFIED'));const info=element('dl');for(const [label,value] of [['Formato',artifact.media_type],['Disponibilidade declarada',availability.declared],['SHA-256 declarado',artifact.declared_digest],['SHA-256 calculado',availability.sha256]])addDefinition(info,label,value);item.append(info,element('p','A observação descreve este pacote. Disponibilidade e digest não autenticam origem nem aprovação.','muted'));target.append(item);}
   target.append(relatedReferenceSection(run));
+  target.append(renderP03Metadata(document,source,run));
   appendRelationList(target,'Derivação declarada — esta execução deriva de',run.derived_from,run._sourceId,'Nenhuma derivação de execução declarada.');
   target.append(element('p','Relações declaradas não demonstram causalidade.','muted'));
 }
@@ -186,10 +193,12 @@ function renderLineage(){
   if(!isolated.length)host.append(element('p','Todas as execuções carregadas participam de alguma relação declarada.','muted'));else{const list=element('ul','', 'entity-list');for(const run of isolated){const item=element('li');item.append(runLink(run),element('small',run._sourceName));list.append(item);}host.append(list);}
 }
 function renderSources(){
+  const expandedMetadata=new Set([...document.querySelectorAll('details[data-p03-metadata-context]')].filter(node=>node.open).map(node=>node.dataset.p03MetadataContext));
   clear('sources-content');for(const source of state.catalog.sources){const card=element('article','', 'panel source-card');card.id='card-'+source.id;card.tabIndex=-1;card.append(element('h3',source.name),badge(source.status));const dl=element('dl');
     for(const [label,value] of [['Fonte no conjunto aberto',source.id],['Snapshot do pacote',source.snapshot_id],['Perfil',source.version],['Sintaxe / semântica do perfil',source.report.valid?'Conforme ao candidato':'Não conforme'],['Autenticidade',source.authenticity],['Aprovação científica',source.scientific_approval],['Integridade de metadados',source.metadata_sha256],['Execuções carregadas',source.read_model?source.read_model.runs.length:'Não informado — fonte não indexada'],['População da fonte inteira',source.coverage?.source],['Total elegível na origem',source.coverage?.eligible],['Selecionados pelo produtor',source.coverage?.selected],['Convertidos pelo produtor',source.coverage?.converted]])addDefinition(dl,label,value);
     card.append(dl,element('p','O pacote aberto pode ser um recorte. Carregados descreve apenas o que esta interface leu; cobertura da fonte inteira e etapas do produtor não foram informadas pelo contrato.','muted'));
-    if(source.changed)card.append(element('p',source.change_message,'compare-note'));const issues=[...(source.report.errors||[]),...(source.report.warnings||[])],details=element('details');details.append(element('summary',`${issues.length} erro(s) ou aviso(s)`));for(const issue of issues)details.append(element('p',`${issue.code}: ${issue.message} (${issue.path||issue.entity_id||''})`));card.append(details,element('p','Uma validação positiva não certifica resultados ou autenticidade.','muted'));$('sources-content').append(card);
+    if(source.changed)card.append(element('p',source.change_message,'compare-note'));const issues=[...(source.report.errors||[]),...(source.report.warnings||[])],details=element('details');details.append(element('summary',`${issues.length} erro(s) ou aviso(s)`));for(const issue of issues)details.append(element('p',`${issue.code}: ${issue.message} (${issue.path||issue.entity_id||''})`));card.append(details,element('p','Uma validação positiva não certifica resultados ou autenticidade.','muted'));
+    const metadata=element('details'),metadataSummary=element('summary','Metadados declarados e observações do leitor');metadataSummary.id='p03-metadata-summary-'+source.id;metadata.dataset.p03MetadataContext=JSON.stringify([state.catalog.snapshot_id,source.id,source.snapshot_id]);metadata.open=Boolean(source.presentation?.errors?.length)||expandedMetadata.has(metadata.dataset.p03MetadataContext);metadata.append(metadataSummary,renderP03Metadata(document,source));card.append(metadata);$('sources-content').append(card);
   }if(!state.catalog.sources.length)$('sources-content').append(element('div','Nenhuma fonte declarada.','empty'));
 }
 function renderDossier(){$('dossier-summary').textContent=`${state.catalog.sources.length} fonte(s) · ${state.runs.length} execução(ões) carregadas · índice observado em ${state.catalog.indexed_at}. Exportação inclui todos os registros carregados, independentemente dos filtros da tela.`;clear('limitations');for(const text of state.catalog.limitations)$('limitations').append(element('li',text));}

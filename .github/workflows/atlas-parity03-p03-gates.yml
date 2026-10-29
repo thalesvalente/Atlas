@@ -40,7 +40,7 @@ jobs:
       - name: Install SDK and viewer for focal collection
         run: python -m pip install --no-build-isolation --no-deps ./packages/protocol ./packages/atlas
       - name: Bind frozen inputs and ownership to exact candidate
-        run: python scripts/qa/atlas_parity03_p03_ci.py inputs
+        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py' || 'scripts/qa/atlas_parity03_p03_ci.py' }} inputs --output-dir .test-output/atlas-parity03-p03
       - name: Collect SDK and P03 tests with zero skips
         run: python scripts/qa/atlas_parity03_p03_ci.py tests
       - name: Build with setuptools 80.9.0 and install outside checkout
@@ -87,7 +87,7 @@ jobs:
       - name: Install pinned test driver without downloading Chromium
         run: npm install --no-save --package-lock=false --ignore-scripts playwright@1.62.1
       - name: Bind frozen inputs and ownership to exact candidate
-        run: python scripts/qa/atlas_parity03_p03_ci.py inputs
+        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py' || 'scripts/qa/atlas_parity03_p03_ci.py' }} inputs --output-dir .test-output/atlas-parity03-p03
       - name: Exercise P03 in existing runner Chromium
         run: python scripts/qa/atlas_parity03_p03_ci.py browser
       - name: Require browser receipts for this exact SHA
@@ -134,7 +134,7 @@ jobs:
         run: |
           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
           python .specify/scripts/python/resolve_template.py spec-template --json
-          python scripts/qa/atlas_parity03_p03_ci.py inputs
+          python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py' || 'scripts/qa/atlas_parity03_p03_ci.py' }} inputs --output-dir .test-output/atlas-parity03-p03
       - name: Preserve specification input evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

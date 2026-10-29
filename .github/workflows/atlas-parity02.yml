@@ -99,7 +99,7 @@ jobs:
         run: |
           specify version --json
           specify integration status --json
-          python scripts/qa/speckit_audit.py --allow-presentation-delta --allow-p02-c0-delta
+          python scripts/qa/speckit_audit.py --allow-presentation-delta ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && '--allow-p03-c4-delta' || '--allow-p02-c0-delta' }}
       - name: Resolve the 004 specification without persisting the active pointer
         run: |
           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks

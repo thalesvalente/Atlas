@@ -11,3 +11,15 @@
 @media(max-width:1100px){.filters{grid-template-columns:repeat(3,minmax(0,1fr))}.filters select{max-width:100%}}
 @media(max-width:760px){.topbar{min-height:75px}.sidebar nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:5px}.nav-button{white-space:normal;width:100%;min-width:0;font-size:12px;padding:10px;align-items:flex-start}.nav-button>span:first-child{flex:0 0 17px}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .search-label{grid-column:1/-1}.filters select{font-size:12px;padding:10px 8px}.filters>.text-button{width:auto}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.page-heading h1{font-size:32px}.table-footer .button{font-size:12px}.source-grid{grid-template-columns:minmax(0,1fr)}.detail .section-heading{gap:8px}.scope-panel{padding:16px}.top-actions{min-width:0}.version{white-space:normal}.brand small{font-size:8px}}
 @media(max-width:360px){main{padding-left:12px;padding-right:12px}.topbar{padding-left:12px;padding-right:12px;flex-wrap:wrap}.top-actions{margin-left:auto}.brand{font-size:23px}.page-heading h1{font-size:30px}.filters{grid-template-columns:minmax(0,1fr)}.filters .search-label{grid-column:auto}.stats>div{padding:0 14px}.panel{padding:14px}.sidebar{padding:8px}.scope-panel{padding:14px}}
+
+/* P03 embedding owns only its subtree; source data and shell controls stay separate. */
+.atlas-p03-embedding{min-width:0;max-width:100%;margin:1.25rem 0;overflow-wrap:anywhere}
+.atlas-p03-context{font-size:.85rem;color:var(--muted);overflow-wrap:anywhere}
+.atlas-p03-picker fieldset{min-inline-size:0;max-width:100%;margin:1rem 0;padding:1rem;border:1px solid var(--line);border-radius:6px}
+.atlas-p03-picker legend{font-weight:650;padding:0 .4rem;max-width:100%;overflow-wrap:anywhere}
+.atlas-p03-picker__option{display:flex;flex-direction:row;align-items:flex-start;gap:.7rem;min-width:0;max-width:100%;margin:.75rem 0;font-size:.85rem;color:var(--ink)}
+.atlas-p03-picker__option span{min-width:0;overflow-wrap:anywhere}
+.atlas-p03-picker__option input{width:18px;height:18px;min-height:18px;padding:0;flex:0 0 18px;accent-color:#256956}
+.atlas-p03-embedding .atlas-p03-table{margin:1.2rem 0}
+.atlas-p03-embedding .atlas-p03-table__scroll{max-height:24rem;overflow:auto}
+.atlas-p03-presentation-error{padding:.8rem;border:1px solid #bf7772;border-radius:5px;background:#f9e6e5;color:#7b302c;overflow-wrap:anywhere}
