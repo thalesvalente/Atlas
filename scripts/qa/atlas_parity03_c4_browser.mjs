@@ -117,6 +117,23 @@ try {
     && await row(propertyIds.boolean).locator('td').nth(2).textContent() === 'false'
     && (await row(propertyIds.absent).locator('td').nth(2).textContent()).includes('Não informado')
     && (await row(propertyIds.absent).locator('td').nth(2).textContent()).includes('desconhecido não é zero'));
+  const typography = await page.locator('#detail .atlas-p03-table__grid th,#detail .atlas-p03-table__metadata')
+    .evaluateAll(nodes => nodes.map(node => ({raw: node.textContent.trim(), rendered: node.innerText.trim(),
+      metadata: node.classList.contains('atlas-p03-table__metadata'),
+      transform: getComputedStyle(node).textTransform})));
+  const unitLabels = await page.locator('#detail .atlas-p03-table__metadata').allInnerTexts();
+  const rowIdentities = await page.locator('#detail [data-row-id] > th[scope="row"]').evaluateAll(nodes =>
+    nodes.map(node => ({declared: node.parentElement.dataset.rowId,
+      raw: node.textContent, rendered: node.innerText.trim(), transform: getComputedStyle(node).textTransform})));
+  check('P03_rendered_unit_labels_and_row_ids_preserve_declared_case',
+    typography.length > 0 && typography.every(item => item.transform === 'none'
+      && (!item.metadata || item.rendered === item.raw))
+    && unitLabels.some(text => text.includes('Unidade: mg/L'))
+    && unitLabels.some(text => text.includes('Unidade: µg/L'))
+    && rowIdentities.length === await choices().count()
+    && rowIdentities.every(item => item.transform === 'none'
+      && item.raw === item.declared && item.rendered === item.declared));
+  receipt.P03_typography = {headers_and_metadata: typography, row_identities: rowIdentities};
   const bindings = await tables().evaluateAll(nodes => nodes.map(node => ({
     source: node.dataset.sourceId, snapshot: node.dataset.snapshotId, entity: node.dataset.entityId,
     columns: node.querySelectorAll('thead th[scope="col"]').length,

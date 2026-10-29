@@ -7,3 +7,5 @@ Preflight C3/P01 efetivamente concluído: leitura integral dos 95 arquivos (5296
 O revisor conferiu o merge puro c120f8ae e identificou todos os 95 blobs C3 idênticos. Leitura estática inicial dos oito paths runtime C4 sem finding bloqueante; ainda não constitui revisão do SHA final/CI. Evidências reais C3 Windows/Ubuntu obtidas com ZIPs de digests conferidos; leitura interna é conciliada no parecer final.
 
 Estado final C4: PENDING_EXACT_SHA_AND_TERMINAL_CI_REVIEW. A lacuna de revisão C3 só é fechada pela confirmação final de preservação desses blobs no SHA C4 e parecer desse revisor. Parecer por SHA e findings serão incorporados após execução real; nenhum parecer de autoria própria é substituto.
+
+C4-R01: asserção de isolamento C2 adaptada individualmente, sem skip; os gates a21 passaram. C4-R02[P2]: unidades e identidades sensíveis à caixa eram visualmente convertidas por CSS global. Finding confirmado em PNG real e preservado mesmo após31/31 jobs a21. Revisor leu o reset CSS estreito e o novo oráculo renderizado sem autoria, aceitando-os apenas estaticamente. O fechamento exige CI/artifacts/PNG do novo SHA.

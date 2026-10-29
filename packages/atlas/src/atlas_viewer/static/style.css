@@ -21,5 +21,6 @@
 .atlas-p03-picker__option span{min-width:0;overflow-wrap:anywhere}
 .atlas-p03-picker__option input{width:18px;height:18px;min-height:18px;padding:0;flex:0 0 18px;accent-color:#256956}
 .atlas-p03-embedding .atlas-p03-table{margin:1.2rem 0}
+.atlas-p03-embedding .atlas-p03-table th{text-transform:none}
 .atlas-p03-embedding .atlas-p03-table__scroll{max-height:24rem;overflow:auto}
 .atlas-p03-presentation-error{padding:.8rem;border:1px solid #bf7772;border-radius:5px;background:#f9e6e5;color:#7b302c;overflow-wrap:anywhere}
