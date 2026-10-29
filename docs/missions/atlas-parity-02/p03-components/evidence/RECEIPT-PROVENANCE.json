@@ -1,0 +1,27 @@
+[
+  {
+    "published_file": "INDEPENDENT-REVIEW.json",
+    "original_receipt_sha256": "99ba60556fc489c10f6c0df4762434898418b0eba8c1c534b01e86ed2696b2cc",
+    "sanitization": "engineering absolute paths replaced by placeholders only"
+  },
+  {
+    "published_file": "INDEPENDENT-PROBES.json",
+    "original_receipt_sha256": "07fa4f9122baaed85c705755a7938b20a622613ea69eecf11d16e882b2c45393",
+    "sanitization": "engineering absolute paths replaced by placeholders only"
+  },
+  {
+    "published_file": "INSTALL.json",
+    "original_receipt_sha256": "386cc35d852330ac7bbfb324d46772890146117c5ef5bfe531d13c8dd4929a41",
+    "sanitization": "engineering absolute paths replaced by placeholders only"
+  },
+  {
+    "published_file": "REGRESSION.json",
+    "original_receipt_sha256": "1893f89d6b8f2ef07c7ced1c8c9776039376f57d11307aa70a9d991a76effb93",
+    "sanitization": "engineering absolute paths replaced by placeholders only"
+  },
+  {
+    "published_file": "VERIFICATION-SUMMARY.json",
+    "original_receipt_sha256": "c3d7b47aed55987d3466e7bea996d46d73871803a098a386b0f83f1c6f5445b4",
+    "sanitization": "engineering absolute paths replaced by placeholders only"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "helper": "setup_tasks.py --json",
+  "exit_code": 0,
+  "result": {
+    "FEATURE_DIR": "<REPO>/specs/004-atlas-parity-c0/workstreams/p01-contracts",
+    "AVAILABLE_DOCS": [
+      "research.md",
+      "data-model.md",
+      "quickstart.md"
+    ],
+    "TASKS_TEMPLATE": "<REPO>/.specify/templates/tasks-template.md"
+  },
+  "template_sha256": "b0f527d41e546af0c31903e04f9b20965b6b497b573792198f663a64ce128863",
+  "template_bytes": 9171,
+  "feature_pointer_present_after": false,
+  "dispatch_native_skill": false
+}

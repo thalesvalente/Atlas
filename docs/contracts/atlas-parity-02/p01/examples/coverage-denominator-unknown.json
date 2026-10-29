@@ -1,0 +1,151 @@
+{
+  "kind": "ATLAS_P01_COVERAGE_EXAMPLE",
+  "status": "CANDIDATE",
+  "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL",
+  "synthetic": true,
+  "derived": true,
+  "caderno_required": false,
+  "scope_id": "synthetic-selection-A",
+  "observed_at": "2026-10-27T12:00:00Z",
+  "selection": {
+    "criterion": "Execuções declaradas na fixture sintética selecionada; vista sem filtro adicional.",
+    "unit": "execution",
+    "selection_id": "synthetic-selection-A"
+  },
+  "collection_total_inferred_from_loaded_runs": false,
+  "layers": [
+    {
+      "layer": "source",
+      "scope_id": "synthetic-selection-A",
+      "unit": "execution",
+      "known": false,
+      "count": null,
+      "evidence": [],
+      "denominator": null,
+      "ratio": null
+    },
+    {
+      "layer": "projection",
+      "scope_id": "synthetic-selection-A",
+      "unit": "execution",
+      "known": false,
+      "count": null,
+      "evidence": [],
+      "denominator": null,
+      "ratio": null
+    },
+    {
+      "layer": "selection",
+      "scope_id": "synthetic-selection-A",
+      "unit": "execution",
+      "known": false,
+      "count": null,
+      "evidence": [],
+      "denominator": null,
+      "ratio": null
+    },
+    {
+      "layer": "conversion",
+      "scope_id": "synthetic-selection-A",
+      "unit": "execution",
+      "known": false,
+      "count": null,
+      "evidence": [],
+      "denominator": null,
+      "ratio": null
+    },
+    {
+      "layer": "package",
+      "scope_id": "synthetic-selection-A",
+      "unit": "execution",
+      "known": true,
+      "count": 1,
+      "evidence": [
+        "synthetic-observation:current-profile-minimal#CreateAction"
+      ],
+      "denominator": null,
+      "ratio": null
+    },
+    {
+      "layer": "read_model",
+      "scope_id": "synthetic-selection-A",
+      "unit": "execution",
+      "known": true,
+      "count": 1,
+      "evidence": [
+        "synthetic-observation:current-profile-minimal#CreateAction"
+      ],
+      "denominator": {
+        "layer": "package",
+        "unit": "execution",
+        "count": 1,
+        "scope_id": "synthetic-selection-A",
+        "relation": "SUBSET_OF",
+        "mapping_evidence": "synthetic-one-to-one:urn:atlas:p01:synthetic:run"
+      },
+      "ratio": 1.0
+    },
+    {
+      "layer": "interface",
+      "scope_id": "synthetic-selection-A",
+      "unit": "execution",
+      "known": true,
+      "count": 1,
+      "evidence": [
+        "synthetic-observation:current-profile-minimal#CreateAction"
+      ],
+      "denominator": null,
+      "ratio": null
+    }
+  ],
+  "losses": [
+    {
+      "from_layer": "source",
+      "to_layer": "projection",
+      "unit": "execution",
+      "count": null,
+      "mapping": "UNKNOWN",
+      "reason": "Etapa anterior não observada neste ensaio documental."
+    },
+    {
+      "from_layer": "projection",
+      "to_layer": "selection",
+      "unit": "execution",
+      "count": null,
+      "mapping": "UNKNOWN",
+      "reason": "Etapa anterior não observada neste ensaio documental."
+    },
+    {
+      "from_layer": "selection",
+      "to_layer": "conversion",
+      "unit": "execution",
+      "count": null,
+      "mapping": "UNKNOWN",
+      "reason": "Etapa anterior não observada neste ensaio documental."
+    },
+    {
+      "from_layer": "conversion",
+      "to_layer": "package",
+      "unit": "execution",
+      "count": null,
+      "mapping": "UNKNOWN",
+      "reason": "Etapa anterior não observada neste ensaio documental."
+    },
+    {
+      "from_layer": "package",
+      "to_layer": "read_model",
+      "unit": "execution",
+      "count": 0,
+      "mapping": "ONE_TO_ONE",
+      "reason": "Mesma execução sintética observada nas duas camadas."
+    },
+    {
+      "from_layer": "read_model",
+      "to_layer": "interface",
+      "unit": "execution",
+      "count": 0,
+      "mapping": "ONE_TO_ONE",
+      "reason": "Mesma execução sintética observada nas duas camadas."
+    }
+  ]
+}

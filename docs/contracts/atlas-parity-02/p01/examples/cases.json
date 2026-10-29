@@ -1,0 +1,398 @@
+{
+  "kind": "ATLAS_P01_EXAMPLE_CASES",
+  "purpose": "Documentary examples only; not a Caderno profile or product API.",
+  "cases": [
+    {
+      "id": "current-profile-minimal",
+      "file": "current-profile-minimal.json",
+      "format": "CADERNO_CURRENT",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "current-profile-second-source",
+      "file": "current-profile-second-source.json",
+      "format": "CADERNO_CURRENT",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "negative-current-missing-reference",
+      "file": "negative-current-missing-reference.json",
+      "format": "CADERNO_CURRENT",
+      "expected_valid": false,
+      "expected_errors": [
+        "SDK:MISSING_REFERENCE"
+      ]
+    },
+    {
+      "id": "negative-current-synthetic-approval",
+      "file": "negative-current-synthetic-approval.json",
+      "format": "CADERNO_CURRENT",
+      "expected_valid": false,
+      "expected_errors": [
+        "SDK:SYNTHETIC_APPROVAL"
+      ]
+    },
+    {
+      "id": "negative-current-missing-value-reason",
+      "file": "negative-current-missing-value-reason.json",
+      "format": "CADERNO_CURRENT",
+      "expected_valid": false,
+      "expected_errors": [
+        "SDK:MISSING_VALUE_REASON"
+      ]
+    },
+    {
+      "id": "presentation-minimal",
+      "file": "presentation-minimal.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "presentation-contextual-collision",
+      "file": "presentation-contextual-collision.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "presentation-explicit-input",
+      "file": "presentation-explicit-input.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "negative-mention-as-input",
+      "file": "negative-mention-as-input.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "RELATION_SEMANTICS"
+      ]
+    },
+    {
+      "id": "negative-cross-source-resolution",
+      "file": "negative-cross-source-resolution.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "CROSS_SOURCE_RELATION"
+      ]
+    },
+    {
+      "id": "negative-document-as-run",
+      "file": "negative-document-as-run.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "ENTITY_KIND"
+      ]
+    },
+    {
+      "id": "negative-duplicate-contextual-id",
+      "file": "negative-duplicate-contextual-id.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "DUPLICATE_CONTEXTUAL_ID"
+      ]
+    },
+    {
+      "id": "negative-stable-ordinal-link",
+      "file": "negative-stable-ordinal-link.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "ORDINAL_STABILITY"
+      ]
+    },
+    {
+      "id": "negative-event-from-file-time",
+      "file": "negative-event-from-file-time.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "TIME_ROLE"
+      ]
+    },
+    {
+      "id": "negative-timezone-missing",
+      "file": "negative-timezone-missing.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "TIME_FORMAT"
+      ]
+    },
+    {
+      "id": "negative-unknown-time-precision",
+      "file": "negative-unknown-time-precision.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "TIME_UNKNOWN"
+      ]
+    },
+    {
+      "id": "negative-input-subject-document",
+      "file": "negative-input-subject-document.json",
+      "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "RELATION_SUBJECT"
+      ]
+    },
+    {
+      "id": "table-typed-minimal",
+      "file": "table-typed-minimal.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "table-incompatible-explicit",
+      "file": "table-incompatible-explicit.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "table-semantic-unknown",
+      "file": "table-semantic-unknown.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "negative-table-type",
+      "file": "negative-table-type.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "CELL_TYPE"
+      ]
+    },
+    {
+      "id": "negative-table-order",
+      "file": "negative-table-order.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "ROW_ORDER"
+      ]
+    },
+    {
+      "id": "negative-table-column-order",
+      "file": "negative-table-column-order.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COLUMN_ORDER"
+      ]
+    },
+    {
+      "id": "negative-table-missing-reason",
+      "file": "negative-table-missing-reason.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "CELL_MISSING_REASON"
+      ]
+    },
+    {
+      "id": "negative-table-lexical-loss",
+      "file": "negative-table-lexical-loss.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "CELL_LEXEME"
+      ]
+    },
+    {
+      "id": "negative-table-comparison-unit",
+      "file": "negative-table-comparison-unit.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COMPARISON_COMPATIBILITY"
+      ]
+    },
+    {
+      "id": "negative-table-comparison-missing",
+      "file": "negative-table-comparison-missing.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COMPARISON_COMPATIBILITY"
+      ]
+    },
+    {
+      "id": "negative-table-unknown-semantic",
+      "file": "negative-table-unknown-semantic.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COMPARISON_COMPATIBILITY"
+      ]
+    },
+    {
+      "id": "negative-table-promoted-protocol",
+      "file": "negative-table-promoted-protocol.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "TABLE_CONTRACT_CLASS"
+      ]
+    },
+    {
+      "id": "coverage-minimal",
+      "file": "coverage-minimal.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "coverage-denominator-unknown",
+      "file": "coverage-denominator-unknown.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "coverage-empty-universe",
+      "file": "coverage-empty-universe.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": true,
+      "expected_errors": []
+    },
+    {
+      "id": "negative-coverage-unknown-zero",
+      "file": "negative-coverage-unknown-zero.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "UNKNOWN_NOT_NULL"
+      ]
+    },
+    {
+      "id": "negative-coverage-no-unknown-reason",
+      "file": "negative-coverage-no-unknown-reason.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "UNKNOWN_REASON"
+      ]
+    },
+    {
+      "id": "negative-coverage-denominator-scope",
+      "file": "negative-coverage-denominator-scope.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "DENOMINATOR_SCOPE"
+      ]
+    },
+    {
+      "id": "negative-coverage-denominator-unit",
+      "file": "negative-coverage-denominator-unit.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "DENOMINATOR_UNIT"
+      ]
+    },
+    {
+      "id": "negative-coverage-fractional-count",
+      "file": "negative-coverage-fractional-count.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COUNT_TYPE"
+      ]
+    },
+    {
+      "id": "negative-coverage-negative-count",
+      "file": "negative-coverage-negative-count.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COUNT_TYPE"
+      ]
+    },
+    {
+      "id": "negative-coverage-boolean-count",
+      "file": "negative-coverage-boolean-count.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COUNT_TYPE"
+      ]
+    },
+    {
+      "id": "negative-coverage-subset-exceeds",
+      "file": "negative-coverage-subset-exceeds.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "SUBSET_COUNT"
+      ]
+    },
+    {
+      "id": "negative-coverage-required-sidecar",
+      "file": "negative-coverage-required-sidecar.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "SIDECAR_AUTHORITY"
+      ]
+    },
+    {
+      "id": "negative-coverage-inferred-collection",
+      "file": "negative-coverage-inferred-collection.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COLLECTION_INFERENCE"
+      ]
+    },
+    {
+      "id": "negative-coverage-known-without-evidence",
+      "file": "negative-coverage-known-without-evidence.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "COUNT_EVIDENCE"
+      ]
+    },
+    {
+      "id": "negative-coverage-loss-mismatch",
+      "file": "negative-coverage-loss-mismatch.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "LOSS_COUNT"
+      ]
+    },
+    {
+      "id": "negative-coverage-zero-denominator-percent",
+      "file": "negative-coverage-zero-denominator-percent.json",
+      "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "RATIO_UNDEFINED"
+      ]
+    },
+    {
+      "id": "negative-json-numeric-overflow",
+      "file": "negative-json-numeric-overflow.json",
+      "format": "ATLAS_P01_TABLE_EXAMPLE",
+      "expected_valid": false,
+      "expected_errors": [
+        "JSON_NONFINITE"
+      ]
+    }
+  ]
+}

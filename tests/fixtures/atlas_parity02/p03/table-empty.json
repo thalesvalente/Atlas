@@ -1,0 +1,39 @@
+{
+  "version": "p03-table/1",
+  "semantic_status": "CANDIDATE_PRESENTATION",
+  "synthetic": true,
+  "title": "Tabela sintética vazia",
+  "description": "Descritor candidato de apresentação; não é contrato persistido do Caderno.",
+  "columns": [
+    {
+      "id": "sample",
+      "label": "Amostra / referência",
+      "type": "string"
+    },
+    {
+      "id": "count",
+      "label": "Inteiro exato",
+      "type": "integer",
+      "unit": "1",
+      "precision": 0
+    },
+    {
+      "id": "measure",
+      "label": "Medição declarada",
+      "type": "decimal",
+      "unit": "mg/L",
+      "precision": 2
+    },
+    {
+      "id": "flag",
+      "label": "Sinalizador",
+      "type": "boolean"
+    },
+    {
+      "id": "code",
+      "label": "Código lexical",
+      "type": "string"
+    }
+  ],
+  "rows": []
+}

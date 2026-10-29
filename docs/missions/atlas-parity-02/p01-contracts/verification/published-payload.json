@@ -1,0 +1,15 @@
+{
+  "tested_commit": "3a308ee78e185912959920d85a97cd511a70a764",
+  "tested_tree": "03894a33271c030a72ccb7b016aeed943b11f525",
+  "product_code_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "command": "python -B docs/contracts/atlas-parity-02/p01/validate_examples.py --suite",
+  "exit_code": 0,
+  "status": "PASS",
+  "unique_examples": 46,
+  "positive_examples": 11,
+  "negative_examples": 35,
+  "reader_probes": 9,
+  "validator_sha256": "1075fc8e6531caaeccaa957bfe2ada5f9a86809853d34acccf7cb8a73cac3791",
+  "cases_manifest_sha256": "323ae7c6f1da3b8f69610bfd6ac7f586cdf1622e0fa0536616396363f4e1a57c",
+  "note": "Exact published payload commit; rerun for binding, not additional unique cases."
+}

@@ -1,0 +1,60 @@
+name: ATLAS-PARITY-03 P01 contract gate
+on:
+  push:
+    branches: [qa/atlas-parity03-c3-contract-gate-20261027]
+    paths:
+      - '.github/workflows/atlas-parity03-contracts.yml'
+      - 'docs/contracts/atlas-parity-02/p01/**'
+      - 'docs/missions/atlas-parity-03/c3-contract-gate/**'
+      - 'specs/004-atlas-parity-c0/workstreams/p01-contracts/**'
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - '.github/workflows/atlas-parity03-contracts.yml'
+      - 'docs/contracts/atlas-parity-02/p01/**'
+      - 'docs/missions/atlas-parity-03/c3-contract-gate/**'
+      - 'specs/004-atlas-parity-c0/workstreams/p01-contracts/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  p01-contract-gate:
+    name: P01 / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - name: Exact SHA checkout, full history for integrity proofs
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install public protocol and viewer only
+        shell: bash
+        run: |
+          python -m pip install build==1.3.0 setuptools==80.9.0 wheel==0.45.1 jsonschema==4.25.1
+          python -m pip install --no-build-isolation ./packages/protocol ./packages/atlas
+      - name: Run 46 examples, 9 public probes, 11 regressions, architecture, normal and -O
+        shell: bash
+        run: |
+          git rev-parse HEAD
+          python -B docs/contracts/atlas-parity-02/p01/run_contract_gate.py --output .ci-p01-contracts
+      - name: Upload SHA-bound JSON and JUnit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-parity03-p01-${{ matrix.os }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: .ci-p01-contracts/**
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 14

@@ -1,0 +1,448 @@
+{
+  "status": "PASS",
+  "scope": "P01_DOCUMENTARY_EXAMPLES_AND_UNCHANGED_READER",
+  "unique_examples": 45,
+  "positive_examples": 11,
+  "negative_examples": 34,
+  "reader_probes": [
+    {
+      "id": "CURRENT_ENTITIES",
+      "status": "PASS",
+      "detail": "All 13 declared graph entities survive in entities."
+    },
+    {
+      "id": "DOCUMENT_PRODUCT_NOT_RUNS",
+      "status": "PASS",
+      "detail": "Document, product and table-file metadata do not create additional runs."
+    },
+    {
+      "id": "MENTION_NEUTRAL_ORDER",
+      "status": "PASS",
+      "detail": "Duplicate mention deduplicated in order, with zero experimental edges inferred."
+    },
+    {
+      "id": "UNKNOWN_VALUES_TIMES",
+      "status": "PASS",
+      "detail": "Absent value, declared precision and unknown event time are preserved."
+    },
+    {
+      "id": "TABLE_METADATA_ONLY",
+      "status": "PASS",
+      "detail": "A table file is representable as metadata; no typed grid is fabricated."
+    },
+    {
+      "id": "SOURCE_SCOPED_COLLISION",
+      "status": "PASS",
+      "detail": "Same entity IDs in two sources retain different source-local titles."
+    },
+    {
+      "id": "ORDINAL_REORDER_LIMIT",
+      "status": "PASS",
+      "detail": "Reordering changes which bytes source-1 denotes; stable identity is not asserted."
+    },
+    {
+      "id": "INVALID_SOURCE_NOT_INDEXED",
+      "status": "PASS",
+      "detail": "The current reader rejects a missing target; no alternate source is searched."
+    },
+    {
+      "id": "INPUT_BYTES_UNCHANGED",
+      "status": "PASS",
+      "detail": "Observed synthetic inputs are byte-identical after these reads."
+    }
+  ],
+  "cases": [
+    {
+      "id": "current-profile-minimal",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "37a669a2276ff8de44582e973abb423aaa2550be30fc85d4dfac92f7801b944f"
+    },
+    {
+      "id": "current-profile-second-source",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "edd043ac4d0ef796e0011203d0ff004a89d20f443f92e755ceb98217041d1aa5"
+    },
+    {
+      "id": "negative-current-missing-reference",
+      "expected_valid": false,
+      "errors": [
+        "SDK:MISSING_REFERENCE"
+      ],
+      "status": "PASS",
+      "sha256": "9c814c437038ad9c8d615e27041c03b56cf97ce1fc9ca4421775ab6af1e69e9a"
+    },
+    {
+      "id": "negative-current-synthetic-approval",
+      "expected_valid": false,
+      "errors": [
+        "SDK:SYNTHETIC_APPROVAL"
+      ],
+      "status": "PASS",
+      "sha256": "4b7140edd6425fafce33f3796bc03a4acf6cc0673c9737c3535e509e5d8ad6e0"
+    },
+    {
+      "id": "negative-current-missing-value-reason",
+      "expected_valid": false,
+      "errors": [
+        "SDK:MISSING_VALUE_REASON"
+      ],
+      "status": "PASS",
+      "sha256": "30af70e22ddca4b99f717dc4115f0813c1209dbf087bb61fd1a383e54ccde036"
+    },
+    {
+      "id": "presentation-minimal",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "011a3ad61e52214b23d17eca8d84cc2f186d8300b4724ff9e602c82363a0c2f3"
+    },
+    {
+      "id": "presentation-contextual-collision",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "b711eff51112551b76c23a176e8d17c4872270304ff6a1cc9df5cf0da2faf6cb"
+    },
+    {
+      "id": "presentation-explicit-input",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "12abaadacd3dfcdab6f94607859b89062b29d2ba281aa72b057aaaa10f702d83"
+    },
+    {
+      "id": "negative-mention-as-input",
+      "expected_valid": false,
+      "errors": [
+        "RELATION_SEMANTICS"
+      ],
+      "status": "PASS",
+      "sha256": "e408170649d2a70e2121ea20771471100c87c6a9c81078157de1d2499796d04c"
+    },
+    {
+      "id": "negative-cross-source-resolution",
+      "expected_valid": false,
+      "errors": [
+        "CROSS_SOURCE_RELATION"
+      ],
+      "status": "PASS",
+      "sha256": "f76937e36fa7d8f7c847c91e8b870e8b88f02bec3817d00170a14a75d3c777c7"
+    },
+    {
+      "id": "negative-document-as-run",
+      "expected_valid": false,
+      "errors": [
+        "ENTITY_KIND"
+      ],
+      "status": "PASS",
+      "sha256": "9b06225c202b95a6c269dbb4f0225059404c5f19c78ac0bcd1634320bdb38739"
+    },
+    {
+      "id": "negative-duplicate-contextual-id",
+      "expected_valid": false,
+      "errors": [
+        "DUPLICATE_CONTEXTUAL_ID"
+      ],
+      "status": "PASS",
+      "sha256": "f85e43698267684287d37dd6aaa0f45e28397c9bccc34278bcdc0165589779f3"
+    },
+    {
+      "id": "negative-stable-ordinal-link",
+      "expected_valid": false,
+      "errors": [
+        "ORDINAL_STABILITY"
+      ],
+      "status": "PASS",
+      "sha256": "e152b3fef2edbfcb1e07a13eb93eb0031493e69bda627c77299e66544950cb47"
+    },
+    {
+      "id": "negative-event-from-file-time",
+      "expected_valid": false,
+      "errors": [
+        "TIME_ROLE"
+      ],
+      "status": "PASS",
+      "sha256": "c1b59c36d8cc0dc3011788c1b7b0e37918d29d7164bbc29320cdbc12295205cc"
+    },
+    {
+      "id": "negative-timezone-missing",
+      "expected_valid": false,
+      "errors": [
+        "TIME_FORMAT"
+      ],
+      "status": "PASS",
+      "sha256": "7f1e51cf4ad20485d3647feedcc84d953739d7304efc6462c9680758794b8d33"
+    },
+    {
+      "id": "negative-unknown-time-precision",
+      "expected_valid": false,
+      "errors": [
+        "TIME_UNKNOWN"
+      ],
+      "status": "PASS",
+      "sha256": "49a7fe3dc7d417c7d547b0800281bf4b24b659a7d1d7391d0c1bd2b9d7e55946"
+    },
+    {
+      "id": "negative-input-subject-document",
+      "expected_valid": false,
+      "errors": [
+        "RELATION_SUBJECT"
+      ],
+      "status": "PASS",
+      "sha256": "c225d963b9439043e5d1855363e8b92171a6569bad6e47a19b28a421097e5a57"
+    },
+    {
+      "id": "table-typed-minimal",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "63cdd00912d2482395ee33da0f45e73b7cb19ac398c4e2f79f9ca66b66dd688b"
+    },
+    {
+      "id": "table-incompatible-explicit",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "1e5ed389f409230a0277b703f53bf498faea8ab3f458c393019da68c89c125af"
+    },
+    {
+      "id": "table-semantic-unknown",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "701f473a52a6c13924f7fdeb2794909a073e4bc67045614aaa62be617382fed7"
+    },
+    {
+      "id": "negative-table-type",
+      "expected_valid": false,
+      "errors": [
+        "CELL_TYPE"
+      ],
+      "status": "PASS",
+      "sha256": "c31956f8ca3b2f9ef5e52100851f77b811b7085a58d6fe28e986e112b80a5c40"
+    },
+    {
+      "id": "negative-table-order",
+      "expected_valid": false,
+      "errors": [
+        "ROW_ORDER"
+      ],
+      "status": "PASS",
+      "sha256": "377b64e9d18e0d34283da116c26c74c43a7ee154eceb8638fbac8a1a77e08cde"
+    },
+    {
+      "id": "negative-table-column-order",
+      "expected_valid": false,
+      "errors": [
+        "COLUMN_ORDER"
+      ],
+      "status": "PASS",
+      "sha256": "49ca10e4aae4cb256a7ebf346b6fe3300c85ec88f1b1d2997e7413160a83bd77"
+    },
+    {
+      "id": "negative-table-missing-reason",
+      "expected_valid": false,
+      "errors": [
+        "CELL_MISSING_REASON"
+      ],
+      "status": "PASS",
+      "sha256": "068a20f39c46d45d14ffdf55dfa490053161bf74f0ddeb004257afa8650a44ca"
+    },
+    {
+      "id": "negative-table-lexical-loss",
+      "expected_valid": false,
+      "errors": [
+        "CELL_LEXEME"
+      ],
+      "status": "PASS",
+      "sha256": "54c59f0b0de2e72b7549133c16f436d98f619e88494dc045c378cce2c5cb66d8"
+    },
+    {
+      "id": "negative-table-comparison-unit",
+      "expected_valid": false,
+      "errors": [
+        "COMPARISON_COMPATIBILITY"
+      ],
+      "status": "PASS",
+      "sha256": "d60db98ee06e29b14502fbe63f1f840c101a8b1d4621d899569ad4fc2b136eca"
+    },
+    {
+      "id": "negative-table-comparison-missing",
+      "expected_valid": false,
+      "errors": [
+        "COMPARISON_COMPATIBILITY"
+      ],
+      "status": "PASS",
+      "sha256": "af28b24b98e5e775c7a06f48a142ae2c9a6b7f1459e75fcf645537812f1c5a91"
+    },
+    {
+      "id": "negative-table-unknown-semantic",
+      "expected_valid": false,
+      "errors": [
+        "COMPARISON_COMPATIBILITY"
+      ],
+      "status": "PASS",
+      "sha256": "463968206033b654fe1efaeb8edf8a6614574cd365c6bfd8a2623b69252b24f0"
+    },
+    {
+      "id": "negative-table-promoted-protocol",
+      "expected_valid": false,
+      "errors": [
+        "TABLE_CONTRACT_CLASS"
+      ],
+      "status": "PASS",
+      "sha256": "dab569f302319c11d1f5aedfb2bec653d227413c9abe0b9f05e18fdd64788ef7"
+    },
+    {
+      "id": "coverage-minimal",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "62740e1367f5b31116ae51aa2b469a26a99d239fd49b84e9448963843041ec3f"
+    },
+    {
+      "id": "coverage-denominator-unknown",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "06e267ee2bbfe4bf65aaa55073434e8c2fc3a62dca7bf307d98337a74329e237"
+    },
+    {
+      "id": "coverage-empty-universe",
+      "expected_valid": true,
+      "errors": [],
+      "status": "PASS",
+      "sha256": "0f17f7d73484b62be61dc6018d65c2c91f44f973857fb4e2d73df2894475ea10"
+    },
+    {
+      "id": "negative-coverage-unknown-zero",
+      "expected_valid": false,
+      "errors": [
+        "UNKNOWN_NOT_NULL"
+      ],
+      "status": "PASS",
+      "sha256": "e7ed190a49483fef88895a1152c06a27cc4ef4b57e951e878f7ce91dadf03168"
+    },
+    {
+      "id": "negative-coverage-no-unknown-reason",
+      "expected_valid": false,
+      "errors": [
+        "UNKNOWN_REASON"
+      ],
+      "status": "PASS",
+      "sha256": "40ecd9e93c1bee058125827c0861cb08b44e2b0a1e3ce54a14c0f96d1e6fa962"
+    },
+    {
+      "id": "negative-coverage-denominator-scope",
+      "expected_valid": false,
+      "errors": [
+        "DENOMINATOR_SCOPE"
+      ],
+      "status": "PASS",
+      "sha256": "1057c045b5b554ab6264ce3a5f89eb8cbb618edcadd9458702ae5c5fe792baca"
+    },
+    {
+      "id": "negative-coverage-denominator-unit",
+      "expected_valid": false,
+      "errors": [
+        "DENOMINATOR_UNIT"
+      ],
+      "status": "PASS",
+      "sha256": "9c0dce425b4bb606d9992d5aa738a133a98fb65cab6f743187b87df5d448f5fe"
+    },
+    {
+      "id": "negative-coverage-fractional-count",
+      "expected_valid": false,
+      "errors": [
+        "COUNT_TYPE"
+      ],
+      "status": "PASS",
+      "sha256": "2d758ffeead760c3e344f6338d021d1439641be0cdabf2042c4a862a88fcea9c"
+    },
+    {
+      "id": "negative-coverage-negative-count",
+      "expected_valid": false,
+      "errors": [
+        "COUNT_TYPE"
+      ],
+      "status": "PASS",
+      "sha256": "f69dd1db0015f37e54ded2f89a3f6a3f8fff1e084041181e57a5a260704476de"
+    },
+    {
+      "id": "negative-coverage-boolean-count",
+      "expected_valid": false,
+      "errors": [
+        "COUNT_TYPE"
+      ],
+      "status": "PASS",
+      "sha256": "6d4f09d01112d8db4470970f2d233a078d610bd2e3598c2357f6f65193a60ce8"
+    },
+    {
+      "id": "negative-coverage-subset-exceeds",
+      "expected_valid": false,
+      "errors": [
+        "SUBSET_COUNT"
+      ],
+      "status": "PASS",
+      "sha256": "0b66b9a66325f205012786a64a9beee3c49d5cec446013a27177c10d782e3282"
+    },
+    {
+      "id": "negative-coverage-required-sidecar",
+      "expected_valid": false,
+      "errors": [
+        "SIDECAR_AUTHORITY"
+      ],
+      "status": "PASS",
+      "sha256": "eae51778b6e141318085a98fe4543357ef63bdd2c7963aa84523aa155cd6e11b"
+    },
+    {
+      "id": "negative-coverage-inferred-collection",
+      "expected_valid": false,
+      "errors": [
+        "COLLECTION_INFERENCE"
+      ],
+      "status": "PASS",
+      "sha256": "2568eb8c20680eef79ab97cd3b0d30013f858cefa1e8ac62b3717927fba17aa7"
+    },
+    {
+      "id": "negative-coverage-known-without-evidence",
+      "expected_valid": false,
+      "errors": [
+        "COUNT_EVIDENCE"
+      ],
+      "status": "PASS",
+      "sha256": "9a71e0e330e06296b0f7e905692ceea14fb5d1269f5ae2cc7fdf7f3464b21b6e"
+    },
+    {
+      "id": "negative-coverage-loss-mismatch",
+      "expected_valid": false,
+      "errors": [
+        "LOSS_COUNT"
+      ],
+      "status": "PASS",
+      "sha256": "cf0f5747b5a5de3e60fae55caabb0d50aeb54128721b8e62c4735c1fb3f5bdef"
+    },
+    {
+      "id": "negative-coverage-zero-denominator-percent",
+      "expected_valid": false,
+      "errors": [
+        "RATIO_UNDEFINED"
+      ],
+      "status": "PASS",
+      "sha256": "6dd8e0e0791bc6c7383894cf65f7c0066c2909319bb8bb23af2f8c662620732b"
+    }
+  ],
+  "validator_sha256": "72ac155939a1f9e5d81a0a370a79b0dd8d1d5100dec90640a1b2414872757047",
+  "cases_manifest_sha256": "f78799cf359022466226f5082cbb24f71dfdc50dbaf29066251d37ddb0832d18",
+  "not_claimed": [
+    "browser_execution",
+    "legacy_parity",
+    "host_access",
+    "scientific_approval",
+    "new_protocol"
+  ]
+}

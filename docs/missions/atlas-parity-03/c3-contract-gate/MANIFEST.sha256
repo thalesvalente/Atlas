@@ -1,0 +1,11 @@
+52df67b6497dd3396cf54b166d000555d680b42b5ad63506c76c07228287f379  .github/workflows/atlas-parity03-contracts.yml
+83aa769518217410231c16ad0ce507306ce72ea53feaf6ecc15a7e76e887a1bc  docs/contracts/atlas-parity-02/p01/run_contract_gate.py
+bc63a36d1d7665e6339c7f774192f8c547c26b56d9e38ff4380578ee819b7f6e  docs/missions/atlas-parity-03/c3-contract-gate/CONTRACT-GATE-RECEIPT.json
+fdeb7aba944de0bb45a38a0955936dcfb626281802e24b5d50b4bcf5fe841588  docs/missions/atlas-parity-03/c3-contract-gate/GAPS.md
+35c283547a450352615a710ea3f22822ed071f9e17ddab73b7b16223004e4458  docs/missions/atlas-parity-03/c3-contract-gate/HANDOFF.json
+73cd7cf0295b4a49b7be05000b8af5772cff0a1370eda1e903bc2c60440f0883  docs/missions/atlas-parity-03/c3-contract-gate/INDEPENDENT-REVIEW.md
+2e6b436de7f355a16715f9b7105d7169985ccc3fab1f6cb35ec4a2691d03d17c  docs/missions/atlas-parity-03/c3-contract-gate/INPUT-SHAS.json
+d6cafc55bad72c70ceeb5519de43588a9faa24af76e5a3c11bbad7cdf1da7d3b  docs/missions/atlas-parity-03/c3-contract-gate/RESULT.md
+119cb275167d594c568f56e250fa099cb0446067489468fc9c954459dad38094  docs/missions/atlas-parity-03/c3-contract-gate/TRACEABILITY-MATRIX.csv
+1071e06c77543fcc9ca668f822f437e79176a419ea56a72eb160b752892645d6  docs/missions/atlas-parity-03/c3-contract-gate/TRACEABILITY-VALIDATION.json
+85df2502c18ac72e79549287d9d67f4181aa5953addaaeebe1bc920a7ee538c8  specs/004-atlas-parity-c0/workstreams/p01-contracts/c3-contract-gate.md

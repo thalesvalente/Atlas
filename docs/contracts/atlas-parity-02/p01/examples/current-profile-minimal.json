@@ -1,0 +1,178 @@
+{
+  "@context": [
+    "https://w3id.org/ro/crate/1.3/context",
+    {
+      "cp": "https://github.com/thalesvalente/Atlas/ns/caderno#",
+      "prov": "http://www.w3.org/ns/prov#"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.3"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "P01 fonte sintética A",
+      "description": "Fixture autoral sem dados reais para validar somente contratos.",
+      "datePublished": "2026-10-27",
+      "license": "Synthetic test fixture authored for P01; no scientific claim. Repository licensing is unchanged.",
+      "conformsTo": [
+        {
+          "@id": "https://w3id.org/ro/wfrun/process/0.6"
+        },
+        {
+          "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+        }
+      ],
+      "hasPart": [
+        {
+          "@id": "urn:atlas:p01:synthetic:project"
+        },
+        {
+          "@id": "urn:atlas:p01:synthetic:experiment"
+        },
+        {
+          "@id": "tables/sample.csv"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "urn:atlas:p01:synthetic:run"
+        }
+      ]
+    },
+    {
+      "@id": "https://w3id.org/ro/wfrun/process/0.6",
+      "@type": [
+        "CreativeWork",
+        "http://www.w3.org/ns/dx/prof/Profile"
+      ],
+      "name": "Process Run Crate",
+      "version": "0.6"
+    },
+    {
+      "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+      "@type": [
+        "CreativeWork",
+        "http://www.w3.org/ns/dx/prof/Profile"
+      ],
+      "name": "Caderno candidate profile",
+      "version": "0.1.0a1"
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:project",
+      "@type": [
+        "Dataset",
+        "cp:Project"
+      ],
+      "name": "Projeto sintético"
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:experiment",
+      "@type": [
+        "Dataset",
+        "cp:Experiment"
+      ],
+      "name": "Experimento sintético",
+      "isPartOf": {
+        "@id": "urn:atlas:p01:synthetic:project"
+      }
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:software",
+      "@type": "SoftwareApplication",
+      "name": "Fixture documental P01",
+      "version": "1",
+      "url": "https://github.com/thalesvalente/Atlas"
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:agent",
+      "@type": "Organization",
+      "name": "Organização fictícia P01"
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:run",
+      "@type": "CreateAction",
+      "name": "Execução sintética sem data conhecida",
+      "cp:executionStatus": "UNKNOWN",
+      "cp:reviewStatus": "HOLD",
+      "cp:synthetic": true,
+      "cp:timestampOrigin": "UNKNOWN",
+      "actionStatus": {
+        "@id": "http://schema.org/PotentialActionStatus"
+      },
+      "cp:experiment": {
+        "@id": "urn:atlas:p01:synthetic:experiment"
+      },
+      "instrument": {
+        "@id": "urn:atlas:p01:synthetic:software"
+      },
+      "agent": {
+        "@id": "urn:atlas:p01:synthetic:agent"
+      },
+      "object": [],
+      "result": [],
+      "cp:metrics": [
+        {
+          "@id": "urn:atlas:p01:synthetic:metric"
+        }
+      ],
+      "cp:parameters": [],
+      "mentions": [
+        {
+          "@id": "urn:atlas:p01:synthetic:document"
+        },
+        {
+          "@id": "urn:atlas:p01:synthetic:document"
+        },
+        {
+          "@id": "urn:atlas:p01:synthetic:product"
+        },
+        {
+          "@id": "tables/sample.csv"
+        }
+      ]
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:metric",
+      "@type": "PropertyValue",
+      "name": "Medida não produzida",
+      "propertyID": "urn:atlas:p01:synthetic:quantity",
+      "cp:valueType": "number",
+      "unitText": "mg/L",
+      "cp:precision": 2,
+      "value": null,
+      "cp:missingReason": "Não medida na fixture sintética."
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:document",
+      "@type": [
+        "CreativeWork",
+        "DigitalDocument"
+      ],
+      "name": "Documento sintético A",
+      "description": "Menção neutra; não afirma entrada, saída ou aprovação.",
+      "dateCreated": "2026-10-26"
+    },
+    {
+      "@id": "urn:atlas:p01:synthetic:product",
+      "@type": "Product",
+      "name": "Produto sintético"
+    },
+    {
+      "@id": "tables/sample.csv",
+      "@type": "File",
+      "name": "Tabela apenas referenciada",
+      "encodingFormat": "text/csv",
+      "cp:availability": "MISSING"
+    }
+  ]
+}

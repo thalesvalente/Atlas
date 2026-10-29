@@ -1,0 +1,77 @@
+{
+  "result": "C2_P03_QUALIFIED_FOR_COMPOSITION",
+  "qualification_scope": "Isolated P03 components and explicit focal harness, with native browser zoom200 NOT_RUN under the operator exception.",
+  "repository": "thalesvalente/Atlas",
+  "draft_pr": 10,
+  "draft_pr_url": "https://github.com/thalesvalente/Atlas/pull/10",
+  "branch": "qa/atlas-parity03-c2-p03-gates-20261027",
+  "code_input_sha": "6c412c36e1dbe11711daa15c6d8727fbe94fa0ad",
+  "code_input_tree": "f9cac8cba86763c2ff98f883e33962648fc01004",
+  "handoff_input_sha": "ead1f753f52f22035326b7366dd2231c62775765",
+  "handoff_input_tree": "624c1ad386666ed2db046a05b0a66530a5ee24c1",
+  "qualified_implementation_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+  "qualified_implementation_tree": "0dd3331f1f873a634f286fdfdb703c1a76a87406",
+  "implementation_commits": [
+    "97151e0e17c3d8afc70aad91a5c488cd831eb171",
+    "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+  ],
+  "implementation_ci": [
+    {
+      "id": 40546494687,
+      "name": "ATLAS021 candidate verification",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494687"
+    },
+    {
+      "id": 40546494736,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494736"
+    },
+    {
+      "id": 40546494721,
+      "name": "ATLAS-PARITY03 P03 isolated qualification",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/40546494721"
+    }
+  ],
+  "independent_code_review": {
+    "reviewer": "/root/independent_review",
+    "authored_delta": false,
+    "tested_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+    "status": "PASS_SCOPED_CODE_REVIEW",
+    "blocking_findings_open": 0
+  },
+  "documentary_commit": {
+    "identity": "Commit containing this file; its SHA is resolved externally to avoid self-reference.",
+    "own_ci_required": true,
+    "own_independent_review_required": true,
+    "closeout_location": "Exact final SHA/tree, terminal runs and independent documentary review are recorded in the closure section of Draft PR10 and in the conversation delivery.",
+    "no_automatic_evidence_transfer": true
+  },
+  "original_frozen_files": 25,
+  "original_manifest_entries": 56,
+  "unchanged_inherited_files": 219,
+  "original_manifest_sha256": "10e6142468aabdd6e8454665207fd8050ff4f64d6b3dcfd9cde81d699ac71e77",
+  "visible_in_main_app": false,
+  "main_server_assets_qualified": false,
+  "synthetic_demonstrators": true,
+  "native_browser_zoom_200": "NOT_RUN",
+  "reasoning_effective": "UNVERIFIED",
+  "next_owner": "Composition in a separate authorized C1 candidate",
+  "minimum_next_act": "Consume original25 P03 files linked to fixed inputs and this qualification; preserve explicit embedding constraints; run composition HTTP/browser on the composed SHA. Do not reuse the fixed219-file harness gate as a composed-product acceptance gate.",
+  "authorizations_not_granted": [
+    "merge",
+    "release",
+    "deploy",
+    "canonical promotion",
+    "scientific approval",
+    "protocol extension"
+  ]
+}

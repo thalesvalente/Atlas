@@ -1,0 +1,37 @@
+{
+  "id": "C2-BROWSER-320",
+  "status": "CLOSED_BY_REAL_REEXECUTION",
+  "red_sha": "97151e0e17c3d8afc70aad91a5c488cd831eb171",
+  "run_id": 40546112894,
+  "linux_job_id": 122337065378,
+  "linux_artifact_id": 12753031743,
+  "linux_artifact_zip_sha256": "0c58438fb2abd6394d6a53c0e1a2bbc1d098fb3c87b641897b0558fe6645b8c2",
+  "checks_passed_before_red": 13,
+  "failed_check": "contained_table_reflow_320_css_px",
+  "observed": {
+    "viewport_css_px": 320,
+    "document_scroll_width": 337,
+    "table_region_left": 31,
+    "table_region_right": 289,
+    "control_label_client_width": 258,
+    "control_label_scroll_width": 306
+  },
+  "cause": "Native select intrinsic width escaped auto-minimum grid track in harness controls. Table region itself was contained.",
+  "correction": "New focal harness CSS uses minmax(0,1fr), min-inline-size:0, bounded select width and wrapped checkbox label.",
+  "oracle_weakened": false,
+  "overflow_hidden_or_clip_added": false,
+  "frozen_25_changed": false,
+  "reviewer": "/root/independent_review",
+  "review": "Independent review confirmed structural CSS correction, unchanged oracle and passing full reexecution on Linux/Windows.",
+  "green_sha": "dc43653d4e06c1f5500437a42b2fb9e2df426dd6",
+  "green_tree": "0dd3331f1f873a634f286fdfdb703c1a76a87406",
+  "green_run_id": 40546494721,
+  "green_browser_jobs": [
+    122338395892,
+    122338396241
+  ],
+  "green_required_checks_per_platform": 19,
+  "windows_red_job_id": 122337065421,
+  "windows_red_control_client_width": 258,
+  "windows_red_control_scroll_width": 268
+}
