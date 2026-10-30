@@ -44,12 +44,12 @@ A coluna «antes» é o literal da matriz AP04. Nenhum item recebe RECOVERED_VER
 | PAR-009 | PARTIAL_NOT_EQUIVALENT | Contagens base/seleção/carga/visível com denominadores ou UNKNOWN | PARTIAL_NOT_EQUIVALENT; GLOBAL_UNPROVEN/UNKNOWN_UPSTREAM |
 | PAR-010 | NOT_RECOVERED | Observações originais, vínculo, nenhum comando de limpeza | NOT_RECOVERED; armazenamento somente consultivo futuro |
 | PAR-011 | CONTRACT_DECISION_PENDING | Leitor externo em fontes existentes, índice efêmero, zero escrita na fonte | CONTRACT_DECISION_PENDING; ARC09_APPROVAL_REQUIRED |
-| PAR-012 | BASELINE_VERIFIED | SDK independente, viewer sem R4, protocolo intacto e CI no novo SHA | NO_CHANGE_TO_BASELINE; CI C4 histórica, regressão futura G5 |
+| PAR-012 | BASELINE_VERIFIED | SDK independente, viewer sem R4, protocolo intacto e CI no novo SHA | PARTIAL_NOT_EQUIVALENT; CI C4 histórica, regressão futura G5 |
 | PAR-013 | ARCHITECTURE_REQUIREMENT_ONLY | Extensibilidade por domínio, sem fake FHIR PASS, versão/perfis a definir | CONTRACT_DECISION_PENDING; nenhuma implementação |
-| PAR-014 | OBSERVED_PARTIAL | Árvore e uma tabela RF real, testes com SHA e recibos locais privados | NO_CHANGE_TO_BASELINE; F5/browser NOT_RUN |
-| PAR-015 | BASELINE_VERIFIED_SCOPE | Bytes originais iguais antes/depois e estados/links sem promoção silenciosa | NO_CHANGE_TO_BASELINE; preservação F1 é evidência escopada anterior |
+| PAR-014 | OBSERVED_PARTIAL | Árvore e uma tabela RF real, testes com SHA e recibos locais privados | PARTIAL_NOT_EQUIVALENT; F5/browser NOT_RUN |
+| PAR-015 | BASELINE_VERIFIED_SCOPE | Bytes originais iguais antes/depois e estados/links sem promoção silenciosa | PARTIAL_NOT_EQUIVALENT; preservação F1 é evidência escopada anterior |
 
-Nenhuma baseline foi revalidada por esta F2. O avanço novo é prontidão documental para decisão humana, não recuperação de funcionalidade. PAR-005–010 continuam abertos; P0 não foi retirado.
+Os estados «Depois nesta missão» avaliam apenas a contribuição documental F2. PARTIAL_NOT_EQUIVALENT em PAR-012/014/015 não rebaixa, revalida nem substitui os estados históricos literais da coluna «Antes». Nenhuma baseline foi revalidada por esta F2. O avanço novo é prontidão documental para decisão humana, não recuperação de funcionalidade. PAR-005–010 continuam abertos; P0 não foi retirado.
 
 ## Contratos de consumo das fases futuras — não executadas
 
