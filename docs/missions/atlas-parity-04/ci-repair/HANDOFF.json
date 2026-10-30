@@ -1,0 +1,61 @@
+{
+  "schema": "atlas-parity04-doc-ci-handoff-v1",
+  "recorded_at_utc": "2026-10-30T16:04:26Z",
+  "status": "AP04_DOC_CI_BLOCKED_EXACT",
+  "repository": "thalesvalente/Atlas",
+  "pull_request": 14,
+  "branch": "docs/atlas-parity04-plan-of-record-20261030",
+  "observed_head": {
+    "sha": "c25d37998dac7174067a2819391f3af1625f96dc",
+    "tree": "e6eacdd02a329f88bc0dd656523b84a8fec9217e"
+  },
+  "prepared_delta": {
+    "authorized_path_count": 19,
+    "original_document_count": 9,
+    "local_negative_tests": {
+      "original_normal": "17_PASS_WINDOWS",
+      "original_optimized": "17_PASS_WINDOWS",
+      "derived_normal": "23_PASS_WINDOWS",
+      "derived_optimized": "23_PASS_WINDOWS"
+    }
+  },
+  "published_repair": {
+    "sha": null,
+    "tree": null,
+    "status": "CURRENT_COMMIT_REQUIRES_EXTERNAL_SHA_CONFIRMATION"
+  },
+  "terminal_ci": {
+    "status": "PENDING_PUBLICATION",
+    "runs": []
+  },
+  "independent_review": {
+    "reviewer": "/root/reviewer",
+    "authorship": false,
+    "original_patch_findings": 2,
+    "reproduced_original_bypasses": 2,
+    "working_tree_correction_review": "NO_REMAINING_BLOCKERS_AFTER_LITERAL_AND_CODEC_CORRECTIONS",
+    "final_sha_review": "PENDING",
+    "derivation_review_findings": 2,
+    "derivation_finding": "Table restricted to literal data before import; UTF-8 codec enforced; execute the same validated text without loader reread"
+  },
+  "blocking_capability": null,
+  "next_exact_actions": [
+    "Finish focal tests, validate the complete manifest and publish fast-forward on PR #14 only.",
+    "Obtain terminal required Actions and 168 inherited C4 IDs plus new IDs on the exact technical SHA.",
+    "Record tested technical SHA and evidence in versioned receipts; requalify the resulting final receipt commit.",
+    "Close externally by exact final SHA/tree/runs/review in the PR without another identity-only commit.",
+    "Keep Draft; no AP04 F1-F6, merge, release, deploy, promotion, migration or private source work."
+  ],
+  "original_attempt": {
+    "recorded_at_utc": "2026-10-30T04:53:50Z",
+    "blocking_capability": "GitHub connector has no write/commit/push/workflow-dispatch action in this session.",
+    "status": "AP04_DOC_CI_BLOCKED_EXACT",
+    "historical_only": true
+  },
+  "mission": "ATLAS-PARITY04-DOC-CI-PUBLISH-REVIEW-03",
+  "pending_gates": [
+    "PUBLICATION",
+    "TERMINAL_CI_FINAL_SHA",
+    "INDEPENDENT_REVIEW_FINAL_SHA"
+  ]
+}

@@ -30,6 +30,8 @@ C3 = "docs/missions/atlas-parity-03/c3-contract-gate"
 C4 = "docs/missions/atlas-parity-03/c4-full-convergence"
 COMPOSITION = "c120f8ae9e455e19b4e0bcd35f47ec0fd7a0117c"
 COMPOSITION_TREE = "3f1f378a3e39b0f148effdc010177144fe29e7c4"
+C4_BASELINE = "72d9b94e613a57c82a5afd309796f44b271e2185"
+C4_BASELINE_TREE = "0a622663ca40232d6143659f82cfe9ce43702e90"
 # The only C2 frozen-file override is its now-inapplicable shell-isolation
 # assertion. The replacement asserts active representable P03 and inactive rich
 # demonstrators; original bytes remain verified in the immutable C2 manifest.
@@ -116,11 +118,26 @@ def tree(ref):
     return result
 
 
+def load_ap04_guard():
+    spec = importlib.util.spec_from_file_location(
+        "atlas_parity04_doc_successor", ROOT / "scripts/qa/atlas_parity04_doc_ci.py")
+    require(spec is not None and spec.loader is not None, "AP04 successor guard is unavailable")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def inputs(output):
     report = {**identity(), "status": "FAIL", "scope": "C4_COMPOSED_INPUT_BINDING"}
     try:
         require(not git("status", "--porcelain", "--untracked-files=normal"),
                 "Exact-SHA input evidence requires a clean checkout")
+        require(git("rev-parse", C4_BASELINE + "^{tree}") == C4_BASELINE_TREE,
+                "Frozen C4 baseline tree differs")
+        require(subprocess.run(["git", "merge-base", "--is-ancestor", C4_BASELINE, "HEAD"],
+                               cwd=ROOT).returncode == 0,
+                "C4 successor must descend from the frozen C4 baseline")
         for name, (sha, expected_tree) in INPUTS.items():
             require(git("rev-parse", sha + "^{tree}") == expected_tree, name + " tree differs")
             require(subprocess.run(["git", "merge-base", "--is-ancestor", sha, "HEAD"],
@@ -148,13 +165,26 @@ def inputs(output):
                     "P03 frozen blob changed: " + item["path"])
         require(set(P03_C4_ADAPTERS) <= {item["path"] for item in frozen["files"]},
                 "C4 contextual adapter must target exactly the declared frozen test")
+
+        # C4 authorship is frozen at C4_BASELINE. Successor documents and their
+        # CI controls are bound by the separate AP04 overlay; they are never
+        # retroactively inserted into this historical manifest.
         manifest_path = C4 + "/MANIFEST.sha256"
-        own = historical_manifest("HEAD", manifest_path, current=True)
-        declared = {line.split("  ", 1)[1] for line in
-                    (ROOT / manifest_path).read_text(encoding="utf-8").splitlines()}
-        authored = set(git("diff", "--name-only", COMPOSITION, "HEAD").splitlines()) - {manifest_path}
-        require(declared == authored, "C4 manifest must cover every authored path, with no arbitrary exclusions")
-        report["current_C4_manifest"] = {**own, "authored_paths": sorted(authored), "coverage_exact": True}
+        own = historical_manifest(C4_BASELINE, manifest_path)
+        manifest_raw = git("show", C4_BASELINE + ":" + manifest_path, binary=True)
+        require((ROOT / manifest_path).is_file()
+                and not (ROOT / manifest_path).is_symlink()
+                and (ROOT / manifest_path).read_bytes() == manifest_raw,
+                "Historical C4 manifest bytes changed in successor")
+        declared = {line.split("  ", 1)[1] for line in manifest_raw.decode("utf-8").splitlines()}
+        authored = set(git("diff", "--name-only", COMPOSITION, C4_BASELINE).splitlines()) - {manifest_path}
+        require(declared == authored,
+                "Frozen C4 manifest must exactly cover C4 authorship, excluding successor overlays")
+        report["current_C4_manifest"] = {
+            **own, "frozen_at_sha": C4_BASELINE, "authored_paths": sorted(authored),
+            "coverage_exact": True, "successor_paths_in_historical_manifest": False,
+        }
+
         baseline_csv = csv.DictReader(io.StringIO(git("show", c3 + ":" + C3 + "/TRACEABILITY-MATRIX.csv")))
         original_rows = {row["p01_id"]: row for row in baseline_csv}
         with (ROOT / C4 / "TRACEABILITY-MATRIX.csv").open(encoding="utf-8", newline="") as stream:
@@ -195,28 +225,42 @@ def inputs(output):
             require(not re.search(r"\b(?:renderCandidate|validateCandidate)\b", text)
                     and "p03-candidate/1" not in text, "Rich demonstrator activated in main shell")
         require(not (ROOT / ".specify/feature.json").exists(), "Shared feature pointer unexpectedly present")
-        audit_spec = importlib.util.spec_from_file_location("c4_frozen_audit",
-            ROOT / "scripts/qa/atlas_parity02_p06_audit.py")
-        audit = importlib.util.module_from_spec(audit_spec)
-        audit_spec.loader.exec_module(audit)
-        protected = audit.audit(ROOT)
-        require(protected["status"] == "PASS_SCOPED" and not protected["errors"],
-                "Protocol/public-source/governance bytes changed")
+
+        head = report["tested_sha"]
+        if head == C4_BASELINE:
+            audit_spec = importlib.util.spec_from_file_location(
+                "c4_frozen_audit", ROOT / "scripts/qa/atlas_parity02_p06_audit.py")
+            audit = importlib.util.module_from_spec(audit_spec)
+            audit_spec.loader.exec_module(audit)
+            protected = audit.audit(ROOT)
+            require(protected["status"] == "PASS_SCOPED" and not protected["errors"],
+                    "Protocol/public-source/governance bytes changed")
+            successor_overlay = None
+        else:
+            guard = load_ap04_guard()
+            successor_overlay = guard.audit(ROOT)
+            require(successor_overlay["status"] == "PASS",
+                    successor_overlay.get("error", "AP04 documentation successor guard failed"))
+            protected = successor_overlay["frozen_boundary"]
+            require(not protected["historical_protection_weakened"],
+                    "AP04 successor weakened the historical frozen boundary")
+
         origins = []
         for path, blob in sorted(current.items()):
             if originals["C1"].get(path) == blob:
                 continue
             matches = [name for name, files in originals.items() if files.get(path) == blob]
             origins.append({"path": path, "candidate_blob": blob, "unchanged_input_blobs": matches,
-                            "origin": matches[0] if matches else "C4_DELTA"})
+                            "origin": matches[0] if matches else "C4_OR_SUCCESSOR_DELTA"})
         report.update(status="PASS", inputs={name: {"sha": sha, "tree": value}
                       for name, (sha, value) in INPUTS.items()}, p03_frozen_source_files=25,
                       p03_current_unchanged_files=24, p03_contextual_test_adapters=P03_C4_ADAPTERS,
                       inherited_fixture_files=len(fixture_paths), protected_inputs=protected,
+                      successor_overlay=successor_overlay,
                       composition_blob_origins=origins, assets=ASSETS, rich_demonstrators_active=False,
                       representable_P03_imports_declared=True,
                       main_application_browser_evidence="REQUIRED_SEPARATE_GATE",
-                      historical_C1_C2_C3_results_are_current_C4_proof=False)
+                      historical_C1_C2_C3_C4_results_are_current_successor_proof=False)
     except Exception as error:
         report["error"] = f"{type(error).__name__}: {error}"
     save(output / "INPUT-SHAS.json", report)

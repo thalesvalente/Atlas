@@ -1,0 +1,65 @@
+{
+  "schema": "atlas-parity04-ci-evidence-v1",
+  "recorded_at_utc": "2026-10-30T16:04:26Z",
+  "source_sha": "c25d37998dac7174067a2819391f3af1625f96dc",
+  "original_runs": [
+    {
+      "workflow": "ATLAS021 candidate verification",
+      "run_id": 41001137694,
+      "conclusion": "success",
+      "classification": "NO_ORIGINAL_FINDING"
+    },
+    {
+      "workflow": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+      "run_id": 41001137728,
+      "conclusion": "failure",
+      "classification": [
+        "FROZEN_BOUNDARY_EXPECTED",
+        "SUCCESSOR_DISPATCH_BUG"
+      ]
+    },
+    {
+      "workflow": "ATLAS-PARITY03 P03 isolated qualification",
+      "run_id": 41001137738,
+      "conclusion": "failure",
+      "classification": "SUCCESSOR_DISPATCH_BUG"
+    },
+    {
+      "workflow": "ATLAS-PARITY-03 C4 full composition",
+      "run_id": 41001137742,
+      "conclusion": "failure",
+      "classification": "MANIFEST_SCOPE_MISMATCH"
+    }
+  ],
+  "local_validation": {
+    "original_input_normal": "17_PASS_WINDOWS",
+    "original_input_optimized": "17_PASS_WINDOWS",
+    "derived_focal_normal": "23_PASS_WINDOWS",
+    "derived_focal_optimized": "23_PASS_WINDOWS",
+    "compile": "PASS",
+    "workflow_yaml_parse": "PASS_5",
+    "receipt_json_parse": "PASS",
+    "original_package_internal_checksums": "PASS_34"
+  },
+  "repair_sha": null,
+  "repair_tree": null,
+  "terminal_runs_on_repair_sha": [],
+  "required_terminal_workflows": [
+    "ATLAS-PARITY-04 documentation successor",
+    "ATLAS-PARITY-02 P06 frozen-boundary QA",
+    "ATLAS-PARITY03 P03 isolated qualification",
+    "ATLAS-PARITY-03 C4 full composition",
+    "ATLAS021 candidate verification",
+    "Spec Kit 1.2.3 / atlas003-speckit"
+  ],
+  "status": "PENDING_PUBLICATION_AND_NEW_SHA_ACTIONS",
+  "evidence_transfer_forbidden": true,
+  "original_attempt_local_validation": {
+    "py_compile": "PASS",
+    "negative_tests_linux_normal": "17_PASS",
+    "negative_tests_linux_optimized": "17_PASS",
+    "synthetic_full_contract_integration": "PASS_28_DELTA_PATHS_9_DOCS_19_REPAIR_PATHS_5_WORKFLOWS",
+    "source": "Immutable original patch receipt; historical claims only"
+  },
+  "current_commit_closure": "External exact-SHA closure required; no SHA or old run is silently transferred"
+}

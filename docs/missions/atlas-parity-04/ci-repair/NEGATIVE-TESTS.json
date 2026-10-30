@@ -1,0 +1,212 @@
+{
+  "schema": "atlas-parity04-negative-tests-v1",
+  "recorded_at_utc": "2026-10-30T16:04:26Z",
+  "test_module": "tests/qa/test_atlas_parity04_doc_ci.py",
+  "case_count": 23,
+  "cases": [
+    {
+      "id": "test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name",
+      "intent": "PASS case: exact docs/C4/overlay on an unrelated branch name",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_edit_remove_and_symlink_of_adr0003_are_red",
+      "intent": "ADR-0003 edit, removal and symlink are RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_adr0004_and_changes_to_adr0001_or_adr0002_are_red",
+      "intent": "ADR-0004 and changes to ADR-0001/0002 are RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_protocol_context_governance_skill_fixture_and_agents_changes_are_red",
+      "intent": "Protocol, schemas/contexts, constitution, skills, fixtures and AGENTS.md are RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_runtime_p03_adapter_and_asset_allowlist_changes_are_red",
+      "intent": "C4 runtime, P03 adapter and public asset file changes are RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_arbitrary_document_outside_original_and_repair_paths_is_red",
+      "intent": "Unlisted AP04 document is RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_branch_name_lookalike_cannot_override_bad_bytes",
+      "intent": "Partial/magic-looking branch name cannot override protected-byte failure",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_mode_change_in_authorized_repair_path_is_red",
+      "intent": "Mode change on an authorized repair path is RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated",
+      "intent": "C4 ASSETS semantic change is RED even with refreshed overlay hash",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red",
+      "intent": "Manifest hash mismatch, missing entry, deletion and noncanonical reordering are RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry",
+      "intent": "Original document/ADR state change is RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_historical_c4_manifest_cannot_be_changed",
+      "intent": "Historical C4 manifest mutation is RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_repair_history_rejects_transient_unauthorized_change_even_if_reverted",
+      "intent": "Transient protected change cannot be erased by a later revert",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_default_boundary_accepts_only_the_single_strict_p06_rejection",
+      "intent": "Only the exact historical P06 ADR rejection is accepted",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_wrong_base_or_document_tree_is_red",
+      "intent": "Ancestry with wrong frozen tree is RED",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent",
+      "intent": "No branch-name routing or workflow bypass marker",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_dedicated_guard_runs_linux_windows_normal_and_optimized",
+      "intent": "Dedicated workflow declares four OS/optimization cells",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_c4_control_flow_cannot_be_relaxed_by_rehashing_the_manifest",
+      "intent": "C4 inputs/installed/main/require returning success is RED even after manifest refresh",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_workflow_conditions_and_commands_cannot_be_reauthorized_by_manifest",
+      "intent": "Skipped mandatory workflow steps using expressions are RED even after manifest refresh",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_guard_control_flow_has_independent_semantic_authorization",
+      "intent": "Independent executable AST pin detects a relaxed guard require/control flow",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_approved_controls_are_fixed_and_the_independent_tests_are_bound",
+      "intent": "Six fixed original controls and independent tests are mutually bound without self-SHA circularity",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_nonliteral_control_table_is_rejected_before_guard_import",
+      "intent": "Executable expression wrapped around the hash table is rejected as nonliteral before guard import",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    },
+    {
+      "id": "test_non_utf8_cookie_cannot_hide_executable_code_from_preflight",
+      "intent": "Non-UTF-8 coding cookie cannot conceal executable bytes behind the validated UTF-8 AST",
+      "expected": "PASS_ASSERTING_FAIL_CLOSED"
+    }
+  ],
+  "local_runs": [
+    {
+      "platform": "windows",
+      "python": "3.12.15",
+      "python_optimization": "normal",
+      "cases": 23,
+      "result": "PASS",
+      "skips": 0,
+      "duration_seconds": 219.196,
+      "tested_source_hashes": {
+        "guard_sha256": "1e6a18c426c4ab3a7b994c027b251b0b282db73467fbf610219fec3857976d7b",
+        "test_sha256": "ef0c73fbb008881a0c9dbca931b4e03a256d381f0d533ba30d064aa51143777c"
+      },
+      "git_sha_claim": "WORKING_TREE_SNAPSHOT_ONLY; Actions will qualify published SHA"
+    },
+    {
+      "platform": "windows",
+      "python": "3.12.15",
+      "python_optimization": "-O",
+      "cases": 23,
+      "result": "PASS",
+      "skips": 0,
+      "duration_seconds": 218.828,
+      "tested_source_hashes": {
+        "guard_sha256": "1e6a18c426c4ab3a7b994c027b251b0b282db73467fbf610219fec3857976d7b",
+        "test_sha256": "ef0c73fbb008881a0c9dbca931b4e03a256d381f0d533ba30d064aa51143777c"
+      },
+      "git_sha_claim": "WORKING_TREE_SNAPSHOT_ONLY; Actions will qualify published SHA"
+    }
+  ],
+  "github_matrix": {
+    "linux_normal": "NOT_RUN",
+    "linux_optimized": "NOT_RUN",
+    "windows_normal": "NOT_RUN",
+    "windows_optimized": "NOT_RUN"
+  },
+  "claim_limit": "Local synthetic tests are not terminal GitHub CI or independent review.",
+  "original_attempt_runs": {
+    "source": "Original immutable patch receipt; prior Linux claims are historical only",
+    "runs": [
+      {
+        "platform": "linux",
+        "python_optimization": "normal",
+        "command": "python -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v",
+        "cases": 17,
+        "result": "PASS"
+      },
+      {
+        "platform": "linux",
+        "python_optimization": "-O",
+        "command": "PYTHONOPTIMIZE=1 python -O -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v",
+        "cases": 17,
+        "result": "PASS"
+      }
+    ]
+  },
+  "original_case_count": 17,
+  "new_case_count": 6,
+  "original_artifact_reexecution": {
+    "platform": "windows",
+    "python": "3.12.15",
+    "normal": {
+      "cases": 17,
+      "result": "PASS"
+    },
+    "optimized": {
+      "cases": 17,
+      "result": "PASS"
+    },
+    "claim_scope": "Original input bytes before derivation; not results for corrected code"
+  },
+  "reproduced_original_bypasses": [
+    {
+      "id": "C4_RETURN_SUCCESS_WITH_REHASHED_MANIFEST",
+      "original_guard": "PASS_UNEXPECTED",
+      "required_after_correction": "FAIL"
+    },
+    {
+      "id": "WORKFLOW_IF_EXPRESSION_FALSE_WITH_REHASHED_MANIFEST",
+      "original_guard": "PASS_UNEXPECTED",
+      "required_after_correction": "FAIL"
+    }
+  ],
+  "superseded_derivation": {
+    "case_count": 22,
+    "normal": "PASS",
+    "optimized": "PASS",
+    "scope": "Intermediate literal-data snapshot; superseded by UTF-8 codec/source-execution correction and 23-case suite"
+  }
+}

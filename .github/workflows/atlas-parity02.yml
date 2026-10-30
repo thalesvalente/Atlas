@@ -11,12 +11,14 @@ on:
       - 'specs/004-atlas-parity-c0/**'
       - 'docs/missions/atlas-parity-02/p06-qa/**'
       - 'docs/missions/atlas-parity-03/c1-core-composition/**'
+      - 'docs/missions/atlas-parity-04/**'
       - '.specify/**'
       - '.agents/**'
       - 'docs/architecture/**'
       - 'docs/protocol/**'
       - 'AGENTS.md'
       - '.github/workflows/atlas-parity02.yml'
+      - '.github/workflows/atlas-parity04-doc.yml'
   workflow_dispatch:
 
 permissions:
@@ -54,8 +56,8 @@ jobs:
           python -m pip install --no-build-isolation ./packages/protocol ./packages/atlas
       - name: Collect and run P06 behavioral checks and counterexamples
         run: python -m unittest discover -s tests/qa -p 'test_atlas_parity02_p06_*.py' -v
-      - name: Preserve frozen protocol, public inputs and governance
-        run: python scripts/qa/atlas_parity02_p06_audit.py --output .ci-clean-inputs.json
+      - name: Preserve the frozen boundary or verify the one exact AP04 successor
+        run: python scripts/qa/atlas_parity04_doc_ci.py boundary --output .ci-clean-inputs.json
       - name: Reuse installed-wheel independence and immutability harness
         run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-p06"
       - name: Verify actual wheel contents against served bytes and origin policy
@@ -99,7 +101,7 @@ jobs:
         run: |
           specify version --json
           specify integration status --json
-          python scripts/qa/speckit_audit.py --allow-presentation-delta ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && '--allow-p03-c4-delta' || '--allow-p02-c0-delta' }}
+          python scripts/qa/atlas_parity04_doc_ci.py speckit
       - name: Resolve the 004 specification without persisting the active pointer
         run: |
           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks

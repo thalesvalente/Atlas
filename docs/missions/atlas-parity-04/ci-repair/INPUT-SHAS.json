@@ -1,0 +1,106 @@
+{
+  "schema": "atlas-parity04-doc-ci-inputs-v1",
+  "recorded_at_utc": "2026-10-30T16:04:26Z",
+  "reasoning_effective": "UNVERIFIED",
+  "repository": "thalesvalente/Atlas",
+  "pull_request": 14,
+  "branch": "docs/atlas-parity04-plan-of-record-20261030",
+  "observed_pr_head_before_repair": {
+    "sha": "c25d37998dac7174067a2819391f3af1625f96dc",
+    "tree": "e6eacdd02a329f88bc0dd656523b84a8fec9217e",
+    "parent": "72d9b94e613a57c82a5afd309796f44b271e2185",
+    "files_added": 9
+  },
+  "frozen_c4": {
+    "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+    "tree": "0a622663ca40232d6143659f82cfe9ce43702e90",
+    "pull_request": 13
+  },
+  "p03_isolated_input": "ead1f753f52f22035326b7366dd2231c62775765",
+  "p03_qualified_head": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+  "repair_publication": {
+    "status": "CURRENT_COMMIT_REQUIRES_EXTERNAL_SHA_CONFIRMATION",
+    "final_sha": null,
+    "final_tree": null,
+    "reason": "A commit cannot contain its own SHA. The exact published SHA/tree and terminal runs are recorded by subsequent evidence and the external PR closure."
+  },
+  "private_sources_accessed": false,
+  "product_or_protocol_changed": false,
+  "original_attempt": {
+    "mission": "ATLAS-PARITY04-DOC-CI-REPAIR-01",
+    "recorded_at_utc": "2026-10-30T04:53:50Z",
+    "repair_publication": {
+      "status": "NOT_PUBLISHED_FROM_THIS_SESSION",
+      "final_sha": null,
+      "final_tree": null,
+      "reason": "The connected GitHub tool surface exposed read operations but no commit/push/workflow-dispatch operation."
+    },
+    "historical_only": true
+  },
+  "mission": "ATLAS-PARITY04-DOC-CI-PUBLISH-REVIEW-03",
+  "executor": {
+    "mode": "CODEX_LOCAL_EXISTING_CHECKOUT",
+    "engineering_environment": "atlas-poc",
+    "python": "3.12.15",
+    "reasoning_effective": "UNVERIFIED",
+    "product_server_started": false,
+    "private_sources_accessed": false
+  },
+  "original_artifact_source": {
+    "commit": "e5e6e5370e463d626e095906f53c4ef18640aef0",
+    "tree": "1903ef87139264d54537416788ac5d64345faf4e",
+    "branch": "evidence/atlas-ap04-ci-repair-recovery-20261030",
+    "patch": {
+      "sha256": "d25540bce2a90dbf099ca38b82528b645ea49c92fd86d04438d5f1b7a58b83b8",
+      "git_blob": "d6ab785bc75634f8248e525580d01cf25b809d18",
+      "bytes": 104058,
+      "verified_from_git_bytes": true
+    },
+    "zip": {
+      "sha256": "5788215d2267902988e141fa6db5a9434564b18204356a3a6d80a3dd2a883752",
+      "git_blob": "2dd4fc9f1f3ca425f00b3fb16de1ae1c4d5cb158",
+      "bytes": 92100,
+      "verified_from_git_bytes": true,
+      "entries": 48,
+      "crc": "PASS",
+      "unsafe_entries": 0,
+      "embedded_patch_matches": true
+    }
+  },
+  "derivation": {
+    "original_applied": true,
+    "original_inventory": {
+      "paths": 19,
+      "modified": 5,
+      "added": 14
+    },
+    "correction_paths": [
+      "scripts/qa/atlas_parity04_doc_ci.py",
+      "tests/qa/test_atlas_parity04_doc_ci.py"
+    ],
+    "correction_reason": "Independent review reproduced two manifest-rehash bypasses; pin complete reviewed controls and guard semantics independently of the supplemental manifest.",
+    "original_c4_and_workflow_bytes_preserved": true,
+    "nine_original_document_bytes_preserved": true,
+    "historical_manifests_preserved": true,
+    "plan_change": "NONE",
+    "review_hardening": [
+      "Literal approved-control data validated before importing the guard",
+      "UTF-8 codec required; execute exactly the validated text without loader reread"
+    ],
+    "tested_source_hashes": {
+      "guard_sha256": "1e6a18c426c4ab3a7b994c027b251b0b282db73467fbf610219fec3857976d7b",
+      "test_sha256": "ef0c73fbb008881a0c9dbca931b4e03a256d381f0d533ba30d064aa51143777c"
+    }
+  },
+  "static_validation": {
+    "original_package_internal_checksums": 34,
+    "original_package_internal_mismatches": 0,
+    "original_documents_byte_identical": 9,
+    "repair_paths": 19,
+    "unauthorized_paths": 0,
+    "workflow_yaml_parse": "PASS_5",
+    "receipt_json_parse": "PASS",
+    "simple_secret_and_private_host_path_scan": "NO_MATCH",
+    "scan_limit": "Pattern scan plus source review; does not replace independent review"
+  }
+}

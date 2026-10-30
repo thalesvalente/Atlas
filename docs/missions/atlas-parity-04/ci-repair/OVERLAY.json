@@ -1,0 +1,87 @@
+{
+  "schema": "atlas-parity04-doc-ci-overlay-v1",
+  "plan_id": "AP04-POR-v1.0-draft",
+  "base_sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+  "baseline_doc_sha": "c25d37998dac7174067a2819391f3af1625f96dc",
+  "adr0003": "PROPOSED_NOT_APPROVED",
+  "historical_manifests": "IMMUTABLE",
+  "plan_change": "NONE",
+  "authorized_paths": [
+    {
+      "path": ".github/workflows/atlas-parity02.yml",
+      "purpose": "Route the P06/Spec Kit successor through the exact AP04 boundary guard while preserving the historical P06 auditor."
+    },
+    {
+      "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+      "purpose": "Select isolated P03 versus composed C4/AP04 inputs by ancestry and verified bytes, never by branch-name strings."
+    },
+    {
+      "path": ".github/workflows/atlas-parity04-doc.yml",
+      "purpose": "Execute the AP04 documentation-successor guard and adversarial tests on Linux/Windows with normal and optimized Python."
+    },
+    {
+      "path": ".github/workflows/atlas003-speckit.yml",
+      "purpose": "Run Spec Kit with the verified lineage dispatcher and include the exact AP04 repair paths in triggering scope."
+    },
+    {
+      "path": ".github/workflows/atlas021.yml",
+      "purpose": "Route installed-suite qualification by verified lineage instead of branch-name strings."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json",
+      "purpose": "Separate original GitHub runs, local validation and absent final-SHA runs."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/CI-ROOT-CAUSE.md",
+      "purpose": "Map original failing workflows/jobs/steps to classified causes and repairs."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/DECISION-COMPLIANCE.md",
+      "purpose": "Reconcile D-001 through D-020, ADR status, HL7/FHIR and G0 through G9."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/HANDOFF.json",
+      "purpose": "Provide exact publication and terminal-CI handoff without claiming an unpublished SHA."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/INDEPENDENT-REVIEW.md",
+      "purpose": "Record independent-review availability without mislabeling self-review."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/INPUT-SHAS.json",
+      "purpose": "Bind the observed C4, AP04 documentation and original PR identities."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/MANIFEST.sha256",
+      "purpose": "Pin every repair file except this self-referential manifest."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/NEGATIVE-TESTS.json",
+      "purpose": "Enumerate adversarial cases and local execution evidence."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/OVERLAY.json",
+      "purpose": "Declare the complete path-level authorization and purpose of this repair."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/RESULT.md",
+      "purpose": "Record the repair result, limitations and exact terminal state."
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md",
+      "purpose": "Specify the exact fail-closed successor authorization contract."
+    },
+    {
+      "path": "scripts/qa/atlas_parity03_c4_ci.py",
+      "purpose": "Freeze C4 authorship at the immutable C4 SHA and delegate successor authorization to the AP04 overlay guard."
+    },
+    {
+      "path": "scripts/qa/atlas_parity04_doc_ci.py",
+      "purpose": "Fail-closed guard for C4 ancestry, nine immutable documents, exact repair paths, Git modes/history, overlay hashes, frozen C4 declarations and workflow safety."
+    },
+    {
+      "path": "tests/qa/test_atlas_parity04_doc_ci.py",
+      "purpose": "Synthetic Git counterexamples for protected bytes, ancestry, modes, manifests, routing, pins and frozen declarations."
+    }
+  ]
+}
