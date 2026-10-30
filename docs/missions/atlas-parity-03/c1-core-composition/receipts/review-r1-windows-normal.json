@@ -1,0 +1,80 @@
+{
+  "artifact_id": 12751594186,
+  "zip_sha256": "3d1d7da78f483b6ae67bdab5b53f7e34abd336b1004a7ec6a28495cb28d3f5b0",
+  "expected_digest_match": true,
+  "extraction_bytes_equal_zip": true,
+  "suite": {
+    "status": "PASS_SCOPED",
+    "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+    "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+    "optimization": 0,
+    "platform": "win32",
+    "unique_test_cases": 122,
+    "total_executed": 122,
+    "consumer_outside_checkout": true,
+    "r4_absent": true,
+    "installed_modules": {
+      "viewer": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\atlas_viewer\\__init__.py",
+      "sdk": "D:\\a\\_temp\\atlas-c1-portable\\viewer-env\\Lib\\site-packages\\caderno_protocol\\__init__.py"
+    },
+    "test_only_dependencies": {
+      "jsonschema": "4.25.1"
+    },
+    "counts": [
+      {
+        "suite": "packages/protocol/tests",
+        "collected": 12,
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "suite": "tests/qa",
+        "collected": 74,
+        "tests": 74,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "suite": "tests/viewer",
+        "collected": 36,
+        "tests": 36,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ],
+    "ids_match_other_cells": true,
+    "log_run_counts": [
+      "12",
+      "74",
+      "36"
+    ],
+    "log_OK_count": 3
+  },
+  "source_equivalence": {
+    "count": 22,
+    "mismatches": [],
+    "sdk": {
+      "sdk_imported": true,
+      "viewer_absent": true,
+      "r4_absent": true,
+      "installed_module": true
+    },
+    "viewer": {
+      "r4_absent": true,
+      "installed_viewer": true,
+      "installed_sdk": true
+    },
+    "source_bytes_unchanged": true
+  },
+  "wheel_equivalence": {
+    "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+    "status": "PASS_SCOPED",
+    "asset_count": 4,
+    "mismatches": [],
+    "digest_in_clean_receipt": true
+  }
+}

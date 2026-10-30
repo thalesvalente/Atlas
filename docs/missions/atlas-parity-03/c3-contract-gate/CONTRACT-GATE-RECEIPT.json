@@ -1,0 +1,41 @@
+{
+  "status": "PENDING_CI_ON_FINAL_SHA",
+  "scope": "P01_CONTRACT_GATE",
+  "workflow": ".github/workflows/atlas-parity03-contracts.yml",
+  "runner": "docs/contracts/atlas-parity-02/p01/run_contract_gate.py",
+  "p01_cases": {
+    "unique": 46,
+    "positive": 11,
+    "negative": 35
+  },
+  "public_reader_probes": 9,
+  "related_reference_regressions": 11,
+  "architecture": "PASS_SCOPED_REQUIRED",
+  "os": [
+    "ubuntu-latest",
+    "windows-latest"
+  ],
+  "python_modes": [
+    "normal",
+    "-O"
+  ],
+  "hashes": "VERIFIED_AT_RUNTIME_PER_HEAD",
+  "zero_skips": "REQUIRED",
+  "normal_optimized_report_equality": "REQUIRED",
+  "artifacts": [
+    ".ci-p01-contracts/normal/report.json",
+    ".ci-p01-contracts/normal/junit.xml",
+    ".ci-p01-contracts/optimized/report.json",
+    ".ci-p01-contracts/optimized/junit.xml",
+    ".ci-p01-contracts/gate-receipt.json"
+  ],
+  "ci_head_sha": null,
+  "ci_run_id": null,
+  "not_claimed": [
+    "CI_SUCCESS_BEFORE_RUN",
+    "BROWSER_PARITY",
+    "FULL_LEGACY_COVERAGE",
+    "SCIENTIFIC_APPROVAL",
+    "SOURCE_AUTHENTICITY"
+  ]
+}

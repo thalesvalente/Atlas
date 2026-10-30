@@ -1,0 +1,60 @@
+{
+  "merge": {
+    "sha": "c120f8ae9e455e19b4e0bcd35f47ec0fd7a0117c",
+    "tree": "3f1f378a3e39b0f148effdc010177144fe29e7c4",
+    "parents": [
+      "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "c0b42a17710fdf3cef3ec4ea13c840796d57d18f"
+    ]
+  },
+  "method": "Three-way per-path comparison with pinned main; identical inherited paths kept; disjoint additions from C2 and C3 applied on C1; explicit three-parent Git commit",
+  "conflicts": [],
+  "input_blob_count": 464,
+  "no_squash": true,
+  "no_rebase": true,
+  "no_force_push": true,
+  "original_branches_updated": false,
+  "protocol_changed": false,
+  "overlay_identity": "Read enclosing commit and external exact-SHA PR receipt",
+  "composition_map": "COMPOSITION-MAP.md",
+  "blob_provenance": "BLOB-PROVENANCE.csv",
+  "overlays": [
+    {
+      "sha": "d897a8f82a95ea1d7714dd6236390b64931dc797",
+      "tree": "54670d6646b8df3a00a8de4faf40e04a5e568fa6",
+      "kind": "INITIAL_COMPOSITION_RUNTIME_AND_GATES",
+      "result": "RED_24_OF_31"
+    },
+    {
+      "sha": "3e65ac5175e03ded6cc85765322cc9314a29bfe2",
+      "tree": "8d19e4efe7d0e6506e3638c7883d35c5dafc9334",
+      "kind": "HARNESS_CONTEXT_REPAIR",
+      "result": "RED_27_OF_31"
+    },
+    {
+      "sha": "a21bacf35c1a7571af39f7366e8f08457db4a49c",
+      "tree": "7787aca95a10c274ce70790abf907bf4a411cb96",
+      "kind": "STALE_LINK_WAIT_REPAIR",
+      "result": "CI_31_OF_31_REVIEW_BLOCKED_R02"
+    },
+    {
+      "sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb",
+      "tree": "73e53237b1362dcd8b65b120acb4c47dfcdf8ba4",
+      "kind": "VISUAL_CASE_SEMANTICS_REPAIR",
+      "result": "CI_31_OF_31_AND_INDEPENDENT_REVIEW_PASS"
+    }
+  ],
+  "final_code_blob_count": 490,
+  "C4_authored_paths": 39,
+  "C4_manifest_entries": 38,
+  "documentary_commit": {
+    "sha": null,
+    "reason": "The enclosing commit cannot contain its own defining SHA.",
+    "status_at_write": "PENDING_OWN_COMMIT_CI_AND_INDEPENDENT_REVIEW",
+    "own_ci_required": true,
+    "own_independent_review_required": true,
+    "no_automatic_evidence_transfer": true,
+    "external_exact_sha_closeout": "Draft PR #13 description, final closeout section, and conversation delivery."
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "mission": "ATLAS-PARITY-03-C4R",
+  "repository": "thalesvalente/Atlas",
+  "branch": "integrate/atlas-parity03-c4-full-candidate-20261027",
+  "baseline": {
+    "sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+    "tree": "5c65d3f42b7199250bb6df11c7cd4fbe37e7ee59",
+    "reconfirmed": "2026-10-29 America/Fortaleza"
+  },
+  "inputs": [
+    {
+      "role": "C1",
+      "pr": 11,
+      "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "terminal": "C1_CORE_CANDIDATE_READY",
+      "ci": [
+        40551740272,
+        40551740243,
+        40551740569
+      ],
+      "tree": "7a9bbc1765bbbf3897760ccc50a0b22aec3ee239",
+      "parents": [
+        "af393e4c0cca19161f49bf9d847bd22617be15fb"
+      ],
+      "manifest": {
+        "path": "docs/missions/atlas-parity-03/c1-core-composition/MANIFEST.sha256",
+        "blob": "1746239922415463b6bbd060498e447276bb1bd8",
+        "sha256": "1f04238e2988369e9c968bd06a83f245dcfa01935a0c7a63d9194deab20ac7b0",
+        "entries": 283
+      },
+      "ci_scope": "INPUT_SHA_ONLY_NOT_C4",
+      "pr_url": "https://github.com/thalesvalente/Atlas/pull/11"
+    },
+    {
+      "role": "C2",
+      "pr": 10,
+      "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "terminal": "C2_P03_QUALIFIED_FOR_COMPOSITION",
+      "ci": [
+        40548072444,
+        40548072396,
+        40548072410
+      ],
+      "tree": "d60783a212b3593e7677ca8761557ad7b758e763",
+      "parents": [
+        "dc43653d4e06c1f5500437a42b2fb9e2df426dd6"
+      ],
+      "manifest": {
+        "path": "docs/missions/atlas-parity-03/c2-p03-qualification/MANIFEST.sha256",
+        "blob": "6ec2869bb59ef14e975a6bea0532ed3dc9113e5d",
+        "sha256": "3abb7752cf23c2d131bfae92f19d821c1bac119fecb64d12e50567484ecc9304",
+        "entries": 27
+      },
+      "ci_scope": "INPUT_SHA_ONLY_NOT_C4",
+      "pr_url": "https://github.com/thalesvalente/Atlas/pull/10"
+    },
+    {
+      "role": "C3",
+      "pr": 12,
+      "sha": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "terminal": "TECHNICAL_PASS_INDEPENDENT_REVIEW_CLOSED_ONLY_BY_C4_REVIEW",
+      "ci": [
+        40546127315,
+        40546247534,
+        40546247554
+      ],
+      "tree": "928fec43fb493387a48789a226f59988587a19a2",
+      "parents": [
+        "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7"
+      ],
+      "manifest": {
+        "path": "docs/missions/atlas-parity-03/c3-contract-gate/MANIFEST.sha256",
+        "blob": "363d6c88b4ef9054e76aa29210080749af287714",
+        "sha256": "c559337bcdf301f16af27e3f7623a27376f3d67d88181e7e8f977b349ccf26d6",
+        "entries": 11
+      },
+      "ci_scope": "INPUT_SHA_ONLY_NOT_C4",
+      "pr_url": "https://github.com/thalesvalente/Atlas/pull/12"
+    }
+  ],
+  "source_branches_updated": false,
+  "reasoning_effective": "UNVERIFIED",
+  "code_candidate": {
+    "sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb",
+    "tree": "73e53237b1362dcd8b65b120acb4c47dfcdf8ba4",
+    "ci_pass": true,
+    "independent_review_pass": true
+  },
+  "documentary_commit": {
+    "sha": null,
+    "reason": "The enclosing commit cannot contain its own defining SHA.",
+    "status_at_write": "PENDING_OWN_COMMIT_CI_AND_INDEPENDENT_REVIEW",
+    "own_ci_required": true,
+    "own_independent_review_required": true,
+    "no_automatic_evidence_transfer": true,
+    "external_exact_sha_closeout": "Draft PR #13 description, final closeout section, and conversation delivery."
+  }
+}

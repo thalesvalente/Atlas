@@ -1,0 +1,287 @@
+{
+  "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+  "suite_reports": [
+    {
+      "artifact_id": 12751444152,
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "status": "PASS_SCOPED",
+      "platform": "linux",
+      "optimization": 1,
+      "unique": 122,
+      "executed": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "ids_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1",
+      "consumer_outside_checkout": true,
+      "r4_absent": true,
+      "test_only_dependencies": {
+        "jsonschema": "4.25.1"
+      }
+    },
+    {
+      "artifact_id": 12751594186,
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "status": "PASS_SCOPED",
+      "platform": "win32",
+      "optimization": 0,
+      "unique": 122,
+      "executed": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "ids_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1",
+      "consumer_outside_checkout": true,
+      "r4_absent": true,
+      "test_only_dependencies": {
+        "jsonschema": "4.25.1"
+      }
+    },
+    {
+      "artifact_id": 12751964434,
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "status": "PASS_SCOPED",
+      "platform": "win32",
+      "optimization": 1,
+      "unique": 122,
+      "executed": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "ids_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1",
+      "consumer_outside_checkout": true,
+      "r4_absent": true,
+      "test_only_dependencies": {
+        "jsonschema": "4.25.1"
+      }
+    },
+    {
+      "artifact_id": 12752632881,
+      "tested_sha": "df56eb6338626d1671d1882d0d745c02a1f48406",
+      "tree": "9f808e84f7bfd367bdec84e74daab1c2977f38be",
+      "status": "PASS_SCOPED",
+      "platform": "linux",
+      "optimization": 0,
+      "unique": 122,
+      "executed": 122,
+      "suites": [
+        {
+          "suite": "packages/protocol/tests",
+          "collected": 12,
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/qa",
+          "collected": 74,
+          "tests": 74,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "suite": "tests/viewer",
+          "collected": 36,
+          "tests": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "ids_sha256": "0fb3addfe2a3cbae2d4aaaf81c0751f049c31fb4522efb772764d578832365b1",
+      "consumer_outside_checkout": true,
+      "r4_absent": true,
+      "test_only_dependencies": {
+        "jsonschema": "4.25.1"
+      }
+    }
+  ],
+  "byte_comparisons": [
+    {
+      "artifact_path": "12751444152/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12751964434/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12752632881/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12753052055/_temp/atlas-c1-p06/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12753301213/_temp/atlas-c1-p06/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12753376391/_temp/atlas-c1-p06/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12753560820/_temp/atlas-c1-p06/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "p06-browser/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12751444152/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    },
+    {
+      "artifact_path": "12751964434/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    },
+    {
+      "artifact_path": "12752632881/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    },
+    {
+      "artifact_path": "12753052055/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    },
+    {
+      "artifact_path": "12753301213/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    },
+    {
+      "artifact_path": "12753376391/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    },
+    {
+      "artifact_path": "12753560820/_temp/atlas-c1-p06/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    },
+    {
+      "artifact_path": "12751594186/clean-install-report.json",
+      "source_files_compared_to_git": 22,
+      "errors": [],
+      "sdk_isolation": true,
+      "viewer_isolation": true,
+      "sources_intact": true
+    },
+    {
+      "artifact_path": "12751594186/parity02-p06-wheel-report.json",
+      "wheel_static_assets_compared_to_git": 4,
+      "errors": []
+    }
+  ]
+}

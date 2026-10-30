@@ -1,0 +1,106 @@
+{
+  "kind": "P02_CODE_OWNERSHIP_AND_PRESERVATION",
+  "verified_at": "2026-10-27T15:09:13.695010+00:00",
+  "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "code_tree": "3a6c4f1b486f47e78c1ab26643dc30ddb28d631a",
+  "changed_paths_at_code_commit": [
+    "packages/atlas/src/atlas_viewer/catalog.py",
+    "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+    "packages/atlas/src/atlas_viewer/server.py",
+    "packages/atlas/src/atlas_viewer/static/app.js",
+    "packages/atlas/src/atlas_viewer/static/index.html",
+    "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+    "packages/atlas/src/atlas_viewer/static/style.css",
+    "scripts/qa/atlas_parity02_p02_browser.mjs",
+    "scripts/qa/atlas_parity02_p02_fixture.py",
+    "scripts/qa/atlas_parity02_p02_run_browser.py",
+    "scripts/qa/atlas_parity02_p02_state_tests.mjs",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/analysis.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/checklists/requirements.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/contracts/navigation.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/data-model.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/plan.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/quickstart.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/research.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/spec.md",
+    "specs/004-atlas-parity-c0/workstreams/p02-c0/tasks.md",
+    "tests/fixtures/atlas_parity02/p02/README.md",
+    "tests/fixtures/atlas_parity02/p02/source-a/data/input.csv",
+    "tests/fixtures/atlas_parity02/p02/source-a/ro-crate-metadata.json",
+    "tests/fixtures/atlas_parity02/p02/source-b/data/input.csv",
+    "tests/fixtures/atlas_parity02/p02/source-b/ro-crate-metadata.json",
+    "tests/viewer/test_atlas_parity02_p02_catalog.py",
+    "tests/viewer/test_atlas_parity02_p02_state.py"
+  ],
+  "count": 27,
+  "outside_ownership_paths": [],
+  "protected_paths": {
+    "packages/protocol": "BYTE_IDENTICAL_TO_BASE",
+    ".specify": "BYTE_IDENTICAL_TO_BASE",
+    ".agents": "BYTE_IDENTICAL_TO_BASE",
+    ".github": "BYTE_IDENTICAL_TO_BASE",
+    "AGENTS.md": "BYTE_IDENTICAL_TO_BASE",
+    "scripts/run_checks.py": "BYTE_IDENTICAL_TO_BASE",
+    "scripts/qa/speckit_audit.py": "BYTE_IDENTICAL_TO_BASE",
+    "scripts/qa/architecture_audit.py": "BYTE_IDENTICAL_TO_BASE",
+    "scripts/qa/browser.mjs": "BYTE_IDENTICAL_TO_BASE",
+    "scripts/qa/clean_install.py": "BYTE_IDENTICAL_TO_BASE",
+    "docs/architecture": "BYTE_IDENTICAL_TO_BASE",
+    "packages/atlas/pyproject.toml": "BYTE_IDENTICAL_TO_BASE"
+  },
+  "protocol_manifest": [
+    {
+      "path": "packages/protocol/pyproject.toml",
+      "sha256": "29292b6cc43253628f8639106703927e7e930d78eed0607bbb419901f8302caa"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/__init__.py",
+      "sha256": "1a70131dd9a23ed2f0a827eb6143b24d32a26fe4f6779155556a23fefa49935f"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/__main__.py",
+      "sha256": "936c615e422464268269eef830c0d4ee161b14c8f0a9bdcb32e0ae84e221eec2"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/model.py",
+      "sha256": "4803f211c9db0713ffe067e6b4b3223b4af6c87e7ab499e53b908f59a8556ed6"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/read_model.py",
+      "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt",
+      "sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/NOTICE.txt",
+      "sha256": "aa69530f0c0d6b50ffc2bb60aa31591d4d041e9f8eb4c4dbf9affda86ab40bdd"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+      "sha256": "463242e640c3396fb1dc318c3dde15191292a123a7a12e46e2d202a20137a46a"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+      "sha256": "5a3df1a43185501db4d45cdde5a478c57eeb1d673eedfe400488fc4c4b21dd91"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+      "sha256": "03a85b4c5c8da312e3b9413b5365531b80f397c33993a70f277b8197c4781f66"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/storage.py",
+      "sha256": "1d2cabaf39e8b38815daed37e515a0e52cdc8d4b37a1e0110522b1d0149f5a67"
+    },
+    {
+      "path": "packages/protocol/tests/test_sdk.py",
+      "sha256": "19f65ab70a36dc269ab8a4ac3ea76961cb36408f5dbeae704fd4ad88632284c9"
+    }
+  ],
+  "pyproject_changed": false,
+  "r4_imports_added": false,
+  "feature_pointer_written": false,
+  "note": "Final documentary paths are listed in HANDOFF.json. This receipt compares the frozen code commit to the requested base; historical audit allowances against an older baseline do not imply P02 changes there."
+}

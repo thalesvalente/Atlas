@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-10-27T12:03:16-03:00",
+  "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+  "payload_commit": "3a308ee78e185912959920d85a97cd511a70a764",
+  "baseline_files_compared": 162,
+  "baseline_changed_paths": [],
+  "protocol_files_compared": 12,
+  "product_files_changed": false,
+  "pointer_written": false,
+  "ownership_allowed_roots": [
+    "docs/missions/atlas-parity-02/p01-contracts/",
+    "docs/contracts/atlas-parity-02/p01/",
+    "specs/004-atlas-parity-c0/workstreams/p01-contracts/"
+  ],
+  "status": "PASS",
+  "note": "Final artifact inventory and manifest are checked again after envelope review; this record does not hash itself."
+}

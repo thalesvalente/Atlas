@@ -1,0 +1,62 @@
+{
+  "kind": "P02_ENGINEERING_BROWSER_ENVIRONMENT",
+  "code_sha": "b443f9eb25f118e6a68c2ad17c8e21ab7aa99990",
+  "recorded_at": "2026-10-27T15:11:06.612511+00:00",
+  "runtime": "isolated engineering runtime; not user host",
+  "python": "3.12.14",
+  "node": "24.22.1",
+  "playwright": "1.62.1",
+  "chromium": "153.0.8010.0",
+  "chromium_distribution": "@sparticuz/chromium@153.0.0",
+  "chromium_binary_sha256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+  "launch": "Playwright defaults, executablePath override only; package extra arguments not used",
+  "acquisition_history": [
+    {
+      "artifact": "Playwright Chromium 151 default archive",
+      "result": "INVALID_TRUNCATED_ZIP; browser not executed from this artifact"
+    },
+    {
+      "artifact": "Playwright Chromium 151 headless-shell archive",
+      "result": "INVALID_TRUNCATED_ZIP; browser not executed from this artifact"
+    },
+    {
+      "artifact": "@sparticuz/chromium@153.0.0",
+      "result": "REAL_BROWSER_LAUNCHED; default Playwright launch"
+    }
+  ],
+  "initial_evidence": {
+    "browser_receipt_sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+    "status": "PASS_SCOPED_WITH_ENVIRONMENT_LIMITATION",
+    "checks": 23,
+    "screenshots_sha256": {
+      "c0-1440.png": "a7783d887d881a71521ca8b945d4fbf062fdbac2316171aa52c15c83feda358e",
+      "c0-320-text-spacing.png": "37ce63e6fa9c68b00d2fba0a6a297cc5d62aaf8894c2a78bf648feff47eb3634",
+      "c0-320.png": "ddd8e7e89355c25b27297991994a6da0c440a90391bd03e5bc4a93d9f5a93ff4",
+      "c0-390.png": "be36349fe9c761a36ca475385dd72d92adf3319363d766a078587760c76dbc27",
+      "c0-detail-390.png": "4a1ccc249931a7c6acef83db8b917bc19587461a436bbc0c765ebb7f5172ab9c",
+      "c0-overview-1440.png": "f4434f79b8446415e722cce5cb4508d6628f18e87c9445111675015ade06c759"
+    },
+    "visual_limit": "ENV-01: CJK/emoji missing glyphs; superseded for final visual proof by rerun with compatible fonts, same CODE_SHA. Original evidence remains untouched in task scratch; only hashes are included here."
+  },
+  "final_evidence": {
+    "receipt": "browser.json",
+    "sha256": "0313dc747b665540d1e5fdf58805ca64c2cdda1f2ca4f29c932686b31ffa1fd7",
+    "executed_at": "2026-10-27T12:09:16.680343-03:00",
+    "executor": "/root/fixtures_browser",
+    "checks": 23,
+    "screenshots": 6,
+    "source_bytes_unchanged": true,
+    "font_fix": "ENV-01-result.json",
+    "font_provenance": "font-provenance.json"
+  },
+  "font_configuration_scope": "Task-specific FONTCONFIG_FILE/PATH and font cache; no HOME/global font configuration mutation",
+  "permissions": "Authorized loopback tests used runtime execution permission; no ACL/firewall/network/sandbox configuration changed",
+  "claims": {
+    "native_zoom": "NOT_RUN",
+    "css_zoom_used": false,
+    "wcag_certification": false,
+    "unicode_visual_scope": "Actual Japanese/Greek/emoji test string, not all Unicode code points",
+    "no_user_host_access": true
+  },
+  "reuse_rule": "The same 23 checks were rerun after changing environment fonts only. Do not count the rerun as new unique cases."
+}

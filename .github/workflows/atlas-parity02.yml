@@ -1,0 +1,147 @@
+name: ATLAS-PARITY-02 P06 frozen-boundary QA
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'packages/**'
+      - 'examples/**'
+      - 'tests/**'
+      - 'scripts/**'
+      - 'specs/004-atlas-parity-c0/**'
+      - 'docs/missions/atlas-parity-02/p06-qa/**'
+      - 'docs/missions/atlas-parity-03/c1-core-composition/**'
+      - '.specify/**'
+      - '.agents/**'
+      - 'docs/architecture/**'
+      - 'docs/protocol/**'
+      - 'AGENTS.md'
+      - '.github/workflows/atlas-parity02.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  boundaries:
+    name: P06 / ${{ matrix.os }} / optimize=${{ matrix.optimize }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        optimize: ['0', '1']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    env:
+      PYTHONOPTIMIZE: ${{ matrix.optimize }}
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Record the exact tested commit and tree
+        run: |
+          git rev-parse HEAD
+          git rev-parse 'HEAD^{tree}'
+      - name: Install engineering dependencies and separate public packages
+        run: |
+          python -m pip install build==1.3.0 setuptools==80.9.0 wheel==0.45.1
+          python -m pip install --no-build-isolation ./packages/protocol ./packages/atlas
+      - name: Collect and run P06 behavioral checks and counterexamples
+        run: python -m unittest discover -s tests/qa -p 'test_atlas_parity02_p06_*.py' -v
+      - name: Preserve frozen protocol, public inputs and governance
+        run: python scripts/qa/atlas_parity02_p06_audit.py --output .ci-clean-inputs.json
+      - name: Reuse installed-wheel independence and immutability harness
+        run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-p06"
+      - name: Verify actual wheel contents against served bytes and origin policy
+        run: python scripts/qa/atlas_parity02_p06_wheel.py --work "${{ runner.temp }}/atlas-c1-p06"
+      - name: Preserve synthetic engineering receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: parity02-p06-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            .ci-clean-inputs.json
+            ${{ runner.temp }}/atlas-c1-p06/clean-install-report.json
+            ${{ runner.temp }}/atlas-c1-p06/parity02-p06-wheel-report.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+
+  specification:
+    name: Spec Kit 004 / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    env:
+      SPECIFY_FEATURE_NO_PERSIST: '1'
+      SPECIFY_FEATURE_DIRECTORY: specs/004-atlas-parity-c0
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install the official CLI in the isolated CI runner
+        run: python -m pip install specify-cli==1.2.3
+      - name: Verify existing managed assets without weakening the audit
+        run: |
+          specify version --json
+          specify integration status --json
+          python scripts/qa/speckit_audit.py --allow-presentation-delta ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && '--allow-p03-c4-delta' || '--allow-p02-c0-delta' }}
+      - name: Resolve the 004 specification without persisting the active pointer
+        run: |
+          python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
+          python .specify/scripts/python/resolve_template.py spec-template --json
+
+
+  browser_replacement:
+    name: P06 / installed Chromium / valid package replacement
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Build and install the frozen public packages outside the checkout
+        run: |
+          git rev-parse HEAD
+          python -m pip install build==1.3.0 setuptools==80.9.0 wheel==0.45.1
+          python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-p06"
+      - name: Install engineering browser tools
+        run: |
+          npm install --no-save playwright@1.62.1
+          npx playwright install --with-deps chromium
+      - name: Exercise valid package replacement and obsolete links explicitly
+        run: python scripts/qa/atlas_parity02_p06_browser.py --work "${{ runner.temp }}/atlas-c1-p06"
+      - name: Preserve synthetic replacement receipt and screenshot
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: parity02-p06-browser-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/atlas-c1-p06/parity02-p06-browser-report.json
+            ${{ runner.temp }}/atlas-c1-p06/parity02-p06-browser-report.png
+            ${{ runner.temp }}/atlas-c1-p06/clean-install-report.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14

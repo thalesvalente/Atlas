@@ -1,0 +1,47 @@
+{
+  "mission": "ATLAS-PARITY-02-P03",
+  "http_socket": {
+    "status": "NOT_RUN",
+    "operation": "ThreadingHTTPServer loopback socket creation",
+    "observed_error": "PermissionError: [Errno 1] Operation not permitted",
+    "environment": "engineering runtime",
+    "sandbox_or_network_change": false,
+    "note": "Initial setup errors were recorded; no successful socket or user host access is claimed. Five P03 cases are explicitly skipped and four baseline HTTP methods excluded in final selected regression."
+  },
+  "browser": {
+    "status": "NOT_RUN",
+    "reason": "CHROMIUM_EXECUTABLE_NOT_AVAILABLE",
+    "command": "node scripts/qa/atlas_parity02_p03_browser.mjs <report.json>",
+    "exit_code": 2,
+    "external_requests": null,
+    "visual_keyboard_reflow": "UNVERIFIED"
+  },
+  "jsonschema": {
+    "status": "NOT_RUN",
+    "test": "test_sdk.ContractAndRoundTrip.test_profile_schema_matches_positive_fixture",
+    "reason": "JSON Schema reference validator absent"
+  },
+  "pinned_build": {
+    "status": "NOT_VERIFIED",
+    "declared_setuptools": "80.9.0",
+    "actual_setuptools": "84.1.0",
+    "actual_wheel": "0.48.0"
+  },
+  "other_not_run": [
+    "Windows",
+    "main app composition",
+    "legacy parity",
+    "release/deployment",
+    "human or scientific approval"
+  ],
+  "earlier_corrected_failures": [
+    {
+      "kind": "NODE_REPORTER_WRAPPER",
+      "resolution": "Direct TAP reporter with explicit leafcase count; final wrapper passes"
+    },
+    {
+      "kind": "NEGATIVE_FIXTURE_RELATION_ENDPOINT",
+      "resolution": "Both endpoints changed in the negative case; final test passes"
+    }
+  ]
+}

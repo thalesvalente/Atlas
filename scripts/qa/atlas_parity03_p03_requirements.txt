@@ -1,0 +1,6 @@
+# Test/build tooling only. Direct pins reused from .github/workflows/atlas021.yml.
+# No runtime dependency is added to either product wheel.
+build==1.3.0
+setuptools==80.9.0
+wheel==0.45.1
+jsonschema==4.25.1

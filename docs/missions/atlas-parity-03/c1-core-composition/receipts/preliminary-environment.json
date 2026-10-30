@@ -1,0 +1,10 @@
+{
+  "environment": "cloud engineering Linux Python 3.12.14; not user host",
+  "unique_cases": 122,
+  "passed": 115,
+  "errors": 7,
+  "skips": 0,
+  "error_precondition": "socket.socket raises PermissionError EPERM; seven HTTP tests could not start server",
+  "browser": "NOT_RUN; Chromium missing and install denied by environment",
+  "reasoning_effective": "UNVERIFIED"
+}

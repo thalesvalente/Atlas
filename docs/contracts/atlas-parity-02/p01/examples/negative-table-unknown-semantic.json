@@ -1,0 +1,238 @@
+{
+  "kind": "ATLAS_P01_TABLE_EXAMPLE",
+  "status": "CANDIDATE",
+  "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL",
+  "synthetic": true,
+  "contract_class": "PERSISTED_EVOLUTION_REQUIRED",
+  "tables": [
+    {
+      "id": "table-A",
+      "column_order": [
+        "measure",
+        "identifier",
+        "large",
+        "flag"
+      ],
+      "columns": [
+        {
+          "id": "measure",
+          "semantic_id": "urn:atlas:p01:synthetic:quantity",
+          "type": "number",
+          "unit": "mg/L",
+          "precision": 2,
+          "measurement_context": "synthetic-method-A"
+        },
+        {
+          "id": "identifier",
+          "semantic_id": "urn:atlas:p01:synthetic:identifier",
+          "type": "string",
+          "unit": null,
+          "precision": null,
+          "measurement_context": "synthetic-method-A"
+        },
+        {
+          "id": "large",
+          "semantic_id": "urn:atlas:p01:synthetic:large-integer",
+          "type": "integer",
+          "unit": "1",
+          "precision": 0,
+          "measurement_context": "synthetic-method-A"
+        },
+        {
+          "id": "flag",
+          "semantic_id": "urn:atlas:p01:synthetic:flag",
+          "type": "boolean",
+          "unit": null,
+          "precision": null,
+          "measurement_context": "synthetic-method-A"
+        }
+      ],
+      "row_order": [
+        "row-2",
+        "row-1"
+      ],
+      "rows": [
+        {
+          "id": "row-2",
+          "cells": [
+            {
+              "column_id": "measure",
+              "value": 1.0,
+              "raw": "1.00",
+              "missing_reason": null
+            },
+            {
+              "column_id": "identifier",
+              "value": "001",
+              "raw": "001",
+              "missing_reason": null
+            },
+            {
+              "column_id": "large",
+              "value": 9007199254740993,
+              "raw": "9007199254740993",
+              "missing_reason": null
+            },
+            {
+              "column_id": "flag",
+              "value": false,
+              "raw": "false",
+              "missing_reason": null
+            }
+          ]
+        },
+        {
+          "id": "row-1",
+          "cells": [
+            {
+              "column_id": "measure",
+              "value": null,
+              "raw": null,
+              "missing_reason": "Não medido na fixture sintética."
+            },
+            {
+              "column_id": "identifier",
+              "value": "001",
+              "raw": "001",
+              "missing_reason": null
+            },
+            {
+              "column_id": "large",
+              "value": 9007199254740993,
+              "raw": "9007199254740993",
+              "missing_reason": null
+            },
+            {
+              "column_id": "flag",
+              "value": false,
+              "raw": "false",
+              "missing_reason": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "table-B",
+      "column_order": [
+        "measure",
+        "identifier",
+        "large",
+        "flag"
+      ],
+      "columns": [
+        {
+          "id": "measure",
+          "semantic_id": null,
+          "type": "number",
+          "unit": "mg/L",
+          "precision": 2,
+          "measurement_context": "synthetic-method-A"
+        },
+        {
+          "id": "identifier",
+          "semantic_id": "urn:atlas:p01:synthetic:identifier",
+          "type": "string",
+          "unit": null,
+          "precision": null,
+          "measurement_context": "synthetic-method-A"
+        },
+        {
+          "id": "large",
+          "semantic_id": "urn:atlas:p01:synthetic:large-integer",
+          "type": "integer",
+          "unit": "1",
+          "precision": 0,
+          "measurement_context": "synthetic-method-A"
+        },
+        {
+          "id": "flag",
+          "semantic_id": "urn:atlas:p01:synthetic:flag",
+          "type": "boolean",
+          "unit": null,
+          "precision": null,
+          "measurement_context": "synthetic-method-A"
+        }
+      ],
+      "row_order": [
+        "row-2",
+        "row-1"
+      ],
+      "rows": [
+        {
+          "id": "row-2",
+          "cells": [
+            {
+              "column_id": "measure",
+              "value": 1.0,
+              "raw": "1.00",
+              "missing_reason": null
+            },
+            {
+              "column_id": "identifier",
+              "value": "001",
+              "raw": "001",
+              "missing_reason": null
+            },
+            {
+              "column_id": "large",
+              "value": 9007199254740993,
+              "raw": "9007199254740993",
+              "missing_reason": null
+            },
+            {
+              "column_id": "flag",
+              "value": false,
+              "raw": "false",
+              "missing_reason": null
+            }
+          ]
+        },
+        {
+          "id": "row-1",
+          "cells": [
+            {
+              "column_id": "measure",
+              "value": null,
+              "raw": null,
+              "missing_reason": "Não medido na fixture sintética."
+            },
+            {
+              "column_id": "identifier",
+              "value": "001",
+              "raw": "001",
+              "missing_reason": null
+            },
+            {
+              "column_id": "large",
+              "value": 9007199254740993,
+              "raw": "9007199254740993",
+              "missing_reason": null
+            },
+            {
+              "column_id": "flag",
+              "value": false,
+              "raw": "false",
+              "missing_reason": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "left": {
+        "table_id": "table-A",
+        "column_id": "measure",
+        "row_id": "row-2"
+      },
+      "right": {
+        "table_id": "table-B",
+        "column_id": "measure",
+        "row_id": "row-2"
+      },
+      "decision": "COMPATIBLE"
+    }
+  ]
+}

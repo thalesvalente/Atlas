@@ -1,0 +1,18 @@
+{
+  "status": "FAIL",
+  "scope": "executed pure state asset; synthetic catalogs; NOT a browser run",
+  "asset_sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+  "checks": [
+    {
+      "name": "original_snapshot_holds_two_source_scoped_selections",
+      "status": "PASS"
+    }
+  ],
+  "observed": {
+    "reason": "SNAPSHOT_MISMATCH",
+    "selected": [],
+    "detail": null
+  },
+  "error": "Legacy P06 expected selection B to survive the global snapshot change\n+ actual - expected\n\n+ '[]'\n- '[\"[\\\\\"source-2\\\\\",\\\\\"urn:synthetic:shared-run\\\\\"]\"]'\n",
+  "legacy_expectation_red": true
+}

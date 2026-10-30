@@ -1,0 +1,110 @@
+{
+  "kind": "ATLAS_P01_PRESENTATION_EXAMPLE",
+  "status": "CANDIDATE",
+  "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL",
+  "synthetic": true,
+  "catalog_scope": "synthetic-catalog-A",
+  "sources": [
+    {
+      "id": "source-1",
+      "metadata_sha256": "37a669a2276ff8de44582e973abb423aaa2550be30fc85d4dfac92f7801b944f",
+      "identity_scope": "CURRENT_CATALOG",
+      "stable_across_reorder": false
+    }
+  ],
+  "entities": [
+    {
+      "source_id": "source-1",
+      "id": "urn:atlas:p01:synthetic:run",
+      "declared_types": [
+        "CreateAction"
+      ],
+      "presentation_kind": "execution",
+      "contract_class": "CURRENT_CONTRACT",
+      "time": {
+        "event": {
+          "value": null,
+          "precision": "UNKNOWN",
+          "origin": "UNKNOWN"
+        },
+        "file_created": {
+          "value": null,
+          "precision": "UNKNOWN",
+          "origin": "UNKNOWN"
+        },
+        "observed": {
+          "value": "2026-10-27T12:00:00Z",
+          "precision": "second",
+          "origin": "OBSERVATION"
+        }
+      }
+    },
+    {
+      "source_id": "source-1",
+      "id": "urn:atlas:p01:synthetic:document",
+      "declared_types": [
+        "CreativeWork",
+        "DigitalDocument"
+      ],
+      "presentation_kind": "document",
+      "contract_class": "COMPATIBLE_PRESENTATION_CANDIDATE",
+      "time": {
+        "event": {
+          "value": null,
+          "precision": "UNKNOWN",
+          "origin": "UNKNOWN"
+        },
+        "file_created": {
+          "value": "2026-10-26",
+          "precision": "day",
+          "origin": "FILE_CREATED"
+        },
+        "observed": {
+          "value": "2026-10-27T12:00:00Z",
+          "precision": "second",
+          "origin": "OBSERVATION"
+        }
+      }
+    },
+    {
+      "source_id": "source-1",
+      "id": "urn:atlas:p01:synthetic:product",
+      "declared_types": [
+        "Product"
+      ],
+      "presentation_kind": "product",
+      "contract_class": "COMPATIBLE_PRESENTATION_CANDIDATE",
+      "time": {
+        "event": {
+          "value": null,
+          "precision": "UNKNOWN",
+          "origin": "UNKNOWN"
+        },
+        "file_created": {
+          "value": null,
+          "precision": "UNKNOWN",
+          "origin": "UNKNOWN"
+        },
+        "observed": {
+          "value": "2026-10-27T12:00:00Z",
+          "precision": "second",
+          "origin": "OBSERVATION"
+        }
+      }
+    }
+  ],
+  "relations": [
+    {
+      "source": {
+        "source_id": "source-1",
+        "id": "urn:atlas:p01:synthetic:document"
+      },
+      "target": {
+        "source_id": "source-1",
+        "id": "urn:atlas:p01:synthetic:document"
+      },
+      "declared_predicate": "object",
+      "presentation_relation": "input"
+    }
+  ]
+}

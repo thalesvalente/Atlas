@@ -1,0 +1,188 @@
+{
+  "mission": "ATLAS-PARITY-03-C4R",
+  "repository": "thalesvalente/Atlas",
+  "draft_pr": 13,
+  "draft_pr_url": "https://github.com/thalesvalente/Atlas/pull/13",
+  "branch": "integrate/atlas-parity03-c4-full-candidate-20261027",
+  "result": "C4_FULL_CANDIDATE_READY_HOST_GATE_DEFERRED",
+  "result_scope": "Code candidate below. Enclosing documentary commit must pass its own exact-SHA gates and independent review; terminal closure is external in the PR description.",
+  "code_candidate": {
+    "sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb",
+    "tree": "73e53237b1362dcd8b65b120acb4c47dfcdf8ba4",
+    "ci": "PASS_6_WORKFLOWS_31_OF_31_JOBS",
+    "independent_review": "PASS_SCOPED_TECHNICAL_AND_ARTIFACT_REVIEW",
+    "blocking_findings": 0
+  },
+  "documentary_commit": {
+    "sha": null,
+    "reason": "The enclosing commit cannot contain its own defining SHA.",
+    "status_at_write": "PENDING_OWN_COMMIT_CI_AND_INDEPENDENT_REVIEW",
+    "own_ci_required": true,
+    "own_independent_review_required": true,
+    "no_automatic_evidence_transfer": true,
+    "external_exact_sha_closeout": "Draft PR #13 description, final closeout section, and conversation delivery."
+  },
+  "inputs": [
+    {
+      "role": "C1",
+      "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "tree": "7a9bbc1765bbbf3897760ccc50a0b22aec3ee239",
+      "pr": 11,
+      "manifest": {
+        "path": "docs/missions/atlas-parity-03/c1-core-composition/MANIFEST.sha256",
+        "blob": "1746239922415463b6bbd060498e447276bb1bd8",
+        "sha256": "1f04238e2988369e9c968bd06a83f245dcfa01935a0c7a63d9194deab20ac7b0",
+        "entries": 283
+      }
+    },
+    {
+      "role": "C2",
+      "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "tree": "d60783a212b3593e7677ca8761557ad7b758e763",
+      "pr": 10,
+      "manifest": {
+        "path": "docs/missions/atlas-parity-03/c2-p03-qualification/MANIFEST.sha256",
+        "blob": "6ec2869bb59ef14e975a6bea0532ed3dc9113e5d",
+        "sha256": "3abb7752cf23c2d131bfae92f19d821c1bac119fecb64d12e50567484ecc9304",
+        "entries": 27
+      }
+    },
+    {
+      "role": "C3",
+      "sha": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "tree": "928fec43fb493387a48789a226f59988587a19a2",
+      "pr": 12,
+      "manifest": {
+        "path": "docs/missions/atlas-parity-03/c3-contract-gate/MANIFEST.sha256",
+        "blob": "363d6c88b4ef9054e76aa29210080749af287714",
+        "sha256": "c559337bcdf301f16af27e3f7623a27376f3d67d88181e7e8f977b349ccf26d6",
+        "entries": 11
+      }
+    }
+  ],
+  "composition": {
+    "sha": "c120f8ae9e455e19b4e0bcd35f47ec0fd7a0117c",
+    "tree": "3f1f378a3e39b0f148effdc010177144fe29e7c4",
+    "parents": [
+      "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "c0b42a17710fdf3cef3ec4ea13c840796d57d18f"
+    ]
+  },
+  "runtime_ci_runs": [
+    {
+      "id": 40976245413,
+      "name": "ATLAS021 candidate verification",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40976245413",
+      "head_sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb"
+    },
+    {
+      "id": 40976245206,
+      "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40976245206",
+      "head_sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb"
+    },
+    {
+      "id": 40976245315,
+      "name": "ATLAS-PARITY-03 P01 contract gate",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40976245315",
+      "head_sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb"
+    },
+    {
+      "id": 40976245336,
+      "name": "ATLAS-PARITY03 P03 isolated qualification",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40976245336",
+      "head_sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb"
+    },
+    {
+      "id": 40976245322,
+      "name": "ATLAS-PARITY-03 C4 full composition",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40976245322",
+      "head_sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb"
+    },
+    {
+      "id": 40976245375,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/40976245375",
+      "head_sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb"
+    }
+  ],
+  "artifacts": {
+    "count": 26,
+    "zip_digests_verified": true,
+    "pngs": 42,
+    "evidence": "CI-EVIDENCE.json"
+  },
+  "collection": {
+    "unique_per_cell": 168,
+    "inherited_C1_ids": 122,
+    "platforms": [
+      "Ubuntu",
+      "Windows"
+    ],
+    "modes": [
+      "normal",
+      "-O"
+    ],
+    "skips": 0
+  },
+  "C3_independent_review_gap": "CLOSED_AT_CODE_CANDIDATE_SHA",
+  "independent_review": {
+    "reviewer": "/root/independent_review",
+    "authored_delta": false,
+    "status": "PASS",
+    "findings_closed": [
+      "C4-R01",
+      "C4-R02",
+      "C4-QA-01",
+      "C4-QA-02",
+      "C4-QA-03",
+      "C4-QA-04"
+    ]
+  },
+  "P03": {
+    "visible_in_main_app": true,
+    "rich_demonstrators_active": false,
+    "metadata_projector_and_four_assets_frozen": true,
+    "original25_current_unchanged": 24,
+    "exact_test_adapter_count": 1,
+    "original56_current_unchanged": 55,
+    "typed_display_preserved": true,
+    "case_sensitive_units_and_ids_preserved": true
+  },
+  "local_evidence": {
+    "candidate_sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+    "l2_status": "L2_BLOCKED_EXACT",
+    "receipt_hashes": {
+      "result": "96b69a7272edadd7a731232cfad993ef94beaa9f119288cb7d30e945b007af91",
+      "handoff": "d020ad8486ce09d5bca2b78a23085030f34237bc70f0a35b4f60fe40d279b8d6"
+    },
+    "LOCAL_C1_INSTALLATION": "PASS",
+    "LOCAL_C1_OFFLINE": "PASS",
+    "LOCAL_C1_HTTP_BROWSER": "BLOCKED_EXTERNAL_WINERROR_10013",
+    "LOCAL_C4_INSTALLATION": "NOT_RUN",
+    "LOCAL_C4_OFFLINE": "NOT_RUN",
+    "LOCAL_C4_HTTP_BROWSER": "NOT_RUN",
+    "HOST_OPERATIONAL_READINESS": false
+  },
+  "ready_for_user_test": false,
+  "protocol_context_schema_version_exporter_carrier_changed": false,
+  "public_fixture_changes": false,
+  "private_P04_published": false,
+  "local_product_execution": false,
+  "paid_calls": false,
+  "global_feature_pointer_written": false,
+  "native_zoom_200": "NOT_MEASURED_IN_C4",
+  "wcag_certification": false,
+  "reasoning_effective": "UNVERIFIED",
+  "authorized_next_act": "Human code/evidence review only after documentary exact-SHA terminal closure. Separate authorized LOCAL C4 mission is required for operational replay.",
+  "authorizations_not_granted": [
+    "merge",
+    "release",
+    "deploy",
+    "promotion",
+    "scientific approval",
+    "license change",
+    "host remediation"
+  ]
+}

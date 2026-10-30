@@ -1,0 +1,41 @@
+{
+  "version": "p03-table/1",
+  "semantic_status": "CANDIDATE_PRESENTATION",
+  "synthetic": true,
+  "title": "Conteúdo inerte <script>globalThis.__p03_xss=true</script>",
+  "columns": [
+    {
+      "id": "payload",
+      "label": "<svg onload=\"globalThis.__p03_xss=true\">",
+      "type": "string"
+    },
+    {
+      "id": "uri",
+      "label": "URI declarada, somente texto",
+      "type": "string"
+    },
+    {
+      "id": "unicode",
+      "label": "Nome longo / Unicode",
+      "type": "string"
+    }
+  ],
+  "rows": [
+    {
+      "id": "row\" autofocus onfocus=\"globalThis.__p03_xss=true",
+      "cells": {
+        "payload": "<img src=\"https://example.invalid/no-fetch\" onerror=\"globalThis.__p03_xss=true\">",
+        "uri": "javascript:globalThis.__p03_xss=true",
+        "unicode": "Observação — água / 水 / 🌱 / é / nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_nome_muito_longo_"
+      }
+    },
+    {
+      "id": "URI-externa",
+      "cells": {
+        "payload": "<iframe src=\"https://example.invalid/private\"></iframe>",
+        "uri": "https://example.invalid/payload.csv?private=synthetic",
+        "unicode": "مرحبا / δοκιμή / परीक्षण"
+      }
+    }
+  ]
+}

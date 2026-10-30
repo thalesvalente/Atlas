@@ -1,0 +1,83 @@
+{
+  "version": "p03-table/1",
+  "semantic_status": "CANDIDATE_PRESENTATION",
+  "synthetic": true,
+  "title": "Tabela sintética: valores e identidades preservados",
+  "description": "Descritor candidato de apresentação; não é contrato persistido do Caderno.",
+  "columns": [
+    {
+      "id": "sample",
+      "label": "Amostra / referência",
+      "type": "string"
+    },
+    {
+      "id": "count",
+      "label": "Inteiro exato",
+      "type": "integer",
+      "unit": "1",
+      "precision": 0
+    },
+    {
+      "id": "measure",
+      "label": "Medição declarada",
+      "type": "decimal",
+      "unit": "mg/L",
+      "precision": 2
+    },
+    {
+      "id": "flag",
+      "label": "Sinalizador",
+      "type": "boolean"
+    },
+    {
+      "id": "code",
+      "label": "Código lexical",
+      "type": "string"
+    }
+  ],
+  "rows": [
+    {
+      "id": "amostra-A",
+      "cells": {
+        "sample": "São Luís / 水 / 🌱",
+        "count": "9007199254740993",
+        "measure": "0.123456789012345678901",
+        "flag": false,
+        "code": "00042"
+      }
+    },
+    {
+      "id": "amostra-B",
+      "cells": {
+        "sample": "Controle",
+        "count": "09007199254740992",
+        "measure": "+001.2300e+2",
+        "flag": true,
+        "code": "0007"
+      }
+    },
+    {
+      "id": "amostra-C",
+      "cells": {
+        "sample": "Zero preservado",
+        "count": 0,
+        "measure": "-0.000",
+        "flag": false,
+        "code": "-0"
+      }
+    },
+    {
+      "id": "amostra-Ausente",
+      "cells": {
+        "sample": "Ausência explícita",
+        "count": null,
+        "code": ""
+      },
+      "missing_reasons": {
+        "count": "Não medido",
+        "measure": "Fonte não declarou",
+        "flag": "Sem declaração"
+      }
+    }
+  ]
+}
