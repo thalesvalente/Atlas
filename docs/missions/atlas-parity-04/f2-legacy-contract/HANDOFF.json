@@ -1,0 +1,52 @@
+{
+  "schema": "atlas-ap04-f2-handoff-v1",
+  "mission": "AP04-F2-CHAT-LEGACY-COMPAT-CONTRACT-01",
+  "package_version": "AP04-F2-v0.2",
+  "descriptor_version": "0.2.0",
+  "status": "F2_REVIEW_PENDING",
+  "branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+  "parent_prompt_sha": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+  "containing_commit_and_tree": "RESOLVE_FROM_CONTAINING_GIT_COMMIT",
+  "candidate": "O1_EXTERNAL_READER_WITH_O3_SEGREGATED_BROWSER_FILE_API",
+  "arc09": "ARC09_APPROVAL_REQUIRED",
+  "adr0003": "PROPOSED_NOT_APPROVED",
+  "G4": "ARCHITECTURAL_DECISION_PENDING",
+  "plan_change": false,
+  "product_change": false,
+  "private_sources_read": false,
+  "independent_review": {
+    "agent": "/root/review_c",
+    "status": "PENDING_PUBLISHED_CANDIDATE"
+  },
+  "executed_validation": [
+    "Public input Git commit/tree/parent/blob reconciliation;22 UTF-8 byte lengths and Git blob hashes matched",
+    "Document JSON parsing:2 metadata JSON files plus3 fenced JSON blocks",
+    "Custom in-memory documentary keyword/invariant checks:2 synthetic examples,zero errors;not formal JSONSchema validation",
+    "Manifest generation and remote Git tree/blob ownership checks required at publication"
+  ],
+  "not_run": [
+    "formal_JSONSchema_validator",
+    "product_tests",
+    "browser",
+    "private_source_reads",
+    "FHIR_validation",
+    "engineering_CI_manually_triggered"
+  ],
+  "next_action": "Complete independent review by published SHA, correct documents and publish final reviewed handoff.",
+  "native_subagents": {
+    "A": {
+      "id": "/root/architecture_a",
+      "ownership": "Architecture proposal only;no writes"
+    },
+    "B": {
+      "id": "/root/model_b",
+      "ownership": "Contract and identity proposal only;no writes"
+    },
+    "C": {
+      "id": "/root/review_c",
+      "ownership": "Independent read-only review;no delta authorship"
+    }
+  },
+  "publication_method": "GitHub Git Data API, single parent commits, fast-forward with expected head lease;coordinator only",
+  "manifest_policy": "All files in F2 workstream except MANIFEST.sha256 itself;includes2 inherited prompt/checklist inputs and11 newly authored outputs"
+}

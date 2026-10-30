@@ -1,0 +1,274 @@
+{
+  "schema": "atlas-ap04-f2-inputs-v1",
+  "mission": "AP04-F2-CHAT-LEGACY-COMPAT-CONTRACT-01",
+  "date": "2026-10-30",
+  "repository": "thalesvalente/Atlas",
+  "branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+  "plan": "AP04-POR-v1.0-draft",
+  "retrieval": "GitHub connector by commit SHA; full contents read; immutable Git blobs reconciled against non-truncated recursive trees",
+  "baselines": [
+    {
+      "role": "prompt_F2",
+      "commit": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "tree": "37f3c90e4d9d4e326eb128614c74e759ec892705",
+      "parents": [
+        "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7"
+      ],
+      "url": "https://github.com/thalesvalente/Atlas/commit/bc2e10e9a783227294daa4100ccaeb384d0dddd0"
+    },
+    {
+      "role": "F1",
+      "commit": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree": "e0626cd274948a9303774593e20ca05fc1d32d62",
+      "parents": [
+        "e140d973fd4cbc4547046f25fd620166662c5004"
+      ],
+      "url": "https://github.com/thalesvalente/Atlas/commit/a237f446e54927eeeda8ed5e8e9daa83ee09dcb7"
+    },
+    {
+      "role": "AP04_PLAN",
+      "commit": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "tree": "a02e8b6e6d82a743de4a31e9835c3d18e29d8947",
+      "parents": [
+        "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60"
+      ],
+      "url": "https://github.com/thalesvalente/Atlas/commit/47c94d27aeb7717eebb30804f01cd2cd33507c8a"
+    },
+    {
+      "role": "C4",
+      "commit": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "tree": "0a622663ca40232d6143659f82cfe9ce43702e90",
+      "parents": [
+        "54461f7494df7c0e54a176cf7df3f16ee43e2edb"
+      ],
+      "url": "https://github.com/thalesvalente/Atlas/commit/72d9b94e613a57c82a5afd309796f44b271e2185"
+    }
+  ],
+  "pr14": {
+    "observed_state": "open",
+    "draft": true,
+    "head": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+    "mutated": false
+  },
+  "files": [
+    {
+      "path": ".specify/memory/constitution.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 4878,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/.specify/memory/constitution.md"
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "a2190a257987aa9a2da276857cdb713ac24dd520",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 5732,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/architecture/ADR-0001-atlas-protocol-producers-storage.md"
+    },
+    {
+      "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "17265f1a7293d7885825d9dc1982b1e1dec2b567",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 4710,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/architecture/ADR-0002-protocol-candidate.md"
+    },
+    {
+      "path": "docs/architecture/ADR-0003-legacy-compatibility-proposed.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "04e4b22b75ac219d4a1f645ac575456d23136fcd",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 4790,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/architecture/ADR-0003-legacy-compatibility-proposed.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ACTION-PLAN.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "de728c827a960cf9bcb2e22e20b5d205aa199781",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 7010,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/ACTION-PLAN.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/DECISION-REGISTER.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "e40075b866987f22f234e86a9c0ea789dc6fe3c9",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 5931,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/DECISION-REGISTER.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "feb9ab242a857fb377724acb9e904b2f89f1f2b9",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 2702,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/PARITY-MATRIX.csv"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/GATES.json",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "d36b302368cf8671e95d798b349b420b0eefd9a2",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 1475,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/GATES.json"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/RESULT-REVIEW-TEMPLATE.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "d8e544a390f47d8c421d6f75f9e94a9311fb59b9",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 3104,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/RESULT-REVIEW-TEMPLATE.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/INTEROPERABILITY-GUARDRAILS.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "2cc06951e3116fb0636d1fc8c68745867d2ae810",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 2731,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/INTEROPERABILITY-GUARDRAILS.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-REVIEW-AND-DECISION-CHECKLIST.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "f57a6cda9fcd70de2f34921f9c26c18abd730ed3",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 2178,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/f2-legacy-contract/F2-REVIEW-AND-DECISION-CHECKLIST.md"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/contracts/reader.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "eb4feb7b4f829d97b048fc9d343861d9297ec04b",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 1738,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/specs/003-producer-selective-preview/contracts/reader.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "832dafc36f14a99ed196d5ff1f51eb18bb60b5f8",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 5036,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/catalog.py",
+      "read_ref": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "git_blob_sha": "b83a14a3101c7aa6fc9b7895c5aeb28d384b35cb",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 8955,
+      "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/atlas/src/atlas_viewer/catalog.py"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/server.py",
+      "read_ref": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "git_blob_sha": "5f73651a3e8a8efb8097a8fbcfc7f808b3ee8aca",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 5051,
+      "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/atlas/src/atlas_viewer/server.py"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/read_model.py",
+      "read_ref": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "git_blob_sha": "5988b605760ab242e99de6ce484ed57569f8f475",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 5182,
+      "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/protocol/src/caderno_protocol/read_model.py"
+    },
+    {
+      "path": "docs/protocol/0.1.0a1.md",
+      "read_ref": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "git_blob_sha": "a60f5bb82156c1cbb04344217415f0ab5deecaef",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 12745,
+      "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/docs/protocol/0.1.0a1.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/RESULT-REVIEW.sanitized.md",
+      "read_ref": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "git_blob_sha": "078ce6364fc88bb2c09d37282426938482387c7a",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 8008,
+      "url": "https://github.com/thalesvalente/Atlas/blob/a237f446e54927eeeda8ed5e8e9daa83ee09dcb7/docs/missions/atlas-parity-04/f1-legacy-inventory/RESULT-REVIEW.sanitized.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.json",
+      "read_ref": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "git_blob_sha": "8b16eb60e2554a337fcaf950df13fa8300e46e87",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 8390,
+      "url": "https://github.com/thalesvalente/Atlas/blob/a237f446e54927eeeda8ed5e8e9daa83ee09dcb7/docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.json"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.md",
+      "read_ref": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "git_blob_sha": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 2547,
+      "url": "https://github.com/thalesvalente/Atlas/blob/a237f446e54927eeeda8ed5e8e9daa83ee09dcb7/docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.md"
+    },
+    {
+      "path": "AGENTS.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "c19ccc55e54f1274dac8408480f7a3e9ecc30f85",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 956,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/AGENTS.md"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-CHAT-ARCHITECTURE-MISSION.md",
+      "read_ref": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "git_blob_sha": "76909b93b41b403cd20024f115bf222520901527",
+      "mode": "100644",
+      "type": "blob",
+      "size_bytes": 14322,
+      "url": "https://github.com/thalesvalente/Atlas/blob/bc2e10e9a783227294daa4100ccaeb384d0dddd0/docs/missions/atlas-parity-04/f2-legacy-contract/F2-CHAT-ARCHITECTURE-MISSION.md"
+    }
+  ],
+  "private_source_contents_paths_ids_digests": "NOT_REQUESTED_NOT_READ_NOT_PUBLISHED",
+  "source_license_handling": "Only original synthetic examples authored in this mission; no third-party fixture/code imported; repository license unchanged.",
+  "outputs_identity": "Resolve containing commit via GitHub Git Data API; no self-referential commit hash.",
+  "byte_verification": {
+    "method": "In-memory UTF-8 byte length and Git SHA-1 blob recomputation from fetched content; compared to Git tree entries",
+    "files_checked": 22,
+    "all_matched": true,
+    "private_inputs": false
+  },
+  "lineage_bridge": {
+    "commit": "e140d973fd4cbc4547046f25fd620166662c5004",
+    "tree": "e1d6d8cca7f66aaaff0e13de293d43c04ad0e6ed",
+    "parents": [
+      "47c94d27aeb7717eebb30804f01cd2cd33507c8a"
+    ]
+  },
+  "plan_to_prompt": {
+    "modified_or_removed_blobs": 0,
+    "added_f1_documents": 5,
+    "added_f2_prompt_documents": 2
+  }
+}
