@@ -51,3 +51,7 @@ Os testes fixam o AST executável do guard, excluindo exclusivamente a tabela de
 A região excluída do digest AST deve ser exclusivamente uma tuple literal de pares string/string, avaliada por ast.literal_eval, com os seis hashes congelados e o hash dos testes exatos. A fonte é validada antes de importar o guard; expressões executáveis nessa tabela são RED.
 
 A declaração de codec deve ser UTF-8. Após o preflight, o teste compila e executa exatamente o texto UTF-8 já validado, sem releitura pelo loader; codecs que reinterpretam comentários são rejeitados antes da execução.
+
+## Fechamento dos recibos por identidade externa
+
+Os recibos versionados registram o último SHA técnico efetivamente testado e seu tree. O commit que os contém deve passar seus próprios gates e revisão independente. A conclusão terminal publica o SHA/tree exato, runs, artefatos e parecer na conversa/descrição da PR #14, conforme PUBLISH-REVIEW-02 seção 9, sem novo commit apenas para embutir o próprio SHA. A qualificação limita-se à CI documental; D-001–D-020, PAR-001–PAR-015, G0–G9 e as não autorizações originais continuam vigentes.

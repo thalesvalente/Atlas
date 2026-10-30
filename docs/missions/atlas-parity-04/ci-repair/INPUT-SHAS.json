@@ -1,6 +1,6 @@
 {
   "schema": "atlas-parity04-doc-ci-inputs-v1",
-  "recorded_at_utc": "2026-10-30T16:04:26Z",
+  "recorded_at_utc": "2026-10-30T16:24:46Z",
   "reasoning_effective": "UNVERIFIED",
   "repository": "thalesvalente/Atlas",
   "pull_request": 14,
@@ -19,10 +19,16 @@
   "p03_isolated_input": "ead1f753f52f22035326b7366dd2231c62775765",
   "p03_qualified_head": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
   "repair_publication": {
-    "status": "CURRENT_COMMIT_REQUIRES_EXTERNAL_SHA_CONFIRMATION",
+    "technical_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+    "technical_tree": "417d29e1cf051644ce6e1edead7fed3315147286",
+    "technical_parent": "c25d37998dac7174067a2819391f3af1625f96dc",
+    "publication": "NORMAL_COMMIT_FAST_FORWARD_SAME_PR_BRANCH",
+    "api_confirmed": true,
+    "technical_ci": "PASS_6_RUNS_33_JOBS",
     "final_sha": null,
     "final_tree": null,
-    "reason": "A commit cannot contain its own SHA. The exact published SHA/tree and terminal runs are recorded by subsequent evidence and the external PR closure."
+    "status": "FINAL_RECEIPT_COMMIT_REQUIRES_EXTERNAL_CLOSURE",
+    "reason": "These bytes record the tested technical predecessor. The commit containing these receipts requires its own CI and independent review, then exact external PR closure without a self-SHA cycle."
   },
   "private_sources_accessed": false,
   "product_or_protocol_changed": false,
@@ -102,5 +108,157 @@
     "receipt_json_parse": "PASS",
     "simple_secret_and_private_host_path_scan": "NO_MATCH",
     "scan_limit": "Pattern scan plus source review; does not replace independent review"
+  },
+  "technical_sha_inventory": {
+    "sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+    "tree": "417d29e1cf051644ce6e1edead7fed3315147286",
+    "path_count": 19,
+    "files": [
+      {
+        "path": ".github/workflows/atlas-parity02.yml",
+        "mode": "100644",
+        "git_blob": "58a152c2672d7bcb35e269932bb4441b4fc07273",
+        "sha256": "2f17a0711e43f27a465d4b99ae6b887cbc2dcd0cc2dd875a535961bd0dcb0937",
+        "bytes": 6245
+      },
+      {
+        "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+        "mode": "100644",
+        "git_blob": "18ae2d4c420a64ebc7a55594bee6352dd2eca42f",
+        "sha256": "491fa56982ce7d427311a7a3e8fe4992c42381766ef3a3e8872d9c2d5adb1bd7",
+        "bytes": 6143
+      },
+      {
+        "path": ".github/workflows/atlas-parity04-doc.yml",
+        "mode": "100644",
+        "git_blob": "fef27525662b490bb0ba806e400f91d42fa84ce2",
+        "sha256": "82ccfaa17d42b4433ddbb110a90102ac854f32c44eaf76fc68a33df1f955be25",
+        "bytes": 1941
+      },
+      {
+        "path": ".github/workflows/atlas003-speckit.yml",
+        "mode": "100644",
+        "git_blob": "4b6950e98a267be44fdbc427042f2bffb9dedaa6",
+        "sha256": "c330d85e29925e7df35c834cb1cd1c4f19d995852b3bcf17d5d5c8fd5dd30fd5",
+        "bytes": 2918
+      },
+      {
+        "path": ".github/workflows/atlas021.yml",
+        "mode": "100644",
+        "git_blob": "348f2d04a26efcfe1a807cfee78e7d68f98698c6",
+        "sha256": "db4589fe1570d0d0aa8d9a8bf39be7362df27b44a66172e2ae958e157098381d",
+        "bytes": 7061
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json",
+        "mode": "100644",
+        "git_blob": "2cd9a21402934530d1be5029f55ea87c1182c176",
+        "sha256": "fb61973c02981b545b18c3101f172ee19b7ed2bf022c18f69d0e37bdc2ea9e75",
+        "bytes": 2254
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/CI-ROOT-CAUSE.md",
+        "mode": "100644",
+        "git_blob": "6ce34c54f0bcc187d5b20600ad3b1bb7df79b75e",
+        "sha256": "4c88142d5c6a76aa5e5d5110cfeaaf8c823b85552487090bafc7e2c4d43bb2a9",
+        "bytes": 3878
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/DECISION-COMPLIANCE.md",
+        "mode": "100644",
+        "git_blob": "441c12f4ae1274260f69bd23b219495e7fe83eea",
+        "sha256": "b0d662d906fe13588391f910f986f2b6e9a51717aa6f6467b052379591c96e43",
+        "bytes": 3418
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/HANDOFF.json",
+        "mode": "100644",
+        "git_blob": "91f97f0924208f31d4fdd1cea9d24647435c8657",
+        "sha256": "2b33b56ee66cfb5e1933ddd9b887b6688f4631ac22578057509a6420b6b3dc59",
+        "bytes": 2414
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/INDEPENDENT-REVIEW.md",
+        "mode": "100644",
+        "git_blob": "98fa51c8cd3f700d7f5c3c4bfc4d7ef0014cf11a",
+        "sha256": "7616b5b053cbe5830180bb6eea3562f646f25f4f4d62319f4c804ba4f38c5925",
+        "bytes": 2080
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/INPUT-SHAS.json",
+        "mode": "100644",
+        "git_blob": "212b6bcb6ec1b2b9038b7d7b9b77c8e27a8d9063",
+        "sha256": "6eccd2fe93d2bdadf4c8553378120c147115c0bbef396f4897de8d8472e18891",
+        "bytes": 4147
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/MANIFEST.sha256",
+        "mode": "100644",
+        "git_blob": "4def7a154aa9e42f82b45f49e730bc90c7bedbae",
+        "sha256": "20b20dc5843aaad6c8d98b915c7231cbc955a415fc053e48708e27ff07834ef2",
+        "bytes": 2070
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/NEGATIVE-TESTS.json",
+        "mode": "100644",
+        "git_blob": "d8e4df57212b91606cb6bc475b6a2da4400ce79a",
+        "sha256": "0f1b5bf2e2351fa1d3a244459f5089e9160c83175cd21511cc05bf2814580e15",
+        "bytes": 8168
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/OVERLAY.json",
+        "mode": "100644",
+        "git_blob": "bc0d1e2796175ff565cc005fc4f234804c7f0a1d",
+        "sha256": "fe25d78627ba7efa11a0f62a16839143cccdd44fa2f7c60796d15dc10ab69f5a",
+        "bytes": 3916
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/RESULT.md",
+        "mode": "100644",
+        "git_blob": "5425b4b743ac66e8c3ea02e3dbbf4993b5c9d1f4",
+        "sha256": "fbafe3a80ed21162c0111d9dbcb12061b5f4f1f5222e3a6d45b835165d4e4101",
+        "bytes": 3168
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md",
+        "mode": "100644",
+        "git_blob": "efc1973429f6d00c8ae2ee00955211411a686420",
+        "sha256": "d9cc704512783240374b3f65b09730a390b49824b506df4753ec9e53c2d186a1",
+        "bytes": 4473
+      },
+      {
+        "path": "scripts/qa/atlas_parity03_c4_ci.py",
+        "mode": "100644",
+        "git_blob": "a80ac9aa87b2e3f2eca123986243952c3a267b5b",
+        "sha256": "8edd381487b138fa1ad127ee9e4fb1460f515b6268850ab7e1d80563de2263b8",
+        "bytes": 21899
+      },
+      {
+        "path": "scripts/qa/atlas_parity04_doc_ci.py",
+        "mode": "100644",
+        "git_blob": "b516eabf506f4f15989767dc53e02aceec26bc5e",
+        "sha256": "1e6a18c426c4ab3a7b994c027b251b0b282db73467fbf610219fec3857976d7b",
+        "bytes": 34287
+      },
+      {
+        "path": "tests/qa/test_atlas_parity04_doc_ci.py",
+        "mode": "100644",
+        "git_blob": "f9762f7b5d969126b2ec5b4908a345d49a9b007f",
+        "sha256": "ef0c73fbb008881a0c9dbca931b4e03a256d381f0d533ba30d064aa51143777c",
+        "bytes": 25169
+      }
+    ],
+    "proof": "Git blobs and API independently reconciled; these OIDs/hashes describe the technical predecessor, not the new receipt bytes"
+  },
+  "capabilities_demonstrated": {
+    "authenticated_git_push": "PASS",
+    "actions_runs_jobs_logs": "PASS",
+    "actions_artifact_metadata": "PASS_28",
+    "artifact_zip_bytes": "PASS_2",
+    "native_independent_reviewer": "/root/reviewer",
+    "sole_writer": "/root",
+    "git_checkout_reused": true,
+    "extra_worktrees_or_clones": 0,
+    "environment_installs": 0
   }
 }

@@ -1,13 +1,13 @@
 {
   "schema": "atlas-parity04-doc-ci-handoff-v1",
-  "recorded_at_utc": "2026-10-30T16:04:26Z",
+  "recorded_at_utc": "2026-10-30T16:24:46Z",
   "status": "AP04_DOC_CI_BLOCKED_EXACT",
   "repository": "thalesvalente/Atlas",
   "pull_request": 14,
   "branch": "docs/atlas-parity04-plan-of-record-20261030",
   "observed_head": {
-    "sha": "c25d37998dac7174067a2819391f3af1625f96dc",
-    "tree": "e6eacdd02a329f88bc0dd656523b84a8fec9217e"
+    "sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+    "tree": "417d29e1cf051644ce6e1edead7fed3315147286"
   },
   "prepared_delta": {
     "authorized_path_count": 19,
@@ -20,13 +20,88 @@
     }
   },
   "published_repair": {
-    "sha": null,
-    "tree": null,
-    "status": "CURRENT_COMMIT_REQUIRES_EXTERNAL_SHA_CONFIRMATION"
+    "sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+    "tree": "417d29e1cf051644ce6e1edead7fed3315147286",
+    "parent": "c25d37998dac7174067a2819391f3af1625f96dc",
+    "status": "PUBLISHED_FAST_FORWARD_API_VERIFIED"
   },
   "terminal_ci": {
-    "status": "PENDING_PUBLICATION",
-    "runs": []
+    "status": "PASS_ON_TECHNICAL_SHA",
+    "sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+    "tree": "417d29e1cf051644ce6e1edead7fed3315147286",
+    "runs": [
+      {
+        "id": 41087116946,
+        "name": "ATLAS-PARITY-04 documentation successor",
+        "workflow_id": 401979434,
+        "head_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "pull_request",
+        "attempt": 1,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41087116946"
+      },
+      {
+        "id": 41087115963,
+        "name": "ATLAS021 candidate verification",
+        "workflow_id": 395287019,
+        "head_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "pull_request",
+        "attempt": 1,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41087115963"
+      },
+      {
+        "id": 41087116289,
+        "name": "ATLAS003 Spec Kit contract checks",
+        "workflow_id": 396277393,
+        "head_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "pull_request",
+        "attempt": 1,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41087116289"
+      },
+      {
+        "id": 41087116019,
+        "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+        "workflow_id": 398354195,
+        "head_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "pull_request",
+        "attempt": 1,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41087116019"
+      },
+      {
+        "id": 41087116596,
+        "name": "ATLAS-PARITY-03 C4 full composition",
+        "workflow_id": 401206077,
+        "head_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "pull_request",
+        "attempt": 1,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41087116596"
+      },
+      {
+        "id": 41087116351,
+        "name": "ATLAS-PARITY03 P03 isolated qualification",
+        "workflow_id": 398503696,
+        "head_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "pull_request",
+        "attempt": 1,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41087116351"
+      }
+    ],
+    "jobs": 33,
+    "unique_installed_ids": 191,
+    "inherited_c4_ids": 168,
+    "new_ap04_ids": 23,
+    "skips": 0
   },
   "independent_review": {
     "reviewer": "/root/reviewer",
@@ -34,17 +109,29 @@
     "original_patch_findings": 2,
     "reproduced_original_bypasses": 2,
     "working_tree_correction_review": "NO_REMAINING_BLOCKERS_AFTER_LITERAL_AND_CODEC_CORRECTIONS",
-    "final_sha_review": "PENDING",
+    "final_sha_review": "PENDING_FINAL_RECEIPT_COMMIT",
     "derivation_review_findings": 2,
-    "derivation_finding": "Table restricted to literal data before import; UTF-8 codec enforced; execute the same validated text without loader reread"
+    "derivation_finding": "Table restricted to literal data before import; UTF-8 codec enforced; execute the same validated text without loader reread",
+    "technical_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+    "technical_tree": "417d29e1cf051644ce6e1edead7fed3315147286",
+    "technical_source_review": "NO_CODE_BLOCKERS",
+    "technical_ci_review": "PASS_FOR_EXACT_TECHNICAL_SHA",
+    "ci_verifier": {
+      "agent": "/root/ci_diagnostic",
+      "authorship": false,
+      "result": "PASS_6_RUNS_33_JOBS_191_IDS_ALL_CELLS"
+    },
+    "technical_findings_remaining": 0,
+    "technical_review_scope": "Full code, ancestry, original/derived controls, exact six runs/33 job logs, four installed ID sets, real P06/AP04 boundary, C4 browser and 28 artifact metadata/upload joins; no host, scientific or promotion qualification",
+    "technical_review_evidence": "INDEPENDENT-REVIEW.md; terminal final receipt identity remains pending external closure"
   },
   "blocking_capability": null,
   "next_exact_actions": [
-    "Finish focal tests, validate the complete manifest and publish fast-forward on PR #14 only.",
-    "Obtain terminal required Actions and 168 inherited C4 IDs plus new IDs on the exact technical SHA.",
-    "Record tested technical SHA and evidence in versioned receipts; requalify the resulting final receipt commit.",
-    "Close externally by exact final SHA/tree/runs/review in the PR without another identity-only commit.",
-    "Keep Draft; no AP04 F1-F6, merge, release, deploy, promotion, migration or private source work."
+    "Publish this receipt-only delta and supplemental manifest by normal fast-forward commit on the existing PR #14 branch.",
+    "Run and observe every applicable gate on that final receipt commit; do not transfer the technical predecessor results.",
+    "Obtain independent review of the exact final SHA, receipt delta and its terminal CI.",
+    "Publish external PR closure with exact SHA/tree/runs/artifacts/review, without an identity-only commit.",
+    "Keep PR open/Draft and preserve AP04-POR-v1.0-draft, ADR proposal and all non-authorizations."
   ],
   "original_attempt": {
     "recorded_at_utc": "2026-10-30T04:53:50Z",
@@ -54,8 +141,23 @@
   },
   "mission": "ATLAS-PARITY04-DOC-CI-PUBLISH-REVIEW-03",
   "pending_gates": [
-    "PUBLICATION",
-    "TERMINAL_CI_FINAL_SHA",
-    "INDEPENDENT_REVIEW_FINAL_SHA"
-  ]
+    "TERMINAL_CI_FINAL_RECEIPT_SHA",
+    "INDEPENDENT_REVIEW_FINAL_RECEIPT_SHA"
+  ],
+  "status_scope": "Checkpoint before publication of this final receipt commit. Only its own terminal CI and independent review remain; the exact final PR closure supersedes these pending gates without altering this snapshot.",
+  "local_host_limitation": {
+    "real_checkout_guard": "FAIL_CRLF_ON_FIVE_PREEXISTING_SPECKIT_WORKTREE_FILES",
+    "files_changed_to_hide_failure": false,
+    "actions_fresh_checkouts": "PASS_BOTH_OSES",
+    "operational_host_qualification": false
+  },
+  "authority": {
+    "plan": "AP04-POR-v1.0-draft",
+    "plan_change": "NONE",
+    "arc": "ARC-01–09_PRESERVED",
+    "adr0003": "PROPOSED_NOT_APPROVED",
+    "f1_f6_started": false,
+    "merge_release_deploy_promotion": "NOT_AUTHORIZED",
+    "private_source_work": false
+  }
 }

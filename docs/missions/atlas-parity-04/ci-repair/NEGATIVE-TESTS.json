@@ -1,6 +1,6 @@
 {
   "schema": "atlas-parity04-negative-tests-v1",
-  "recorded_at_utc": "2026-10-30T16:04:26Z",
+  "recorded_at_utc": "2026-10-30T16:24:46Z",
   "test_module": "tests/qa/test_atlas_parity04_doc_ci.py",
   "case_count": 23,
   "cases": [
@@ -151,12 +151,49 @@
     }
   ],
   "github_matrix": {
-    "linux_normal": "NOT_RUN",
-    "linux_optimized": "NOT_RUN",
-    "windows_normal": "NOT_RUN",
-    "windows_optimized": "NOT_RUN"
+    "tested_sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+    "tested_tree": "417d29e1cf051644ce6e1edead7fed3315147286",
+    "run_id": 41087116946,
+    "cells": [
+      {
+        "platform": "ubuntu-latest",
+        "python_optimization": 0,
+        "job_id": 124171063918,
+        "cases": 23,
+        "status": "PASS",
+        "skips": 0,
+        "real_graph_audit": "PASS"
+      },
+      {
+        "platform": "ubuntu-latest",
+        "python_optimization": 1,
+        "job_id": 124171064339,
+        "cases": 23,
+        "status": "PASS",
+        "skips": 0,
+        "real_graph_audit": "PASS"
+      },
+      {
+        "platform": "windows-latest",
+        "python_optimization": 0,
+        "job_id": 124171064388,
+        "cases": 23,
+        "status": "PASS",
+        "skips": 0,
+        "real_graph_audit": "PASS"
+      },
+      {
+        "platform": "windows-latest",
+        "python_optimization": 1,
+        "job_id": 124171064441,
+        "cases": 23,
+        "status": "PASS",
+        "skips": 0,
+        "real_graph_audit": "PASS"
+      }
+    ]
   },
-  "claim_limit": "Local synthetic tests are not terminal GitHub CI or independent review.",
+  "claim_limit": "Local synthetic tests bind source hashes; the recorded technical SHA also passed the real Actions graph and four-cell matrix. The final receipt commit still needs its own CI/review and external closure.",
   "original_attempt_runs": {
     "source": "Original immutable patch receipt; prior Linux claims are historical only",
     "runs": [

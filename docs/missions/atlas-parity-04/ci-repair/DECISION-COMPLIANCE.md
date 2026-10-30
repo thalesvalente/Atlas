@@ -47,4 +47,6 @@ Os valores de `GATES.json` são byte-idênticos à baseline documental: G0 `DOCU
 
 O ajuste de executor usa apenas o checkout e ambiente de engenharia existentes, autorizado pelo operador após o bloqueio anterior. A correção dos dois defeitos do patch permanece no ownership dos mesmos guard/testes/recibos; não altera objetivo, aceite ou fronteira arquitetural.
 
-PAR-001–PAR-011, PAR-013–PAR-014: nenhum avanço funcional. PAR-012/PAR-015: apenas provas novas de não regressão/integridade por SHA, ainda dependentes dos runs terminais. Nenhum estado da matriz ou de GATES.json é promovido. Os nove documentos e manifestos históricos permanecem byte-idênticos.
+PAR-001–PAR-011, PAR-013–PAR-014: nenhum avanço funcional. PAR-012/PAR-015: apenas provas novas de não regressão/integridade no SHA técnico 54ffea9e8fe2ed5cde071a8ec52fbcbff857df60, com seis workflows/33 jobs terminais success; o commit dos recibos requer seus próprios gates. Nenhum estado da matriz ou de GATES.json é promovido. Os nove documentos e manifestos históricos permanecem byte-idênticos.
+
+ARC-01–09 e ADR-0001 permanecem intactos por bytes e sem mudança arquitetural. A rejeição local por CRLF não autoriza normalizar arquivos congelados; nenhum desses arquivos foi escrito. A aprovação técnica da CI não promove G0–G9, a matriz PAR nem o host para uso operacional.
