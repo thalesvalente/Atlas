@@ -1,0 +1,204 @@
+{
+  "schema": "atlas-parity04-f1-sanitized-handoff-v1",
+  "mission": "AP04-F1-LOCAL-LEGACY-SOURCE-INVENTORY-01",
+  "recorded_date": "2026-10-30",
+  "plan_id": "AP04-POR-v1.0-draft",
+  "plan_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+  "prompt_sha": "e140d973fd4cbc4547046f25fd620166662c5004",
+  "c4_sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+  "result": "F1_G1_SOURCE_AND_RF_READ_PASS_SCOPED",
+  "ap04_terminal": "PARTIAL_PARITY_WITH_GAPS",
+  "selection": {
+    "considered_files": 3,
+    "selected_files": 3,
+    "read_files": 3,
+    "inert_json_payloads_parsed": 2,
+    "html_documents_inspected_inertly": 2,
+    "max_files": 3,
+    "max_file_bytes": 67108864,
+    "all_within_limit": true
+  },
+  "qualifying_payload_counts": {
+    "records": 159,
+    "result_tables": 5,
+    "rows_per_table": [
+      39,
+      85,
+      28,
+      0,
+      0
+    ],
+    "observed_requirement_rows": 152,
+    "literal_rows_compared": 1,
+    "unadmitted_rows": 28,
+    "lineage_nodes": 2911,
+    "lineage_edges": 1595,
+    "resolved_explicit_parent_keys": 858,
+    "product_items": 162,
+    "product_groups": 10,
+    "resource_documents": 80,
+    "dossier_assessments": 24,
+    "dossier_packages": 4
+  },
+  "scope": {
+    "counts_for_qualifying_payload_only": true,
+    "overlapping_snapshots_not_summed": true,
+    "global_archive": "UNKNOWN_UPSTREAM",
+    "global_history": "GLOBAL_UNPROVEN",
+    "upstream_raw_sources_opened": false,
+    "upstream_hashes_revalidated": false,
+    "literal_row_private_only": true
+  },
+  "hierarchy": {
+    "explicit_typed_parent_links_observed": true,
+    "full_project_experiment_run_tree_demonstrated": false,
+    "RF_sample_explicit_run_source_link": true,
+    "RF_sample_continuous_parent_path": false,
+    "external_binding_gap_preserved": true
+  },
+  "preservation": {
+    "selected_sources_hashed_before_after": 3,
+    "source_hashes_equal": true,
+    "sizes_equal": true,
+    "mtimes_equal": true,
+    "source_write_operations": 0,
+    "protected_paths_compared": 7,
+    "protected_existing_files_byte_equal": 6,
+    "protected_paths_still_absent": 1,
+    "protected_all_paths_unchanged": true
+  },
+  "negatives_preserved": {
+    "null_graph_endpoints": 22,
+    "declared_unresolved_relations": 75,
+    "declared_identity_collisions": 50,
+    "repeated_triple_groups": 40,
+    "extra_repeated_triple_occurrences": 41,
+    "tables_without_resolvable_record_id": 4,
+    "unadmitted_rows_native_id_null": 28,
+    "deduplication_performed": false
+  },
+  "review": {
+    "native_subagents": 3,
+    "selection_integrity_role": true,
+    "semantic_role": true,
+    "independent_adversarial_role": true,
+    "independent_reviewer_authorship": false,
+    "source_row_offsets_identity_and_gate_independently_checked": true,
+    "privacy_review_required_before_publication": true
+  },
+  "matrix": [
+    {
+      "id": "PAR-001",
+      "baseline": "NOT_RECOVERED",
+      "original_criterion": "Nós projeto/experimento/execução; expandir, selecionar, zoom/pan, minimapa, teclado; hierarquia vs causalidade",
+      "f1_assessment": "NOT_RECOVERED",
+      "evidence": "Hierarquia nativa observável; 858 parent keys resolvidos. UI e cadeia completa de tipos Project/Experiment não demonstradas.",
+      "gap": "F3A e demonstração integrada."
+    },
+    {
+      "id": "PAR-002",
+      "baseline": "NOT_RECOVERED",
+      "original_criterion": "ID/núcleo/nome/descrição/critério; filtros/detalhe/exportação; prova de linhas reais",
+      "f1_assessment": "PARTIAL_NOT_EQUIVALENT",
+      "evidence": "Uma linha RF original comparada literalmente, com todos os campos requeridos presentes; 152 linhas observadas no payload.",
+      "gap": "Interface, filtros, detalhe e exportação não executados; 28 linhas permanecem não admitidas."
+    },
+    {
+      "id": "PAR-003",
+      "baseline": "INPUT_AVAILABILITY_UNKNOWN",
+      "original_criterion": "Mesmo renderer para linhas existentes, sem inventar ausentes",
+      "f1_assessment": "INPUT_AVAILABILITY_UNKNOWN",
+      "evidence": "Disponibilidade de RNF/RES não inferida de RF, tokens ou nomes.",
+      "gap": "Verificação futura delimitada quando houver fonte declarada."
+    },
+    {
+      "id": "PAR-004",
+      "baseline": "PARTIAL_NOT_EQUIVALENT",
+      "original_criterion": "Seleção contextual persistida por fonte/snapshot/ID e retorno",
+      "f1_assessment": "PARTIAL_NOT_EQUIVALENT",
+      "evidence": "A RF amostrada liga explicitamente fonte, registro e execução externa; o Run está isolado no grafo e conserva binding_gap.",
+      "gap": "Caminho contínuo árvore→execução→RF→evidência e navegação não demonstrados."
+    },
+    {
+      "id": "PAR-011",
+      "baseline": "CONTRACT_DECISION_PENDING",
+      "original_criterion": "Leitor externo em fontes existentes, índice efêmero, zero escrita na fonte",
+      "f1_assessment": "CONTRACT_DECISION_PENDING",
+      "evidence": "Leitura F1 inerte e preservação observadas; nenhum leitor de runtime ou adaptador implementado.",
+      "gap": "F2: contrato e decisão ARC-09 aplicável antes de implementação."
+    },
+    {
+      "id": "PAR-012",
+      "baseline": "BASELINE_VERIFIED",
+      "original_criterion": "SDK independente, viewer sem R4, protocolo intacto e CI no novo SHA",
+      "f1_assessment": "PARTIAL_NOT_EQUIVALENT",
+      "evidence": "Código/protocolo preservados no escopo observado. CI anterior é referência histórica; nenhum teste de engenharia/CI/browser F1 executado.",
+      "gap": "Validação de código sucessor pertence à fase que o alterar."
+    },
+    {
+      "id": "PAR-013",
+      "baseline": "ARCHITECTURE_REQUIREMENT_ONLY",
+      "original_criterion": "Extensibilidade por domínio, sem fake FHIR PASS, versão/perfis a definir",
+      "f1_assessment": "CONTRACT_DECISION_PENDING",
+      "evidence": "Capacidade futura preservada; nenhuma implementação ou conformidade HL7/FHIR alegada.",
+      "gap": "Caso de uso, versão e perfis continuam abertos."
+    },
+    {
+      "id": "PAR-015",
+      "baseline": "BASELINE_VERIFIED_SCOPE",
+      "original_criterion": "Bytes originais iguais antes/depois e estados/links sem promoção silenciosa",
+      "f1_assessment": "PARTIAL_NOT_EQUIVALENT",
+      "evidence": "SHA-256, tamanho e mtime iguais para as três fontes selecionadas; sete caminhos de prova comparados (seis arquivos com bytes iguais e um permaneceu ausente); negativos mantidos.",
+      "gap": "Acervo global e fontes brutas upstream não medidos."
+    }
+  ],
+  "matrix_upstream_edited": false,
+  "baseline_states_not_revalidated_or_replaced": true,
+  "validation": {
+    "source_read_checks": "ACTUALLY_EXECUTED",
+    "synthetic_tests": "NOT_RUN",
+    "engineering_tests": "NOT_RUN",
+    "ci_for_F1": "NOT_RUN",
+    "browser": "NOT_RUN",
+    "prior_ci_scope": "START_PREREQUISITE_ONLY"
+  },
+  "authority": {
+    "scientific_approval": false,
+    "adr0003": "PROPOSED_NOT_APPROVED",
+    "ARC_01_09": "PRESERVED",
+    "plan_change": "NONE",
+    "F2_F6_started": false,
+    "full_parity": false,
+    "hl7_fhir": "FUTURE_CAPABILITY_ONLY_NOT_IMPLEMENTED_OR_CONFORMANT"
+  },
+  "next_minimum_action": "Handoff sanitized F1 evidence to existing F2 architecture responsibility; finalize ephemeral contract and applicable versioned ARC-09 decision before implementation, without starting F2-F6 in this mission.",
+  "git_persistence": {
+    "branch": "docs/atlas-parity04-f1-local-inventory-20261030",
+    "parent_sha": "e140d973fd4cbc4547046f25fd620166662c5004",
+    "commit_and_tree": "RESOLVE_FROM_CONTAINING_GIT_COMMIT",
+    "publication_receipt": "PRIVATE_POST_PUBLICATION_VERIFICATION",
+    "allowed_public_files": 3,
+    "PR14_untouched": true
+  },
+  "non_actions": [
+    "no_new_worktree_or_clone",
+    "no_source_mutation",
+    "no_migration",
+    "no_generation_or_rebuild",
+    "no_private_code_import",
+    "no_merge",
+    "no_release",
+    "no_deploy",
+    "no_promotion",
+    "no_cleanup"
+  ],
+  "procedural_exception": "Initial read-only Git inspection before official prompt retrieval included commands outside the four-command list; disclosed in private receipts, no mutation or plan implementation resulted.",
+  "rf_sample_fields": {
+    "original_id": "PRESENT",
+    "core_or_module": "PRESENT",
+    "title": "PRESENT",
+    "description": "PRESENT",
+    "acceptance_criteria": "PRESENT",
+    "category": "MISSING_ORIGINAL_MARKER_PRESERVED_OPTIONAL"
+  }
+}
