@@ -1,6 +1,6 @@
 # Resultado AP04-F2 — pacote AP04-F2-v0.2
 
-Estado deste candidato: F2_REVIEW_PENDING. Estado terminal será registrado por commit após revisão independente real. Não é aprovação de ADR, G4, paridade ou implementação.
+Estado: F2_ARCHITECTURE_DECISION_READY_FOR_HUMAN_REVIEW. Pacote técnico revisado no SHA c3ea1e82938fd61cc5a22fee973352715a5bb527; identidade terminal e revisão externa dos recibos são publicadas na PR Draft. Este estado não é aprovação de ADR, G4, paridade ou implementação.
 
 Missão AP04-F2-CHAT-LEGACY-COMPAT-CONTRACT-01, 2026-10-30.
 Owner Git: coordenador /root, único writer. Branch exclusiva existente: docs/atlas-parity04-f2-legacy-contract-20261030.
@@ -15,7 +15,7 @@ PLAN: ler integralmente missão e inputs públicos fixados; reconciliar quatro c
 
 EXECUTE: A (/root/architecture_a) analisa arquitetura/alternativas; B (/root/model_b) propõe contrato/modelo/identidade; coordenador integra textos e escreve exclusivamente os novos documentos F2 por Git Data API. A/B não escrevem filesystem/Git. C (/root/review_c) é revisor nativo real independente, somente leitura e sem autoria dos deltas. Não há simulação de execução ou aprovação.
 
-REVIEW: revisão do conteúdo publicado por SHA, manifesto e diff; findings serão corrigidos documentalmente e submetidos a nova leitura. Evidência e escopo estão em INDEPENDENT-REVIEW.md. O SHA terminal também deve receber fechamento externo de revisão, sem ciclo de auto-hash.
+REVIEW: C examinou integralmente o pacote 7caffc69dc17b2f0d4ec0906bb1b4a2bba0abc67 e apontou P2 C-001 (enum de estado em três linhas). A correção documental foi publicada em c3ea1e82938fd61cc5a22fee973352715a5bb527 e revalidada independentemente, sem findings abertos. Manifesto e todos os blobs conferidos por C. INDEPENDENT-REVIEW.md registra escopo e limites. O SHA terminal dos recibos recebe fechamento externo próprio na PR Draft, sem ciclo de auto-hash.
 
 ## Resultado técnico proposto
 
@@ -45,3 +45,9 @@ Nenhum clone/worktree, migração/reorganização/exclusão, experimento/provide
 Não há necessidade de alterar ordem F0–F6, PAR/G0–G9 ou proteções para produzir esta documentação. Nenhum PLAN-DEVIATION-REQUEST necessário neste escopo. Uma necessidade posterior deve ser submetida antes de implementação.
 
 Menor próximo ato: decisão humana objetiva em DECISION-REQUEST.md vinculada à versão/SHA revisada. Aprovação arquitetural, eventual autorização de fase, merge/release/deploy/promoção/ciência/limpeza têm gates separados e continuam não concedidos.
+
+## Handoff Git verificável
+
+Pacote técnico: [c3ea1e82938fd61cc5a22fee973352715a5bb527](https://github.com/thalesvalente/Atlas/commit/c3ea1e82938fd61cc5a22fee973352715a5bb527), tree 986a1ddaf3ceae4c6e0fcb03c7bd1dfd63ef378c, parent 7caffc69dc17b2f0d4ec0906bb1b4a2bba0abc67. Manifesto técnico: dfe50699a7bb9df042264220a356d1f3e4b959df02bac76870e54cd152953b5f. C-001 corrigido e fechado por revisão independente desse SHA.
+
+O commit que contém este resultado é filho normal desse SHA; sua identidade, manifesto atualizado e revisão externa terminal são registrados no corpo da PR Draft. Todos os documentos são públicos, sem ZIP obrigatório. Nenhuma alteração na PR #14; seu HEAD permaneceu 47c94d27aeb7717eebb30804f01cd2cd33507c8a, aberta e Draft na última conferência.
