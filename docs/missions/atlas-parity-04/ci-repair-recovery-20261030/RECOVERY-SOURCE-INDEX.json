@@ -1,0 +1,37 @@
+{
+  "schema": "atlas-ap04-recovery-source-index-v1",
+  "date": "2026-10-30",
+  "canonical_public_pr": "https://github.com/thalesvalente/Atlas/pull/14",
+  "original_head": "c25d37998dac7174067a2819391f3af1625f96dc",
+  "current_available_sources": [
+    {
+      "kind": "current_chat_document",
+      "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01.md",
+      "git_path": "prompts/ATLAS-PARITY04-DOC-CI-REPAIR-01.md"
+    },
+    {
+      "kind": "current_chat_document",
+      "name": "ATLAS-PARITY04-DOC-CI-PUBLISH-REVIEW-02.md",
+      "git_path": "prompts/ATLAS-PARITY04-DOC-CI-PUBLISH-REVIEW-02.md"
+    },
+    {
+      "kind": "current_chat_document",
+      "name": "CONFRONTO-AP04-RESULTADOS-20261030.md",
+      "git_path": "prompts/CONFRONTO-AP04-RESULTADOS-20261030.md"
+    }
+  ],
+  "unavailable_origins": [
+    {
+      "kind": "original_git_patch",
+      "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01.patch",
+      "status": "NOT_RECOVERED"
+    },
+    {
+      "kind": "original_zip",
+      "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip",
+      "status": "NOT_RECOVERED"
+    }
+  ],
+  "sha_hand_off_policy": "Do not claim original recovery or AP04_CI_QUALIFIED without actual blob proof and CI",
+  "repo_branch_role": "evidence-only; NOT PR14 fix"
+}

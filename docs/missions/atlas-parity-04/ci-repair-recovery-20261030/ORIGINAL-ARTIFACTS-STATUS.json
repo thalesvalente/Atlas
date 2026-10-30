@@ -1,0 +1,42 @@
+{
+  "schema": "atlas-ap04-artifact-recovery-v1",
+  "date": "2026-10-30",
+  "source_type": "prior_chat_generated_artifacts",
+  "verification_status": "UNAVAILABLE_IN_THIS_SESSION_NOT_BYTE_VERIFIED",
+  "repository": "thalesvalente/Atlas",
+  "original_pr": 14,
+  "original_pr_head": "c25d37998dac7174067a2819391f3af1625f96dc",
+  "artifacts": [
+    {
+      "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01.patch",
+      "sha256_expected_from_prior_receipt": "d25540bce2a90dbf099ca38b82528b645ea49c92fd86d04438d5f1b7a58b83b8",
+      "original_chat_sandbox_path_historical": "sandbox:/mnt/data/ATLAS-PARITY04-DOC-CI-REPAIR-01.patch",
+      "present_in_this_session": false
+    },
+    {
+      "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip",
+      "sha256_expected_from_prior_receipt": "5788215d2267902988e141fa6db5a9434564b18204356a3a6d80a3dd2a883752",
+      "original_chat_sandbox_path_historical": "sandbox:/mnt/data/ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip",
+      "present_in_this_session": false
+    },
+    {
+      "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip.sha256",
+      "sha256_expected_from_prior_receipt": null,
+      "original_chat_sandbox_path_historical": "sandbox:/mnt/data/ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip.sha256",
+      "present_in_this_session": false
+    }
+  ],
+  "patch_source_claims": {
+    "exact_paths": 19,
+    "old_paths_changed": 5,
+    "new_paths": 14,
+    "negative_tests_normal": 17,
+    "negative_tests_optimized": 17,
+    "synthetic_contract_paths": 28,
+    "original_review_independent": false,
+    "original_ci_on_new_sha": false,
+    "provenance": "unverified_operator_supplied_handoff_summary"
+  },
+  "no_original_bytes_fabricated": true,
+  "do_not_apply_from_summary": true
+}
