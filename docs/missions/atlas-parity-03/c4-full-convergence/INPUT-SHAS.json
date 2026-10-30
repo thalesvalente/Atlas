@@ -79,5 +79,20 @@
     }
   ],
   "source_branches_updated": false,
-  "reasoning_effective": "UNVERIFIED"
+  "reasoning_effective": "UNVERIFIED",
+  "code_candidate": {
+    "sha": "54461f7494df7c0e54a176cf7df3f16ee43e2edb",
+    "tree": "73e53237b1362dcd8b65b120acb4c47dfcdf8ba4",
+    "ci_pass": true,
+    "independent_review_pass": true
+  },
+  "documentary_commit": {
+    "sha": null,
+    "reason": "The enclosing commit cannot contain its own defining SHA.",
+    "status_at_write": "PENDING_OWN_COMMIT_CI_AND_INDEPENDENT_REVIEW",
+    "own_ci_required": true,
+    "own_independent_review_required": true,
+    "no_automatic_evidence_transfer": true,
+    "external_exact_sha_closeout": "Draft PR #13 description, final closeout section, and conversation delivery."
+  }
 }
