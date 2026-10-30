@@ -6,15 +6,20 @@ on:
       - 'specs/003-producer-selective-preview/**'
       - 'specs/004-atlas-parity-c0/**'
       - 'docs/missions/atlas-parity-03/c1-core-composition/**'
+      - 'docs/missions/atlas-parity-04/**'
+      - 'docs/architecture/ADR-0003-legacy-compatibility-proposed.md'
       - '.specify/**'
       - '.agents/skills/**'
       - '.github/workflows/atlas003-speckit.yml'
+      - '.github/workflows/atlas-parity04-doc.yml'
       - 'packages/protocol/src/caderno_protocol/read_model.py'
       - 'packages/atlas/src/atlas_viewer/static/**'
       - 'packages/atlas/src/atlas_viewer/catalog.py'
       - 'packages/atlas/src/atlas_viewer/server.py'
       - 'scripts/qa/speckit_audit.py'
+      - 'scripts/qa/atlas_parity04_doc_ci.py'
       - 'tests/qa/test_speckit_presentation_audit.py'
+      - 'tests/qa/test_atlas_parity04_doc_ci.py'
       - 'tests/viewer/test_related_references.py'
   workflow_dispatch:
 
@@ -49,7 +54,7 @@ jobs:
           specify version --json
           specify integration status --json
       - name: Check generated Spec Kit assets and preserved architecture
-        run: python scripts/qa/speckit_audit.py --allow-presentation-delta ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && '--allow-p03-c4-delta' || '--allow-p02-c0-delta' }}
+        run: python scripts/qa/atlas_parity04_doc_ci.py speckit
       - name: Verify feature 003 requirements and tasks without active-pointer writes
         env:
           SPECIFY_FEATURE_NO_PERSIST: '1'

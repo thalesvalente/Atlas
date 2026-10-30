@@ -1,0 +1,16 @@
+ID,Funcionalidade_legada,Prioridade,C4_em_2026_10_30,Aceite_minimo,Estado_inicial,Owner
+PAR-001,Árvore gráfica hierárquica clicável,P0,AUSENTE,"Nós projeto/experimento/execução; expandir, selecionar, zoom/pan, minimapa, teclado; hierarquia vs causalidade",NOT_RECOVERED,UI_GRAPH
+PAR-002,Tabela RF real com conteúdo original,P0,AUSENTE; C4 só tabela de propriedades,ID/núcleo/nome/descrição/critério; filtros/detalhe/exportação; prova de linhas reais,NOT_RECOVERED,LEGACY_READER + UI_TABLE
+PAR-003,Tabelas RNF/RES quando existirem,P0,NÃO DEMONSTRADO,"Mesmo renderer para linhas existentes, sem inventar ausentes",INPUT_AVAILABILITY_UNKNOWN,LEGACY_READER + UI_TABLE
+PAR-004,Navegação hierarquia→execução→requisitos→evidência,P0,PARCIAL,Seleção contextual persistida por fonte/snapshot/ID e retorno,PARTIAL_NOT_EQUIVALENT,INTEGRATOR
+PAR-005,"Produtos, grupos, versões e apresentações",P1,METADADOS PARCIAIS,Catálogo navegável ligado a execução sem deduzir produto por MIME,NOT_RECOVERED,UI_PRODUCTS
+PAR-006,Documentos e dossiês,P1,REFERÊNCIAS PARCIAIS,"Metadados, disponibilidade, links verificáveis e consulta segura",PARTIAL_NOT_EQUIVALENT,UI_DOCS
+PAR-007,Grafo de linhagem tipada,P1,TABELA SIMPLIFICADA,Grafo navegável com relações declaradas e menções neutras,PARTIAL_NOT_EQUIVALENT,UI_GRAPH
+PAR-008,Histórico e timeline,P1,TIMELINE PARCIAL,Datas declaradas/UNKNOWN e revisões independentes; sem fabricar evento,PARTIAL_NOT_EQUIVALENT,UI_HISTORY
+PAR-009,Cobertura por camada e população,P1,ESCOPO PARCIAL,Contagens base/seleção/carga/visível com denominadores ou UNKNOWN,PARTIAL_NOT_EQUIVALENT,LEGACY_READER + UI_COVERAGE
+PAR-010,Visão consultiva de armazenamento,P1,AUSENTE,"Observações originais, vínculo, nenhum comando de limpeza",NOT_RECOVERED,UI_COVERAGE
+PAR-011,Acesso legado sem migração,P0,NÃO IMPLEMENTADO,"Leitor externo em fontes existentes, índice efêmero, zero escrita na fonte",CONTRACT_DECISION_PENDING,ARCH + LOCAL
+PAR-012,Não regressão de Caderno/RO-Crate/Process Run,GATE,C4 CI PASS,"SDK independente, viewer sem R4, protocolo intacto e CI no novo SHA",BASELINE_VERIFIED,QA
+PAR-013,Capacidade futura HL7/FHIR,GATE,IMPLEMENTAÇÃO NÃO COMPROVADA,"Extensibilidade por domínio, sem fake FHIR PASS, versão/perfis a definir",ARCHITECTURE_REQUIREMENT_ONLY,ARCH
+PAR-014,Browser local com acervo completo autorizado,P0,TELA C4 DE 2 RUNS OBSERVADA,"Árvore e uma tabela RF real, testes com SHA e recibos locais privados",OBSERVED_PARTIAL,LOCAL_QA
+PAR-015,"Integridade, estados e preservação",GATE,BASELINE PASS,Bytes originais iguais antes/depois e estados/links sem promoção silenciosa,BASELINE_VERIFIED_SCOPE,QA + LOCAL

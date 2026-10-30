@@ -44,7 +44,9 @@ jobs:
       - name: Install wheels again in new empty environments
         run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-portable"
       - name: Install test-only schema tooling and run the installed suite outside checkout with zero skips
-        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py installed' || 'scripts/qa/atlas_parity02_p06_installed_checks.py' }} --repo . --work "${{ runner.temp }}/atlas-c1-portable" --install-test-tools
+        run: >-
+          python scripts/qa/atlas_parity04_doc_ci.py installed
+          --repo . --work "${{ runner.temp }}/atlas-c1-portable" --install-test-tools
       - name: Verify installed wheel assets and fixed routes
         run: python scripts/qa/atlas_parity02_p06_wheel.py --work "${{ runner.temp }}/atlas-c1-portable"
       - name: Preserve exact-SHA installed verification receipts and collection

@@ -1,0 +1,77 @@
+{
+  "schema": "atlas-parity04-plan-of-record-v1",
+  "plan_id": "AP04-POR-v1.0-draft",
+  "recorded_date": "2026-10-30",
+  "repo": "thalesvalente/Atlas",
+  "baseline": {
+    "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+    "tree": "0a622663ca40232d6143659f82cfe9ce43702e90",
+    "pr": 13,
+    "ci": "6_WORKFLOWS_31_JOBS_SUCCESS",
+    "full_legacy_parity": false
+  },
+  "observations": {
+    "c4_browser": "USER_OBSERVED_2_RUNS_NO_FORMAL_REPLAY",
+    "rf_literal_table": "NOT_AVAILABLE_IN_OBSERVED_P04",
+    "legacy_tree": "NOT_RECOVERED",
+    "hl7_fhir": "ARCHITECTURAL_CAPABILITY_RESERVED_NOT_IMPLEMENTED"
+  },
+  "non_authorizations": [
+    "new_worktrees",
+    "new_clones",
+    "bulk_migration",
+    "source_mutation",
+    "private_code_publication",
+    "R4_pipeline_changes",
+    "merge_main",
+    "release",
+    "deploy",
+    "promotion",
+    "scientific_approval",
+    "cleanup"
+  ],
+  "gates": [
+    [
+      "G0",
+      "DOCUMENTATION_DRAFT"
+    ],
+    [
+      "G1",
+      "NOT_RUN"
+    ],
+    [
+      "G2",
+      "NOT_RUN"
+    ],
+    [
+      "G3",
+      "NOT_RUN"
+    ],
+    [
+      "G4",
+      "ARCHITECTURAL_DECISION_PENDING"
+    ],
+    [
+      "G5",
+      "C4_BASELINE_ONLY"
+    ],
+    [
+      "G6",
+      "USER_OBSERVATION_PARTIAL"
+    ],
+    [
+      "G7",
+      "NOT_QUALIFIED"
+    ],
+    [
+      "G8",
+      "NOT_AUTHORIZED"
+    ],
+    [
+      "G9",
+      "NOT_AUTHORIZED"
+    ]
+  ],
+  "adr0003": "PROPOSED_NOT_APPROVED",
+  "scope": "DOCUMENTATION_ONLY"
+}
