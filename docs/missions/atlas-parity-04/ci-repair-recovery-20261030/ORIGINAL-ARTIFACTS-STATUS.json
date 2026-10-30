@@ -2,7 +2,7 @@
   "schema": "atlas-ap04-artifact-recovery-v1",
   "date": "2026-10-30",
   "source_type": "prior_chat_generated_artifacts",
-  "verification_status": "UNAVAILABLE_IN_THIS_SESSION_NOT_BYTE_VERIFIED",
+  "verification_status": "BLOCKED_ORIGINAL_ARTIFACTS_UNAVAILABLE",
   "repository": "thalesvalente/Atlas",
   "original_pr": 14,
   "original_pr_head": "c25d37998dac7174067a2819391f3af1625f96dc",
@@ -11,19 +11,31 @@
       "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01.patch",
       "sha256_expected_from_prior_receipt": "d25540bce2a90dbf099ca38b82528b645ea49c92fd86d04438d5f1b7a58b83b8",
       "original_chat_sandbox_path_historical": "sandbox:/mnt/data/ATLAS-PARITY04-DOC-CI-REPAIR-01.patch",
-      "present_in_this_session": false
+      "present_in_this_session": false,
+      "sha256_computed_from_original_bytes": null,
+      "git_blob_sha": null,
+      "byte_verification_status": "NOT_RUN_ORIGINAL_BYTES_UNAVAILABLE",
+      "publication_status": "NOT_PUBLISHED_ORIGINAL_BYTES_UNAVAILABLE"
     },
     {
       "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip",
       "sha256_expected_from_prior_receipt": "5788215d2267902988e141fa6db5a9434564b18204356a3a6d80a3dd2a883752",
       "original_chat_sandbox_path_historical": "sandbox:/mnt/data/ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip",
-      "present_in_this_session": false
+      "present_in_this_session": false,
+      "sha256_computed_from_original_bytes": null,
+      "git_blob_sha": null,
+      "byte_verification_status": "NOT_RUN_ORIGINAL_BYTES_UNAVAILABLE",
+      "publication_status": "NOT_PUBLISHED_ORIGINAL_BYTES_UNAVAILABLE"
     },
     {
       "name": "ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip.sha256",
       "sha256_expected_from_prior_receipt": null,
       "original_chat_sandbox_path_historical": "sandbox:/mnt/data/ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip.sha256",
-      "present_in_this_session": false
+      "present_in_this_session": false,
+      "sha256_computed_from_original_bytes": null,
+      "git_blob_sha": null,
+      "byte_verification_status": "NOT_RUN_ORIGINAL_BYTES_UNAVAILABLE",
+      "publication_status": "NOT_PUBLISHED_ORIGINAL_BYTES_UNAVAILABLE"
     }
   ],
   "patch_source_claims": {
@@ -38,5 +50,34 @@
     "provenance": "unverified_operator_supplied_handoff_summary"
   },
   "no_original_bytes_fabricated": true,
-  "do_not_apply_from_summary": true
+  "do_not_apply_from_summary": true,
+  "recovery_attempts": [
+    {
+      "recorded_at_utc": "2026-10-30T15:18:03Z",
+      "requested_operation": "DIRECT_PUBLICATION_OF_UNMODIFIED_ORIGINAL_ARTIFACTS",
+      "authorized_repository": "thalesvalente/Atlas",
+      "authorized_branch": "evidence/atlas-ap04-ci-repair-recovery-20261030",
+      "inspected_reference_commit": "28bd914334c592fad04c55be1f5a144bfa3e5e66",
+      "inspected_reference_tree": "2d6560f926668e968439ad19d11f6004cd60b905",
+      "recursive_tree_entries": 619,
+      "recursive_tree_truncated": false,
+      "original_artifact_paths_in_reference_tree": [],
+      "source_conversation_read": "SUCCEEDED_TEXT_AND_HISTORICAL_SANDBOX_LINKS_ONLY",
+      "source_conversation_attachment_inventory": "ORIGINAL_MISSION_MARKDOWN_ONLY",
+      "current_request_attachment_inventory": "REQUEST_TEXT_ONLY",
+      "source_browser_retrieval": "SOURCE_CHAT_UNAVAILABLE_BY_DIRECT_URL_AND_EXACT_TITLE_SEARCH",
+      "available_file_executor_platform": "win32",
+      "source_sandbox_bytes_accessible": false,
+      "block_code": "BLOCKED_ORIGINAL_ARTIFACTS_UNAVAILABLE",
+      "block_reason": "No available file or conversation interface exposes the bytes of the original patch, ZIP or SHA-256 sidecar. Historical sandbox links and expected digests are present, but cannot establish the file contents.",
+      "expected_hashes_recalculated": false,
+      "originals_private_content_and_secrets_review": "NOT_RUN_ORIGINAL_BYTES_UNAVAILABLE",
+      "original_artifacts_git_persisted": false,
+      "original_artifacts_reconstructed": false,
+      "manual_download_requested": false,
+      "pr14_mutation_performed": false,
+      "evidence_scope": "Only this existing status receipt is updated; this is not publication, application or qualification of the original repair.",
+      "next_automatable_action": "The execution environment that can read the original sandbox files must verify their actual digests and publicability, then publish the unmodified bytes directly under originals/ on this evidence branch."
+    }
+  ]
 }
