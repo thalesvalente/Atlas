@@ -1,0 +1,57 @@
+{
+  "schema": "atlas-ap04-original-artifacts-v1",
+  "recorded_date": "2026-10-30",
+  "status": "ORIGINAL_ARTIFACTS_VERIFIED_AND_GIT_PERSISTED",
+  "verification_scope": "bytes supplied directly by user; sha256 checked; Git blob sha1 matched; ZIP CRC and manifest checked; no independent review",
+  "repository": "thalesvalente/Atlas",
+  "branch": "evidence/atlas-ap04-ci-repair-recovery-20261030",
+  "previous_unavailability_receipt": "HISTORICAL_CORRECT_AT_THAT_TIME",
+  "artifacts": [
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair-recovery-20261030/originals/ATLAS-PARITY04-DOC-CI-REPAIR-01.patch",
+      "sha256": "d25540bce2a90dbf099ca38b82528b645ea49c92fd86d04438d5f1b7a58b83b8",
+      "git_blob_sha1": "d6ab785bc75634f8248e525580d01cf25b809d18",
+      "size_bytes": 104058
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair-recovery-20261030/originals/ATLAS-PARITY04-DOC-CI-REPAIR-01-blocked-exact.zip",
+      "sha256": "5788215d2267902988e141fa6db5a9434564b18204356a3a6d80a3dd2a883752",
+      "git_blob_sha1": "2dd4fc9f1f3ca425f00b3fb16de1ae1c4d5cb158",
+      "size_bytes": 92100
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ci-repair-recovery-20261030/originals/APPLY-INSTRUCTIONS.md",
+      "sha256": "59a915dd9e239f7bdc4be43b4447501bfc7290b57fdc1c4cfb01e425116d57c9",
+      "git_blob_sha1": "88ca9d498b744054498763f2401895f541783cb1",
+      "size_bytes": 2785
+    }
+  ],
+  "zip_checks": {
+    "members": 48,
+    "internal_sha256_entries": 34,
+    "mismatches": 0,
+    "crc": "PASS",
+    "patch_matches_standalone": true
+  },
+  "patch_inventory": {
+    "paths": 19,
+    "modified": 5,
+    "added": 14
+  },
+  "security_scan": {
+    "simple_secret_pattern": "NO_MATCH",
+    "windows_host_paths": "NO_MATCH",
+    "note": "Automated scan only; human reviewer still required before reuse"
+  },
+  "pr14": {
+    "number": 14,
+    "branch": "docs/atlas-parity04-plan-of-record-20261030",
+    "expected_head": "c25d37998dac7174067a2819391f3af1625f96dc",
+    "status": "UNMODIFIED_BY_EVIDENCE_PUBLISH"
+  },
+  "plan": "AP04-POR-v1.0-draft",
+  "adr0003": "PROPOSED_NOT_APPROVED",
+  "repair_applied": false,
+  "ci_qualified": false,
+  "independent_review": false
+}

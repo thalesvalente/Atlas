@@ -1,0 +1,2028 @@
+diff --git a/.github/workflows/atlas-parity02.yml b/.github/workflows/atlas-parity02.yml
+index 6640fe7e336a692eaeddc9ea955d565e92eb3548..58a152c2672d7bcb35e269932bb4441b4fc07273 100644
+--- a/.github/workflows/atlas-parity02.yml
++++ b/.github/workflows/atlas-parity02.yml
+@@ -11,12 +11,14 @@ on:
+       - 'specs/004-atlas-parity-c0/**'
+       - 'docs/missions/atlas-parity-02/p06-qa/**'
+       - 'docs/missions/atlas-parity-03/c1-core-composition/**'
++      - 'docs/missions/atlas-parity-04/**'
+       - '.specify/**'
+       - '.agents/**'
+       - 'docs/architecture/**'
+       - 'docs/protocol/**'
+       - 'AGENTS.md'
+       - '.github/workflows/atlas-parity02.yml'
++      - '.github/workflows/atlas-parity04-doc.yml'
+   workflow_dispatch:
+ 
+ permissions:
+@@ -54,8 +56,8 @@ jobs:
+           python -m pip install --no-build-isolation ./packages/protocol ./packages/atlas
+       - name: Collect and run P06 behavioral checks and counterexamples
+         run: python -m unittest discover -s tests/qa -p 'test_atlas_parity02_p06_*.py' -v
+-      - name: Preserve frozen protocol, public inputs and governance
+-        run: python scripts/qa/atlas_parity02_p06_audit.py --output .ci-clean-inputs.json
++      - name: Preserve the frozen boundary or verify the one exact AP04 successor
++        run: python scripts/qa/atlas_parity04_doc_ci.py boundary --output .ci-clean-inputs.json
+       - name: Reuse installed-wheel independence and immutability harness
+         run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-p06"
+       - name: Verify actual wheel contents against served bytes and origin policy
+@@ -99,7 +101,7 @@ jobs:
+         run: |
+           specify version --json
+           specify integration status --json
+-          python scripts/qa/speckit_audit.py --allow-presentation-delta ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && '--allow-p03-c4-delta' || '--allow-p02-c0-delta' }}
++          python scripts/qa/atlas_parity04_doc_ci.py speckit
+       - name: Resolve the 004 specification without persisting the active pointer
+         run: |
+           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
+diff --git a/.github/workflows/atlas-parity03-p03-gates.yml b/.github/workflows/atlas-parity03-p03-gates.yml
+index 04fc88cca9b23cb32c40def7e198a657dbd8bf61..18ae2d4c420a64ebc7a55594bee6352dd2eca42f 100644
+--- a/.github/workflows/atlas-parity03-p03-gates.yml
++++ b/.github/workflows/atlas-parity03-p03-gates.yml
+@@ -40,7 +40,7 @@ jobs:
+       - name: Install SDK and viewer for focal collection
+         run: python -m pip install --no-build-isolation --no-deps ./packages/protocol ./packages/atlas
+       - name: Bind frozen inputs and ownership to exact candidate
+-        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py' || 'scripts/qa/atlas_parity03_p03_ci.py' }} inputs --output-dir .test-output/atlas-parity03-p03
++        run: python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+       - name: Collect SDK and P03 tests with zero skips
+         run: python scripts/qa/atlas_parity03_p03_ci.py tests
+       - name: Build with setuptools 80.9.0 and install outside checkout
+@@ -87,9 +87,9 @@ jobs:
+       - name: Install pinned test driver without downloading Chromium
+         run: npm install --no-save --package-lock=false --ignore-scripts playwright@1.62.1
+       - name: Bind frozen inputs and ownership to exact candidate
+-        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py' || 'scripts/qa/atlas_parity03_p03_ci.py' }} inputs --output-dir .test-output/atlas-parity03-p03
++        run: python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+       - name: Exercise P03 in existing runner Chromium
+-        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py p03-browser' || 'scripts/qa/atlas_parity03_p03_ci.py browser' }} --output-dir .test-output/atlas-parity03-p03
++        run: python scripts/qa/atlas_parity04_doc_ci.py p03-browser --output-dir .test-output/atlas-parity03-p03
+       - name: Require browser receipts for this exact SHA
+         if: always()
+         run: python scripts/qa/atlas_parity03_p03_ci.py summary
+@@ -134,7 +134,7 @@ jobs:
+         run: |
+           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
+           python .specify/scripts/python/resolve_template.py spec-template --json
+-          python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py' || 'scripts/qa/atlas_parity03_p03_ci.py' }} inputs --output-dir .test-output/atlas-parity03-p03
++          python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+       - name: Preserve specification input evidence
+         if: always()
+         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+diff --git a/.github/workflows/atlas-parity04-doc.yml b/.github/workflows/atlas-parity04-doc.yml
+new file mode 100644
+index 0000000000000000000000000000000000000000..fef27525662b490bb0ba806e400f91d42fa84ce2
+--- /dev/null
++++ b/.github/workflows/atlas-parity04-doc.yml
+@@ -0,0 +1,52 @@
++name: ATLAS-PARITY-04 documentation successor
++
++on:
++  pull_request:
++    types: [opened, synchronize, reopened, ready_for_review]
++  workflow_dispatch:
++
++permissions:
++  contents: read
++
++jobs:
++  successor-guard:
++    name: AP04 documentation guard / ${{ matrix.os }} / optimize=${{ matrix.optimize }}
++    runs-on: ${{ matrix.os }}
++    timeout-minutes: 10
++    strategy:
++      fail-fast: false
++      matrix:
++        os: [ubuntu-latest, windows-latest]
++        optimize: ['0', '1']
++    env:
++      PYTHONOPTIMIZE: ${{ matrix.optimize }}
++      PYTHONUTF8: '1'
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
++        with:
++          ref: ${{ github.event.pull_request.head.sha || github.sha }}
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
++        with:
++          python-version: '3.12'
++      - name: Record the exact candidate
++        run: |
++          git rev-parse HEAD
++          git rev-parse 'HEAD^{tree}'
++      - name: Verify the exact C4 documentation successor and supplemental overlay
++        run: >-
++          python scripts/qa/atlas_parity04_doc_ci.py audit
++          --output .test-output/atlas-parity04/SUCCESSOR-DOC-RECEIPT.json
++          --junit .test-output/atlas-parity04/successor-doc-junit.xml
++      - name: Execute negative counterexamples in a temporary Git repository
++        run: python -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v
++      - name: Preserve exact-SHA AP04 guard evidence
++        if: always()
++        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
++        with:
++          name: atlas-parity04-doc-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}
++          path: .test-output/atlas-parity04/**
++          include-hidden-files: true
++          if-no-files-found: error
++          retention-days: 30
+diff --git a/.github/workflows/atlas003-speckit.yml b/.github/workflows/atlas003-speckit.yml
+index 1a9cd1b97969042f65cbca74b78fa7a5fe5e7146..4b6950e98a267be44fdbc427042f2bffb9dedaa6 100644
+--- a/.github/workflows/atlas003-speckit.yml
++++ b/.github/workflows/atlas003-speckit.yml
+@@ -6,15 +6,20 @@ on:
+       - 'specs/003-producer-selective-preview/**'
+       - 'specs/004-atlas-parity-c0/**'
+       - 'docs/missions/atlas-parity-03/c1-core-composition/**'
++      - 'docs/missions/atlas-parity-04/**'
++      - 'docs/architecture/ADR-0003-legacy-compatibility-proposed.md'
+       - '.specify/**'
+       - '.agents/skills/**'
+       - '.github/workflows/atlas003-speckit.yml'
++      - '.github/workflows/atlas-parity04-doc.yml'
+       - 'packages/protocol/src/caderno_protocol/read_model.py'
+       - 'packages/atlas/src/atlas_viewer/static/**'
+       - 'packages/atlas/src/atlas_viewer/catalog.py'
+       - 'packages/atlas/src/atlas_viewer/server.py'
+       - 'scripts/qa/speckit_audit.py'
++      - 'scripts/qa/atlas_parity04_doc_ci.py'
+       - 'tests/qa/test_speckit_presentation_audit.py'
++      - 'tests/qa/test_atlas_parity04_doc_ci.py'
+       - 'tests/viewer/test_related_references.py'
+   workflow_dispatch:
+ 
+@@ -49,7 +54,7 @@ jobs:
+           specify version --json
+           specify integration status --json
+       - name: Check generated Spec Kit assets and preserved architecture
+-        run: python scripts/qa/speckit_audit.py --allow-presentation-delta ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && '--allow-p03-c4-delta' || '--allow-p02-c0-delta' }}
++        run: python scripts/qa/atlas_parity04_doc_ci.py speckit
+       - name: Verify feature 003 requirements and tasks without active-pointer writes
+         env:
+           SPECIFY_FEATURE_NO_PERSIST: '1'
+diff --git a/.github/workflows/atlas021.yml b/.github/workflows/atlas021.yml
+index 394c6a13233f65e54aec797bf824c29b61e779d5..348f2d04a26efcfe1a807cfee78e7d68f98698c6 100644
+--- a/.github/workflows/atlas021.yml
++++ b/.github/workflows/atlas021.yml
+@@ -44,7 +44,9 @@ jobs:
+       - name: Install wheels again in new empty environments
+         run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-portable"
+       - name: Install test-only schema tooling and run the installed suite outside checkout with zero skips
+-        run: python ${{ (github.head_ref == 'integrate/atlas-parity03-c4-full-candidate-20261027' || github.ref_name == 'integrate/atlas-parity03-c4-full-candidate-20261027') && 'scripts/qa/atlas_parity03_c4_ci.py installed' || 'scripts/qa/atlas_parity02_p06_installed_checks.py' }} --repo . --work "${{ runner.temp }}/atlas-c1-portable" --install-test-tools
++        run: >-
++          python scripts/qa/atlas_parity04_doc_ci.py installed
++          --repo . --work "${{ runner.temp }}/atlas-c1-portable" --install-test-tools
+       - name: Verify installed wheel assets and fixed routes
+         run: python scripts/qa/atlas_parity02_p06_wheel.py --work "${{ runner.temp }}/atlas-c1-portable"
+       - name: Preserve exact-SHA installed verification receipts and collection
+diff --git a/docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json b/docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..8ffea49a5bb1e6832183904744a9e795222db27e
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json
+@@ -0,0 +1,53 @@
++{
++  "schema": "atlas-parity04-ci-evidence-v1",
++  "recorded_at_utc": "2026-10-30T04:53:50Z",
++  "source_sha": "c25d37998dac7174067a2819391f3af1625f96dc",
++  "original_runs": [
++    {
++      "workflow": "ATLAS021 candidate verification",
++      "run_id": 41001137694,
++      "conclusion": "success",
++      "classification": "NO_ORIGINAL_FINDING"
++    },
++    {
++      "workflow": "ATLAS-PARITY-02 P06 frozen-boundary QA",
++      "run_id": 41001137728,
++      "conclusion": "failure",
++      "classification": [
++        "FROZEN_BOUNDARY_EXPECTED",
++        "SUCCESSOR_DISPATCH_BUG"
++      ]
++    },
++    {
++      "workflow": "ATLAS-PARITY03 P03 isolated qualification",
++      "run_id": 41001137738,
++      "conclusion": "failure",
++      "classification": "SUCCESSOR_DISPATCH_BUG"
++    },
++    {
++      "workflow": "ATLAS-PARITY-03 C4 full composition",
++      "run_id": 41001137742,
++      "conclusion": "failure",
++      "classification": "MANIFEST_SCOPE_MISMATCH"
++    }
++  ],
++  "local_validation": {
++    "py_compile": "PASS",
++    "negative_tests_linux_normal": "17_PASS",
++    "negative_tests_linux_optimized": "17_PASS",
++    "synthetic_full_contract_integration": "PASS_28_DELTA_PATHS_9_DOCS_19_REPAIR_PATHS_5_WORKFLOWS"
++  },
++  "repair_sha": null,
++  "repair_tree": null,
++  "terminal_runs_on_repair_sha": [],
++  "required_terminal_workflows": [
++    "ATLAS-PARITY-04 documentation successor",
++    "ATLAS-PARITY-02 P06 frozen-boundary QA",
++    "ATLAS-PARITY03 P03 isolated qualification",
++    "ATLAS-PARITY-03 C4 full composition",
++    "ATLAS021 candidate verification",
++    "Spec Kit 1.2.3 where triggered"
++  ],
++  "status": "BLOCKED_NO_PUBLISHED_REPAIR_SHA",
++  "evidence_transfer_forbidden": true
++}
+diff --git a/docs/missions/atlas-parity-04/ci-repair/CI-ROOT-CAUSE.md b/docs/missions/atlas-parity-04/ci-repair/CI-ROOT-CAUSE.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..5b156d5156e00afd5b9a01a45e04a05c623a60b3
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/CI-ROOT-CAUSE.md
+@@ -0,0 +1,24 @@
++# Causa raiz e correção por workflow
++
++## Evidência original — SHA `c25d37998dac7174067a2819391f3af1625f96dc`
++
++| Workflow/run | Job/step representativo | Finding | Classificação | Correção preparada |
++|---|---|---|---|---|
++| `ATLAS-PARITY-02 P06 frozen-boundary QA` / `41001137728` | Jobs P06 `123885547585`, `123885547656`, `123885547692`, `123885547745`; step `Preserve frozen protocol, public inputs and governance` | `UNEXPECTED_PROTECTED_FILE` para a ADR-0003 proposta | `FROZEN_BOUNDARY_EXPECTED` | O auditor P06 não é relaxado. `atlas_parity04_doc_ci.py boundary` exige exatamente esse único erro histórico e só o neutraliza após provar blob, path, ancestry, modos, histórico e overlay completos. |
++| Mesmo run | Spec Kit jobs `123885547644` e `123885547948`; step `Verify existing managed assets without weakening the audit` | A sucessora não recebe o modo C4 por depender da string da branch | `SUCCESSOR_DISPATCH_BUG` | `atlas-parity04_doc_ci.py speckit` seleciona por identidade/ancestralidade validada. |
++| `ATLAS-PARITY03 P03 isolated qualification` / `41001137738` | Jobs portáveis e Chromium; step `Bind frozen inputs and ownership to exact candidate`; Spec Kit step `Check C2 workstream...` | `P03 manifest entry changed: tests/viewer/test_atlas_parity02_p03_harness.py` | `SUCCESSOR_DISPATCH_BUG` | `p03-inputs`/`p03-browser` usam P03 isolada somente na linhagem P03 sem C4; C4/AP04 usam o auditor composto, que reconhece a única adaptação congelada. |
++| `ATLAS-PARITY-03 C4 full composition` / `41001137742` | Jobs C4 `123885547518`, `123885547519`, `123885547571`, `123885547767`; step `Bind input manifests...` | `C4 manifest must cover every authored path, with no arbitrary exclusions` | `MANIFEST_SCOPE_MISMATCH` | O manifesto C4 é lido no SHA C4 e comparado apenas com `COMPOSITION..C4_BASELINE`; AP04 é overlay suplementar completo e separado. |
++| Mesmo run | Spec Kit jobs `123885547194`, `123885547671`; step `Resolve C4 spec, plan and tasks...` | Falha decorrente da associação de inputs ao HEAD sucessor | `MANIFEST_SCOPE_MISMATCH` | O auditor C4 primeiro fixa a C4 e, quando HEAD é sucessor, exige o guard AP04 completo. |
++| `ATLAS021 candidate verification` / `41001137694` | workflow completo | Sem finding no run original | Não aplicável | Requalificação continua obrigatória no SHA publicado; não se transfere o sucesso antigo. |
++
++## Invariantes preservadas
++
++- `scripts/qa/atlas_parity02_p06_audit.py` permanece byte-idêntico e fail-closed.
++- `scripts/qa/atlas_parity03_p03_ci.py` permanece byte-idêntico e continua sendo o gate da linhagem P03 isolada.
++- Manifestos C1/C2/C3/C4 permanecem byte-idênticos.
++- Pins existentes de GitHub Actions são comparados com C4 e não podem mudar no sucessor.
++- Não há `paths-ignore`, seleção por nome da branch, `continue-on-error`, `if: false` ou `|| true` nos workflows alterados.
++
++## Ausência de regressão alegada
++
++As falhas originais ocorreram em binding/inputs antes dos testes de produto correspondentes. Isso não prova regressão nem prova ausência de regressão. A execução dos browsers, suites instaladas e 168 IDs C4 deve ocorrer novamente no SHA publicado.
+diff --git a/docs/missions/atlas-parity-04/ci-repair/DECISION-COMPLIANCE.md b/docs/missions/atlas-parity-04/ci-repair/DECISION-COMPLIANCE.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..7e3f1e37bdb6242125c589abf5e5fc12a7fc2f40
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/DECISION-COMPLIANCE.md
+@@ -0,0 +1,44 @@
++# Conformidade com decisões e gates
++
++## D-001–D-020
++
++| Decisão | Estado | Evidência desta frente |
++|---|---|---|
++| D-001 | `COMPLIANT` | No change to Atlas/Caderno/storage separation. |
++| D-002 | `COMPLIANT` | No R4 import or producer-name coupling; only CI controls changed. |
++| D-003 | `COMPLIANT` | Engineering CI remains distinct from authenticity, state and scientific approval. |
++| D-004 | `COMPLIANT` | No compatibility reader, migration, deletion or runtime change implemented. |
++| D-005 | `COMPLIANT` | C4 and historical objects are immutable; no paridade/promotion claim. |
++| D-006 | `COMPLIANT` | ADR-0003 remains proposed; the repair does not implement the architectural option. |
++| D-007 | `COMPLIANT` | ADR-0002 direction remains untouched and no release is authorized. |
++| D-008 | `COMPLIANT` | No complete-parity claim is made. |
++| D-009 | `COMPLIANT` | C4 evidence is preserved but not transferred to the successor SHA. |
++| D-010 | `COMPLIANT` | No cleanup, retention action, worktree deletion or physical change. |
++| D-011 | `COMPLIANT` | No BIM/IFC/IDS/SHACL implementation or claim. |
++| D-012 | `OUT_OF_SCOPE_PRESERVED` | Repair only unblocks documentation CI; no restart or parity implementation. |
++| D-013 | `OUT_OF_SCOPE_PRESERVED` | No legacy UI feature implementation in this mission. |
++| D-014 | `COMPLIANT` | No corpus reorganization or bulk conversion. |
++| D-015 | `OUT_OF_SCOPE_PRESERVED` | No legacy reader is implemented; proposal remains pending. |
++| D-016 | `COMPLIANT` | HL7/FHIR possibility is neither removed nor claimed implemented. |
++| D-017 | `COMPLIANT` | No R4 change. |
++| D-018 | `COMPLIANT` | No remote clone/worktree; only temporary synthetic Git repositories for tests. |
++| D-019 | `COMPLIANT` | This file and RESULT explicitly reconcile the repair with the plan. |
++| D-020 | `COMPLIANT` | No experiment/history moved or deleted. |
++
++## ADRs
++
++- ADR-0001 e ADR-0002: nenhum byte alterado por este delta.
++- ADR-0003: os nove documentos originais são verificados por blob/bytes; estado obrigatório `PROPOSED_NOT_APPROVED`.
++- Nenhuma ADR futura ou prefixo `docs/architecture/` foi liberado.
++
++## HL7/FHIR
++
++A capacidade futura permanece apenas uma direção registrada. Nenhum recurso, perfil, versão, guia de implementação, conformidade clínica ou claim HL7/FHIR foi introduzido.
++
++## G0–G9
++
++Os valores de `GATES.json` são byte-idênticos à baseline documental: G0 `DOCUMENTATION_DRAFT`; G1–G3 `NOT_RUN`; G4 `ARCHITECTURAL_DECISION_PENDING`; G5 `C4_BASELINE_ONLY`; G6 `USER_OBSERVATION_PARTIAL`; G7 `NOT_QUALIFIED`; G8/G9 `NOT_AUTHORIZED`. O reparo de CI não promove nenhum gate.
++
++## Mudança de plano
++
++`NONE`. O delta implementa o mecanismo de sucessor/overlay previsto na missão, sem alterar PAR-001–PAR-015 ou o plano AP04 original.
+diff --git a/docs/missions/atlas-parity-04/ci-repair/HANDOFF.json b/docs/missions/atlas-parity-04/ci-repair/HANDOFF.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..42910420c1007a30e2447233b4e17bd7d4f1b27b
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/HANDOFF.json
+@@ -0,0 +1,42 @@
++{
++  "schema": "atlas-parity04-doc-ci-handoff-v1",
++  "recorded_at_utc": "2026-10-30T04:53:50Z",
++  "status": "AP04_DOC_CI_BLOCKED_EXACT",
++  "repository": "thalesvalente/Atlas",
++  "pull_request": 14,
++  "branch": "docs/atlas-parity04-plan-of-record-20261030",
++  "observed_head": {
++    "sha": "c25d37998dac7174067a2819391f3af1625f96dc",
++    "tree": "e6eacdd02a329f88bc0dd656523b84a8fec9217e"
++  },
++  "prepared_delta": {
++    "authorized_path_count": 19,
++    "original_document_count": 9,
++    "local_negative_tests": {
++      "normal": "17_PASS",
++      "optimized": "17_PASS"
++    }
++  },
++  "published_repair": {
++    "sha": null,
++    "tree": null,
++    "status": "NOT_PUBLISHED"
++  },
++  "terminal_ci": {
++    "status": "NOT_RUN_NO_REPAIR_SHA",
++    "runs": []
++  },
++  "independent_review": {
++    "status": "NOT_PERFORMED",
++    "reason": "No native subagent/reviewer tool exposed."
++  },
++  "blocking_capability": "GitHub connector has no write/commit/push/workflow-dispatch action in this session.",
++  "next_exact_actions": [
++    "On the existing branch only, verify HEAD is still c25d37998dac7174067a2819391f3af1625f96dc.",
++    "Apply the supplied patch without creating a worktree or clone and review all 19 repair paths.",
++    "Run the local focal tests, then commit and push fast-forward without rebase, force-push or merge.",
++    "Wait for fresh runs on that exact SHA; do not rerun the old SHA and do not transfer old success.",
++    "Populate final SHA/tree/run IDs, regenerate the supplemental manifest if receipts changed, and obtain independent review on the resulting final SHA.",
++    "Keep PR #14 Draft; do not merge, release, deploy, promote, migrate or start AP04 F1-F6."
++  ]
++}
+diff --git a/docs/missions/atlas-parity-04/ci-repair/INDEPENDENT-REVIEW.md b/docs/missions/atlas-parity-04/ci-repair/INDEPENDENT-REVIEW.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..1b609639ee4c6968acd5c9e5a66dd137814e8250
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/INDEPENDENT-REVIEW.md
+@@ -0,0 +1,21 @@
++# Revisão independente
++
++## Estado
++
++`NATIVE_SUBAGENTS_NOT_AVAILABLE`
++
++`INDEPENDENT_REVIEW_NOT_PERFORMED`
++
++A sessão não expôs uma ferramenta de subagente nativo real. A análise adversarial feita pelo mesmo coordenador encontrou e corrigiu uma lacuna — proteção semântica de `ASSETS`, inputs e adaptador P03 dentro do script C4 autorizado —, mas **não é** denominada revisão independente.
++
++## Autoria e separação
++
++- Autor do delta preparado: coordenador desta execução.
++- Revisor independente sem autoria: não disponível.
++- Parecer bloqueante: ausente porque não houve revisor elegível, e não porque o delta tenha sido aprovado.
++
++## Escopo obrigatório da revisão externa restante
++
++A revisão deve usar o SHA publicado final e verificar: diff completo desde C4; byte-identidade dos nove documentos; ausência de mudança em manifestos históricos; semântica do guard; pins e workflows; resultados das quatro células do workflow AP04; suites/browser/168 IDs C4; recibos adicionados após o código; e ausência de aprovação implícita da ADR-0003.
++
++A PR deve permanecer Draft até essa revisão e a CI terminal convergirem.
+diff --git a/docs/missions/atlas-parity-04/ci-repair/INPUT-SHAS.json b/docs/missions/atlas-parity-04/ci-repair/INPUT-SHAS.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..09b7055b880e755d7febfb17cfb69b7e59b3232e
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/INPUT-SHAS.json
+@@ -0,0 +1,29 @@
++{
++  "schema": "atlas-parity04-doc-ci-inputs-v1",
++  "recorded_at_utc": "2026-10-30T04:53:50Z",
++  "reasoning_effective": "UNVERIFIED",
++  "repository": "thalesvalente/Atlas",
++  "pull_request": 14,
++  "branch": "docs/atlas-parity04-plan-of-record-20261030",
++  "observed_pr_head_before_repair": {
++    "sha": "c25d37998dac7174067a2819391f3af1625f96dc",
++    "tree": "e6eacdd02a329f88bc0dd656523b84a8fec9217e",
++    "parent": "72d9b94e613a57c82a5afd309796f44b271e2185",
++    "files_added": 9
++  },
++  "frozen_c4": {
++    "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
++    "tree": "0a622663ca40232d6143659f82cfe9ce43702e90",
++    "pull_request": 13
++  },
++  "p03_isolated_input": "ead1f753f52f22035326b7366dd2231c62775765",
++  "p03_qualified_head": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
++  "repair_publication": {
++    "status": "NOT_PUBLISHED_FROM_THIS_SESSION",
++    "final_sha": null,
++    "final_tree": null,
++    "reason": "The connected GitHub tool surface exposed read operations but no commit/push/workflow-dispatch operation."
++  },
++  "private_sources_accessed": false,
++  "product_or_protocol_changed": false
++}
+diff --git a/docs/missions/atlas-parity-04/ci-repair/MANIFEST.sha256 b/docs/missions/atlas-parity-04/ci-repair/MANIFEST.sha256
+new file mode 100644
+index 0000000000000000000000000000000000000000..d5c5f480f0c43201c27764c30626f8d8b59b5283
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/MANIFEST.sha256
+@@ -0,0 +1,18 @@
++2f17a0711e43f27a465d4b99ae6b887cbc2dcd0cc2dd875a535961bd0dcb0937  .github/workflows/atlas-parity02.yml
++491fa56982ce7d427311a7a3e8fe4992c42381766ef3a3e8872d9c2d5adb1bd7  .github/workflows/atlas-parity03-p03-gates.yml
++82ccfaa17d42b4433ddbb110a90102ac854f32c44eaf76fc68a33df1f955be25  .github/workflows/atlas-parity04-doc.yml
++c330d85e29925e7df35c834cb1cd1c4f19d995852b3bcf17d5d5c8fd5dd30fd5  .github/workflows/atlas003-speckit.yml
++db4589fe1570d0d0aa8d9a8bf39be7362df27b44a66172e2ae958e157098381d  .github/workflows/atlas021.yml
++678d71b688a08304f58aa91f9bb3f30607e75a882f17c728be9b7e4dd96a9ce2  docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json
++767090e55dc906ca31abf12f0ec840581d246ea8f48a1039153261b3ca60f905  docs/missions/atlas-parity-04/ci-repair/CI-ROOT-CAUSE.md
++07181080d77e3fce70e7cfad7df7364659b16459d861840da4661857ba3cd6a7  docs/missions/atlas-parity-04/ci-repair/DECISION-COMPLIANCE.md
++a193d59b4b387542cd9b88f270e862f8c642a298c867a58dddfb7ac2a070e5a0  docs/missions/atlas-parity-04/ci-repair/HANDOFF.json
++c9b68aa2f7c6eaef955b6e63f56d90d750bd36c9931df2d0d9474d4fd73d000c  docs/missions/atlas-parity-04/ci-repair/INDEPENDENT-REVIEW.md
++32ddd66ed15ff84958ca63c88da541a37f2b6714ab3d74d73a1eede7082668c3  docs/missions/atlas-parity-04/ci-repair/INPUT-SHAS.json
++5150f7c05d128f76842b52cac95ccc86733faf9d2420fbd50b10afdcaae663f7  docs/missions/atlas-parity-04/ci-repair/NEGATIVE-TESTS.json
++fe25d78627ba7efa11a0f62a16839143cccdd44fa2f7c60796d15dc10ab69f5a  docs/missions/atlas-parity-04/ci-repair/OVERLAY.json
++ca43f74b879664b238019b1e0c9ff679de5846680358737b021c37ed5b6992dc  docs/missions/atlas-parity-04/ci-repair/RESULT.md
++9303d5b1e10fc018a736f8ae891726f5ad34ceab05c34e3042c652b60580e9d2  docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md
++8edd381487b138fa1ad127ee9e4fb1460f515b6268850ab7e1d80563de2263b8  scripts/qa/atlas_parity03_c4_ci.py
++8a81302e91a7db330dffd46d0982698ea120c82a08dafb9aab1d5463fdc1722e  scripts/qa/atlas_parity04_doc_ci.py
++f49faaa747eceea527384ec98cfcb989afd47aef2664a98997ad0a82cc7989cd  tests/qa/test_atlas_parity04_doc_ci.py
+diff --git a/docs/missions/atlas-parity-04/ci-repair/NEGATIVE-TESTS.json b/docs/missions/atlas-parity-04/ci-repair/NEGATIVE-TESTS.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..bb584952824a7b2804ff1a90493365bd97f3adbb
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/NEGATIVE-TESTS.json
+@@ -0,0 +1,116 @@
++{
++  "schema": "atlas-parity04-negative-tests-v1",
++  "recorded_at_utc": "2026-10-30T04:53:50Z",
++  "test_module": "tests/qa/test_atlas_parity04_doc_ci.py",
++  "case_count": 17,
++  "cases": [
++    {
++      "id": "test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name",
++      "intent": "PASS case: exact docs/C4/overlay on an unrelated branch name",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_edit_remove_and_symlink_of_adr0003_are_red",
++      "intent": "ADR-0003 edit, removal and symlink are RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_adr0004_and_changes_to_adr0001_or_adr0002_are_red",
++      "intent": "ADR-0004 and changes to ADR-0001/0002 are RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_protocol_context_governance_skill_fixture_and_agents_changes_are_red",
++      "intent": "Protocol, schemas/contexts, constitution, skills, fixtures and AGENTS.md are RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_runtime_p03_adapter_and_asset_allowlist_changes_are_red",
++      "intent": "C4 runtime, P03 adapter and public asset file changes are RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_arbitrary_document_outside_original_and_repair_paths_is_red",
++      "intent": "Unlisted AP04 document is RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_branch_name_lookalike_cannot_override_bad_bytes",
++      "intent": "Partial/magic-looking branch name cannot override protected-byte failure",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_mode_change_in_authorized_repair_path_is_red",
++      "intent": "Mode change on an authorized repair path is RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated",
++      "intent": "C4 ASSETS semantic change is RED even with refreshed overlay hash",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red",
++      "intent": "Manifest hash mismatch, missing entry, deletion and noncanonical reordering are RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry",
++      "intent": "Original document/ADR state change is RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_historical_c4_manifest_cannot_be_changed",
++      "intent": "Historical C4 manifest mutation is RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_repair_history_rejects_transient_unauthorized_change_even_if_reverted",
++      "intent": "Transient protected change cannot be erased by a later revert",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_default_boundary_accepts_only_the_single_strict_p06_rejection",
++      "intent": "Only the exact historical P06 ADR rejection is accepted",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_wrong_base_or_document_tree_is_red",
++      "intent": "Ancestry with wrong frozen tree is RED",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent",
++      "intent": "No branch-name routing or workflow bypass marker",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    },
++    {
++      "id": "test_dedicated_guard_runs_linux_windows_normal_and_optimized",
++      "intent": "Dedicated workflow declares four OS/optimization cells",
++      "expected": "PASS_ASSERTING_FAIL_CLOSED"
++    }
++  ],
++  "local_runs": [
++    {
++      "platform": "linux",
++      "python_optimization": "normal",
++      "command": "python -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v",
++      "cases": 17,
++      "result": "PASS"
++    },
++    {
++      "platform": "linux",
++      "python_optimization": "-O",
++      "command": "PYTHONOPTIMIZE=1 python -O -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v",
++      "cases": 17,
++      "result": "PASS"
++    }
++  ],
++  "github_matrix": {
++    "linux_normal": "NOT_RUN",
++    "linux_optimized": "NOT_RUN",
++    "windows_normal": "NOT_RUN",
++    "windows_optimized": "NOT_RUN"
++  },
++  "claim_limit": "Local synthetic tests are not terminal GitHub CI or independent review."
++}
+diff --git a/docs/missions/atlas-parity-04/ci-repair/OVERLAY.json b/docs/missions/atlas-parity-04/ci-repair/OVERLAY.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..bc0d1e2796175ff565cc005fc4f234804c7f0a1d
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/OVERLAY.json
+@@ -0,0 +1,87 @@
++{
++  "schema": "atlas-parity04-doc-ci-overlay-v1",
++  "plan_id": "AP04-POR-v1.0-draft",
++  "base_sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
++  "baseline_doc_sha": "c25d37998dac7174067a2819391f3af1625f96dc",
++  "adr0003": "PROPOSED_NOT_APPROVED",
++  "historical_manifests": "IMMUTABLE",
++  "plan_change": "NONE",
++  "authorized_paths": [
++    {
++      "path": ".github/workflows/atlas-parity02.yml",
++      "purpose": "Route the P06/Spec Kit successor through the exact AP04 boundary guard while preserving the historical P06 auditor."
++    },
++    {
++      "path": ".github/workflows/atlas-parity03-p03-gates.yml",
++      "purpose": "Select isolated P03 versus composed C4/AP04 inputs by ancestry and verified bytes, never by branch-name strings."
++    },
++    {
++      "path": ".github/workflows/atlas-parity04-doc.yml",
++      "purpose": "Execute the AP04 documentation-successor guard and adversarial tests on Linux/Windows with normal and optimized Python."
++    },
++    {
++      "path": ".github/workflows/atlas003-speckit.yml",
++      "purpose": "Run Spec Kit with the verified lineage dispatcher and include the exact AP04 repair paths in triggering scope."
++    },
++    {
++      "path": ".github/workflows/atlas021.yml",
++      "purpose": "Route installed-suite qualification by verified lineage instead of branch-name strings."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json",
++      "purpose": "Separate original GitHub runs, local validation and absent final-SHA runs."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/CI-ROOT-CAUSE.md",
++      "purpose": "Map original failing workflows/jobs/steps to classified causes and repairs."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/DECISION-COMPLIANCE.md",
++      "purpose": "Reconcile D-001 through D-020, ADR status, HL7/FHIR and G0 through G9."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/HANDOFF.json",
++      "purpose": "Provide exact publication and terminal-CI handoff without claiming an unpublished SHA."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/INDEPENDENT-REVIEW.md",
++      "purpose": "Record independent-review availability without mislabeling self-review."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/INPUT-SHAS.json",
++      "purpose": "Bind the observed C4, AP04 documentation and original PR identities."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/MANIFEST.sha256",
++      "purpose": "Pin every repair file except this self-referential manifest."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/NEGATIVE-TESTS.json",
++      "purpose": "Enumerate adversarial cases and local execution evidence."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/OVERLAY.json",
++      "purpose": "Declare the complete path-level authorization and purpose of this repair."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/RESULT.md",
++      "purpose": "Record the repair result, limitations and exact terminal state."
++    },
++    {
++      "path": "docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md",
++      "purpose": "Specify the exact fail-closed successor authorization contract."
++    },
++    {
++      "path": "scripts/qa/atlas_parity03_c4_ci.py",
++      "purpose": "Freeze C4 authorship at the immutable C4 SHA and delegate successor authorization to the AP04 overlay guard."
++    },
++    {
++      "path": "scripts/qa/atlas_parity04_doc_ci.py",
++      "purpose": "Fail-closed guard for C4 ancestry, nine immutable documents, exact repair paths, Git modes/history, overlay hashes, frozen C4 declarations and workflow safety."
++    },
++    {
++      "path": "tests/qa/test_atlas_parity04_doc_ci.py",
++      "purpose": "Synthetic Git counterexamples for protected bytes, ancestry, modes, manifests, routing, pins and frozen declarations."
++    }
++  ]
++}
+diff --git a/docs/missions/atlas-parity-04/ci-repair/RESULT.md b/docs/missions/atlas-parity-04/ci-repair/RESULT.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..315dbc0be98587c744846d217bc0af2208d67587
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/RESULT.md
+@@ -0,0 +1,49 @@
++# Resultado — reparo de CI documental AP04
++
++**Plano:** `AP04-POR-v1.0-draft`
++**Missão:** `ATLAS-PARITY04-DOC-CI-REPAIR-01`
++**Registro UTC:** `2026-10-30T04:53:50Z`
++**REASONING_EFFECTIVE:** `UNVERIFIED`
++
++## Estado terminal desta execução
++
++`AP04_DOC_CI_BLOCKED_EXACT`
++
++O delta de engenharia foi produzido e validado localmente, mas **não foi publicado** na branch da PR #14 porque a superfície GitHub disponível nesta sessão expôs somente leitura: não havia operação de commit/push nem dispatch de workflow. Também não havia ferramenta de subagente nativo; portanto, nenhuma revisão foi denominada independente.
++
++Isso impede, de forma objetiva, três condições de `AP04_DOCUMENTATION_CI_QUALIFIED`: SHA final publicado, CI terminal nesse SHA e parecer independente efetivo. A PR deve permanecer Draft.
++
++## Causas corrigidas no delta preparado
++
++1. **P06:** o auditor histórico continua estrito e continua rejeitando qualquer ADR nova. Um guard sucessor separado aceita somente `docs/architecture/ADR-0003-legacy-compatibility-proposed.md` quando o blob é exatamente o publicado em `c25d3799…`, a ancestralidade C4 é exata e todo o restante do delta é manifestado.
++2. **P03:** a seleção de modo deixa de depender de `github.head_ref`/`github.ref_name`; usa ancestralidade e validação dos inputs congelados. A sucessora documental usa o contrato composto C4, sem reabrir P03 isolada.
++3. **C4:** autoria e `MANIFEST.sha256` ficam congelados em `72d9b94e…`; documentos e controles AP04 são um overlay suplementar, não autoria retroativa da C4.
++4. **Defesa adicional:** `INPUTS`, `P03_C4_ADAPTERS`, `ASSETS` e demais declarações congeladas do auditor C4 são comparadas semanticamente com o objeto C4, para que uma mudança indevida não seja legitimada apenas recalculando o overlay.
++
++## Alterações mínimas
++
++- 5 arquivos existentes modificados: quatro workflows e o auditor C4.
++- 3 controles executáveis novos: workflow AP04, guard AP04 e 17 contraprovas sintéticas.
++- 11 recibos/contratos em `docs/missions/atlas-parity-04/ci-repair/`, incluindo overlay e manifesto próprios.
++- Nenhum dos nove documentos AP04 originais foi modificado.
++- Nenhum manifesto/handoff C1/C2/C3/C4 foi modificado.
++- Nenhum runtime, protocolo, schema, fixture científica, constituição, `AGENTS.md`, fonte privada ou pin existente foi alterado.
++
++## Validação local concluída
++
++| Execução | Plataforma observada | Resultado |
++|---|---|---|
++| `python -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v` | Linux, Python normal | 17/17 PASS |
++| `PYTHONOPTIMIZE=1 python -O -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v` | Linux, Python `-O` | 17/17 PASS |
++| `python -m py_compile ...` | Linux | PASS |
++| Integração sintética com os cinco workflows reais, auditor C4 real, 9 documentos e 19 paths de reparo | Linux | PASS: delta completo 28 paths, 5 workflows e declarações C4 congeladas |
++
++A matriz Windows × normal/`-O` foi implementada no workflow, mas não executada nesta sessão; não é contabilizada como evidência.
++
++## Plano e autoridade
++
++Não houve mudança de `AP04-POR-v1.0-draft`. O reparo implementa exatamente o guard sucessor e overlay exigidos. ADR-0003 permanece `PROPOSED_NOT_APPROVED`; G8/G9, merge, release, deploy, promoção, migração e acesso a fontes privadas permanecem não autorizados.
++
++## Menor ato externo restante
++
++Aplicar o patch fornecido na branch existente, revisar o diff, fazer commit/push fast-forward sem rebase/force-push, aguardar os workflows no novo SHA e obter revisão independente real nesse SHA. Os recibos finais devem então ser atualizados com SHA/tree/run IDs reais sem reescrever os nove documentos ou manifestos históricos.
+diff --git a/docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md b/docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..917185c6802590988c3bd4ae0ef1efc8bccb0a1e
+--- /dev/null
++++ b/docs/missions/atlas-parity-04/ci-repair/SUCCESSOR-DOC-CONTRACT.md
+@@ -0,0 +1,43 @@
++# Contrato do sucessor documental AP04
++
++## Objetivo
++
++Autorizar somente um sucessor documental verificável da C4, sem converter a exceção em permissão para `docs/**`, `docs/architecture/**`, `.github/**`, `scripts/**` ou qualquer futura ADR.
++
++## Âncoras imutáveis
++
++- C4 SHA/tree: `72d9b94e613a57c82a5afd309796f44b271e2185` / `0a622663ca40232d6143659f82cfe9ce43702e90`.
++- Baseline documental SHA/tree: `c25d37998dac7174067a2819391f3af1625f96dc` / `e6eacdd02a329f88bc0dd656523b84a8fec9217e`.
++- A baseline documental deve ter C4 como pai único e direto.
++- Os nove paths publicados nesse SHA devem conservar modo `100644`, tipo blob, OID e bytes.
++
++## Autorização do delta
++
++1. `HEAD` deve descender de C4 e da baseline documental.
++2. Cada commit posterior à baseline documental deve ter um único pai, sem merge, e tocar somente paths enumerados no overlay.
++3. O diff completo `C4..HEAD` deve conter exatamente os nove documentos e os 19 paths de reparo; nenhum path pode faltar ou sobrar.
++4. Os cinco paths existentes devem ter status `M`; os demais devem ter status `A`; todos devem permanecer blobs `100644`.
++5. Symlink, remoção, rename implícito, modo executável, submódulo e alteração transitória seguida de reversão são RED.
++6. `OVERLAY.json` deve enumerar cada path e propósito exato. `MANIFEST.sha256` deve conter todos os paths de reparo exceto ele próprio, com SHA-256 correto e serialização canônica ordenada.
++7. O manifesto C4 no checkout deve ser byte/blob-idêntico ao objeto C4 e cobrir somente a autoria C4.
++8. O auditor P06 histórico deve continuar retornando FAIL com exatamente um erro: a ADR-0003 como `UNEXPECTED_PROTECTED_FILE`. Qualquer outro erro é RED.
++
++## ADR-0003
++
++A única exceção documental é o path literal `docs/architecture/ADR-0003-legacy-compatibility-proposed.md`, no blob publicado pela baseline documental. `GATES.json` deve continuar declarando `PROPOSED_NOT_APPROVED`, `DOCUMENTATION_ONLY` e as não autorizações de merge/release/deploy/promotion. ADR-0004, alterações em ADR-0001/0002 ou qualquer outro arquivo de `docs/architecture/` são RED.
++
++## Identidade P03/C4
++
++- A linhagem P03 isolada é reconhecida somente quando contém o input P03 fixado e **não** contém C4.
++- C4 exata usa o contrato C4 histórico.
++- Um sucessor de `c25d3799…` usa C4 mais este guard AP04.
++- Nenhuma outra linhagem recebe fallback permissivo; a classificação falha fechada.
++- `INPUTS`, `P03_C4_ADAPTERS`, `ASSETS`, `COMPOSITION` e as declarações de origem do auditor C4 são comparadas semanticamente com o blob C4.
++
++## Workflows
++
++Os quatro workflows existentes conservam integralmente seus pins. O workflow AP04 aceita somente os três actions/pins completos declarados no guard e executa Linux/Windows × normal/`-O`. Tokens de bypass e seleção por nome de branch são rejeitados.
++
++## Evidência
++
++O guard emite JSON e JUnit com `tested_sha`, `tested_tree`, base, baseline documental, documentos, histórico, delta completo, hashes do overlay, boundary P06 e limitações. Esse recibo não substitui run terminal do GitHub, browser real, revisão independente ou decisão humana.
+diff --git a/scripts/qa/atlas_parity03_c4_ci.py b/scripts/qa/atlas_parity03_c4_ci.py
+index 7f7312983c423470262163f46932a90c1114bd22..a80ac9aa87b2e3f2eca123986243952c3a267b5b 100644
+--- a/scripts/qa/atlas_parity03_c4_ci.py
++++ b/scripts/qa/atlas_parity03_c4_ci.py
+@@ -30,6 +30,8 @@ C3 = "docs/missions/atlas-parity-03/c3-contract-gate"
+ C4 = "docs/missions/atlas-parity-03/c4-full-convergence"
+ COMPOSITION = "c120f8ae9e455e19b4e0bcd35f47ec0fd7a0117c"
+ COMPOSITION_TREE = "3f1f378a3e39b0f148effdc010177144fe29e7c4"
++C4_BASELINE = "72d9b94e613a57c82a5afd309796f44b271e2185"
++C4_BASELINE_TREE = "0a622663ca40232d6143659f82cfe9ce43702e90"
+ # The only C2 frozen-file override is its now-inapplicable shell-isolation
+ # assertion. The replacement asserts active representable P03 and inactive rich
+ # demonstrators; original bytes remain verified in the immutable C2 manifest.
+@@ -116,11 +118,26 @@ def tree(ref):
+     return result
+ 
+ 
++def load_ap04_guard():
++    spec = importlib.util.spec_from_file_location(
++        "atlas_parity04_doc_successor", ROOT / "scripts/qa/atlas_parity04_doc_ci.py")
++    require(spec is not None and spec.loader is not None, "AP04 successor guard is unavailable")
++    module = importlib.util.module_from_spec(spec)
++    sys.modules[spec.name] = module
++    spec.loader.exec_module(module)
++    return module
++
++
+ def inputs(output):
+     report = {**identity(), "status": "FAIL", "scope": "C4_COMPOSED_INPUT_BINDING"}
+     try:
+         require(not git("status", "--porcelain", "--untracked-files=normal"),
+                 "Exact-SHA input evidence requires a clean checkout")
++        require(git("rev-parse", C4_BASELINE + "^{tree}") == C4_BASELINE_TREE,
++                "Frozen C4 baseline tree differs")
++        require(subprocess.run(["git", "merge-base", "--is-ancestor", C4_BASELINE, "HEAD"],
++                               cwd=ROOT).returncode == 0,
++                "C4 successor must descend from the frozen C4 baseline")
+         for name, (sha, expected_tree) in INPUTS.items():
+             require(git("rev-parse", sha + "^{tree}") == expected_tree, name + " tree differs")
+             require(subprocess.run(["git", "merge-base", "--is-ancestor", sha, "HEAD"],
+@@ -148,13 +165,26 @@ def inputs(output):
+                     "P03 frozen blob changed: " + item["path"])
+         require(set(P03_C4_ADAPTERS) <= {item["path"] for item in frozen["files"]},
+                 "C4 contextual adapter must target exactly the declared frozen test")
++
++        # C4 authorship is frozen at C4_BASELINE. Successor documents and their
++        # CI controls are bound by the separate AP04 overlay; they are never
++        # retroactively inserted into this historical manifest.
+         manifest_path = C4 + "/MANIFEST.sha256"
+-        own = historical_manifest("HEAD", manifest_path, current=True)
+-        declared = {line.split("  ", 1)[1] for line in
+-                    (ROOT / manifest_path).read_text(encoding="utf-8").splitlines()}
+-        authored = set(git("diff", "--name-only", COMPOSITION, "HEAD").splitlines()) - {manifest_path}
+-        require(declared == authored, "C4 manifest must cover every authored path, with no arbitrary exclusions")
+-        report["current_C4_manifest"] = {**own, "authored_paths": sorted(authored), "coverage_exact": True}
++        own = historical_manifest(C4_BASELINE, manifest_path)
++        manifest_raw = git("show", C4_BASELINE + ":" + manifest_path, binary=True)
++        require((ROOT / manifest_path).is_file()
++                and not (ROOT / manifest_path).is_symlink()
++                and (ROOT / manifest_path).read_bytes() == manifest_raw,
++                "Historical C4 manifest bytes changed in successor")
++        declared = {line.split("  ", 1)[1] for line in manifest_raw.decode("utf-8").splitlines()}
++        authored = set(git("diff", "--name-only", COMPOSITION, C4_BASELINE).splitlines()) - {manifest_path}
++        require(declared == authored,
++                "Frozen C4 manifest must exactly cover C4 authorship, excluding successor overlays")
++        report["current_C4_manifest"] = {
++            **own, "frozen_at_sha": C4_BASELINE, "authored_paths": sorted(authored),
++            "coverage_exact": True, "successor_paths_in_historical_manifest": False,
++        }
++
+         baseline_csv = csv.DictReader(io.StringIO(git("show", c3 + ":" + C3 + "/TRACEABILITY-MATRIX.csv")))
+         original_rows = {row["p01_id"]: row for row in baseline_csv}
+         with (ROOT / C4 / "TRACEABILITY-MATRIX.csv").open(encoding="utf-8", newline="") as stream:
+@@ -195,28 +225,42 @@ def inputs(output):
+             require(not re.search(r"\b(?:renderCandidate|validateCandidate)\b", text)
+                     and "p03-candidate/1" not in text, "Rich demonstrator activated in main shell")
+         require(not (ROOT / ".specify/feature.json").exists(), "Shared feature pointer unexpectedly present")
+-        audit_spec = importlib.util.spec_from_file_location("c4_frozen_audit",
+-            ROOT / "scripts/qa/atlas_parity02_p06_audit.py")
+-        audit = importlib.util.module_from_spec(audit_spec)
+-        audit_spec.loader.exec_module(audit)
+-        protected = audit.audit(ROOT)
+-        require(protected["status"] == "PASS_SCOPED" and not protected["errors"],
+-                "Protocol/public-source/governance bytes changed")
++
++        head = report["tested_sha"]
++        if head == C4_BASELINE:
++            audit_spec = importlib.util.spec_from_file_location(
++                "c4_frozen_audit", ROOT / "scripts/qa/atlas_parity02_p06_audit.py")
++            audit = importlib.util.module_from_spec(audit_spec)
++            audit_spec.loader.exec_module(audit)
++            protected = audit.audit(ROOT)
++            require(protected["status"] == "PASS_SCOPED" and not protected["errors"],
++                    "Protocol/public-source/governance bytes changed")
++            successor_overlay = None
++        else:
++            guard = load_ap04_guard()
++            successor_overlay = guard.audit(ROOT)
++            require(successor_overlay["status"] == "PASS",
++                    successor_overlay.get("error", "AP04 documentation successor guard failed"))
++            protected = successor_overlay["frozen_boundary"]
++            require(not protected["historical_protection_weakened"],
++                    "AP04 successor weakened the historical frozen boundary")
++
+         origins = []
+         for path, blob in sorted(current.items()):
+             if originals["C1"].get(path) == blob:
+                 continue
+             matches = [name for name, files in originals.items() if files.get(path) == blob]
+             origins.append({"path": path, "candidate_blob": blob, "unchanged_input_blobs": matches,
+-                            "origin": matches[0] if matches else "C4_DELTA"})
++                            "origin": matches[0] if matches else "C4_OR_SUCCESSOR_DELTA"})
+         report.update(status="PASS", inputs={name: {"sha": sha, "tree": value}
+                       for name, (sha, value) in INPUTS.items()}, p03_frozen_source_files=25,
+                       p03_current_unchanged_files=24, p03_contextual_test_adapters=P03_C4_ADAPTERS,
+                       inherited_fixture_files=len(fixture_paths), protected_inputs=protected,
++                      successor_overlay=successor_overlay,
+                       composition_blob_origins=origins, assets=ASSETS, rich_demonstrators_active=False,
+                       representable_P03_imports_declared=True,
+                       main_application_browser_evidence="REQUIRED_SEPARATE_GATE",
+-                      historical_C1_C2_C3_results_are_current_C4_proof=False)
++                      historical_C1_C2_C3_C4_results_are_current_successor_proof=False)
+     except Exception as error:
+         report["error"] = f"{type(error).__name__}: {error}"
+     save(output / "INPUT-SHAS.json", report)
+diff --git a/scripts/qa/atlas_parity04_doc_ci.py b/scripts/qa/atlas_parity04_doc_ci.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..21a47419b2fa212baa410a01e011dd009ced0476
+--- /dev/null
++++ b/scripts/qa/atlas_parity04_doc_ci.py
+@@ -0,0 +1,706 @@
++"""Fail-closed AP04 documentation-successor guard and CI dispatcher.
++
++The historical P06, P03 and C4 controls remain unchanged in meaning. This
++module recognizes one exact documentation successor of the frozen C4 object,
++verifies its original nine documents by Git object identity, and binds every CI
++repair file through a supplemental manifest. It grants no architectural,
++scientific, merge, release, deployment or promotion authority.
++"""
++from __future__ import annotations
++
++import argparse
++import ast
++from dataclasses import dataclass
++from datetime import datetime, timezone
++import hashlib
++import importlib.util
++import json
++import os
++from pathlib import Path, PurePosixPath
++import re
++import subprocess
++import sys
++from typing import Callable, Iterable
++import xml.etree.ElementTree as ET
++
++ROOT = Path(__file__).resolve().parents[2]
++C4_SHA = "72d9b94e613a57c82a5afd309796f44b271e2185"
++C4_TREE = "0a622663ca40232d6143659f82cfe9ce43702e90"
++DOC_SHA = "c25d37998dac7174067a2819391f3af1625f96dc"
++DOC_TREE = "e6eacdd02a329f88bc0dd656523b84a8fec9217e"
++P03_INPUT_SHA = "ead1f753f52f22035326b7366dd2231c62775765"
++ADR_PATH = "docs/architecture/ADR-0003-legacy-compatibility-proposed.md"
++GATES_PATH = "docs/missions/atlas-parity-04/GATES.json"
++C4_MANIFEST = "docs/missions/atlas-parity-03/c4-full-convergence/MANIFEST.sha256"
++OVERLAY_ROOT = "docs/missions/atlas-parity-04/ci-repair"
++OVERLAY_CONTRACT = OVERLAY_ROOT + "/OVERLAY.json"
++OVERLAY_MANIFEST = OVERLAY_ROOT + "/MANIFEST.sha256"
++
++DOC_PATHS = frozenset({
++    ADR_PATH,
++    "docs/missions/atlas-parity-04/ACTION-PLAN.md",
++    "docs/missions/atlas-parity-04/DECISION-REGISTER.md",
++    "docs/missions/atlas-parity-04/EVIDENCE-REGISTER.md",
++    GATES_PATH,
++    "docs/missions/atlas-parity-04/INTEROPERABILITY-GUARDRAILS.md",
++    "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
++    "docs/missions/atlas-parity-04/README.md",
++    "docs/missions/atlas-parity-04/RESULT-REVIEW-TEMPLATE.md",
++})
++
++MODIFIED_REPAIR_PATHS = frozenset({
++    ".github/workflows/atlas-parity02.yml",
++    ".github/workflows/atlas-parity03-p03-gates.yml",
++    ".github/workflows/atlas003-speckit.yml",
++    ".github/workflows/atlas021.yml",
++    "scripts/qa/atlas_parity03_c4_ci.py",
++})
++
++NEW_REPAIR_PATHS = frozenset({
++    ".github/workflows/atlas-parity04-doc.yml",
++    "scripts/qa/atlas_parity04_doc_ci.py",
++    "tests/qa/test_atlas_parity04_doc_ci.py",
++    OVERLAY_ROOT + "/RESULT.md",
++    OVERLAY_ROOT + "/INPUT-SHAS.json",
++    OVERLAY_ROOT + "/CI-ROOT-CAUSE.md",
++    OVERLAY_ROOT + "/SUCCESSOR-DOC-CONTRACT.md",
++    OVERLAY_ROOT + "/NEGATIVE-TESTS.json",
++    OVERLAY_ROOT + "/CI-EVIDENCE.json",
++    OVERLAY_ROOT + "/DECISION-COMPLIANCE.md",
++    OVERLAY_ROOT + "/INDEPENDENT-REVIEW.md",
++    OVERLAY_ROOT + "/HANDOFF.json",
++    OVERLAY_CONTRACT,
++    OVERLAY_MANIFEST,
++})
++
++REPAIR_PATHS = MODIFIED_REPAIR_PATHS | NEW_REPAIR_PATHS
++
++C4_FROZEN_LITERAL_NAMES = frozenset({
++    "INPUTS", "P03", "C1", "C2", "C3", "C4", "COMPOSITION",
++    "COMPOSITION_TREE", "P03_C4_ADAPTERS", "ASSETS",
++})
++
++WORKFLOW_PATHS = frozenset({
++    ".github/workflows/atlas-parity02.yml",
++    ".github/workflows/atlas-parity03-p03-gates.yml",
++    ".github/workflows/atlas003-speckit.yml",
++    ".github/workflows/atlas021.yml",
++    ".github/workflows/atlas-parity04-doc.yml",
++})
++
++FORBIDDEN_WORKFLOW_MARKERS = (
++    "github.head_ref", "github.ref_name", "continue-on-error", "paths-ignore",
++    "if: false", "|| true", "pull_request_target",
++)
++
++NEW_AP04_ACTION_PINS = (
++    "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
++    "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
++    "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
++)
++
++
++@dataclass(frozen=True)
++class SuccessorContract:
++    c4_sha: str
++    c4_tree: str
++    doc_sha: str
++    doc_tree: str
++    doc_paths: frozenset[str]
++    repair_paths: frozenset[str]
++    modified_repair_paths: frozenset[str]
++    adr_path: str
++    gates_path: str
++    c4_manifest: str
++    overlay_contract: str
++    overlay_manifest: str
++    plan_id: str = "AP04-POR-v1.0-draft"
++
++
++PRODUCTION_CONTRACT = SuccessorContract(
++    c4_sha=C4_SHA,
++    c4_tree=C4_TREE,
++    doc_sha=DOC_SHA,
++    doc_tree=DOC_TREE,
++    doc_paths=DOC_PATHS,
++    repair_paths=REPAIR_PATHS,
++    modified_repair_paths=MODIFIED_REPAIR_PATHS,
++    adr_path=ADR_PATH,
++    gates_path=GATES_PATH,
++    c4_manifest=C4_MANIFEST,
++    overlay_contract=OVERLAY_CONTRACT,
++    overlay_manifest=OVERLAY_MANIFEST,
++)
++
++
++class GuardError(RuntimeError):
++    """A closed gate with an exact diagnostic."""
++
++
++def require(condition: object, message: str) -> None:
++    if not condition:
++        raise GuardError(message)
++
++
++def sha256(raw: bytes) -> str:
++    return hashlib.sha256(raw).hexdigest()
++
++
++def git(root: Path, *args: str, binary: bool = False, check: bool = True):
++    completed = subprocess.run(
++        ["git", *args], cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
++        check=False,
++    )
++    if check and completed.returncode != 0:
++        stderr = completed.stderr.decode("utf-8", "replace").strip()
++        raise GuardError("git " + " ".join(args) + " failed: " + stderr)
++    return completed.stdout if binary else completed.stdout.decode("utf-8").strip()
++
++
++def is_ancestor(root: Path, ancestor: str, descendant: str = "HEAD") -> bool:
++    return subprocess.run(
++        ["git", "merge-base", "--is-ancestor", ancestor, descendant],
++        cwd=root, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
++        check=False,
++    ).returncode == 0
++
++
++def tree_entry(root: Path, ref: str, path: str) -> tuple[str, str, str]:
++    raw = git(root, "ls-tree", "-z", ref, "--", path, binary=True)
++    entries = [entry for entry in raw.split(b"\0") if entry]
++    require(len(entries) == 1, f"Expected exactly one Git tree entry: {ref}:{path}")
++    header, raw_path = entries[0].split(b"\t", 1)
++    mode, kind, oid = header.decode("ascii").split()
++    require(raw_path.decode("utf-8") == path, f"Git path identity mismatch: {path}")
++    return mode, kind, oid
++
++
++def object_bytes(root: Path, ref: str, path: str) -> bytes:
++    return git(root, "show", f"{ref}:{path}", binary=True)
++
++
++def safe_manifest_path(path: str, manifest_path: str) -> bool:
++    pure = PurePosixPath(path)
++    return (
++        path == pure.as_posix()
++        and not pure.is_absolute()
++        and ".." not in pure.parts
++        and "\\" not in path
++        and path != manifest_path
++    )
++
++
++def parse_manifest(raw: bytes, manifest_path: str) -> dict[str, str]:
++    entries: dict[str, str] = {}
++    for line in raw.decode("utf-8").splitlines():
++        match = re.fullmatch(r"([0-9a-f]{64})  ([^\r\n]+)", line)
++        require(match is not None, f"Malformed supplemental manifest line: {line!r}")
++        digest, path = match.groups()
++        require(safe_manifest_path(path, manifest_path), f"Unsafe manifest path: {path}")
++        require(path not in entries, f"Repeated manifest path: {path}")
++        entries[path] = digest
++    return entries
++
++
++def parse_raw_diff(root: Path, base: str, target: str) -> dict[str, dict[str, str]]:
++    raw = git(
++        root, "diff", "--raw", "--full-index", "--abbrev=40", "-z", "--no-renames",
++        base, target, "--", binary=True,
++    )
++    parts = raw.split(b"\0")
++    changes: dict[str, dict[str, str]] = {}
++    index = 0
++    while index < len(parts) and parts[index]:
++        header = parts[index].decode("ascii")
++        require(index + 1 < len(parts), "Truncated raw Git diff")
++        path = parts[index + 1].decode("utf-8")
++        index += 2
++        match = re.fullmatch(
++            r":([0-7]{6}) ([0-7]{6}) ([0-9a-f]{40}) ([0-9a-f]{40}) ([A-Z])",
++            header,
++        )
++        require(match is not None, f"Unsupported raw Git diff record: {header}")
++        old_mode, new_mode, old_oid, new_oid, status = match.groups()
++        require(path not in changes, f"Repeated changed path: {path}")
++        changes[path] = {
++            "status": status,
++            "old_mode": old_mode,
++            "new_mode": new_mode,
++            "old_oid": old_oid,
++            "new_oid": new_oid,
++        }
++    require(all(not part for part in parts[index:]), "Unexpected trailing raw diff data")
++    return changes
++
++
++def commit_sequence(root: Path, after: str, head: str) -> list[str]:
++    value = git(root, "rev-list", "--reverse", f"{after}..{head}")
++    return value.splitlines() if value else []
++
++
++def verify_linear_repair_history(
++    root: Path, contract: SuccessorContract, head: str,
++) -> list[dict[str, object]]:
++    commits = commit_sequence(root, contract.doc_sha, head)
++    history: list[dict[str, object]] = []
++    for commit in commits:
++        parents = git(root, "rev-list", "--parents", "-n", "1", commit).split()
++        require(len(parents) == 2, f"Repair history must be fast-forward and non-merge: {commit}")
++        parent = parents[1]
++        delta = parse_raw_diff(root, parent, commit)
++        rejected = sorted(set(delta) - set(contract.repair_paths))
++        require(not rejected, f"Repair commit changed unauthorized paths: {rejected}")
++        for path, entry in delta.items():
++            require(entry["status"] in {"A", "M"}, f"Repair commit uses forbidden status {entry['status']}: {path}")
++            require(entry["new_mode"] == "100644", f"Repair path must remain a regular 100644 blob: {path}")
++            if entry["status"] == "M":
++                require(entry["old_mode"] == "100644", f"Repair changed file mode/type: {path}")
++        history.append({"commit": commit, "parent": parent, "paths": sorted(delta)})
++    return history
++
++
++def top_level_literals(raw: bytes, names: Iterable[str], source: str) -> dict[str, object]:
++    wanted = set(names)
++    values: dict[str, object] = {}
++    try:
++        tree = ast.parse(raw.decode("utf-8"), filename=source)
++    except (SyntaxError, UnicodeDecodeError) as error:
++        raise GuardError(f"Cannot parse frozen Python declarations in {source}: {error}") from error
++    for node in tree.body:
++        name: str | None = None
++        value = None
++        if isinstance(node, ast.Assign) and len(node.targets) == 1 \
++                and isinstance(node.targets[0], ast.Name):
++            name, value = node.targets[0].id, node.value
++        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
++            name, value = node.target.id, node.value
++        if name not in wanted:
++            continue
++        require(name not in values, f"Repeated frozen declaration {name} in {source}")
++        try:
++            values[name] = ast.literal_eval(value)
++        except (ValueError, TypeError) as error:
++            raise GuardError(f"Frozen declaration {name} is no longer literal in {source}") from error
++    missing = sorted(wanted - set(values))
++    require(not missing, f"Missing frozen declarations in {source}: {missing}")
++    return values
++
++
++def verify_c4_frozen_literals(root: Path, contract: SuccessorContract) -> dict[str, object]:
++    path = "scripts/qa/atlas_parity03_c4_ci.py"
++    baseline = top_level_literals(
++        object_bytes(root, contract.c4_sha, path), C4_FROZEN_LITERAL_NAMES,
++        f"{contract.c4_sha}:{path}",
++    )
++    current = top_level_literals(
++        (root / path).read_bytes(), C4_FROZEN_LITERAL_NAMES, f"HEAD:{path}",
++    )
++    require(current == baseline,
++            "Frozen C4 input, adapter or asset declarations changed in the successor")
++    return {"path": path, "frozen_literals": sorted(baseline), "unchanged": True}
++
++
++def workflow_action_pins(raw: bytes, path: str) -> list[str]:
++    lines = []
++    for line in raw.decode("utf-8").splitlines():
++        stripped = line.strip()
++        if stripped.startswith("uses:") or stripped.startswith("- uses:"):
++            value = stripped.split("uses:", 1)[1].strip()
++            require(re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+@[0-9a-f]{40}", value) is not None,
++                    f"Workflow action is not pinned by full SHA in {path}: {value}")
++            lines.append(value)
++    return lines
++
++
++def verify_workflow_safety(root: Path, contract: SuccessorContract) -> dict[str, object]:
++    reports: dict[str, object] = {}
++    for path in sorted(WORKFLOW_PATHS):
++        current = (root / path).read_bytes()
++        text = current.decode("utf-8")
++        for marker in FORBIDDEN_WORKFLOW_MARKERS:
++            require(marker not in text, f"Forbidden workflow routing/bypass marker in {path}: {marker}")
++        current_pins = workflow_action_pins(current, path)
++        if path in contract.modified_repair_paths:
++            baseline_pins = workflow_action_pins(object_bytes(root, contract.c4_sha, path), path)
++            require(current_pins == baseline_pins, f"Existing workflow action pins changed: {path}")
++        else:
++            require(path == ".github/workflows/atlas-parity04-doc.yml",
++                    f"Unexpected new workflow in safety check: {path}")
++            require(tuple(current_pins) == NEW_AP04_ACTION_PINS,
++                    f"New AP04 workflow action pins/order differ: {path}")
++        reports[path] = {"action_pins": current_pins, "forbidden_markers": False}
++    return reports
++
++
++def load_module(path: Path, name: str):
++    spec = importlib.util.spec_from_file_location(name, path)
++    require(spec is not None and spec.loader is not None, f"Cannot load audit module: {path}")
++    module = importlib.util.module_from_spec(spec)
++    sys.modules[spec.name] = module
++    spec.loader.exec_module(module)
++    return module
++
++
++def default_boundary_audit(root: Path, contract: SuccessorContract) -> dict:
++    module = load_module(root / "scripts/qa/atlas_parity02_p06_audit.py", "ap04_historical_p06")
++    raw = module.audit(root)
++    expected = [{"path": contract.adr_path, "reason": "UNEXPECTED_PROTECTED_FILE"}]
++    require(raw.get("errors") == expected, "Historical P06 differs from the one exact AP04 ADR rejection")
++    require(raw.get("status") == "FAIL", "Historical P06 must remain strict and RED for the new ADR")
++    return {
++        "status": "PASS_EXACT_SUCCESSOR_EXCEPTION",
++        "historical_audit_status": raw["status"],
++        "historical_errors": raw["errors"],
++        "authorized_exception": {
++            "path": contract.adr_path,
++            "reason": "EXACT_BLOB_PINNED_BY_BASELINE_DOC_SHA",
++            "does_not_authorize_prefix": "docs/architecture/",
++        },
++        "historical_protection_weakened": False,
++    }
++
++
++def verify_original_documents(
++    root: Path, contract: SuccessorContract,
++) -> list[dict[str, str]]:
++    documents: list[dict[str, str]] = []
++    for path in sorted(contract.doc_paths):
++        baseline_mode, baseline_kind, baseline_oid = tree_entry(root, contract.doc_sha, path)
++        head_mode, head_kind, head_oid = tree_entry(root, "HEAD", path)
++        require(baseline_mode == head_mode == "100644", f"Original AP04 document mode changed: {path}")
++        require(baseline_kind == head_kind == "blob", f"Original AP04 document is not a regular blob: {path}")
++        baseline_raw = object_bytes(root, contract.doc_sha, path)
++        current = root / path
++        require(current.is_file() and not current.is_symlink(), f"Original AP04 document missing/nonregular: {path}")
++        require(current.read_bytes() == baseline_raw, f"Original AP04 document bytes changed: {path}")
++        require(head_oid == baseline_oid, f"Original AP04 document blob changed: {path}")
++        documents.append({"path": path, "blob": baseline_oid, "sha256": sha256(baseline_raw)})
++    return documents
++
++
++def verify_overlay(
++    root: Path, contract: SuccessorContract,
++) -> tuple[dict[str, object], dict[str, str], str]:
++    contract_path = root / contract.overlay_contract
++    manifest_path = root / contract.overlay_manifest
++    require(contract_path.is_file() and not contract_path.is_symlink(), "Missing/nonregular overlay contract")
++    require(manifest_path.is_file() and not manifest_path.is_symlink(), "Missing/nonregular overlay manifest")
++
++    overlay = json.loads(contract_path.read_text(encoding="utf-8"))
++    require(overlay.get("schema") == "atlas-parity04-doc-ci-overlay-v1", "Overlay schema mismatch")
++    require(overlay.get("plan_id") == contract.plan_id, "Overlay plan identity mismatch")
++    require(overlay.get("base_sha") == contract.c4_sha, "Overlay C4 baseline mismatch")
++    require(overlay.get("baseline_doc_sha") == contract.doc_sha, "Overlay documentation baseline mismatch")
++    require(overlay.get("adr0003") == "PROPOSED_NOT_APPROVED", "Overlay promoted ADR-0003")
++    require(overlay.get("historical_manifests") == "IMMUTABLE", "Overlay permits historical manifest mutation")
++    authorizations = overlay.get("authorized_paths")
++    require(isinstance(authorizations, list), "Overlay authorized_paths must be a list")
++    purposes: dict[str, str] = {}
++    for item in authorizations:
++        require(isinstance(item, dict), "Overlay authorization entry must be an object")
++        path, purpose = item.get("path"), item.get("purpose")
++        require(isinstance(path, str) and isinstance(purpose, str) and purpose.strip(),
++                "Overlay authorization requires path and nonempty purpose")
++        require(path not in purposes, f"Repeated overlay authorization: {path}")
++        purposes[path] = purpose.strip()
++    require(set(purposes) == set(contract.repair_paths), "Overlay path set is incomplete or overbroad")
++
++    manifest_raw = manifest_path.read_bytes()
++    entries = parse_manifest(manifest_raw, contract.overlay_manifest)
++    canonical_manifest = "".join(
++        f"{entries[path]}  {path}\n" for path in sorted(entries)
++    ).encode("utf-8")
++    require(manifest_raw == canonical_manifest,
++            "Supplemental manifest must use canonical sorted bytes")
++    expected_entries = set(contract.repair_paths) - {contract.overlay_manifest}
++    require(set(entries) == expected_entries, "Supplemental manifest entries are incomplete or overbroad")
++    for path, expected_hash in sorted(entries.items()):
++        target = root / path
++        require(target.is_file() and not target.is_symlink(), f"Manifest target missing/nonregular: {path}")
++        mode, kind, _ = tree_entry(root, "HEAD", path)
++        require(mode == "100644" and kind == "blob", f"Manifest target has forbidden mode/type: {path}")
++        require(sha256(target.read_bytes()) == expected_hash, f"Supplemental manifest hash mismatch: {path}")
++    return overlay, entries, sha256(manifest_raw)
++
++
++def verify_final_delta(
++    root: Path, contract: SuccessorContract, head: str,
++) -> tuple[dict[str, dict[str, str]], list[str]]:
++    changes = parse_raw_diff(root, contract.c4_sha, head)
++    allowed = set(contract.doc_paths) | set(contract.repair_paths)
++    rejected = sorted(set(changes) - allowed)
++    missing = sorted(allowed - set(changes))
++    require(not rejected, f"Unexpected path in complete C4 successor delta: {rejected}")
++    require(not missing, f"Authorized successor path missing from complete delta: {missing}")
++
++    expected_modified = set(contract.modified_repair_paths)
++    expected_added = allowed - expected_modified
++    for path, entry in changes.items():
++        expected_status = "M" if path in expected_modified else "A"
++        require(entry["status"] == expected_status,
++                f"Unexpected Git status for {path}: {entry['status']} != {expected_status}")
++        require(entry["new_mode"] == "100644", f"Successor path must be a regular 100644 blob: {path}")
++        if expected_status == "M":
++            require(entry["old_mode"] == "100644", f"Modified control changed mode/type: {path}")
++        else:
++            require(entry["old_mode"] == "000000", f"Added successor path unexpectedly existed in C4: {path}")
++    return changes, rejected
++
++
++def write_json(path: Path, payload: dict) -> None:
++    path.parent.mkdir(parents=True, exist_ok=True)
++    temporary = path.with_name(path.name + ".tmp")
++    temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++    temporary.replace(path)
++
++
++def write_junit(path: Path, report: dict) -> None:
++    path.parent.mkdir(parents=True, exist_ok=True)
++    checks = [
++        "c4_identity", "documentation_identity", "linear_history", "complete_delta",
++        "supplemental_manifest", "historical_boundary", "adr_state",
++    ]
++    failed = report.get("status") != "PASS"
++    suites = ET.Element("testsuites")
++    suite = ET.SubElement(
++        suites, "testsuite", name="AP04-documentation-successor",
++        tests=str(len(checks)), failures="1" if failed else "0", errors="0", skipped="0",
++    )
++    for index, check in enumerate(checks):
++        case = ET.SubElement(suite, "testcase", classname="AP04DocSuccessor", name=check)
++        if failed and index == 0:
++            ET.SubElement(case, "failure", message=report.get("error", "guard failed"))
++    ET.ElementTree(suites).write(path, encoding="utf-8", xml_declaration=True)
++
++
++def audit(
++    root: Path = ROOT,
++    *,
++    contract: SuccessorContract = PRODUCTION_CONTRACT,
++    boundary_audit: Callable[[Path, SuccessorContract], dict] | None = None,
++    output: Path | None = None,
++    junit: Path | None = None,
++) -> dict:
++    root = root.resolve()
++    report: dict[str, object] = {
++        "status": "FAIL",
++        "scope": "AP04_DOCUMENTATION_SUCCESSOR_CI_ONLY",
++        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
++        "reasoning_effective": "UNVERIFIED",
++        "base_sha": contract.c4_sha,
++        "base_tree": contract.c4_tree,
++        "baseline_doc_sha": contract.doc_sha,
++        "baseline_doc_tree": contract.doc_tree,
++        "adr0003": "PROPOSED_NOT_APPROVED",
++        "architectural_approval": False,
++        "scientific_approval": False,
++        "merge_release_deploy_promotion": "NOT_AUTHORIZED",
++    }
++    try:
++        require((root / ".git").exists(), "Repository root is not a Git checkout")
++        require(not git(root, "status", "--porcelain", "--untracked-files=normal"),
++                "Successor evidence requires a clean checkout")
++        head = git(root, "rev-parse", "HEAD")
++        head_tree = git(root, "rev-parse", "HEAD^{tree}")
++        report.update(tested_sha=head, tested_tree=head_tree)
++
++        require(git(root, "rev-parse", contract.c4_sha + "^{tree}") == contract.c4_tree,
++                "Frozen C4 tree identity mismatch")
++        require(git(root, "rev-parse", contract.doc_sha + "^{tree}") == contract.doc_tree,
++                "Published AP04 documentation tree identity mismatch")
++        doc_parents = git(root, "rev-list", "--parents", "-n", "1", contract.doc_sha).split()
++        require(doc_parents == [contract.doc_sha, contract.c4_sha],
++                "Published AP04 documentation commit is not the direct C4 successor")
++        require(is_ancestor(root, contract.c4_sha, head), "HEAD does not descend from frozen C4")
++        require(is_ancestor(root, contract.doc_sha, head), "HEAD does not descend from published AP04 documents")
++
++        c4_manifest_current = root / contract.c4_manifest
++        c4_manifest_raw = object_bytes(root, contract.c4_sha, contract.c4_manifest)
++        require(c4_manifest_current.is_file() and not c4_manifest_current.is_symlink(),
++                "Historical C4 manifest is missing/nonregular")
++        require(c4_manifest_current.read_bytes() == c4_manifest_raw,
++                "Historical C4 manifest bytes changed")
++        require(tree_entry(root, "HEAD", contract.c4_manifest)[2]
++                == tree_entry(root, contract.c4_sha, contract.c4_manifest)[2],
++                "Historical C4 manifest blob changed")
++
++        documents = verify_original_documents(root, contract)
++        gates = json.loads((root / contract.gates_path).read_text(encoding="utf-8"))
++        require(gates.get("plan_id") == contract.plan_id, "AP04 plan identity changed")
++        require(gates.get("adr0003") == "PROPOSED_NOT_APPROVED", "ADR-0003 is no longer proposed")
++        require(gates.get("scope") == "DOCUMENTATION_ONLY", "Published AP04 scope changed")
++        non_authorizations = set(gates.get("non_authorizations", []))
++        require({"merge_main", "release", "deploy", "promotion"} <= non_authorizations,
++                "Published AP04 non-authorizations were weakened")
++
++        changes, rejected = verify_final_delta(root, contract, head)
++        history = verify_linear_repair_history(root, contract, head)
++        c4_frozen_literals = verify_c4_frozen_literals(root, contract)
++        workflow_safety = verify_workflow_safety(root, contract)
++        overlay, entries, manifest_hash = verify_overlay(root, contract)
++        frozen_boundary = (boundary_audit or default_boundary_audit)(root, contract)
++
++        report.update(
++            status="PASS",
++            mode="AP04_DOCUMENTATION_SUCCESSOR",
++            original_documents=documents,
++            original_document_count=len(documents),
++            c4_manifest={"path": contract.c4_manifest, "sha256": sha256(c4_manifest_raw),
++                         "source_sha": contract.c4_sha, "immutable": True},
++            complete_delta={"paths": sorted(changes), "count": len(changes),
++                            "rejected_paths": rejected,
++                            "statuses": {path: entry["status"] for path, entry in sorted(changes.items())}},
++            repair_history=history,
++            c4_frozen_literals=c4_frozen_literals,
++            workflow_safety=workflow_safety,
++            overlay={"path": contract.overlay_contract, "authorized_paths": len(overlay["authorized_paths"]),
++                     "manifest_path": contract.overlay_manifest, "manifest_sha256": manifest_hash,
++                     "manifest_entries": entries},
++            frozen_boundary=frozen_boundary,
++            limitations=[
++                "CI engineering evidence only; no ADR-0003 approval",
++                "No private source, host replay, migration, merge, release, deployment or promotion",
++                "Terminal GitHub run IDs and independent review remain separate closing gates",
++            ],
++        )
++    except Exception as error:  # fail closed and preserve an attributable receipt
++        report["error"] = f"{type(error).__name__}: {error}"
++
++    if output is not None:
++        write_json(output, report)
++    if junit is not None:
++        write_junit(junit, report)
++    return report
++
++
++def classify(root: Path = ROOT) -> str:
++    root = root.resolve()
++    head = git(root, "rev-parse", "HEAD")
++    if head == C4_SHA:
++        require(git(root, "rev-parse", "HEAD^{tree}") == C4_TREE, "Exact C4 SHA has unexpected tree")
++        return "C4_BASELINE"
++    if is_ancestor(root, DOC_SHA, head):
++        report = audit(root)
++        require(report["status"] == "PASS", str(report.get("error", "AP04 successor guard failed")))
++        return "AP04_DOCUMENTATION_SUCCESSOR"
++    if is_ancestor(root, P03_INPUT_SHA, head) and not is_ancestor(root, C4_SHA, head):
++        return "P03_ISOLATED"
++    raise GuardError("Candidate is not an exact C4, AP04 documentation successor or isolated P03 lineage")
++
++
++def run_python(root: Path, relative_script: str, *args: str) -> int:
++    return subprocess.run([sys.executable, str(root / relative_script), *args], cwd=root, check=False).returncode
++
++
++def dispatch_p03_inputs(root: Path, output_dir: Path) -> int:
++    mode = classify(root)
++    script = "scripts/qa/atlas_parity03_p03_ci.py" if mode == "P03_ISOLATED" \
++        else "scripts/qa/atlas_parity03_c4_ci.py"
++    return run_python(root, script, "inputs", "--output-dir", str(output_dir))
++
++
++def dispatch_p03_browser(root: Path, output_dir: Path) -> int:
++    mode = classify(root)
++    if mode == "P03_ISOLATED":
++        return run_python(root, "scripts/qa/atlas_parity03_p03_ci.py", "browser",
++                          "--output-dir", str(output_dir))
++    return run_python(root, "scripts/qa/atlas_parity03_c4_ci.py", "p03-browser",
++                      "--output-dir", str(output_dir))
++
++
++def dispatch_installed(root: Path, repo: Path, work: Path, install_test_tools: bool) -> int:
++    mode = classify(root)
++    common = ["--repo", str(repo), "--work", str(work)]
++    if install_test_tools:
++        common.append("--install-test-tools")
++    if mode == "P03_ISOLATED":
++        return run_python(root, "scripts/qa/atlas_parity02_p06_installed_checks.py", *common)
++    return run_python(root, "scripts/qa/atlas_parity03_c4_ci.py", "installed", *common)
++
++
++def dispatch_speckit(root: Path) -> int:
++    mode = classify(root)
++    option = "--allow-p02-c0-delta" if mode == "P03_ISOLATED" else "--allow-p03-c4-delta"
++    return run_python(root, "scripts/qa/speckit_audit.py", "--allow-presentation-delta", option)
++
++
++def dispatch_boundary(root: Path, output: Path) -> int:
++    mode = classify(root)
++    if mode == "AP04_DOCUMENTATION_SUCCESSOR":
++        report = audit(root, output=output)
++        print(json.dumps(report, ensure_ascii=True, indent=2))
++        return 0 if report["status"] == "PASS" else 1
++    return run_python(root, "scripts/qa/atlas_parity02_p06_audit.py", "--output", str(output))
++
++
++def build_parser() -> argparse.ArgumentParser:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--repo-root", type=Path, default=ROOT)
++    commands = parser.add_subparsers(dest="command", required=True)
++
++    audit_parser = commands.add_parser("audit")
++    audit_parser.add_argument("--output", type=Path,
++                              default=Path(".test-output/atlas-parity04/SUCCESSOR-DOC-RECEIPT.json"))
++    audit_parser.add_argument("--junit", type=Path,
++                              default=Path(".test-output/atlas-parity04/successor-doc-junit.xml"))
++
++    commands.add_parser("classify")
++
++    boundary = commands.add_parser("boundary")
++    boundary.add_argument("--output", type=Path, required=True)
++
++    commands.add_parser("speckit")
++
++    p03_inputs = commands.add_parser("p03-inputs")
++    p03_inputs.add_argument("--output-dir", type=Path, required=True)
++
++    p03_browser = commands.add_parser("p03-browser")
++    p03_browser.add_argument("--output-dir", type=Path, required=True)
++
++    installed = commands.add_parser("installed")
++    installed.add_argument("--repo", type=Path, required=True)
++    installed.add_argument("--work", type=Path, required=True)
++    installed.add_argument("--install-test-tools", action="store_true")
++    return parser
++
++
++def main() -> int:
++    args = build_parser().parse_args()
++    root = args.repo_root.resolve()
++    require(root == ROOT, "Alternate repository roots cannot produce production AP04 evidence")
++    if args.command == "audit":
++        report = audit(root, output=args.output.resolve(), junit=args.junit.resolve())
++        print("AP04_SUCCESSOR_SUMMARY=" + json.dumps({
++            key: report.get(key) for key in (
++                "status", "error", "tested_sha", "tested_tree", "base_sha",
++                "baseline_doc_sha", "original_document_count", "adr0003",
++            )
++        }, separators=(",", ":")))
++        return 0 if report["status"] == "PASS" else 1
++    if args.command == "classify":
++        mode = classify(root)
++        print(mode)
++        output = os.environ.get("GITHUB_OUTPUT")
++        if output:
++            with Path(output).open("a", encoding="utf-8") as stream:
++                stream.write("mode=" + mode + "\n")
++        return 0
++    if args.command == "boundary":
++        return dispatch_boundary(root, args.output.resolve())
++    if args.command == "speckit":
++        return dispatch_speckit(root)
++    if args.command == "p03-inputs":
++        return dispatch_p03_inputs(root, args.output_dir.resolve())
++    if args.command == "p03-browser":
++        return dispatch_p03_browser(root, args.output_dir.resolve())
++    if args.command == "installed":
++        return dispatch_installed(root, args.repo.resolve(), args.work.resolve(), args.install_test_tools)
++    raise GuardError("Unknown command")
++
++
++if __name__ == "__main__":
++    try:
++        raise SystemExit(main())
++    except (GuardError, OSError, ValueError, KeyError, json.JSONDecodeError) as error:
++        print(f"AP04_DOC_CI_GUARD_ERROR={type(error).__name__}: {error}", file=sys.stderr)
++        raise SystemExit(1)
+diff --git a/tests/qa/test_atlas_parity04_doc_ci.py b/tests/qa/test_atlas_parity04_doc_ci.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..ec1a31dab3960d8b287aeb31e1d68bb1fc4ecfcf
+--- /dev/null
++++ b/tests/qa/test_atlas_parity04_doc_ci.py
+@@ -0,0 +1,413 @@
++"""Adversarial probes for the exact AP04 documentation-successor contract."""
++from __future__ import annotations
++
++import hashlib
++import importlib.util
++import json
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import tempfile
++import unittest
++
++ROOT = Path(__file__).resolve().parents[2]
++SPEC = importlib.util.spec_from_file_location(
++    "atlas_parity04_doc_ci", ROOT / "scripts/qa/atlas_parity04_doc_ci.py")
++if SPEC is None or SPEC.loader is None:
++    raise RuntimeError("Cannot load AP04 successor guard")
++GUARD = importlib.util.module_from_spec(SPEC)
++sys.modules[SPEC.name] = GUARD
++SPEC.loader.exec_module(GUARD)
++
++
++class SyntheticSuccessor:
++    def __init__(self):
++        self.temporary = tempfile.TemporaryDirectory()
++        self.root = Path(self.temporary.name)
++        self.git("init", "-q")
++        self.git("config", "core.autocrlf", "false")
++        self.git("config", "core.symlinks", "false")
++        self.protected = {
++            "AGENTS.md",
++            ".specify/memory/constitution.md",
++            ".agents/skills/speckit-implement/SKILL.md",
++            "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
++            "docs/architecture/ADR-0002-protocol-candidate.md",
++            "packages/protocol/src/caderno_protocol/resources/schema.json",
++            "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
++            "packages/atlas/src/atlas_viewer/server.py",
++            "packages/atlas/src/atlas_viewer/static/index.html",
++            "tests/fixtures/atlas_parity02/p03/table-positive.json",
++            "tests/viewer/test_atlas_parity02_p03_harness.py",
++        }
++        self._create_c4()
++        self._create_documents()
++        self._create_repair()
++
++    def close(self):
++        self.temporary.cleanup()
++
++    def git(self, *args: str, input_bytes: bytes | None = None) -> str:
++        return subprocess.check_output(
++            ["git", *args], cwd=self.root, input=input_bytes,
++        ).decode("utf-8").strip()
++
++    def write(self, path: str, raw: bytes | str):
++        target = self.root / path
++        target.parent.mkdir(parents=True, exist_ok=True)
++        target.write_bytes(raw.encode("utf-8") if isinstance(raw, str) else raw)
++
++    @staticmethod
++    def c4_script(marker: str, *, assets: dict | None = None) -> str:
++        values = {
++            "INPUTS": {"C1": ("1" * 40, "2" * 40)},
++            "P03": "docs/p03", "C1": "docs/c1", "C2": "docs/c2",
++            "C3": "docs/c3", "C4": "docs/c4",
++            "COMPOSITION": "3" * 40, "COMPOSITION_TREE": "4" * 40,
++            "P03_C4_ADAPTERS": {"tests/viewer/adapter.py": "5" * 64},
++            "ASSETS": assets if assets is not None else {"/": ("index.html", "text/html")},
++        }
++        return "\n".join(f"{name} = {value!r}" for name, value in values.items()) \
++            + f"\n# {marker}\n"
++
++    @staticmethod
++    def ap04_workflow() -> str:
++        return "\n".join([
++            "name: synthetic AP04",
++            "jobs:",
++            "  guard:",
++            "    steps:",
++            *[f"      - uses: {value}" for value in GUARD.NEW_AP04_ACTION_PINS],
++            "",
++        ])
++
++    def commit(self, message: str):
++        self.git("add", "-A")
++        self.git(
++            "-c", "user.name=Synthetic AP04", "-c", "user.email=ap04@example.invalid",
++            "-c", "commit.gpgsign=false", "commit", "-qm", message,
++        )
++
++    def _create_c4(self):
++        for path in GUARD.MODIFIED_REPAIR_PATHS | self.protected:
++            self.write(path, "synthetic C4 bytes for " + path + "\n")
++        self.write("scripts/qa/atlas_parity03_c4_ci.py", self.c4_script("frozen C4"))
++        self.write(GUARD.C4_MANIFEST, "synthetic immutable C4 manifest\n")
++        self.write("scripts/qa/atlas_parity02_p06_audit.py", """
++def audit(root):
++    return {"status": "FAIL", "errors": [
++        {"path": "docs/architecture/ADR-0003-legacy-compatibility-proposed.md",
++         "reason": "UNEXPECTED_PROTECTED_FILE"}
++    ]}
++""")
++        self.commit("C4 sintética")
++        self.c4_sha = self.git("rev-parse", "HEAD")
++        self.c4_tree = self.git("rev-parse", "HEAD^{tree}")
++
++    def _create_documents(self):
++        for path in GUARD.DOC_PATHS:
++            if path == GUARD.GATES_PATH:
++                payload = {
++                    "plan_id": "AP04-POR-v1.0-draft",
++                    "adr0003": "PROPOSED_NOT_APPROVED",
++                    "scope": "DOCUMENTATION_ONLY",
++                    "non_authorizations": ["merge_main", "release", "deploy", "promotion"],
++                }
++                self.write(path, json.dumps(payload, sort_keys=True) + "\n")
++            elif path == GUARD.ADR_PATH:
++                self.write(path, "# ADR-0003\n\nStatus: PROPOSED_NOT_APPROVED\n")
++            else:
++                self.write(path, "synthetic original AP04 document: " + path + "\n")
++        self.commit("Documentação AP04 sintética")
++        self.doc_sha = self.git("rev-parse", "HEAD")
++        self.doc_tree = self.git("rev-parse", "HEAD^{tree}")
++
++    def _overlay_payload(self):
++        return {
++            "schema": "atlas-parity04-doc-ci-overlay-v1",
++            "plan_id": "AP04-POR-v1.0-draft",
++            "base_sha": self.c4_sha,
++            "baseline_doc_sha": self.doc_sha,
++            "adr0003": "PROPOSED_NOT_APPROVED",
++            "historical_manifests": "IMMUTABLE",
++            "authorized_paths": [
++                {"path": path, "purpose": "synthetic authorized repair"}
++                for path in sorted(GUARD.REPAIR_PATHS)
++            ],
++        }
++
++    def _rewrite_manifest(self):
++        lines = []
++        for path in sorted(GUARD.REPAIR_PATHS - {GUARD.OVERLAY_MANIFEST}):
++            raw = (self.root / path).read_bytes()
++            lines.append(hashlib.sha256(raw).hexdigest() + "  " + path)
++        self.write(GUARD.OVERLAY_MANIFEST, "\n".join(lines) + "\n")
++
++    def _create_repair(self):
++        for path in GUARD.MODIFIED_REPAIR_PATHS:
++            if path == "scripts/qa/atlas_parity03_c4_ci.py":
++                self.write(path, self.c4_script("authorized AP04 repair"))
++            else:
++                self.write(path, "synthetic authorized repair for " + path + "\n")
++        for path in GUARD.NEW_REPAIR_PATHS - {GUARD.OVERLAY_CONTRACT, GUARD.OVERLAY_MANIFEST}:
++            if path == ".github/workflows/atlas-parity04-doc.yml":
++                self.write(path, self.ap04_workflow())
++            else:
++                self.write(path, "synthetic new repair file: " + path + "\n")
++        self.write(GUARD.OVERLAY_CONTRACT, json.dumps(self._overlay_payload(), indent=2) + "\n")
++        self._rewrite_manifest()
++        self.commit("Reparo AP04 sintético")
++        self.repair_sha = self.git("rev-parse", "HEAD")
++
++    @property
++    def contract(self):
++        return GUARD.SuccessorContract(
++            c4_sha=self.c4_sha,
++            c4_tree=self.c4_tree,
++            doc_sha=self.doc_sha,
++            doc_tree=self.doc_tree,
++            doc_paths=GUARD.DOC_PATHS,
++            repair_paths=GUARD.REPAIR_PATHS,
++            modified_repair_paths=GUARD.MODIFIED_REPAIR_PATHS,
++            adr_path=GUARD.ADR_PATH,
++            gates_path=GUARD.GATES_PATH,
++            c4_manifest=GUARD.C4_MANIFEST,
++            overlay_contract=GUARD.OVERLAY_CONTRACT,
++            overlay_manifest=GUARD.OVERLAY_MANIFEST,
++        )
++
++    @staticmethod
++    def boundary(_root, _contract):
++        return {"status": "PASS_EXACT_SUCCESSOR_EXCEPTION", "historical_protection_weakened": False}
++
++    def report(self):
++        return GUARD.audit(self.root, contract=self.contract, boundary_audit=self.boundary)
++
++    def mutate_and_commit(self, path: str, raw: str = "unauthorized mutation\n"):
++        self.write(path, raw)
++        self.commit("Mutação adversarial")
++
++    def remove_and_commit(self, path: str):
++        target = self.root / path
++        if target.is_dir() and not target.is_symlink():
++            shutil.rmtree(target)
++        else:
++            target.unlink()
++        self.commit("Remoção adversarial")
++
++    def symlink_mode_and_commit(self, path: str):
++        blob = self.git("hash-object", "-w", "--stdin", input_bytes=b"target\n")
++        self.git("update-index", "--add", "--cacheinfo", "120000," + blob + "," + path)
++        self.git(
++            "-c", "user.name=Synthetic AP04", "-c", "user.email=ap04@example.invalid",
++            "-c", "commit.gpgsign=false", "commit", "-qm", "Symlink adversarial",
++        )
++        self.git("reset", "--hard", "HEAD")
++
++    def executable_mode_and_commit(self, path: str):
++        self.git("update-index", "--chmod=+x", "--", path)
++        self.git(
++            "-c", "user.name=Synthetic AP04", "-c", "user.email=ap04@example.invalid",
++            "-c", "commit.gpgsign=false", "commit", "-qm", "Mode adversarial",
++        )
++        self.git("reset", "--hard", "HEAD")
++
++
++class AP04SuccessorGuardTests(unittest.TestCase):
++    def setUp(self):
++        self.repo = SyntheticSuccessor()
++        self.addCleanup(self.repo.close)
++
++    def assertRed(self, report):
++        self.assertEqual(report["status"], "FAIL", report)
++        self.assertIn("error", report)
++
++    def test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name(self):
++        self.repo.git("branch", "-m", "arbitrary/successor-name-without-magic")
++        report = self.repo.report()
++        self.assertEqual(report["status"], "PASS", report)
++        self.assertEqual(report["original_document_count"], 9)
++        self.assertEqual(set(report["complete_delta"]["paths"]),
++                         set(GUARD.DOC_PATHS | GUARD.REPAIR_PATHS))
++        self.assertFalse(report["frozen_boundary"]["historical_protection_weakened"])
++
++    def test_edit_remove_and_symlink_of_adr0003_are_red(self):
++        scenarios = ("edit", "remove", "symlink")
++        for scenario in scenarios:
++            with self.subTest(scenario=scenario):
++                repo = SyntheticSuccessor()
++                try:
++                    if scenario == "edit":
++                        repo.mutate_and_commit(GUARD.ADR_PATH)
++                    elif scenario == "remove":
++                        repo.remove_and_commit(GUARD.ADR_PATH)
++                    else:
++                        repo.symlink_mode_and_commit(GUARD.ADR_PATH)
++                    self.assertRed(repo.report())
++                finally:
++                    repo.close()
++
++    def test_adr0004_and_changes_to_adr0001_or_adr0002_are_red(self):
++        paths = (
++            "docs/architecture/ADR-0004-unapproved.md",
++            "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
++            "docs/architecture/ADR-0002-protocol-candidate.md",
++        )
++        for path in paths:
++            with self.subTest(path=path):
++                repo = SyntheticSuccessor()
++                try:
++                    repo.mutate_and_commit(path)
++                    self.assertRed(repo.report())
++                finally:
++                    repo.close()
++
++    def test_protocol_context_governance_skill_fixture_and_agents_changes_are_red(self):
++        paths = (
++            "packages/protocol/src/caderno_protocol/resources/schema.json",
++            "packages/protocol/src/caderno_protocol/resources/new-schema.json",
++            "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
++            ".specify/memory/constitution.md",
++            ".agents/skills/speckit-implement/SKILL.md",
++            "tests/fixtures/atlas_parity02/p03/table-positive.json",
++            "AGENTS.md",
++        )
++        for path in paths:
++            with self.subTest(path=path):
++                repo = SyntheticSuccessor()
++                try:
++                    repo.mutate_and_commit(path)
++                    self.assertRed(repo.report())
++                finally:
++                    repo.close()
++
++    def test_runtime_p03_adapter_and_asset_allowlist_changes_are_red(self):
++        paths = (
++            "packages/atlas/src/atlas_viewer/server.py",
++            "packages/atlas/src/atlas_viewer/static/index.html",
++            "tests/viewer/test_atlas_parity02_p03_harness.py",
++        )
++        for path in paths:
++            with self.subTest(path=path):
++                repo = SyntheticSuccessor()
++                try:
++                    repo.mutate_and_commit(path)
++                    self.assertRed(repo.report())
++                finally:
++                    repo.close()
++
++    def test_arbitrary_document_outside_original_and_repair_paths_is_red(self):
++        self.repo.mutate_and_commit("docs/missions/atlas-parity-04/UNLISTED.md")
++        self.assertRed(self.repo.report())
++
++    def test_branch_name_lookalike_cannot_override_bad_bytes(self):
++        self.repo.git("branch", "-m", "lookalike/atlas-parity03-c4-full-candidate-20261027-copy")
++        self.repo.mutate_and_commit("packages/atlas/src/atlas_viewer/server.py")
++        self.assertRed(self.repo.report())
++
++    def test_mode_change_in_authorized_repair_path_is_red(self):
++        self.repo.executable_mode_and_commit(".github/workflows/atlas021.yml")
++        self.assertRed(self.repo.report())
++
++    def test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated(self):
++        path = "scripts/qa/atlas_parity03_c4_ci.py"
++        self.repo.write(path, self.repo.c4_script(
++            "malicious asset change", assets={"/wildcard": ("private.html", "text/html")}))
++        self.repo._rewrite_manifest()
++        self.repo.commit("Asset allowlist adversarial")
++        self.assertRed(self.repo.report())
++
++    def test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red(self):
++        for scenario in ("hash", "entry", "delete", "order"):
++            with self.subTest(scenario=scenario):
++                repo = SyntheticSuccessor()
++                try:
++                    manifest = repo.root / GUARD.OVERLAY_MANIFEST
++                    if scenario == "hash":
++                        text = manifest.read_text(encoding="utf-8")
++                        manifest.write_text("0" * 64 + text[64:], encoding="utf-8")
++                        repo.commit("Hash divergente")
++                    elif scenario == "entry":
++                        lines = manifest.read_text(encoding="utf-8").splitlines()
++                        manifest.write_text("\n".join(lines[1:]) + "\n", encoding="utf-8")
++                        repo.commit("Entrada removida")
++                    elif scenario == "delete":
++                        repo.remove_and_commit(GUARD.OVERLAY_MANIFEST)
++                    else:
++                        lines = manifest.read_text(encoding="utf-8").splitlines()
++                        manifest.write_text("\n".join(reversed(lines)) + "\n", encoding="utf-8")
++                        repo.commit("Manifesto reordenado")
++                    self.assertRed(repo.report())
++                finally:
++                    repo.close()
++
++    def test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry(self):
++        self.repo.mutate_and_commit(GUARD.GATES_PATH, json.dumps({
++            "plan_id": "AP04-POR-v1.0-draft",
++            "adr0003": "APPROVED",
++            "scope": "DOCUMENTATION_ONLY",
++            "non_authorizations": ["merge_main", "release", "deploy", "promotion"],
++        }) + "\n")
++        self.assertRed(self.repo.report())
++
++    def test_historical_c4_manifest_cannot_be_changed(self):
++        self.repo.mutate_and_commit(GUARD.C4_MANIFEST)
++        self.assertRed(self.repo.report())
++
++    def test_repair_history_rejects_transient_unauthorized_change_even_if_reverted(self):
++        path = "packages/protocol/src/caderno_protocol/resources/schema.json"
++        original = (self.repo.root / path).read_bytes()
++        self.repo.mutate_and_commit(path)
++        self.repo.write(path, original)
++        self.repo.commit("Reversão não apaga histórico")
++        self.assertRed(self.repo.report())
++
++    def test_default_boundary_accepts_only_the_single_strict_p06_rejection(self):
++        result = GUARD.default_boundary_audit(self.repo.root, self.repo.contract)
++        self.assertEqual(result["status"], "PASS_EXACT_SUCCESSOR_EXCEPTION")
++        self.assertFalse(result["historical_protection_weakened"])
++        script = self.repo.root / "scripts/qa/atlas_parity02_p06_audit.py"
++        script.write_text("def audit(root):\n    return {'status': 'PASS_SCOPED', 'errors': []}\n",
++                          encoding="utf-8")
++        with self.assertRaises(GUARD.GuardError):
++            GUARD.default_boundary_audit(self.repo.root, self.repo.contract)
++
++    def test_wrong_base_or_document_tree_is_red(self):
++        wrong = GUARD.SuccessorContract(
++            **{**self.repo.contract.__dict__, "doc_tree": "0" * 40}
++        )
++        self.assertRed(GUARD.audit(
++            self.repo.root, contract=wrong, boundary_audit=self.repo.boundary))
++
++
++class AP04WorkflowRoutingTests(unittest.TestCase):
++    def test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent(self):
++        paths = (
++            ".github/workflows/atlas-parity02.yml",
++            ".github/workflows/atlas-parity03-p03-gates.yml",
++            ".github/workflows/atlas003-speckit.yml",
++            ".github/workflows/atlas021.yml",
++            ".github/workflows/atlas-parity04-doc.yml",
++        )
++        combined = "\n".join((ROOT / path).read_text(encoding="utf-8") for path in paths)
++        for forbidden in (
++            "github.head_ref", "github.ref_name", "continue-on-error", "if: false",
++            "|| true", "paths-ignore", "pytest.skip", "@unittest.skip",
++        ):
++            self.assertNotIn(forbidden, combined)
++        self.assertIn("atlas_parity04_doc_ci.py p03-inputs", combined)
++        self.assertIn("atlas_parity04_doc_ci.py boundary", combined)
++        self.assertIn("atlas_parity04_doc_ci.py installed", combined)
++        self.assertIn("atlas_parity04_doc_ci.py speckit", combined)
++
++    def test_dedicated_guard_runs_linux_windows_normal_and_optimized(self):
++        text = (ROOT / ".github/workflows/atlas-parity04-doc.yml").read_text(encoding="utf-8")
++        self.assertIn("os: [ubuntu-latest, windows-latest]", text)
++        self.assertIn("optimize: ['0', '1']", text)
++        self.assertIn("python -m unittest", text)
++        self.assertIn("atlas_parity04_doc_ci.py audit", text)
++
++
++if __name__ == "__main__":
++    unittest.main()
