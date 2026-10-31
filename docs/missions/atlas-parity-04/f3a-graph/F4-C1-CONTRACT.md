@@ -1,25 +1,44 @@
 # Contrato sucessor focal — escala F4 C1
 
-Sucessor de GRAPH-CONTRACT.md, que permanece intacto no SHA histórico f0d39787e3fb93bfd70ad096824505ba298c6881. API e descriptor0.2.0 continuam exclusivamente in-memory; nenhum novo caminho de aquisição ou integração no shell. Este texto não altera schema, protocolo ou autorização científica.
+Sucessor de GRAPH-CONTRACT.md, preservado no SHA histórico f0d39787e3fb93bfd70ad096824505ba298c6881. API e descriptor 0.2.0 continuam exclusivamente in-memory. Este contrato não acrescenta aquisição, integração no shell, mudança de protocolo ou autorização científica.
 
-## Modelo integral e desenho por janela
+## Modelo completo e desenho por janela
 
-O modelo conserva todos os nós e relações admitidos. Os antigos1.000 nós/4.000 relações passam a ser teto de desenho, não recusa por contagem do modelo. SVG principal desenha até1.000 nós,4.000 relações e4.000 arestas hierárquicas por janela. Nó/foco e seleção expandidos são pinados quando possível. Abaixo de1.001 nós o desenho conserva comportamento integral herdado. Relações fora do desenho continuam disponíveis sequencialmente no painel de ocorrências, inclusive repetições/null/unresolved/collision. Limite de desenho não altera endpoints nem inventa resolução.
+Todos os nós e relações admitidos permanecem no modelo. Os antigos 1.000 nós/4.000 relações passam a limitar o desenho, sem recusar o modelo apenas por exceder essas contagens. O SVG principal desenha até 1.000 nós, 4.000 relações e 4.000 arestas hierárquicas por janela. Foco e seleção expandidos são preservados na janela quando possível. Até 1.000 nós, o desenho mantém o comportamento integral herdado.
 
-getState distingue declared_node_count (descriptor.nodes, não população global), loaded_node_count/node_count (modelo completo), visible_ids (traversal de todos os nós da hierarquia expandida), rendered_ids/rendered_node_count (subconjunto SVG), rendered_relation_count e rendered_parent_edge_count. relation_count é total carregado, selection é contexto atual. Contagens da fonte no descriptor não são reescritas; global_total continua null/UNKNOWN_UPSTREAM.
+Relações fora do desenho continuam disponíveis no painel sequencial de ocorrências, incluindo repetições, endpoints nulos, não resolvidos e colidentes. O desenho não altera endpoints ou inventa resolução.
 
-graph.reveal(nav_id) localiza qualquer nó do índice corrente e expande somente ancestrais explícitos previamente validados; retorna false para identidade ausente, contexto expirado ou falha de desenho. Não seleciona nem admite native_id. O finder localiza nav_id exato ou substring de nav_id/rótulo e percorre resultados sem deduplicar ocorrências. Identidade source_id/snapshot_id/nav_id/occurrence/session_id e invalidações anteriores mantidas. Native_id nulo não recebe identidade nativa por localização.
+getState distingue:
 
-Pan/zoom/fit/reset atualizam a janela, teclado navega índice completo de nós expandidos e materializa o destino antes do foco DOM. Colapso conserva modelo/seleção e retorna foco a ancestral visível quando necessário. Minimapa grande agrega posições em no máximo32×64 bins geométricos com contagem; bins não são nós/ancestrais/relações científicos. Soma data-bin-count equivale ao índice expandido. Hierarquia e causalidade permanecem distintas.
+- declared_node_count: tamanho de descriptor.nodes; não é população global;
+- loaded_node_count/node_count: modelo completo;
+- visible_ids: traversal de todos os nós da hierarquia expandida;
+- rendered_ids/rendered_node_count: subconjunto SVG;
+- rendered_relation_count/rendered_parent_edge_count: desenho de relações/hierarquia;
+- relation_count: total carregado; selection: contexto atual.
+
+Contagens da fonte não são reescritas; global_total continua null/UNKNOWN_UPSTREAM. Colapso conserva o modelo e a seleção.
+
+## Navegação e minimapa
+
+graph.reveal(nav_id) localiza um nó no índice corrente e expande somente ancestrais explícitos previamente validados. Retorna false para identidade ausente, contexto expirado ou falha de desenho; não seleciona nem admite native_id. O finder localiza nav_id exato ou substring de nav_id/rótulo e percorre resultados sem deduplicar ocorrências.
+
+Identidade source_id/snapshot_id/nav_id/occurrence/session_id e invalidações anteriores permanecem. Native_id nulo continua nulo. Teclado navega o índice expandido e materializa o destino antes de focá-lo no DOM. Pan/zoom/fit/reset atualizam a janela. Colapso retorna o foco a um ancestral visível quando necessário. Hierarquia não vira causalidade.
+
+O minimapa grande agrega posições em até 32×64 marcas geométricas. Sua contagem soma o índice expandido; marcas não são entidades, ancestrais ou relações científicas. PreserveAspectRatio none distribui o resumo por toda a área CSS, e a CTM inversa mapeia cliques para posições do grafo. O oráculo mede largura útil, soma de ocorrências e centralização real da câmera sobre uma marca clicada.
 
 ## Limites reais
 
-Envelope aprovado permanece32MiB/profundidade20/10.000 nós/100.000 relações. Limites simultâneos de bytes e contagem se aplicam: o máximo de contagem não garante que qualquer payload dessa contagem caiba em32MiB. copyJSON preserva limite auxiliar herdado de600.000 valores visitados e131.072 bytes por literal; semanticModel mantém65.536 bytes por célula. Esses limites reais podem recusar dentro dos máximos de contagem e precisam permanecer visíveis ao integrador; não equivalem a suporte integral do teto100.000 relações.
+O envelope aprovado permanece 32 MiB, profundidade 20, 10.000 nós e 100.000 relações. Limites de bytes e contagem se aplicam simultaneamente; o máximo de contagem não garante que qualquer payload dessa contagem caiba em 32 MiB.
 
-Recusa é atômica e visível, sem seleção/modelo parcial. Prazo30s permanece por operação. operation_ms mede setData com cópia/validação/modelo/layout/desenho; draw_ms mede última janela. Métricas de heap Chromium, quando expostas, são observações do processo de teste, sem certificação de hard heap256MiB. Não há execução/parse externo, rede, storage, abertura de URI, script injetado ou fonte privada.
+copyJSON preserva o limite auxiliar herdado de 600.000 valores visitados e 131.072 bytes por literal; semanticModel mantém 65.536 bytes por célula. Esses limites podem recusar payloads abaixo dos máximos de contagem e precisam continuar explícitos ao integrador. Recusa é atômica e visível, sem modelo/seleção parcial. O prazo de 30 s permanece por operação.
 
-## Qualificação
+operation_ms mede setData, incluindo cópia, validação, modelo, layout e desenho; draw_ms mede a última janela. Heap Chromium, quando exposto, é observação do teste e não certificação de hard heap de 256 MiB. O componente não lê ou parseia arquivos externos, faz rede/storage, abre URI, injeta script ou recebe fonte privada.
 
-Fixture sintética gerada determinística de2911/1595 amplia seed original109/210 preservada:22 endpoint-null,75 unresolved,50 endpoints colidentes,50 IDs nativos com duas ocorrências e40 grupos/41 repetições adicionais. Fonte real F1 não foi publicada nem executada. Testes/CI e revisão do novo SHA decidem qualificação focal; não herdar PASS anterior. G5/G6 e sucessão de controles globais pertencem à composição/C4 conforme contrato histórico.
+## Qualificação e gate do integrador
 
-Revisão geométrica C1: minimapa usa preserveAspectRatio none para distribuir o resumo por toda a área CSS; CTM inversa mantém o clique na posição geométrica correspondente. Isso impede a árvore alta de colapsar numa faixa subpixel. O oráculo mede largura útil dos bins, soma das ocorrências e centralização real da câmera sobre uma marca clicada.
+A fixture sintética gerada de 2.911 nós/1.595 relações preserva o seed histórico de 109/210, incluindo anomalias e repetições. A fonte real F1 não foi executada ou publicada. Testes e revisão do novo SHA decidem a qualificação focal; não herdar PASS anterior.
+
+No SHA técnico 913e4038, 10.000 nós/0 relações, com 5.407.991 bytes, foram aceitos. 10.001 nós foram recusados integralmente. O stress de 10.000/100.000 mede 81.008.070 bytes e foi recusado por 600.000 valores, além de exceder 32 MiB. Não qualifica 100.000 relações válidas dentro de 32 MiB.
+
+REAL_VALUE_CAP_GATE_INTEGRATOR_REQUIRED conserva essa limitação para composição. Qualquer mudança aplicável de quota, contrato ou plano exige decisão antes de implementar. G5/G6 e hard heap de 256 MiB continuam não qualificados. A sucessão dos controles globais pertence a C4; CI/revisão do HEAD documental são vinculadas externamente no PR #16.
