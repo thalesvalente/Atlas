@@ -268,6 +268,13 @@ export function mount(host, descriptor, options={}) {
   controls.forEach(([action,label])=>toolbar.append(makeButton(action,label)));
   const zoomLabel=element("output",{"aria-label":"Escala",class:"f3a-zoom"});
   toolbar.append(zoomLabel);
+  const navigation=element("div",{class:"f3a-navigation"});
+  const navigationLabel=element("label",{},"Localizar nó (nav_id ou texto do rótulo)");
+  const navigationInput=element("input",{type:"search","data-navigation-index":"true",
+    "aria-label":"Localizar nó por nav_id ou rótulo",autocomplete:"off",maxlength:"65536"});
+  navigationLabel.append(navigationInput);
+  const navigationResult=element("output",{"data-navigation-result":"true","aria-live":"polite"});
+  navigation.append(navigationLabel,makeButton("locate","Localizar / próximo resultado"),navigationResult);
   const status=element("p",{class:"f3a-status",role:"status","aria-live":"polite"});
   const error=element("p",{class:"f3a-error",role:"alert",hidden:""});
   const viewport=element("div",{class:"f3a-viewport"});
@@ -295,16 +302,21 @@ export function mount(host, descriptor, options={}) {
   relationControls.append(makeButton("relation-previous","Relação anterior"),makeButton("relation-next","Próxima relação"));
   const relationDetail=element("pre",{class:"f3a-detail","aria-label":"Detalhe da relação",tabindex:"0"});
   relations.append(relationHeading,relationControls,relationDetail);
-  root.append(banner,toolbar,status,error,viewport,mini,legend,detail,relations);
+  root.append(banner,toolbar,navigation,status,error,viewport,mini,legend,detail,relations);
   host.replaceChildren(root);
   let model=null,session=0,sessionId=null,selection=null,focusId=null,expanded=new Set(),
     positions=new Map(),visible=[],zoom=1,pan={x:20,y:20},width=1000,height=440,
-    bounds={width:1000,height:440},timer=null,disposed=false,errorMessage=null,relationIndex=0;
+    bounds={width:1000,height:440},timer=null,disposed=false,errorMessage=null,relationIndex=0,
+    renderedIds=[],renderedRelationCount=0,renderedParentCount=0,minimapBinCount=0,
+    windowSignature=null,drawing=false,operationMs=0,drawMs=0,searchText="",searchIndex=-1;
   const listen=(e,event,fn,opts={})=>e.addEventListener(event,fn,{...opts,signal});
   const emit=()=>host.dispatchEvent(new CustomEvent("graph-selection",{detail:selection?{...selection}:null,bubbles:true}));
   function clear(message=null) {
     clearTimeout(timer);timer=null; model=null; selection=null;sessionId=null;focusId=null;
-    expanded.clear();positions.clear();visible=[];world.replaceChildren();mini.replaceChildren();
+    expanded.clear();positions.clear();visible=[];renderedIds=[];renderedRelationCount=0;renderedParentCount=0;
+    minimapBinCount=0;windowSignature=null;searchText="";searchIndex=-1;operationMs=0;drawMs=0;
+    navigationInput.value="";navigationResult.textContent="";
+    world.replaceChildren();mini.replaceChildren();
     detail.textContent="Nenhum nó selecionado.";relationDetail.textContent="Nenhuma relação carregada.";
     errorMessage=message;error.hidden=!message;error.textContent=message||"";
     banner.textContent="LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATED";
@@ -324,8 +336,6 @@ export function mount(host, descriptor, options={}) {
       const checkpoint=()=>{if(performance.now()-started>LIMITS.operationMs)fail("Operation time quota exceeded");};
       const d=copyJSON(input,checkpoint);
       validateSchema(d,SCHEMA);checkpoint();
-      if(d.nodes.length>LIMITS.renderNodes || d.relations.length>LIMITS.renderRelations)
-        fail("Render limit exceeded: "+LIMITS.renderNodes+" nodes / "+LIMITS.renderRelations+" relations; no truncation");
       model=semanticModel(d,now(),checkpoint);
       sessionId="f3a-"+instance+"-"+session;
       expanded=new Set(model.nodes.keys());focusId=d.nodes[0]?.identity.navigation_id||null;
@@ -334,6 +344,7 @@ export function mount(host, descriptor, options={}) {
         " · fonte "+d.source.availability+" · descriptor_schema PASS · descriptor_semantics PASS · OBSERVED_SNAPSHOT_ONLY · expira "+
         d.snapshot.expires_at+" · autenticidade NOT_VERIFIED · ciência NOT_EVALUATED";
       error.hidden=true;errorMessage=null;render(null,checkpoint);
+      operationMs=performance.now()-started;
       timer=setTimeout(()=>{live();},Math.max(1,model.expires-now()+1));
       return true;
     } catch(e) {clear("F3A — "+e.message);return false;}
@@ -352,17 +363,27 @@ export function mount(host, descriptor, options={}) {
   }
   function select(context) {
     if(!live())return false;
-    if(context===null){selection=null;showDetail();paintSelection();emit();return true;}
+    if(context===null){
+      selection=null;showDetail();
+      try {paintSelection();} catch(e) {clear("F3A — "+e.message);return false;}
+      emit();return true;
+    }
     if(!isObject(context) || !model.nodes.has(context.nav_id))return false;
     const expected=currentContext(context.nav_id);
     if(Object.keys(expected).some(k=>context[k]!==expected[k]))return false;
-    selection=expected;showDetail();paintSelection();emit();return true;
+    selection=expected;showDetail();
+    try {paintSelection();} catch(e) {clear("F3A — "+e.message);return false;}
+    emit();return true;
   }
   function paintSelection() {
+    drawWindow();
     for(const node of world.querySelectorAll("[data-node-id]"))
       node.setAttribute("aria-selected",String(selection?.nav_id===node.getAttribute("data-node-id")));
   }
   function updateCamera() {
+    if(model && !drawing) {
+      try {drawWindow();} catch(e) {clear("F3A — "+e.message);return;}
+    }
     world.setAttribute("transform","translate("+pan.x+" "+pan.y+") scale("+zoom+")");
     zoomLabel.textContent=(zoom<.01?(zoom*100).toFixed(3):String(Math.round(zoom*100)))+"%";
     const rect=mini.querySelector("[data-mini-view]");
@@ -380,7 +401,7 @@ export function mount(host, descriptor, options={}) {
     pan={x:cx-(cx-pan.x)*factor,y:cy-(cy-pan.y)*factor};
     zoom=target;updateCamera();
   }
-  function reveal(id) {
+  function revealPosition(id) {
     const p=positions.get(id);if(!p)return;
     const needsLegibility=zoom<.5;
     if(needsLegibility)zoom=1;
@@ -392,11 +413,34 @@ export function mount(host, descriptor, options={}) {
   function focusNode(id,shouldReveal=true) {
     if(!live() || !positions.has(id))return;
     focusId=id;
+    if(shouldReveal)revealPosition(id);
+    if(!model)return;
+    try {drawWindow();} catch(e) {clear("F3A — "+e.message);return;}
     for(const node of world.querySelectorAll("[data-node-id]")){
       const active=node.getAttribute("data-node-id")===id;node.setAttribute("tabindex",active?"0":"-1");
       if(active)node.focus({preventScroll:true});
     }
-    if(shouldReveal)reveal(id);
+  }
+  // Navigation is by presentation identity only; it never resolves a native collision.
+  function revealNode(id) {
+    if(!live() || typeof id!=="string" || !model.nodes.has(id))return false;
+    let parent=model.parents.get(id);
+    while(parent!==undefined){expanded.add(parent);parent=model.parents.get(parent);}
+    focusId=id;
+    try {render(id);if(!model)return false;focusNode(id);return !!model && focusId===id;}
+    catch(e) {clear("F3A — "+e.message);return false;}
+  }
+  function locate() {
+    const query=navigationInput.value.trim();
+    if(!query){navigationResult.textContent="Informe nav_id ou texto do rótulo.";return;}
+    const folded=query.toLocaleLowerCase();
+    const matches=model.nodes.has(query)?[query]:[...model.nodes].filter(([id,n])=>
+      id.toLocaleLowerCase().includes(folded) || n.label_literal.toLocaleLowerCase().includes(folded)).map(([id])=>id);
+    if(!matches.length){navigationResult.textContent="Nenhum nó localizado.";return;}
+    searchIndex=searchText===query?(searchIndex+1)%matches.length:0;searchText=query;
+    if(revealNode(matches[searchIndex]))navigationResult.textContent=
+      "Resultado "+(searchIndex+1)+" / "+matches.length+" · "+matches[searchIndex]+
+      ". Localização de apresentação; nenhuma identidade nativa admitida.";
   }
   function toggle(id) {
     if(!live() || !model.children.get(id)?.length)return;
@@ -416,7 +460,7 @@ export function mount(host, descriptor, options={}) {
     const hadFocus=world.contains(document.activeElement);
     positions=new Map();visible=[];let row=0,maxDepth=0;
     const roots=[...model.nodes.keys()].filter(id=>!model.parents.has(id));
-    // Iterative DFS, bounded by validated input; cycles are retained as annotated roots.
+    // All expanded records remain in this navigation index, whether drawn or not.
     const stack=roots.map(id=>[id,0]).reverse();
     while(stack.length) {
       checkpoint();
@@ -426,23 +470,111 @@ export function mount(host, descriptor, options={}) {
     }
     bounds={width:Math.max(260,maxDepth*270+260),height:Math.max(100,row*86)};
     if(!positions.has(focusId))focusId=fallback && positions.has(fallback)?fallback:visible[0]||null;
-    world.replaceChildren();
-    const svgLine=(a,b,cls,attrs={})=>{
-      const p=positions.get(a),q=positions.get(b);if(!p || !q)return;
-      world.append(element("line",{x1:p.x+230,y1:p.y+31,x2:q.x,y2:q.y+31,
-        class:"f3a-edge f3a-"+cls,...attrs},null,true));
-    };
-    for(const [id,parent] of model.parents)svgLine(parent,id,"membership",{"data-edge":"parent","data-parent-edge":"true","data-parent-id":parent});
-    for(const r of model.d.relations) {
-      if(r.from.resolution!=="RESOLVED" || r.to.resolution!=="RESOLVED")continue;
-      const cls=r.semantics==="DECLARED_LINEAGE"?"lineage":r.semantics==="DECLARED_BINDING"?"binding":
-        r.semantics==="ORGANIZATIONAL_MEMBERSHIP"?"membership":"mention";
-      const directed=r.direction==="FROM_TO" && ["lineage","binding"].includes(cls);
-      svgLine(r.from.target_navigation_id,r.to.target_navigation_id,cls,{
-        "data-relation-id":r.identity.navigation_id,"data-semantics":r.semantics,
-        "data-direction":r.direction,...(directed?{"marker-end":"url(#f3a-"+instance+"-"+cls+")"}:{})});
+    mini.replaceChildren();mini.setAttribute("viewBox","-20 -20 "+(bounds.width+40)+" "+(bounds.height+40));
+    if(visible.length<=LIMITS.renderNodes) {
+      minimapBinCount=visible.length;
+      for(const id of visible){const p=positions.get(id);mini.append(element("rect",{x:p.x,y:p.y,width:"230",height:"62",
+        class:"f3a-mini-node"},null,true));}
+    } else {
+      // Geometric bins represent positions, never invented graph entities or ancestors.
+      const bins=new Map(),columns=32,rows=64;
+      for(const id of visible) {
+        checkpoint();const p=positions.get(id);
+        const x=Math.min(columns-1,Math.floor(p.x/bounds.width*columns));
+        const y=Math.min(rows-1,Math.floor(p.y/bounds.height*rows));
+        const key=x+":"+y,bin=bins.get(key)||{x,y,count:0};bin.count++;bins.set(key,bin);
+      }
+      minimapBinCount=bins.size;
+      for(const bin of bins.values()){
+        const mark=element("rect",{x:bin.x*bounds.width/columns,y:bin.y*bounds.height/rows,
+          width:Math.max(1,bounds.width/columns),height:Math.max(1,bounds.height/rows),
+          class:"f3a-mini-node f3a-mini-bin","data-bin-count":bin.count},null,true);
+        mark.append(element("title",{},bin.count+" posições de nós; agregado visual sem ancestral inferido",true));mini.append(mark);
+      }
     }
-    for(const id of visible) {
+    mini.setAttribute("data-node-count",String(visible.length));
+    mini.setAttribute("aria-label","Minimapa navegável: "+visible.length+" nós na hierarquia expandida; "+
+      minimapBinCount+" marcas geométricas. Clique para centrar; setas movem a vista.");
+    mini.append(element("rect",{"data-mini-view":"true",class:"f3a-mini-view",x:0,y:0,width:100,height:100},null,true));
+    windowSignature=null;showDetail();relationText();updateCamera();checkpoint();
+    if(hadFocus && focusId)focusNode(focusId,false);
+  }
+  function reportCounts() {
+    if(!model)return;
+    status.textContent="Nós declarados no descriptor "+model.d.nodes.length+"; carregados "+model.nodes.size+
+      "; hierarquia expandida "+visible.length+"; elementos SVG de nós "+renderedIds.length+
+      "; seleção atual "+(selection?.nav_id||"nenhuma")+
+      "; relações carregadas "+model.d.relations.length+"; relações SVG "+renderedRelationCount+
+      "; arestas de hierarquia SVG "+renderedParentCount+
+      "; minimapa "+visible.length+" nós / "+minimapBinCount+" marcas"+
+      "; endpoints "+JSON.stringify(model.endpointCounts)+"; ciclos "+model.cycles.size+
+      "; gaps declarados "+JSON.stringify(model.d.gaps)+
+      ". Janela de desenho até "+LIMITS.renderNodes+" nós / "+LIMITS.renderRelations+
+      " relações; índice e detalhes preservam todos os registros carregados. "+
+      "Sem pai resolvido e RUN_EXTERNAL_ISOLATED permanecem raízes isoladas; agrupamento somente UI. "+
+      "UNKNOWN_UPSTREAM / GLOBAL_UNPROVEN; sem denominador global.";
+  }
+  function drawWindow() {
+    if(!model || drawing)return;
+    drawing=true;
+    const started=performance.now(),checkpoint=()=>{
+      if(performance.now()-started>LIMITS.operationMs)fail("Window render time quota exceeded");
+    };
+    try {
+      const hadFocus=world.contains(document.activeElement);
+      const left=(-pan.x-64)/zoom,right=(width-pan.x+64)/zoom,
+        top=(-pan.y-64)/zoom,bottom=(height-pan.y+64)/zoom;
+      let chosen=visible;
+      if(visible.length>LIMITS.renderNodes) {
+        const pins=[focusId,selection?.nav_id].filter(id=>positions.has(id));
+        const candidates=visible.filter(id=>{const p=positions.get(id);
+          return p.x<=right && p.x+230>=left && p.y<=bottom && p.y+62>=top;});
+        if(candidates.length>LIMITS.renderNodes) {
+          const cx=(left+right)/2,cy=(top+bottom)/2;
+          candidates.sort((a,b)=>{const p=positions.get(a),q=positions.get(b);
+            return Math.hypot(p.x+115-cx,p.y+31-cy)-Math.hypot(q.x+115-cx,q.y+31-cy);});
+        }
+        const wanted=new Set(pins);
+        for(const id of candidates){if(wanted.size>=LIMITS.renderNodes)break;wanted.add(id);}
+        chosen=visible.filter(id=>wanted.has(id));
+      }
+      const chosenSet=new Set(chosen),parentLines=[],relationLines=[];
+      function inWindow(a,b) {
+        const p=positions.get(a),q=positions.get(b);if(!p || !q)return false;
+        if(visible.length<=LIMITS.renderNodes || (chosenSet.has(a) && chosenSet.has(b)))return true;
+        return Math.min(p.x+230,q.x)<=right && Math.max(p.x+230,q.x)>=left &&
+          Math.min(p.y+31,q.y+31)<=bottom && Math.max(p.y+31,q.y+31)>=top;
+      }
+      for(const [id,parent] of model.parents) {
+        checkpoint();
+        if(parentLines.length<LIMITS.renderRelations && inWindow(parent,id))parentLines.push([parent,id]);
+      }
+      for(const r of model.d.relations) {
+        checkpoint();
+        if(relationLines.length<LIMITS.renderRelations && r.from.resolution==="RESOLVED" &&
+          r.to.resolution==="RESOLVED" && inWindow(r.from.target_navigation_id,r.to.target_navigation_id))relationLines.push(r);
+      }
+      const signature=chosen.join("|")+";"+parentLines.map(([p,id])=>p+">"+id).join("|")+
+        ";"+relationLines.map(r=>r.identity.navigation_id).join("|");
+      renderedIds=chosen;renderedRelationCount=relationLines.length;renderedParentCount=parentLines.length;
+      if(signature!==windowSignature) {
+        world.replaceChildren();
+        const svgLine=(a,b,cls,attrs={})=>{
+          const p=positions.get(a),q=positions.get(b);
+          world.append(element("line",{x1:p.x+230,y1:p.y+31,x2:q.x,y2:q.y+31,
+            class:"f3a-edge f3a-"+cls,...attrs},null,true));
+        };
+        for(const [parent,id] of parentLines)svgLine(parent,id,"membership",
+          {"data-edge":"parent","data-parent-edge":"true","data-parent-id":parent});
+        for(const r of relationLines) {
+          const cls=r.semantics==="DECLARED_LINEAGE"?"lineage":r.semantics==="DECLARED_BINDING"?"binding":
+            r.semantics==="ORGANIZATIONAL_MEMBERSHIP"?"membership":"mention";
+          const directed=r.direction==="FROM_TO" && ["lineage","binding"].includes(cls);
+          svgLine(r.from.target_navigation_id,r.to.target_navigation_id,cls,{
+            "data-relation-id":r.identity.navigation_id,"data-semantics":r.semantics,
+            "data-direction":r.direction,...(directed?{"marker-end":"url(#f3a-"+instance+"-"+cls+")"}:{})});
+        }
+    for(const id of renderedIds) {
       checkpoint();
       const n=model.nodes.get(id),p=positions.get(id),hasChildren=model.children.get(id).length>0;
       const collision=n.identity.native_id!==null && model.natives.get(n.identity.native_id).length>1;
@@ -471,21 +603,22 @@ export function mount(host, descriptor, options={}) {
       fitSVGText(g.querySelector(".f3a-label"),label,hasChildren?190:210);
       fitSVGText(g.querySelector(".f3a-node-meta"),(n.original_type||n.kind)+" · "+warning,210);
     }
-    mini.replaceChildren();mini.setAttribute("viewBox","-20 -20 "+(bounds.width+40)+" "+(bounds.height+40));
-    for(const id of visible){const p=positions.get(id);mini.append(element("rect",{x:p.x,y:p.y,width:"230",height:"62",
-      class:"f3a-mini-node"},null,true));}
-    mini.append(element("rect",{"data-mini-view":"true",class:"f3a-mini-view",x:0,y:0,width:100,height:100},null,true));
-    status.textContent="Nós carregados "+model.nodes.size+"; visíveis "+visible.length+
-      "; relações "+model.d.relations.length+"; endpoints "+JSON.stringify(model.endpointCounts)+
-      "; ciclos "+model.cycles.size+"; gaps declarados "+JSON.stringify(model.d.gaps)+
-      ". Sem pai resolvido e RUN_EXTERNAL_ISOLATED permanecem raízes isoladas; agrupamento somente UI. "+
-      "UNKNOWN_UPSTREAM / GLOBAL_UNPROVEN; sem denominador global.";
-    showDetail();relationText();updateCamera();checkpoint();
-    if(hadFocus && focusId)focusNode(focusId,false);
+
+        windowSignature=signature;
+      }
+      for(const node of world.querySelectorAll("[data-node-id]")) {
+        const id=node.getAttribute("data-node-id");
+        node.setAttribute("tabindex",id===focusId?"0":"-1");
+        node.setAttribute("aria-selected",String(selection?.nav_id===id));
+        if(hadFocus && id===focusId)node.focus({preventScroll:true});
+      }
+      reportCounts();checkpoint();drawMs=performance.now()-started;
+    } finally {drawing=false;}
   }
   function action(name) {
     if(!live())return;
-    if(name==="zoom-in")zoomAt(zoom*1.25);
+    if(name==="locate")locate();
+    else if(name==="zoom-in")zoomAt(zoom*1.25);
     else if(name==="zoom-out")zoomAt(zoom/1.25);
     else if(name==="reset"){zoom=1;pan={x:20,y:20};updateCamera();}
     else if(name==="fit"){
@@ -500,6 +633,9 @@ export function mount(host, descriptor, options={}) {
   }
   listen(root,"click",event=>{
     const button=event.target.closest("[data-action]");if(button && root.contains(button))action(button.dataset.action);
+  });
+  listen(navigationInput,"keydown",event=>{
+    if(event.key==="Enter" && live()){event.preventDefault();locate();}
   });
   listen(svg,"click",event=>{
     if(!live())return;
@@ -580,12 +716,17 @@ export function mount(host, descriptor, options={}) {
     svg.setAttribute("viewBox","0 0 "+width+" "+height);updateCamera();
   });resize.observe(viewport);
   const api={
-    setData,select,
+    setData,select,reveal:revealNode,
     getState(){
       live();
       return {session_id:sessionId,selection:selection?{...selection}:null,zoom,pan:{...pan},
         expanded:[...expanded],visible_ids:[...visible],focus_id:focusId,node_count:model?.nodes.size||0,
         relation_count:model?.d.relations.length||0,endpoint_counts:model?{...model.endpointCounts}:null,
+        declared_node_count:model?.d.nodes.length||0,loaded_node_count:model?.nodes.size||0,
+        rendered_ids:[...renderedIds],rendered_node_count:renderedIds.length,
+        rendered_relation_count:renderedRelationCount,rendered_parent_edge_count:renderedParentCount,
+        windowing:visible.length>LIMITS.renderNodes,minimap_node_count:visible.length,
+        minimap_bin_count:minimapBinCount,operation_ms:operationMs,draw_ms:drawMs,model_value_limit:600000,
         cycle_ids:model?[...model.cycles]:[],error:errorMessage,disposed};
     },
     dispose(){

@@ -22,6 +22,9 @@ EXPECTED_BROWSER_CHECKS = (
     "hierarchy_cycles_retained_as_anomalies", "capacity_and_descriptor_extremes",
     "responsive_390", "responsive_320", "reflow_preserves_focus_zoom_and_selection",
     "authority_validation_gaps_and_expiry_visible",
+    "scale_full_index_and_identity", "scale_collapsed_orphan_isolated_and_occurrences",
+    "scale_pan_zoom_minimap_keyboard", "scale_responsive_390", "scale_responsive_320",
+    "scale_stale_ttl_snapshot_dispose", "scale_descriptor_stress_and_metrics",
 )
 
 def descriptor_schema():
@@ -114,7 +117,7 @@ class F3AGraph(unittest.TestCase):
         self.assertEqual(self.browser["sha"], sha)
         self.assertEqual(self.browser["tree"], tree)
         self.assertTrue(self.browser["browser"])
-        self.assertEqual({p["name"] for p in self.browser["screenshots"]}, {"desktop.png", "mobile-390.png", "mobile-320.png"})
+        self.assertEqual({p["name"] for p in self.browser["screenshots"]}, {"desktop.png", "mobile-390.png", "mobile-320.png", "scale-desktop.png", "scale-mobile-390.png", "scale-mobile-320.png"})
         for item in self.browser["screenshots"]:
             data = (OUTPUT / item["name"]).read_bytes()
             self.assertGreater(len(data), 1000)
@@ -138,6 +141,36 @@ class F3AGraph(unittest.TestCase):
     def test_responsive_320(self): self.browser_check("responsive_320")
     def test_reflow_preserves_focus_zoom_and_selection(self): self.browser_check("reflow_preserves_focus_zoom_and_selection")
     def test_authority_validation_gaps_and_expiry_visible(self): self.browser_check("authority_validation_gaps_and_expiry_visible")
+
+
+    def test_scale_fixture_independent_schema_and_occurrences(self):
+        d = json.loads((OUTPUT / "scale-fixture.json").read_text(encoding="utf-8"))
+        self.validator.validate(d)
+        self.assertIs(d["synthetic"], True)
+        self.assertEqual((len(d["nodes"]), len(d["relations"])), (2911, 1595))
+        self.assertEqual(d["nodes"][:109], self.fixture["nodes"])
+        self.assertEqual(d["relations"][:210], self.fixture["relations"])
+        navs = [n["identity"]["navigation_id"] for n in d["nodes"]] + [r["identity"]["navigation_id"] for r in d["relations"]]
+        self.assertEqual(len(set(navs)), len(navs))
+        endpoints = collections.Counter(ref["resolution"] for r in d["relations"] for ref in (r["from"], r["to"]))
+        self.assertEqual((endpoints["NULL_ENDPOINT"], endpoints["UNRESOLVED"], endpoints["COLLISION"]), (22, 75, 50))
+        lookup = {n["identity"]["navigation_id"]: n for n in d["nodes"]}
+        for n in d["nodes"][109:]:
+            parent = lookup[n["parent"]["target_navigation_id"]]
+            self.assertEqual(parent["identity"]["native_id"], n["parent_key_literal"])
+            self.assertEqual(n["parent"]["resolution"], "RESOLVED")
+        counts = {c["unit"]: c for c in d["coverage"]["counts"]}
+        self.assertEqual(counts["presentation_node_occurrences"]["selected"], 2911)
+        self.assertEqual(counts["presentation_node_occurrences"]["loaded"], 2911)
+        self.assertIsNone(counts["presentation_node_occurrences"]["visible"])
+
+    def test_scale_full_index_and_identity(self): self.browser_check("scale_full_index_and_identity")
+    def test_scale_collapsed_orphan_isolated_and_occurrences(self): self.browser_check("scale_collapsed_orphan_isolated_and_occurrences")
+    def test_scale_pan_zoom_minimap_keyboard(self): self.browser_check("scale_pan_zoom_minimap_keyboard")
+    def test_scale_responsive_390(self): self.browser_check("scale_responsive_390")
+    def test_scale_responsive_320(self): self.browser_check("scale_responsive_320")
+    def test_scale_stale_ttl_snapshot_dispose(self): self.browser_check("scale_stale_ttl_snapshot_dispose")
+    def test_scale_descriptor_stress_and_metrics(self): self.browser_check("scale_descriptor_stress_and_metrics")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

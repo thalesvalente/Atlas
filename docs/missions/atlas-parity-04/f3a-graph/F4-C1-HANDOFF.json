@@ -1,0 +1,39 @@
+{
+  "schema": "atlas-f4-c1-handoff-v1",
+  "mission": "AP04-F4-C1-GRAPH-SCALE-CHAT-01",
+  "status": "PENDING_OWN_CI_AND_FINAL_REVIEW",
+  "qualified_for_composition": false,
+  "synthetic_only": true,
+  "private_payload_executed": false,
+  "descriptor_version": "0.2.0",
+  "target": {
+    "nodes": 2911,
+    "relations": 1595
+  },
+  "real_limits": {
+    "descriptor_bytes": 33554432,
+    "depth": 20,
+    "nodes": 10000,
+    "relations": 100000,
+    "visited_values": 600000,
+    "svg_nodes": 1000,
+    "svg_relations": 4000,
+    "svg_parent_edges": 4000,
+    "operation_ms": 30000,
+    "browser_hard_heap_256MiB": "NOT_QUALIFIED"
+  },
+  "integration_gates": {
+    "G5": "NOT_QUALIFIED",
+    "G6": "NOT_QUALIFIED",
+    "global_gate_successor": "C4_OWNER_REQUIRED"
+  },
+  "preserved": {
+    "F3B": true,
+    "shell": true,
+    "protocol": true,
+    "R4": true,
+    "reader003": true,
+    "historical_controls": true
+  },
+  "terminal_receipt_location": "PR16 external closure after own final-HEAD CI/review"
+}

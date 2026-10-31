@@ -13,8 +13,9 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+PREDECESSOR = "f0d39787e3fb93bfd70ad096824505ba298c6881"
 DOCS = "docs/missions/atlas-parity-04/f3a-graph/"
-MANIFEST = DOCS + "MANIFEST.sha256"
+MANIFEST = DOCS + "F4-C1-MANIFEST.sha256"
 PRODUCT = {
     "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
     "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
@@ -30,7 +31,17 @@ DOC_NAMES = {
     "HANDOFF.json", "CI-EVIDENCE.json", "GLOBAL-GATE-REPAIR-CONTRACT.md",
     "MANIFEST.sha256",
 }
-ALLOWED = PRODUCT | {DOCS + name for name in DOC_NAMES}
+LEGACY_ALLOWED = PRODUCT | {DOCS + name for name in DOC_NAMES}
+F4_DOC_NAMES = {
+    "F4-C1-PLAN.md", "F4-C1-INPUTS.json", "F4-C1-CONTRACT.md", "F4-C1-RESULT.md",
+    "F4-C1-CI-EVIDENCE.json", "F4-C1-INDEPENDENT-REVIEW.md", "F4-C1-HANDOFF.json",
+    "F4-C1-MANIFEST.sha256",
+}
+GENERATOR = "scripts/qa/atlas_parity04_f3a_scale_fixture.mjs"
+F4_PRODUCT = (PRODUCT - {"tests/fixtures/atlas_parity04_f3a_graph.json"}) | {GENERATOR}
+F4_ALLOWED = F4_PRODUCT | {DOCS + name for name in F4_DOC_NAMES}
+ALLOWED = LEGACY_ALLOWED | F4_ALLOWED
+PRODUCT = PRODUCT | {GENERATOR}
 OUTPUT = Path(os.environ.get("F3A_OUTPUT", str(ROOT / ".test-output" / "atlas-parity04-f3a")))
 
 def require(condition, reason):
@@ -56,8 +67,10 @@ def preflight():
     expected = os.environ.get("F3A_EXPECTED_SHA")
     require(expected is None or sha == expected, "Runner HEAD differs from expected GitHub head SHA")
     subprocess.run(["git", "merge-base", "--is-ancestor", BASE, sha], cwd=ROOT, check=True)
+    subprocess.run(["git", "merge-base", "--is-ancestor", PREDECESSOR, sha], cwd=ROOT, check=True)
     previous = BASE
     history = []
+    f4_phase = False
     for commit in git("rev-list", "--reverse", BASE + ".." + sha).splitlines():
         parents = git("show", "-s", "--format=%P", commit).split()
         require(parents == [previous], "F3A history must be one-parent fast-forward only: " + commit)
@@ -65,14 +78,22 @@ def preflight():
         require(changes, "Empty F3A commit is not qualification evidence")
         for line in changes:
             status, path = line.split("\t")
-            require(status in {"A", "M"} and path in ALLOWED, "Out-of-ownership intermediate delta: " + line)
+            require(status in {"A", "M"} and path in (F4_ALLOWED if f4_phase else LEGACY_ALLOWED), "Out-of-ownership intermediate delta: " + line)
+            if f4_phase and path.startswith(DOCS):
+                require(status == "A" or path in tree(previous), "F4 successor document must have traceable ordinary history")
         history.append({"sha": commit, "parent": previous, "changes": changes})
         previous = commit
+        if commit == PREDECESSOR:
+            f4_phase = True
     require(history and previous == sha, "No F3A candidate commits after frozen base")
+    require(f4_phase, "F3A qualified predecessor was not observed in linear history")
     base_entries, head_entries = tree(BASE), tree(sha)
+    predecessor_entries = tree(PREDECESSOR)
+    frozen_predecessor = {path: item for path, item in predecessor_entries.items() if path not in F4_PRODUCT}
+    require(all(head_entries.get(path) == item for path, item in frozen_predecessor.items()), "Historical F3A receipts/fixture or out-of-ownership predecessor blob changed")
     require(all(head_entries.get(path) == item for path, item in base_entries.items()), "Frozen base file/mode/blob changed")
     additions = set(head_entries) - set(base_entries)
-    require(additions <= ALLOWED and PRODUCT <= additions and MANIFEST in additions, "Unexpected/missing F3A inventory")
+    require(additions <= ALLOWED and PRODUCT <= additions and {DOCS + name for name in F4_DOC_NAMES} <= additions, "Unexpected/missing exact F3A plus F4-C1 inventory")
     for path in additions:
         require(head_entries[path][0:2] == ("100644", "blob"), "F3A file is not ordinary 100644 blob: " + path)
         require(not (ROOT / path).is_symlink(), "Symlink refused")
@@ -95,7 +116,7 @@ def preflight():
         digest = hashlib.sha256(tracked).hexdigest()
         require(digest == expected_hash, "Manifest mismatch: " + path)
         files.append({"path": path, "blob": head_entries[path][2], "sha256": digest, "bytes": len(tracked)})
-    receipt = {"schema": "atlas-f3a-input-receipt-v1", "sha": sha, "tree": tree_sha, "base_sha": BASE, "history": history, "files": files, "base_files_preserved": len(base_entries), "global_gates_modified": False}
+    receipt = {"schema": "atlas-f3a-input-receipt-v1", "sha": sha, "tree": tree_sha, "base_sha": BASE, "predecessor_sha": PREDECESSOR, "qualification": "F4_C1_SYNTHETIC_SCALE_ONLY", "history": history, "files": files, "base_files_preserved": len(base_entries), "global_gates_modified": False}
     (OUTPUT / "inputs.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(receipt, indent=2), flush=True)
     return receipt
@@ -126,7 +147,7 @@ def main():
     module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
     suite = unittest.defaultTestLoader.loadTestsFromModule(module)
     expected = suite.countTestCases()
-    require(expected == 22, "Unexpected F3A collection; require all 22 named tests")
+    require(expected == 30, "Unexpected F4-C1 collection; require 22 inherited plus 8 scale tests")
     result = unittest.TextTestRunner(verbosity=2, resultclass=Result).run(suite)
     failures = {t.id(): detail for t, detail in result.failures}
     errors = {t.id(): detail for t, detail in result.errors}

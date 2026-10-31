@@ -1,0 +1,24 @@
+{
+  "schema": "atlas-f4-c1-ci-evidence-v1",
+  "status": "PENDING_TECHNICAL_CI",
+  "plan_sha": "f229239e1ebfc585209a684be3460d20015f85e9",
+  "historical_receipts_preserved": true,
+  "expected": {
+    "tests_per_cell": 30,
+    "inherited_test_names": 22,
+    "browser_journeys": 24,
+    "inherited_journey_names": 17,
+    "cells": [
+      "ubuntu-normal",
+      "ubuntu-O",
+      "windows-normal",
+      "windows-O"
+    ],
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "plan_attempt": "Plan-only commit deliberately not qualification; historical focal manifest does not admit successor docs until technical gate successor is published",
+  "terminal_custody": "Final HEAD must receive its own Actions run and independent review; linked outside commit to avoid recursive self hash",
+  "global_gates": "Frozen; no G5 PASS; successor C4 required"
+}

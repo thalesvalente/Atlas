@@ -14,6 +14,11 @@
 }
 .f3a-graph button:hover { background:#dce8f7; }
 .f3a-graph :focus-visible { outline:3px solid #9b3900; outline-offset:3px; }
+.f3a-graph .f3a-navigation { display:flex; flex-wrap:wrap; align-items:end; gap:8px; margin:8px 0; }
+.f3a-graph .f3a-navigation label { flex:1 1 240px; min-width:0; }
+.f3a-graph .f3a-navigation input { display:block; width:100%; min-width:0; min-height:44px;
+  padding:8px; border:1px solid #60748c; border-radius:5px; color:#183451; background:#fff; font:inherit; }
+.f3a-graph .f3a-navigation output { flex:1 1 100%; }
 .f3a-graph .f3a-status { max-height:180px; overflow:auto; white-space:pre-wrap; }
 .f3a-graph .f3a-error { background:#fff1f1; color:#881a25; border:2px solid #ad2634; padding:12px; }
 .f3a-graph .f3a-error[hidden] { display:none; }

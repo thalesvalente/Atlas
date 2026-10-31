@@ -1,0 +1,103 @@
+{
+  "schema": "atlas-f4-c1-inputs-v1",
+  "mission": "AP04-F4-C1-GRAPH-SCALE-CHAT-01",
+  "recorded_date": "2026-10-31",
+  "repo": "thalesvalente/Atlas",
+  "branch": "feat/atlas-parity04-f3a-graph-20261031",
+  "pr": 16,
+  "base": {
+    "sha": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+    "tree": "e0d293bd9de6b78c12934bc395b5f0ab5981563f"
+  },
+  "plan": {
+    "sha": "f229239e1ebfc585209a684be3460d20015f85e9",
+    "tree": "e610173beb661ae0d0064ce284b10c72d8428ad3",
+    "review": "C_COMPATIBLE_SCOPED_NO_PLAN_DEVIATION"
+  },
+  "approved_descriptor": {
+    "version": "0.2.0",
+    "technical_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "tree": "986a1ddaf3ceae4c6e0fcb03c7bd1dfd63ef378c",
+    "approval_url": "https://github.com/thalesvalente/Atlas/pull/15#issuecomment-6539419419",
+    "status": "APPROVED_SCOPED"
+  },
+  "sources": [
+    {
+      "path": ".specify/memory/constitution.md",
+      "ref": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6"
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "ref": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "a2190a257987aa9a2da276857cdb713ac24dd520"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ACTION-PLAN.md",
+      "ref": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "de728c827a960cf9bcb2e22e20b5d205aa199781"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+      "ref": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "feb9ab242a857fb377724acb9e904b2f89f1f2b9"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/GATES.json",
+      "ref": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "d36b302368cf8671e95d798b349b420b0eefd9a2"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-wave-launch/02-F4-C1-GRAPH-SCALE-CHAT.md",
+      "ref": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "907273e6d3f458d21ce8b2f128a538e387288e3a"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.md",
+      "ref": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "blob": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "ref": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/PARITY-TRACEABILITY.md",
+      "ref": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "blob": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "ref": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/SECURITY-AND-INTEROPERABILITY.md",
+      "ref": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "blob": "11e979d153b0cdb140696df654fc1a78e928b08e"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+      "ref": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "blob": "f010f8e2190b0853713c5c68a881ed72759f3e36"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f3a-graph/GLOBAL-GATE-REPAIR-CONTRACT.md",
+      "ref": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "blob": "6483fa31f32d96ba43fe236a74a2f16bb3c5c340"
+    }
+  ],
+  "source_access": "Public sanitized documents and synthetic fixtures only; no private payload/code",
+  "local_execution": {
+    "status": "NOT_EXECUTED",
+    "reason": "MXC launcher failed before process start while enumerating D: volume, os error1005; node_repl terminated unexpectedly"
+  },
+  "agents": {
+    "A": "/root/a_graph",
+    "B": "/root/b_scale_qa",
+    "C": "/root/c_review",
+    "publisher": "/root"
+  },
+  "reasoning_effective": "UNVERIFIED"
+}

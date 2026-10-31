@@ -5,6 +5,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { scaleFixture, stressFixture } from './atlas_parity04_f3a_scale_fixture.mjs';
 
 const root = resolve(process.argv[2] || '.');
 const out = resolve(process.argv[3] || '.test-output/atlas-parity04-f3a');
@@ -13,6 +14,8 @@ const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8'
 const sha = git('rev-parse', 'HEAD'), tree = git('rev-parse', 'HEAD^{tree}');
 if (process.env.F3A_EXPECTED_SHA && sha !== process.env.F3A_EXPECTED_SHA) throw new Error('Tested SHA does not match expected head');
 const fixture = JSON.parse(await readFile(join(root, 'tests/fixtures/atlas_parity04_f3a_graph.json'), 'utf8'));
+const scale = scaleFixture(fixture), scaleSource = "synthetic-f3a", scaleSnapshot = "synthetic-f3a-v1";
+await writeFile(join(out, 'scale-fixture.json'), JSON.stringify(scale));
 const js = await readFile(join(root, 'packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js'));
 const css = await readFile(join(root, 'packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css'));
 const html = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><link rel="stylesheet" href="/graph.css"><title>F3A isolated synthetic QA</title></head><body style="margin:0"><main id="root"></main><script type="module">import {mount} from "/graph.js"; window.mountGraph=mount;</script></body></html>';
@@ -290,7 +293,8 @@ try {
       const edges=bigger(2,4000),edgeStart=performance.now();
       if(!graph.setData(edges) || graph.getState().node_count!==2 || graph.getState().relation_count!==4000 || document.querySelectorAll('[data-relation-id]').length!==4000) throw new Error('Render cap4000 relations was not admitted completely');
       positive.push({nodes:2,relations:4000,duration_ms:performance.now()-edgeStart,dom_relations:document.querySelectorAll('[data-relation-id]').length});
-      const negative=[[1001,0],[10000,0],[10001,0],[2,4001],[2,100000],[2,100001]].map(([nodes,relations])=>{
+      for(const [nodes,relations] of [[1001,0],[10000,0],[2,4001]]) { const d=bigger(nodes,relations),start=performance.now(); if(!graph.setData(d))throw new Error('Within-envelope scale refused: '+nodes+'/'+relations+' '+graph.getState().error);positive.push({nodes,relations,duration_ms:performance.now()-start,rendered_nodes:graph.getState().rendered_node_count,rendered_relations:graph.getState().rendered_relation_count}); }
+      const negative=[[10001,0],[2,100001]].map(([nodes,relations])=>{
         const d=bigger(nodes,relations),start=performance.now(),accepted=graph.setData(d),s=graph.getState();
         return {nodes,relations,accepted,error:s.error,visible:s.visible_ids.length,duration_ms:performance.now()-start,text:document.querySelector('#root').textContent};
       });return {positive,negative};
@@ -335,10 +339,145 @@ try {
     insist(Object.values(ratios).every(r=>r>=4.5),'Measured control/node text contrast below4.5: '+JSON.stringify(ratios));
     return {authority:'LEGACY_DERIVED',scientific_approval:'NOT_EVALUATED',measured_text_contrast:ratios};
   });
+
+  await check('scale_full_index_and_identity', async p => {
+    const before = await state(p);
+    insist(before.node_count === 2911 && before.relation_count === 1595, 'Scale fixture records lost');
+    insist(before.loaded_node_count === 2911 && before.declared_node_count === 2911, 'Loaded/declared node counts confused with DOM');
+    const expectedIds = new Set(scale.nodes.map(n => n.identity.navigation_id));
+    insist(before.visible_ids.length === 2911 && new Set(before.visible_ids).size === 2911 && before.visible_ids.every(id => expectedIds.has(id)), 'Initial scale traversal lost or duplicated an occurrence');
+    insist(before.operation_ms < 30000, '2911-node admission exceeded operation deadline');
+    const metrics = await p.evaluate(() => ({dom_elements:document.querySelectorAll('#root *').length,heap_bytes:performance.memory?.usedJSHeapSize ?? null,operation_ms:graph.getState().operation_ms,draw_ms:graph.getState().draw_ms}));
+    insist(before.endpoint_counts.NULL_ENDPOINT === 22 && before.endpoint_counts.UNRESOLVED === 75 && before.endpoint_counts.COLLISION === 50, 'Scale adversarial endpoint counts lost');
+    insist(before.rendered_node_count <= 1000 && before.rendered_node_count > 0 && before.rendered_node_count === await p.locator('[data-node-id]').count(), 'Rendered window is not bounded or truthful');
+    const selected = [];
+    for (const id of ['nav:project', 'nav:scale-1455', 'nav:scale-2910']) {
+      const reveal = await p.evaluate(id => { const started=performance.now(),ok=graph.reveal(id); return {ok,elapsed_ms:performance.now()-started,dom_elements:document.querySelectorAll('#root *').length,rendered:graph.getState().rendered_node_count}; }, id);
+      insist(reveal.ok && reveal.elapsed_ms < 30000, 'Cannot reveal first/middle/last within deadline: ' + id);
+      await p.keyboard.press('Enter'); const current = await state(p);
+      insist(current.selection?.nav_id === id, 'Revealed node cannot be selected: ' + id);
+      const context = current.selection;
+      insist(context.source_id === scaleSource && context.snapshot_id === scaleSnapshot && context.occurrence === 0 && context.session_id === current.session_id, 'Scale selection lost full identity');
+      insist(current.rendered_ids.includes(id), 'Selected scale identity absent from drawing');
+      selected.push({context,reveal});
+    }
+    const after = await state(p);
+    insist(after.node_count === before.node_count && after.relation_count === before.relation_count, 'Window navigation dropped model records');
+    const original = JSON.stringify(scale); insist(await p.evaluate(() => JSON.stringify(window.fixture)) === original, 'Scale descriptor mutated');
+    await shot(p, 'scale-desktop'); return { total: before.node_count, loaded: before.loaded_node_count, rendered: after.rendered_node_count, metrics, selected };
+  }, 1440, scale);
+  await check('scale_collapsed_orphan_isolated_and_occurrences', async p => {
+    await p.evaluate(() => { graph.reveal('nav:family'); });
+    await p.locator('[data-toggle-id="nav:family"]').click();
+    insist(!(await state(p)).visible_ids.includes('nav:scale-2910'), 'Collapsed branch stayed logically expanded');
+    insist(await p.evaluate(() => graph.reveal('nav:scale-2910')), 'Reveal cannot expand actual collapsed ancestors');
+    insist((await state(p)).visible_ids.includes('nav:scale-2910'), 'Revealed descendant absent');
+    const contexts = [];
+    for (const id of ['nav:orphan', 'nav:isolated', 'nav:collision-0-a', 'nav:collision-0-b', 'nav:hostile']) {
+      insist(await p.evaluate(id => graph.reveal(id), id), 'Scale anomaly inaccessible: ' + id);
+      await p.keyboard.press('Enter'); contexts.push((await state(p)).selection);
+    }
+    insist(contexts[2].nav_id !== contexts[3].nav_id && contexts[2].occurrence === 0 && contexts[3].occurrence === 1, 'Duplicate native identities merged occurrences');
+    await p.locator('[data-action="relation-previous"]').click();
+    const lastRelation = await p.locator('[aria-label="Detalhe da relação"]').textContent();
+    insist(lastRelation.includes('nav:scale-rel-1594') && lastRelation.includes('"native_id": null'), 'Last relation occurrence or null native identity lost outside SVG window');
+    insist(await p.locator('#root img,#root script,#root iframe,#root a[href]').count() === 0, 'Scale hostile text activated');
+    const invalid = await p.evaluate(() => {
+      const d = structuredClone(fixture); d.nodes[1455].identity.navigation_id = d.nodes[1454].identity.navigation_id;
+      const accepted = graph.setData(d); return {accepted,state:graph.getState()};
+    });
+    insist(!invalid.accepted && invalid.state.error && invalid.state.visible_ids.length === 0, 'Scale duplicate nav ID not atomically refused');
+    return { contexts, duplicate_rejected: true };
+  }, 1440, scale);
+  await check('scale_pan_zoom_minimap_keyboard', async p => {
+    insist(await p.evaluate(() => graph.reveal('nav:scale-1455')), 'Middle node inaccessible');
+    const a = await state(p); await p.locator('[data-action="zoom-in"]').click();
+    const b = await state(p); insist(b.zoom > a.zoom, 'Scale zoom failed');
+    await p.locator('[data-action="pan-right"]').click(); const c = await state(p); insist(c.pan.x !== b.pan.x, 'Scale pan failed');
+    const map = p.locator('[data-minimap]'), box = await map.boundingBox(); insist(box && box.width > 0, 'Scale minimap missing');
+    await map.click({position:{x:box.width*.2,y:box.height*.8}}); const d = await state(p);
+    insist(d.pan.x !== c.pan.x || d.pan.y !== c.pan.y, 'Scale minimap navigation failed');
+    insist(d.minimap_bin_count <= 2048 && d.minimap_node_count === d.visible_ids.length, 'Minimap discarded semantic nodes or drew unbounded bins');
+    await p.evaluate(() => graph.reveal('nav:scale-1455')); await p.keyboard.press('Home');
+    let k = await state(p); insist(await p.evaluate(() => document.activeElement?.getAttribute('data-node-id')) === k.visible_ids[0], 'Scale Home failed');
+    await p.keyboard.press('End'); k = await state(p);
+    insist(await p.evaluate(() => document.activeElement?.getAttribute('data-node-id')) === k.visible_ids.at(-1), 'Scale End failed');
+    await p.keyboard.press('ArrowUp'); await p.keyboard.press('ArrowDown'); await p.keyboard.press('Enter');
+    insist((await state(p)).selection?.nav_id === k.visible_ids.at(-1), 'Scale arrows/Enter failed');
+    await p.keyboard.press('Escape'); insist((await state(p)).selection === null, 'Scale Escape failed');
+    await p.keyboard.press('Tab'); insist(await p.evaluate(() => document.activeElement !== document.body), 'Scale Tab focus lost');
+    await p.locator('[data-action="fit"]').click(); const fitted = await state(p);
+    insist(fitted.zoom > 0 && Number.isFinite(fitted.pan.x) && fitted.rendered_node_count <= 1000, 'Scale fit or window budget failed');
+    return { zoom: fitted.zoom, rendered: fitted.rendered_node_count, minimap_bins: fitted.minimap_bin_count };
+  }, 1440, scale);
+  for (const width of [390, 320]) await check('scale_responsive_' + width, async p => {
+    const sizes = await p.evaluate(() => ({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    insist(sizes.scroll <= width, 'Scale layout horizontal overflow at ' + width);
+    const finder = p.locator('[data-navigation-index]');
+    await finder.fill('nav:scale-2910'); await p.locator('[data-action="locate"]').click();
+    insist((await state(p)).rendered_ids.includes('nav:scale-2910'), 'Index cannot reveal last node at ' + width);
+    await p.locator('[data-node-id="nav:scale-2910"]').focus(); await p.keyboard.press('Enter');
+    const before = await state(p);
+    await shot(p, 'scale-mobile-' + width);
+    await p.setViewportSize({width:width===320?390:320,height:800}); await p.waitForTimeout(80);
+    const after = await state(p);
+    insist(after.selection?.nav_id === before.selection.nav_id && after.zoom === before.zoom, 'Scale responsive reflow lost selection/zoom');
+    insist(await p.evaluate(() => document.activeElement?.getAttribute('data-node-id')) === 'nav:scale-2910', 'Scale responsive reflow lost focus');
+    return { sizes, rendered: after.rendered_node_count, selection: after.selection };
+  }, width, scale);
+  await check('scale_stale_ttl_snapshot_dispose', async p => {
+    await p.evaluate(() => graph.reveal('nav:scale-1455')); await p.keyboard.press('Enter'); const old = (await state(p)).selection;
+    const result = await p.evaluate(ctx => {
+      const accepted = graph.setData(structuredClone(fixture)), fresh = graph.getState();
+      return {accepted,stale:graph.select(ctx),fresh};
+    }, old);
+    insist(result.accepted && !result.stale && result.fresh.session_id !== old.session_id && result.fresh.selection === null, 'Scale stale session admitted');
+    const crossed = await p.evaluate(ctx => {
+      const d=structuredClone(fixture); d.source.source_id='synthetic-scale-other-source'; d.snapshot.snapshot_id='synthetic-scale-other-snapshot';
+      const fix=r=>{ if(r.source_id)r.source_id=d.source.source_id; if(r.snapshot_id)r.snapshot_id=d.snapshot.snapshot_id; };
+      d.nodes.forEach(n=>{fix(n.parent);if(n.external_reference)fix(n.external_reference);});
+      d.relations.forEach(r=>{fix(r.from);fix(r.to);});
+      const accepted=graph.setData(d),fresh=graph.getState();
+      return {accepted,wrong_context:graph.select({...ctx,session_id:fresh.session_id}),session:fresh.session_id};
+    }, old);
+    insist(crossed.accepted && !crossed.wrong_context, 'Scale cross-source/snapshot textual identity resolved');
+    const ttl = await p.evaluate(() => {
+      fixtureNow = Date.parse('2026-10-31T10:02:00Z'); graph.reveal('nav:scale-2910');
+      return graph.getState();
+    });
+    insist(ttl.error && ttl.selection === null && ttl.visible_ids.length === 0, 'Scale TTL retained live data');
+    await p.evaluate(() => graph.dispose()); insist(await p.locator('#root').textContent() === '', 'Scale dispose left DOM');
+    return { stale_rejected:true, cross_source_snapshot_rejected:true, ttl_error:ttl.error, disposed:true };
+  }, 1440, scale);
+  await check('scale_descriptor_stress_and_metrics', async p => {
+    const descriptors = [
+      {nodes:10000,relations:0,descriptor:stressFixture(fixture,10000,0),required:true},
+      {nodes:10000,relations:100000,descriptor:stressFixture(fixture,10000,100000),required:false},
+      {nodes:10001,relations:0,descriptor:stressFixture(fixture,10001,0),required:false},
+      {nodes:2,relations:100001,descriptor:stressFixture(fixture,2,100001),required:false}
+    ];
+    const results = [];
+    for (const item of descriptors) {
+      const bytes = Buffer.byteLength(JSON.stringify(item.descriptor));
+      const result = await p.evaluate(({descriptor,nodes,relations}) => {
+        const heap = () => performance.memory ? performance.memory.usedJSHeapSize : null;
+        const beforeHeap=heap(),started=performance.now(),accepted=graph.setData(descriptor),s=graph.getState();
+        return {nodes,relations,accepted,error:s.error,duration_ms:performance.now()-started,before_heap_bytes:beforeHeap,after_heap_bytes:heap(),dom_elements:document.querySelectorAll('#root *').length,rendered_nodes:s.rendered_node_count,rendered_relations:s.rendered_relation_count,visible:s.visible_ids.length,node_count:s.node_count,relation_count:s.relation_count,text:document.querySelector('#root').textContent.slice(0,400)};
+      }, item);
+      result.descriptor_bytes=bytes; results.push(result);
+      insist(result.duration_ms < 30000, 'Scale stress deadline exceeded');
+      if (item.required) insist(result.accepted && result.node_count === item.nodes && result.relation_count === item.relations, 'Required within-envelope node stress refused: '+JSON.stringify(result));
+      if (item.nodes > 10000 || item.relations > 100000) insist(!result.accepted && result.error && result.visible===0, 'Descriptor envelope overflow admitted');
+      if (!result.accepted) insist(result.error && result.visible===0 && result.text.length>0, 'Stress refusal was not atomic/visible');
+      else insist(result.rendered_nodes<=1000 && result.rendered_relations<=4000, 'Scale stress drawing unbounded');
+    }
+    return { results, memory_scope:'Observed Chromium usedJSHeapSize when exposed; not a hard 256MiB browser heap qualification', deadline_ms:30000 };
+  }, 1440, scale);
+
 } catch(e) { report.fatal=String(e.stack||e); }
 finally {
   if(browser)await browser.close();await new Promise(r=>server.close(r));
-  report.passed=!report.fatal && report.checks.length===17 && report.checks.every(c=>c.passed) && report.outside_requests.length===0 && report.page_errors.length===0 && report.storage_calls.length===0;
+  report.passed=!report.fatal && report.checks.length===24 && report.checks.every(c=>c.passed) && report.outside_requests.length===0 && report.page_errors.length===0 && report.storage_calls.length===0;
   await writeFile(join(out,'browser-receipt.json'),JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify(report,null,2));
 }
