@@ -286,10 +286,10 @@ class AcquisitionContraproofs(unittest.TestCase):
                 self.assert_code('UNSAFE_PATH', lambda path=path: self.open_fixture(source=Path(path), allowlist=[Path(path)]))
 
 
-class ReviewCounterproofs(ParserContraproofs):
-    # Inherit the original synthetic suite and add independent-review negatives.
+class ReviewCounterproofs(unittest.TestCase):
+    assert_code = ParserContraproofs.assert_code
     def test_invalid_shapes_are_structured_errors(self):
-        for change in [lambda s: s['result_tables'][0]['rows'][0].update(requirement=[1]), lambda s: s['edges'][0].update(semantics=0.1), lambda s: s['edges'][0].update(**{'from': 0.1})]:
+        for change in [lambda s: s['result_tables'][0]['rows'][0].update(requirement=[1]), lambda s: s['edges'][0].update(semantics=0.1), lambda s: s['edges'][0].update(**{'from': 0.1}), lambda s: s['edges'][0].update(**{'from': {'id': 0.1, 'source_id': s['source_id'], 'snapshot_id': s['snapshot_id']}}), lambda s: s['edges'][0].update(**{'from': {'id': 'P', 'source_id': 0.1, 'snapshot_id': s['snapshot_id']}}), lambda s: s['edges'][0].update(**{'from': {'id': 'P', 'source_id': s['source_id'], 'snapshot_id': s['snapshot_id'], 'extra': 0.1}})]:
             source = fixture_source()
             change(source)
             self.assert_code('SOURCE_STRUCTURE_INVALID', lambda: descriptor(raw_source(source)))
@@ -315,7 +315,10 @@ class ReviewCounterproofs(ParserContraproofs):
         self.assertEqual(d['nodes'][1]['parent']['resolution'], 'RESOLVED')
 
 
-class AcquisitionReviewCounterproofs(AcquisitionContraproofs):
+class AcquisitionReviewCounterproofs(unittest.TestCase):
+    setUp = AcquisitionContraproofs.setUp
+    open_fixture = AcquisitionContraproofs.open_fixture
+    assert_code = AcquisitionContraproofs.assert_code
     def test_missing_source_is_payload_free_cli_error(self):
         absent = self.base/'DO-NOT-LEAK-THIS-PATH'
         args = [sys.executable, '-m', 'tools.atlas_legacy_presentation', '--source', str(absent), '--allow', str(absent), '--scratch', str(self.base), '--synthetic-fixture']

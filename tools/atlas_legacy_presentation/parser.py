@@ -318,6 +318,8 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
             if set(value) != {'source_id', 'snapshot_id', 'id'}:
                 fail()
             source, snapshot, value = value['source_id'], value['snapshot_id'], value['id']
+            if any(context is not None and not isinstance(context, str) for context in (source, snapshot)):
+                fail()
         if value is not None and (not isinstance(value, str) or not value):
             fail()
         candidates = index[value] if value is not None and source == source_id and snapshot == snapshot_id else []
@@ -377,6 +379,8 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
             value = item.get(field)
             if value is not None and not isinstance(value, (str, dict)):
                 fail()
+        reference(item.get('from', MISSING), '')
+        reference(item.get('to', MISSING), '')
         key = json.dumps([(field in item, item.get(field)) for field in ('from', 'to', 'kind', 'semantics', 'direction')], sort_keys=True, ensure_ascii=True)
         repeat_keys.append(key)
         repeats[key] += 1
