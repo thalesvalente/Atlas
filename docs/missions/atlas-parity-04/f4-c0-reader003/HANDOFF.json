@@ -1,0 +1,212 @@
+{
+  "schema": "atlas-ap04-f4-c0-handoff-v1",
+  "mission": "AP04-F4-C0-READER003-CONTRACT-CHAT-01",
+  "owner": "coordenador /root",
+  "status": "F4_C0_READER003_SCOPED_CONTRACT_REVIEWED",
+  "target": "F4_C0_READER003_SCOPED_CONTRACT_REVIEWED",
+  "branch": "docs/atlas-parity04-f4-reader003-20261031",
+  "plan_commit": "296a47245059fa473715fd4fcf9bf96011c19f44",
+  "independent_review": {
+    "reviewer": "/root/c_review",
+    "native": true,
+    "authorship": false,
+    "status": "APPROVED_DOCUMENTATION_SCOPED",
+    "findings_P1_P2": 0,
+    "reviewed_sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+    "reviewed_tree": "45f95d0f1b5afabf0bbfad6e4aa983473b21a555",
+    "reviewed_parent": "296a47245059fa473715fd4fcf9bf96011c19f44",
+    "review_file": "docs/missions/atlas-parity-04/f4-c0-reader003/INDEPENDENT-REVIEW.md",
+    "terminal_verification": "EXACT_HEAD_EXTERNAL_RECEIPT_IN_PR19_AFTER_PUBLICATION"
+  },
+  "contract": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+  "descriptor_blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+  "historical_reader_blob": "eb4feb7b4f829d97b048fc9d343861d9297ec04b",
+  "approval_comment": 6539419419,
+  "approval_package_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+  "custody": {
+    "commit_tree_parents_blob": "RESOLVE_FROM_CONTAINING_GIT_OBJECT",
+    "manifest_excludes_only_itself": true,
+    "output_inventory": "OUTPUT-OBJECTS.json",
+    "terminal_receipt": "PR Draft exact HEAD/tree/parents/blob inventory and native C verification",
+    "receipt_only_changes": [
+      "docs/missions/atlas-parity-04/f4-c0-reader003/RESULT.md",
+      "docs/missions/atlas-parity-04/f4-c0-reader003/INDEPENDENT-REVIEW.md",
+      "docs/missions/atlas-parity-04/f4-c0-reader003/HANDOFF.json",
+      "docs/missions/atlas-parity-04/f4-c0-reader003/OUTPUT-OBJECTS.json",
+      "docs/missions/atlas-parity-04/f4-c0-reader003/MANIFEST.sha256"
+    ]
+  },
+  "next": {
+    "C3": "C0_DOCUMENTARY_DEPENDENCY_REVIEWED; pin terminal HEAD/tree/parents/contract_blob + terminal PR receipt; require C1/C2/F3B before integration",
+    "C4": "qualify succession CI after C3 frozen; preserve C0 bytes and ancestry",
+    "L1": "requires C2 pin and fresh explicit source authorization"
+  },
+  "runtime_tests": "NOT_RUN",
+  "formal_schema_validation": "NOT_RUN",
+  "G4": "NOT_QUALIFIED_BY_C0",
+  "G5": "NOT_QUALIFIED_BY_C0",
+  "G6": "NOT_RUN",
+  "plan_change": "NONE",
+  "scientific_approval": false,
+  "hl7_fhir": "FUTURE_CAPABILITY_ONLY_NOT_IMPLEMENTED",
+  "private_sources_read": false,
+  "main_merge": false,
+  "release": false,
+  "deploy": false,
+  "promotion": false,
+  "cleanup": false,
+  "new_worktrees": false,
+  "new_clones": false,
+  "reviewed_payload": {
+    "sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+    "tree": "45f95d0f1b5afabf0bbfad6e4aa983473b21a555",
+    "parents": [
+      "296a47245059fa473715fd4fcf9bf96011c19f44"
+    ],
+    "files": [
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md",
+        "blob": "cc4037044c76a6c6eb89035e5d4473316516cffb",
+        "mode": "100644"
+      },
+      {
+        "path": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+        "blob": "4cba947bd931b2c932198076f143068967ce909c",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/CONTRACT-DELTA.md",
+        "blob": "2b6ab97e6919d2b5d85584217603ff534a888c48",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/SECURITY-AND-ROLLBACK.md",
+        "blob": "ea8b297b041d7075a9ea9a7bfa3d3788e4243962",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/INPUT-SHAS.json",
+        "blob": "898f22a0a8f1ee4bded90f0c3cedbf2fef71a5d1",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/RESULT.md",
+        "blob": "8898b3de6c34cc382b0ed392c7b37f6097785221",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/INDEPENDENT-REVIEW.md",
+        "blob": "90c30520dd434a3e55d28bffd0070a801af9ea12",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/HANDOFF.json",
+        "blob": "5a42b73ed255a769fd180b2e7447722dc633dbbf",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/OUTPUT-OBJECTS.json",
+        "blob": "880eb484d7d976b0dfbf3d44f375df278b3b0116",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/MANIFEST.sha256",
+        "blob": "fd4b924cdf0427d9f6c6d5c3710de6e503ccf4d6",
+        "mode": "100644"
+      }
+    ]
+  },
+  "contract_blob": "4cba947bd931b2c932198076f143068967ce909c",
+  "validation": {
+    "documentary_roundtrip_blobs": 10,
+    "documentary_json_parse": 3,
+    "manifest_hashes_recomputed": 9,
+    "source_inputs_checked_by_C": 24,
+    "commit_envelopes_checked_by_C": 4,
+    "all_preexisting_leaves_unchanged_from_F2": true,
+    "formal_descriptor_validator": "NOT_RUN",
+    "runtime_oracles": "NOT_RUN",
+    "runtime_result": "UNKNOWN"
+  },
+  "ci": {
+    "classification": "CI_SUCCESSION_TO_QUALIFY_C4",
+    "payload_samples": [
+      {
+        "workflow": "ATLAS021 candidate verification",
+        "run_id": 41211955169,
+        "job_id": 124568622243,
+        "job_name": "installed / ubuntu-latest / Python optimize=0",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41211955169/job/124568622243",
+        "head_sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+        "observed_sample_conclusion": "failure",
+        "cause": "GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md']",
+        "secondary": null
+      },
+      {
+        "workflow": "ATLAS-PARITY-03 C4 full composition",
+        "run_id": 41211955295,
+        "job_id": 124568622597,
+        "job_name": "C4 Spec Kit 1.2.3 / ubuntu-latest",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41211955295/job/124568622597",
+        "head_sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+        "observed_sample_conclusion": "failure",
+        "cause": "GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md']",
+        "secondary": null
+      },
+      {
+        "workflow": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+        "run_id": 41211955143,
+        "job_id": 124568622212,
+        "job_name": "P06 / ubuntu-latest / optimize=1",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41211955143/job/124568622212",
+        "head_sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+        "observed_sample_conclusion": "failure",
+        "cause": "GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md']",
+        "secondary": null
+      },
+      {
+        "workflow": "ATLAS-PARITY-04 documentation successor",
+        "run_id": 41211955673,
+        "job_id": 124568625422,
+        "job_name": "AP04 documentation guard / windows-latest / optimize=0",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41211955673/job/124568625422",
+        "head_sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+        "observed_sample_conclusion": "failure",
+        "cause": "GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md']",
+        "secondary": null
+      },
+      {
+        "workflow": "ATLAS-PARITY03 P03 isolated qualification",
+        "run_id": 41211955144,
+        "job_id": 124568621965,
+        "job_name": "P03 Chromium / ubuntu-latest",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41211955144/job/124568621965",
+        "head_sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+        "observed_sample_conclusion": "failure",
+        "cause": "GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md']",
+        "secondary": "Required receipt missing, failed, skipped or attributed to a different SHA"
+      },
+      {
+        "workflow": "ATLAS003 Spec Kit contract checks",
+        "run_id": 41211955216,
+        "job_id": 124568622221,
+        "job_name": "atlas003-specification (windows-latest)",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41211955216/job/124568622221",
+        "head_sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+        "observed_sample_conclusion": "failure",
+        "cause": "GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md']",
+        "secondary": null
+      }
+    ],
+    "terminal_results": "READ_OWN_SHA_AND_PUBLISH_IN_PR19_NO_TRANSFER",
+    "global_qualified": false,
+    "guards_changed": false
+  },
+  "pr": {
+    "number": 19,
+    "url": "https://github.com/thalesvalente/Atlas/pull/19",
+    "draft": true,
+    "base": "docs/atlas-parity04-f2-legacy-contract-20261030",
+    "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+  }
+}

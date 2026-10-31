@@ -1,0 +1,246 @@
+{
+  "schema": "atlas-ap04-f4-c0-inputs-v1",
+  "mission": "AP04-F4-C0-READER003-CONTRACT-CHAT-01",
+  "owner": "coordenador /root",
+  "recorded_date": "2026-10-31",
+  "plan": "AP04-POR-v1.0-draft",
+  "branch": "docs/atlas-parity04-f4-reader003-20261031",
+  "git_inputs": [
+    {
+      "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9",
+      "parents": [
+        "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+      ]
+    },
+    {
+      "sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "tree": "986a1ddaf3ceae4c6e0fcb03c7bd1dfd63ef378c",
+      "parents": [
+        "7caffc69dc17b2f0d4ec0906bb1b4a2bba0abc67"
+      ]
+    },
+    {
+      "sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree": "e0626cd274948a9303774593e20ca05fc1d32d62",
+      "parents": [
+        "e140d973fd4cbc4547046f25fd620166662c5004"
+      ]
+    },
+    {
+      "sha": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "tree": "5e7a1e3ec9067be640974eaf8ec75bd9748e78af",
+      "parents": [
+        "6c576ab0dd8a34732ac31a5829d41815f973ea1c"
+      ]
+    }
+  ],
+  "plan_commit": {
+    "sha": "296a47245059fa473715fd4fcf9bf96011c19f44",
+    "tree": "2b8eaac88578899852c71d32c5f2244455f6441b",
+    "parents": [
+      "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    ],
+    "blob": "cc4037044c76a6c6eb89035e5d4473316516cffb"
+  },
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "c19ccc55e54f1274dac8408480f7a3e9ecc30f85",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "a2190a257987aa9a2da276857cdb713ac24dd520",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "17265f1a7293d7885825d9dc1982b1e1dec2b567",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ACTION-PLAN.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "de728c827a960cf9bcb2e22e20b5d205aa199781",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/DECISION-REGISTER.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "e40075b866987f22f234e86a9c0ea789dc6fe3c9",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/GATES.json",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "d36b302368cf8671e95d798b349b420b0eefd9a2",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "feb9ab242a857fb377724acb9e904b2f89f1f2b9",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/INTEROPERABILITY-GUARDRAILS.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "2cc06951e3116fb0636d1fc8c68745867d2ae810",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/spec.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/plan.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "d5ac461bbb33a149c0b2d66e88780192b5a95912",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/contracts/interface.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "c9c53b40322f3b766040c5e811d2cc606ea015e8",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/contracts/reader.md",
+      "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "blob": "eb4feb7b4f829d97b048fc9d343861d9297ec04b",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ADR-0003-v0.2-CANDIDATE.md",
+      "commit": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "blob": "e1283af1ac285937bf02bdf163ce3cf2d00f3081",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "commit": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "commit": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/SECURITY-AND-INTEROPERABILITY.md",
+      "commit": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "blob": "11e979d153b0cdb140696df654fc1a78e928b08e",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/PARITY-TRACEABILITY.md",
+      "commit": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "blob": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483",
+      "mode": "100644",
+      "read_status": "READ"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.json",
+      "commit": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "blob": "8b16eb60e2554a337fcaf950df13fa8300e46e87",
+      "mode": "100644",
+      "read_status": "READ_SANITIZED_ONLY"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/RESULT-REVIEW.sanitized.md",
+      "commit": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "blob": "078ce6364fc88bb2c09d37282426938482387c7a",
+      "mode": "100644",
+      "read_status": "READ_SANITIZED_ONLY"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-wave-launch/01-F4-C0-READER003-CONTRACT-CHAT.md",
+      "commit": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "1446b71cd71f6f231d0b3888969901294bd7dd8c",
+      "mode": "100644",
+      "read_status": "READ_BY_COORDINATOR_OR_NATIVE_AGENT"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-wave-launch/03-F4-C2-EXTERNAL-READER-CHAT.md",
+      "commit": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "f430d286efa0281866cfe7acc2190a67a061f861",
+      "mode": "100644",
+      "read_status": "READ_BY_COORDINATOR_OR_NATIVE_AGENT"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-wave-launch/04-F4-C3-INTEGRATION-CHAT.md",
+      "commit": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "683e213b9facf0546bce759a1a58db6b5acb8024",
+      "mode": "100644",
+      "read_status": "READ_BY_COORDINATOR_OR_NATIVE_AGENT"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-wave-launch/05-F4-C4-GLOBAL-CI-CHAT.md",
+      "commit": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+      "blob": "2c65403fb1718293fdc0738dce571b57a1837ee4",
+      "mode": "100644",
+      "read_status": "READ_BY_COORDINATOR_OR_NATIVE_AGENT"
+    }
+  ],
+  "human_approval": {
+    "comment_id": 6539419419,
+    "url": "https://github.com/thalesvalente/Atlas/pull/15#issuecomment-6539419419",
+    "author": "thalesvalente",
+    "association": "OWNER",
+    "created_at": "2026-10-31T05:11:44Z",
+    "updated_at": "2026-10-31T05:11:44Z",
+    "state": "APPROVED_SCOPED",
+    "package_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "body_utf8_sha256": "4a880190abca8f376de4f4e0546ade84ae88723a1a7ad641df1d673f4e192a3b",
+    "scope": "ADR-0003 v0.2 + atlas-legacy-presentation0.2.0: O1 externo, File API opcional O3, estado efêmero segregado, sem Catalog/SDK/protocolo alterado",
+    "is_git_blob": false
+  },
+  "custody": {
+    "own_blob_commit_tree_parents": "RESOLVE_FROM_CONTAINING_GIT_OBJECT",
+    "inventory": "OUTPUT-OBJECTS.json + MANIFEST.sha256 + terminal PR receipt",
+    "self_reference": "No self digest or invented own SHA"
+  },
+  "execution": {
+    "local_checkout_identity": "UNVERIFIED_MXC_LAUNCHER_FAILURE_D_VOLUME",
+    "local_tests": "NOT_RUN",
+    "github_environment": "CHAT_GITHUB_CONNECTOR",
+    "private_sources_read": false,
+    "formal_schema_validator": "NOT_RUN",
+    "schema_document_json_parse": "PASS_SYNTAX_ONLY_NOT_FORMAL_VALIDATION",
+    "runtime_or_browser_tests": "NOT_RUN",
+    "new_worktrees": false,
+    "new_clones": false,
+    "plan_change": "NONE"
+  }
+}

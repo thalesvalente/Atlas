@@ -1,0 +1,169 @@
+{
+  "schema": "atlas-ap04-f4-c0-output-objects-v1",
+  "owner": "coordenador /root",
+  "mission": "AP04-F4-C0-READER003-CONTRACT-CHAT-01",
+  "phase": "REVIEW_RECORDED_TERMINAL_ENVELOPE_IN_PR19",
+  "base_commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+  "base_tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9",
+  "direct_parent_commit": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+  "direct_parent_tree": "45f95d0f1b5afabf0bbfad6e4aa983473b21a555",
+  "containing_commit_tree_parents": "RESOLVE_FROM_CONTAINING_GIT_OBJECT_AND_PR19_TERMINAL_RECEIPT",
+  "reviewed_payload": {
+    "sha": "2628d0f3425a50cea5dcd097dfb4e03836d66217",
+    "tree": "45f95d0f1b5afabf0bbfad6e4aa983473b21a555",
+    "parents": [
+      "296a47245059fa473715fd4fcf9bf96011c19f44"
+    ],
+    "reviewer": "/root/c_review",
+    "verdict": "APPROVED_DOCUMENTATION_SCOPED",
+    "files": [
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md",
+        "blob": "cc4037044c76a6c6eb89035e5d4473316516cffb",
+        "mode": "100644",
+        "sha256": "5fa0865dc9b6678dc4381a9b211f4909fd2b8d582432fa2cb9d482434065343c"
+      },
+      {
+        "path": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+        "blob": "4cba947bd931b2c932198076f143068967ce909c",
+        "mode": "100644",
+        "sha256": "abb3b5ea8defe08aefa3829a0737fe45a1f04952bd99e9914e8b64dbc7e462aa"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/CONTRACT-DELTA.md",
+        "blob": "2b6ab97e6919d2b5d85584217603ff534a888c48",
+        "mode": "100644",
+        "sha256": "369bb12eef7509d6106e1b104fd9979c4c3f00626a81b177fff5c2e43fdee06e"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/SECURITY-AND-ROLLBACK.md",
+        "blob": "ea8b297b041d7075a9ea9a7bfa3d3788e4243962",
+        "mode": "100644",
+        "sha256": "c261d33cf969eb51d5c0a908565988f0c8a2d97a2e82b1f264c85a51b6fea62f"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/INPUT-SHAS.json",
+        "blob": "898f22a0a8f1ee4bded90f0c3cedbf2fef71a5d1",
+        "mode": "100644",
+        "sha256": "03796e23ae5a98b578d3729f38b32458491054be2c9ab8584f64a0b29c4af44a"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/RESULT.md",
+        "blob": "8898b3de6c34cc382b0ed392c7b37f6097785221",
+        "mode": "100644",
+        "sha256": "aa1baf5a577074f7ccf546fd4b7ee3eb472425a4888496f493a2267822258ad5"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/INDEPENDENT-REVIEW.md",
+        "blob": "90c30520dd434a3e55d28bffd0070a801af9ea12",
+        "mode": "100644",
+        "sha256": "cc580cb649525d77dcd78c366404a58c57791942ff1c2da0e3316c497a79fa41"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/HANDOFF.json",
+        "blob": "5a42b73ed255a769fd180b2e7447722dc633dbbf",
+        "mode": "100644",
+        "sha256": "6d2586efbafef4fb1e74d08e29b05193c62845c7b62c28c33071bbd3b2133095"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/OUTPUT-OBJECTS.json",
+        "blob": "880eb484d7d976b0dfbf3d44f375df278b3b0116",
+        "mode": "100644",
+        "sha256": "41a231b68535ca868df09f9c92dc5fff0f779721e52d7fd9de451f5b702cd699"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c0-reader003/MANIFEST.sha256",
+        "blob": "fd4b924cdf0427d9f6c6d5c3710de6e503ccf4d6",
+        "mode": "100644",
+        "sha256": "521ea42cd0e44f7d64bc4c1b03bd3e53536bd43cffa914b597e248b767bb162c"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/CONTRACT-DELTA.md",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "2b6ab97e6919d2b5d85584217603ff534a888c48",
+      "sha256": "369bb12eef7509d6106e1b104fd9979c4c3f00626a81b177fff5c2e43fdee06e",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/HANDOFF.json",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "e308f54123eff555021ed60be51bcd3a9fce5784",
+      "sha256": "636ca5867c238d0899e469dc4e06c58729d35c80f091115a2bdff474d126fa70",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": false
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/INDEPENDENT-REVIEW.md",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "0ad3127d243a97bb2a78e26e1d203998288a593d",
+      "sha256": "1ffd08e4cacf790d87360b29569b862da5afb83f8fb3c0d346400ba7cb02f895",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": false
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/INPUT-SHAS.json",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "898f22a0a8f1ee4bded90f0c3cedbf2fef71a5d1",
+      "sha256": "03796e23ae5a98b578d3729f38b32458491054be2c9ab8584f64a0b29c4af44a",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/PLAN.md",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "cc4037044c76a6c6eb89035e5d4473316516cffb",
+      "sha256": "5fa0865dc9b6678dc4381a9b211f4909fd2b8d582432fa2cb9d482434065343c",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/RESULT.md",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "dd562169f1ed32e012820aa5179c7775f48309fb",
+      "sha256": "7991f432c9c0c709299c556a9bb35de59c0940fb9ba143f1ba11d61758c7b832",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": false
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/SECURITY-AND-ROLLBACK.md",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "ea8b297b041d7075a9ea9a7bfa3d3788e4243962",
+      "sha256": "c261d33cf969eb51d5c0a908565988f0c8a2d97a2e82b1f264c85a51b6fea62f",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": true
+    },
+    {
+      "path": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+      "owner": "coordenador /root",
+      "mode": "100644",
+      "blob": "4cba947bd931b2c932198076f143068967ce909c",
+      "sha256": "abb3b5ea8defe08aefa3829a0737fe45a1f04952bd99e9914e8b64dbc7e462aa",
+      "commit_tree_parents": "CONTAINING_GIT_OBJECT",
+      "unchanged_from_reviewed_payload": true
+    }
+  ],
+  "self_and_manifest": {
+    "paths": [
+      "docs/missions/atlas-parity-04/f4-c0-reader003/OUTPUT-OBJECTS.json",
+      "docs/missions/atlas-parity-04/f4-c0-reader003/MANIFEST.sha256"
+    ],
+    "owner": "coordenador /root",
+    "mode": "100644",
+    "blob_commit_tree_parents": "EXACT_GIT_TREE_AND_PR19_TERMINAL_RECEIPT",
+    "reason": "no recursive self hash or circular inventory/manifest",
+    "manifest_hashes_inventory": true
+  },
+  "terminal_revision_scope": "only receipt/result/handoff/inventory/manifest; all five technical input documents unchanged",
+  "authority": "documentation custody only; no source authenticity/science/G4/G5"
+}
