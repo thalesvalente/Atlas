@@ -166,7 +166,7 @@ def _scratch(path, source):
     return path
 
 
-def _open_read(source, flags):
+def _open_read(source, flags, *, create=False):
     if os.name != 'nt':
         return os.open(source, flags)
     from ctypes import wintypes
@@ -175,17 +175,17 @@ def _open_read(source, flags):
     kernel.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
     kernel.CreateFileW.restype = wintypes.HANDLE
     kernel.CloseHandle.argtypes = [wintypes.HANDLE]
-    handle = kernel.CreateFileW(str(source), 0x80000000, 7, None, 3, 0x00200000 | 0x08000000, None)
+    handle = kernel.CreateFileW(str(source), 0xC0000000 if create else 0x80000000, 7, None, 1 if create else 3, 0x80 if create else 0x00200000 | 0x08000000, None)
     if handle == wintypes.HANDLE(-1).value:
         _fail('IO_UNVERIFIED')
     try:
-        return msvcrt.open_osfhandle(handle, os.O_RDONLY | os.O_BINARY)
+        return msvcrt.open_osfhandle(handle, (os.O_RDWR if create else os.O_RDONLY) | os.O_BINARY)
     except OSError:
         kernel.CloseHandle(handle)
         _fail('IO_UNVERIFIED')
 
 
-def _source_stamp(fd):
+def _source_stamp(fd, *, single_link=True):
     if os.name != 'nt':
         return _fingerprint(os.fstat(fd))
     # Use the same Win32 metadata API for both held and re-opened handles.
@@ -199,16 +199,16 @@ def _source_stamp(fd):
     info = FileInformation()
     if not kernel.GetFileInformationByHandle(msvcrt.get_osfhandle(fd), ctypes.byref(info)):
         _fail('SOURCE_CHANGED')
-    if info.attributes & 0x400 or info.links != 1:
+    if info.attributes & 0x400 or (single_link and info.links != 1):
         _fail('UNSAFE_PATH')
     ticks = lambda value: (value.dwHighDateTime << 32) | value.dwLowDateTime
     return info.volume, (info.index_hi << 32) | info.index_lo, (info.size_hi << 32) | info.size_lo, ticks(info.written), ticks(info.created), info.links
 
 
-def _path_stamp(path, flags):
+def _path_stamp(path, flags, *, single_link=True):
     candidate = _open_read(path, flags)
     try:
-        return _source_stamp(candidate)
+        return _source_stamp(candidate, single_link=single_link)
     finally:
         os.close(candidate)
 
@@ -216,7 +216,7 @@ def _path_stamp(path, flags):
 def _remove_partial(path, fd):
     # Never unlink a path whose identity no longer matches our still-open file.
     try:
-        if _fingerprint(path.lstat()) == _fingerprint(os.fstat(fd)):
+        if _path_stamp(path, os.O_RDONLY | getattr(os, 'O_BINARY', 0) | getattr(os, 'O_NOFOLLOW', 0), single_link=False) == _source_stamp(fd, single_link=False):
             path.unlink()
             return True
     except FileNotFoundError:
@@ -297,7 +297,10 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
             _scratch(scratch, source)
             destination = scratch / ('atlas-c2-' + uuid.uuid4().hex + '.json')
             temporary = scratch / (destination.name + '.partial')
-            temporary_fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_BINARY', 0), 0o600)
+            if os.name == 'nt':
+                temporary_fd = _open_read(temporary, os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_BINARY, create=True)
+            else:
+                temporary_fd = os.open(temporary, os.O_RDWR | os.O_CREAT | os.O_EXCL, 0o600)
             with os.fdopen(temporary_fd, 'wb', closefd=False) as target:
                 target.write(encoded)
                 target.flush()
