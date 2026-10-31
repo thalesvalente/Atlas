@@ -311,6 +311,8 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
             if not _remove_partial(temporary, temporary_fd):
                 _fail('DERIVED_IDENTITY_CHANGED')
             temporary = None
+            os.close(temporary_fd)
+            temporary_fd = None
             _OWNED[str(destination)] = _fingerprint(destination.lstat())
             return destination
     except ReaderError:
