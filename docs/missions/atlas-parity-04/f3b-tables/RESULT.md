@@ -35,7 +35,7 @@ Estes estados de fase não apagam nem revalidam as baselines históricas. PAR001
 
 [Gate focal técnico41173677346](https://github.com/thalesvalente/Atlas/actions/runs/41173677346), attempt1, quatro jobs completed/success: Windows/Ubuntu×Python normal/O1. Cada célula executou24testes top-level e380IDs de recibo distintos/iguais, zero falhas/erros/skips, Chromium151.0.7922.34. Total96execuções top-level/1520casos,12screenshots1440/390/320×900. Asserções executáveis de DOM/reflow/foco/teclado/zero erros de página-console/zero requisições externas da página. Quatro artefatos com JSON/JUnit/descriptor/screenhots e recibo de ownership; hashes e atribuição por SHA conferidos. B conferiu logsUbuntuO0/WinO1; C conferiu todos quatro e integridade. Sem inspeção manual de pixels/ZIP/XML literal.
 
-C-001–004 corrigidos e fechados no técnico por revisão nativa real e testes. A tentativa inicialb29 falhou no pinPython inexistente; a8f1 falhou no teste de quota que amplificava células extensas no transporte, sem alegação de recusa atômica. A fixture negativa foi isolada; 129tabelas pequenas e33MiB gerados no browser agora testam as quotas separadamente. Os limites de produto não foram relaxados.
+C-001–004 corrigidos e fechados no técnico por revisão nativa real e testes. A tentativa inicialb29 falhou no pinPython inexistente; a8f1 falhou no teste de quota que amplificava células extensas no transporte, sem alegação de recusa atômica. A fixture negativa foi isolada; 129tabelas pequenas e33.554.433 bytes ASCII (32MiB+1byte) gerados no browser agora testam as quotas separadamente. Os limites de produto não foram relaxados.
 
 ## CI global e sucessão
 

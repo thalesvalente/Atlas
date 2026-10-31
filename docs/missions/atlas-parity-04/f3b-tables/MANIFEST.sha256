@@ -7,7 +7,7 @@ d60bb194e21bcf6ed4437c77c2a2f5ee545c6884ff1e389ffef1f1475550a45a  docs/missions/
 a808abb1fe46128d4b9105977fe9eb535e7543f8f9e5d43c6e2913c4258033d9  docs/missions/atlas-parity-04/f3b-tables/INPUT-SHAS.json
 0fb72e05676e8b0d5340413ee399c6cfddc5f12b020bce95d02213d1c7ab6f81  docs/missions/atlas-parity-04/f3b-tables/NEGATIVE-TESTS.json
 b31ff21459fd5509a040d4df6b8cf9a05a25f1362f150c10159eb1438a6d5dec  docs/missions/atlas-parity-04/f3b-tables/PLAN.md
-38c128c9ade35d8c35efc72c2c873b9b38ce844b6b413de0c5d9ee4f942e17f0  docs/missions/atlas-parity-04/f3b-tables/RESULT.md
+af2193f2aa389c5d6f342da5d0f8c438ea7696f92be39619883d1adf7835bbb6  docs/missions/atlas-parity-04/f3b-tables/RESULT.md
 e53ed8204330c0509d580b4618a22d46549af7ec2d941076912624b864c0e70f  docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md
 600cf74c6accfb535719ce8152a029bd2fd49077a369a2c402889751672e02b5  packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.css
 310573aad7eb347bd2a52d70668d2ce3608556e079da49ef002c8f6f85a42f99  packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js
