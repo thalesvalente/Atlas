@@ -1,0 +1,441 @@
+{
+  "mission": "AP04-F3B-CHAT-TABLES-01",
+  "technical_sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+  "technical_tree": "19f87d1dda3b1e75fbec70817612dcb9893bda83",
+  "technical_parent": "8f1da3af0f1b9e981d64d4fa5fd7b8010c904b0c",
+  "plan": "AP04-POR-v1.0-draft",
+  "scope": {
+    "collection": "100% synthetic, 5 tables, 46 rows (16 admitted RF, 28 unadmitted RF, 1 RNF, 1 RES), 4 unbound tables, 3 nodes (2 source + 1 external stub), 1 relation, 1 File; no F1 replay",
+    "private_data": false,
+    "rf_real_integrated": false,
+    "G5_global": false,
+    "G6": false,
+    "F4_implemented": false,
+    "opening_budget": "F4/external obligation; 256MiB/30s hard isolation NOT_IMPLEMENTED by memory-only F3B",
+    "standards": {
+      "preserved": [
+        "RO-Crate 1.3",
+        "Process Run 0.6",
+        "Caderno 0.1.0a1"
+      ],
+      "fhir": "FUTURE_DOMAIN_EXTENSION_NOT_IMPLEMENTED_NOT_CONFORMANT"
+    }
+  },
+  "qualified_run": {
+    "id": 41173677346,
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173677346",
+    "event": "push",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "aa804815a173bf091108c1a81410f1b0f2f838ca"
+  },
+  "jobs": [
+    {
+      "job_id": 124456704716,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173677346/job/124456704716",
+      "platform": "win32",
+      "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+      "optimize": 1,
+      "browser": "151.0.7922.34",
+      "tests": 24,
+      "receipt_cases": 380,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "success": true,
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "tree": "19f87d1dda3b1e75fbec70817612dcb9893bda83",
+      "parent": "8f1da3af0f1b9e981d64d4fa5fd7b8010c904b0c",
+      "test_id_set_sha256": "ab4a2597f297c649107a457b1372c2c781534cf21f53b384a44bc1331fec2a52",
+      "screenshots": [
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-1440.png",
+          "height": 900,
+          "sha256": "4be39bd661e5fe83194939ae164004703f4fb240e440f78d4b12a2177ab10051",
+          "width": 1440
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-390.png",
+          "height": 900,
+          "sha256": "a810b23597cc1ff72f05f2ce27849933a3c61f94907715b234463c1f074738d2",
+          "width": 390
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-320.png",
+          "height": 900,
+          "sha256": "2e15f51ad2912c5ff34cea00acdbc51ab8a84ff1db8f253c7b4b77e01e8d8204",
+          "width": 320
+        }
+      ],
+      "source_files": [
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+          "sha256": "310573aad7eb347bd2a52d70668d2ce3608556e079da49ef002c8f6f85a42f99"
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.css",
+          "sha256": "600cf74c6accfb535719ce8152a029bd2fd49077a369a2c402889751672e02b5"
+        },
+        {
+          "path": "tests/qa/test_atlas_parity04_f3b_tables.py",
+          "sha256": "ff4d5033e758d665b428fcc975870aacbb9799fe1686ded9c3cf599434cdadca"
+        },
+        {
+          "path": "tests/qa/f3b_fixture.py",
+          "sha256": "7e02867bdbdd1a28507e762d464cc29a5645629f6d1173e3ef0741e5c885cb25"
+        },
+        {
+          "path": "tests/fixtures/atlas_parity04_f3b_cases.json",
+          "sha256": "5124d434327f439c338ee88730de548bb4455f1d63a92981f7d0c47b2c353be7"
+        }
+      ]
+    },
+    {
+      "job_id": 124456704837,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173677346/job/124456704837",
+      "platform": "linux",
+      "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+      "optimize": 0,
+      "browser": "151.0.7922.34",
+      "tests": 24,
+      "receipt_cases": 380,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "success": true,
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "tree": "19f87d1dda3b1e75fbec70817612dcb9893bda83",
+      "parent": "8f1da3af0f1b9e981d64d4fa5fd7b8010c904b0c",
+      "test_id_set_sha256": "ab4a2597f297c649107a457b1372c2c781534cf21f53b384a44bc1331fec2a52",
+      "screenshots": [
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-1440.png",
+          "height": 900,
+          "sha256": "0673e7c279040ef3c6d192c1f90d9a716f21bcb2da1db67af9ff40fd2d7c2e1a",
+          "width": 1440
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-390.png",
+          "height": 900,
+          "sha256": "70397e03ae0d2fb208bad3ae464431a2cd5a8b305da967f77517e523b03d8e71",
+          "width": 390
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-320.png",
+          "height": 900,
+          "sha256": "f1832e11838318ef2943fa5ad1825b7f1b910584550dbb29c2b00b68d43d81fc",
+          "width": 320
+        }
+      ],
+      "source_files": [
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+          "sha256": "310573aad7eb347bd2a52d70668d2ce3608556e079da49ef002c8f6f85a42f99"
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.css",
+          "sha256": "600cf74c6accfb535719ce8152a029bd2fd49077a369a2c402889751672e02b5"
+        },
+        {
+          "path": "tests/qa/test_atlas_parity04_f3b_tables.py",
+          "sha256": "ff4d5033e758d665b428fcc975870aacbb9799fe1686ded9c3cf599434cdadca"
+        },
+        {
+          "path": "tests/qa/f3b_fixture.py",
+          "sha256": "7e02867bdbdd1a28507e762d464cc29a5645629f6d1173e3ef0741e5c885cb25"
+        },
+        {
+          "path": "tests/fixtures/atlas_parity04_f3b_cases.json",
+          "sha256": "5124d434327f439c338ee88730de548bb4455f1d63a92981f7d0c47b2c353be7"
+        }
+      ]
+    },
+    {
+      "job_id": 124456704843,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173677346/job/124456704843",
+      "platform": "linux",
+      "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+      "optimize": 1,
+      "browser": "151.0.7922.34",
+      "tests": 24,
+      "receipt_cases": 380,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "success": true,
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "tree": "19f87d1dda3b1e75fbec70817612dcb9893bda83",
+      "parent": "8f1da3af0f1b9e981d64d4fa5fd7b8010c904b0c",
+      "test_id_set_sha256": "ab4a2597f297c649107a457b1372c2c781534cf21f53b384a44bc1331fec2a52",
+      "screenshots": [
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-1440.png",
+          "height": 900,
+          "sha256": "0673e7c279040ef3c6d192c1f90d9a716f21bcb2da1db67af9ff40fd2d7c2e1a",
+          "width": 1440
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-390.png",
+          "height": 900,
+          "sha256": "70397e03ae0d2fb208bad3ae464431a2cd5a8b305da967f77517e523b03d8e71",
+          "width": 390
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-320.png",
+          "height": 900,
+          "sha256": "f1832e11838318ef2943fa5ad1825b7f1b910584550dbb29c2b00b68d43d81fc",
+          "width": 320
+        }
+      ],
+      "source_files": [
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+          "sha256": "310573aad7eb347bd2a52d70668d2ce3608556e079da49ef002c8f6f85a42f99"
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.css",
+          "sha256": "600cf74c6accfb535719ce8152a029bd2fd49077a369a2c402889751672e02b5"
+        },
+        {
+          "path": "tests/qa/test_atlas_parity04_f3b_tables.py",
+          "sha256": "ff4d5033e758d665b428fcc975870aacbb9799fe1686ded9c3cf599434cdadca"
+        },
+        {
+          "path": "tests/qa/f3b_fixture.py",
+          "sha256": "7e02867bdbdd1a28507e762d464cc29a5645629f6d1173e3ef0741e5c885cb25"
+        },
+        {
+          "path": "tests/fixtures/atlas_parity04_f3b_cases.json",
+          "sha256": "5124d434327f439c338ee88730de548bb4455f1d63a92981f7d0c47b2c353be7"
+        }
+      ]
+    },
+    {
+      "job_id": 124456704877,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173677346/job/124456704877",
+      "platform": "win32",
+      "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+      "optimize": 0,
+      "browser": "151.0.7922.34",
+      "tests": 24,
+      "receipt_cases": 380,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "success": true,
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "tree": "19f87d1dda3b1e75fbec70817612dcb9893bda83",
+      "parent": "8f1da3af0f1b9e981d64d4fa5fd7b8010c904b0c",
+      "test_id_set_sha256": "ab4a2597f297c649107a457b1372c2c781534cf21f53b384a44bc1331fec2a52",
+      "screenshots": [
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-1440.png",
+          "height": 900,
+          "sha256": "4be39bd661e5fe83194939ae164004703f4fb240e440f78d4b12a2177ab10051",
+          "width": 1440
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-390.png",
+          "height": 900,
+          "sha256": "a810b23597cc1ff72f05f2ce27849933a3c61f94907715b234463c1f074738d2",
+          "width": 390
+        },
+        {
+          "browser": "151.0.7922.34",
+          "file": "chromium-320.png",
+          "height": 900,
+          "sha256": "2e15f51ad2912c5ff34cea00acdbc51ab8a84ff1db8f253c7b4b77e01e8d8204",
+          "width": 320
+        }
+      ],
+      "source_files": [
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+          "sha256": "310573aad7eb347bd2a52d70668d2ce3608556e079da49ef002c8f6f85a42f99"
+        },
+        {
+          "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.css",
+          "sha256": "600cf74c6accfb535719ce8152a029bd2fd49077a369a2c402889751672e02b5"
+        },
+        {
+          "path": "tests/qa/test_atlas_parity04_f3b_tables.py",
+          "sha256": "ff4d5033e758d665b428fcc975870aacbb9799fe1686ded9c3cf599434cdadca"
+        },
+        {
+          "path": "tests/qa/f3b_fixture.py",
+          "sha256": "7e02867bdbdd1a28507e762d464cc29a5645629f6d1173e3ef0741e5c885cb25"
+        },
+        {
+          "path": "tests/fixtures/atlas_parity04_f3b_cases.json",
+          "sha256": "5124d434327f439c338ee88730de548bb4455f1d63a92981f7d0c47b2c353be7"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13032082704,
+      "name": "f3b-ubuntu-latest-O0-aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "size_in_bytes": 161830,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032082704",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032082704/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:43:45Z",
+      "expires_at": "2026-11-30T05:43:44Z",
+      "updated_at": "2026-10-31T05:43:45Z",
+      "digest": "sha256:76f801077ec17a831f63e9f6cd6ae18f435863b250f8c77408ee4864d0bf06bf",
+      "workflow_run": {
+        "id": 41173677346,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3b-tables-20261031",
+        "head_sha": "aa804815a173bf091108c1a81410f1b0f2f838ca"
+      }
+    },
+    {
+      "id": 13032032841,
+      "name": "f3b-ubuntu-latest-O1-aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "size_in_bytes": 162643,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032032841",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032032841/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:44:12Z",
+      "expires_at": "2026-11-30T05:44:11Z",
+      "updated_at": "2026-10-31T05:44:12Z",
+      "digest": "sha256:fe43b96194736154afe5db0361ef7c2d9aecc2bef015475b8564739695581878",
+      "workflow_run": {
+        "id": 41173677346,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3b-tables-20261031",
+        "head_sha": "aa804815a173bf091108c1a81410f1b0f2f838ca"
+      }
+    },
+    {
+      "id": 13031882197,
+      "name": "f3b-windows-latest-O0-aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "size_in_bytes": 102519,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13031882197",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13031882197/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:44:07Z",
+      "expires_at": "2026-11-30T05:44:07Z",
+      "updated_at": "2026-10-31T05:44:07Z",
+      "digest": "sha256:0060a53091831843125eca11d7a8bf0963e287f636d1b0d04826e7179a8ac31b",
+      "workflow_run": {
+        "id": 41173677346,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3b-tables-20261031",
+        "head_sha": "aa804815a173bf091108c1a81410f1b0f2f838ca"
+      }
+    },
+    {
+      "id": 13031438230,
+      "name": "f3b-windows-latest-O1-aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "size_in_bytes": 102516,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13031438230",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13031438230/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:43:39Z",
+      "expires_at": "2026-11-30T05:43:39Z",
+      "updated_at": "2026-10-31T05:43:39Z",
+      "digest": "sha256:13320f0a297ddd5f47b422c48c18bfc28b2eb09ed476ada038d6a0e006b1fd58",
+      "workflow_run": {
+        "id": 41173677346,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3b-tables-20261031",
+        "head_sha": "aa804815a173bf091108c1a81410f1b0f2f838ca"
+      }
+    }
+  ],
+  "mirror_pull_request_run": {
+    "id": 41173681631,
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681631",
+    "state": "completed/success",
+    "evidence": "API observed; qualifying complete log/artifact review uses push run41173677346"
+  },
+  "other_workflows_snapshot": [
+    {
+      "id": 41173681607,
+      "name": "ATLAS-PARITY-04 documentation successor",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681607",
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173681603,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681603",
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173681649,
+      "name": "ATLAS021 candidate verification",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681649",
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 41173681641,
+      "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681641",
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173681630,
+      "name": "ATLAS-PARITY-03 C4 full composition",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681630",
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173681646,
+      "name": "ATLAS-PARITY03 P03 isolated qualification",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681646",
+      "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+      "status": "completed",
+      "conclusion": "failure"
+    }
+  ],
+  "global_conflict": {
+    "sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+    "run": 41173681607,
+    "job": 124456718342,
+    "line": "2026-10-31T05:43:14.4077866Z AP04_F2_SUCCESSOR_SUMMARY={\"status\":\"FAIL\",\"tested_sha\":\"aa804815a173bf091108c1a81410f1b0f2f838ca\",\"tested_tree\":\"19f87d1dda3b1e75fbec70817612dcb9893bda83\",\"error\":\"GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f3b-tables/PLAN.md']\"}",
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173681607/job/124456718342"
+  },
+  "global_G5": "NOT_QUALIFIED",
+  "successor_contract": {
+    "owner": "future integrator / owner of historical controls",
+    "required": "Separate explicitly scoped successor qualification must address the F2 history allowlist and full global regression on the integrated SHA. Keep historical pins/oracles/manifests unchanged in F3B.",
+    "not_done": [
+      "relaxing guards",
+      "continue-on-error",
+      "paths-ignore",
+      "force/rebase",
+      "merge"
+    ]
+  },
+  "terminal_policy": "New documentation commit must be independently qualified; locate external SHA-bound closure in Draft PR17."
+}
