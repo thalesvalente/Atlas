@@ -1,0 +1,270 @@
+{
+  "schema": "atlas-f3a-handoff-v1",
+  "mission": "AP04-F3A-CHAT-GRAPH-01",
+  "result": "F3A_GRAPH_COMPONENT_READY_FOR_F4",
+  "scope": "QUALIFIED_TECHNICAL_SHA_ISOLATED_SYNTHETIC_COMPONENT_ONLY",
+  "qualification": {
+    "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+    "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+    "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+    "run_id": 41173213797,
+    "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "containing_commit": {
+    "sha": "RESOLVE_FROM_GIT",
+    "requires_own_focal_ci": true,
+    "requires_own_independent_review": true,
+    "authoritative_external_closure": "https://github.com/thalesvalente/Atlas/pull/16"
+  },
+  "branch": "feat/atlas-parity04-f3a-graph-20261031",
+  "pr": {
+    "number": 16,
+    "draft": true,
+    "base": "docs/atlas-parity04-f2-legacy-contract-20261030",
+    "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "base_tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9"
+  },
+  "reasoning_effective": "UNVERIFIED",
+  "native_agents": {
+    "A": {
+      "name": "/root/logic_a",
+      "ownership": "JS/CSS only"
+    },
+    "B": {
+      "name": "/root/qa_b",
+      "ownership": "5 QA/fixture/harness/workflow paths only"
+    },
+    "C": {
+      "name": "/root/review_c",
+      "read_only": true,
+      "no_authorship": true,
+      "technical_verdict": "PASS"
+    },
+    "ORQ": {
+      "name": "/root",
+      "ownership": "F3A receipts and sole branch publisher"
+    }
+  },
+  "api": [
+    "mount",
+    "setData",
+    "select",
+    "getState",
+    "dispose"
+  ],
+  "selection": [
+    "source_id",
+    "snapshot_id",
+    "occurrence",
+    "nav_id",
+    "session_id"
+  ],
+  "session": "WebCrypto128bit per mount plus per-import counter; reload/reimport/expiry invalidates old contexts",
+  "capacity": {
+    "render_nodes": 1000,
+    "render_relations": 4000,
+    "descriptor_nodes": 10000,
+    "descriptor_relations": 100000,
+    "descriptor_bytes": 33554432,
+    "depth": 20,
+    "values": 600000,
+    "operation_ms": 30000,
+    "whole_input_rejection": true,
+    "no_silent_truncation": true,
+    "real_f1_nodes": 2911,
+    "real_f1_supported": false
+  },
+  "gates": {
+    "G2": "ISOLATED_SYNTHETIC_COMPONENT_VERIFIED",
+    "G4": "NOT_QUALIFIED",
+    "G5": "BLOCKED_GLOBAL_CONTROLS_AND_INTEGRATION_NOT_EXECUTED",
+    "G6": "NOT_RUN_PRIVATE",
+    "G7": "NOT_QUALIFIED",
+    "G8": "NOT_AUTHORIZED",
+    "G9": "NOT_AUTHORIZED"
+  },
+  "par_matrix": [
+    {
+      "id": "PAR-001",
+      "before": "NOT_RECOVERED",
+      "after_global": "NOT_RECOVERED",
+      "contribution": "F3A synthetic isolated SVG tree; real tree and F4 pending"
+    },
+    {
+      "id": "PAR-002",
+      "before": "NOT_RECOVERED",
+      "after_global": "NOT_RECOVERED",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-003",
+      "before": "INPUT_AVAILABILITY_UNKNOWN",
+      "after_global": "INPUT_AVAILABILITY_UNKNOWN",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-004",
+      "before": "PARTIAL_NOT_EQUIVALENT",
+      "after_global": "PARTIAL_NOT_EQUIVALENT",
+      "contribution": "Session/source/snapshot/occurrence selection in component; integrated table journey pending"
+    },
+    {
+      "id": "PAR-005",
+      "before": "NOT_RECOVERED",
+      "after_global": "NOT_RECOVERED",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-006",
+      "before": "PARTIAL_NOT_EQUIVALENT",
+      "after_global": "PARTIAL_NOT_EQUIVALENT",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-007",
+      "before": "PARTIAL_NOT_EQUIVALENT",
+      "after_global": "PARTIAL_NOT_EQUIVALENT",
+      "contribution": "Typed relation occurrences/null/unresolved/collision/repeats retained synthetically; real graph pending"
+    },
+    {
+      "id": "PAR-008",
+      "before": "PARTIAL_NOT_EQUIVALENT",
+      "after_global": "PARTIAL_NOT_EQUIVALENT",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-009",
+      "before": "PARTIAL_NOT_EQUIVALENT",
+      "after_global": "PARTIAL_NOT_EQUIVALENT",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-010",
+      "before": "NOT_RECOVERED",
+      "after_global": "NOT_RECOVERED",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-011",
+      "before": "CONTRACT_DECISION_PENDING",
+      "after_global": "CONTRACT_DECISION_PENDING",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-012",
+      "before": "BASELINE_VERIFIED",
+      "after_global": "BASELINE_VERIFIED",
+      "contribution": "Frozen base blobs preserved; focal CI only, global integrated G5 not qualified"
+    },
+    {
+      "id": "PAR-013",
+      "before": "ARCHITECTURE_REQUIREMENT_ONLY",
+      "after_global": "ARCHITECTURE_REQUIREMENT_ONLY",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-014",
+      "before": "OBSERVED_PARTIAL",
+      "after_global": "OBSERVED_PARTIAL",
+      "contribution": "Outside F3A; no recovery or revalidation claimed"
+    },
+    {
+      "id": "PAR-015",
+      "before": "BASELINE_VERIFIED_SCOPE",
+      "after_global": "BASELINE_VERIFIED_SCOPE",
+      "contribution": "Synthetic inert values/context invalidation tested; no new private-source integrity observation"
+    }
+  ],
+  "current_files_at_technical_sha": [
+    {
+      "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+      "blob": "512f843aab20bb9a2902e228e6d8ab14ba914b39",
+      "sha256": "33eadb7aff6f176d2a5398f1d9a60281404dc48db6c3517a71987daf1b8656f3",
+      "bytes": 2546
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+      "blob": "dc735bd0c73b2580cf34611332d7729c02ac9c9f",
+      "sha256": "dd094e46746fb83a2e3309cea812b7206fd6d31928df77301d3b829ae7ba9c58",
+      "bytes": 5626
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+      "blob": "82d24e26c4f272a482026b9fb103257452c50b52",
+      "sha256": "bc2be7f21d939179577eab0e833d9c4f4148423455d3c8341eeb754ed1a5d4f2",
+      "bytes": 7824
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f3a-graph/PLAN.md",
+      "blob": "274049d98c435fc073bd1c3db534a26f5aaa4cad",
+      "sha256": "7de4cdc47eac676c42d370888882847740d7045c5d96f10209dfc69f40c72c25",
+      "bytes": 4491
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+      "blob": "607f239ada9601e935f59101e604e75f38b623f6",
+      "sha256": "fe646983752cedf9e2a58458330003b17c8c196284050edeb1befd99834ce687",
+      "bytes": 3745
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+      "blob": "16d334e7df19d08554ba11eace3cb308ce3751b0",
+      "sha256": "50e457b0d73b0f9cb89f830648bb99499b31111eb62b74566941271a64c0eb5b",
+      "bytes": 47986
+    },
+    {
+      "path": "scripts/qa/atlas_parity04_f3a_browser.mjs",
+      "blob": "930e612ba38827c3804b1524879f1dbb9a5ae81e",
+      "sha256": "eb613555841643df022035107a6b0f07a86e6663bbef9551e5c652fcc54960f9",
+      "bytes": 30995
+    },
+    {
+      "path": "scripts/qa/atlas_parity04_f3a_ci.py",
+      "blob": "9a077fd2e9404a369c7b04527e6576728a86a750",
+      "sha256": "c40f5c5e1fdb10a5256ae281ba1f45da4b3b630b5bda60a0aaf15b60e3700618",
+      "bytes": 8627
+    },
+    {
+      "path": "tests/fixtures/atlas_parity04_f3a_graph.json",
+      "blob": "b9e43e1e249915634d0e99aa23c13a5ea54f6720",
+      "sha256": "3ca0ecb9cb872cde5108be11d53e23079adff654ab8153f64b873eb4c2167b27",
+      "bytes": 318702
+    },
+    {
+      "path": "tests/qa/test_atlas_parity04_f3a_graph.py",
+      "blob": "29096df749f2331a7fe40731090b8eeaf1ed77f2",
+      "sha256": "a0bb49b5895262462eb1c16fb1d0939a85e17a20ca582be9dc69e139537fc994",
+      "bytes": 9139
+    }
+  ],
+  "architectural_approval": {
+    "state": "APPROVED_SCOPED",
+    "package_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "url": "https://github.com/thalesvalente/Atlas/pull/15#issuecomment-6539419419"
+  },
+  "next_minimum_actions": [
+    "F4 needs its own authorization and exclusive integration ownership",
+    "Resolve graph capacity before attempting 2911-node F1 payload",
+    "Apply authorized successor control repair as GLOBAL-GATE-REPAIR-CONTRACT.md; do not weaken historical gates",
+    "Keep File API/reader003/shell/Catalog/protocol/R4/private acquisition outside this F3A handoff"
+  ],
+  "limits": {
+    "binary_pixels_zip_xml_opened": false,
+    "manual_pixel_review": false,
+    "full_semantic_origin_or_authenticity_proof": false,
+    "hard_heap_opening_budget_belongs_to_future_external_flow": true
+  },
+  "not_authorized": [
+    "merge",
+    "release",
+    "deploy",
+    "promotion",
+    "migration",
+    "cleanup",
+    "license_changes",
+    "R4_changes",
+    "private_source_publication"
+  ]
+}

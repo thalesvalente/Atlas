@@ -1,0 +1,3746 @@
+{
+  "schema": "atlas-f4-c1-ci-evidence-v1",
+  "status": "TECHNICAL_CI_AND_INDEPENDENT_REVIEW_PASS_SCOPED",
+  "plan_sha": "f229239e1ebfc585209a684be3460d20015f85e9",
+  "historical_receipts_preserved": true,
+  "expected": {
+    "tests_per_cell": 30,
+    "inherited_test_names": 22,
+    "browser_journeys": 24,
+    "inherited_journey_names": 17,
+    "cells": [
+      "ubuntu-normal",
+      "ubuntu-O",
+      "windows-normal",
+      "windows-O"
+    ],
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "plan_attempt": "Plan-only commit deliberately not qualification; historical focal manifest does not admit successor docs until technical gate successor is published",
+  "terminal_custody": "The documentation successor must receive its own four-cell CI and independent final-HEAD review. Its exact SHA/tree/run/jobs/artifacts and result are recorded externally in PR16 closure to avoid recursive self hashes; no PASS is inherited automatically.",
+  "global_gates": "Frozen; no G5 PASS; successor C4 required",
+  "rounds": [
+    {
+      "sha": "f229239e1ebfc585209a684be3460d20015f85e9",
+      "status": "NOT_QUALIFICATION_PLAN_ONLY"
+    },
+    {
+      "sha": "7a629ee80df0ac47b24d5903779890ce319dda50",
+      "tree": "555919681a91175dd0c907e8730715cd2c3d2a7c",
+      "focal_pr_run": 41211847400,
+      "focal_push_run": 41211842559,
+      "status": "FAILED_HARNESS_STRESS_TARGET_CLOSED_AND_600S_TIMEOUT",
+      "reason": "Geometric minimap compression found independently; new SHA and stronger oracle required regardless of eventual CI conclusion",
+      "observed": {
+        "job": 124568303550,
+        "artifact": 13045859370,
+        "tests": 0,
+        "errors": 1,
+        "browser_journeys_passed": 23,
+        "browser_journeys_expected": 24,
+        "failed_journey": "scale_descriptor_stress_and_metrics",
+        "browser_failure": "Target page/context/browser closed during page.evaluate at stress transfer; cleanup threw; Node remained live until unchanged600s Python timeout",
+        "io": {
+          "outside_requests": 0,
+          "page_errors": 0,
+          "storage_calls": 0
+        },
+        "qualified": false
+      }
+    },
+    {
+      "sha": "e069499957496ef8f600fc362179023b33e9e2c5",
+      "tree": "4b8043543b812252d5baef2b5bdd5ee6b209d4bf",
+      "focal_pr_run": 41212334610,
+      "focal_push_run": 41212330563,
+      "status": "FAILED_SAME_STRESS_HARNESS_NOT_QUALIFIED",
+      "observed": {
+        "job": 124569753030,
+        "artifact": 13047575593,
+        "artifact_digest": "sha256:b5047c07f73b04cb11cc5db25a30a0ca007e77ab9df45f546287232849c6abbf",
+        "browser_journeys_passed": 23,
+        "browser_journeys_expected": 24,
+        "minimap_geometry": {
+          "passed": true,
+          "css_width": 300,
+          "plotted_width": 255.3177089691162,
+          "bins": 175,
+          "sum": 2911,
+          "camera_center_within_graph_bounds": true
+        },
+        "failed_journey": "scale_descriptor_stress_and_metrics",
+        "browser_failure": "TargetClosed during giant object transfer; cleanup failure and600s harness timeout; not valid descriptor refusal"
+      },
+      "qualified": false
+    }
+  ],
+  "global_observations": {
+    "sha": "7a629ee80df0ac47b24d5903779890ce319dda50",
+    "guard_failures": [
+      {
+        "run": 41211847380,
+        "job": 124568303356,
+        "name": "AP04doc"
+      },
+      {
+        "run": 41211847384,
+        "job": 124568303463,
+        "name": "003"
+      },
+      {
+        "run": 41211847381,
+        "job": 124568303524,
+        "name": "P03portable"
+      },
+      {
+        "run": 41211847381,
+        "job": 124568303566,
+        "name": "P03Spec"
+      },
+      {
+        "run": 41211847414,
+        "job": 124568303806,
+        "name": "P06"
+      },
+      {
+        "run": 41211847382,
+        "job": 124568303968,
+        "name": "ATLAS021installed"
+      }
+    ],
+    "guard_reason": "Repair history contains unauthorized paths: f3a-graph/INPUT-SHAS.json and PLAN.md",
+    "c4_fixture_failures": [
+      {
+        "run": 41211847376,
+        "job": 124568303457
+      },
+      {
+        "run": 41211847376,
+        "job": 124568303315
+      }
+    ],
+    "c4_reason": "Composition may not add/remove inherited fixtures",
+    "source_tooling_failure": {
+      "run": 41211847382,
+      "job": 124568303949,
+      "reason": "ERR_MODULE_NOT_FOUND playwright in historical source workflow; 25 failures and 1 error, scale-fixture absent after import failure"
+    },
+    "reader": "C independent direct logs; no global controls changed or G5 claimed"
+  },
+  "harness_successor": {
+    "browser_blob": "3f0ff506cd4a949f5ddf95486865047d04bc6aa2",
+    "tests_blob": "59f0ecc957223dca84de5752af973df9d8b7baa6",
+    "change": "Full stress constructed sequentially inside renderer from pure fixed local test module; only counts cross CDP, actual JSON bytes/construction/product/DOM/heap observed there. Progressive checkpoints, bounded cleanup/watchdog, fail status retained. Python deadline600s unchanged and stdout/stderr streamed.",
+    "source_review": "C_COMPATIBLE_SCOPED_NO_BLOCKING_FINDING_PENDING_REAL_CI"
+  },
+  "qualification": {
+    "result": "F4_C1_GRAPH_SCALE_QUALIFIED_FOR_COMPOSITION",
+    "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+    "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+    "parent": "e069499957496ef8f600fc362179023b33e9e2c5",
+    "run_id": 41213311466,
+    "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466",
+    "status": "completed",
+    "conclusion": "success",
+    "scope": "Complete synthetic2911/1595 navigation, isolated component only",
+    "independent_review": "C_PASS_SCOPED_FOR_COMPOSITION_NO_OPEN_BLOCKING_FINDING"
+  },
+  "cells": [
+    {
+      "os": "ubuntu-latest",
+      "optimize": 0,
+      "job_id": 124572607388,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/job/124572607388",
+      "artifact": {
+        "id": 13046642907,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/artifacts/13046642907",
+        "digest": "sha256:ec4d6660398ca588fa6d695e057bccf13a52da9c9152b3a603b382f3f73d43c4",
+        "size_in_bytes": 1255318,
+        "downloaded_zip_digest_verified": true
+      },
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "python_optimize": 0,
+        "tests": 30,
+        "expected": 30,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_collapsed_orphan_isolated_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_descriptor_stress_and_metrics",
+          "f3a_graph_tests.F3AGraph.test_scale_fixture_independent_schema_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_full_index_and_identity",
+          "f3a_graph_tests.F3AGraph.test_scale_pan_zoom_minimap_keyboard",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_stale_ttl_snapshot_dispose",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "browser": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 360,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-d8e538273c5e4c6ea5616bd141b76211-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 236,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 181,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 431,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-f3bc1560006b2498296324d43bf199f2-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "declared_node_count": 9,
+                "loaded_node_count": 9,
+                "rendered_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "rendered_node_count": 9,
+                "rendered_relation_count": 4,
+                "rendered_parent_edge_count": 4,
+                "windowing": false,
+                "minimap_node_count": 9,
+                "minimap_bin_count": 9,
+                "operation_ms": 19.5,
+                "draw_ms": 0.10000000000582077,
+                "model_value_limit": 600000,
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 416,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 145,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-5a98c292ce43e80da70444aaef33b923-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-5a98c292ce43e80da70444aaef33b923-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 488,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 125,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 241,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 151,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 258,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 114,
+            "detail": {
+              "session_id": "f3a-1-50521c4d4734d71be35afe4091928965-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "declared_node_count": 5,
+              "loaded_node_count": 5,
+              "rendered_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "rendered_node_count": 5,
+              "rendered_relation_count": 0,
+              "rendered_parent_edge_count": 0,
+              "windowing": false,
+              "minimap_node_count": 5,
+              "minimap_bin_count": 5,
+              "operation_ms": 6.5,
+              "draw_ms": 3.2000000000116415,
+              "model_value_limit": 600000,
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 8545,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 1347.5,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 543.5,
+                  "dom_relations": 4000
+                },
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "duration_ms": 107.19999999999709,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "duration_ms": 1136.699999999997,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "duration_ms": 493.8000000000029,
+                  "rendered_nodes": 2,
+                  "rendered_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 651.9000000000087
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2057.800000000003
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 301,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 285,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 301,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-418ad49218a9dfe90ecfbcdba23ca280-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 139,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          },
+          {
+            "name": "scale_full_index_and_identity",
+            "passed": true,
+            "duration_ms": 3660,
+            "detail": {
+              "total": 2911,
+              "loaded": 2911,
+              "rendered": 7,
+              "metrics": {
+                "dom_elements": 635,
+                "heap_bytes": 81400000,
+                "operation_ms": 634.1999999999971,
+                "draw_ms": 8.5
+              },
+              "selected": [
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:project",
+                    "session_id": "f3a-1-ee54a234bd2bc7c81ab195f3968a6247-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 20.30000000000291,
+                    "dom_elements": 635,
+                    "rendered": 6
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-1455",
+                    "session_id": "f3a-1-ee54a234bd2bc7c81ab195f3968a6247-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 33.19999999999709,
+                    "dom_elements": 465,
+                    "rendered": 8
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-2910",
+                    "session_id": "f3a-1-ee54a234bd2bc7c81ab195f3968a6247-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 32.60000000000582,
+                    "dom_elements": 466,
+                    "rendered": 8
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "scale_collapsed_orphan_isolated_and_occurrences",
+            "passed": true,
+            "duration_ms": 3187,
+            "detail": {
+              "contexts": [
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:orphan",
+                  "session_id": "f3a-1-2dfc1bc38f14a8a4ef74b07044d6b0bd-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:isolated",
+                  "session_id": "f3a-1-2dfc1bc38f14a8a4ef74b07044d6b0bd-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:collision-0-a",
+                  "session_id": "f3a-1-2dfc1bc38f14a8a4ef74b07044d6b0bd-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 1,
+                  "nav_id": "nav:collision-0-b",
+                  "session_id": "f3a-1-2dfc1bc38f14a8a4ef74b07044d6b0bd-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:hostile",
+                  "session_id": "f3a-1-2dfc1bc38f14a8a4ef74b07044d6b0bd-1"
+                }
+              ],
+              "duplicate_rejected": true
+            }
+          },
+          {
+            "name": "scale_pan_zoom_minimap_keyboard",
+            "passed": true,
+            "duration_ms": 4852,
+            "detail": {
+              "zoom": 0.001629744433703754,
+              "rendered": 1000,
+              "minimap_bins": 175,
+              "minimap_geometry": {
+                "css_width": 300,
+                "plotted_width": 255.3177089691162,
+                "bins": 175,
+                "sum": 2911,
+                "target": {
+                  "client_x": 185.79622650146484,
+                  "client_y": 396.76612854003906,
+                  "world_x": 1086.875,
+                  "world_y": 119305.515625
+                },
+                "bounds": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 1880,
+                  "bottom": 250346
+                }
+              },
+              "click_camera_center": {
+                "x": 1081.7449664429528,
+                "y": 117915.43478260876
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_390",
+            "passed": true,
+            "duration_ms": 2416,
+            "detail": {
+              "sizes": {
+                "scroll": 390,
+                "inner": 390
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-a2336b3788f140170b342600d053645a-1"
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_320",
+            "passed": true,
+            "duration_ms": 2434,
+            "detail": {
+              "sizes": {
+                "scroll": 320,
+                "inner": 320
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-fa1dbe80f3fb6110e260f17bbc3ea665-1"
+              }
+            }
+          },
+          {
+            "name": "scale_stale_ttl_snapshot_dispose",
+            "passed": true,
+            "duration_ms": 3564,
+            "detail": {
+              "stale_rejected": true,
+              "cross_source_snapshot_rejected": true,
+              "ttl_error": "EXPIRED — snapshot expirado; seleção e links invalidados.",
+              "disposed": true
+            }
+          },
+          {
+            "name": "scale_descriptor_stress_and_metrics",
+            "passed": true,
+            "duration_ms": 11107,
+            "detail": {
+              "results": [
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "descriptor_bytes": 5407991,
+                  "construction_ms": 103.19999999998254,
+                  "accepted": true,
+                  "error": null,
+                  "duration_ms": 1122.8999999999942,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 199,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0,
+                  "visible": 10000,
+                  "node_count": 10000,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · synthetic-f3a / synthetic-f3a-v1 · fonte OBSERVED_AVAILABLE · descriptor_schema PASS · descriptor_semantics PASS · OBSERVED_SNAPSHOT_ONLY · expira 2026-10-31T10:01:00Z · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoNós declarados no descriptor"
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 100000,
+                  "descriptor_bytes": 81008070,
+                  "construction_ms": 1472,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1939.3999999999942,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "descriptor_bytes": 5408536,
+                  "construction_ms": 94.60000000000582,
+                  "accepted": false,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 808.5,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — $.nodes: array quotaPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta somente FROM_TOInp"
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "descriptor_bytes": 73870894,
+                  "construction_ms": 1570.1000000000058,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1915.2000000000116,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                }
+              ],
+              "memory_scope": "Observed Chromium usedJSHeapSize when exposed; not a hard 256MiB browser heap qualification",
+              "deadline_ms": 30000,
+              "transport": "Counts only via CDP; complete synthetic descriptors constructed sequentially in renderer from fixed local test module"
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 218306,
+            "sha256": "089349e7e34da62bda4473e4d9ae3448d1a9f8b2613dc6c607fb06d1e23b26bb"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 166399,
+            "sha256": "486b67fe686476f579236f3f4cda016894bcd80c212bc49c413af0067b44d2d0"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 162235,
+            "sha256": "7b6a4599406623e11968bf0c4cc7dcf0b6a00e9c7d299378e914d9f8068095de"
+          },
+          {
+            "name": "scale-desktop.png",
+            "bytes": 304963,
+            "sha256": "8fb356dc7f1ab772777b8c1e21800003a5d0f347a06e3678a98e14a00f528e4b"
+          },
+          {
+            "name": "scale-mobile-390.png",
+            "bytes": 181632,
+            "sha256": "86fb945b83a973f76c873c6695169528c6d80953b6a2a25afd0b86658120af16"
+          },
+          {
+            "name": "scale-mobile-320.png",
+            "bytes": 176330,
+            "sha256": "0d390a36ce95eb234f08f78a56b960ed6b815a1f62077ffdee0a68f1e6de94dc"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "active_stage": "complete",
+        "passed": true
+      }
+    },
+    {
+      "os": "ubuntu-latest",
+      "optimize": 1,
+      "job_id": 124572607335,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/job/124572607335",
+      "artifact": {
+        "id": 13047655598,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/artifacts/13047655598",
+        "digest": "sha256:3e49bb28016f25c40e65e3164589c99f95399d99114866b71bb78c2474f864f0",
+        "size_in_bytes": 1254608,
+        "downloaded_zip_digest_verified": true
+      },
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "python_optimize": 1,
+        "tests": 30,
+        "expected": 30,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_collapsed_orphan_isolated_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_descriptor_stress_and_metrics",
+          "f3a_graph_tests.F3AGraph.test_scale_fixture_independent_schema_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_full_index_and_identity",
+          "f3a_graph_tests.F3AGraph.test_scale_pan_zoom_minimap_keyboard",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_stale_ttl_snapshot_dispose",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "browser": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 271,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-494ef8923acefaa7386f309b29c4371a-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 225,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 126,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 371,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-770e4dcfa938ccaa46cce154173803ef-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "declared_node_count": 9,
+                "loaded_node_count": 9,
+                "rendered_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "rendered_node_count": 9,
+                "rendered_relation_count": 4,
+                "rendered_parent_edge_count": 4,
+                "windowing": false,
+                "minimap_node_count": 9,
+                "minimap_bin_count": 9,
+                "operation_ms": 11.5,
+                "draw_ms": 0,
+                "model_value_limit": 600000,
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 374,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 93,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-6bd41f6e749013e2ee99bd53c14b46b9-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-6bd41f6e749013e2ee99bd53c14b46b9-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 275,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 107,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 176,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 111,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 168,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 75,
+            "detail": {
+              "session_id": "f3a-1-a50ed66dec0f3b6e3ad71c3ee8aa3143-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "declared_node_count": 5,
+              "loaded_node_count": 5,
+              "rendered_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "rendered_node_count": 5,
+              "rendered_relation_count": 0,
+              "rendered_parent_edge_count": 0,
+              "windowing": false,
+              "minimap_node_count": 5,
+              "minimap_bin_count": 5,
+              "operation_ms": 3.900000000008731,
+              "draw_ms": 1.7000000000116415,
+              "model_value_limit": 600000,
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 5611,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 622.3000000000029,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 372.8000000000029,
+                  "dom_relations": 4000
+                },
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "duration_ms": 68.10000000000582,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "duration_ms": 807.9000000000087,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "duration_ms": 357.09999999999127,
+                  "rendered_nodes": 2,
+                  "rendered_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 529.2999999999884
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1483.1000000000058
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 201,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 188,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 211,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-bb2d6f3d67d16ba522a3aa7c618b56b9-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 88,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          },
+          {
+            "name": "scale_full_index_and_identity",
+            "passed": true,
+            "duration_ms": 2268,
+            "detail": {
+              "total": 2911,
+              "loaded": 2911,
+              "rendered": 7,
+              "metrics": {
+                "dom_elements": 635,
+                "heap_bytes": 81400000,
+                "operation_ms": 442.40000000000873,
+                "draw_ms": 5.099999999991269
+              },
+              "selected": [
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:project",
+                    "session_id": "f3a-1-c001e84422382a5bd78f1285f234ae95-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 12.400000000008731,
+                    "dom_elements": 635,
+                    "rendered": 6
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-1455",
+                    "session_id": "f3a-1-c001e84422382a5bd78f1285f234ae95-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 28.10000000000582,
+                    "dom_elements": 465,
+                    "rendered": 8
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-2910",
+                    "session_id": "f3a-1-c001e84422382a5bd78f1285f234ae95-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 17.09999999999127,
+                    "dom_elements": 466,
+                    "rendered": 8
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "scale_collapsed_orphan_isolated_and_occurrences",
+            "passed": true,
+            "duration_ms": 2203,
+            "detail": {
+              "contexts": [
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:orphan",
+                  "session_id": "f3a-1-16018564664c1a1f6c292677c6b2b206-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:isolated",
+                  "session_id": "f3a-1-16018564664c1a1f6c292677c6b2b206-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:collision-0-a",
+                  "session_id": "f3a-1-16018564664c1a1f6c292677c6b2b206-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 1,
+                  "nav_id": "nav:collision-0-b",
+                  "session_id": "f3a-1-16018564664c1a1f6c292677c6b2b206-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:hostile",
+                  "session_id": "f3a-1-16018564664c1a1f6c292677c6b2b206-1"
+                }
+              ],
+              "duplicate_rejected": true
+            }
+          },
+          {
+            "name": "scale_pan_zoom_minimap_keyboard",
+            "passed": true,
+            "duration_ms": 3024,
+            "detail": {
+              "zoom": 0.001629744433703754,
+              "rendered": 1000,
+              "minimap_bins": 175,
+              "minimap_geometry": {
+                "css_width": 300,
+                "plotted_width": 255.3177089691162,
+                "bins": 175,
+                "sum": 2911,
+                "target": {
+                  "client_x": 185.79622650146484,
+                  "client_y": 396.76612854003906,
+                  "world_x": 1086.875,
+                  "world_y": 119305.515625
+                },
+                "bounds": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 1880,
+                  "bottom": 250346
+                }
+              },
+              "click_camera_center": {
+                "x": 1081.7449664429528,
+                "y": 117915.43478260876
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_390",
+            "passed": true,
+            "duration_ms": 1682,
+            "detail": {
+              "sizes": {
+                "scroll": 390,
+                "inner": 390
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-379604c0e9da7d0d7b5a028ededfeaf6-1"
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_320",
+            "passed": true,
+            "duration_ms": 1721,
+            "detail": {
+              "sizes": {
+                "scroll": 320,
+                "inner": 320
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-02fc8d06085acd2a6399c6e33b767627-1"
+              }
+            }
+          },
+          {
+            "name": "scale_stale_ttl_snapshot_dispose",
+            "passed": true,
+            "duration_ms": 2423,
+            "detail": {
+              "stale_rejected": true,
+              "cross_source_snapshot_rejected": true,
+              "ttl_error": "EXPIRED — snapshot expirado; seleção e links invalidados.",
+              "disposed": true
+            }
+          },
+          {
+            "name": "scale_descriptor_stress_and_metrics",
+            "passed": true,
+            "duration_ms": 7910,
+            "detail": {
+              "results": [
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "descriptor_bytes": 5407991,
+                  "construction_ms": 79.79999999998836,
+                  "accepted": true,
+                  "error": null,
+                  "duration_ms": 785.2999999999884,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 199,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0,
+                  "visible": 10000,
+                  "node_count": 10000,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · synthetic-f3a / synthetic-f3a-v1 · fonte OBSERVED_AVAILABLE · descriptor_schema PASS · descriptor_semantics PASS · OBSERVED_SNAPSHOT_ONLY · expira 2026-10-31T10:01:00Z · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoNós declarados no descriptor"
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 100000,
+                  "descriptor_bytes": 81008070,
+                  "construction_ms": 973,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1392.5,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "descriptor_bytes": 5408536,
+                  "construction_ms": 60.5,
+                  "accepted": false,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 621.7999999999884,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — $.nodes: array quotaPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta somente FROM_TOInp"
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "descriptor_bytes": 73870894,
+                  "construction_ms": 991.7000000000116,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1552.1000000000058,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                }
+              ],
+              "memory_scope": "Observed Chromium usedJSHeapSize when exposed; not a hard 256MiB browser heap qualification",
+              "deadline_ms": 30000,
+              "transport": "Counts only via CDP; complete synthetic descriptors constructed sequentially in renderer from fixed local test module"
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 218041,
+            "sha256": "49ad03f513f55c192e5bbf430ef3b129e455b24e109e705fa21761f8cd77e546"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 166762,
+            "sha256": "fc6811e452f570dd5f7b378c31d6b92df9d44f24464546277b97b65bdcc7b384"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 162112,
+            "sha256": "bd0b2703491da6ee2d90d266a055cd12c2d19353aea8f622bc9ae7513a89379e"
+          },
+          {
+            "name": "scale-desktop.png",
+            "bytes": 304679,
+            "sha256": "073eb7923b40906bf7ae99c8dac5c1582754103a6c31f77cc8cb3421eb37a807"
+          },
+          {
+            "name": "scale-mobile-390.png",
+            "bytes": 181553,
+            "sha256": "0e3538f9f2867cfa9b95b82dcd606965170e6d040e9dee11260f620bd7513a2e"
+          },
+          {
+            "name": "scale-mobile-320.png",
+            "bytes": 176692,
+            "sha256": "7bf3d4f2b96caf325ba654d9e866067afa30f61c849333f3edcd52215c6682da"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "active_stage": "complete",
+        "passed": true
+      }
+    },
+    {
+      "os": "windows-latest",
+      "optimize": 0,
+      "job_id": 124572607114,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/job/124572607114",
+      "artifact": {
+        "id": 13047387412,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/artifacts/13047387412",
+        "digest": "sha256:373e7e88632af625d11b4de9522f6b010a679ca1c66a0ea9f4fd85a97390a265",
+        "size_in_bytes": 737035,
+        "downloaded_zip_digest_verified": true
+      },
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "python_optimize": 0,
+        "tests": 30,
+        "expected": 30,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_collapsed_orphan_isolated_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_descriptor_stress_and_metrics",
+          "f3a_graph_tests.F3AGraph.test_scale_fixture_independent_schema_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_full_index_and_identity",
+          "f3a_graph_tests.F3AGraph.test_scale_pan_zoom_minimap_keyboard",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_stale_ttl_snapshot_dispose",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "browser": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 524,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-5bc3dbaca9c93e01b943fb6556e088e7-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 291,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 218,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 511,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-c0fe3bd3599188c0be0f25f142917113-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "declared_node_count": 9,
+                "loaded_node_count": 9,
+                "rendered_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "rendered_node_count": 9,
+                "rendered_relation_count": 4,
+                "rendered_parent_edge_count": 4,
+                "windowing": false,
+                "minimap_node_count": 9,
+                "minimap_bin_count": 9,
+                "operation_ms": 40.899999999965075,
+                "draw_ms": 0.09999999997671694,
+                "model_value_limit": 600000,
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 446,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 169,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-4b08aa20d9d92fe1dc7dfdd1e6b28b70-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-4b08aa20d9d92fe1dc7dfdd1e6b28b70-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 443,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 163,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 294,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 195,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 302,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 154,
+            "detail": {
+              "session_id": "f3a-1-2532819f6f2fc86955597aa43e26e545-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "declared_node_count": 5,
+              "loaded_node_count": 5,
+              "rendered_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "rendered_node_count": 5,
+              "rendered_relation_count": 0,
+              "rendered_parent_edge_count": 0,
+              "windowing": false,
+              "minimap_node_count": 5,
+              "minimap_bin_count": 5,
+              "operation_ms": 6.7000000000116415,
+              "draw_ms": 3.7999999999883585,
+              "model_value_limit": 600000,
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 10053,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 1447.2999999999884,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 565.2000000000116,
+                  "dom_relations": 4000
+                },
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "duration_ms": 162.60000000003492,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "duration_ms": 1403.4000000000233,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "duration_ms": 603.8999999999651,
+                  "rendered_nodes": 2,
+                  "rendered_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 798.7000000000116
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2452.100000000035
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 302,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 287,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 309,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-6e175502063581c3caa4e13759fd3d5c-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 167,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          },
+          {
+            "name": "scale_full_index_and_identity",
+            "passed": true,
+            "duration_ms": 3116,
+            "detail": {
+              "total": 2911,
+              "loaded": 2911,
+              "rendered": 7,
+              "metrics": {
+                "dom_elements": 635,
+                "heap_bytes": 81400000,
+                "operation_ms": 646.3999999999651,
+                "draw_ms": 8.599999999976717
+              },
+              "selected": [
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:project",
+                    "session_id": "f3a-1-6b0e7b36cd46177a96776314874e511a-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 25.5,
+                    "dom_elements": 635,
+                    "rendered": 6
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-1455",
+                    "session_id": "f3a-1-6b0e7b36cd46177a96776314874e511a-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 34.899999999965075,
+                    "dom_elements": 465,
+                    "rendered": 8
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-2910",
+                    "session_id": "f3a-1-6b0e7b36cd46177a96776314874e511a-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 28.100000000034925,
+                    "dom_elements": 466,
+                    "rendered": 8
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "scale_collapsed_orphan_isolated_and_occurrences",
+            "passed": true,
+            "duration_ms": 3099,
+            "detail": {
+              "contexts": [
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:orphan",
+                  "session_id": "f3a-1-df9a93962d947a1e0da6f932446b2470-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:isolated",
+                  "session_id": "f3a-1-df9a93962d947a1e0da6f932446b2470-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:collision-0-a",
+                  "session_id": "f3a-1-df9a93962d947a1e0da6f932446b2470-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 1,
+                  "nav_id": "nav:collision-0-b",
+                  "session_id": "f3a-1-df9a93962d947a1e0da6f932446b2470-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:hostile",
+                  "session_id": "f3a-1-df9a93962d947a1e0da6f932446b2470-1"
+                }
+              ],
+              "duplicate_rejected": true
+            }
+          },
+          {
+            "name": "scale_pan_zoom_minimap_keyboard",
+            "passed": true,
+            "duration_ms": 5478,
+            "detail": {
+              "zoom": 0.001629744433703754,
+              "rendered": 1000,
+              "minimap_bins": 175,
+              "minimap_geometry": {
+                "css_width": 300,
+                "plotted_width": 255.3177089691162,
+                "bins": 175,
+                "sum": 2911,
+                "target": {
+                  "client_x": 185.79622650146484,
+                  "client_y": 396.76612854003906,
+                  "world_x": 1086.875,
+                  "world_y": 119305.515625
+                },
+                "bounds": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 1880,
+                  "bottom": 250346
+                }
+              },
+              "click_camera_center": {
+                "x": 1081.7449664429528,
+                "y": 117915.43478260876
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_390",
+            "passed": true,
+            "duration_ms": 2387,
+            "detail": {
+              "sizes": {
+                "scroll": 390,
+                "inner": 390
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-1fc4139d927ec97f2b5c68edbe0a38e6-1"
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_320",
+            "passed": true,
+            "duration_ms": 2371,
+            "detail": {
+              "sizes": {
+                "scroll": 320,
+                "inner": 320
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-d94a140e39d9f273b04ceb724c68003d-1"
+              }
+            }
+          },
+          {
+            "name": "scale_stale_ttl_snapshot_dispose",
+            "passed": true,
+            "duration_ms": 3516,
+            "detail": {
+              "stale_rejected": true,
+              "cross_source_snapshot_rejected": true,
+              "ttl_error": "EXPIRED — snapshot expirado; seleção e links invalidados.",
+              "disposed": true
+            }
+          },
+          {
+            "name": "scale_descriptor_stress_and_metrics",
+            "passed": true,
+            "duration_ms": 10986,
+            "detail": {
+              "results": [
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "descriptor_bytes": 5407991,
+                  "construction_ms": 112.19999999995343,
+                  "accepted": true,
+                  "error": null,
+                  "duration_ms": 1146,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 199,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0,
+                  "visible": 10000,
+                  "node_count": 10000,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · synthetic-f3a / synthetic-f3a-v1 · fonte OBSERVED_AVAILABLE · descriptor_schema PASS · descriptor_semantics PASS · OBSERVED_SNAPSHOT_ONLY · expira 2026-10-31T10:01:00Z · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoNós declarados no descriptor"
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 100000,
+                  "descriptor_bytes": 81008070,
+                  "construction_ms": 1243.899999999965,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2114.399999999965,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "descriptor_bytes": 5408536,
+                  "construction_ms": 83.30000000004657,
+                  "accepted": false,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 863,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — $.nodes: array quotaPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta somente FROM_TOInp"
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "descriptor_bytes": 73870894,
+                  "construction_ms": 1315,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2175.5,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                }
+              ],
+              "memory_scope": "Observed Chromium usedJSHeapSize when exposed; not a hard 256MiB browser heap qualification",
+              "deadline_ms": 30000,
+              "transport": "Counts only via CDP; complete synthetic descriptors constructed sequentially in renderer from fixed local test module"
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 124688,
+            "sha256": "16e7b977ad834aeadc5635d5cc090942848d75765b4baa4dfff8c95c5d59a827"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 89660,
+            "sha256": "c2e818253e4c7eda23f285c6364e0bdf00540ab52d5ef339364ba0172873af10"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 87918,
+            "sha256": "08122794a7d1cdede225b908b2f618e26fc9c8ac456f05ec7b1b5ddd084de326"
+          },
+          {
+            "name": "scale-desktop.png",
+            "bytes": 175523,
+            "sha256": "1ff37b6ffd3a241042a9d23de91787ae09b3531cc6191effb75dfe95c253b68f"
+          },
+          {
+            "name": "scale-mobile-390.png",
+            "bytes": 100386,
+            "sha256": "bccc19af9af11593525fce7bc920e2e545c19ca8778eafc094da19d99dd6fec5"
+          },
+          {
+            "name": "scale-mobile-320.png",
+            "bytes": 95885,
+            "sha256": "b43f9a5cd077fb99cc8290965bd6faac314dc5cca40682341f6d7f31313a56bb"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "active_stage": "complete",
+        "passed": true
+      }
+    },
+    {
+      "os": "windows-latest",
+      "optimize": 1,
+      "job_id": 124572607413,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/job/124572607413",
+      "artifact": {
+        "id": 13047586402,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213311466/artifacts/13047586402",
+        "digest": "sha256:d6f2fd3c746936cca1d238bdde287c9b9fd1f52ca8b829b6ebde1b97f2f03479",
+        "size_in_bytes": 738466,
+        "downloaded_zip_digest_verified": true
+      },
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "python_optimize": 1,
+        "tests": 30,
+        "expected": 30,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_collapsed_orphan_isolated_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_descriptor_stress_and_metrics",
+          "f3a_graph_tests.F3AGraph.test_scale_fixture_independent_schema_and_occurrences",
+          "f3a_graph_tests.F3AGraph.test_scale_full_index_and_identity",
+          "f3a_graph_tests.F3AGraph.test_scale_pan_zoom_minimap_keyboard",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_scale_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_scale_stale_ttl_snapshot_dispose",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "browser": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+        "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 491,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-533aa9c80af31e919f1874d916d87507-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 271,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 220,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 519,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-70baa8526584b7d89f5ec5f559b4296d-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "declared_node_count": 9,
+                "loaded_node_count": 9,
+                "rendered_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "rendered_node_count": 9,
+                "rendered_relation_count": 4,
+                "rendered_parent_edge_count": 4,
+                "windowing": false,
+                "minimap_node_count": 9,
+                "minimap_bin_count": 9,
+                "operation_ms": 46.399999999965075,
+                "draw_ms": 0.20000000001164153,
+                "model_value_limit": 600000,
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 448,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 172,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-27f0f3629ed8b8e70421b65c063a2ccd-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-27f0f3629ed8b8e70421b65c063a2ccd-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 432,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 163,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 286,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 191,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 311,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 158,
+            "detail": {
+              "session_id": "f3a-1-da5f52494ee170e2b3c29d46bd99dee8-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "declared_node_count": 5,
+              "loaded_node_count": 5,
+              "rendered_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "rendered_node_count": 5,
+              "rendered_relation_count": 0,
+              "rendered_parent_edge_count": 0,
+              "windowing": false,
+              "minimap_node_count": 5,
+              "minimap_bin_count": 5,
+              "operation_ms": 8.5,
+              "draw_ms": 5.099999999976717,
+              "model_value_limit": 600000,
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 9694,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 1529.7999999999302,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 546.6999999999534,
+                  "dom_relations": 4000
+                },
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "duration_ms": 107.09999999997672,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "duration_ms": 1263.2999999999302,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "duration_ms": 586,
+                  "rendered_nodes": 2,
+                  "rendered_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 782.7999999999302
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2378.600000000093
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 347,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 343,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 331,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-0b82cb04be5b4a312fd33884a9439d11-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 176,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          },
+          {
+            "name": "scale_full_index_and_identity",
+            "passed": true,
+            "duration_ms": 3146,
+            "detail": {
+              "total": 2911,
+              "loaded": 2911,
+              "rendered": 7,
+              "metrics": {
+                "dom_elements": 635,
+                "heap_bytes": 81400000,
+                "operation_ms": 622.2000000000698,
+                "draw_ms": 8.20000000006985
+              },
+              "selected": [
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:project",
+                    "session_id": "f3a-1-66b524fb0224ee2d76ccbd5780011d42-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 20.800000000046566,
+                    "dom_elements": 635,
+                    "rendered": 6
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-1455",
+                    "session_id": "f3a-1-66b524fb0224ee2d76ccbd5780011d42-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 35.59999999997672,
+                    "dom_elements": 465,
+                    "rendered": 8
+                  }
+                },
+                {
+                  "context": {
+                    "source_id": "synthetic-f3a",
+                    "snapshot_id": "synthetic-f3a-v1",
+                    "occurrence": 0,
+                    "nav_id": "nav:scale-2910",
+                    "session_id": "f3a-1-66b524fb0224ee2d76ccbd5780011d42-1"
+                  },
+                  "reveal": {
+                    "ok": true,
+                    "elapsed_ms": 28.900000000023283,
+                    "dom_elements": 466,
+                    "rendered": 8
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "scale_collapsed_orphan_isolated_and_occurrences",
+            "passed": true,
+            "duration_ms": 3054,
+            "detail": {
+              "contexts": [
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:orphan",
+                  "session_id": "f3a-1-ed19b212216b9011481b54dc725ff2ac-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:isolated",
+                  "session_id": "f3a-1-ed19b212216b9011481b54dc725ff2ac-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:collision-0-a",
+                  "session_id": "f3a-1-ed19b212216b9011481b54dc725ff2ac-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 1,
+                  "nav_id": "nav:collision-0-b",
+                  "session_id": "f3a-1-ed19b212216b9011481b54dc725ff2ac-1"
+                },
+                {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:hostile",
+                  "session_id": "f3a-1-ed19b212216b9011481b54dc725ff2ac-1"
+                }
+              ],
+              "duplicate_rejected": true
+            }
+          },
+          {
+            "name": "scale_pan_zoom_minimap_keyboard",
+            "passed": true,
+            "duration_ms": 5039,
+            "detail": {
+              "zoom": 0.001629744433703754,
+              "rendered": 1000,
+              "minimap_bins": 175,
+              "minimap_geometry": {
+                "css_width": 300,
+                "plotted_width": 255.3177089691162,
+                "bins": 175,
+                "sum": 2911,
+                "target": {
+                  "client_x": 185.79622650146484,
+                  "client_y": 396.76612854003906,
+                  "world_x": 1086.875,
+                  "world_y": 119305.515625
+                },
+                "bounds": {
+                  "left": 0,
+                  "top": 0,
+                  "right": 1880,
+                  "bottom": 250346
+                }
+              },
+              "click_camera_center": {
+                "x": 1081.7449664429528,
+                "y": 117915.43478260876
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_390",
+            "passed": true,
+            "duration_ms": 2328,
+            "detail": {
+              "sizes": {
+                "scroll": 390,
+                "inner": 390
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-9316967ef54a4f30814f8f6b12efc086-1"
+              }
+            }
+          },
+          {
+            "name": "scale_responsive_320",
+            "passed": true,
+            "duration_ms": 2319,
+            "detail": {
+              "sizes": {
+                "scroll": 320,
+                "inner": 320
+              },
+              "rendered": 6,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:scale-2910",
+                "session_id": "f3a-1-54c7fe1ecb297271b70cd5fa24d722d6-1"
+              }
+            }
+          },
+          {
+            "name": "scale_stale_ttl_snapshot_dispose",
+            "passed": true,
+            "duration_ms": 3459,
+            "detail": {
+              "stale_rejected": true,
+              "cross_source_snapshot_rejected": true,
+              "ttl_error": "EXPIRED — snapshot expirado; seleção e links invalidados.",
+              "disposed": true
+            }
+          },
+          {
+            "name": "scale_descriptor_stress_and_metrics",
+            "passed": true,
+            "duration_ms": 10463,
+            "detail": {
+              "results": [
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "descriptor_bytes": 5407991,
+                  "construction_ms": 106.5,
+                  "accepted": true,
+                  "error": null,
+                  "duration_ms": 1116.4000000000233,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 199,
+                  "rendered_nodes": 6,
+                  "rendered_relations": 0,
+                  "visible": 10000,
+                  "node_count": 10000,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · synthetic-f3a / synthetic-f3a-v1 · fonte OBSERVED_AVAILABLE · descriptor_schema PASS · descriptor_semantics PASS · OBSERVED_SNAPSHOT_ONLY · expira 2026-10-31T10:01:00Z · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoNós declarados no descriptor"
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 100000,
+                  "descriptor_bytes": 81008070,
+                  "construction_ms": 1161.5999999999767,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2027.3000000000466,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "descriptor_bytes": 5408536,
+                  "construction_ms": 78.40000000002328,
+                  "accepted": false,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 769.6999999999534,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — $.nodes: array quotaPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta somente FROM_TOInp"
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "descriptor_bytes": 73870894,
+                  "construction_ms": 1245.4000000000233,
+                  "accepted": false,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2063.5999999999767,
+                  "before_heap_bytes": 76600000,
+                  "after_heap_bytes": 76600000,
+                  "dom_elements": 40,
+                  "rendered_nodes": 0,
+                  "rendered_relations": 0,
+                  "visible": 0,
+                  "node_count": 0,
+                  "relation_count": 0,
+                  "text": "LEGACY_DERIVED · sem snapshot validado · autenticidade NOT_VERIFIED · ciência NOT_EVALUATEDAmpliar +Reduzir −Mover ←Mover →Mover ↑Mover ↓RestaurarAjustar100%Localizar nó (nav_id ou texto do rótulo)Localizar / próximo resultadoSnapshot indisponível; nenhuma apresentação parcial.F3A — Descriptor depth/value quota exceededPertencimento: parent_key explícito (sem causalidade)Linhagem declarada: seta s"
+                }
+              ],
+              "memory_scope": "Observed Chromium usedJSHeapSize when exposed; not a hard 256MiB browser heap qualification",
+              "deadline_ms": 30000,
+              "transport": "Counts only via CDP; complete synthetic descriptors constructed sequentially in renderer from fixed local test module"
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 124714,
+            "sha256": "28a830ab60a5e6f742a378e653bd148424be4edd53e5d6f00c536df51582ca67"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 89913,
+            "sha256": "49b45a608450da7782f27a05dbd2a2670fc9f4b5d5f43f01306b4ca65bb82585"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 87854,
+            "sha256": "fec2200b2f77255fa70bb60f31b8b01cb672aa4a11794e1d2d532e5303b11615"
+          },
+          {
+            "name": "scale-desktop.png",
+            "bytes": 175669,
+            "sha256": "a9f7ad54c59d4c9fe3718d270433763e208dc549d48b6b97268fac631fc6a8b9"
+          },
+          {
+            "name": "scale-mobile-390.png",
+            "bytes": 100393,
+            "sha256": "56163a9702f7961b25bc809dead466697806ee6ea4e02db4fd72ba94bcf9e80e"
+          },
+          {
+            "name": "scale-mobile-320.png",
+            "bytes": 95881,
+            "sha256": "0ca824483b766ed754dab594bb64949990231a44057bc96b3393a68ec8011ae7"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "active_stage": "complete",
+        "passed": true
+      }
+    }
+  ],
+  "metrics": {
+    "load_ms": [
+      442.40000000000873,
+      646.3999999999651
+    ],
+    "reveal_ms": [
+      12.400000000008731,
+      35.59999999997672
+    ],
+    "loaded_nodes": 2911,
+    "loaded_relations": 1595,
+    "initial_dom_elements": 635
+  },
+  "input_inventory": {
+    "sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+    "tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+    "base_files_preserved": 545,
+    "global_gates_modified": false,
+    "files": [
+      {
+        "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+        "blob": "512f843aab20bb9a2902e228e6d8ab14ba914b39",
+        "sha256": "33eadb7aff6f176d2a5398f1d9a60281404dc48db6c3517a71987daf1b8656f3",
+        "bytes": 2546
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/BROWSER-RECEIPT.json",
+        "blob": "ba1e6de3d671b491b3ab97d7cdd00f4e5242bbda",
+        "sha256": "98d08988c8421fdd173164e00ff6dfe74a0ec30868b1f56eb29f96c90bc458dc",
+        "bytes": 58186
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/CI-EVIDENCE.json",
+        "blob": "4843c715e1809c880ed67954ee288e8ded4318b8",
+        "sha256": "e2f56cc4d77460e0eebdefd3de253cccda6e52d95aabc6eae889d64a9eae2550",
+        "bytes": 64043
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-CI-EVIDENCE.json",
+        "blob": "0c03c2357c27a1ca263ca6623d38a141321d89ab",
+        "sha256": "92f1dd380aa20df6480a824472197caea609446995ea2cea6a9aad270c6cb1ee",
+        "bytes": 4982
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md",
+        "blob": "23fc1d271dde4aa5af638d13d77935dd33c5228c",
+        "sha256": "31c2977da726a43d2e6443fc0ebee699467f14c38b0af87b9814c30bcb29bd8a",
+        "bytes": 4262
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-HANDOFF.json",
+        "blob": "ab03c37fd309fc134bd75139d1e6beecb25be333",
+        "sha256": "741dcc35dd6b591bf97082978d117ff380b4293fc34a10ba2b97fc9d681b538c",
+        "bytes": 1005
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-INDEPENDENT-REVIEW.md",
+        "blob": "994bad2a16ee1a44fa6a6ec3da227a7cb3ea416c",
+        "sha256": "dc3c810fb98b0a92b97ac0d7e7b98b5ecf0f6d2686e59c140285ce339d6625b0",
+        "bytes": 2007
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-INPUTS.json",
+        "blob": "8f237b12a617b738d311dc2a1ce113f28a254102",
+        "sha256": "55a14aa30202cdefabbf01c600f2f33332afeb046104fde15588df6199f67728",
+        "bytes": 4318
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-PLAN.md",
+        "blob": "2858664ef906230dac2c028d9fd92b9037fc60f3",
+        "sha256": "9206335c7cb0c5acc687d36ce7c9b017db231bf2584752ad0a0c321338ecae08",
+        "bytes": 4913
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md",
+        "blob": "df5c3486b51b136c967b098cc7c11672dfee15c6",
+        "sha256": "1ef50a962c784c97fed1bc795e71c9541ed60a4727ace57def36e5239c17f55c",
+        "bytes": 2094
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/GLOBAL-GATE-REPAIR-CONTRACT.md",
+        "blob": "6483fa31f32d96ba43fe236a74a2f16bb3c5c340",
+        "sha256": "40ddef2538df2b6c7e6919f8f113accce02ca4fcc7423cfebecfa7348785eff7",
+        "bytes": 3425
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+        "blob": "f010f8e2190b0853713c5c68a881ed72759f3e36",
+        "sha256": "49c751a5aef6a7af74e3570d574485b29a20b0af490823cda51897ffde0117a0",
+        "bytes": 6131
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/HANDOFF.json",
+        "blob": "04757d338218f1b207abefb693030c65de57c9df",
+        "sha256": "48bba699a8a9aadc6ff7c07bb023035ba1a47716936f41ae72734b5fe68694a2",
+        "bytes": 9133
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/INDEPENDENT-REVIEW.md",
+        "blob": "779a80a0148b6cc3c3a2f3119898657a21b2cb84",
+        "sha256": "1ce0446c2710b9d6d53fae8f16ba3f6662078733c129a08ac0a289a7a2add254",
+        "bytes": 3382
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+        "blob": "82d24e26c4f272a482026b9fb103257452c50b52",
+        "sha256": "bc2be7f21d939179577eab0e833d9c4f4148423455d3c8341eeb754ed1a5d4f2",
+        "bytes": 7824
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+        "blob": "b6b6148693069251065053abf0a348a9658beb73",
+        "sha256": "7e1c2f84d0568b9a737cd85bbcef3543c4517e58e46c9371908e1ce92b44d4e5",
+        "bytes": 2033
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/NEGATIVE-TESTS.json",
+        "blob": "256f9d16f1a826fff0dc38b73ac9586c6c90e944",
+        "sha256": "7de605523bf2e2fdbf31d9d5b108f91a3003cb920ec1366688b7fecd4d815324",
+        "bytes": 13075
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/PLAN.md",
+        "blob": "274049d98c435fc073bd1c3db534a26f5aaa4cad",
+        "sha256": "7de4cdc47eac676c42d370888882847740d7045c5d96f10209dfc69f40c72c25",
+        "bytes": 4491
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f3a-graph/RESULT.md",
+        "blob": "cf0267c19a54c7681533747a70e8eff373e738bf",
+        "sha256": "6c0b603e9eac2592dd897293fca48bf12ed69614e41b1912abf463f882d524a2",
+        "bytes": 8900
+      },
+      {
+        "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+        "blob": "6a84b49af7e52779b4527a1a50cd03ca73314ce8",
+        "sha256": "fd88f1515e6444b982b69091ec05a38e314b06802de80d01c3b4be6f547e2fbd",
+        "bytes": 4165
+      },
+      {
+        "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+        "blob": "a7b12176801f0207aae7ed3b8469b9142d6da334",
+        "sha256": "d323add6ead9b6f3ee4581d60425dd9248b8e2087985ec0ba876a3ddb29c54a4",
+        "bytes": 55971
+      },
+      {
+        "path": "scripts/qa/atlas_parity04_f3a_browser.mjs",
+        "blob": "3f0ff506cd4a949f5ddf95486865047d04bc6aa2",
+        "sha256": "acdda70b987abb3bfdab05b374862c4eb7d9a0f071d05cfbbf2f38b9ebcab61d",
+        "bytes": 48661
+      },
+      {
+        "path": "scripts/qa/atlas_parity04_f3a_ci.py",
+        "blob": "5026b27bb4c0f3d81e74d48d23c9a66a84b44beb",
+        "sha256": "dd73ca8bf1b0ec1460d5bfb9563368427a76ffd4d199aa0b9d7ad993f4d206d9",
+        "bytes": 10147
+      },
+      {
+        "path": "scripts/qa/atlas_parity04_f3a_scale_fixture.mjs",
+        "blob": "68b0406bf3aa6e119ac1bc97b090d53fce2eca21",
+        "sha256": "b35723561886c45361a49d5e62a03d8845c288f934e13c2586feb1f333e404e4",
+        "bytes": 3777
+      },
+      {
+        "path": "tests/fixtures/atlas_parity04_f3a_graph.json",
+        "blob": "b9e43e1e249915634d0e99aa23c13a5ea54f6720",
+        "sha256": "3ca0ecb9cb872cde5108be11d53e23079adff654ab8153f64b873eb4c2167b27",
+        "bytes": 318702
+      },
+      {
+        "path": "tests/qa/test_atlas_parity04_f3a_graph.py",
+        "blob": "59f0ecc957223dca84de5752af973df9d8b7baa6",
+        "sha256": "460941d8f004f9558ff6d061b6c0acd8465d9d152cf154bdcd86a13f67d214dc",
+        "bytes": 12981
+      }
+    ]
+  },
+  "n01_n24_scope": [
+    {
+      "id": "N01",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Contextual selection rejects another source/snapshot; reload and reimport invalidate session"
+    },
+    {
+      "id": "N02",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "50 native collision groups retain 100 separate node occurrences; ambiguous RESOLVED refused"
+    },
+    {
+      "id": "N03",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Navigation ID promoted to native ID refused"
+    },
+    {
+      "id": "N04",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "22 null endpoints retained and counted without targets"
+    },
+    {
+      "id": "N05",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "75 unresolved endpoints/relations retained with visible counts"
+    },
+    {
+      "id": "N06",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "40 repeated groups and 41 excess occurrences; all 210 relation occurrences retained"
+    },
+    {
+      "id": "N07",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "F3B table record binding UI"
+    },
+    {
+      "id": "N08",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "F3B unadmitted RF rendering/admission"
+    },
+    {
+      "id": "N09",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "SOURCE_ENTITY isolated Run and explicit reference stub remain distinct; binding_gap and absent parent visible"
+    },
+    {
+      "id": "N10",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "F3B category/null/missing table UI"
+    },
+    {
+      "id": "N11",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "F3B typed precision/table rendering; frozen examples only formally schema-checked"
+    },
+    {
+      "id": "N12",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Hostile HTML/JS label remains literal; active DOM, execution and external requests remain zero"
+    },
+    {
+      "id": "N13",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "F3B export/CSV"
+    },
+    {
+      "id": "N14",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "External acquisition host paths/TOCTOU; no file reader in F3A"
+    },
+    {
+      "id": "N15",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "javascript/file/remote URI literals remain inert, never followed"
+    },
+    {
+      "id": "N16",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "External source change/observation; no original source monitoring"
+    },
+    {
+      "id": "N17",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Closed schema and semantic negatives remain inherited; 1001/10000 nodes and4001 relations now admitted by model with bounded SVG; full synthetic2911/1595 navigable;10001 nodes rejected atomically;10000/100000 81,008,070bytes refused by real600000-value limit, no claim of valid100k relations within32MiB"
+    },
+    {
+      "id": "N18",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Same-snapshot reimport, cross-context, expiry and real page reload invalidate old context"
+    },
+    {
+      "id": "N19",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "UNKNOWN_UPSTREAM/GLOBAL_UNPROVEN and absence of global denominator exposed"
+    },
+    {
+      "id": "N20",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "LEGACY_DERIVED, NOT_VERIFIED and NOT_EVALUATED remain separate from descriptor validation"
+    },
+    {
+      "id": "N21",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Declared original kind/type only; no title/MIME/domain inference or FHIR conformity"
+    },
+    {
+      "id": "N22",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "Installed SDK/C4 integrated G5"
+    },
+    {
+      "id": "N23",
+      "scope": "F4_C1_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Real isolated component navigation/keyboard/browser only; integrated RF/private G6 not executed"
+    },
+    {
+      "id": "N24",
+      "scope": "NOT_EXECUTED_OUTSIDE_F4_C1",
+      "oracle": "Protocol conformance validation/false conformity; F3A makes no such claim"
+    }
+  ],
+  "source_and_privacy": {
+    "synthetic": true,
+    "private_payload_or_code_read": false,
+    "original_fixture_preserved": true,
+    "descriptor_schema_literal_unchanged": true,
+    "frozen_base_blobs_preserved": 545,
+    "global_workflows_or_guards_modified": false
+  },
+  "integrator_gate": {
+    "code": "REAL_VALUE_CAP_GATE_INTEGRATOR_REQUIRED",
+    "descriptor_envelope": {
+      "nodes": 10000,
+      "relations": 100000,
+      "bytes": 33554432,
+      "depth": 20
+    },
+    "observed_stress": {
+      "nodes": 10000,
+      "relations": 100000,
+      "bytes": 81008070,
+      "accepted": false,
+      "error": "F3A — Descriptor depth/value quota exceeded",
+      "real_visited_value_limit": 600000,
+      "also_exceeds_descriptor_byte_limit": true,
+      "valid_100000_relation_payload_within_32MiB_qualified": false
+    },
+    "browser_hard_heap_256MiB": "NOT_QUALIFIED",
+    "G5": "NOT_QUALIFIED",
+    "G6": "NOT_QUALIFIED",
+    "minimal_next_act": "Integrator must retain real limits and this refusal; any proposed quota/contract/plan change requires applicable decision before implementation. C4 owns global gate succession; private L1 owns real source proof."
+  }
+}

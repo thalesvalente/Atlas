@@ -1,0 +1,74 @@
+{
+  "schema": "atlas-f4-c1-handoff-v1",
+  "mission": "AP04-F4-C1-GRAPH-SCALE-CHAT-01",
+  "status": "F4_C1_GRAPH_SCALE_QUALIFIED_FOR_COMPOSITION",
+  "qualified_for_composition": true,
+  "synthetic_only": true,
+  "private_payload_executed": false,
+  "descriptor_version": "0.2.0",
+  "target": {
+    "nodes": 2911,
+    "relations": 1595
+  },
+  "real_limits": {
+    "descriptor_bytes": 33554432,
+    "depth": 20,
+    "nodes": 10000,
+    "relations": 100000,
+    "visited_values": 600000,
+    "svg_nodes": 1000,
+    "svg_relations": 4000,
+    "svg_parent_edges": 4000,
+    "operation_ms": 30000,
+    "browser_hard_heap_256MiB": "NOT_QUALIFIED"
+  },
+  "integration_gates": {
+    "G5": "NOT_QUALIFIED",
+    "G6": "NOT_QUALIFIED",
+    "global_gate_successor": "C4_OWNER_REQUIRED"
+  },
+  "preserved": {
+    "F3B": true,
+    "shell": true,
+    "protocol": true,
+    "R4": true,
+    "reader003": true,
+    "historical_controls": true
+  },
+  "terminal_receipt_location": "PR16 external closure MUST bind documentation HEAD to its own four-cell CI and independent review; technical PASS913 is not automatically transferred",
+  "qualification_sha": "913e4038b817916c9a728e18b8cd780ade36b9f0",
+  "qualification_tree": "7eabeffd019f206641412c56a29ab705ad15b4d3",
+  "ci": {
+    "run_id": 41213311466,
+    "cells": 4,
+    "tests_per_cell": 30,
+    "browser_journeys_per_cell": 24,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "independent_review": "C_PASS_SCOPED_FOR_COMPOSITION"
+  },
+  "integrator_constraints": {
+    "code": "REAL_VALUE_CAP_GATE_INTEGRATOR_REQUIRED",
+    "descriptor_envelope": {
+      "nodes": 10000,
+      "relations": 100000,
+      "bytes": 33554432,
+      "depth": 20
+    },
+    "observed_stress": {
+      "nodes": 10000,
+      "relations": 100000,
+      "bytes": 81008070,
+      "accepted": false,
+      "error": "F3A — Descriptor depth/value quota exceeded",
+      "real_visited_value_limit": 600000,
+      "also_exceeds_descriptor_byte_limit": true,
+      "valid_100000_relation_payload_within_32MiB_qualified": false
+    },
+    "browser_hard_heap_256MiB": "NOT_QUALIFIED",
+    "G5": "NOT_QUALIFIED",
+    "G6": "NOT_QUALIFIED",
+    "minimal_next_act": "Integrator must retain real limits and this refusal; any proposed quota/contract/plan change requires applicable decision before implementation. C4 owns global gate succession; private L1 owns real source proof."
+  }
+}

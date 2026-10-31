@@ -1,0 +1,1308 @@
+{
+  "schema": "atlas-f3a-ci-evidence-v1",
+  "mission": "AP04-F3A-CHAT-GRAPH-01",
+  "technical_qualification": {
+    "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+    "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+    "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+    "run_id": 41173213797,
+    "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "scope": "FOCAL_ONLY_NOT_GLOBAL_CI_PASS",
+  "terminal_containing_sha": "RESOLVE_FROM_GIT_AND_PR16_CLOSURE; own focal CI and C review required",
+  "required_matrix": {
+    "os": [
+      "ubuntu-latest",
+      "windows-latest"
+    ],
+    "python_optimize": [
+      0,
+      1
+    ],
+    "checks_per_cell": 17,
+    "unittest_ids_per_cell": 22,
+    "skips": 0
+  },
+  "cells": [
+    {
+      "job_id": 124455337335,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337335",
+      "os": "ubuntu-latest",
+      "optimize": 0,
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "python_optimize": 0,
+        "tests": 22,
+        "expected": 22,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "inputs": {
+        "schema": "atlas-f3a-input-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "history": [
+          {
+            "sha": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "parent": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+            "changes": [
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/PLAN.md"
+            ]
+          },
+          {
+            "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "parent": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "changes": [
+              "A\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "A\tscripts/qa/atlas_parity04_f3a_browser.mjs",
+              "A\tscripts/qa/atlas_parity04_f3a_ci.py",
+              "A\ttests/fixtures/atlas_parity04_f3a_graph.json",
+              "A\ttests/qa/test_atlas_parity04_f3a_graph.py"
+            ]
+          },
+          {
+            "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "parent": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "changes": [
+              "M\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          },
+          {
+            "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+            "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "changes": [
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          }
+        ],
+        "files": [
+          {
+            "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+            "blob": "512f843aab20bb9a2902e228e6d8ab14ba914b39",
+            "sha256": "33eadb7aff6f176d2a5398f1d9a60281404dc48db6c3517a71987daf1b8656f3",
+            "bytes": 2546
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+            "blob": "dc735bd0c73b2580cf34611332d7729c02ac9c9f",
+            "sha256": "dd094e46746fb83a2e3309cea812b7206fd6d31928df77301d3b829ae7ba9c58",
+            "bytes": 5626
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+            "blob": "82d24e26c4f272a482026b9fb103257452c50b52",
+            "sha256": "bc2be7f21d939179577eab0e833d9c4f4148423455d3c8341eeb754ed1a5d4f2",
+            "bytes": 7824
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/PLAN.md",
+            "blob": "274049d98c435fc073bd1c3db534a26f5aaa4cad",
+            "sha256": "7de4cdc47eac676c42d370888882847740d7045c5d96f10209dfc69f40c72c25",
+            "bytes": 4491
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+            "blob": "607f239ada9601e935f59101e604e75f38b623f6",
+            "sha256": "fe646983752cedf9e2a58458330003b17c8c196284050edeb1befd99834ce687",
+            "bytes": 3745
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+            "blob": "16d334e7df19d08554ba11eace3cb308ce3751b0",
+            "sha256": "50e457b0d73b0f9cb89f830648bb99499b31111eb62b74566941271a64c0eb5b",
+            "bytes": 47986
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_browser.mjs",
+            "blob": "930e612ba38827c3804b1524879f1dbb9a5ae81e",
+            "sha256": "eb613555841643df022035107a6b0f07a86e6663bbef9551e5c652fcc54960f9",
+            "bytes": 30995
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_ci.py",
+            "blob": "9a077fd2e9404a369c7b04527e6576728a86a750",
+            "sha256": "c40f5c5e1fdb10a5256ae281ba1f45da4b3b630b5bda60a0aaf15b60e3700618",
+            "bytes": 8627
+          },
+          {
+            "path": "tests/fixtures/atlas_parity04_f3a_graph.json",
+            "blob": "b9e43e1e249915634d0e99aa23c13a5ea54f6720",
+            "sha256": "3ca0ecb9cb872cde5108be11d53e23079adff654ab8153f64b873eb4c2167b27",
+            "bytes": 318702
+          },
+          {
+            "path": "tests/qa/test_atlas_parity04_f3a_graph.py",
+            "blob": "29096df749f2331a7fe40731090b8eeaf1ed77f2",
+            "sha256": "a0bb49b5895262462eb1c16fb1d0939a85e17a20ca582be9dc69e139537fc994",
+            "bytes": 9139
+          }
+        ],
+        "base_files_preserved": 545,
+        "global_gates_modified": false
+      }
+    },
+    {
+      "job_id": 124455337172,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337172",
+      "os": "ubuntu-latest",
+      "optimize": 1,
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "python_optimize": 1,
+        "tests": 22,
+        "expected": 22,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "inputs": {
+        "schema": "atlas-f3a-input-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "history": [
+          {
+            "sha": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "parent": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+            "changes": [
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/PLAN.md"
+            ]
+          },
+          {
+            "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "parent": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "changes": [
+              "A\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "A\tscripts/qa/atlas_parity04_f3a_browser.mjs",
+              "A\tscripts/qa/atlas_parity04_f3a_ci.py",
+              "A\ttests/fixtures/atlas_parity04_f3a_graph.json",
+              "A\ttests/qa/test_atlas_parity04_f3a_graph.py"
+            ]
+          },
+          {
+            "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "parent": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "changes": [
+              "M\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          },
+          {
+            "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+            "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "changes": [
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          }
+        ],
+        "files": [
+          {
+            "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+            "blob": "512f843aab20bb9a2902e228e6d8ab14ba914b39",
+            "sha256": "33eadb7aff6f176d2a5398f1d9a60281404dc48db6c3517a71987daf1b8656f3",
+            "bytes": 2546
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+            "blob": "dc735bd0c73b2580cf34611332d7729c02ac9c9f",
+            "sha256": "dd094e46746fb83a2e3309cea812b7206fd6d31928df77301d3b829ae7ba9c58",
+            "bytes": 5626
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+            "blob": "82d24e26c4f272a482026b9fb103257452c50b52",
+            "sha256": "bc2be7f21d939179577eab0e833d9c4f4148423455d3c8341eeb754ed1a5d4f2",
+            "bytes": 7824
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/PLAN.md",
+            "blob": "274049d98c435fc073bd1c3db534a26f5aaa4cad",
+            "sha256": "7de4cdc47eac676c42d370888882847740d7045c5d96f10209dfc69f40c72c25",
+            "bytes": 4491
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+            "blob": "607f239ada9601e935f59101e604e75f38b623f6",
+            "sha256": "fe646983752cedf9e2a58458330003b17c8c196284050edeb1befd99834ce687",
+            "bytes": 3745
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+            "blob": "16d334e7df19d08554ba11eace3cb308ce3751b0",
+            "sha256": "50e457b0d73b0f9cb89f830648bb99499b31111eb62b74566941271a64c0eb5b",
+            "bytes": 47986
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_browser.mjs",
+            "blob": "930e612ba38827c3804b1524879f1dbb9a5ae81e",
+            "sha256": "eb613555841643df022035107a6b0f07a86e6663bbef9551e5c652fcc54960f9",
+            "bytes": 30995
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_ci.py",
+            "blob": "9a077fd2e9404a369c7b04527e6576728a86a750",
+            "sha256": "c40f5c5e1fdb10a5256ae281ba1f45da4b3b630b5bda60a0aaf15b60e3700618",
+            "bytes": 8627
+          },
+          {
+            "path": "tests/fixtures/atlas_parity04_f3a_graph.json",
+            "blob": "b9e43e1e249915634d0e99aa23c13a5ea54f6720",
+            "sha256": "3ca0ecb9cb872cde5108be11d53e23079adff654ab8153f64b873eb4c2167b27",
+            "bytes": 318702
+          },
+          {
+            "path": "tests/qa/test_atlas_parity04_f3a_graph.py",
+            "blob": "29096df749f2331a7fe40731090b8eeaf1ed77f2",
+            "sha256": "a0bb49b5895262462eb1c16fb1d0939a85e17a20ca582be9dc69e139537fc994",
+            "bytes": 9139
+          }
+        ],
+        "base_files_preserved": 545,
+        "global_gates_modified": false
+      }
+    },
+    {
+      "job_id": 124455337389,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337389",
+      "os": "windows-latest",
+      "optimize": 0,
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "python_optimize": 0,
+        "tests": 22,
+        "expected": 22,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "inputs": {
+        "schema": "atlas-f3a-input-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "history": [
+          {
+            "sha": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "parent": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+            "changes": [
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/PLAN.md"
+            ]
+          },
+          {
+            "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "parent": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "changes": [
+              "A\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "A\tscripts/qa/atlas_parity04_f3a_browser.mjs",
+              "A\tscripts/qa/atlas_parity04_f3a_ci.py",
+              "A\ttests/fixtures/atlas_parity04_f3a_graph.json",
+              "A\ttests/qa/test_atlas_parity04_f3a_graph.py"
+            ]
+          },
+          {
+            "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "parent": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "changes": [
+              "M\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          },
+          {
+            "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+            "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "changes": [
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          }
+        ],
+        "files": [
+          {
+            "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+            "blob": "512f843aab20bb9a2902e228e6d8ab14ba914b39",
+            "sha256": "33eadb7aff6f176d2a5398f1d9a60281404dc48db6c3517a71987daf1b8656f3",
+            "bytes": 2546
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+            "blob": "dc735bd0c73b2580cf34611332d7729c02ac9c9f",
+            "sha256": "dd094e46746fb83a2e3309cea812b7206fd6d31928df77301d3b829ae7ba9c58",
+            "bytes": 5626
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+            "blob": "82d24e26c4f272a482026b9fb103257452c50b52",
+            "sha256": "bc2be7f21d939179577eab0e833d9c4f4148423455d3c8341eeb754ed1a5d4f2",
+            "bytes": 7824
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/PLAN.md",
+            "blob": "274049d98c435fc073bd1c3db534a26f5aaa4cad",
+            "sha256": "7de4cdc47eac676c42d370888882847740d7045c5d96f10209dfc69f40c72c25",
+            "bytes": 4491
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+            "blob": "607f239ada9601e935f59101e604e75f38b623f6",
+            "sha256": "fe646983752cedf9e2a58458330003b17c8c196284050edeb1befd99834ce687",
+            "bytes": 3745
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+            "blob": "16d334e7df19d08554ba11eace3cb308ce3751b0",
+            "sha256": "50e457b0d73b0f9cb89f830648bb99499b31111eb62b74566941271a64c0eb5b",
+            "bytes": 47986
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_browser.mjs",
+            "blob": "930e612ba38827c3804b1524879f1dbb9a5ae81e",
+            "sha256": "eb613555841643df022035107a6b0f07a86e6663bbef9551e5c652fcc54960f9",
+            "bytes": 30995
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_ci.py",
+            "blob": "9a077fd2e9404a369c7b04527e6576728a86a750",
+            "sha256": "c40f5c5e1fdb10a5256ae281ba1f45da4b3b630b5bda60a0aaf15b60e3700618",
+            "bytes": 8627
+          },
+          {
+            "path": "tests/fixtures/atlas_parity04_f3a_graph.json",
+            "blob": "b9e43e1e249915634d0e99aa23c13a5ea54f6720",
+            "sha256": "3ca0ecb9cb872cde5108be11d53e23079adff654ab8153f64b873eb4c2167b27",
+            "bytes": 318702
+          },
+          {
+            "path": "tests/qa/test_atlas_parity04_f3a_graph.py",
+            "blob": "29096df749f2331a7fe40731090b8eeaf1ed77f2",
+            "sha256": "a0bb49b5895262462eb1c16fb1d0939a85e17a20ca582be9dc69e139537fc994",
+            "bytes": 9139
+          }
+        ],
+        "base_files_preserved": 545,
+        "global_gates_modified": false
+      }
+    },
+    {
+      "job_id": 124455337334,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337334",
+      "os": "windows-latest",
+      "optimize": 1,
+      "tests": {
+        "schema": "atlas-f3a-tests-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "python_optimize": 1,
+        "tests": 22,
+        "expected": 22,
+        "ids": [
+          "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+          "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+          "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+          "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+          "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+          "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+          "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+          "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+          "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+          "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+          "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+          "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+          "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+          "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+          "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+          "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+          "f3a_graph_tests.F3AGraph.test_responsive_320",
+          "f3a_graph_tests.F3AGraph.test_responsive_390",
+          "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+          "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+          "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+        ],
+        "failures": {},
+        "errors": {},
+        "skips": [],
+        "passed": true
+      },
+      "inputs": {
+        "schema": "atlas-f3a-input-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "history": [
+          {
+            "sha": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "parent": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+            "changes": [
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/PLAN.md"
+            ]
+          },
+          {
+            "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "parent": "a49d2cc99bdc6b5f582ca6a16d7adf726db80f28",
+            "changes": [
+              "A\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+              "A\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+              "A\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "A\tscripts/qa/atlas_parity04_f3a_browser.mjs",
+              "A\tscripts/qa/atlas_parity04_f3a_ci.py",
+              "A\ttests/fixtures/atlas_parity04_f3a_graph.json",
+              "A\ttests/qa/test_atlas_parity04_f3a_graph.py"
+            ]
+          },
+          {
+            "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "parent": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+            "changes": [
+              "M\t.github/workflows/atlas-parity04-f3a-graph.yml",
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          },
+          {
+            "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+            "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+            "changes": [
+              "M\tdocs/missions/atlas-parity-04/f3a-graph/MANIFEST.sha256",
+              "M\tpackages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "M\tscripts/qa/atlas_parity04_f3a_browser.mjs"
+            ]
+          }
+        ],
+        "files": [
+          {
+            "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+            "blob": "512f843aab20bb9a2902e228e6d8ab14ba914b39",
+            "sha256": "33eadb7aff6f176d2a5398f1d9a60281404dc48db6c3517a71987daf1b8656f3",
+            "bytes": 2546
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+            "blob": "dc735bd0c73b2580cf34611332d7729c02ac9c9f",
+            "sha256": "dd094e46746fb83a2e3309cea812b7206fd6d31928df77301d3b829ae7ba9c58",
+            "bytes": 5626
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/INPUT-SHAS.json",
+            "blob": "82d24e26c4f272a482026b9fb103257452c50b52",
+            "sha256": "bc2be7f21d939179577eab0e833d9c4f4148423455d3c8341eeb754ed1a5d4f2",
+            "bytes": 7824
+          },
+          {
+            "path": "docs/missions/atlas-parity-04/f3a-graph/PLAN.md",
+            "blob": "274049d98c435fc073bd1c3db534a26f5aaa4cad",
+            "sha256": "7de4cdc47eac676c42d370888882847740d7045c5d96f10209dfc69f40c72c25",
+            "bytes": 4491
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css",
+            "blob": "607f239ada9601e935f59101e604e75f38b623f6",
+            "sha256": "fe646983752cedf9e2a58458330003b17c8c196284050edeb1befd99834ce687",
+            "bytes": 3745
+          },
+          {
+            "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+            "blob": "16d334e7df19d08554ba11eace3cb308ce3751b0",
+            "sha256": "50e457b0d73b0f9cb89f830648bb99499b31111eb62b74566941271a64c0eb5b",
+            "bytes": 47986
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_browser.mjs",
+            "blob": "930e612ba38827c3804b1524879f1dbb9a5ae81e",
+            "sha256": "eb613555841643df022035107a6b0f07a86e6663bbef9551e5c652fcc54960f9",
+            "bytes": 30995
+          },
+          {
+            "path": "scripts/qa/atlas_parity04_f3a_ci.py",
+            "blob": "9a077fd2e9404a369c7b04527e6576728a86a750",
+            "sha256": "c40f5c5e1fdb10a5256ae281ba1f45da4b3b630b5bda60a0aaf15b60e3700618",
+            "bytes": 8627
+          },
+          {
+            "path": "tests/fixtures/atlas_parity04_f3a_graph.json",
+            "blob": "b9e43e1e249915634d0e99aa23c13a5ea54f6720",
+            "sha256": "3ca0ecb9cb872cde5108be11d53e23079adff654ab8153f64b873eb4c2167b27",
+            "bytes": 318702
+          },
+          {
+            "path": "tests/qa/test_atlas_parity04_f3a_graph.py",
+            "blob": "29096df749f2331a7fe40731090b8eeaf1ed77f2",
+            "sha256": "a0bb49b5895262462eb1c16fb1d0939a85e17a20ca582be9dc69e139537fc994",
+            "bytes": 9139
+          }
+        ],
+        "base_files_preserved": 545,
+        "global_gates_modified": false
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13032535349,
+      "name": "atlas-f3a-graph-ubuntu-latest-O1-7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "size_in_bytes": 485382,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032535349",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032535349/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:36:16Z",
+      "expires_at": "2026-11-30T05:36:15Z",
+      "updated_at": "2026-10-31T05:36:16Z",
+      "digest": "sha256:d0594a669ffce5bd92664ae8eaecd625e7277e536131f4edbf090349ee9f8006",
+      "workflow_run": {
+        "id": 41173213797,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3a-graph-20261031",
+        "head_sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1"
+      }
+    },
+    {
+      "id": 13032296872,
+      "name": "atlas-f3a-graph-windows-latest-O0-7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "size_in_bytes": 268888,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032296872",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032296872/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:40:22Z",
+      "expires_at": "2026-11-30T05:40:21Z",
+      "updated_at": "2026-10-31T05:40:22Z",
+      "digest": "sha256:7f75d9202d9020d0ea78b07350f459bee5b87c8f415eeb526467bb41793d4176",
+      "workflow_run": {
+        "id": 41173213797,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3a-graph-20261031",
+        "head_sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1"
+      }
+    },
+    {
+      "id": 13032221564,
+      "name": "atlas-f3a-graph-ubuntu-latest-O0-7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "size_in_bytes": 485031,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032221564",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13032221564/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:36:14Z",
+      "expires_at": "2026-11-30T05:36:14Z",
+      "updated_at": "2026-10-31T05:36:14Z",
+      "digest": "sha256:6d6359a7b6932cbcccc6c4a96c55ad17690f0e4924559ca5cac1363cdb97d385",
+      "workflow_run": {
+        "id": 41173213797,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3a-graph-20261031",
+        "head_sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1"
+      }
+    },
+    {
+      "id": 13031722259,
+      "name": "atlas-f3a-graph-windows-latest-O1-7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "size_in_bytes": 269127,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13031722259",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13031722259/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:39:57Z",
+      "expires_at": "2026-11-30T05:39:56Z",
+      "updated_at": "2026-10-31T05:39:57Z",
+      "digest": "sha256:e69f055e6633a634f2de123475329636af0185f92bb5f4be9427074778ae93ae",
+      "workflow_run": {
+        "id": 41173213797,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f3a-graph-20261031",
+        "head_sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1"
+      }
+    }
+  ],
+  "earlier_cycles": [
+    {
+      "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+      "qualified": false,
+      "reason": "Workflow invalid before jobs; job-level runner.temp cause inferred from source, annotation endpoint unavailable",
+      "runs": [
+        {
+          "id": 41172955073,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41172955073",
+          "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+          "path": ".github/workflows/atlas-parity02.yml",
+          "event": "pull_request",
+          "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41172955155,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41172955155",
+          "name": "ATLAS-PARITY-03 C4 full composition",
+          "path": ".github/workflows/atlas-parity03-c4.yml",
+          "event": "pull_request",
+          "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41172955107,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41172955107",
+          "name": "ATLAS-PARITY-04 documentation successor",
+          "path": ".github/workflows/atlas-parity04-doc.yml",
+          "event": "pull_request",
+          "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41172955075,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41172955075",
+          "name": "ATLAS003 Spec Kit contract checks",
+          "path": ".github/workflows/atlas003-speckit.yml",
+          "event": "pull_request",
+          "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41172955109,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41172955109",
+          "name": "ATLAS-PARITY03 P03 isolated qualification",
+          "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+          "event": "pull_request",
+          "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41172955070,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41172955070",
+          "name": "ATLAS021 candidate verification",
+          "path": ".github/workflows/atlas021.yml",
+          "event": "pull_request",
+          "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41172937230,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41172937230",
+          "name": ".github/workflows/atlas-parity04-f3a-graph.yml",
+          "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+          "event": "push",
+          "sha": "f51bc5318b700f2bd8d24080ea7519cd1c29c5de",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    },
+    {
+      "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+      "qualified": false,
+      "reason": "Real Chromium 13/17 passed; four TypeError textContent() harness failures plus test summary; corrected without relaxing oracles",
+      "sample_job": 124454925868,
+      "sample_receipts": [
+        {
+          "schema": "atlas-f3a-browser-receipt-v1",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "tree": "3c2d75435e4c529eb01be57ba15470d770cd16da",
+          "synthetic": true,
+          "browser": "151.0.7922.34",
+          "checks": [
+            {
+              "name": "hierarchy_selection_and_event",
+              "passed": true,
+              "duration_ms": 343,
+              "detail": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-1"
+              }
+            },
+            {
+              "name": "collapse_expand_focus_and_state",
+              "passed": true,
+              "duration_ms": 225,
+              "detail": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run",
+                "nav:orphan",
+                "nav:isolated",
+                "nav:stub",
+                "nav:hostile"
+              ]
+            },
+            {
+              "name": "keyboard_traversal",
+              "passed": true,
+              "duration_ms": 184,
+              "detail": {
+                "first": "nav:project",
+                "last": "nav:hostile"
+              }
+            },
+            {
+              "name": "viewport_controls_reset_fit_and_minimap",
+              "passed": true,
+              "duration_ms": 414,
+              "detail": {
+                "initial": {
+                  "session_id": "f3a-1-1",
+                  "selection": null,
+                  "zoom": 1,
+                  "pan": {
+                    "x": 20,
+                    "y": 20
+                  },
+                  "expanded": [
+                    "nav:project",
+                    "nav:family",
+                    "nav:experiment",
+                    "nav:stage",
+                    "nav:run",
+                    "nav:orphan",
+                    "nav:isolated",
+                    "nav:stub",
+                    "nav:hostile"
+                  ],
+                  "visible_ids": [
+                    "nav:project",
+                    "nav:family",
+                    "nav:experiment",
+                    "nav:stage",
+                    "nav:run",
+                    "nav:orphan",
+                    "nav:isolated",
+                    "nav:stub",
+                    "nav:hostile"
+                  ],
+                  "focus_id": "nav:project",
+                  "node_count": 9,
+                  "relation_count": 4,
+                  "endpoint_counts": {
+                    "RESOLVED": 8,
+                    "NULL_ENDPOINT": 0,
+                    "UNRESOLVED": 0,
+                    "COLLISION": 0,
+                    "EXTERNAL_DECLARED": 0
+                  },
+                  "cycle_ids": [],
+                  "error": null,
+                  "disposed": false
+                },
+                "zoomed": 1.25,
+                "reset": 1,
+                "fit": 0.5271317829457365
+              }
+            },
+            {
+              "name": "pointer_pan_wheel_zoom_and_pinch",
+              "passed": true,
+              "duration_ms": 405,
+              "detail": {
+                "drag": {
+                  "x": 55,
+                  "y": 42
+                },
+                "wheel": 1.2712491503214047,
+                "pinch": 2.3306234422559085
+              }
+            },
+            {
+              "name": "typed_edges_and_no_fabricated_parent",
+              "passed": true,
+              "duration_ms": 124,
+              "detail": [
+                {
+                  "id": "nav:rel-0",
+                  "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                  "direction": "UNDIRECTED",
+                  "arrow": null,
+                  "css": "f3a-edge f3a-membership"
+                },
+                {
+                  "id": "nav:rel-1",
+                  "semantics": "DECLARED_LINEAGE",
+                  "direction": "FROM_TO",
+                  "arrow": "url(#f3a-1-lineage)",
+                  "css": "f3a-edge f3a-lineage"
+                },
+                {
+                  "id": "nav:rel-2",
+                  "semantics": "DECLARED_BINDING",
+                  "direction": "FROM_TO",
+                  "arrow": "url(#f3a-1-binding)",
+                  "css": "f3a-edge f3a-binding"
+                },
+                {
+                  "id": "nav:rel-3",
+                  "semantics": "NEUTRAL_MENTION",
+                  "direction": "UNKNOWN",
+                  "arrow": null,
+                  "css": "f3a-edge f3a-mention"
+                }
+              ]
+            },
+            {
+              "name": "adversarial_occurrences_counts_and_no_mutation",
+              "passed": true,
+              "duration_ms": 399,
+              "detail": {
+                "node_count": 109,
+                "relation_count": 210,
+                "endpoint_counts": {
+                  "RESOLVED": 273,
+                  "NULL_ENDPOINT": 22,
+                  "UNRESOLVED": 75,
+                  "COLLISION": 50,
+                  "EXTERNAL_DECLARED": 0
+                }
+              }
+            },
+            {
+              "name": "hostile_text_uri_and_zero_io",
+              "passed": true,
+              "duration_ms": 126,
+              "detail": {
+                "inert": true,
+                "active_elements": 0
+              }
+            },
+            {
+              "name": "stale_context_cross_source_snapshot_and_disposal",
+              "passed": true,
+              "duration_ms": 172,
+              "detail": {
+                "reimport_session_changed": true,
+                "cross_context_rejected": true
+              }
+            },
+            {
+              "name": "expiry_invalidates_selection_and_links",
+              "passed": false,
+              "duration_ms": 151,
+              "error": "page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:1:172)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:214:23\n    at async check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:20)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:212:3"
+            },
+            {
+              "name": "invalid_descriptors_rejected_atomically",
+              "passed": false,
+              "duration_ms": 115,
+              "error": "page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:23:133)\n    at Array.map (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:20:40)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:219:27\n    at check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:26)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:218:3"
+            },
+            {
+              "name": "hierarchy_cycles_retained_as_anomalies",
+              "passed": false,
+              "duration_ms": 112,
+              "error": "page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:6:116)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:248:23\n    at check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:26)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:247:3"
+            },
+            {
+              "name": "capacity_and_descriptor_extremes",
+              "passed": false,
+              "duration_ms": 3347,
+              "error": "page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:20:158)\n    at Array.map (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:18:84)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:268:29\n    at async check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:20)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:257:3"
+            },
+            {
+              "name": "responsive_390",
+              "passed": true,
+              "duration_ms": 250,
+              "detail": {
+                "scroll": 390,
+                "inner": 390
+              }
+            },
+            {
+              "name": "responsive_320",
+              "passed": true,
+              "duration_ms": 238,
+              "detail": {
+                "scroll": 320,
+                "inner": 320
+              }
+            },
+            {
+              "name": "reflow_preserves_focus_zoom_and_selection",
+              "passed": true,
+              "duration_ms": 251,
+              "detail": {
+                "zoom": 1.25,
+                "selection": {
+                  "source_id": "synthetic-f3a",
+                  "snapshot_id": "synthetic-f3a-v1",
+                  "occurrence": 0,
+                  "nav_id": "nav:run",
+                  "session_id": "f3a-1-1"
+                }
+              }
+            },
+            {
+              "name": "authority_validation_gaps_and_expiry_visible",
+              "passed": true,
+              "duration_ms": 122,
+              "detail": {
+                "authority": "LEGACY_DERIVED",
+                "scientific_approval": "NOT_EVALUATED",
+                "measured_text_contrast": {
+                  "button": 11.633279715376746,
+                  "label": 14.611124826847021,
+                  "metadata": 8.706781919939354
+                }
+              }
+            }
+          ],
+          "screenshots": [
+            {
+              "name": "desktop.png",
+              "bytes": 189569,
+              "sha256": "e6f989b40520748b07f9068ef5f9f0678bcdb3049eafbbe6042fc26ec687a720"
+            },
+            {
+              "name": "mobile-390.png",
+              "bytes": 155586,
+              "sha256": "dea6633c5ef3779d6831edba0625ed8467c7de86d693fe8c6121bc466139d17e"
+            },
+            {
+              "name": "mobile-320.png",
+              "bytes": 150320,
+              "sha256": "61e7b7814cff13acde2cca8d6197ed4ca86201fddc3094f5637559ecdfce5f09"
+            }
+          ],
+          "outside_requests": [],
+          "page_errors": [],
+          "storage_calls": [],
+          "passed": false
+        },
+        {
+          "schema": "atlas-f3a-tests-receipt-v1",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "tree": "3c2d75435e4c529eb01be57ba15470d770cd16da",
+          "python_optimize": 0,
+          "tests": 22,
+          "expected": 22,
+          "ids": [
+            "f3a_graph_tests.F3AGraph.test_adversarial_occurrences_counts_and_no_mutation",
+            "f3a_graph_tests.F3AGraph.test_authority_validation_gaps_and_expiry_visible",
+            "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound",
+            "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes",
+            "f3a_graph_tests.F3AGraph.test_collapse_expand_focus_and_state",
+            "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links",
+            "f3a_graph_tests.F3AGraph.test_fixture_matches_frozen_descriptor_schema",
+            "f3a_graph_tests.F3AGraph.test_frozen_f2_examples_remain_schema_valid",
+            "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies",
+            "f3a_graph_tests.F3AGraph.test_hierarchy_selection_and_event",
+            "f3a_graph_tests.F3AGraph.test_hostile_text_uri_and_zero_io",
+            "f3a_graph_tests.F3AGraph.test_independent_schema_rejects_invalid_version_extra_and_identity",
+            "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically",
+            "f3a_graph_tests.F3AGraph.test_keyboard_traversal",
+            "f3a_graph_tests.F3AGraph.test_occurrences_null_unresolved_collision_and_repeats_reconciled",
+            "f3a_graph_tests.F3AGraph.test_pointer_pan_wheel_zoom_and_pinch",
+            "f3a_graph_tests.F3AGraph.test_reflow_preserves_focus_zoom_and_selection",
+            "f3a_graph_tests.F3AGraph.test_responsive_320",
+            "f3a_graph_tests.F3AGraph.test_responsive_390",
+            "f3a_graph_tests.F3AGraph.test_stale_context_cross_source_snapshot_and_disposal",
+            "f3a_graph_tests.F3AGraph.test_typed_edges_and_no_fabricated_parent",
+            "f3a_graph_tests.F3AGraph.test_viewport_controls_reset_fit_and_minimap"
+          ],
+          "failures": {
+            "f3a_graph_tests.F3AGraph.test_browser_receipt_complete_and_sha_bound": "Traceback (most recent call last):\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 105, in test_browser_receipt_complete_and_sha_bound\n    self.assertEqual(self.browser_exit, 0, \"Real Chromium runner failed\")\nAssertionError: 1 != 0 : Real Chromium runner failed\n",
+            "f3a_graph_tests.F3AGraph.test_capacity_and_descriptor_extremes": "Traceback (most recent call last):\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 136, in test_capacity_and_descriptor_extremes\n    def test_capacity_and_descriptor_extremes(self): self.browser_check(\"capacity_and_descriptor_extremes\")\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 57, in browser_check\n    self.assertTrue(self.checks[name].get(\"passed\"), self.checks[name].get(\"error\"))\nAssertionError: False is not true : page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:20:158)\n    at Array.map (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:18:84)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:268:29\n    at async check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:20)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:257:3\n",
+            "f3a_graph_tests.F3AGraph.test_expiry_invalidates_selection_and_links": "Traceback (most recent call last):\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 133, in test_expiry_invalidates_selection_and_links\n    def test_expiry_invalidates_selection_and_links(self): self.browser_check(\"expiry_invalidates_selection_and_links\")\n                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 57, in browser_check\n    self.assertTrue(self.checks[name].get(\"passed\"), self.checks[name].get(\"error\"))\nAssertionError: False is not true : page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:1:172)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:214:23\n    at async check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:20)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:212:3\n",
+            "f3a_graph_tests.F3AGraph.test_hierarchy_cycles_retained_as_anomalies": "Traceback (most recent call last):\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 135, in test_hierarchy_cycles_retained_as_anomalies\n    def test_hierarchy_cycles_retained_as_anomalies(self): self.browser_check(\"hierarchy_cycles_retained_as_anomalies\")\n                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 57, in browser_check\n    self.assertTrue(self.checks[name].get(\"passed\"), self.checks[name].get(\"error\"))\nAssertionError: False is not true : page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:6:116)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:248:23\n    at check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:26)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:247:3\n",
+            "f3a_graph_tests.F3AGraph.test_invalid_descriptors_rejected_atomically": "Traceback (most recent call last):\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 134, in test_invalid_descriptors_rejected_atomically\n    def test_invalid_descriptors_rejected_atomically(self): self.browser_check(\"invalid_descriptors_rejected_atomically\")\n                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/Atlas/Atlas/tests/qa/test_atlas_parity04_f3a_graph.py\", line 57, in browser_check\n    self.assertTrue(self.checks[name].get(\"passed\"), self.checks[name].get(\"error\"))\nAssertionError: False is not true : page.evaluate: TypeError: document.querySelector(...).textContent is not a function\n    at eval (eval at evaluate (:311:30), <anonymous>:23:133)\n    at Array.map (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:20:40)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:219:27\n    at check (/home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:65:26)\n    at async file:///home/runner/work/Atlas/Atlas/scripts/qa/atlas_parity04_f3a_browser.mjs:218:3\n"
+          },
+          "errors": {},
+          "skips": [],
+          "passed": false
+        }
+      ],
+      "runs": [
+        {
+          "id": 41173070357,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173070357",
+          "name": "ATLAS021 candidate verification",
+          "path": ".github/workflows/atlas021.yml",
+          "event": "pull_request",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 41173070571,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173070571",
+          "name": "ATLAS003 Spec Kit contract checks",
+          "path": ".github/workflows/atlas003-speckit.yml",
+          "event": "pull_request",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41173070379,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173070379",
+          "name": "ATLAS-PARITY-03 C4 full composition",
+          "path": ".github/workflows/atlas-parity03-c4.yml",
+          "event": "pull_request",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41173070458,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173070458",
+          "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+          "path": ".github/workflows/atlas-parity02.yml",
+          "event": "pull_request",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41173070367,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173070367",
+          "name": "ATLAS-PARITY-04 documentation successor",
+          "path": ".github/workflows/atlas-parity04-doc.yml",
+          "event": "pull_request",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41173070266,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173070266",
+          "name": "ATLAS-PARITY03 P03 isolated qualification",
+          "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+          "event": "pull_request",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41173070281,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173070281",
+          "name": "ATLAS-PARITY-04 F3A isolated graph",
+          "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+          "event": "pull_request",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 41173066831,
+          "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173066831",
+          "name": "ATLAS-PARITY-04 F3A isolated graph",
+          "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+          "event": "push",
+          "sha": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ]
+    }
+  ],
+  "technical_sha_all_runs_snapshot": [
+    {
+      "id": 41173213935,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213935",
+      "name": "ATLAS-PARITY-04 documentation successor",
+      "path": ".github/workflows/atlas-parity04-doc.yml",
+      "event": "pull_request",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173213809,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213809",
+      "name": "ATLAS-PARITY-03 C4 full composition",
+      "path": ".github/workflows/atlas-parity03-c4.yml",
+      "event": "pull_request",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173213821,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213821",
+      "name": "ATLAS-PARITY03 P03 isolated qualification",
+      "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+      "event": "pull_request",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173213781,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213781",
+      "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+      "path": ".github/workflows/atlas-parity02.yml",
+      "event": "pull_request",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173213780,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213780",
+      "name": "ATLAS003 Spec Kit contract checks",
+      "path": ".github/workflows/atlas003-speckit.yml",
+      "event": "pull_request",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 41173213778,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213778",
+      "name": "ATLAS021 candidate verification",
+      "path": ".github/workflows/atlas021.yml",
+      "event": "pull_request",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 41173213797,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797",
+      "name": "ATLAS-PARITY-04 F3A isolated graph",
+      "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+      "event": "pull_request",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 41173210202,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41173210202",
+      "name": "ATLAS-PARITY-04 F3A isolated graph",
+      "path": ".github/workflows/atlas-parity04-f3a-graph.yml",
+      "event": "push",
+      "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "global_failures": "See GLOBAL-GATE-REPAIR-CONTRACT.md; authoring history, fixture inventory, old workflow missing Playwright all remain unmodified",
+  "inspection_limits": {
+    "binary_artifact_zip_png_xml_opened": false,
+    "manual_pixel_review": false,
+    "native_200_percent_zoom_proven": false,
+    "wcag_certification": false,
+    "hard_browser_heap_256mib_enforced": false,
+    "private_data_accessed": false
+  }
+}
