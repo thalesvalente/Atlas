@@ -4,8 +4,18 @@
   "base_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
   "branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
   "containing_commit": "RESOLVE_FROM_GIT",
+  "current_candidate": "Batch Git reads with all checks retained; CI and independent review still required on containing commit",
   "descriptor": "0.2.0 PROPOSED_NOT_APPROVED",
   "final_closure": "PR15 must record the containing SHA/tree, six completed/success runs, all jobs/artifacts/191 inherited IDs and independent C review",
+  "first_repair_cycle": {
+    "all_191_plus_27_ids_proven": "Ubuntu installed only; Windows source passed and installed incomplete",
+    "cancelled_jobs": 2,
+    "sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+    "successful_jobs": 31,
+    "tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+    "workflows_cancelled": 1,
+    "workflows_success": 5
+  },
   "mission": "AP04-F2-DOC-CI-REPAIR-01",
   "not_authorized": [
     "F3A",
@@ -31,6 +41,6 @@
   "plan_change": false,
   "pr": 15,
   "schema": "atlas-ap04-f2-ci-repair-handoff-v1",
-  "status": "IMPLEMENTED_PENDING_REAL_ACTIONS_AND_REVIEW",
+  "status": "REPAIR_CONTINUES_AFTER_WINDOWS_TIMEOUT",
   "technical_f2_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527"
 }

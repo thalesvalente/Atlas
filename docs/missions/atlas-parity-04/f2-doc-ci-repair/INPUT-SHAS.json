@@ -279,6 +279,17 @@
     "tree": "4937e66fe60d26b13c48d02708637911016dce2e"
   },
   "repository": "thalesvalente/Atlas",
+  "reviewed_prior_repair": {
+    "guard_blob": "64ded18f97e38cdabe4ed45f5004a19183b979ae",
+    "guard_sha256": "a7d13716ed52643aa4ff3662e543a5b316023d5516679457fc38003fa52a5155",
+    "independent_reviewer": "/root/review_c",
+    "parent": "04373bb910db2e6215cc8bc4212093b649e48456",
+    "scope": "Exact previously reviewed control revisions; four AP04 cells passed; five workflows passed and one cancelled, so no qualification transfer",
+    "sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+    "test_blob": "398db6f8315a0d10f026120f3e935be8c2715e63",
+    "test_sha256": "6d3f18e3f8dfd95521e32b775ac73d9387053df3b2b8d2fd1e3a4eb24cc54442",
+    "tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+  },
   "schema": "atlas-ap04-f2-ci-repair-inputs-v1",
   "verification": {
     "all_13_entries_match": true,

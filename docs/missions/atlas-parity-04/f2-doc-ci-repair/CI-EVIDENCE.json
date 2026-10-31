@@ -2,7 +2,2705 @@
   "candidate_runs": [],
   "closure": "The containing commit must get its own six terminal runs and independent review; final external closure belongs in PR15, not a self-referential commit",
   "engineering_evidence_only": true,
+  "first_repair_cycle": {
+    "artifacts": [
+      {
+        "created_at": "2026-10-31T00:50:02Z",
+        "digest": "sha256:3f32012d48d6cc1692e9b1e02811abdc7a10a29aed72aa8a491ab94b845fc4cc",
+        "expired": false,
+        "expires_at": "2026-11-30T00:50:02Z",
+        "id": 13023781519,
+        "name": "atlas-parity04-doc-windows-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151598987,
+        "size_in_bytes": 8269,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/artifacts/13023781519"
+      },
+      {
+        "created_at": "2026-10-31T00:50:08Z",
+        "digest": "sha256:66a73d438447ace662b7a43427f39825fd41f9663475ebf286451f37878c778b",
+        "expired": false,
+        "expires_at": "2026-11-30T00:50:07Z",
+        "id": 13023582708,
+        "name": "atlas-parity04-doc-windows-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151598987,
+        "size_in_bytes": 8236,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/artifacts/13023582708"
+      },
+      {
+        "created_at": "2026-10-31T00:42:46Z",
+        "digest": "sha256:97ef494edf0750c5931016b09c573d6b541942f7addc3cd1b206add34fadf0e3",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:45Z",
+        "id": 13022878133,
+        "name": "atlas-parity04-doc-ubuntu-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151598987,
+        "size_in_bytes": 8521,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/artifacts/13022878133"
+      },
+      {
+        "created_at": "2026-10-31T00:42:50Z",
+        "digest": "sha256:6a6f5560db59a6d0a2dd0958d3a4d368bc4deacb5c1c354075e9144db87bdbbc",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:50Z",
+        "id": 13022813349,
+        "name": "atlas-parity04-doc-ubuntu-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151598987,
+        "size_in_bytes": 8505,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/artifacts/13022813349"
+      },
+      {
+        "created_at": "2026-10-31T00:42:58Z",
+        "digest": "sha256:d82e20910fc134e6bead478fa5d457ebbe814d0b8aa18e1b0ab665902729ebdd",
+        "expired": false,
+        "expires_at": "2026-11-14T00:42:57Z",
+        "id": 13023301992,
+        "name": "parity02-p06-browser-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599009,
+        "size_in_bytes": 700805,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/artifacts/13023301992"
+      },
+      {
+        "created_at": "2026-10-31T00:42:48Z",
+        "digest": "sha256:10bdc2cf22d145e297f92b3cb91a3623157fcf2dcd0d6a2fafe27b01725158cb",
+        "expired": false,
+        "expires_at": "2026-11-14T00:42:47Z",
+        "id": 13023266895,
+        "name": "parity02-p06-ubuntu-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599009,
+        "size_in_bytes": 7953,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/artifacts/13023266895"
+      },
+      {
+        "created_at": "2026-10-31T00:42:35Z",
+        "digest": "sha256:092fdb78e30041c1ffdfddbef09be80de4fbf01ca64ba9df6155d6571acb1cb5",
+        "expired": false,
+        "expires_at": "2026-11-14T00:42:34Z",
+        "id": 13023002859,
+        "name": "parity02-p06-ubuntu-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599009,
+        "size_in_bytes": 7951,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/artifacts/13023002859"
+      },
+      {
+        "created_at": "2026-10-31T00:43:16Z",
+        "digest": "sha256:d5986ddecbf719f04f6bec2dca6685be29a9a90e27281bfc5712974a30df290e",
+        "expired": false,
+        "expires_at": "2026-11-14T00:43:15Z",
+        "id": 13022653686,
+        "name": "parity02-p06-windows-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599009,
+        "size_in_bytes": 7985,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/artifacts/13022653686"
+      },
+      {
+        "created_at": "2026-10-31T00:43:26Z",
+        "digest": "sha256:306966096743d3c77f44c4c145d349a5abd369c665b86206b0513092ff28e199",
+        "expired": false,
+        "expires_at": "2026-11-14T00:43:25Z",
+        "id": 13022638692,
+        "name": "parity02-p06-windows-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599009,
+        "size_in_bytes": 7985,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/artifacts/13022638692"
+      },
+      {
+        "created_at": "2026-10-31T00:42:39Z",
+        "digest": "sha256:433c818090b60d491892e3c330ad62e520c5f5d68a24597c24bc0164e30c76a7",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:38Z",
+        "id": 13023810319,
+        "name": "p03-portable-ubuntu-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 26366,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13023810319"
+      },
+      {
+        "created_at": "2026-10-31T00:43:31Z",
+        "digest": "sha256:3765ea6c11dd65826455679e57b2e1e03ac4b410fbeeaaf183fc3184634785b9",
+        "expired": false,
+        "expires_at": "2026-11-30T00:43:30Z",
+        "id": 13023785470,
+        "name": "p03-browser-windows-latest-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 2840539,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13023785470"
+      },
+      {
+        "created_at": "2026-10-31T00:43:24Z",
+        "digest": "sha256:b95a61fd66a25e0f0a13a090df59f9f77d8bced915ec23abbb6784b292481537",
+        "expired": false,
+        "expires_at": "2026-11-30T00:43:23Z",
+        "id": 13023695663,
+        "name": "p03-specification-windows-latest-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 16900,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13023695663"
+      },
+      {
+        "created_at": "2026-10-31T00:43:35Z",
+        "digest": "sha256:750bcca65a80088173b6d18ab1f0cffeb7a879e873f8e2e4ab2fdaaa12fb45ca",
+        "expired": false,
+        "expires_at": "2026-11-30T00:43:35Z",
+        "id": 13023656236,
+        "name": "p03-portable-windows-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 26391,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13023656236"
+      },
+      {
+        "created_at": "2026-10-31T00:42:43Z",
+        "digest": "sha256:6f3372c73eecb94f6cad56e3a71a768b98d9b72dab4e02c813e801fecc130347",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:42Z",
+        "id": 13023536413,
+        "name": "p03-browser-ubuntu-latest-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 4569101,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13023536413"
+      },
+      {
+        "created_at": "2026-10-31T00:43:45Z",
+        "digest": "sha256:47fe3ca451b0c7dd1cca4a35adcc1968121966ec592c3e8700eaa7dca1ec4800",
+        "expired": false,
+        "expires_at": "2026-11-30T00:43:44Z",
+        "id": 13022873235,
+        "name": "p03-portable-windows-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 26394,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13022873235"
+      },
+      {
+        "created_at": "2026-10-31T00:42:54Z",
+        "digest": "sha256:04d8c70b4639b8c4ce23476ef6dd3a26399ce1fe1e379fe88889cb3c17d5aafc",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:54Z",
+        "id": 13022748291,
+        "name": "p03-portable-ubuntu-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 26370,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13022748291"
+      },
+      {
+        "created_at": "2026-10-31T00:42:32Z",
+        "digest": "sha256:89f10c55087a50627bddafe609b649705804ed676ca92206b9e7ff4fb64ad15b",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:31Z",
+        "id": 13022628586,
+        "name": "p03-specification-ubuntu-latest-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599065,
+        "size_in_bytes": 16869,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/artifacts/13022628586"
+      },
+      {
+        "created_at": "2026-10-31T00:42:37Z",
+        "digest": "sha256:ca0b57fd3dcdc7907e63eea0edd69e0feb8f3bf4cc8f88150f2298b2ad7978b5",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:37Z",
+        "id": 13023850064,
+        "name": "atlas-c4-specification-ubuntu-latest-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599090,
+        "size_in_bytes": 16868,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/artifacts/13023850064"
+      },
+      {
+        "created_at": "2026-10-31T00:42:56Z",
+        "digest": "sha256:7373f026b7abec3c44407018ab22a49f348ce33933bf2531b42ba82fa417a59f",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:55Z",
+        "id": 13023261398,
+        "name": "atlas-c4-integrated-ubuntu-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599090,
+        "size_in_bytes": 5116743,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/artifacts/13023261398"
+      },
+      {
+        "created_at": "2026-10-31T00:44:01Z",
+        "digest": "sha256:3a01791197acbbf3629141036079ba3805a8a3136f983dfc2350a57ec54d6cf7",
+        "expired": false,
+        "expires_at": "2026-11-30T00:43:59Z",
+        "id": 13023247286,
+        "name": "atlas-c4-integrated-windows-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599090,
+        "size_in_bytes": 3074431,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/artifacts/13023247286"
+      },
+      {
+        "created_at": "2026-10-31T00:44:25Z",
+        "digest": "sha256:ddb392d4b6cbd57893e78285e7902e5c9ffc252e14d0acc26c9727d4e144337f",
+        "expired": false,
+        "expires_at": "2026-11-30T00:44:24Z",
+        "id": 13023197401,
+        "name": "atlas-c4-integrated-windows-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599090,
+        "size_in_bytes": 3075843,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/artifacts/13023197401"
+      },
+      {
+        "created_at": "2026-10-31T00:43:34Z",
+        "digest": "sha256:6b5249d6c12675b54537a7055ec0a8a2da85f429e3e5cea7c664a89463811d9e",
+        "expired": false,
+        "expires_at": "2026-11-30T00:43:34Z",
+        "id": 13022963117,
+        "name": "atlas-c4-specification-windows-latest-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599090,
+        "size_in_bytes": 16900,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/artifacts/13022963117"
+      },
+      {
+        "created_at": "2026-10-31T00:42:45Z",
+        "digest": "sha256:ee1be85de34a801dfb09e0c0c7761b6cfa34ce07dcfcf88ba4689c2dcbff8685",
+        "expired": false,
+        "expires_at": "2026-11-30T00:42:44Z",
+        "id": 13022743441,
+        "name": "atlas-c4-integrated-ubuntu-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599090,
+        "size_in_bytes": 5117830,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/artifacts/13022743441"
+      },
+      {
+        "created_at": "2026-10-31T00:57:30Z",
+        "digest": "sha256:692c671df9179c152068a7e972b8a9a6896df14136ea74381eaa46f698869c12",
+        "expired": false,
+        "expires_at": "2026-11-14T00:57:29Z",
+        "id": 13024085035,
+        "name": "atlas-c1-installed-windows-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599012,
+        "size_in_bytes": 2074,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/artifacts/13024085035"
+      },
+      {
+        "created_at": "2026-10-31T00:43:27Z",
+        "digest": "sha256:bcf998dacb4668bde384872bb49997586cd9b5ca701f251ba59b317496b9ce0f",
+        "expired": false,
+        "expires_at": "2026-11-14T00:43:26Z",
+        "id": 13023626291,
+        "name": "atlas-c1-installed-ubuntu-latest-O0-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599012,
+        "size_in_bytes": 29396,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/artifacts/13023626291"
+      },
+      {
+        "created_at": "2026-10-31T00:57:39Z",
+        "digest": "sha256:c2ab8a56884b124221de00e809eaf014f2af0c3c872a10e40fa23673840d1d43",
+        "expired": false,
+        "expires_at": "2026-11-14T00:57:38Z",
+        "id": 13023498929,
+        "name": "atlas-c1-installed-windows-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599012,
+        "size_in_bytes": 2072,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/artifacts/13023498929"
+      },
+      {
+        "created_at": "2026-10-31T00:43:33Z",
+        "digest": "sha256:0679caf9e14bb6bbcc3e027233cde57ffecdce62a33017c8dc7aa2a470c559b4",
+        "expired": false,
+        "expires_at": "2026-11-14T00:43:31Z",
+        "id": 13023461725,
+        "name": "atlas003-browser-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599012,
+        "size_in_bytes": 11044479,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/artifacts/13023461725"
+      },
+      {
+        "created_at": "2026-10-31T00:43:49Z",
+        "digest": "sha256:98eeeffad9fae67bb5fcfcbc3311039e88e36f99a1c0b62523dcebf9bdfad252",
+        "expired": false,
+        "expires_at": "2026-11-14T00:43:48Z",
+        "id": 13023317014,
+        "name": "atlas-c1-installed-ubuntu-latest-O1-9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "run_id": 41151599012,
+        "size_in_bytes": 29400,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/artifacts/13023317014"
+      }
+    ],
+    "atlas021_browser": {
+      "job_id": 124389144452,
+      "run_id": 41151599012,
+      "stages": [
+        {
+          "check_count": 20,
+          "checks": [
+            {
+              "name": "source_and_run_key_identity_unique_independent_of_order",
+              "status": "PASS"
+            },
+            {
+              "name": "catalog_records_match_parsed_source",
+              "status": "PASS"
+            },
+            {
+              "name": "record_labels_render_as_text",
+              "status": "PASS"
+            },
+            {
+              "name": "search_and_clear",
+              "status": "PASS"
+            },
+            {
+              "name": "project_experiment_status_filters",
+              "status": "PASS"
+            },
+            {
+              "name": "run_detail_metrics_states_and_synthetic_identity",
+              "status": "PASS"
+            },
+            {
+              "name": "all_source_details_preserve_values_absence_and_availability",
+              "status": "PASS"
+            },
+            {
+              "name": "related_references_match_source_graph_and_keep_empty_state",
+              "status": "PASS"
+            },
+            {
+              "name": "comparison_preserves_states_and_units",
+              "status": "PASS"
+            },
+            {
+              "name": "compatible_metric_pairs_values_and_units_match_per_source",
+              "status": "PASS"
+            },
+            {
+              "name": "timeline_preserves_declared_and_missing_times",
+              "status": "PASS"
+            },
+            {
+              "name": "lineage_navigation_uses_declared_relations",
+              "status": "PASS"
+            },
+            {
+              "name": "source_validity_is_distinct_from_authenticity",
+              "status": "PASS"
+            },
+            {
+              "name": "dossier_download_contains_real_records_and_limits",
+              "status": "PASS"
+            },
+            {
+              "name": "http_host_origin_and_fixed_source_allowlist",
+              "status": "PASS"
+            },
+            {
+              "name": "explicit_reindex_preserves_source_records",
+              "status": "PASS"
+            },
+            {
+              "name": "keyboard_skip_link_filters_and_visible_focus",
+              "status": "PASS"
+            },
+            {
+              "name": "visible_controls_have_names",
+              "status": "PASS"
+            },
+            {
+              "name": "mobile_390px_detail_and_navigation",
+              "status": "PASS"
+            },
+            {
+              "name": "no_page_errors_or_external_requests",
+              "status": "PASS"
+            }
+          ],
+          "css_zoom_used": false,
+          "external_requests": [],
+          "native_zoom": "NOT_RUN",
+          "page_errors": [],
+          "scope": "installed-live-ui",
+          "screenshots": [
+            "browser-report-desktop.png",
+            "browser-report-mobile.png"
+          ],
+          "status": "PASS_SCOPED"
+        },
+        {
+          "check_count": 24,
+          "checks": [
+            {
+              "name": "source_and_run_key_identity_unique_independent_of_order",
+              "status": "PASS"
+            },
+            {
+              "name": "catalog_records_match_parsed_source",
+              "status": "PASS"
+            },
+            {
+              "name": "record_labels_render_as_text",
+              "status": "PASS"
+            },
+            {
+              "name": "search_and_clear",
+              "status": "PASS"
+            },
+            {
+              "name": "project_experiment_status_filters",
+              "status": "PASS"
+            },
+            {
+              "name": "detail_preserves_large_integer_text",
+              "status": "PASS"
+            },
+            {
+              "name": "run_detail_metrics_states_and_synthetic_identity",
+              "status": "PASS"
+            },
+            {
+              "name": "all_source_details_preserve_values_absence_and_availability",
+              "status": "PASS"
+            },
+            {
+              "name": "related_references_match_source_graph_and_keep_empty_state",
+              "status": "PASS"
+            },
+            {
+              "name": "comparison_preserves_repeated_metric_identity_values",
+              "status": "PASS"
+            },
+            {
+              "name": "comparison_explains_incompatible_units_or_types",
+              "status": "PASS"
+            },
+            {
+              "name": "comparison_preserves_large_integer_text",
+              "status": "PASS"
+            },
+            {
+              "name": "comparison_preserves_states_and_units",
+              "status": "PASS"
+            },
+            {
+              "name": "timeline_preserves_declared_and_missing_times",
+              "status": "PASS"
+            },
+            {
+              "name": "lineage_navigation_uses_declared_relations",
+              "status": "PASS"
+            },
+            {
+              "name": "source_validity_is_distinct_from_authenticity",
+              "status": "PASS"
+            },
+            {
+              "name": "dossier_preserves_large_integer_raw_json",
+              "status": "PASS"
+            },
+            {
+              "name": "dossier_download_contains_real_records_and_limits",
+              "status": "PASS"
+            },
+            {
+              "name": "http_host_origin_and_fixed_source_allowlist",
+              "status": "PASS"
+            },
+            {
+              "name": "explicit_reindex_preserves_source_records",
+              "status": "PASS"
+            },
+            {
+              "name": "keyboard_skip_link_filters_and_visible_focus",
+              "status": "PASS"
+            },
+            {
+              "name": "visible_controls_have_names",
+              "status": "PASS"
+            },
+            {
+              "name": "mobile_390px_detail_and_navigation",
+              "status": "PASS"
+            },
+            {
+              "name": "no_page_errors_or_external_requests",
+              "status": "PASS"
+            }
+          ],
+          "css_zoom_used": false,
+          "external_requests": [],
+          "native_zoom": "NOT_RUN",
+          "page_errors": [],
+          "scope": "installed-live-ui",
+          "screenshots": [
+            "browser-adversarial-report-desktop.png",
+            "browser-adversarial-report-mobile.png"
+          ],
+          "status": "PASS_SCOPED"
+        },
+        {
+          "check_count": 23,
+          "checks": [
+            {
+              "name": "source_and_run_key_identity_unique_independent_of_order",
+              "status": "PASS"
+            },
+            {
+              "name": "catalog_records_match_parsed_source",
+              "status": "PASS"
+            },
+            {
+              "name": "record_labels_render_as_text",
+              "status": "PASS"
+            },
+            {
+              "name": "search_and_clear",
+              "status": "PASS"
+            },
+            {
+              "name": "project_experiment_status_filters",
+              "status": "PASS"
+            },
+            {
+              "name": "run_detail_metrics_states_and_synthetic_identity",
+              "status": "PASS"
+            },
+            {
+              "name": "all_source_details_preserve_values_absence_and_availability",
+              "status": "PASS"
+            },
+            {
+              "name": "related_references_match_source_graph_and_keep_empty_state",
+              "status": "PASS"
+            },
+            {
+              "name": "related_reference_keyboard_navigation_is_source_scoped_with_visible_focus",
+              "status": "PASS"
+            },
+            {
+              "name": "related_references_do_not_open_external_uris_or_download_content",
+              "status": "PASS"
+            },
+            {
+              "name": "comparison_preserves_states_and_units",
+              "status": "PASS"
+            },
+            {
+              "name": "compatible_metric_pairs_values_and_units_match_per_source",
+              "status": "PASS"
+            },
+            {
+              "name": "timeline_preserves_declared_and_missing_times",
+              "status": "PASS"
+            },
+            {
+              "name": "lineage_navigation_uses_declared_relations",
+              "status": "PASS"
+            },
+            {
+              "name": "source_validity_is_distinct_from_authenticity",
+              "status": "PASS"
+            },
+            {
+              "name": "dossier_download_contains_real_records_and_limits",
+              "status": "PASS"
+            },
+            {
+              "name": "http_host_origin_and_fixed_source_allowlist",
+              "status": "PASS"
+            },
+            {
+              "name": "explicit_reindex_preserves_source_records",
+              "status": "PASS"
+            },
+            {
+              "name": "keyboard_skip_link_filters_and_visible_focus",
+              "status": "PASS"
+            },
+            {
+              "name": "visible_controls_have_names",
+              "status": "PASS"
+            },
+            {
+              "name": "mobile_390px_detail_and_navigation",
+              "status": "PASS"
+            },
+            {
+              "name": "related_references_css_zoom_200_percent_reflow_and_keyboard",
+              "status": "PASS"
+            },
+            {
+              "name": "no_page_errors_or_external_requests",
+              "status": "PASS"
+            }
+          ],
+          "css_zoom_used": true,
+          "external_requests": [],
+          "native_zoom": "NOT_RUN",
+          "page_errors": [],
+          "related_internal_navigations": 2,
+          "scope": "installed-live-ui",
+          "screenshots": [
+            "browser-related-references-report-desktop.png",
+            "browser-related-references-report-mobile.png",
+            "browser-related-references-report-zoom200.png"
+          ],
+          "status": "PASS_SCOPED"
+        },
+        {
+          "checks": 23,
+          "native_zoom": "NOT_RUN",
+          "screenshots": 6,
+          "status": "PASS_SCOPED"
+        }
+      ]
+    },
+    "c4_browser_cells": [
+      {
+        "all_checks_pass": true,
+        "browser_version": "156.0.8078.80",
+        "checks": 31,
+        "console_errors": 0,
+        "consumer_outside_checkout": true,
+        "external_requests": 0,
+        "inherited_fixtures_modified": false,
+        "job_id": 124389144325,
+        "native_browser_zoom_200": "NOT_MEASURED",
+        "optimization": 1,
+        "page_errors": 0,
+        "platform": "win32",
+        "playwright_version": "1.62.1",
+        "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
+        "run_id": 41151599090,
+        "screenshots": {
+          "c4-main-1440.png": "5cde5c3db2d075793bcd8c44c507e99dcf1b34aead37cb0d377b058f146da751",
+          "c4-main-320.png": "69bf608828c2895867affd23a3bca1805568b74665d2801e0ff3003b2b0c5e40",
+          "c4-main-390.png": "5025f5f5f494ec9eaaa8c4ccef3a89c8e0c5d076760dd8700df21af378b49a44",
+          "c4-visible-presentation-error.png": "953187afa7578b74551990192a807e0f1ae78a591463708c0956475e6cb5e107"
+        },
+        "skips": 0,
+        "status": "PASS",
+        "synthetic_copy_bytes_match_expected": true,
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+        "viewer_without_r4": true
+      },
+      {
+        "all_checks_pass": true,
+        "browser_version": "156.0.8078.47",
+        "checks": 31,
+        "console_errors": 0,
+        "consumer_outside_checkout": true,
+        "external_requests": 0,
+        "inherited_fixtures_modified": false,
+        "job_id": 124389144522,
+        "native_browser_zoom_200": "NOT_MEASURED",
+        "optimization": 1,
+        "page_errors": 0,
+        "platform": "linux",
+        "playwright_version": "1.62.1",
+        "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
+        "run_id": 41151599090,
+        "screenshots": {
+          "c4-main-1440.png": "3650c1582a44d8f90133f53154703bcec12c4dbad46082adf668cf03cb9c47a1",
+          "c4-main-320.png": "af445b53f8102feb13e3233b6c68e8153cf0938577cbc0b7a21a462b8908bb63",
+          "c4-main-390.png": "fd603cfeb15849e8641b95b296352d8e9e36e61e3a88ce195af92b1822ea975b",
+          "c4-visible-presentation-error.png": "8566868f40262abf73dd763e69a3a945e12d594fc0650a575cac67abd77dd0cd"
+        },
+        "skips": 0,
+        "status": "PASS",
+        "synthetic_copy_bytes_match_expected": true,
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+        "viewer_without_r4": true
+      },
+      {
+        "all_checks_pass": true,
+        "browser_version": "156.0.8078.47",
+        "checks": 31,
+        "console_errors": 0,
+        "consumer_outside_checkout": true,
+        "external_requests": 0,
+        "inherited_fixtures_modified": false,
+        "job_id": 124389144551,
+        "native_browser_zoom_200": "NOT_MEASURED",
+        "optimization": 0,
+        "page_errors": 0,
+        "platform": "linux",
+        "playwright_version": "1.62.1",
+        "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
+        "run_id": 41151599090,
+        "screenshots": {
+          "c4-main-1440.png": "94fcdf543e91692f207065fe152b8bd04c0eb40a82815463e283e74b32a566ae",
+          "c4-main-320.png": "61715cd42ef62edac214b7a2bc520f664fb2df413e92e4270ad744bfea184cc7",
+          "c4-main-390.png": "984fa1ceb78e484aa01f99d72ce31536d0121222240286814b792bb9d7bb6186",
+          "c4-visible-presentation-error.png": "988c9c34285f111835d3a1fc85a22fadb26add80cbeacab1344673d53584c8ab"
+        },
+        "skips": 0,
+        "status": "PASS",
+        "synthetic_copy_bytes_match_expected": true,
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+        "viewer_without_r4": true
+      },
+      {
+        "all_checks_pass": true,
+        "browser_version": "156.0.8078.80",
+        "checks": 31,
+        "console_errors": 0,
+        "consumer_outside_checkout": true,
+        "external_requests": 0,
+        "inherited_fixtures_modified": false,
+        "job_id": 124389144638,
+        "native_browser_zoom_200": "NOT_MEASURED",
+        "optimization": 0,
+        "page_errors": 0,
+        "platform": "win32",
+        "playwright_version": "1.62.1",
+        "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
+        "run_id": 41151599090,
+        "screenshots": {
+          "c4-main-1440.png": "d23eb7efbb5777cbe91d0e9fafeecb4dc95aea37073055e1e9a650c774687a5d",
+          "c4-main-320.png": "f5ca98021e9961936effdaac1de9a56a487424cf9fb1c582594073c087d76199",
+          "c4-main-390.png": "5c65ddbd791168622d8dafc1bbbb7c70858941599b8f6bfcfb595580c0641379",
+          "c4-visible-presentation-error.png": "1be6e4a66d74356b4bfafc73f414cd64290a233068f6c5b400796577ff3f9284"
+        },
+        "skips": 0,
+        "status": "PASS",
+        "synthetic_copy_bytes_match_expected": true,
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+        "viewer_without_r4": true
+      }
+    ],
+    "c4_browser_check_names": [
+      "two_valid_sources_keep_repeated_run_and_property_ids_scoped",
+      "metadata_projection_is_bound_to_explicit_source_snapshot_source-1",
+      "metadata_projection_is_bound_to_explicit_source_snapshot_source-2",
+      "boolean_is_actual_false_and_large_integer_uses_exact_display_text",
+      "main_http_routes_allow_only_named_assets_and_keep_focal_demo_paths_inactive",
+      "main_detail_has_metadata_and_lazy_explicit_property_selection",
+      "explicit_selection_builds_separate_category_type_and_unit_tables",
+      "P03_rendered_unit_labels_and_row_ids_preserve_declared_case",
+      "semantic_tables_keep_source_snapshot_entity_and_declared_row_identity",
+      "keyboard_toggle_preserves_checkbox_focus_and_updates_only_derived_output",
+      "filter_render_keeps_same_detail_control_focus_and_explicit_selection",
+      "deep_link_preserves_C0_source_snapshot_and_run",
+      "same_property_ids_in_source_B_do_not_reuse_source_A_choices",
+      "source_B_tables_and_metadata_are_bound_to_B_without_cross_source_retargeting",
+      "File_mentions_and_hostile_text_keep_neutral_declared_semantics",
+      "back_navigation_restores_source_A_explicit_choices_without_cross_source_state",
+      "document_and_P03_embedding_reflow_at_1440_css_pixels",
+      "only_named_keyboard_accessible_table_regions_scroll_at_1440",
+      "document_and_P03_embedding_reflow_at_390_css_pixels",
+      "only_named_keyboard_accessible_table_regions_scroll_at_390",
+      "document_and_P03_embedding_reflow_at_320_css_pixels",
+      "only_named_keyboard_accessible_table_regions_scroll_at_320",
+      "table_overflow_is_reachable_with_keyboard_without_losing_focus",
+      "escape_closes_detail_and_restores_visible_C0_opener_focus",
+      "fresh_document_deep_link_opens_correct_source_and_leaves_P03_opt_in",
+      "valid_package_replacement_marks_changed_but_keeps_old_snapshot_until_reindex",
+      "new_snapshot_discards_old_C0_and_P03_detail_selection_with_visible_notice",
+      "old_deep_link_never_retargets_repeated_run_in_other_source",
+      "reindex_expires_all_prior_P03_choices_in_the_unchanged_other_source",
+      "metadata_presentation_error_is_visible_while_protocol_source_remains_READY",
+      "no_external_request_browser_exception_or_console_error"
+    ],
+    "evidence_basis": [
+      "GitHub Actions REST run/job/step metadata",
+      "Actual JSON receipts parsed from job stdout",
+      "GitHub Actions official artifact metadata"
+    ],
+    "inherited_collection": {
+      "actual_218_sha256": "0773bb6a074cb45071b843dd5a4f96e47d1c35dd46b61556e0fe33f7e193d1ee",
+      "actual_218_test_ids": [
+        "test_architecture_boundaries.ArchitectureGuardTests.test_allowed_direction_is_not_rejected",
+        "test_architecture_boundaries.ArchitectureGuardTests.test_distribution_dependency_is_rejected",
+        "test_architecture_boundaries.ArchitectureGuardTests.test_import_string_in_documentation_is_not_code",
+        "test_architecture_boundaries.ArchitectureGuardTests.test_literal_dynamic_import_is_rejected",
+        "test_architecture_boundaries.ArchitectureGuardTests.test_missing_package_does_not_vacuously_pass",
+        "test_architecture_boundaries.ArchitectureGuardTests.test_private_dependency_hidden_in_helper_is_rejected",
+        "test_architecture_boundaries.ArchitectureGuardTests.test_process_execution_capability_is_rejected_in_viewer",
+        "test_architecture_boundaries.ArchitectureGuardTests.test_reverse_ui_dependency_is_rejected",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_changed_source_retains_old_records_and_scope_until_explicit_rebuild",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_fixture_has_28_valid_synthetic_runs_and_duplicate_ids_scoped_by_source",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_loaded_counts_do_not_invent_source_eligible_selected_or_converted_totals",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_mentions_are_neutral_and_adversarial_text_never_loads_external_documents",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_new_session_and_reordered_allowlist_never_reuse_source_number_scope",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_snapshot_and_dossier_only_read_sources_and_do_not_expose_filesystem_paths",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_snapshot_token_is_stable_for_same_instance_and_unchanged_rebuild",
+        "test_atlas_parity02_p02_catalog.P02CatalogTests.test_unknown_time_isolated_runs_precision_and_incompatible_metrics_survive",
+        "test_atlas_parity02_p02_catalog.P02HTTPTests.test_explicit_state_asset_is_served_with_csp_and_no_external_permission",
+        "test_atlas_parity02_p02_catalog.P02HTTPTests.test_origin_host_and_allowlist_guards_still_apply_to_new_surface",
+        "test_atlas_parity02_p02_catalog.P02HTTPTests.test_state_asset_is_not_a_generic_filesystem_server",
+        "test_atlas_parity02_p02_state.P02StateTests.test_snapshot_bound_hash_filters_selection_and_deterministic_order",
+        "test_atlas_parity02_p03_harness.HarnessHTTPTests.test_cross_origin_and_wrong_host_are_rejected",
+        "test_atlas_parity02_p03_harness.HarnessHTTPTests.test_fixture_transport_preserves_numbers_and_inert_text",
+        "test_atlas_parity02_p03_harness.HarnessHTTPTests.test_mutation_methods_cannot_write",
+        "test_atlas_parity02_p03_harness.HarnessHTTPTests.test_no_payload_traversal_catalog_or_arbitrary_files",
+        "test_atlas_parity02_p03_harness.HarnessHTTPTests.test_real_http_serves_only_fixed_resources",
+        "test_atlas_parity02_p03_harness.HarnessStreamTests.test_C4_app_loads_only_representable_p03_components",
+        "test_atlas_parity02_p03_harness.HarnessStreamTests.test_cross_origin_and_wrong_host_are_rejected",
+        "test_atlas_parity02_p03_harness.HarnessStreamTests.test_fixture_transport_preserves_numbers_and_inert_text",
+        "test_atlas_parity02_p03_harness.HarnessStreamTests.test_handler_parser_serves_only_fixed_resources",
+        "test_atlas_parity02_p03_harness.HarnessStreamTests.test_mutation_methods_cannot_write",
+        "test_atlas_parity02_p03_harness.HarnessStreamTests.test_no_payload_traversal_catalog_or_arbitrary_files",
+        "test_atlas_parity02_p03_harness.HarnessStreamTests.test_reading_harness_keeps_fixture_bytes",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_conflicting_availability_or_declared_digest_is_rejected",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_declared_and_observed_availability_are_separate",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_digest_mismatch_preserves_both_values_without_approval",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_empty_and_missing_metadata_remain_explicit",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_file_name_and_mime_do_not_infer_document_or_product",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_forged_read_model_output_is_rejected",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_html_uri_and_unicode_remain_exact_strings",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_input_output_derivation_directions_match_graph",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_invalid_identity_duplicates_and_types_have_codes",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_invalid_status_digest_and_text_are_rejected",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_item_and_text_boundaries_are_enforced",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_mentions_are_neutral_and_do_not_become_outputs",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_missing_calculated_digest_stays_absent",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_no_io_and_no_mutation_or_aliasing",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_non_action_result_field_does_not_create_production",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_numeric_false_source_digest_is_not_treated_as_missing",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_numeric_metadata_is_not_coerced_or_exposed_as_product_value",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_projected_reference_must_be_declared_in_entities",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_sdk_read_model_of_existing_synthetic_package_is_consumable",
+        "test_atlas_parity02_p03_metadata.MetadataProjectionTests.test_source_pair_is_explicit_and_collision_free",
+        "test_atlas_parity02_p03_renderers.RendererBehaviorTests.test_metadata_javascript_behavior",
+        "test_atlas_parity02_p03_renderers.RendererBehaviorTests.test_real_renderers_with_dom_recorder_not_browser",
+        "test_atlas_parity02_p03_table.TableBehaviorTests.test_candidate_table_behavior_suite",
+        "test_atlas_parity02_p06_composed_navigation.ComposedNavigationTests.test_replaced_snapshot_discards_stale_selection_and_requires_explicit_new_selection",
+        "test_atlas_parity02_p06_invariance.FrozenInputTests.test_added_untracked_protocol_code_is_rejected",
+        "test_atlas_parity02_p06_invariance.FrozenInputTests.test_component_output_and_python_cache_do_not_masquerade_as_inputs",
+        "test_atlas_parity02_p06_invariance.FrozenInputTests.test_each_protected_area_rejects_a_material_byte_change",
+        "test_atlas_parity02_p06_invariance.FrozenInputTests.test_protocol_deletion_is_not_an_allowed_presentation_change",
+        "test_atlas_parity02_p06_invariance.FrozenInputTests.test_unchanged_inputs_pass_and_report_actual_commit_and_tree",
+        "test_atlas_parity02_p06_semantics.Parity02P06SemanticsTests.test_decimal_precision_loss_is_rejected_without_rounding_or_source_fallback",
+        "test_atlas_parity02_p06_semantics.Parity02P06SemanticsTests.test_execution_review_integrity_and_unknown_time_remain_separate",
+        "test_atlas_parity02_p06_semantics.Parity02P06SemanticsTests.test_integer_zero_boolean_decimal_precision_and_absence_are_preserved",
+        "test_atlas_parity02_p06_semantics.Parity02P06SemanticsTests.test_passive_uri_mentions_remain_literal_without_network_or_execution",
+        "test_atlas_parity02_p06_semantics.Parity02P06SemanticsTests.test_repeated_ids_do_not_mix_values_or_mentions_between_sources",
+        "test_atlas_parity02_p06_semantics.Parity02P06SemanticsTests.test_time_offsets_and_neutral_mentions_do_not_reverse_declared_lineage",
+        "test_atlas_parity02_p06_semantics.Parity02P06SemanticsTests.test_unsupported_or_unsafe_sources_do_not_receive_another_sources_preview",
+        "test_atlas_parity03_c4_audit.C4ExactAuditTests.test_C4_accepts_only_explicit_three_hashes_and_freezes_protocol",
+        "test_atlas_parity03_c4_audit.C4ExactAuditTests.test_C4_cli_has_no_hash_path_or_baseline_override",
+        "test_atlas_parity03_c4_audit.C4ExactAuditTests.test_C4_does_not_grant_historical_presentation_or_sibling_edits",
+        "test_atlas_parity03_c4_audit.C4ExactAuditTests.test_C4_named_path_cannot_be_deleted_or_a_directory",
+        "test_atlas_parity03_c4_audit.C4ExactAuditTests.test_C4_still_rejects_governance_and_protocol_even_with_presentation_flag",
+        "test_atlas_parity03_c4_audit.C4ExactAuditTests.test_default_and_previous_opt_ins_reject_C4_runtime_bytes",
+        "test_atlas_parity03_c4_audit.C4ExactAuditTests.test_named_paths_cannot_use_arbitrary_bytes_or_old_P02_bytes",
+        "test_atlas_parity03_p03_composition.P03CompositionTests.test_metadata_identity_binds_source_and_snapshot_without_collapsing_duplicate_ids",
+        "test_atlas_parity03_p03_composition.P03CompositionTests.test_metadata_presentation_error_keeps_valid_source_runs_and_dossier",
+        "test_atlas_parity03_p03_composition.P03CompositionTests.test_typed_selection_identity_lifecycle_and_visible_errors_in_installed_module",
+        "test_atlas_parity03_p03_composition.P03CompositionTests.test_unavailable_source_has_no_fabricated_presentation",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_adr0004_and_changes_to_adr0001_or_adr0002_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_arbitrary_document_outside_original_and_repair_paths_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_branch_name_lookalike_cannot_override_bad_bytes",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_c4_control_flow_cannot_be_relaxed_by_rehashing_the_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_default_boundary_accepts_only_the_single_strict_p06_rejection",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_edit_remove_and_symlink_of_adr0003_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_historical_c4_manifest_cannot_be_changed",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_mode_change_in_authorized_repair_path_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_protocol_context_governance_skill_fixture_and_agents_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_repair_history_rejects_transient_unauthorized_change_even_if_reverted",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_runtime_p03_adapter_and_asset_allowlist_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_workflow_conditions_and_commands_cannot_be_reauthorized_by_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_wrong_base_or_document_tree_is_red",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_approved_controls_are_fixed_and_the_independent_tests_are_bound",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dedicated_guard_runs_linux_windows_normal_and_optimized",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_guard_control_flow_has_independent_semantic_authorization",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_non_utf8_cookie_cannot_hide_executable_code_from_preflight",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_nonliteral_control_table_is_rejected_before_guard_import",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_documents_deletion_and_rename_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_exact_frozen_epoch_tree_and_parent_are_required",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_overlay_must_be_exact_canonical_and_owned",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_protected_governance_product_audits_manifests_and_reader_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_mode_removal_and_unexpected_parent_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_transient_unauthorized_change_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_transient_unapproved_control_revision_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_non_utf8_codec_cannot_hide_execution",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_security_guards_contain_no_optimized_away_assert",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red",
+        "test_catalog_server.CatalogTests.test_corrupt_zip_does_not_hide_other_sources_or_invent_payload_availability",
+        "test_catalog_server.CatalogTests.test_empty_and_inaccessible_sources_do_not_fabricate_runs",
+        "test_catalog_server.CatalogTests.test_installed_read_and_reindex_never_write_source",
+        "test_catalog_server.CatalogTests.test_large_integer_has_exact_display_text_and_dossier_bytes",
+        "test_catalog_server.CatalogTests.test_metadata_change_does_not_silently_change_cached_records",
+        "test_catalog_server.CatalogTests.test_payload_tampering_detected_and_reindex_does_not_promote_it",
+        "test_catalog_server.CatalogTests.test_returned_projection_is_not_the_internal_index",
+        "test_catalog_server.CatalogTests.test_source_count_is_bounded",
+        "test_catalog_server.CatalogTests.test_source_scoping_preserves_ids_instead_of_deduplication",
+        "test_catalog_server.HTTPTests.test_dns_rebinding_and_cross_origin_are_rejected",
+        "test_catalog_server.HTTPTests.test_no_path_serving_or_scientific_mutation_endpoints",
+        "test_catalog_server.HTTPTests.test_only_fixed_source_reindex_is_allowed",
+        "test_catalog_server.HTTPTests.test_packaged_assets_and_catalog",
+        "test_poc_required_boundaries.PocRequiredBoundaryTests.test_controlled_zip_bomb_is_rejected_before_any_member_is_opened",
+        "test_poc_required_boundaries.PocRequiredBoundaryTests.test_invalid_entity_types_return_explicit_errors",
+        "test_poc_required_boundaries.PocRequiredBoundaryTests.test_missing_or_invalid_entity_ids_return_explicit_errors",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_absent_source_is_not_fabricated_empty_success",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_aggregate_payload_budget_applies_to_expanded_directories",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_boolean_is_not_number",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_changed_payload_fails_byte_integrity",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_context_redefinition_is_rejected",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_corrupted_compression_metadata_returns_source_diagnostic_without_writes",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_corrupted_compression_payload_preserves_records_and_reports_unavailable",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_derivation_cycle_is_rejected",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_duplicate_graph_ids_are_rejected",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_duplicate_json_keys_are_not_silently_overwritten",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_execution_success_cannot_contradict_action_status",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_external_payload_remains_unresolved_without_network",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_future_profile_is_not_downgraded",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_graph_order_does_not_change_graph_validity",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_high_precision_decimal_bytes_are_rejected_instead_of_rounded",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_integer_above_javascript_safe_range_remains_exact_in_sdk",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_malformed_uri_returns_validation_error_instead_of_crashing",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_metadata_digest_is_byte_integrity_not_semantic_canonicalization",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_metadata_limit_is_enforced",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_missing_local_payload_retains_record_and_reports_availability",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_missing_numeric_value_requires_reason",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_missing_run_experiment_is_graph_error",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_nonfinite_numbers_are_rejected_at_document_and_json_boundaries",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_numeric_metric_requires_unit",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_payload_symlink_outside_package_is_not_read",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_read_projection_and_reload_do_not_change_source_bytes",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_real_exporter_produces_valid_complete_partial_failed_and_unknown",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_symlink_metadata_is_not_read",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_synthetic_accepted_science_is_rejected",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_timestamp_requires_timezone",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_traversal_references_are_rejected_without_reading",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_unknown_context_never_causes_network_loading",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_zip_case_colliding_names_are_rejected",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_zip_symlink_is_rejected",
+        "test_protocol_adversarial.ProtocolAdversarialTests.test_zip_traversal_is_rejected_without_extracting",
+        "test_related_references.RelatedReferenceTests.test_availability_and_digest_keep_observed_and_declared_meanings",
+        "test_related_references.RelatedReferenceTests.test_declared_mention_is_visible_without_input_or_output_invention",
+        "test_related_references.RelatedReferenceTests.test_expanded_reference_objects_are_not_silently_normalized",
+        "test_related_references.RelatedReferenceTests.test_html_and_unsafe_uri_context_stay_data_without_arbitrary_read",
+        "test_related_references.RelatedReferenceTests.test_index_rebuild_adds_projection_to_legacy_index_without_source_write",
+        "test_related_references.RelatedReferenceTests.test_missing_empty_and_long_titles_keep_declared_identity",
+        "test_related_references.RelatedReferenceTests.test_mixed_inputs_outputs_and_mentions_do_not_create_extra_lineage",
+        "test_related_references.RelatedReferenceTests.test_packages_without_run_mentions_continue_with_empty_references",
+        "test_related_references.RelatedReferenceTests.test_same_ids_in_two_sources_resolve_inside_their_own_package",
+        "test_related_references.RelatedReferenceTests.test_single_reference_and_list_forms_preserve_first_occurrence_order",
+        "test_related_references.RelatedReferenceTests.test_unresolved_mentions_are_rejected_without_source_fallback",
+        "test_sdk.ContractAndRoundTrip.test_aliasing_file_ids_rejected",
+        "test_sdk.ContractAndRoundTrip.test_complete_profiles_and_software_metadata_required",
+        "test_sdk.ContractAndRoundTrip.test_corrupt_lzma_stream_is_reported_without_losing_readable_records",
+        "test_sdk.ContractAndRoundTrip.test_decimal_import_never_silently_rounds_the_source",
+        "test_sdk.ContractAndRoundTrip.test_environmental_producer_and_lossless_projection",
+        "test_sdk.ContractAndRoundTrip.test_export_refuses_overwrite",
+        "test_sdk.ContractAndRoundTrip.test_external_missing_relation_is_not_silently_accepted",
+        "test_sdk.ContractAndRoundTrip.test_official_example_is_preserved_and_explicitly_outside_profile",
+        "test_sdk.ContractAndRoundTrip.test_profile_schema_matches_positive_fixture",
+        "test_sdk.ContractAndRoundTrip.test_serialization_round_trip_preserves_original_graph",
+        "test_sdk.ContractAndRoundTrip.test_unknown_unprefixed_terms_not_silently_dropped",
+        "test_sdk.ContractAndRoundTrip.test_zip_transport_preserves_bytes_and_projection",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_both_opt_ins_still_reject_governance_protocol_and_skills",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_cli_has_no_path_exclusion_or_baseline_override",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_current_protocol_pin_overrides_historical_read_model_allowance",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_default_and_historical_opt_in_reject_all_three_p02_paths",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_p02_cannot_be_rolled_back_to_historical_bytes",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_p02_does_not_grant_a_directory_exception",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_p02_named_path_with_unfrozen_bytes_is_rejected",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_p02_named_paths_cannot_be_deleted_or_replaced_by_directories",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_p02_opt_in_does_not_implicitly_grant_historical_allowance",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_p02_opt_in_records_only_exact_frozen_paths",
+        "test_speckit_presentation_audit.P02C0AuditTests.test_protocol_additions_and_deletions_are_rejected",
+        "test_speckit_presentation_audit.PresentationAuditTests.test_default_still_rejects_authorized_runtime_edits",
+        "test_speckit_presentation_audit.PresentationAuditTests.test_opt_in_does_not_allow_contract_governance_or_skill_edits",
+        "test_speckit_presentation_audit.PresentationAuditTests.test_opt_in_does_not_allow_deleting_a_presentation_file",
+        "test_speckit_presentation_audit.PresentationAuditTests.test_opt_in_is_explicit_and_records_exact_changed_paths"
+      ],
+      "inherited_191_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
+      "new_27_sha256": "55916e8f1606be03721fdba2393bbc8f4f279cfdc25382754368ea741fadc0a8",
+      "new_27_test_ids": [
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_documents_deletion_and_rename_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_exact_frozen_epoch_tree_and_parent_are_required",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_overlay_must_be_exact_canonical_and_owned",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_protected_governance_product_audits_manifests_and_reader_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_mode_removal_and_unexpected_parent_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_transient_unauthorized_change_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_transient_unapproved_control_revision_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_non_utf8_codec_cannot_hide_execution",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_security_guards_contain_no_optimized_away_assert",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
+      ],
+      "serialization": "UTF-8 compact JSON of sorted full IDs followed by LF",
+      "source_path": "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json",
+      "source_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a"
+    },
+    "installed_cells": [
+      {
+        "architecture_exit_code": 0,
+        "consumer_outside_checkout": true,
+        "duplicates": 0,
+        "errors": 0,
+        "executed": 218,
+        "failures": 0,
+        "full_ids_sha256": "0773bb6a074cb45071b843dd5a4f96e47d1c35dd46b61556e0fe33f7e193d1ee",
+        "inherited_ids_preserved": true,
+        "job_conclusion": "success",
+        "job_id": 124389144345,
+        "job_status": "completed",
+        "loader_errors": 0,
+        "missing_inherited_ids": [],
+        "new_ids": 27,
+        "optimization": 0,
+        "platform": "linux",
+        "r4_absent": true,
+        "skips": 0,
+        "status": "PASS_SCOPED",
+        "strong_gate": {
+          "all_C1_test_ids_preserved": true,
+          "inherited_C1_cases": 122,
+          "inherited_f2_test_collection": {
+            "all_inherited_ids_preserved": true,
+            "inherited_ap04_ids": 23,
+            "inherited_c4_ids": 168,
+            "inherited_union_ids": 191,
+            "inherited_union_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
+            "new_test_id_count": 27,
+            "source_path": "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json",
+            "source_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a"
+          },
+          "status": "PASS",
+          "unique_test_cases": 218
+        },
+        "suite_counts": [
+          {
+            "collected": 12,
+            "executed": 12,
+            "suite": "packages/protocol/tests"
+          },
+          {
+            "collected": 131,
+            "executed": 131,
+            "suite": "tests/qa"
+          },
+          {
+            "collected": 75,
+            "executed": 75,
+            "suite": "tests/viewer"
+          }
+        ],
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+        "unique_ids": 218
+      },
+      {
+        "architecture_exit_code": 0,
+        "consumer_outside_checkout": true,
+        "duplicates": 0,
+        "errors": 0,
+        "executed": 218,
+        "failures": 0,
+        "full_ids_sha256": "0773bb6a074cb45071b843dd5a4f96e47d1c35dd46b61556e0fe33f7e193d1ee",
+        "inherited_ids_preserved": true,
+        "job_conclusion": "success",
+        "job_id": 124389144413,
+        "job_status": "completed",
+        "loader_errors": 0,
+        "missing_inherited_ids": [],
+        "new_ids": 27,
+        "optimization": 1,
+        "platform": "linux",
+        "r4_absent": true,
+        "skips": 0,
+        "status": "PASS_SCOPED",
+        "strong_gate": {
+          "all_C1_test_ids_preserved": true,
+          "inherited_C1_cases": 122,
+          "inherited_f2_test_collection": {
+            "all_inherited_ids_preserved": true,
+            "inherited_ap04_ids": 23,
+            "inherited_c4_ids": 168,
+            "inherited_union_ids": 191,
+            "inherited_union_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
+            "new_test_id_count": 27,
+            "source_path": "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json",
+            "source_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a"
+          },
+          "status": "PASS",
+          "unique_test_cases": 218
+        },
+        "suite_counts": [
+          {
+            "collected": 12,
+            "executed": 12,
+            "suite": "packages/protocol/tests"
+          },
+          {
+            "collected": 131,
+            "executed": 131,
+            "suite": "tests/qa"
+          },
+          {
+            "collected": 75,
+            "executed": 75,
+            "suite": "tests/viewer"
+          }
+        ],
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+        "unique_ids": 218
+      },
+      {
+        "cancellation_message": "The operation was canceled.",
+        "cancelled_step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+        "cancelled_step_completed_at": "2026-10-31T00:57:28Z",
+        "cancelled_step_started_at": "2026-10-31T00:53:09Z",
+        "clean_install_sdk": {
+          "installed_module": true,
+          "r4_absent": true,
+          "sdk_imported": true,
+          "viewer_absent": true
+        },
+        "clean_install_status": "PASS_SCOPED",
+        "clean_install_viewer": {
+          "installed_sdk": true,
+          "installed_viewer": true,
+          "r4_absent": true
+        },
+        "configured_job_timeout_minutes": 15,
+        "diagnosis": "The installed suite exceeded the remaining budget after the source suite; the total job duration reached the unchanged 15-minute limit.",
+        "diagnosis_basis": "Configured workflow timeout, run/job/step durations and cancellation log; no manual rerun or cancellation by B",
+        "installed_218_id_proof": false,
+        "installed_suite_status": "CANCELLED_INCOMPLETE",
+        "job_completed_at": "2026-10-31T00:57:34Z",
+        "job_conclusion": "cancelled",
+        "job_id": 124389144379,
+        "job_started_at": "2026-10-31T00:42:20Z",
+        "job_status": "completed",
+        "optimization": 0,
+        "platform": "win32",
+        "source_bytes_unchanged": true,
+        "source_qa_duration_seconds": 592.157,
+        "source_suite_results": [
+          {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "packages/protocol/tests",
+            "tests": 12
+          },
+          {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/qa",
+            "tests": 131
+          },
+          {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/viewer",
+            "tests": 75
+          }
+        ],
+        "source_suite_status": "PASS"
+      },
+      {
+        "cancellation_message": "The operation was canceled.",
+        "cancelled_step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+        "cancelled_step_completed_at": "2026-10-31T00:57:38Z",
+        "cancelled_step_started_at": "2026-10-31T00:54:53Z",
+        "clean_install_sdk": {
+          "installed_module": true,
+          "r4_absent": true,
+          "sdk_imported": true,
+          "viewer_absent": true
+        },
+        "clean_install_status": "PASS_SCOPED",
+        "clean_install_viewer": {
+          "installed_sdk": true,
+          "installed_viewer": true,
+          "r4_absent": true
+        },
+        "configured_job_timeout_minutes": 15,
+        "diagnosis": "The installed suite exceeded the remaining budget after the source suite; the total job duration reached the unchanged 15-minute limit.",
+        "diagnosis_basis": "Configured workflow timeout, run/job/step durations and cancellation log; no manual rerun or cancellation by B",
+        "installed_218_id_proof": false,
+        "installed_suite_status": "CANCELLED_INCOMPLETE",
+        "job_completed_at": "2026-10-31T00:57:43Z",
+        "job_conclusion": "cancelled",
+        "job_id": 124389144600,
+        "job_started_at": "2026-10-31T00:42:20Z",
+        "job_status": "completed",
+        "optimization": 1,
+        "platform": "win32",
+        "source_bytes_unchanged": true,
+        "source_qa_duration_seconds": 694.572,
+        "source_suite_results": [
+          {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "packages/protocol/tests",
+            "tests": 12
+          },
+          {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/qa",
+            "tests": 131
+          },
+          {
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/viewer",
+            "tests": 75
+          }
+        ],
+        "source_suite_status": "PASS"
+      }
+    ],
+    "limitations": {
+      "artifact_zip_bytes_inspected": false,
+      "host_private_sources_accessed": false,
+      "junit_bytes_extracted": false,
+      "previous_ci_success_transferred": false,
+      "reason": "The connector supplies file references; the available runtime cannot fetch their bytes. No ZIP or pixel-level review is claimed.",
+      "reference_scope": "No matching Process Run 0.6 profile, remote availability proof, scientific acceptance, or HL7/FHIR conformance is claimed.",
+      "screenshot_pixels_visually_inspected": false,
+      "signed_urls_included": false
+    },
+    "p03_receipts": [
+      {
+        "job_id": 124389144935,
+        "name": "P03 portable / ubuntu-latest / optimize=0",
+        "optimization": 0,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BUILD-AND-INSTALL.json": {
+            "sha256": "1c96052a7933a94241024211d5a5a2982a42d448818aef21c114608d0ec2670d",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "HTTP-RECEIPT.json": {
+            "sha256": "6d89d3c0dba044d47c75dfc1ff7cc89eb2737df9e6b5e43625a6f533d7b94544",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "c596d0249ace941a0690c3471f704098cae35cafac8f41344423014647a61830",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "TEST-RECEIPT.json": {
+            "sha256": "e9e2594ab1f42d76ad18caa5fb6f853bca0313a9cb524f9cdf2244d2cdcc4318",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          }
+        },
+        "required": [
+          "BUILD-AND-INSTALL.json",
+          "HTTP-RECEIPT.json",
+          "INPUT-SHAS.json",
+          "TEST-RECEIPT.json"
+        ],
+        "run_id": 41151599065,
+        "status": "PASS",
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+      },
+      {
+        "job_id": 124389144963,
+        "name": "P03 portable / ubuntu-latest / optimize=1",
+        "optimization": 1,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BUILD-AND-INSTALL.json": {
+            "sha256": "60932334cc955fce04684bf60ea9ff447f7415a49ff9715501e48d9f1e166a7e",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "HTTP-RECEIPT.json": {
+            "sha256": "d9f7d6594e5e149da54fd5c980e83b626404e0cddf0ef98264d55d819666c753",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "94585df91e62e99e778a00724d3eeb8679971f64b76b66d0f34142779d49282e",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "TEST-RECEIPT.json": {
+            "sha256": "b5e8a544f3d9eab0839c2926095ee4e211e7d3385dfae371e1d5891d06230ca7",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          }
+        },
+        "required": [
+          "BUILD-AND-INSTALL.json",
+          "HTTP-RECEIPT.json",
+          "INPUT-SHAS.json",
+          "TEST-RECEIPT.json"
+        ],
+        "run_id": 41151599065,
+        "status": "PASS",
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+      },
+      {
+        "job_id": 124389144800,
+        "name": "P03 portable / windows-latest / optimize=1",
+        "optimization": 1,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BUILD-AND-INSTALL.json": {
+            "sha256": "ff600260a311b892a94e4933438ab16378ee8b1a55b5f6d89e35623e77cfddd8",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "HTTP-RECEIPT.json": {
+            "sha256": "8fb857451e800c2389ac0b627daff2b2ba56bebe7bd95d667170c131594af5c1",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "485b8120e044ea3c47dd3d9db58d73afa1d8db2f5beb7ac86eec76b2b8a48523",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "TEST-RECEIPT.json": {
+            "sha256": "2dc4827f23a6a2684593b648274dd42541695c96dc8e416b7e1960bc1efb05d4",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          }
+        },
+        "required": [
+          "BUILD-AND-INSTALL.json",
+          "HTTP-RECEIPT.json",
+          "INPUT-SHAS.json",
+          "TEST-RECEIPT.json"
+        ],
+        "run_id": 41151599065,
+        "status": "PASS",
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+      },
+      {
+        "job_id": 124389145007,
+        "name": "P03 portable / windows-latest / optimize=0",
+        "optimization": 0,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BUILD-AND-INSTALL.json": {
+            "sha256": "36cabedc373ea7c32ba556830e3e3d2edd882f8b5d24d3d1ecc6cc5c838b9f0c",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "HTTP-RECEIPT.json": {
+            "sha256": "2368227ddedcd8c01d5714ae1f5386f132e3a3b6e626a2ea2ee715d348ff01d1",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "0fb92748918918ca6e59c394be3e62309e116b7600a96d9b56c02c95f639c024",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "TEST-RECEIPT.json": {
+            "sha256": "34e04b6e95f29a031a58e06e8686684ca4c7c54fac3dd16c061dc6b0a0e5ebfd",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          }
+        },
+        "required": [
+          "BUILD-AND-INSTALL.json",
+          "HTTP-RECEIPT.json",
+          "INPUT-SHAS.json",
+          "TEST-RECEIPT.json"
+        ],
+        "run_id": 41151599065,
+        "status": "PASS",
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+      },
+      {
+        "job_id": 124389144702,
+        "name": "P03 Chromium / ubuntu-latest",
+        "optimization": 0,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BROWSER-RECEIPT.json": {
+            "sha256": "6c29d26395822f03fdb849556d13a8f47e4b86f2b756b14f2c916b8dd1bf2a8d",
+            "skips": 0,
+            "status": "PASS_SCOPED",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "5811a598110632d389a1c2599649dab22d60f4dd8c6468156b3aa0bc5ebf571e",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          }
+        },
+        "required": [
+          "BROWSER-RECEIPT.json",
+          "INPUT-SHAS.json"
+        ],
+        "run_id": 41151599065,
+        "status": "PASS",
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+      },
+      {
+        "job_id": 124389144973,
+        "name": "P03 Chromium / windows-latest",
+        "optimization": 0,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BROWSER-RECEIPT.json": {
+            "sha256": "f861bc8b3d74916fd6ee69e89d01c908b75d050b1f38129f7feb963b6203a326",
+            "skips": 0,
+            "status": "PASS_SCOPED",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "fab80a1b2519eb52e14a07325bb3b9e022d59f59c44cc8463d2f1b32db999514",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+          }
+        },
+        "required": [
+          "BROWSER-RECEIPT.json",
+          "INPUT-SHAS.json"
+        ],
+        "run_id": 41151599065,
+        "status": "PASS",
+        "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+      }
+    ],
+    "p06_browser": {
+      "browser_version": "151.0.7922.34",
+      "checks": [
+        {
+          "name": "fixture_has_repeated_ids_and_distinct_source_labels",
+          "status": "PASS"
+        },
+        {
+          "name": "exact_source_run_identity_source-1",
+          "status": "PASS"
+        },
+        {
+          "name": "exact_source_run_identity_source-2",
+          "status": "PASS"
+        },
+        {
+          "name": "old_detail_opened_from_source_A",
+          "status": "PASS"
+        },
+        {
+          "name": "valid_replacement_is_marked_changed_without_silent_cache_substitution",
+          "status": "PASS"
+        },
+        {
+          "name": "obsolete_detail_is_closed_instead_of_resolving_same_id_in_source_B",
+          "status": "PASS"
+        },
+        {
+          "name": "changed_snapshot_expires_all_stale_selection_with_explicit_warning",
+          "status": "PASS"
+        },
+        {
+          "name": "replacement_has_new_ids_and_other_source_keeps_original_ids",
+          "status": "PASS"
+        },
+        {
+          "name": "source_B_snapshot_and_records_remain_unchanged",
+          "status": "PASS"
+        },
+        {
+          "name": "fresh_explicit_B_selection_is_bound_to_new_snapshot",
+          "status": "PASS"
+        },
+        {
+          "name": "source_B_related_link_receives_keyboard_focus",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard_reference_remains_scoped_after_other_package_is_replaced",
+          "status": "PASS"
+        },
+        {
+          "name": "replacement_navigation_reflows_at_390_pixels",
+          "status": "PASS"
+        },
+        {
+          "name": "no_page_error_or_external_request",
+          "status": "PASS"
+        }
+      ],
+      "external_requests": [],
+      "full_parity_denominator": "UNKNOWN",
+      "host_browser": "NOT_RUN",
+      "installed_wheels": {
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "2a3e89858a68d2fdede1cb4fa536432c084a8aa2bbed024fd1600f058e9e73d5",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "7895ff80ff54387e2848c50cff4514041c1a9771ed87cc7461845165e2cd4b89"
+      },
+      "job_id": 124389144333,
+      "page_errors": [],
+      "run_id": 41151599009,
+      "scope": "synthetic valid-package replacement on installed viewer",
+      "source_bytes_equal_to_driver_expected": true,
+      "source_mutation": "SYNTHETIC_FIXTURE_DRIVER_METADATA_ONLY",
+      "status": "PASS_SCOPED",
+      "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+    },
+    "p06_portable": [
+      {
+        "clean_install": {
+          "optimization": 0,
+          "reindex": {
+            "generation_advanced": true,
+            "rebuild_same_records": true
+          },
+          "sdk": {
+            "installed_module": true,
+            "r4_absent": true,
+            "sdk_imported": true,
+            "viewer_absent": true
+          },
+          "source_bytes_unchanged": true,
+          "status": "PASS_SCOPED",
+          "viewer": {
+            "installed_sdk": true,
+            "installed_viewer": true,
+            "r4_absent": true
+          }
+        },
+        "guard": {
+          "error": null,
+          "status": "PASS",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+          "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+        },
+        "job_id": 124389144466,
+        "name": "P06 / ubuntu-latest / optimize=0",
+        "run_id": 41151599009,
+        "wheel": {
+          "assets": [
+            {
+              "route": "/",
+              "sha256": "61bd9a62a5df83f00dc787fbd2bd2cde9c8f798a5101c4d090992f8cefe1e030",
+              "status": 200
+            },
+            {
+              "route": "/app.js",
+              "sha256": "448a4a428f72e40bdb34075fab2e3d558d6693769bf0e5a7920d212bb7b248d3",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p02_state.js",
+              "sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.js",
+              "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.js",
+              "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+              "status": 200
+            },
+            {
+              "route": "/parity03_p03_composition.js",
+              "sha256": "291c4f19dbdd9b870caefa9ad991844d9ba1ab7817958c2079e50b88f181a7a4",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.css",
+              "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.css",
+              "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+              "status": 200
+            },
+            {
+              "route": "/style.css",
+              "sha256": "b562129e340a6b1d57289e2e148a3dd794ae6e521df62173df8500cc7e568e0f",
+              "status": 200
+            }
+          ],
+          "isolated_installed_viewer": true,
+          "optimization": 0,
+          "r4_absent": true,
+          "status": "PASS_SCOPED",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+        }
+      },
+      {
+        "clean_install": {
+          "optimization": 1,
+          "reindex": {
+            "generation_advanced": true,
+            "rebuild_same_records": true
+          },
+          "sdk": {
+            "installed_module": true,
+            "r4_absent": true,
+            "sdk_imported": true,
+            "viewer_absent": true
+          },
+          "source_bytes_unchanged": true,
+          "status": "PASS_SCOPED",
+          "viewer": {
+            "installed_sdk": true,
+            "installed_viewer": true,
+            "r4_absent": true
+          }
+        },
+        "guard": {
+          "error": null,
+          "status": "PASS",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+          "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+        },
+        "job_id": 124389144587,
+        "name": "P06 / ubuntu-latest / optimize=1",
+        "run_id": 41151599009,
+        "wheel": {
+          "assets": [
+            {
+              "route": "/",
+              "sha256": "61bd9a62a5df83f00dc787fbd2bd2cde9c8f798a5101c4d090992f8cefe1e030",
+              "status": 200
+            },
+            {
+              "route": "/app.js",
+              "sha256": "448a4a428f72e40bdb34075fab2e3d558d6693769bf0e5a7920d212bb7b248d3",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p02_state.js",
+              "sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.js",
+              "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.js",
+              "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+              "status": 200
+            },
+            {
+              "route": "/parity03_p03_composition.js",
+              "sha256": "291c4f19dbdd9b870caefa9ad991844d9ba1ab7817958c2079e50b88f181a7a4",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.css",
+              "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.css",
+              "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+              "status": 200
+            },
+            {
+              "route": "/style.css",
+              "sha256": "b562129e340a6b1d57289e2e148a3dd794ae6e521df62173df8500cc7e568e0f",
+              "status": 200
+            }
+          ],
+          "isolated_installed_viewer": true,
+          "optimization": 1,
+          "r4_absent": true,
+          "status": "PASS_SCOPED",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+        }
+      },
+      {
+        "clean_install": {
+          "optimization": 0,
+          "reindex": {
+            "generation_advanced": true,
+            "rebuild_same_records": true
+          },
+          "sdk": {
+            "installed_module": true,
+            "r4_absent": true,
+            "sdk_imported": true,
+            "viewer_absent": true
+          },
+          "source_bytes_unchanged": true,
+          "status": "PASS_SCOPED",
+          "viewer": {
+            "installed_sdk": true,
+            "installed_viewer": true,
+            "r4_absent": true
+          }
+        },
+        "guard": {
+          "error": null,
+          "status": "PASS",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+          "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+        },
+        "job_id": 124389144445,
+        "name": "P06 / windows-latest / optimize=0",
+        "run_id": 41151599009,
+        "wheel": {
+          "assets": [
+            {
+              "route": "/",
+              "sha256": "61bd9a62a5df83f00dc787fbd2bd2cde9c8f798a5101c4d090992f8cefe1e030",
+              "status": 200
+            },
+            {
+              "route": "/app.js",
+              "sha256": "448a4a428f72e40bdb34075fab2e3d558d6693769bf0e5a7920d212bb7b248d3",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p02_state.js",
+              "sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.js",
+              "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.js",
+              "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+              "status": 200
+            },
+            {
+              "route": "/parity03_p03_composition.js",
+              "sha256": "291c4f19dbdd9b870caefa9ad991844d9ba1ab7817958c2079e50b88f181a7a4",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.css",
+              "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.css",
+              "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+              "status": 200
+            },
+            {
+              "route": "/style.css",
+              "sha256": "b562129e340a6b1d57289e2e148a3dd794ae6e521df62173df8500cc7e568e0f",
+              "status": 200
+            }
+          ],
+          "isolated_installed_viewer": true,
+          "optimization": 0,
+          "r4_absent": true,
+          "status": "PASS_SCOPED",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+        }
+      },
+      {
+        "clean_install": {
+          "optimization": 1,
+          "reindex": {
+            "generation_advanced": true,
+            "rebuild_same_records": true
+          },
+          "sdk": {
+            "installed_module": true,
+            "r4_absent": true,
+            "sdk_imported": true,
+            "viewer_absent": true
+          },
+          "source_bytes_unchanged": true,
+          "status": "PASS_SCOPED",
+          "viewer": {
+            "installed_sdk": true,
+            "installed_viewer": true,
+            "r4_absent": true
+          }
+        },
+        "guard": {
+          "error": null,
+          "status": "PASS",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+          "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+        },
+        "job_id": 124389144534,
+        "name": "P06 / windows-latest / optimize=1",
+        "run_id": 41151599009,
+        "wheel": {
+          "assets": [
+            {
+              "route": "/",
+              "sha256": "61bd9a62a5df83f00dc787fbd2bd2cde9c8f798a5101c4d090992f8cefe1e030",
+              "status": 200
+            },
+            {
+              "route": "/app.js",
+              "sha256": "448a4a428f72e40bdb34075fab2e3d558d6693769bf0e5a7920d212bb7b248d3",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p02_state.js",
+              "sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.js",
+              "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.js",
+              "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+              "status": 200
+            },
+            {
+              "route": "/parity03_p03_composition.js",
+              "sha256": "291c4f19dbdd9b870caefa9ad991844d9ba1ab7817958c2079e50b88f181a7a4",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.css",
+              "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.css",
+              "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+              "status": 200
+            },
+            {
+              "route": "/style.css",
+              "sha256": "b562129e340a6b1d57289e2e148a3dd794ae6e521df62173df8500cc7e568e0f",
+              "status": 200
+            }
+          ],
+          "isolated_installed_viewer": true,
+          "optimization": 1,
+          "r4_absent": true,
+          "status": "PASS_SCOPED",
+          "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+        }
+      }
+    ],
+    "qualification_asserted_by_this_receipt": false,
+    "reference_comparisons": {
+      "job_id": 124389144191,
+      "results": [
+        {
+          "counts": {
+            "experiments": 3,
+            "projects": 2,
+            "relations": 12,
+            "runs": 4
+          },
+          "eln": "1.2+20260923 / RO-Crate 1.2 / extensions retained; no Process Run 0.6 claim",
+          "equivalent_fields": {
+            "experiments": true,
+            "projects": true,
+            "relations": true,
+            "runs": true
+          },
+          "losses_without_extensions": [
+            "review status",
+            "partial/unknown execution",
+            "typed missing-value reason",
+            "timestamp origin",
+            "declared availability"
+          ],
+          "projection_comparison_is_not_validation": true,
+          "ro_crate": "1.3 / Process Run 0.6 / Caderno 0.1.0a1 candidate",
+          "semantic_identity_claim": "Only selected domain facts match. JSON-LD contexts and profile declarations differ; byte or full RDF equality is not claimed.",
+          "synthetic_only": true
+        },
+        {
+          "expectation_met": true,
+          "fail": 0,
+          "pass": 63,
+          "passed": true,
+          "skip": 3
+        },
+        {
+          "expectation_met": true,
+          "fail": 0,
+          "pass": 63,
+          "passed": true,
+          "skip": 3
+        },
+        {
+          "expectation_met": true,
+          "fail": 5,
+          "pass": 58,
+          "passed": false,
+          "skip": 3
+        }
+      ],
+      "run_id": 41151599012,
+      "scope": "Frozen reference tooling uses roc-validator 0.13.0 offline with availability checks skipped. Three upstream reference checks are skipped per invocation; these are distinct from the zero-skip unittest/installed-suite requirement. All three expected valid/invalid outcomes matched."
+    },
+    "runs": [
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T00:42:17Z",
+        "head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "id": 41151598987,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T00:42:53Z",
+            "conclusion": "success",
+            "id": 124389144519,
+            "name": "AP04 documentation guard / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:19Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/job/124389144519"
+          },
+          {
+            "completed_at": "2026-10-31T00:50:12Z",
+            "conclusion": "success",
+            "id": 124389144698,
+            "name": "AP04 documentation guard / windows-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/job/124389144698"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:49Z",
+            "conclusion": "success",
+            "id": 124389144711,
+            "name": "AP04 documentation guard / ubuntu-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/job/124389144711"
+          },
+          {
+            "completed_at": "2026-10-31T00:50:06Z",
+            "conclusion": "success",
+            "id": 124389144758,
+            "name": "AP04 documentation guard / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987/job/124389144758"
+          }
+        ],
+        "name": "ATLAS-PARITY-04 documentation successor",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T00:50:13Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151598987"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T00:42:17Z",
+        "head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "id": 41151599009,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T00:43:02Z",
+            "conclusion": "success",
+            "id": 124389144333,
+            "name": "P06 / installed Chromium / valid package replacement",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/job/124389144333"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:30Z",
+            "conclusion": "success",
+            "id": 124389144445,
+            "name": "P06 / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/job/124389144445"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:37Z",
+            "conclusion": "success",
+            "id": 124389144466,
+            "name": "P06 / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/job/124389144466"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:36Z",
+            "conclusion": "success",
+            "id": 124389144498,
+            "name": "Spec Kit 004 / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 9
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/job/124389144498"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:59Z",
+            "conclusion": "success",
+            "id": 124389144510,
+            "name": "Spec Kit 004 / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 9
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/job/124389144510"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:21Z",
+            "conclusion": "success",
+            "id": 124389144534,
+            "name": "P06 / windows-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/job/124389144534"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:50Z",
+            "conclusion": "success",
+            "id": 124389144587,
+            "name": "P06 / ubuntu-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009/job/124389144587"
+          }
+        ],
+        "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T00:43:30Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599009"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T00:42:17Z",
+        "head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "id": 41151599065,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T00:42:46Z",
+            "conclusion": "success",
+            "id": 124389144702,
+            "name": "P03 Chromium / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389144702"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:50Z",
+            "conclusion": "success",
+            "id": 124389144800,
+            "name": "P03 portable / windows-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:21Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389144800"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:28Z",
+            "conclusion": "success",
+            "id": 124389144900,
+            "name": "P03 Spec Kit 1.2.3 / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389144900"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:41Z",
+            "conclusion": "success",
+            "id": 124389144935,
+            "name": "P03 portable / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389144935"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:57Z",
+            "conclusion": "success",
+            "id": 124389144963,
+            "name": "P03 portable / ubuntu-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:30Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389144963"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:44Z",
+            "conclusion": "success",
+            "id": 124389144970,
+            "name": "P03 Spec Kit 1.2.3 / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389144970"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:37Z",
+            "conclusion": "success",
+            "id": 124389144973,
+            "name": "P03 Chromium / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389144973"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:41Z",
+            "conclusion": "success",
+            "id": 124389145007,
+            "name": "P03 portable / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065/job/124389145007"
+          }
+        ],
+        "name": "ATLAS-PARITY03 P03 isolated qualification",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T00:43:51Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599065"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T00:42:17Z",
+        "head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "id": 41151599090,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T00:44:06Z",
+            "conclusion": "success",
+            "id": 124389144325,
+            "name": "C4 installed C0+P03 / windows-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/job/124389144325"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:59Z",
+            "conclusion": "success",
+            "id": 124389144522,
+            "name": "C4 installed C0+P03 / ubuntu-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/job/124389144522"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:38Z",
+            "conclusion": "success",
+            "id": 124389144549,
+            "name": "C4 Spec Kit 1.2.3 / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:19Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 11
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/job/124389144549"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:57Z",
+            "conclusion": "success",
+            "id": 124389144551,
+            "name": "C4 installed C0+P03 / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/job/124389144551"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:39Z",
+            "conclusion": "success",
+            "id": 124389144590,
+            "name": "C4 Spec Kit 1.2.3 / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 11
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/job/124389144590"
+          },
+          {
+            "completed_at": "2026-10-31T00:44:30Z",
+            "conclusion": "success",
+            "id": 124389144638,
+            "name": "C4 installed C0+P03 / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090/job/124389144638"
+          }
+        ],
+        "name": "ATLAS-PARITY-03 C4 full composition",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T00:44:31Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599090"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T00:42:17Z",
+        "head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "id": 41151599007,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T00:43:34Z",
+            "conclusion": "success",
+            "id": 124389144149,
+            "name": "atlas003-specification (windows-latest)",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599007/job/124389144149"
+          },
+          {
+            "completed_at": "2026-10-31T00:42:34Z",
+            "conclusion": "success",
+            "id": 124389144383,
+            "name": "atlas003-specification (ubuntu-latest)",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599007/job/124389144383"
+          }
+        ],
+        "name": "ATLAS003 Spec Kit contract checks",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T00:43:35Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599007"
+      },
+      {
+        "conclusion": "cancelled",
+        "created_at": "2026-10-31T00:42:17Z",
+        "head_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+        "id": 41151599012,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T00:42:51Z",
+            "conclusion": "success",
+            "id": 124389144191,
+            "name": "Public standards comparison and RO-Crate 1.3 reference",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:19Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 9
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/job/124389144191"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:30Z",
+            "conclusion": "success",
+            "id": 124389144345,
+            "name": "ubuntu-latest / Python optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:19Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/job/124389144345"
+          },
+          {
+            "completed_at": "2026-10-31T00:57:34Z",
+            "conclusion": "cancelled",
+            "id": 124389144379,
+            "name": "windows-latest / Python optimize=0",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T00:57:28Z",
+                "conclusion": "cancelled",
+                "name": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+                "started_at": "2026-10-31T00:53:09Z"
+              },
+              {
+                "completed_at": "2026-10-31T00:57:28Z",
+                "conclusion": "skipped",
+                "name": "Verify installed wheel assets and fixed routes",
+                "started_at": "2026-10-31T00:57:28Z"
+              },
+              {
+                "completed_at": "2026-10-31T00:57:30Z",
+                "conclusion": "skipped",
+                "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+                "started_at": "2026-10-31T00:57:30Z"
+              },
+              {
+                "completed_at": "2026-10-31T00:57:30Z",
+                "conclusion": "skipped",
+                "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                "started_at": "2026-10-31T00:57:30Z"
+              }
+            ],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "cancelled": 1,
+              "skipped": 3,
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/job/124389144379"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:53Z",
+            "conclusion": "success",
+            "id": 124389144413,
+            "name": "ubuntu-latest / Python optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/job/124389144413"
+          },
+          {
+            "completed_at": "2026-10-31T00:43:36Z",
+            "conclusion": "success",
+            "id": 124389144452,
+            "name": "Installed viewer / Chromium desktop and mobile",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T00:42:24Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 15
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/job/124389144452"
+          },
+          {
+            "completed_at": "2026-10-31T00:57:43Z",
+            "conclusion": "cancelled",
+            "id": 124389144600,
+            "name": "windows-latest / Python optimize=1",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T00:57:38Z",
+                "conclusion": "cancelled",
+                "name": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+                "started_at": "2026-10-31T00:54:53Z"
+              },
+              {
+                "completed_at": "2026-10-31T00:57:38Z",
+                "conclusion": "skipped",
+                "name": "Verify installed wheel assets and fixed routes",
+                "started_at": "2026-10-31T00:57:38Z"
+              },
+              {
+                "completed_at": "2026-10-31T00:57:39Z",
+                "conclusion": "skipped",
+                "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+                "started_at": "2026-10-31T00:57:39Z"
+              },
+              {
+                "completed_at": "2026-10-31T00:57:39Z",
+                "conclusion": "skipped",
+                "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                "started_at": "2026-10-31T00:57:39Z"
+              }
+            ],
+            "started_at": "2026-10-31T00:42:20Z",
+            "status": "completed",
+            "step_conclusions": {
+              "cancelled": 1,
+              "skipped": 3,
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012/job/124389144600"
+          }
+        ],
+        "name": "ATLAS021 candidate verification",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T00:57:43Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41151599012"
+      }
+    ],
+    "schema": "atlas-parity04-f2-b-ci-verification-v1",
+    "speckit_jobs": [
+      {
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144149,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "atlas003-specification (windows-latest)",
+        "official_skills": 10,
+        "run_id": 41151599007
+      },
+      {
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144383,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "atlas003-specification (ubuntu-latest)",
+        "official_skills": 10,
+        "run_id": 41151599007
+      },
+      {
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144498,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "Spec Kit 004 / ubuntu-latest",
+        "official_skills": 10,
+        "run_id": 41151599009
+      },
+      {
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144510,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "Spec Kit 004 / windows-latest",
+        "official_skills": 10,
+        "run_id": 41151599009
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144549,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "C4 Spec Kit 1.2.3 / windows-latest",
+        "official_skills": 10,
+        "run_id": 41151599090
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144590,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "C4 Spec Kit 1.2.3 / ubuntu-latest",
+        "official_skills": 10,
+        "run_id": 41151599090
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144900,
+        "name": "P03 Spec Kit 1.2.3 / windows-latest",
+        "run_id": 41151599065
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124389144970,
+        "name": "P03 Spec Kit 1.2.3 / ubuntu-latest",
+        "run_id": 41151599065
+      }
+    ],
+    "status": "PARTIAL_CI_5_WORKFLOWS_SUCCESS_1_CANCELLED",
+    "terminal_summary": {
+      "cancelled": 1,
+      "cancelled_jobs": 2,
+      "failed_jobs": 0,
+      "jobs": 33,
+      "success": 5,
+      "successful_jobs": 31,
+      "workflows": 6
+    },
+    "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+    "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
+    "verification_role": "B CI engineer and author of dispatch controls; independent review is separate"
+  },
   "mission": "AP04-F2-DOC-CI-REPAIR-01",
+  "next_candidate": {
+    "executed_in_this_candidate": false,
+    "guard_blob": "68ff00ad8722486fd67568f481212b80e59bdb43",
+    "guard_sha256": "c95c6a1a5386ea9f800f74e420790213276efab72c074babb370abe4f0164edd",
+    "mechanism": "Batch inert Git object reads by exact OID; no PASS cache, removed cases, timeout/pin changes or product changes",
+    "new_regression_methods_defined": 31,
+    "status": "PENDING_REAL_ACTIONS_AND_FINAL_SHA_REVIEW",
+    "test_blob": "7d03c30213a782ebd58b48d3635b07c53a65d9ba",
+    "test_sha256": "988204e7e06cb671bba279da0acaabe1a8d25e0fcb244547e6bb1cf49a69d0a5"
+  },
   "original_runs": [
     {
       "conclusion": "failure",
@@ -93,5 +2791,5 @@
   },
   "original_tree": "611306f28557f5d9e27db49108880004399f5768",
   "schema": "atlas-ap04-f2-ci-evidence-v1",
-  "status": "PENDING_REAL_ACTIONS_AND_INDEPENDENT_FINAL_SHA_REVIEW"
+  "status": "REPAIR_CONTINUES_AFTER_WINDOWS_INSTALLED_SUITE_CANCELLATION"
 }

@@ -1,5 +1,16 @@
 {
   "actual_test_ids": [],
+  "batch_candidate": {
+    "additional_counterproofs": [
+      "Binary blob/commit framing preserves exact bytes and request order",
+      "Reject missing/truncated/extra/wrong OID/type/size/content frames",
+      "Reject unsafe requests, byte/request limits and malformed commit headers",
+      "Prior revisions match exact independently reviewed SHA9777 Git objects"
+    ],
+    "new_methods_defined": 31,
+    "retained_methods": 27,
+    "status": "NOT_YET_EXECUTED"
+  },
   "coverage": [
     "Exact C4/AP04/F1/F2 identities and legitimate repair",
     "Unauthorized path in every epoch and post-F2, including reverted changes",
@@ -11,6 +22,53 @@
     "Ancestry errors/lookalike branch/wrong lineage/pins/bypass/skip/xfail/subset/stale receipt",
     "Preflight literal-table expressions, non-UTF8 codec and executable statements sharing excluded lines"
   ],
+  "first_cycle": {
+    "all_four_jobs": "completed/success",
+    "ap04_job_ids": [
+      124389144519,
+      124389144711,
+      124389144758,
+      124389144698
+    ],
+    "ap04_run_id": 41151598987,
+    "failures": 0,
+    "inherited_ap04_cases_per_cell": 23,
+    "loader_errors": 0,
+    "new_cases_per_cell": 27,
+    "new_test_ids": [
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_documents_deletion_and_rename_are_red",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_exact_frozen_epoch_tree_and_parent_are_required",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_overlay_must_be_exact_canonical_and_owned",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_protected_governance_product_audits_manifests_and_reader_are_red",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_mode_removal_and_unexpected_parent_are_red",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_transient_unauthorized_change_reverted_remains_red",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_transient_unapproved_control_revision_reverted_remains_red",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+      "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_non_utf8_codec_cannot_hide_execution",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_security_guards_contain_no_optimized_away_assert",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+      "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
+    ],
+    "new_test_set_sha256": "55916e8f1606be03721fdba2393bbc8f4f279cfdc25382754368ea741fadc0a8",
+    "skips": 0,
+    "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+    "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+  },
   "inherited_ids": {
     "ap04": 23,
     "c4": 168,
@@ -26,6 +84,6 @@
     "windows-O"
   ],
   "schema": "atlas-ap04-f2-negative-tests-v1",
-  "status": "IMPLEMENTED_PENDING_REAL_ACTIONS",
+  "status": "FIRST_CYCLE_27_PASS_FOUR_CELLS_BATCH_CANDIDATE_PENDING",
   "synthetic_tests_do_not_replace_actions": true
 }

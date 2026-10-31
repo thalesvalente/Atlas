@@ -19,7 +19,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 GUARD_PATH = "scripts/qa/atlas_parity04_f2_doc_ci.py"
 TEST_PATH = "tests/qa/test_atlas_parity04_f2_doc_ci.py"
-APPROVED_GUARD_SOURCE = "b02d4c03e38722ebf7f3e61fa056afb90cb1e2d672a3e01d63c04746623078a9"
+APPROVED_GUARD_SOURCE = "2953086f89925df18b526c37a64dd07e9b7f0c8fcfcfbe4a2bb52eb74ffdccc4"
 APPROVED_EXTERNAL_CONTROLS = {
     ".github/workflows/atlas-parity02.yml": "d165bdd580d748418fdf24cbc513f1442ac2744874f30a2219169c60c11262a7",
     ".github/workflows/atlas-parity03-p03-gates.yml": "d6f4e39d86e3ee8d3fbc81cec09f4b42b476fa4c5b3c0ca7a694c7ca9bcde652",
@@ -442,6 +442,28 @@ class F2IndependentPreflightTests(unittest.TestCase):
         self.assertEqual(dict(GUARD.APPROVED_CONTROL_HASHES), expected)
         GUARD.verify_controls(ROOT, GUARD.APPROVED_CONTROL_HASHES, GUARD.CONTROL_PATHS)
 
+    def test_prior_control_revisions_match_exact_reviewed_9777_git_objects(self):
+        reviewed = "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
+        expected = (
+            ("scripts/qa/atlas_parity04_f2_doc_ci.py",
+             "a7d13716ed52643aa4ff3662e543a5b316023d5516679457fc38003fa52a5155"),
+            ("tests/qa/test_atlas_parity04_f2_doc_ci.py",
+             "6d3f18e3f8dfd95521e32b775ac73d9387053df3b2b8d2fd1e3a4eb24cc54442"),
+        )
+        blobs = {
+            "scripts/qa/atlas_parity04_f2_doc_ci.py": "64ded18f97e38cdabe4ed45f5004a19183b979ae",
+            "tests/qa/test_atlas_parity04_f2_doc_ci.py": "398db6f8315a0d10f026120f3e935be8c2715e63",
+        }
+        self.assertEqual(GUARD.APPROVED_PRIOR_CONTROL_REVISIONS, expected)
+        records = GUARD.tree_records(ROOT, reviewed, blobs)
+        objects = GUARD.git_objects(ROOT, [(blobs[path], "blob") for path, _digest in expected])
+        for path, digest in expected:
+            with self.subTest(path=path):
+                self.assertEqual(records[path], ("100644", "blob", blobs[path]))
+                self.assertEqual(hashlib.sha256(objects[blobs[path]]).hexdigest(), digest)
+        self.assertNotEqual(hashlib.sha256((ROOT / TEST_PATH).read_bytes()).hexdigest(), expected[1][1])
+
+
     def test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity(self):
         expected = {GUARD.C4_SHA: "C4_BASELINE",
                     GUARD.AP04_SHA: "AP04_DOCUMENTATION_SNAPSHOT",
@@ -510,6 +532,80 @@ class F2IndependentPreflightTests(unittest.TestCase):
         self.assertIn(b"merge-base --is-ancestor", original)
         self.assertIn(b"atlas_parity04_f2_doc_ci.py", original)
         self.assertIn(b"atlas_parity04_doc_ci.py", original)
+
+
+class F2GitObjectBatchTests(unittest.TestCase):
+    @staticmethod
+    def frame(kind, payload):
+        header = kind.encode("ascii") + b" " + str(len(payload)).encode("ascii")
+        oid = hashlib.sha1(header + b"\0" + payload).hexdigest()
+        return oid, oid.encode("ascii") + b" " + header + b"\n" + payload + b"\n"
+
+    def test_batch_preserves_binary_blob_and_commit_payloads_in_request_order(self):
+        blob = b"inert\0binary\nbytes\xff\n"
+        commit = (b"tree " + b"a" * 40 + b"\nparent " + b"b" * 40
+                  + b"\nauthor Synthetic <synthetic@example.invalid> 0 +0000\n"
+                  + b"committer Synthetic <synthetic@example.invalid> 0 +0000\n\nmessage\n")
+        blob_oid, blob_frame = self.frame("blob", blob)
+        commit_oid, commit_frame = self.frame("commit", commit)
+        objects = GUARD.parse_object_batch(blob_frame + commit_frame,
+                                           [(blob_oid, "blob"), (commit_oid, "commit")])
+        self.assertEqual(objects[blob_oid], blob)
+        self.assertEqual(objects[commit_oid], commit)
+        self.assertEqual(GUARD.commit_identity(objects[commit_oid]), ("a" * 40, ["b" * 40]))
+        self.assertEqual(GUARD.parse_object_batch(b"", []), {})
+
+    def test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content(self):
+        oid, frame = self.frame("blob", b"safe\0\n")
+        header, payload = frame.split(b"\n", 1)
+        cases = [
+            (b"", [(oid, "blob")]),
+            (header, [(oid, "blob")]),
+            (frame[:-1], [(oid, "blob")]),
+            (frame[:-2], [(oid, "blob")]),
+            (frame + b"extra", [(oid, "blob")]),
+            (oid.encode("ascii") + b" missing\n", [(oid, "blob")]),
+            (frame, [("0" * 40, "blob")]),
+            (frame, [(oid, "commit")]),
+            (header.replace(b"blob", b"tree") + b"\n" + payload, [(oid, "blob")]),
+            (header.rsplit(b" ", 1)[0] + b" 06\n" + payload, [(oid, "blob")]),
+            (header.rsplit(b" ", 1)[0] + b" -1\n" + payload, [(oid, "blob")]),
+            (header.rsplit(b" ", 1)[0] + b" 1\n" + payload, [(oid, "blob")]),
+            (header.rsplit(b" ", 1)[0] + b" " + str(GUARD.MAX_OBJECT_BYTES + 1).encode("ascii")
+             + b"\n" + payload, [(oid, "blob")]),
+            (frame.replace(b"safe", b"evil"), [(oid, "blob")]),
+            (frame + frame, [(oid, "blob")]),
+        ]
+        for raw, requests in cases:
+            with self.subTest(raw=raw[:75], requests=requests):
+                with self.assertRaises(GUARD.GuardError):
+                    GUARD.parse_object_batch(raw, requests)
+
+    def test_batch_requests_and_commit_headers_fail_closed(self):
+        oid, frame = self.frame("blob", b"safe")
+        with self.assertRaisesRegex(GUARD.GuardError, "batch byte limit"):
+            GUARD.parse_object_batch(bytes(GUARD.MAX_BATCH_BYTES + 1), [])
+        oversized = (oid.encode("ascii") + b" blob "
+                     + str(GUARD.MAX_OBJECT_BYTES + 1).encode("ascii") + b"\n")
+        with self.assertRaisesRegex(GUARD.GuardError, "approved byte limit"):
+            GUARD.parse_object_batch(oversized, [(oid, "blob")])
+        for requests in (
+            [("HEAD:private", "blob")], [(oid + "\n", "blob")],
+            [(oid, "tree")], [(oid, "blob"), (oid, "commit")],
+            [(oid, "blob")] * (GUARD.MAX_BATCH_REQUESTS + 1),
+        ):
+            with self.subTest(requests=requests[:2]):
+                with self.assertRaises(GUARD.GuardError):
+                    GUARD.parse_object_batch(frame, requests)
+        for raw in (
+            b"tree " + b"a" * 40,
+            b"tree " + b"a" * 40 + b"\ntree " + b"b" * 40 + b"\n\nmessage",
+            b"parent " + b"b" * 40 + b"\ntree " + b"a" * 40 + b"\n\nmessage",
+            b"tree " + b"a" * 40 + b"\nparent invalid\n\nmessage",
+        ):
+            with self.subTest(raw=raw):
+                with self.assertRaises(GUARD.GuardError):
+                    GUARD.commit_identity(raw)
 
 
 class ReceiptResult(unittest.TextTestResult):

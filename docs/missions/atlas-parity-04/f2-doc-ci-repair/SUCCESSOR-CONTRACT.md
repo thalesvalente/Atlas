@@ -31,3 +31,9 @@ O controle C4 continua verificando seus INPUTS, COMPOSITION, COMPOSITION_TREE, P
 O auditor P06 permanece inalterado, com FAIL histórico exato para o path/blob ADR-0003 já publicado. Nenhuma liberação de docs/architecture ou outro diretório. GATES/constituição/ADRs/plano/reader003/protocolo/fixtures/fontes permanecem intactos. ADR-0003 v0.2 e descriptor 0.2.0 continuam PROPOSED_NOT_APPROVED; G4 pendente; nenhuma fase F3–F6 é iniciada.
 
 Sucesso exige seis workflows completed/success no mesmo SHA FINAL, zero skips/loader errors/falhas, todos os IDs herdados e revisão C do próprio SHA terminal. Se recibos forem acrescentados depois do SHA técnico, o commit posterior exige nova CI e revisão. A conclusão externa na PR identifica esse SHA sem ciclo de commits para embutir o próprio hash.
+
+## Leitura Git em lote após o primeiro ciclo
+
+O primeiro ciclo 9777 passou nos guards e em cinco workflows, mas ATLAS021 Windows não completou a segunda suíte antes do limite preservado de 15 minutos. A correção agrupa leituras por OID exato usando cat-file --batch, em vez de abrir um processo por objeto. Cada frame valida identidade, tipo, tamanho canônico/limites, payload, LF, conteúdo SHA-1 e ausência de trailing bytes. As árvores/modes e todos os pais/revisões continuam conferidos em cada chamada, sem cache de resultados PASS.
+
+APPROVED_PRIOR_CONTROL_REVISIONS admite somente os dois hashes anteriores de guard/testes publicados no SHA 9777 e revisados independentemente; a nova contraprova reconcilia SHA/tree/blobs/bytes e impede substituir os pins antigos por hashes novos. Alterar/recalcular o overlay não aprova versões de controles. A mudança permanece nos mesmos dezenove paths e não altera AP04-POR, timeouts, pins, IDs herdados ou controles de produto.

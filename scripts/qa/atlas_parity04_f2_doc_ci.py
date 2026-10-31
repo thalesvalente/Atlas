@@ -326,7 +326,10 @@ REPAIR_PATHS = frozenset(item["path"] for item in REPAIR_PURPOSES)
 WORKFLOW_PATHS = frozenset(path for path in MODIFIED_REPAIR_PATHS if path.endswith(".yml")) | {".github/workflows/atlas-parity03-c4.yml"}
 CONTROL_PATHS = WORKFLOW_PATHS | {"scripts/qa/atlas_parity03_c4_ci.py", TEST_PATH}
 # Prior control revisions require explicit independent review and a source-authorized pin.
-APPROVED_PRIOR_CONTROL_REVISIONS = ()
+APPROVED_PRIOR_CONTROL_REVISIONS = (
+    ("scripts/qa/atlas_parity04_f2_doc_ci.py", "a7d13716ed52643aa4ff3662e543a5b316023d5516679457fc38003fa52a5155"),
+    ("tests/qa/test_atlas_parity04_f2_doc_ci.py", "6d3f18e3f8dfd95521e32b775ac73d9387053df3b2b8d2fd1e3a4eb24cc54442"),
+)
 # BEGIN_APPROVED_CONTROL_HASHES
 APPROVED_CONTROL_HASHES = (
     (".github/workflows/atlas-parity02.yml", "d165bdd580d748418fdf24cbc513f1442ac2744874f30a2219169c60c11262a7"),
@@ -336,7 +339,7 @@ APPROVED_CONTROL_HASHES = (
     (".github/workflows/atlas003-speckit.yml", "cea45f4f2bb97999e69335ea295bfddded25fcae7bacb37ea0ef711c420ba388"),
     (".github/workflows/atlas021.yml", "3214f4bcb2a8515a3318b007e41ac171617e74b95f30d8d9bb542a26358087ea"),
     ("scripts/qa/atlas_parity03_c4_ci.py", "940e0960e055235abbfc95e85ae8e4a817c5ad934206205299d228aea035639f"),
-    ("tests/qa/test_atlas_parity04_f2_doc_ci.py", "6d3f18e3f8dfd95521e32b775ac73d9387053df3b2b8d2fd1e3a4eb24cc54442"),
+    ("tests/qa/test_atlas_parity04_f2_doc_ci.py", "988204e7e06cb671bba279da0acaabe1a8d25e0fcb244547e6bb1cf49a69d0a5"),
 )
 # END_APPROVED_CONTROL_HASHES
 
@@ -384,6 +387,82 @@ def tree_entry(root, ref, path):
     return mode, kind, blob
 
 
+MAX_OBJECT_BYTES = 4 * 1024 * 1024
+MAX_BATCH_BYTES = 64 * 1024 * 1024
+MAX_BATCH_REQUESTS = 4096
+
+
+def validate_object_requests(requests):
+    require(len(requests) <= MAX_BATCH_REQUESTS, "Git object batch request limit exceeded")
+    kinds = {}
+    for oid, kind in requests:
+        require(isinstance(oid, str) and re.fullmatch(r"[0-9a-f]{40}", oid) is not None,
+                "Git object request must use an exact SHA-1")
+        require(kind in {"blob", "commit"}, "Git object request type is not approved")
+        require(oid not in kinds or kinds[oid] == kind, "Git object request has conflicting types")
+        kinds[oid] = kind
+
+
+def parse_object_batch(raw, requests):
+    validate_object_requests(requests)
+    require(len(raw) <= MAX_BATCH_BYTES, "Git object batch byte limit exceeded")
+    offset = 0
+    objects = {}
+    for expected_oid, expected_kind in requests:
+        end = raw.find(b"\n", offset)
+        require(end >= offset, "Truncated Git object batch header")
+        match = re.fullmatch(rb"([0-9a-f]{40}) (blob|commit) (0|[1-9][0-9]*)",
+                             raw[offset:end])
+        require(match is not None, "Malformed or missing Git object batch header")
+        oid, kind, size_raw = match.groups()
+        require(oid.decode("ascii") == expected_oid and kind.decode("ascii") == expected_kind,
+                "Git object batch identity or type differs")
+        size = int(size_raw)
+        require(size <= MAX_OBJECT_BYTES, "Git object exceeds approved byte limit")
+        offset = end + 1
+        require(offset + size < len(raw), "Truncated Git object batch payload")
+        payload = raw[offset:offset + size]
+        offset += size
+        require(raw[offset:offset + 1] == b"\n", "Git object batch separator differs")
+        offset += 1
+        actual_oid = hashlib.sha1(kind + b" " + size_raw + b"\0" + payload).hexdigest()
+        require(actual_oid == expected_oid, "Git object batch content does not match its SHA-1")
+        objects[expected_oid] = payload
+    require(offset == len(raw), "Trailing Git object batch bytes")
+    return objects
+
+
+def git_objects(root, requests):
+    requests = list(requests)
+    validate_object_requests(requests)
+    if not requests:
+        return {}
+    request_bytes = "".join(oid + "\n" for oid, _kind in requests).encode("ascii")
+    completed = subprocess.run(
+        ["git", "cat-file", "--batch"], cwd=root, input=request_bytes,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+    require(completed.returncode == 0,
+            "Git object batch read failed: " + completed.stderr.decode("utf-8", "replace"))
+    return parse_object_batch(completed.stdout, requests)
+
+
+def commit_identity(raw):
+    headers, separator, _message = raw.partition(b"\n\n")
+    require(separator == b"\n\n", "Git commit object has no header boundary")
+    lines = headers.split(b"\n")
+    trees = [line for line in lines if line.startswith(b"tree ")]
+    require(len(trees) == 1 and lines[0] == trees[0]
+            and re.fullmatch(rb"tree [0-9a-f]{40}", trees[0]) is not None,
+            "Git commit tree header differs")
+    parents = []
+    for line in lines:
+        if line.startswith(b"parent "):
+            require(re.fullmatch(rb"parent [0-9a-f]{40}", line) is not None,
+                    "Git commit parent header differs")
+            parents.append(line[7:].decode("ascii"))
+    return trees[0][5:].decode("ascii"), parents
+
+
 def tree_records(root, ref, paths):
     raw = git(root, "ls-tree", "-r", "-z", ref, "--", *sorted(paths), binary=True)
     records = {}
@@ -417,13 +496,14 @@ def delta(root, before, after):
 
 def verify_epochs(root, epochs, first_parent):
     previous = first_parent
-    for commit, tree, parent in epochs:
+    for commit, _tree, parent in epochs:
         require(parent == previous, "Frozen epoch genealogy is not linear")
-        require(git(root, "rev-parse", commit + "^{tree}") == tree,
-                "Frozen epoch tree changed: " + commit)
-        require(git(root, "rev-list", "--parents", "-n", "1", commit).split()
-                == [commit, parent], "Frozen epoch parent changed: " + commit)
         previous = commit
+    objects = git_objects(root, [(commit, "commit") for commit, _tree, _parent in epochs])
+    for commit, tree, parent in epochs:
+        actual_tree, parents = commit_identity(objects[commit])
+        require(actual_tree == tree, "Frozen epoch tree changed: " + commit)
+        require(parents == [parent], "Frozen epoch parent changed: " + commit)
     return previous
 
 
@@ -439,32 +519,38 @@ def verify_documents(root, documents, head="HEAD"):
                 "Document source identity differs: " + path)
         require(current.get(path) == ("100644", "blob", item["blob"]),
                 "Frozen F1/F2 document changed: " + path)
-        require(sha256(object_bytes(root, head, path)) == item["sha256"],
-                "Frozen F1/F2 document hash differs: " + path)
+    objects = git_objects(root, [(item["blob"], "blob") for item in documents])
+    for item in documents:
+        require(sha256(objects[item["blob"]]) == item["sha256"],
+                "Frozen F1/F2 document hash differs: " + item["path"])
 
 
 def verify_repair_history(root, baseline, head, repair_paths, approved_revisions=None):
     require(is_ancestor(root, baseline, head), "Candidate lacks exact F2 ancestry")
     previous = baseline
     history = []
-    commits = git(root, "rev-list", "--reverse", baseline + ".." + head).splitlines()
-    for commit in commits:
-        require(git(root, "rev-list", "--parents", "-n", "1", commit).split()
-                == [commit, previous], "Repair history is not single-parent fast-forward")
+    control_revisions = []
+    records = git(root, "rev-list", "--parents", "--reverse", baseline + ".." + head).splitlines()
+    for record in records:
+        parts = record.split()
+        require(bool(parts), "Repair history contains an empty commit record")
+        commit = parts[0]
+        require(parts == [commit, previous], "Repair history is not single-parent fast-forward")
         changes = delta(root, previous, commit)
         require(set(changes) <= set(repair_paths),
                 "Repair history contains unauthorized paths: " + str(sorted(set(changes) - set(repair_paths))))
-        for path, (old_mode, new_mode, _old, _new, status) in changes.items():
+        for path, (old_mode, new_mode, _old, new_oid, status) in changes.items():
             require(status in {"A", "M"}, "Repair history contains removal/rename: " + path)
             require(new_mode == "100644" and old_mode in {"000000", "100644"},
                     "Repair history contains forbidden mode/type: " + path)
             if approved_revisions is not None and path in approved_revisions:
-                revision_hash = sha256(object_bytes(root, commit, path))
-                require(revision_hash in approved_revisions[path],
-                        "Independent control revision authorization failed in history: " + path + "@" + commit)
-
+                control_revisions.append((path, commit, new_oid))
         history.append({"commit": commit, "parent": previous, "paths": sorted(changes)})
         previous = commit
+    objects = git_objects(root, [(oid, "blob") for _path, _commit, oid in control_revisions])
+    for path, commit, oid in control_revisions:
+        require(sha256(objects[oid]) in approved_revisions[path],
+                "Independent control revision authorization failed in history: " + path + "@" + commit)
     return history
 
 
