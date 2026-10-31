@@ -339,7 +339,14 @@ class F3BTables(unittest.TestCase):
             elif kind=='resolved_collision': t['record_binding'].update(declared_id='ROW-SYN-COLLISION',target_navigation_id='nav:a-row-14')
             elif kind=='ttl': d['snapshot']['expires_at']='2026-10-30T15:01:00Z'
             elif kind=='expired': d['snapshot']['expires_at']='2026-10-30T12:01:01Z'
-            elif kind=='table_quota': d['tables']=[copy.deepcopy(t) for _ in range(129)]
+            elif kind=='table_quota':
+                small=copy.deepcopy(d['tables'][4])
+                small['columns']=[]
+                d['tables']=[]
+                for i in range(129):
+                    item=copy.deepcopy(small)
+                    item['identity'].update(navigation_id=f'nav:quota-table-{i}',locator=f'/tables/{i}')
+                    d['tables'].append(item)
             return d
         kinds = ['version','extra_property','not_run','failed_semantics','numeric_trailing_newline','numeric_coercion','row_width',
                  'ordinal','duplicate_navigation','navigation_promoted','unadmitted_native','utf8_cell_quota',
@@ -349,6 +356,8 @@ class F3BTables(unittest.TestCase):
             with self.subTest(mutation=kind):
                 self.assertFalse(self.page.evaluate('(d)=>component.setTables(d)',mutate(kind)))
                 self.assertTrue(self.page.locator('[data-f3b="error"]').inner_text())
+                if kind=='table_quota':
+                    self.assertIn('SCHEMA_MAX_ITEMS',self.state()['error'])
                 self.assertEqual(self.state()['selection'],token)
                 self.assertEqual(self.exported(), self.descriptor)
 
@@ -386,7 +395,7 @@ class F3BTables(unittest.TestCase):
                 self.assertFalse(overflow,'Table overflow escaped viewport')
                 name = f'chromium-{width}.png'
                 file = OUT / name
-                self.page.locator('#mount table').scroll_into_view_if_needed()
+                self.page.locator('.atlas-f3b .f3b-viewport').evaluate('(v)=>{v.scrollTop=0;v.scrollLeft=0;v.scrollIntoView({block:"start",inline:"nearest"});}')
                 self.assertFalse(self.page.evaluate('document.documentElement.scrollWidth > window.innerWidth + 1'))
                 self.page.screenshot(path=str(file),full_page=False)
                 raw = file.read_bytes()
@@ -453,6 +462,20 @@ class F3BTables(unittest.TestCase):
                 self.assertEqual(row.get_attribute('data-native-collision'),'true')
                 self.assertIn('COLLISION (DERIVED_FOR_PRESENTATION)',row.inner_text())
         self.assertEqual(self.exported(),d)
+
+    def test_24_descriptor_byte_quota_rejects_before_clone_atomically(self):
+        token=self.token()
+        self.assertTrue(self.select(token))
+        accepted=self.page.evaluate('''() => {
+            const candidate=JSON.parse(component.exportJSON());
+            candidate.tables[0].rows[0].cells[17].literal='Q'.repeat(33554433);
+            return component.setTables(candidate);
+        }''')
+        self.assertFalse(accepted)
+        self.assertIn('QUOTA_DESCRIPTOR_BYTES',self.state()['error'])
+        self.assertTrue(self.page.locator('[data-f3b="error"]').inner_text())
+        self.assertEqual(self.state()['selection'],token)
+        self.assertEqual(self.exported(),self.descriptor)
 
 
 class ReceiptResult(unittest.TextTestResult):
