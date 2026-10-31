@@ -1,0 +1,15 @@
+# Revisão independente — AP04-F2-DOC-CI-REPAIR-01
+
+Revisor nativo real: /root/review_c, somente leitura, sem autoria. Parecer técnico **PASS, nenhum finding bloqueante aberto**, vinculado a **bd2166651f159e70a8165e0f12c8ad2a3270a0d6**, tree **fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5**, aos seis runs próprios completed/success e 37 logs de jobs success registrados em CI-EVIDENCE.json.
+
+C conferiu independentemente o prompt obrigatório completo, seus oito blocos, marcador, blob 370a07b809c98f2bf771cfad0fe89427561bca2d, 11.285 bytes e SHA256 7eeaa481a628d93f3af26dcf59f25f12eb8d8716d7bd2d51ecb06e30d3053201. A revisão de plano considerou o reparo compatível com AP04-POR-v1.0-draft, mantendo ARC/ADRs/GATES e os critérios. Nenhum desvio ou aprovação arquitetural foi inferido.
+
+A revisão verificou história/parents/árvores, exatos 19 paths 6M+13A desde 04373, modos 100644, 19 documentos F1/F2 imutáveis, demais blobs congelados, 37 entradas do manifesto, overlay literal, controles independentes, cinco revisões prévias autorizadas e preservação do guard antigo/seus 23 testes/manifests. Hash refeito isoladamente não autoriza semântica. C conferiu as 32 contraprovas, 191 IDs herdados e 223 IDs completos nas quatro células fonte e quatro instaladas, sem skips/falhas/loader errors.
+
+Findings fechados: C-001 restaurou checkpoint técnico positivo em cada cenário; C-002 moveu o runner e seu preflight independente ao módulo de testes; C-003 exige hash aprovado de cada revisão intermediária, mesmo revertida; C-004 corrigiu preenchimento da tabela atual sem sobrescrever pins históricos em candidato não publicado. Todos estão cobertos e passando no SHA técnico; candidatos não integrados não entraram na tabela de cinco priors.
+
+Os ciclos 9777 e f642 não receberam qualificação global: houve cancelamento Windows instalado por orçamento. A correção por cat-file --batch preserva identidade/tipo/tamanho/framing/SHA1 e toda história, sem cache PASS. A matriz literal source/installed mantém oito suítes completas e dez pins em ordem, timeout 15, fail-fast=false, clean-install/R4 ausente/assets e uploads. Skips de steps inativos são roteamento, não casos. C considerou essa distribuição compatível com o plano.
+
+Limite: C inspecionou fontes, logs/recibos, IDs/contagens, hashes/nomes/tamanhos e uploads de artefatos/screenshots. Não abriu ZIP/PNG/XML literal nem avaliou pixels manualmente. O comparador upstream mantém os resultados offline esperados, sem certificação completa de Process Run 0.6/FHIR. A exceção de leitura local de metadados foi relatada pelo coordenador e não auditada independentemente por C; ela foi excluída da evidência qualificadora.
+
+**Fechamento do commit que contém estes recibos:** requer nova revisão C do próprio SHA/tree, seus documentos/delta/manifests e seus seis workflows/37 jobs terminais. Esse parecer e os runs finais serão registrados externamente na PR #15, sem herança deste parecer técnico nem commit autorreferente. Revisão de agente não é aprovação humana; ADR-0003/descriptor e G4 continuam pendentes.

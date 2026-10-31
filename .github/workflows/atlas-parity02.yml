@@ -57,7 +57,17 @@ jobs:
       - name: Collect and run P06 behavioral checks and counterexamples
         run: python -m unittest discover -s tests/qa -p 'test_atlas_parity02_p06_*.py' -v
       - name: Preserve the frozen boundary or verify the one exact AP04 successor
-        run: python scripts/qa/atlas_parity04_doc_ci.py boundary --output .ci-clean-inputs.json
+        shell: bash
+        run: |
+          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+            python scripts/qa/atlas_parity04_f2_doc_ci.py boundary --output .ci-clean-inputs.json
+          else
+            ap04_ancestry_status=$?
+            if [ "$ap04_ancestry_status" -ne 1 ]; then
+              exit "$ap04_ancestry_status"
+            fi
+            python scripts/qa/atlas_parity04_doc_ci.py boundary --output .ci-clean-inputs.json
+          fi
       - name: Reuse installed-wheel independence and immutability harness
         run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-p06"
       - name: Verify actual wheel contents against served bytes and origin policy
@@ -98,10 +108,19 @@ jobs:
       - name: Install the official CLI in the isolated CI runner
         run: python -m pip install specify-cli==1.2.3
       - name: Verify existing managed assets without weakening the audit
+        shell: bash
         run: |
           specify version --json
           specify integration status --json
-          python scripts/qa/atlas_parity04_doc_ci.py speckit
+          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+            python scripts/qa/atlas_parity04_f2_doc_ci.py speckit
+          else
+            ap04_ancestry_status=$?
+            if [ "$ap04_ancestry_status" -ne 1 ]; then
+              exit "$ap04_ancestry_status"
+            fi
+            python scripts/qa/atlas_parity04_doc_ci.py speckit
+          fi
       - name: Resolve the 004 specification without persisting the active pointer
         run: |
           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks

@@ -118,9 +118,22 @@ def tree(ref):
     return result
 
 
+def is_f2_documentation_successor():
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor",
+         "04373bb910db2e6215cc8bc4212093b649e48456", "HEAD"],
+        cwd=ROOT, check=False,
+    ).returncode
+    require(result in (0, 1), "Cannot resolve the exact F2 documentation ancestry")
+    return result == 0
+
+
 def load_ap04_guard():
+    guard_path = ROOT / "scripts/qa/atlas_parity04_doc_ci.py"
+    if is_f2_documentation_successor():
+        guard_path = ROOT / "scripts/qa/atlas_parity04_f2_doc_ci.py"
     spec = importlib.util.spec_from_file_location(
-        "atlas_parity04_doc_successor", ROOT / "scripts/qa/atlas_parity04_doc_ci.py")
+        "atlas_parity04_doc_successor", guard_path)
     require(spec is not None and spec.loader is not None, "AP04 successor guard is unavailable")
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
@@ -287,6 +300,35 @@ def write_junit(path, name, checks, failures=()):
     ET.ElementTree(root).write(path, encoding="utf-8", xml_declaration=True)
 
 
+def verify_f2_inherited_collection(actual):
+    baseline_sha = "47c94d27aeb7717eebb30804f01cd2cd33507c8a"
+    baseline_path = "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json"
+    baseline = json.loads(git("show", baseline_sha + ":" + baseline_path))["installed_regression"]
+    c4_ids = baseline["inherited_c4_test_ids"]
+    ap04_ids = baseline["new_ap04_test_ids"]
+    require(isinstance(c4_ids, list) and isinstance(ap04_ids, list)
+            and all(isinstance(value, str) for value in c4_ids + ap04_ids),
+            "Historical C4/AP04 test inventories are not explicit ID lists")
+    c4, ap04 = set(c4_ids), set(ap04_ids)
+    require(len(c4_ids) == len(c4) == 168 and len(ap04_ids) == len(ap04) == 23
+            and not (c4 & ap04), "Historical C4/AP04 test IDs are missing or repeated")
+    inherited = c4 | ap04
+    serialized = (json.dumps(sorted(inherited), ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+    expected_hash = "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a"
+    require(len(inherited) == 191 and digest(serialized) == expected_hash,
+            "Historical 191-ID C4/AP04 inventory differs from the reviewed set")
+    missing = sorted(inherited - actual)
+    require(not missing, "The installed F2 suite lost inherited C4/AP04 test IDs: " + repr(missing))
+    return {
+        "source_sha": baseline_sha, "source_path": baseline_path,
+        "inherited_c4_ids": len(c4), "inherited_ap04_ids": len(ap04),
+        "inherited_union_ids": len(inherited), "inherited_union_sha256": expected_hash,
+        "all_inherited_ids_preserved": True,
+        "new_test_ids": sorted(actual - inherited),
+        "new_test_id_count": len(actual - inherited),
+    }
+
+
 def installed(work):
     command = [sys.executable, *(["-O"] if sys.flags.optimize else []), str(ROOT / "scripts/qa/atlas_parity02_p06_installed_checks.py"),
                "--repo", str(ROOT), "--work", str(work), "--install-test-tools"]
@@ -304,6 +346,7 @@ def installed(work):
         require(len(expected) == 122 and expected <= actual and len(actual) >= 122,
                 "The composed collection lost inherited C1 test identities")
         require(receipt["tested_sha"] == report["tested_sha"]
+                and receipt["tree"] == report["tested_tree"]
                 and receipt["optimization"] == sys.flags.optimize
                 and receipt["consumer_outside_checkout"]
                 and receipt["unique_test_cases"] == receipt["total_executed"] == len(actual),
@@ -311,6 +354,8 @@ def installed(work):
         require(all(item["skipped"] == item["failures"] == item["errors"] == 0
                     and not item["loader_errors"] for item in receipt["suites"]),
                 "Installed suite skipped or failed a case")
+        if is_f2_documentation_successor():
+            report["inherited_f2_test_collection"] = verify_f2_inherited_collection(actual)
         report.update(status="PASS", inherited_C1_cases=len(expected), unique_test_cases=len(actual),
                       all_C1_test_ids_preserved=True, full_installed_suite=receipt)
         write_junit(work / "c4-installed-junit.xml", "C4-installed", sorted(actual))
@@ -320,7 +365,8 @@ def installed(work):
     save(work / "c4-installed-receipt.json", report)
     print("C4_INSTALLED_SUMMARY=" + json.dumps({key: report.get(key) for key in
         ("status", "error", "tested_sha", "tested_tree", "optimization", "platform", "skips",
-         "inherited_C1_cases", "unique_test_cases", "all_C1_test_ids_preserved")}, separators=(",", ":")))
+         "inherited_C1_cases", "unique_test_cases", "all_C1_test_ids_preserved",
+         "inherited_f2_test_collection")}, separators=(",", ":")))
     require(report["status"] == "PASS", report.get("error", "Installed suite failed"))
 
 

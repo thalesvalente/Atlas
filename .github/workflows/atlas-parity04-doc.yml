@@ -35,18 +35,30 @@ jobs:
           git rev-parse HEAD
           git rev-parse 'HEAD^{tree}'
       - name: Verify the exact C4 documentation successor and supplemental overlay
-        run: >-
-          python scripts/qa/atlas_parity04_doc_ci.py audit
-          --output .test-output/atlas-parity04/SUCCESSOR-DOC-RECEIPT.json
-          --junit .test-output/atlas-parity04/successor-doc-junit.xml
+        shell: bash
+        run: |
+          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+            python scripts/qa/atlas_parity04_f2_doc_ci.py audit --output .test-output/atlas-parity04/SUCCESSOR-DOC-RECEIPT.json --junit .test-output/atlas-parity04/successor-doc-junit.xml
+          else
+            ap04_ancestry_status=$?
+            if [ "$ap04_ancestry_status" -ne 1 ]; then
+              exit "$ap04_ancestry_status"
+            fi
+            python scripts/qa/atlas_parity04_doc_ci.py audit --output .test-output/atlas-parity04/SUCCESSOR-DOC-RECEIPT.json --junit .test-output/atlas-parity04/successor-doc-junit.xml
+          fi
       - name: Execute negative counterexamples in a temporary Git repository
-        run: python -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v
+        shell: bash
+        run: |
+          python -m unittest discover -s tests/qa -p 'test_atlas_parity04_doc_ci.py' -v
+          python tests/qa/test_atlas_parity04_f2_doc_ci.py --output .test-output/atlas-parity04-f2/REGRESSIONS.json --junit .test-output/atlas-parity04-f2/regressions.xml
       - name: Preserve exact-SHA AP04 guard evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: atlas-parity04-doc-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}
-          path: .test-output/atlas-parity04/**
+          path: |
+            .test-output/atlas-parity04/**
+            .test-output/atlas-parity04-f2/**
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 30

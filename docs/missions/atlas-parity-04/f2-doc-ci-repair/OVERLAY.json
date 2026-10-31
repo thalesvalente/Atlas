@@ -1,0 +1,241 @@
+{
+  "adr0003": "PROPOSED_NOT_APPROVED",
+  "authorized_paths": [
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity02.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity04-doc.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas003-speckit.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas021.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/CI-EVIDENCE.json",
+      "purpose": "Registrar CI terminal, jobs e artefatos no SHA executado"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/DECISION-COMPLIANCE.md",
+      "purpose": "Confrontar D-001 a D-020, PAR-001 a PAR-015 e nao autorizacoes"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/HANDOFF.json",
+      "purpose": "Entregar estado, gates e referencias publicas duraveis"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/INDEPENDENT-REVIEW.md",
+      "purpose": "Registrar revisao independente e findings por SHA"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/INPUT-SHAS.json",
+      "purpose": "Fixar identidades Git, blobs e hashes dos insumos publicos"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/MANIFEST.sha256",
+      "purpose": "Vincular bytes suplementares canonicos sem auto inclusao"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/NEGATIVE-TESTS.json",
+      "purpose": "Registrar contraprovas e recibos atribuiveis ao SHA"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/OVERLAY.json",
+      "purpose": "Declarar autorizacoes exatas e documentos congelados"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/REPAIR-OWNERSHIP.json",
+      "purpose": "Fixar ownership, propositos e contraprovas dos caminhos exatos"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/RESULT.md",
+      "purpose": "Registrar resultado, plano executado e limites do reparo F2"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/SUCCESSOR-CONTRACT.md",
+      "purpose": "Documentar epocas imutaveis e contrato do sucessor F2"
+    },
+    {
+      "owner": "B",
+      "path": "scripts/qa/atlas_parity03_c4_ci.py",
+      "purpose": "Integrar guard F2 e preservar os 191 IDs herdados"
+    },
+    {
+      "owner": "A",
+      "path": "scripts/qa/atlas_parity04_f2_doc_ci.py",
+      "purpose": "Auditar epocas Git, sucessor documental F2 e controles independentes"
+    },
+    {
+      "owner": "A",
+      "path": "tests/qa/test_atlas_parity04_f2_doc_ci.py",
+      "purpose": "Contraprovas sinteticas e preflight independente do guard F2"
+    }
+  ],
+  "base_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+  "frozen_documents": [
+    {
+      "blob": "57294f1ef604b3a73b62ffb7f7bbb6e2a8dc8654",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/F1-LOCAL-MISSION.md",
+      "sha256": "de3c32b4dd874f83261de0a2dfc23cdf47491903291e4d6c5a29032def3aa611",
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7"
+    },
+    {
+      "blob": "0b388a02875554df7a8a8e8be5b468b06f5be529",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/README.md",
+      "sha256": "361a30e33bc63c5fd4fb172edb9834cd4a55b6bbec27a8a5cc5bf6d2d13beef9",
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7"
+    },
+    {
+      "blob": "078ce6364fc88bb2c09d37282426938482387c7a",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/RESULT-REVIEW.sanitized.md",
+      "sha256": "39741ae62b24c03fd4f24035adf79b9063daa4c4c1e36c1cf4be6c408d0eedb9",
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7"
+    },
+    {
+      "blob": "8b16eb60e2554a337fcaf950df13fa8300e46e87",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.json",
+      "sha256": "12a3df17391c3a981e87aed9ed80e7ba66a4e549ffb27564e870ac8432d3a8b4",
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7"
+    },
+    {
+      "blob": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.md",
+      "sha256": "08f843d3d6f040a26ba837c3aa6d7a4a0641297600a38cc14f4467bc5950315c",
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7"
+    },
+    {
+      "blob": "e1283af1ac285937bf02bdf163ce3cf2d00f3081",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ADR-0003-v0.2-CANDIDATE.md",
+      "sha256": "a5c67b508ff94b9f261dcf899cc405ba0f92202af142c79d22a787244a627729",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "0d1c651a9f521b6d6511732aa24427d932019f1c",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ARCHITECTURE-OPTIONS.md",
+      "sha256": "02a11b8debfd664b2502f80023e051f80a63cae7e2e3f14a4ffee97e55ae9bc5",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "13882234b324f9038fdd01ec7d6d34f4b3d0e1d8",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/DECISION-REQUEST.md",
+      "sha256": "3739fa11087af9a91edd7825484d941debb948f808f137fca36894caf6d6bc44",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "sha256": "25e829797f99693fab455bffba5f1752da2a17c680329ec5041c46b01bafd8a4",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "76909b93b41b403cd20024f115bf222520901527",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-CHAT-ARCHITECTURE-MISSION.md",
+      "sha256": "d4236bfc45e59cb4ce9f0bd1471b8999275c3f1c4b446bbb877625cc44f6ffe3",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "f57a6cda9fcd70de2f34921f9c26c18abd730ed3",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-REVIEW-AND-DECISION-CHECKLIST.md",
+      "sha256": "b10a55c51af72df4188f2eca9edd15ab3890b58271317182360a63091d65a2f7",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "eb1085226cd9c56c0d06b318a298da6eed3d1375",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/HANDOFF.json",
+      "sha256": "c378cd8c6cb0c6751f50d81206bc51132b150c292100e33d5e080d4b142b0718",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "sha256": "2d64dff0ac66c958411521dd910df90a46a08491e5efa8174114432ae570cbd2",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "73c0ebdec75d04951bce1ebc54dc561e54f5e921",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/INDEPENDENT-REVIEW.md",
+      "sha256": "54a446271887cf8c2ba571f75bd15871a337981aca568da4c0fbef41d64e7c72",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "8e22751137a0a0b00307579873547d55af0102b6",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/INPUT-SHAS.json",
+      "sha256": "bd6f035d7c99d2f0ac352e2ff9b23f0e1151a6da3ac410448cf1608dfec08ae7",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "03bc6befa8fd13394d912bbfc3b343d54b29414f",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/MANIFEST.sha256",
+      "sha256": "d5f99c3686add17fbb78273a81967621fcf96ab7befd808dce39abcaba876361",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/PARITY-TRACEABILITY.md",
+      "sha256": "7f08f8f39ac9e32b81d290e27bb568a38c23ea170a52af7c12f031c94c2c5bd9",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "b80ce9e0358ffd4ec10114162d38c12a9e46fe57",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/RESULT.md",
+      "sha256": "3199fe3500c749aecc4dc7c7d50f85f96097bfe0b2f684458fda9d522b8474a3",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    },
+    {
+      "blob": "11e979d153b0cdb140696df654fc1a78e928b08e",
+      "mode": "100644",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/SECURITY-AND-INTEROPERABILITY.md",
+      "sha256": "8c56608f573fdd35fbd71b9041b86222f8e5bdd365b9ba5c4822db7a0fd5a3fe",
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456"
+    }
+  ],
+  "historical_ap04_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+  "historical_manifests": "IMMUTABLE",
+  "mission": "AP04-F2-DOC-CI-REPAIR-01",
+  "plan_id": "AP04-POR-v1.0-draft",
+  "schema": "atlas-parity04-f2-doc-ci-overlay-v1"
+}

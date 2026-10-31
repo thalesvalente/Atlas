@@ -1,0 +1,113 @@
+{
+  "schema": "atlas-ap04-f2-handoff-v1",
+  "mission": "AP04-F2-CHAT-LEGACY-COMPAT-CONTRACT-01",
+  "package_version": "AP04-F2-v0.2",
+  "descriptor_version": "0.2.0",
+  "status": "F2_ARCHITECTURE_DECISION_READY_FOR_HUMAN_REVIEW",
+  "branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+  "parent_prompt_sha": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+  "containing_commit_and_tree": "RESOLVE_FROM_CONTAINING_GIT_COMMIT",
+  "candidate": "O1_EXTERNAL_READER_WITH_O3_SEGREGATED_BROWSER_FILE_API",
+  "arc09": "ARC09_APPROVAL_REQUIRED",
+  "adr0003": "PROPOSED_NOT_APPROVED",
+  "G4": "ARCHITECTURAL_DECISION_PENDING",
+  "plan_change": false,
+  "product_change": false,
+  "private_sources_read": false,
+  "independent_review": {
+    "agent": "/root/review_c",
+    "authorship_of_deltas": false,
+    "initial_sha": "7caffc69dc17b2f0d4ec0906bb1b4a2bba0abc67",
+    "findings": [
+      {
+        "id": "C-001",
+        "priority": "P2",
+        "status": "CLOSED_BY_INDEPENDENT_REVIEW",
+        "fixed_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+        "subject": "PAR-012/014/015 item-state enum;historical baseline preserved"
+      }
+    ],
+    "technical_sha_reviewed": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "technical_tree_reviewed": "986a1ddaf3ceae4c6e0fcb03c7bd1dfd63ef378c",
+    "technical_result": "NO_OPEN_DOCUMENTARY_FINDINGS_IDENTIFIED",
+    "verified": {
+      "git_blobs": 14,
+      "manifest_entries": 13,
+      "all_matched": true
+    },
+    "terminal_sha_review": "EXTERNAL_POST_PUBLICATION_REVIEW_REQUIRED;resolve from Draft PR body"
+  },
+  "executed_validation": [
+    "Public input Git commit/tree/parent/blob reconciliation;22 UTF-8 byte lengths and Git blob hashes matched",
+    "Document JSON parsing:2 metadata JSON files plus3 fenced JSON blocks",
+    "Custom in-memory documentary keyword/invariant checks:2 synthetic examples,zero errors;not formal JSONSchema validation",
+    "Manifest generation and remote Git tree/blob ownership checks required at publication",
+    "Independent C read14 workstream files and recomputed14 Git blobs/13 manifest SHA256;C-001 corrected and independently revalidated"
+  ],
+  "not_run": [
+    "formal_JSONSchema_validator",
+    "product_tests",
+    "browser",
+    "private_source_reads",
+    "FHIR_validation",
+    "engineering_CI_manually_triggered"
+  ],
+  "next_action": "Human architectural decision on ADR-0003 v0.2 and descriptor0.2.0 at technical_package.sha;no phase implementation authorized by this handoff.",
+  "native_subagents": {
+    "A": {
+      "id": "/root/architecture_a",
+      "ownership": "Architecture proposal only;no writes"
+    },
+    "B": {
+      "id": "/root/model_b",
+      "ownership": "Contract and identity proposal only;no writes"
+    },
+    "C": {
+      "id": "/root/review_c",
+      "ownership": "Independent read-only review;no delta authorship"
+    }
+  },
+  "publication_method": "GitHub Git Data API, single parent commits, fast-forward with expected head lease;coordinator only",
+  "manifest_policy": "All files in F2 workstream except MANIFEST.sha256 itself;includes2 inherited prompt/checklist inputs and11 newly authored outputs",
+  "ap04_status": "CONTRACT_DECISION_PENDING",
+  "technical_package": {
+    "sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "tree": "986a1ddaf3ceae4c6e0fcb03c7bd1dfd63ef378c",
+    "parent": "7caffc69dc17b2f0d4ec0906bb1b4a2bba0abc67",
+    "manifest_sha256": "dfe50699a7bb9df042264220a356d1f3e4b959df02bac76870e54cd152953b5f",
+    "url": "https://github.com/thalesvalente/Atlas/commit/c3ea1e82938fd61cc5a22fee973352715a5bb527"
+  },
+  "receipt_parent_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+  "decision_request": {
+    "version": "ADR-0003 v0.2",
+    "descriptor": "0.2.0",
+    "technical_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "state": "PENDING_HUMAN_DECISION",
+    "file": "DECISION-REQUEST.md"
+  },
+  "publication": {
+    "existing_branch": true,
+    "new_clones_or_worktrees": false,
+    "single_parent_fast_forward": true,
+    "allowed_new_documents": 12,
+    "inherited_prompt_documents": 2,
+    "terminal_identity": "RESOLVE_FROM_CONTAINING_GIT_COMMIT",
+    "external_closure": "Draft PR body records exact final SHA/tree/parent/manifest and independent review",
+    "PR14_mutated": false
+  },
+  "not_authorized": [
+    "ADR_0003_APPROVED",
+    "G4_PASS",
+    "F3A_F3B_F4_F5_F6_START",
+    "private_source_transfer",
+    "R4_change",
+    "current_contract_change",
+    "migration",
+    "merge",
+    "release",
+    "deploy",
+    "promotion",
+    "scientific_approval",
+    "cleanup"
+  ]
+}
