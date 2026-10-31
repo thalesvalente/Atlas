@@ -245,8 +245,18 @@ class AcquisitionContraproofs(unittest.TestCase):
     def test_source_replacement_during_read_refused(self):
         replacement = self.source_dir / 'replacement.json'
         replacement.write_bytes(self.source.read_bytes())
-        with patch.object(reader, '_after_read', side_effect=lambda path: os.replace(replacement, path)):
-            self.assert_code('SOURCE_CHANGED', lambda: self.open_fixture())
+        def replace(path):
+            try:
+                os.replace(replacement, path)
+            except PermissionError:
+                # Some Windows filesystems reject delete-sharing despite the
+                # requested share mode. Acquisition still aborts, no descriptor.
+                raise ReaderError('SOURCE_CHANGE_PREVENTED_BY_OS')
+        with patch.object(reader, '_after_read', side_effect=replace):
+            with self.assertRaises(ReaderError) as caught:
+                self.open_fixture()
+            self.assertIn(caught.exception.code, {'SOURCE_CHANGED', 'SOURCE_CHANGE_PREVENTED_BY_OS'})
+        self.assertFalse(any(self.scratch.iterdir()))
 
     def test_mtime_change_during_read_refused(self):
         def change(path):
@@ -337,6 +347,20 @@ class AcquisitionReviewCounterproofs(unittest.TestCase):
             self.assert_code('IO_UNVERIFIED', lambda: self.open_fixture())
         self.assertEqual(foreign.read_text(encoding='utf-8'), 'unowned bytes must survive')
         self.assertFalse((self.scratch/(foreign.name+'.partial')).exists())
+
+
+    def test_partial_cleanup_preserves_replaced_foreign_identity(self):
+        foreign = self.scratch/'foreign-invented.txt'
+        foreign.write_text('unowned replacement must survive', encoding='utf-8')
+        replaced = []
+        def substitute(temporary, destination, **kwargs):
+            os.replace(foreign, temporary)
+            replaced.append(Path(temporary))
+            raise OSError('invented publication fault')
+        with patch.object(reader.os, 'link', side_effect=substitute):
+            self.assert_code('IO_UNVERIFIED', lambda: self.open_fixture())
+        self.assertEqual(len(replaced), 1)
+        self.assertEqual(replaced[0].read_text(encoding='utf-8'), 'unowned replacement must survive')
 
     @unittest.skipUnless(os.name == 'nt', 'Windows effective ACL counterproof')
     def test_effective_file_dacl_is_only_owner_and_system(self):

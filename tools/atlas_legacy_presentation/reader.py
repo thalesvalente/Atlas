@@ -185,6 +185,45 @@ def _open_read(source, flags):
         _fail('IO_UNVERIFIED')
 
 
+def _source_stamp(fd):
+    if os.name != 'nt':
+        return _fingerprint(os.fstat(fd))
+    # Use the same Win32 metadata API for both held and re-opened handles.
+    # Python path stat/fstat may differ in timestamp representation on Windows.
+    from ctypes import wintypes
+    import msvcrt
+    class FileInformation(ctypes.Structure):
+        _fields_ = [('attributes', wintypes.DWORD), ('created', wintypes.FILETIME), ('accessed', wintypes.FILETIME), ('written', wintypes.FILETIME), ('volume', wintypes.DWORD), ('size_hi', wintypes.DWORD), ('size_lo', wintypes.DWORD), ('links', wintypes.DWORD), ('index_hi', wintypes.DWORD), ('index_lo', wintypes.DWORD)]
+    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+    kernel.GetFileInformationByHandle.argtypes = [wintypes.HANDLE, ctypes.POINTER(FileInformation)]
+    info = FileInformation()
+    if not kernel.GetFileInformationByHandle(msvcrt.get_osfhandle(fd), ctypes.byref(info)):
+        _fail('SOURCE_CHANGED')
+    if info.attributes & 0x400 or info.links != 1:
+        _fail('UNSAFE_PATH')
+    ticks = lambda value: (value.dwHighDateTime << 32) | value.dwLowDateTime
+    return info.volume, (info.index_hi << 32) | info.index_lo, (info.size_hi << 32) | info.size_lo, ticks(info.written), ticks(info.created), info.links
+
+
+def _path_stamp(path, flags):
+    candidate = _open_read(path, flags)
+    try:
+        return _source_stamp(candidate)
+    finally:
+        os.close(candidate)
+
+
+def _remove_partial(path, fd):
+    # Never unlink a path whose identity no longer matches our still-open file.
+    try:
+        if _fingerprint(path.lstat()) == _fingerprint(os.fstat(fd)):
+            path.unlink()
+            return True
+    except FileNotFoundError:
+        return False
+    return False
+
+
 def _after_read(path):
     """Fault injection seam for synthetic counterproofs, not a CLI option."""
 
@@ -213,11 +252,12 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
     started = time.monotonic()
     temporary = None
     destination = None
+    temporary_fd = None
     fd = _open_read(source, flags)
     try:
-        before = os.fstat(fd)
-        if _fingerprint(before) != _fingerprint(source.lstat()) or before.st_size > MAX_SOURCE_BYTES:
-            _fail('QUOTA_EXCEEDED' if before.st_size > MAX_SOURCE_BYTES else 'SOURCE_CHANGED')
+        before = _source_stamp(fd)
+        if before != _path_stamp(source, flags) or before[2] > MAX_SOURCE_BYTES:
+            _fail('QUOTA_EXCEEDED' if before[2] > MAX_SOURCE_BYTES else 'SOURCE_CHANGED')
         with os.fdopen(fd, 'rb', closefd=False) as handle:
             raw = handle.read(MAX_SOURCE_BYTES + 1)
             if len(raw) > MAX_SOURCE_BYTES:
@@ -226,10 +266,13 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
             _after_read(source)
 
             def stable():
-                _verify_chain(source_proof)
-                handle.seek(0)
-                second = handle.read(MAX_SOURCE_BYTES + 1)
-                if len(second) > MAX_SOURCE_BYTES or _fingerprint(os.fstat(fd)) != _fingerprint(before) or _fingerprint(source.lstat()) != _fingerprint(before) or hashlib.sha256(second).hexdigest() != digest:
+                try:
+                    _verify_chain(source_proof)
+                    handle.seek(0)
+                    second = handle.read(MAX_SOURCE_BYTES + 1)
+                    if len(second) > MAX_SOURCE_BYTES or _source_stamp(fd) != before or _path_stamp(source, flags) != before or hashlib.sha256(second).hexdigest() != digest:
+                        _fail('SOURCE_CHANGED')
+                except OSError:
                     _fail('SOURCE_CHANGED')
                 # Cooperative limit is additional detection, never hard isolation.
                 if time.monotonic() - started > 30:
@@ -254,15 +297,16 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
             _scratch(scratch, source)
             destination = scratch / ('atlas-c2-' + uuid.uuid4().hex + '.json')
             temporary = scratch / (destination.name + '.partial')
-            out = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_BINARY', 0), 0o600)
-            with os.fdopen(out, 'wb') as target:
+            temporary_fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_BINARY', 0), 0o600)
+            with os.fdopen(temporary_fd, 'wb', closefd=False) as target:
                 target.write(encoded)
                 target.flush()
                 os.fsync(target.fileno())
             stable()
             # Atomic publication with no-clobber semantics on both supported OSes.
             os.link(temporary, destination, follow_symlinks=False)
-            temporary.unlink()
+            if not _remove_partial(temporary, temporary_fd):
+                _fail('DERIVED_IDENTITY_CHANGED')
             temporary = None
             _OWNED[str(destination)] = _fingerprint(destination.lstat())
             return destination
@@ -272,8 +316,12 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
         _fail('IO_UNVERIFIED')
     finally:
         os.close(fd)
-        if temporary is not None and temporary.exists():
-            temporary.unlink()
+        try:
+            if temporary is not None and temporary_fd is not None:
+                _remove_partial(temporary, temporary_fd)
+        finally:
+            if temporary_fd is not None:
+                os.close(temporary_fd)
 
 
 @_io_errors
