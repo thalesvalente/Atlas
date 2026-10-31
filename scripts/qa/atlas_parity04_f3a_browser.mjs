@@ -5,7 +5,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { scaleFixture, stressFixture } from './atlas_parity04_f3a_scale_fixture.mjs';
+import { scaleFixture } from './atlas_parity04_f3a_scale_fixture.mjs';
 
 const root = resolve(process.argv[2] || '.');
 const out = resolve(process.argv[3] || '.test-output/atlas-parity04-f3a');
@@ -18,9 +18,10 @@ const scale = scaleFixture(fixture), scaleSource = "synthetic-f3a", scaleSnapsho
 await writeFile(join(out, 'scale-fixture.json'), JSON.stringify(scale));
 const js = await readFile(join(root, 'packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js'));
 const css = await readFile(join(root, 'packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css'));
-const html = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><link rel="stylesheet" href="/graph.css"><title>F3A isolated synthetic QA</title></head><body style="margin:0"><main id="root"></main><script type="module">import {mount} from "/graph.js"; window.mountGraph=mount;</script></body></html>';
+const generator = await readFile(join(root, 'scripts/qa/atlas_parity04_f3a_scale_fixture.mjs'));
+const html = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><link rel="stylesheet" href="/graph.css"><title>F3A isolated synthetic QA</title></head><body style="margin:0"><main id="root"></main><script type="module">import {mount} from "/graph.js"; import {stressFixture} from "/scale-fixture.js"; window.mountGraph=mount; window.stressFixture=stressFixture;</script></body></html>';
 const server = createServer((req, res) => {
-  const payload = { '/': [html, 'text/html'], '/graph.js': [js, 'text/javascript'], '/graph.css': [css, 'text/css'] }[req.url];
+  const payload = { '/': [html, 'text/html'], '/graph.js': [js, 'text/javascript'], '/graph.css': [css, 'text/css'], '/scale-fixture.js': [generator, 'text/javascript'] }[req.url];
   if (!payload) { res.writeHead(404); res.end(); return; }
   res.writeHead(200, { 'Content-Type': payload[1] + '; charset=utf-8', 'Cache-Control': 'no-store' });
   res.end(payload[0]);
@@ -29,6 +30,24 @@ await new Promise(r => server.listen(0, '127.0.0.1', r));
 const origin = 'http://127.0.0.1:' + server.address().port;
 const report = { schema: 'atlas-f3a-browser-receipt-v1', sha, tree, synthetic: true, browser: null, checks: [], screenshots: [], outside_requests: [], page_errors: [], storage_calls: [] };
 let browser;
+report.progress = [];
+async function checkpoint(stage, detail = {}) {
+  const item={stage,at:new Date().toISOString(),...detail}; report.progress.push(item);
+  report.active_stage=stage; report.passed=false;
+  console.log(JSON.stringify({f3a_checkpoint:item}));
+  await writeFile(join(out,'browser-progress.json'),JSON.stringify({sha,tree,progress:report.progress},null,2)+'\n');
+  await writeFile(join(out,'browser-receipt.json'),JSON.stringify(report,null,2)+'\n');
+}
+async function deadline(label, promise, milliseconds) {
+  let timer;
+  try { return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(label+' exceeded '+milliseconds+'ms')),milliseconds);})]); }
+  finally {clearTimeout(timer);}
+}
+const watchdog=setTimeout(async()=>{
+  report.fatal='Harness watchdog exceeded 540000ms at '+report.active_stage;report.passed=false;
+  try {await checkpoint('watchdog',{error:report.fatal});} finally {process.exit(1);}
+},540000);
+watchdog.unref();
 function insist(value, message) { if (!value) throw new Error(message); }
 function small() {
   const d = structuredClone(fixture);
@@ -41,6 +60,7 @@ function small() {
 }
 async function check(name, fn, width = 1440, data = small()) {
   const start = performance.now(); let page, context;
+  await checkpoint('journey:start',{name,width});
   try {
     context = await browser.newContext({ viewport: { width, height: 800 }, deviceScaleFactor: 1 });
     await context.addInitScript(() => {
@@ -51,7 +71,7 @@ async function check(name, fn, width = 1440, data = small()) {
     });
     await context.route('**/*', route => {
       const u = new URL(route.request().url());
-      if (u.origin !== origin || !['/', '/graph.js', '/graph.css'].includes(u.pathname)) { report.outside_requests.push(route.request().url()); route.abort(); }
+      if (u.origin !== origin || !['/', '/graph.js', '/graph.css', '/scale-fixture.js'].includes(u.pathname)) { report.outside_requests.push(route.request().url()); route.abort(); }
       else route.continue();
     });
     page = await context.newPage();
@@ -65,7 +85,7 @@ async function check(name, fn, width = 1440, data = small()) {
       return window.graph.getState();
     }, data);
     insist(!ok.error, 'Valid synthetic descriptor was refused: ' + JSON.stringify(ok));
-    const detail = await fn(page);
+    const detail = await deadline('Journey '+name,fn(page),90000);
     const state = await page.evaluate(() => ({ pwned: window.F3A_PWNED, storage: window.f3aStorageCalls }));
     insist(state.pwned === 0, 'Hostile data executed');
     insist(state.storage.length === 0, 'Component accessed browser storage');
@@ -73,8 +93,11 @@ async function check(name, fn, width = 1440, data = small()) {
   } catch (e) {
     report.checks.push({ name, passed: false, duration_ms: Math.round(performance.now() - start), error: String(e.stack || e) });
   } finally {
-    if (page) { const s = await page.evaluate(() => window.f3aStorageCalls || []).catch(() => []); report.storage_calls.push(...s); }
-    if (context) await context.close();
+    if (page) { const storage = await deadline('Storage inspection '+name,page.evaluate(() => window.f3aStorageCalls || []),5000).catch(() => []); report.storage_calls.push(...storage); }
+    let cleanupError=null;
+    if (context) { try {await deadline('Context close '+name,context.close(),10000);} catch(e) {cleanupError=e;report.fatal=String(e.stack||e);} }
+    await checkpoint('journey:end',{name,passed:report.checks.at(-1)?.passed===true,duration_ms:Math.round(performance.now()-start),cleanup_error:cleanupError?String(cleanupError):null});
+    if(cleanupError)throw cleanupError;
   }
 }
 async function state(p) { return p.evaluate(() => window.graph.getState()); }
@@ -464,36 +487,48 @@ try {
     await p.evaluate(() => graph.dispose()); insist(await p.locator('#root').textContent() === '', 'Scale dispose left DOM');
     return { stale_rejected:true, cross_source_snapshot_rejected:true, ttl_error:ttl.error, disposed:true };
   }, 1440, scale);
+
   await check('scale_descriptor_stress_and_metrics', async p => {
-    const descriptors = [
-      {nodes:10000,relations:0,descriptor:stressFixture(fixture,10000,0),required:true},
-      {nodes:10000,relations:100000,descriptor:stressFixture(fixture,10000,100000),required:false},
-      {nodes:10001,relations:0,descriptor:stressFixture(fixture,10001,0),required:false},
-      {nodes:2,relations:100001,descriptor:stressFixture(fixture,2,100001),required:false}
+    const specifications = [
+      {nodes:10000,relations:0,required:true},
+      {nodes:10000,relations:100000,required:false},
+      {nodes:10001,relations:0,required:false},
+      {nodes:2,relations:100001,required:false}
     ];
     const results = [];
-    for (const item of descriptors) {
-      const bytes = Buffer.byteLength(JSON.stringify(item.descriptor));
-      const result = await p.evaluate(({descriptor,nodes,relations}) => {
+    for (const item of specifications) {
+      await checkpoint('stress:start',item);
+      const result = await deadline('Stress '+item.nodes+'/'+item.relations,p.evaluate(({nodes,relations}) => {
+        // Construct one full synthetic descriptor in the renderer. Only counts cross CDP.
+        // The pure factory is a fixed local harness module, never imported by the component.
+        const constructionStart=performance.now(),descriptor=window.stressFixture(fixture,nodes,relations);
+        const descriptor_bytes=new TextEncoder().encode(JSON.stringify(descriptor)).byteLength;
+        const construction_ms=performance.now()-constructionStart;
         const heap = () => performance.memory ? performance.memory.usedJSHeapSize : null;
         const beforeHeap=heap(),started=performance.now(),accepted=graph.setData(descriptor),s=graph.getState();
-        return {nodes,relations,accepted,error:s.error,duration_ms:performance.now()-started,before_heap_bytes:beforeHeap,after_heap_bytes:heap(),dom_elements:document.querySelectorAll('#root *').length,rendered_nodes:s.rendered_node_count,rendered_relations:s.rendered_relation_count,visible:s.visible_ids.length,node_count:s.node_count,relation_count:s.relation_count,text:document.querySelector('#root').textContent.slice(0,400)};
-      }, item);
-      result.descriptor_bytes=bytes; results.push(result);
+        return {nodes,relations,descriptor_bytes,construction_ms,accepted,error:s.error,duration_ms:performance.now()-started,before_heap_bytes:beforeHeap,after_heap_bytes:heap(),dom_elements:document.querySelectorAll('#root *').length,rendered_nodes:s.rendered_node_count,rendered_relations:s.rendered_relation_count,visible:s.visible_ids.length,node_count:s.node_count,relation_count:s.relation_count,text:document.querySelector('#root').textContent.slice(0,400)};
+      }, item),60000);
+      results.push(result); await checkpoint('stress:end',result);
       insist(result.duration_ms < 30000, 'Scale stress deadline exceeded');
       if (item.required) insist(result.accepted && result.node_count === item.nodes && result.relation_count === item.relations, 'Required within-envelope node stress refused: '+JSON.stringify(result));
       if (item.nodes > 10000 || item.relations > 100000) insist(!result.accepted && result.error && result.visible===0, 'Descriptor envelope overflow admitted');
       if (!result.accepted) insist(result.error && result.visible===0 && result.text.length>0, 'Stress refusal was not atomic/visible');
       else insist(result.rendered_nodes<=1000 && result.rendered_relations<=4000, 'Scale stress drawing unbounded');
     }
-    return { results, memory_scope:'Observed Chromium usedJSHeapSize when exposed; not a hard 256MiB browser heap qualification', deadline_ms:30000 };
+    return { results, memory_scope:'Observed Chromium usedJSHeapSize when exposed; not a hard 256MiB browser heap qualification', deadline_ms:30000, transport:'Counts only via CDP; complete synthetic descriptors constructed sequentially in renderer from fixed local test module' };
   }, 1440, scale);
 
 } catch(e) { report.fatal=String(e.stack||e); }
 finally {
-  if(browser)await browser.close();await new Promise(r=>server.close(r));
+  await checkpoint('cleanup:start');
+  if(browser) {try {await deadline('Browser close',browser.close(),10000);} catch(e) {report.fatal=(report.fatal?report.fatal+'; ':'')+String(e.stack||e);} }
+  server.closeAllConnections();
+  try {await deadline('Server close',new Promise(r=>server.close(r)),5000);} catch(e) {report.fatal=(report.fatal?report.fatal+'; ':'')+String(e.stack||e);}
+  clearTimeout(watchdog);
+  report.active_stage='complete';
   report.passed=!report.fatal && report.checks.length===24 && report.checks.every(c=>c.passed) && report.outside_requests.length===0 && report.page_errors.length===0 && report.storage_calls.length===0;
   await writeFile(join(out,'browser-receipt.json'),JSON.stringify(report,null,2)+'\n');
-  console.log(JSON.stringify(report,null,2));
 }
-if(!report.passed)process.exitCode=1;
+await new Promise(resolve=>process.stdout.write(JSON.stringify(report,null,2)+'\n',resolve));
+// Browser/driver crashes may leave handles; terminal status always reflects the complete receipt.
+process.exit(report.passed?0:1);

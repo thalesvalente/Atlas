@@ -91,7 +91,8 @@
   "source_access": "Public sanitized documents and synthetic fixtures only; no private payload/code",
   "local_execution": {
     "status": "NOT_EXECUTED",
-    "reason": "MXC launcher failed before process start while enumerating D: volume, os error1005; node_repl terminated unexpectedly"
+    "reason": "MXC launcher failed before process start while enumerating D: volume, os error1005; node_repl terminated unexpectedly",
+    "diagnostics": "Later native commands with sandbox_permissions=require_escalated succeeded for read-only checkout identity and inspection of synthetic CI ZIPs. No local component test/checkout change was performed; current checkout is separate docs branch47c94d27, clean when read. No clone/worktree was created."
   },
   "agents": {
     "A": "/root/a_graph",

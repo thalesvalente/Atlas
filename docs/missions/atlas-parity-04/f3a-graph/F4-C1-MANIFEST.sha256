@@ -1,11 +1,11 @@
 33eadb7aff6f176d2a5398f1d9a60281404dc48db6c3517a71987daf1b8656f3  .github/workflows/atlas-parity04-f3a-graph.yml
 98d08988c8421fdd173164e00ff6dfe74a0ec30868b1f56eb29f96c90bc458dc  docs/missions/atlas-parity-04/f3a-graph/BROWSER-RECEIPT.json
 e2f56cc4d77460e0eebdefd3de253cccda6e52d95aabc6eae889d64a9eae2550  docs/missions/atlas-parity-04/f3a-graph/CI-EVIDENCE.json
-1524a26371b0756324253b69ab6b4abbd3186eda0d57edf11f9f81880047100f  docs/missions/atlas-parity-04/f3a-graph/F4-C1-CI-EVIDENCE.json
+92f1dd380aa20df6480a824472197caea609446995ea2cea6a9aad270c6cb1ee  docs/missions/atlas-parity-04/f3a-graph/F4-C1-CI-EVIDENCE.json
 31c2977da726a43d2e6443fc0ebee699467f14c38b0af87b9814c30bcb29bd8a  docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md
 741dcc35dd6b591bf97082978d117ff380b4293fc34a10ba2b97fc9d681b538c  docs/missions/atlas-parity-04/f3a-graph/F4-C1-HANDOFF.json
-413873fec07cc542d20dfa3cd0c3f209cc5802bf4ed74705e536ccc91a6548f8  docs/missions/atlas-parity-04/f3a-graph/F4-C1-INDEPENDENT-REVIEW.md
-182915ffc04c4a5489dff1b39a97805aa9b1b4dfcf1073c65e59cd50eeeaa9c0  docs/missions/atlas-parity-04/f3a-graph/F4-C1-INPUTS.json
+dc3c810fb98b0a92b97ac0d7e7b98b5ecf0f6d2686e59c140285ce339d6625b0  docs/missions/atlas-parity-04/f3a-graph/F4-C1-INDEPENDENT-REVIEW.md
+55a14aa30202cdefabbf01c600f2f33332afeb046104fde15588df6199f67728  docs/missions/atlas-parity-04/f3a-graph/F4-C1-INPUTS.json
 9206335c7cb0c5acc687d36ce7c9b017db231bf2584752ad0a0c321338ecae08  docs/missions/atlas-parity-04/f3a-graph/F4-C1-PLAN.md
 1ef50a962c784c97fed1bc795e71c9541ed60a4727ace57def36e5239c17f55c  docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md
 40ddef2538df2b6c7e6919f8f113accce02ca4fcc7423cfebecfa7348785eff7  docs/missions/atlas-parity-04/f3a-graph/GLOBAL-GATE-REPAIR-CONTRACT.md
@@ -19,8 +19,8 @@ bc2be7f21d939179577eab0e833d9c4f4148423455d3c8341eeb754ed1a5d4f2  docs/missions/
 6c0b603e9eac2592dd897293fca48bf12ed69614e41b1912abf463f882d524a2  docs/missions/atlas-parity-04/f3a-graph/RESULT.md
 fd88f1515e6444b982b69091ec05a38e314b06802de80d01c3b4be6f547e2fbd  packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.css
 d323add6ead9b6f3ee4581d60425dd9248b8e2087985ec0ba876a3ddb29c54a4  packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js
-07f0aca879a7627a17a4f5b5d326ea53b203002a3ae3dc51f97d27f4737929a5  scripts/qa/atlas_parity04_f3a_browser.mjs
+acdda70b987abb3bfdab05b374862c4eb7d9a0f071d05cfbbf2f38b9ebcab61d  scripts/qa/atlas_parity04_f3a_browser.mjs
 dd73ca8bf1b0ec1460d5bfb9563368427a76ffd4d199aa0b9d7ad993f4d206d9  scripts/qa/atlas_parity04_f3a_ci.py
 b35723561886c45361a49d5e62a03d8845c288f934e13c2586feb1f333e404e4  scripts/qa/atlas_parity04_f3a_scale_fixture.mjs
 3ca0ecb9cb872cde5108be11d53e23079adff654ab8153f64b873eb4c2167b27  tests/fixtures/atlas_parity04_f3a_graph.json
-105527f6deaf5c639151898776f8a23e8a8ea12497139aab3d01769a31646fbe  tests/qa/test_atlas_parity04_f3a_graph.py
+460941d8f004f9558ff6d061b6c0acd8465d9d152cf154bdcd86a13f67d214dc  tests/qa/test_atlas_parity04_f3a_graph.py

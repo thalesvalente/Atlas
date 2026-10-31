@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import threading
 import unittest
 
 from jsonschema import Draft202012Validator, FormatChecker
@@ -44,15 +45,38 @@ class F3AGraph(unittest.TestCase):
         cls.validator, cls.f2_examples = descriptor_schema()
         OUTPUT.mkdir(parents=True, exist_ok=True)
         command = ["node", str(ROOT / "scripts/qa/atlas_parity04_f3a_browser.mjs"), str(ROOT), str(OUTPUT)]
-        result = subprocess.run(command, cwd=ROOT, text=True, encoding="utf-8", capture_output=True, timeout=600, check=False)
-        (OUTPUT / "browser-stdout.log").write_text(result.stdout, encoding="utf-8")
-        (OUTPUT / "browser-stderr.log").write_text(result.stderr, encoding="utf-8")
-        print(result.stdout, flush=True)
-        if result.stderr:
-            print(result.stderr, flush=True)
+        process = subprocess.Popen(command, cwd=ROOT, text=True, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        def relay(pipe, name):
+            with (OUTPUT / name).open("w", encoding="utf-8") as log:
+                for line in iter(pipe.readline, ""):
+                    log.write(line); log.flush()
+                    print(line, end="", flush=True)
+        relays = [threading.Thread(target=relay, args=(process.stdout, "browser-stdout.log"), daemon=True),
+                  threading.Thread(target=relay, args=(process.stderr, "browser-stderr.log"), daemon=True)]
+        for worker in relays:
+            worker.start()
+        try:
+            process.wait(timeout=600)
+        except subprocess.TimeoutExpired as exc:
+            process.kill()
+            try:
+                process.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                pass
+            for worker in relays:
+                worker.join(timeout=2)
+            timeout = {"error": "Real Chromium runner exceeded unchanged 600s deadline", "command": command, "timeout_seconds": 600}
+            for name in ("browser-stdout.log", "browser-stderr.log"):
+                path = OUTPUT / name
+                timeout[name] = path.read_text(encoding="utf-8", errors="replace")[-12000:] if path.exists() else ""
+            (OUTPUT / "browser-timeout.json").write_text(json.dumps(timeout, indent=2) + "\n", encoding="utf-8")
+            raise RuntimeError("Real Chromium runner exceeded 600s; exact progress and stdout/stderr were retained") from exc
+        finally:
+            for worker in relays:
+                worker.join(timeout=2)
         path = OUTPUT / "browser-receipt.json"
         cls.browser = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"fatal": "Browser runner produced no receipt", "checks": []}
-        cls.browser_exit = result.returncode
+        cls.browser_exit = process.returncode
         cls.checks = {c["name"]: c for c in cls.browser.get("checks", [])}
 
     def browser_check(self, name):
