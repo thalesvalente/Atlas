@@ -205,13 +205,21 @@ try {
       return { ok, selected: graph.select({source_id: 'synthetic-f3a',snapshot_id:'synthetic-f3a-v1',occurrence:0,nav_id:'nav:run',session_id:s.session_id}) };
     });
     insist(crossed.ok && !crossed.selected, 'Cross-source/snapshot nav text resolved');
+    await p.reload();await p.waitForFunction(()=>typeof window.mountGraph==='function');
+    const reloaded=await p.evaluate(({d,old})=>{
+      window.fixture=d;window.fixtureNow=Date.parse('2026-10-31T09:05:00Z');window.f3aEvents=[];
+      document.querySelector('#root').addEventListener('graph-selection',e=>f3aEvents.push(e.detail));
+      window.graph=window.mountGraph(document.querySelector('#root'),d,{now:()=>fixtureNow});
+      return {session:graph.getState().session_id,accepted:graph.select(old)};
+    },{d:small(),old});
+    insist(reloaded.session!==old.session_id && !reloaded.accepted,'Page reload reused previous session/context');
     await p.evaluate(() => { graph.dispose(); graph.dispose(); });
     insist(await p.locator('#root').textContent() === '', 'dispose left component state in DOM');
     return { reimport_session_changed: true, cross_context_rejected: true };
   });
   await check('expiry_invalidates_selection_and_links', async p => {
     await p.locator('[data-node-id="nav:run"]').click(); const old = (await state(p)).selection;
-    const r = await p.evaluate(ctx => { fixtureNow = Date.parse('2026-10-31T10:02:00Z'); const accepted = graph.select(ctx); return {accepted,state:graph.getState(),text:document.querySelector('#root').textContent()}; }, old);
+    const r = await p.evaluate(ctx => { fixtureNow = Date.parse('2026-10-31T10:02:00Z'); const accepted = graph.select(ctx); return {accepted,state:graph.getState(),text:document.querySelector('#root').textContent}; }, old);
     insist(!r.accepted && r.state.selection === null && r.state.error && /expir/i.test(r.text), 'Expiry did not visibly invalidate data/context');
     return r.state.error;
   });
@@ -238,7 +246,7 @@ try {
       return Object.entries(mutations).map(([name,mutate]) => {
         graph.setData(structuredClone(fixture)); const d=structuredClone(fixture);mutate(d);
         const accepted=graph.setData(d);const s=graph.getState();
-        return {name,accepted,error:s.error,selection:s.selection,visible:s.visible_ids.length,text:document.querySelector('#root').textContent()};
+        return {name,accepted,error:s.error,selection:s.selection,visible:s.visible_ids.length,text:document.querySelector('#root').textContent};
       });
     });
     for(const c of cases) insist(!c.accepted && c.error && c.selection === null && c.visible === 0 && c.text.length > 0, 'Invalid input not visibly/atomically refused: '+JSON.stringify(c));
@@ -250,7 +258,7 @@ try {
       d.nodes[0].parent_key_literal='SYN-R';d.nodes[0].parent={source_id:d.source.source_id,snapshot_id:d.snapshot.snapshot_id,declared_id:'SYN-R',target_navigation_id:'nav:run',resolution:'RESOLVED',evidence_locator:'/synthetic/cycle'};
       d.nodes[0].tree_state='PARENT_RESOLVED';
       const counts={presentation_node_occurrences:5,source_nodes:5,external_reference_stubs:0,relations:0,tables:0,rows:0,assets:0};d.coverage.counts.forEach(c=>{c.selected=counts[c.unit];c.loaded=counts[c.unit]});
-      const accepted=graph.setData(d);return {accepted,state:graph.getState(),text:document.querySelector('#root').textContent()};
+      const accepted=graph.setData(d);return {accepted,state:graph.getState(),text:document.querySelector('#root').textContent};
     });
     insist(r.accepted && r.state.visible_ids.length === 5 && /cycl|cicl/i.test(r.text), 'Cycle was dropped or silently treated as valid hierarchy'); return r.state;
   });
@@ -284,7 +292,7 @@ try {
       positive.push({nodes:2,relations:4000,duration_ms:performance.now()-edgeStart,dom_relations:document.querySelectorAll('[data-relation-id]').length});
       const negative=[[1001,0],[10000,0],[10001,0],[2,4001],[2,100000],[2,100001]].map(([nodes,relations])=>{
         const d=bigger(nodes,relations),start=performance.now(),accepted=graph.setData(d),s=graph.getState();
-        return {nodes,relations,accepted,error:s.error,visible:s.visible_ids.length,duration_ms:performance.now()-start,text:document.querySelector('#root').textContent()};
+        return {nodes,relations,accepted,error:s.error,visible:s.visible_ids.length,duration_ms:performance.now()-start,text:document.querySelector('#root').textContent};
       });return {positive,negative};
     });
     for(const r of results.negative) insist(!r.accepted && r.error && r.visible===0 && r.text.length>0 && r.duration_ms<30000,'Capacity silent truncation or budget exceeded: '+JSON.stringify(r));

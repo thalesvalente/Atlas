@@ -254,7 +254,12 @@ export function mount(host, descriptor, options={}) {
   if(!(host instanceof Element))throw new TypeError("F3A mount requires an Element");
   const now=options.now || (()=>Date.now());
   if(typeof now!=="function")throw new TypeError("now must be a function");
-  const instance=++mountSerial,abort=new AbortController(),signal=abort.signal;
+  const nonce=new Uint32Array(4);
+  if(!globalThis.crypto || typeof globalThis.crypto.getRandomValues!=="function")
+    throw new Error("F3A requires WebCrypto for isolated presentation sessions");
+  globalThis.crypto.getRandomValues(nonce);
+  const instance=(++mountSerial)+"-"+Array.from(nonce,n=>n.toString(16).padStart(8,"0")).join(""),
+    abort=new AbortController(),signal=abort.signal;
   const root=element("section",{class:"f3a-graph","aria-label":"Apresentação legada — grafo derivado"});
   const banner=element("p",{class:"f3a-banner"}),toolbar=element("div",{class:"f3a-toolbar","aria-label":"Controles do grafo"});
   const controls=[
