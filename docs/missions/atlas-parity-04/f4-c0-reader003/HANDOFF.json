@@ -1,0 +1,47 @@
+{
+  "schema": "atlas-ap04-f4-c0-handoff-v1",
+  "mission": "AP04-F4-C0-READER003-CONTRACT-CHAT-01",
+  "owner": "coordenador /root",
+  "status": "F4_C0_CONTRACT_DOCUMENTED_REVIEW_PENDING",
+  "target": "F4_C0_READER003_SCOPED_CONTRACT_REVIEWED",
+  "branch": "docs/atlas-parity04-f4-reader003-20261031",
+  "plan_commit": "296a47245059fa473715fd4fcf9bf96011c19f44",
+  "independent_review": {
+    "reviewer": "/root/c_review",
+    "native": true,
+    "authorship": false,
+    "status": "PENDING"
+  },
+  "contract": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+  "descriptor_blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+  "historical_reader_blob": "eb4feb7b4f829d97b048fc9d343861d9297ec04b",
+  "approval_comment": 6539419419,
+  "approval_package_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+  "custody": {
+    "commit_tree_parents_blob": "RESOLVE_FROM_CONTAINING_GIT_OBJECT",
+    "manifest_excludes_only_itself": true,
+    "output_inventory": "OUTPUT-OBJECTS.json",
+    "terminal_receipt": "PR Draft exact HEAD/tree/parents/blob inventory and native C verification"
+  },
+  "next": {
+    "C3": "BLOCKED_UNTIL_C0_REAL_REVIEW_AND_OTHER_QUALIFIED_INPUTS",
+    "C4": "qualify succession CI after C3 frozen; preserve C0 bytes and ancestry",
+    "L1": "requires C2 pin and fresh explicit source authorization"
+  },
+  "runtime_tests": "NOT_RUN",
+  "formal_schema_validation": "NOT_RUN",
+  "G4": "NOT_QUALIFIED_BY_C0",
+  "G5": "NOT_QUALIFIED_BY_C0",
+  "G6": "NOT_RUN",
+  "plan_change": "NONE",
+  "scientific_approval": false,
+  "hl7_fhir": "FUTURE_CAPABILITY_ONLY_NOT_IMPLEMENTED",
+  "private_sources_read": false,
+  "main_merge": false,
+  "release": false,
+  "deploy": false,
+  "promotion": false,
+  "cleanup": false,
+  "new_worktrees": false,
+  "new_clones": false
+}
