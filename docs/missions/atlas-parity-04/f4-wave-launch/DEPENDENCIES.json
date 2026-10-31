@@ -1,0 +1,91 @@
+{
+  "schema": "atlas-ap04-f4-wave-v1",
+  "plan": "AP04-POR-v1.0-draft",
+  "status": "PROMPTS_PUBLISHED_NOT_EXECUTED",
+  "baselines": {
+    "F2": {
+      "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9"
+    },
+    "F3A": {
+      "sha": "f0d39787e3fb93bfd70ad096824505ba298c6881",
+      "tree": "e0d293bd9de6b78c12934bc395b5f0ab5981563f"
+    },
+    "F3B": {
+      "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "tree": "ac3dec6de49bf55dc25115bfb35dd364b1a2f690"
+    },
+    "adr": {
+      "technical_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "approval_comment": 6539419419,
+      "state": "APPROVED_SCOPED"
+    }
+  },
+  "missions": [
+    {
+      "id": "C0",
+      "environment": "CHAT",
+      "branch": "docs/atlas-parity04-f4-reader003-20261031",
+      "depends": [],
+      "target": "F4_C0_READER003_SCOPED_CONTRACT_REVIEWED"
+    },
+    {
+      "id": "C1",
+      "environment": "CHAT",
+      "branch": "feat/atlas-parity04-f3a-graph-20261031",
+      "depends": [],
+      "target": "F4_C1_GRAPH_SCALE_QUALIFIED_FOR_COMPOSITION"
+    },
+    {
+      "id": "C2",
+      "environment": "CHAT",
+      "branch": "feat/atlas-parity04-f4-external-reader-20261031",
+      "depends": [],
+      "target": "F4_C2_EXTERNAL_READER_READY_FOR_LOCAL_QUALIFICATION"
+    },
+    {
+      "id": "C3",
+      "environment": "CHAT",
+      "branch": "integrate/atlas-parity04-f4-composition-20261031",
+      "depends": [
+        "C0",
+        "C1",
+        "C2",
+        "F3B"
+      ],
+      "target": "F4_C3_INTEGRATED_CANDIDATE_GLOBAL_CI_PENDING"
+    },
+    {
+      "id": "C4",
+      "environment": "CHAT",
+      "branch": "integrate/atlas-parity04-f4-composition-20261031",
+      "depends": [
+        "C3"
+      ],
+      "target": "F4_G5_INTEGRATION_CI_QUALIFIED_HOST_GATE_DEFERRED"
+    },
+    {
+      "id": "L1",
+      "environment": "LOCAL",
+      "branch": "PRIVATE_RECEIPTS_LOCAL_SEPARATE_SANITIZED_BRANCH_IF_AUTHORIZED",
+      "depends": [
+        "C2",
+        "EXPLICIT_F4_SOURCE_AUTHORIZATION"
+      ],
+      "target": "F4_L1_LOCAL_READER_QUALIFIED_SCOPED"
+    }
+  ],
+  "constraints": {
+    "new_worktrees": false,
+    "new_clones": false,
+    "bulk_migration": false,
+    "source_mutation": false,
+    "main_merge": false,
+    "release": false,
+    "deployment": false,
+    "promotion": false,
+    "cleanup": false,
+    "read_private_without_new_authorization": false
+  },
+  "terminal_gate": "F4_READY_FOR_F5_PRIVATE_REPLAY_REQUIRES_C4_AND_L1_REAL_PASS;F5_REQUIRES_SEPARATE_AUTHORIZATION"
+}
