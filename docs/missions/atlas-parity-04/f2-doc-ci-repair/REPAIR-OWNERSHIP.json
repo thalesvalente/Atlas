@@ -1,0 +1,154 @@
+{
+  "authorization": {
+    "human_request": "Execute mission in existing Draft PR15; persist code/tests/public evidence; no plan deviation",
+    "inventory_fixed_in_session_before_editing": true,
+    "plan_change": false,
+    "requirements": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "source_sha": "8abf556c6c39fcc54855391f2eeef3d8a8615985"
+  },
+  "authorized_paths": [
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity02.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity04-doc.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas003-speckit.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "B",
+      "path": ".github/workflows/atlas021.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/CI-EVIDENCE.json",
+      "purpose": "Registrar CI terminal, jobs e artefatos no SHA executado"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/DECISION-COMPLIANCE.md",
+      "purpose": "Confrontar D-001 a D-020, PAR-001 a PAR-015 e nao autorizacoes"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/HANDOFF.json",
+      "purpose": "Entregar estado, gates e referencias publicas duraveis"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/INDEPENDENT-REVIEW.md",
+      "purpose": "Registrar revisao independente e findings por SHA"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/INPUT-SHAS.json",
+      "purpose": "Fixar identidades Git, blobs e hashes dos insumos publicos"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/MANIFEST.sha256",
+      "purpose": "Vincular bytes suplementares canonicos sem auto inclusao"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/NEGATIVE-TESTS.json",
+      "purpose": "Registrar contraprovas e recibos atribuiveis ao SHA"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/OVERLAY.json",
+      "purpose": "Declarar autorizacoes exatas e documentos congelados"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/REPAIR-OWNERSHIP.json",
+      "purpose": "Fixar ownership, propositos e contraprovas dos caminhos exatos"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/RESULT.md",
+      "purpose": "Registrar resultado, plano executado e limites do reparo F2"
+    },
+    {
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/SUCCESSOR-CONTRACT.md",
+      "purpose": "Documentar epocas imutaveis e contrato do sucessor F2"
+    },
+    {
+      "owner": "B",
+      "path": "scripts/qa/atlas_parity03_c4_ci.py",
+      "purpose": "Integrar guard F2 e preservar os 191 IDs herdados"
+    },
+    {
+      "owner": "A",
+      "path": "scripts/qa/atlas_parity04_f2_doc_ci.py",
+      "purpose": "Auditar epocas Git, sucessor documental F2 e controles independentes"
+    },
+    {
+      "owner": "A",
+      "path": "tests/qa/test_atlas_parity04_f2_doc_ci.py",
+      "purpose": "Contraprovas sinteticas e preflight independente do guard F2"
+    }
+  ],
+  "counterproofs": {
+    "A": "New synthetic epoch/history/mode/manifest/control/dispatch/preflight regression tests; old 23 AP04 tests remain unchanged",
+    "B": "Same inherited 191 IDs plus new IDs; SHA-bound installed/browser/Spec Kit matrices, independent control hashes; real ancestry fallback",
+    "ORQ": "Canonical complete supplemental manifest; exact 19-path delta; immutable full terminal tree outside six reviewed controls; source/publication checks"
+  },
+  "mission": "AP04-F2-DOC-CI-REPAIR-01",
+  "native_agents": {
+    "A": {
+      "exclusive_files": [
+        "scripts/qa/atlas_parity04_f2_doc_ci.py",
+        "tests/qa/test_atlas_parity04_f2_doc_ci.py"
+      ],
+      "id": "/root/provenance_a"
+    },
+    "B": {
+      "exclusive_files": [
+        ".github/workflows/atlas-parity02.yml",
+        ".github/workflows/atlas-parity03-p03-gates.yml",
+        ".github/workflows/atlas-parity04-doc.yml",
+        ".github/workflows/atlas003-speckit.yml",
+        ".github/workflows/atlas021.yml",
+        "scripts/qa/atlas_parity03_c4_ci.py"
+      ],
+      "id": "/root/ci_b"
+    },
+    "C": {
+      "authorship": false,
+      "id": "/root/review_c",
+      "read_only": true
+    }
+  },
+  "publication": {
+    "method": "GitHub Git Data API; single-parent fast-forward with expected head lease",
+    "no_new_branch_worktree_clone_pr": true,
+    "writer": "/root"
+  },
+  "schema": "atlas-ap04-f2-ci-repair-ownership-v1"
+}

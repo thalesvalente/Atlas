@@ -1,0 +1,296 @@
+{
+  "branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+  "c4": {
+    "parent": "54461f7494df7c0e54a176cf7df3f16ee43e2edb",
+    "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+    "tree": "0a622663ca40232d6143659f82cfe9ce43702e90"
+  },
+  "epochs": [
+    {
+      "parent": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "sha": "c25d37998dac7174067a2819391f3af1625f96dc",
+      "tree": "e6eacdd02a329f88bc0dd656523b84a8fec9217e"
+    },
+    {
+      "parent": "c25d37998dac7174067a2819391f3af1625f96dc",
+      "sha": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+      "tree": "417d29e1cf051644ce6e1edead7fed3315147286"
+    },
+    {
+      "parent": "54ffea9e8fe2ed5cde071a8ec52fbcbff857df60",
+      "sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "tree": "a02e8b6e6d82a743de4a31e9835c3d18e29d8947"
+    },
+    {
+      "parent": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "sha": "e140d973fd4cbc4547046f25fd620166662c5004",
+      "tree": "e1d6d8cca7f66aaaff0e13de293d43c04ad0e6ed"
+    },
+    {
+      "parent": "e140d973fd4cbc4547046f25fd620166662c5004",
+      "sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree": "e0626cd274948a9303774593e20ca05fc1d32d62"
+    },
+    {
+      "parent": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "sha": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "tree": "37f3c90e4d9d4e326eb128614c74e759ec892705"
+    },
+    {
+      "parent": "bc2e10e9a783227294daa4100ccaeb384d0dddd0",
+      "sha": "7caffc69dc17b2f0d4ec0906bb1b4a2bba0abc67",
+      "tree": "045683c64bf2bc5111a80aaa1894d727533475e8"
+    },
+    {
+      "parent": "7caffc69dc17b2f0d4ec0906bb1b4a2bba0abc67",
+      "sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "tree": "986a1ddaf3ceae4c6e0fcb03c7bd1dfd63ef378c"
+    },
+    {
+      "parent": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree": "611306f28557f5d9e27db49108880004399f5768"
+    }
+  ],
+  "frozen_documents": [
+    {
+      "bytes": 10147,
+      "content_blob": "57294f1ef604b3a73b62ffb7f7bbb6e2a8dc8654",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/F1-LOCAL-MISSION.md",
+      "recomputed_blob": "57294f1ef604b3a73b62ffb7f7bbb6e2a8dc8654",
+      "sha256": "de3c32b4dd874f83261de0a2dfc23cdf47491903291e4d6c5a29032def3aa611",
+      "size_match": true,
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree_blob": "57294f1ef604b3a73b62ffb7f7bbb6e2a8dc8654",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 1138,
+      "content_blob": "0b388a02875554df7a8a8e8be5b468b06f5be529",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/README.md",
+      "recomputed_blob": "0b388a02875554df7a8a8e8be5b468b06f5be529",
+      "sha256": "361a30e33bc63c5fd4fb172edb9834cd4a55b6bbec27a8a5cc5bf6d2d13beef9",
+      "size_match": true,
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree_blob": "0b388a02875554df7a8a8e8be5b468b06f5be529",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 8008,
+      "content_blob": "078ce6364fc88bb2c09d37282426938482387c7a",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/RESULT-REVIEW.sanitized.md",
+      "recomputed_blob": "078ce6364fc88bb2c09d37282426938482387c7a",
+      "sha256": "39741ae62b24c03fd4f24035adf79b9063daa4c4c1e36c1cf4be6c408d0eedb9",
+      "size_match": true,
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree_blob": "078ce6364fc88bb2c09d37282426938482387c7a",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 8390,
+      "content_blob": "8b16eb60e2554a337fcaf950df13fa8300e46e87",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.json",
+      "recomputed_blob": "8b16eb60e2554a337fcaf950df13fa8300e46e87",
+      "sha256": "12a3df17391c3a981e87aed9ed80e7ba66a4e549ffb27564e870ac8432d3a8b4",
+      "size_match": true,
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree_blob": "8b16eb60e2554a337fcaf950df13fa8300e46e87",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 2547,
+      "content_blob": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.md",
+      "recomputed_blob": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c",
+      "sha256": "08f843d3d6f040a26ba837c3aa6d7a4a0641297600a38cc14f4467bc5950315c",
+      "size_match": true,
+      "source_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "tree_blob": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 6271,
+      "content_blob": "e1283af1ac285937bf02bdf163ce3cf2d00f3081",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ADR-0003-v0.2-CANDIDATE.md",
+      "recomputed_blob": "e1283af1ac285937bf02bdf163ce3cf2d00f3081",
+      "sha256": "a5c67b508ff94b9f261dcf899cc405ba0f92202af142c79d22a787244a627729",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "e1283af1ac285937bf02bdf163ce3cf2d00f3081",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 11779,
+      "content_blob": "0d1c651a9f521b6d6511732aa24427d932019f1c",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ARCHITECTURE-OPTIONS.md",
+      "recomputed_blob": "0d1c651a9f521b6d6511732aa24427d932019f1c",
+      "sha256": "02a11b8debfd664b2502f80023e051f80a63cae7e2e3f14a4ffee97e55ae9bc5",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "0d1c651a9f521b6d6511732aa24427d932019f1c",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 2722,
+      "content_blob": "13882234b324f9038fdd01ec7d6d34f4b3d0e1d8",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/DECISION-REQUEST.md",
+      "recomputed_blob": "13882234b324f9038fdd01ec7d6d34f4b3d0e1d8",
+      "sha256": "3739fa11087af9a91edd7825484d941debb948f808f137fca36894caf6d6bc44",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "13882234b324f9038fdd01ec7d6d34f4b3d0e1d8",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 64656,
+      "content_blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "recomputed_blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "sha256": "25e829797f99693fab455bffba5f1752da2a17c680329ec5041c46b01bafd8a4",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 14322,
+      "content_blob": "76909b93b41b403cd20024f115bf222520901527",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-CHAT-ARCHITECTURE-MISSION.md",
+      "recomputed_blob": "76909b93b41b403cd20024f115bf222520901527",
+      "sha256": "d4236bfc45e59cb4ce9f0bd1471b8999275c3f1c4b446bbb877625cc44f6ffe3",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "76909b93b41b403cd20024f115bf222520901527",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 2178,
+      "content_blob": "f57a6cda9fcd70de2f34921f9c26c18abd730ed3",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-REVIEW-AND-DECISION-CHECKLIST.md",
+      "recomputed_blob": "f57a6cda9fcd70de2f34921f9c26c18abd730ed3",
+      "sha256": "b10a55c51af72df4188f2eca9edd15ab3890b58271317182360a63091d65a2f7",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "f57a6cda9fcd70de2f34921f9c26c18abd730ed3",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 4568,
+      "content_blob": "eb1085226cd9c56c0d06b318a298da6eed3d1375",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/HANDOFF.json",
+      "recomputed_blob": "eb1085226cd9c56c0d06b318a298da6eed3d1375",
+      "sha256": "c378cd8c6cb0c6751f50d81206bc51132b150c292100e33d5e080d4b142b0718",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "eb1085226cd9c56c0d06b318a298da6eed3d1375",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 12120,
+      "content_blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "recomputed_blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "sha256": "2d64dff0ac66c958411521dd910df90a46a08491e5efa8174114432ae570cbd2",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 4497,
+      "content_blob": "73c0ebdec75d04951bce1ebc54dc561e54f5e921",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/INDEPENDENT-REVIEW.md",
+      "recomputed_blob": "73c0ebdec75d04951bce1ebc54dc561e54f5e921",
+      "sha256": "54a446271887cf8c2ba571f75bd15871a337981aca568da4c0fbef41d64e7c72",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "73c0ebdec75d04951bce1ebc54dc561e54f5e921",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 12489,
+      "content_blob": "8e22751137a0a0b00307579873547d55af0102b6",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/INPUT-SHAS.json",
+      "recomputed_blob": "8e22751137a0a0b00307579873547d55af0102b6",
+      "sha256": "bd6f035d7c99d2f0ac352e2ff9b23f0e1151a6da3ac410448cf1608dfec08ae7",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "8e22751137a0a0b00307579873547d55af0102b6",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 1814,
+      "content_blob": "03bc6befa8fd13394d912bbfc3b343d54b29414f",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/MANIFEST.sha256",
+      "recomputed_blob": "03bc6befa8fd13394d912bbfc3b343d54b29414f",
+      "sha256": "d5f99c3686add17fbb78273a81967621fcf96ab7befd808dce39abcaba876361",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "03bc6befa8fd13394d912bbfc3b343d54b29414f",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 12354,
+      "content_blob": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/PARITY-TRACEABILITY.md",
+      "recomputed_blob": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483",
+      "sha256": "7f08f8f39ac9e32b81d290e27bb568a38c23ea170a52af7c12f031c94c2c5bd9",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 7227,
+      "content_blob": "b80ce9e0358ffd4ec10114162d38c12a9e46fe57",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/RESULT.md",
+      "recomputed_blob": "b80ce9e0358ffd4ec10114162d38c12a9e46fe57",
+      "sha256": "3199fe3500c749aecc4dc7c7d50f85f96097bfe0b2f684458fda9d522b8474a3",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "b80ce9e0358ffd4ec10114162d38c12a9e46fe57",
+      "tree_mode": "100644"
+    },
+    {
+      "bytes": 6855,
+      "content_blob": "11e979d153b0cdb140696df654fc1a78e928b08e",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/SECURITY-AND-INTEROPERABILITY.md",
+      "recomputed_blob": "11e979d153b0cdb140696df654fc1a78e928b08e",
+      "sha256": "8c56608f573fdd35fbd71b9041b86222f8e5bdd365b9ba5c4822db7a0fd5a3fe",
+      "size_match": true,
+      "source_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "tree_blob": "11e979d153b0cdb140696df654fc1a78e928b08e",
+      "tree_mode": "100644"
+    }
+  ],
+  "mission": "AP04-F2-DOC-CI-REPAIR-01",
+  "plan": "AP04-POR-v1.0-draft",
+  "private_sources": "NOT_READ_NOT_REQUESTED_NOT_PUBLISHED",
+  "prompt": {
+    "blob": "370a07b809c98f2bf771cfad0fe89427561bca2d",
+    "bytes": 11285,
+    "complete_marker": true,
+    "eight_sections": true,
+    "parent": "9bde37b90e9670a802b3790944e2136bf7bd241e",
+    "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair-prompt/AP04-F2-DOC-CI-REPAIR-01.md",
+    "sha": "8abf556c6c39fcc54855391f2eeef3d8a8615985",
+    "sha256": "7eeaa481a628d93f3af26dcf59f25f12eb8d8716d7bd2d51ecb06e30d3053201",
+    "supersedes_truncated_prompt": true,
+    "tree": "4937e66fe60d26b13c48d02708637911016dce2e"
+  },
+  "repository": "thalesvalente/Atlas",
+  "schema": "atlas-ap04-f2-ci-repair-inputs-v1",
+  "verification": {
+    "all_13_entries_match": true,
+    "all_lengths_and_blobs_match": true,
+    "count": 19,
+    "f1": 5,
+    "f1_public_manifest": "NONE; five public blobs frozen individually",
+    "f2": 14,
+    "f2_technical_manifest_sha256": "dfe50699a7bb9df042264220a356d1f3e4b959df02bac76870e54cd152953b5f",
+    "f2_terminal_manifest_entries": 13,
+    "f2_terminal_manifest_sha256": "d5f99c3686add17fbb78273a81967621fcf96ab7befd808dce39abcaba876361",
+    "history_inspected_before_writes": true,
+    "method": "GitHub Git Data API trees/parents/diffs and in-memory UTF-8 lengths, Git blob SHA-1 and SHA-256 recomputation"
+  }
+}

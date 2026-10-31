@@ -54,7 +54,17 @@ jobs:
           specify version --json
           specify integration status --json
       - name: Check generated Spec Kit assets and preserved architecture
-        run: python scripts/qa/atlas_parity04_doc_ci.py speckit
+        shell: bash
+        run: |
+          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+            python scripts/qa/atlas_parity04_f2_doc_ci.py speckit
+          else
+            ap04_ancestry_status=$?
+            if [ "$ap04_ancestry_status" -ne 1 ]; then
+              exit "$ap04_ancestry_status"
+            fi
+            python scripts/qa/atlas_parity04_doc_ci.py speckit
+          fi
       - name: Verify feature 003 requirements and tasks without active-pointer writes
         env:
           SPECIFY_FEATURE_NO_PERSIST: '1'

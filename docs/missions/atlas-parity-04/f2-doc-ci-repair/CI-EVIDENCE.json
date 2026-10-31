@@ -1,0 +1,97 @@
+{
+  "candidate_runs": [],
+  "closure": "The containing commit must get its own six terminal runs and independent review; final external closure belongs in PR15, not a self-referential commit",
+  "engineering_evidence_only": true,
+  "mission": "AP04-F2-DOC-CI-REPAIR-01",
+  "original_runs": [
+    {
+      "conclusion": "failure",
+      "failed": 4,
+      "head_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "run_attempt": 1,
+      "run_id": 41119159266,
+      "status": "completed",
+      "success": 0,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41119159266",
+      "workflow": "ATLAS-PARITY-04 documentation successor"
+    },
+    {
+      "conclusion": "failure",
+      "failed": 6,
+      "head_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "run_attempt": 1,
+      "run_id": 41119159241,
+      "status": "completed",
+      "success": 1,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41119159241",
+      "workflow": "ATLAS-PARITY-02 P06 frozen-boundary QA"
+    },
+    {
+      "conclusion": "failure",
+      "failed": 8,
+      "head_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "run_attempt": 1,
+      "run_id": 41119159203,
+      "status": "completed",
+      "success": 0,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41119159203",
+      "workflow": "ATLAS-PARITY03 P03 isolated qualification"
+    },
+    {
+      "conclusion": "failure",
+      "failed": 6,
+      "head_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "run_attempt": 1,
+      "run_id": 41119159306,
+      "status": "completed",
+      "success": 0,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41119159306",
+      "workflow": "ATLAS-PARITY-03 C4 full composition"
+    },
+    {
+      "conclusion": "failure",
+      "failed": 2,
+      "head_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "run_attempt": 1,
+      "run_id": 41119159205,
+      "status": "completed",
+      "success": 0,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41119159205",
+      "workflow": "ATLAS003 Spec Kit contract checks"
+    },
+    {
+      "conclusion": "failure",
+      "failed": 4,
+      "head_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+      "run_attempt": 1,
+      "run_id": 41119159228,
+      "status": "completed",
+      "success": 2,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41119159228",
+      "workflow": "ATLAS021 candidate verification"
+    }
+  ],
+  "original_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
+  "original_summary": {
+    "all_terminal": true,
+    "attribution": "Native B read real Actions logs; no independent downstream failure observed before guard termination",
+    "failed": 30,
+    "jobs": 33,
+    "representative_log_job_ids": [
+      124281106958,
+      124281106273,
+      124281106077,
+      124281107142,
+      124281107141,
+      124281106943,
+      124281106627,
+      124281106460,
+      124281106838
+    ],
+    "root_cause": "GuardError: Unexpected path in complete C4 successor delta; 5 F1 + 14 F2 documents",
+    "success": 3
+  },
+  "original_tree": "611306f28557f5d9e27db49108880004399f5768",
+  "schema": "atlas-ap04-f2-ci-evidence-v1",
+  "status": "PENDING_REAL_ACTIONS_AND_INDEPENDENT_FINAL_SHA_REVIEW"
+}

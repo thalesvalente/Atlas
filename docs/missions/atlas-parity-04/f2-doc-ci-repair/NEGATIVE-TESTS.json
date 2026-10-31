@@ -1,0 +1,31 @@
+{
+  "actual_test_ids": [],
+  "coverage": [
+    "Exact C4/AP04/F1/F2 identities and legitimate repair",
+    "Unauthorized path in every epoch and post-F2, including reverted changes",
+    "Edit/delete/rename/symlink/gitlink/mode of all 19 frozen documents",
+    "ADR/governance/GATES/plan/fixtures/protocol/schema/context/skills/AGENTS immutability",
+    "Historical manifest tampering and malformed/canonicality/traversal/overbroad supplemental overlay",
+    "Rehashed guard/dispatch/oracle/test control changes fail independent authorization",
+    "C4 INPUTS/ASSETS/COMPOSITION/P03_C4_ADAPTERS freeze",
+    "Ancestry errors/lookalike branch/wrong lineage/pins/bypass/skip/xfail/subset/stale receipt",
+    "Preflight literal-table expressions, non-UTF8 codec and executable statements sharing excluded lines"
+  ],
+  "inherited_ids": {
+    "ap04": 23,
+    "c4": 168,
+    "total": 191,
+    "union_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a"
+  },
+  "mission": "AP04-F2-DOC-CI-REPAIR-01",
+  "real_receipts": [],
+  "required_modes": [
+    "ubuntu-normal",
+    "ubuntu-O",
+    "windows-normal",
+    "windows-O"
+  ],
+  "schema": "atlas-ap04-f2-negative-tests-v1",
+  "status": "IMPLEMENTED_PENDING_REAL_ACTIONS",
+  "synthetic_tests_do_not_replace_actions": true
+}
