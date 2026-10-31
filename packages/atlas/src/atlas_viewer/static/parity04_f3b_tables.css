@@ -1,0 +1,54 @@
+/* Isolated F3B component. Horizontal overflow belongs to its table viewport. */
+.atlas-f3b,
+.atlas-f3b * { box-sizing: border-box; }
+.atlas-f3b {
+  inline-size: 100%; max-inline-size: 100%; min-inline-size: 0;
+  color: #14243a; background: #fff; border: 1px solid #a7b5c7;
+  border-radius: .5rem; padding: .75rem;
+  font: 1rem/1.5 system-ui, sans-serif; overflow-wrap: anywhere;
+}
+.atlas-f3b h2 { margin-block: 0 .5rem; font-size: 1.2rem; }
+.atlas-f3b p { margin-block: .5rem; }
+.atlas-f3b .f3b-controls {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: .75rem; margin-block: .75rem;
+}
+.atlas-f3b label { display: flex; flex-direction: column; gap: .25rem; min-inline-size: 0; }
+.atlas-f3b input, .atlas-f3b select, .atlas-f3b textarea, .atlas-f3b button {
+  font: inherit; color: inherit; background: #fff; border: 1px solid #697e97;
+  border-radius: .2rem; padding: .5rem; min-inline-size: 0; max-inline-size: 100%;
+}
+.atlas-f3b input, .atlas-f3b select, .atlas-f3b textarea { inline-size: 100%; }
+.atlas-f3b button { min-block-size: 2.75rem; cursor: pointer; white-space: normal; }
+.atlas-f3b button:disabled { cursor: default; opacity: .65; }
+.atlas-f3b :focus-visible { outline: 3px solid #105dcc; outline-offset: 2px; }
+.atlas-f3b .f3b-viewport {
+  max-inline-size: 100%; min-inline-size: 0; max-block-size: 70vh; overflow: auto;
+  border: 1px solid #9bacc2; margin-block: .75rem; overscroll-behavior-inline: contain;
+}
+.atlas-f3b table {
+  border-collapse: collapse; inline-size: max-content; min-inline-size: 100%;
+  max-inline-size: none; table-layout: auto;
+}
+.atlas-f3b caption { text-align: start; caption-side: top; padding: .65rem; font-weight: 650; }
+.atlas-f3b th, .atlas-f3b td {
+  border: 1px solid #b8c5d6; text-align: start; vertical-align: top; padding: .6rem;
+  min-inline-size: 10rem; max-inline-size: 26rem; overflow-wrap: anywhere; white-space: normal;
+}
+.atlas-f3b th { background: #e8eef7; }
+.atlas-f3b tr[aria-selected="true"] { background: #e1efff; }
+.atlas-f3b .f3b-literal { display: block; white-space: pre-wrap; }
+.atlas-f3b .f3b-cell-meta { display: block; color: #354963; margin-block-start: .4rem; }
+.atlas-f3b .f3b-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: .75rem; }
+.atlas-f3b pre {
+  inline-size: 100%; max-inline-size: 100%; max-block-size: 32rem; overflow: auto;
+  white-space: pre-wrap; overflow-wrap: anywhere; padding: .65rem; background: #f1f5fa;
+}
+.atlas-f3b textarea { resize: vertical; white-space: pre; overflow: auto; }
+.atlas-f3b .f3b-error { color: #9d1226; font-weight: 650; }
+.atlas-f3b .f3b-error:empty { display: none; }
+@media (max-width: 420px) {
+  .atlas-f3b { padding: .5rem; }
+  .atlas-f3b .f3b-controls { grid-template-columns: 1fr; }
+  .atlas-f3b .f3b-actions > button { flex: 1 1 8rem; }
+}

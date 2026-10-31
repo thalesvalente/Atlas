@@ -1,0 +1,117 @@
+{
+  "mission": "AP04-F3B-CHAT-TABLES-01",
+  "repository": "thalesvalente/Atlas",
+  "branch": "feat/atlas-parity04-f3b-tables-20261031",
+  "base": {
+    "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9"
+  },
+  "prompt": {
+    "sha": "23e776d5b94e1e075275d28e41b5e9214a52cffe",
+    "path": "docs/missions/atlas-parity-04/f3-parallel-launch/F3B-CHAT-TABLES-01.md",
+    "blob": "9e3facac352adf28798f6551c3ec8c97257f6c83"
+  },
+  "approval": {
+    "package_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "comment": "https://github.com/thalesvalente/Atlas/pull/15#issuecomment-6539419419",
+    "state": "APPROVED_SCOPED"
+  },
+  "f1": {
+    "sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+    "use": "SANITIZED_GAPS_ONLY_NO_PRIVATE_DATA_NO_REPLAY"
+  },
+  "inputs": [
+    {
+      "path": ".specify/memory/constitution.md",
+      "git_blob_sha1": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+      "bytes": 4878
+    },
+    {
+      "path": "AGENTS.md",
+      "git_blob_sha1": "c19ccc55e54f1274dac8408480f7a3e9ecc30f85",
+      "bytes": 956
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "git_blob_sha1": "a2190a257987aa9a2da276857cdb713ac24dd520",
+      "bytes": 5732
+    },
+    {
+      "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+      "git_blob_sha1": "17265f1a7293d7885825d9dc1982b1e1dec2b567",
+      "bytes": 4710
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ACTION-PLAN.md",
+      "git_blob_sha1": "de728c827a960cf9bcb2e22e20b5d205aa199781",
+      "bytes": 7010
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/DECISION-REGISTER.md",
+      "git_blob_sha1": "e40075b866987f22f234e86a9c0ea789dc6fe3c9",
+      "bytes": 5931
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/GATES.json",
+      "git_blob_sha1": "d36b302368cf8671e95d798b349b420b0eefd9a2",
+      "bytes": 1475
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/INTEROPERABILITY-GUARDRAILS.md",
+      "git_blob_sha1": "2cc06951e3116fb0636d1fc8c68745867d2ae810",
+      "bytes": 2731
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+      "git_blob_sha1": "feb9ab242a857fb377724acb9e904b2f89f1f2b9",
+      "bytes": 2702
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/README.md",
+      "git_blob_sha1": "52be8c6f8d23a4278abc7313a439a0560ee85b66",
+      "bytes": 2921
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/RESULT-REVIEW-TEMPLATE.md",
+      "git_blob_sha1": "d8e544a390f47d8c421d6f75f9e94a9311fb59b9",
+      "bytes": 3104
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ADR-0003-v0.2-CANDIDATE.md",
+      "git_blob_sha1": "e1283af1ac285937bf02bdf163ce3cf2d00f3081",
+      "bytes": 6271
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "git_blob_sha1": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "bytes": 64656
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "git_blob_sha1": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "bytes": 12120
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/PARITY-TRACEABILITY.md",
+      "git_blob_sha1": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483",
+      "bytes": 12354
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/plan.md",
+      "git_blob_sha1": "d5ac461bbb33a149c0b2d66e88780192b5a95912",
+      "bytes": 3041
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/spec.md",
+      "git_blob_sha1": "039a217eba8cabd65554447ab51694b382855ac2",
+      "bytes": 8600
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.md",
+      "git_blob_sha1": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c",
+      "bytes": 2547
+    }
+  ],
+  "reasoning_effective": "UNVERIFIED",
+  "environment": "GitHub connector and GitHub Actions; no local host qualification"
+}

@@ -1,0 +1,104 @@
+name: ATLAS-PARITY04 F3B isolated tables
+on:
+  push:
+    branches: ['feat/atlas-parity04-f3b-tables-20261031']
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-browser:
+    name: F3B Chromium / ${{ matrix.os }} / O${{ matrix.optimize }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        optimize: ['0', '1']
+    env:
+      PYTHONOPTIMIZE: ${{ matrix.optimize }}
+      PYTHONUTF8: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      F3B_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Verify exclusive additive F3B ownership and frozen blobs
+        shell: python
+        run: |
+          import json, pathlib, subprocess
+          base = "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+          def git(*args):
+              return subprocess.check_output(["git", *args], text=True).strip()
+          if git("rev-parse", "HEAD") != __import__("os").environ["F3B_SHA"]:
+              raise RuntimeError("Candidate SHA mismatch")
+          subprocess.run(["git", "merge-base", "--is-ancestor", base, "HEAD"], check=True)
+          exact = {
+              "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+              "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.css",
+              "tests/qa/test_atlas_parity04_f3b_tables.py",
+              ".github/workflows/atlas-parity04-f3b-tables.yml",
+          }
+          prefixes = (
+              "tests/qa/f3b", "tests/fixtures/atlas_parity04_f3b_",
+              "scripts/qa/atlas_parity04_f3b_", "docs/missions/atlas-parity-04/f3b-tables/",
+          )
+          changed = git("diff", "--name-only", base, "HEAD").splitlines()
+          forbidden = [p for p in changed if p not in exact and not p.startswith(prefixes)]
+          if forbidden:
+              raise RuntimeError("Out-of-ownership delta: " + repr(forbidden))
+          before = {}
+          for line in git("ls-tree", "-r", base).splitlines():
+              metadata, path = line.split("\t", 1)
+              before[path] = metadata
+          after = {}
+          for line in git("ls-tree", "-r", "HEAD").splitlines():
+              metadata, path = line.split("\t", 1)
+              after[path] = metadata
+          if any(after.get(p) != blob for p, blob in before.items()):
+              raise RuntimeError("Inherited blob changed or deleted")
+          import hashlib
+          manifest_path = "docs/missions/atlas-parity-04/f3b-tables/MANIFEST.sha256"
+          entries = {}
+          for line in pathlib.Path(manifest_path).read_text(encoding="utf-8").splitlines():
+              digest, path = line.split("  ", 1)
+              if path in entries or path not in changed or path == manifest_path:
+                  raise RuntimeError("Invalid manifest entry: " + path)
+              if hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest() != digest:
+                  raise RuntimeError("Manifest digest mismatch: " + path)
+              entries[path] = digest
+          if set(entries) != set(changed) - {manifest_path}:
+              raise RuntimeError("Manifest does not cover complete F3B delta")
+          print(json.dumps({"manifest_sha256":hashlib.sha256(pathlib.Path(manifest_path).read_bytes()).hexdigest(),"entries":len(entries)}))
+          out = pathlib.Path(".test-output/atlas-parity04-f3b")
+          out.mkdir(parents=True, exist_ok=True)
+          receipt = {"sha":git("rev-parse","HEAD"),"tree":git("rev-parse","HEAD^{tree}"),"parent":git("rev-parse","HEAD^"),"base":base,"frozen_blobs":len(before),"changed":changed}
+          (out/"ownership.json").write_text(json.dumps(receipt, indent=2), encoding="utf-8")
+          print(json.dumps(receipt))
+      - name: Install pinned test-only tools
+        run: python -m pip install playwright==1.62.0 jsonschema==4.25.1
+      - name: Install Chromium on Ubuntu
+        if: runner.os == 'Linux'
+        run: python -m playwright install --with-deps chromium
+      - name: Install Chromium on Windows
+        if: runner.os == 'Windows'
+        run: python -m playwright install chromium
+      - name: Execute actual component and adversarial browser collection
+        run: python tests/qa/test_atlas_parity04_f3b_tables.py --output .test-output/atlas-parity04-f3b
+      - name: Preserve SHA-bound JSON, JUnit, fixtures and screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: f3b-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: .test-output/atlas-parity04-f3b/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30

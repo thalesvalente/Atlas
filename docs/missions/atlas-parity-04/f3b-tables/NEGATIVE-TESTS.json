@@ -1,0 +1,355 @@
+{
+  "mission": "AP04-F3B-CHAT-TABLES-01",
+  "technical_sha": "aa804815a173bf091108c1a81410f1b0f2f838ca",
+  "technical_tree": "19f87d1dda3b1e75fbec70817612dcb9893bda83",
+  "technical_parent": "8f1da3af0f1b9e981d64d4fa5fd7b8010c904b0c",
+  "plan": "AP04-POR-v1.0-draft",
+  "scope": {
+    "collection": "100% synthetic, 5 tables, 46 rows (16 admitted RF, 28 unadmitted RF, 1 RNF, 1 RES), 4 unbound tables, 3 nodes (2 source + 1 external stub), 1 relation, 1 File; no F1 replay",
+    "private_data": false,
+    "rf_real_integrated": false,
+    "G5_global": false,
+    "G6": false,
+    "F4_implemented": false,
+    "opening_budget": "F4/external obligation; 256MiB/30s hard isolation NOT_IMPLEMENTED by memory-only F3B",
+    "standards": {
+      "preserved": [
+        "RO-Crate 1.3",
+        "Process Run 0.6",
+        "Caderno 0.1.0a1"
+      ],
+      "fhir": "FUTURE_DOMAIN_EXTENSION_NOT_IMPLEMENTED_NOT_CONFORMANT"
+    }
+  },
+  "status": "TECHNICAL_FOCAL_PASS",
+  "evidence_run": "https://github.com/thalesvalente/Atlas/actions/runs/41173677346",
+  "top_level_test_count": 24,
+  "case_count_per_cell": 380,
+  "test_method_ids": [
+    "test_01_fidelity_all_fields_types_lexemes_and_source_unchanged",
+    "test_02_integer_sort_exact_and_original_order_restore",
+    "test_03_decimal_sort_exact_and_boolean_string_types",
+    "test_04_sort_requires_explicit_declaration_and_matching_units",
+    "test_05_filter_pagination_counts_without_mutation",
+    "test_06_twenty_eight_unadmitted_stay_queryable_without_native_id",
+    "test_07_four_unbound_tables_remain_visible",
+    "test_08_domains_optional_no_filename_mime_or_product_inference",
+    "test_09_category_absence_null_empty_zero_unknown_remain_distinct",
+    "test_10_hostile_html_js_uri_and_structured_values_inert",
+    "test_11_csv_formula_controls_headers_quotes_unicode_and_full_scope",
+    "test_12_neutral_selection_event_context_occurrences_and_collisions",
+    "test_13_reimport_same_snapshot_invalidates_old_token",
+    "test_14_snapshot_source_switch_does_not_merge_or_resolve_stale_links",
+    "test_15_expiration_invalidates_context_and_selection",
+    "test_16_invalid_schema_semantics_and_quotas_denied_atomically",
+    "test_17_keyboard_semantics_and_headers",
+    "test_18_real_browser_reflow_screenshots_1440_390_320",
+    "test_19_dispose_and_new_mount_invalidate_old_session",
+    "test_20_view_clones_cannot_mutate_dataset_or_selection",
+    "test_21_empty_dataset_and_no_tables_message",
+    "test_22_new_module_session_cannot_resolve_old_deep_link",
+    "test_23_native_collision_visible_per_occurrence_without_declared_gap",
+    "test_24_descriptor_byte_quota_rejects_before_clone_atomically"
+  ],
+  "actual_negative_case_ids": [
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='version')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='extra_property')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='not_run')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='failed_semantics')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='numeric_trailing_newline')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='numeric_coercion')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='row_width')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='ordinal')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='duplicate_navigation')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='navigation_promoted')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='unadmitted_native')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='utf8_cell_quota')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='structured_depth')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='structured_lexeme_mismatch')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='invalid_array')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='lexical_mismatch')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='requirement_index')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='resolved_binding')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='coverage_count')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='invalid_calendar')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='resolved_collision')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='ttl')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='expired')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically (mutation='table_quota')",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_16_invalid_schema_semantics_and_quotas_denied_atomically",
+      "status": "PASS"
+    },
+    {
+      "id": "__main__.F3BTables.test_24_descriptor_byte_quota_rejects_before_clone_atomically",
+      "status": "PASS"
+    }
+  ],
+  "traceability": [
+    {
+      "case_id": "N01",
+      "test_ids": [
+        "test_14_snapshot_source_switch_does_not_merge_or_resolve_stale_links"
+      ],
+      "scope": "SOURCE_SNAPSHOT_CONTEXT"
+    },
+    {
+      "case_id": "N02",
+      "test_ids": [
+        "test_12_neutral_selection_event_context_occurrences_and_collisions",
+        "test_23_native_collision_visible_per_occurrence_without_declared_gap"
+      ],
+      "scope": "COLLISION_OCCURRENCES"
+    },
+    {
+      "case_id": "N03",
+      "test_ids": [
+        "test_16_invalid_schema_semantics_and_quotas_denied_atomically"
+      ],
+      "scope": "NAV_ID_PROMOTION_REJECTED"
+    },
+    {
+      "case_id": "N04",
+      "test_ids": [
+        "test_07_four_unbound_tables_remain_visible"
+      ],
+      "scope": "TABLE_BINDING_NULL_ONLY_GRAPH_COUNTS_OUT_OF_SCOPE"
+    },
+    {
+      "case_id": "N05",
+      "test_ids": [
+        "test_06_twenty_eight_unadmitted_stay_queryable_without_native_id",
+        "test_07_four_unbound_tables_remain_visible"
+      ],
+      "scope": "TABLE_BINDING_GAP_ONLY"
+    },
+    {
+      "case_id": "N06",
+      "test_ids": [
+        "test_12_neutral_selection_event_context_occurrences_and_collisions"
+      ],
+      "scope": "TABLE_COLLISION_OCCURRENCES_ONLY_GRAPH_REPEATS_OUT_OF_SCOPE"
+    },
+    {
+      "case_id": "N07",
+      "test_ids": [
+        "test_07_four_unbound_tables_remain_visible"
+      ],
+      "scope": "FOUR_UNBOUND"
+    },
+    {
+      "case_id": "N08",
+      "test_ids": [
+        "test_06_twenty_eight_unadmitted_stay_queryable_without_native_id"
+      ],
+      "scope": "TWENTY_EIGHT_SYNTHETIC_UNADMITTED"
+    },
+    {
+      "case_id": "N09",
+      "test_ids": [
+        "test_06_twenty_eight_unadmitted_stay_queryable_without_native_id",
+        "test_01_fidelity_all_fields_types_lexemes_and_source_unchanged"
+      ],
+      "scope": "ISOLATED_RUN_BINDING_PRESERVED_NO_TREE_INTEGRATION"
+    },
+    {
+      "case_id": "N10",
+      "test_ids": [
+        "test_09_category_absence_null_empty_zero_unknown_remain_distinct"
+      ],
+      "scope": "ABSENCE_DISTINCTIONS"
+    },
+    {
+      "case_id": "N11",
+      "test_ids": [
+        "test_01_fidelity_all_fields_types_lexemes_and_source_unchanged",
+        "test_02_integer_sort_exact_and_original_order_restore",
+        "test_03_decimal_sort_exact_and_boolean_string_types",
+        "test_04_sort_requires_explicit_declaration_and_matching_units"
+      ],
+      "scope": "EXACT_TYPED_VALUES"
+    },
+    {
+      "case_id": "N12",
+      "test_ids": [
+        "test_10_hostile_html_js_uri_and_structured_values_inert"
+      ],
+      "scope": "INERT_DOM"
+    },
+    {
+      "case_id": "N13",
+      "test_ids": [
+        "test_11_csv_formula_controls_headers_quotes_unicode_and_full_scope"
+      ],
+      "scope": "SAFE_CSV_LITERAL_JSON"
+    },
+    {
+      "case_id": "N14",
+      "test_ids": [],
+      "scope": "NOT_RUN_EXTERNAL_ACQUISITION_F4"
+    },
+    {
+      "case_id": "N15",
+      "test_ids": [
+        "test_10_hostile_html_js_uri_and_structured_values_inert"
+      ],
+      "scope": "INERT_URI_NO_OPEN"
+    },
+    {
+      "case_id": "N16",
+      "test_ids": [],
+      "scope": "NOT_RUN_HOST_SOURCE_OBSERVATION_F4_F5"
+    },
+    {
+      "case_id": "N17",
+      "test_ids": [
+        "test_16_invalid_schema_semantics_and_quotas_denied_atomically",
+        "test_24_descriptor_byte_quota_rejects_before_clone_atomically"
+      ],
+      "scope": "STRUCTURAL_COMPONENT_QUOTAS_ONLY_NOT_IMPORTER_HEAP_TIME"
+    },
+    {
+      "case_id": "N18",
+      "test_ids": [
+        "test_13_reimport_same_snapshot_invalidates_old_token",
+        "test_14_snapshot_source_switch_does_not_merge_or_resolve_stale_links",
+        "test_15_expiration_invalidates_context_and_selection",
+        "test_19_dispose_and_new_mount_invalidate_old_session",
+        "test_22_new_module_session_cannot_resolve_old_deep_link"
+      ],
+      "scope": "STALE_CONTEXTS"
+    },
+    {
+      "case_id": "N19",
+      "test_ids": [
+        "test_05_filter_pagination_counts_without_mutation",
+        "test_08_domains_optional_no_filename_mime_or_product_inference"
+      ],
+      "scope": "UNKNOWN_GLOBAL_NOT_SUMMED"
+    },
+    {
+      "case_id": "N20",
+      "test_ids": [
+        "test_08_domains_optional_no_filename_mime_or_product_inference"
+      ],
+      "scope": "NO_SCIENTIFIC_PROMOTION"
+    },
+    {
+      "case_id": "N21",
+      "test_ids": [
+        "test_08_domains_optional_no_filename_mime_or_product_inference"
+      ],
+      "scope": "NO_DOMAIN_PRODUCT_FHIR_INFERENCE"
+    },
+    {
+      "case_id": "N22",
+      "test_ids": [],
+      "scope": "FROZEN_BLOBS_545_PASS_GLOBAL_REGRESSION_NOT_QUALIFIED"
+    },
+    {
+      "case_id": "N23",
+      "test_ids": [
+        "test_17_keyboard_semantics_and_headers",
+        "test_18_real_browser_reflow_screenshots_1440_390_320"
+      ],
+      "scope": "TABLE_BROWSER_ONLY_TREE_AND_PRIVATE_INTEGRATED_FLOW_OUT_OF_SCOPE"
+    },
+    {
+      "case_id": "N24",
+      "test_ids": [
+        "test_08_domains_optional_no_filename_mime_or_product_inference"
+      ],
+      "scope": "NO_O2_CONFORMANCE_ASSERTION_NOT_O2_VALIDATION"
+    }
+  ],
+  "atomicity": "Every invalid candidate is rejected visibly before replacing a still-live dataset or its selection; expired contexts are invalidated. Count quota uses129 small tables, byte quota33554433chars generated inside Chromium to avoid IPC amplification.",
+  "failed_attempts": [
+    {
+      "sha": "b29eb124064238276b7d485daa052120eab7b1d1",
+      "run_id": 41173107488,
+      "state": "FAIL_BEFORE_BROWSER",
+      "cause": "Python playwright==1.62.1 did not exist; corrected only the newly authored workflow to1.62.0. Historical npm pin untouched."
+    },
+    {
+      "sha": "8f1da3af0f1b9e981d64d4fa5fd7b8010c904b0c",
+      "run_id": 41173375933,
+      "failure_job": 124455823769,
+      "state": "FAILED_BROWSER_ATTEMPT_NOT_QUALIFIED",
+      "cause": "table_quota fixture multiplied the long-cell table129times; TargetClosedError during Playwright call, then cascading browser setup errors. Inferred transport/resource overload, not an atomic rejection. Next commit changed only the test and manifest; small count-quota candidate plus separate in-browser byte candidate passed."
+    }
+  ],
+  "external_acquisition": "NOT_RUN_NOT_IMPLEMENTED_F3B",
+  "private_parity": "NOT_RUN"
+}
