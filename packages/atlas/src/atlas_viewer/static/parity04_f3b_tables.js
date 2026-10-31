@@ -43,6 +43,18 @@
   }
   // Implements only the keywords used by the frozen embedded F2 schema.
   // This does not claim a general JSON Schema engine or scientific validation.
+  function validDateTime(value) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-](\d{2}):(\d{2}))$/.exec(value);
+    if (!match || match[0].length !== value.length) return false;
+    const year = Number(match[1]), month = Number(match[2]), day = Number(match[3]);
+    const hour = Number(match[4]), minute = Number(match[5]), second = Number(match[6]);
+    const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    const days = [31,leap ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+    if (month < 1 || month > 12 || day < 1 || day > days[month - 1] ||
+        hour > 23 || minute > 59 || second > 59) return false;
+    if (match[7] !== "Z" && (Number(match[8]) > 23 || Number(match[9]) > 59)) return false;
+    return Number.isFinite(Date.parse(value));
+  }
   function schemaCheck(value, rule, path = "$") {
     if (rule.$ref) return schemaCheck(value, SCHEMA.$defs[rule.$ref.split("/").pop()],path);
     if (rule.const !== undefined) ok(equal(value,rule.const), "SCHEMA_CONST " + path);
@@ -59,7 +71,7 @@
       if (rule.minLength !== undefined) ok(length >= rule.minLength,"SCHEMA_MIN_LENGTH " + path);
       if (rule.maxLength !== undefined) ok(length <= rule.maxLength,"SCHEMA_MAX_LENGTH " + path);
       if (rule.pattern) ok(new RegExp(rule.pattern).test(value),"SCHEMA_PATTERN " + path);
-      if (rule.format === "date-time") ok(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(value) && Number.isFinite(Date.parse(value)),"SCHEMA_DATE " + path);
+      if (rule.format === "date-time") ok(validDateTime(value),"SCHEMA_DATE " + path);
     }
     if (typeof value === "number") {
       if (rule.minimum !== undefined) ok(value >= rule.minimum,"SCHEMA_MINIMUM " + path);
@@ -106,6 +118,12 @@
       ok(parsed === cell.literal,"CELL_STRING_LEXEME");
     } else if (["integer","decimal","boolean"].includes(cell.type)) {
       ok(cell.literal === cell.lexeme,"CELL_TYPED_LEXEME");
+      if (cell.type === "integer" || cell.type === "decimal") {
+        const grammar = cell.type === "integer" ? /^-?(0|[1-9][0-9]*)$/ :
+          /^-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][+-]?[0-9]+)?$/;
+        const match = grammar.exec(cell.literal);
+        ok(match !== null && match[0].length === cell.literal.length,"CELL_NUMERIC_GRAMMAR");
+      }
     } else if (cell.type === "array" || cell.type === "object") {
       for (const text of [cell.literal,cell.lexeme]) {
         let parsed; try { parsed = JSON.parse(text); } catch (_) { fail("CELL_JSON_LITERAL"); }
@@ -223,14 +241,27 @@
   const admissionText = row => row.requirement ? row.requirement.admission + (row.requirement.admission === "UNADMITTED_NATIVE_RF" ? " — não admitida" : "") + "; categoria " + row.requirement.category_status : "Requisito não declarado";
   const bindingText = reference => reference.resolution === "RESOLVED" ? "vínculo declarado resolvido" : "não vinculada — " + reference.resolution;
 
+  function identityCollisions(descriptor) {
+    const counts = new Map();
+    const add = entity => { const id = entity.identity.native_id; if (id !== null) counts.set(id,(counts.get(id) || 0) + 1); };
+    for (const node of descriptor.nodes) if (node.entity_status === "SOURCE_ENTITY") add(node);
+    for (const table of descriptor.tables) { add(table); for (const row of table.rows) add(row); }
+    for (const relation of descriptor.relations) add(relation);
+    for (const asset of descriptor.assets) add(asset);
+    return new Set(Array.from(counts).filter(([,count]) => count > 1).map(([id]) => id));
+  }
   function mount(root, descriptor, options = {}) {
     ok(root && typeof root.appendChild === "function","MOUNT_ROOT_REQUIRED");
     const doc = root.ownerDocument;
-    const instance = "atlas-f3b-" + (++instanceCounter);
+    ok(globalThis.crypto && typeof globalThis.crypto.getRandomValues === "function","SECURE_RANDOM_UNAVAILABLE");
+    const nonce = Array.from(globalThis.crypto.getRandomValues(new Uint32Array(4)), value => value.toString(16).padStart(8,"0")).join("");
+    const instance = "atlas-f3b-" + nonce + "-" + (++instanceCounter);
     const now = typeof options.now === "function" ? options.now : () => Date.now();
     const sortTypes = copy(options.sortTypes || {});
     let data = null, session = null, revision = 0, selected = null, expired = false, disposed = false, error = "", timer = null;
     let tableNav = null, search = "", admission = "", sort = null, page = 0;
+    let nativeCollisions = new Set();
+    const collisionLabel = identity => identity.native_id !== null && nativeCollisions.has(identity.native_id) ? " | COLLISION (DERIVED_FOR_PRESENTATION)" : "";
     let pageSize = options.pageSize === undefined ? 10 : options.pageSize;
     ok(Number.isInteger(pageSize) && pageSize >= 1 && pageSize <= 100,"PAGE_SIZE");
     const element = (tag,text,attributes = {}) => {
@@ -282,7 +313,7 @@
     function live() {
       if (disposed) return false;
       if (data && now() >= Date.parse(data.snapshot.expires_at)) {
-        data = null; session = null; selected = null; tableNav = null; expired = true;
+        data = null; nativeCollisions.clear(); session = null; selected = null; tableNav = null; expired = true;
         clearTimeout(timer); timer = null; output.value = "";
         error = "SNAPSHOT_EXPIRED: seleção e links invalidados";
         render(true);
@@ -342,7 +373,7 @@
         if (data) for (const item of data.tables) {
           const identity = item.identity;
           const domain = item.domain_origin === "DECLARED" ? item.domain : "UNKNOWN";
-          tableSelect.append(element("option",item.title_literal + " | " + domain + " | ocorrência " + identity.occurrence + " | " + bindingText(item.record_binding),{value:identity.navigation_id,"data-table-nav":identity.navigation_id}));
+          tableSelect.append(element("option",item.title_literal + " | " + domain + " | ocorrência " + identity.occurrence + " | " + bindingText(item.record_binding) + collisionLabel(identity),{value:identity.navigation_id,"data-table-nav":identity.navigation_id}));
         }
         sortSelect.replaceChildren(element("option","Ordem original",{value:""}));
         if (table) table.columns.forEach((column,index) => {
@@ -365,7 +396,8 @@
         " | OBSERVED_SNAPSHOT_ONLY | expira " + data.snapshot.expires_at +
         " | schema " + data.validation.descriptor_schema + " / semântica " + data.validation.descriptor_semantics +
         " | NOT_VERIFIED (autenticidade) / NOT_EVALUATED (ciência). " +
-        data.gaps.map(gap => gap.code + ": " + gap.note).join(" | ");
+        data.gaps.map(gap => gap.code + ": " + gap.note).join(" | ") +
+        " | Colisões de IDs observadas neste descriptor (DERIVED_FOR_PRESENTATION): " + nativeCollisions.size;
       const visible = rows.slice(page * pageSize,(page + 1) * pageSize);
       summary.textContent = "Tabelas " + data.tables.length + "; carregadas " + (table ? table.rows.length : 0) +
         "; filtradas " + rows.length + "; visíveis " + visible.length + "; página " + (page + 1) + "/" +
@@ -377,13 +409,14 @@
       const htmlTable = element("table");
       htmlTable.append(element("caption",table.title_literal + " | " + bindingText(table.record_binding) + " | native_id " +
         (table.identity.native_id === null ? "null" : table.identity.native_id) + " | " + table.identity.navigation_id +
-        " | ocorrência " + table.identity.occurrence + " | " + data.source.source_id + "/" + data.snapshot.snapshot_id));
+        " | ocorrência " + table.identity.occurrence + " | " + data.source.source_id + "/" + data.snapshot.snapshot_id + collisionLabel(table.identity)));
       const head = element("thead"), headerRow = element("tr");
       table.columns.forEach((column,index) => headerRow.append(element("th",column.header_literal,{id:instance + "-col-" + index,scope:"col"})));
       headerRow.append(element("th","Navegação derivada",{id:instance + "-navigation",scope:"col"})); head.append(headerRow);
       const body = element("tbody");
       for (const row of visible) {
         const tr = element("tr",null,{"data-row-nav":row.identity.navigation_id});
+        if (nativeCollisions.has(row.identity.native_id)) tr.setAttribute("data-native-collision","true");
         if (selected && selected.row_navigation_id === row.identity.navigation_id) tr.setAttribute("aria-selected","true");
         row.cells.forEach((cell,index) => {
           const td = element("td",null,{headers:instance + "-col-" + index});
@@ -395,7 +428,7 @@
         const rowButton = button("Detalhe da linha " + row.ordinal,"row-detail",() => select(token(tableNav,row.identity.navigation_id)));
         rowButton.setAttribute("data-row-nav",row.identity.navigation_id);
         actions.append(rowButton,element("small",admissionText(row) + " | native_id=" + String(row.identity.native_id) +
-          " | binding_gap=" + row.binding_gap + " | Run " + row.run_binding.resolution,{class:"f3b-cell-meta"}));
+          " | binding_gap=" + row.binding_gap + " | Run " + row.run_binding.resolution + collisionLabel(row.identity),{class:"f3b-cell-meta"}));
         tr.append(actions); body.append(tr);
       }
       htmlTable.append(head,body);
@@ -409,7 +442,7 @@
       live();
       let nextData;
       try { nextData = validateDescriptor(input,now()); } catch (reason) { return report(reason); }
-      data = nextData; session = instance + "-import-" + (++revision); selected = null; expired = false;
+      data = nextData; nativeCollisions = identityCollisions(nextData); session = instance + "-import-" + (++revision); selected = null; expired = false;
       tableNav = data.tables.length ? data.tables[0].identity.navigation_id : null;
       search = ""; admission = ""; sort = null; page = 0; output.value = ""; clearError();
       render(true); armTimer(); return true;
@@ -467,19 +500,18 @@
     }
     function exportJSON() {
       if (!live()) { report("SNAPSHOT_UNAVAILABLE"); return null; }
-      clearError(); return JSON.stringify(data,null,2);
+      return JSON.stringify(data,null,2);
     }
     function exportCSV(navigation = tableNav) {
       if (!live()) { report("SNAPSHOT_UNAVAILABLE"); return null; }
       const table = data.tables.find(item => item.identity.navigation_id === navigation);
       if (!table) { report("UNKNOWN_TABLE"); return null; }
-      clearError();
       const rows = [table.columns.map(column => column.header_literal),...table.rows.map(row => row.cells.map(cell => cell.type === "missing" ? "MISSING" : cell.type === "null" ? "null" : cell.literal))];
       return rows.map(row => row.map(csvCell).join(",")).join("\r\n") + "\r\n";
     }
     function dispose() {
       if (disposed) return;
-      disposed = true; clearTimeout(timer); data = null; selected = null; session = null;
+      disposed = true; clearTimeout(timer); data = null; nativeCollisions.clear(); selected = null; session = null;
       output.value = ""; detail.textContent = ""; wrapper.remove();
     }
     tableSelect.addEventListener("change",() => query({table:tableSelect.value}));

@@ -238,7 +238,7 @@ class F3BTables(unittest.TestCase):
         self.assertTrue(rows[0][18].startswith("'="))
         self.assertEqual(self.exported(), self.descriptor)
         self.page.locator('[data-f3b="export-csv"]').click()
-        self.assertEqual(self.page.locator('[data-f3b="export-output"]').input_value(),text)
+        self.assertEqual(self.page.locator('[data-f3b="export-output"]').input_value(),text.replace('\r\n','\n'))
         self.page.locator('[data-f3b="export-json"]').click()
         self.assertEqual(json.loads(self.page.locator('[data-f3b="export-output"]').input_value()),self.descriptor)
 
@@ -320,6 +320,7 @@ class F3BTables(unittest.TestCase):
             elif kind=='extra_property': d['unexpected']='x'
             elif kind=='not_run': d['validation']['descriptor_schema']='NOT_RUN'
             elif kind=='failed_semantics': d['validation']['descriptor_semantics']='FAIL'
+            elif kind=='numeric_trailing_newline': r['cells'][6].update(literal='123\n',lexeme='123\n')
             elif kind=='numeric_coercion': r['cells'][6]['literal']=9007199254740993
             elif kind=='row_width': r['cells'].pop()
             elif kind=='ordinal': r['ordinal']=99
@@ -334,20 +335,22 @@ class F3BTables(unittest.TestCase):
             elif kind=='requirement_index': r['requirement']['fields']['title']=255
             elif kind=='resolved_binding': t['record_binding']['declared_id']='MISMATCH'
             elif kind=='coverage_count': next(c for c in d['coverage']['counts'] if c['unit']=='rows')['loaded']=999
+            elif kind=='invalid_calendar': d['snapshot']['scientific_at']='2026-02-31T00:00:00Z'
+            elif kind=='resolved_collision': t['record_binding'].update(declared_id='ROW-SYN-COLLISION',target_navigation_id='nav:a-row-14')
             elif kind=='ttl': d['snapshot']['expires_at']='2026-10-30T15:01:00Z'
             elif kind=='expired': d['snapshot']['expires_at']='2026-10-30T12:01:01Z'
             elif kind=='table_quota': d['tables']=[copy.deepcopy(t) for _ in range(129)]
             return d
-        kinds = ['version','extra_property','not_run','failed_semantics','numeric_coercion','row_width',
+        kinds = ['version','extra_property','not_run','failed_semantics','numeric_trailing_newline','numeric_coercion','row_width',
                  'ordinal','duplicate_navigation','navigation_promoted','unadmitted_native','utf8_cell_quota',
                  'structured_depth','structured_lexeme_mismatch','invalid_array','lexical_mismatch','requirement_index','resolved_binding',
-                 'coverage_count','ttl','expired','table_quota']
+                 'coverage_count','invalid_calendar','resolved_collision','ttl','expired','table_quota']
         for kind in kinds:
             with self.subTest(mutation=kind):
                 self.assertFalse(self.page.evaluate('(d)=>component.setTables(d)',mutate(kind)))
-                self.assertEqual(self.exported(), self.descriptor)
-                self.assertEqual(self.state()['selection'],token)
                 self.assertTrue(self.page.locator('[data-f3b="error"]').inner_text())
+                self.assertEqual(self.state()['selection'],token)
+                self.assertEqual(self.exported(), self.descriptor)
 
     def test_17_keyboard_semantics_and_headers(self):
         search = self.page.locator('[data-f3b="search"]')
@@ -424,6 +427,31 @@ class F3BTables(unittest.TestCase):
         self.assertIsNone(state['selection'])
         text=self.page.locator('#mount').inner_text().lower()
         self.assertRegex(text,r'nenhuma|sem tabel|vazi')
+        self.assertEqual(self.exported(),d)
+
+    def test_22_new_module_session_cannot_resolve_old_deep_link(self):
+        token=self.token()
+        self.assertTrue(self.select(token))
+        self.page.evaluate('component.dispose()')
+        # Reinitialize module closure exactly as a fresh page/session does.
+        self.page.add_script_tag(content=JS.read_text(encoding='utf-8'))
+        self.mount()
+        self.assertNotEqual(self.state()['session_id'],token['session_id'])
+        self.assertFalse(self.select(token))
+        self.assertTrue(self.select(self.token()))
+
+    def test_23_native_collision_visible_per_occurrence_without_declared_gap(self):
+        d=copy.deepcopy(self.descriptor)
+        d['gaps']=[g for g in d['gaps'] if g['code']!='DECLARED_COLLISION']
+        for i in (14,15):
+            d['tables'][0]['rows'][i]['identity']['native_id']='ROW-SYN-DUPLICATE'
+        self.mount(d)
+        for i in (14,15):
+            with self.subTest(occurrence=i):
+                self.assertTrue(self.select(self.token(TABLE,f'nav:a-row-{i}')))
+                row=self.page.locator(f'tr[data-row-nav="nav:a-row-{i}"]')
+                self.assertEqual(row.get_attribute('data-native-collision'),'true')
+                self.assertIn('COLLISION (DERIVED_FOR_PRESENTATION)',row.inner_text())
         self.assertEqual(self.exported(),d)
 
 
