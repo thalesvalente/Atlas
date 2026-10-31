@@ -14,14 +14,14 @@ const finite = (v) => typeof v === "number" && Number.isFinite(v);
 const isObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
 const text = (v) => v === null ? "null" : String(v);
 function validDateTime(value) {
-  const m=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.\d+)?(Z|[+-](\d\d):(\d\d))$/.exec(value);
+  const m=/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.\d+)?(Z|[+-](\d\d):(\d\d))$/i.exec(value);
   if(!m)return false;
   const year=Number(m[1]),month=Number(m[2]),day=Number(m[3]);
   const leap=year%4===0 && (year%100!==0 || year%400===0);
   const days=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31];
   return month>=1 && month<=12 && day>=1 && day<=days[month-1] &&
     Number(m[4])<=23 && Number(m[5])<=59 && Number(m[6])<=59 &&
-    (m[7]==="Z" || (Number(m[8])<=23 && Number(m[9])<=59)) &&
+    (m[7].toUpperCase()==="Z" || (Number(m[8])<=23 && Number(m[9])<=59)) &&
     Number.isFinite(Date.parse(value));
 }
 function validateSchema(v, s, path="$") {
@@ -120,6 +120,7 @@ function semanticModel(d, now, checkpoint) {
   }
   if (d.validation.descriptor_schema!=="PASS" || d.validation.descriptor_semantics!=="PASS")
     fail("Descriptor validation must be PASS; presentation never grants scientific approval");
+  if(["CHANGED","EXPIRED"].includes(d.source.availability))fail("Source context invalidated: "+d.source.availability);
   const observed=Date.parse(d.snapshot.observed_at), generated=Date.parse(d.snapshot.generated_at),
     expires=Date.parse(d.snapshot.expires_at);
   if (!(observed<=generated && generated<expires && expires-generated<=3600000))
@@ -325,7 +326,7 @@ export function mount(host, descriptor, options={}) {
       expanded=new Set(model.nodes.keys());focusId=d.nodes[0]?.identity.navigation_id||null;
       relationIndex=0;zoom=1;pan={x:20,y:20};
       banner.textContent="LEGACY_DERIVED · "+d.source.source_id+" / "+d.snapshot.snapshot_id+
-        " · descriptor_schema PASS · descriptor_semantics PASS · OBSERVED_SNAPSHOT_ONLY · expira "+
+        " · fonte "+d.source.availability+" · descriptor_schema PASS · descriptor_semantics PASS · OBSERVED_SNAPSHOT_ONLY · expira "+
         d.snapshot.expires_at+" · autenticidade NOT_VERIFIED · ciência NOT_EVALUATED";
       error.hidden=true;errorMessage=null;render(null,checkpoint);
       timer=setTimeout(()=>{live();},Math.max(1,model.expires-now()+1));
@@ -358,7 +359,7 @@ export function mount(host, descriptor, options={}) {
   }
   function updateCamera() {
     world.setAttribute("transform","translate("+pan.x+" "+pan.y+") scale("+zoom+")");
-    zoomLabel.textContent=Math.round(zoom*100)+"%";
+    zoomLabel.textContent=(zoom<.01?(zoom*100).toFixed(3):String(Math.round(zoom*100)))+"%";
     const rect=mini.querySelector("[data-mini-view]");
     if(rect){rect.setAttribute("x",String(-pan.x/zoom));rect.setAttribute("y",String(-pan.y/zoom));
       rect.setAttribute("width",String(width/zoom));rect.setAttribute("height",String(height/zoom));}
@@ -376,9 +377,10 @@ export function mount(host, descriptor, options={}) {
   }
   function reveal(id) {
     const p=positions.get(id);if(!p)return;
-    if(p.x*zoom+pan.x<0 || (p.x+230)*zoom+pan.x>width ||
+    const needsLegibility=zoom<.5;
+    if(needsLegibility)zoom=1;
+    if(needsLegibility || p.x*zoom+pan.x<0 || (p.x+230)*zoom+pan.x>width ||
       p.y*zoom+pan.y<0 || (p.y+62)*zoom+pan.y>height) {
-      if(zoom<.5)zoom=1;
       pan={x:width/2-(p.x+115)*zoom,y:height/2-(p.y+31)*zoom};updateCamera();
     }
   }

@@ -229,6 +229,7 @@ try {
         not_validated: d => { d.validation.descriptor_schema='NOT_RUN'; },
         invalid_ttl: d => { d.snapshot.expires_at='2026-11-01T10:01:00Z'; },
         invalid_calendar: d => { d.snapshot.observed_at='2026-02-30T09:00:00Z'; },
+        invalid_clock_24h: d => { d.snapshot.observed_at='2026-10-30T24:00:00Z'; },
         unmapped_literal_lexeme_mismatch: d => { d.unmapped_fields=[{owner_navigation_id:'nav:project',locator:'/synthetic/unmapped',source_key_literal:'synthetic',value:{type:'string',literal:'benign',lexeme:'"different"',unit:null,precision:null,absence:null}}]; },
         unmapped_embedded_json_depth: d => {const s='['.repeat(25)+'0'+']'.repeat(25);d.unmapped_fields=[{owner_navigation_id:'nav:project',locator:'/synthetic/unmapped',source_key_literal:'synthetic',value:{type:'array',literal:s,lexeme:s,unit:null,precision:null,absence:null}}]; },
         depth: d => { let o=d;for(let i=0;i<25;i++){o.deep={};o=o.deep;} },
@@ -254,6 +255,16 @@ try {
     insist(r.accepted && r.state.visible_ids.length === 5 && /cycl|cicl/i.test(r.text), 'Cycle was dropped or silently treated as valid hierarchy'); return r.state;
   });
   await check('capacity_and_descriptor_extremes', async p => {
+    await p.evaluate(() => {
+      const d=structuredClone(fixture), seed=structuredClone(d.nodes[0]);d.relations=[];d.gaps=[];
+      d.nodes=Array.from({length:1000},(_,i)=>({...structuredClone(seed),identity:{...seed.identity,native_id:'SYN-KBD-'+i,navigation_id:'nav:kbd-'+i,occurrence:i},parent_key_literal:i?'SYN-KBD-'+(i-1):null,tree_state:i?'PARENT_RESOLVED':'ROOT_DECLARED',parent:i?{source_id:d.source.source_id,snapshot_id:d.snapshot.snapshot_id,declared_id:'SYN-KBD-'+(i-1),target_navigation_id:'nav:kbd-'+(i-1),resolution:'RESOLVED',evidence_locator:'/synthetic/kbd/'+i}:structuredClone(seed.parent)}));
+      const counts={presentation_node_occurrences:1000,source_nodes:1000,external_reference_stubs:0,relations:0,tables:0,rows:0,assets:0};d.coverage.counts.forEach(c=>{c.selected=counts[c.unit];c.loaded=counts[c.unit]});
+      if(!graph.setData(d))throw new Error('Keyboard chain cap1000 refused');
+    });
+    await p.locator('[data-action="fit"]').click();
+    await p.locator('[data-node-id="nav:kbd-0"]').focus();await p.keyboard.press('End');await p.keyboard.press('Enter');
+    const focused = await p.locator('[data-node-id="nav:kbd-999"]').boundingBox();
+    insist(focused.width >= 115 && (await state(p)).selection?.nav_id === 'nav:kbd-999', 'Keyboard after fit failed legible contextual focus in deep1000 chain');
     const results = await p.evaluate(() => {
       function bigger(nodes, relations) {
         const d=structuredClone(fixture), seed=structuredClone(d.nodes[0]), edge=structuredClone(d.relations[0]);
@@ -288,7 +299,7 @@ try {
       const b=p.locator('[data-action="'+action+'"]');insist(await b.isVisible(),'Control clipped at '+width+': '+action);await b.focus();
       insist(await b.evaluate(el=>el===document.activeElement),'Control unreachable by focus');
     }
-    await p.locator('[data-node-id="nav:hostile"]').focus();await p.keyboard.press('Enter');
+    await p.locator('[data-node-id="nav:project"]').focus();await p.keyboard.press('End');await p.keyboard.press('Enter');
     insist((await state(p)).selection?.nav_id==='nav:hostile','Long/hostile label unreachable');
     const textFits=await p.locator('[data-node-id="nav:hostile"] text').evaluateAll(es=>es.every(el=>{const b=el.getBBox();return b.x>=0 && b.x+b.width<=230;}));
     insist(textFits,'Long original_type or label overflowed node card at '+width);
@@ -305,7 +316,16 @@ try {
   await check('authority_validation_gaps_and_expiry_visible', async p => {
     const t=await p.locator('#root').textContent();
     for(const expected of ['LEGACY_DERIVED','OBSERVED_SNAPSHOT_ONLY','NOT_VERIFIED','NOT_EVALUATED','PASS','2026-10-31']) insist(t.includes(expected),'Missing authority/validation/expiry disclosure: '+expected);
-    insist(/gap|lacuna/i.test(t),'Binding gaps hidden');return {authority:'LEGACY_DERIVED',scientific_approval:'NOT_EVALUATED'};
+    insist(/gap|lacuna/i.test(t),'Binding gaps hidden');
+    const ratios=await p.evaluate(()=>{
+      function rgb(text){const n=text.match(/[\d.]+/g);return n.slice(0,3).map(Number);}
+      function luminance(text){return rgb(text).map(n=>{const c=n/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;}).reduce((sum,n,i)=>sum+n*[.2126,.7152,.0722][i],0);}
+      function ratio(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+      const button=getComputedStyle(document.querySelector('[data-action="fit"]')), label=getComputedStyle(document.querySelector('.f3a-label')), meta=getComputedStyle(document.querySelector('.f3a-node-meta')), card=getComputedStyle(document.querySelector('.f3a-node > rect'));
+      return {button:ratio(button.color,button.backgroundColor),label:ratio(label.fill,card.fill),metadata:ratio(meta.fill,card.fill)};
+    });
+    insist(Object.values(ratios).every(r=>r>=4.5),'Measured control/node text contrast below4.5: '+JSON.stringify(ratios));
+    return {authority:'LEGACY_DERIVED',scientific_approval:'NOT_EVALUATED',measured_text_contrast:ratios};
   });
 } catch(e) { report.fatal=String(e.stack||e); }
 finally {

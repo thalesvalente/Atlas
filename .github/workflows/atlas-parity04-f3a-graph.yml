@@ -31,7 +31,6 @@ jobs:
       PYTHONUTF8: '1'
       PYTHONOPTIMIZE: ${{ matrix.optimize }}
       F3A_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-      F3A_OUTPUT: ${{ runner.temp }}/atlas-parity04-f3a
       PIP_DISABLE_PIP_VERSION_CHECK: '1'
     steps:
       - name: Checkout exact candidate, not synthetic merge ref
@@ -52,6 +51,8 @@ jobs:
           npm install --no-save --package-lock=false --ignore-scripts playwright@1.62.1
           npx playwright install --with-deps chromium
       - name: Run all isolated source, browser and custody oracles without skips
+        env:
+          F3A_OUTPUT: ${{ runner.temp }}/atlas-parity04-f3a
         run: python scripts/qa/atlas_parity04_f3a_ci.py
       - name: Preserve exact-SHA JSON, JUnit, logs and synthetic PNG evidence
         if: always()
