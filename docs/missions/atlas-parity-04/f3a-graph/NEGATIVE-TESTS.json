@@ -1,0 +1,440 @@
+{
+  "schema": "atlas-f3a-negative-evidence-v1",
+  "qualification": {
+    "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+    "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+    "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+    "run_id": 41173213797,
+    "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "synthetic": true,
+  "fixture": {
+    "nodes": 109,
+    "relations": 210,
+    "collision_groups": 50,
+    "null_endpoints": 22,
+    "unresolved_endpoints": 75,
+    "repeated_groups": 40,
+    "excess_occurrences": 41,
+    "categories_not_additive_partition": true
+  },
+  "n01_n24_scope": [
+    {
+      "id": "N01",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Contextual selection rejects another source/snapshot; reload and reimport invalidate session"
+    },
+    {
+      "id": "N02",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "50 native collision groups retain 100 separate node occurrences; ambiguous RESOLVED refused"
+    },
+    {
+      "id": "N03",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Navigation ID promoted to native ID refused"
+    },
+    {
+      "id": "N04",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "22 null endpoints retained and counted without targets"
+    },
+    {
+      "id": "N05",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "75 unresolved endpoints/relations retained with visible counts"
+    },
+    {
+      "id": "N06",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "40 repeated groups and 41 excess occurrences; all 210 relation occurrences retained"
+    },
+    {
+      "id": "N07",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "F3B table record binding UI"
+    },
+    {
+      "id": "N08",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "F3B unadmitted RF rendering/admission"
+    },
+    {
+      "id": "N09",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "SOURCE_ENTITY isolated Run and explicit reference stub remain distinct; binding_gap and absent parent visible"
+    },
+    {
+      "id": "N10",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "F3B category/null/missing table UI"
+    },
+    {
+      "id": "N11",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "F3B typed precision/table rendering; frozen examples only formally schema-checked"
+    },
+    {
+      "id": "N12",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Hostile HTML/JS label remains literal; active DOM, execution and external requests remain zero"
+    },
+    {
+      "id": "N13",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "F3B export/CSV"
+    },
+    {
+      "id": "N14",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "External acquisition host paths/TOCTOU; no file reader in F3A"
+    },
+    {
+      "id": "N15",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "javascript/file/remote URI literals remain inert, never followed"
+    },
+    {
+      "id": "N16",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "External source change/observation; no original source monitoring"
+    },
+    {
+      "id": "N17",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "16 malformed/semantic cases, closed schema, quotas and visible atomic refusal; 1000-node and 4000-relation positive capacities"
+    },
+    {
+      "id": "N18",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Same-snapshot reimport, cross-context, expiry and real page reload invalidate old context"
+    },
+    {
+      "id": "N19",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "UNKNOWN_UPSTREAM/GLOBAL_UNPROVEN and absence of global denominator exposed"
+    },
+    {
+      "id": "N20",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "LEGACY_DERIVED, NOT_VERIFIED and NOT_EVALUATED remain separate from descriptor validation"
+    },
+    {
+      "id": "N21",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Declared original kind/type only; no title/MIME/domain inference or FHIR conformity"
+    },
+    {
+      "id": "N22",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "Installed SDK/C4 integrated G5"
+    },
+    {
+      "id": "N23",
+      "scope": "F3A_SYNTHETIC_COMPONENT_ONLY",
+      "oracle": "Real isolated component navigation/keyboard/browser only; integrated RF/private G6 not executed"
+    },
+    {
+      "id": "N24",
+      "scope": "NOT_EXECUTED_OUTSIDE_F3A",
+      "oracle": "Protocol conformance validation/false conformity; F3A makes no such claim"
+    }
+  ],
+  "browser_mutations": [
+    {
+      "name": "unknown_version",
+      "error": "F3A — $.version: invalid constant"
+    },
+    {
+      "name": "unknown_property",
+      "error": "F3A — $: extra property extra"
+    },
+    {
+      "name": "duplicate_nav",
+      "error": "F3A — Duplicate navigation_id"
+    },
+    {
+      "name": "duplicate_cross_collection_nav",
+      "error": "F3A — Duplicate navigation_id"
+    },
+    {
+      "name": "nav_promoted_native",
+      "error": "F3A — Navigation identity promoted to native_id"
+    },
+    {
+      "name": "resolved_context_mismatch",
+      "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+    },
+    {
+      "name": "resolved_stub_target",
+      "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+    },
+    {
+      "name": "resolved_collision",
+      "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+    },
+    {
+      "name": "not_validated",
+      "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+    },
+    {
+      "name": "invalid_ttl",
+      "error": "F3A — Invalid snapshot chronology/TTL"
+    },
+    {
+      "name": "invalid_calendar",
+      "error": "F3A — $.snapshot.observed_at: invalid date-time"
+    },
+    {
+      "name": "invalid_clock_24h",
+      "error": "F3A — $.snapshot.observed_at: invalid date-time"
+    },
+    {
+      "name": "unmapped_literal_lexeme_mismatch",
+      "error": "F3A — String literal/lexeme mismatch"
+    },
+    {
+      "name": "unmapped_embedded_json_depth",
+      "error": "F3A — Descriptor depth/value quota exceeded"
+    },
+    {
+      "name": "depth",
+      "error": "F3A — Descriptor depth/value quota exceeded"
+    },
+    {
+      "name": "nonfinite",
+      "error": "F3A — Descriptor must contain only JSON data"
+    }
+  ],
+  "capacity": [
+    {
+      "os": "ubuntu-latest",
+      "optimize": 0,
+      "positive": [
+        {
+          "nodes": 1000,
+          "relations": 0,
+          "duration_ms": 812.4000000000015,
+          "visible": 1000
+        },
+        {
+          "nodes": 2,
+          "relations": 4000,
+          "duration_ms": 465.5,
+          "dom_relations": 4000
+        }
+      ],
+      "negative": [
+        {
+          "nodes": 1001,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 79.20000000000437
+        },
+        {
+          "nodes": 10000,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 917.9000000000015
+        },
+        {
+          "nodes": 10001,
+          "relations": 0,
+          "error": "F3A — $.nodes: array quota",
+          "duration_ms": 554.3000000000029
+        },
+        {
+          "nodes": 2,
+          "relations": 4001,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 440.1999999999971
+        },
+        {
+          "nodes": 2,
+          "relations": 100000,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 1710.4000000000015
+        },
+        {
+          "nodes": 2,
+          "relations": 100001,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 1653
+        }
+      ]
+    },
+    {
+      "os": "ubuntu-latest",
+      "optimize": 1,
+      "positive": [
+        {
+          "nodes": 1000,
+          "relations": 0,
+          "duration_ms": 633.3999999999942,
+          "visible": 1000
+        },
+        {
+          "nodes": 2,
+          "relations": 4000,
+          "duration_ms": 380.30000000001746,
+          "dom_relations": 4000
+        }
+      ],
+      "negative": [
+        {
+          "nodes": 1001,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 70.60000000000582
+        },
+        {
+          "nodes": 10000,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 779.3000000000175
+        },
+        {
+          "nodes": 10001,
+          "relations": 0,
+          "error": "F3A — $.nodes: array quota",
+          "duration_ms": 542.8000000000175
+        },
+        {
+          "nodes": 2,
+          "relations": 4001,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 388.20000000001164
+        },
+        {
+          "nodes": 2,
+          "relations": 100000,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 1517.2000000000116
+        },
+        {
+          "nodes": 2,
+          "relations": 100001,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 1644
+        }
+      ]
+    },
+    {
+      "os": "windows-latest",
+      "optimize": 0,
+      "positive": [
+        {
+          "nodes": 1000,
+          "relations": 0,
+          "duration_ms": 1391,
+          "visible": 1000
+        },
+        {
+          "nodes": 2,
+          "relations": 4000,
+          "duration_ms": 765,
+          "dom_relations": 4000
+        }
+      ],
+      "negative": [
+        {
+          "nodes": 1001,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 144.70000000001164
+        },
+        {
+          "nodes": 10000,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 1521.4000000000233
+        },
+        {
+          "nodes": 10001,
+          "relations": 0,
+          "error": "F3A — $.nodes: array quota",
+          "duration_ms": 786.7999999999884
+        },
+        {
+          "nodes": 2,
+          "relations": 4001,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 590.7000000000116
+        },
+        {
+          "nodes": 2,
+          "relations": 100000,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 2859.2000000000116
+        },
+        {
+          "nodes": 2,
+          "relations": 100001,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 2535.4000000000233
+        }
+      ]
+    },
+    {
+      "os": "windows-latest",
+      "optimize": 1,
+      "positive": [
+        {
+          "nodes": 1000,
+          "relations": 0,
+          "duration_ms": 1376.2999999999884,
+          "visible": 1000
+        },
+        {
+          "nodes": 2,
+          "relations": 4000,
+          "duration_ms": 634.6000000000349,
+          "dom_relations": 4000
+        }
+      ],
+      "negative": [
+        {
+          "nodes": 1001,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 118.09999999997672
+        },
+        {
+          "nodes": 10000,
+          "relations": 0,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 1272.7999999999884
+        },
+        {
+          "nodes": 10001,
+          "relations": 0,
+          "error": "F3A — $.nodes: array quota",
+          "duration_ms": 816.7000000000116
+        },
+        {
+          "nodes": 2,
+          "relations": 4001,
+          "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+          "duration_ms": 564.5
+        },
+        {
+          "nodes": 2,
+          "relations": 100000,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 2301
+        },
+        {
+          "nodes": 2,
+          "relations": 100001,
+          "error": "F3A — Descriptor depth/value quota exceeded",
+          "duration_ms": 2346.7999999999884
+        }
+      ]
+    }
+  ],
+  "no_test_skips": true,
+  "out_of_scope_is_not_test_skip": true,
+  "source_changed_or_expired": "Implementation rejects changed/expired source status; external observation of original source is outside F3A"
+}

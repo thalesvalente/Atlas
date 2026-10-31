@@ -1,0 +1,1774 @@
+{
+  "schema": "atlas-f3a-browser-evidence-v1",
+  "mission": "AP04-F3A-CHAT-GRAPH-01",
+  "qualification": {
+    "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+    "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+    "parent": "e56b2f3a406be52ab8edc33270834c1cf54c9d75",
+    "run_id": 41173213797,
+    "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "scope": "ISOLATED_SYNTHETIC_COMPONENT_ONLY",
+  "extraction": "Runner stdout: timestamps/CR and identifiable interleaved unittest stderr lines removed; original artifacts unchanged",
+  "binary_pixels_zip_xml_opened": false,
+  "cells": [
+    {
+      "job_id": 124455337335,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337335",
+      "os": "ubuntu-latest",
+      "optimize": 0,
+      "report": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 300,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-19f4508d92e304cf77a1f8bce152fca5-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 198,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 144,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 392,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-ad067ddb1e33f6ec97f0a839554c1a55-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 390,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 112,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-0693e186d37d148d4355a35d0a91aa2d-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-0693e186d37d148d4355a35d0a91aa2d-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 367,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 104,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 213,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 130,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 207,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 91,
+            "detail": {
+              "session_id": "f3a-1-a49bb232d45daf48608e055f49268ec1-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 9058,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 812.4000000000015,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 465.5,
+                  "dom_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 79.20000000000437
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 917.9000000000015
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 554.3000000000029
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 440.1999999999971
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100000,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1710.4000000000015
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1653
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 242,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 238,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 258,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-b807e4e067b6142149ca1bdfbab060ad-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 117,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 192807,
+            "sha256": "651da169bf20f27650e5d2e24124dff438f27a7dbeb2609c56f4b0de8fb61bb1"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 157189,
+            "sha256": "657109d203a537a5d560602f9a842ce10bd17f4cfc1fda34d97bf4e89950b01e"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 153434,
+            "sha256": "ac4a82cdc44e1ce834462c039db78e8d60076b416f80202c567a1fab0e5ee4f3"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "passed": true
+      }
+    },
+    {
+      "job_id": 124455337172,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337172",
+      "os": "ubuntu-latest",
+      "optimize": 1,
+      "report": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 240,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-c7780fff3e43387a66e9412a7dc390b0-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 179,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 120,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 382,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-e94c88ace19a25134b4c5c36d3a6092c-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 375,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 88,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-9d7900a146577715dc8f899453ea1065-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-9d7900a146577715dc8f899453ea1065-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 269,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 81,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 178,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 116,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 158,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 73,
+            "detail": {
+              "session_id": "f3a-1-1b280423bf38d844ea3ad93f81e31317-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 7768,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 633.3999999999942,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 380.30000000001746,
+                  "dom_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 70.60000000000582
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 779.3000000000175
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 542.8000000000175
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 388.20000000001164
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100000,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1517.2000000000116
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 1644
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 187,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 175,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 214,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-c1651cf80481f5098367c64385c3672c-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 84,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 192592,
+            "sha256": "b9e2387486615bb46c9e296a085f4444f51c3015e7476c7f56c5271031536cf5"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 157783,
+            "sha256": "a91895fcd58180da5aedf26cd66e4892b9dd4333e23a8e40c2daf816b6d185e7"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 153956,
+            "sha256": "2a917d8c59a58880fc37f5a242d66f60149630f43212de37e44a3f58e3eabab3"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "passed": true
+      }
+    },
+    {
+      "job_id": 124455337389,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337389",
+      "os": "windows-latest",
+      "optimize": 0,
+      "report": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 651,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-bd85ade08f781ea317328a6b149bc23c-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 275,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 218,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 604,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-947fb256c779b0c4834747c949a91502-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 527,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 209,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-5d9a878518f8c508d6b1da9282b9cd68-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-5d9a878518f8c508d6b1da9282b9cd68-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 573,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 223,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 334,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 223,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 354,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 198,
+            "detail": {
+              "session_id": "f3a-1-8797134131c23100c9794de5502d4427-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 14453,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 1391,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 765,
+                  "dom_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 144.70000000001164
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 1521.4000000000233
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 786.7999999999884
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 590.7000000000116
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100000,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2859.2000000000116
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2535.4000000000233
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 347,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 333,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 326,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-0508d2fa0aefb86a892a04e8bf819ff3-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 172,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 113936,
+            "sha256": "2e03e592eeff496117b88d17515a8d62662b0f9b036af5a9688994895ae9059a"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 82324,
+            "sha256": "d262ee8451f34a7371fc0c5f7a4c64b49c1b7746f9c3ca8b95cbf987e79bb659"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 82873,
+            "sha256": "0cd1fc8a023eaf2719265dd2960a7d220da3cde73e79137563ecd6f9a2d7d48f"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "passed": true
+      }
+    },
+    {
+      "job_id": 124455337334,
+      "job_url": "https://github.com/thalesvalente/Atlas/actions/runs/41173213797/job/124455337334",
+      "os": "windows-latest",
+      "optimize": 1,
+      "report": {
+        "schema": "atlas-f3a-browser-receipt-v1",
+        "sha": "7008fa5a98b7036b7f97161ee808a422b2ce9ae1",
+        "tree": "3d8a6c00259655ecc65376cf2ccfc03554d68476",
+        "synthetic": true,
+        "browser": "151.0.7922.34",
+        "checks": [
+          {
+            "name": "hierarchy_selection_and_event",
+            "passed": true,
+            "duration_ms": 514,
+            "detail": {
+              "source_id": "synthetic-f3a",
+              "snapshot_id": "synthetic-f3a-v1",
+              "occurrence": 0,
+              "nav_id": "nav:run",
+              "session_id": "f3a-1-16e13e2621b1f4a4225002a8f51481a9-1"
+            }
+          },
+          {
+            "name": "collapse_expand_focus_and_state",
+            "passed": true,
+            "duration_ms": 260,
+            "detail": [
+              "nav:project",
+              "nav:family",
+              "nav:experiment",
+              "nav:stage",
+              "nav:run",
+              "nav:orphan",
+              "nav:isolated",
+              "nav:stub",
+              "nav:hostile"
+            ]
+          },
+          {
+            "name": "keyboard_traversal",
+            "passed": true,
+            "duration_ms": 207,
+            "detail": {
+              "first": "nav:project",
+              "last": "nav:hostile"
+            }
+          },
+          {
+            "name": "viewport_controls_reset_fit_and_minimap",
+            "passed": true,
+            "duration_ms": 493,
+            "detail": {
+              "initial": {
+                "session_id": "f3a-1-507c1ac0fdb436aa8ba8761b5bb7fa6c-1",
+                "selection": null,
+                "zoom": 1,
+                "pan": {
+                  "x": 20,
+                  "y": 20
+                },
+                "expanded": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "visible_ids": [
+                  "nav:project",
+                  "nav:family",
+                  "nav:experiment",
+                  "nav:stage",
+                  "nav:run",
+                  "nav:orphan",
+                  "nav:isolated",
+                  "nav:stub",
+                  "nav:hostile"
+                ],
+                "focus_id": "nav:project",
+                "node_count": 9,
+                "relation_count": 4,
+                "endpoint_counts": {
+                  "RESOLVED": 8,
+                  "NULL_ENDPOINT": 0,
+                  "UNRESOLVED": 0,
+                  "COLLISION": 0,
+                  "EXTERNAL_DECLARED": 0
+                },
+                "cycle_ids": [],
+                "error": null,
+                "disposed": false
+              },
+              "zoomed": 1.25,
+              "reset": 1,
+              "fit": 0.5271317829457365
+            }
+          },
+          {
+            "name": "pointer_pan_wheel_zoom_and_pinch",
+            "passed": true,
+            "duration_ms": 465,
+            "detail": {
+              "drag": {
+                "x": 55,
+                "y": 42
+              },
+              "wheel": 1.2712491503214047,
+              "pinch": 2.3306234422559085
+            }
+          },
+          {
+            "name": "typed_edges_and_no_fabricated_parent",
+            "passed": true,
+            "duration_ms": 164,
+            "detail": [
+              {
+                "id": "nav:rel-0",
+                "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+                "direction": "UNDIRECTED",
+                "arrow": null,
+                "css": "f3a-edge f3a-membership"
+              },
+              {
+                "id": "nav:rel-1",
+                "semantics": "DECLARED_LINEAGE",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-802f653a4ebe57ae063d8a6ccc5a5eb2-lineage)",
+                "css": "f3a-edge f3a-lineage"
+              },
+              {
+                "id": "nav:rel-2",
+                "semantics": "DECLARED_BINDING",
+                "direction": "FROM_TO",
+                "arrow": "url(#f3a-1-802f653a4ebe57ae063d8a6ccc5a5eb2-binding)",
+                "css": "f3a-edge f3a-binding"
+              },
+              {
+                "id": "nav:rel-3",
+                "semantics": "NEUTRAL_MENTION",
+                "direction": "UNKNOWN",
+                "arrow": null,
+                "css": "f3a-edge f3a-mention"
+              }
+            ]
+          },
+          {
+            "name": "adversarial_occurrences_counts_and_no_mutation",
+            "passed": true,
+            "duration_ms": 421,
+            "detail": {
+              "node_count": 109,
+              "relation_count": 210,
+              "endpoint_counts": {
+                "RESOLVED": 273,
+                "NULL_ENDPOINT": 22,
+                "UNRESOLVED": 75,
+                "COLLISION": 50,
+                "EXTERNAL_DECLARED": 0
+              }
+            }
+          },
+          {
+            "name": "hostile_text_uri_and_zero_io",
+            "passed": true,
+            "duration_ms": 157,
+            "detail": {
+              "inert": true,
+              "active_elements": 0
+            }
+          },
+          {
+            "name": "stale_context_cross_source_snapshot_and_disposal",
+            "passed": true,
+            "duration_ms": 279,
+            "detail": {
+              "reimport_session_changed": true,
+              "cross_context_rejected": true
+            }
+          },
+          {
+            "name": "expiry_invalidates_selection_and_links",
+            "passed": true,
+            "duration_ms": 182,
+            "detail": "EXPIRED — snapshot expirado; seleção e links invalidados."
+          },
+          {
+            "name": "invalid_descriptors_rejected_atomically",
+            "passed": true,
+            "duration_ms": 279,
+            "detail": [
+              {
+                "name": "unknown_version",
+                "error": "F3A — $.version: invalid constant"
+              },
+              {
+                "name": "unknown_property",
+                "error": "F3A — $: extra property extra"
+              },
+              {
+                "name": "duplicate_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "duplicate_cross_collection_nav",
+                "error": "F3A — Duplicate navigation_id"
+              },
+              {
+                "name": "nav_promoted_native",
+                "error": "F3A — Navigation identity promoted to native_id"
+              },
+              {
+                "name": "resolved_context_mismatch",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_stub_target",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "resolved_collision",
+                "error": "F3A — RESOLVED requires unique original target, identity, context and evidence"
+              },
+              {
+                "name": "not_validated",
+                "error": "F3A — Descriptor validation must be PASS; presentation never grants scientific approval"
+              },
+              {
+                "name": "invalid_ttl",
+                "error": "F3A — Invalid snapshot chronology/TTL"
+              },
+              {
+                "name": "invalid_calendar",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "invalid_clock_24h",
+                "error": "F3A — $.snapshot.observed_at: invalid date-time"
+              },
+              {
+                "name": "unmapped_literal_lexeme_mismatch",
+                "error": "F3A — String literal/lexeme mismatch"
+              },
+              {
+                "name": "unmapped_embedded_json_depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "depth",
+                "error": "F3A — Descriptor depth/value quota exceeded"
+              },
+              {
+                "name": "nonfinite",
+                "error": "F3A — Descriptor must contain only JSON data"
+              }
+            ]
+          },
+          {
+            "name": "hierarchy_cycles_retained_as_anomalies",
+            "passed": true,
+            "duration_ms": 149,
+            "detail": {
+              "session_id": "f3a-1-4436a2fb3c61cf955da7b0f2ae017679-2",
+              "selection": null,
+              "zoom": 1,
+              "pan": {
+                "x": 20,
+                "y": 20
+              },
+              "expanded": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "visible_ids": [
+                "nav:project",
+                "nav:family",
+                "nav:experiment",
+                "nav:stage",
+                "nav:run"
+              ],
+              "focus_id": "nav:project",
+              "node_count": 5,
+              "relation_count": 0,
+              "endpoint_counts": {
+                "RESOLVED": 0,
+                "NULL_ENDPOINT": 0,
+                "UNRESOLVED": 0,
+                "COLLISION": 0,
+                "EXTERNAL_DECLARED": 0
+              },
+              "cycle_ids": [
+                "nav:project",
+                "nav:run",
+                "nav:stage",
+                "nav:experiment",
+                "nav:family"
+              ],
+              "error": null,
+              "disposed": false
+            }
+          },
+          {
+            "name": "capacity_and_descriptor_extremes",
+            "passed": true,
+            "duration_ms": 12782,
+            "detail": {
+              "positive": [
+                {
+                  "nodes": 1000,
+                  "relations": 0,
+                  "duration_ms": 1376.2999999999884,
+                  "visible": 1000
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4000,
+                  "duration_ms": 634.6000000000349,
+                  "dom_relations": 4000
+                }
+              ],
+              "negative": [
+                {
+                  "nodes": 1001,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 118.09999999997672
+                },
+                {
+                  "nodes": 10000,
+                  "relations": 0,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 1272.7999999999884
+                },
+                {
+                  "nodes": 10001,
+                  "relations": 0,
+                  "error": "F3A — $.nodes: array quota",
+                  "duration_ms": 816.7000000000116
+                },
+                {
+                  "nodes": 2,
+                  "relations": 4001,
+                  "error": "F3A — Render limit exceeded: 1000 nodes / 4000 relations; no truncation",
+                  "duration_ms": 564.5
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100000,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2301
+                },
+                {
+                  "nodes": 2,
+                  "relations": 100001,
+                  "error": "F3A — Descriptor depth/value quota exceeded",
+                  "duration_ms": 2346.7999999999884
+                }
+              ]
+            }
+          },
+          {
+            "name": "responsive_390",
+            "passed": true,
+            "duration_ms": 289,
+            "detail": {
+              "scroll": 390,
+              "inner": 390
+            }
+          },
+          {
+            "name": "responsive_320",
+            "passed": true,
+            "duration_ms": 290,
+            "detail": {
+              "scroll": 320,
+              "inner": 320
+            }
+          },
+          {
+            "name": "reflow_preserves_focus_zoom_and_selection",
+            "passed": true,
+            "duration_ms": 292,
+            "detail": {
+              "zoom": 1.25,
+              "selection": {
+                "source_id": "synthetic-f3a",
+                "snapshot_id": "synthetic-f3a-v1",
+                "occurrence": 0,
+                "nav_id": "nav:run",
+                "session_id": "f3a-1-94a5fa8b43cf55966d48bb010279ea38-1"
+              }
+            }
+          },
+          {
+            "name": "authority_validation_gaps_and_expiry_visible",
+            "passed": true,
+            "duration_ms": 155,
+            "detail": {
+              "authority": "LEGACY_DERIVED",
+              "scientific_approval": "NOT_EVALUATED",
+              "measured_text_contrast": {
+                "button": 11.633279715376746,
+                "label": 14.611124826847021,
+                "metadata": 8.706781919939354
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "name": "desktop.png",
+            "bytes": 113852,
+            "sha256": "e13bb25aa0ab42a0eb3bf20f302ba519321c53da2d7877bbf5a45e5c27739ff5"
+          },
+          {
+            "name": "mobile-390.png",
+            "bytes": 82475,
+            "sha256": "41a047d935bb570afc3b1c5eefee85421750b2595e3a0856478ad7761414a6ae"
+          },
+          {
+            "name": "mobile-320.png",
+            "bytes": 83065,
+            "sha256": "e03e9c2d4f26a049fee234b18bcfa9b7f6c1f6076dcb9f68110f47355e5e8ba1"
+          }
+        ],
+        "outside_requests": [],
+        "page_errors": [],
+        "storage_calls": [],
+        "passed": true
+      }
+    }
+  ]
+}

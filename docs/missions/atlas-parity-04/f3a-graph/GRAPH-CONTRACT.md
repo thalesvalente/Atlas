@@ -46,4 +46,6 @@ F2 exige orçamento de 256MiB/30s por abertura externa. F3A não certifica heap 
 
 Gate focal executa componente isolado com fixture original sintética, Chromium real Windows/Ubuntu e Python normal/-O. Capturas/JSON/JUnit são atribuídos a SHA/tree. A revisão usa execução e oráculos explícitos, não snapshots cegos. Testes F4 relativos a host paths/TOCTOU, tabelas/exportação, SDK instalado e acervo privado são fora do escopo desta prova; N01–N24 são confrontados no RESULT sem inventar execução.
 
-O gate histórico pode recusar paths novos por autoria congelada. Essa recusa não é removida nem convertida em G5 PASS. Prontidão F3A permite handoff futuro F4, sem iniciar integração, sem recuperar árvore legada real e sem aceitar ciência.
+Os gates históricos recusam paths novos por autoria congelada, inventário de fixtures ou tooling/coleção insuficientes no workflow antigo, conforme GLOBAL-GATE-REPAIR-CONTRACT.md. Essas falhas não são removidas nem convertidas em G5 PASS. Prontidão F3A permite handoff futuro F4, sem iniciar integração, sem recuperar árvore legada real e sem aceitar ciência.
+
+O validador local verifica o schema 0.2.0 fechado e invariantes de fronteira, células, referências e contagens conhecidas. Não comprova literalmente a origem, a autenticidade, a ciência ou todas as obrigações de importação F4. Um nonce WebCrypto de 128 bits por mount distingue sessões mesmo após reload; na ausência de WebCrypto, mount falha antes de modificar o host.
