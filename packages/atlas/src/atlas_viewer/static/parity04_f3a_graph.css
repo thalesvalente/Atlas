@@ -1,0 +1,59 @@
+/* Scoped F3A component styles; no shell selectors or external assets. */
+.f3a-graph {
+  color:#182638; background:#fff; border:1px solid #9aa8b8; border-radius:8px;
+  padding:12px; box-sizing:border-box; width:100%; min-width:0;
+  font:14px/1.5 system-ui,sans-serif; overflow-wrap:anywhere;
+}
+.f3a-graph *, .f3a-graph *::before, .f3a-graph *::after { box-sizing:border-box; }
+.f3a-graph .f3a-banner { background:#e7eef8; border-left:4px solid #204c87; padding:10px; margin:0 0 10px; }
+.f3a-graph .f3a-toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:8px 0; }
+.f3a-graph button {
+  appearance:none; background:#f1f5fa; color:#183451; border:1px solid #60748c;
+  border-radius:5px; min-width:44px; min-height:44px; padding:8px 12px;
+  font:inherit; cursor:pointer;
+}
+.f3a-graph button:hover { background:#dce8f7; }
+.f3a-graph :focus-visible { outline:3px solid #9b3900; outline-offset:3px; }
+.f3a-graph .f3a-status { max-height:180px; overflow:auto; white-space:pre-wrap; }
+.f3a-graph .f3a-error { background:#fff1f1; color:#881a25; border:2px solid #ad2634; padding:12px; }
+.f3a-graph .f3a-error[hidden] { display:none; }
+.f3a-graph .f3a-viewport { height:440px; width:100%; overflow:hidden; border:1px solid #7488a0; background:#f7f9fc; }
+.f3a-graph .f3a-svg { display:block; width:100%; height:100%; touch-action:none; user-select:none; }
+.f3a-graph .f3a-edge { stroke-width:2.5; fill:none; vector-effect:non-scaling-stroke; }
+.f3a-graph .f3a-membership { stroke:#596a7c; }
+.f3a-graph .f3a-lineage { stroke:#005aa8; stroke-dasharray:9 3; }
+.f3a-graph .f3a-binding { stroke:#713997; stroke-dasharray:3 3; }
+.f3a-graph .f3a-mention { stroke:#596a7c; stroke-dasharray:1 5; stroke-linecap:round; }
+.f3a-graph .f3a-arrow-lineage { fill:#005aa8; }
+.f3a-graph .f3a-arrow-binding { fill:#713997; }
+.f3a-graph .f3a-node { cursor:pointer; outline:none; }
+.f3a-graph .f3a-node > rect { fill:#fff; stroke:#617994; stroke-width:1.5; }
+.f3a-graph .f3a-node[aria-selected="true"] > rect { fill:#d9ebff; stroke:#004b90; stroke-width:3; }
+.f3a-graph .f3a-node:focus > rect { stroke:#9b3900; stroke-width:4; }
+.f3a-graph .f3a-label { fill:#142a41; font-size:14px; font-weight:650; pointer-events:none; }
+.f3a-graph .f3a-node-meta { fill:#374d65; font-size:11px; pointer-events:none; }
+.f3a-graph .f3a-toggle-hit { fill:transparent; stroke:none; }
+.f3a-graph .f3a-toggle text { fill:#004b90; font-size:20px; font-weight:700; pointer-events:none; }
+.f3a-graph .f3a-minimap { display:block; width:min(100%,300px); height:140px; margin:12px 0;
+  background:#eff4fa; border:1px solid #60748c; cursor:crosshair; }
+.f3a-graph .f3a-mini-node { fill:#60748c; }
+.f3a-graph .f3a-mini-view { fill:#d3e6ff; fill-opacity:.25; stroke:#003d77; stroke-width:3; vector-effect:non-scaling-stroke; }
+.f3a-graph .f3a-legend { display:flex; flex-wrap:wrap; gap:10px 22px; padding-left:20px; }
+.f3a-graph .f3a-key-membership { color:#374d65; }
+.f3a-graph .f3a-key-lineage { color:#005aa8; }
+.f3a-graph .f3a-key-binding { color:#713997; }
+.f3a-graph .f3a-key-mention { color:#374d65; }
+.f3a-graph .f3a-detail { font:13px/1.5 ui-monospace,monospace; white-space:pre-wrap; overflow-wrap:anywhere;
+  word-break:break-word; max-height:340px; overflow:auto; min-width:0; padding:10px;
+  border:1px solid #b0bece; background:#f7f9fc; }
+.f3a-graph .f3a-relations h3 { font-size:16px; margin-bottom:8px; }
+.f3a-graph .f3a-zoom { min-width:48px; font-variant-numeric:tabular-nums; }
+@media (max-width:420px) {
+  .f3a-graph { padding:8px; }
+  .f3a-graph button { flex:1 1 auto; padding:8px; }
+  .f3a-graph .f3a-viewport { height:390px; }
+  .f3a-graph .f3a-legend { display:block; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .f3a-graph * { scroll-behavior:auto; }
+}
