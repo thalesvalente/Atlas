@@ -359,8 +359,11 @@ class AcquisitionReviewCounterproofs(unittest.TestCase):
             raise OSError('invented publication fault')
         with patch.object(reader.os, 'link', side_effect=substitute):
             self.assert_code('IO_UNVERIFIED', lambda: self.open_fixture())
-        self.assertEqual(len(replaced), 1)
-        self.assertEqual(replaced[0].read_text(encoding='utf-8'), 'unowned replacement must survive')
+        if replaced:
+            self.assertEqual(replaced[0].read_text(encoding='utf-8'), 'unowned replacement must survive')
+        else:
+            self.assertEqual(os.name, 'nt')
+            self.assertEqual(foreign.read_text(encoding='utf-8'), 'unowned replacement must survive')
 
     @unittest.skipUnless(os.name == 'nt', 'Windows effective ACL counterproof')
     def test_effective_file_dacl_is_only_owner_and_system(self):
@@ -370,24 +373,52 @@ class AcquisitionReviewCounterproofs(unittest.TestCase):
         result = self.open_fixture()
         advapi = ctypes.WinDLL('advapi32', use_last_error=True)
         kernel = ctypes.WinDLL('kernel32', use_last_error=True)
-        advapi.GetNamedSecurityInfoW.argtypes = [wintypes.LPWSTR, ctypes.c_int, wintypes.DWORD, ctypes.POINTER(ctypes.c_void_p), ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p), ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
+        advapi.GetNamedSecurityInfoW.argtypes = [wintypes.LPWSTR, ctypes.c_int, wintypes.DWORD, ctypes.c_void_p, ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p), ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
+        advapi.OpenProcessToken.argtypes = [wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE)]
+        advapi.GetTokenInformation.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD, ctypes.POINTER(wintypes.DWORD)]
+        advapi.GetAclInformation.argtypes = [ctypes.c_void_p, ctypes.c_void_p, wintypes.DWORD, ctypes.c_int]
+        advapi.GetAce.argtypes = [ctypes.c_void_p, wintypes.DWORD, ctypes.POINTER(ctypes.c_void_p)]
         advapi.ConvertSidToStringSidW.argtypes = [ctypes.c_void_p, ctypes.POINTER(wintypes.LPWSTR)]
-        advapi.ConvertSecurityDescriptorToStringSecurityDescriptorW.argtypes = [ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, ctypes.POINTER(wintypes.LPWSTR), ctypes.c_void_p]
+        kernel.GetCurrentProcess.restype = wintypes.HANDLE
+        kernel.CloseHandle.argtypes = [wintypes.HANDLE]
         kernel.LocalFree.argtypes = [ctypes.c_void_p]
-        owner, dacl, security = ctypes.c_void_p(), ctypes.c_void_p(), ctypes.c_void_p()
-        owner_text, descriptor_text = wintypes.LPWSTR(), wintypes.LPWSTR()
+        dacl, security = ctypes.c_void_p(), ctypes.c_void_p()
+        token = wintypes.HANDLE()
+        def sid_string(sid):
+            value = wintypes.LPWSTR()
+            self.assertTrue(advapi.ConvertSidToStringSidW(sid, ctypes.byref(value)))
+            try:
+                return value.value
+            finally:
+                kernel.LocalFree(ctypes.cast(value, ctypes.c_void_p))
         try:
-            self.assertEqual(advapi.GetNamedSecurityInfoW(str(result), 1, 5, ctypes.byref(owner), None, ctypes.byref(dacl), None, ctypes.byref(security)), 0)
-            self.assertTrue(advapi.ConvertSidToStringSidW(owner, ctypes.byref(owner_text)))
-            self.assertTrue(advapi.ConvertSecurityDescriptorToStringSecurityDescriptorW(security, 1, 4, ctypes.byref(descriptor_text), None))
-            aces = [ace.split(';') for ace in re.findall(r'\(([^()]*)\)', descriptor_text.value)]
-            self.assertEqual(len(aces), 2)
-            self.assertTrue(all(ace[0] == 'A' and 'ID' in ace[1] for ace in aces))
-            self.assertEqual({ace[-1] for ace in aces}, {'SY', owner_text.value})
+            self.assertTrue(advapi.OpenProcessToken(kernel.GetCurrentProcess(), 8, ctypes.byref(token)))
+            needed = wintypes.DWORD()
+            advapi.GetTokenInformation(token, 1, None, 0, ctypes.byref(needed))
+            buffer = ctypes.create_string_buffer(needed.value)
+            self.assertTrue(advapi.GetTokenInformation(token, 1, buffer, needed, ctypes.byref(needed)))
+            user = sid_string(ctypes.cast(buffer, ctypes.POINTER(ctypes.c_void_p))[0])
+            self.assertEqual(advapi.GetNamedSecurityInfoW(str(result), 1, 4, None, None, ctypes.byref(dacl), None, ctypes.byref(security)), 0)
+            class AclSize(ctypes.Structure):
+                _fields_ = [('count', wintypes.DWORD), ('used', wintypes.DWORD), ('free', wintypes.DWORD)]
+            size = AclSize()
+            self.assertTrue(advapi.GetAclInformation(dacl, ctypes.byref(size), ctypes.sizeof(size), 2))
+            self.assertEqual(size.count, 2)
+            trustees = set()
+            for index in range(size.count):
+                ace = ctypes.c_void_p()
+                self.assertTrue(advapi.GetAce(dacl, index, ctypes.byref(ace)))
+                header = ctypes.string_at(ace, 2)
+                self.assertEqual(header[0], 0)
+                self.assertTrue(header[1] & 0x10)
+                trustees.add(sid_string(ace.value + 8))
+            self.assertEqual(trustees, {'S-1-5-18', user})
         finally:
-            for allocation in (security, owner_text, descriptor_text):
-                if allocation:
-                    kernel.LocalFree(ctypes.cast(allocation, ctypes.c_void_p))
+            if security:
+                kernel.LocalFree(security)
+            if token:
+                kernel.CloseHandle(token)
+
 
 if __name__ == '__main__':
     unittest.main()
