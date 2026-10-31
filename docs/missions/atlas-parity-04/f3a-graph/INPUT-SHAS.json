@@ -1,0 +1,207 @@
+{
+  "mission": "AP04-F3A-CHAT-GRAPH-01",
+  "reasoning_effective": "UNVERIFIED",
+  "base": {
+    "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9",
+    "parent": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+  },
+  "prompt": {
+    "sha": "23e776d5b94e1e075275d28e41b5e9214a52cffe",
+    "path": "docs/missions/atlas-parity-04/f3-parallel-launch/F3A-CHAT-GRAPH-01.md",
+    "blob": "edea2253d82943ae1772d9eeae11578b930f4f38"
+  },
+  "architectural_approval": {
+    "url": "https://github.com/thalesvalente/Atlas/pull/15#issuecomment-6539419419",
+    "state": "APPROVED_SCOPED",
+    "package_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527"
+  },
+  "inputs": [
+    {
+      "path": ".specify/memory/constitution.md",
+      "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "AGENTS.md",
+      "blob": "c19ccc55e54f1274dac8408480f7a3e9ecc30f85",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "blob": "a2190a257987aa9a2da276857cdb713ac24dd520",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+      "blob": "17265f1a7293d7885825d9dc1982b1e1dec2b567",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/ACTION-PLAN.md",
+      "blob": "de728c827a960cf9bcb2e22e20b5d205aa199781",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/DECISION-REGISTER.md",
+      "blob": "e40075b866987f22f234e86a9c0ea789dc6fe3c9",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/GATES.json",
+      "blob": "d36b302368cf8671e95d798b349b420b0eefd9a2",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/INTEROPERABILITY-GUARDRAILS.md",
+      "blob": "2cc06951e3116fb0636d1fc8c68745867d2ae810",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+      "blob": "feb9ab242a857fb377724acb9e904b2f89f1f2b9",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/README.md",
+      "blob": "52be8c6f8d23a4278abc7313a439a0560ee85b66",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/F1-LOCAL-MISSION.md",
+      "blob": "57294f1ef604b3a73b62ffb7f7bbb6e2a8dc8654",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/README.md",
+      "blob": "0b388a02875554df7a8a8e8be5b468b06f5be529",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/RESULT-REVIEW.sanitized.md",
+      "blob": "078ce6364fc88bb2c09d37282426938482387c7a",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.json",
+      "blob": "8b16eb60e2554a337fcaf950df13fa8300e46e87",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.md",
+      "blob": "bb4840cc44f60a8e1a73d0e3a3b727ad7dd5ac9c",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ADR-0003-v0.2-CANDIDATE.md",
+      "blob": "e1283af1ac285937bf02bdf163ce3cf2d00f3081",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/ARCHITECTURE-OPTIONS.md",
+      "blob": "0d1c651a9f521b6d6511732aa24427d932019f1c",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/DECISION-REQUEST.md",
+      "blob": "13882234b324f9038fdd01ec7d6d34f4b3d0e1d8",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-CHAT-ARCHITECTURE-MISSION.md",
+      "blob": "76909b93b41b403cd20024f115bf222520901527",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/F2-REVIEW-AND-DECISION-CHECKLIST.md",
+      "blob": "f57a6cda9fcd70de2f34921f9c26c18abd730ed3",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/HANDOFF.json",
+      "blob": "eb1085226cd9c56c0d06b318a298da6eed3d1375",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/INDEPENDENT-REVIEW.md",
+      "blob": "73c0ebdec75d04951bce1ebc54dc561e54f5e921",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/INPUT-SHAS.json",
+      "blob": "8e22751137a0a0b00307579873547d55af0102b6",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/MANIFEST.sha256",
+      "blob": "03bc6befa8fd13394d912bbfc3b343d54b29414f",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/PARITY-TRACEABILITY.md",
+      "blob": "f1f894f3cbcb10945aa311cd4c4c3d6acf83b483",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/RESULT.md",
+      "blob": "b80ce9e0358ffd4ec10114162d38c12a9e46fe57",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/SECURITY-AND-INTEROPERABILITY.md",
+      "blob": "11e979d153b0cdb140696df654fc1a78e928b08e",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/plan.md",
+      "blob": "d5ac461bbb33a149c0b2d66e88780192b5a95912",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/spec.md",
+      "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+      "mode": "100644",
+      "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    }
+  ]
+}
