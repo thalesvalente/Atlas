@@ -352,17 +352,26 @@ class AcquisitionReviewCounterproofs(unittest.TestCase):
     def test_partial_cleanup_preserves_replaced_foreign_identity(self):
         foreign = self.scratch/'foreign-invented.txt'
         foreign.write_text('unowned replacement must survive', encoding='utf-8')
-        replaced = []
+        replaced, attempted, prevented = [], [], []
         def substitute(temporary, destination, **kwargs):
-            os.replace(foreign, temporary)
+            attempted.append(True)
+            try:
+                os.replace(foreign, temporary)
+            except PermissionError:
+                prevented.append(True)
+                raise
             replaced.append(Path(temporary))
             raise OSError('invented publication fault')
         with patch.object(reader.os, 'link', side_effect=substitute):
             self.assert_code('IO_UNVERIFIED', lambda: self.open_fixture())
+        self.assertEqual(len(attempted), 1)
+        self.assertFalse(any(p.name.startswith('atlas-c2-') and p.suffix == '.json' for p in self.scratch.iterdir()))
         if replaced:
+            self.assertFalse(prevented)
             self.assertEqual(replaced[0].read_text(encoding='utf-8'), 'unowned replacement must survive')
         else:
             self.assertEqual(os.name, 'nt')
+            self.assertEqual(prevented, [True])
             self.assertEqual(foreign.read_text(encoding='utf-8'), 'unowned replacement must survive')
 
     @unittest.skipUnless(os.name == 'nt', 'Windows effective ACL counterproof')
