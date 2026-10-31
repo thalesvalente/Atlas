@@ -288,7 +288,8 @@ export function mount(host, descriptor, options={}) {
   }
   const world=element("g",{class:"f3a-world"},null,true);svg.append(defs,world);viewport.append(svg);
   const mini=element("svg",{"data-minimap":"true",class:"f3a-minimap",role:"button",tabindex:"0",
-    "aria-label":"Minimapa navegável. Clique para centrar; setas movem a vista.",viewBox:"0 0 1000 440"},null,true);
+    "aria-label":"Minimapa navegável. Clique para centrar; setas movem a vista.",
+    preserveAspectRatio:"none",viewBox:"0 0 1000 440"},null,true);
   const legend=element("ul",{class:"f3a-legend","aria-label":"Legenda de relações"});
   [["membership","Pertencimento: parent_key explícito (sem causalidade)"],
     ["lineage","Linhagem declarada: seta somente FROM_TO"],

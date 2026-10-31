@@ -394,8 +394,23 @@ try {
     const a = await state(p); await p.locator('[data-action="zoom-in"]').click();
     const b = await state(p); insist(b.zoom > a.zoom, 'Scale zoom failed');
     await p.locator('[data-action="pan-right"]').click(); const c = await state(p); insist(c.pan.x !== b.pan.x, 'Scale pan failed');
-    const map = p.locator('[data-minimap]'), box = await map.boundingBox(); insist(box && box.width > 0, 'Scale minimap missing');
-    await map.click({position:{x:box.width*.2,y:box.height*.8}}); const d = await state(p);
+    const map = p.locator('[data-minimap]'); await map.scrollIntoViewIfNeeded();
+    const geometry = await map.evaluate(el => {
+      const area=el.getBoundingClientRect(),marks=[...el.querySelectorAll('.f3a-mini-bin')],vb=el.viewBox.baseVal;
+      if(!marks.length)return null;
+      const boxes=marks.map(mark=>mark.getBoundingClientRect()),left=Math.min(...boxes.map(b=>b.left)),right=Math.max(...boxes.map(b=>b.right));
+      const target=marks[Math.floor(marks.length/2)],box=target.getBoundingClientRect(),b=target.getBBox();
+      return {css_width:area.width,plotted_width:right-left,bins:marks.length,sum:marks.reduce((n,m)=>n+Number(m.getAttribute('data-bin-count')),0),
+        target:{client_x:box.x+box.width/2,client_y:box.y+box.height/2,world_x:b.x+b.width/2,world_y:b.y+b.height/2},
+        bounds:{left:vb.x+20,top:vb.y+20,right:vb.x+vb.width-20,bottom:vb.y+vb.height-20}};
+    });
+    insist(geometry && geometry.css_width>0 && geometry.plotted_width>geometry.css_width*.5, 'Tall scale minimap marks do not occupy useful CSS width: '+JSON.stringify(geometry));
+    insist(geometry.sum===2911 && geometry.bins<=2048, 'Minimap bin counts lost or duplicated node occurrences');
+    await p.mouse.click(geometry.target.client_x,geometry.target.client_y); const d = await state(p);
+    const center = await p.evaluate(() => {const v=document.querySelector('svg[data-f3a-canvas]').viewBox.baseVal,s=graph.getState();return {x:(v.width/2-s.pan.x)/s.zoom,y:(v.height/2-s.pan.y)/s.zoom};});
+    const tolerance={x:Math.max(2,(geometry.bounds.right-geometry.bounds.left)*.01),y:Math.max(2,(geometry.bounds.bottom-geometry.bounds.top)*.01)};
+    insist(center.x>=geometry.bounds.left && center.x<=geometry.bounds.right && center.y>=geometry.bounds.top && center.y<=geometry.bounds.bottom, 'Minimap click centered camera outside graph bounds: '+JSON.stringify({center,geometry}));
+    insist(Math.abs(center.x-geometry.target.world_x)<=tolerance.x && Math.abs(center.y-geometry.target.world_y)<=tolerance.y, 'Minimap click did not navigate to clicked bin: '+JSON.stringify({center,geometry}));
     insist(d.pan.x !== c.pan.x || d.pan.y !== c.pan.y, 'Scale minimap navigation failed');
     insist(d.minimap_bin_count <= 2048 && d.minimap_node_count === d.visible_ids.length, 'Minimap discarded semantic nodes or drew unbounded bins');
     await p.evaluate(() => graph.reveal('nav:scale-1455')); await p.keyboard.press('Home');
@@ -408,7 +423,7 @@ try {
     await p.keyboard.press('Tab'); insist(await p.evaluate(() => document.activeElement !== document.body), 'Scale Tab focus lost');
     await p.locator('[data-action="fit"]').click(); const fitted = await state(p);
     insist(fitted.zoom > 0 && Number.isFinite(fitted.pan.x) && fitted.rendered_node_count <= 1000, 'Scale fit or window budget failed');
-    return { zoom: fitted.zoom, rendered: fitted.rendered_node_count, minimap_bins: fitted.minimap_bin_count };
+    return { zoom: fitted.zoom, rendered: fitted.rendered_node_count, minimap_bins: fitted.minimap_bin_count, minimap_geometry:geometry, click_camera_center:center };
   }, 1440, scale);
   for (const width of [390, 320]) await check('scale_responsive_' + width, async p => {
     const sizes = await p.evaluate(() => ({scroll:document.documentElement.scrollWidth,inner:innerWidth}));

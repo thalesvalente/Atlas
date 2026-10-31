@@ -20,5 +20,72 @@
   },
   "plan_attempt": "Plan-only commit deliberately not qualification; historical focal manifest does not admit successor docs until technical gate successor is published",
   "terminal_custody": "Final HEAD must receive its own Actions run and independent review; linked outside commit to avoid recursive self hash",
-  "global_gates": "Frozen; no G5 PASS; successor C4 required"
+  "global_gates": "Frozen; no G5 PASS; successor C4 required",
+  "rounds": [
+    {
+      "sha": "f229239e1ebfc585209a684be3460d20015f85e9",
+      "status": "NOT_QUALIFICATION_PLAN_ONLY"
+    },
+    {
+      "sha": "7a629ee80df0ac47b24d5903779890ce319dda50",
+      "tree": "555919681a91175dd0c907e8730715cd2c3d2a7c",
+      "focal_pr_run": 41211847400,
+      "focal_push_run": 41211842559,
+      "status": "UNQUALIFIED_REVIEW_MINIMAP_FINDING",
+      "reason": "Geometric minimap compression found independently; new SHA and stronger oracle required regardless of eventual CI conclusion"
+    }
+  ],
+  "global_observations": {
+    "sha": "7a629ee80df0ac47b24d5903779890ce319dda50",
+    "guard_failures": [
+      {
+        "run": 41211847380,
+        "job": 124568303356,
+        "name": "AP04doc"
+      },
+      {
+        "run": 41211847384,
+        "job": 124568303463,
+        "name": "003"
+      },
+      {
+        "run": 41211847381,
+        "job": 124568303524,
+        "name": "P03portable"
+      },
+      {
+        "run": 41211847381,
+        "job": 124568303566,
+        "name": "P03Spec"
+      },
+      {
+        "run": 41211847414,
+        "job": 124568303806,
+        "name": "P06"
+      },
+      {
+        "run": 41211847382,
+        "job": 124568303968,
+        "name": "ATLAS021installed"
+      }
+    ],
+    "guard_reason": "Repair history contains unauthorized paths: f3a-graph/INPUT-SHAS.json and PLAN.md",
+    "c4_fixture_failures": [
+      {
+        "run": 41211847376,
+        "job": 124568303457
+      },
+      {
+        "run": 41211847376,
+        "job": 124568303315
+      }
+    ],
+    "c4_reason": "Composition may not add/remove inherited fixtures",
+    "source_tooling_failure": {
+      "run": 41211847382,
+      "job": 124568303949,
+      "reason": "ERR_MODULE_NOT_FOUND playwright in historical source workflow; 25 failures and 1 error, scale-fixture absent after import failure"
+    },
+    "reader": "C independent direct logs; no global controls changed or G5 claimed"
+  }
 }

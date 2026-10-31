@@ -21,3 +21,5 @@ Recusa é atômica e visível, sem seleção/modelo parcial. Prazo30s permanece 
 ## Qualificação
 
 Fixture sintética gerada determinística de2911/1595 amplia seed original109/210 preservada:22 endpoint-null,75 unresolved,50 endpoints colidentes,50 IDs nativos com duas ocorrências e40 grupos/41 repetições adicionais. Fonte real F1 não foi publicada nem executada. Testes/CI e revisão do novo SHA decidem qualificação focal; não herdar PASS anterior. G5/G6 e sucessão de controles globais pertencem à composição/C4 conforme contrato histórico.
+
+Revisão geométrica C1: minimapa usa preserveAspectRatio none para distribuir o resumo por toda a área CSS; CTM inversa mantém o clique na posição geométrica correspondente. Isso impede a árvore alta de colapsar numa faixa subpixel. O oráculo mede largura útil dos bins, soma das ocorrências e centralização real da câmera sobre uma marca clicada.
