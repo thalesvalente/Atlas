@@ -1,0 +1,138 @@
+{
+  "mission": "AP04-F4-C2-EXTERNAL-READER-CHAT-01",
+  "prompt": {
+    "commit": "c4f1204d75222c1a72678d22f1a4b23f1a33ab8f",
+    "path": "docs/missions/atlas-parity-04/f4-wave-launch/03-F4-C2-EXTERNAL-READER-CHAT.md",
+    "git_blob_sha1": "f430d286efa0281866cfe7acc2190a67a061f861"
+  },
+  "baseline": {
+    "commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9"
+  },
+  "approved_contract": {
+    "package_commit": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "approval_url": "https://github.com/thalesvalente/Atlas/pull/15#issuecomment-6539419419",
+    "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+    "git_blob_sha1": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+    "sha256": "25e829797f99693fab455bffba5f1752da2a17c680329ec5041c46b01bafd8a4",
+    "schema_sha256": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed",
+    "schema_extraction": "first JSON fence verbatim, trim trailing newline then one LF; JSON object unchanged"
+  },
+  "preserved_public_trees": [
+    {
+      "path": "examples/environmental/sample",
+      "git_tree_sha1": "1cc6eddf78806cd57906a8b812d5f5809fd36818"
+    },
+    {
+      "path": "packages/atlas",
+      "git_tree_sha1": "2aac0ef32baebbe2c50c3ec97f04ab1beda3bd45"
+    },
+    {
+      "path": "packages/protocol",
+      "git_tree_sha1": "8b5f1cdb97685ffc77e359f05252fd659ca65cc9"
+    }
+  ],
+  "own_code_sha256": {
+    "tools/atlas_legacy_presentation/__init__.py": "ebce1eff6c81acd1e097d0cd0103fd1b17106f20132f050e949c0470244b373c",
+    "tools/atlas_legacy_presentation/errors.py": "4edb992cdb7ab62e21eabeb2223103c1bdc9b5fa740d81f5b63bd1252e4074d4",
+    "tools/atlas_legacy_presentation/descriptor.schema.json": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed",
+    "tools/atlas_legacy_presentation/reader.py": "d904872bbca55effff7f82d3adada9d1a8793f0f4d107a388296eb7e29e9dff5",
+    "tools/atlas_legacy_presentation/__main__.py": "5abd2fb3bd0f3d1b4faa2ee24f9879e132a3d3b0193e208a89c69160860b2d12",
+    "tools/atlas_legacy_presentation/parser.py": "42b5bc9c3f0bc522009860bc98b157e931af0e1c9b4306b5ddf8d20cd1c7814c",
+    "tools/atlas_legacy_presentation/semantics.py": "a74790afac6c9e92421398c3ac5525960563f2412adda921d8fb66a5dbaaeea8",
+    "tests/qa/test_atlas_parity04_f4_c2_reader.py": "8985e9f812f21bc7a0891c2839475f4048605ff17581ccf3465cad186e51a49c",
+    "scripts/qa/atlas_parity04_f4_c2_qualification.py": "885ac4f01c5d00b651f7253dca45b32821249b8356d746cd2d52c55710a589e4",
+    ".github/workflows/atlas-parity04-f4-c2-reader.yml": "13e30282b58d303250ae6e5928a2b7b86a28fe4899dd6265eb03a86a8c427d81",
+    "scripts/qa/atlas_parity04_f4_c2_evidence.py": "7889edd90ae584cf67f41b778a0aefabce840e2d724d92dc0e4f9a8d9c2a715f",
+    "tools/atlas_legacy_presentation/README.md": "8aff2769cbc9d8c2f3bb899456e6de0ac7a74e5becb30fbf3eff9870f9e521a5",
+    "tests/fixtures/atlas_parity04_f4_c2_source.json": "5b302cb0888fe6ee141f62f2f4dc92f4b02975fa0bd8f44b15b854f068c8e547"
+  },
+  "technical": {
+    "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+    "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+    "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+  },
+  "point_in_time": true,
+  "private_source_access": false,
+  "local_checkout_observed": false,
+  "independent_git_readback": [
+    {
+      "path": "tools/atlas_legacy_presentation/__init__.py",
+      "ok": true,
+      "blob": "d54799b455c1b4448f70215b5ff0960c30247c67",
+      "sha256": "ebce1eff6c81acd1e097d0cd0103fd1b17106f20132f050e949c0470244b373c"
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/errors.py",
+      "ok": true,
+      "blob": "b3e9684e3dde8cff1708f6c21750f63e8f77471d",
+      "sha256": "4edb992cdb7ab62e21eabeb2223103c1bdc9b5fa740d81f5b63bd1252e4074d4"
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/descriptor.schema.json",
+      "ok": true,
+      "blob": "e87767710b6eafd32d57fc68d5294610b0038571",
+      "sha256": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed"
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/reader.py",
+      "ok": true,
+      "blob": "353538c5e28d57cb4408c5044891a5db9f926a4a",
+      "sha256": "d904872bbca55effff7f82d3adada9d1a8793f0f4d107a388296eb7e29e9dff5"
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/__main__.py",
+      "ok": true,
+      "blob": "c2ea51a30d02616f83bcb5b23e36092280d01393",
+      "sha256": "5abd2fb3bd0f3d1b4faa2ee24f9879e132a3d3b0193e208a89c69160860b2d12"
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/parser.py",
+      "ok": true,
+      "blob": "b4f08897b4a70044b70eae6a00a2efe48077f934",
+      "sha256": "42b5bc9c3f0bc522009860bc98b157e931af0e1c9b4306b5ddf8d20cd1c7814c"
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/semantics.py",
+      "ok": true,
+      "blob": "c448663d84507178a8fb463d019a10a1a43f0cde",
+      "sha256": "a74790afac6c9e92421398c3ac5525960563f2412adda921d8fb66a5dbaaeea8"
+    },
+    {
+      "path": "tests/qa/test_atlas_parity04_f4_c2_reader.py",
+      "ok": true,
+      "blob": "c187f3591c9dc7c243076a31254cf6e6462af5fa",
+      "sha256": "8985e9f812f21bc7a0891c2839475f4048605ff17581ccf3465cad186e51a49c"
+    },
+    {
+      "path": "scripts/qa/atlas_parity04_f4_c2_qualification.py",
+      "ok": true,
+      "blob": "6dafab87d1c9e55da5b9b558786c5592b6c2b396",
+      "sha256": "885ac4f01c5d00b651f7253dca45b32821249b8356d746cd2d52c55710a589e4"
+    },
+    {
+      "path": ".github/workflows/atlas-parity04-f4-c2-reader.yml",
+      "ok": true,
+      "blob": "e96c62e13d11c92c3c0aee94b28ac49827c9a55e",
+      "sha256": "13e30282b58d303250ae6e5928a2b7b86a28fe4899dd6265eb03a86a8c427d81"
+    },
+    {
+      "path": "scripts/qa/atlas_parity04_f4_c2_evidence.py",
+      "ok": true,
+      "blob": "a4a3ab92238c2c3aafd659038917285103e23b91",
+      "sha256": "7889edd90ae584cf67f41b778a0aefabce840e2d724d92dc0e4f9a8d9c2a715f"
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/README.md",
+      "ok": true,
+      "blob": "2673dcd1eb9e422a86ad53ef360c344a1d35008a",
+      "sha256": "8aff2769cbc9d8c2f3bb899456e6de0ac7a74e5becb30fbf3eff9870f9e521a5"
+    },
+    {
+      "path": "tests/fixtures/atlas_parity04_f4_c2_source.json",
+      "ok": true,
+      "blob": "6d29d8095180a9ee1964ffadb05b8062d91004aa",
+      "sha256": "5b302cb0888fe6ee141f62f2f4dc92f4b02975fa0bd8f44b15b854f068c8e547"
+    }
+  ]
+}

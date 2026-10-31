@@ -1,0 +1,88 @@
+{
+  "mission": "AP04-F4-C2-EXTERNAL-READER-CHAT-01",
+  "status": "F4_C2_BLOCKED_EXACT",
+  "synthetic_implementation": "QUALIFIED_ON_INVENTED_FIXTURES_ONLY",
+  "technical": {
+    "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+    "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+    "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+  },
+  "plan_commit": "5ca6cdc7dbaa78e4bf0d29dc30bb1b9d17659260",
+  "repository": "thalesvalente/Atlas",
+  "branch": "feat/atlas-parity04-f4-external-reader-20261031",
+  "draft_pr": "https://github.com/thalesvalente/Atlas/pull/18",
+  "ci": {
+    "id": 41213116001,
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001",
+    "conclusion": "success"
+  },
+  "independent_review": {
+    "agent": "/root/review_c",
+    "authorship": false,
+    "static_findings_open": 0,
+    "dynamic_matrix": "4/4 PASS",
+    "path": "docs/missions/atlas-parity-04/f4-c2-reader/INDEPENDENT-REVIEW.md"
+  },
+  "blockers": [
+    {
+      "code": "SOURCE_FORMAT_UNSUPPORTED",
+      "exact": "No observed structural input schema for preexisting real legacy projection; F2 specifies only descriptor output. New synthetic envelope does not establish R4 compatibility.",
+      "next_owner": "L1 + approved follow-up C2"
+    },
+    {
+      "code": "HARD_BUDGET_UNVERIFIED",
+      "exact": "No qualified OS enforcement for 256MiB memory and 30s wallclock per opening; cooperative deadline is not isolation.",
+      "next_owner": "L1 host qualification + approved follow-up C2"
+    },
+    {
+      "code": "OS_ISOLATION_UNVERIFIED",
+      "exact": "No qualified process confinement to exact sources RO, own scratch RW and network denial. Synthetic flag is test intent only.",
+      "next_owner": "L1 host qualification"
+    },
+    {
+      "code": "FROZEN_GLOBAL_GUARDS_REJECT_NEW_PATHS",
+      "exact": "Documentation repair history guard rejects C2 PLAN path; C4 composition guard rejects added inherited fixture paths. No global control was weakened.",
+      "next_owner": "C4 coordination, separate scoped authorization"
+    }
+  ],
+  "l1_minimum_input": {
+    "privacy": "Structural sample with entirely invented replacement values, no private paths/IDs/digests/literals/bytes; no private acquisition authorized by this handoff.",
+    "fields": [
+      "actual format/version and inert HTML delimiter if applicable",
+      "JSON pointers, collection shapes and types for records/edges/result_tables/product_items/resource_documents",
+      "identity/endpoints/source+snapshot context keys and explicit relation evidence",
+      "column/row order, missing/null/empty/zero distinction, literal/lexeme/unit/precision locations",
+      "RF identity/admission evidence and unadmitted semantics",
+      "whether payload can be read without JS execution"
+    ],
+    "qualification": "Version-bound OS profile and local counterproofs for exact RO sources, own private scratch, no network, 256MiB/30s enforced by OS; sanitized receipts only."
+  },
+  "gates": {
+    "G4": "BLOCKED",
+    "G5": "NOT_EVALUATED",
+    "G6": "NOT_EVALUATED"
+  },
+  "limits_preserved": [
+    "ARC-01–09",
+    "AP04-POR",
+    "RO-Crate1.3",
+    "ProcessRun0.6",
+    "Caderno0.1.0a1",
+    "HL7/FHIR future capability only"
+  ],
+  "boundaries": {
+    "private_acervo": "NOT_ACCESSED",
+    "r4": "NOT_ACCESSED_OR_CHANGED",
+    "catalog_sdk_caderno_reader003_shell": "UNCHANGED",
+    "global_guards_manifests": "UNCHANGED",
+    "feature_json": "UNCHANGED",
+    "additional_local_worktrees_clones": "NONE",
+    "migration": "NONE",
+    "merge_release_deploy_license_change": "NONE"
+  },
+  "publication": {
+    "receipt_commit": "successor of technical commit, Git object carries its own commit/tree/parent to avoid self-referential hashes",
+    "manifest": "MANIFEST.sha256 covers all C2 code/tests/workflow/receipts except itself",
+    "verification": "CI evidence script checks manifest bytes and ownership on receipt successor; coordinator also reads immutable Git files by SHA."
+  }
+}

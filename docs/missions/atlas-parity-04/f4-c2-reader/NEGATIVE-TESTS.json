@@ -1,0 +1,381 @@
+{
+  "technical": {
+    "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+    "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+    "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+  },
+  "run": {
+    "id": 41213116001,
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001",
+    "conclusion": "success"
+  },
+  "independent_cases": 34,
+  "matrix_executions": 136,
+  "passed_executions": 134,
+  "os_specific_skips": 2,
+  "skip_reason": "effective file DACL is Windows-specific; skipped only in two Ubuntu jobs",
+  "cases": [
+    {
+      "name": "test_28_unadmitted_and_four_unbound_tables_preserved",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_collision_null_unresolved_and_repeat_occurrences",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_depth_and_column_quotas_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_descriptor_schema_and_semantic_tampering_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_duplicate_keys_nonfinite_invalid_utf8_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_expiration_and_ttl_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_hostile_html_javascript_and_uri_are_inert",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_literal_types_and_lexemes_are_not_coerced",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_multibyte_literal_byte_quota_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_observed_isolated_run_and_file_retained",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_schema_is_exact_approved_f2",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_unknown_format_and_ambiguous_html_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_allowlist_limit_and_ttl_quota",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_cleanup_never_removes_foreign_file",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_cleanup_refuses_replaced_owned_identity",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_default_mode_blocks_before_any_source_read",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_hardlink_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_mtime_change_during_read_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_path_not_exactly_allowlisted",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_scratch_must_be_separate_from_source",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_source_change_during_read_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_source_immutable_and_one_derived_file_only",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_source_replacement_during_read_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_symlink_leaf_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_symlink_or_reparse_ancestor_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_traversal_refused_even_when_resolving_to_allowed_source",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_unc_device_ads_and_glob_refused",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_contextual_parent_uses_only_explicit_identity",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_cycles_retained_with_explicit_gap",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_invalid_shapes_are_structured_errors",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_atomic_publish_never_clobbers_existing_destination",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_effective_file_dacl_is_only_owner_and_system",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "SKIP",
+        "ubuntu1": "SKIP"
+      }
+    },
+    {
+      "name": "test_missing_source_is_payload_free_cli_error",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    },
+    {
+      "name": "test_partial_cleanup_preserves_replaced_foreign_identity",
+      "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+      "matrix": {
+        "windows0": "PASS",
+        "windows1": "PASS",
+        "ubuntu0": "PASS",
+        "ubuntu1": "PASS"
+      }
+    }
+  ],
+  "asserted_behaviors": {
+    "formats": "unknown/script-dependent/ambiguous format -> SOURCE_FORMAT_UNSUPPORTED",
+    "json": "duplicate keys/nonfinite/invalid UTF8/unpaired surrogate -> SOURCE_JSON_INVALID",
+    "paths": "not exact -> PATH_NOT_ALLOWED; traversal/symlink/reparse/hardlink/UNC/device/ADS/glob/encoded alias -> UNSAFE_PATH",
+    "source_change": "mutation/mtime change -> SOURCE_CHANGED; replacement either detected or explicitly SOURCE_CHANGE_PREVENTED_BY_OS; no descriptor",
+    "quotas": "depth/columns/multibyte literals/allowlist/TTL -> QUOTA_EXCEEDED",
+    "schema": "extra property -> DESCRIPTOR_SCHEMA_INVALID",
+    "semantics": "identity/context/snapshot/declared-id/lexeme/ordinal/cycle-gap tampering -> DESCRIPTOR_SEMANTICS_INVALID",
+    "malformed_shapes": "requirement list / scalar or nested Decimal reference -> SOURCE_STRUCTURE_INVALID, no traceback",
+    "expiry": "DESCRIPTOR_EXPIRED with current now",
+    "ownership": "cleanup refuses foreign and replaced final/partial identities; forced publication collision preserves existing file",
+    "default_acquisition": "HARD_BUDGET_UNVERIFIED before source/path read, including missing source",
+    "literal": "large integer, decimal lexeme/unit/precision, numeric string, null/missing/empty/zero/boolean, array/object lexemes retained",
+    "f1_like_negatives": "28 INVENTED unadmitted rows + four INVENTED unbound tables + observed INVENTED isolated Run; not revalidation of F1",
+    "network_html": "hostile HTML/JS/URIs remain inert with socket failure guard",
+    "windows_acl": "effective inherited ACCESS_ALLOWED trustees equal current TOKEN_USER and SYSTEM only; owner group is not used as token identity"
+  },
+  "notes": [
+    "Subtests exercise multiple values within a case; not counted as independent cases.",
+    "On Windows an OS-prevented fault is distinguished from an actual replacement: fault hook must run, PermissionError must be observed, foreign bytes survive and no final descriptor is published.",
+    "Cooperative checks do not prove OS isolation or a hard process budget."
+  ]
+}
