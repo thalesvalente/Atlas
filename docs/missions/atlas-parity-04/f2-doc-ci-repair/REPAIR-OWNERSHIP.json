@@ -150,5 +150,176 @@
     "no_new_branch_worktree_clone_pr": true,
     "writer": "/root"
   },
-  "schema": "atlas-ap04-f2-ci-repair-ownership-v1"
+  "schema": "atlas-ap04-f2-ci-repair-ownership-v1",
+  "verification_by_path": [
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red",
+        "test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash"
+      ],
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity02.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados",
+      "verification": "Real F2 ancestry and strict earlier fallback; fail-closed Git errors and independent control hash; own workflow completed/success"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red",
+        "test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash"
+      ],
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados",
+      "verification": "Real F2 ancestry and strict earlier fallback; fail-closed Git errors and independent control hash; own workflow completed/success"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red",
+        "test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash"
+      ],
+      "owner": "B",
+      "path": ".github/workflows/atlas-parity04-doc.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados",
+      "verification": "Real F2 ancestry and strict earlier fallback; fail-closed Git errors and independent control hash; own workflow completed/success"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red",
+        "test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash"
+      ],
+      "owner": "B",
+      "path": ".github/workflows/atlas003-speckit.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados",
+      "verification": "Real F2 ancestry and strict earlier fallback; fail-closed Git errors and independent control hash; own workflow completed/success"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+        "test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
+      ],
+      "owner": "B",
+      "path": ".github/workflows/atlas021.yml",
+      "purpose": "Dispatch F2 por ancestry com gates e pins preservados",
+      "verification": "Eight complete source/installed cells plus browser/reference; stage matrix ten mutants; unchanged ordered ten action pins and 15-minute timeout"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/CI-EVIDENCE.json",
+      "purpose": "Registrar CI terminal, jobs e artefatos no SHA executado",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/DECISION-COMPLIANCE.md",
+      "purpose": "Confrontar D-001 a D-020, PAR-001 a PAR-015 e nao autorizacoes",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/HANDOFF.json",
+      "purpose": "Entregar estado, gates e referencias publicas duraveis",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/INDEPENDENT-REVIEW.md",
+      "purpose": "Registrar revisao independente e findings por SHA",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/INPUT-SHAS.json",
+      "purpose": "Fixar identidades Git, blobs e hashes dos insumos publicos",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/MANIFEST.sha256",
+      "purpose": "Vincular bytes suplementares canonicos sem auto inclusao",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/NEGATIVE-TESTS.json",
+      "purpose": "Registrar contraprovas e recibos atribuiveis ao SHA",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/OVERLAY.json",
+      "purpose": "Declarar autorizacoes exatas e documentos congelados",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/REPAIR-OWNERSHIP.json",
+      "purpose": "Fixar ownership, propositos e contraprovas dos caminhos exatos",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/RESULT.md",
+      "purpose": "Registrar resultado, plano executado e limites do reparo F2",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "owner": "ORQ",
+      "path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/SUCCESSOR-CONTRACT.md",
+      "purpose": "Documentar epocas imutaveis e contrato do sucessor F2",
+      "verification": "Exact path inventory; canonical 37-entry manifest; remote tree/blob/hash and independent C review; containing commit needs own six CI runs"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+        "test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips"
+      ],
+      "owner": "B",
+      "path": "scripts/qa/atlas_parity03_c4_ci.py",
+      "purpose": "Integrar guard F2 e preservar os 191 IDs herdados",
+      "verification": "Exact inherited 191 IDs plus32; four installed consumers, four C4 browsers, frozen C4 assets/input/oracles"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_guard_source_has_independent_authorization",
+        "test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+        "test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+        "test_transient_unapproved_control_revision_reverted_remains_red"
+      ],
+      "owner": "A",
+      "path": "scripts/qa/atlas_parity04_f2_doc_ci.py",
+      "purpose": "Auditar epocas Git, sucessor documental F2 e controles independentes",
+      "verification": "32 new cases in four AP04 and eight complete source/installed suites; independent preflight/control hashes/history"
+    },
+    {
+      "authorization": "Mandatory mission 8abf556c6c39fcc54855391f2eeef3d8a8615985; fixed 19-path ownership; AP04-POR unchanged",
+      "counterproof_ids": [
+        "test_guard_source_has_independent_authorization",
+        "test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+        "test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+        "test_transient_unapproved_control_revision_reverted_remains_red"
+      ],
+      "owner": "A",
+      "path": "tests/qa/test_atlas_parity04_f2_doc_ci.py",
+      "purpose": "Contraprovas sinteticas e preflight independente do guard F2",
+      "verification": "32 new cases in four AP04 and eight complete source/installed suites; independent preflight/control hashes/history"
+    }
+  ]
 }

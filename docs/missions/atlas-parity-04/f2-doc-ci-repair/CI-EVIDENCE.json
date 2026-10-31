@@ -1,44 +1,479 @@
 {
-  "archived_first_repair_cycle": {
-    "evidence_blob": "66518c7444f6a6ee8343155472d175d7d5dea82f",
-    "evidence_path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/CI-EVIDENCE.json",
-    "evidence_ref": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-    "evidence_sha256": "da5eac8367ab53e17c1cb1a1183c5284fc833f171f7ced99d14bdf7dcbddcd97",
-    "note": "Complete first-cycle receipt is immutable in this ancestor; no cancellation or failed gate is hidden",
-    "summary": {
-      "cancelled": 1,
-      "cancelled_jobs": 2,
-      "failed_jobs": 0,
-      "jobs": 33,
-      "success": 5,
-      "successful_jobs": 31,
-      "workflows": 6
+  "ap04_artifacts": [
+    {
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13029118671/zip",
+      "created_at": "2026-10-31T03:53:22Z",
+      "digest": "sha256:d2ef91797273ef2089340aff8db96847f6be0cf5e1fdcff88cc2d8071e1c82bc",
+      "expired": false,
+      "expires_at": "2026-11-30T03:53:21Z",
+      "id": 13029118671,
+      "name": "atlas-parity04-doc-windows-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "size_in_bytes": 8740,
+      "updated_at": "2026-10-31T03:53:22Z",
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13029118671",
+      "workflow_run": {
+        "head_branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+        "head_repository_id": 1432371627,
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951189,
+        "repository_id": 1432371627
+      }
     },
-    "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
-    "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
-  },
-  "candidate_runs": [],
-  "closure": "The containing commit must get its own six terminal runs and independent review; final external closure belongs in PR15, not a self-referential commit",
+    {
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13028782268/zip",
+      "created_at": "2026-10-31T03:49:06Z",
+      "digest": "sha256:eb8c1d2443ac4ffd51c777842d8aa0b846545794f3de3110f89b323b72222ba0",
+      "expired": false,
+      "expires_at": "2026-11-30T03:49:05Z",
+      "id": 13028782268,
+      "name": "atlas-parity04-doc-ubuntu-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "size_in_bytes": 9100,
+      "updated_at": "2026-10-31T03:49:06Z",
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13028782268",
+      "workflow_run": {
+        "head_branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+        "head_repository_id": 1432371627,
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951189,
+        "repository_id": 1432371627
+      }
+    },
+    {
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13028724359/zip",
+      "created_at": "2026-10-31T03:52:40Z",
+      "digest": "sha256:785a7ffe160b6636dd054b44a6f5444146e50f4116f149f4a4cdcf5ad4d978c3",
+      "expired": false,
+      "expires_at": "2026-11-30T03:52:39Z",
+      "id": 13028724359,
+      "name": "atlas-parity04-doc-windows-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "size_in_bytes": 8708,
+      "updated_at": "2026-10-31T03:52:40Z",
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13028724359",
+      "workflow_run": {
+        "head_branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+        "head_repository_id": 1432371627,
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951189,
+        "repository_id": 1432371627
+      }
+    },
+    {
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13028653863/zip",
+      "created_at": "2026-10-31T03:49:02Z",
+      "digest": "sha256:e64fd0432e04938cf3ef86ba744f548ffcd6024e8e522b0d9162554da6e1b4b6",
+      "expired": false,
+      "expires_at": "2026-11-30T03:49:01Z",
+      "id": 13028653863,
+      "name": "atlas-parity04-doc-ubuntu-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "size_in_bytes": 9098,
+      "updated_at": "2026-10-31T03:49:02Z",
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13028653863",
+      "workflow_run": {
+        "head_branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
+        "head_repository_id": 1432371627,
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951189,
+        "repository_id": 1432371627
+      }
+    }
+  ],
+  "ap04_cells": [
+    {
+      "audit": {
+        "error": null,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      "counts": [
+        "Ran 23 tests in 4.447s",
+        "Ran 32 tests in 9.171s",
+        "With the provided path, there will be 4 files uploaded",
+        "SHA256 digest of uploaded artifact zip is e64fd0432e04938cf3ef86ba744f548ffcd6024e8e522b0d9162554da6e1b4b6",
+        "Artifact download URL: https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13028653863"
+      ],
+      "errors": 0,
+      "failures": 0,
+      "job_id": 124433439929,
+      "loader_errors": 0,
+      "new_ids": [
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_documents_deletion_and_rename_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_exact_frozen_epoch_tree_and_parent_are_required",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_overlay_must_be_exact_canonical_and_owned",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_protected_governance_product_audits_manifests_and_reader_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_mode_removal_and_unexpected_parent_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_transient_unauthorized_change_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_transient_unapproved_control_revision_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_requests_and_commit_headers_fail_closed",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_non_utf8_codec_cannot_hide_execution",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_security_guards_contain_no_optimized_away_assert",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
+      ],
+      "old_ids": [
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_adr0004_and_changes_to_adr0001_or_adr0002_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_arbitrary_document_outside_original_and_repair_paths_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_branch_name_lookalike_cannot_override_bad_bytes",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_c4_control_flow_cannot_be_relaxed_by_rehashing_the_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_default_boundary_accepts_only_the_single_strict_p06_rejection",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_edit_remove_and_symlink_of_adr0003_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_historical_c4_manifest_cannot_be_changed",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_mode_change_in_authorized_repair_path_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_protocol_context_governance_skill_fixture_and_agents_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_repair_history_rejects_transient_unauthorized_change_even_if_reverted",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_runtime_p03_adapter_and_asset_allowlist_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_workflow_conditions_and_commands_cannot_be_reauthorized_by_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_wrong_base_or_document_tree_is_red",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_approved_controls_are_fixed_and_the_independent_tests_are_bound",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dedicated_guard_runs_linux_windows_normal_and_optimized",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_guard_control_flow_has_independent_semantic_authorization",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_non_utf8_cookie_cannot_hide_executable_code_from_preflight",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_nonliteral_control_table_is_rejected_before_guard_import"
+      ],
+      "optimization": 0,
+      "os": "ubuntu-latest",
+      "skips": 0,
+      "status": "PASS"
+    },
+    {
+      "audit": {
+        "error": null,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      "counts": [
+        "Ran 23 tests in 5.417s",
+        "Ran 32 tests in 10.842s",
+        "With the provided path, there will be 4 files uploaded",
+        "SHA256 digest of uploaded artifact zip is eb8c1d2443ac4ffd51c777842d8aa0b846545794f3de3110f89b323b72222ba0",
+        "Artifact download URL: https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13028782268"
+      ],
+      "errors": 0,
+      "failures": 0,
+      "job_id": 124433439901,
+      "loader_errors": 0,
+      "new_ids": [
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_documents_deletion_and_rename_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_exact_frozen_epoch_tree_and_parent_are_required",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_overlay_must_be_exact_canonical_and_owned",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_protected_governance_product_audits_manifests_and_reader_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_mode_removal_and_unexpected_parent_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_transient_unauthorized_change_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_transient_unapproved_control_revision_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_requests_and_commit_headers_fail_closed",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_non_utf8_codec_cannot_hide_execution",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_security_guards_contain_no_optimized_away_assert",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
+      ],
+      "old_ids": [
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_adr0004_and_changes_to_adr0001_or_adr0002_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_arbitrary_document_outside_original_and_repair_paths_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_branch_name_lookalike_cannot_override_bad_bytes",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_c4_control_flow_cannot_be_relaxed_by_rehashing_the_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_default_boundary_accepts_only_the_single_strict_p06_rejection",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_edit_remove_and_symlink_of_adr0003_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_historical_c4_manifest_cannot_be_changed",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_mode_change_in_authorized_repair_path_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_protocol_context_governance_skill_fixture_and_agents_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_repair_history_rejects_transient_unauthorized_change_even_if_reverted",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_runtime_p03_adapter_and_asset_allowlist_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_workflow_conditions_and_commands_cannot_be_reauthorized_by_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_wrong_base_or_document_tree_is_red",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_approved_controls_are_fixed_and_the_independent_tests_are_bound",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dedicated_guard_runs_linux_windows_normal_and_optimized",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_guard_control_flow_has_independent_semantic_authorization",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_non_utf8_cookie_cannot_hide_executable_code_from_preflight",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_nonliteral_control_table_is_rejected_before_guard_import"
+      ],
+      "optimization": 1,
+      "os": "ubuntu-latest",
+      "skips": 0,
+      "status": "PASS"
+    },
+    {
+      "audit": {
+        "error": null,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      "counts": [
+        "Ran 23 tests in 82.326s",
+        "Ran 32 tests in 137.001s",
+        "With the provided path, there will be 4 files uploaded",
+        "SHA256 digest of uploaded artifact zip is 785a7ffe160b6636dd054b44a6f5444146e50f4116f149f4a4cdcf5ad4d978c3",
+        "Artifact download URL: https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13028724359"
+      ],
+      "errors": 0,
+      "failures": 0,
+      "job_id": 124433439832,
+      "loader_errors": 0,
+      "new_ids": [
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_documents_deletion_and_rename_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_exact_frozen_epoch_tree_and_parent_are_required",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_overlay_must_be_exact_canonical_and_owned",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_protected_governance_product_audits_manifests_and_reader_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_mode_removal_and_unexpected_parent_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_transient_unauthorized_change_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_transient_unapproved_control_revision_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_requests_and_commit_headers_fail_closed",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_non_utf8_codec_cannot_hide_execution",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_security_guards_contain_no_optimized_away_assert",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
+      ],
+      "old_ids": [
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_adr0004_and_changes_to_adr0001_or_adr0002_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_arbitrary_document_outside_original_and_repair_paths_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_branch_name_lookalike_cannot_override_bad_bytes",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_c4_control_flow_cannot_be_relaxed_by_rehashing_the_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_default_boundary_accepts_only_the_single_strict_p06_rejection",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_edit_remove_and_symlink_of_adr0003_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_historical_c4_manifest_cannot_be_changed",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_mode_change_in_authorized_repair_path_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_protocol_context_governance_skill_fixture_and_agents_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_repair_history_rejects_transient_unauthorized_change_even_if_reverted",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_runtime_p03_adapter_and_asset_allowlist_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_workflow_conditions_and_commands_cannot_be_reauthorized_by_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_wrong_base_or_document_tree_is_red",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_approved_controls_are_fixed_and_the_independent_tests_are_bound",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dedicated_guard_runs_linux_windows_normal_and_optimized",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_guard_control_flow_has_independent_semantic_authorization",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_non_utf8_cookie_cannot_hide_executable_code_from_preflight",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_nonliteral_control_table_is_rejected_before_guard_import"
+      ],
+      "optimization": 1,
+      "os": "windows-latest",
+      "skips": 0,
+      "status": "PASS"
+    },
+    {
+      "audit": {
+        "error": null,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      "counts": [
+        "Ran 23 tests in 97.598s",
+        "Ran 32 tests in 160.252s",
+        "With the provided path, there will be 4 files uploaded",
+        "SHA256 digest of uploaded artifact zip is d2ef91797273ef2089340aff8db96847f6be0cf5e1fdcff88cc2d8071e1c82bc",
+        "Artifact download URL: https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13029118671"
+      ],
+      "errors": 0,
+      "failures": 0,
+      "job_id": 124433439947,
+      "loader_errors": 0,
+      "new_ids": [
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_documents_deletion_and_rename_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_exact_frozen_epoch_tree_and_parent_are_required",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_overlay_must_be_exact_canonical_and_owned",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_protected_governance_product_audits_manifests_and_reader_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_mode_removal_and_unexpected_parent_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_repair_transient_unauthorized_change_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_transient_unapproved_control_revision_reverted_remains_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+        "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+        "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_requests_and_commit_headers_fail_closed",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_non_utf8_codec_cannot_hide_execution",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_security_guards_contain_no_optimized_away_assert",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
+      ],
+      "old_ids": [
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_adr0004_and_changes_to_adr0001_or_adr0002_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_arbitrary_document_outside_original_and_repair_paths_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_asset_allowlist_change_is_red_even_when_overlay_hash_is_updated",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_branch_name_lookalike_cannot_override_bad_bytes",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_c4_control_flow_cannot_be_relaxed_by_rehashing_the_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_default_boundary_accepts_only_the_single_strict_p06_rejection",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_edit_remove_and_symlink_of_adr0003_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_exact_documentation_and_manifested_controls_pass_on_arbitrary_branch_name",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_historical_c4_manifest_cannot_be_changed",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_manifest_hash_divergence_missing_entry_deletion_and_reordering_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_mode_change_in_authorized_repair_path_is_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_original_document_bytes_cannot_be_replaced_even_with_correct_ancestry",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_protocol_context_governance_skill_fixture_and_agents_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_repair_history_rejects_transient_unauthorized_change_even_if_reverted",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_runtime_p03_adapter_and_asset_allowlist_changes_are_red",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_workflow_conditions_and_commands_cannot_be_reauthorized_by_manifest",
+        "test_atlas_parity04_doc_ci.AP04SuccessorGuardTests.test_wrong_base_or_document_tree_is_red",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_approved_controls_are_fixed_and_the_independent_tests_are_bound",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dedicated_guard_runs_linux_windows_normal_and_optimized",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_dispatch_is_not_based_on_branch_name_and_forbidden_bypasses_are_absent",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_guard_control_flow_has_independent_semantic_authorization",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_non_utf8_cookie_cannot_hide_executable_code_from_preflight",
+        "test_atlas_parity04_doc_ci.AP04WorkflowRoutingTests.test_nonliteral_control_table_is_rejected_before_guard_import"
+      ],
+      "optimization": 0,
+      "os": "windows-latest",
+      "skips": 0,
+      "status": "PASS"
+    }
+  ],
+  "archived_prior_cycles": [
+    {
+      "evidence_blob": "66518c7444f6a6ee8343155472d175d7d5dea82f",
+      "evidence_path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/CI-EVIDENCE.json",
+      "evidence_ref": "f642660d6b1782ff4e3cebb90b09398df5e57734",
+      "evidence_sha256": "da5eac8367ab53e17c1cb1a1183c5284fc833f171f7ced99d14bdf7dcbddcd97",
+      "note": "Complete first-cycle receipt is immutable in this ancestor; no cancellation or failed gate is hidden",
+      "summary": {
+        "cancelled": 1,
+        "cancelled_jobs": 2,
+        "failed_jobs": 0,
+        "jobs": 33,
+        "success": 5,
+        "successful_jobs": 31,
+        "workflows": 6
+      },
+      "tested_sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+      "tested_tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1"
+    },
+    {
+      "evidence_blob": "c3b802861503442587f9a1110673904b85437111",
+      "evidence_path": "docs/missions/atlas-parity-04/f2-doc-ci-repair/CI-EVIDENCE.json",
+      "evidence_ref": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "evidence_sha256": "7f737741860ec36a0ddc3b78107079d6ab8b6d165fb97d8b17e3d9722d997905",
+      "note": "Full second-cycle receipt remains immutable in this ancestor. Five workflows succeeded; Windows optimized installed cell exceeded unchanged 15-minute budget. Not qualified.",
+      "summary": {
+        "cancelled": 1,
+        "cancelled_jobs": 1,
+        "failed_jobs": 0,
+        "jobs": 33,
+        "success": 5,
+        "successful_jobs": 32,
+        "workflows": 6
+      },
+      "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
+      "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
+    }
+  ],
   "engineering_evidence_only": true,
-  "mission": "AP04-F2-DOC-CI-REPAIR-01",
-  "next_candidate": {
-    "execution_claimed": false,
-    "expected_atlas021_cells": {
-      "installed": 4,
-      "source": 4
-    },
-    "guard_blob": "a50911b8f21ce6242e533b36924d1e4434c78f0a",
-    "guard_sha256": "952a1546f2fdf734cbe30e104cb6c6368886ae54bdb82de249edc72d403072ff",
-    "inactive_stage_step_skips": "Intentional routing; every test case still required in the four active cells per suite",
-    "mechanism": "Closed source/installed matrix; four complete source cells and four complete installed cells at the same head SHA, preserving action pins/order and 15-minute job limits",
-    "new_regression_methods_defined": 32,
-    "prior_control_revision_count": 5,
-    "status": "PENDING_REAL_ACTIONS_AND_FINAL_SHA_REVIEW",
-    "test_blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
-    "test_sha256": "9971bccd3cbe88624b18b29aa640203955c95ebe1830db6259471c94c9a155e7",
-    "workflow_blob": "b0ab10b1b1102af5b4fc8c12b63563744591c35f",
-    "workflow_sha256": "1f4e7ad52a597ea30fa7f581a3dd494d63c4615d5ccd52847d027276b75def7e"
+  "independent_review": {
+    "agent": "/root/review_c",
+    "authorship": false,
+    "containing_commit_review": "REQUIRED_ON_ITS_OWN_SHA_IN_EXTERNAL_PR15_CLOSURE",
+    "findings_closed": [
+      "C-001",
+      "C-002",
+      "C-003",
+      "C-004"
+    ],
+    "human_approval": false,
+    "jobs_reviewed": 37,
+    "status": "PASS_NO_OPEN_BLOCKING_FINDINGS",
+    "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+    "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
   },
+  "limits": {
+    "artifact_evidence": "SHA-bound logs, emitted receipts, screenshot names/hash/size, serializers and upload/API archive digests inspected; 28 artifact publications",
+    "artifact_zip_png_xml_bytes_opened": false,
+    "inactive_stage_steps": "Expected routing skips only; every source/installed suite runs all 223 cases",
+    "private_source_or_r4_access": false,
+    "procedural_exception": "Before prompt retrieval the coordinator ran read-only local Git metadata/instruction-file-name inventory commands in the already open checkout. No local Git writes, code/tests/install, source/private corpus/R4 access; those observations were excluded from qualification evidence. Reported by coordinator; C did not independently audit that local trace.",
+    "reference_comparator": "Three offline upstream reports each record three availability skips; the expected-invalid third records five failures with expectation_met=true. These are reference outcomes, not unittest skips or failures.",
+    "scientific_or_human_approval": false,
+    "screenshot_pixels_manually_reviewed": false,
+    "unittest_case_skips": 0
+  },
+  "mission": "AP04-F2-DOC-CI-REPAIR-01",
   "original_runs": [
     {
       "conclusion": "failure",
@@ -128,349 +563,355 @@
     "success": 3
   },
   "original_tree": "611306f28557f5d9e27db49108880004399f5768",
-  "schema": "atlas-ap04-f2-ci-evidence-v1",
-  "second_repair_cycle": {
+  "qualification_scope": {
+    "containing_commit": "RESOLVE_FROM_GIT; requires its own six completed/success workflows and independent C review",
+    "external_closure": "PR15 records the final containing SHA/tree, six own runs and independent review; no self-referential receipt commit",
+    "result": "AP04_F2_DOCUMENTATION_CI_QUALIFIED_FOR_TESTED_SHA",
+    "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+    "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+  },
+  "qualified_technical_cycle": {
     "artifacts": [
       {
-        "created_at": "2026-10-31T03:26:15Z",
-        "digest": "sha256:fc97e209f7b62d0f7433d454e8324608300c8be90db74695cb4fe861b1250a7f",
+        "created_at": "2026-10-31T03:53:22Z",
+        "digest": "sha256:d2ef91797273ef2089340aff8db96847f6be0cf5e1fdcff88cc2d8071e1c82bc",
         "expired": false,
-        "expires_at": "2026-11-30T03:26:14Z",
-        "id": 13028820791,
-        "name": "atlas-parity04-doc-windows-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121103,
-        "size_in_bytes": 8587,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/artifacts/13028820791"
+        "expires_at": "2026-11-30T03:53:21Z",
+        "id": 13029118671,
+        "name": "atlas-parity04-doc-windows-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951189,
+        "size_in_bytes": 8740,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13029118671"
       },
       {
-        "created_at": "2026-10-31T03:26:22Z",
-        "digest": "sha256:01a46e968613f607f1cd9484b44f53a19432bddfff0f1f12b1896e4ddec0b84f",
+        "created_at": "2026-10-31T03:49:06Z",
+        "digest": "sha256:eb8c1d2443ac4ffd51c777842d8aa0b846545794f3de3110f89b323b72222ba0",
         "expired": false,
-        "expires_at": "2026-11-30T03:26:21Z",
-        "id": 13028750257,
-        "name": "atlas-parity04-doc-windows-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121103,
-        "size_in_bytes": 8601,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/artifacts/13028750257"
+        "expires_at": "2026-11-30T03:49:05Z",
+        "id": 13028782268,
+        "name": "atlas-parity04-doc-ubuntu-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951189,
+        "size_in_bytes": 9100,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13028782268"
       },
       {
-        "created_at": "2026-10-31T03:23:06Z",
-        "digest": "sha256:2118a732d25e29f2f29ee9607e6cc62e306c8e8a317a9afa3f46eb7e0696f544",
+        "created_at": "2026-10-31T03:52:40Z",
+        "digest": "sha256:785a7ffe160b6636dd054b44a6f5444146e50f4116f149f4a4cdcf5ad4d978c3",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:05Z",
-        "id": 13028505198,
-        "name": "atlas-parity04-doc-ubuntu-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121103,
-        "size_in_bytes": 8977,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/artifacts/13028505198"
+        "expires_at": "2026-11-30T03:52:39Z",
+        "id": 13028724359,
+        "name": "atlas-parity04-doc-windows-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951189,
+        "size_in_bytes": 8708,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13028724359"
       },
       {
-        "created_at": "2026-10-31T03:23:05Z",
-        "digest": "sha256:ed3684463d22f010e72a754b6b3f0a378afdd326ab0bd1828a493c37f94bcd18",
+        "created_at": "2026-10-31T03:49:02Z",
+        "digest": "sha256:e64fd0432e04938cf3ef86ba744f548ffcd6024e8e522b0d9162554da6e1b4b6",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:05Z",
-        "id": 13028094457,
-        "name": "atlas-parity04-doc-ubuntu-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121103,
-        "size_in_bytes": 8969,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/artifacts/13028094457"
+        "expires_at": "2026-11-30T03:49:01Z",
+        "id": 13028653863,
+        "name": "atlas-parity04-doc-ubuntu-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951189,
+        "size_in_bytes": 9098,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/artifacts/13028653863"
       },
       {
-        "created_at": "2026-10-31T03:23:11Z",
-        "digest": "sha256:e3db67af58c38ce40e646c346a87d6b4011a8df8ee8f15ceaa11bb74825d66e9",
+        "created_at": "2026-10-31T03:49:27Z",
+        "digest": "sha256:e9002620bb1174f3c4cf02435dc265437001cebdd2784edee361af2f1e5465ae",
         "expired": false,
-        "expires_at": "2026-11-14T03:23:11Z",
-        "id": 13028745406,
-        "name": "parity02-p06-ubuntu-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121110,
-        "size_in_bytes": 8004,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/artifacts/13028745406"
+        "expires_at": "2026-11-14T03:49:27Z",
+        "id": 13029317359,
+        "name": "atlas-c1-installed-ubuntu-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951215,
+        "size_in_bytes": 30105,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/artifacts/13029317359"
       },
       {
-        "created_at": "2026-10-31T03:23:32Z",
-        "digest": "sha256:86c16a516af83f2ee31d45ede7a9be8e564cba44fd736d0833f1b6d8ee18e0ca",
+        "created_at": "2026-10-31T03:49:36Z",
+        "digest": "sha256:671cfb1a1cf96589880a91eab1019456f5c9c512122478d1cc538aa4106b56ad",
         "expired": false,
-        "expires_at": "2026-11-14T03:23:31Z",
-        "id": 13028730029,
-        "name": "parity02-p06-browser-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121110,
-        "size_in_bytes": 700579,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/artifacts/13028730029"
+        "expires_at": "2026-11-14T03:49:35Z",
+        "id": 13029007177,
+        "name": "atlas-c1-installed-ubuntu-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951215,
+        "size_in_bytes": 30109,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/artifacts/13029007177"
       },
       {
-        "created_at": "2026-10-31T03:23:07Z",
-        "digest": "sha256:be6240ac2a81a8d2bba725900d177b91228aa5d706b9d19f5cc98bcc17e03836",
+        "created_at": "2026-10-31T03:49:57Z",
+        "digest": "sha256:990ee32b39de18f361c7fe44c95b15eec15a9a0b338aa15ac498ad5886000efa",
         "expired": false,
-        "expires_at": "2026-11-14T03:23:06Z",
-        "id": 13028128906,
-        "name": "parity02-p06-ubuntu-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121110,
-        "size_in_bytes": 8006,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/artifacts/13028128906"
+        "expires_at": "2026-11-14T03:49:55Z",
+        "id": 13028507741,
+        "name": "atlas003-browser-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951215,
+        "size_in_bytes": 11047664,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/artifacts/13028507741"
       },
       {
-        "created_at": "2026-10-31T03:23:41Z",
-        "digest": "sha256:10367f3c911e701637d118e29cd271c176a35c2b44a1b38f557aa421b8a4e3dd",
+        "created_at": "2026-10-31T03:54:32Z",
+        "digest": "sha256:fd2a424c202c7b516d04154e678899f21ea7e7c6bd39325840305d4a3cdab65c",
         "expired": false,
-        "expires_at": "2026-11-14T03:23:40Z",
-        "id": 13027994883,
-        "name": "parity02-p06-windows-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121110,
-        "size_in_bytes": 8033,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/artifacts/13027994883"
+        "expires_at": "2026-11-14T03:54:31Z",
+        "id": 13028459795,
+        "name": "atlas-c1-installed-windows-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951215,
+        "size_in_bytes": 30164,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/artifacts/13028459795"
       },
       {
-        "created_at": "2026-10-31T03:23:41Z",
-        "digest": "sha256:472c36c7487a898020d571d04bf25efdebe4a7cc9171094eda47fe14aff949a7",
+        "created_at": "2026-10-31T03:52:49Z",
+        "digest": "sha256:904e8011c9c0e2bf5d9c54f6136c0b457f13506bb264211a68357ecaf32bfb32",
         "expired": false,
-        "expires_at": "2026-11-14T03:23:40Z",
-        "id": 13027974844,
-        "name": "parity02-p06-windows-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121110,
-        "size_in_bytes": 8036,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/artifacts/13027974844"
+        "expires_at": "2026-11-14T03:52:49Z",
+        "id": 13028298407,
+        "name": "atlas-c1-installed-windows-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951215,
+        "size_in_bytes": 30163,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/artifacts/13028298407"
       },
       {
-        "created_at": "2026-10-31T03:23:56Z",
-        "digest": "sha256:b0e945b7c23a2bd260c5bc9e0eed5d83bf7a56a527975f07f3ec8bcdc6b0ff75",
+        "created_at": "2026-10-31T03:49:50Z",
+        "digest": "sha256:e62f9e4e47f4fefce654a196356cf247296bc29a6ca8c5415955bbdaf9480d5d",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:56Z",
-        "id": 13029050060,
-        "name": "p03-specification-windows-latest-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 16972,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13029050060"
+        "expires_at": "2026-11-30T03:49:50Z",
+        "id": 13029392035,
+        "name": "atlas-c4-specification-windows-latest-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951241,
+        "size_in_bytes": 17010,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/artifacts/13029392035"
       },
       {
-        "created_at": "2026-10-31T03:23:45Z",
-        "digest": "sha256:b93af6042e0c4cfe691ab06a8e7f912d710274345658c4dabd118b7c2925122b",
+        "created_at": "2026-10-31T03:49:54Z",
+        "digest": "sha256:9005328fbe74d56019ce51b69b3f88819ac538047b2f84b3aee5d53202c4c163",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:44Z",
-        "id": 13028795443,
-        "name": "p03-browser-windows-latest-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 2840613,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13028795443"
+        "expires_at": "2026-11-30T03:49:53Z",
+        "id": 13029297545,
+        "name": "atlas-c4-integrated-windows-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951241,
+        "size_in_bytes": 3075678,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/artifacts/13029297545"
       },
       {
-        "created_at": "2026-10-31T03:23:05Z",
-        "digest": "sha256:e740d74e6a6d736b52576c0757333d62a275056e80053af017a6fe1d9cadb93b",
+        "created_at": "2026-10-31T03:49:00Z",
+        "digest": "sha256:9d8dff95e0916adffd1261c396da5064612951717a76df10b491303204683515",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:04Z",
-        "id": 13028470729,
-        "name": "p03-specification-ubuntu-latest-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 16939,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13028470729"
+        "expires_at": "2026-11-30T03:49:00Z",
+        "id": 13029012034,
+        "name": "atlas-c4-specification-ubuntu-latest-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951241,
+        "size_in_bytes": 16974,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/artifacts/13029012034"
       },
       {
-        "created_at": "2026-10-31T03:24:04Z",
-        "digest": "sha256:9c7e641d4fb338099ea13e278aa020fe4191f4b9d91623a7088c66c5cf521b73",
+        "created_at": "2026-10-31T03:49:37Z",
+        "digest": "sha256:605017938bc202d8c035c440bb8dc0dcbcf195d922ce50a24be13257cd4c1a28",
         "expired": false,
-        "expires_at": "2026-11-30T03:24:04Z",
-        "id": 13028174034,
-        "name": "p03-portable-windows-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 26466,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13028174034"
+        "expires_at": "2026-11-30T03:49:36Z",
+        "id": 13028432810,
+        "name": "atlas-c4-integrated-ubuntu-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951241,
+        "size_in_bytes": 5115929,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/artifacts/13028432810"
       },
       {
-        "created_at": "2026-10-31T03:23:10Z",
-        "digest": "sha256:fc9cb1301d11d2eb7006cab2ef03670c05816022c232905bc36c98988f0f4c2a",
+        "created_at": "2026-10-31T03:50:09Z",
+        "digest": "sha256:eab545cc545528e90ffee3b38e3daf4129ada97c9960f7dd91e16ab596928eb6",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:09Z",
-        "id": 13028168699,
-        "name": "p03-browser-ubuntu-latest-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 4566987,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13028168699"
+        "expires_at": "2026-11-30T03:50:08Z",
+        "id": 13028402776,
+        "name": "atlas-c4-integrated-windows-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951241,
+        "size_in_bytes": 3074653,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/artifacts/13028402776"
       },
       {
-        "created_at": "2026-10-31T03:23:11Z",
-        "digest": "sha256:6d655b4cbd834baa77467ed25be50a25db65e397bd1076b096fa6682c11db800",
+        "created_at": "2026-10-31T03:49:19Z",
+        "digest": "sha256:631c4e46054e97e262860cc662cbed9ee7594c2aeb7edb54c1cf4d39579117e5",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:10Z",
-        "id": 13028153870,
-        "name": "p03-portable-ubuntu-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 26440,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13028153870"
+        "expires_at": "2026-11-30T03:49:17Z",
+        "id": 13028344403,
+        "name": "atlas-c4-integrated-ubuntu-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951241,
+        "size_in_bytes": 5120861,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/artifacts/13028344403"
       },
       {
-        "created_at": "2026-10-31T03:23:15Z",
-        "digest": "sha256:087d33d935566df63e3776fe6e42d3ae38f823dddf2e1d4fd25e92299f4905b5",
+        "created_at": "2026-10-31T03:49:29Z",
+        "digest": "sha256:56fc5d0ac24d191c84fb243175c8fad9348a4e72b9f2feecce1960a576c88918",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:14Z",
-        "id": 13027934706,
-        "name": "p03-portable-ubuntu-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 26444,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13027934706"
+        "expires_at": "2026-11-14T03:49:28Z",
+        "id": 13029267899,
+        "name": "parity02-p06-windows-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951204,
+        "size_in_bytes": 8078,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/artifacts/13029267899"
       },
       {
-        "created_at": "2026-10-31T03:24:10Z",
-        "digest": "sha256:f66f6e6d923560268850985072171f0d099afe537ac2ba6ce4f9f6f0a1d8c865",
+        "created_at": "2026-10-31T03:49:06Z",
+        "digest": "sha256:e588a2db917b4afe3a5e13f26d16017e8eaddc70c5d32569f4d8ea820f2dd218",
         "expired": false,
-        "expires_at": "2026-11-30T03:24:09Z",
-        "id": 13027449936,
-        "name": "p03-portable-windows-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121111,
-        "size_in_bytes": 26468,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/artifacts/13027449936"
+        "expires_at": "2026-11-14T03:49:05Z",
+        "id": 13029083470,
+        "name": "parity02-p06-ubuntu-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951204,
+        "size_in_bytes": 8045,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/artifacts/13029083470"
       },
       {
-        "created_at": "2026-10-31T03:24:24Z",
-        "digest": "sha256:20004d0d02f53d145e66011068a46b507ac565754fb113f0ad3b504eecb8819b",
+        "created_at": "2026-10-31T03:49:26Z",
+        "digest": "sha256:746b7af7e37715d1cbb373fc22633fb246f11b71fa1c936cb844b3b3119418b8",
         "expired": false,
-        "expires_at": "2026-11-30T03:24:23Z",
-        "id": 13029060134,
-        "name": "atlas-c4-integrated-windows-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121126,
-        "size_in_bytes": 3073582,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/artifacts/13029060134"
+        "expires_at": "2026-11-14T03:49:26Z",
+        "id": 13028958425,
+        "name": "parity02-p06-browser-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951204,
+        "size_in_bytes": 700917,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/artifacts/13028958425"
       },
       {
-        "created_at": "2026-10-31T03:24:20Z",
-        "digest": "sha256:1fb1b809ed19cabaf4af002cdbf9b0db9d6e2fcc2b9ce00f45bebef82e4704d2",
+        "created_at": "2026-10-31T03:49:04Z",
+        "digest": "sha256:457969c52a60f5b1424cae0ec88288d00b6c30f1a94d460140646b10e8e4e296",
         "expired": false,
-        "expires_at": "2026-11-30T03:24:19Z",
-        "id": 13028975277,
-        "name": "atlas-c4-integrated-windows-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121126,
-        "size_in_bytes": 3075133,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/artifacts/13028975277"
+        "expires_at": "2026-11-14T03:49:03Z",
+        "id": 13028697447,
+        "name": "parity02-p06-ubuntu-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951204,
+        "size_in_bytes": 8043,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/artifacts/13028697447"
       },
       {
-        "created_at": "2026-10-31T03:23:06Z",
-        "digest": "sha256:b14250ca9e0720ac44e9c98116106b63e8c7f078165a780b842b9ad0a51c5f85",
+        "created_at": "2026-10-31T03:50:14Z",
+        "digest": "sha256:462dbf20c47a71366f2e026f8806fa8478a09f0b1936d11e13db0f72c5ce2320",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:06Z",
-        "id": 13028540165,
-        "name": "atlas-c4-specification-ubuntu-latest-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121126,
-        "size_in_bytes": 16938,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/artifacts/13028540165"
+        "expires_at": "2026-11-14T03:50:13Z",
+        "id": 13028283114,
+        "name": "parity02-p06-windows-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951204,
+        "size_in_bytes": 8073,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/artifacts/13028283114"
       },
       {
-        "created_at": "2026-10-31T03:23:55Z",
-        "digest": "sha256:8c5bac4eebd59b4b6a0e106593974e80b334ccf184cbe847e59ebfcea4a7a29a",
+        "created_at": "2026-10-31T03:49:59Z",
+        "digest": "sha256:cb7db3a5383b54872ce77c1ee45a85105fe3058566b51f6faac2981fa2acbb49",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:54Z",
-        "id": 13028360470,
-        "name": "atlas-c4-specification-windows-latest-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121126,
-        "size_in_bytes": 16972,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/artifacts/13028360470"
+        "expires_at": "2026-11-30T03:49:59Z",
+        "id": 13029372139,
+        "name": "p03-portable-windows-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 26504,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13029372139"
       },
       {
-        "created_at": "2026-10-31T03:23:41Z",
-        "digest": "sha256:5a79a11763f8c18456770a7fa7467a34b93f43acb020daff3707410e853da0bb",
+        "created_at": "2026-10-31T03:49:45Z",
+        "digest": "sha256:8b1a10e4397eaa5f6fe05835ec0ccdf42cb5eb478c440ed61ec7fb0e9c582742",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:40Z",
-        "id": 13028258551,
-        "name": "atlas-c4-integrated-ubuntu-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121126,
-        "size_in_bytes": 5117707,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/artifacts/13028258551"
+        "expires_at": "2026-11-30T03:49:44Z",
+        "id": 13029302418,
+        "name": "p03-portable-windows-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 26497,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13029302418"
       },
       {
-        "created_at": "2026-10-31T03:23:21Z",
-        "digest": "sha256:e699886753ac27bdf071530310dfa0e66c6a2fbb87eb4a640606c584d7ed1cc6",
+        "created_at": "2026-10-31T03:50:04Z",
+        "digest": "sha256:f5c2d89c7c78a20eb625a703cc1987aff719e3753346233fe9fa84d314ff61e1",
         "expired": false,
-        "expires_at": "2026-11-30T03:23:20Z",
-        "id": 13027969766,
-        "name": "atlas-c4-integrated-ubuntu-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121126,
-        "size_in_bytes": 5119147,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/artifacts/13027969766"
+        "expires_at": "2026-11-30T03:50:03Z",
+        "id": 13029038469,
+        "name": "p03-specification-windows-latest-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 17011,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13029038469"
       },
       {
-        "created_at": "2026-10-31T03:37:58Z",
-        "digest": "sha256:853c7c92a38018da5c41f245a1bffe3a0b8603a0f638ba81874a867aa7d959e5",
+        "created_at": "2026-10-31T03:49:01Z",
+        "digest": "sha256:f2c436c8743369e3de91df86897c6325094319d0ea7bc7e7c691341db13ed1f3",
         "expired": false,
-        "expires_at": "2026-11-14T03:37:57Z",
-        "id": 13029206638,
-        "name": "atlas-c1-installed-windows-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121147,
-        "size_in_bytes": 2075,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/artifacts/13029206638"
+        "expires_at": "2026-11-30T03:48:59Z",
+        "id": 13028963468,
+        "name": "p03-specification-ubuntu-latest-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 16976,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13028963468"
       },
       {
-        "created_at": "2026-10-31T03:24:01Z",
-        "digest": "sha256:e71150e57517069b3f3ddc5e0a77e3f93a5648f60bab8abd47167cbae289189a",
+        "created_at": "2026-10-31T03:49:08Z",
+        "digest": "sha256:07659ad460b50b726851be757167042853c6a28bdc5eb63c8af94e12421d5836",
         "expired": false,
-        "expires_at": "2026-11-14T03:23:59Z",
-        "id": 13029045019,
-        "name": "atlas003-browser-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121147,
-        "size_in_bytes": 11045654,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/artifacts/13029045019"
+        "expires_at": "2026-11-30T03:49:07Z",
+        "id": 13028677563,
+        "name": "p03-browser-ubuntu-latest-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 4569448,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13028677563"
       },
       {
-        "created_at": "2026-10-31T03:24:03Z",
-        "digest": "sha256:8820b02d93afc133f9a6cbcfef6d6cf7bfecee1b00b9c435411e71a3ff3307fe",
+        "created_at": "2026-10-31T03:49:16Z",
+        "digest": "sha256:84e066f0c0950be837ab81b09eaf07da1898c5b1592700cb93f8a05b03c0bdf3",
         "expired": false,
-        "expires_at": "2026-11-14T03:24:03Z",
-        "id": 13028995089,
-        "name": "atlas-c1-installed-ubuntu-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121147,
-        "size_in_bytes": 29947,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/artifacts/13028995089"
+        "expires_at": "2026-11-30T03:49:15Z",
+        "id": 13028548995,
+        "name": "p03-portable-ubuntu-latest-O1-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 26474,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13028548995"
       },
       {
-        "created_at": "2026-10-31T03:35:25Z",
-        "digest": "sha256:634242d99dced0ac1ee26071e63b48ae59bbd9e79dd8ff9a7e8a232706c89096",
+        "created_at": "2026-10-31T03:49:39Z",
+        "digest": "sha256:8b4d83de19df11c81e28cef4958d322e78df1ad323d4639d5afb9c6c802a0cc9",
         "expired": false,
-        "expires_at": "2026-11-14T03:35:24Z",
-        "id": 13028766807,
-        "name": "atlas-c1-installed-windows-latest-O0-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121147,
-        "size_in_bytes": 30010,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/artifacts/13028766807"
+        "expires_at": "2026-11-30T03:49:38Z",
+        "id": 13028437795,
+        "name": "p03-browser-windows-latest-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 2840647,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13028437795"
       },
       {
-        "created_at": "2026-10-31T03:24:01Z",
-        "digest": "sha256:2b8a8ca064b1f27bbd48654a7e931f6030944bde5d30ec9942c292f4e6a52eb9",
+        "created_at": "2026-10-31T03:49:03Z",
+        "digest": "sha256:93824a5296568937267d476b2703b07f98dbd2095b680c8993d903bc7cd3c1a9",
         "expired": false,
-        "expires_at": "2026-11-14T03:24:00Z",
-        "id": 13028575701,
-        "name": "atlas-c1-installed-ubuntu-latest-O1-f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "run_id": 41164121147,
-        "size_in_bytes": 29949,
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/artifacts/13028575701"
+        "expires_at": "2026-11-30T03:49:03Z",
+        "id": 13028278137,
+        "name": "p03-portable-ubuntu-latest-O0-bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "run_id": 41165951246,
+        "size_in_bytes": 26476,
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/artifacts/13028278137"
       }
     ],
     "atlas021_browser": {
-      "job_id": 124427862914,
-      "run_id": 41164121147,
+      "job_id": 124433439957,
+      "run_id": 41165951215,
       "stages": [
         {
           "check_count": 20,
@@ -798,31 +1239,31 @@
     "c4_browser_cells": [
       {
         "all_checks_pass": true,
-        "browser_version": "156.0.8078.47",
+        "browser_version": "156.0.8078.48",
         "checks": 31,
         "console_errors": 0,
         "consumer_outside_checkout": true,
         "external_requests": 0,
         "inherited_fixtures_modified": false,
-        "job_id": 124427862895,
+        "job_id": 124433440101,
         "native_browser_zoom_200": "NOT_MEASURED",
         "optimization": 0,
         "page_errors": 0,
-        "platform": "linux",
+        "platform": "win32",
         "playwright_version": "1.62.1",
         "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
-        "run_id": 41164121126,
+        "run_id": 41165951241,
         "screenshots": {
-          "c4-main-1440.png": "3cec8aa91bc322738f66929f4a84f4eae3657cf3fb5cb9f804795a37683c8deb",
-          "c4-main-320.png": "873a6f19bec580fa8144fd84f632ba3091313c527a740b8e9c6a7cc5013ee313",
-          "c4-main-390.png": "599315d10966273bc0843680aa261e79d0786c3fac8a8775c6570955d4734886",
-          "c4-visible-presentation-error.png": "d76fafef28a5524d43c2c6106830dae8fb419dd8aac6ec1df59fc26e1ff3062d"
+          "c4-main-1440.png": "18ed31d5557b7090877ccf63d4c5d26a933f947b093a5d3a19d0fe3b1ea0aa91",
+          "c4-main-320.png": "fdafb7d5e30a8dcca958998e5f1e0bd18b636b4c4712c938850cc3f1ab017e65",
+          "c4-main-390.png": "27b1f732d387b5013f229ccca5771bbc3cb393ab142021d603960acf32a56dcd",
+          "c4-visible-presentation-error.png": "5632204357e2af3e0bae4ed60ef9be7447944f5e1b3675018f44e6958b756598"
         },
         "skips": 0,
         "status": "PASS",
         "synthetic_copy_bytes_match_expected": true,
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
         "viewer_without_r4": true
       },
       {
@@ -833,25 +1274,25 @@
         "consumer_outside_checkout": true,
         "external_requests": 0,
         "inherited_fixtures_modified": false,
-        "job_id": 124427862919,
+        "job_id": 124433440107,
         "native_browser_zoom_200": "NOT_MEASURED",
         "optimization": 1,
         "page_errors": 0,
         "platform": "win32",
         "playwright_version": "1.62.1",
         "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
-        "run_id": 41164121126,
+        "run_id": 41165951241,
         "screenshots": {
-          "c4-main-1440.png": "e497f739b84dbd5553e659642fd5afe9e35009e833b54557aef91d331113c6aa",
-          "c4-main-320.png": "6dfd8c71e5083f5e58a8573813fc87d797cea009933aa459b510b5a49fb4f895",
-          "c4-main-390.png": "244765a789303b53c5735e887d3edb7e529ce4b7ee6c2d74eace8ca15ed9ce70",
-          "c4-visible-presentation-error.png": "f92f6c1de32ce1c72445876a3aefa10004b286b0951a2ee04ea223d3766ac829"
+          "c4-main-1440.png": "52cbf2ed48449d3e23c2d299225b4532ae751ffb7560308452a6fa46453e929f",
+          "c4-main-320.png": "4c8ebe4a1ababd2d8469646afa0cbc3d3b3ee920829368c723972ed758ebb7af",
+          "c4-main-390.png": "122e3c36376c72a2e0b1eaaae2db0c04a404c405c1ae3c39f3f607d5be7c65e6",
+          "c4-visible-presentation-error.png": "7f7c81f0c3ff59343134355872fc668bbc3321cb0af1cd24dfe03ef373b3241e"
         },
         "skips": 0,
         "status": "PASS",
         "synthetic_copy_bytes_match_expected": true,
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
         "viewer_without_r4": true
       },
       {
@@ -862,54 +1303,54 @@
         "consumer_outside_checkout": true,
         "external_requests": 0,
         "inherited_fixtures_modified": false,
-        "job_id": 124427862944,
+        "job_id": 124433440144,
+        "native_browser_zoom_200": "NOT_MEASURED",
+        "optimization": 0,
+        "page_errors": 0,
+        "platform": "linux",
+        "playwright_version": "1.62.1",
+        "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
+        "run_id": 41165951241,
+        "screenshots": {
+          "c4-main-1440.png": "7e64b38cb010fa59778e6cc622b90a679101478dfd5d04ecf35442a2036ba3ef",
+          "c4-main-320.png": "0e4beb496ad0e5c99b59ca0171b56db6be040f8e6fd64662fa06ff8cf98d5efc",
+          "c4-main-390.png": "ff69a0b81eba9877b6f7f69dd9aee1207c0a074755dff2bb078a35c28c5931fc",
+          "c4-visible-presentation-error.png": "8033a376e3d3a59b7a342cae34e65d0f900ddf2ec4ac9e9f298b88d26b96fc31"
+        },
+        "skips": 0,
+        "status": "PASS",
+        "synthetic_copy_bytes_match_expected": true,
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "viewer_without_r4": true
+      },
+      {
+        "all_checks_pass": true,
+        "browser_version": "156.0.8078.47",
+        "checks": 31,
+        "console_errors": 0,
+        "consumer_outside_checkout": true,
+        "external_requests": 0,
+        "inherited_fixtures_modified": false,
+        "job_id": 124433440149,
         "native_browser_zoom_200": "NOT_MEASURED",
         "optimization": 1,
         "page_errors": 0,
         "platform": "linux",
         "playwright_version": "1.62.1",
         "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
-        "run_id": 41164121126,
+        "run_id": 41165951241,
         "screenshots": {
-          "c4-main-1440.png": "9afd5b12a41a30b22445f034386109fc1b3d907e499f90abc7e6bd5b7ce17573",
-          "c4-main-320.png": "99ad517e99d3d8dbf9ac2972b2646a8d920a2b1aa214647eadb81b93b77ff6e3",
-          "c4-main-390.png": "61d2e3f9cdf3a2ffef849767541d0df4570af1a93dc2f9d371c48e1f6f5a6c73",
-          "c4-visible-presentation-error.png": "490627b1e9f47c6c087c4ca6c908568d7b89b5d46395d769a9160f4551afa0c9"
+          "c4-main-1440.png": "14953e2f127a2841fc047f7d0fec2cee065a0d61c3b3aab78374c685cd1c7738",
+          "c4-main-320.png": "a6206ebee6643d31fe370a6aef451fae18d23232b341806b6b68fff9f1c5e5b5",
+          "c4-main-390.png": "090d216f95f835f4bab13b10ada5847ca434496006ab3a851790adc0fba14ce8",
+          "c4-visible-presentation-error.png": "839a60c78a50637257bd24d69ff904fa5c2f761c081600ef3d1af2281969a065"
         },
         "skips": 0,
         "status": "PASS",
         "synthetic_copy_bytes_match_expected": true,
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
-        "viewer_without_r4": true
-      },
-      {
-        "all_checks_pass": true,
-        "browser_version": "156.0.8078.48",
-        "checks": 31,
-        "console_errors": 0,
-        "consumer_outside_checkout": true,
-        "external_requests": 0,
-        "inherited_fixtures_modified": false,
-        "job_id": 124427862954,
-        "native_browser_zoom_200": "NOT_MEASURED",
-        "optimization": 0,
-        "page_errors": 0,
-        "platform": "win32",
-        "playwright_version": "1.62.1",
-        "reflow_scope": "1440, 390 and 320 CSS-pixel browser viewports; no CSS zoom",
-        "run_id": 41164121126,
-        "screenshots": {
-          "c4-main-1440.png": "41f9dce45434f4894943acf28ca56d19bd32fa055f4648eb13c88422434206eb",
-          "c4-main-320.png": "a390627f0fb00145d78f2d88119a69ddd6af6e0cab83bb896ff686590a0e1bff",
-          "c4-main-390.png": "e1e409a8b5cedf09c095c9afa676c6663c5cbd155b45b3a2ed5ff825fa767fed",
-          "c4-visible-presentation-error.png": "05f7096ec1946429c6d33b01cdd1c771c3c8c92c13f61f179b98bb8dc3239f6e"
-        },
-        "skips": 0,
-        "status": "PASS",
-        "synthetic_copy_bytes_match_expected": true,
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
         "viewer_without_r4": true
       }
     ],
@@ -951,8 +1392,13 @@
       "Actual JSON receipts parsed from job stdout",
       "GitHub Actions official artifact metadata"
     ],
+    "evidence_processing": {
+      "source_full_id_sets_compared_with_installed": true,
+      "source_json_normalization": "Combined stdout/stderr logs can interleave the source receipt JSON with unittest separators, 'Ran N tests in ...s', empty lines and 'OK'. Only those exact non-JSON diagnostics are excluded while assembling JSON; full test IDs are independently checked from verbose unittest lines.",
+      "source_sha_attribution": "Run head SHA and the exact-candidate step bind each source execution; the source JSON itself reports mode and suite results. Installed receipts independently serialize SHA/tree."
+    },
     "inherited_collection": {
-      "actual_test_count": 222,
+      "actual_test_count": 223,
       "actual_test_ids": [
         "test_architecture_boundaries.ArchitectureGuardTests.test_allowed_direction_is_not_rejected",
         "test_architecture_boundaries.ArchitectureGuardTests.test_distribution_dependency_is_rejected",
@@ -1075,6 +1521,7 @@
         "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
         "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
         "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_requests_and_commit_headers_fail_closed",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
@@ -1177,9 +1624,9 @@
         "test_speckit_presentation_audit.PresentationAuditTests.test_opt_in_does_not_allow_deleting_a_presentation_file",
         "test_speckit_presentation_audit.PresentationAuditTests.test_opt_in_is_explicit_and_records_exact_changed_paths"
       ],
-      "actual_test_ids_sha256": "0a8e7d683d9e851e2dd620eed02ed92e418c886b1da3e6b3b44284b9eaf1e6f2",
+      "actual_test_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
       "inherited_191_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
-      "new_test_count": 31,
+      "new_test_count": 32,
       "new_test_ids": [
         "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
         "test_atlas_parity04_f2_doc_ci.F2EpochAdversarialTests.test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
@@ -1200,6 +1647,7 @@
         "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
         "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
         "test_atlas_parity04_f2_doc_ci.F2GitObjectBatchTests.test_batch_requests_and_commit_headers_fail_closed",
+        "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_inventory_and_test_bytes_are_independently_pinned",
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_control_table_expression_is_rejected_before_import",
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_guard_source_has_independent_authorization",
@@ -1213,7 +1661,7 @@
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
         "test_atlas_parity04_f2_doc_ci.F2IndependentPreflightTests.test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red"
       ],
-      "new_test_ids_sha256": "e67076f2614ffbe53474798b60d50f69e10aa07d7e3676141c909f5f04caf80b",
+      "new_test_ids_sha256": "f985b1d216d1be48d4b867ead49eca965b1a62eb4b9f56713c08c5acc58ed15e",
       "serialization": "UTF-8 compact JSON of sorted full IDs followed by LF",
       "source_path": "docs/missions/atlas-parity-04/ci-repair/CI-EVIDENCE.json",
       "source_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a"
@@ -1224,18 +1672,40 @@
         "consumer_outside_checkout": true,
         "duplicates": 0,
         "errors": 0,
-        "executed": 222,
+        "executed": 223,
         "failures": 0,
-        "full_ids_sha256": "0a8e7d683d9e851e2dd620eed02ed92e418c886b1da3e6b3b44284b9eaf1e6f2",
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
         "inherited_ids_preserved": true,
-        "job_id": 124427862891,
+        "job_id": 124433440153,
         "loader_errors": 0,
         "missing_inherited_ids": [],
-        "new_ids": 31,
+        "new_ids": 32,
         "optimization": 0,
-        "platform": "linux",
+        "phase_step_results": [
+          {
+            "conclusion": "skipped",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "success",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "success",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "win32",
         "r4_absent": true,
-        "run_id": 41164121147,
+        "run_id": 41165951215,
         "skips": 0,
         "status": "PASS_SCOPED",
         "strong_gate": {
@@ -1243,7 +1713,7 @@
           "inherited_191_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
           "inherited_C1_cases": 122,
           "status": "PASS",
-          "unique_test_cases": 222
+          "unique_test_cases": 223
         },
         "suite_counts": [
           {
@@ -1252,8 +1722,8 @@
             "suite": "packages/protocol/tests"
           },
           {
-            "collected": 135,
-            "executed": 135,
+            "collected": 136,
+            "executed": 136,
             "suite": "tests/qa"
           },
           {
@@ -1262,27 +1732,49 @@
             "suite": "tests/viewer"
           }
         ],
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
-        "unique_ids": 222
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
       },
       {
         "architecture_exit_code": 0,
         "consumer_outside_checkout": true,
         "duplicates": 0,
         "errors": 0,
-        "executed": 222,
+        "executed": 223,
         "failures": 0,
-        "full_ids_sha256": "0a8e7d683d9e851e2dd620eed02ed92e418c886b1da3e6b3b44284b9eaf1e6f2",
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
         "inherited_ids_preserved": true,
-        "job_id": 124427862942,
+        "job_id": 124433440156,
         "loader_errors": 0,
         "missing_inherited_ids": [],
-        "new_ids": 31,
+        "new_ids": 32,
         "optimization": 1,
-        "platform": "linux",
+        "phase_step_results": [
+          {
+            "conclusion": "skipped",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "success",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "success",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "win32",
         "r4_absent": true,
-        "run_id": 41164121147,
+        "run_id": 41165951215,
         "skips": 0,
         "status": "PASS_SCOPED",
         "strong_gate": {
@@ -1290,7 +1782,7 @@
           "inherited_191_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
           "inherited_C1_cases": 122,
           "status": "PASS",
-          "unique_test_cases": 222
+          "unique_test_cases": 223
         },
         "suite_counts": [
           {
@@ -1299,8 +1791,8 @@
             "suite": "packages/protocol/tests"
           },
           {
-            "collected": 135,
-            "executed": 135,
+            "collected": 136,
+            "executed": 136,
             "suite": "tests/qa"
           },
           {
@@ -1309,84 +1801,49 @@
             "suite": "tests/viewer"
           }
         ],
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
-        "unique_ids": 222
-      },
-      {
-        "cancellation_message": "The operation was canceled.",
-        "cancelled_step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
-        "cancelled_step_completed_at": "2026-10-31T03:37:57Z",
-        "cancelled_step_started_at": "2026-10-31T03:31:00Z",
-        "clean_install_sdk": {
-          "installed_module": true,
-          "r4_absent": true,
-          "sdk_imported": true,
-          "viewer_absent": true
-        },
-        "clean_install_status": "PASS_SCOPED",
-        "clean_install_viewer": {
-          "installed_sdk": true,
-          "installed_viewer": true,
-          "r4_absent": true
-        },
-        "configured_job_timeout_minutes": 15,
-        "diagnosis": "The full installed suite did not complete inside the unchanged 15-minute job budget after the full source suite.",
-        "diagnosis_basis": "Configured workflow timeout, run/job/step durations and cancellation log; no manual rerun or cancellation by B",
-        "installed_full_id_proof": false,
-        "installed_suite_status": "CANCELLED_INCOMPLETE",
-        "job_completed_at": "2026-10-31T03:38:02Z",
-        "job_conclusion": "cancelled",
-        "job_id": 124427862969,
-        "job_started_at": "2026-10-31T03:22:49Z",
-        "job_status": "completed",
-        "optimization": 1,
-        "platform": "win32",
-        "run_id": 41164121147,
-        "source_bytes_unchanged": true,
-        "source_qa_duration_seconds": 429.908,
-        "source_suite_results": [
-          {
-            "errors": 0,
-            "failures": 0,
-            "skipped": 0,
-            "suite": "packages/protocol/tests",
-            "tests": 12
-          },
-          {
-            "errors": 0,
-            "failures": 0,
-            "skipped": 0,
-            "suite": "tests/qa",
-            "tests": 135
-          },
-          {
-            "errors": 0,
-            "failures": 0,
-            "skipped": 0,
-            "suite": "tests/viewer",
-            "tests": 75
-          }
-        ],
-        "source_suite_status": "PASS"
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
       },
       {
         "architecture_exit_code": 0,
         "consumer_outside_checkout": true,
         "duplicates": 0,
         "errors": 0,
-        "executed": 222,
+        "executed": 223,
         "failures": 0,
-        "full_ids_sha256": "0a8e7d683d9e851e2dd620eed02ed92e418c886b1da3e6b3b44284b9eaf1e6f2",
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
         "inherited_ids_preserved": true,
-        "job_id": 124427863017,
+        "job_id": 124433440172,
         "loader_errors": 0,
         "missing_inherited_ids": [],
-        "new_ids": 31,
+        "new_ids": 32,
         "optimization": 0,
-        "platform": "win32",
+        "phase_step_results": [
+          {
+            "conclusion": "skipped",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "success",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "success",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "linux",
         "r4_absent": true,
-        "run_id": 41164121147,
+        "run_id": 41165951215,
         "skips": 0,
         "status": "PASS_SCOPED",
         "strong_gate": {
@@ -1394,7 +1851,7 @@
           "inherited_191_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
           "inherited_C1_cases": 122,
           "status": "PASS",
-          "unique_test_cases": 222
+          "unique_test_cases": 223
         },
         "suite_counts": [
           {
@@ -1403,8 +1860,8 @@
             "suite": "packages/protocol/tests"
           },
           {
-            "collected": 135,
-            "executed": 135,
+            "collected": 136,
+            "executed": 136,
             "suite": "tests/qa"
           },
           {
@@ -1413,9 +1870,78 @@
             "suite": "tests/viewer"
           }
         ],
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
-        "unique_ids": 222
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
+      },
+      {
+        "architecture_exit_code": 0,
+        "consumer_outside_checkout": true,
+        "duplicates": 0,
+        "errors": 0,
+        "executed": 223,
+        "failures": 0,
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
+        "inherited_ids_preserved": true,
+        "job_id": 124433440290,
+        "loader_errors": 0,
+        "missing_inherited_ids": [],
+        "new_ids": 32,
+        "optimization": 1,
+        "phase_step_results": [
+          {
+            "conclusion": "skipped",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "success",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "success",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "success",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "linux",
+        "r4_absent": true,
+        "run_id": 41165951215,
+        "skips": 0,
+        "status": "PASS_SCOPED",
+        "strong_gate": {
+          "all_C1_test_ids_preserved": true,
+          "inherited_191_sha256": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
+          "inherited_C1_cases": 122,
+          "status": "PASS",
+          "unique_test_cases": 223
+        },
+        "suite_counts": [
+          {
+            "collected": 12,
+            "executed": 12,
+            "suite": "packages/protocol/tests"
+          },
+          {
+            "collected": 136,
+            "executed": 136,
+            "suite": "tests/qa"
+          },
+          {
+            "collected": 75,
+            "executed": 75,
+            "suite": "tests/viewer"
+          }
+        ],
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
       }
     ],
     "limitations": {
@@ -1430,216 +1956,34 @@
     },
     "p03_receipts": [
       {
-        "job_id": 124427862835,
-        "name": "P03 portable / windows-latest / optimize=0",
-        "optimization": 0,
-        "qualifies_main_shell": false,
-        "receipts": {
-          "BUILD-AND-INSTALL.json": {
-            "sha256": "17568a1f1dcd916e70b24bab6ee3e3daac043832c25278eafd0d4c9c105dcb68",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "HTTP-RECEIPT.json": {
-            "sha256": "4f36ecc089a0639524c88e625a0eb4b5e6e7072e3593d5b04e4c55d4faa9eb1d",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "INPUT-SHAS.json": {
-            "sha256": "d14cd1710345412ae9e8c40475cb11e0d5ac2a87b41b57c7f215a9dbfb0f9151",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "TEST-RECEIPT.json": {
-            "sha256": "f88a07fe4bc06a7407522b5a9acaa77153ebbfd340a42f8160857a90d2c44544",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          }
-        },
-        "required": [
-          "BUILD-AND-INSTALL.json",
-          "HTTP-RECEIPT.json",
-          "INPUT-SHAS.json",
-          "TEST-RECEIPT.json"
-        ],
-        "run_id": 41164121111,
-        "status": "PASS",
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
-      },
-      {
-        "job_id": 124427862854,
-        "name": "P03 Chromium / windows-latest",
-        "optimization": 0,
-        "qualifies_main_shell": false,
-        "receipts": {
-          "BROWSER-RECEIPT.json": {
-            "sha256": "c7ea981dff3efb23b277affb279212146bb98468a6348990d0d0b0043674701a",
-            "skips": 0,
-            "status": "PASS_SCOPED",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "INPUT-SHAS.json": {
-            "sha256": "238d7c25589c35f72a51282c3b76a733be5d5367db40f6663a77d5007de42229",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          }
-        },
-        "required": [
-          "BROWSER-RECEIPT.json",
-          "INPUT-SHAS.json"
-        ],
-        "run_id": 41164121111,
-        "status": "PASS",
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
-      },
-      {
-        "job_id": 124427862896,
-        "name": "P03 portable / windows-latest / optimize=1",
-        "optimization": 1,
-        "qualifies_main_shell": false,
-        "receipts": {
-          "BUILD-AND-INSTALL.json": {
-            "sha256": "8cd80d896b5c1ca0fb85717c33ad4b7d07ae43d82c7b17922c8a0e1865d0a785",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "HTTP-RECEIPT.json": {
-            "sha256": "998ae61dc549cdd02b487766e98103fc155ebf58bd503f09d28fe1530987d435",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "INPUT-SHAS.json": {
-            "sha256": "9f0a2b9b52aff57b71d3da661a1bb590b7e367435de9f0dc367c01a02960a7fb",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "TEST-RECEIPT.json": {
-            "sha256": "096b1ea4f342fa5356f489217c6f748ddd5741f1bec8beebadbb4b9c714b351d",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          }
-        },
-        "required": [
-          "BUILD-AND-INSTALL.json",
-          "HTTP-RECEIPT.json",
-          "INPUT-SHAS.json",
-          "TEST-RECEIPT.json"
-        ],
-        "run_id": 41164121111,
-        "status": "PASS",
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
-      },
-      {
-        "job_id": 124427862905,
-        "name": "P03 portable / ubuntu-latest / optimize=1",
-        "optimization": 1,
-        "qualifies_main_shell": false,
-        "receipts": {
-          "BUILD-AND-INSTALL.json": {
-            "sha256": "0da42b59091d68eb5709652e9bd3ac897d8b33a585a84122ea277d8a311f9d66",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "HTTP-RECEIPT.json": {
-            "sha256": "3e767abc4574783fcfcd032f625c2461d7e6524cee64840e8935f2c6959078e1",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "INPUT-SHAS.json": {
-            "sha256": "6ce890b467f59832a01dd3ded96f5b9505a16dec1f85fa2f108e8c5da609c69c",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "TEST-RECEIPT.json": {
-            "sha256": "7ea933a1c336c007f8971199be372b7d1445b47b99631ce2663b8e17ca9e6b31",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          }
-        },
-        "required": [
-          "BUILD-AND-INSTALL.json",
-          "HTTP-RECEIPT.json",
-          "INPUT-SHAS.json",
-          "TEST-RECEIPT.json"
-        ],
-        "run_id": 41164121111,
-        "status": "PASS",
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
-      },
-      {
-        "job_id": 124427862956,
-        "name": "P03 Chromium / ubuntu-latest",
-        "optimization": 0,
-        "qualifies_main_shell": false,
-        "receipts": {
-          "BROWSER-RECEIPT.json": {
-            "sha256": "288427b5c6b759fbbb71c60014a9bf61518f87be2d88d9172811d4d467d5fac7",
-            "skips": 0,
-            "status": "PASS_SCOPED",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          },
-          "INPUT-SHAS.json": {
-            "sha256": "5df5d9e88483cdb60db73a5464bd99a3effb1b5c25fc0e4915f6075d8c23b57b",
-            "skips": 0,
-            "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-          }
-        },
-        "required": [
-          "BROWSER-RECEIPT.json",
-          "INPUT-SHAS.json"
-        ],
-        "run_id": 41164121111,
-        "status": "PASS",
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
-      },
-      {
-        "job_id": 124427862995,
+        "job_id": 124433440039,
         "name": "P03 portable / ubuntu-latest / optimize=0",
         "optimization": 0,
         "qualifies_main_shell": false,
         "receipts": {
           "BUILD-AND-INSTALL.json": {
-            "sha256": "3a1d00874ca7e3471c12905d35c053ef32fc4fdea4dd28e094de8c921d04480a",
+            "sha256": "4a498dc6122024f64e0f63878f96c52e475feaaddc81a69c1415a89214627c37",
             "skips": 0,
             "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
           },
           "HTTP-RECEIPT.json": {
-            "sha256": "acf393c71e7c06a3ccec68642c5ad0bc250b91a0aa0be3d35e5b07fcbd5b477d",
+            "sha256": "ac028954df6c459dac07929fa0d41f162ff06417b22930295bb933a73b496412",
             "skips": 0,
             "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
           },
           "INPUT-SHAS.json": {
-            "sha256": "08b976350d36fd839d94cd5c0a2835395fc0114809c72b3141c0fdbbdca19a1e",
+            "sha256": "8ad763790a66a364b664db4b055b9a7df5b846f70aec1c5693a198e01e7fe9b3",
             "skips": 0,
             "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
           },
           "TEST-RECEIPT.json": {
-            "sha256": "14150cb4c39f4f82c16e61f7ad1770eaa78439b8383b8a93058e96da14317bd1",
+            "sha256": "a35467c4d281df5dbabe378e9647e4f408861fbf6b9e3d04b479e4db02779af1",
             "skips": 0,
             "status": "PASS",
-            "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
           }
         },
         "required": [
@@ -1648,10 +1992,192 @@
           "INPUT-SHAS.json",
           "TEST-RECEIPT.json"
         ],
-        "run_id": 41164121111,
+        "run_id": 41165951246,
         "status": "PASS",
-        "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      {
+        "job_id": 124433440083,
+        "name": "P03 Chromium / ubuntu-latest",
+        "optimization": 0,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BROWSER-RECEIPT.json": {
+            "sha256": "7479fa46c938ec7324eb7953f620f601082eeb88f39eddc869210d25964b5238",
+            "skips": 0,
+            "status": "PASS_SCOPED",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "be3d9b5741585b7cf2da2a934f892ff831f6b8749f1397eebb1296914673f20b",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          }
+        },
+        "required": [
+          "BROWSER-RECEIPT.json",
+          "INPUT-SHAS.json"
+        ],
+        "run_id": 41165951246,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      {
+        "job_id": 124433440132,
+        "name": "P03 portable / windows-latest / optimize=1",
+        "optimization": 1,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BUILD-AND-INSTALL.json": {
+            "sha256": "b64a30066d8c6527840fc956ccf5d7c175db64f0c8350d5f0e8a8dbdf11b3072",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "HTTP-RECEIPT.json": {
+            "sha256": "61a75ab1ae3547af3d03c3e2bd5d51a7c5b9215b4bfd1c410c2e79a27512e286",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "296caf38060f1a3c363055a7e9485d2b1f89d5ccfac7869c23099f38b275f22e",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "TEST-RECEIPT.json": {
+            "sha256": "8bca89d2586af4526d7a347545d0e7374c00d570d928991a43546f9fd486e45c",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          }
+        },
+        "required": [
+          "BUILD-AND-INSTALL.json",
+          "HTTP-RECEIPT.json",
+          "INPUT-SHAS.json",
+          "TEST-RECEIPT.json"
+        ],
+        "run_id": 41165951246,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      {
+        "job_id": 124433440157,
+        "name": "P03 portable / windows-latest / optimize=0",
+        "optimization": 0,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BUILD-AND-INSTALL.json": {
+            "sha256": "b10bdd994242d878a7e3ab7cd316bc0b2efb8297b62cb6100fa91963d3036416",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "HTTP-RECEIPT.json": {
+            "sha256": "ff0ab0af319da3f0f5445492c5c400ae8b6d01cb22275f8b0a33aa93b1165c34",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "4158a545f7d52f8d12c76d45b019f98cad9eb36be8188d1ee6a4d0ef148ad4e1",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "TEST-RECEIPT.json": {
+            "sha256": "08c060c90d7728b7db1c8c9fc3b3e845f26a532be20015597542c187eecb354a",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          }
+        },
+        "required": [
+          "BUILD-AND-INSTALL.json",
+          "HTTP-RECEIPT.json",
+          "INPUT-SHAS.json",
+          "TEST-RECEIPT.json"
+        ],
+        "run_id": 41165951246,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      {
+        "job_id": 124433440191,
+        "name": "P03 Chromium / windows-latest",
+        "optimization": 0,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BROWSER-RECEIPT.json": {
+            "sha256": "ff5b8d061049a8aacc57447f362c02d5e9f857445d2b7064adac77ea99eba36b",
+            "skips": 0,
+            "status": "PASS_SCOPED",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "2c91716a34ebf69bcd2a13dfe5189e60622d3ac9efc6212594354e3507cda9dd",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          }
+        },
+        "required": [
+          "BROWSER-RECEIPT.json",
+          "INPUT-SHAS.json"
+        ],
+        "run_id": 41165951246,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+      },
+      {
+        "job_id": 124433440207,
+        "name": "P03 portable / ubuntu-latest / optimize=1",
+        "optimization": 1,
+        "qualifies_main_shell": false,
+        "receipts": {
+          "BUILD-AND-INSTALL.json": {
+            "sha256": "5512e044e0c5ed5e88609ae9b1abb4706a0ea43425367cd3247e153d4c38d968",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "HTTP-RECEIPT.json": {
+            "sha256": "9f48c264a1cb387ea7ecad0ca4a08cc2f7170d2249f6ed6168f62249ae0a861c",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "INPUT-SHAS.json": {
+            "sha256": "8f9b3bcc44768ebda3de079bbc4fbb84f5d7e9a00cb9334714d42ed43ebf7d5b",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          },
+          "TEST-RECEIPT.json": {
+            "sha256": "3bb23e277e56d666f33974d5d3da4f65861ed502add1919275b5a390c1eb21b1",
+            "skips": 0,
+            "status": "PASS",
+            "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+          }
+        },
+        "required": [
+          "BUILD-AND-INSTALL.json",
+          "HTTP-RECEIPT.json",
+          "INPUT-SHAS.json",
+          "TEST-RECEIPT.json"
+        ],
+        "run_id": 41165951246,
+        "status": "PASS",
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
       }
     ],
     "p06_browser": {
@@ -1718,106 +2244,21 @@
       "full_parity_denominator": "UNKNOWN",
       "host_browser": "NOT_RUN",
       "installed_wheels": {
-        "atlas_viewer-0.1.0a1-py3-none-any.whl": "90b3dcf8ac061bb01a2fe9dcdc65f6fd768852765114ce016cc4d57d10fe014b",
-        "caderno_protocol-0.1.0a1-py3-none-any.whl": "d104581978a58dbbb30aba76665b2a3cbde0b054f560649fe554d2ce36c37885"
+        "atlas_viewer-0.1.0a1-py3-none-any.whl": "545b82513060b96fd3a511879d95867c3c0e4342babe995bb8aad15db0a705f7",
+        "caderno_protocol-0.1.0a1-py3-none-any.whl": "49430bdb0e7c9c7d3bfdfcb4a4bca8486e842920095b6c53364edb04deca8d86"
       },
-      "job_id": 124427862872,
+      "job_id": 124433440510,
       "page_errors": [],
-      "run_id": 41164121110,
+      "run_id": 41165951204,
       "scope": "synthetic valid-package replacement on installed viewer",
       "source_bytes_equal_to_driver_expected": true,
       "source_mutation": "SYNTHETIC_FIXTURE_DRIVER_METADATA_ONLY",
       "status": "PASS_SCOPED",
-      "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+      "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
     },
     "p06_portable": [
       {
         "clean_install": {
-          "optimization": 1,
-          "reindex": {
-            "generation_advanced": true,
-            "rebuild_same_records": true
-          },
-          "sdk": {
-            "installed_module": true,
-            "r4_absent": true,
-            "sdk_imported": true,
-            "viewer_absent": true
-          },
-          "source_bytes_unchanged": true,
-          "status": "PASS_SCOPED",
-          "viewer": {
-            "installed_sdk": true,
-            "installed_viewer": true,
-            "r4_absent": true
-          }
-        },
-        "guard": {
-          "error": null,
-          "status": "PASS",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-          "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
-        },
-        "job_id": 124427862839,
-        "name": "P06 / ubuntu-latest / optimize=1",
-        "run_id": 41164121110,
-        "wheel": {
-          "assets": [
-            {
-              "route": "/",
-              "sha256": "61bd9a62a5df83f00dc787fbd2bd2cde9c8f798a5101c4d090992f8cefe1e030",
-              "status": 200
-            },
-            {
-              "route": "/app.js",
-              "sha256": "448a4a428f72e40bdb34075fab2e3d558d6693769bf0e5a7920d212bb7b248d3",
-              "status": 200
-            },
-            {
-              "route": "/parity02_p02_state.js",
-              "sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
-              "status": 200
-            },
-            {
-              "route": "/parity02_p03_table.js",
-              "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
-              "status": 200
-            },
-            {
-              "route": "/parity02_p03_artifacts.js",
-              "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
-              "status": 200
-            },
-            {
-              "route": "/parity03_p03_composition.js",
-              "sha256": "291c4f19dbdd9b870caefa9ad991844d9ba1ab7817958c2079e50b88f181a7a4",
-              "status": 200
-            },
-            {
-              "route": "/parity02_p03_table.css",
-              "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
-              "status": 200
-            },
-            {
-              "route": "/parity02_p03_artifacts.css",
-              "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
-              "status": 200
-            },
-            {
-              "route": "/style.css",
-              "sha256": "b562129e340a6b1d57289e2e148a3dd794ae6e521df62173df8500cc7e568e0f",
-              "status": 200
-            }
-          ],
-          "isolated_installed_viewer": true,
-          "optimization": 1,
-          "r4_absent": true,
-          "status": "PASS_SCOPED",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
-        }
-      },
-      {
-        "clean_install": {
           "optimization": 0,
           "reindex": {
             "generation_advanced": true,
@@ -1840,12 +2281,12 @@
         "guard": {
           "error": null,
           "status": "PASS",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-          "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+          "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
         },
-        "job_id": 124427862876,
+        "job_id": 124433440143,
         "name": "P06 / windows-latest / optimize=0",
-        "run_id": 41164121110,
+        "run_id": 41165951204,
         "wheel": {
           "assets": [
             {
@@ -1898,7 +2339,7 @@
           "optimization": 0,
           "r4_absent": true,
           "status": "PASS_SCOPED",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
         }
       },
       {
@@ -1925,12 +2366,12 @@
         "guard": {
           "error": null,
           "status": "PASS",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-          "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+          "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
         },
-        "job_id": 124427862910,
+        "job_id": 124433440152,
         "name": "P06 / ubuntu-latest / optimize=0",
-        "run_id": 41164121110,
+        "run_id": 41165951204,
         "wheel": {
           "assets": [
             {
@@ -1983,7 +2424,7 @@
           "optimization": 0,
           "r4_absent": true,
           "status": "PASS_SCOPED",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
         }
       },
       {
@@ -2010,12 +2451,12 @@
         "guard": {
           "error": null,
           "status": "PASS",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-          "tested_tree": "764407a156f77dd3769893d684c186d6625014b6"
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+          "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
         },
-        "job_id": 124427863035,
+        "job_id": 124433440220,
         "name": "P06 / windows-latest / optimize=1",
-        "run_id": 41164121110,
+        "run_id": 41165951204,
         "wheel": {
           "assets": [
             {
@@ -2068,13 +2509,109 @@
           "optimization": 1,
           "r4_absent": true,
           "status": "PASS_SCOPED",
-          "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734"
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
+        }
+      },
+      {
+        "clean_install": {
+          "optimization": 1,
+          "reindex": {
+            "generation_advanced": true,
+            "rebuild_same_records": true
+          },
+          "sdk": {
+            "installed_module": true,
+            "r4_absent": true,
+            "sdk_imported": true,
+            "viewer_absent": true
+          },
+          "source_bytes_unchanged": true,
+          "status": "PASS_SCOPED",
+          "viewer": {
+            "installed_sdk": true,
+            "installed_viewer": true,
+            "r4_absent": true
+          }
+        },
+        "guard": {
+          "error": null,
+          "status": "PASS",
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+          "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
+        },
+        "job_id": 124433440269,
+        "name": "P06 / ubuntu-latest / optimize=1",
+        "run_id": 41165951204,
+        "wheel": {
+          "assets": [
+            {
+              "route": "/",
+              "sha256": "61bd9a62a5df83f00dc787fbd2bd2cde9c8f798a5101c4d090992f8cefe1e030",
+              "status": 200
+            },
+            {
+              "route": "/app.js",
+              "sha256": "448a4a428f72e40bdb34075fab2e3d558d6693769bf0e5a7920d212bb7b248d3",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p02_state.js",
+              "sha256": "b8e531f4c81cd0efe6788d8ef2b59597a7d23a47c08b248872d70c85d07d1aa1",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.js",
+              "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.js",
+              "sha256": "dcedbb24fbf23a81da3797cf007087341341fea8168844af64b8f61d76f67f13",
+              "status": 200
+            },
+            {
+              "route": "/parity03_p03_composition.js",
+              "sha256": "291c4f19dbdd9b870caefa9ad991844d9ba1ab7817958c2079e50b88f181a7a4",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_table.css",
+              "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+              "status": 200
+            },
+            {
+              "route": "/parity02_p03_artifacts.css",
+              "sha256": "f98f0f92225baa1d6c91483ebe3b0ea801dae866416e0fa67ed413d47ee48d2c",
+              "status": 200
+            },
+            {
+              "route": "/style.css",
+              "sha256": "b562129e340a6b1d57289e2e148a3dd794ae6e521df62173df8500cc7e568e0f",
+              "status": 200
+            }
+          ],
+          "isolated_installed_viewer": true,
+          "optimization": 1,
+          "r4_absent": true,
+          "status": "PASS_SCOPED",
+          "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6"
         }
       }
     ],
+    "phase_routing": {
+      "counting": "The unique test-ID set is shared by all eight source/installed cells; separate executions do not create new identities.",
+      "inactive_phase_step_skips_are_recorded_in_job_metadata": true,
+      "literal_phases": [
+        "source",
+        "installed"
+      ],
+      "observed_installed_cells": 4,
+      "observed_source_cells": 4,
+      "unittest_case_skips": 0
+    },
     "qualification_asserted_by_this_receipt": false,
     "reference_comparisons": {
-      "job_id": 124427862729,
+      "job_id": 124433440151,
       "results": [
         {
           "counts": {
@@ -2124,653 +2661,1149 @@
           "skip": 3
         }
       ],
-      "run_id": 41164121147,
+      "run_id": 41165951215,
       "scope": "Frozen reference tooling uses roc-validator 0.13.0 offline with availability checks skipped. Three upstream reference checks are skipped per invocation; these are distinct from the zero-skip unittest/installed-suite requirement. All three expected valid/invalid outcomes matched."
     },
     "runs": [
       {
         "conclusion": "success",
-        "created_at": "2026-10-31T03:22:47Z",
-        "head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "id": 41164121103,
+        "created_at": "2026-10-31T03:48:42Z",
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951189,
         "jobs": [
           {
-            "completed_at": "2026-10-31T03:23:08Z",
+            "completed_at": "2026-10-31T03:52:44Z",
             "conclusion": "success",
-            "id": 124427862801,
-            "name": "AP04 documentation guard / ubuntu-latest / optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 10
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/job/124427862801"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:08Z",
-            "conclusion": "success",
-            "id": 124427862955,
-            "name": "AP04 documentation guard / ubuntu-latest / optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 10
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/job/124427862955"
-          },
-          {
-            "completed_at": "2026-10-31T03:26:25Z",
-            "conclusion": "success",
-            "id": 124427862966,
+            "id": 124433439832,
             "name": "AP04 documentation guard / windows-latest / optimize=1",
             "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
+            "started_at": "2026-10-31T03:48:44Z",
             "status": "completed",
             "step_conclusions": {
               "success": 10
             },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/job/124427862966"
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/job/124433439832"
           },
           {
-            "completed_at": "2026-10-31T03:26:18Z",
+            "completed_at": "2026-10-31T03:49:08Z",
             "conclusion": "success",
-            "id": 124427863038,
-            "name": "AP04 documentation guard / windows-latest / optimize=0",
+            "id": 124433439901,
+            "name": "AP04 documentation guard / ubuntu-latest / optimize=1",
             "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
+            "started_at": "2026-10-31T03:48:44Z",
             "status": "completed",
             "step_conclusions": {
               "success": 10
             },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103/job/124427863038"
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/job/124433439901"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:04Z",
+            "conclusion": "success",
+            "id": 124433439929,
+            "name": "AP04 documentation guard / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/job/124433439929"
+          },
+          {
+            "completed_at": "2026-10-31T03:53:26Z",
+            "conclusion": "success",
+            "id": 124433439947,
+            "name": "AP04 documentation guard / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189/job/124433439947"
           }
         ],
         "name": "ATLAS-PARITY-04 documentation successor",
         "run_attempt": 1,
         "status": "completed",
-        "updated_at": "2026-10-31T03:26:26Z",
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121103"
+        "updated_at": "2026-10-31T03:53:27Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189"
       },
       {
         "conclusion": "success",
-        "created_at": "2026-10-31T03:22:47Z",
-        "head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "id": 41164121110,
+        "created_at": "2026-10-31T03:48:42Z",
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951214,
         "jobs": [
           {
-            "completed_at": "2026-10-31T03:23:07Z",
+            "completed_at": "2026-10-31T03:49:35Z",
             "conclusion": "success",
-            "id": 124427862690,
-            "name": "Spec Kit 004 / ubuntu-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 9
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/job/124427862690"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:13Z",
-            "conclusion": "success",
-            "id": 124427862839,
-            "name": "P06 / ubuntu-latest / optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 13
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/job/124427862839"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:36Z",
-            "conclusion": "success",
-            "id": 124427862872,
-            "name": "P06 / installed Chromium / valid package replacement",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 12
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/job/124427862872"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:45Z",
-            "conclusion": "success",
-            "id": 124427862876,
-            "name": "P06 / windows-latest / optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 13
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/job/124427862876"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:09Z",
-            "conclusion": "success",
-            "id": 124427862910,
-            "name": "P06 / ubuntu-latest / optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 13
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/job/124427862910"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:45Z",
-            "conclusion": "success",
-            "id": 124427862998,
-            "name": "Spec Kit 004 / windows-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 9
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/job/124427862998"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:45Z",
-            "conclusion": "success",
-            "id": 124427863035,
-            "name": "P06 / windows-latest / optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 13
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110/job/124427863035"
-          }
-        ],
-        "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
-        "run_attempt": 1,
-        "status": "completed",
-        "updated_at": "2026-10-31T03:23:46Z",
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121110"
-      },
-      {
-        "conclusion": "success",
-        "created_at": "2026-10-31T03:22:47Z",
-        "head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "id": 41164121111,
-        "jobs": [
-          {
-            "completed_at": "2026-10-31T03:24:00Z",
-            "conclusion": "success",
-            "id": 124427862691,
-            "name": "P03 Spec Kit 1.2.3 / windows-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 10
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862691"
-          },
-          {
-            "completed_at": "2026-10-31T03:24:08Z",
-            "conclusion": "success",
-            "id": 124427862835,
-            "name": "P03 portable / windows-latest / optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 16
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862835"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:08Z",
-            "conclusion": "success",
-            "id": 124427862849,
-            "name": "P03 Spec Kit 1.2.3 / ubuntu-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 10
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862849"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:48Z",
-            "conclusion": "success",
-            "id": 124427862854,
-            "name": "P03 Chromium / windows-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:50Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 13
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862854"
-          },
-          {
-            "completed_at": "2026-10-31T03:24:15Z",
-            "conclusion": "success",
-            "id": 124427862896,
-            "name": "P03 portable / windows-latest / optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 16
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862896"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:18Z",
-            "conclusion": "success",
-            "id": 124427862905,
-            "name": "P03 portable / ubuntu-latest / optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 16
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862905"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:13Z",
-            "conclusion": "success",
-            "id": 124427862956,
-            "name": "P03 Chromium / ubuntu-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 13
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862956"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:13Z",
-            "conclusion": "success",
-            "id": 124427862995,
-            "name": "P03 portable / ubuntu-latest / optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 16
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111/job/124427862995"
-          }
-        ],
-        "name": "ATLAS-PARITY03 P03 isolated qualification",
-        "run_attempt": 1,
-        "status": "completed",
-        "updated_at": "2026-10-31T03:24:15Z",
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121111"
-      },
-      {
-        "conclusion": "success",
-        "created_at": "2026-10-31T03:22:47Z",
-        "head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "id": 41164121126,
-        "jobs": [
-          {
-            "completed_at": "2026-10-31T03:23:08Z",
-            "conclusion": "success",
-            "id": 124427862712,
-            "name": "C4 Spec Kit 1.2.3 / ubuntu-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 11
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/job/124427862712"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:24Z",
-            "conclusion": "success",
-            "id": 124427862895,
-            "name": "C4 installed C0+P03 / ubuntu-latest / optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 14
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/job/124427862895"
-          },
-          {
-            "completed_at": "2026-10-31T03:24:25Z",
-            "conclusion": "success",
-            "id": 124427862919,
-            "name": "C4 installed C0+P03 / windows-latest / optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 14
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/job/124427862919"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:59Z",
-            "conclusion": "success",
-            "id": 124427862931,
-            "name": "C4 Spec Kit 1.2.3 / windows-latest",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 11
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/job/124427862931"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:44Z",
-            "conclusion": "success",
-            "id": 124427862944,
-            "name": "C4 installed C0+P03 / ubuntu-latest / optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 14
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/job/124427862944"
-          },
-          {
-            "completed_at": "2026-10-31T03:24:28Z",
-            "conclusion": "success",
-            "id": 124427862954,
-            "name": "C4 installed C0+P03 / windows-latest / optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 14
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126/job/124427862954"
-          }
-        ],
-        "name": "ATLAS-PARITY-03 C4 full composition",
-        "run_attempt": 1,
-        "status": "completed",
-        "updated_at": "2026-10-31T03:24:29Z",
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121126"
-      },
-      {
-        "conclusion": "success",
-        "created_at": "2026-10-31T03:22:47Z",
-        "head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "id": 41164121121,
-        "jobs": [
-          {
-            "completed_at": "2026-10-31T03:23:06Z",
-            "conclusion": "success",
-            "id": 124427863328,
-            "name": "atlas003-specification (ubuntu-latest)",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:50Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 12
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121121/job/124427863328"
-          },
-          {
-            "completed_at": "2026-10-31T03:23:27Z",
-            "conclusion": "success",
-            "id": 124427863363,
+            "id": 124433439978,
             "name": "atlas003-specification (windows-latest)",
             "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
+            "started_at": "2026-10-31T03:48:44Z",
             "status": "completed",
             "step_conclusions": {
               "success": 12
             },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121121/job/124427863363"
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951214/job/124433439978"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:04Z",
+            "conclusion": "success",
+            "id": 124433440041,
+            "name": "atlas003-specification (ubuntu-latest)",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951214/job/124433440041"
           }
         ],
         "name": "ATLAS003 Spec Kit contract checks",
         "run_attempt": 1,
         "status": "completed",
-        "updated_at": "2026-10-31T03:23:27Z",
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121121"
+        "updated_at": "2026-10-31T03:49:36Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951214"
       },
       {
-        "conclusion": "cancelled",
-        "created_at": "2026-10-31T03:22:47Z",
-        "head_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-        "id": 41164121147,
+        "conclusion": "success",
+        "created_at": "2026-10-31T03:48:42Z",
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951215,
         "jobs": [
           {
-            "completed_at": "2026-10-31T03:23:17Z",
+            "completed_at": "2026-10-31T03:49:59Z",
             "conclusion": "success",
-            "id": 124427862729,
-            "name": "Public standards comparison and RO-Crate 1.3 reference",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 9
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/job/124427862729"
-          },
-          {
-            "completed_at": "2026-10-31T03:24:06Z",
-            "conclusion": "success",
-            "id": 124427862891,
-            "name": "ubuntu-latest / Python optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:54Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 16
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/job/124427862891"
-          },
-          {
-            "completed_at": "2026-10-31T03:24:04Z",
-            "conclusion": "success",
-            "id": 124427862914,
+            "id": 124433439957,
             "name": "Installed viewer / Chromium desktop and mobile",
             "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
+            "started_at": "2026-10-31T03:48:44Z",
             "status": "completed",
             "step_conclusions": {
               "success": 15
             },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/job/124427862914"
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433439957"
           },
           {
-            "completed_at": "2026-10-31T03:24:05Z",
+            "completed_at": "2026-10-31T03:49:24Z",
             "conclusion": "success",
-            "id": 124427862942,
-            "name": "ubuntu-latest / Python optimize=1",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
-            "status": "completed",
-            "step_conclusions": {
-              "success": 16
-            },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/job/124427862942"
-          },
-          {
-            "completed_at": "2026-10-31T03:38:02Z",
-            "conclusion": "cancelled",
-            "id": 124427862969,
-            "name": "windows-latest / Python optimize=1",
+            "id": 124433440085,
+            "name": "source / ubuntu-latest / Python optimize=1",
             "non_success_steps": [
               {
-                "completed_at": "2026-10-31T03:37:57Z",
-                "conclusion": "cancelled",
-                "name": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
-                "started_at": "2026-10-31T03:31:00Z"
+                "completed_at": "2026-10-31T03:49:22Z",
+                "conclusion": "skipped",
+                "name": "Install wheels again in new empty environments",
+                "started_at": "2026-10-31T03:49:22Z"
               },
               {
-                "completed_at": "2026-10-31T03:37:57Z",
+                "completed_at": "2026-10-31T03:49:22Z",
+                "conclusion": "skipped",
+                "name": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+                "started_at": "2026-10-31T03:49:22Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:49:22Z",
                 "conclusion": "skipped",
                 "name": "Verify installed wheel assets and fixed routes",
-                "started_at": "2026-10-31T03:37:57Z"
+                "started_at": "2026-10-31T03:49:22Z"
               },
               {
-                "completed_at": "2026-10-31T03:37:58Z",
+                "completed_at": "2026-10-31T03:49:22Z",
                 "conclusion": "skipped",
-                "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
-                "started_at": "2026-10-31T03:37:58Z"
-              },
-              {
-                "completed_at": "2026-10-31T03:37:58Z",
-                "conclusion": "skipped",
-                "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
-                "started_at": "2026-10-31T03:37:58Z"
+                "name": "Preserve exact-SHA installed verification receipts and collection",
+                "started_at": "2026-10-31T03:49:22Z"
               }
             ],
-            "started_at": "2026-10-31T03:22:49Z",
+            "started_at": "2026-10-31T03:48:44Z",
             "status": "completed",
             "step_conclusions": {
-              "cancelled": 1,
-              "skipped": 3,
+              "skipped": 4,
               "success": 12
             },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/job/124427862969"
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440085"
           },
           {
-            "completed_at": "2026-10-31T03:35:29Z",
+            "completed_at": "2026-10-31T03:49:14Z",
             "conclusion": "success",
-            "id": 124427863017,
-            "name": "windows-latest / Python optimize=0",
-            "non_success_steps": [],
-            "started_at": "2026-10-31T03:22:49Z",
+            "id": 124433440129,
+            "name": "source / ubuntu-latest / Python optimize=0",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T03:49:12Z",
+                "conclusion": "skipped",
+                "name": "Install wheels again in new empty environments",
+                "started_at": "2026-10-31T03:49:12Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:49:12Z",
+                "conclusion": "skipped",
+                "name": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+                "started_at": "2026-10-31T03:49:12Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:49:12Z",
+                "conclusion": "skipped",
+                "name": "Verify installed wheel assets and fixed routes",
+                "started_at": "2026-10-31T03:49:12Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:49:12Z",
+                "conclusion": "skipped",
+                "name": "Preserve exact-SHA installed verification receipts and collection",
+                "started_at": "2026-10-31T03:49:12Z"
+              }
+            ],
+            "started_at": "2026-10-31T03:48:44Z",
             "status": "completed",
             "step_conclusions": {
-              "success": 16
+              "skipped": 4,
+              "success": 12
             },
-            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147/job/124427863017"
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440129"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:07Z",
+            "conclusion": "success",
+            "id": 124433440151,
+            "name": "Public standards comparison and RO-Crate 1.3 reference",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 9
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440151"
+          },
+          {
+            "completed_at": "2026-10-31T03:54:36Z",
+            "conclusion": "success",
+            "id": 124433440153,
+            "name": "installed / windows-latest / Python optimize=0",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T03:49:12Z",
+                "conclusion": "skipped",
+                "name": "Verify contracts, architecture, safe reading and viewer",
+                "started_at": "2026-10-31T03:49:12Z"
+              }
+            ],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "skipped": 1,
+              "success": 15
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440153"
+          },
+          {
+            "completed_at": "2026-10-31T03:52:53Z",
+            "conclusion": "success",
+            "id": 124433440156,
+            "name": "installed / windows-latest / Python optimize=1",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T03:49:12Z",
+                "conclusion": "skipped",
+                "name": "Verify contracts, architecture, safe reading and viewer",
+                "started_at": "2026-10-31T03:49:12Z"
+              }
+            ],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "skipped": 1,
+              "success": 15
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440156"
+          },
+          {
+            "completed_at": "2026-10-31T03:56:01Z",
+            "conclusion": "success",
+            "id": 124433440164,
+            "name": "source / windows-latest / Python optimize=1",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T03:55:58Z",
+                "conclusion": "skipped",
+                "name": "Install wheels again in new empty environments",
+                "started_at": "2026-10-31T03:55:58Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:55:58Z",
+                "conclusion": "skipped",
+                "name": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+                "started_at": "2026-10-31T03:55:58Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:55:58Z",
+                "conclusion": "skipped",
+                "name": "Verify installed wheel assets and fixed routes",
+                "started_at": "2026-10-31T03:55:58Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:55:58Z",
+                "conclusion": "skipped",
+                "name": "Preserve exact-SHA installed verification receipts and collection",
+                "started_at": "2026-10-31T03:55:58Z"
+              }
+            ],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "skipped": 4,
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440164"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:30Z",
+            "conclusion": "success",
+            "id": 124433440172,
+            "name": "installed / ubuntu-latest / Python optimize=0",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T03:48:52Z",
+                "conclusion": "skipped",
+                "name": "Verify contracts, architecture, safe reading and viewer",
+                "started_at": "2026-10-31T03:48:52Z"
+              }
+            ],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "skipped": 1,
+              "success": 15
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440172"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:39Z",
+            "conclusion": "success",
+            "id": 124433440290,
+            "name": "installed / ubuntu-latest / Python optimize=1",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T03:48:59Z",
+                "conclusion": "skipped",
+                "name": "Verify contracts, architecture, safe reading and viewer",
+                "started_at": "2026-10-31T03:48:59Z"
+              }
+            ],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "skipped": 1,
+              "success": 15
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440290"
+          },
+          {
+            "completed_at": "2026-10-31T03:54:18Z",
+            "conclusion": "success",
+            "id": 124433440319,
+            "name": "source / windows-latest / Python optimize=0",
+            "non_success_steps": [
+              {
+                "completed_at": "2026-10-31T03:54:15Z",
+                "conclusion": "skipped",
+                "name": "Install wheels again in new empty environments",
+                "started_at": "2026-10-31T03:54:15Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:54:15Z",
+                "conclusion": "skipped",
+                "name": "Install test-only schema tooling and run the installed suite outside checkout with zero skips",
+                "started_at": "2026-10-31T03:54:15Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:54:15Z",
+                "conclusion": "skipped",
+                "name": "Verify installed wheel assets and fixed routes",
+                "started_at": "2026-10-31T03:54:15Z"
+              },
+              {
+                "completed_at": "2026-10-31T03:54:15Z",
+                "conclusion": "skipped",
+                "name": "Preserve exact-SHA installed verification receipts and collection",
+                "started_at": "2026-10-31T03:54:15Z"
+              }
+            ],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "skipped": 4,
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215/job/124433440319"
           }
         ],
         "name": "ATLAS021 candidate verification",
         "run_attempt": 1,
         "status": "completed",
-        "updated_at": "2026-10-31T03:38:03Z",
-        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41164121147"
+        "updated_at": "2026-10-31T03:56:02Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T03:48:42Z",
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951241,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T03:49:02Z",
+            "conclusion": "success",
+            "id": 124433439996,
+            "name": "C4 Spec Kit 1.2.3 / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 11
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/job/124433439996"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:55Z",
+            "conclusion": "success",
+            "id": 124433440077,
+            "name": "C4 Spec Kit 1.2.3 / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 11
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/job/124433440077"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:58Z",
+            "conclusion": "success",
+            "id": 124433440101,
+            "name": "C4 installed C0+P03 / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/job/124433440101"
+          },
+          {
+            "completed_at": "2026-10-31T03:50:13Z",
+            "conclusion": "success",
+            "id": 124433440107,
+            "name": "C4 installed C0+P03 / windows-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/job/124433440107"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:40Z",
+            "conclusion": "success",
+            "id": 124433440144,
+            "name": "C4 installed C0+P03 / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:45Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/job/124433440144"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:21Z",
+            "conclusion": "success",
+            "id": 124433440149,
+            "name": "C4 installed C0+P03 / ubuntu-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:56Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 14
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241/job/124433440149"
+          }
+        ],
+        "name": "ATLAS-PARITY-03 C4 full composition",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T03:50:14Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T03:48:42Z",
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951204,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T03:49:02Z",
+            "conclusion": "success",
+            "id": 124433440013,
+            "name": "Spec Kit 004 / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 9
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/job/124433440013"
+          },
+          {
+            "completed_at": "2026-10-31T03:50:19Z",
+            "conclusion": "success",
+            "id": 124433440143,
+            "name": "P06 / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:45Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/job/124433440143"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:15Z",
+            "conclusion": "success",
+            "id": 124433440152,
+            "name": "P06 / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/job/124433440152"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:38Z",
+            "conclusion": "success",
+            "id": 124433440155,
+            "name": "Spec Kit 004 / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:45Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 9
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/job/124433440155"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:33Z",
+            "conclusion": "success",
+            "id": 124433440220,
+            "name": "P06 / windows-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/job/124433440220"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:07Z",
+            "conclusion": "success",
+            "id": 124433440269,
+            "name": "P06 / ubuntu-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/job/124433440269"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:29Z",
+            "conclusion": "success",
+            "id": 124433440510,
+            "name": "P06 / installed Chromium / valid package replacement",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:45Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 12
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204/job/124433440510"
+          }
+        ],
+        "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T03:50:19Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204"
+      },
+      {
+        "conclusion": "success",
+        "created_at": "2026-10-31T03:48:42Z",
+        "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "id": 41165951246,
+        "jobs": [
+          {
+            "completed_at": "2026-10-31T03:50:08Z",
+            "conclusion": "success",
+            "id": 124433439942,
+            "name": "P03 Spec Kit 1.2.3 / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433439942"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:05Z",
+            "conclusion": "success",
+            "id": 124433440039,
+            "name": "P03 portable / ubuntu-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433440039"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:11Z",
+            "conclusion": "success",
+            "id": 124433440083,
+            "name": "P03 Chromium / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433440083"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:03Z",
+            "conclusion": "success",
+            "id": 124433440105,
+            "name": "P03 Spec Kit 1.2.3 / ubuntu-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 10
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433440105"
+          },
+          {
+            "completed_at": "2026-10-31T03:50:03Z",
+            "conclusion": "success",
+            "id": 124433440132,
+            "name": "P03 portable / windows-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433440132"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:48Z",
+            "conclusion": "success",
+            "id": 124433440157,
+            "name": "P03 portable / windows-latest / optimize=0",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433440157"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:43Z",
+            "conclusion": "success",
+            "id": 124433440191,
+            "name": "P03 Chromium / windows-latest",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 13
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433440191"
+          },
+          {
+            "completed_at": "2026-10-31T03:49:19Z",
+            "conclusion": "success",
+            "id": 124433440207,
+            "name": "P03 portable / ubuntu-latest / optimize=1",
+            "non_success_steps": [],
+            "started_at": "2026-10-31T03:48:44Z",
+            "status": "completed",
+            "step_conclusions": {
+              "success": 16
+            },
+            "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246/job/124433440207"
+          }
+        ],
+        "name": "ATLAS-PARITY03 P03 isolated qualification",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-31T03:50:09Z",
+        "url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246"
       }
     ],
     "schema": "atlas-parity04-f2-b-ci-verification-v2",
+    "source_cells": [
+      {
+        "duplicates": 0,
+        "errors": 0,
+        "executed": 223,
+        "extra_ids": [],
+        "failures": 0,
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
+        "inherited_ids_preserved": true,
+        "job_id": 124433440085,
+        "loader_error_ids": [],
+        "missing_ids": [],
+        "optimization": 1,
+        "phase": "source",
+        "phase_step_results": [
+          {
+            "conclusion": "success",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "linux",
+        "run_id": 41165951215,
+        "skips": 0,
+        "status": "PASS",
+        "suite_counts": [
+          {
+            "errors": 0,
+            "executed": 12,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "packages/protocol/tests"
+          },
+          {
+            "errors": 0,
+            "executed": 136,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/qa"
+          },
+          {
+            "errors": 0,
+            "executed": 75,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/viewer"
+          }
+        ],
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
+      },
+      {
+        "duplicates": 0,
+        "errors": 0,
+        "executed": 223,
+        "extra_ids": [],
+        "failures": 0,
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
+        "inherited_ids_preserved": true,
+        "job_id": 124433440129,
+        "loader_error_ids": [],
+        "missing_ids": [],
+        "optimization": 0,
+        "phase": "source",
+        "phase_step_results": [
+          {
+            "conclusion": "success",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "linux",
+        "run_id": 41165951215,
+        "skips": 0,
+        "status": "PASS",
+        "suite_counts": [
+          {
+            "errors": 0,
+            "executed": 12,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "packages/protocol/tests"
+          },
+          {
+            "errors": 0,
+            "executed": 136,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/qa"
+          },
+          {
+            "errors": 0,
+            "executed": 75,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/viewer"
+          }
+        ],
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
+      },
+      {
+        "duplicates": 0,
+        "errors": 0,
+        "executed": 223,
+        "extra_ids": [],
+        "failures": 0,
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
+        "inherited_ids_preserved": true,
+        "job_id": 124433440164,
+        "loader_error_ids": [],
+        "missing_ids": [],
+        "optimization": 1,
+        "phase": "source",
+        "phase_step_results": [
+          {
+            "conclusion": "success",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "win32",
+        "run_id": 41165951215,
+        "skips": 0,
+        "status": "PASS",
+        "suite_counts": [
+          {
+            "errors": 0,
+            "executed": 12,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "packages/protocol/tests"
+          },
+          {
+            "errors": 0,
+            "executed": 136,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/qa"
+          },
+          {
+            "errors": 0,
+            "executed": 75,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/viewer"
+          }
+        ],
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
+      },
+      {
+        "duplicates": 0,
+        "errors": 0,
+        "executed": 223,
+        "extra_ids": [],
+        "failures": 0,
+        "full_ids_sha256": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
+        "inherited_ids_preserved": true,
+        "job_id": 124433440319,
+        "loader_error_ids": [],
+        "missing_ids": [],
+        "optimization": 0,
+        "phase": "source",
+        "phase_step_results": [
+          {
+            "conclusion": "success",
+            "step": "Verify contracts, architecture, safe reading and viewer"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install wheels again in new empty environments"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Install test-only schema tooling and run the installed suite outside checkout with zero skips"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Verify installed wheel assets and fixed routes"
+          },
+          {
+            "conclusion": "skipped",
+            "step": "Preserve exact-SHA installed verification receipts and collection"
+          }
+        ],
+        "platform": "win32",
+        "run_id": 41165951215,
+        "skips": 0,
+        "status": "PASS",
+        "suite_counts": [
+          {
+            "errors": 0,
+            "executed": 12,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "packages/protocol/tests"
+          },
+          {
+            "errors": 0,
+            "executed": 136,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/qa"
+          },
+          {
+            "errors": 0,
+            "executed": 75,
+            "failures": 0,
+            "skipped": 0,
+            "suite": "tests/viewer"
+          }
+        ],
+        "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+        "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
+        "unique_ids": 223
+      }
+    ],
     "speckit_jobs": [
       {
         "cli_version": "1.2.3",
         "integration_findings": [],
         "integration_status": "ok",
-        "job_id": 124427862690,
-        "managed_audit_errors": [],
-        "managed_audit_status": "PASS",
-        "managed_files": 28,
-        "name": "Spec Kit 004 / ubuntu-latest",
-        "official_skills": 10,
-        "run_id": 41164121110
-      },
-      {
-        "cli_version": "1.2.3",
-        "integration_findings": [],
-        "integration_status": "ok",
-        "job_id": 124427862998,
-        "managed_audit_errors": [],
-        "managed_audit_status": "PASS",
-        "managed_files": 28,
-        "name": "Spec Kit 004 / windows-latest",
-        "official_skills": 10,
-        "run_id": 41164121110
-      },
-      {
-        "c4_input_status": "PASS",
-        "cli_version": "1.2.3",
-        "integration_findings": [],
-        "integration_status": "ok",
-        "job_id": 124427862691,
-        "name": "P03 Spec Kit 1.2.3 / windows-latest",
-        "run_id": 41164121111
-      },
-      {
-        "c4_input_status": "PASS",
-        "cli_version": "1.2.3",
-        "integration_findings": [],
-        "integration_status": "ok",
-        "job_id": 124427862849,
-        "name": "P03 Spec Kit 1.2.3 / ubuntu-latest",
-        "run_id": 41164121111
-      },
-      {
-        "c4_input_status": "PASS",
-        "cli_version": "1.2.3",
-        "integration_findings": [],
-        "integration_status": "ok",
-        "job_id": 124427862712,
-        "managed_audit_errors": [],
-        "managed_audit_status": "PASS",
-        "managed_files": 28,
-        "name": "C4 Spec Kit 1.2.3 / ubuntu-latest",
-        "official_skills": 10,
-        "run_id": 41164121126
-      },
-      {
-        "c4_input_status": "PASS",
-        "cli_version": "1.2.3",
-        "integration_findings": [],
-        "integration_status": "ok",
-        "job_id": 124427862931,
-        "managed_audit_errors": [],
-        "managed_audit_status": "PASS",
-        "managed_files": 28,
-        "name": "C4 Spec Kit 1.2.3 / windows-latest",
-        "official_skills": 10,
-        "run_id": 41164121126
-      },
-      {
-        "cli_version": "1.2.3",
-        "integration_findings": [],
-        "integration_status": "ok",
-        "job_id": 124427863328,
-        "managed_audit_errors": [],
-        "managed_audit_status": "PASS",
-        "managed_files": 28,
-        "name": "atlas003-specification (ubuntu-latest)",
-        "official_skills": 10,
-        "run_id": 41164121121
-      },
-      {
-        "cli_version": "1.2.3",
-        "integration_findings": [],
-        "integration_status": "ok",
-        "job_id": 124427863363,
+        "job_id": 124433439978,
         "managed_audit_errors": [],
         "managed_audit_status": "PASS",
         "managed_files": 28,
         "name": "atlas003-specification (windows-latest)",
         "official_skills": 10,
-        "run_id": 41164121121
+        "run_id": 41165951214
+      },
+      {
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124433440041,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "atlas003-specification (ubuntu-latest)",
+        "official_skills": 10,
+        "run_id": 41165951214
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124433439996,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "C4 Spec Kit 1.2.3 / ubuntu-latest",
+        "official_skills": 10,
+        "run_id": 41165951241
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124433440077,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "C4 Spec Kit 1.2.3 / windows-latest",
+        "official_skills": 10,
+        "run_id": 41165951241
+      },
+      {
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124433440013,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "Spec Kit 004 / ubuntu-latest",
+        "official_skills": 10,
+        "run_id": 41165951204
+      },
+      {
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124433440155,
+        "managed_audit_errors": [],
+        "managed_audit_status": "PASS",
+        "managed_files": 28,
+        "name": "Spec Kit 004 / windows-latest",
+        "official_skills": 10,
+        "run_id": 41165951204
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124433439942,
+        "name": "P03 Spec Kit 1.2.3 / windows-latest",
+        "run_id": 41165951246
+      },
+      {
+        "c4_input_status": "PASS",
+        "cli_version": "1.2.3",
+        "integration_findings": [],
+        "integration_status": "ok",
+        "job_id": 124433440105,
+        "name": "P03 Spec Kit 1.2.3 / ubuntu-latest",
+        "run_id": 41165951246
       }
     ],
-    "status": "TERMINAL_CI_WITH_UNSUCCESSFUL_JOBS",
+    "status": "SIX_TERMINAL_WORKFLOWS_SUCCESS",
     "terminal_summary": {
-      "cancelled": 1,
-      "cancelled_jobs": 1,
+      "cancelled": 0,
+      "cancelled_jobs": 0,
       "failed_jobs": 0,
-      "jobs": 33,
-      "success": 5,
-      "successful_jobs": 32,
+      "jobs": 37,
+      "success": 6,
+      "successful_jobs": 37,
       "workflows": 6
     },
-    "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-    "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
+    "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+    "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5",
     "verification_role": "B CI engineer and author of dispatch controls; independent review is separate"
   },
-  "status": "REPAIR_CONTINUES_WITH_COMPLETE_SOURCE_AND_INSTALLED_STAGE_MATRIX"
+  "schema": "atlas-ap04-f2-ci-repair-terminal-evidence-v1",
+  "six_runs_same_sha": [
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951214",
+      "id": 41165951214,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "run_attempt": 1,
+      "status": "completed",
+      "updated_at": "2026-10-31T03:49:36Z"
+    },
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951241",
+      "id": 41165951241,
+      "name": "ATLAS-PARITY-03 C4 full composition",
+      "run_attempt": 1,
+      "status": "completed",
+      "updated_at": "2026-10-31T03:50:14Z"
+    },
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951246",
+      "id": 41165951246,
+      "name": "ATLAS-PARITY03 P03 isolated qualification",
+      "run_attempt": 1,
+      "status": "completed",
+      "updated_at": "2026-10-31T03:50:09Z"
+    },
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951204",
+      "id": 41165951204,
+      "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+      "run_attempt": 1,
+      "status": "completed",
+      "updated_at": "2026-10-31T03:50:19Z"
+    },
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951189",
+      "id": 41165951189,
+      "name": "ATLAS-PARITY-04 documentation successor",
+      "run_attempt": 1,
+      "status": "completed",
+      "updated_at": "2026-10-31T03:53:27Z"
+    },
+    {
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+      "html_url": "https://github.com/thalesvalente/Atlas/actions/runs/41165951215",
+      "id": 41165951215,
+      "name": "ATLAS021 candidate verification",
+      "run_attempt": 1,
+      "status": "completed",
+      "updated_at": "2026-10-31T03:56:02Z"
+    }
+  ],
+  "status": "AP04_F2_DOCUMENTATION_CI_QUALIFIED_FOR_TESTED_SHA"
 }

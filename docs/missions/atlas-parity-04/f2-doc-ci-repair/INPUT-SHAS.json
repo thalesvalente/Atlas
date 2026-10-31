@@ -266,6 +266,7 @@
   "mission": "AP04-F2-DOC-CI-REPAIR-01",
   "plan": "AP04-POR-v1.0-draft",
   "private_sources": "NOT_READ_NOT_REQUESTED_NOT_PUBLISHED",
+  "procedural_exception": "Before prompt retrieval the coordinator ran read-only local Git metadata/instruction-file-name inventory commands in the already open checkout. No local Git writes, code/tests/install, source/private corpus/R4 access; those observations were excluded from qualification evidence. Reported by coordinator; C did not independently audit that local trace.",
   "prompt": {
     "blob": "370a07b809c98f2bf771cfad0fe89427561bca2d",
     "bytes": 11285,
@@ -277,6 +278,44 @@
     "sha256": "7eeaa481a628d93f3af26dcf59f25f12eb8d8716d7bd2d51ecb06e30d3053201",
     "supersedes_truncated_prompt": true,
     "tree": "4937e66fe60d26b13c48d02708637911016dce2e"
+  },
+  "qualified_technical_cycle": {
+    "containing_commit": "RESOLVE_FROM_GIT; requires its own six completed/success workflows and independent C review",
+    "current_control_revisions": [
+      {
+        "blob": "a50911b8f21ce6242e533b36924d1e4434c78f0a",
+        "path": "scripts/qa/atlas_parity04_f2_doc_ci.py",
+        "sha256": "952a1546f2fdf734cbe30e104cb6c6368886ae54bdb82de249edc72d403072ff"
+      },
+      {
+        "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+        "path": "tests/qa/test_atlas_parity04_f2_doc_ci.py",
+        "sha256": "9971bccd3cbe88624b18b29aa640203955c95ebe1830db6259471c94c9a155e7"
+      },
+      {
+        "blob": "b0ab10b1b1102af5b4fc8c12b63563744591c35f",
+        "path": ".github/workflows/atlas021.yml",
+        "sha256": "1f4e7ad52a597ea30fa7f581a3dd494d63c4615d5ccd52847d027276b75def7e"
+      }
+    ],
+    "external_closure": "PR15 records the final containing SHA/tree, six own runs and independent review; no self-referential receipt commit",
+    "result": "AP04_F2_DOCUMENTATION_CI_QUALIFIED_FOR_TESTED_SHA",
+    "terminal_summary": {
+      "cancelled": 0,
+      "cancelled_jobs": 0,
+      "failed_jobs": 0,
+      "jobs": 37,
+      "success": 6,
+      "successful_jobs": 37,
+      "workflows": 6
+    },
+    "test_id_hashes": {
+      "all_ids": "4c1a5340a6c8580e338fa8216780ed7cb77a00645262c80f71eb82d76971add0",
+      "inherited": "51601e459a2420f604bcf1659e687a858145caa7eecbbce6eb0ad039e9e80f1a",
+      "new_ids": "f985b1d216d1be48d4b867ead49eca965b1a62eb4b9f56713c08c5acc58ed15e"
+    },
+    "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+    "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
   },
   "repository": "thalesvalente/Atlas",
   "reviewed_prior_control_revisions": [
@@ -334,6 +373,7 @@
     "f2_terminal_manifest_entries": 13,
     "f2_terminal_manifest_sha256": "d5f99c3686add17fbb78273a81967621fcf96ab7befd808dce39abcaba876361",
     "history_inspected_before_writes": true,
-    "method": "GitHub Git Data API trees/parents/diffs and in-memory UTF-8 lengths, Git blob SHA-1 and SHA-256 recomputation"
+    "method": "GitHub Git Data API trees/parents/diffs and in-memory UTF-8 lengths, Git blob SHA-1 and SHA-256 recomputation",
+    "qualification_evidence": "GitHub Git Data API and GitHub Actions, bound to each tested SHA; local metadata exception excluded"
   }
 }

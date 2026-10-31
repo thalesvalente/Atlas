@@ -3,27 +3,35 @@
   "adr0003": "PROPOSED_NOT_APPROVED",
   "base_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
   "branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
-  "containing_commit": "RESOLVE_FROM_GIT",
-  "current_candidate": {
-    "closure": "Containing SHA still needs all six completed/success workflows and independent review",
-    "defined_new_regression_methods": 32,
-    "installed_cells": 4,
-    "job_timeout_minutes": 15,
-    "original_action_pin_list_preserved": true,
-    "same_sha_required": true,
-    "source_cells": 4,
-    "workflow": "source/installed closed matrix"
-  },
+  "current_control_revisions": [
+    {
+      "blob": "a50911b8f21ce6242e533b36924d1e4434c78f0a",
+      "path": "scripts/qa/atlas_parity04_f2_doc_ci.py",
+      "sha256": "952a1546f2fdf734cbe30e104cb6c6368886ae54bdb82de249edc72d403072ff"
+    },
+    {
+      "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+      "path": "tests/qa/test_atlas_parity04_f2_doc_ci.py",
+      "sha256": "9971bccd3cbe88624b18b29aa640203955c95ebe1830db6259471c94c9a155e7"
+    },
+    {
+      "blob": "b0ab10b1b1102af5b4fc8c12b63563744591c35f",
+      "path": ".github/workflows/atlas021.yml",
+      "sha256": "1f4e7ad52a597ea30fa7f581a3dd494d63c4615d5ccd52847d027276b75def7e"
+    }
+  ],
   "descriptor": "0.2.0 PROPOSED_NOT_APPROVED",
-  "final_closure": "PR15 must record the containing SHA/tree, six completed/success runs, all jobs/artifacts/191 inherited IDs and independent C review",
-  "first_repair_cycle": {
-    "all_191_plus_27_ids_proven": "Ubuntu installed only; Windows source passed and installed incomplete",
-    "cancelled_jobs": 2,
-    "sha": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
-    "successful_jobs": 31,
-    "tree": "37fe3132c3e4b6a4161af4956a0659189136c1c1",
-    "workflows_cancelled": 1,
-    "workflows_success": 5
+  "independent_review": "C PASS for tested technical SHA; own containing-SHA review mandatory in PR15 external closure",
+  "limits": {
+    "artifact_evidence": "SHA-bound logs, emitted receipts, screenshot names/hash/size, serializers and upload/API archive digests inspected; 28 artifact publications",
+    "artifact_zip_png_xml_bytes_opened": false,
+    "inactive_stage_steps": "Expected routing skips only; every source/installed suite runs all 223 cases",
+    "private_source_or_r4_access": false,
+    "procedural_exception": "Before prompt retrieval the coordinator ran read-only local Git metadata/instruction-file-name inventory commands in the already open checkout. No local Git writes, code/tests/install, source/private corpus/R4 access; those observations were excluded from qualification evidence. Reported by coordinator; C did not independently audit that local trace.",
+    "reference_comparator": "Three offline upstream reports each record three availability skips; the expected-invalid third records five failures with expectation_met=true. These are reference outcomes, not unittest skips or failures.",
+    "scientific_or_human_approval": false,
+    "screenshot_pixels_manually_reviewed": false,
+    "unittest_case_skips": 0
   },
   "mission": "AP04-F2-DOC-CI-REPAIR-01",
   "not_authorized": [
@@ -49,17 +57,31 @@
   "plan": "AP04-POR-v1.0-draft",
   "plan_change": false,
   "pr": 15,
-  "schema": "atlas-ap04-f2-ci-repair-handoff-v1",
-  "second_repair_cycle": {
-    "cancelled_jobs": 1,
-    "installed_id_proof": "222 unique IDs in Ubuntu normal/O and Windows normal only",
-    "not_qualified": true,
-    "sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
-    "successful_jobs": 32,
-    "tree": "764407a156f77dd3769893d684c186d6625014b6",
-    "workflows_cancelled": 1,
-    "workflows_success": 5
+  "qualification_scope": {
+    "containing_commit": "RESOLVE_FROM_GIT; requires its own six completed/success workflows and independent C review",
+    "external_closure": "PR15 records the final containing SHA/tree, six own runs and independent review; no self-referential receipt commit",
+    "result": "AP04_F2_DOCUMENTATION_CI_QUALIFIED_FOR_TESTED_SHA",
+    "tested_sha": "bd2166651f159e70a8165e0f12c8ad2a3270a0d6",
+    "tested_tree": "fd5d73e327e3c780efa4f6aa2437b20eb6eca6e5"
   },
-  "status": "STAGE_MATRIX_CANDIDATE_PENDING_REAL_CI",
-  "technical_f2_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527"
+  "schema": "atlas-ap04-f2-ci-repair-handoff-v1",
+  "status": "AP04_F2_DOCUMENTATION_CI_QUALIFIED_FOR_TESTED_SHA",
+  "technical_f2_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+  "terminal_summary": {
+    "cancelled": 0,
+    "cancelled_jobs": 0,
+    "failed_jobs": 0,
+    "jobs": 37,
+    "success": 6,
+    "successful_jobs": 37,
+    "workflows": 6
+  },
+  "test_counts": {
+    "case_skips": 0,
+    "inherited": 191,
+    "installed_cells": 4,
+    "new": 32,
+    "source_cells": 4,
+    "total": 223
+  }
 }
