@@ -2,7 +2,7 @@
 from __future__ import annotations
 from collections import Counter, defaultdict
 from dataclasses import dataclass
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from html.parser import HTMLParser
 import json
 import re
@@ -162,7 +162,7 @@ def parse_source(data: bytes, *, media_type='application/json') -> ParsedSource:
         white()
         if pos != len(text):
             fail('SOURCE_JSON_INVALID')
-    except (ValueError, UnicodeError, RecursionError):
+    except (ValueError, UnicodeError, RecursionError, InvalidOperation):
         fail('SOURCE_JSON_INVALID')
     if not isinstance(result, dict) or result.get('format') != SOURCE_FORMAT or result.get('version') != '0.1.0' or result.get('synthetic') is not True:
         fail('SOURCE_FORMAT_UNSUPPORTED')
@@ -233,11 +233,15 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
         objects.append(result)
         return result
 
-    def preserve(item, path, owner, structural=()):
+    def preserve(item, path, owner, structural=(), expected=()):
         for key, value in item.items():
             if key not in structural:
                 locator = pointer(path, key)
                 unmapped.append(dict(owner_navigation_id=owner, locator=locator, source_key_literal=key, value=_cell(parsed, locator, value)))
+
+        for key in expected:
+            if key not in item:
+                unmapped.append(dict(owner_navigation_id=owner, locator=pointer(path, key), source_key_literal=key, value=_cell(parsed, pointer(path, key), MISSING)))
 
     nodes, tables, relations, assets = [], [], [], []
     for i, item in enumerate(src['records']):
@@ -246,10 +250,10 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
         kind = item.get('kind', 'Unknown')
         if not isinstance(item.get('label'), str):
             fail()
-        node = dict(identity=ident, kind=kind, original_type=item.get('original_type', item.get('kind')), entity_status='SOURCE_ENTITY', label_literal=item['label'], family_literal=item.get('family'), parent_key_literal=item.get('parent_id') if isinstance(item.get('parent_id'), str) else None, parent=None, tree_state='PARENT_UNKNOWN', external_reference=None, binding_gap=True)
+        node = dict(identity=ident, kind=kind, original_type=item.get('original_type', item.get('kind')), entity_status='SOURCE_ENTITY', label_literal=item['label'], family_literal=item.get('family'), parent_key_literal=(item.get('parent_id', {}).get('id') if isinstance(item.get('parent_id'), dict) else item.get('parent_id')), parent=None, tree_state='PARENT_UNKNOWN', external_reference=None, binding_gap=True)
         nodes.append(node)
         pending.append((node, item, path))
-        preserve(item, path, ident['navigation_id'])
+        preserve(item, path, ident['navigation_id'], expected=('id', 'kind', 'original_type', 'family', 'parent_id', 'root'))
     for i, item in enumerate(src['result_tables']):
         path = f'/result_tables/{i}'
         ident = identity(item, path)
@@ -276,17 +280,20 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
                 if set(cell) - expected_keys or (cell['present'] and 'value' not in cell):
                     fail()
                 cells.append(_cell(parsed, cp + '/value', cell.get('value') if cell['present'] else MISSING, unit=cell.get('unit'), precision=cell.get('precision')))
+                preserve(cell, cp, rid['navigation_id'], ('value',), expected=('unit', 'precision'))
+            if row.get('requirement') is not None and not isinstance(row['requirement'], dict):
+                fail()
             rr = dict(identity=rid, ordinal=j, cells=cells, requirement=row.get('requirement'), run_binding=None, binding_gap=True)
             rows.append(rr)
             pending.append((rr, row, rp))
-            preserve(row, rp, rid['navigation_id'], ('cells', 'requirement'))
+            preserve(row, rp, rid['navigation_id'], ('cells', 'requirement'), expected=('id', 'run_id', 'requirement'))
             if 'requirement' in row:
                 # Preserve raw requirement declaration, including lexical form.
                 preserve({'requirement': row['requirement']}, rp, rid['navigation_id'])
         table = dict(identity=ident, title_literal=item['title'], domain=item.get('domain', 'UNKNOWN'), domain_origin='DECLARED' if 'domain' in item and item['domain'] != 'UNKNOWN' else 'UNKNOWN', record_binding=None, columns=columns, rows=rows)
         tables.append(table)
         pending.append((table, item, path))
-        preserve(item, path, ident['navigation_id'], ('columns', 'rows'))
+        preserve(item, path, ident['navigation_id'], ('columns', 'rows'), expected=('id', 'domain', 'record_id'))
     for group in ('product_items', 'resource_documents'):
         for i, item in enumerate(src[group]):
             path = f'/{group}/{i}'
@@ -296,7 +303,7 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
             asset = dict(identity=ident, kind=item.get('kind', 'Unknown'), original_type=item.get('original_type', item.get('kind')), label_literal=item['label'], declared_product_role=item.get('product_role'), declared_binding=None, media_type_literal=item.get('media_type'), uri_literal=item.get('uri'), availability='DECLARED_ONLY', opened=False)
             assets.append(asset)
             pending.append((asset, item, path))
-            preserve(item, path, ident['navigation_id'])
+            preserve(item, path, ident['navigation_id'], expected=('id', 'kind', 'original_type', 'product_role', 'binding_id', 'media_type', 'uri'))
     index = defaultdict(list)
     for item in nodes + tables + [r for t in tables for r in t['rows']] + assets:
         native = item['identity']['native_id']
@@ -340,13 +347,37 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
             target['binding_gap'] = target['run_binding']['resolution'] != 'RESOLVED'
         else:
             target['declared_binding'] = reference(item.get('binding_id', MISSING), path + '/binding_id')
+    # Functional parent graph: retain cycles and mark every cyclic occurrence.
+    by_nav = {node['identity']['navigation_id']: node for node in nodes}
+    done, cycle_nodes = set(), set()
+    for start in by_nav:
+        chain, positions, cursor = [], {}, start
+        while cursor in by_nav and cursor not in done:
+            if cursor in positions:
+                cycle_nodes.update(chain[positions[cursor]:])
+                break
+            positions[cursor] = len(chain)
+            chain.append(cursor)
+            parent = by_nav[cursor]['parent']
+            cursor = parent['target_navigation_id'] if parent['resolution'] == 'RESOLVED' else None
+        done.update(chain)
+    for nav in cycle_nodes:
+        by_nav[nav]['binding_gap'] = True
     repeats = Counter()
     repeat_keys = []
     for item in src['edges']:
         if not isinstance(item, dict):
             fail()
         # Include explicit semantic/direction/context fields in repeat identity.
-        key = json.dumps([item.get('from'), item.get('to'), item.get('kind'), item.get('semantics'), item.get('direction')], sort_keys=True, ensure_ascii=True)
+        # Reject shapes before computing signatures; no Decimal/invalid coercion.
+        for field in ('kind', 'semantics', 'direction'):
+            if item.get(field) is not None and not isinstance(item[field], str):
+                fail()
+        for field in ('from', 'to'):
+            value = item.get(field)
+            if value is not None and not isinstance(value, (str, dict)):
+                fail()
+        key = json.dumps([(field in item, item.get(field)) for field in ('from', 'to', 'kind', 'semantics', 'direction')], sort_keys=True, ensure_ascii=True)
         repeat_keys.append(key)
         repeats[key] += 1
     seen = Counter()
@@ -375,6 +406,7 @@ def transform(parsed, *, source_id, snapshot_id, access_policy_id, bytes_sha256,
         for row in table['rows']:
             if row['requirement'] and row['requirement'].get('admission') == 'UNADMITTED_NATIVE_RF':
                 gap_counts['UNADMITTED_NATIVE_RF'] += 1
+    gap_counts['TREE_CYCLE'] = len(cycle_nodes)
     gap_counts['COLLISION'] = sum(len(v) > 1 for v in index.values())
     gaps = [dict(code=code, scope='selected synthetic payload', count=count, unit='occurrences', note='Preserved without inferred binding or scientific approval.') for code, count in gap_counts.items() if count]
     gaps.append(dict(code='RNF_RES_UNKNOWN', scope='upstream populations', count=None, unit='domain populations', note='No global denominator or upstream completeness assertion.'))

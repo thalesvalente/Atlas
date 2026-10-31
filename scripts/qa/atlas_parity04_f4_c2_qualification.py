@@ -34,7 +34,7 @@ def main():
             raise RuntimeError('Subprocess failed: '+repr(command)+'\n'+done.stdout.decode('utf-8', 'replace')+done.stderr.decode('utf-8', 'replace'))
         return done.stdout
 
-    flags = ['-I'] + (['-O'] if sys.flags.optimize else [])
+    flags = ['-I', '-X', 'utf8'] + (['-O'] if sys.flags.optimize else [])
     try:
         result['commit'] = run(['git', 'rev-parse', 'HEAD'], repo).decode().strip()
         result['tree'] = run(['git', 'rev-parse', 'HEAD^{tree}'], repo).decode().strip()

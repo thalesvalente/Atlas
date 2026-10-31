@@ -184,6 +184,24 @@ def validate_descriptor(descriptor, schema, *, now=None):
                 if stub is None or stub.get('entity_status') != 'DECLARED_EXTERNAL_REFERENCE' or stub['identity']['native_id'] is not None:
                     _bad()
 
+    by_nav = {node['identity']['navigation_id']: node for node in nodes}
+    done, cycle_nodes = set(), set()
+    for start in by_nav:
+        chain, positions, cursor = [], {}, start
+        while cursor in by_nav and cursor not in done:
+            if cursor in positions:
+                cycle_nodes.update(chain[positions[cursor]:])
+                break
+            positions[cursor] = len(chain)
+            chain.append(cursor)
+            parent = by_nav[cursor]['parent']
+            cursor = parent['target_navigation_id'] if parent['resolution'] == 'RESOLVED' else None
+        done.update(chain)
+    cycle_gaps = [gap for gap in d['gaps'] if gap['code'] == 'TREE_CYCLE']
+    if cycle_nodes and (len(cycle_gaps) != 1 or cycle_gaps[0]['count'] != len(cycle_nodes)):
+        _bad()
+    if not cycle_nodes and cycle_gaps:
+        _bad()
     for node in nodes:
         ref(node['parent'])
         external = node['entity_status'] == 'DECLARED_EXTERNAL_REFERENCE'
@@ -192,7 +210,7 @@ def validate_descriptor(descriptor, schema, *, now=None):
                 _bad()
         if node['external_reference'] is not None:
             ref(node['external_reference'])
-        if node['tree_state'] == 'PARENT_RESOLVED' and (node['parent']['resolution'] != 'RESOLVED' or node['binding_gap']):
+        if node['tree_state'] == 'PARENT_RESOLVED' and (node['parent']['resolution'] != 'RESOLVED' or node['binding_gap'] != (node['identity']['navigation_id'] in cycle_nodes)):
             _bad()
         if node['tree_state'] == 'ROOT_DECLARED' and (node['parent']['declared_id'] is not None or node['binding_gap']):
             _bad()
@@ -250,7 +268,7 @@ def validate_descriptor(descriptor, schema, *, now=None):
     for group in repeat_groups.values():
         if len(group) < 2 or [r['repeat_occurrence'] for r in group] != list(range(1, len(group) + 1)):
             _bad()
-        signatures = {(r['kind_literal'], r['semantics'], r['direction'], r['from']['source_id'], r['from']['snapshot_id'], r['from']['declared_id'], r['to']['source_id'], r['to']['snapshot_id'], r['to']['declared_id']) for r in group}
+        signatures = {(r['kind_literal'], r['semantics'], r['direction'], r['from']['source_id'], r['from']['snapshot_id'], r['from']['declared_id'], r['from']['resolution'], r['to']['source_id'], r['to']['snapshot_id'], r['to']['declared_id'], r['to']['resolution']) for r in group}
         if len(signatures) != 1:
             _bad()
     for asset in assets:

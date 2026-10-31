@@ -21,8 +21,8 @@ def main():
         output = prepare(args.source, args.allow, private_scratch(args.scratch), ttl_seconds=args.ttl_seconds, synthetic_fixture=True)
         print(json.dumps({'status': 'SYNTHETIC_DESCRIPTOR_ONLY', 'output': str(output), 'g4': 'BLOCKED', 'hard_budget': 'HARD_BUDGET_UNVERIFIED', 'os_isolation': 'OS_ISOLATION_UNVERIFIED', 'cleanup': 'No crash cleanup guarantee; TTL must be enforced by consumer.'}))
         return 0
-    except ReaderError as error:
-        print(json.dumps({'status': 'F4_C2_BLOCKED_EXACT', 'code': error.code}), file=sys.stderr)
+    except (ReaderError, OSError) as error:
+        print(json.dumps({'status': 'F4_C2_BLOCKED_EXACT', 'code': error.code if isinstance(error, ReaderError) else 'IO_UNVERIFIED'}), file=sys.stderr)
         return 2
 
 

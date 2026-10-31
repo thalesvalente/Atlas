@@ -1,8 +1,6 @@
 name: AP04 F4 C2 external reader synthetic qualification
 
 on:
-  push:
-    branches: [feat/atlas-parity04-f4-external-reader-20261031]
   pull_request:
     branches: [docs/atlas-parity04-f2-legacy-contract-20261030]
     types: [opened, synchronize, reopened]

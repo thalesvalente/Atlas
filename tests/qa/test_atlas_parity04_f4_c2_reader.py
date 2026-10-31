@@ -163,7 +163,7 @@ class AcquisitionContraproofs(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix='atlas-parity04-f4-c2-synthetic-')
         self.addCleanup(self.tmp.cleanup)
-        self.base = Path(self.tmp.name)
+        self.base = Path(self.tmp.name).resolve(strict=True)
         self.source_dir = self.base / 'invented-source'
         self.source_dir.mkdir()
         self.source = self.source_dir / 'invented.json'
@@ -285,6 +285,82 @@ class AcquisitionContraproofs(unittest.TestCase):
             with self.subTest(path=path):
                 self.assert_code('UNSAFE_PATH', lambda path=path: self.open_fixture(source=Path(path), allowlist=[Path(path)]))
 
+
+class ReviewCounterproofs(ParserContraproofs):
+    # Inherit the original synthetic suite and add independent-review negatives.
+    def test_invalid_shapes_are_structured_errors(self):
+        for change in [lambda s: s['result_tables'][0]['rows'][0].update(requirement=[1]), lambda s: s['edges'][0].update(semantics=0.1), lambda s: s['edges'][0].update(**{'from': 0.1})]:
+            source = fixture_source()
+            change(source)
+            self.assert_code('SOURCE_STRUCTURE_INVALID', lambda: descriptor(raw_source(source)))
+
+    def test_cycles_retained_with_explicit_gap(self):
+        source = fixture_source()
+        source['records'] += [{'id': 'cycle-A', 'kind': 'Experiment', 'label': 'Invented cycle A', 'parent_id': 'cycle-B'}, {'id': 'cycle-B', 'kind': 'Experiment', 'label': 'Invented cycle B', 'parent_id': 'cycle-A'}]
+        d = descriptor(raw_source(source))
+        validate_descriptor(d, SCHEMA, now=NOW)
+        cycle = [n for n in d['nodes'] if n['identity']['native_id'] in ('cycle-A', 'cycle-B')]
+        self.assertEqual(len(cycle), 2)
+        self.assertTrue(all(n['binding_gap'] and n['parent']['resolution'] == 'RESOLVED' for n in cycle))
+        self.assertEqual(next(g['count'] for g in d['gaps'] if g['code'] == 'TREE_CYCLE'), 2)
+        d['gaps'] = [g for g in d['gaps'] if g['code'] != 'TREE_CYCLE']
+        self.assert_code('DESCRIPTOR_SEMANTICS_INVALID', lambda: validate_descriptor(d, SCHEMA, now=NOW))
+
+    def test_contextual_parent_uses_only_explicit_identity(self):
+        source = fixture_source()
+        source['records'][1]['parent_id'] = {'id': 'P', 'source_id': source['source_id'], 'snapshot_id': source['snapshot_id']}
+        d = descriptor(raw_source(source))
+        validate_descriptor(d, SCHEMA, now=NOW)
+        self.assertEqual(d['nodes'][1]['parent_key_literal'], 'P')
+        self.assertEqual(d['nodes'][1]['parent']['resolution'], 'RESOLVED')
+
+
+class AcquisitionReviewCounterproofs(AcquisitionContraproofs):
+    def test_missing_source_is_payload_free_cli_error(self):
+        absent = self.base/'DO-NOT-LEAK-THIS-PATH'
+        args = [sys.executable, '-m', 'tools.atlas_legacy_presentation', '--source', str(absent), '--allow', str(absent), '--scratch', str(self.base), '--synthetic-fixture']
+        done = subprocess.run(args, cwd=ROOT, capture_output=True, text=True, timeout=10)
+        self.assertEqual(done.returncode, 2)
+        self.assertEqual(json.loads(done.stderr)['code'], 'IO_UNVERIFIED')
+        self.assertNotIn('DO-NOT-LEAK', done.stderr)
+        self.assertNotIn('Traceback', done.stderr)
+
+    def test_atomic_publish_never_clobbers_existing_destination(self):
+        from types import SimpleNamespace
+        fixed = 'invented-fixed-collision'
+        foreign = self.scratch/('atlas-c2-'+fixed+'.json')
+        foreign.write_text('unowned bytes must survive', encoding='utf-8')
+        with patch.object(reader.uuid, 'uuid4', return_value=SimpleNamespace(hex=fixed)):
+            self.assert_code('IO_UNVERIFIED', lambda: self.open_fixture())
+        self.assertEqual(foreign.read_text(encoding='utf-8'), 'unowned bytes must survive')
+        self.assertFalse((self.scratch/(foreign.name+'.partial')).exists())
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows effective ACL counterproof')
+    def test_effective_file_dacl_is_only_owner_and_system(self):
+        import ctypes
+        from ctypes import wintypes
+        import re
+        result = self.open_fixture()
+        advapi = ctypes.WinDLL('advapi32', use_last_error=True)
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        advapi.GetNamedSecurityInfoW.argtypes = [wintypes.LPWSTR, ctypes.c_int, wintypes.DWORD, ctypes.POINTER(ctypes.c_void_p), ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p), ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
+        advapi.ConvertSidToStringSidW.argtypes = [ctypes.c_void_p, ctypes.POINTER(wintypes.LPWSTR)]
+        advapi.ConvertSecurityDescriptorToStringSecurityDescriptorW.argtypes = [ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, ctypes.POINTER(wintypes.LPWSTR), ctypes.c_void_p]
+        kernel.LocalFree.argtypes = [ctypes.c_void_p]
+        owner, dacl, security = ctypes.c_void_p(), ctypes.c_void_p(), ctypes.c_void_p()
+        owner_text, descriptor_text = wintypes.LPWSTR(), wintypes.LPWSTR()
+        try:
+            self.assertEqual(advapi.GetNamedSecurityInfoW(str(result), 1, 5, ctypes.byref(owner), None, ctypes.byref(dacl), None, ctypes.byref(security)), 0)
+            self.assertTrue(advapi.ConvertSidToStringSidW(owner, ctypes.byref(owner_text)))
+            self.assertTrue(advapi.ConvertSecurityDescriptorToStringSecurityDescriptorW(security, 1, 4, ctypes.byref(descriptor_text), None))
+            aces = [ace.split(';') for ace in re.findall(r'\(([^()]*)\)', descriptor_text.value)]
+            self.assertEqual(len(aces), 2)
+            self.assertTrue(all(ace[0] == 'A' and 'ID' in ace[1] for ace in aces))
+            self.assertEqual({ace[-1] for ace in aces}, {'SY', owner_text.value})
+        finally:
+            for allocation in (security, owner_text, descriptor_text):
+                if allocation:
+                    kernel.LocalFree(ctypes.cast(allocation, ctypes.c_void_p))
 
 if __name__ == '__main__':
     unittest.main()

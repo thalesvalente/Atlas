@@ -8,6 +8,7 @@ from __future__ import annotations
 import ctypes
 from datetime import datetime, timedelta, timezone
 import hashlib
+from functools import wraps
 import json
 import os
 from pathlib import Path
@@ -100,7 +101,7 @@ def _windows_private_mkdir(path):
         sid = ctypes.cast(buffer, ctypes.POINTER(ctypes.c_void_p))[0]
         if not advapi.ConvertSidToStringSidW(sid, ctypes.byref(sid_text)):
             _fail('SCRATCH_UNVERIFIED')
-        sddl = 'D:P(A;;FA;;;SY)(A;;FA;;;' + sid_text.value + ')'
+        sddl = 'D:P(A;OICI;FA;;;SY)(A;OICI;FA;;;' + sid_text.value + ')'
         if not advapi.ConvertStringSecurityDescriptorToSecurityDescriptorW(sddl, 1, ctypes.byref(descriptor), None):
             _fail('SCRATCH_UNVERIFIED')
         class SecurityAttributes(ctypes.Structure):
@@ -117,6 +118,17 @@ def _windows_private_mkdir(path):
         kernel.CloseHandle(token)
 
 
+def _io_errors(function):
+    @wraps(function)
+    def guarded(*args, **kwargs):
+        try:
+            return function(*args, **kwargs)
+        except OSError:
+            _fail('IO_UNVERIFIED')
+    return guarded
+
+
+@_io_errors
 def private_scratch(parent):
     """Create one private child of an explicitly supplied, separate parent.
 
@@ -154,10 +166,30 @@ def _scratch(path, source):
     return path
 
 
+def _open_read(source, flags):
+    if os.name != 'nt':
+        return os.open(source, flags)
+    from ctypes import wintypes
+    import msvcrt
+    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+    kernel.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD, ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+    kernel.CreateFileW.restype = wintypes.HANDLE
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    handle = kernel.CreateFileW(str(source), 0x80000000, 7, None, 3, 0x00200000 | 0x08000000, None)
+    if handle == wintypes.HANDLE(-1).value:
+        _fail('IO_UNVERIFIED')
+    try:
+        return msvcrt.open_osfhandle(handle, os.O_RDONLY | os.O_BINARY)
+    except OSError:
+        kernel.CloseHandle(handle)
+        _fail('IO_UNVERIFIED')
+
+
 def _after_read(path):
     """Fault injection seam for synthetic counterproofs, not a CLI option."""
 
 
+@_io_errors
 def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=False):
     """Produce one ephemeral descriptor only in explicit synthetic test mode.
 
@@ -181,7 +213,7 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
     started = time.monotonic()
     temporary = None
     destination = None
-    fd = os.open(source, flags)
+    fd = _open_read(source, flags)
     try:
         before = os.fstat(fd)
         if _fingerprint(before) != _fingerprint(source.lstat()) or before.st_size > MAX_SOURCE_BYTES:
@@ -228,8 +260,9 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
                 target.flush()
                 os.fsync(target.fileno())
             stable()
-            # Random final name in our private directory; no overwriting user files.
-            os.replace(temporary, destination)
+            # Atomic publication with no-clobber semantics on both supported OSes.
+            os.link(temporary, destination, follow_symlinks=False)
+            temporary.unlink()
             temporary = None
             _OWNED[str(destination)] = _fingerprint(destination.lstat())
             return destination
@@ -243,6 +276,7 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
             temporary.unlink()
 
 
+@_io_errors
 def cleanup_owned(path):
     """Remove only this process's exact derived identity; no directory scan."""
     path = _lexical(path)
