@@ -84,6 +84,43 @@
     "windows-O"
   ],
   "schema": "atlas-ap04-f2-negative-tests-v1",
-  "status": "FIRST_CYCLE_27_PASS_FOUR_CELLS_BATCH_CANDIDATE_PENDING",
+  "second_cycle": {
+    "all_four_jobs": "completed/success",
+    "ap04_job_ids": [
+      124427862955,
+      124427862801,
+      124427863038,
+      124427862966
+    ],
+    "ap04_run_id": 41164121103,
+    "inherited_ap04_per_cell": 23,
+    "installed_ids": 222,
+    "installed_verified_cells": [
+      "ubuntu-normal",
+      "ubuntu-O",
+      "windows-normal"
+    ],
+    "new_id_sha256": "e67076f2614ffbe53474798b60d50f69e10aa07d7e3676141c909f5f04caf80b",
+    "new_per_cell": 31,
+    "tested_sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
+    "tested_tree": "764407a156f77dd3769893d684c186d6625014b6",
+    "windows_O_installed": "CANCELLED_INCOMPLETE"
+  },
+  "stage_matrix_candidate": {
+    "coverage": [
+      "Both stages and both OS/optimization axes required",
+      "Complete source and installed commands",
+      "Wrong stage condition rejected",
+      "No test subset",
+      "Wheel/assets gate retained",
+      "Exact-SHA artifacts and all six installed receipt targets retained"
+    ],
+    "methods_defined": 32,
+    "negative_mutations": 10,
+    "new_method": "test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+    "retained_methods": 31,
+    "status": "NOT_YET_EXECUTED"
+  },
+  "status": "STAGE_MATRIX_CANDIDATE_PENDING_EXECUTION",
   "synthetic_tests_do_not_replace_actions": true
 }

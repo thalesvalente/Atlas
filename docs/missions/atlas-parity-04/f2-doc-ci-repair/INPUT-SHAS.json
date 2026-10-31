@@ -279,6 +279,38 @@
     "tree": "4937e66fe60d26b13c48d02708637911016dce2e"
   },
   "repository": "thalesvalente/Atlas",
+  "reviewed_prior_control_revisions": [
+    {
+      "blob": "64ded18f97e38cdabe4ed45f5004a19183b979ae",
+      "path": "scripts/qa/atlas_parity04_f2_doc_ci.py",
+      "ref": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+      "sha256": "a7d13716ed52643aa4ff3662e543a5b316023d5516679457fc38003fa52a5155"
+    },
+    {
+      "blob": "398db6f8315a0d10f026120f3e935be8c2715e63",
+      "path": "tests/qa/test_atlas_parity04_f2_doc_ci.py",
+      "ref": "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e",
+      "sha256": "6d3f18e3f8dfd95521e32b775ac73d9387053df3b2b8d2fd1e3a4eb24cc54442"
+    },
+    {
+      "blob": "68ff00ad8722486fd67568f481212b80e59bdb43",
+      "path": "scripts/qa/atlas_parity04_f2_doc_ci.py",
+      "ref": "f642660d6b1782ff4e3cebb90b09398df5e57734",
+      "sha256": "c95c6a1a5386ea9f800f74e420790213276efab72c074babb370abe4f0164edd"
+    },
+    {
+      "blob": "7d03c30213a782ebd58b48d3635b07c53a65d9ba",
+      "path": "tests/qa/test_atlas_parity04_f2_doc_ci.py",
+      "ref": "f642660d6b1782ff4e3cebb90b09398df5e57734",
+      "sha256": "988204e7e06cb671bba279da0acaabe1a8d25e0fcb244547e6bb1cf49a69d0a5"
+    },
+    {
+      "blob": "d7a47ea3d708d6dedbd21be25f05b3ec93993c6e",
+      "path": ".github/workflows/atlas021.yml",
+      "ref": "f642660d6b1782ff4e3cebb90b09398df5e57734",
+      "sha256": "3214f4bcb2a8515a3318b007e41ac171617e74b95f30d8d9bb542a26358087ea"
+    }
+  ],
   "reviewed_prior_repair": {
     "guard_blob": "64ded18f97e38cdabe4ed45f5004a19183b979ae",
     "guard_sha256": "a7d13716ed52643aa4ff3662e543a5b316023d5516679457fc38003fa52a5155",

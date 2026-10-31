@@ -4,7 +4,16 @@
   "base_sha": "04373bb910db2e6215cc8bc4212093b649e48456",
   "branch": "docs/atlas-parity04-f2-legacy-contract-20261030",
   "containing_commit": "RESOLVE_FROM_GIT",
-  "current_candidate": "Batch Git reads with all checks retained; CI and independent review still required on containing commit",
+  "current_candidate": {
+    "closure": "Containing SHA still needs all six completed/success workflows and independent review",
+    "defined_new_regression_methods": 32,
+    "installed_cells": 4,
+    "job_timeout_minutes": 15,
+    "original_action_pin_list_preserved": true,
+    "same_sha_required": true,
+    "source_cells": 4,
+    "workflow": "source/installed closed matrix"
+  },
   "descriptor": "0.2.0 PROPOSED_NOT_APPROVED",
   "final_closure": "PR15 must record the containing SHA/tree, six completed/success runs, all jobs/artifacts/191 inherited IDs and independent C review",
   "first_repair_cycle": {
@@ -41,6 +50,16 @@
   "plan_change": false,
   "pr": 15,
   "schema": "atlas-ap04-f2-ci-repair-handoff-v1",
-  "status": "REPAIR_CONTINUES_AFTER_WINDOWS_TIMEOUT",
+  "second_repair_cycle": {
+    "cancelled_jobs": 1,
+    "installed_id_proof": "222 unique IDs in Ubuntu normal/O and Windows normal only",
+    "not_qualified": true,
+    "sha": "f642660d6b1782ff4e3cebb90b09398df5e57734",
+    "successful_jobs": 32,
+    "tree": "764407a156f77dd3769893d684c186d6625014b6",
+    "workflows_cancelled": 1,
+    "workflows_success": 5
+  },
+  "status": "STAGE_MATRIX_CANDIDATE_PENDING_REAL_CI",
   "technical_f2_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527"
 }

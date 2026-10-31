@@ -37,3 +37,11 @@ Sucesso exige seis workflows completed/success no mesmo SHA FINAL, zero skips/lo
 O primeiro ciclo 9777 passou nos guards e em cinco workflows, mas ATLAS021 Windows não completou a segunda suíte antes do limite preservado de 15 minutos. A correção agrupa leituras por OID exato usando cat-file --batch, em vez de abrir um processo por objeto. Cada frame valida identidade, tipo, tamanho canônico/limites, payload, LF, conteúdo SHA-1 e ausência de trailing bytes. As árvores/modes e todos os pais/revisões continuam conferidos em cada chamada, sem cache de resultados PASS.
 
 APPROVED_PRIOR_CONTROL_REVISIONS admite somente os dois hashes anteriores de guard/testes publicados no SHA 9777 e revisados independentemente; a nova contraprova reconcilia SHA/tree/blobs/bytes e impede substituir os pins antigos por hashes novos. Alterar/recalcular o overlay não aprova versões de controles. A mudança permanece nos mesmos dezenove paths e não altera AP04-POR, timeouts, pins, IDs herdados ou controles de produto.
+
+## Orçamento separado para fonte e instalação
+
+O f642 concluiu toda a fonte e três células instaladas, mas a otimizada Windows excedeu o limite durante a segunda suíte. A matriz ATLAS021 agora inclui o eixo literal stage: [source, installed]. Cada OS/modo executa uma fonte completa e uma instalação completa em jobs independentes, todos no mesmo SHA/tree. Nenhum conjunto de testes é particionado ou reduzido: ambas as suítes continuam integrais. A conclusão do workflow exige todas as oito células, mais browser e referência.
+
+A definição única do job mantém a quantidade/ordem dos dez uses/pins. Os timeouts de 15 minutos, fail-fast=false, clean-install fora do checkout, ausência R4, assets e recibos permanecem. Upload installed-only usa nomes únicos por OS/modo/SHA. Etapas da fase inativa são skips de roteamento; skips de casos continuam proibidos. A contraprova exige todos os eixos/comandos/recibos e rejeita dez mutações.
+
+A tabela de revisões anteriores contém somente cinco hashes publicados/revisados: A guard/test de 9777, A guard/test de f642 e atlas021 anterior. Nenhum hash de proposta não integrada foi admitido. A distribuição de CI preserva os critérios AP04-POR/F0–F6/PAR/GATES, sem desvio arquitetural ou redução de gate.

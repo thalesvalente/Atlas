@@ -329,6 +329,9 @@ CONTROL_PATHS = WORKFLOW_PATHS | {"scripts/qa/atlas_parity03_c4_ci.py", TEST_PAT
 APPROVED_PRIOR_CONTROL_REVISIONS = (
     ("scripts/qa/atlas_parity04_f2_doc_ci.py", "a7d13716ed52643aa4ff3662e543a5b316023d5516679457fc38003fa52a5155"),
     ("tests/qa/test_atlas_parity04_f2_doc_ci.py", "6d3f18e3f8dfd95521e32b775ac73d9387053df3b2b8d2fd1e3a4eb24cc54442"),
+    ("scripts/qa/atlas_parity04_f2_doc_ci.py", "c95c6a1a5386ea9f800f74e420790213276efab72c074babb370abe4f0164edd"),
+    ("tests/qa/test_atlas_parity04_f2_doc_ci.py", "988204e7e06cb671bba279da0acaabe1a8d25e0fcb244547e6bb1cf49a69d0a5"),
+    (".github/workflows/atlas021.yml", "3214f4bcb2a8515a3318b007e41ac171617e74b95f30d8d9bb542a26358087ea"),
 )
 # BEGIN_APPROVED_CONTROL_HASHES
 APPROVED_CONTROL_HASHES = (
@@ -337,9 +340,9 @@ APPROVED_CONTROL_HASHES = (
     (".github/workflows/atlas-parity03-p03-gates.yml", "d6f4e39d86e3ee8d3fbc81cec09f4b42b476fa4c5b3c0ca7a694c7ca9bcde652"),
     (".github/workflows/atlas-parity04-doc.yml", "abc9d3a672bd9382e9a45b08a2436105e21e53d82583bc564eb99f9f45281115"),
     (".github/workflows/atlas003-speckit.yml", "cea45f4f2bb97999e69335ea295bfddded25fcae7bacb37ea0ef711c420ba388"),
-    (".github/workflows/atlas021.yml", "3214f4bcb2a8515a3318b007e41ac171617e74b95f30d8d9bb542a26358087ea"),
+    (".github/workflows/atlas021.yml", "1f4e7ad52a597ea30fa7f581a3dd494d63c4615d5ccd52847d027276b75def7e"),
     ("scripts/qa/atlas_parity03_c4_ci.py", "940e0960e055235abbfc95e85ae8e4a817c5ad934206205299d228aea035639f"),
-    ("tests/qa/test_atlas_parity04_f2_doc_ci.py", "988204e7e06cb671bba279da0acaabe1a8d25e0fcb244547e6bb1cf49a69d0a5"),
+    ("tests/qa/test_atlas_parity04_f2_doc_ci.py", "9971bccd3cbe88624b18b29aa640203955c95ebe1830db6259471c94c9a155e7"),
 )
 # END_APPROVED_CONTROL_HASHES
 

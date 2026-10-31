@@ -19,3 +19,11 @@ C-004 foi encontrado em candidato não publicado da otimização: pin do teste a
 O batch parser preserva todas as verificações de OID/tipo/tamanho/framing/conteúdo, épocas, parents e história de controles, sem cache PASS nem redução de IDs. Timeout/pins/controles B permanecem intactos. O uso de hashes de versões anteriores é autorização exata dos bytes revisados, nunca uma allowlist de pasta ou autorização por overlay recalculado.
 
 Limite de inspeção: fontes, logs/recibos, contagens, hashes, nomes e uploads de artefatos/screenhots conferidos; nenhum ZIP/PNG/XML literal ou avaliação manual de pixels. Não se afirma certificação externa completa: o comparador de referência offline registra seus skips e negativo esperados. O fechamento terminal exige revisão de C e CI do SHA que contiver os recibos finais.
+
+## Segundo ciclo e matriz de suítes completas
+
+C confirmou no f642 as quatro células AP04 (23+31), os pins anteriores e C-004 nominalmente passando. C-001–C-004 estão fechados em fonte/execução desse SHA; isso não concede qualificação global, pois a instalada Windows otimizada foi cancelada e wheel/assets não terminaram.
+
+A divisão ATLAS021 por stage literal source/installed foi considerada compatível com AP04-POR: oito células obrigatórias, quatro fontes completas e quatro instaladas completas, mesmo HEAD/tree/OS/-O, timeout15, isolamento/assets e dez pins/ordem preservados. Etapas da fase inativa não equivalem a skips de casos. A lista anterior de actions não foi duplicada. C revisou b0ab10b1b1102af5b4fc8c12b63563744591c35f e A a50911b8f21ce6242e533b36924d1e4434c78f0a / da9bd3128fe144a8e0c7b9cd48751dc8f01745dc, sem finding bloqueante de código.
+
+Os cinco estados anteriores de controle são exclusivamente os publicados em 9777/f642 (quatro hashes A mais o workflow antigo); a contraprova reconcilia commits, blobs e bytes. Os 31 métodos anteriores foram preservados; o novo método cobre oito células e dez mutantes. São 32 métodos definidos, sem afirmar execução antes da CI real. O fechamento da nova matriz e do SHA que contiver recibos finais permanece pendente.

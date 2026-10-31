@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -19,13 +20,13 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 GUARD_PATH = "scripts/qa/atlas_parity04_f2_doc_ci.py"
 TEST_PATH = "tests/qa/test_atlas_parity04_f2_doc_ci.py"
-APPROVED_GUARD_SOURCE = "2953086f89925df18b526c37a64dd07e9b7f0c8fcfcfbe4a2bb52eb74ffdccc4"
+APPROVED_GUARD_SOURCE = "6a24601b66e4a6e09cea70585c2412f59feda0f2c3f5c5924f2b25fd180c61c6"
 APPROVED_EXTERNAL_CONTROLS = {
     ".github/workflows/atlas-parity02.yml": "d165bdd580d748418fdf24cbc513f1442ac2744874f30a2219169c60c11262a7",
     ".github/workflows/atlas-parity03-p03-gates.yml": "d6f4e39d86e3ee8d3fbc81cec09f4b42b476fa4c5b3c0ca7a694c7ca9bcde652",
     ".github/workflows/atlas-parity04-doc.yml": "abc9d3a672bd9382e9a45b08a2436105e21e53d82583bc564eb99f9f45281115",
     ".github/workflows/atlas003-speckit.yml": "cea45f4f2bb97999e69335ea295bfddded25fcae7bacb37ea0ef711c420ba388",
-    ".github/workflows/atlas021.yml": "3214f4bcb2a8515a3318b007e41ac171617e74b95f30d8d9bb542a26358087ea",
+    ".github/workflows/atlas021.yml": "1f4e7ad52a597ea30fa7f581a3dd494d63c4615d5ccd52847d027276b75def7e",
     ".github/workflows/atlas-parity03-c4.yml": "0b87ec141ef2cf2606b35b5d9ea7aaf956c7d611a34ee068e9fbf686061ef675",
     "scripts/qa/atlas_parity03_c4_ci.py": "940e0960e055235abbfc95e85ae8e4a817c5ad934206205299d228aea035639f",
 }
@@ -443,26 +444,44 @@ class F2IndependentPreflightTests(unittest.TestCase):
         GUARD.verify_controls(ROOT, GUARD.APPROVED_CONTROL_HASHES, GUARD.CONTROL_PATHS)
 
     def test_prior_control_revisions_match_exact_reviewed_9777_git_objects(self):
-        reviewed = "9777d1a2dc58ab803b92b518d1e0a70ba0f8847e"
         expected = (
             ("scripts/qa/atlas_parity04_f2_doc_ci.py",
              "a7d13716ed52643aa4ff3662e543a5b316023d5516679457fc38003fa52a5155"),
             ("tests/qa/test_atlas_parity04_f2_doc_ci.py",
              "6d3f18e3f8dfd95521e32b775ac73d9387053df3b2b8d2fd1e3a4eb24cc54442"),
+            ("scripts/qa/atlas_parity04_f2_doc_ci.py",
+             "c95c6a1a5386ea9f800f74e420790213276efab72c074babb370abe4f0164edd"),
+            ("tests/qa/test_atlas_parity04_f2_doc_ci.py",
+             "988204e7e06cb671bba279da0acaabe1a8d25e0fcb244547e6bb1cf49a69d0a5"),
+            (".github/workflows/atlas021.yml",
+             "3214f4bcb2a8515a3318b007e41ac171617e74b95f30d8d9bb542a26358087ea"),
         )
-        blobs = {
-            "scripts/qa/atlas_parity04_f2_doc_ci.py": "64ded18f97e38cdabe4ed45f5004a19183b979ae",
-            "tests/qa/test_atlas_parity04_f2_doc_ci.py": "398db6f8315a0d10f026120f3e935be8c2715e63",
-        }
+        reviewed = [
+            ("9777d1a2dc58ab803b92b518d1e0a70ba0f8847e", expected[0],
+             "64ded18f97e38cdabe4ed45f5004a19183b979ae"),
+            ("9777d1a2dc58ab803b92b518d1e0a70ba0f8847e", expected[1],
+             "398db6f8315a0d10f026120f3e935be8c2715e63"),
+            ("f642660d6b1782ff4e3cebb90b09398df5e57734", expected[2],
+             "68ff00ad8722486fd67568f481212b80e59bdb43"),
+            ("f642660d6b1782ff4e3cebb90b09398df5e57734", expected[3],
+             "7d03c30213a782ebd58b48d3635b07c53a65d9ba"),
+            ("f642660d6b1782ff4e3cebb90b09398df5e57734", expected[4],
+             "d7a47ea3d708d6dedbd21be25f05b3ec93993c6e"),
+        ]
         self.assertEqual(GUARD.APPROVED_PRIOR_CONTROL_REVISIONS, expected)
-        records = GUARD.tree_records(ROOT, reviewed, blobs)
-        objects = GUARD.git_objects(ROOT, [(blobs[path], "blob") for path, _digest in expected])
-        for path, digest in expected:
-            with self.subTest(path=path):
-                self.assertEqual(records[path], ("100644", "blob", blobs[path]))
-                self.assertEqual(hashlib.sha256(objects[blobs[path]]).hexdigest(), digest)
-        self.assertNotEqual(hashlib.sha256((ROOT / TEST_PATH).read_bytes()).hexdigest(), expected[1][1])
-
+        records = {ref: GUARD.tree_records(ROOT, ref, {pair[0] for candidate, pair, _blob in reviewed
+                                                       if candidate == ref})
+                   for ref in {candidate for candidate, _pair, _blob in reviewed}}
+        objects = GUARD.git_objects(ROOT, [(blob, "blob") for _ref, _pair, blob in reviewed])
+        for ref, (path, digest), blob in reviewed:
+            with self.subTest(ref=ref, path=path):
+                self.assertEqual(records[ref][path], ("100644", "blob", blob))
+                self.assertEqual(hashlib.sha256(objects[blob]).hexdigest(), digest)
+        current_test = hashlib.sha256((ROOT / TEST_PATH).read_bytes()).hexdigest()
+        self.assertNotIn(current_test, {expected[1][1], expected[3][1]})
+        current_workflow = hashlib.sha256((ROOT / expected[4][0]).read_bytes()).hexdigest()
+        self.assertEqual(current_workflow, APPROVED_EXTERNAL_CONTROLS[expected[4][0]])
+        self.assertNotEqual(current_workflow, expected[4][1])
 
     def test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity(self):
         expected = {GUARD.C4_SHA: "C4_BASELINE",
@@ -514,6 +533,87 @@ class F2IndependentPreflightTests(unittest.TestCase):
                 with self.assertRaises(GUARD.GuardError):
                     GUARD.verify_test_receipt({**good, **mutation},
                                               "a" * 40, "b" * 40, {"case-a", "case-b"})
+
+
+    def test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification(self):
+        path = ".github/workflows/atlas021.yml"
+        original = (ROOT / path).read_text(encoding="utf-8")
+        old = GUARD.load_historical(ROOT)
+        previous = GUARD.object_bytes(
+            ROOT, "f642660d6b1782ff4e3cebb90b09398df5e57734", path)
+        expected_pins = old.workflow_action_pins(previous, path)
+
+        def contract(text):
+            self.assertEqual(old.workflow_action_pins(text.encode("utf-8"), path), expected_pins)
+            self.assertIn("  portable:\n", text)
+            portable = text.split("  portable:\n", 1)[1].split("\n  browser:\n", 1)[0]
+            for axis in ("        os: [ubuntu-latest, windows-latest]",
+                         "        optimize: ['0', '1']",
+                         "        stage: [source, installed]"):
+                self.assertIn("\n" + axis + "\n", portable)
+            self.assertIn("name: ${{ matrix.stage }} / ${{ matrix.os }} / Python optimize=${{ matrix.optimize }}",
+                          portable)
+            self.assertIn("    timeout-minutes: 15\n", portable)
+            self.assertIn("      PYTHONOPTIMIZE: ${{ matrix.optimize }}\n", portable)
+            self.assertIn("          ref: ${{ github.event.pull_request.head.sha || github.sha }}\n",
+                          portable)
+            self.assertIn("          git rev-parse HEAD\n", portable)
+            self.assertIn("          git rev-parse 'HEAD^{tree}'\n", portable)
+
+            def step(name):
+                match = re.search(r"(?ms)^      - name: " + re.escape(name)
+                                  + r"\n(.*?)(?=^      - (?:name|uses):|\Z)", portable)
+                self.assertIsNotNone(match, name)
+                return match.group(1)
+
+            source = step("Verify contracts, architecture, safe reading and viewer")
+            self.assertIn("        if: ${{ matrix.stage == 'source' }}\n", source)
+            self.assertRegex(source, r"(?m)^        run: python scripts/run_checks\.py$")
+            clean = step("Install wheels again in new empty environments")
+            installed = step("Install test-only schema tooling and run the installed suite outside checkout with zero skips")
+            wheel = step("Verify installed wheel assets and fixed routes")
+            for body in (clean, installed, wheel):
+                self.assertIn("        if: ${{ matrix.stage == 'installed' }}\n", body)
+            self.assertIn('        run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-portable"\n',
+                          clean)
+            for entry in ("atlas_parity04_f2_doc_ci.py", "atlas_parity04_doc_ci.py"):
+                command = ('            python scripts/qa/' + entry
+                           + ' installed --repo . --work "${{ runner.temp }}/atlas-c1-portable" --install-test-tools\n')
+                self.assertIn(command, installed)
+            self.assertIn('        run: python scripts/qa/atlas_parity02_p06_wheel.py --work "${{ runner.temp }}/atlas-c1-portable"\n',
+                          wheel)
+            upload = step("Preserve exact-SHA installed verification receipts and collection")
+            self.assertIn("        if: ${{ always() && matrix.stage == 'installed' }}\n", upload)
+            self.assertIn("          name: atlas-c1-installed-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}\n",
+                          upload)
+            self.assertIn("          if-no-files-found: error\n", upload)
+            for artifact in ("clean-install-report.json", "parity02-p06-installed-checks.json",
+                             "parity02-p06-installed-checks.log", "parity02-p06-wheel-report.json",
+                             "c4-installed-receipt.json", "c4-installed-junit.xml"):
+                self.assertIn("            ${{ runner.temp }}/atlas-c1-portable/" + artifact + "\n", upload)
+
+        contract(original)
+        mutations = [
+            original.replace("stage: [source, installed]", "stage: [source]"),
+            original.replace("os: [ubuntu-latest, windows-latest]", "os: [ubuntu-latest]"),
+            original.replace("optimize: ['0', '1']", "optimize: ['0']"),
+            original.replace("run: python scripts/run_checks.py\n",
+                             "run: python scripts/run_checks.py -k subset\n"),
+            original.replace("if: ${{ matrix.stage == 'source' }}",
+                             "if: ${{ matrix.stage == 'installed' }}", 1),
+            original.replace('--install-test-tools\n', '--install-test-tools -k subset\n', 1),
+            original.replace('run: python scripts/qa/atlas_parity02_p06_wheel.py',
+                             'run: python scripts/qa/unapproved_subset.py', 1),
+            original.replace("always() && matrix.stage == 'installed'", "false", 1),
+            original.replace("atlas-c1-installed-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}",
+                             "atlas-c1-installed-unattributed", 1),
+            original.replace("            ${{ runner.temp }}/atlas-c1-portable/parity02-p06-installed-checks.json\n", "", 1),
+        ]
+        for index, mutated in enumerate(mutations):
+            with self.subTest(mutation=index):
+                self.assertNotEqual(mutated, original)
+                with self.assertRaises(AssertionError):
+                    contract(mutated)
 
 
     def test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red(self):
