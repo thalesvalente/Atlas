@@ -270,6 +270,46 @@ def _windows_broker_worker(args) -> int:
             report({"isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES",
                     "source_length_sample": len(source_sample)})
             return 0
+        if args.mode == "memory":
+            try:
+                block = bytearray(300 * 1024 * 1024)
+                block[0] = 1
+                verdict = "ALLOCATED_OVER_LIMIT"
+            except MemoryError:
+                verdict = "MEMORY_ERROR_OS_LIMIT"
+            report({"memory_probe": verdict, "isolation":
+                    "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
+            return 0 if verdict == "MEMORY_ERROR_OS_LIMIT" else 79
+        if args.mode == "sleep":
+            report({"sleep_started": True, "isolation":
+                    "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
+            time.sleep(90)
+            return 0
+        if args.mode == "descendant":
+            import subprocess
+            child = subprocess.Popen(
+                [sys.executable, "-I", "-S", "-c",
+                 "import time; time.sleep(90)"],
+                stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL)
+            report({"descendant_started": child.pid,
+                    "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
+            time.sleep(90)
+            return 0
+        if args.mode == "breakaway":
+            import subprocess
+            try:
+                child = subprocess.Popen(
+                    [sys.executable, "-I", "-S", "-c", "pass"],
+                    creationflags=0x01000000, stdin=subprocess.DEVNULL,
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                child.wait(timeout=4)
+                verdict = "BREAKAWAY_SUCCEEDED_UNSAFE"
+            except OSError:
+                verdict = "BREAKAWAY_DENIED_BY_JOB"
+            report({"breakaway": verdict,
+                    "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
+            return 0 if verdict == "BREAKAWAY_DENIED_BY_JOB" else 79
         if args.mode != "denials":
             return 78
         checks = {}
@@ -294,8 +334,9 @@ def _windows_broker_worker(args) -> int:
                     ("127.0.0.1", args.broker_loopback_port))
         except OSError as exc:
             connect_error = exc.errno
-        # On Windows, Python timed connect_ex may yield 10035 (in progress)\n        # or 10060 (timeout) when WFP silently drops loopback. 10060 is
-        # missing loopback capabilities. Do NOT equate a plain timeout
+        # On Windows, timed connect_ex may yield 10035 (in progress)
+        # or 10060 (timeout) when WFP silently drops loopback.
+        # These outcomes alone do not prove enforcement. Do NOT equate a plain timeout
         # with OS denial: the supervisor additionally verifies the WFP
         # exemption inventory, token capabilities, positive control and
         # absence of an accepted worker connection.

@@ -91,10 +91,13 @@ class _Proc(ctypes.Structure):
 
 def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
                       inject_assign_failure: bool = False,
-                      appcontainer: bool = False) -> dict:
+                      appcontainer: bool = False,
+                      inject_source_swap: bool = False) -> dict:
     """CREATE_SUSPENDED -> set/query Job -> assign -> resume -> monotonic kill."""
     if sys.platform != "win32":
         raise NativeJobUnavailable("WINDOWS_ONLY")
+    if inject_source_swap and not appcontainer:
+        raise NativeJobUnavailable("BROKER_SWAP_REQUIRES_APPCONTAINER")
     if not 0 < wall_seconds <= WALL_SECONDS:
         raise NativeJobUnavailable("UNSAFE_WALL_LIMIT")
     # Not a general-purpose Job-as-sandbox launcher: fixed, reviewed worker only.
@@ -191,6 +194,7 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
             raise NativeJobUnavailable("JOB_LIMIT_MISMATCH")
         if appcontainer:
             profile = _AppContainerLaunch(Path(flags_args[1]), Path(flags_args[5]))
+            profile.inject_source_swap = inject_source_swap
             profile.prepare()
         si = profile.startup if profile else _Startup()
         if not profile:
@@ -272,6 +276,8 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
                 int(accounting.ActiveProcesses) if timed_out else None,
             "filesystem_network_confined": False,
             "appcontainer_token_verified": bool(profile),
+            "source_swap_denied_os":
+                profile.source_swap_denied_os if profile else None,
             "appcontainer_loopback_exception_absent":
                 profile.loopback_no_exception if profile else None,
             "loopback_control_passed":
@@ -330,6 +336,8 @@ class _AppContainerLaunch:
         self._initialized = False
         self.loopback_no_exception = False
         self.loopback_control_passed = False
+        self.inject_source_swap = False
+        self.source_swap_denied_os = False
 
     def _verify_network_policy(self):
         """Read-only native WFP AppContainer exception inventory.
@@ -487,7 +495,8 @@ class _AppContainerLaunch:
             self.profile_name = None
             raise NativeJobUnavailable("APPCONTAINER_PROFILE_CREATE_FAILED")
         self._verify_network_policy()
-        self._stage_python_runtime()
+        # Open and pin before staging the interpreter, closing the long
+        # TOCTOU window. Never share write/delete rights to this source.
         # Open source with no FILE_SHARE_WRITE/DELETE; keep it pinned through
         # worker termination. FILE_FLAG_OPEN_REPARSE_POINT rejects link races.
         attrs = _InheritAttributes(ctypes.sizeof(_InheritAttributes), None, True)
@@ -497,6 +506,14 @@ class _AppContainerLaunch:
         if src in (None, invalid):
             raise NativeJobUnavailable("BROKER_SOURCE_OPEN_FAILED")
         self.handles.append(src)
+        if self.inject_source_swap:
+            # Genuine kernel sharing violation, no mock/string-only check.
+            try:
+                self.source.rename(self.source.with_name("os-swap-attempt.json"))
+            except PermissionError:
+                self.source_swap_denied_os = True
+            else:
+                raise NativeJobUnavailable("BROKER_SOURCE_RENAME_ALLOWED_UNSAFE")
         buf = ctypes.create_string_buffer(len(_INVENTED_SOURCE) + 1)
         count = wintypes.DWORD()
         if not kernel.ReadFile(src, buf, len(buf), ctypes.byref(count), None):
@@ -505,6 +522,7 @@ class _AppContainerLaunch:
             raise NativeJobUnavailable("BROKER_SOURCE_NOT_INVENTED")
         if not kernel.SetFilePointerEx(src, 0, None, 0):
             raise NativeJobUnavailable("BROKER_SOURCE_REWIND_FAILED")
+        self._stage_python_runtime()
         # The worker gets a WRITE-only handle. It cannot name/open a new
         # output outside scratch, and cannot overwrite a prior receipt.
         report = self.scratch / "os-probe-report.json"

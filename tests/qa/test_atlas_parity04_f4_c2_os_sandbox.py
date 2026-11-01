@@ -431,3 +431,100 @@ def test_windows_broker_flags_cannot_authenticate_direct_worker(synthetic):
     checked = subprocess.run(command, capture_output=True, timeout=8)
     assert checked.returncode == 78
     assert not (scratch / "os-probe-report.json").exists()
+
+
+
+def _appcontainer_argv(synthetic, mode: str) -> list[str]:
+    source, outside, scratch = synthetic
+    worker = Path(sandbox.__file__).with_name("os_worker.py")
+    argv = [sys.executable, "-I"]
+    if os.environ.get("ATLAS_WORKER_OPTIMIZE") == "1":
+        argv += ["-O"]
+    return argv + ["-S", str(worker),
+                   "--source", str(source), "--outside", str(outside),
+                   "--scratch", str(scratch), "--mode", mode,
+                   "--supervisor-pid", str(os.getpid())]
+
+
+def test_windows_appcontainer_memory_native_limit(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Native AppContainer limit challenge is Windows-only")
+    from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
+    result = run_synthetic_job(
+        _appcontainer_argv(synthetic, "memory"),
+        wall_seconds=10, appcontainer=True)
+    assert result["appcontainer_token_verified"] is True
+    assert result["job_memory_limit_bytes"] == 268435456
+    assert result["timed_out"] is False
+    assert result["exit_code"] == 0, result
+    report = json.loads((synthetic[2] / "os-probe-report.json").read_text())
+    assert report["memory_probe"] == "MEMORY_ERROR_OS_LIMIT"
+
+
+def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Native AppContainer descendants Windows-only")
+    from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
+    result = run_synthetic_job(
+        _appcontainer_argv(synthetic, "descendant"),
+        wall_seconds=3, appcontainer=True)
+    assert result["appcontainer_token_verified"] is True
+    assert result["timed_out"] is True
+    assert result["status"] == "OS_WALL_TIMEOUT_TERMINATED"
+    assert result["active_processes_after_timeout"] == 0
+    assert not any(synthetic[2].glob("atlas-c2-*.json"))
+
+
+def test_windows_appcontainer_breakaway_denied_by_job(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Native AppContainer Job breakaway Windows-only")
+    from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
+    result = run_synthetic_job(
+        _appcontainer_argv(synthetic, "breakaway"),
+        wall_seconds=10, appcontainer=True)
+    assert result["exit_code"] == 0, result
+    report = json.loads((synthetic[2] / "os-probe-report.json").read_text())
+    assert report["breakaway"] == "BREAKAWAY_DENIED_BY_JOB"
+
+
+def test_windows_appcontainer_source_rename_denied_after_handle_pin(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Native Windows handle-sharing rule only")
+    from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
+    result = run_synthetic_job(
+        _appcontainer_argv(synthetic, "success"),
+        wall_seconds=10, appcontainer=True, inject_source_swap=True)
+    assert result["source_swap_denied_os"] is True
+    assert result["exit_code"] == 0, result
+    assert synthetic[0].is_file()
+    assert not (synthetic[0].parent / "os-swap-attempt.json").exists()
+
+
+def test_windows_appcontainer_rejects_mutated_source_before_worker(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Native Windows source broker only")
+    from tools.atlas_legacy_presentation.os_windows_job import (
+        NativeJobUnavailable, run_synthetic_job)
+    source, _, scratch = synthetic
+    source.write_bytes(b'{"synthetic":true,"payload":"tampered"}')
+    with pytest.raises(NativeJobUnavailable, match="BROKER_SOURCE_NOT_INVENTED"):
+        run_synthetic_job(
+            _appcontainer_argv(synthetic, "success"),
+            wall_seconds=10, appcontainer=True)
+    assert not any(scratch.glob("atlas-c2-*.json"))
+    report = scratch / "os-probe-report.json"
+    assert not report.exists() or report.stat().st_size == 0
+
+
+def test_windows_appcontainer_assignment_failure_never_resumes_worker(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Native Windows fault injection only")
+    from tools.atlas_legacy_presentation.os_windows_job import (
+        NativeJobUnavailable, run_synthetic_job)
+    with pytest.raises(NativeJobUnavailable, match="JOB_ASSIGN_FAILED_INJECTED"):
+        run_synthetic_job(
+            _appcontainer_argv(synthetic, "success"),
+            wall_seconds=10, appcontainer=True, inject_assign_failure=True)
+    assert not any(synthetic[2].glob("atlas-c2-*.json"))
+    report = synthetic[2] / "os-probe-report.json"
+    assert not report.exists() or report.stat().st_size == 0
