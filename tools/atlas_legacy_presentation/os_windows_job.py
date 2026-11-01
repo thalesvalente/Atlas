@@ -317,7 +317,7 @@ class _SidAndAttributes(ctypes.Structure):
 
 
 class _AppContainerLaunch:
-    """Ephemeral profile and exactly two inherited file capabilities.
+    """Ephemeral profile and only the WRITE-only report file capability.
 
     Not a production file broker. Operates only on the already-created
     invented fixture. No ACLs, accounts, firewall or global policies changed.
@@ -371,6 +371,10 @@ class _AppContainerLaunch:
                     raise NativeJobUnavailable("APPCONTAINER_LOOPBACK_EXEMPT")
             self.loopback_no_exception = True
         finally:
+            # Per Microsoft Learn NetworkIsolationGetAppContainerConfig
+            # sample, this result uses HeapFree(GetProcessHeap), including
+            # each SID and the SID_AND_ATTRIBUTES array. The named
+            # 'NetworkIsolationFreeAppContainerConfig' API is not documented.
             if entries:
                 heap = self.kernel.GetProcessHeap()
                 for index in range(min(count.value, 10000)):
@@ -497,12 +501,14 @@ class _AppContainerLaunch:
         self._verify_network_policy()
         # Open and pin before staging the interpreter, closing the long
         # TOCTOU window. Never share write/delete rights to this source.
-        # Open source with no FILE_SHARE_WRITE/DELETE; keep it pinned through
-        # worker termination. FILE_FLAG_OPEN_REPARSE_POINT rejects link races.
+        # Open source read-only and NON-INHERITABLE, pinned through worker
+        # termination. The worker will receive no raw source handle.
+        src_attrs = _InheritAttributes(
+            ctypes.sizeof(_InheritAttributes), None, False)
         attrs = _InheritAttributes(ctypes.sizeof(_InheritAttributes), None, True)
         invalid = ctypes.c_void_p(-1).value
         src = kernel.CreateFileW(str(self.source), 0x80000000, 1,
-                                 ctypes.byref(attrs), 3, 0x00200000, None)
+                                 ctypes.byref(src_attrs), 3, 0x00200000, None)
         if src in (None, invalid):
             raise NativeJobUnavailable("BROKER_SOURCE_OPEN_FAILED")
         self.handles.append(src)
@@ -540,10 +546,15 @@ class _AppContainerLaunch:
         self.listener.bind(("127.0.0.1", 0))
         self.listener.listen(1)
         self._verify_listener_positive_control()
-        self.argv_suffix = ["--broker-source-handle", str(int(src)),
-                            "--broker-report-handle", str(int(out)),
-                            "--broker-loopback-port",
-                            str(self.listener.getsockname()[1])]
+        # Only a WRITE-only report handle is inherited by the worker.
+        # The source handle remains pinned/readable solely by the trusted
+        # supervisor, which verified the exact synthetic payload already.
+        self.argv_suffix = [
+            "--broker-report-handle", str(int(out)),
+            "--broker-denied-source-handle", str(int(src)),
+            "--broker-source-length", str(len(_INVENTED_SOURCE)),
+            "--broker-loopback-port",
+            str(self.listener.getsockname()[1])]
         sizes = ctypes.c_size_t()
         kernel.InitializeProcThreadAttributeList(None, 2, 0, ctypes.byref(sizes))
         if not sizes.value:
@@ -556,7 +567,7 @@ class _AppContainerLaunch:
         self._initialized = True
         caps = _SecurityCapabilities(self.sid, None, 0, 0)
         self._caps = caps  # pointer must outlive CreateProcessW
-        self._handle_array = (wintypes.HANDLE * 2)(*self.handles)
+        self._handle_array = (wintypes.HANDLE * 1)(out)
         if not kernel.UpdateProcThreadAttribute(
                 self.attributes, 0, 0x00020009, ctypes.byref(caps),
                 ctypes.sizeof(caps), None, None):
@@ -614,7 +625,12 @@ class _AppContainerLaunch:
         for handle in self.handles:
             self.kernel.CloseHandle(handle)
         if self.sid.value:
-            self.kernel.LocalFree(self.sid)
+            # The Userenv CreateAppContainerProfile contract requires FreeSid,
+            # not LocalFree. See Microsoft Learn userenv.h reference.
+            adv = ctypes.WinDLL("advapi32", use_last_error=True)
+            adv.FreeSid.argtypes = [ctypes.c_void_p]
+            adv.FreeSid.restype = ctypes.c_void_p
+            adv.FreeSid(self.sid)
         if self.profile_name:
             if self.userenv.DeleteAppContainerProfile(self.profile_name) != 0:
                 raise NativeJobUnavailable("APPCONTAINER_PROFILE_CLEANUP_FAILED")

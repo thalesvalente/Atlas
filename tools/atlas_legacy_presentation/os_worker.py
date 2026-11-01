@@ -35,18 +35,17 @@ def main() -> int:
         "denials", "memory", "sleep", "success", "breakaway", "descendant"),
         required=True)
     parser.add_argument("--supervisor-pid", type=int, required=True)
-    parser.add_argument("--broker-source-handle", type=int)
     parser.add_argument("--broker-report-handle", type=int)
+    parser.add_argument("--broker-denied-source-handle", type=int)
+    parser.add_argument("--broker-source-length", type=int)
     parser.add_argument("--broker-loopback-port", type=int)
     args = parser.parse_args()
-    if any(v is not None for v in (
-            args.broker_source_handle, args.broker_report_handle,
-            args.broker_loopback_port)):
-        # A normal process must never accept claimed broker handles.
-        if sys.platform != "win32" or not all(
-                isinstance(v, int) and v > 0 for v in (
-                    args.broker_source_handle, args.broker_report_handle,
-                    args.broker_loopback_port)):
+    broker_values = (
+        args.broker_report_handle, args.broker_denied_source_handle,
+        args.broker_source_length, args.broker_loopback_port)
+    if any(v is not None for v in broker_values):
+        if (sys.platform != "win32" or
+                any(not isinstance(v, int) or v <= 0 for v in broker_values)):
             return 78
         return _windows_broker_worker(args)
     # Enforce synthetic boundary *in the independently executable worker*.
@@ -200,10 +199,12 @@ def main() -> int:
 
 
 def _windows_broker_worker(args) -> int:
-    """Read only kernel-inherited RO handle, write only inherited scratch handle.
+    """Never read source bytes from a caller-supplied handle.
 
-    TokenIsAppContainer + token capability count are checked BEFORE ReadFile.
-    Parent PID alone is never considered proof of privileged broker launch.
+    The trusted supervisor checks the exact invented source and owns its
+    non-inheritable read handle. The worker inherits only a WRITE-only report
+    handle; a forged AppContainer launch therefore cannot trigger a read of
+    a separately inherited private file.
     """
     try:
         import ctypes
@@ -251,14 +252,25 @@ def _windows_broker_worker(args) -> int:
                 args.outside.parent == args.source.parent and
                 args.scratch.parent == args.source.parent.parent):
             return 78
-        # These handles were already validated, pinned and exclusively
-        # transferred by the supervisor's PROC_THREAD_ATTRIBUTE_HANDLE_LIST.
-        with os.fdopen(msvcrt.open_osfhandle(
-                args.broker_source_handle, os.O_RDONLY | os.O_BINARY), "rb") as src:
-            source_sample = src.read(128)
+        # Verify the supervisor's source handle identifier is INVALID in
+        # this child. It must NOT be inherited or read, even under forged
+        # AppContainer credentials or command-line switches.
+        k.GetHandleInformation.argtypes = [
+            wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+        k.GetHandleInformation.restype = wintypes.BOOL
+        observed = wintypes.DWORD()
+        if k.GetHandleInformation(wintypes.HANDLE(
+                args.broker_denied_source_handle), ctypes.byref(observed)):
+            return 78
+        if ctypes.get_last_error() != 6:  # ERROR_INVALID_HANDLE
+            return 78
+        expected_len = len(b'{"synthetic":true,"payload":"invented"}')
+        if args.broker_source_length != expected_len:
+            return 78
         def report(payload):
             output = {**payload, "worker_optimize": sys.flags.optimize,
-                      "appcontainer_token_verified": True}
+                      "appcontainer_token_verified": True,
+                      "source_handle_not_inherited": True}
             data = json.dumps(output, sort_keys=True).encode("utf-8")
             with os.fdopen(msvcrt.open_osfhandle(
                     args.broker_report_handle,
@@ -268,7 +280,8 @@ def _windows_broker_worker(args) -> int:
                 os.fsync(stream.fileno())
         if args.mode == "success":
             report({"isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES",
-                    "source_length_sample": len(source_sample)})
+                    "source_length_sample": args.broker_source_length,
+                    "source_handle_not_inherited": True})
             return 0
         if args.mode == "memory":
             try:

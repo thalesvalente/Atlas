@@ -409,6 +409,7 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
             repr({"outcome": result, "synthetic_checks": detail}))
         assert detail is not None
         assert detail["appcontainer_token_verified"] is True
+        assert detail["source_handle_not_inherited"] is True
         assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
         assert set(detail["checks"]) == {
             "outside_read", "source_write", "scratch_path_write",
@@ -435,8 +436,9 @@ def test_windows_broker_flags_cannot_authenticate_direct_worker(synthetic):
                "--source", str(source), "--outside", str(outside),
                "--scratch", str(scratch), "--mode", "success",
                "--supervisor-pid", str(os.getpid()),
-               "--broker-source-handle", "123456",
                "--broker-report-handle", "123457",
+               "--broker-denied-source-handle", "123456",
+               "--broker-source-length", str(len(sandbox._INVENTED_SOURCE)),
                "--broker-loopback-port", "12345"]
     checked = subprocess.run(command, capture_output=True, timeout=8)
     assert checked.returncode == 78
@@ -469,6 +471,7 @@ def test_windows_appcontainer_memory_native_limit(synthetic):
     assert result["exit_code"] == 0, result
     report = json.loads((synthetic[2] / "os-probe-report.json").read_text())
     assert report["memory_probe"] == "MEMORY_ERROR_OS_LIMIT"
+    assert report["source_handle_not_inherited"] is True
 
 
 def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic):
@@ -547,3 +550,17 @@ def test_windows_appcontainer_assignment_failure_never_resumes_worker(synthetic)
     assert not any(synthetic[2].glob("atlas-c2-*.json"))
     report = synthetic[2] / "os-probe-report.json"
     assert not report.exists() or report.stat().st_size == 0
+
+
+
+def test_windows_broker_has_no_source_read_api_or_handle_transit():
+    """Reviewable structural contract plus the native child handle check."""
+    from tools.atlas_legacy_presentation import os_worker, os_windows_job
+    import inspect
+    worker = inspect.getsource(os_worker._windows_broker_worker)
+    native = inspect.getsource(os_windows_job._AppContainerLaunch.prepare)
+    assert "args.broker_source_handle" not in worker
+    assert "GetHandleInformation" in worker
+    assert "source_sample = src.read" not in worker
+    assert "(wintypes.HANDLE * 1)(out)" in native
+    assert "src_attrs" in native
