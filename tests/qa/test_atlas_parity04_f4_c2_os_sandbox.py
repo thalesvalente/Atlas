@@ -123,9 +123,15 @@ def test_linux_os_denials_or_windows_explicit_block():
     assert result["descriptor_absent"] is True
     assert result["synthetic_source_unchanged"] is True
     if sys.platform == "win32":
-        assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
-        assert result["probe"]["isolation"] == "OS_PROFILE_NOT_ENFORCED"
-        assert result["filesystem_network_confined"] is False
+        assert result["qualification"] == (
+            "OS_CONTROL_TESTED_IN_RUNNER_APPCONTAINER")
+        assert result["probe"]["isolation"] == (
+            "APPCONTAINER_NO_NETWORK_CAPABILITIES")
+        assert result["appcontainer_token_verified"] is True
+        assert result["appcontainer_loopback_exception_absent"] is True
+        assert result["loopback_control_passed"] is True
+        assert result["loopback_worker_accepted"] is False
+        assert result["filesystem_network_confined"] is True
         return
     assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER", result
     checks = result["probe"]["checks"]
@@ -190,7 +196,11 @@ def test_exact_source_read_inside_native_profile():
         assert result["probe"]["landlock_abi"] >= 3
         assert result["scratch_report_mode"] == 0o600
     else:
-        assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
+        assert result["qualification"] == (
+            "OS_CONTROL_TESTED_IN_RUNNER_APPCONTAINER_SOURCE_ONLY")
+        assert result["probe"]["source_length_sample"] == len(
+            sandbox._INVENTED_SOURCE)
+        assert result["appcontainer_token_verified"] is True
         assert result["windows_scratch_acl_checked"] is True
 
 

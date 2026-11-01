@@ -134,7 +134,12 @@ def _probe_owned(source: Path, outside: Path, scratch: Path, mode: str, *,
     if sys.platform == "win32":
         from .os_windows_job import run_synthetic_job
         try:
-            outcome = run_synthetic_job(args, wall_seconds=wall_seconds)
+            # Operations that read the synthetic source or challenge network
+            # NEVER run in the Job-only path. Job-only modes exercise budgets,
+            # process containment and fault injection without reading payloads.
+            outcome = run_synthetic_job(
+                args, wall_seconds=wall_seconds,
+                appcontainer=mode in ("success", "denials"))
         except Exception as exc:
             raise OSProfileNotEnforced(
                 getattr(exc, "args", ["JOB_SETUP_FAILED"])[0]) from None
@@ -198,10 +203,44 @@ def _probe_owned(source: Path, outside: Path, scratch: Path, mode: str, *,
     if detail is not None and detail.get("worker_optimize") != int(optimize):
         raise OSProfileNotEnforced("WORKER_OPTIMIZE_UNVERIFIED")
     if sys.platform == "win32":
-        result["qualification"] = (
-            "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
-            if outcome["exit_code"] == 0 and detail is not None
-            else "OS_PROFILE_NOT_ENFORCED")
+        appcontainer_mode = mode in ("success", "denials")
+        token_verified = (
+            outcome.get("appcontainer_token_verified") is True and
+            outcome.get("appcontainer_loopback_exception_absent") is True and
+            outcome.get("loopback_control_passed") is True and
+            outcome.get("loopback_worker_accepted") is False)
+        report_native = (
+            isinstance(detail, dict) and
+            detail.get("isolation") == "APPCONTAINER_NO_NETWORK_CAPABILITIES")
+        if appcontainer_mode:
+            if not (outcome["exit_code"] == 0 and token_verified and report_native):
+                raise OSProfileNotEnforced("WINDOWS_APPCONTAINER_OS_PROFILE_MISSING")
+            if mode == "denials":
+                checks = detail.get("checks", {})
+                if (set(checks) != {
+                        "outside_read", "source_write", "scratch_path_write",
+                        "loopback_connect"} or
+                    any(v != "DENIED_BY_OS" for k, v in checks.items()
+                        if k != "loopback_connect") or
+                    checks["loopback_connect"] not in (
+                        "DENIED_BY_OS", "NO_CONNECTION_TIMEOUT") or
+                    detail.get("loopback_connect_os_error") not in (
+                        13, 10013, 10035, 10060)):
+                    raise OSProfileNotEnforced("WINDOWS_NATIVE_OS_DENIAL_MISSING")
+                result["qualification"] = (
+                    "OS_CONTROL_TESTED_IN_RUNNER_APPCONTAINER")
+                result["filesystem_network_confined"] = True
+            else:
+                if detail.get("source_length_sample") != len(_INVENTED_SOURCE):
+                    raise OSProfileNotEnforced("WINDOWS_HANDLE_SOURCE_UNVERIFIED")
+                result["qualification"] = (
+                    "OS_CONTROL_TESTED_IN_RUNNER_APPCONTAINER_SOURCE_ONLY")
+                result["filesystem_network_confined"] = False
+        else:
+            result["qualification"] = (
+                "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
+                if outcome["exit_code"] == 0 and detail is not None
+                else "OS_PROFILE_NOT_ENFORCED")
         result["windows_scratch_acl_checked"] = True
         return result
     enforced = (outcome["exit_code"] == 0 and isinstance(detail, dict) and
