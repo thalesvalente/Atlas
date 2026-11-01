@@ -141,6 +141,11 @@ def enforce(source: Path, scratch: Path, *, supervisor_pid: int) -> dict:
     _checked(libc.prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) == 0,
              "NO_NEW_PRIVS_FAILED")
     # Linux address space: VAS, not RSS; no process creation allowed.
+    # Prevent core-dump copies of a synthetic or future private payload.
+    resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+    _checked(resource.getrlimit(resource.RLIMIT_CORE) == (0, 0),
+             "CORE_DUMP_LIMIT_FAILED")
+    os.umask(0o077)
     resource.setrlimit(resource.RLIMIT_AS, (BUDGET_BYTES, BUDGET_BYTES))
     _checked(resource.getrlimit(resource.RLIMIT_AS) ==
              (BUDGET_BYTES, BUDGET_BYTES), "ADDRESS_SPACE_LIMIT_FAILED")

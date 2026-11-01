@@ -128,6 +128,9 @@ def test_exact_source_read_inside_native_profile(synthetic):
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER", result
         assert result["probe"]["source_length_sample"] > 0
         assert result["probe"]["landlock_abi"] >= 3
+        import stat
+        assert stat.S_IMODE(
+            (scratch / "os-probe-report.json").stat().st_mode) == 0o600
     else:
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
 
