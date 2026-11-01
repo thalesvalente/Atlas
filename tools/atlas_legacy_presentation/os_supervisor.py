@@ -62,11 +62,13 @@ def _preflight(source: Path, outside: Path, scratch: Path) -> None:
             scratch.parent.name != "os-invented"):
         raise OSProfileNotEnforced("SYNTHETIC_FIXTURE_REQUIRED")
     if os.name == "nt":
+        from .os_windows_acl import WindowsScratchUnverified, verify_private_scratch
         try:
-            from .os_windows_acl import verify_private_scratch
             verify_private_scratch(scratch)
+        except WindowsScratchUnverified as exc:
+            raise OSProfileNotEnforced(str(exc)) from None
         except Exception:
-            raise OSProfileNotEnforced("WINDOWS_SCRATCH_ACL_UNVERIFIED") from None
+            raise OSProfileNotEnforced("WINDOWS_SCRATCH_API_UNVERIFIED") from None
     elif sc.st_uid != os.getuid() or stat.S_IMODE(sc.st_mode) != 0o700:
         raise OSProfileNotEnforced("SCRATCH_NOT_PRIVATE")
 
@@ -95,8 +97,15 @@ def run_synthetic_probe(mode: str, *, wall_seconds: float = MAX_WALL_SECONDS) ->
         inputs = root / "input"
         inputs.mkdir(mode=0o700)
         scratch = root / "scratch"
-        scratch.mkdir(mode=0o700)
-        if os.name != "nt":
+        if os.name == "nt":
+            from .os_windows_acl import (WindowsScratchUnverified,
+                                         create_private_scratch)
+            try:
+                create_private_scratch(scratch)
+            except WindowsScratchUnverified as exc:
+                raise OSProfileNotEnforced(str(exc)) from None
+        else:
+            scratch.mkdir(mode=0o700)
             scratch.chmod(0o700)
         source = inputs / "os-allowlisted.json"
         outside = inputs / "os-outside.json"

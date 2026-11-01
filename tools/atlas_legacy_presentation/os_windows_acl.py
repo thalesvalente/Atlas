@@ -118,3 +118,78 @@ def verify_private_scratch(path: Path) -> None:
                 kernel.LocalFree(sd)
     finally:
         kernel.CloseHandle(token)
+
+
+class _SecurityAttributes(ctypes.Structure):
+    _fields_ = [("nLength", wintypes.DWORD),
+                ("lpSecurityDescriptor", ctypes.c_void_p),
+                ("bInheritHandle", wintypes.BOOL)]
+
+
+def create_private_scratch(path: Path) -> None:
+    """Create one NEW test-owned scratch using an explicitly protected DACL.
+
+    This changes neither inherited directories nor any source ACL.
+    """
+    if sys.platform != "win32":
+        raise WindowsScratchUnverified("WINDOWS_ONLY")
+    adv = ctypes.WinDLL("advapi32", use_last_error=True)
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.GetCurrentProcess.restype = wintypes.HANDLE
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.LocalFree.argtypes = [ctypes.c_void_p]
+    kernel.LocalFree.restype = ctypes.c_void_p
+    adv.OpenProcessToken.argtypes = [
+        wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE)]
+    adv.OpenProcessToken.restype = wintypes.BOOL
+    adv.GetTokenInformation.argtypes = [
+        wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD,
+        ctypes.POINTER(wintypes.DWORD)]
+    adv.GetTokenInformation.restype = wintypes.BOOL
+    adv.ConvertSidToStringSidW.argtypes = [
+        ctypes.c_void_p, ctypes.POINTER(wintypes.LPWSTR)]
+    adv.ConvertSidToStringSidW.restype = wintypes.BOOL
+    adv.ConvertStringSecurityDescriptorToSecurityDescriptorW.argtypes = [
+        wintypes.LPCWSTR, wintypes.DWORD, ctypes.POINTER(ctypes.c_void_p),
+        ctypes.POINTER(wintypes.DWORD)]
+    adv.ConvertStringSecurityDescriptorToSecurityDescriptorW.restype = wintypes.BOOL
+    kernel.CreateDirectoryW.argtypes = [
+        wintypes.LPCWSTR, ctypes.POINTER(_SecurityAttributes)]
+    kernel.CreateDirectoryW.restype = wintypes.BOOL
+    token = wintypes.HANDLE()
+    if not adv.OpenProcessToken(kernel.GetCurrentProcess(), 0x0008,
+                                ctypes.byref(token)):
+        raise WindowsScratchUnverified("SCRATCH_TOKEN_UNVERIFIED")
+    try:
+        needed = wintypes.DWORD()
+        adv.GetTokenInformation(token, 1, None, 0, ctypes.byref(needed))
+        if needed.value < ctypes.sizeof(ctypes.c_void_p):
+            raise WindowsScratchUnverified("SCRATCH_TOKEN_UNVERIFIED")
+        buffer = ctypes.create_string_buffer(needed.value)
+        if not adv.GetTokenInformation(token, 1, buffer, needed,
+                                       ctypes.byref(needed)):
+            raise WindowsScratchUnverified("SCRATCH_TOKEN_UNVERIFIED")
+        user_sid = ctypes.cast(buffer, ctypes.POINTER(ctypes.c_void_p))[0]
+        sid_text = wintypes.LPWSTR()
+        if not adv.ConvertSidToStringSidW(user_sid, ctypes.byref(sid_text)):
+            raise WindowsScratchUnverified("SCRATCH_SID_UNVERIFIED")
+        try:
+            sid_string = sid_text.value
+        finally:
+            kernel.LocalFree(ctypes.cast(sid_text, ctypes.c_void_p))
+    finally:
+        kernel.CloseHandle(token)
+    # Protected DACL: exactly current token owner and SYSTEM; no broad ACEs.
+    sddl = f"D:P(A;;FA;;;SY)(A;;FA;;;{sid_string})"
+    descriptor = ctypes.c_void_p()
+    if not adv.ConvertStringSecurityDescriptorToSecurityDescriptorW(
+            sddl, 1, ctypes.byref(descriptor), None):
+        raise WindowsScratchUnverified("SCRATCH_DESCRIPTOR_BUILD_FAILED")
+    try:
+        attrs = _SecurityAttributes(ctypes.sizeof(_SecurityAttributes),
+                                    descriptor, False)
+        if not kernel.CreateDirectoryW(str(path), ctypes.byref(attrs)):
+            raise WindowsScratchUnverified("SCRATCH_PRIVATE_CREATE_FAILED")
+    finally:
+        kernel.LocalFree(descriptor)
+    verify_private_scratch(path)
