@@ -182,6 +182,12 @@ def _probe_owned(source: Path, outside: Path, scratch: Path, mode: str, *,
                 "qualification": "OS_CONTROL_TESTED_IN_RUNNER_WALL_ONLY",
                 "requested_worker_optimize": int(optimize)}
     detail = None
+    if sys.platform == "win32" and report.exists():
+        from .os_windows_acl import WindowsScratchUnverified, verify_private_child
+        try:
+            verify_private_child(scratch, report)
+        except (WindowsScratchUnverified, OSError):
+            raise OSProfileNotEnforced("WINDOWS_CHILD_ACL_UNVERIFIED") from None
     if report.is_file() and not report.is_symlink() and report.stat().st_size <= 4096:
         try:
             detail = json.loads(report.read_text(encoding="utf-8"))

@@ -29,11 +29,13 @@ class _AceHeader(ctypes.Structure):
                 ("ace_size", ctypes.c_uint16)]
 
 
-def verify_private_scratch(path: Path) -> None:
-    """Verify exact token-owner and DACL ACE SIDs by Win32 binary APIs.
+def verify_private_scratch(path: Path, *, inherited_child: bool = False) -> None:
+    """Verify trusted user/SYSTEM DACL using the kernel's SID and ACE records.
 
-    SDDL rendering is not authoritative: Windows may serialize well-known
-    principals as abbreviations or numeric SIDs. Compare kernel SIDs instead.
+    Protected directory ACEs MUST have OI|CI so descendant files do not
+    silently fall back to unrelated default ACLs. A child must actually carry
+    inherited ACEs from that protected directory; child-owner may be the
+    current token's default owner (e.g. Administrators on hosted runners).
     """
     if sys.platform != "win32":
         raise WindowsScratchUnverified("WINDOWS_ONLY")
@@ -94,14 +96,19 @@ def verify_private_scratch(path: Path) -> None:
                 ctypes.byref(sd)) != 0:
             raise WindowsScratchUnverified("SCRATCH_DACL_UNVERIFIED")
         try:
-            if not owner.value or not dacl.value or not adv.EqualSid(owner, user):
+            if not owner.value or not dacl.value:
+                raise WindowsScratchUnverified("SCRATCH_OWNER_UNVERIFIED")
+            if not inherited_child and not adv.EqualSid(owner, user):
                 raise WindowsScratchUnverified("SCRATCH_OWNER_UNVERIFIED")
             control = wintypes.WORD()
             revision = wintypes.DWORD()
             if not adv.GetSecurityDescriptorControl(
                     sd, ctypes.byref(control), ctypes.byref(revision)):
                 raise WindowsScratchUnverified("SCRATCH_CONTROL_UNVERIFIED")
-            if not (control.value & 0x1000):  # SE_DACL_PROTECTED
+            if inherited_child:
+                if control.value & 0x1000:  # inherited child DACL must not be shielded
+                    raise WindowsScratchUnverified("SCRATCH_CHILD_INHERITANCE_MISSING")
+            elif not (control.value & 0x1000):  # SE_DACL_PROTECTED
                 raise WindowsScratchUnverified("SCRATCH_DACL_NOT_PROTECTED")
             acl = ctypes.cast(dacl, ctypes.POINTER(_ACL)).contents
             if acl.ace_count < 1 or acl.ace_count > 8:
@@ -115,14 +122,27 @@ def verify_private_scratch(path: Path) -> None:
                 raise WindowsScratchUnverified("SCRATCH_BUILTIN_SIDS_UNVERIFIED")
             try:
                 has_user_write = False
+                has_system_allow = False
                 for idx in range(acl.ace_count):
                     ace = ctypes.c_void_p()
                     if not adv.GetAce(dacl, idx, ctypes.byref(ace)) or not ace.value:
                         raise WindowsScratchUnverified("SCRATCH_ACE_UNVERIFIED")
                     header = ctypes.cast(ace, ctypes.POINTER(_AceHeader)).contents
-                    if (header.ace_type != 0 or header.ace_flags & 0x10
-                            or header.ace_size < 12):
+                    if header.ace_type != 0 or header.ace_size < 12:
                         raise WindowsScratchUnverified("SCRATCH_ACE_UNSAFE")
+                    if inherited_child:
+                        # INHERITED_ACE is mandatory; INHERIT_ONLY_ACE would not
+                        # grant access to the child itself.
+                        if not header.ace_flags & 0x10 or header.ace_flags & 0x08:
+                            raise WindowsScratchUnverified(
+                                "SCRATCH_CHILD_INHERITANCE_MISSING")
+                    else:
+                        # OBJECT_INHERIT_ACE | CONTAINER_INHERIT_ACE, explicit.
+                        # Disallow inherited, inherit-only or non-propagating
+                        # entries on the protected scratch root.
+                        if header.ace_flags != 0x03:
+                            raise WindowsScratchUnverified(
+                                "SCRATCH_CHILD_INHERITANCE_MISSING")
                     # ACCESS_ALLOWED_ACE = ACE_HEADER(4) + AccessMask(4)
                     # + SidStart. Sid pointer refers to the SID at +8.
                     trustee = ctypes.c_void_p(ace.value + 8)
@@ -137,8 +157,13 @@ def verify_private_scratch(path: Path) -> None:
                     mask = ctypes.c_uint32.from_address(ace.value + 4).value
                     if is_user and (mask & 0x2 or mask & 0x10000000):
                         has_user_write = True
+                    if adv.EqualSid(trustee, system_sid) and (
+                            mask & 0x001F01FF) == 0x001F01FF:
+                        has_system_allow = True
                 if not has_user_write:
                     raise WindowsScratchUnverified("SCRATCH_USER_WRITE_UNVERIFIED")
+                if not has_system_allow:
+                    raise WindowsScratchUnverified("SCRATCH_SYSTEM_ALLOW_UNVERIFIED")
             finally:
                 if system_sid.value:
                     kernel.LocalFree(system_sid)
@@ -149,6 +174,14 @@ def verify_private_scratch(path: Path) -> None:
                 kernel.LocalFree(sd)
     finally:
         kernel.CloseHandle(token)
+
+
+def verify_private_child(scratch: Path, child: Path) -> None:
+    """Verify a newly created direct child inherited only owner/SYSTEM ACEs."""
+    if child.parent != scratch or child.is_symlink() or not child.is_file():
+        raise WindowsScratchUnverified("SCRATCH_CHILD_PATH_UNVERIFIED")
+    verify_private_scratch(scratch)
+    verify_private_scratch(child, inherited_child=True)
 
 
 class _SecurityAttributes(ctypes.Structure):
@@ -213,7 +246,9 @@ def create_private_scratch(path: Path) -> None:
     # Protected DACL: exactly current token owner and SYSTEM; no broad ACEs.
     # Elevated CI runners may default newly created owners to Administrators.
     # Explicit owner is our current token user SID; no global security changes.
-    sddl = f"O:{sid_string}D:P(A;;FA;;;SY)(A;;FA;;;{sid_string})"
+    # OI/CI guarantee that private child files receive the same ACE SIDs.
+    # Never grant Everyone/Users/Authenticated Users access to scratch.
+    sddl = f"O:{sid_string}D:P(A;OICI;FA;;;SY)(A;OICI;FA;;;{sid_string})"
     descriptor = ctypes.c_void_p()
     if not adv.ConvertStringSecurityDescriptorToSecurityDescriptorW(
             sddl, 1, ctypes.byref(descriptor), None):

@@ -19,6 +19,11 @@ def _report(scratch: Path, payload: dict) -> None:
                   fp, sort_keys=True)
         fp.flush()
         os.fsync(fp.fileno())
+    if os.name == "nt":
+        # Native check of the ACTUAL child file, not only the directory.
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from os_windows_acl import verify_private_child
+        verify_private_child(scratch, scratch / "os-probe-report.json")
 
 
 def main() -> int:

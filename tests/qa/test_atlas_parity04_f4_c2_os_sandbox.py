@@ -153,6 +153,22 @@ def test_invalid_modes_and_time_budgets_denied():
             sandbox.run_synthetic_probe(mode, wall_seconds=budget)
 
 
+def test_windows_child_inherits_private_scratch_acl(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Only Windows can verify child NTFS DACL inheritance")
+    _, _, scratch = synthetic
+    from tools.atlas_legacy_presentation.os_windows_acl import (
+        WindowsScratchUnverified, verify_private_child,
+    )
+    child = scratch / "invented-child.txt"
+    child.write_text("synthetic", encoding="utf-8")
+    verify_private_child(scratch, child)
+    # Child outside the trusted parent must never pass as a private child.
+    with pytest.raises(WindowsScratchUnverified,
+                       match="SCRATCH_CHILD_PATH_UNVERIFIED"):
+        verify_private_child(scratch, scratch.parent / "input" / "os-allowlisted.json")
+
+
 def test_report_no_clobber(synthetic):
     _, _, scratch = synthetic
     from tools.atlas_legacy_presentation.os_worker import _report
