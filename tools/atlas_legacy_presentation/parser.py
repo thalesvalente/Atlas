@@ -30,16 +30,17 @@ class ParsedSource:
 
 
 class _Embedded(HTMLParser):
-    def __init__(self):
+    def __init__(self, script_id=SOURCE_FORMAT):
         super().__init__(convert_charrefs=False)
+        self.script_id = script_id
         self.active = False
         self.parts = []
         self.count = 0
         self.closed = 0
 
     def handle_starttag(self, tag, attrs):
-        if tag == 'script' and any(k == 'id' and v == SOURCE_FORMAT for k, v in attrs):
-            if len(attrs) != 2 or dict(attrs) != {'type': 'application/json', 'id': SOURCE_FORMAT}:
+        if tag == 'script' and any(k == 'id' and v == self.script_id for k, v in attrs):
+            if len(attrs) != 2 or dict(attrs) != {'type': 'application/json', 'id': self.script_id}:
                 fail('SOURCE_FORMAT_UNSUPPORTED')
             self.count += 1
             self.active = True
@@ -54,7 +55,10 @@ class _Embedded(HTMLParser):
             self.active = False
 
 
-def parse_source(data: bytes, *, media_type='application/json') -> ParsedSource:
+def parse_source(data: bytes, *, media_type='application/json', source_profile='synthetic') -> ParsedSource:
+    """Parse inert JSON; accept only the explicit synthetic or real R4 v5 profiles."""
+    if source_profile not in ('synthetic', 'r4-v5'):
+        fail('SOURCE_FORMAT_UNSUPPORTED')
     if type(data) is not bytes:
         fail('SOURCE_JSON_INVALID')
     if len(data) > MAX_SOURCE_BYTES:
@@ -64,7 +68,7 @@ def parse_source(data: bytes, *, media_type='application/json') -> ParsedSource:
     except UnicodeError:
         fail('SOURCE_JSON_INVALID')
     if media_type == 'text/html':
-        html = _Embedded()
+        html = _Embedded('data' if source_profile == 'r4-v5' else SOURCE_FORMAT)
         html.feed(text)
         html.close()
         if html.count != 1 or html.closed != 1 or html.active:
@@ -164,7 +168,12 @@ def parse_source(data: bytes, *, media_type='application/json') -> ParsedSource:
             fail('SOURCE_JSON_INVALID')
     except (ValueError, UnicodeError, RecursionError, InvalidOperation):
         fail('SOURCE_JSON_INVALID')
-    if not isinstance(result, dict) or result.get('format') != SOURCE_FORMAT or result.get('version') != '0.1.0' or result.get('synthetic') is not True:
+    if not isinstance(result, dict):
+        fail('SOURCE_FORMAT_UNSUPPORTED')
+    if source_profile == 'r4-v5':
+        if result.get('schema') != 'r4-experiment-viewer-v5' or result.get('authority') != 'PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY':
+            fail('SOURCE_FORMAT_UNSUPPORTED')
+    elif result.get('format') != SOURCE_FORMAT or result.get('version') != '0.1.0' or result.get('synthetic') is not True:
         fail('SOURCE_FORMAT_UNSUPPORTED')
     return ParsedSource(result, lexemes)
 
