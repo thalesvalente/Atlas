@@ -194,14 +194,22 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
         si = profile.startup if profile else _Startup()
         if not profile:
             si.cb = ctypes.sizeof(si)
-        process_argv = argv + (profile.argv_suffix if profile else [])
+        process_argv = list(argv)
+        executable = argv[0]
+        cwd = None
+        if profile:
+            executable = profile.launch_exe
+            process_argv[0] = executable
+            process_argv[worker_index] = profile.launch_worker
+            process_argv += profile.argv_suffix
+            cwd = profile.launch_cwd
         line = ctypes.create_unicode_buffer(subprocess.list2cmdline(process_argv))
         creation = CREATE_SUSPENDED | CREATE_NO_WINDOW
         if profile:
             creation |= 0x00080000  # EXTENDED_STARTUPINFO_PRESENT
         startup_pointer = ctypes.cast(ctypes.byref(si), ctypes.POINTER(_Startup))
-        if not k.CreateProcessW(argv[0], line, None, None, bool(profile),
-                                creation, None, None, startup_pointer,
+        if not k.CreateProcessW(executable, line, None, None, bool(profile),
+                                creation, None, cwd, startup_pointer,
                                 ctypes.byref(process)):
             raise NativeJobUnavailable("JOB_CREATE_SUSPENDED_FAILED")
         created = True
@@ -308,6 +316,55 @@ class _AppContainerLaunch:
         self.listener = None
         self._initialized = False
 
+    def _stage_python_runtime(self):
+        """Copy only installed public Python runtime into this disposable fixture.
+
+        AppContainer must not be granted permissions on the runner's Python
+        installation or repository. ACLs apply only to new test-owned files.
+        """
+        import shutil
+        import subprocess
+        from .os_supervisor import OSProfileNotEnforced
+        base = Path(sys.base_prefix)
+        runtime = self.scratch.parent / "runtime"
+        runtime.mkdir(mode=0o700)
+        if not (base / "python.exe").is_file() or not (base / "Lib").is_dir():
+            raise NativeJobUnavailable("BROKER_RUNTIME_SOURCE_MISSING")
+        adv = ctypes.WinDLL("advapi32", use_last_error=True)
+        adv.ConvertSidToStringSidW.argtypes = [
+            ctypes.c_void_p, ctypes.POINTER(wintypes.LPWSTR)]
+        adv.ConvertSidToStringSidW.restype = wintypes.BOOL
+        sid_text = wintypes.LPWSTR()
+        if not adv.ConvertSidToStringSidW(self.sid, ctypes.byref(sid_text)):
+            raise NativeJobUnavailable("BROKER_RUNTIME_SID_UNVERIFIED")
+        try:
+            sid_string = sid_text.value
+        finally:
+            self.kernel.LocalFree(ctypes.cast(sid_text, ctypes.c_void_p))
+        # The package gets read+execute ONLY on the disposable runtime.
+        grant = subprocess.run(
+            ["icacls", str(runtime), "/grant",
+             "*" + sid_string + ":(OI)(CI)(RX)"],
+            capture_output=True, text=True, timeout=20)
+        if grant.returncode:
+            raise NativeJobUnavailable("BROKER_RUNTIME_ACL_GRANT_FAILED")
+        for name in ("python.exe", "python3.dll", "python312.dll",
+                     "vcruntime140.dll", "vcruntime140_1.dll"):
+            if (base / name).is_file():
+                shutil.copy2(base / name, runtime / name)
+        if not (runtime / "python312.dll").is_file():
+            raise NativeJobUnavailable("BROKER_RUNTIME_PYTHON_DLL_MISSING")
+        shutil.copytree(
+            base / "Lib", runtime / "Lib",
+            ignore=shutil.ignore_patterns("site-packages", "__pycache__"))
+        if (base / "DLLs").is_dir():
+            shutil.copytree(base / "DLLs", runtime / "DLLs")
+        shutil.copy2(Path(__file__).with_name("os_worker.py"),
+                     runtime / "os_worker.py")
+        self.launch_exe = str(runtime / "python.exe")
+        self.launch_worker = str(runtime / "os_worker.py")
+        self.launch_cwd = str(runtime)
+
     def prepare(self):
         import secrets
         import socket
@@ -357,6 +414,7 @@ class _AppContainerLaunch:
                 None, 0, ctypes.byref(self.sid)) != 0 or not self.sid.value:
             self.profile_name = None
             raise NativeJobUnavailable("APPCONTAINER_PROFILE_CREATE_FAILED")
+        self._stage_python_runtime()
         # Open source with no FILE_SHARE_WRITE/DELETE; keep it pinned through
         # worker termination. FILE_FLAG_OPEN_REPARSE_POINT rejects link races.
         attrs = _InheritAttributes(ctypes.sizeof(_InheritAttributes), None, True)
