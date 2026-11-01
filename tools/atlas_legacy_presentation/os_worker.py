@@ -198,9 +198,6 @@ def main() -> int:
     return 0 if safe else 79
 
 
-if __name__ == "__main__":
-    raise SystemExit(main())
-
 
 def _windows_broker_worker(args) -> int:
     """Read only kernel-inherited RO handle, write only inherited scratch handle.
@@ -307,3 +304,7 @@ def _windows_broker_worker(args) -> int:
         return 0 if safe else 79
     except Exception:
         return 78
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
