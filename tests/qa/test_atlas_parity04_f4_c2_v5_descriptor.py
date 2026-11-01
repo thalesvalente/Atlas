@@ -1,4 +1,5 @@
 """Direct actual R4 v5 field mapping — source values entirely invented."""
+import copy
 import hashlib
 import json
 import unittest
@@ -153,14 +154,178 @@ class DirectV5DescriptorTests(unittest.TestCase):
         source["lineage_graph"]["nodes"][0]["key"] = "rec-a"
         source["lineage_graph"]["nodes"][0]["native_id"] = None
         source["lineage_graph"]["nodes"][1]["parent_key"] = "rec-a"
-        with self.assertRaises(ReaderError):
-            make_descriptor(source)
+        descriptor = make_descriptor(source)
+        child = next(node for node in descriptor["nodes"]
+                     if node["identity"]["locator"] == "/lineage_graph/nodes/1")
+        self.assertEqual(child["parent_key_literal"], "rec-a")
+        self.assertEqual(child["parent"]["resolution"], "NULL_ENDPOINT")
+        self.assertIsNone(child["parent"]["target_navigation_id"])
+        self.assertTrue(child["binding_gap"])
+        self.assertTrue(any(gap["code"] == "SOURCE_KEY_NAMESPACE_COLLISION"
+                            for gap in descriptor["gaps"]))
+        self.assertIn("/lineage_graph/nodes/1/parent_key",
+                      {field["locator"] for field in descriptor["unmapped_fields"]})
 
     def test_invalid_numeric_native_id_rejected(self):
         src = raw_v5()
         src["lineage_graph"]["nodes"][0]["native_id"] = 123
         with self.assertRaises(ReaderError):
             make_descriptor(src)
+
+    def test_lineage_graph_endpoint_cross_collection_collision_is_gap(self):
+        source = raw_v5()
+        source["lineage_graph"]["nodes"][0]["native_id"] = None
+        source["lineage_graph"]["nodes"][0]["key"] = "rec-a"
+        source["lineage_graph"]["edges"] = [
+            {"type": "MEMBER_OF", "from_key": "rec-a", "to_key": "run-a"}]
+        descriptor = make_descriptor(source)
+        relation = descriptor["relations"][0]
+        self.assertEqual(relation["from"]["resolution"], "NULL_ENDPOINT")
+        self.assertIsNone(relation["from"]["target_navigation_id"])
+        self.assertEqual(relation["to"]["resolution"], "RESOLVED")
+        self.assertTrue(relation["binding_gap"])
+        self.assertIn("/lineage_graph/edges/0/from_key",
+                      {entry["locator"] for entry in descriptor["unmapped_fields"]})
+
+    def test_table_record_id_not_resolved_to_unrelated_lineage_node(self):
+        source = raw_v5()
+        source["lineage_graph"]["nodes"].append({
+            "key": "graph-local-key", "ui_id": "ui-third",
+            "native_id": "ghost", "kind": "Run", "label": "Unrelated run"})
+        source["result_tables"][0]["record_id"] = "ghost"
+        descriptor = make_descriptor(source)
+        table = descriptor["tables"][0]
+        self.assertEqual(table["record_binding"]["resolution"], "NULL_ENDPOINT")
+        self.assertTrue(any(entry["locator"] == "/result_tables/0/record_id"
+                            and entry["value"]["literal"] == "ghost"
+                            for entry in descriptor["unmapped_fields"]))
+
+    def test_real_r4_v5_original_population_and_five_rf_tables(self):
+        source = raw_v5()
+        source["records"] = [dict(source["records"][0], id=f"rec-{i}")
+                             for i in range(159)]
+        counts = [39, 85, 28, 0, 0]
+        tables = []
+        for table_index, count in enumerate(counts):
+            unadmitted = table_index == 2
+            rows = []
+            for index in range(count):
+                identifier = f"RF-INVENTED-{table_index}-{index}"
+                rows.append({
+                    "native_id": None if unadmitted else identifier,
+                    "cells": {"ID": "" if unadmitted else identifier,
+                              "Núcleo / Módulo": "Módulo inventado",
+                              "Nome": f"Nome {index}",
+                              "Descrição": "Unicode ação ⚙",
+                              "Critérios de Aceitação": "Critério literal"}})
+            tables.append({"id": f"table-{table_index}", "label": "Inventada",
+                           "role": ("UNADMITTED_NATIVE_RF" if unadmitted
+                                    else "NATIVE_RF_SOURCE_PRESENTATION"),
+                           "record_id": "rec-0" if table_index == 0 else "unlinked",
+                           "rows": rows})
+        source["result_tables"] = tables
+        d = make_descriptor(source)
+        self.assertEqual(len(d["nodes"]), 161)
+        self.assertEqual([len(x["rows"]) for x in d["tables"]], counts)
+        self.assertEqual(sum(len(x["rows"]) for x in d["tables"]), 152)
+        self.assertEqual(sum(r["requirement"]["admission"] == "UNADMITTED_NATIVE_RF"
+                             and r["identity"]["native_id"] is None
+                             for table in d["tables"] for r in table["rows"]), 28)
+        self.assertEqual(d["tables"][0]["record_binding"]["resolution"], "RESOLVED")
+        self.assertTrue(all(x["record_binding"]["resolution"] == "UNRESOLVED"
+                            for x in d["tables"][1:]))
+        self.assertEqual(d["coverage"]["global_total"], None)
+
+    def test_root_sidecars_and_a10_metadata_are_loss_accounted(self):
+        source = raw_v5()
+        source["sources"] = [{"id": "fake-source", "sha256": "not-authenticated"}]
+        source["source_crosswalk"] = [{"record_id": "rec-a", "source_id": "invented"}]
+        source["frontiers"] = [{"id": "fr-1", "records": ["rec-a"]}]
+        source["external_runs"] = [{"id": "external-1", "run_id": "ghost"}]
+        source["dossier_batch"] = {"status": "NOT_IMPORTED", "member_ledger": []}
+        source["lineage_graph"]["branches"] = [{"ui_id": "invented-branch"}]
+        source["lineage_graph"]["counts"] = {"nodes": 2, "edges": 1}
+        d = make_descriptor(source)
+        fields = {field["locator"]: field["value"] for field in d["unmapped_fields"]}
+        for loc in ("/sources/0/id", "/source_crosswalk/0/record_id",
+                    "/frontiers/0/id", "/external_runs/0/run_id",
+                    "/dossier_batch/status",
+                    "/lineage_graph/branches/0/ui_id",
+                    "/lineage_graph/counts/nodes"):
+            self.assertIn(loc, fields)
+        self.assertEqual(fields["/dossier_batch/member_ledger"]["type"], "array")
+        self.assertTrue(any(gap["code"] == "UNMAPPED_ROOT_FIELD"
+                            for gap in d["gaps"]))
+
+    def test_source_numeric_precision_null_missing_and_unicode(self):
+        source = raw_v5()
+        source["result_tables"][0]["role"] = "UNKNOWN"
+        source["result_tables"][0]["rows"][0]["native_id"] = None
+        source["result_tables"][0]["rows"][0]["cells"] = {
+            "large": 900719925474099312345,
+            "null": None, "absent": "", "emoji": "áé🔬"}
+        raw = json.dumps(source, ensure_ascii=False).encode("utf-8")
+        p = parse_legacy_export(raw, media_type="application/json")
+        d = transform_legacy_v5(
+            p, source_id="invented-source", snapshot_id="invented-snapshot",
+            access_policy_id="invented-test-policy",
+            bytes_sha256=hashlib.sha256(raw).hexdigest(),
+            observed_at=NOW, generated_at=NOW,
+            expires_at="2026-10-31T02:00:00Z", synthetic_test=True)
+        validate_descriptor(d, SCHEMA, now=NOW)
+        row = d["tables"][0]["rows"][0]
+        self.assertEqual([c["type"] for c in row["cells"]],
+                         ["integer", "null", "string", "string"])
+        self.assertEqual(row["cells"][0]["lexeme"], "900719925474099312345")
+        self.assertEqual(row["cells"][3]["literal"], "áé🔬")
+        self.assertEqual(row["requirement"], None)
+
+    def test_partial_invalid_source_rejected_without_partial_result(self):
+        source = raw_v5()
+        source["result_tables"].append({
+            "id": "bad-table", "label": "Invented",
+            "rows": [{"native_id": None, "cells": []}]})
+        data = json.dumps(source).encode("utf-8")
+        parsed = parse_legacy_export(data, media_type="application/json")
+        with self.assertRaises(ReaderError):
+            transform_legacy_v5(
+                parsed, source_id="source", snapshot_id="snapshot",
+                access_policy_id="policy",
+                bytes_sha256=hashlib.sha256(data).hexdigest(),
+                observed_at=NOW, generated_at=NOW,
+                expires_at="2026-10-31T02:00:00Z", synthetic_test=True)
+
+    def test_dossier_collections_must_be_lists(self):
+        source = raw_v5()
+        source["dossier_packages"] = {"id": "not-a-list"}
+        with self.assertRaises(ReaderError):
+            parse_legacy_export(json.dumps(source).encode(),
+                                media_type="application/json")
+
+    def test_unadmitted_id_conflict_rejected_not_promoted(self):
+        source = raw_v5()
+        source["result_tables"][0]["role"] = "UNADMITTED_NATIVE_RF"
+        with self.assertRaises(ReaderError):
+            make_descriptor(source)
+
+    def test_only_explicit_product_role_and_binding_produce_product(self):
+        source = raw_v5()
+        source["resources"] = [{"id": "res-1", "path": "invented/path"}]
+        source["product_items"] = [{
+            "id": "p-1", "label": "Invented product",
+            "kind": "Product", "product_role": "SOURCE_DECLARED",
+            "atlas_record_id": "rec-a"}]
+        source["products"] = [{
+            "id": "r4-product", "label": "No explicit product_role",
+            "run_id": "run-a", "record_id": "rec-a",
+            "pointer": "res-1", "resources": ["res-1"]}]
+        d = make_descriptor(source)
+        asset_kinds = {a["identity"]["native_id"]: a["kind"] for a in d["assets"]}
+        self.assertEqual(asset_kinds["res-1"], "File")
+        self.assertEqual(asset_kinds["p-1"], "Product")
+        self.assertEqual(asset_kinds["r4-product"], "Other")
+        self.assertTrue(any(gap["code"] == "PRODUCT_ROLE_OR_BINDING_UNVERIFIED"
+                            for gap in d["gaps"]))
 
 
 if __name__ == "__main__":

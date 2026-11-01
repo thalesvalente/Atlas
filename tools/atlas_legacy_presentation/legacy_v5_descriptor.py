@@ -67,6 +67,7 @@ class _Builder:
         self.targets = []
         self.pending = []
         self.graph_keys = {}
+        self.record_nodes = []
 
     def identity(self, original, locator):
         native = _text(original)
@@ -129,6 +130,8 @@ class _Builder:
             "external_reference": None, "binding_gap": True,
         }
         self.nodes.append(node)
+        if not lineage:
+            self.record_nodes.append(node)
         self.targets.append(node)
         self.pending.append(("parent", node, parent_key, loc, lineage, raw.get("root") is True))
         if lineage:
@@ -138,8 +141,8 @@ class _Builder:
                     _fail("R4_V5_LINEAGE_KEY_INVALID")
                 self.graph_keys[key] = node
         self.preserve(raw, loc, ident["navigation_id"],
-                      ("native_id", "kind", "label", "family", "parent_key")
-                      if lineage else ("id", "kind", "title", "family", "parent_key"))
+                      ("native_id", "kind", "label", "family")
+                      if lineage else ("id", "kind", "title", "family"))
         return node
 
     def add_table(self, raw, loc):
@@ -215,12 +218,12 @@ class _Builder:
             self.pending.append(("run_binding", item, rawrow.get("run_id", raw.get("run_id")),
                                  path, False, False))
             self.preserve(rawrow, path, rid["navigation_id"],
-                          ("cells", "native_id", "run_id"))
+                          ("cells", "native_id"))
         self.tables.append(table)
         self.targets.append(table)
         self.pending.append(("record_binding", table, raw.get("record_id"), loc, False, False))
         self.preserve(raw, loc, ident["navigation_id"],
-                      ("id", "label", "rows", "record_id", "role"))
+                      ("id", "label", "rows", "role"))
         return table
 
     def add_asset(self, raw, loc, category):
@@ -256,7 +259,7 @@ class _Builder:
         self.pending.append(("declared_binding", asset, binding, loc, False, False))
         self.preserve(raw, loc, ident["navigation_id"],
                       ("id", "kind", "label", "name", "title", "product_role",
-                       "record_id", "atlas_record_id", "binding_id", "media_type", "uri"))
+                       "media_type", "uri"))
         return asset
 
     def ref(self, declared, path):
@@ -275,33 +278,64 @@ class _Builder:
             "resolution": state, "evidence_locator": path,
         }
 
+    def scoped_ref(self, declared, path, *, scope, gap_code):
+        """Resolve a reference only in its originating collection.
+
+        Descriptor 0.2.0 indexes *all* native identifiers. When the literal
+        denotes an R4 structural key or a different entity namespace, a
+        same-text match elsewhere is NOT evidence. Preserve the literal in
+        unmapped_fields/parent_key_literal and emit a fail-closed null reference
+        rather than create a false scientific edge. A genuine cross-namespace
+        collision stays COLLISION and cannot be auto-selected.
+        """
+        ref = self.ref(declared, path)
+        if declared is None:
+            return ref
+        if scope == "lineage-key":
+            original = self.graph_keys.get(declared)
+            if original is None or original["identity"]["native_id"] != declared:
+                self.gap(gap_code)
+                if ref["resolution"] in ("RESOLVED", "COLLISION"):
+                    self.gap("SOURCE_KEY_NAMESPACE_COLLISION")
+                    return self.ref(None, path)
+                return ref
+            if (ref["resolution"] == "RESOLVED" and
+                    ref["target_navigation_id"] != original["identity"]["navigation_id"]):
+                _fail("R4_V5_SOURCE_KEY_AMBIGUOUS")
+            if ref["resolution"] != "RESOLVED":
+                self.gap("SOURCE_KEY_NATIVE_COLLISION")
+            return ref
+        if ref["resolution"] == "RESOLVED":
+            candidate = self.by_native[declared][0]
+            eligible = (candidate in self.record_nodes if scope == "record"
+                        else candidate in self.nodes and candidate.get("kind") == "Run")
+            if not eligible:
+                self.gap(gap_code)
+                return self.ref(None, path)
+        elif ref["resolution"] == "COLLISION":
+            self.gap("CROSS_COLLECTION_NATIVE_ID_COLLISION")
+        return ref
+
     def resolve(self):
         self.by_native = defaultdict(list)
         for item in self.targets:
             if item["identity"]["native_id"] is not None:
                 self.by_native[item["identity"]["native_id"]].append(item)
         for name, obj, declared, loc, lineage, root in self.pending:
-            ref = self.ref(declared, pointer(loc, "parent_key") if name == "parent"
-                           else pointer(loc, "record_id") if name == "record_binding"
-                           else pointer(loc, "run_id") if name == "run_binding"
-                           else pointer(loc, "binding_id"))
+            path = (pointer(loc, "parent_key") if name == "parent" else
+                    pointer(loc, "record_id") if name == "record_binding" else
+                    pointer(loc, "run_id") if name == "run_binding" else
+                    pointer(loc, "binding_id"))
+            scope = ("lineage-key" if lineage else "record") if name == "parent" else (
+                "run" if name == "run_binding" else "record")
+            code = ("SOURCE_PARENT_KEY_NOT_NATIVE_REFERENCE" if lineage else
+                    "PARENT_REFERENCE_OUTSIDE_RECORDS") if name == "parent" else (
+                    "RUN_REFERENCE_OUTSIDE_RUN_NODES" if name == "run_binding" else
+                    "RECORD_REFERENCE_OUTSIDE_RECORDS")
+            ref = self.scoped_ref(declared, path, scope=scope, gap_code=code)
             if name == "parent":
-                obj[name] = ref
-                if lineage and declared is not None:
-                    ancestor = self.graph_keys.get(declared)
-                    # Parent key addresses an R4 lineage SOURCE KEY. A same-text
-                    # business native ID in another collection is NOT that key.
-                    if ancestor is None or ancestor["identity"]["native_id"] != declared:
-                        if self.by_native.get(declared):
-                            _fail("R4_V5_PARENT_SCOPE_UNREPRESENTABLE")
-                        self.gap("SOURCE_PARENT_KEY_NOT_NATIVE_REFERENCE")
-                    elif (ref["resolution"] != "RESOLVED" or
-                          ref["target_navigation_id"] != ancestor["identity"]["navigation_id"]):
-                        _fail("R4_V5_PARENT_SCOPE_UNREPRESENTABLE")
+                obj["parent"] = ref
                 if ref["resolution"] == "RESOLVED":
-                    candidate = self.by_native[declared][0]
-                    if candidate not in self.nodes:
-                        _fail("R4_V5_PARENT_SCOPE_UNREPRESENTABLE")
                     obj["tree_state"] = "PARENT_RESOLVED"
                     obj["binding_gap"] = False
                 elif root and declared is None:
@@ -314,12 +348,8 @@ class _Builder:
             else:
                 obj[name] = ref
                 if name == "run_binding":
-                    if ref["resolution"] == "RESOLVED":
-                        candidate = self.by_native[declared][0]
-                        if candidate.get("kind") != "Run":
-                            _fail("R4_V5_RUN_BINDING_UNREPRESENTABLE")
                     obj["binding_gap"] = ref["resolution"] != "RESOLVED"
-        # Cycle members must be accounted for by the exact descriptor contract.
+        # Only proved descriptor-native parents participate in cycle analysis.
         by_nav = {n["identity"]["navigation_id"]: n for n in self.nodes}
         done, cycles = set(), set()
         for start in by_nav:
@@ -356,20 +386,18 @@ class _Builder:
             semantics = ("DECLARED_LINEAGE" if kind in
                          ("DERIVED_FROM", "INPUT_FROM", "PREDECESSOR") and
                          bool(raw.get("proofs")) else "NEUTRAL_MENTION")
-        from_ref = self.ref(left, pointer(loc, "from_key" if graph and "from_key" in raw else "from"))
-        to_ref = self.ref(right, pointer(loc, "to_key" if graph and "to_key" in raw else "to"))
         if graph:
-            for key, bound in ((left, from_ref), (right, to_ref)):
-                if key is None:
-                    continue
-                original = self.graph_keys.get(key)
-                if original is None or original["identity"]["native_id"] != key:
-                    if bound["resolution"] != "UNRESOLVED":
-                        _fail("R4_V5_GRAPH_EDGE_SCOPE_UNREPRESENTABLE")
-                    self.gap("SOURCE_GRAPH_KEY_NOT_NATIVE_REFERENCE")
-                elif (bound["resolution"] != "RESOLVED" or
-                      bound["target_navigation_id"] != original["identity"]["navigation_id"]):
-                    _fail("R4_V5_GRAPH_EDGE_SCOPE_UNREPRESENTABLE")
+            from_ref = self.scoped_ref(
+                left, pointer(loc, "from_key" if "from_key" in raw else "from"),
+                scope="lineage-key", gap_code="SOURCE_GRAPH_KEY_NOT_NATIVE_REFERENCE")
+            to_ref = self.scoped_ref(
+                right, pointer(loc, "to_key" if "to_key" in raw else "to"),
+                scope="lineage-key", gap_code="SOURCE_GRAPH_KEY_NOT_NATIVE_REFERENCE")
+        else:
+            from_ref = self.scoped_ref(left, pointer(loc, "from"),
+                                       scope="record", gap_code="EDGE_OUTSIDE_RECORDS")
+            to_ref = self.scoped_ref(right, pointer(loc, "to"),
+                                     scope="record", gap_code="EDGE_OUTSIDE_RECORDS")
         issues = []
         if from_ref["resolution"] != "RESOLVED" or to_ref["resolution"] != "RESOLVED":
             issues.append("DECLARED_SOURCE_ENDPOINT_NOT_NATIVE_RESOLVED")
@@ -383,7 +411,7 @@ class _Builder:
         }
         self.relations.append(item)
         self.preserve(raw, loc, rid["navigation_id"],
-                      ("id", "type", "from", "to", "from_key", "to_key"))
+                      ("id", "type", "from", "to"))
         return item
 
     def finalize_relations(self):
@@ -407,10 +435,50 @@ class _Builder:
                     e["repeat_occurrence"] = i
                 self.gap("REPEATED_RELATION_OCCURRENCE", len(group) - 1)
 
+    def preserve_unmapped_root(self, source):
+        """Loss-account all R4 v5 source collections and lineage metadata.
+
+        Each original JSON pointer and scalar lexeme is preserved, including
+        empty arrays/objects. Large/unsupported source data fails explicitly
+        instead of silently truncating the source. A10 graph nodes/edges and
+        R4 records/edges/tables/assets have their own typed mapping above.
+        """
+        covered = {"schema", "authority", "lineage_graph",
+                   "records", "edges", "result_tables",
+                   *(name for name, _ in _ASSETS)}
+        total = 0
+
+        def keep(original_key, path, value, depth=0):
+            nonlocal total
+            if depth > 20 or total > 100000:
+                _fail("QUOTA_EXCEEDED")
+            if isinstance(value, dict) and value:
+                for key, part in value.items():
+                    keep(key, pointer(path, key), part, depth + 1)
+            elif isinstance(value, list) and value:
+                for index, part in enumerate(value):
+                    keep(original_key, pointer(path, index), part, depth + 1)
+            else:
+                total += 1
+                if total > 100000:
+                    _fail("QUOTA_EXCEEDED")
+                self.unmapped.append({
+                    "owner_navigation_id": None, "locator": path,
+                    "source_key_literal": original_key,
+                    "value": _cell(self.parsed, path, value),
+                })
+
+        for key, value in source.items():
+            if key == "lineage_graph" and isinstance(value, dict):
+                for subkey, part in value.items():
+                    if subkey not in ("nodes", "edges"):
+                        self.gap("UNMAPPED_LINEAGE_GRAPH_METADATA")
+                        keep(subkey, pointer("/lineage_graph", subkey), part)
+            elif key not in covered:
+                self.gap("UNMAPPED_ROOT_FIELD")
+                keep(key, pointer("", key), value)
+
     def coverage(self, source):
-        targets = self.nodes + self.tables + [
-            row for table in self.tables for row in table["rows"]
-        ] + self.assets
         groups = {
             "presentation_node_occurrences": len(self.nodes),
             "source_nodes": len(self.nodes),
@@ -420,24 +488,16 @@ class _Builder:
             "relations": len(self.relations),
             "assets": len(self.assets),
         }
-        for name in _EXTRA_ROOT_COLLECTIONS:
-            raw = source.get(name)
-            if isinstance(raw, list) and raw:
-                self.gap("UNMAPPED_ROOT_COLLECTION_" + name.upper(), len(raw))
-            elif isinstance(raw, dict) and raw:
-                self.gap("UNMAPPED_ROOT_OBJECT_" + name.upper(), 1)
-        result_counts = [
-            {
-                "unit": name, "selected": size, "loaded": size,
-                "visible": None, "unavailable": 0, "unknown_reason": None,
-            } for name, size in groups.items()
-        ]
         return {
             "population": "SELECTED_QUALIFYING_PAYLOAD",
             "global_archive": "UNKNOWN_UPSTREAM",
             "global_history": "GLOBAL_UNPROVEN",
             "global_total": None, "global_percentage": None,
-            "snapshot_overlap": "NOT_SUMMED", "counts": result_counts,
+            "snapshot_overlap": "NOT_SUMMED",
+            "counts": [{
+                "unit": name, "selected": size, "loaded": size,
+                "visible": None, "unavailable": 0, "unknown_reason": None,
+            } for name, size in groups.items()],
         }
 
 
@@ -476,6 +536,7 @@ def transform_legacy_v5(parsed: ParsedSource, *, source_id: str,
     for i, edge in enumerate(src["edges"]):
         b.add_relation(edge, f"/edges/{i}")
     b.finalize_relations()
+    b.preserve_unmapped_root(src)
     policy = {
         "source_access": "EXTERNAL_EXACT_ALLOWLIST_ONLY",
         "max_descriptor_bytes": 33554432, "ttl_max_seconds": 3600,

@@ -29,6 +29,7 @@ HISTORICAL_LISTS = (
     "product_items", "product_groups", "resource_documents",
     "storage_observations", "frontier_catalog", "external_runs",
     "coverage_ledger",
+    "dossier_assessments", "dossier_packages",
 )
 
 
@@ -132,6 +133,8 @@ def validate_legacy_projection(data: dict[str, Any]) -> None:
             original_ui_ids.add(ui_id)
             _require(node.get("native_id") is None
                      or isinstance(node["native_id"], str), "R4_V5_NATIVE_ID")
+            _require(node.get("parent_key") is None
+                     or isinstance(node["parent_key"], str), "R4_V5_PARENT_KEY")
         for edge in graph["edges"]:
             _require(isinstance(edge, dict)
                      and isinstance(edge.get("type"), str), "R4_V5_LINEAGE_EDGE")
