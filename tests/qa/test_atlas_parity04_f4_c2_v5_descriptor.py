@@ -146,6 +146,16 @@ class DirectV5DescriptorTests(unittest.TestCase):
         self.assertEqual(len(d["tables"]), 1)
         self.assertEqual(len(d["tables"][0]["rows"]), 1)
 
+    def test_lineage_source_key_never_resolves_to_unrelated_record_id(self):
+        source = raw_v5()
+        # The lineage parent structural key happens to equal a record's native ID,
+        # but the graph's parent node has NO native ID. Never choose the record.
+        source["lineage_graph"]["nodes"][0]["key"] = "rec-a"
+        source["lineage_graph"]["nodes"][0]["native_id"] = None
+        source["lineage_graph"]["nodes"][1]["parent_key"] = "rec-a"
+        with self.assertRaises(ReaderError):
+            make_descriptor(source)
+
     def test_invalid_numeric_native_id_rejected(self):
         src = raw_v5()
         src["lineage_graph"]["nodes"][0]["native_id"] = 123

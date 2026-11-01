@@ -287,12 +287,17 @@ class _Builder:
                            else pointer(loc, "binding_id"))
             if name == "parent":
                 obj[name] = ref
-                if lineage and declared in self.graph_keys:
-                    ancestor = self.graph_keys[declared]
-                    if ancestor["identity"]["native_id"] != declared:
+                if lineage and declared is not None:
+                    ancestor = self.graph_keys.get(declared)
+                    # Parent key addresses an R4 lineage SOURCE KEY. A same-text
+                    # business native ID in another collection is NOT that key.
+                    if ancestor is None or ancestor["identity"]["native_id"] != declared:
                         if self.by_native.get(declared):
                             _fail("R4_V5_PARENT_SCOPE_UNREPRESENTABLE")
                         self.gap("SOURCE_PARENT_KEY_NOT_NATIVE_REFERENCE")
+                    elif (ref["resolution"] != "RESOLVED" or
+                          ref["target_navigation_id"] != ancestor["identity"]["navigation_id"]):
+                        _fail("R4_V5_PARENT_SCOPE_UNREPRESENTABLE")
                 if ref["resolution"] == "RESOLVED":
                     candidate = self.by_native[declared][0]
                     if candidate not in self.nodes:
@@ -353,6 +358,18 @@ class _Builder:
                          bool(raw.get("proofs")) else "NEUTRAL_MENTION")
         from_ref = self.ref(left, pointer(loc, "from_key" if graph and "from_key" in raw else "from"))
         to_ref = self.ref(right, pointer(loc, "to_key" if graph and "to_key" in raw else "to"))
+        if graph:
+            for key, bound in ((left, from_ref), (right, to_ref)):
+                if key is None:
+                    continue
+                original = self.graph_keys.get(key)
+                if original is None or original["identity"]["native_id"] != key:
+                    if bound["resolution"] != "UNRESOLVED":
+                        _fail("R4_V5_GRAPH_EDGE_SCOPE_UNREPRESENTABLE")
+                    self.gap("SOURCE_GRAPH_KEY_NOT_NATIVE_REFERENCE")
+                elif (bound["resolution"] != "RESOLVED" or
+                      bound["target_navigation_id"] != original["identity"]["navigation_id"]):
+                    _fail("R4_V5_GRAPH_EDGE_SCOPE_UNREPRESENTABLE")
         issues = []
         if from_ref["resolution"] != "RESOLVED" or to_ref["resolution"] != "RESOLVED":
             issues.append("DECLARED_SOURCE_ENDPOINT_NOT_NATIVE_RESOLVED")
