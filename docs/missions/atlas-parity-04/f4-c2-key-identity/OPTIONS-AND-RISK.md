@@ -7,6 +7,8 @@
 | **O2** — sidecar UI de navegação | Possível, mas gerencia segunda entrada e duas fontes de resolução/TTL | Maior risco de split-brain, versões/índices divergentes, precisa ARC-09 também | **Não preferida** |
 | **O3** — renderer R4 ou `r4.*` no novo viewer | Pode reutilizar apresentação histórica | Contraria limite externo O1→File API O3, ARC-04/07, Caderno e isolamento de produto | **Rejeitada sem nova arquitetura aprovada** |
 
+**Compatibilidade de shape:** `node.parent` e `node.parent_key_literal` já são obrigatórios no schema 0.2.0; O1 adiciona somente `node.source_key_literal` e os dois campos tipados de `$defs.reference`, sem substituir os campos antigos. A key original é obrigatória nos nós R4 v5, e duplicidade/ausência rejeita atomicamente. (` = crase nos trechos a seguir.)
+
 ## Riscos com mitigação mandatória em O1
 
 1. **Promoção indevida à ciência:** `source_key_literal`/`declared_key_literal` nunca entram em `native_id`; `ui_id` não vira native nem navigation_id durável. `LEGACY_DERIVED` em todo payload.

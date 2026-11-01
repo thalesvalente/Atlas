@@ -1742,16 +1742,7 @@
         }
       },
       "expected_0_2_1": {
-        "parent_ref": {
-          "reference_basis": "SOURCE_STRUCTURAL_KEY",
-          "source_id": "source-fixture",
-          "snapshot_id": "snapshot-E",
-          "declared_id": null,
-          "declared_key_literal": "missing-E",
-          "target_navigation_id": null,
-          "resolution": "UNRESOLVED",
-          "evidence_locator": "/lineage_graph/nodes/1/parent_key"
-        },
+        "import": "REJECT_MISSING_STRUCTURAL_KEY_ATOMIC",
         "no_ui_id_or_label_fallback": true
       }
     },
@@ -1807,6 +1798,205 @@
       },
       "expected_0_2_1": {
         "import": "REJECT_DUPLICATE_STRUCTURAL_KEY_ATOMIC"
+      }
+    },
+    {
+      "id": "G",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-G",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "root-G",
+              "ui_id": "ui-root-G",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic root-G"
+            },
+            {
+              "key": "child-G",
+              "ui_id": "ui-child-G",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic child-G",
+              "parent_key": "absent-G"
+            }
+          ],
+          "edges": []
+        }
+      },
+      "expected_0_2_1": {
+        "parent_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "source_id": "source-fixture",
+          "snapshot_id": "snapshot-G",
+          "declared_id": null,
+          "declared_key_literal": "absent-G",
+          "target_navigation_id": null,
+          "resolution": "UNRESOLVED",
+          "evidence_locator": "/lineage_graph/nodes/1/parent_key"
+        },
+        "tree_state": "ORPHAN",
+        "binding_gap": true
+      }
+    },
+    {
+      "id": "H",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-H",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "cycle-H-1",
+              "ui_id": "ui-cycle-H-1",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic cycle-H-1",
+              "parent_key": "cycle-H-2"
+            },
+            {
+              "key": "cycle-H-2",
+              "ui_id": "ui-cycle-H-2",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic cycle-H-2",
+              "parent_key": "cycle-H-1"
+            }
+          ],
+          "edges": []
+        }
+      },
+      "expected_0_2_1": {
+        "structural_parent_refs_resolved_individually": 2,
+        "tree_cycle_gap": "TREE_CYCLE",
+        "binding_gap": true,
+        "no_acyclic_claim": true
+      }
+    },
+    {
+      "id": "I",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-I",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "member-I",
+              "ui_id": "ui-member-I",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic member-I"
+            },
+            {
+              "key": "group-I",
+              "ui_id": "ui-group-I",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic group-I"
+            }
+          ],
+          "edges": [
+            {
+              "type": "MEMBER_OF",
+              "from_key": "member-I",
+              "to_key": "group-I"
+            }
+          ]
+        }
+      },
+      "expected_0_2_1": {
+        "from_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "declared_id": null,
+          "declared_key_literal": "member-I",
+          "resolution": "RESOLVED"
+        },
+        "to_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "declared_id": null,
+          "declared_key_literal": "group-I",
+          "resolution": "RESOLVED"
+        },
+        "semantics": "ORGANIZATIONAL_MEMBERSHIP",
+        "causal_status": "NON_CAUSAL",
+        "scientific_approval": "NOT_EVALUATED"
       }
     }
   ]

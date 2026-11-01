@@ -2,7 +2,7 @@
 
 **Missão:** AP04-F4-C2-K-KEY-IDENTITY-CONTRACT-CHAT-01.
 **Conclusão técnica:** `O0_INSUFFICIENT_O1_RECOMMENDED_CONDITIONALLY`.
-**Gate de conclusão integral:** `INDEPENDENT_REVIEW_PENDING` e `ARC09_HUMAN_APPROVAL_PENDING`. Não reivindicar `C2_K_IDENTITY_DECISION_READY_FOR_HUMAN_REVIEW` sem revisão real por autor distinto.
+**Gate de conclusão integral:** `INDEPENDENT_REVIEW_NOT_PROVEN` e `ARC09_HUMAN_APPROVAL_PENDING`; resultado atual `C2_K_REVIEW_BLOCKED_EXACT`. Não reivindicar `C2_K_CONTRACT_CANDIDATE_REVIEWED` sem parecer distinto no SHA final.
 **Autoridade:** `LEGACY_DERIVED`, não científica.
 
 ## Evidência verificável
@@ -14,6 +14,18 @@ O schema fechado 0.2.0 em `tools/atlas_legacy_presentation/descriptor.schema.jso
 C2 no SHA `e349a09d439d292011bca4c0994cf8ab3e3fbf9f` conserva key e ui_id em `unmapped_fields`, mas `ref()` busca nativos. O cenário sem native vira `UNRESOLVED` + `SOURCE_PARENT_KEY_NOT_NATIVE_REFERENCE`; se key textual se confunde com native_id de outra coleção, o mapeador recusa `R4_V5_PARENT_SCOPE_UNREPRESENTABLE`. Arestas `from_key/to_key` possuem proteção análoga. Isso protege a ciência, mas perde navegação explícita legítima. Não é falta de teste somente: é uma lacuna do modelo de referência.
 
 F1 sanitizada `a237f446e54927eeeda8ed5e8e9daa83ee09dcb7` informa 2.911 nós, 1.595 relações e 858 parent_keys explícitos resolvidos **no legado e no payload selecionado**. Esses números não demonstram paridade em 0.2.0, nem cobertura do acervo global. Os 50 negativos F1 não são a mesma coisa que os 50 pares inventados de nosso teste D.
+
+## Disposição das cinco observações Copilot no SHA inicial
+
+1. F1: a linha F3A da compatibilidade refere-se agora à **baseline sanitizada e escopada** de 2.911 nós/1.595 relações/858 parent keys; não são números sintéticos nem universais.
+2. Markdown: normalizadas as crases dos campos em `DESCRIPTOR-0.2.1-CANDIDATE.md` e `CURRENT-CONTRACT-COUNTEREXAMPLES.md`.
+3. Schema: explicado que `node.parent_key_literal` e `node.parent` são **ambos requeridos já em 0.2.0**; o delta declara `source_key_literal` e os novos campos requeridos de `reference`. `PARENT_RESOLVED` agora tem prova verificável, campo-irmão, base e alvo inequívocos.
+4. Grafia: corrigido “órfãos”.
+5. Handoff: `technical_conclusion` usa o mesmo token deste RESULT e hashes do manifest são recalculados para os arquivos efetivamente alterados.
+
+**Contraprova adicional:** caso E de origem com key ausente exige rejeição atômica (o oráculo anterior confundia E com órfão válido); G exercita alvo ausente com key válida; H ciclo; I `MEMBER_OF` navegável e não causal. Os casos continuam inventados, não são testes executados do produto.
+
+**Revisão independente no SHA corrigido:** `INDEPENDENT_REVIEW_NOT_PROVEN` até análise por executor distinto. A revisão Copilot no SHA inicial foi uma revisão real com cinco findings, não atesta as correções posteriores.
 
 ## Decisão recomendada
 
