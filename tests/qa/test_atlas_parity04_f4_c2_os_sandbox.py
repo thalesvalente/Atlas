@@ -320,3 +320,28 @@ def test_windows_job_rejects_tampered_argument_vector(synthetic):
         with pytest.raises(NativeJobUnavailable,
                            match="WORKER_ARGUMENTS_UNTRUSTED"):
             run_synthetic_job(args)
+
+
+
+def test_aarch64_socketpair_is_in_native_seccomp_denyset(monkeypatch):
+    """AArch64 is not the hosted Ubuntu arch; validate its BPF branch structurally."""
+    if sys.platform != "linux":
+        pytest.skip("Linux seccomp structural test")
+    import ctypes
+    from tools.atlas_legacy_presentation import os_linux_isolation as linux
+    monkeypatch.setattr(linux.platform, "machine", lambda: "aarch64")
+
+    class FakeLibc:
+        def prctl(self, option, mode, program, arg4, arg5):
+            p = ctypes.cast(program, ctypes.POINTER(linux._Program)).contents
+            checks = [
+                (p.filters[i].code, p.filters[i].k,
+                 p.filters[i + 1].code, p.filters[i + 1].k)
+                for i in range(p.length - 1)
+            ]
+            assert (0x15, 199, 0x06, 0x00050001) in checks
+            assert p.filters[2].code == 0x06
+            assert p.filters[2].k == 0x80000000
+            return 0
+
+    linux._seccomp(FakeLibc())
