@@ -108,6 +108,25 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
             Path(argv[0]).resolve() != Path(sys.executable).resolve() or
             Path(argv[worker_index]).resolve() != expected):
         raise NativeJobUnavailable("UNTRUSTED_WORKER_REJECTED")
+    # Validate every operand, not only the interpreter and module.
+    flags = argv[worker_index + 1:]
+    expected_flags = ["--source", "--outside", "--scratch", "--mode",
+                      "--supervisor-pid"]
+    if len(flags) != 10 or flags[::2] != expected_flags:
+        raise NativeJobUnavailable("WORKER_ARGUMENTS_UNTRUSTED")
+    try:
+        import os
+        from .os_supervisor import _preflight, _OPERATIONS
+        src, outside, scratch = [Path(flags[i]) for i in (1, 3, 5)]
+        if flags[7] not in _OPERATIONS or int(flags[9]) != os.getpid():
+            raise NativeJobUnavailable("WORKER_ARGUMENTS_UNTRUSTED")
+        _preflight(src, outside, scratch)
+        if not scratch.parent.parent.name.startswith("atlas-c2b-"):
+            raise NativeJobUnavailable("WORKER_ARGUMENTS_UNTRUSTED")
+    except NativeJobUnavailable:
+        raise
+    except Exception:
+        raise NativeJobUnavailable("WORKER_ARGUMENTS_UNTRUSTED") from None
     k = ctypes.WinDLL("kernel32", use_last_error=True)
     k.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
     k.CreateJobObjectW.restype = wintypes.HANDLE

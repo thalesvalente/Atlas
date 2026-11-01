@@ -60,7 +60,7 @@ def _seccomp(libc: ctypes.CDLL) -> None:
                      59, 101, 272, 299, 308, 321, 322, 425, 435)
     elif machine in ("aarch64", "arm64"):
         arch = 0xC00000B7
-        forbidden = (198, 200, 201, 202, 203, 206, 208, 210, 211,
+        forbidden = (198, 199, 200, 201, 202, 203, 206, 208, 210, 211,
                      212, 220, 221, 117, 268, 270, 277, 280, 425, 435)
     else:
         raise IsolationUnavailable("SECCOMP_ARCH_UNSUPPORTED")

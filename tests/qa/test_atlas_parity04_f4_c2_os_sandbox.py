@@ -15,13 +15,19 @@ from tools.atlas_legacy_presentation import os_supervisor as sandbox
 @pytest.fixture
 def synthetic(tmp_path: Path):
     """Only preflight/injected-assignment tests receive external invented paths."""
-    root = tmp_path / "os-invented"
+    parent = tmp_path / "atlas-c2b-fixture"
+    parent.mkdir()
+    root = parent / "os-invented"
     root.mkdir()
     inputs = root / "input"
     inputs.mkdir()
     scratch = root / "scratch"
-    scratch.mkdir(mode=0o700)
-    if os.name != "nt":
+    if os.name == "nt":
+        from tools.atlas_legacy_presentation.os_windows_acl import (
+            create_private_scratch)
+        create_private_scratch(scratch)
+    else:
+        scratch.mkdir(mode=0o700)
         scratch.chmod(0o700)
     source = inputs / "os-allowlisted.json"
     outside = inputs / "os-outside.json"
@@ -274,3 +280,43 @@ def test_evidence_checkout_sha_mismatch_must_fail(tmp_path, monkeypatch):
         '<testsuite tests="1" skipped="0" failures="0" errors="0"/>',
         encoding="utf-8")
     assert evidence.main() == 2
+
+
+
+def test_direct_worker_refuses_untrusted_paths(tmp_path):
+    """No data from caller-selected paths may be parsed by the worker CLI."""
+    worker = Path(sandbox.__file__).with_name("os_worker.py")
+    fake = tmp_path / "untrusted.json"
+    fake.write_text('{"invented":true}', encoding="utf-8")
+    out = tmp_path / "untrusted-report"
+    out.mkdir()
+    cmd = [sys.executable, "-I", "-S", str(worker),
+           "--source", str(fake), "--outside", str(fake),
+           "--scratch", str(out), "--mode", "success",
+           "--supervisor-pid", str(os.getpid())]
+    result = subprocess.run(cmd, capture_output=True, timeout=8)
+    assert result.returncode == 78
+    assert fake.read_text(encoding="utf-8") == '{"invented":true}'
+    assert list(out.iterdir()) == []
+
+
+def test_windows_job_rejects_tampered_argument_vector(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Windows native job API only")
+    source, outside, scratch = synthetic
+    from tools.atlas_legacy_presentation.os_windows_job import (
+        NativeJobUnavailable, run_synthetic_job)
+    worker = Path(sandbox.__file__).with_name("os_worker.py")
+    valid = [sys.executable, "-I", "-S", str(worker),
+             "--source", str(source), "--outside", str(outside),
+             "--scratch", str(scratch), "--mode", "success",
+             "--supervisor-pid", str(os.getpid())]
+    tampered = [
+        valid[:-1] + ["0"],
+        valid[:5] + ["--other-flag"] + valid[6:],
+        valid + ["--unexpected", "value"],
+    ]
+    for args in tampered:
+        with pytest.raises(NativeJobUnavailable,
+                           match="WORKER_ARGUMENTS_UNTRUSTED"):
+            run_synthetic_job(args)

@@ -31,6 +31,45 @@ def main() -> int:
         required=True)
     parser.add_argument("--supervisor-pid", type=int, required=True)
     args = parser.parse_args()
+    # Enforce synthetic boundary *in the independently executable worker*.
+    # A direct CLI call must not inherit the supervisor's trust automatically.
+    try:
+        if os.getppid() != args.supervisor_pid:
+            return 78
+        if not (args.source.is_absolute() and args.outside.is_absolute()
+                and args.scratch.is_absolute()):
+            return 78
+        parent = args.source.parent.parent
+        if (args.source.name != "os-allowlisted.json" or
+                args.outside.name != "os-outside.json" or
+                args.source.parent.name != "input" or
+                args.outside.parent != args.source.parent or
+                args.scratch != parent / "scratch" or
+                parent.name != "os-invented" or
+                not parent.parent.name.startswith("atlas-c2b-")):
+            return 78
+        for path in (args.source, args.outside, args.scratch):
+            for ancestor in (path, *path.parents):
+                st = ancestor.lstat()
+                if ancestor.is_symlink() or (
+                        os.name == "nt" and
+                        getattr(st, "st_file_attributes", 0) & 0x400):
+                    return 78
+        if os.name == "nt":
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from os_windows_acl import verify_private_scratch
+            verify_private_scratch(args.scratch)
+        else:
+            import stat
+            sc = args.scratch.stat()
+            if (not stat.S_ISDIR(sc.st_mode) or sc.st_uid != os.getuid()
+                    or stat.S_IMODE(sc.st_mode) != 0o700):
+                return 78
+        src = args.source.stat()
+        if not args.source.is_file() or src.st_nlink != 1:
+            return 78
+    except Exception:
+        return 78
     if sys.platform != "linux":
         # Job-only probes MUST NOT inspect non-fixture source or do any network.
         if args.mode == "memory":

@@ -1,26 +1,26 @@
-# AP04 F4-C2-B — política de isolamento e capacidades observáveis
+# AP04-F4-C2-B — Política OS, limites e capacidades
 
-## Windows (runners GitHub)
+**Contexto imutável**: ADR-0003-v0.2 `APPROVED_SCOPED`, F2, reader003 e precedência da via Caderno. Este componente é **somente um ensaio nativo de SO** para futura composição C2-D; não é aquisição privada nem valida paridade. Todos os dados do workflow são inventados internamente.
 
-- **Implementado e ensaiado**: `CreateJobObjectW`, `SetInformationJobObject`, `QueryInformationJobObject`, `JOB_OBJECT_LIMIT_JOB_MEMORY=268435456`, `JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE`, `CreateProcessW(CREATE_SUSPENDED)`, associação antes de `ResumeThread`, `TerminateJobObject` e consulta de `ActiveProcesses` após timeout.
-- **Escopo de memória**: committed bytes agregado do Job. Não confundir com RSS, working set ou tempo CPU.
-- **Escopo de deadline**: relógio monotônico do processo supervisor, 30 s, incluindo worker bloqueado/descendente, sem usar `JOB_OBJECT_LIMIT_JOB_TIME` como wall clock.
-- **Não implementado**: AppContainer/LPAC ou broker de handles/ACL. Job não restringe filesystem e rede, sequer o loopback; nunca afirmar que a execução Windows foi confinada nessas dimensões.
-- **Perfil proposto ao próximo owner**: AppContainer/LPAC sem capabilities de rede, com fonte inventada exata read-only e scratch próprio, process creation suspenso e Job; testes de `CreateFileW`, write e conexão loopback/external. Não criar perfis, ACLs ou políticas do computador pessoal sem autorização. API experimental `CreateProcessInSandbox` depende do SO e de especificação compilada; a presença documental não é evidência do runner.
-- **Status**: `OS_CONTROL_IMPLEMENTED` para Job; `OS_CONTROL_TESTED_IN_RUNNER` para Job no SHA com CI verde; `NOT_SUPPORTED` para FS/rede até implementação e contraprovas; `HOST_UNVERIFIED`.
+## Windows
 
-## Linux (runners GitHub)
+- Worker confiável fixado em `os_worker.py`; lançado **suspenso**; Job criado com limite agregado `JOB_OBJECT_LIMIT_JOB_MEMORY=268435456` de **committed bytes**. Limites consultados por `QueryInformationJobObject`; `KILL_ON_JOB_CLOSE` e `BREAKAWAY_OK=0`; somente depois `AssignProcessToJobObject`/retomada. Terminador monitorado pelo supervisor usa **wall clock monotônico 30 s**; não substituído por `JOB_OBJECT_LIMIT_JOB_TIME`.
+- Contraprovas: 300MiB, sleep 90s, filho bloqueado, tentativa de breakaway, falha forçada de associação sem retomada, encerramento de descendentes e ausência de descriptor publicável.
+- Caminhos do worker de teste são gerados internamente a partir de literais inventados. Scratch 0700 equivalente: criação Windows com descritor de segurança explícito **protegido** e dono SID do token atual, ACEs de owner+SYSTEM; rechecagem com `GetNamedSecurityInfoW`, `GetAce` e `EqualSid`, negando trustees não permitidos. Não alterar ACLs de outras pastas, fontes ou host.
+- **Diferenciação obrigatória**: privacidade do scratch de teste não confina leitura/escrita do WORKER em outros caminhos. Job Object **não bloqueia rede**. Sem AppContainer/LPAC ou broker, esse requisito F2 está **NÃO IMPLEMENTADO** para Windows; `C2_B_OS_BLOCKED_EXACT`.
 
-- **Implementado**: Landlock ABI >=3 (`landlock_create_ruleset`, `landlock_add_rule`, `landlock_restrict_self`) sobre um arquivo exato read-only e scratch privado RW, seccomp BPF bloqueando socket/fork/clone/exec, `NO_NEW_PRIVS`, `PDEATHSIG`, `RLIMIT_AS=256 MiB`, `RLIMIT_CORE=0`, umask 077.
-- **Escopo de memória**: `RLIMIT_AS` é teto de virtual address space do worker, não um contador cgroup v2 de memória residente. `fork/clone` é negado para evitar soma de processos; kernel/host memory fuera do address space não é contabilizado da mesma forma.
-- **Escopo de rede**: chamada de criação de socket AF_INET/AF_INET6 negada pelo SO; sem socket herdado no processo criado com `close_fds=True`.
-- **Fallback**: Landlock ABI <3, seccomp não disponível, OS não reconhecido, scratch impróprio, perfil incompleto → `OS_ISOLATION_UNVERIFIED` e recusa; **sem bypass cooperativo**. Não criar cgroups sem delegação.
-- **Status**: `OS_CONTROL_IMPLEMENTED`; `OS_CONTROL_TESTED_IN_RUNNER` apenas para as contraprovas observadas e o SHA correspondente. Testes Linux não qualificam host Windows do operador.
+## Ubuntu Linux
 
-## Direitos e fontes
+- `prctl(NO_NEW_PRIVS)`, `PR_SET_PDEATHSIG=SIGKILL`; Landlock v3+ file-level RO na fixture fonte exata, RW somente no scratch próprio; `seccomp-BPF` veda criação de sockets e novos processos/exec, com `SECCOMP_RET_KILL_PROCESS` para arquitetura não esperada; sem herança de descritores via `close_fds=True`.
+- `RLIMIT_AS` igual a **256MiB de espaço de endereçamento virtual** e `RLIMIT_CORE=0`; essas métricas diferem de committed Job e RSS/cgroup v2. Nenhuma afirmação falsa de equivalência de medidas.
+- Prazo de 30s supervisor externo monotônico, `killpg`, espera terminal; testes recusam escrita fora do scratch, abertura de arquivo fora da allowlist, sockets loopback/IPv6, fork, OOM virtual, timeout, forma de reporter 0600 e ausência física de descriptor.
+- Se Landlock ABI <3, seccomp indisponível, plataforma desconhecida, scratch inseguro ou limite falho: **bloqueio**, nunca substituição por deadline cooperativo.
 
-Norma F2: no máximo 3 entradas allowlisted, fonte somente leitura, scratch temporário privado fora do checkout/acervo; sem recursão, ZIP, provider, código R4 ou rede. Limites 64 MiB por arquivo, 192 MiB combinado e descriptor 32 MiB permanecem de responsabilidade de reader/C2-D, não são alterados aqui. Não há produção nesta branch.
+## Política de CI e gates
 
-Referências públicas oficiais: [Microsoft — Launch an AppContainer](https://learn.microsoft.com/en-us/windows/win32/secauthz/implementing-an-appcontainer); [Microsoft — JobObject extended limit](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information); [Linux kernel — Landlock](https://docs.kernel.org/userspace-api/landlock.html).
+- `windows-latest` e `ubuntu-latest` com worker normal (`optimize=0`) e worker otimizado (`optimize=1`). **Pytest sempre com asserts ativos**, independentemente do worker. O recibo audita `git rev-parse HEAD == ATLAS_CHECKOUT_SHA`, JUnit com pelo menos um teste executado, zero falhas e erros, e falha com exit code não-zero no caso contrário.
+- Artefatos do GitHub Actions são JUnit e `observed-ci.json` sob `.test-output/`, retidos no serviço, não dados científicos. A rotina preserva bloqueio `PRODUCTION_ACQUISITION_BLOCKED` mesmo se todos testes passam.
+- Contribuição C2-B não altera `reader.py` de C2-A, schema do descriptor, arquivo histórico/manifesto antigo, workflow congelado, `AGENTS.md`, `feature.json`, R4 ou planos.
+- Não executar replays R4, inferências/providers, importação de fontes reais ou chamadas externas de rede. G4 continua `BLOCKED`, G5/G6 `NOT_APPROVED`.
 
-**Restrição mandatória**: operação real fica em `PRODUCTION_ACQUISITION_BLOCKED` até Windows FS/rede e demais invariantes testados e validados por revisão independente. Nenhuma aprovação de G4/G5/G6.
+Fontes técnicas: [Microsoft Job Objects](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects); [Microsoft AppContainer](https://learn.microsoft.com/en-us/windows/win32/secauthz/implementing-an-appcontainer); [Linux Landlock](https://docs.kernel.org/userspace-api/landlock.html).
