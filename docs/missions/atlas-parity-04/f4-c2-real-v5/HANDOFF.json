@@ -1,0 +1,32 @@
+{
+  "schema": "atlas-ap04-f4-c2-a-handoff-v1",
+  "mission": "AP04-F4-C2-A-REAL-V5-MAPPING-CHAT-02",
+  "repository": "thalesvalente/Atlas",
+  "branch": "feat/atlas-parity04-f4-external-reader-20261031",
+  "pr": 18,
+  "pr_draft": true,
+  "code_sha": "dcd219bf592f47590413424adfdf6513a0daa18f",
+  "code_tree": "aad819d8d7bc8dc40544aa850bb73831fa5b7fb0",
+  "code_ci": 41269925191,
+  "documentation_parent": "dcd219bf592f47590413424adfdf6513a0daa18f",
+  "terminal_sha": "VERIFY_FROM_PR18_HEAD_AFTER_PUBLICATION",
+  "status": "C2_A_BLOCKED_EXACT",
+  "subsidiary": "C2_A_SOURCE_KEY_DECISION_REQUIRED",
+  "blockers": [
+    "SOURCE_KEY_CONTRACT_MISMATCH",
+    "C2_V5_UNAUTHORIZED_HISTORY_PATH",
+    "NATIVE_INDEPENDENT_REVIEW_NOT_AVAILABLE",
+    "OS_ISOLATION_UNVERIFIED",
+    "HARD_BUDGET_UNVERIFIED",
+    "REAL_SOURCE_BYTES_NOT_ACCESSED"
+  ],
+  "historical_sha": "258eda6153ffe602d3fa8e6b4fe7a2ad74edbbd7",
+  "historical_blobs_verified": 22,
+  "decision_owner_K": "ARC-09 versioned structural-key reference mapping decision",
+  "checker_owner": "Authorize new receipt paths by versioned guarded modification; do not bypass historical audit",
+  "owner_B": "OS sandbox and hard budget on exclusive reader/host files",
+  "independent_QA": "Review frozen terminal SHA by actual different executor",
+  "C4": "Requalify global gate only after approved composition",
+  "F4_C3": "NOT_AUTHORIZED",
+  "no_merge_release_deploy_migration": true
+}

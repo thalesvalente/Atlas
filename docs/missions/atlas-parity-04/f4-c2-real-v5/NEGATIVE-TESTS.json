@@ -1,0 +1,119 @@
+{
+  "schema": "atlas-ap04-f4-c2-a-negative-v1",
+  "code_sha": "dcd219bf592f47590413424adfdf6513a0daa18f",
+  "run_id": 41269925191,
+  "fixture_values": "ALL_INVENTED_R4_V5_SHAPE",
+  "matrix": [
+    {
+      "os": "ubuntu",
+      "optimized": 0,
+      "passed": 59,
+      "skipped": 1,
+      "failed": 0
+    },
+    {
+      "os": "ubuntu",
+      "optimized": 1,
+      "passed": 59,
+      "skipped": 1,
+      "failed": 0
+    },
+    {
+      "os": "windows",
+      "optimized": 0,
+      "passed": 60,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "os": "windows",
+      "optimized": 1,
+      "passed": 60,
+      "skipped": 0,
+      "failed": 0
+    }
+  ],
+  "positive_invented_shapes": {
+    "records": 159,
+    "lineage_nodes": 2911,
+    "lineage_edges": 1595,
+    "tables": 5,
+    "rows_by_table": [
+      39,
+      85,
+      28,
+      0,
+      0
+    ],
+    "unadmitted": 28
+  },
+  "cases": [
+    [
+      "graph_cross_collection_native_id_collision",
+      "PASS",
+      "NULL_ENDPOINT+SOURCE_KEY_NAMESPACE_COLLISION, no wrong parent"
+    ],
+    [
+      "graph_from_key_cross_collection_collision",
+      "PASS",
+      "no invented relation"
+    ],
+    [
+      "table_record_id_cross_collection_collision",
+      "PASS",
+      "record binding not falsely linked"
+    ],
+    [
+      "large_graph_and_distinct_records",
+      "PASS",
+      "2911 nodes/1595 edges distinct from records"
+    ],
+    [
+      "five_tables_152_rows_28_unadmitted",
+      "PASS",
+      "map cells, RF status and null native IDs"
+    ],
+    [
+      "missing_null_unicode_large_integer",
+      "PASS",
+      "lexemes preserved"
+    ],
+    [
+      "root_history_and_A10_sidecars",
+      "PASS",
+      "unmapped typed pointers"
+    ],
+    [
+      "partial_invalid_transform_atomicity",
+      "PASS",
+      "reject without descriptor"
+    ],
+    [
+      "unadmitted_with_native_id",
+      "PASS",
+      "reject"
+    ],
+    [
+      "invalid_dossier_shape",
+      "PASS",
+      "reject"
+    ],
+    [
+      "File_cannot_be_inferred_Product",
+      "PASS",
+      "distinct asset types"
+    ],
+    [
+      "duplicated_html_script_or_json_key",
+      "PASS",
+      "reject"
+    ],
+    [
+      "untrusted_executable_js_or_link",
+      "PASS",
+      "not executed or dereferenced"
+    ]
+  ],
+  "source_archive_read": false,
+  "operational_acquisition": "NOT_RUN"
+}
