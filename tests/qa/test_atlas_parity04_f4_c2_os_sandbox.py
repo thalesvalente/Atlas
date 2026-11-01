@@ -563,3 +563,16 @@ def test_windows_broker_has_no_source_read_api_or_handle_transit():
     assert "source_sample = src.read" not in worker
     assert "(wintypes.HANDLE * 1)(out)" in native
     assert "src_attrs" in native
+
+
+
+def test_native_handle_integer_conversion_rejects_forged_or_invalid():
+    """ctypes ABI converter: verifies both native restype and wrapped HANDLE."""
+    import ctypes
+    from tools.atlas_legacy_presentation.os_windows_job import (
+        NativeJobUnavailable, _numeric_handle)
+    assert _numeric_handle(42) == "42"
+    assert _numeric_handle(ctypes.c_void_p(42)) == "42"
+    for invalid in (None, 0, ctypes.c_void_p(), -1, ctypes.c_void_p(-1)):
+        with pytest.raises(NativeJobUnavailable, match="BROKER_HANDLE_INVALID"):
+            _numeric_handle(invalid)

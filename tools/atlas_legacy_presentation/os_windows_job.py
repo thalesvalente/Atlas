@@ -317,6 +317,18 @@ class _SidAndAttributes(ctypes.Structure):
     _fields_ = [("Sid", ctypes.c_void_p), ("Attributes", wintypes.DWORD)]
 
 
+def _numeric_handle(handle) -> str:
+    """Convert a native HANDLE return to its non-null pointer-sized integer.
+
+    ctypes restype=HANDLE normally returns int/None; explicit c_void_p
+    wrappers are also accepted. Do not stringify or int(c_void_p) directly.
+    """
+    raw = handle.value if isinstance(handle, ctypes.c_void_p) else handle
+    if not isinstance(raw, int) or raw <= 0 or raw == ctypes.c_void_p(-1).value:
+        raise NativeJobUnavailable("BROKER_HANDLE_INVALID")
+    return str(raw)
+
+
 class _AppContainerLaunch:
     """Ephemeral profile and only the WRITE-only report file capability.
 
@@ -551,7 +563,7 @@ class _AppContainerLaunch:
         # The source handle remains pinned/readable solely by the trusted
         # supervisor, which verified the exact synthetic payload already.
         self.argv_suffix = [
-            "--broker-report-handle", str(int(out)),
+            "--broker-report-handle", _numeric_handle(out),
             "--broker-source-length", str(len(_INVENTED_SOURCE)),
             "--broker-loopback-port",
             str(self.listener.getsockname()[1])]
