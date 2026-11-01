@@ -286,21 +286,29 @@ def _windows_broker_worker(args) -> int:
                 checks[name] = "DENIED_BY_OS"
             except OSError:
                 checks[name] = "OTHER_ERROR_UNVERIFIED"
+        connect_error = None
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
                 sock.settimeout(2)
-                outcome = sock.connect_ex(("127.0.0.1",
-                                           args.broker_loopback_port))
-                checks["loopback_connect"] = (
-                    "DENIED_BY_OS" if outcome in (13, 10013) else
-                    "PERMITTED_OR_UNVERIFIED")
+                connect_error = sock.connect_ex(
+                    ("127.0.0.1", args.broker_loopback_port))
         except OSError as exc:
-            checks["loopback_connect"] = (
-                "DENIED_BY_OS" if exc.errno in (13, 10013)
-                else "OTHER_ERROR_UNVERIFIED")
-        safe = all(v == "DENIED_BY_OS" for v in checks.values())
+            connect_error = exc.errno
+        # 10060 is the WFP-drop timeout observed with an AppContainer
+        # missing loopback capabilities. Do NOT equate a plain timeout
+        # with OS denial: the supervisor additionally verifies the WFP
+        # exemption inventory, token capabilities, positive control and
+        # absence of an accepted worker connection.
+        checks["loopback_connect"] = (
+            "DENIED_BY_OS" if connect_error in (13, 10013) else
+            "NO_CONNECTION_TIMEOUT" if connect_error == 10060 else
+            "PERMITTED_OR_UNVERIFIED")
+        safe = all(v == "DENIED_BY_OS" for k, v in checks.items()
+                   if k != "loopback_connect") and checks[
+                       "loopback_connect"] in (
+                           "DENIED_BY_OS", "NO_CONNECTION_TIMEOUT")
         report({"isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES",
-                "checks": checks})
+                "checks": checks, "loopback_connect_os_error": connect_error})
         return 0 if safe else 79
     except Exception:
         return 78

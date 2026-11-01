@@ -271,7 +271,13 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
             "active_processes_after_timeout":
                 int(accounting.ActiveProcesses) if timed_out else None,
             "filesystem_network_confined": False,
-            "appcontainer_token_verified": bool(profile)}
+            "appcontainer_token_verified": bool(profile),
+            "appcontainer_loopback_exception_absent":
+                profile.loopback_no_exception if profile else None,
+            "loopback_control_passed":
+                profile.loopback_control_passed if profile else None,
+            "loopback_worker_accepted":
+                profile._loopback_worker_accepted() if profile else None}
     finally:
         if created:
             if not associated:
@@ -300,6 +306,9 @@ class _InheritAttributes(ctypes.Structure):
                 ("lpSecurityDescriptor", ctypes.c_void_p),
                 ("bInheritHandle", wintypes.BOOL)]
 
+class _SidAndAttributes(ctypes.Structure):
+    _fields_ = [("Sid", ctypes.c_void_p), ("Attributes", wintypes.DWORD)]
+
 
 class _AppContainerLaunch:
     """Ephemeral profile and exactly two inherited file capabilities.
@@ -319,6 +328,66 @@ class _AppContainerLaunch:
         self.argv_suffix = []
         self.listener = None
         self._initialized = False
+        self.loopback_no_exception = False
+        self.loopback_control_passed = False
+
+    def _verify_network_policy(self):
+        """Read-only native WFP AppContainer exception inventory.
+
+        If its SID has an exemption or the inventory cannot be verified,
+        fail closed. No firewall/host policy is ever modified.
+        """
+        firewall = ctypes.WinDLL("FirewallAPI", use_last_error=True)
+        firewall.NetworkIsolationGetAppContainerConfig.argtypes = [
+            ctypes.POINTER(wintypes.DWORD),
+            ctypes.POINTER(ctypes.POINTER(_SidAndAttributes))]
+        firewall.NetworkIsolationGetAppContainerConfig.restype = wintypes.DWORD
+        adv = ctypes.WinDLL("advapi32", use_last_error=True)
+        adv.EqualSid.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+        adv.EqualSid.restype = wintypes.BOOL
+        self.kernel.GetProcessHeap.restype = wintypes.HANDLE
+        self.kernel.HeapFree.argtypes = [
+            wintypes.HANDLE, wintypes.DWORD, ctypes.c_void_p]
+        self.kernel.HeapFree.restype = wintypes.BOOL
+        count = wintypes.DWORD()
+        entries = ctypes.POINTER(_SidAndAttributes)()
+        if firewall.NetworkIsolationGetAppContainerConfig(
+                ctypes.byref(count), ctypes.byref(entries)) != 0:
+            raise NativeJobUnavailable("APPCONTAINER_LOOPBACK_POLICY_UNVERIFIED")
+        try:
+            if count.value > 10000 or (count.value and not entries):
+                raise NativeJobUnavailable("APPCONTAINER_LOOPBACK_POLICY_UNVERIFIED")
+            for index in range(count.value):
+                sid = entries[index].Sid
+                if sid and adv.EqualSid(self.sid, sid):
+                    raise NativeJobUnavailable("APPCONTAINER_LOOPBACK_EXEMPT")
+            self.loopback_no_exception = True
+        finally:
+            if entries:
+                heap = self.kernel.GetProcessHeap()
+                for index in range(min(count.value, 10000)):
+                    if entries[index].Sid:
+                        self.kernel.HeapFree(heap, 0, entries[index].Sid)
+                self.kernel.HeapFree(heap, 0, ctypes.cast(entries, ctypes.c_void_p))
+
+    def _verify_listener_positive_control(self):
+        import socket
+        self.listener.settimeout(3)
+        with socket.create_connection(self.listener.getsockname(), timeout=3):
+            peer, _ = self.listener.accept()
+            peer.close()
+        self.listener.settimeout(0.15)
+        self.loopback_control_passed = True
+
+    def _loopback_worker_accepted(self):
+        import socket
+        try:
+            peer, _ = self.listener.accept()
+        except socket.timeout:
+            return False
+        else:
+            peer.close()
+            return True
 
     def _stage_python_runtime(self):
         """Copy only installed public Python runtime into this disposable fixture.
@@ -417,6 +486,7 @@ class _AppContainerLaunch:
                 None, 0, ctypes.byref(self.sid)) != 0 or not self.sid.value:
             self.profile_name = None
             raise NativeJobUnavailable("APPCONTAINER_PROFILE_CREATE_FAILED")
+        self._verify_network_policy()
         self._stage_python_runtime()
         # Open source with no FILE_SHARE_WRITE/DELETE; keep it pinned through
         # worker termination. FILE_FLAG_OPEN_REPARSE_POINT rejects link races.
@@ -451,6 +521,7 @@ class _AppContainerLaunch:
         self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.listener.bind(("127.0.0.1", 0))
         self.listener.listen(1)
+        self._verify_listener_positive_control()
         self.argv_suffix = ["--broker-source-handle", str(int(src)),
                             "--broker-report-handle", str(int(out)),
                             "--broker-loopback-port",

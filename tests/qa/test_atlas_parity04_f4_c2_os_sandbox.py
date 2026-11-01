@@ -376,10 +376,13 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
     from tools.atlas_legacy_presentation.os_windows_job import (
         NativeJobUnavailable, run_synthetic_job)
     worker = Path(sandbox.__file__).with_name("os_worker.py")
-    argv = [sys.executable, "-I", "-S", str(worker),
-            "--source", str(source), "--outside", str(outside),
-            "--scratch", str(scratch), "--mode", "denials",
-            "--supervisor-pid", str(os.getpid())]
+    argv = [sys.executable, "-I"]
+    if os.environ.get("ATLAS_WORKER_OPTIMIZE") == "1":
+        argv.append("-O")
+    argv += ["-S", str(worker),
+             "--source", str(source), "--outside", str(outside),
+             "--scratch", str(scratch), "--mode", "denials",
+             "--supervisor-pid", str(os.getpid())]
     try:
         result = run_synthetic_job(argv, wall_seconds=8, appcontainer=True)
     except NativeJobUnavailable as exc:
@@ -401,7 +404,16 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
             "outside_read", "source_write", "scratch_path_write",
             "loopback_connect"}
         assert all(v == "DENIED_BY_OS"
-                   for v in detail["checks"].values())
+                   for k, v in detail["checks"].items()
+                   if k != "loopback_connect")
+        assert result["appcontainer_loopback_exception_absent"] is True
+        assert result["loopback_control_passed"] is True
+        assert result["loopback_worker_accepted"] is False
+        assert detail["checks"]["loopback_connect"] in (
+            "DENIED_BY_OS", "NO_CONNECTION_TIMEOUT")
+        assert detail["loopback_connect_os_error"] in (13, 10013, 10060)
+        assert detail["worker_optimize"] == int(os.environ.get(
+            "ATLAS_WORKER_OPTIMIZE", "0"))
 
 
 def test_windows_broker_flags_cannot_authenticate_direct_worker(synthetic):
