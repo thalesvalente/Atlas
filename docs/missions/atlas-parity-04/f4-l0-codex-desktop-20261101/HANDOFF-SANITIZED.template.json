@@ -1,0 +1,39 @@
+{
+  "schema": "ap04-f4-l0-codex-sanitized-v1",
+  "mission": "AP04-F4-L0-CODEX-DESKTOP-01",
+  "c2_d_sha": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+  "result": "NOT_EXECUTED",
+  "host_local_verified": false,
+  "workspace_write_probe": "NOT_RUN",
+  "source_authorization": "NOT_GRANTED",
+  "source_read": false,
+  "source_integrity": "NOT_RECHECKED",
+  "f1_comparison": "NOT_RUN",
+  "proof_scope": "SELECTED_F1_FILES_ONLY",
+  "observed_counts": {
+    "records": null,
+    "lineage_nodes": null,
+    "lineage_edges": null,
+    "table_count": null,
+    "table_rows_total": null,
+    "unadmitted_rf_rows": null,
+    "resolved_explicit_parent_keys": null,
+    "unbound_tables": null
+  },
+  "structural_checks": {
+    "v5_export_declared": null,
+    "a10_lineage_declared": null,
+    "source_key_native_id_distinct": null,
+    "missing_null_distinguished": null
+  },
+  "privacy_review": "PENDING",
+  "operator_publication_approval": false,
+  "gates": {
+    "G4": "BLOCKED",
+    "G5": "NOT_EVALUATED",
+    "G6": "NOT_EVALUATED",
+    "L1": "NOT_EXECUTED",
+    "C3_dependency_satisfied": false
+  },
+  "global_archive": "UNKNOWN_UPSTREAM"
+}
