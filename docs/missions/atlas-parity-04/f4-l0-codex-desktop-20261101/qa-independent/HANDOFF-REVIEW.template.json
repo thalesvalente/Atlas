@@ -1,0 +1,29 @@
+{
+  "schema": "ap04-f4-l0-independent-receipts-review-v1",
+  "mission": "AP04-F4-L0-QA-INDEPENDENT-RECEIPTS-01",
+  "execution": "NOT_EXECUTED",
+  "result": "NOT_REVIEWED",
+  "independence": "NOT_PROVEN",
+  "reference": {
+    "F1_public_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+    "C2D_blocked_sha": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+    "L0_handoff_docs_sha": "f487c0982a7ead8b458b9f193a917a2fd3bb0359"
+  },
+  "reviewed_scope": "ARQUIVO_3_ONLY_RECEIPTS_NO_SOURCE_READ",
+  "exact_source_identity": "UNVERIFIED",
+  "F1_and_L0_receipt_integrity": "NOT_CHECKED",
+  "sha256_equality": "UNVERIFIED",
+  "mtime_serialization": "UNVERIFIED",
+  "mtime_status": "AMBIGUOUS",
+  "source_drift_full_metadata": "UNVERIFIED",
+  "scientific_source_reopened_by_QA": false,
+  "review_receipt_persisted": "NOT_ATTEMPTED",
+  "privacy_review": "PENDING",
+  "material_findings": "NOT_EVALUATED",
+  "gates": {
+    "G4": "BLOCKED",
+    "L1": "NOT_EXECUTED",
+    "C3_dependency_satisfied": false
+  },
+  "public_release_authorized": false
+}
