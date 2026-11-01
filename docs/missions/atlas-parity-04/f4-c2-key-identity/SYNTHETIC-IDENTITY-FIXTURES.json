@@ -1,0 +1,1813 @@
+{
+  "schema": "ap04-f4-c2-k-synthetic-oracles-v1",
+  "synthetic": true,
+  "private_data": false,
+  "description": "Invented source-profile R4 v5 cases plus EXPECTED proposed 0.2.1 results; not executable approved descriptors and NOT run through Python/JS validators",
+  "cases": [
+    {
+      "id": "A",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-A",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "p-A",
+              "ui_id": "ui-p-A",
+              "native_id": "native-A",
+              "kind": "Stage",
+              "label": "Synthetic ui-p-A"
+            },
+            {
+              "key": "c-A",
+              "ui_id": "ui-c-A",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-c-A",
+              "parent_key": "p-A"
+            }
+          ],
+          "edges": [
+            {
+              "type": "MEMBER_OF",
+              "from_key": "c-A",
+              "to_key": "p-A"
+            }
+          ]
+        }
+      },
+      "expected_0_2_0": {
+        "resolution": "UNRESOLVED",
+        "gap": "SOURCE_PARENT_KEY_NOT_NATIVE_REFERENCE"
+      },
+      "expected_0_2_1": {
+        "parent_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "source_id": "source-fixture",
+          "snapshot_id": "snapshot-A",
+          "declared_id": null,
+          "declared_key_literal": "p-A",
+          "target_navigation_id": "nav:fixture:A:1",
+          "resolution": "RESOLVED",
+          "evidence_locator": "/lineage_graph/nodes/1/parent_key"
+        },
+        "parent_native_id_unchanged": "native-A"
+      }
+    },
+    {
+      "id": "B",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-B",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "rec-B",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "rec-B",
+              "ui_id": "ui-p-B",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-p-B"
+            },
+            {
+              "key": "c-B",
+              "ui_id": "ui-c-B",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-c-B",
+              "parent_key": "rec-B"
+            }
+          ],
+          "edges": [
+            {
+              "type": "MEMBER_OF",
+              "from_key": "c-B",
+              "to_key": "rec-B"
+            }
+          ]
+        }
+      },
+      "expected_0_2_0": {
+        "mapping": "REJECT",
+        "error": "R4_V5_PARENT_SCOPE_UNREPRESENTABLE"
+      },
+      "expected_0_2_1": {
+        "parent_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "source_id": "source-fixture",
+          "snapshot_id": "snapshot-B",
+          "declared_id": null,
+          "declared_key_literal": "rec-B",
+          "target_navigation_id": "nav:fixture:B:1",
+          "resolution": "RESOLVED",
+          "evidence_locator": "/lineage_graph/nodes/1/parent_key"
+        },
+        "record_id_same_literal_not_target": true
+      }
+    },
+    {
+      "id": "C1",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-C1",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "shared-C",
+              "ui_id": "ui-p-C",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-p-C"
+            },
+            {
+              "key": "c-C",
+              "ui_id": "ui-c-C",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-c-C",
+              "parent_key": "shared-C"
+            }
+          ],
+          "edges": [
+            {
+              "type": "MEMBER_OF",
+              "from_key": "c-C",
+              "to_key": "shared-C"
+            }
+          ]
+        }
+      },
+      "expected_0_2_1": {
+        "parent_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "source_id": "source-fixture",
+          "snapshot_id": "snapshot-C1",
+          "declared_id": null,
+          "declared_key_literal": "shared-C",
+          "target_navigation_id": "nav:fixture:C1:1",
+          "resolution": "RESOLVED",
+          "evidence_locator": "/lineage_graph/nodes/1/parent_key"
+        }
+      }
+    },
+    {
+      "id": "C2",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-C2",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "shared-C",
+              "ui_id": "ui-p-C",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-p-C"
+            },
+            {
+              "key": "c-C",
+              "ui_id": "ui-c-C",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-c-C",
+              "parent_key": "shared-C"
+            }
+          ],
+          "edges": [
+            {
+              "type": "MEMBER_OF",
+              "from_key": "c-C",
+              "to_key": "shared-C"
+            }
+          ]
+        }
+      },
+      "expected_0_2_1": {
+        "parent_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "source_id": "source-fixture",
+          "snapshot_id": "snapshot-C2",
+          "declared_id": null,
+          "declared_key_literal": "shared-C",
+          "target_navigation_id": "nav:fixture:C2:1",
+          "resolution": "RESOLVED",
+          "evidence_locator": "/lineage_graph/nodes/1/parent_key"
+        },
+        "cross_snapshot_forbidden": true
+      }
+    },
+    {
+      "id": "D",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-D",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "first-D-00",
+              "ui_id": "ui-first-D-00",
+              "native_id": "native-collision-00",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-00"
+            },
+            {
+              "key": "second-D-00",
+              "ui_id": "ui-second-D-00",
+              "native_id": "native-collision-00",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-00"
+            },
+            {
+              "key": "child-D-00",
+              "ui_id": "ui-child-D-00",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-00",
+              "parent_key": "first-D-00"
+            },
+            {
+              "key": "first-D-01",
+              "ui_id": "ui-first-D-01",
+              "native_id": "native-collision-01",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-01"
+            },
+            {
+              "key": "second-D-01",
+              "ui_id": "ui-second-D-01",
+              "native_id": "native-collision-01",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-01"
+            },
+            {
+              "key": "child-D-01",
+              "ui_id": "ui-child-D-01",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-01",
+              "parent_key": "first-D-01"
+            },
+            {
+              "key": "first-D-02",
+              "ui_id": "ui-first-D-02",
+              "native_id": "native-collision-02",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-02"
+            },
+            {
+              "key": "second-D-02",
+              "ui_id": "ui-second-D-02",
+              "native_id": "native-collision-02",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-02"
+            },
+            {
+              "key": "child-D-02",
+              "ui_id": "ui-child-D-02",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-02",
+              "parent_key": "first-D-02"
+            },
+            {
+              "key": "first-D-03",
+              "ui_id": "ui-first-D-03",
+              "native_id": "native-collision-03",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-03"
+            },
+            {
+              "key": "second-D-03",
+              "ui_id": "ui-second-D-03",
+              "native_id": "native-collision-03",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-03"
+            },
+            {
+              "key": "child-D-03",
+              "ui_id": "ui-child-D-03",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-03",
+              "parent_key": "first-D-03"
+            },
+            {
+              "key": "first-D-04",
+              "ui_id": "ui-first-D-04",
+              "native_id": "native-collision-04",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-04"
+            },
+            {
+              "key": "second-D-04",
+              "ui_id": "ui-second-D-04",
+              "native_id": "native-collision-04",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-04"
+            },
+            {
+              "key": "child-D-04",
+              "ui_id": "ui-child-D-04",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-04",
+              "parent_key": "first-D-04"
+            },
+            {
+              "key": "first-D-05",
+              "ui_id": "ui-first-D-05",
+              "native_id": "native-collision-05",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-05"
+            },
+            {
+              "key": "second-D-05",
+              "ui_id": "ui-second-D-05",
+              "native_id": "native-collision-05",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-05"
+            },
+            {
+              "key": "child-D-05",
+              "ui_id": "ui-child-D-05",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-05",
+              "parent_key": "first-D-05"
+            },
+            {
+              "key": "first-D-06",
+              "ui_id": "ui-first-D-06",
+              "native_id": "native-collision-06",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-06"
+            },
+            {
+              "key": "second-D-06",
+              "ui_id": "ui-second-D-06",
+              "native_id": "native-collision-06",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-06"
+            },
+            {
+              "key": "child-D-06",
+              "ui_id": "ui-child-D-06",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-06",
+              "parent_key": "first-D-06"
+            },
+            {
+              "key": "first-D-07",
+              "ui_id": "ui-first-D-07",
+              "native_id": "native-collision-07",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-07"
+            },
+            {
+              "key": "second-D-07",
+              "ui_id": "ui-second-D-07",
+              "native_id": "native-collision-07",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-07"
+            },
+            {
+              "key": "child-D-07",
+              "ui_id": "ui-child-D-07",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-07",
+              "parent_key": "first-D-07"
+            },
+            {
+              "key": "first-D-08",
+              "ui_id": "ui-first-D-08",
+              "native_id": "native-collision-08",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-08"
+            },
+            {
+              "key": "second-D-08",
+              "ui_id": "ui-second-D-08",
+              "native_id": "native-collision-08",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-08"
+            },
+            {
+              "key": "child-D-08",
+              "ui_id": "ui-child-D-08",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-08",
+              "parent_key": "first-D-08"
+            },
+            {
+              "key": "first-D-09",
+              "ui_id": "ui-first-D-09",
+              "native_id": "native-collision-09",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-09"
+            },
+            {
+              "key": "second-D-09",
+              "ui_id": "ui-second-D-09",
+              "native_id": "native-collision-09",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-09"
+            },
+            {
+              "key": "child-D-09",
+              "ui_id": "ui-child-D-09",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-09",
+              "parent_key": "first-D-09"
+            },
+            {
+              "key": "first-D-10",
+              "ui_id": "ui-first-D-10",
+              "native_id": "native-collision-10",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-10"
+            },
+            {
+              "key": "second-D-10",
+              "ui_id": "ui-second-D-10",
+              "native_id": "native-collision-10",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-10"
+            },
+            {
+              "key": "child-D-10",
+              "ui_id": "ui-child-D-10",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-10",
+              "parent_key": "first-D-10"
+            },
+            {
+              "key": "first-D-11",
+              "ui_id": "ui-first-D-11",
+              "native_id": "native-collision-11",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-11"
+            },
+            {
+              "key": "second-D-11",
+              "ui_id": "ui-second-D-11",
+              "native_id": "native-collision-11",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-11"
+            },
+            {
+              "key": "child-D-11",
+              "ui_id": "ui-child-D-11",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-11",
+              "parent_key": "first-D-11"
+            },
+            {
+              "key": "first-D-12",
+              "ui_id": "ui-first-D-12",
+              "native_id": "native-collision-12",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-12"
+            },
+            {
+              "key": "second-D-12",
+              "ui_id": "ui-second-D-12",
+              "native_id": "native-collision-12",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-12"
+            },
+            {
+              "key": "child-D-12",
+              "ui_id": "ui-child-D-12",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-12",
+              "parent_key": "first-D-12"
+            },
+            {
+              "key": "first-D-13",
+              "ui_id": "ui-first-D-13",
+              "native_id": "native-collision-13",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-13"
+            },
+            {
+              "key": "second-D-13",
+              "ui_id": "ui-second-D-13",
+              "native_id": "native-collision-13",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-13"
+            },
+            {
+              "key": "child-D-13",
+              "ui_id": "ui-child-D-13",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-13",
+              "parent_key": "first-D-13"
+            },
+            {
+              "key": "first-D-14",
+              "ui_id": "ui-first-D-14",
+              "native_id": "native-collision-14",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-14"
+            },
+            {
+              "key": "second-D-14",
+              "ui_id": "ui-second-D-14",
+              "native_id": "native-collision-14",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-14"
+            },
+            {
+              "key": "child-D-14",
+              "ui_id": "ui-child-D-14",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-14",
+              "parent_key": "first-D-14"
+            },
+            {
+              "key": "first-D-15",
+              "ui_id": "ui-first-D-15",
+              "native_id": "native-collision-15",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-15"
+            },
+            {
+              "key": "second-D-15",
+              "ui_id": "ui-second-D-15",
+              "native_id": "native-collision-15",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-15"
+            },
+            {
+              "key": "child-D-15",
+              "ui_id": "ui-child-D-15",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-15",
+              "parent_key": "first-D-15"
+            },
+            {
+              "key": "first-D-16",
+              "ui_id": "ui-first-D-16",
+              "native_id": "native-collision-16",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-16"
+            },
+            {
+              "key": "second-D-16",
+              "ui_id": "ui-second-D-16",
+              "native_id": "native-collision-16",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-16"
+            },
+            {
+              "key": "child-D-16",
+              "ui_id": "ui-child-D-16",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-16",
+              "parent_key": "first-D-16"
+            },
+            {
+              "key": "first-D-17",
+              "ui_id": "ui-first-D-17",
+              "native_id": "native-collision-17",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-17"
+            },
+            {
+              "key": "second-D-17",
+              "ui_id": "ui-second-D-17",
+              "native_id": "native-collision-17",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-17"
+            },
+            {
+              "key": "child-D-17",
+              "ui_id": "ui-child-D-17",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-17",
+              "parent_key": "first-D-17"
+            },
+            {
+              "key": "first-D-18",
+              "ui_id": "ui-first-D-18",
+              "native_id": "native-collision-18",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-18"
+            },
+            {
+              "key": "second-D-18",
+              "ui_id": "ui-second-D-18",
+              "native_id": "native-collision-18",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-18"
+            },
+            {
+              "key": "child-D-18",
+              "ui_id": "ui-child-D-18",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-18",
+              "parent_key": "first-D-18"
+            },
+            {
+              "key": "first-D-19",
+              "ui_id": "ui-first-D-19",
+              "native_id": "native-collision-19",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-19"
+            },
+            {
+              "key": "second-D-19",
+              "ui_id": "ui-second-D-19",
+              "native_id": "native-collision-19",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-19"
+            },
+            {
+              "key": "child-D-19",
+              "ui_id": "ui-child-D-19",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-19",
+              "parent_key": "first-D-19"
+            },
+            {
+              "key": "first-D-20",
+              "ui_id": "ui-first-D-20",
+              "native_id": "native-collision-20",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-20"
+            },
+            {
+              "key": "second-D-20",
+              "ui_id": "ui-second-D-20",
+              "native_id": "native-collision-20",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-20"
+            },
+            {
+              "key": "child-D-20",
+              "ui_id": "ui-child-D-20",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-20",
+              "parent_key": "first-D-20"
+            },
+            {
+              "key": "first-D-21",
+              "ui_id": "ui-first-D-21",
+              "native_id": "native-collision-21",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-21"
+            },
+            {
+              "key": "second-D-21",
+              "ui_id": "ui-second-D-21",
+              "native_id": "native-collision-21",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-21"
+            },
+            {
+              "key": "child-D-21",
+              "ui_id": "ui-child-D-21",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-21",
+              "parent_key": "first-D-21"
+            },
+            {
+              "key": "first-D-22",
+              "ui_id": "ui-first-D-22",
+              "native_id": "native-collision-22",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-22"
+            },
+            {
+              "key": "second-D-22",
+              "ui_id": "ui-second-D-22",
+              "native_id": "native-collision-22",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-22"
+            },
+            {
+              "key": "child-D-22",
+              "ui_id": "ui-child-D-22",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-22",
+              "parent_key": "first-D-22"
+            },
+            {
+              "key": "first-D-23",
+              "ui_id": "ui-first-D-23",
+              "native_id": "native-collision-23",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-23"
+            },
+            {
+              "key": "second-D-23",
+              "ui_id": "ui-second-D-23",
+              "native_id": "native-collision-23",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-23"
+            },
+            {
+              "key": "child-D-23",
+              "ui_id": "ui-child-D-23",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-23",
+              "parent_key": "first-D-23"
+            },
+            {
+              "key": "first-D-24",
+              "ui_id": "ui-first-D-24",
+              "native_id": "native-collision-24",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-24"
+            },
+            {
+              "key": "second-D-24",
+              "ui_id": "ui-second-D-24",
+              "native_id": "native-collision-24",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-24"
+            },
+            {
+              "key": "child-D-24",
+              "ui_id": "ui-child-D-24",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-24",
+              "parent_key": "first-D-24"
+            },
+            {
+              "key": "first-D-25",
+              "ui_id": "ui-first-D-25",
+              "native_id": "native-collision-25",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-25"
+            },
+            {
+              "key": "second-D-25",
+              "ui_id": "ui-second-D-25",
+              "native_id": "native-collision-25",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-25"
+            },
+            {
+              "key": "child-D-25",
+              "ui_id": "ui-child-D-25",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-25",
+              "parent_key": "first-D-25"
+            },
+            {
+              "key": "first-D-26",
+              "ui_id": "ui-first-D-26",
+              "native_id": "native-collision-26",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-26"
+            },
+            {
+              "key": "second-D-26",
+              "ui_id": "ui-second-D-26",
+              "native_id": "native-collision-26",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-26"
+            },
+            {
+              "key": "child-D-26",
+              "ui_id": "ui-child-D-26",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-26",
+              "parent_key": "first-D-26"
+            },
+            {
+              "key": "first-D-27",
+              "ui_id": "ui-first-D-27",
+              "native_id": "native-collision-27",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-27"
+            },
+            {
+              "key": "second-D-27",
+              "ui_id": "ui-second-D-27",
+              "native_id": "native-collision-27",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-27"
+            },
+            {
+              "key": "child-D-27",
+              "ui_id": "ui-child-D-27",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-27",
+              "parent_key": "first-D-27"
+            },
+            {
+              "key": "first-D-28",
+              "ui_id": "ui-first-D-28",
+              "native_id": "native-collision-28",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-28"
+            },
+            {
+              "key": "second-D-28",
+              "ui_id": "ui-second-D-28",
+              "native_id": "native-collision-28",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-28"
+            },
+            {
+              "key": "child-D-28",
+              "ui_id": "ui-child-D-28",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-28",
+              "parent_key": "first-D-28"
+            },
+            {
+              "key": "first-D-29",
+              "ui_id": "ui-first-D-29",
+              "native_id": "native-collision-29",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-29"
+            },
+            {
+              "key": "second-D-29",
+              "ui_id": "ui-second-D-29",
+              "native_id": "native-collision-29",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-29"
+            },
+            {
+              "key": "child-D-29",
+              "ui_id": "ui-child-D-29",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-29",
+              "parent_key": "first-D-29"
+            },
+            {
+              "key": "first-D-30",
+              "ui_id": "ui-first-D-30",
+              "native_id": "native-collision-30",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-30"
+            },
+            {
+              "key": "second-D-30",
+              "ui_id": "ui-second-D-30",
+              "native_id": "native-collision-30",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-30"
+            },
+            {
+              "key": "child-D-30",
+              "ui_id": "ui-child-D-30",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-30",
+              "parent_key": "first-D-30"
+            },
+            {
+              "key": "first-D-31",
+              "ui_id": "ui-first-D-31",
+              "native_id": "native-collision-31",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-31"
+            },
+            {
+              "key": "second-D-31",
+              "ui_id": "ui-second-D-31",
+              "native_id": "native-collision-31",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-31"
+            },
+            {
+              "key": "child-D-31",
+              "ui_id": "ui-child-D-31",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-31",
+              "parent_key": "first-D-31"
+            },
+            {
+              "key": "first-D-32",
+              "ui_id": "ui-first-D-32",
+              "native_id": "native-collision-32",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-32"
+            },
+            {
+              "key": "second-D-32",
+              "ui_id": "ui-second-D-32",
+              "native_id": "native-collision-32",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-32"
+            },
+            {
+              "key": "child-D-32",
+              "ui_id": "ui-child-D-32",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-32",
+              "parent_key": "first-D-32"
+            },
+            {
+              "key": "first-D-33",
+              "ui_id": "ui-first-D-33",
+              "native_id": "native-collision-33",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-33"
+            },
+            {
+              "key": "second-D-33",
+              "ui_id": "ui-second-D-33",
+              "native_id": "native-collision-33",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-33"
+            },
+            {
+              "key": "child-D-33",
+              "ui_id": "ui-child-D-33",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-33",
+              "parent_key": "first-D-33"
+            },
+            {
+              "key": "first-D-34",
+              "ui_id": "ui-first-D-34",
+              "native_id": "native-collision-34",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-34"
+            },
+            {
+              "key": "second-D-34",
+              "ui_id": "ui-second-D-34",
+              "native_id": "native-collision-34",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-34"
+            },
+            {
+              "key": "child-D-34",
+              "ui_id": "ui-child-D-34",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-34",
+              "parent_key": "first-D-34"
+            },
+            {
+              "key": "first-D-35",
+              "ui_id": "ui-first-D-35",
+              "native_id": "native-collision-35",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-35"
+            },
+            {
+              "key": "second-D-35",
+              "ui_id": "ui-second-D-35",
+              "native_id": "native-collision-35",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-35"
+            },
+            {
+              "key": "child-D-35",
+              "ui_id": "ui-child-D-35",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-35",
+              "parent_key": "first-D-35"
+            },
+            {
+              "key": "first-D-36",
+              "ui_id": "ui-first-D-36",
+              "native_id": "native-collision-36",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-36"
+            },
+            {
+              "key": "second-D-36",
+              "ui_id": "ui-second-D-36",
+              "native_id": "native-collision-36",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-36"
+            },
+            {
+              "key": "child-D-36",
+              "ui_id": "ui-child-D-36",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-36",
+              "parent_key": "first-D-36"
+            },
+            {
+              "key": "first-D-37",
+              "ui_id": "ui-first-D-37",
+              "native_id": "native-collision-37",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-37"
+            },
+            {
+              "key": "second-D-37",
+              "ui_id": "ui-second-D-37",
+              "native_id": "native-collision-37",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-37"
+            },
+            {
+              "key": "child-D-37",
+              "ui_id": "ui-child-D-37",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-37",
+              "parent_key": "first-D-37"
+            },
+            {
+              "key": "first-D-38",
+              "ui_id": "ui-first-D-38",
+              "native_id": "native-collision-38",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-38"
+            },
+            {
+              "key": "second-D-38",
+              "ui_id": "ui-second-D-38",
+              "native_id": "native-collision-38",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-38"
+            },
+            {
+              "key": "child-D-38",
+              "ui_id": "ui-child-D-38",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-38",
+              "parent_key": "first-D-38"
+            },
+            {
+              "key": "first-D-39",
+              "ui_id": "ui-first-D-39",
+              "native_id": "native-collision-39",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-39"
+            },
+            {
+              "key": "second-D-39",
+              "ui_id": "ui-second-D-39",
+              "native_id": "native-collision-39",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-39"
+            },
+            {
+              "key": "child-D-39",
+              "ui_id": "ui-child-D-39",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-39",
+              "parent_key": "first-D-39"
+            },
+            {
+              "key": "first-D-40",
+              "ui_id": "ui-first-D-40",
+              "native_id": "native-collision-40",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-40"
+            },
+            {
+              "key": "second-D-40",
+              "ui_id": "ui-second-D-40",
+              "native_id": "native-collision-40",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-40"
+            },
+            {
+              "key": "child-D-40",
+              "ui_id": "ui-child-D-40",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-40",
+              "parent_key": "first-D-40"
+            },
+            {
+              "key": "first-D-41",
+              "ui_id": "ui-first-D-41",
+              "native_id": "native-collision-41",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-41"
+            },
+            {
+              "key": "second-D-41",
+              "ui_id": "ui-second-D-41",
+              "native_id": "native-collision-41",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-41"
+            },
+            {
+              "key": "child-D-41",
+              "ui_id": "ui-child-D-41",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-41",
+              "parent_key": "first-D-41"
+            },
+            {
+              "key": "first-D-42",
+              "ui_id": "ui-first-D-42",
+              "native_id": "native-collision-42",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-42"
+            },
+            {
+              "key": "second-D-42",
+              "ui_id": "ui-second-D-42",
+              "native_id": "native-collision-42",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-42"
+            },
+            {
+              "key": "child-D-42",
+              "ui_id": "ui-child-D-42",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-42",
+              "parent_key": "first-D-42"
+            },
+            {
+              "key": "first-D-43",
+              "ui_id": "ui-first-D-43",
+              "native_id": "native-collision-43",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-43"
+            },
+            {
+              "key": "second-D-43",
+              "ui_id": "ui-second-D-43",
+              "native_id": "native-collision-43",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-43"
+            },
+            {
+              "key": "child-D-43",
+              "ui_id": "ui-child-D-43",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-43",
+              "parent_key": "first-D-43"
+            },
+            {
+              "key": "first-D-44",
+              "ui_id": "ui-first-D-44",
+              "native_id": "native-collision-44",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-44"
+            },
+            {
+              "key": "second-D-44",
+              "ui_id": "ui-second-D-44",
+              "native_id": "native-collision-44",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-44"
+            },
+            {
+              "key": "child-D-44",
+              "ui_id": "ui-child-D-44",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-44",
+              "parent_key": "first-D-44"
+            },
+            {
+              "key": "first-D-45",
+              "ui_id": "ui-first-D-45",
+              "native_id": "native-collision-45",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-45"
+            },
+            {
+              "key": "second-D-45",
+              "ui_id": "ui-second-D-45",
+              "native_id": "native-collision-45",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-45"
+            },
+            {
+              "key": "child-D-45",
+              "ui_id": "ui-child-D-45",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-45",
+              "parent_key": "first-D-45"
+            },
+            {
+              "key": "first-D-46",
+              "ui_id": "ui-first-D-46",
+              "native_id": "native-collision-46",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-46"
+            },
+            {
+              "key": "second-D-46",
+              "ui_id": "ui-second-D-46",
+              "native_id": "native-collision-46",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-46"
+            },
+            {
+              "key": "child-D-46",
+              "ui_id": "ui-child-D-46",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-46",
+              "parent_key": "first-D-46"
+            },
+            {
+              "key": "first-D-47",
+              "ui_id": "ui-first-D-47",
+              "native_id": "native-collision-47",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-47"
+            },
+            {
+              "key": "second-D-47",
+              "ui_id": "ui-second-D-47",
+              "native_id": "native-collision-47",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-47"
+            },
+            {
+              "key": "child-D-47",
+              "ui_id": "ui-child-D-47",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-47",
+              "parent_key": "first-D-47"
+            },
+            {
+              "key": "first-D-48",
+              "ui_id": "ui-first-D-48",
+              "native_id": "native-collision-48",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-48"
+            },
+            {
+              "key": "second-D-48",
+              "ui_id": "ui-second-D-48",
+              "native_id": "native-collision-48",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-48"
+            },
+            {
+              "key": "child-D-48",
+              "ui_id": "ui-child-D-48",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-48",
+              "parent_key": "first-D-48"
+            },
+            {
+              "key": "first-D-49",
+              "ui_id": "ui-first-D-49",
+              "native_id": "native-collision-49",
+              "kind": "Stage",
+              "label": "Synthetic ui-first-D-49"
+            },
+            {
+              "key": "second-D-49",
+              "ui_id": "ui-second-D-49",
+              "native_id": "native-collision-49",
+              "kind": "Stage",
+              "label": "Synthetic ui-second-D-49"
+            },
+            {
+              "key": "child-D-49",
+              "ui_id": "ui-child-D-49",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-child-D-49",
+              "parent_key": "first-D-49"
+            }
+          ],
+          "edges": [
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-00",
+              "to_key": "first-D-00"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-01",
+              "to_key": "first-D-01"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-02",
+              "to_key": "first-D-02"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-03",
+              "to_key": "first-D-03"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-04",
+              "to_key": "first-D-04"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-05",
+              "to_key": "first-D-05"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-06",
+              "to_key": "first-D-06"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-07",
+              "to_key": "first-D-07"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-08",
+              "to_key": "first-D-08"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-09",
+              "to_key": "first-D-09"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-10",
+              "to_key": "first-D-10"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-11",
+              "to_key": "first-D-11"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-12",
+              "to_key": "first-D-12"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-13",
+              "to_key": "first-D-13"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-14",
+              "to_key": "first-D-14"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-15",
+              "to_key": "first-D-15"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-16",
+              "to_key": "first-D-16"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-17",
+              "to_key": "first-D-17"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-18",
+              "to_key": "first-D-18"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-19",
+              "to_key": "first-D-19"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-20",
+              "to_key": "first-D-20"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-21",
+              "to_key": "first-D-21"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-22",
+              "to_key": "first-D-22"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-23",
+              "to_key": "first-D-23"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-24",
+              "to_key": "first-D-24"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-25",
+              "to_key": "first-D-25"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-26",
+              "to_key": "first-D-26"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-27",
+              "to_key": "first-D-27"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-28",
+              "to_key": "first-D-28"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-29",
+              "to_key": "first-D-29"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-30",
+              "to_key": "first-D-30"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-31",
+              "to_key": "first-D-31"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-32",
+              "to_key": "first-D-32"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-33",
+              "to_key": "first-D-33"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-34",
+              "to_key": "first-D-34"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-35",
+              "to_key": "first-D-35"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-36",
+              "to_key": "first-D-36"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-37",
+              "to_key": "first-D-37"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-38",
+              "to_key": "first-D-38"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-39",
+              "to_key": "first-D-39"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-40",
+              "to_key": "first-D-40"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-41",
+              "to_key": "first-D-41"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-42",
+              "to_key": "first-D-42"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-43",
+              "to_key": "first-D-43"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-44",
+              "to_key": "first-D-44"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-45",
+              "to_key": "first-D-45"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-46",
+              "to_key": "first-D-46"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-47",
+              "to_key": "first-D-47"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-48",
+              "to_key": "first-D-48"
+            },
+            {
+              "type": "MEMBER_OF",
+              "from_key": "child-D-49",
+              "to_key": "first-D-49"
+            }
+          ]
+        }
+      },
+      "expected_0_2_1": {
+        "native_collision_groups": 50,
+        "native_colliding_nodes": 100,
+        "unique_structural_keys": 150,
+        "explicit_structural_parents": 50,
+        "native_lookup_still": "COLLISION",
+        "structural_parent_resolutions": 50
+      }
+    },
+    {
+      "id": "E",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-E",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "ui_id": "ui-no-key-E",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "No key"
+            },
+            {
+              "key": "c-E",
+              "ui_id": "ui-c-E",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-c-E",
+              "parent_key": "missing-E"
+            }
+          ],
+          "edges": []
+        }
+      },
+      "expected_0_2_1": {
+        "parent_ref": {
+          "reference_basis": "SOURCE_STRUCTURAL_KEY",
+          "source_id": "source-fixture",
+          "snapshot_id": "snapshot-E",
+          "declared_id": null,
+          "declared_key_literal": "missing-E",
+          "target_navigation_id": null,
+          "resolution": "UNRESOLVED",
+          "evidence_locator": "/lineage_graph/nodes/1/parent_key"
+        },
+        "no_ui_id_or_label_fallback": true
+      }
+    },
+    {
+      "id": "F",
+      "source_id": "source-fixture",
+      "snapshot_id": "snapshot-F",
+      "r4_v5": {
+        "schema": "r4-experiment-viewer-v5",
+        "authority": "PRESENTATION_ONLY_NO_CLEANUP_AUTHORITY",
+        "records": [
+          {
+            "id": "synthetic-record",
+            "title": "Synthetic record",
+            "family": "Fixture",
+            "kind": "experiment",
+            "result": "UNKNOWN",
+            "retention": "REVIEW_REQUIRED",
+            "resources": []
+          }
+        ],
+        "edges": [],
+        "resources": [],
+        "products": [],
+        "result_tables": [],
+        "frontiers": [],
+        "sources": [],
+        "source_crosswalk": [],
+        "coverage": {
+          "limits": [],
+          "global_history_complete": false
+        },
+        "lineage_graph": {
+          "schema": "r4-experiment-lineage-a10-v1",
+          "nodes": [
+            {
+              "key": "dup-F",
+              "ui_id": "ui-1-F",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-1-F"
+            },
+            {
+              "key": "dup-F",
+              "ui_id": "ui-2-F",
+              "native_id": null,
+              "kind": "Stage",
+              "label": "Synthetic ui-2-F"
+            }
+          ],
+          "edges": []
+        }
+      },
+      "expected_0_2_1": {
+        "import": "REJECT_DUPLICATE_STRUCTURAL_KEY_ATOMIC"
+      }
+    }
+  ]
+}
