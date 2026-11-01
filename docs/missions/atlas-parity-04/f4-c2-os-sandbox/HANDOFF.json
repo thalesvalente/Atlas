@@ -1,0 +1,64 @@
+{
+  "mission": "AP04-F4-C2-B-OS-SANDBOX-CHAT-01",
+  "repository": "thalesvalente/Atlas",
+  "branch": "feat/atlas-parity04-f4-c2-os-isolation-20261101",
+  "draft_pr": "https://github.com/thalesvalente/Atlas/pull/20",
+  "prompt_sha": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
+  "prompt_path": "docs/missions/atlas-parity-04/f4-direct-reuse-next-20261101/02-C2-B-WINDOWS-OS-SANDBOX-CHAT.md",
+  "branch_base_sha": "e349a09d439d292011bca4c0994cf8ab3e3fbf9f",
+  "technical_sha": "5fe99d28fa2543478a0436ea94d80eabe07a9fad",
+  "status": "C2_B_OS_BLOCKED_EXACT",
+  "paths_owner": "new os_* modules; new OS tests; new OS script; new OS workflow; new os receipt directory ONLY",
+  "code": {
+    "windows": {
+      "job_committed_memory_bytes": 268435456,
+      "wall_seconds": 30,
+      "os_fs_network": "NOT_IMPLEMENTED",
+      "job_control": "IMPLEMENTED_AND_RUNNER_TESTED"
+    },
+    "linux": {
+      "memory_metric": "RLIMIT_AS_virtual_address_space",
+      "max_bytes": 268435456,
+      "wall_seconds": 30,
+      "os_fs_network": "LANDLOCK_SECCOMP_IMPLEMENTED_AND_RUNNER_TESTED_SCOPED"
+    }
+  },
+  "controls": {
+    "production_acquisition": "PRODUCTION_ACQUISITION_BLOCKED",
+    "synthetic_fixture_only": true
+  },
+  "baseline_ci": {
+    "sha": "3ad2b700c570db6ec0ce4604c9fbc02b479d9287",
+    "run_id": 41270139863,
+    "result": "4/4_SUCCESS"
+  },
+  "latest_technical_ci": "SEE_CI-EVIDENCE.json_NOT_IMPLIED_BY_BASELINE",
+  "independent_review": "NOT_PERFORMED_NO_NATIVE_SUBAGENTS",
+  "pending": [
+    "WINDOWS_FS_NETWORK_APP_CONTAINER_OR_EQUIVALENT",
+    "FULL_CRASH_HANDLE_RACE_NEGATIVES",
+    "INDEPENDENT_SECURITY_REVIEW_TERMINAL_SHA",
+    "REAL_HOST_L1_APPROVED_PROOF",
+    "C2_D_EXPLICIT_BLOB_COMPOSITION"
+  ],
+  "governance": {
+    "adr": "ADR-0003-v0.2 APPROVED_SCOPED",
+    "f2": "UNCHANGED",
+    "reader003": "UNCHANGED",
+    "G4": "BLOCKED",
+    "G5": "NOT_APPROVED",
+    "G6": "NOT_APPROVED",
+    "private_data": "NOT_ACCESSED",
+    "merges": "NONE",
+    "releases": "NONE",
+    "deploy": "NONE",
+    "migrations": "NONE",
+    "r4_mutations": "NONE"
+  },
+  "composition": {
+    "owner": "C2-D",
+    "strategy": "COPY_VETTED_BLOBS_BY_SHA_AND_CHECK_BRANCH_B_HISTORY",
+    "not_ancestor_claim": true,
+    "no_merge_PR18": true
+  }
+}

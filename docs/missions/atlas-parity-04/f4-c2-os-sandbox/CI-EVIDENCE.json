@@ -1,0 +1,90 @@
+{
+  "schema": "ap04-f4-c2-b-ci-evidence-v1",
+  "mission": "AP04-F4-C2-B-OS-SANDBOX-CHAT-01",
+  "technical_sha": "5fe99d28fa2543478a0436ea94d80eabe07a9fad",
+  "technical_tree": "d43843e80a5e7f01acb717ce80589972d3853447",
+  "workflow": ".github/workflows/atlas-parity04-f4-c2-os-sandbox.yml",
+  "run_id": 41270423601,
+  "url": "https://github.com/thalesvalente/Atlas/actions/runs/41270423601",
+  "event": "push",
+  "status": "completed",
+  "conclusion": "success",
+  "all_jobs_success": true,
+  "jobs": [
+    {
+      "name": "ubuntu-latest/O0",
+      "id": 124741885911,
+      "conclusion": "success",
+      "tests": 14,
+      "pass": 10,
+      "not_applicable": 4,
+      "fail": 0,
+      "artifact_id": 13068942689
+    },
+    {
+      "name": "ubuntu-latest/O1",
+      "id": 124741885940,
+      "conclusion": "success",
+      "tests": 14,
+      "pass": 10,
+      "not_applicable": 4,
+      "fail": 0,
+      "artifact_id": 13068439932
+    },
+    {
+      "name": "windows-latest/O0",
+      "id": 124741886070,
+      "conclusion": "success",
+      "tests": 14,
+      "pass": 14,
+      "not_applicable": 0,
+      "fail": 0,
+      "artifact_id": 13068903091
+    },
+    {
+      "name": "windows-latest/O1",
+      "id": 124741885825,
+      "conclusion": "success",
+      "tests": 14,
+      "pass": 14,
+      "not_applicable": 0,
+      "fail": 0,
+      "artifact_id": 13068594152
+    }
+  ],
+  "summary": {
+    "executions": 56,
+    "pass": 48,
+    "not_applicable": 8,
+    "fail": 0,
+    "junit_persisted": true,
+    "json_evidence_persisted": true,
+    "synthetic_only": true
+  },
+  "frozen_global_workflows": {
+    "conclusion": "NOT_ALL_GREEN",
+    "reason": "Other frozen-asset/old input lineage guards triggered by PR #20 on noncanonical C2-B branch; their exact protections were not altered or bypassed.",
+    "examples": [
+      {
+        "run_id": 41270428281,
+        "name": "ATLAS-PARITY-04 documentation successor",
+        "observed": "failure"
+      },
+      {
+        "run_id": 41270428317,
+        "name": "ATLAS-PARITY-03 C4 full composition",
+        "observed": "failure"
+      },
+      {
+        "run_id": 41270428398,
+        "name": "ATLAS-PARITY03 P03 isolated qualification",
+        "observed": "in_progress_at_inspection"
+      }
+    ]
+  },
+  "terminal_receipt_ci": "REQUIRES_POST_PUBLICATION_SHA_CHECK",
+  "host": "HOST_UNVERIFIED",
+  "windows_fs_network": "OS_PROFILE_NOT_ENFORCED",
+  "independent_review": "NOT_COMPLETED",
+  "ultimate_decision": "C2_B_OS_BLOCKED_EXACT"
+}
