@@ -1,26 +1,27 @@
-"""Explicit, test-only synthetic CLI. Real legacy acquisition is blocked."""
+"""Production CLI fails before filesystem access; synthetic API is test-only."""
 import argparse
 import json
 import sys
-from pathlib import Path
 from .errors import ReaderError
-from .reader import prepare, private_scratch
+from .reader import prepare
 
 
 def main():
-    parser = argparse.ArgumentParser(description='External synthetic qualification only; real acquisition/G4 BLOCKED. No qualified OS isolation or hard budget.')
-    parser.add_argument('--source', type=Path, required=True)
-    parser.add_argument('--allow', action='append', type=Path, required=True)
-    parser.add_argument('--scratch', type=Path, required=True, help='Separate parent; creates a private operation subdirectory.')
+    parser = argparse.ArgumentParser(description='External acquisition/G4 BLOCKED pending a qualified native worker. No private paths are inspected.')
+    parser.add_argument('--source', required=True)
+    parser.add_argument('--allow', action='append', required=True)
+    parser.add_argument('--scratch', required=True)
     parser.add_argument('--ttl-seconds', type=int, default=3600)
-    parser.add_argument('--synthetic-fixture', action='store_true', help='TEST ONLY: operator asserts invented fixture. This does not prove provenance or isolation. Never use for L1 acervo.')
+    parser.add_argument('--synthetic-fixture', action='store_true', help='Deprecated on CLI: does not authorize caller-selected files. Synthetic tests use the internal fixture API only.')
     args = parser.parse_args()
     try:
-        if not args.synthetic_fixture:
-            raise ReaderError('HARD_BUDGET_UNVERIFIED')
-        output = prepare(args.source, args.allow, private_scratch(args.scratch), ttl_seconds=args.ttl_seconds, synthetic_fixture=True)
-        print(json.dumps({'status': 'SYNTHETIC_DESCRIPTOR_ONLY', 'output': str(output), 'g4': 'BLOCKED', 'hard_budget': 'HARD_BUDGET_UNVERIFIED', 'os_isolation': 'OS_ISOLATION_UNVERIFIED', 'cleanup': 'No crash cleanup guarantee; TTL must be enforced by consumer.'}))
-        return 0
+        if args.synthetic_fixture:
+            # Preserve the historical payload-free CLI failure code, but do not
+            # create scratch or open caller-selected bytes under a test label.
+            raise ReaderError('IO_UNVERIFIED')
+        prepare(args.source, args.allow, args.scratch, ttl_seconds=args.ttl_seconds)
+        # No returning capability is implemented in this revision.
+        raise ReaderError('OS_ISOLATION_UNVERIFIED')
     except (ReaderError, OSError) as error:
         print(json.dumps({'status': 'F4_C2_BLOCKED_EXACT', 'code': error.code if isinstance(error, ReaderError) else 'IO_UNVERIFIED'}), file=sys.stderr)
         return 2

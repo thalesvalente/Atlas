@@ -237,7 +237,9 @@ def prepare(source, allowlist, scratch, *, ttl_seconds=3600, synthetic_fixture=F
     Operational acquisition is therefore unconditionally disabled.
     """
     if synthetic_fixture is not True:
-        _fail('HARD_BUDGET_UNVERIFIED')
+        from .production import require_production_profile
+        require_production_profile()
+        _fail('OS_ISOLATION_UNVERIFIED')
     if type(ttl_seconds) is not int or not 0 < ttl_seconds <= 3600 or not 0 < len(allowlist) <= MAX_ALLOWLIST:
         _fail('QUOTA_EXCEEDED')
     source = _lexical(source)
