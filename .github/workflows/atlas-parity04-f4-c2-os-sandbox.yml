@@ -39,7 +39,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
-          fetch-depth: 1
+          # C2-B verifies the immutable manifest at the original commit and
+          # audits EVERY intermediate successor commit (including reverts).
+          fetch-depth: 0
       - name: Install pinned Python version
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
