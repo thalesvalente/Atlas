@@ -68,7 +68,7 @@ def _seccomp(libc: ctypes.CDLL) -> None:
     ins = [
         _Filter(0x20, 0, 0, 4),
         _Filter(0x15, 1, 0, arch),
-        _Filter(0x80000000, 0, 0, 0),
+        _Filter(0x06, 0, 0, 0x80000000),  # BPF_RET | SECCOMP_RET_KILL_PROCESS
         _Filter(0x20, 0, 0, 0),
     ]
     if arch == 0xC000003E:

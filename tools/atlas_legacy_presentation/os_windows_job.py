@@ -98,10 +98,15 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
     # Not a general-purpose Job-as-sandbox launcher: fixed, reviewed worker only.
     from pathlib import Path
     expected = Path(__file__).with_name("os_worker.py").resolve(strict=True)
-    if (len(argv) < 4 or
+    if argv[1:3] == ["-I", "-S"]:
+        worker_index = 3
+    elif argv[1:4] == ["-I", "-O", "-S"]:
+        worker_index = 4
+    else:
+        worker_index = -1
+    if (worker_index < 0 or len(argv) <= worker_index or
             Path(argv[0]).resolve() != Path(sys.executable).resolve() or
-            argv[1:3] != ["-I", "-S"] or
-            Path(argv[3]).resolve() != expected):
+            Path(argv[worker_index]).resolve() != expected):
         raise NativeJobUnavailable("UNTRUSTED_WORKER_REJECTED")
     k = ctypes.WinDLL("kernel32", use_last_error=True)
     k.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
@@ -188,6 +193,11 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
             wait = k.WaitForSingleObject(process.hProcess,
                                          max(1, min(100, int(remaining * 1000))))
             if wait == WAIT_OBJECT_0:
+                # A completion observed past the wall deadline is still expired.
+                if time.monotonic() >= deadline:
+                    timed_out = True
+                    if not k.TerminateJobObject(job, 124):
+                        raise NativeJobUnavailable("JOB_TERMINATION_FAILED")
                 break
             if wait != WAIT_TIMEOUT:
                 raise NativeJobUnavailable("JOB_WAIT_FAILED")

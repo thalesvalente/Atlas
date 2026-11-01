@@ -1,28 +1,32 @@
-"""OS negative challenges use disposable entirely invented fixture files."""
+"""Native OS counterproofs: every launched worker consumes internally invented bytes."""
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
+import stat
+import subprocess
 import sys
+
 import pytest
 from tools.atlas_legacy_presentation import os_supervisor as sandbox
 
 
 @pytest.fixture
 def synthetic(tmp_path: Path):
+    """Only preflight/injected-assignment tests receive external invented paths."""
     root = tmp_path / "os-invented"
     root.mkdir()
-    sources = root / "input"
-    sources.mkdir()
+    inputs = root / "input"
+    inputs.mkdir()
     scratch = root / "scratch"
     scratch.mkdir(mode=0o700)
     if os.name != "nt":
         scratch.chmod(0o700)
-    source = sources / "os-allowlisted.json"
-    source.write_text('{"synthetic":true,"payload":"invented"}', encoding="utf-8")
-    outside = sources / "os-outside.json"
-    outside.write_text('{"synthetic":true,"outside":"invented"}',
-                       encoding="utf-8")
+    source = inputs / "os-allowlisted.json"
+    outside = inputs / "os-outside.json"
+    source.write_bytes(b'{"synthetic":true,"payload":"invented"}')
+    outside.write_bytes(b'{"synthetic":true,"outside":"invented"}')
     return source, outside, scratch
 
 
@@ -38,43 +42,83 @@ def test_memory_and_wall_budgets_fixed():
     assert sandbox.MAX_WALL_SECONDS == 30
 
 
+def test_external_paths_cannot_be_passed_to_public_probe(synthetic):
+    source, outside, scratch = synthetic
+    with pytest.raises(TypeError):
+        sandbox.run_synthetic_probe(source, outside, scratch, "success")
+
+
 def test_preflight_rejects_symlink(synthetic):
     source, outside, scratch = synthetic
-    link = source.parent / "os-link"
+    link = source.parent / "os-allowlisted-link"
     try:
         link.symlink_to(source)
-    except (OSError, NotImplementedError):
-        pytest.skip("Windows runner cannot create a test-owned symlink")
-    with pytest.raises(sandbox.OSProfileNotEnforced, match="UNSAFE_SYMLINK"):
-        sandbox.run_synthetic_probe(link, outside, scratch, "success")
+    except (OSError, NotImplementedError) as exc:
+        pytest.fail(f"OS_SYMLINK_FIXTURE_UNAVAILABLE: {type(exc).__name__}")
+    with pytest.raises(sandbox.OSProfileNotEnforced,
+                       match="UNSAFE_REPARSE_OR_SYMLINK"):
+        sandbox._preflight(link, outside, scratch)
 
 
-def test_native_memory_challenge(synthetic):
+def test_preflight_rejects_symlinked_ancestor(synthetic):
     source, outside, scratch = synthetic
-    result = sandbox.run_synthetic_probe(source, outside, scratch, "memory")
+    redirect = scratch.parent.parent / "aliased-fixtures"
+    try:
+        redirect.symlink_to(source.parent.parent, target_is_directory=True)
+    except (OSError, NotImplementedError) as exc:
+        pytest.fail(f"OS_ANCESTOR_SYMLINK_UNAVAILABLE: {type(exc).__name__}")
+    aliased = redirect / "input" / source.name
+    with pytest.raises(sandbox.OSProfileNotEnforced,
+                       match="UNSAFE_REPARSE_OR_SYMLINK"):
+        sandbox._preflight(aliased, outside, scratch)
+
+
+def test_windows_junction_rejected(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Windows junction/reparse-point syscall only")
+    source, outside, scratch = synthetic
+    junction = scratch.parent.parent / "junction"
+    created = subprocess.run(
+        ["cmd", "/d", "/s", "/c", "mklink", "/J",
+         str(junction), str(source.parent.parent)],
+        capture_output=True, text=True)
+    if created.returncode:
+        pytest.fail("JUNCTION_FIXTURE_UNAVAILABLE")
+    with pytest.raises(sandbox.OSProfileNotEnforced,
+                       match="UNSAFE_REPARSE_OR_SYMLINK"):
+        sandbox._preflight(junction / "input" / source.name,
+                           outside, scratch)
+
+
+def test_native_memory_challenge():
+    result = sandbox.run_synthetic_probe("memory")
     assert result["timed_out"] is False
+    assert result["descriptor_absent"] is True
     assert result["descriptor_published"] is False
+    assert result["synthetic_source_unchanged"] is True
     assert result["probe"] is not None, result
-    assert list(scratch.glob("atlas-c2-*.json")) == []
     assert result["probe"]["memory_probe"] == "MEMORY_ERROR_OS_LIMIT", result
+    assert result["probe"]["worker_optimize"] == int(
+        os.getenv("ATLAS_WORKER_OPTIMIZE", "0"))
     if sys.platform == "win32":
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
         assert result["memory_metric"] == "JobMemoryLimit_committed_bytes_job_total"
         assert result["job_memory_limit_bytes"] == 268435456
         assert result["kill_on_job_close"] is True
         assert result["breakaway_permitted"] is False
+        assert result["windows_scratch_acl_checked"] is True
     else:
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER"
         assert result["probe"]["memory_metric"] == "RLIMIT_AS_virtual_address_space"
 
 
-def test_linux_os_denials_or_windows_explicit_block(synthetic):
-    source, outside, scratch = synthetic
-    result = sandbox.run_synthetic_probe(source, outside, scratch, "denials")
-    assert result["descriptor_published"] is False
+def test_linux_os_denials_or_windows_explicit_block():
+    result = sandbox.run_synthetic_probe("denials")
+    assert result["descriptor_absent"] is True
+    assert result["synthetic_source_unchanged"] is True
     if sys.platform == "win32":
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
-        assert result["probe"] == {"isolation": "OS_PROFILE_NOT_ENFORCED"}
+        assert result["probe"]["isolation"] == "OS_PROFILE_NOT_ENFORCED"
         assert result["filesystem_network_confined"] is False
         return
     assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER", result
@@ -85,79 +129,85 @@ def test_linux_os_denials_or_windows_explicit_block(synthetic):
     assert all(v == "DENIED_BY_OS" for k, v in checks.items()
                if k != "scratch_write")
     assert checks["scratch_write"] == "ALLOWED"
-    assert source.read_text(encoding="utf-8") == (
-        '{"synthetic":true,"payload":"invented"}')
 
 
-def test_monotonic_wall_clock_30s_kills_blocked_worker(synthetic):
-    source, outside, scratch = synthetic
-    result = sandbox.run_synthetic_probe(
-        source, outside, scratch, "sleep", wall_seconds=30)
+def test_monotonic_wall_clock_30s_kills_blocked_worker():
+    result = sandbox.run_synthetic_probe("sleep", wall_seconds=30)
     assert result["timed_out"] is True, result
     assert result["status"] == "OS_WALL_TIMEOUT_TERMINATED"
     assert result["elapsed_seconds"] >= 29
     assert result["elapsed_seconds"] < 35
+    assert result["descriptor_absent"] is True
     assert result["descriptor_published"] is False
-    assert list(scratch.glob("atlas-c2-*.json")) == []
 
 
-def test_invalid_modes_and_time_budgets_denied(synthetic):
-    source, outside, scratch = synthetic
+def test_invalid_modes_and_time_budgets_denied():
     for mode, budget in (("arbitrary", 1), ("memory", 31), ("memory", 0)):
         with pytest.raises(sandbox.OSProfileNotEnforced, match="INVALID_PROBE"):
-            sandbox.run_synthetic_probe(
-                source, outside, scratch, mode, wall_seconds=budget)
+            sandbox.run_synthetic_probe(mode, wall_seconds=budget)
 
 
-def test_report_never_overwrites_existing_file(synthetic):
-    source, outside, scratch = synthetic
-    report = scratch / "os-probe-report.json"
-    report.write_text("previous owned report", encoding="utf-8")
-    with pytest.raises(sandbox.OSProfileNotEnforced,
-                       match="REPORT_ALREADY_EXISTS"):
-        sandbox.run_synthetic_probe(source, outside, scratch, "success")
-    assert report.read_text(encoding="utf-8") == "previous owned report"
+def test_report_no_clobber(synthetic):
+    _, _, scratch = synthetic
+    from tools.atlas_legacy_presentation.os_worker import _report
+    _report(scratch, {"fixture": "original"})
+    with pytest.raises(FileExistsError):
+        _report(scratch, {"fixture": "attacker"})
+    assert json.loads((scratch / "os-probe-report.json").read_text(
+        encoding="utf-8"))["fixture"] == "original"
 
 
-def test_exact_source_read_inside_native_profile(synthetic):
-    source, outside, scratch = synthetic
-    result = sandbox.run_synthetic_probe(source, outside, scratch, "success")
-    assert result["descriptor_published"] is False
+def test_exact_source_read_inside_native_profile():
+    result = sandbox.run_synthetic_probe("success")
+    assert result["descriptor_absent"] is True
+    assert result["synthetic_source_unchanged"] is True
     assert result["probe"] is not None, result
     if sys.platform == "linux":
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER", result
         assert result["probe"]["source_length_sample"] > 0
         assert result["probe"]["landlock_abi"] >= 3
-        import stat
-        assert stat.S_IMODE(
-            (scratch / "os-probe-report.json").stat().st_mode) == 0o600
+        assert result["scratch_report_mode"] == 0o600
     else:
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
+        assert result["windows_scratch_acl_checked"] is True
 
 
-def test_windows_breakaway_denied(synthetic):
+def test_seccomp_foreign_arch_is_kill_bpf():
+    if sys.platform != "linux":
+        pytest.skip("Seccomp BPF code structure applicable to Linux only")
+    import ctypes
+    from tools.atlas_legacy_presentation import os_linux_isolation as linux
+    class FakeLibc:
+        def prctl(self, option, mode, program, arg4, arg5):
+            p = ctypes.cast(program, ctypes.POINTER(linux._Program)).contents
+            assert p.length > 4
+            assert p.filters[1].code == 0x15
+            assert p.filters[2].code == 0x06  # BPF_RET
+            assert p.filters[2].k == 0x80000000  # SECCOMP_RET_KILL_PROCESS
+            return 0
+    linux._seccomp(FakeLibc())
+
+
+def test_windows_breakaway_denied():
     if sys.platform != "win32":
-        pytest.skip("Not applicable: Linux deny fork/clone in native seccomp probe")
-    source, outside, scratch = synthetic
-    result = sandbox.run_synthetic_probe(source, outside, scratch, "breakaway")
+        pytest.skip("Linux denies fork/clone via seccomp")
+    result = sandbox.run_synthetic_probe("breakaway")
     assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
     assert result["probe"]["breakaway"] == "BREAKAWAY_DENIED_BY_JOB"
 
 
-def test_windows_descendants_killed_in_job(synthetic):
+def test_windows_descendants_killed_in_job():
     if sys.platform != "win32":
-        pytest.skip("Not applicable: Linux forks are denied")
-    source, outside, scratch = synthetic
-    result = sandbox.run_synthetic_probe(
-        source, outside, scratch, "descendant", wall_seconds=2)
+        pytest.skip("Linux denies fork via seccomp")
+    result = sandbox.run_synthetic_probe("descendant", wall_seconds=2)
     assert result["timed_out"] is True
     assert result["active_processes_after_timeout"] == 0
-    assert result["descriptor_published"] is False
+    assert result["descriptor_absent"] is True
 
 
 def test_windows_association_error_terminates_suspended_worker(synthetic):
     if sys.platform != "win32":
-        pytest.skip("Not applicable: Windows Job only")
+        pytest.skip("Windows Job only")
     source, outside, scratch = synthetic
     from tools.atlas_legacy_presentation.os_windows_job import (
         NativeJobUnavailable, run_synthetic_job)
@@ -177,11 +227,10 @@ def test_unrecognized_synthetic_fixture_layout_rejected(synthetic):
     bogus.write_text('{"invented":true}', encoding="utf-8")
     with pytest.raises(sandbox.OSProfileNotEnforced,
                        match="SYNTHETIC_FIXTURE_REQUIRED"):
-        sandbox.run_synthetic_probe(bogus, outside, scratch, "success")
-    assert not (scratch / "os-probe-report.json").exists()
+        sandbox._preflight(bogus, outside, scratch)
 
 
-def test_windows_job_refuses_arbitrary_entrypoint(synthetic):
+def test_windows_job_refuses_arbitrary_entrypoint():
     if sys.platform != "win32":
         pytest.skip("Windows Job-specific negative contract")
     from tools.atlas_legacy_presentation.os_windows_job import (
@@ -189,3 +238,39 @@ def test_windows_job_refuses_arbitrary_entrypoint(synthetic):
     with pytest.raises(NativeJobUnavailable,
                        match="UNTRUSTED_WORKER_REJECTED"):
         run_synthetic_job([sys.executable, "-I", "-S", "untrusted.py"])
+
+
+def test_evidence_all_skipped_must_fail(tmp_path, monkeypatch):
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    monkeypatch.chdir(tmp_path)
+    directory = tmp_path / ".test-output/atlas-parity04-f4-c2-os"
+    directory.mkdir(parents=True)
+    (directory / "junit.xml").write_text(
+        '<testsuite tests="2" skipped="2" failures="0" errors="0"/>',
+        encoding="utf-8")
+    assert evidence.main() == 2
+    receipt = json.loads((directory / "observed-ci.json").read_text())
+    assert receipt["test_gate"] != "OBSERVED_PASS"
+
+
+def test_evidence_failures_must_exit_nonzero(tmp_path, monkeypatch):
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    monkeypatch.chdir(tmp_path)
+    directory = tmp_path / ".test-output/atlas-parity04-f4-c2-os"
+    directory.mkdir(parents=True)
+    (directory / "junit.xml").write_text(
+        '<testsuite tests="2" skipped="0" failures="1" errors="0"/>',
+        encoding="utf-8")
+    assert evidence.main() == 2
+
+
+def test_evidence_checkout_sha_mismatch_must_fail(tmp_path, monkeypatch):
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("ATLAS_CHECKOUT_SHA", "0" * 40)
+    directory = tmp_path / ".test-output/atlas-parity04-f4-c2-os"
+    directory.mkdir(parents=True)
+    (directory / "junit.xml").write_text(
+        '<testsuite tests="1" skipped="0" failures="0" errors="0"/>',
+        encoding="utf-8")
+    assert evidence.main() == 2

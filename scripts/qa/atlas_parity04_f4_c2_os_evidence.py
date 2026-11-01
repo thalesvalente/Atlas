@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 
@@ -22,11 +23,26 @@ def main() -> int:
                        for k in ("tests", "errors", "failures", "skipped")}
         except (ValueError, ET.ParseError):
             pass
-    passed = (metrics is not None and metrics["tests"] > 0
-              and metrics["errors"] == 0 and metrics["failures"] == 0)
+    executed = metrics["tests"] - metrics["skipped"] if metrics else 0
+    expected = os.getenv("ATLAS_CHECKOUT_SHA")
+    try:
+        git = subprocess.run(["git", "rev-parse", "HEAD"], text=True,
+                             capture_output=True, timeout=10, check=True)
+        actual = git.stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        actual = None
+    sha_matches = bool(actual and expected and actual == expected)
+    passed = bool(metrics and executed > 0
+                  and metrics["errors"] == 0 and metrics["failures"] == 0
+                  and sha_matches)
     report = {
         "mission": "AP04-F4-C2-B-OS-SANDBOX-CHAT-01",
-        "commit_sha": os.getenv("GITHUB_SHA", "LOCAL_NOT_GITHUB"),
+        "commit_sha": actual,
+        "expected_checkout_sha": expected,
+        "trigger_sha": os.getenv("GITHUB_SHA"),
+        "checkout_sha_verified": sha_matches,
+        "executed_non_skipped": executed,
+        "worker_optimize": os.getenv("ATLAS_WORKER_OPTIMIZE"),
         "run_id": os.getenv("GITHUB_RUN_ID"),
         "runner_os": os.getenv("RUNNER_OS", platform.system()),
         "python": sys.version.split()[0],
@@ -39,7 +55,7 @@ def main() -> int:
             "OS_PROFILE_NOT_ENFORCED" if sys.platform == "win32"
             else "REQUIRES_OBSERVED_NEGATIVE_TESTS",
         "approval": "C2_B_OS_BLOCKED_EXACT",
-        "independent_review": "NOT_PERFORMED_IN_THIS_SESSION",
+        "independent_review": "COPILOT_REVIEW_HAS_UNRESOLVED_FINDINGS",
         "fixtures": "INVENTED_ONLY",
     }
     (directory / "observed-ci.json").write_text(
@@ -47,7 +63,7 @@ def main() -> int:
     print(json.dumps({"test_gate": report["test_gate"], "junit": metrics,
                       "approval": report["approval"],
                       "sha": report["commit_sha"]}, sort_keys=True))
-    return 0 if metrics is not None else 2
+    return 0 if passed else 2
 
 
 if __name__ == "__main__":

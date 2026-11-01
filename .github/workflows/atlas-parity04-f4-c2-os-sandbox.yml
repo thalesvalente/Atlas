@@ -27,7 +27,10 @@ jobs:
         optimize: ['0', '1']
     env:
       PYTHONUTF8: '1'
-      PYTHONOPTIMIZE: ${{ matrix.optimize }}
+      # Assertions in pytest MUST remain enabled in both cells.
+      PYTHONOPTIMIZE: '0'
+      ATLAS_WORKER_OPTIMIZE: ${{ matrix.optimize }}
+      ATLAS_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       PYTHONDONTWRITEBYTECODE: '1'
       PIP_DISABLE_PIP_VERSION_CHECK: '1'
     steps:

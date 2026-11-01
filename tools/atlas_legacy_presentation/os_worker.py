@@ -13,8 +13,10 @@ import time
 
 def _report(scratch: Path, payload: dict) -> None:
     # Test-only receipt, not a publishable descriptor.
-    with (scratch / "os-probe-report.json").open("w", encoding="utf-8") as fp:
-        json.dump(payload, fp, sort_keys=True)
+    # Exclusive create: a hostile existing file can never be clobbered.
+    with (scratch / "os-probe-report.json").open("x", encoding="utf-8") as fp:
+        json.dump({**payload, "worker_optimize": sys.flags.optimize},
+                  fp, sort_keys=True)
         fp.flush()
         os.fsync(fp.fileno())
 
