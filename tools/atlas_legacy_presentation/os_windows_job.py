@@ -221,6 +221,9 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
         if not k.AssignProcessToJobObject(job, process.hProcess):
             raise NativeJobUnavailable("JOB_ASSIGN_FAILED")
         associated = True
+        # Time budget starts at the worker's first runnable instant, not while
+        # copying the disposable runtime or configuring the suspended token.
+        started = time.monotonic()
         if k.ResumeThread(process.hThread) == 0xFFFFFFFF:
             raise NativeJobUnavailable("JOB_RESUME_FAILED")
         deadline = started + wall_seconds
