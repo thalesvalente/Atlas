@@ -55,6 +55,7 @@ def test_native_memory_challenge(synthetic):
     assert result["timed_out"] is False
     assert result["descriptor_published"] is False
     assert result["probe"] is not None, result
+    assert list(scratch.glob("atlas-c2-*.json")) == []
     assert result["probe"]["memory_probe"] == "MEMORY_ERROR_OS_LIMIT", result
     if sys.platform == "win32":
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
@@ -97,6 +98,7 @@ def test_monotonic_wall_clock_30s_kills_blocked_worker(synthetic):
     assert result["elapsed_seconds"] >= 29
     assert result["elapsed_seconds"] < 35
     assert result["descriptor_published"] is False
+    assert list(scratch.glob("atlas-c2-*.json")) == []
 
 
 def test_invalid_modes_and_time_budgets_denied(synthetic):
@@ -164,3 +166,23 @@ def test_windows_association_error_terminates_suspended_worker(synthetic):
     with pytest.raises(NativeJobUnavailable, match="JOB_ASSIGN_FAILED_INJECTED"):
         run_synthetic_job(argv, inject_assign_failure=True)
     assert not (scratch / "os-probe-report.json").exists()
+
+
+def test_unrecognized_synthetic_fixture_layout_rejected(synthetic):
+    source, outside, scratch = synthetic
+    bogus = source.parent / "non-synthetic.json"
+    bogus.write_text('{"invented":true}', encoding="utf-8")
+    with pytest.raises(sandbox.OSProfileNotEnforced,
+                       match="SYNTHETIC_FIXTURE_REQUIRED"):
+        sandbox.run_synthetic_probe(bogus, outside, scratch, "success")
+    assert not (scratch / "os-probe-report.json").exists()
+
+
+def test_windows_job_refuses_arbitrary_entrypoint(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("Windows Job-specific negative contract")
+    from tools.atlas_legacy_presentation.os_windows_job import (
+        NativeJobUnavailable, run_synthetic_job)
+    with pytest.raises(NativeJobUnavailable,
+                       match="UNTRUSTED_WORKER_REJECTED"):
+        run_synthetic_job([sys.executable, "-I", "-S", "untrusted.py"])

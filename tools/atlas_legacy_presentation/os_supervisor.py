@@ -44,6 +44,15 @@ def _preflight(source: Path, outside: Path, scratch: Path) -> None:
         raise OSProfileNotEnforced("UNSAFE_SCRATCH")
     if not outside.is_file() or source == outside:
         raise OSProfileNotEnforced("UNSAFE_OUTSIDE_PROBE")
+    # Synthetic-only API: reject ordinary caller paths before launch.
+    if (source.name != "os-allowlisted.json" or
+            outside.name != "os-outside.json" or
+            source.parent.name != "input" or
+            outside.parent != source.parent or
+            scratch.name != "scratch" or
+            scratch.parent != source.parent.parent or
+            scratch.parent.name != "os-invented"):
+        raise OSProfileNotEnforced("SYNTHETIC_FIXTURE_REQUIRED")
 
 
 def run_synthetic_probe(source: Path, outside: Path, scratch: Path,

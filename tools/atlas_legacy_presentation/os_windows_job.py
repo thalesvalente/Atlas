@@ -95,6 +95,14 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
         raise NativeJobUnavailable("WINDOWS_ONLY")
     if not 0 < wall_seconds <= WALL_SECONDS:
         raise NativeJobUnavailable("UNSAFE_WALL_LIMIT")
+    # Not a general-purpose Job-as-sandbox launcher: fixed, reviewed worker only.
+    from pathlib import Path
+    expected = Path(__file__).with_name("os_worker.py").resolve(strict=True)
+    if (len(argv) < 4 or
+            Path(argv[0]).resolve() != Path(sys.executable).resolve() or
+            argv[1:3] != ["-I", "-S"] or
+            Path(argv[3]).resolve() != expected):
+        raise NativeJobUnavailable("UNTRUSTED_WORKER_REJECTED")
     k = ctypes.WinDLL("kernel32", use_last_error=True)
     k.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
     k.CreateJobObjectW.restype = wintypes.HANDLE
