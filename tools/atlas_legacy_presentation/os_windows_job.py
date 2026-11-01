@@ -89,7 +89,8 @@ class _Proc(ctypes.Structure):
 
 
 def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
-                      inject_assign_failure: bool = False) -> dict:
+                      inject_assign_failure: bool = False,
+                      appcontainer: bool = False) -> dict:
     """CREATE_SUSPENDED -> set/query Job -> assign -> resume -> monotonic kill."""
     if sys.platform != "win32":
         raise NativeJobUnavailable("WINDOWS_ONLY")
@@ -127,6 +128,7 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
         raise
     except Exception:
         raise NativeJobUnavailable("WORKER_ARGUMENTS_UNTRUSTED") from None
+    flags_args = flags
     k = ctypes.WinDLL("kernel32", use_last_error=True)
     k.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
     k.CreateJobObjectW.restype = wintypes.HANDLE
@@ -161,6 +163,7 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
     if not job:
         raise NativeJobUnavailable("JOB_CREATE_FAILED")
     process = _Proc()
+    profile = None
     created = associated = False
     started = time.monotonic()
     timed_out = False
@@ -185,14 +188,25 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
                 JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK) or (
                 check.JobMemoryLimit != MEMORY_BYTES):
             raise NativeJobUnavailable("JOB_LIMIT_MISMATCH")
-        si = _Startup()
-        si.cb = ctypes.sizeof(si)
-        line = ctypes.create_unicode_buffer(subprocess.list2cmdline(argv))
-        if not k.CreateProcessW(argv[0], line, None, None, False,
-                                CREATE_SUSPENDED | CREATE_NO_WINDOW, None, None,
-                                ctypes.byref(si), ctypes.byref(process)):
+        if appcontainer:
+            profile = _AppContainerLaunch(Path(flags_args[1]), Path(flags_args[5]))
+            profile.prepare()
+        si = profile.startup if profile else _Startup()
+        if not profile:
+            si.cb = ctypes.sizeof(si)
+        process_argv = argv + (profile.argv_suffix if profile else [])
+        line = ctypes.create_unicode_buffer(subprocess.list2cmdline(process_argv))
+        creation = CREATE_SUSPENDED | CREATE_NO_WINDOW
+        if profile:
+            creation |= 0x00080000  # EXTENDED_STARTUPINFO_PRESENT
+        startup_pointer = ctypes.cast(ctypes.byref(si), ctypes.POINTER(_Startup))
+        if not k.CreateProcessW(argv[0], line, None, None, bool(profile),
+                                creation, None, None, startup_pointer,
+                                ctypes.byref(process)):
             raise NativeJobUnavailable("JOB_CREATE_SUSPENDED_FAILED")
         created = True
+        if profile:
+            profile.verify_child(process.hProcess)
         if inject_assign_failure:
             raise NativeJobUnavailable("JOB_ASSIGN_FAILED_INJECTED")
         if not k.AssignProcessToJobObject(job, process.hProcess):
@@ -244,7 +258,8 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
             "kill_on_job_close": True, "breakaway_permitted": False,
             "active_processes_after_timeout":
                 int(accounting.ActiveProcesses) if timed_out else None,
-            "filesystem_network_confined": False}
+            "filesystem_network_confined": False,
+            "appcontainer_token_verified": bool(profile)}
     finally:
         if created:
             if not associated:
@@ -253,3 +268,199 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
             k.CloseHandle(process.hProcess)
         # KILL_ON_JOB_CLOSE covers children, including supervisor termination.
         k.CloseHandle(job)
+        if profile:
+            profile.close()
+
+
+class _StartupEx(ctypes.Structure):
+    _fields_ = [("StartupInfo", _Startup), ("lpAttributeList", ctypes.c_void_p)]
+
+
+class _SecurityCapabilities(ctypes.Structure):
+    _fields_ = [("AppContainerSid", ctypes.c_void_p),
+                ("Capabilities", ctypes.c_void_p),
+                ("CapabilityCount", wintypes.DWORD),
+                ("Reserved", wintypes.DWORD)]
+
+
+class _InheritAttributes(ctypes.Structure):
+    _fields_ = [("nLength", wintypes.DWORD),
+                ("lpSecurityDescriptor", ctypes.c_void_p),
+                ("bInheritHandle", wintypes.BOOL)]
+
+
+class _AppContainerLaunch:
+    """Ephemeral profile and exactly two inherited file capabilities.
+
+    Not a production file broker. Operates only on the already-created
+    invented fixture. No ACLs, accounts, firewall or global policies changed.
+    """
+    def __init__(self, source, scratch):
+        self.source = source
+        self.scratch = scratch
+        self.profile_name = None
+        self.sid = ctypes.c_void_p()
+        self.handles = []
+        self.attributes = None
+        self.attr_buf = None
+        self.startup = _StartupEx()
+        self.argv_suffix = []
+        self.listener = None
+        self._initialized = False
+
+    def prepare(self):
+        import secrets
+        import socket
+        from .os_supervisor import _INVENTED_SOURCE, _preflight
+        from .os_windows_acl import verify_private_child
+        _preflight(self.source, self.scratch.parent / "input" / "os-outside.json",
+                   self.scratch)
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        userenv = ctypes.WinDLL("userenv", use_last_error=True)
+        self.kernel = kernel
+        self.userenv = userenv
+        userenv.CreateAppContainerProfile.argtypes = [
+            wintypes.LPCWSTR, wintypes.LPCWSTR, wintypes.LPCWSTR,
+            ctypes.c_void_p, wintypes.DWORD, ctypes.POINTER(ctypes.c_void_p)]
+        userenv.CreateAppContainerProfile.restype = ctypes.c_long
+        userenv.DeleteAppContainerProfile.argtypes = [wintypes.LPCWSTR]
+        userenv.DeleteAppContainerProfile.restype = ctypes.c_long
+        kernel.LocalFree.argtypes = [ctypes.c_void_p]
+        kernel.LocalFree.restype = ctypes.c_void_p
+        kernel.CreateFileW.argtypes = [
+            wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD,
+            ctypes.POINTER(_InheritAttributes), wintypes.DWORD,
+            wintypes.DWORD, wintypes.HANDLE]
+        kernel.CreateFileW.restype = wintypes.HANDLE
+        kernel.ReadFile.argtypes = [
+            wintypes.HANDLE, ctypes.c_void_p, wintypes.DWORD,
+            ctypes.POINTER(wintypes.DWORD), ctypes.c_void_p]
+        kernel.ReadFile.restype = wintypes.BOOL
+        kernel.SetFilePointerEx.argtypes = [
+            wintypes.HANDLE, ctypes.c_int64, ctypes.c_void_p, wintypes.DWORD]
+        kernel.SetFilePointerEx.restype = wintypes.BOOL
+        kernel.InitializeProcThreadAttributeList.argtypes = [
+            ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD,
+            ctypes.POINTER(ctypes.c_size_t)]
+        kernel.InitializeProcThreadAttributeList.restype = wintypes.BOOL
+        kernel.UpdateProcThreadAttribute.argtypes = [
+            ctypes.c_void_p, wintypes.DWORD, ctypes.c_size_t,
+            ctypes.c_void_p, ctypes.c_size_t, ctypes.c_void_p, ctypes.c_void_p]
+        kernel.UpdateProcThreadAttribute.restype = wintypes.BOOL
+        kernel.DeleteProcThreadAttributeList.argtypes = [ctypes.c_void_p]
+        kernel.DeleteProcThreadAttributeList.restype = None
+        kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+        kernel.CloseHandle.restype = wintypes.BOOL
+        self.profile_name = "AtlasC2BSynthetic" + secrets.token_hex(12)
+        if userenv.CreateAppContainerProfile(
+                self.profile_name, "Atlas C2-B synthetic", "Disposable CI fixture",
+                None, 0, ctypes.byref(self.sid)) != 0 or not self.sid.value:
+            self.profile_name = None
+            raise NativeJobUnavailable("APPCONTAINER_PROFILE_CREATE_FAILED")
+        # Open source with no FILE_SHARE_WRITE/DELETE; keep it pinned through
+        # worker termination. FILE_FLAG_OPEN_REPARSE_POINT rejects link races.
+        attrs = _InheritAttributes(ctypes.sizeof(_InheritAttributes), None, True)
+        invalid = ctypes.c_void_p(-1).value
+        src = kernel.CreateFileW(str(self.source), 0x80000000, 1,
+                                 ctypes.byref(attrs), 3, 0x00200000, None)
+        if src in (None, invalid):
+            raise NativeJobUnavailable("BROKER_SOURCE_OPEN_FAILED")
+        self.handles.append(src)
+        buf = ctypes.create_string_buffer(len(_INVENTED_SOURCE) + 1)
+        count = wintypes.DWORD()
+        if not kernel.ReadFile(src, buf, len(buf), ctypes.byref(count), None):
+            raise NativeJobUnavailable("BROKER_SOURCE_VERIFY_FAILED")
+        if bytes(buf.raw[:count.value]) != _INVENTED_SOURCE:
+            raise NativeJobUnavailable("BROKER_SOURCE_NOT_INVENTED")
+        if not kernel.SetFilePointerEx(src, 0, None, 0):
+            raise NativeJobUnavailable("BROKER_SOURCE_REWIND_FAILED")
+        # The worker gets a WRITE-only handle. It cannot name/open a new
+        # output outside scratch, and cannot overwrite a prior receipt.
+        report = self.scratch / "os-probe-report.json"
+        out = kernel.CreateFileW(str(report), 0x40000000, 0,
+                                 ctypes.byref(attrs), 1, 0x00000080, None)
+        if out in (None, invalid):
+            raise NativeJobUnavailable("BROKER_REPORT_CREATE_FAILED")
+        self.handles.append(out)
+        verify_private_child(self.scratch, report)
+        self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.listener.bind(("127.0.0.1", 0))
+        self.listener.listen(1)
+        self.argv_suffix = ["--broker-source-handle", str(int(src)),
+                            "--broker-report-handle", str(int(out)),
+                            "--broker-loopback-port",
+                            str(self.listener.getsockname()[1])]
+        sizes = ctypes.c_size_t()
+        kernel.InitializeProcThreadAttributeList(None, 2, 0, ctypes.byref(sizes))
+        if not sizes.value:
+            raise NativeJobUnavailable("APPCONTAINER_ATTRIBUTES_UNAVAILABLE")
+        self.attr_buf = ctypes.create_string_buffer(sizes.value)
+        self.attributes = ctypes.cast(self.attr_buf, ctypes.c_void_p)
+        if not kernel.InitializeProcThreadAttributeList(
+                self.attributes, 2, 0, ctypes.byref(sizes)):
+            raise NativeJobUnavailable("APPCONTAINER_ATTRIBUTES_INIT_FAILED")
+        self._initialized = True
+        caps = _SecurityCapabilities(self.sid, None, 0, 0)
+        self._caps = caps  # pointer must outlive CreateProcessW
+        self._handle_array = (wintypes.HANDLE * 2)(*self.handles)
+        if not kernel.UpdateProcThreadAttribute(
+                self.attributes, 0, 0x00020009, ctypes.byref(caps),
+                ctypes.sizeof(caps), None, None):
+            raise NativeJobUnavailable("APPCONTAINER_CAPABILITIES_FAILED")
+        if not kernel.UpdateProcThreadAttribute(
+                self.attributes, 0, 0x00020002,
+                ctypes.byref(self._handle_array), ctypes.sizeof(self._handle_array),
+                None, None):
+            raise NativeJobUnavailable("APPCONTAINER_HANDLE_LIST_FAILED")
+        self.startup.StartupInfo.cb = ctypes.sizeof(_StartupEx)
+        self.startup.lpAttributeList = self.attributes
+
+    def verify_child(self, child):
+        """Must verify actual suspended process token, not caller's flags."""
+        adv = ctypes.WinDLL("advapi32", use_last_error=True)
+        adv.OpenProcessToken.argtypes = [
+            wintypes.HANDLE, wintypes.DWORD, ctypes.POINTER(wintypes.HANDLE)]
+        adv.OpenProcessToken.restype = wintypes.BOOL
+        adv.GetTokenInformation.argtypes = [
+            wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD,
+            ctypes.POINTER(wintypes.DWORD)]
+        adv.GetTokenInformation.restype = wintypes.BOOL
+        adv.EqualSid.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+        adv.EqualSid.restype = wintypes.BOOL
+        token = wintypes.HANDLE()
+        if not adv.OpenProcessToken(child, 0x0008, ctypes.byref(token)):
+            raise NativeJobUnavailable("APPCONTAINER_CHILD_TOKEN_UNAVAILABLE")
+        try:
+            returned = wintypes.DWORD()
+            is_app = wintypes.DWORD()
+            if not adv.GetTokenInformation(token, 29, ctypes.byref(is_app),
+                                            ctypes.sizeof(is_app), ctypes.byref(returned)
+                                            ) or is_app.value != 1:
+                raise NativeJobUnavailable("APPCONTAINER_CHILD_NOT_ISOLATED")
+            buffer = ctypes.create_string_buffer(256)
+            if not adv.GetTokenInformation(token, 31, buffer, len(buffer),
+                                            ctypes.byref(returned)):
+                raise NativeJobUnavailable("APPCONTAINER_CHILD_SID_UNVERIFIED")
+            actual_sid = ctypes.cast(buffer, ctypes.POINTER(ctypes.c_void_p))[0]
+            if not actual_sid or not adv.EqualSid(actual_sid, self.sid):
+                raise NativeJobUnavailable("APPCONTAINER_CHILD_SID_MISMATCH")
+            if not adv.GetTokenInformation(token, 30, buffer, len(buffer),
+                                            ctypes.byref(returned)):
+                raise NativeJobUnavailable("APPCONTAINER_CAPABILITIES_UNVERIFIED")
+            if ctypes.cast(buffer, ctypes.POINTER(wintypes.DWORD))[0] != 0:
+                raise NativeJobUnavailable("APPCONTAINER_NETWORK_CAPABILITY_PRESENT")
+        finally:
+            self.kernel.CloseHandle(token)
+
+    def close(self):
+        if self._initialized:
+            self.kernel.DeleteProcThreadAttributeList(self.attributes)
+        if self.listener:
+            self.listener.close()
+        for handle in self.handles:
+            self.kernel.CloseHandle(handle)
+        if self.sid.value:
+            self.kernel.LocalFree(self.sid)
+        if self.profile_name:
+            if self.userenv.DeleteAppContainerProfile(self.profile_name) != 0:
+                raise NativeJobUnavailable("APPCONTAINER_PROFILE_CLEANUP_FAILED")

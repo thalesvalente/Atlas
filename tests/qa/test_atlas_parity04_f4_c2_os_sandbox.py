@@ -361,3 +361,57 @@ def test_aarch64_socketpair_is_in_native_seccomp_denyset(monkeypatch):
             return 0
 
     linux._seccomp(FakeLibc())
+
+
+
+def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
+    """Native process-token challenge, no mock, with exact inherited handles.
+
+    A missing profile/runtime is a blocked result, never evidence of a pass.
+    The legacy Job-only tests remain separate and unchanged.
+    """
+    if sys.platform != "win32":
+        pytest.skip("AppContainer requires Windows native kernel")
+    source, outside, scratch = synthetic
+    from tools.atlas_legacy_presentation.os_windows_job import (
+        NativeJobUnavailable, run_synthetic_job)
+    worker = Path(sandbox.__file__).with_name("os_worker.py")
+    argv = [sys.executable, "-I", "-S", str(worker),
+            "--source", str(source), "--outside", str(outside),
+            "--scratch", str(scratch), "--mode", "denials",
+            "--supervisor-pid", str(os.getpid())]
+    try:
+        result = run_synthetic_job(argv, wall_seconds=8, appcontainer=True)
+    except NativeJobUnavailable as exc:
+        # Explicit blocked result; never claim native confinement succeeded.
+        assert str(exc).startswith(("APPCONTAINER_", "BROKER_"))
+        assert not (scratch / "atlas-c2-approved.json").exists()
+    else:
+        assert result["appcontainer_token_verified"] is True
+        assert result["filesystem_network_confined"] is False
+        if result["exit_code"] == 0:
+            detail = json.loads((scratch / "os-probe-report.json").read_text())
+            assert detail["appcontainer_token_verified"] is True
+            assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
+            assert all(v == "DENIED_BY_OS"
+                       for v in detail["checks"].values())
+        else:
+            # A launch/runtime failure never counts as an OS-enforced pass.
+            assert result["exit_code"] != 0
+
+
+def test_windows_broker_flags_cannot_authenticate_direct_worker(synthetic):
+    if sys.platform != "win32":
+        pytest.skip("AppContainer process-token test only")
+    source, outside, scratch = synthetic
+    worker = Path(sandbox.__file__).with_name("os_worker.py")
+    command = [sys.executable, "-I", "-S", str(worker),
+               "--source", str(source), "--outside", str(outside),
+               "--scratch", str(scratch), "--mode", "success",
+               "--supervisor-pid", str(os.getpid()),
+               "--broker-source-handle", "123456",
+               "--broker-report-handle", "123457",
+               "--broker-loopback-port", "12345"]
+    checked = subprocess.run(command, capture_output=True, timeout=8)
+    assert checked.returncode == 78
+    assert not (scratch / "os-probe-report.json").exists()

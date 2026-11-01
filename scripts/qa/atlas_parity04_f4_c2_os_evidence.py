@@ -17,6 +17,7 @@ import xml.etree.ElementTree as ET
 C2_B_FROZEN_SHA = "bc5b634dd05d822983a8b8d5ec9c247bf47b3e4d"
 C2_B_MANIFEST_PATH = "docs/missions/atlas-parity-04/f4-c2-os-sandbox/MANIFEST.sha256"
 SUCCESSOR_PATHS = frozenset({
+    "tools/atlas_legacy_presentation/os_windows_job.py",
     "tools/atlas_legacy_presentation/os_windows_acl.py",
     "tools/atlas_legacy_presentation/os_worker.py",
     "tools/atlas_legacy_presentation/os_supervisor.py",
