@@ -1,0 +1,2032 @@
+{
+  "mission": "AP04-F4-C2-EXTERNAL-READER-CHAT-01",
+  "scope": "SYNTHETIC_ONLY_NOT_G4",
+  "technical": {
+    "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+    "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+    "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+  },
+  "run": {
+    "id": 41213116001,
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001",
+    "conclusion": "success"
+  },
+  "jobs": [
+    {
+      "id": 124572045526,
+      "name": "F4 C2 / windows-latest / optimize=0",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001/job/124572045526"
+    },
+    {
+      "id": 124572045621,
+      "name": "F4 C2 / windows-latest / optimize=1",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001/job/124572045621"
+    },
+    {
+      "id": 124572045630,
+      "name": "F4 C2 / ubuntu-latest / optimize=1",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001/job/124572045630"
+    },
+    {
+      "id": 124572045654,
+      "name": "F4 C2 / ubuntu-latest / optimize=0",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001/job/124572045654"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13047540973,
+      "name": "atlas-f4-c2-ubuntu-latest-O1-9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "size_in_bytes": 6285,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047540973",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047540973/zip",
+      "expired": false,
+      "created_at": "2026-10-31T15:06:16Z",
+      "expires_at": "2026-11-30T15:06:15Z",
+      "updated_at": "2026-10-31T15:06:16Z",
+      "digest": "sha256:ad121c174e0bd0adc50e49737665b36279aac4f6abb87092f0f0488df629a63e",
+      "workflow_run": {
+        "id": 41213116001,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f4-external-reader-20261031",
+        "head_sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+      }
+    },
+    {
+      "id": 13047466422,
+      "name": "atlas-f4-c2-windows-latest-O1-9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "size_in_bytes": 6399,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047466422",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047466422/zip",
+      "expired": false,
+      "created_at": "2026-10-31T15:06:47Z",
+      "expires_at": "2026-11-30T15:06:45Z",
+      "updated_at": "2026-10-31T15:06:47Z",
+      "digest": "sha256:9dd4b334c2cf2a9e43b9f6b851ed6d4448a66ea5219b94204861f45998882f15",
+      "workflow_run": {
+        "id": 41213116001,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f4-external-reader-20261031",
+        "head_sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+      }
+    },
+    {
+      "id": 13047366494,
+      "name": "atlas-f4-c2-ubuntu-latest-O0-9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "size_in_bytes": 6295,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047366494",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047366494/zip",
+      "expired": false,
+      "created_at": "2026-10-31T15:05:53Z",
+      "expires_at": "2026-11-30T15:05:52Z",
+      "updated_at": "2026-10-31T15:05:53Z",
+      "digest": "sha256:605da5a66ec635deba989dedf84f1603a6a7963f94bdfcb0ae1e957f1a3cbddc",
+      "workflow_run": {
+        "id": 41213116001,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f4-external-reader-20261031",
+        "head_sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+      }
+    },
+    {
+      "id": 13047241744,
+      "name": "atlas-f4-c2-windows-latest-O0-9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "size_in_bytes": 6386,
+      "url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047241744",
+      "archive_download_url": "https://api.github.com/repos/thalesvalente/Atlas/actions/artifacts/13047241744/zip",
+      "expired": false,
+      "created_at": "2026-10-31T15:05:43Z",
+      "expires_at": "2026-11-30T15:05:43Z",
+      "updated_at": "2026-10-31T15:05:43Z",
+      "digest": "sha256:148a910f4f5a2643ca38c60e53736ffeb44c1a539207ae139d165cc496b584a4",
+      "workflow_run": {
+        "id": 41213116001,
+        "repository_id": 1432371627,
+        "head_repository_id": 1432371627,
+        "head_branch": "feat/atlas-parity04-f4-external-reader-20261031",
+        "head_sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "key": "windows0",
+      "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+      "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0",
+      "optimized": 0,
+      "synthetic_only": true,
+      "g4": "BLOCKED",
+      "hard_budget": "HARD_BUDGET_UNVERIFIED",
+      "os_isolation": "OS_ISOLATION_UNVERIFIED",
+      "changed_paths": [
+        ".github/workflows/atlas-parity04-f4-c2-reader.yml",
+        "docs/missions/atlas-parity-04/f4-c2-reader/PLAN.md",
+        "docs/missions/atlas-parity-04/f4-c2-reader/READER-CONTRACT.md",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py",
+        "tools/atlas_legacy_presentation/README.md",
+        "tools/atlas_legacy_presentation/__init__.py",
+        "tools/atlas_legacy_presentation/__main__.py",
+        "tools/atlas_legacy_presentation/descriptor.schema.json",
+        "tools/atlas_legacy_presentation/errors.py",
+        "tools/atlas_legacy_presentation/parser.py",
+        "tools/atlas_legacy_presentation/reader.py",
+        "tools/atlas_legacy_presentation/semantics.py"
+      ],
+      "ownership": "PASS",
+      "tests": [
+        {
+          "name": "test_28_unadmitted_and_four_unbound_tables_preserved",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_collision_null_unresolved_and_repeat_occurrences",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_depth_and_column_quotas_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_descriptor_schema_and_semantic_tampering_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_duplicate_keys_nonfinite_invalid_utf8_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_expiration_and_ttl_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hostile_html_javascript_and_uri_are_inert",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_literal_types_and_lexemes_are_not_coerced",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_multibyte_literal_byte_quota_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_observed_isolated_run_and_file_retained",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_schema_is_exact_approved_f2",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unknown_format_and_ambiguous_html_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_allowlist_limit_and_ttl_quota",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_never_removes_foreign_file",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_refuses_replaced_owned_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_default_mode_blocks_before_any_source_read",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hardlink_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_mtime_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_path_not_exactly_allowlisted",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_scratch_must_be_separate_from_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_immutable_and_one_derived_file_only",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_replacement_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_leaf_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_or_reparse_ancestor_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_traversal_refused_even_when_resolving_to_allowed_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unc_device_ads_and_glob_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_contextual_parent_uses_only_explicit_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cycles_retained_with_explicit_gap",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_invalid_shapes_are_structured_errors",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_atomic_publish_never_clobbers_existing_destination",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_effective_file_dacl_is_only_owner_and_system",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_missing_source_is_payload_free_cli_error",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_partial_cleanup_preserves_replaced_foreign_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        }
+      ],
+      "independence": {
+        "status": "PASS",
+        "synthetic_only": true,
+        "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+        "optimized": 0,
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "commands": [
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "7efd5566ca284b240377de94d720692c367e3d051c267d34ab179ac8231174cc",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD^{tree}"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e2b0cbdd2ed958bb140c9d014af9198e4a21238350d5d8290b28992960c554ce",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "show",
+              "-s",
+              "--format=%P",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "14120d3a10559a1508a7374d23ae110952d54151611fc16f052cec616691230a",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\build-inputs\\protocol"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 732,
+            "stderr_bytes": 0,
+            "stdout_sha256": "43436183ce3d7e067fd1fa5d645205ce3bc046d748f09f7ae7d855262df427a0",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\build-inputs\\atlas"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 705,
+            "stderr_bytes": 0,
+            "stdout_sha256": "c7df0561602bc16da700f51faefa6515b9b7ec85cfbc4cec6cd4540802302c6e",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\sdk-only\\Scripts\\python.exe",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\wheels\\caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 333,
+            "stderr_bytes": 0,
+            "stdout_sha256": "193470d785db1ba205c8d104297bf260e2ad948a760c85f94664c2ce13e6ab9b",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\sdk-only\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\sdk-only\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-m",
+              "caderno_protocol",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1282,
+            "stderr_bytes": 0,
+            "stdout_sha256": "4269eff21c5e877d3fc907c008c1167f73df99ae07ac4a891d42a2fc501b0c31",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\sdk-only\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-c",
+              "import importlib.util;raise SystemExit(0 if importlib.util.find_spec('atlas_viewer') is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\viewer-and-sdk\\Scripts\\python.exe",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\wheels\\atlas_viewer-0.1.0a1-py3-none-any.whl",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\wheels\\caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 499,
+            "stderr_bytes": 0,
+            "stdout_sha256": "8c9b28f308a50b375f67c7252921136df90caa4d55fcf8d3b15dc8d5bf6c6b02",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\viewer-and-sdk\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\viewer-and-sdk\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-m",
+              "caderno_protocol",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1282,
+            "stderr_bytes": 0,
+            "stdout_sha256": "4269eff21c5e877d3fc907c008c1167f73df99ae07ac4a891d42a2fc501b0c31",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\viewer-and-sdk\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-m",
+              "atlas_viewer",
+              "inspect",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-kht8cu3r\\invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 47012,
+            "stderr_bytes": 0,
+            "stdout_sha256": "15d58682e21d69bbc9402eb07b26c4ff16d2fa7c4895df4d79a599ff47986f73",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "checks": {
+          "sdk-only": "PASS",
+          "viewer-and-sdk": "PASS",
+          "external_tool_excluded_from_wheels": "PASS",
+          "outside_checkout_runtime_without_tools_or_r4": "PASS"
+        },
+        "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+        "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+        "parents": [
+          "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+        ],
+        "wheels": [
+          {
+            "name": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+            "sha256": "f0c03570c722c79436f67c58031f7b3169dd5b21ba4345cfa4ea14cd7661775b",
+            "external_tool_present": false,
+            "entries": 20
+          },
+          {
+            "name": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+            "sha256": "e934b9e5d95f6d9342db043af38fdf6127580de007bd1056880e69130a373331",
+            "external_tool_present": false,
+            "entries": 15
+          }
+        ]
+      },
+      "inputs": {
+        "tools/atlas_legacy_presentation/descriptor.schema.json": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed",
+        "tools/atlas_legacy_presentation/errors.py": "4edb992cdb7ab62e21eabeb2223103c1bdc9b5fa740d81f5b63bd1252e4074d4",
+        "tools/atlas_legacy_presentation/parser.py": "42b5bc9c3f0bc522009860bc98b157e931af0e1c9b4306b5ddf8d20cd1c7814c",
+        "tools/atlas_legacy_presentation/reader.py": "d904872bbca55effff7f82d3adada9d1a8793f0f4d107a388296eb7e29e9dff5",
+        "tools/atlas_legacy_presentation/README.md": "8aff2769cbc9d8c2f3bb899456e6de0ac7a74e5becb30fbf3eff9870f9e521a5",
+        "tools/atlas_legacy_presentation/semantics.py": "a74790afac6c9e92421398c3ac5525960563f2412adda921d8fb66a5dbaaeea8",
+        "tools/atlas_legacy_presentation/__init__.py": "ebce1eff6c81acd1e097d0cd0103fd1b17106f20132f050e949c0470244b373c",
+        "tools/atlas_legacy_presentation/__main__.py": "5abd2fb3bd0f3d1b4faa2ee24f9879e132a3d3b0193e208a89c69160860b2d12",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py": "7889edd90ae584cf67f41b778a0aefabce840e2d724d92dc0e4f9a8d9c2a715f",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py": "885ac4f01c5d00b651f7253dca45b32821249b8356d746cd2d52c55710a589e4",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py": "8985e9f812f21bc7a0891c2839475f4048605ff17581ccf3465cad186e51a49c",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json": "5b302cb0888fe6ee141f62f2f4dc92f4b02975fa0bd8f44b15b854f068c8e547"
+      }
+    },
+    {
+      "key": "windows1",
+      "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+      "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0",
+      "optimized": 1,
+      "synthetic_only": true,
+      "g4": "BLOCKED",
+      "hard_budget": "HARD_BUDGET_UNVERIFIED",
+      "os_isolation": "OS_ISOLATION_UNVERIFIED",
+      "changed_paths": [
+        ".github/workflows/atlas-parity04-f4-c2-reader.yml",
+        "docs/missions/atlas-parity-04/f4-c2-reader/PLAN.md",
+        "docs/missions/atlas-parity-04/f4-c2-reader/READER-CONTRACT.md",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py",
+        "tools/atlas_legacy_presentation/README.md",
+        "tools/atlas_legacy_presentation/__init__.py",
+        "tools/atlas_legacy_presentation/__main__.py",
+        "tools/atlas_legacy_presentation/descriptor.schema.json",
+        "tools/atlas_legacy_presentation/errors.py",
+        "tools/atlas_legacy_presentation/parser.py",
+        "tools/atlas_legacy_presentation/reader.py",
+        "tools/atlas_legacy_presentation/semantics.py"
+      ],
+      "ownership": "PASS",
+      "tests": [
+        {
+          "name": "test_28_unadmitted_and_four_unbound_tables_preserved",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_collision_null_unresolved_and_repeat_occurrences",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_depth_and_column_quotas_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_descriptor_schema_and_semantic_tampering_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_duplicate_keys_nonfinite_invalid_utf8_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_expiration_and_ttl_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hostile_html_javascript_and_uri_are_inert",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_literal_types_and_lexemes_are_not_coerced",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_multibyte_literal_byte_quota_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_observed_isolated_run_and_file_retained",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_schema_is_exact_approved_f2",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unknown_format_and_ambiguous_html_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_allowlist_limit_and_ttl_quota",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_never_removes_foreign_file",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_refuses_replaced_owned_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_default_mode_blocks_before_any_source_read",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hardlink_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_mtime_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_path_not_exactly_allowlisted",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_scratch_must_be_separate_from_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_immutable_and_one_derived_file_only",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_replacement_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_leaf_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_or_reparse_ancestor_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_traversal_refused_even_when_resolving_to_allowed_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unc_device_ads_and_glob_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_contextual_parent_uses_only_explicit_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cycles_retained_with_explicit_gap",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_invalid_shapes_are_structured_errors",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_atomic_publish_never_clobbers_existing_destination",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_effective_file_dacl_is_only_owner_and_system",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_missing_source_is_payload_free_cli_error",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_partial_cleanup_preserves_replaced_foreign_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        }
+      ],
+      "independence": {
+        "status": "PASS",
+        "synthetic_only": true,
+        "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+        "optimized": 1,
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "commands": [
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "7efd5566ca284b240377de94d720692c367e3d051c267d34ab179ac8231174cc",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD^{tree}"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e2b0cbdd2ed958bb140c9d014af9198e4a21238350d5d8290b28992960c554ce",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "show",
+              "-s",
+              "--format=%P",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "14120d3a10559a1508a7374d23ae110952d54151611fc16f052cec616691230a",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\build-inputs\\protocol"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 732,
+            "stderr_bytes": 0,
+            "stdout_sha256": "52b7338e0c8ea70cee80dbe17f262df683ec6a5bcdd2a33abec26ddabdad4b61",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\build-inputs\\atlas"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 705,
+            "stderr_bytes": 0,
+            "stdout_sha256": "10d38d7ce4efebe11ce28203734ed986970943f5b92e5f93272e20add7a5970e",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\sdk-only\\Scripts\\python.exe",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\wheels\\caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 333,
+            "stderr_bytes": 0,
+            "stdout_sha256": "b71eafd0eb311b4a264269b37d8febb88b83969dc49ce935d0ad4c8c7df9a3e4",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\sdk-only\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\sdk-only\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-m",
+              "caderno_protocol",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1282,
+            "stderr_bytes": 0,
+            "stdout_sha256": "4269eff21c5e877d3fc907c008c1167f73df99ae07ac4a891d42a2fc501b0c31",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\sdk-only\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-c",
+              "import importlib.util;raise SystemExit(0 if importlib.util.find_spec('atlas_viewer') is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\viewer-and-sdk\\Scripts\\python.exe",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\wheels",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\wheels\\atlas_viewer-0.1.0a1-py3-none-any.whl",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\wheels\\caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 499,
+            "stderr_bytes": 0,
+            "stdout_sha256": "00bf78f19d5793bc60ca29a3a432f4437f7b17d63c385d4c574a0c6c013e2c9c",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\viewer-and-sdk\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\viewer-and-sdk\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-m",
+              "caderno_protocol",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1282,
+            "stderr_bytes": 0,
+            "stdout_sha256": "4269eff21c5e877d3fc907c008c1167f73df99ae07ac4a891d42a2fc501b0c31",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\viewer-and-sdk\\Scripts\\python.exe",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-m",
+              "atlas_viewer",
+              "inspect",
+              "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\atlas-parity04-f4-c2-wheels-tabgwoje\\invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 47012,
+            "stderr_bytes": 0,
+            "stdout_sha256": "f95653b1b74b0cfef1fd093b3278c1fa3b1403bdba64fc7cd2cf2c4f93fa049a",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "checks": {
+          "sdk-only": "PASS",
+          "viewer-and-sdk": "PASS",
+          "external_tool_excluded_from_wheels": "PASS",
+          "outside_checkout_runtime_without_tools_or_r4": "PASS"
+        },
+        "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+        "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+        "parents": [
+          "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+        ],
+        "wheels": [
+          {
+            "name": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+            "sha256": "767b32dc55a1bd5a9bad852d3c38c8c962391176c6cd8b049210d1dba6a7df81",
+            "external_tool_present": false,
+            "entries": 20
+          },
+          {
+            "name": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+            "sha256": "3cf59997c25eca9c302068baff0bd8d2974f4b9eab43f7771cb3eefb5b89c483",
+            "external_tool_present": false,
+            "entries": 15
+          }
+        ]
+      },
+      "inputs": {
+        "tools/atlas_legacy_presentation/descriptor.schema.json": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed",
+        "tools/atlas_legacy_presentation/errors.py": "4edb992cdb7ab62e21eabeb2223103c1bdc9b5fa740d81f5b63bd1252e4074d4",
+        "tools/atlas_legacy_presentation/parser.py": "42b5bc9c3f0bc522009860bc98b157e931af0e1c9b4306b5ddf8d20cd1c7814c",
+        "tools/atlas_legacy_presentation/reader.py": "d904872bbca55effff7f82d3adada9d1a8793f0f4d107a388296eb7e29e9dff5",
+        "tools/atlas_legacy_presentation/README.md": "8aff2769cbc9d8c2f3bb899456e6de0ac7a74e5becb30fbf3eff9870f9e521a5",
+        "tools/atlas_legacy_presentation/semantics.py": "a74790afac6c9e92421398c3ac5525960563f2412adda921d8fb66a5dbaaeea8",
+        "tools/atlas_legacy_presentation/__init__.py": "ebce1eff6c81acd1e097d0cd0103fd1b17106f20132f050e949c0470244b373c",
+        "tools/atlas_legacy_presentation/__main__.py": "5abd2fb3bd0f3d1b4faa2ee24f9879e132a3d3b0193e208a89c69160860b2d12",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py": "7889edd90ae584cf67f41b778a0aefabce840e2d724d92dc0e4f9a8d9c2a715f",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py": "885ac4f01c5d00b651f7253dca45b32821249b8356d746cd2d52c55710a589e4",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py": "8985e9f812f21bc7a0891c2839475f4048605ff17581ccf3465cad186e51a49c",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json": "5b302cb0888fe6ee141f62f2f4dc92f4b02975fa0bd8f44b15b854f068c8e547"
+      }
+    },
+    {
+      "key": "ubuntu0",
+      "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+      "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0",
+      "optimized": 0,
+      "synthetic_only": true,
+      "g4": "BLOCKED",
+      "hard_budget": "HARD_BUDGET_UNVERIFIED",
+      "os_isolation": "OS_ISOLATION_UNVERIFIED",
+      "changed_paths": [
+        ".github/workflows/atlas-parity04-f4-c2-reader.yml",
+        "docs/missions/atlas-parity-04/f4-c2-reader/PLAN.md",
+        "docs/missions/atlas-parity-04/f4-c2-reader/READER-CONTRACT.md",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py",
+        "tools/atlas_legacy_presentation/README.md",
+        "tools/atlas_legacy_presentation/__init__.py",
+        "tools/atlas_legacy_presentation/__main__.py",
+        "tools/atlas_legacy_presentation/descriptor.schema.json",
+        "tools/atlas_legacy_presentation/errors.py",
+        "tools/atlas_legacy_presentation/parser.py",
+        "tools/atlas_legacy_presentation/reader.py",
+        "tools/atlas_legacy_presentation/semantics.py"
+      ],
+      "ownership": "PASS",
+      "tests": [
+        {
+          "name": "test_28_unadmitted_and_four_unbound_tables_preserved",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_collision_null_unresolved_and_repeat_occurrences",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_depth_and_column_quotas_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_descriptor_schema_and_semantic_tampering_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_duplicate_keys_nonfinite_invalid_utf8_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_expiration_and_ttl_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hostile_html_javascript_and_uri_are_inert",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_literal_types_and_lexemes_are_not_coerced",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_multibyte_literal_byte_quota_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_observed_isolated_run_and_file_retained",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_schema_is_exact_approved_f2",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unknown_format_and_ambiguous_html_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_allowlist_limit_and_ttl_quota",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_never_removes_foreign_file",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_refuses_replaced_owned_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_default_mode_blocks_before_any_source_read",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hardlink_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_mtime_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_path_not_exactly_allowlisted",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_scratch_must_be_separate_from_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_immutable_and_one_derived_file_only",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_replacement_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_leaf_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_or_reparse_ancestor_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_traversal_refused_even_when_resolving_to_allowed_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unc_device_ads_and_glob_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_contextual_parent_uses_only_explicit_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cycles_retained_with_explicit_gap",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_invalid_shapes_are_structured_errors",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_atomic_publish_never_clobbers_existing_destination",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_effective_file_dacl_is_only_owner_and_system",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "SKIP"
+        },
+        {
+          "name": "test_missing_source_is_payload_free_cli_error",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_partial_cleanup_preserves_replaced_foreign_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        }
+      ],
+      "independence": {
+        "status": "PASS",
+        "synthetic_only": true,
+        "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+        "optimized": 0,
+        "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+        "commands": [
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "7efd5566ca284b240377de94d720692c367e3d051c267d34ab179ac8231174cc",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD^{tree}"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e2b0cbdd2ed958bb140c9d014af9198e4a21238350d5d8290b28992960c554ce",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "show",
+              "-s",
+              "--format=%P",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "14120d3a10559a1508a7374d23ae110952d54151611fc16f052cec616691230a",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/build-inputs/protocol"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 688,
+            "stderr_bytes": 0,
+            "stdout_sha256": "8ba055b978657f4e3b2788de3dab7133b91f614fb72603893a19f6fe201a1bd7",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/build-inputs/atlas"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 661,
+            "stderr_bytes": 0,
+            "stdout_sha256": "0755c7a3336c5c69f39a87c178f484a4fe80c150562b4416687cf6dcb6d56a69",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/sdk-only/bin/python",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/wheels/caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 265,
+            "stderr_bytes": 0,
+            "stdout_sha256": "ddcc84904d097f929e5a912c08f7f1169e11ae5824e2be9027c539ebea38e577",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/sdk-only/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/sdk-only/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-m",
+              "caderno_protocol",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1241,
+            "stderr_bytes": 0,
+            "stdout_sha256": "b58dd8e82b67fd96b36ab1c2787ea3a61e9ea72b8f5102b7bd8a9f97ec652944",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/sdk-only/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-c",
+              "import importlib.util;raise SystemExit(0 if importlib.util.find_spec('atlas_viewer') is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/viewer-and-sdk/bin/python",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/wheels/atlas_viewer-0.1.0a1-py3-none-any.whl",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/wheels/caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 398,
+            "stderr_bytes": 0,
+            "stdout_sha256": "275fb007fb299abbd1e3f51438c31e07710bde17c800bea7548d5d0e93855329",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/viewer-and-sdk/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/viewer-and-sdk/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-m",
+              "caderno_protocol",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1241,
+            "stderr_bytes": 0,
+            "stdout_sha256": "b58dd8e82b67fd96b36ab1c2787ea3a61e9ea72b8f5102b7bd8a9f97ec652944",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/viewer-and-sdk/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-m",
+              "atlas_viewer",
+              "inspect",
+              "/tmp/atlas-parity04-f4-c2-wheels-3ypxwfpo/invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 45823,
+            "stderr_bytes": 0,
+            "stdout_sha256": "d5eeeba86d6be41ce43c0960d6c8827da39a210b47b49eb089e6eb5ba1e306f0",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "checks": {
+          "sdk-only": "PASS",
+          "viewer-and-sdk": "PASS",
+          "external_tool_excluded_from_wheels": "PASS",
+          "outside_checkout_runtime_without_tools_or_r4": "PASS"
+        },
+        "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+        "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+        "parents": [
+          "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+        ],
+        "wheels": [
+          {
+            "name": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+            "sha256": "812233cd217677b624679baf771d19fd1be8705f8344696e18a2a463c989115c",
+            "external_tool_present": false,
+            "entries": 20
+          },
+          {
+            "name": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+            "sha256": "e29bda686b98d43061649f16ed6bc1ff29d5270f8d062acd330d9e1da5f23143",
+            "external_tool_present": false,
+            "entries": 15
+          }
+        ]
+      },
+      "inputs": {
+        "tools/atlas_legacy_presentation/parser.py": "42b5bc9c3f0bc522009860bc98b157e931af0e1c9b4306b5ddf8d20cd1c7814c",
+        "tools/atlas_legacy_presentation/semantics.py": "a74790afac6c9e92421398c3ac5525960563f2412adda921d8fb66a5dbaaeea8",
+        "tools/atlas_legacy_presentation/errors.py": "4edb992cdb7ab62e21eabeb2223103c1bdc9b5fa740d81f5b63bd1252e4074d4",
+        "tools/atlas_legacy_presentation/README.md": "8aff2769cbc9d8c2f3bb899456e6de0ac7a74e5becb30fbf3eff9870f9e521a5",
+        "tools/atlas_legacy_presentation/__init__.py": "ebce1eff6c81acd1e097d0cd0103fd1b17106f20132f050e949c0470244b373c",
+        "tools/atlas_legacy_presentation/descriptor.schema.json": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed",
+        "tools/atlas_legacy_presentation/reader.py": "d904872bbca55effff7f82d3adada9d1a8793f0f4d107a388296eb7e29e9dff5",
+        "tools/atlas_legacy_presentation/__main__.py": "5abd2fb3bd0f3d1b4faa2ee24f9879e132a3d3b0193e208a89c69160860b2d12",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py": "7889edd90ae584cf67f41b778a0aefabce840e2d724d92dc0e4f9a8d9c2a715f",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py": "885ac4f01c5d00b651f7253dca45b32821249b8356d746cd2d52c55710a589e4",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py": "8985e9f812f21bc7a0891c2839475f4048605ff17581ccf3465cad186e51a49c",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json": "5b302cb0888fe6ee141f62f2f4dc92f4b02975fa0bd8f44b15b854f068c8e547"
+      }
+    },
+    {
+      "key": "ubuntu1",
+      "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+      "parent": "ddbab1b193054404a6bd5d5259a17f26397e9fd0",
+      "optimized": 1,
+      "synthetic_only": true,
+      "g4": "BLOCKED",
+      "hard_budget": "HARD_BUDGET_UNVERIFIED",
+      "os_isolation": "OS_ISOLATION_UNVERIFIED",
+      "changed_paths": [
+        ".github/workflows/atlas-parity04-f4-c2-reader.yml",
+        "docs/missions/atlas-parity-04/f4-c2-reader/PLAN.md",
+        "docs/missions/atlas-parity-04/f4-c2-reader/READER-CONTRACT.md",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py",
+        "tools/atlas_legacy_presentation/README.md",
+        "tools/atlas_legacy_presentation/__init__.py",
+        "tools/atlas_legacy_presentation/__main__.py",
+        "tools/atlas_legacy_presentation/descriptor.schema.json",
+        "tools/atlas_legacy_presentation/errors.py",
+        "tools/atlas_legacy_presentation/parser.py",
+        "tools/atlas_legacy_presentation/reader.py",
+        "tools/atlas_legacy_presentation/semantics.py"
+      ],
+      "ownership": "PASS",
+      "tests": [
+        {
+          "name": "test_28_unadmitted_and_four_unbound_tables_preserved",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_collision_null_unresolved_and_repeat_occurrences",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_depth_and_column_quotas_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_descriptor_schema_and_semantic_tampering_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_duplicate_keys_nonfinite_invalid_utf8_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_expiration_and_ttl_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hostile_html_javascript_and_uri_are_inert",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_literal_types_and_lexemes_are_not_coerced",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_multibyte_literal_byte_quota_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_observed_isolated_run_and_file_retained",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_schema_is_exact_approved_f2",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unknown_format_and_ambiguous_html_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ParserContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_allowlist_limit_and_ttl_quota",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_never_removes_foreign_file",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cleanup_refuses_replaced_owned_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_default_mode_blocks_before_any_source_read",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_hardlink_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_mtime_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_path_not_exactly_allowlisted",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_scratch_must_be_separate_from_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_change_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_immutable_and_one_derived_file_only",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_source_replacement_during_read_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_leaf_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_symlink_or_reparse_ancestor_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_traversal_refused_even_when_resolving_to_allowed_source",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_unc_device_ads_and_glob_refused",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionContraproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_contextual_parent_uses_only_explicit_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_cycles_retained_with_explicit_gap",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_invalid_shapes_are_structured_errors",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.ReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_atomic_publish_never_clobbers_existing_destination",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_effective_file_dacl_is_only_owner_and_system",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "SKIP"
+        },
+        {
+          "name": "test_missing_source_is_payload_free_cli_error",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        },
+        {
+          "name": "test_partial_cleanup_preserves_replaced_foreign_identity",
+          "class": "tests.qa.test_atlas_parity04_f4_c2_reader.AcquisitionReviewCounterproofs",
+          "status": "PASS"
+        }
+      ],
+      "independence": {
+        "status": "PASS",
+        "synthetic_only": true,
+        "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+        "optimized": 1,
+        "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+        "commands": [
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "7efd5566ca284b240377de94d720692c367e3d051c267d34ab179ac8231174cc",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "rev-parse",
+              "HEAD^{tree}"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e2b0cbdd2ed958bb140c9d014af9198e4a21238350d5d8290b28992960c554ce",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "git",
+              "show",
+              "-s",
+              "--format=%P",
+              "HEAD"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 41,
+            "stderr_bytes": 0,
+            "stdout_sha256": "14120d3a10559a1508a7374d23ae110952d54151611fc16f052cec616691230a",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/build-inputs/protocol"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 688,
+            "stderr_bytes": 0,
+            "stdout_sha256": "6e8f37d4a24ad8a1f24e47c3ced68d94ff4a927eb8c100510a43041792fa97c7",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/opt/hostedtoolcache/Python/3.12.15/x64/bin/python",
+              "-m",
+              "pip",
+              "wheel",
+              "--no-deps",
+              "--no-build-isolation",
+              "--wheel-dir",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/build-inputs/atlas"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 661,
+            "stderr_bytes": 0,
+            "stdout_sha256": "ec95add04d2d9260f151baedebfae22eff0015df4c112761fbf0431de6d46a85",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/sdk-only/bin/python",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/wheels/caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 265,
+            "stderr_bytes": 0,
+            "stdout_sha256": "d7e785456502854cc42329278f68a828adc8df182c265f93542d49d7ee545787",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/sdk-only/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/sdk-only/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-m",
+              "caderno_protocol",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1241,
+            "stderr_bytes": 0,
+            "stdout_sha256": "b58dd8e82b67fd96b36ab1c2787ea3a61e9ea72b8f5102b7bd8a9f97ec652944",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/sdk-only/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-c",
+              "import importlib.util;raise SystemExit(0 if importlib.util.find_spec('atlas_viewer') is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/viewer-and-sdk/bin/python",
+              "-m",
+              "pip",
+              "install",
+              "--no-index",
+              "--no-deps",
+              "--find-links",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/wheels",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/wheels/atlas_viewer-0.1.0a1-py3-none-any.whl",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/wheels/caderno_protocol-0.1.0a1-py3-none-any.whl"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 398,
+            "stderr_bytes": 0,
+            "stdout_sha256": "d85f0a16ea9877fe82d085dc13b0939b0b55b6ae5ade62b11d007a743ccddd30",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/viewer-and-sdk/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-c",
+              "import importlib.util;p=importlib.util.find_spec('atlas_legacy_presentation');t=importlib.util.find_spec('tools');r=importlib.util.find_spec('r4');raise SystemExit(0 if p is None and t is None and r is None else 1)"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/viewer-and-sdk/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-m",
+              "caderno_protocol",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 1241,
+            "stderr_bytes": 0,
+            "stdout_sha256": "b58dd8e82b67fd96b36ab1c2787ea3a61e9ea72b8f5102b7bd8a9f97ec652944",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "argv": [
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/viewer-and-sdk/bin/python",
+              "-I",
+              "-X",
+              "utf8",
+              "-O",
+              "-m",
+              "atlas_viewer",
+              "inspect",
+              "/tmp/atlas-parity04-f4-c2-wheels-ldufz_u0/invented-environmental-source"
+            ],
+            "returncode": 0,
+            "stdout_bytes": 45823,
+            "stderr_bytes": 0,
+            "stdout_sha256": "ec944083758a1549a1afd751297bbbfe93d2b8862e1bd046897de44253c340d8",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "checks": {
+          "sdk-only": "PASS",
+          "viewer-and-sdk": "PASS",
+          "external_tool_excluded_from_wheels": "PASS",
+          "outside_checkout_runtime_without_tools_or_r4": "PASS"
+        },
+        "commit": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+        "tree": "5994e923131148f0fb3ffa9217cbea5d5c7a5e0e",
+        "parents": [
+          "ddbab1b193054404a6bd5d5259a17f26397e9fd0"
+        ],
+        "wheels": [
+          {
+            "name": "atlas_viewer-0.1.0a1-py3-none-any.whl",
+            "sha256": "83543ff2d2267b1285567fd815fd5a7e80c51291d2b0cc6f8a6e0fdc5ab67f79",
+            "external_tool_present": false,
+            "entries": 20
+          },
+          {
+            "name": "caderno_protocol-0.1.0a1-py3-none-any.whl",
+            "sha256": "ff2804ba962441aa3afc61044c9fbcf752873c759e24bbd16706ef0d3d56587f",
+            "external_tool_present": false,
+            "entries": 15
+          }
+        ]
+      },
+      "inputs": {
+        "tools/atlas_legacy_presentation/parser.py": "42b5bc9c3f0bc522009860bc98b157e931af0e1c9b4306b5ddf8d20cd1c7814c",
+        "tools/atlas_legacy_presentation/semantics.py": "a74790afac6c9e92421398c3ac5525960563f2412adda921d8fb66a5dbaaeea8",
+        "tools/atlas_legacy_presentation/errors.py": "4edb992cdb7ab62e21eabeb2223103c1bdc9b5fa740d81f5b63bd1252e4074d4",
+        "tools/atlas_legacy_presentation/README.md": "8aff2769cbc9d8c2f3bb899456e6de0ac7a74e5becb30fbf3eff9870f9e521a5",
+        "tools/atlas_legacy_presentation/__init__.py": "ebce1eff6c81acd1e097d0cd0103fd1b17106f20132f050e949c0470244b373c",
+        "tools/atlas_legacy_presentation/descriptor.schema.json": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed",
+        "tools/atlas_legacy_presentation/reader.py": "d904872bbca55effff7f82d3adada9d1a8793f0f4d107a388296eb7e29e9dff5",
+        "tools/atlas_legacy_presentation/__main__.py": "5abd2fb3bd0f3d1b4faa2ee24f9879e132a3d3b0193e208a89c69160860b2d12",
+        "scripts/qa/atlas_parity04_f4_c2_evidence.py": "7889edd90ae584cf67f41b778a0aefabce840e2d724d92dc0e4f9a8d9c2a715f",
+        "scripts/qa/atlas_parity04_f4_c2_qualification.py": "885ac4f01c5d00b651f7253dca45b32821249b8356d746cd2d52c55710a589e4",
+        "tests/qa/test_atlas_parity04_f4_c2_reader.py": "8985e9f812f21bc7a0891c2839475f4048605ff17581ccf3465cad186e51a49c",
+        "tests/fixtures/atlas_parity04_f4_c2_source.json": "5b302cb0888fe6ee141f62f2f4dc92f4b02975fa0bd8f44b15b854f068c8e547"
+      }
+    }
+  ],
+  "global_workflows": [
+    {
+      "id": 41213116027,
+      "name": "ATLAS-PARITY-04 documentation successor",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116027",
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+    },
+    {
+      "id": 41213115968,
+      "name": "ATLAS-PARITY-03 C4 full composition",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213115968",
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+    },
+    {
+      "id": 41213116018,
+      "name": "ATLAS003 Spec Kit contract checks",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116018",
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+    },
+    {
+      "id": 41213115961,
+      "name": "ATLAS021 candidate verification",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213115961",
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+    },
+    {
+      "id": 41213116001,
+      "name": "AP04 F4 C2 external reader synthetic qualification",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116001",
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+    },
+    {
+      "id": 41213115981,
+      "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213115981",
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+    },
+    {
+      "id": 41213116129,
+      "name": "ATLAS-PARITY03 P03 isolated qualification",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/41213116129",
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e"
+    }
+  ],
+  "frozen_guard_counterproofs": [
+    {
+      "run_id": 41213116027,
+      "job_id": 124572045176,
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "lines": [
+        "2026-10-31T15:05:07.2835845Z AP04_F2_SUCCESSOR_SUMMARY={\"status\":\"FAIL\",\"tested_sha\":\"9bbf6891433bbe1457a818afcd42ead44d95a07e\",\"tested_tree\":\"5994e923131148f0fb3ffa9217cbea5d5c7a5e0e\",\"error\":\"GuardError: Repair history contains unauthorized paths: ['docs/missions/atlas-parity-04/f4-c2-reader/PLAN.md']\"}"
+      ]
+    },
+    {
+      "run_id": 41213115968,
+      "job_id": 124572044900,
+      "sha": "9bbf6891433bbe1457a818afcd42ead44d95a07e",
+      "lines": [
+        "2026-10-31T15:05:02.1670094Z C4_INPUT_SUMMARY={\"status\":\"FAIL\",\"error\":\"RuntimeError: Composition may not add/remove inherited fixtures\",\"tested_sha\":\"9bbf6891433bbe1457a818afcd42ead44d95a07e\",\"tested_tree\":\"5994e923131148f0fb3ffa9217cbea5d5c7a5e0e\",\"inputs\":null,\"historical_manifests\":[{\"source_sha\":\"326b92ae27effb6941801ed3e9af5c07aa90fb95\",\"path\":\"docs/missions/atlas-parity-03/c1-core-composition/MANIFEST.sha256\",\"sha256\":\"1f04238e2988369e9c968bd06a83f245dcfa01935a0c7a63d9194deab20ac7b0\",\"entries\":283,\"current_bytes_required\":false,\"strict_current_adapters\":{}},{\"source_sha\":\"f625f8be40156fd9fe4572a0ac2074910efd96cf\",\"path\":\"docs/missions/atlas-parity-03/c2-p03-qualification/MANIFEST.sha256\",\"sha256\":\"3abb7752cf23c2d131bfae92f19d821c1bac119fecb64d12e50567484ecc9304\",\"entries\":27,\"current_bytes_required\":false,\"strict_current_adapters\":{}},{\"source_sha\":\"f625f8be40156fd9fe4572a0ac2074910efd96cf\",\"path\":\"docs/missions/atlas-parity-02/p03-components/MANIFEST.sha256\",\"sha256\":\"10e6142468aabdd6e8454665207fd8050ff4f64d6b3dcfd9cde81d699ac71e77\",\"entries\":56,\"current_bytes_required\":true,\"strict_current_adapters\":{\"tests/viewer/test_atlas_parity02_p03_harness.py\":\"3bed307fb7f9aec6b4d4929be2865a8344c66b3f0f2a7c0c9aa749661b9c7689\"}},{\"source_sha\":\"c0b42a17710fdf3cef3ec4ea13c840796d57d18f\",\"path\":\"docs/missions/atlas-parity-03/c3-contract-gate/MANIFEST.sha256\",\"sha256\":\"c559337bcdf301f16af27e3f7623a27376f3d67d88181e7e8f977b349ccf26d6\",\"entries\":11,\"current_bytes_required\":true,\"strict_current_adapters\":{}},{\"source_sha\":\"c0b42a17710fdf3cef3ec4ea13c840796d57d18f\",\"path\":\"docs/missions/atlas-parity-02/p01-contracts/MANIFEST.sha256\",\"sha256\":\"88f64b8ab62d60e4355a3f29553173638f4d7e3844ce0e8126dc1484713c353c\",\"entries\":82,\"current_bytes_required\":true,\"strict_current_adapters\":{}}],\"p03_frozen_source_files\":null,\"p03_current_unchanged_files\":null,\"p03_contextual_test_adapters\":null,\"inherited_fixture_files\":null,\"C4_traceability\":{\"journeys\":28,\"original_columns_unchanged\":true,\"study_c_attribution\":\"NOT_ATTRIBUTED\",\"complete_legacy_denominator\":\"UNKNOWN\"}}"
+      ]
+    }
+  ],
+  "global_ci_green_claim": false,
+  "artifact_retention_days": 30,
+  "durable_results": "This JSON preserves extracted C2_EVIDENCE_JSON from actual completed logs in Git; JUnit retained as run artifacts.",
+  "private_source_access": false
+}

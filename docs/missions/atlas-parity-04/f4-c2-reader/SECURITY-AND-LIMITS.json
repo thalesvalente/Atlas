@@ -1,0 +1,79 @@
+{
+  "status": "F4_C2_BLOCKED_EXACT",
+  "synthetic_only": true,
+  "source_schema": {
+    "public_synthetic": "atlas-legacy-synthetic-source/0.1.0",
+    "real_legacy": "SOURCE_FORMAT_UNSUPPORTED",
+    "r4_compatibility": "UNVERIFIED_NO_PRIVATE_BYTES"
+  },
+  "operational_acquisition": {
+    "enabled": false,
+    "default_refusal": "HARD_BUDGET_UNVERIFIED",
+    "refusal_before_path_inspection": true,
+    "required_unmet": [
+      "OBSERVED_SANITIZED_SOURCE_SCHEMA",
+      "HARD_BUDGET_256MIB_30S_OS_QUALIFICATION",
+      "OS_READ_ONLY_SOURCE_SCRATCH_WRITE_NETWORK_DENIAL_QUALIFICATION"
+    ]
+  },
+  "test_mode": {
+    "flag": "--synthetic-fixture",
+    "operator_assertion_only": true,
+    "proves_synthetic_origin": false,
+    "proves_authorization": false,
+    "proves_os_isolation": false,
+    "allowed_this_session": "invented fixtures only"
+  },
+  "limits": {
+    "max_allowlist_paths": 3,
+    "max_source_bytes": 67108864,
+    "max_total_source_bytes": 201326592,
+    "one_source_per_operation": true,
+    "max_descriptor_bytes": 33554432,
+    "max_depth": 20,
+    "max_nodes": 10000,
+    "max_assets": 10000,
+    "max_relations": 100000,
+    "max_tables": 128,
+    "max_total_rows": 100000,
+    "max_columns_per_table": 256,
+    "max_literal_utf8_bytes": 65536,
+    "max_lexeme_utf8_bytes": 131072,
+    "ttl_max_seconds": 3600,
+    "cooperative_deadline_seconds": 30,
+    "hard_process_memory_bytes": 268435456,
+    "hard_process_memory_status": "HARD_BUDGET_UNVERIFIED",
+    "hard_wallclock_status": "HARD_BUDGET_UNVERIFIED"
+  },
+  "source_stability": {
+    "same_handle": true,
+    "sha256_size_mtime_ctime_identity": true,
+    "ancestor_rechecks": true,
+    "authenticity": "NOT_VERIFIED",
+    "adversarial_toctou_qualification": "UNVERIFIED",
+    "windows_metadata_api": "GetFileInformationByHandle for held and reopened exact handle"
+  },
+  "output": {
+    "single_descriptor": true,
+    "publish": "atomic no-clobber hard link then unlink owned partial",
+    "private_directory": "POSIX0700 or protected inheritable Windows current-token-user+SYSTEM DACL",
+    "ttl_enforced_by": "validate_descriptor with current now; consumer must pass clock",
+    "automatic_disk_expiry_removal": false,
+    "cleanup": "only exact same-process derived identity; no scan, recursion or crash recovery",
+    "secure_erase_claim": false
+  },
+  "network": {
+    "source_uri_access": false,
+    "remote_json_schema_refs": false,
+    "process_network_os_denial": "OS_ISOLATION_UNVERIFIED"
+  },
+  "scope": {
+    "catalog_sdk_caderno_reader003_shell": "UNCHANGED",
+    "r4": "NOT_ACCESSED_OR_MODIFIED",
+    "worktree_clone_migration": false,
+    "paid_calls": false,
+    "merge_release_deploy_license_change": false
+  },
+  "qualified_scope": "invented fixtures only; no real acquisition or host adversarial isolation",
+  "ci_run": 41213116001
+}

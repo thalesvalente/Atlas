@@ -1,0 +1,1273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:atlas:proposal:legacy-presentation:0.2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "authority",
+    "synthetic",
+    "source",
+    "snapshot",
+    "validation",
+    "policy",
+    "nodes",
+    "tables",
+    "relations",
+    "assets",
+    "unmapped_fields",
+    "coverage",
+    "gaps"
+  ],
+  "properties": {
+    "format": {
+      "const": "atlas-legacy-presentation"
+    },
+    "version": {
+      "const": "0.2.0"
+    },
+    "authority": {
+      "const": "LEGACY_DERIVED"
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "snapshot": {
+      "$ref": "#/$defs/snapshot"
+    },
+    "validation": {
+      "$ref": "#/$defs/validation"
+    },
+    "policy": {
+      "$ref": "#/$defs/policy"
+    },
+    "nodes": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "tables": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "$ref": "#/$defs/table"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    },
+    "unmapped_fields": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "$ref": "#/$defs/unmapped"
+      }
+    },
+    "coverage": {
+      "$ref": "#/$defs/coverage"
+    },
+    "gaps": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "synthetic": {
+            "const": false
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "snapshot": {
+            "properties": {
+              "binding_basis": {
+                "const": "OBSERVED_BYTES_AND_POLICY"
+              },
+              "digest_status": {
+                "const": "OBSERVED_BYTES"
+              },
+              "bytes_sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "text": {
+      "type": "string",
+      "maxLength": 65536
+    },
+    "nullable_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 65536
+    },
+    "navigation_id": {
+      "type": "string",
+      "pattern": "^nav:[A-Za-z0-9._:-]+$",
+      "maxLength": 512
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "scope",
+        "original_format",
+        "original_profile_declared",
+        "availability",
+        "access_policy_id",
+        "declared_scientific_review"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "scope": {
+          "$ref": "#/$defs/text"
+        },
+        "original_format": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "original_profile_declared": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "availability": {
+          "enum": [
+            "OBSERVED_AVAILABLE",
+            "UNAVAILABLE",
+            "UNKNOWN",
+            "CHANGED",
+            "EXPIRED"
+          ]
+        },
+        "access_policy_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "declared_scientific_review": {
+          "$ref": "#/$defs/nullable_text"
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_id",
+        "binding_basis",
+        "bytes_sha256",
+        "digest_status",
+        "observed_at",
+        "scientific_at",
+        "generated_at",
+        "expires_at",
+        "freshness"
+      ],
+      "properties": {
+        "snapshot_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "binding_basis": {
+          "enum": [
+            "OBSERVED_BYTES_AND_POLICY",
+            "SYNTHETIC_FIXTURE"
+          ]
+        },
+        "bytes_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "digest_status": {
+          "enum": [
+            "OBSERVED_BYTES",
+            "NOT_COMPUTED"
+          ]
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "scientific_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "freshness": {
+          "const": "OBSERVED_SNAPSHOT_ONLY"
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "descriptor_schema",
+        "descriptor_semantics",
+        "literal_comparison",
+        "source_profile_assessment",
+        "authenticity",
+        "scientific_approval"
+      ],
+      "properties": {
+        "descriptor_schema": {
+          "enum": [
+            "NOT_RUN",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "descriptor_semantics": {
+          "enum": [
+            "NOT_RUN",
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "literal_comparison": {
+          "enum": [
+            "NOT_PERFORMED",
+            "SOURCE_FIELD_COMPARED",
+            "SOURCE_ROW_COMPARED"
+          ]
+        },
+        "source_profile_assessment": {
+          "const": "NOT_ASSERTED"
+        },
+        "authenticity": {
+          "const": "NOT_VERIFIED"
+        },
+        "scientific_approval": {
+          "const": "NOT_EVALUATED"
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_access",
+        "max_descriptor_bytes",
+        "ttl_max_seconds",
+        "browser_persistence",
+        "automatic_uri_access"
+      ],
+      "properties": {
+        "source_access": {
+          "const": "EXTERNAL_EXACT_ALLOWLIST_ONLY"
+        },
+        "max_descriptor_bytes": {
+          "const": 33554432
+        },
+        "ttl_max_seconds": {
+          "const": 3600
+        },
+        "browser_persistence": {
+          "const": "MEMORY_ONLY"
+        },
+        "automatic_uri_access": {
+          "const": false
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "native_id",
+        "navigation_id",
+        "navigation_id_kind",
+        "occurrence",
+        "locator"
+      ],
+      "properties": {
+        "native_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "navigation_id": {
+          "$ref": "#/$defs/navigation_id"
+        },
+        "navigation_id_kind": {
+          "const": "DERIVED_FOR_PRESENTATION"
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "locator": {
+          "type": "string",
+          "maxLength": 8192
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "snapshot_id",
+        "declared_id",
+        "target_navigation_id",
+        "resolution",
+        "evidence_locator"
+      ],
+      "properties": {
+        "source_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "snapshot_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "declared_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4096
+        },
+        "target_navigation_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/navigation_id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resolution": {
+          "enum": [
+            "RESOLVED",
+            "NULL_ENDPOINT",
+            "UNRESOLVED",
+            "COLLISION",
+            "EXTERNAL_DECLARED"
+          ]
+        },
+        "evidence_locator": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 8192
+        }
+      }
+    },
+    "cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "literal",
+        "lexeme",
+        "unit",
+        "precision",
+        "absence"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "string",
+            "integer",
+            "decimal",
+            "boolean",
+            "null",
+            "missing",
+            "array",
+            "object"
+          ]
+        },
+        "literal": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "lexeme": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 131072
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256
+        },
+        "precision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 128
+        },
+        "absence": {
+          "enum": [
+            null,
+            "NULL",
+            "MISSING"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "string",
+                  "integer",
+                  "decimal",
+                  "boolean",
+                  "array",
+                  "object"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "literal": {
+                "type": "string"
+              },
+              "lexeme": {
+                "type": "string"
+              },
+              "absence": {
+                "const": null
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "integer"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "literal": {
+                "pattern": "^-?(0|[1-9][0-9]*)$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "decimal"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "literal": {
+                "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "boolean"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "literal": {
+                "enum": [
+                  "true",
+                  "false"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "literal": {
+                "const": null
+              },
+              "lexeme": {
+                "const": "null"
+              },
+              "absence": {
+                "const": "NULL"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "missing"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "literal": {
+                "const": null
+              },
+              "lexeme": {
+                "const": null
+              },
+              "absence": {
+                "const": "MISSING"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "kind",
+        "original_type",
+        "entity_status",
+        "label_literal",
+        "family_literal",
+        "parent_key_literal",
+        "parent",
+        "tree_state",
+        "external_reference",
+        "binding_gap"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "kind": {
+          "enum": [
+            "Project",
+            "Family",
+            "Experiment",
+            "Run",
+            "Other",
+            "Unknown"
+          ]
+        },
+        "original_type": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "entity_status": {
+          "enum": [
+            "SOURCE_ENTITY",
+            "DECLARED_EXTERNAL_REFERENCE"
+          ]
+        },
+        "label_literal": {
+          "$ref": "#/$defs/text"
+        },
+        "family_literal": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "parent_key_literal": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "parent": {
+          "$ref": "#/$defs/reference"
+        },
+        "tree_state": {
+          "enum": [
+            "ROOT_DECLARED",
+            "PARENT_RESOLVED",
+            "ORPHAN",
+            "PARENT_UNKNOWN",
+            "RUN_EXTERNAL_ISOLATED"
+          ]
+        },
+        "external_reference": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/reference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "binding_gap": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "entity_status": {
+                "const": "DECLARED_EXTERNAL_REFERENCE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "identity": {
+                "properties": {
+                  "native_id": {
+                    "const": null
+                  }
+                }
+              },
+              "tree_state": {
+                "const": "RUN_EXTERNAL_ISOLATED"
+              },
+              "binding_gap": {
+                "const": true
+              },
+              "external_reference": {
+                "$ref": "#/$defs/reference"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "column": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordinal",
+        "native_key",
+        "header_literal"
+      ],
+      "properties": {
+        "ordinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "native_key": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "header_literal": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "column_index": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 255
+    },
+    "requirement_fields": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "module",
+        "title",
+        "description",
+        "acceptance_criteria",
+        "category"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/column_index"
+        },
+        "module": {
+          "$ref": "#/$defs/column_index"
+        },
+        "title": {
+          "$ref": "#/$defs/column_index"
+        },
+        "description": {
+          "$ref": "#/$defs/column_index"
+        },
+        "acceptance_criteria": {
+          "$ref": "#/$defs/column_index"
+        },
+        "category": {
+          "$ref": "#/$defs/column_index"
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "native_id",
+        "admission",
+        "admission_evidence_locator",
+        "fields",
+        "category_status"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "RF",
+            "RNF",
+            "RES"
+          ]
+        },
+        "native_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "admission": {
+          "enum": [
+            "ADMITTED_NATIVE_RF",
+            "UNADMITTED_NATIVE_RF",
+            "NOT_EVALUATED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "admission_evidence_locator": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 8192
+        },
+        "fields": {
+          "$ref": "#/$defs/requirement_fields"
+        },
+        "category_status": {
+          "enum": [
+            "MISSING",
+            "PRESENT",
+            "UNKNOWN"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "admission": {
+                "const": "UNADMITTED_NATIVE_RF"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "RF"
+              },
+              "native_id": {
+                "const": null
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "admission": {
+                "const": "ADMITTED_NATIVE_RF"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "RF"
+              },
+              "native_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "admission_evidence_locator": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "ordinal",
+        "cells",
+        "requirement",
+        "run_binding",
+        "binding_gap"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "ordinal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cells": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/cell"
+          }
+        },
+        "requirement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/requirement"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "run_binding": {
+          "$ref": "#/$defs/reference"
+        },
+        "binding_gap": {
+          "type": "boolean"
+        }
+      }
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "title_literal",
+        "domain",
+        "domain_origin",
+        "record_binding",
+        "columns",
+        "rows"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "title_literal": {
+          "$ref": "#/$defs/text"
+        },
+        "domain": {
+          "enum": [
+            "RF",
+            "RNF",
+            "RES",
+            "UNKNOWN",
+            "OTHER"
+          ]
+        },
+        "domain_origin": {
+          "enum": [
+            "DECLARED",
+            "UNKNOWN"
+          ]
+        },
+        "record_binding": {
+          "$ref": "#/$defs/reference"
+        },
+        "columns": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/column"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "maxItems": 100000,
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "kind_literal",
+        "semantics",
+        "direction",
+        "from",
+        "to",
+        "evidence_locator",
+        "issues",
+        "repeat_group",
+        "repeat_occurrence",
+        "binding_gap"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "kind_literal": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "semantics": {
+          "enum": [
+            "ORGANIZATIONAL_MEMBERSHIP",
+            "DECLARED_LINEAGE",
+            "DECLARED_BINDING",
+            "NEUTRAL_MENTION",
+            "UNKNOWN"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "FROM_TO",
+            "UNDIRECTED",
+            "UNKNOWN"
+          ]
+        },
+        "from": {
+          "$ref": "#/$defs/reference"
+        },
+        "to": {
+          "$ref": "#/$defs/reference"
+        },
+        "evidence_locator": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 8192
+        },
+        "issues": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "maxLength": 256
+          }
+        },
+        "repeat_group": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "repeat_occurrence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "binding_gap": {
+          "type": "boolean"
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "kind",
+        "original_type",
+        "label_literal",
+        "declared_product_role",
+        "declared_binding",
+        "media_type_literal",
+        "uri_literal",
+        "availability",
+        "opened"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "kind": {
+          "enum": [
+            "File",
+            "Product",
+            "ProductGroup",
+            "ResourceDocument",
+            "DossierAssessment",
+            "DossierPackage",
+            "Other",
+            "Unknown"
+          ]
+        },
+        "original_type": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "label_literal": {
+          "$ref": "#/$defs/text"
+        },
+        "declared_product_role": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "declared_binding": {
+          "$ref": "#/$defs/reference"
+        },
+        "media_type_literal": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 256
+        },
+        "uri_literal": {
+          "$ref": "#/$defs/nullable_text"
+        },
+        "availability": {
+          "enum": [
+            "OBSERVED_AVAILABLE",
+            "DECLARED_ONLY",
+            "UNVERIFIED",
+            "MISSING",
+            "EXTERNAL_UNRESOLVED",
+            "UNKNOWN",
+            "INTEGRITY_MISMATCH"
+          ]
+        },
+        "opened": {
+          "const": false
+        }
+      }
+    },
+    "unmapped": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner_navigation_id",
+        "locator",
+        "source_key_literal",
+        "value"
+      ],
+      "properties": {
+        "owner_navigation_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/navigation_id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "locator": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "source_key_literal": {
+          "$ref": "#/$defs/text"
+        },
+        "value": {
+          "$ref": "#/$defs/cell"
+        }
+      }
+    },
+    "count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "selected",
+        "loaded",
+        "visible",
+        "unavailable",
+        "unknown_reason"
+      ],
+      "properties": {
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "selected": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "loaded": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "visible": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "unavailable": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "unknown_reason": {
+          "$ref": "#/$defs/nullable_text"
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "population",
+        "global_archive",
+        "global_history",
+        "global_total",
+        "global_percentage",
+        "snapshot_overlap",
+        "counts"
+      ],
+      "properties": {
+        "population": {
+          "enum": [
+            "SELECTED_QUALIFYING_PAYLOAD",
+            "SYNTHETIC_FIXTURE"
+          ]
+        },
+        "global_archive": {
+          "const": "UNKNOWN_UPSTREAM"
+        },
+        "global_history": {
+          "const": "GLOBAL_UNPROVEN"
+        },
+        "global_total": {
+          "const": null
+        },
+        "global_percentage": {
+          "const": null
+        },
+        "snapshot_overlap": {
+          "enum": [
+            "NOT_SUMMED",
+            "UNKNOWN"
+          ]
+        },
+        "counts": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/count"
+          }
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "scope",
+        "count",
+        "unit",
+        "note"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "scope": {
+          "$ref": "#/$defs/text"
+        },
+        "count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "note": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    }
+  }
+}

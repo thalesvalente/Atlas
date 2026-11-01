@@ -1,0 +1,33 @@
+{
+  "format": "atlas-legacy-synthetic-source",
+  "version": "0.1.0",
+  "synthetic": true,
+  "source_id": "invented-public-c2",
+  "snapshot_id": "invented-public-c2-s1",
+  "access_policy_id": "invented-only",
+  "scope": "Original public invented demonstration, no historical bytes",
+  "records": [
+    {
+      "id": "P-invented",
+      "kind": "Project",
+      "label": "Invented Project",
+      "root": true
+    },
+    {
+      "id": "R-invented",
+      "kind": "Run",
+      "label": "Invented isolated Run"
+    }
+  ],
+  "edges": [
+    {
+      "from": null,
+      "to": "R-invented",
+      "kind": "invented mention"
+    }
+  ],
+  "result_tables": [],
+  "product_items": [],
+  "resource_documents": [],
+  "unknown_upstream": null
+}

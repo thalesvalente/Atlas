@@ -1,0 +1,7 @@
+# Revisão adversarial escopada / INDEPENDENT_REVIEW_NOT_AVAILABLE
+
+**Autor e revisor nesta sessão são o mesmo executor.** Ferramentas nativas `spawn_agent`, `send_message`, `wait` ou equivalentes não foram expostas. Revisões Copilot anteriores da PR não cobrem este SHA. Não há revisão independente válida do SHA final. Status `NOT_RUN`, nunca PASS por simulação.
+
+Conferências do autor, não equivalentes a revisão independente: (1) fonte R4 A10 confirma que key/ui_id/native_id são distintos, e parent_key/from_key/to_key pertencem a namespace estrutural; (2) não escolher um record por colisão textual; (3) RF R4 usa cells como mapa e guarda native_id null na população não admitida; (4) toda informação v5 não tipada conservada em unmapped_fields com pointers/quotas; (5) File, Product, ProductGroup, ResourceDocument e dossiê não se confundem; (6) nenhum HTML/JS, URI, provider, host privado ou dependência r4 nos wheels; (7) CI 4/4 no SHA de código, com skip ACL Ubuntu claramente identificado; (8) permissão do usuário para reuso de código não autoriza bytes de experimentos.
+
+**Achados materiais abertos:** HIGH `SOURCE_KEY_CONTRACT_MISMATCH`, HIGH `C2_V5_UNAUTHORIZED_HISTORY_PATH`, HIGH `INDEPENDENT_REVIEW_NOT_AVAILABLE`; OPERATIONAL `OS_ISOLATION_UNVERIFIED` e `HARD_BUDGET_UNVERIFIED`. Reviewer distinto precisa verificar SHA terminal e confirmar fechamento antes de qualificação escopada. Não declarar G4/G5/G6, integração, nem aprovação científica.

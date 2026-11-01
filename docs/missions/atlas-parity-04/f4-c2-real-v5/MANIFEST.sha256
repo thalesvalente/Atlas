@@ -1,0 +1,11 @@
+aee2a724f1d3dbd1c12ba9a76ad45241a677c40d81a6d210f251d4473c0f273c  docs/missions/atlas-parity-04/f4-c2-real-v5/CI-EVIDENCE.json
+2deb78fe7233a1a692d1fd345376035e4345ea56c28cff832c55b12a76f40f4d  docs/missions/atlas-parity-04/f4-c2-real-v5/HANDOFF.json
+b01d250c96f16c85c4a858116f48324e48dd25c9bcbc3ab5e8ce17a322ff475d  docs/missions/atlas-parity-04/f4-c2-real-v5/INDEPENDENT-REVIEW.md
+5a2750afe437dc155e002f703c462c384a019d77b36e2c2f8a88754735605ec6  docs/missions/atlas-parity-04/f4-c2-real-v5/NEGATIVE-TESTS.json
+3503e07bdae7120ab85ae64def25b13f20f705ef965b97a68d48f4b68735bd98  docs/missions/atlas-parity-04/f4-c2-real-v5/PLAN.md
+599b530e504e8c07ef7f5a9ffa1af232b7b38f2db344edf4b883045a87d9db77  docs/missions/atlas-parity-04/f4-c2-real-v5/REAL-V5-FIELD-MAPPING.md
+69dac935f50f3dd84482f8093733d62b96ab72b4a3944ca34ad896cc2b822cd9  docs/missions/atlas-parity-04/f4-c2-real-v5/RESULT.md
+1d02d6130868891f5bfe590d4878c60fa6a0218ae7b952cc479e7e21a31a922d  docs/missions/atlas-parity-04/f4-c2-real-v5/SOURCE-KEY-GAPS.md
+e16c3b10a087b08f0a64d83e31227af5216bbc1b33764c47718be951a96227d1  tests/qa/test_atlas_parity04_f4_c2_v5_descriptor.py
+4b80632a6b66449ea3c6a281529c62411d4a7bef2ed568c8e61253b96f0cd175  tools/atlas_legacy_presentation/legacy_v5_descriptor.py
+c3c9c25ffd35f4d24e6c40ced49606ecfa78e488f8ec4d7728f183d360dc042d  tools/atlas_legacy_presentation/legacy_v5.py

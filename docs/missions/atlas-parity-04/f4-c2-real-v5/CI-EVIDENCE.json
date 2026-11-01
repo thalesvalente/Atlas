@@ -1,0 +1,68 @@
+{
+  "schema": "atlas-ap04-f4-c2-a-ci-v1",
+  "branch": "feat/atlas-parity04-f4-external-reader-20261031",
+  "pr": 18,
+  "code_sha": "dcd219bf592f47590413424adfdf6513a0daa18f",
+  "code_tree": "aad819d8d7bc8dc40544aa850bb73831fa5b7fb0",
+  "code_parent": "228d1e1a10ea17874f0078f491e4418c56cf5969",
+  "focal": {
+    "id": 41269925191,
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41269925191",
+    "conclusion": "success",
+    "matrix": [
+      {
+        "id": 124740412288,
+        "os": "ubuntu",
+        "opt": 0,
+        "passed": 59,
+        "skipped": 1,
+        "conclusion": "success"
+      },
+      {
+        "id": 124740412498,
+        "os": "ubuntu",
+        "opt": 1,
+        "passed": 59,
+        "skipped": 1,
+        "conclusion": "success"
+      },
+      {
+        "id": 124740412460,
+        "os": "windows",
+        "opt": 0,
+        "passed": 60,
+        "skipped": 0,
+        "conclusion": "success"
+      },
+      {
+        "id": 124740412398,
+        "os": "windows",
+        "opt": 1,
+        "passed": 60,
+        "skipped": 0,
+        "conclusion": "success"
+      }
+    ],
+    "artifacts": [
+      13068573194,
+      13069101120,
+      13068598357,
+      13068608162
+    ],
+    "junit_and_json": true,
+    "wheels_exclude_external_reader_and_r4": true
+  },
+  "historical": {
+    "commit": "258eda6153ffe602d3fa8e6b4fe7a2ad74edbbd7",
+    "manifest_sha256": "e5c459a2a5bb974cbdea5f38cd6ba8060c212e919900b6ee56dd9bc17a75c1f7",
+    "objects_verified": 22,
+    "unchanged": true
+  },
+  "terminal_documentation_sha": "REFER_TO_PR18_HEAD_AFTER_PUBLICATION",
+  "terminal_ci": "EXPECTED_FAIL_C2_V5_UNAUTHORIZED_HISTORY_PATH_UNTIL_AUTHORIZED_VERSIONED_CHECKER_UPDATE",
+  "independent_native_review": "NOT_AVAILABLE",
+  "real_R4_experiment_bytes": "NOT_ACCESSED",
+  "os_isolation": "UNVERIFIED",
+  "hard_budget_256MiB_30s": "UNVERIFIED",
+  "global_ci": "NOT_QUALIFIED"
+}
