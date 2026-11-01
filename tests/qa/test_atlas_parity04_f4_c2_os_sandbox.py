@@ -387,9 +387,14 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
     else:
         assert result["appcontainer_token_verified"] is True
         assert result["filesystem_network_confined"] is False
+        report_path = scratch / "os-probe-report.json"
+        detail = (json.loads(report_path.read_text())
+                  if report_path.is_file() and report_path.stat().st_size < 4096
+                  else None)
         assert result["exit_code"] == 0, (
-            "APPCONTAINER_WORKER_RUNTIME_UNAVAILABLE:" + repr(result))
-        detail = json.loads((scratch / "os-probe-report.json").read_text())
+            "APPCONTAINER_NEGATIVE_PROBE_FAILED:" +
+            repr({"outcome": result, "synthetic_checks": detail}))
+        assert detail is not None
         assert detail["appcontainer_token_verified"] is True
         assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
         assert set(detail["checks"]) == {
