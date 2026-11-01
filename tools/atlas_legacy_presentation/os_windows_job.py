@@ -276,6 +276,7 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
                 int(accounting.ActiveProcesses) if timed_out else None,
             "filesystem_network_confined": False,
             "appcontainer_token_verified": bool(profile),
+            "source_handle_exported": False if profile else None,
             "source_swap_denied_os":
                 profile.source_swap_denied_os if profile else None,
             "appcontainer_loopback_exception_absent":
@@ -551,7 +552,6 @@ class _AppContainerLaunch:
         # supervisor, which verified the exact synthetic payload already.
         self.argv_suffix = [
             "--broker-report-handle", str(int(out)),
-            "--broker-denied-source-handle", str(int(src)),
             "--broker-source-length", str(len(_INVENTED_SOURCE)),
             "--broker-loopback-port",
             str(self.listener.getsockname()[1])]

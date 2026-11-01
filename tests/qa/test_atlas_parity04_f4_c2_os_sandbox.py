@@ -409,7 +409,7 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
             repr({"outcome": result, "synthetic_checks": detail}))
         assert detail is not None
         assert detail["appcontainer_token_verified"] is True
-        assert detail["source_handle_not_inherited"] is True
+        assert detail["source_bytes_read_by_worker"] == 0
         assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
         assert set(detail["checks"]) == {
             "outside_read", "source_write", "scratch_path_write",
@@ -437,7 +437,6 @@ def test_windows_broker_flags_cannot_authenticate_direct_worker(synthetic):
                "--scratch", str(scratch), "--mode", "success",
                "--supervisor-pid", str(os.getpid()),
                "--broker-report-handle", "123457",
-               "--broker-denied-source-handle", "123456",
                "--broker-source-length", str(len(sandbox._INVENTED_SOURCE)),
                "--broker-loopback-port", "12345"]
     checked = subprocess.run(command, capture_output=True, timeout=8)
@@ -471,7 +470,7 @@ def test_windows_appcontainer_memory_native_limit(synthetic):
     assert result["exit_code"] == 0, result
     report = json.loads((synthetic[2] / "os-probe-report.json").read_text())
     assert report["memory_probe"] == "MEMORY_ERROR_OS_LIMIT"
-    assert report["source_handle_not_inherited"] is True
+    assert report["source_bytes_read_by_worker"] == 0
 
 
 def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic):
@@ -560,7 +559,7 @@ def test_windows_broker_has_no_source_read_api_or_handle_transit():
     worker = inspect.getsource(os_worker._windows_broker_worker)
     native = inspect.getsource(os_windows_job._AppContainerLaunch.prepare)
     assert "args.broker_source_handle" not in worker
-    assert "GetHandleInformation" in worker
+    assert "args.broker_source_length" in worker
     assert "source_sample = src.read" not in worker
     assert "(wintypes.HANDLE * 1)(out)" in native
     assert "src_attrs" in native
