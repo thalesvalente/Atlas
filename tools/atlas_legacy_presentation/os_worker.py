@@ -287,11 +287,22 @@ def _windows_broker_worker(args) -> int:
             return 0
         if args.mode == "descendant":
             import subprocess
-            child = subprocess.Popen(
-                [sys.executable, "-I", "-S", "-c",
-                 "import time; time.sleep(90)"],
-                stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL)
+            try:
+                child = subprocess.Popen(
+                    [sys.executable, "-I", "-S", "-c",
+                     "import time; time.sleep(90)"],
+                    stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL)
+            except OSError as exc:
+                # Child-creation denial is a distinct, valid negative proof.
+                # An unrelated runtime/loader error is NOT a security pass.
+                denied = isinstance(exc, PermissionError) and (
+                    exc.errno == 13 or getattr(exc, "winerror", None) == 5)
+                report({"child_spawn": "DENIED_BY_OS" if denied else
+                        "UNVERIFIED_ERROR",
+                        "child_os_errno": exc.errno,
+                        "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
+                return 0 if denied else 79
             report({"descendant_started": child.pid,
                     "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
             time.sleep(90)

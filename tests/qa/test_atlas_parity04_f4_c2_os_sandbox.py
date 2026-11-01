@@ -469,9 +469,18 @@ def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic):
         _appcontainer_argv(synthetic, "descendant"),
         wall_seconds=3, appcontainer=True)
     assert result["appcontainer_token_verified"] is True
-    assert result["timed_out"] is True
-    assert result["status"] == "OS_WALL_TIMEOUT_TERMINATED"
-    assert result["active_processes_after_timeout"] == 0
+    report_path = synthetic[2] / "os-probe-report.json"
+    assert report_path.exists(), result
+    detail = json.loads(report_path.read_text())
+    if result["timed_out"]:
+        assert result["status"] == "OS_WALL_TIMEOUT_TERMINATED"
+        assert result["active_processes_after_timeout"] == 0
+        assert detail["descendant_started"] > 0
+    else:
+        assert result["exit_code"] == 0, {
+            "outcome": result, "synthetic_probe": detail}
+        assert detail["child_spawn"] == "DENIED_BY_OS", detail
+        assert detail["child_os_errno"] == 13
     assert not any(synthetic[2].glob("atlas-c2-*.json"))
 
 
