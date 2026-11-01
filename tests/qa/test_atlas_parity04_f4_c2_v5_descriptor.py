@@ -104,7 +104,7 @@ class DirectV5DescriptorTests(unittest.TestCase):
         root = next(n for n in d["nodes"] if n["identity"]["locator"] == "/lineage_graph/nodes/0")
         self.assertIsNone(root["identity"]["native_id"])
         child = next(n for n in d["nodes"] if n["identity"]["native_id"] == "run-a")
-        self.assertEqual(child["tree_state"], "ORPHAN")
+        self.assertEqual(child["tree_state"], "RUN_EXTERNAL_ISOLATED")
         self.assertEqual(child["parent"]["declared_id"], "experiment-key")
         self.assertEqual(child["parent"]["resolution"], "UNRESOLVED")
         self.assertTrue(any(g["code"] == "SOURCE_PARENT_KEY_NOT_NATIVE_REFERENCE"

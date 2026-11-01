@@ -46,7 +46,7 @@ jobs:
         run: python scripts/qa/atlas_parity04_f4_c2_qualification.py --output .test-output/atlas-parity04-f4-c2/independence.json
       - name: Publish exact SHA evidence summary
         if: always()
-        run: python scripts/qa/atlas_parity04_f4_c2_evidence.py
+        run: python scripts/qa/atlas_parity04_f4_c2_v5_evidence.py
       - name: Preserve synthetic JSON and JUnit
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
