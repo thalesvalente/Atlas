@@ -49,7 +49,7 @@ def source():
 
 class V5SourceTests(unittest.TestCase):
     def test_inert_legacy_html_and_separate_collections(self):
-        data = json.dumps(source(), ensure_ascii=False)
+        data = json.dumps(source(), ensure_ascii=False).replace("<", "\\u003c")
         html = ('<!doctype html><script>throw Error("should not run")</script>'
                 '<script type="application/json" id="data">' + data +
                 '</script><script>alert("not executed")</script>')
