@@ -1,15 +1,16 @@
-# Manifest AP04-C2-B (SHA-256); covers new C2-B code, tests, workflow, receipts. Excludes this manifest to avoid self-reference.
-d426124d5e0837f01b88037ed94fb6eeee635eb1987e77c7026cccb54013d978  .github/workflows/atlas-parity04-f4-c2-os-sandbox.yml
-392c843c759731039a6206deae19c12593139a72d3ede4e915305bb8c8c7dbb2  docs/missions/atlas-parity-04/f4-c2-os-sandbox/CI-EVIDENCE.json
-897ee4306fe8a6b1bc5b967fbad9ae320408fdc5bc4436691d2bab815d1f2af1  docs/missions/atlas-parity-04/f4-c2-os-sandbox/HANDOFF.json
-7c3adfbb60c504d3926a52c56c389aa2cd227393e32b8528b05c1b10704d8600  docs/missions/atlas-parity-04/f4-c2-os-sandbox/INDEPENDENT-REVIEW.md
-e005093117659ef08fab390daf32627c97db6ca38e9266c46afe42a9ce6f87ce  docs/missions/atlas-parity-04/f4-c2-os-sandbox/NEGATIVE-TESTS.json
-c2466b96daa67b15535263d84b5d79f50884aae37722b14af082377221564966  docs/missions/atlas-parity-04/f4-c2-os-sandbox/OS-POLICY-AND-CAPABILITIES.md
-aa696be2131251870aca35edfa20bdcde5cab1200e61b93b48eb9bc3dc98c6eb  docs/missions/atlas-parity-04/f4-c2-os-sandbox/RESULT.md
-2bb8e3ae4f01fd30442e7c1f3fdc16695bf3fd4ccf1397a290e76d2c25d814fc  docs/missions/atlas-parity-04/f4-c2-os-sandbox/THREAT-MODEL.md
-90ccfe765503fc208eb8eab3468e57818ce3dfb44127b9efc6c42577082276ac  scripts/qa/atlas_parity04_f4_c2_os_evidence.py
-1f9eb2907f2fe534d4b02d2fee65a184f9d3ac260bbd26866e13f35f7160d8ac  tests/qa/test_atlas_parity04_f4_c2_os_sandbox.py
-e5ef389a7d522a8d9196c9a28d8718b814c04bff6de42a11d199ea1970235403  tools/atlas_legacy_presentation/os_linux_isolation.py
-78027639987e6e71c7dd234aadf461f07697fcdfac294da9f36700f726652abb  tools/atlas_legacy_presentation/os_supervisor.py
-dcca4bd1e5858d474b0f78ae4aceaab3cdc711d0896fd422d2e4b51d3faf907d  tools/atlas_legacy_presentation/os_windows_job.py
-91af3474eda5ad5856c094a2b681780e910ca7952870d45ab48a4d02246a7792  tools/atlas_legacy_presentation/os_worker.py
+# AP04-F4-C2-B SHA-256 manifest, 15 Git-verified UTF-8 blobs. Manifest excludes itself to avoid recursion.
+f52fb3843a7b6fe9284776c980b462be18e4b8aed3b1265846abb9182661dd8a  .github/workflows/atlas-parity04-f4-c2-os-sandbox.yml
+ed30598575b1191872e96c813c618fb495dc9ee8417ecf82a5653c3528cd7501  docs/missions/atlas-parity-04/f4-c2-os-sandbox/CI-EVIDENCE.json
+b77e665f95e1f6d5d91b8262efa9563ed951a5d6bdcc17761aea1923a30adca5  docs/missions/atlas-parity-04/f4-c2-os-sandbox/HANDOFF.json
+f7738bada2e1be2944ef3719292795b9d19841f3d764ae6cbac1e5a639449dbc  docs/missions/atlas-parity-04/f4-c2-os-sandbox/INDEPENDENT-REVIEW.md
+f0bfd262cbb046b7f906310aa7edf7cd734783f3484876d7ac9e50ed2f369329  docs/missions/atlas-parity-04/f4-c2-os-sandbox/NEGATIVE-TESTS.json
+c8bd181561eee849609710dcc1d1241344be30080fbee7388c72e2b2a572160b  docs/missions/atlas-parity-04/f4-c2-os-sandbox/OS-POLICY-AND-CAPABILITIES.md
+6f0a1eeb9c5492613eea62ad6c9f3043e2061819e94b6f4fead1bea0387156d5  docs/missions/atlas-parity-04/f4-c2-os-sandbox/RESULT.md
+024542b70f5eaa0c1189fe1a6fcc8c41adac211964438beeb4f220219bb8765c  docs/missions/atlas-parity-04/f4-c2-os-sandbox/THREAT-MODEL.md
+2f13efe0687417b25a597febfe7dc41dfaf6d2acf23779e86acd30a0a1d88fd3  scripts/qa/atlas_parity04_f4_c2_os_evidence.py
+1c272e8de557c5f30d6f79ade8e52b02a1910b3b00a792b8234ae6660f405888  tests/qa/test_atlas_parity04_f4_c2_os_sandbox.py
+b67e4a84c31d407a065dfdb24a2a042f5454348947bbfb8c09567f7538112a2c  tools/atlas_legacy_presentation/os_linux_isolation.py
+aacc0fc3a01c8366bebe8d4dc1861e0ea8fe821c58e3cbf1de9793f76628ffda  tools/atlas_legacy_presentation/os_supervisor.py
+c4df14689b5f46d349e68c4bc93039d4a8a38743db30db19e7e16da833ff99a4  tools/atlas_legacy_presentation/os_windows_acl.py
+9ad851d6b5d05bff233765e57b0467af42f88c92e2a6dea793c7c707e645df01  tools/atlas_legacy_presentation/os_windows_job.py
+6d4b9a7304bcc022dc6c6d3b73a8d0be94a356f49afb198aa3360944763cce04  tools/atlas_legacy_presentation/os_worker.py

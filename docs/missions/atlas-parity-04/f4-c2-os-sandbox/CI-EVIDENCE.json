@@ -1,90 +1,113 @@
 {
-  "schema": "ap04-f4-c2-b-ci-evidence-v1",
+  "schema": "ap04-f4-c2-b-ci-evidence-v2",
   "mission": "AP04-F4-C2-B-OS-SANDBOX-CHAT-01",
-  "technical_sha": "5fe99d28fa2543478a0436ea94d80eabe07a9fad",
-  "technical_tree": "d43843e80a5e7f01acb717ce80589972d3853447",
+  "technical_sha": "29f0e144e7470794df721806ed1485d50000a05b",
+  "technical_tree": "4301450546c2e643ce9eada4a9ab607735c74f08",
   "workflow": ".github/workflows/atlas-parity04-f4-c2-os-sandbox.yml",
-  "run_id": 41270423601,
-  "url": "https://github.com/thalesvalente/Atlas/actions/runs/41270423601",
+  "run_id": 41271638031,
+  "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41271638031",
   "event": "push",
   "status": "completed",
   "conclusion": "success",
-  "all_jobs_success": true,
+  "focal_matrix_jobs_success": 4,
+  "focal_matrix_jobs_total": 4,
+  "provenance": {
+    "checkout_sha_git_rev_parse_verified": true,
+    "matched_expected_commit_sha": "29f0e144e7470794df721806ed1485d50000a05b",
+    "pytest_optimize": 0,
+    "worker_optimize_values": [
+      0,
+      1
+    ],
+    "receipt_failure_nonzero": true
+  },
   "jobs": [
     {
-      "name": "ubuntu-latest/O0",
-      "id": 124741885911,
+      "name": "OS B / windows-latest / optimize=0",
+      "job_id": 124745439571,
+      "status": "completed",
       "conclusion": "success",
-      "tests": 14,
-      "pass": 10,
-      "not_applicable": 4,
+      "collected": 24,
+      "pass": 22,
+      "skip": 2,
       "fail": 0,
-      "artifact_id": 13068942689
+      "artifact_id": 13069064511
     },
     {
-      "name": "ubuntu-latest/O1",
-      "id": 124741885940,
+      "name": "OS B / windows-latest / optimize=1",
+      "job_id": 124745439423,
+      "status": "completed",
       "conclusion": "success",
-      "tests": 14,
-      "pass": 10,
-      "not_applicable": 4,
+      "collected": 24,
+      "pass": 22,
+      "skip": 2,
       "fail": 0,
-      "artifact_id": 13068439932
+      "artifact_id": 13069656789
     },
     {
-      "name": "windows-latest/O0",
-      "id": 124741886070,
+      "name": "OS B / ubuntu-latest / optimize=0",
+      "job_id": 124745439575,
+      "status": "completed",
       "conclusion": "success",
-      "tests": 14,
-      "pass": 14,
-      "not_applicable": 0,
+      "collected": 24,
+      "pass": 18,
+      "skip": 6,
       "fail": 0,
-      "artifact_id": 13068903091
+      "artifact_id": 13069831073
     },
     {
-      "name": "windows-latest/O1",
-      "id": 124741885825,
+      "name": "OS B / ubuntu-latest / optimize=1",
+      "job_id": 124745439576,
+      "status": "completed",
       "conclusion": "success",
-      "tests": 14,
-      "pass": 14,
-      "not_applicable": 0,
+      "collected": 24,
+      "pass": 18,
+      "skip": 6,
       "fail": 0,
-      "artifact_id": 13068594152
+      "artifact_id": 13069726542
     }
   ],
-  "summary": {
-    "executions": 56,
-    "pass": 48,
-    "not_applicable": 8,
-    "fail": 0,
-    "junit_persisted": true,
-    "json_evidence_persisted": true,
-    "synthetic_only": true
+  "totals": {
+    "collected": 96,
+    "pass": 80,
+    "skip": 16,
+    "fail": 0
   },
-  "frozen_global_workflows": {
-    "conclusion": "NOT_ALL_GREEN",
-    "reason": "Other frozen-asset/old input lineage guards triggered by PR #20 on noncanonical C2-B branch; their exact protections were not altered or bypassed.",
-    "examples": [
+  "published_artifacts": "Four SHA-specific junit.xml + observed-ci.json artifacts in Actions run; no private fixture contents or science data",
+  "observed_global_pr_runs": {
+    "caveat": "INHERITED_GLOBAL_GATES_NOT_ALL_GREEN: DO_NOT_LOWER_PROTECTION_OR_PINS",
+    "at_same_technical_sha": [
       {
-        "run_id": 41270428281,
+        "id": 41271642906,
         "name": "ATLAS-PARITY-04 documentation successor",
-        "observed": "failure"
+        "conclusion": "failure"
       },
       {
-        "run_id": 41270428317,
-        "name": "ATLAS-PARITY-03 C4 full composition",
-        "observed": "failure"
+        "id": 41271642742,
+        "name": "ATLAS-PARITY-02 P06 frozen-boundary QA",
+        "conclusion": "failure"
       },
       {
-        "run_id": 41270428398,
+        "id": 41271642674,
         "name": "ATLAS-PARITY03 P03 isolated qualification",
-        "observed": "in_progress_at_inspection"
+        "conclusion": "failure"
+      },
+      {
+        "id": 41271642761,
+        "name": "ATLAS003 Spec Kit contract checks",
+        "conclusion": "failure"
+      },
+      {
+        "id": 41271642690,
+        "name": "ATLAS-PARITY-03 C4 full composition",
+        "conclusion": "failure"
       }
     ]
   },
-  "terminal_receipt_ci": "REQUIRES_POST_PUBLICATION_SHA_CHECK",
-  "host": "HOST_UNVERIFIED",
+  "independent_review": "COPILOT_3_ROUNDS_WITH_FINDINGS_RE_REVIEW_PENDING",
   "windows_fs_network": "OS_PROFILE_NOT_ENFORCED",
-  "independent_review": "NOT_COMPLETED",
-  "ultimate_decision": "C2_B_OS_BLOCKED_EXACT"
+  "full_os_qualification": "C2_B_OS_BLOCKED_EXACT",
+  "production_acquisition": "PRODUCTION_ACQUISITION_BLOCKED",
+  "data": "INVENTED_ONLY",
+  "final_document_commit_ci": "POST_PUBLICATION_SHA_CHECK_PENDING"
 }

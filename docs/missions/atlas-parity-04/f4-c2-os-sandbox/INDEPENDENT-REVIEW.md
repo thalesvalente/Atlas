@@ -1,27 +1,30 @@
-# AP04-F4-C2-B — revisão por autor distinto (GitHub)
+# AP04 F4 C2-B — revisão independente real e seu estado
 
-**Execução nativa multiagente nesta sessão:** ferramentas `spawn_agent`, `send_message`, `wait` não expostas; não houve subagente nativo criado, e o autor não simula esse requisito.
+**Subagentes nativos deste CHAT:** nenhum `spawn_agent` / delegação nativa real disponível; nenhum agente foi simulado.
 
-**Revisão independente efetivamente observada:** GitHub Copilot Code Review, autor `copilot-pull-request-reviewer[bot]`, PR [#20](https://github.com/thalesvalente/Atlas/pull/20), [review ID 5726283233](https://github.com/thalesvalente/Atlas/pull/20#pullrequestreview-5726283233), estado `COMMENTED`, `Changes recommended` (não `APPROVED`). Revisão foi sobre um SHA anterior às correções; logo não constitui aprovação ou verificação independente de SHA final. A matriz de CI valida testes, não resolve isso.
+**Revisor distinto de autoria:** `copilot-pull-request-reviewer[bot]` publicou três revisões identificáveis na [PR Draft #20](https://github.com/thalesvalente/Atlas/pull/20), incluindo o primeiro [review 5726283233](https://github.com/thalesvalente/Atlas/pull/20#pullrequestreview-5726283233), todas no estado `COMMENTED` / `Changes recommended` (não `APPROVED`). Revisor analisou SHAs anteriores; não se deve inferir aprovação do SHA técnico final a partir de um parecer anterior.
 
-## Findings independentes rastreados
+## Findings com evidência, correção e status de review
 
-| Discussão | Classe | Finding originalmente confirmado | Correção de autoria submetida | Status do aceite independente |
-|---|---|---|---|---|
-| [r4434295500](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295500) | HIGH | seccomp arquitetura inesperada codificava ação KILL no campo opcode truncado | instrução BPF_RET + `SECCOMP_RET_KILL_PROCESS` e teste estrutural | RE-REVIEW_PENDING |
-| [r4434295516](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295516) | HIGH | junction/reparse em ancestral podia escapar de validação do caminho | `lstat` de ancestrais e bit 0x400; contraprova junction real Windows | RE-REVIEW_PENDING |
-| [r4434295523](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295523) | HIGH | API de probe aceitava caminhos arbitrários (risco fonte privada) | agora API pública recebe apenas `mode`, cria fixtures inventadas dentro do próprio test harness | RE-REVIEW_PENDING |
-| [r4434295530](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295530) | HIGH | scratch Windows sem owner/DACL verificados | nova criação SDDL protegida somente no scratch temporário e consulta nativa de ACE/SID (incluindo correções observadas no runner) | RE-REVIEW_PENDING |
-| [r4434295537](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295537) | MEDIUM | pytest com `PYTHONOPTIMIZE=1` ignorava `assert` | pytest não otimizado em ambos jobs; apenas worker executa `-O` e confirma flag | RE-REVIEW_PENDING |
-| [r4434295547](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295547) | MEDIUM | all-skipped JUnit marcada como PASS | checker exige executados>0 e SHA exato, falha process exit, contraprovas inventadas | RE-REVIEW_PENDING |
+| Thread | Risco apontado pelo revisor | Correção executada por C2-B | Status |
+|---|---|---|---|
+| [4434295500](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295500) | arquitetura seccomp errada podia cair em default allow por truncamento de opcode | `BPF_RET` com `SECCOMP_RET_KILL_PROCESS` em campo `k` e teste da instrução | AWAITING_FINAL_REREVIEW |
+| [4434295516](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295516), [4434317843](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434317843) | ancestors symlink/junction/reparse sem verificação | `lstat` de cada ancestral em supervisor e worker, bit Windows `0x400`, testes reais de symlink e junction | AWAITING_FINAL_REREVIEW |
+| [4434295523](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295523), [4434305776](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434305776) | origem de fixture arbitrária mesmo sob nomes parecidos | API pública sem parâmetros de paths; bytes inventados no interior de `TemporaryDirectory`, preflight de dono/tipo e recusa de chamadas externas | AWAITING_FINAL_REREVIEW |
+| [4434305804](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434305804), [4434317872](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434317872) | worker executável diretamente podia receber path privado | novo preflight no entrypoint do worker, verificação de PID parent, árvore sintética, symlinks e owner/ACL; contraprova chamada direta recusa | AWAITING_FINAL_REREVIEW |
+| [4434317862](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434317862) | validador do Job aceitava argumentos adicionais/alterados | confere todas flags e valores e reusa `_preflight`; contraprovas de vetor adulterado | AWAITING_FINAL_REREVIEW |
+| [4434295530](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295530) | scratch Windows herdava ACL não privada | criação de scratch **somente teste** com SDDL protegida e owner explícito; consulta GetNamedSecurityInfo/GetAce/EqualSid, ACE desconhecida recusada; falhas Windows reais em iterações anteriores foram consertadas e reexecutadas | AWAITING_FINAL_REREVIEW |
+| [4434295537](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295537) | `PYTHONOPTIMIZE=1` apagava asserts do pytest | pytest sempre sem otimização; `-O` apenas no worker, com flag comprovada na evidência | AWAITING_FINAL_REREVIEW |
+| [4434295547](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434295547), [4434317883](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434317883), [4434317890](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434317890) | suite all-skipped ou falha JUnit/checkout incorreto podia gerar PASS | exigência de executados >0, `git rev-parse HEAD == ATLAS_CHECKOUT_SHA`, exit nonzero por falhas; contraprovas locais em CI | AWAITING_FINAL_REREVIEW |
+| [4434317903](https://github.com/thalesvalente/Atlas/pull/20#discussion_r4434317903) | socketpair syscall 199 omitida no AArch64 | syscall 199 incluída no deny set e teste **estrutural** do BPF AArch64 no Ubuntu amd64; runtime arm64 não executado | AWAITING_FINAL_REREVIEW |
 
-Achados adicionais do corpo da revisão (risco de SHA PR vs checkout, exit=0 em JUnit com falhas, deadline após exit, skip silencioso no Windows, relatórios de teste ausentes): correções de autoria em pipeline e testes; permanecem pendentes de revisão de autoria distinta no SHA terminal.
+Demais observações do review (tempo wall estrito, fonte sintética, proteção de arquivo/descriptor, não ignorar symlink Windows) foram incorporadas aos testes nativos. Não foram executadas provas de crash adversarial completa nem as corridas de FDs/handles contra host com permissões reais.
 
-## Observações reprodutíveis do autor, não aprovação
+## Distinções que impedem aprovação
 
-- `Job Object` de memória/processos **não** contém filesystem/rede Windows; esse limite foi deliberadamente registrado como **não implementado**. Recomendação de bloquear operação real permanece.
-- Linux `RLIMIT_AS` mede espaço de endereçamento virtual e Windows Job contabiliza committed job-wide; a prova sintética não pode ser generalizada para o host privado.
-- Sem prova de crash adversarial do supervisor, todos os swaps TOCTOU, configurador AppContainer/LPAC, perfil Windows integral, C2-D, L1 ou acervo real.
-- Logs de CI contêm sucessos/falhas reais e são reproduzíveis por SHA; workflows globais do monorepo têm guards históricos que não foram enfraquecidos.
+1. O **Job Object** é supervisor de prazo/memória/descendentes, **não é** sandbox de rede/filesystem. A ACL privada protege somente o scratch de teste, não o namespace de leitura/gravação do worker Windows. Sem AppContainer/LPAC ou broker equivalente **enforced** → `WINDOWS_FS_NETWORK_OS_PROFILE_MISSING`.
+2. Landlock+seccomp foram exercitados em runners Linux com fixtures inventadas. Isso **não** autoriza abrir fontes reais; C2-D/host L1 são outras frentes e dependem de autorizações explícitas.
+3. O Copilot avaliou código e publicou findings reais, mas **nenhuma revisão distinta assinou aprovação do SHA terminal**. Não resolver automaticamente threads do revisor apenas porque o próprio autor implementou correções.
+4. Workflows globais da PR #20 podem falhar sob checks de proveniência ou congelamento. Esses gates não foram contornados, alterados ou declarados verdes.
 
-**Estado:** revisão independente **real e distinta, com findings**, mas **sem aprovação independente final**; preservar os threads abertos para o revisor. Sem G4/G5/G6, merge, release ou deploy.
+**Avaliação formal:** `INDEPENDENT_REVIEW_PERFORMED_WITH_FINDINGS_NO_FINAL_APPROVAL`. A implementação focada continua `C2_B_OS_BLOCKED_EXACT`, mesmo com CI focal `OBSERVED_PASS`. Sem G4/G5/G6/merge/release/deploy.

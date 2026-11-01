@@ -1,162 +1,238 @@
 {
-  "schema": "ap04-f4-c2-b-native-os-negative-tests-v1",
+  "schema": "ap04-f4-c2-b-native-os-negative-tests-v2",
   "mission": "AP04-F4-C2-B-OS-SANDBOX-CHAT-01",
-  "source_shas": {
-    "prompt": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
-    "technical": "5fe99d28fa2543478a0436ea94d80eabe07a9fad"
-  },
-  "synthetic_only": true,
-  "real_sources_read": 0,
-  "os_enforcement_claim": "SCOPED_NOT_PRODUCTION_READY",
+  "technical_sha": "29f0e144e7470794df721806ed1485d50000a05b",
+  "synthetic_fixture_policy": "INTERNALLY_GENERATED_LITERALS_ONLY",
+  "private_data_inspected": false,
+  "source_paths_supplied_by_user": false,
+  "provider_calls": 0,
+  "host": "HOST_UNVERIFIED",
   "run": {
-    "id": 41270423601,
-    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41270423601",
+    "id": 41271638031,
+    "url": "https://github.com/thalesvalente/Atlas/actions/runs/41271638031",
     "event": "push",
-    "head_sha": "5fe99d28fa2543478a0436ea94d80eabe07a9fad",
+    "head_sha": "29f0e144e7470794df721806ed1485d50000a05b",
     "status": "completed",
     "conclusion": "success"
   },
-  "matrix": [
+  "job_matrix": [
     {
-      "os": "ubuntu-latest",
-      "optimize": "0",
-      "pass": 10,
-      "not_applicable": 4,
-      "fail": 0
-    },
-    {
-      "os": "ubuntu-latest",
-      "optimize": "1",
-      "pass": 10,
-      "not_applicable": 4,
+      "os": "windows-latest",
+      "worker_optimize": 0,
+      "tests": 24,
+      "pass": 22,
+      "skipped_not_applicable": 2,
       "fail": 0
     },
     {
       "os": "windows-latest",
-      "optimize": "0",
-      "pass": 14,
-      "not_applicable": 0,
+      "worker_optimize": 1,
+      "tests": 24,
+      "pass": 22,
+      "skipped_not_applicable": 2,
       "fail": 0
     },
     {
-      "os": "windows-latest",
-      "optimize": "1",
-      "pass": 14,
-      "not_applicable": 0,
+      "os": "ubuntu-latest",
+      "worker_optimize": 0,
+      "tests": 24,
+      "pass": 18,
+      "skipped_not_applicable": 6,
+      "fail": 0
+    },
+    {
+      "os": "ubuntu-latest",
+      "worker_optimize": 1,
+      "tests": 24,
+      "pass": 18,
+      "skipped_not_applicable": 6,
       "fail": 0
     }
   ],
-  "status": "C2_B_OS_BLOCKED_EXACT",
-  "counterproofs": [
+  "total": {
+    "collected": 96,
+    "passed": 80,
+    "skipped_not_applicable": 16,
+    "failed": 0
+  },
+  "contract_status": "C2_B_OS_BLOCKED_EXACT",
+  "findings": [
     {
-      "id": "MEMORY_256MIB",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "mechanism_windows": "JobMemoryLimit_committed_bytes_job_total",
-      "mechanism_linux": "RLIMIT_AS_virtual_address_space",
-      "negative": "300MiB bytearray raises MemoryError in both runners"
+      "id": "OS_MEMORY_256_MIB",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Win job-wide committed; Linux RLIMIT_AS virtual; 300MiB synthetic allocation denied"
     },
     {
-      "id": "WALL_TIME_30S",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "90-second blocked worker terminated around 30s by supervisor; no descriptor"
+      "id": "OS_WALL_30_SECONDS",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "90s sleep killed near 30 seconds under monotonic supervisor, no descriptor"
     },
     {
-      "id": "DESCENDANT",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "Windows spawned descendant then TerminateJobObject with ActiveProcesses=0; Linux fork blocked by seccomp"
+      "id": "OS_DESCENDANTS_TERMINATED",
+      "windows": "RUNNER_PASS",
+      "linux": "NATIVE_FORK_DENIED",
+      "observation": "Windows child terminated by Job; Linux fork forbidden by seccomp"
     },
     {
-      "id": "JOB_ASSIGN_FAILED",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "NOT_APPLICABLE",
-      "negative": "Injected association failure kills suspended Windows worker with no report"
+      "id": "OS_BREAKAWAY_ATTEMPT",
+      "windows": "RUNNER_PASS",
+      "linux": "NOT_APPLICABLE",
+      "observation": "Windows BREAKAWAY_FROM_JOB denied"
     },
     {
-      "id": "JOB_BREAKAWAY",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "NOT_APPLICABLE",
-      "negative": "Windows CREATE_BREAKAWAY_FROM_JOB denied"
+      "id": "OS_ASSIGNMENT_FAILURE",
+      "windows": "RUNNER_PASS",
+      "linux": "NOT_APPLICABLE",
+      "observation": "Injected assignment failure terminates suspended worker, no report"
     },
     {
-      "id": "OUTSIDE_READ",
+      "id": "OS_OUTSIDE_READ",
       "windows": "OS_PROFILE_NOT_ENFORCED",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "Ubuntu Landlock denies real open outside exact synthetic source; Windows has no FS sandbox"
+      "linux": "RUNNER_PASS",
+      "observation": "Linux Landlock EACCES/EPERM for outside invented file"
     },
     {
-      "id": "SOURCE_WRITE",
+      "id": "OS_SOURCE_WRITE",
       "windows": "OS_PROFILE_NOT_ENFORCED",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "Ubuntu Landlock denies append to synthetic source; Windows lacks write-deny OS profile"
+      "linux": "RUNNER_PASS",
+      "observation": "Linux Landlock append denied; source exact fixture unchanged"
     },
     {
-      "id": "SCRATCH_PRIVATE_WRITE",
+      "id": "OS_SCRATCH_WRITE",
+      "windows": "PRIVATE_TEST_SCRATCH_ONLY",
+      "linux": "RUNNER_PASS",
+      "observation": "Windows temporary scratch owner+DACL verified; Linux scratch 0700 & receipt 0600"
+    },
+    {
+      "id": "OS_SOCKET_LOOPBACK",
       "windows": "OS_PROFILE_NOT_ENFORCED",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "Ubuntu scratch chmod 0700 and worker report mode 0600; Windows RW isolation not configured"
+      "linux": "RUNNER_PASS",
+      "observation": "Linux AF_INET creation denied; no provider network traffic"
     },
     {
-      "id": "SOCKET_LOOPBACK",
+      "id": "OS_SOCKET_EXTERNAL",
       "windows": "OS_PROFILE_NOT_ENFORCED",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "Ubuntu AF_INET socket denied at creation by seccomp; no actual connect possible"
+      "linux": "RUNNER_PASS",
+      "observation": "Linux AF_INET6 creation denied; no external traffic"
     },
     {
-      "id": "SOCKET_EXTERNAL",
-      "windows": "OS_PROFILE_NOT_ENFORCED",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "Ubuntu AF_INET6 socket denied at creation by seccomp; Windows sockets not isolated"
+      "id": "OS_SYMLINK_FINAL",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Test-owned symlink to invented file rejected"
     },
     {
-      "id": "NO_DESCRIPTOR_AFTER_FAIL",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER_TEST_HARNESS_ONLY",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER_TEST_HARNESS_ONLY",
-      "negative": "Tests inspect glob for atlas-c2-*.json after synthetic OOM and timeout; production descriptor path not integrated"
+      "id": "OS_SYMLINK_ANCESTOR",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Test-owned ancestor symlink rejected"
     },
     {
-      "id": "PRODUCTION_BLOCK",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "require_production_acquisition always raises PRODUCTION_ACQUISITION_BLOCKED even when synthetic_fixture=True"
+      "id": "OS_WINDOWS_JUNCTION",
+      "windows": "RUNNER_PASS",
+      "linux": "NOT_APPLICABLE",
+      "observation": "Native Windows mklink /J junction fixture rejected"
     },
     {
-      "id": "UNTRUSTED_WORKER",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "NOT_APPLICABLE",
-      "negative": "Job launcher rejects non-reviewed worker script argv before CreateProcess"
+      "id": "OS_DIRECT_WORKER_ARBITRARY_PATH",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Direct worker argv with invented but untrusted path fails before source read"
     },
     {
-      "id": "NON_SYNTHETIC_LAYOUT",
-      "windows": "OS_CONTROL_TESTED_IN_RUNNER",
-      "ubuntu": "OS_CONTROL_TESTED_IN_RUNNER",
-      "negative": "Non-invented fixture naming/placement rejected before launch"
+      "id": "OS_WINDOWS_JOB_TAMPERED_ARGV",
+      "windows": "RUNNER_PASS",
+      "linux": "NOT_APPLICABLE",
+      "observation": "Extra args, changed flag, mismatched parent PID denied"
     },
     {
-      "id": "SUPERVISOR_CRASH",
-      "windows": "NOT_RUN_UNSUPPORTED",
-      "ubuntu": "NOT_RUN_UNSUPPORTED",
-      "negative": "Kill-on-job-close/PDEATHSIG configured; abrupt-supervisor-death adversarial observation not executed"
+      "id": "OS_NON_SYNTHETIC_EXTERNAL_API",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Public API accepts only mode, not caller-provided file paths"
     },
     {
-      "id": "HANDLE_RACE_TOCTOU",
-      "windows": "NOT_RUN_UNSUPPORTED",
-      "ubuntu": "NOT_RUN_UNSUPPORTED",
-      "negative": "Full concurrent handle swap, symlink/reparse, race in OS broker not executed"
+      "id": "OS_NON_SYNT_LAYOUT",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Preflight rejects untrusted fixture layout"
     },
     {
-      "id": "NETWORK_WITH_EXISTING_INHERITED_HANDLE",
-      "windows": "NOT_RUN_UNSUPPORTED",
-      "ubuntu": "NOT_RUN_UNSUPPORTED",
-      "negative": "Linux closes fds and blocks socket calls; malicious pre-opened fd inheritance not fully validated; Windows sandbox absent"
+      "id": "OS_NO_DESCRIPTOR_ON_FAILURE",
+      "windows": "RUNNER_PASS_HARNESS_ONLY",
+      "linux": "RUNNER_PASS_HARNESS_ONLY",
+      "observation": "OOM/timeout synthetic probe physically returns descriptor_absent true; no product reader integration"
     },
     {
-      "id": "UNSAFE_FS_NETWORK_REAL_RUN",
+      "id": "OS_NO_CLOBBER_RECEIPT",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Worker creates JSON receipt exclusively, never overwrites existing fixture report"
+    },
+    {
+      "id": "OS_STATIC_SECCOMP_FOREIGN_ARCH",
+      "windows": "NOT_APPLICABLE",
+      "linux": "RUNNER_PASS_STRUCTURAL",
+      "observation": "BPF_RET KILL_PROCESS instruction checked without wrong arch execution"
+    },
+    {
+      "id": "OS_STATIC_AARCH64_SOCKETPAIR_199",
+      "windows": "NOT_APPLICABLE",
+      "linux": "RUNNER_PASS_STRUCTURAL",
+      "observation": "AArch64 filter branch checked structurally on hosted AMD64 Linux; no native ARM64 runtime"
+    },
+    {
+      "id": "OS_EVIDENCE_ALL_SKIPPED",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "JUnit all skipped yields nonzero, not OBSERVED_PASS"
+    },
+    {
+      "id": "OS_EVIDENCE_FAILED_JUNIT",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "JUnit failures result nonzero exit, not pass"
+    },
+    {
+      "id": "OS_EVIDENCE_SHA_MISMATCH",
+      "windows": "RUNNER_PASS",
+      "linux": "RUNNER_PASS",
+      "observation": "Wrong expected HEAD yields nonzero, not pass"
+    },
+    {
+      "id": "OS_SUPERVISOR_CRASH",
+      "windows": "NOT_RUN",
+      "linux": "NOT_RUN",
+      "observation": "No independent crash adversary; kill-on-close & PDEATHSIG in code not sufficient to claim proven"
+    },
+    {
+      "id": "OS_HANDLE_RACE_TOCTOU",
+      "windows": "NOT_RUN",
+      "linux": "NOT_RUN",
+      "observation": "Comprehensive concurrently swapped handles/dir paths not executed"
+    },
+    {
+      "id": "WINDOWS_NATIVE_FS_NETWORK_PROFILE",
+      "windows": "NOT_IMPLEMENTED",
+      "linux": "NOT_APPLICABLE",
+      "observation": "Windows job + private synthetic scratch are NOT FS or network namespace confinement"
+    },
+    {
+      "id": "HOST_PRIVATE_ACQUISITION",
       "windows": "PRODUCTION_ACQUISITION_BLOCKED",
-      "ubuntu": "PRODUCTION_ACQUISITION_BLOCKED",
-      "negative": "C2-D integration not authorized in B; no private or real source processed"
+      "linux": "PRODUCTION_ACQUISITION_BLOCKED",
+      "observation": "No private files read; no L1 host test; no F2 release"
     }
+  ],
+  "interpretative_limits": [
+    "RUNNER_PASS measures scoped synthetic tests, not approval to process real sources",
+    "WinJobObject protects memory/descendant/time, not filesystem/network of worker",
+    "Windows scratch ACL is private but worker token remains unconstrained for other paths",
+    "Linux RLIMIT_AS virtual-address-space ceiling not equivalent to cgroup/RSS",
+    "AArch64 syscall 199 test is structural only on x86_64 runner",
+    "Completeness of crash/FD races and Windows AppContainer not validated",
+    "Publication of atlas-c2 descriptors forbidden in this branch"
   ]
 }

@@ -1,64 +1,122 @@
 {
+  "schema": "ap04-f4-c2-b-handoff-v2",
   "mission": "AP04-F4-C2-B-OS-SANDBOX-CHAT-01",
   "repository": "thalesvalente/Atlas",
   "branch": "feat/atlas-parity04-f4-c2-os-isolation-20261101",
   "draft_pr": "https://github.com/thalesvalente/Atlas/pull/20",
-  "prompt_sha": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
-  "prompt_path": "docs/missions/atlas-parity-04/f4-direct-reuse-next-20261101/02-C2-B-WINDOWS-OS-SANDBOX-CHAT.md",
-  "branch_base_sha": "e349a09d439d292011bca4c0994cf8ab3e3fbf9f",
-  "technical_sha": "5fe99d28fa2543478a0436ea94d80eabe07a9fad",
+  "prompt": {
+    "commit": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
+    "path": "docs/missions/atlas-parity-04/f4-direct-reuse-next-20261101/02-C2-B-WINDOWS-OS-SANDBOX-CHAT.md"
+  },
+  "base_commit": "e349a09d439d292011bca4c0994cf8ab3e3fbf9f",
+  "technical_commit": "29f0e144e7470794df721806ed1485d50000a05b",
+  "evidence_commit": "RECEIPT_COMMIT_IS_DESCENDANT_OF_TECHNICAL_COMMIT; IDENTIFY_BY_CURRENT_BRANCH_HEAD",
   "status": "C2_B_OS_BLOCKED_EXACT",
-  "paths_owner": "new os_* modules; new OS tests; new OS script; new OS workflow; new os receipt directory ONLY",
-  "code": {
-    "windows": {
-      "job_committed_memory_bytes": 268435456,
-      "wall_seconds": 30,
-      "os_fs_network": "NOT_IMPLEMENTED",
-      "job_control": "IMPLEMENTED_AND_RUNNER_TESTED"
+  "codes": {
+    "windows": "JOB_NATIVE_TESTED_WINDOWS_FS_NETWORK_NOT_SUPPORTED",
+    "linux": "LANDLOCK_SECCOMP_RLIMIT_AS_TESTED_IN_UBUNTU_RUNNER",
+    "host": "HOST_UNVERIFIED",
+    "production": "PRODUCTION_ACQUISITION_BLOCKED",
+    "independent_review": "COPILOT_REVIEWS_WITH_FINDINGS_NOT_APPROVED"
+  },
+  "hard_limits": {
+    "memory_bytes": 268435456,
+    "wall_seconds": 30,
+    "memory_windows": "JobMemoryLimit_committed_bytes_job_total",
+    "memory_linux": "RLIMIT_AS_virtual_address_space"
+  },
+  "ci": {
+    "workflow": ".github/workflows/atlas-parity04-f4-c2-os-sandbox.yml",
+    "run_id": 41271638031,
+    "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41271638031",
+    "sha": "29f0e144e7470794df721806ed1485d50000a05b",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "os": "windows-latest",
+        "worker_optimize": 0,
+        "job_id": 124745439571,
+        "pass": 22,
+        "skip": 2,
+        "fail": 0,
+        "artifact_id": 13069064511
+      },
+      {
+        "os": "windows-latest",
+        "worker_optimize": 1,
+        "job_id": 124745439423,
+        "pass": 22,
+        "skip": 2,
+        "fail": 0,
+        "artifact_id": 13069656789
+      },
+      {
+        "os": "ubuntu-latest",
+        "worker_optimize": 0,
+        "job_id": 124745439575,
+        "pass": 18,
+        "skip": 6,
+        "fail": 0,
+        "artifact_id": 13069831073
+      },
+      {
+        "os": "ubuntu-latest",
+        "worker_optimize": 1,
+        "job_id": 124745439576,
+        "pass": 18,
+        "skip": 6,
+        "fail": 0,
+        "artifact_id": 13069726542
+      }
+    ],
+    "summary": {
+      "collected": 96,
+      "pass": 80,
+      "skip": 16,
+      "fail": 0
     },
-    "linux": {
-      "memory_metric": "RLIMIT_AS_virtual_address_space",
-      "max_bytes": 268435456,
-      "wall_seconds": 30,
-      "os_fs_network": "LANDLOCK_SECCOMP_IMPLEMENTED_AND_RUNNER_TESTED_SCOPED"
-    }
+    "global_gates": "NOT_ALL_GREEN; frozen guards not bypassed",
+    "receipt_git_sha_validated": true
   },
-  "controls": {
-    "production_acquisition": "PRODUCTION_ACQUISITION_BLOCKED",
-    "synthetic_fixture_only": true
+  "review": {
+    "evaluator": "copilot-pull-request-reviewer[bot]",
+    "review_state": "COMMENTED_CHANGES_RECOMMENDED",
+    "review_ids": [
+      "5726283233",
+      "PRR_kwDOVWBBq88AAAABVVBRsQ",
+      "PRR_kwDOVWBBq88AAAABVVCAvg",
+      "PRR_kwDOVWBBq88AAAABVVBRsQ",
+      "PRR_kwDOVWBBq88AAAABVVCAvg"
+    ],
+    "native_subagents": "NOT_AVAILABLE_NO_SPAWN_TOOLS",
+    "approval": "NO",
+    "open_review_threads": "PRESERVED_RE_REVIEW_PENDING"
   },
-  "baseline_ci": {
-    "sha": "3ad2b700c570db6ec0ce4604c9fbc02b479d9287",
-    "run_id": 41270139863,
-    "result": "4/4_SUCCESS"
+  "actual_scope": {
+    "added_code": [
+      "tools/atlas_legacy_presentation/os_linux_isolation.py",
+      "tools/atlas_legacy_presentation/os_windows_job.py",
+      "tools/atlas_legacy_presentation/os_windows_acl.py",
+      "tools/atlas_legacy_presentation/os_supervisor.py",
+      "tools/atlas_legacy_presentation/os_worker.py",
+      "tests/qa/test_atlas_parity04_f4_c2_os_sandbox.py",
+      "scripts/qa/atlas_parity04_f4_c2_os_evidence.py",
+      ".github/workflows/atlas-parity04-f4-c2-os-sandbox.yml"
+    ],
+    "receipts_root": "docs/missions/atlas-parity-04/f4-c2-os-sandbox",
+    "mapper_c2_a_changed": false,
+    "historical_manifest_changed": false,
+    "private_data_read": false,
+    "clones_worktrees_created": false,
+    "merge": false,
+    "deploy": false,
+    "release": false
   },
-  "latest_technical_ci": "SEE_CI-EVIDENCE.json_NOT_IMPLIED_BY_BASELINE",
-  "independent_review": "NOT_PERFORMED_NO_NATIVE_SUBAGENTS",
-  "pending": [
-    "WINDOWS_FS_NETWORK_APP_CONTAINER_OR_EQUIVALENT",
-    "FULL_CRASH_HANDLE_RACE_NEGATIVES",
-    "INDEPENDENT_SECURITY_REVIEW_TERMINAL_SHA",
-    "REAL_HOST_L1_APPROVED_PROOF",
-    "C2_D_EXPLICIT_BLOB_COMPOSITION"
-  ],
-  "governance": {
-    "adr": "ADR-0003-v0.2 APPROVED_SCOPED",
-    "f2": "UNCHANGED",
-    "reader003": "UNCHANGED",
-    "G4": "BLOCKED",
-    "G5": "NOT_APPROVED",
-    "G6": "NOT_APPROVED",
-    "private_data": "NOT_ACCESSED",
-    "merges": "NONE",
-    "releases": "NONE",
-    "deploy": "NONE",
-    "migrations": "NONE",
-    "r4_mutations": "NONE"
-  },
-  "composition": {
-    "owner": "C2-D",
-    "strategy": "COPY_VETTED_BLOBS_BY_SHA_AND_CHECK_BRANCH_B_HISTORY",
-    "not_ancestor_claim": true,
-    "no_merge_PR18": true
+  "next_actions": {
+    "C2_B": "Create verified native Windows fs/network confinement profile and negative runner proofs; re-review by distinct owner before readiness; optional AArch64 native runtime check remains unexecuted",
+    "C2_D": "Vet blobs by exact technical SHA and compose in own branch after gates, not via merge PR20",
+    "L1": "Host/Windows proof only with independent authorization",
+    "governance": "Maintain human ADR-0003 decisions; G4 BLOCKED G5/G6 NOT_APPROVED"
   }
 }
