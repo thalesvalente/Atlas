@@ -7,6 +7,7 @@ under another owner's path. All native B tests run on the COMPOSED modules.
 from __future__ import annotations
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -131,6 +132,17 @@ class CompositionCounterproofs(unittest.TestCase):
         self.assertFalse(result['B_is_git_ancestor'])
         self.assertEqual(result['historical_manifest_entries_verified'], 22)
 
+    def test_pinned_collection_is_confined_to_its_exact_temporary_directory(self):
+        with tempfile.TemporaryDirectory(prefix='atlas-c2d-collection-') as tmp:
+            target = Path(tmp).resolve() / Path(B_TEST).name
+            args = pinned_pytest_arguments(target, ROOT / '.test-output/b-junit.xml')
+            self.assertEqual(args[0], str(target))
+            self.assertIn('--rootdir=' + str(target.parent), args)
+            self.assertIn('--confcutdir=' + str(target.parent), args)
+            self.assertIn('--noconftest', args)
+            self.assertEqual(args[args.index('-c') + 1], str(target.parent / 'pytest.ini'))
+            self.assertNotIn(str(ROOT), args)
+
 
 class AuditCounterproofs(unittest.TestCase):
     def test_transient_forbidden_path_is_rejected_even_if_later_reverted(self):
@@ -195,6 +207,14 @@ def pinned_bytes(path, expected):
     return raw
 
 
+def pinned_pytest_arguments(target, junit):
+    return [str(target), '-v', '-o', 'addopts=',
+            '-c', str(target.parent / 'pytest.ini'),
+            '--rootdir=' + str(target.parent),
+            '--confcutdir=' + str(target.parent), '--noconftest',
+            '--junitxml=' + str(junit)]
+
+
 def run_pinned_B():
     import pytest
     import scripts.qa
@@ -210,10 +230,17 @@ def run_pinned_B():
     output.mkdir(parents=True, exist_ok=True)
     junit = output / 'b-junit.xml'
     with tempfile.TemporaryDirectory(prefix='atlas-c2d-pinned-b-') as tmp:
-        target = Path(tmp) / Path(B_TEST).name
+        target = Path(tmp).resolve() / Path(B_TEST).name
         target.write_bytes(test)
-        status = pytest.main([str(target), '-v', '-o', 'addopts=',
-                              '--junitxml=' + str(junit)])
+        (target.parent / 'pytest.ini').write_text('[pytest]\n', encoding='utf-8')
+        previous = Path.cwd()
+        try:
+            # Windows runner checkout and TEMP can be on different drives.
+            # Never let collection climb to C:\ or consume ambient conftest.
+            os.chdir(target.parent)
+            status = pytest.main(pinned_pytest_arguments(target, junit))
+        finally:
+            os.chdir(previous)
     report = {'source_sha': B_SHA, 'test_blob': B_TEST_BLOB,
               'test_sha256': hashlib.sha256(test).hexdigest(),
               'helper_blob': B_HELPER_BLOB,
