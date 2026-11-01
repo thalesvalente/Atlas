@@ -1,0 +1,65 @@
+{
+  "schema": "ap04-f4-l0-codex-local-inputs-v1",
+  "mission": "AP04-F4-L0-CODEX-DESKTOP-01",
+  "environment": "WINDOWS_CODEX_LOCAL_ONLY",
+  "expected_mode": "L0_PRECHECK_THEN_EXACT_AUTHORIZED_SOURCE_WITNESS",
+  "repository": "thalesvalente/Atlas",
+  "documentation_base_commit": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+  "documentation_base_tree": "982da6af550229c45cef5b6bdbca5c1e4bcb4d12",
+  "sources": {
+    "L0_prompt": {
+      "sha": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
+      "path": "docs/missions/atlas-parity-04/f4-direct-reuse-next-20261101/04-L0-LOCAL-REAL-SOURCE-WITNESS.md",
+      "blob": "3b84f85634ed14a984e067de48b6e6a468e3820c"
+    },
+    "L1_blocked_prompt": {
+      "sha": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
+      "path": "docs/missions/atlas-parity-04/f4-direct-reuse-next-20261101/06-L1-LOCAL-REAL-READER-PROOF.md",
+      "blob": "79f3684bec8516a972846aa11507bba513e139a8"
+    },
+    "F1_selected_sources_sanitized": {
+      "sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "path": "docs/missions/atlas-parity-04/f1-legacy-inventory/SANITIZED-HANDOFF.json"
+    },
+    "C2_D_final": {
+      "sha": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "tree": "982da6af550229c45cef5b6bdbca5c1e4bcb4d12",
+      "pr": 18,
+      "run_id": 41276067820,
+      "status": "C2_D_BLOCKED_EXACT",
+      "production_acquisition": false
+    },
+    "C2_B": {
+      "sha": "bc5b634dd05d822983a8b8d5ec9c247bf47b3e4d",
+      "status": "C2_B_OS_BLOCKED_EXACT"
+    },
+    "C2_K": {
+      "sha": "ab22a78eb22af4ef9651cdd8f652c3cb2755e947",
+      "status": "ARC09_021_NOT_APPROVED"
+    },
+    "F2": {
+      "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "descriptor": "atlas-legacy-presentation/0.2.0"
+    },
+    "ADR_0003_v02": {
+      "technical_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+      "approval_comment": 6539419419,
+      "status": "APPROVED_SCOPED"
+    }
+  },
+  "private_F1_receipt_location": "LOCAL_ONLY_NOT_IN_GIT",
+  "public_corpus_paths": [],
+  "explicit_new_source_read_authorization": "REQUIRED_IN_LOCAL_SESSION_AFTER_EXACT_PATH_REVIEW",
+  "L1": "NOT_AUTHORIZED_BY_THIS_PACKAGE",
+  "constraints": {
+    "no_clones": true,
+    "no_worktrees": true,
+    "no_branch_mutations_in_local": true,
+    "no_private_bytes_in_model_context_or_git": true,
+    "no_git_push_from_host": true,
+    "no_R4_mutation": true,
+    "no_descriptor_change": true,
+    "no_merge_release_deploy": true,
+    "no_G4_claim": true
+  }
+}

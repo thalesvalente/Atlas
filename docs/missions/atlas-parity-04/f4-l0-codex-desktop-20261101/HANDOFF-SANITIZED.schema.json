@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AP04 F4 L0 sanitization-only handoff (no private paths, IDs or hashes)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "mission",
+    "c2_d_sha",
+    "result",
+    "host_local_verified",
+    "workspace_write_probe",
+    "source_authorization",
+    "source_read",
+    "source_integrity",
+    "f1_comparison",
+    "proof_scope",
+    "observed_counts",
+    "structural_checks",
+    "privacy_review",
+    "operator_publication_approval",
+    "gates",
+    "global_archive"
+  ],
+  "properties": {
+    "schema": {
+      "const": "ap04-f4-l0-codex-sanitized-v1"
+    },
+    "mission": {
+      "const": "AP04-F4-L0-CODEX-DESKTOP-01"
+    },
+    "c2_d_sha": {
+      "const": "86aec49d793d10c1d0b35db58fda747e0febdb23"
+    },
+    "result": {
+      "enum": [
+        "NOT_EXECUTED",
+        "F4_L0_PRECHECK_ONLY",
+        "F4_L0_SOURCE_NOT_AUTHORIZED",
+        "F4_L0_RECEIPT_NOT_FOUND",
+        "F4_L0_REAL_SOURCE_SHAPE_WITNESSED_SCOPED",
+        "F4_L0_STRUCTURAL_GAP_EXACT",
+        "SOURCE_DRIFT",
+        "LOCAL_WORKSPACE_UNAVAILABLE",
+        "WORKSPACE_WRITE_BLOCKED",
+        "PRIVATE_PAYLOAD_EXPOSURE_UNVERIFIED"
+      ]
+    },
+    "host_local_verified": {
+      "type": "boolean"
+    },
+    "workspace_write_probe": {
+      "enum": [
+        "NOT_RUN",
+        "PASS",
+        "BLOCKED"
+      ]
+    },
+    "source_authorization": {
+      "enum": [
+        "NOT_GRANTED",
+        "GRANTED_LOCALLY_FOR_EXACT_F1_THREE",
+        "NOT_NEEDED_RECEIPTS_ONLY"
+      ]
+    },
+    "source_read": {
+      "type": "boolean"
+    },
+    "source_integrity": {
+      "enum": [
+        "NOT_RECHECKED",
+        "MATCH",
+        "DRIFT",
+        "UNVERIFIED"
+      ]
+    },
+    "f1_comparison": {
+      "enum": [
+        "NOT_RUN",
+        "PASS_SELECTED_SCOPE",
+        "DRIFT",
+        "STRUCTURAL_GAP",
+        "UNVERIFIED"
+      ]
+    },
+    "proof_scope": {
+      "const": "SELECTED_F1_FILES_ONLY"
+    },
+    "observed_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "records",
+        "lineage_nodes",
+        "lineage_edges",
+        "table_count",
+        "table_rows_total",
+        "unadmitted_rf_rows",
+        "resolved_explicit_parent_keys",
+        "unbound_tables"
+      ],
+      "properties": {
+        "records": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "lineage_nodes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "lineage_edges": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "table_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "table_rows_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "unadmitted_rf_rows": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "resolved_explicit_parent_keys": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "unbound_tables": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "structural_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "v5_export_declared",
+        "a10_lineage_declared",
+        "source_key_native_id_distinct",
+        "missing_null_distinguished"
+      ],
+      "properties": {
+        "v5_export_declared": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "a10_lineage_declared": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "source_key_native_id_distinct": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "missing_null_distinguished": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "privacy_review": {
+      "enum": [
+        "PENDING",
+        "PERFORMED_WITH_FINDINGS",
+        "APPROVED_FOR_PUBLICATION",
+        "REJECTED"
+      ]
+    },
+    "operator_publication_approval": {
+      "type": "boolean"
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "G4",
+        "G5",
+        "G6",
+        "L1",
+        "C3_dependency_satisfied"
+      ],
+      "properties": {
+        "G4": {
+          "const": "BLOCKED"
+        },
+        "G5": {
+          "const": "NOT_EVALUATED"
+        },
+        "G6": {
+          "const": "NOT_EVALUATED"
+        },
+        "L1": {
+          "const": "NOT_EXECUTED"
+        },
+        "C3_dependency_satisfied": {
+          "const": false
+        }
+      }
+    },
+    "global_archive": {
+      "const": "UNKNOWN_UPSTREAM"
+    }
+  }
+}
