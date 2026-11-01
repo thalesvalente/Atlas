@@ -1,0 +1,142 @@
+{
+  "schema": "ap04-f4-real-legacy-direct-next-v1",
+  "published_on": "2026-11-01",
+  "status": "PROMPTS_GIT_PUBLISHED_NOT_EXECUTED",
+  "plan": "AP04-POR-v1.0-draft",
+  "strategy": "R4_V5_REAL_EXPORT_AS_INPUT_NO_INVENTED_SOURCE_PROFILE",
+  "architecture": {
+    "adr": "ADR-0003-v0.2",
+    "state": "APPROVED_SCOPED",
+    "technical_sha": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "approval_comment": 6539419419,
+    "descriptor_current": "atlas-legacy-presentation/0.2.0",
+    "descriptor_extension": "REQUIRES_NEW_EXPLICIT_HUMAN_APPROVAL"
+  },
+  "inputs": {
+    "F2": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "F1": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+    "C0": "d498504cd2c4d230088f86e04e55624bbe32df79",
+    "C1": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+    "F3B": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+    "C2_original": "258eda6153ffe602d3fa8e6b4fe7a2ad74edbbd7",
+    "C2_real_v5_partial": "e349a09d439d292011bca4c0994cf8ab3e3fbf9f",
+    "R4_private_reference": "5c145615c8a1bd601351badddccaf3acea474ed2"
+  },
+  "missions": [
+    {
+      "id": "C2-A",
+      "prompt": "01-C2-A-REAL-V5-MAPPING-CHAT.md",
+      "environment": "CHAT_GITHUB_ACTIONS",
+      "effort": "EXTRA_HIGH_MANUAL",
+      "branch": "feat/atlas-parity04-f4-external-reader-20261031",
+      "depends": [],
+      "target": "C2_A_REAL_V5_MAPPING_QUALIFIED_SCOPED_OR_DECISION_REQUIRED",
+      "owner": "v5-parser-mapper-tests"
+    },
+    {
+      "id": "C2-B",
+      "prompt": "02-C2-B-WINDOWS-OS-SANDBOX-CHAT.md",
+      "environment": "CHAT_GITHUB_ACTIONS",
+      "effort": "EXTRA_HIGH_MANUAL",
+      "branch": "feat/atlas-parity04-f4-c2-os-isolation-20261101",
+      "depends": [],
+      "target": "C2_B_OS_ENFORCEMENT_VERIFIED_FOR_COMPOSITION_OR_BLOCKED",
+      "owner": "new-os-modules-tests"
+    },
+    {
+      "id": "C2-K",
+      "prompt": "03-C2-K-KEY-IDENTITY-CONTRACT-CHAT.md",
+      "environment": "CHAT_GITHUB_ACTIONS",
+      "effort": "EXTRA_HIGH_MANUAL",
+      "branch": "docs/atlas-parity04-f4-key-identity-20261101",
+      "depends": [],
+      "target": "C2_K_IDENTITY_DECISION_READY_FOR_HUMAN_REVIEW",
+      "owner": "documentation-proposal-only"
+    },
+    {
+      "id": "L0",
+      "prompt": "04-L0-LOCAL-REAL-SOURCE-WITNESS.md",
+      "environment": "LOCAL_WINDOWS_CODEX",
+      "effort": "HIGH_MANUAL",
+      "branch": "PRIVATE_RECEIPTS_ONLY",
+      "depends": [
+        "F1_PRIVATE_RECEIPTS",
+        "EXPLICIT_F4_L0_SOURCE_AUTHORIZATION_IF_REOPEN"
+      ],
+      "target": "F4_L0_REAL_SOURCE_SHAPE_WITNESSED_SCOPED",
+      "owner": "read-only-source-shape"
+    },
+    {
+      "id": "C2-D",
+      "prompt": "05-C2-D-COMPOSE-REVIEW-CHAT.md",
+      "environment": "CHAT_GITHUB_ACTIONS",
+      "effort": "EXTRA_HIGH_MANUAL",
+      "branch": "feat/atlas-parity04-f4-external-reader-20261031",
+      "depends": [
+        "C2-A",
+        "C2-B",
+        "C2-K_HUMAN_APPROVAL_IF_EXTENSION"
+      ],
+      "optional_inputs": [
+        "L0_SANITIZED_WITNESS_IF_AVAILABLE"
+      ],
+      "target": "C2_D_REAL_V5_READER_READY_FOR_HOST_PROOF",
+      "owner": "reader-entrypoint-b-integration"
+    },
+    {
+      "id": "L1",
+      "prompt": "06-L1-LOCAL-REAL-READER-PROOF.md",
+      "environment": "LOCAL_WINDOWS_CODEX",
+      "effort": "EXTRA_HIGH_MANUAL",
+      "branch": "PRIVATE_RECEIPTS_AND_SANITIZED_QA",
+      "depends": [
+        "C2-D",
+        "EXPLICIT_F4_L1_SOURCE_AUTHORIZATION",
+        "OS_HOST_CAPABILITY"
+      ],
+      "target": "F4_L1_LOCAL_REAL_READER_QUALIFIED_SCOPED",
+      "owner": "read-only-private-proof"
+    },
+    {
+      "id": "C3",
+      "prompt": "07-C3-INTEGRATE-REAL-ATLAS-CHAT.md",
+      "environment": "CHAT_GITHUB_ACTIONS",
+      "effort": "EXTRA_HIGH_MANUAL",
+      "branch": "integrate/atlas-parity04-f4-composition-20261031",
+      "depends": [
+        "C2-D",
+        "C0",
+        "C1",
+        "F3B",
+        "C2-K_HUMAN_APPROVAL_IF_EXTENSION"
+      ],
+      "target": "F4_C3_REAL_V5_INTEGRATED_CANDIDATE_GLOBAL_CI_PENDING",
+      "owner": "viewer-shell-integration"
+    },
+    {
+      "id": "C4",
+      "prompt": "08-C4-GLOBAL-CI-CHAT.md",
+      "environment": "CHAT_GITHUB_ACTIONS",
+      "effort": "EXTRA_HIGH_MANUAL",
+      "branch": "integrate/atlas-parity04-f4-composition-20261031",
+      "depends": [
+        "C3"
+      ],
+      "target": "F4_G5_INTEGRATION_CI_QUALIFIED_HOST_GATE_DEFERRED",
+      "owner": "global-ci-only"
+    }
+  ],
+  "terminal_gate": "F5_REQUIRES_F4_G5_CI_AND_F4_L1_G4_REAL_PROOFS_AND_NEW_F5_AUTHORIZATION",
+  "constraints": {
+    "no_new_worktree": true,
+    "no_clone": true,
+    "no_main_merge": true,
+    "no_release": true,
+    "no_deploy": true,
+    "no_migration": true,
+    "no_R4_mutation": true,
+    "no_private_data_publication": true,
+    "no_global_ci_bypass": true,
+    "no_unapproved_descriptor_change": true
+  }
+}
