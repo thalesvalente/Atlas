@@ -6,7 +6,7 @@
 
 ## Pergunta binária para aprovação ARC-09
 
-**Após parecer de autor realmente independente no SHA exato, você APROVA ou REJEITA o adendo `atlas-legacy-presentation/0.2.1` exclusivamente para transporte/navegação de `parent_key` e `from_key/to_key` por `reference_basis=SOURCE_STRUCTURAL_KEY`, `node.source_key_literal`, `node.parent_key_literal` e `node.parent` já tipado, além de `reference.declared_key_literal`, sem promover `native_id`, segundo `DESCRIPTOR-0.2.1-CANDIDATE.md` e os negativos publicados?**
+**Após parecer de autor realmente independente no SHA exato, você APROVA ou REJEITA o adendo `atlas-legacy-presentation/0.2.1` exclusivamente para transporte/navegação de `parent_key` e `from_key/to_key` por `reference_basis=SOURCE_STRUCTURAL_KEY`, `node.source_key_literal`, `node.parent_key_presence` (`ABSENT`/`EXPLICIT_NULL`/`PRESENT`), `node.parent_key_literal` e `node.parent` já tipado, além de `reference.declared_key_literal` (até 65.536 caracteres) e das condições de base por `allOf/if/then`, sem promover `native_id`, segundo `DESCRIPTOR-0.2.1-CANDIDATE.md` e os negativos publicados?**
 
 Aprovar autoriza **somente** implementação posterior, testada e revisada em C2/F3A/F3B pelos owners, após gates próprios. NÃO aprova C3 antecipado, extensão do Caderno, transferência de conteúdo privado, G4/G5/G6, F5, confiança científica, merge, release, deploy, migração, limpeza ou alteração R4.
 

@@ -22,7 +22,7 @@
 
 ## Contraexemplo mínimo A
 
-O pai tem `{key:"p-A",native_id:null,ui_id:"ui-p-A"}`; filho, `{key:"c-A",native_id:null,parent_key:"p-A"}`. A ligação é declarada por `parent_key` e tem alvo estrutural literal único; não é prova de native_id. Marcar `reference.declared_id="p-A"`, `resolution="RESOLVED"` e `target_navigation_id` do pai violaria o `semantics.py` e o F3A 0.2.0. Copiar `key` a `native_id` é falsificação de identidade científica. Deixar `UNRESOLVED` é seguro, porém perde o clique legítimo. **O0 não satisfaz simultaneamente fidelidade, navegação e validação estrita.**
+O pai tem `{key:"p-A",native_id:"native-A",ui_id:"ui-p-A"}`; filho, `{key:"c-A",native_id:null,parent_key:"p-A"}`. A ligação é declarada por `parent_key` e tem alvo estrutural literal único; não é prova de native_id. Marcar `reference.declared_id="p-A"`, `resolution="RESOLVED"` e `target_navigation_id` do pai violaria o `semantics.py` e o F3A 0.2.0. Copiar `key` a `native_id` é falsificação de identidade científica. Deixar `UNRESOLVED` é seguro, porém perde o clique legítimo. **O0 não satisfaz simultaneamente fidelidade, navegação e validação estrita.**
 
 ## Rejeições exigidas para 0.2.1
 
@@ -36,3 +36,12 @@ O pai tem `{key:"p-A",native_id:null,ui_id:"ui-p-A"}`; filho, `{key:"c-A",native
 **Casos adicionais G/H/I:** inventados e também incluídos nos oráculos JSON; `G` distingue referência a alvo inexistente de entrada sem key, `H` testa ciclo apesar de endpoints resolvidos e `I` testa navegação sem causalidade. Sem execução de validator 0.2.1.
 
 **Método:** leitura dos códigos nos SHAs de `INPUT-SHAS.json` e contraprovas de invariantes. Não foi executado `validate_descriptor`, F3A, F3B, nem ensaio com origem privada. Os casos são **oráculos para testes futuros**, não relatório PASS.
+
+## Oráculos suplementares J–M (inteiramente inventados, não executados)
+
+- **J — pai ausente:** nó de linhagem sem propriedade `parent_key`; `parent_key_presence=ABSENT`, `parent_key_literal=null`, `node.parent` obrigatório com `reference_basis=SOURCE_STRUCTURAL_KEY`, `declared_id=null`, `declared_key_literal=null`, `resolution=NULL_ENDPOINT`, `target_navigation_id=null`; `PARENT_UNKNOWN` sem `root=true` original.
+- **K — null explícito:** `parent_key:null`; `parent_key_presence=EXPLICIT_NULL` e referência `NULL_ENDPOINT`, sem perder a diferença para J. Apenas declaração comprovada `root=true` autoriza `ROOT_DECLARED`.
+- **L — referência longa:** `parent_key` de 3000 caracteres é preservada integralmente em `parent_key_literal` e `declared_key_literal` (limite 65.536); nenhuma chave indexável de nó excede 2048, portanto `UNRESOLVED`, `ORPHAN`, `binding_gap=true`. Não truncar nem inventar `native_id`.
+- **M — base mista:** com `NATIVE_ID`, `declared_key_literal` não null é rejeitado; com `SOURCE_STRUCTURAL_KEY`, `declared_id` não null é rejeitado. São negativos do futuro schema `allOf/if/then`, não testes instalados.
+
+Esses oráculos serão executados por C2/F3A somente após decisão ARC-09; documentação estática não constitui CI 0.2.1 nem revisão independente.

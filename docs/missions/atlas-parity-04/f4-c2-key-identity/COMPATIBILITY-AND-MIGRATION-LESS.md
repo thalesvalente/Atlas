@@ -24,7 +24,9 @@
 3. C: snapshots distintos com mesma key; rejeitar cross-snapshot, tokens stale.
 4. D: 50 pares native duplicados e 50 `parent_key` explícitos; native lookup COLLISION, structural lookup único.
 5. E/F: key original ausente/null/vazia/duplicada/não string/>2048: **rejeição atômica** do input, sem fallback de UI. G: key de origem válida, mas parent_key aponta para alvo ausente: `UNRESOLVED` + `ORPHAN`/gap.
-6. Aliasing proibido: ligação via `ui_id`, label, hash, path ou ordenação rejeitada.
+6. Ausência e null explícito de `parent_key` precisam de `parent_key_presence=ABSENT` versus `EXPLICIT_NULL`; em ambos os casos `node.parent` continua referência obrigatória `NULL_ENDPOINT`. `ROOT_DECLARED` exige `root=true` declarado, não omissão. Referência de 2049–65536 caracteres permanece literal e `UNRESOLVED` quando não pertence ao índice estrutural (máximo 2048), sem truncamento.
+7. O schema futuro aplica `allOf/if/then` para rejeitar bases misturadas: `NATIVE_ID` exige `declared_key_literal=null`; `SOURCE_STRUCTURAL_KEY` exige `declared_id=null`. O validador semântico também confere source/snapshot, evidência e alvo original único.
+8. Aliasing proibido: ligação via `ui_id`, label, hash, path ou ordenação rejeitada.
 7. Tipos/direção/causalidade: I (`MEMBER_OF`) resolve endpoints estruturais mas continua organizacional/não causal; relações sem provas permanecem UNKNOWN; repetições, stubs e gaps conservados. H: ciclo de `parent_key` detectado (`TREE_CYCLE`) mesmo com referências individualmente resolvidas.
 8. Versão: 0.2.0 segue passando seus testes; 0.2.1 só depois de implementação explícita, versões inválidas rejeitam antes da UI.
 9. Quotas: 32MiB, 10k nós, 100k edges, 128 tabelas, TTL≤3600, profundidade/literal, inerte, no URI/network.
