@@ -180,7 +180,9 @@ def create_private_scratch(path: Path) -> None:
     finally:
         kernel.CloseHandle(token)
     # Protected DACL: exactly current token owner and SYSTEM; no broad ACEs.
-    sddl = f"D:P(A;;FA;;;SY)(A;;FA;;;{sid_string})"
+    # Elevated CI runners may default newly created owners to Administrators.
+    # Explicit owner is our current token user SID; no global security changes.
+    sddl = f"O:{sid_string}D:P(A;;FA;;;SY)(A;;FA;;;{sid_string})"
     descriptor = ctypes.c_void_p()
     if not adv.ConvertStringSecurityDescriptorToSecurityDescriptorW(
             sddl, 1, ctypes.byref(descriptor), None):
