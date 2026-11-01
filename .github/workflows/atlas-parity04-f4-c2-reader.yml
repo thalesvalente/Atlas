@@ -59,7 +59,7 @@ jobs:
         run: python scripts/qa/atlas_parity04_f4_c2_d_evidence.py --stage composed --junit .test-output/atlas-parity04-f4-c2/junit.xml
       - name: Inventory every current changed byte and reconcile receipts
         if: always()
-        run: python tests/qa/test_atlas_parity04_f4_c2_d_evidence.py --inventory-only
+        run: python tests/qa/test_atlas_parity04_f4_c2_d_evidence.py --require-manifest
       - name: Preserve synthetic JSON and JUnit
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
