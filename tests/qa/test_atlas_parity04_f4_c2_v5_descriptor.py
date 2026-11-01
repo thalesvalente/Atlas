@@ -284,7 +284,9 @@ class DirectV5DescriptorTests(unittest.TestCase):
         source = raw_v5()
         source["result_tables"].append({
             "id": "bad-table", "label": "Invented",
-            "rows": [{"native_id": None, "cells": []}]})
+            "role": "UNADMITTED_NATIVE_RF",
+            "rows": [{"native_id": "BAD-INVENTED",
+                      "cells": {"ID": "BAD-INVENTED"}}]})
         data = json.dumps(source).encode("utf-8")
         parsed = parse_legacy_export(data, media_type="application/json")
         with self.assertRaises(ReaderError):
