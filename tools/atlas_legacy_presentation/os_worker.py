@@ -294,14 +294,14 @@ def _windows_broker_worker(args) -> int:
                     ("127.0.0.1", args.broker_loopback_port))
         except OSError as exc:
             connect_error = exc.errno
-        # 10060 is the WFP-drop timeout observed with an AppContainer
+        # On Windows, Python timed connect_ex may yield 10035 (in progress)\n        # or 10060 (timeout) when WFP silently drops loopback. 10060 is
         # missing loopback capabilities. Do NOT equate a plain timeout
         # with OS denial: the supervisor additionally verifies the WFP
         # exemption inventory, token capabilities, positive control and
         # absence of an accepted worker connection.
         checks["loopback_connect"] = (
             "DENIED_BY_OS" if connect_error in (13, 10013) else
-            "NO_CONNECTION_TIMEOUT" if connect_error == 10060 else
+            "NO_CONNECTION_TIMEOUT" if connect_error in (10035, 10060) else
             "PERMITTED_OR_UNVERIFIED")
         safe = all(v == "DENIED_BY_OS" for k, v in checks.items()
                    if k != "loopback_connect") and checks[

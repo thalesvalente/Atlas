@@ -411,7 +411,7 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
         assert result["loopback_worker_accepted"] is False
         assert detail["checks"]["loopback_connect"] in (
             "DENIED_BY_OS", "NO_CONNECTION_TIMEOUT")
-        assert detail["loopback_connect_os_error"] in (13, 10013, 10060)
+        assert detail["loopback_connect_os_error"] in (13, 10013, 10035, 10060)
         assert detail["worker_optimize"] == int(os.environ.get(
             "ATLAS_WORKER_OPTIMIZE", "0"))
 
