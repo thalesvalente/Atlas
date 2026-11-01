@@ -383,21 +383,20 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
     try:
         result = run_synthetic_job(argv, wall_seconds=8, appcontainer=True)
     except NativeJobUnavailable as exc:
-        # Explicit blocked result; never claim native confinement succeeded.
-        assert str(exc).startswith(("APPCONTAINER_", "BROKER_"))
-        assert not (scratch / "atlas-c2-approved.json").exists()
+        pytest.fail("APPCONTAINER_OS_ENFORCEMENT_MISSING:" + str(exc))
     else:
         assert result["appcontainer_token_verified"] is True
         assert result["filesystem_network_confined"] is False
-        if result["exit_code"] == 0:
-            detail = json.loads((scratch / "os-probe-report.json").read_text())
-            assert detail["appcontainer_token_verified"] is True
-            assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
-            assert all(v == "DENIED_BY_OS"
-                       for v in detail["checks"].values())
-        else:
-            # A launch/runtime failure never counts as an OS-enforced pass.
-            assert result["exit_code"] != 0
+        assert result["exit_code"] == 0, (
+            "APPCONTAINER_WORKER_RUNTIME_UNAVAILABLE:" + repr(result))
+        detail = json.loads((scratch / "os-probe-report.json").read_text())
+        assert detail["appcontainer_token_verified"] is True
+        assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
+        assert set(detail["checks"]) == {
+            "outside_read", "source_write", "scratch_path_write",
+            "loopback_connect"}
+        assert all(v == "DENIED_BY_OS"
+                   for v in detail["checks"].values())
 
 
 def test_windows_broker_flags_cannot_authenticate_direct_worker(synthetic):

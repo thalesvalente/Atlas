@@ -377,12 +377,16 @@ class _AppContainerLaunch:
         # The worker gets a WRITE-only handle. It cannot name/open a new
         # output outside scratch, and cannot overwrite a prior receipt.
         report = self.scratch / "os-probe-report.json"
-        out = kernel.CreateFileW(str(report), 0x40000000, 0,
+        out = kernel.CreateFileW(str(report), 0x40000000, 1,
                                  ctypes.byref(attrs), 1, 0x00000080, None)
         if out in (None, invalid):
             raise NativeJobUnavailable("BROKER_REPORT_CREATE_FAILED")
         self.handles.append(out)
-        verify_private_child(self.scratch, report)
+        from .os_windows_acl import WindowsScratchUnverified
+        try:
+            verify_private_child(self.scratch, report)
+        except WindowsScratchUnverified:
+            raise NativeJobUnavailable("BROKER_REPORT_ACL_UNVERIFIED") from None
         self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.listener.bind(("127.0.0.1", 0))
         self.listener.listen(1)
