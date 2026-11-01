@@ -10,6 +10,7 @@ from ctypes import wintypes
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 JOB_OBJECT_LIMIT_JOB_MEMORY = 0x00000200
 JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x00002000
@@ -324,7 +325,6 @@ class _AppContainerLaunch:
         """
         import shutil
         import subprocess
-        from .os_supervisor import OSProfileNotEnforced
         base = Path(sys.base_prefix)
         runtime = self.scratch.parent / "runtime"
         runtime.mkdir(mode=0o700)
