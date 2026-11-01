@@ -1,0 +1,122 @@
+{
+  "schema": "ap04-f4-c2-b-handoff-v2",
+  "mission": "AP04-F4-C2-B-OS-SANDBOX-CHAT-01",
+  "repository": "thalesvalente/Atlas",
+  "branch": "feat/atlas-parity04-f4-c2-os-isolation-20261101",
+  "draft_pr": "https://github.com/thalesvalente/Atlas/pull/20",
+  "prompt": {
+    "commit": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
+    "path": "docs/missions/atlas-parity-04/f4-direct-reuse-next-20261101/02-C2-B-WINDOWS-OS-SANDBOX-CHAT.md"
+  },
+  "base_commit": "e349a09d439d292011bca4c0994cf8ab3e3fbf9f",
+  "technical_commit": "29f0e144e7470794df721806ed1485d50000a05b",
+  "evidence_commit": "RECEIPT_COMMIT_IS_DESCENDANT_OF_TECHNICAL_COMMIT; IDENTIFY_BY_CURRENT_BRANCH_HEAD",
+  "status": "C2_B_OS_BLOCKED_EXACT",
+  "codes": {
+    "windows": "JOB_NATIVE_TESTED_WINDOWS_FS_NETWORK_NOT_SUPPORTED",
+    "linux": "LANDLOCK_SECCOMP_RLIMIT_AS_TESTED_IN_UBUNTU_RUNNER",
+    "host": "HOST_UNVERIFIED",
+    "production": "PRODUCTION_ACQUISITION_BLOCKED",
+    "independent_review": "COPILOT_REVIEWS_WITH_FINDINGS_NOT_APPROVED"
+  },
+  "hard_limits": {
+    "memory_bytes": 268435456,
+    "wall_seconds": 30,
+    "memory_windows": "JobMemoryLimit_committed_bytes_job_total",
+    "memory_linux": "RLIMIT_AS_virtual_address_space"
+  },
+  "ci": {
+    "workflow": ".github/workflows/atlas-parity04-f4-c2-os-sandbox.yml",
+    "run_id": 41271638031,
+    "run_url": "https://github.com/thalesvalente/Atlas/actions/runs/41271638031",
+    "sha": "29f0e144e7470794df721806ed1485d50000a05b",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "os": "windows-latest",
+        "worker_optimize": 0,
+        "job_id": 124745439571,
+        "pass": 22,
+        "skip": 2,
+        "fail": 0,
+        "artifact_id": 13069064511
+      },
+      {
+        "os": "windows-latest",
+        "worker_optimize": 1,
+        "job_id": 124745439423,
+        "pass": 22,
+        "skip": 2,
+        "fail": 0,
+        "artifact_id": 13069656789
+      },
+      {
+        "os": "ubuntu-latest",
+        "worker_optimize": 0,
+        "job_id": 124745439575,
+        "pass": 18,
+        "skip": 6,
+        "fail": 0,
+        "artifact_id": 13069831073
+      },
+      {
+        "os": "ubuntu-latest",
+        "worker_optimize": 1,
+        "job_id": 124745439576,
+        "pass": 18,
+        "skip": 6,
+        "fail": 0,
+        "artifact_id": 13069726542
+      }
+    ],
+    "summary": {
+      "collected": 96,
+      "pass": 80,
+      "skip": 16,
+      "fail": 0
+    },
+    "global_gates": "NOT_ALL_GREEN; frozen guards not bypassed",
+    "receipt_git_sha_validated": true
+  },
+  "review": {
+    "evaluator": "copilot-pull-request-reviewer[bot]",
+    "review_state": "COMMENTED_CHANGES_RECOMMENDED",
+    "review_ids": [
+      "5726283233",
+      "PRR_kwDOVWBBq88AAAABVVBRsQ",
+      "PRR_kwDOVWBBq88AAAABVVCAvg",
+      "PRR_kwDOVWBBq88AAAABVVBRsQ",
+      "PRR_kwDOVWBBq88AAAABVVCAvg"
+    ],
+    "native_subagents": "NOT_AVAILABLE_NO_SPAWN_TOOLS",
+    "approval": "NO",
+    "open_review_threads": "PRESERVED_RE_REVIEW_PENDING"
+  },
+  "actual_scope": {
+    "added_code": [
+      "tools/atlas_legacy_presentation/os_linux_isolation.py",
+      "tools/atlas_legacy_presentation/os_windows_job.py",
+      "tools/atlas_legacy_presentation/os_windows_acl.py",
+      "tools/atlas_legacy_presentation/os_supervisor.py",
+      "tools/atlas_legacy_presentation/os_worker.py",
+      "tests/qa/test_atlas_parity04_f4_c2_os_sandbox.py",
+      "scripts/qa/atlas_parity04_f4_c2_os_evidence.py",
+      ".github/workflows/atlas-parity04-f4-c2-os-sandbox.yml"
+    ],
+    "receipts_root": "docs/missions/atlas-parity-04/f4-c2-os-sandbox",
+    "mapper_c2_a_changed": false,
+    "historical_manifest_changed": false,
+    "private_data_read": false,
+    "clones_worktrees_created": false,
+    "merge": false,
+    "deploy": false,
+    "release": false
+  },
+  "next_actions": {
+    "C2_B": "Create verified native Windows fs/network confinement profile and negative runner proofs; re-review by distinct owner before readiness; optional AArch64 native runtime check remains unexecuted",
+    "C2_D": "Vet blobs by exact technical SHA and compose in own branch after gates, not via merge PR20",
+    "L1": "Host/Windows proof only with independent authorization",
+    "governance": "Maintain human ADR-0003 decisions; G4 BLOCKED G5/G6 NOT_APPROVED"
+  }
+}

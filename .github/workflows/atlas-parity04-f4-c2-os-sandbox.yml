@@ -1,0 +1,62 @@
+name: AP04 F4 C2-B native OS sandbox counterproofs
+
+on:
+  push:
+    branches:
+      - feat/atlas-parity04-f4-c2-os-isolation-20261101
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: atlas-f4-c2-b-os-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  native-sandbox:
+    name: OS B / ${{ matrix.os }} / optimize=${{ matrix.optimize }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 14
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        optimize: ['0', '1']
+    env:
+      PYTHONUTF8: '1'
+      # Assertions in pytest MUST remain enabled in both cells.
+      PYTHONOPTIMIZE: '0'
+      ATLAS_WORKER_OPTIMIZE: ${{ matrix.optimize }}
+      ATLAS_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+    steps:
+      - name: Checkout exact head SHA without persisted credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Install pinned Python version
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install exact pytest version
+        run: python -m pip install pytest==8.4.2
+      - name: OS adversarial probes on invented fixtures (30 s wall clock)
+        run: python -m pytest tests/qa/test_atlas_parity04_f4_c2_os_sandbox.py -v --junitxml=.test-output/atlas-parity04-f4-c2-os/junit.xml
+      - name: Record observed SHA-specific gate
+        if: always()
+        run: python scripts/qa/atlas_parity04_f4_c2_os_evidence.py
+      - name: Upload JUnit and scoped synthetic receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-f4-c2-b-os-${{ matrix.os }}-O${{ matrix.optimize }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: .test-output/atlas-parity04-f4-c2-os/**
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
