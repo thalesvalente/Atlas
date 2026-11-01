@@ -15,8 +15,26 @@ class WindowsScratchUnverified(RuntimeError):
     pass
 
 
+class _ACL(ctypes.Structure):
+    _fields_ = [("revision", ctypes.c_ubyte),
+                ("reserved", ctypes.c_ubyte),
+                ("size", ctypes.c_uint16),
+                ("ace_count", ctypes.c_uint16),
+                ("reserved2", ctypes.c_uint16)]
+
+
+class _AceHeader(ctypes.Structure):
+    _fields_ = [("ace_type", ctypes.c_ubyte),
+                ("ace_flags", ctypes.c_ubyte),
+                ("ace_size", ctypes.c_uint16)]
+
+
 def verify_private_scratch(path: Path) -> None:
-    """Fail closed unless only current user, SYSTEM, or Administrators have allow ACEs."""
+    """Verify exact token-owner and DACL ACE SIDs by Win32 binary APIs.
+
+    SDDL rendering is not authoritative: Windows may serialize well-known
+    principals as abbreviations or numeric SIDs. Compare kernel SIDs instead.
+    """
     if sys.platform != "win32":
         raise WindowsScratchUnverified("WINDOWS_ONLY")
     adv = ctypes.WinDLL("advapi32", use_last_error=True)
@@ -32,43 +50,41 @@ def verify_private_scratch(path: Path) -> None:
         wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD,
         ctypes.POINTER(wintypes.DWORD)]
     adv.GetTokenInformation.restype = wintypes.BOOL
-    adv.ConvertSidToStringSidW.argtypes = [
-        ctypes.c_void_p, ctypes.POINTER(wintypes.LPWSTR)]
-    adv.ConvertSidToStringSidW.restype = wintypes.BOOL
     adv.EqualSid.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
     adv.EqualSid.restype = wintypes.BOOL
+    adv.IsValidSid.argtypes = [ctypes.c_void_p]
+    adv.IsValidSid.restype = wintypes.BOOL
+    adv.ConvertStringSidToSidW.argtypes = [
+        wintypes.LPCWSTR, ctypes.POINTER(ctypes.c_void_p)]
+    adv.ConvertStringSidToSidW.restype = wintypes.BOOL
+    adv.GetAce.argtypes = [
+        ctypes.c_void_p, wintypes.DWORD, ctypes.POINTER(ctypes.c_void_p)]
+    adv.GetAce.restype = wintypes.BOOL
     adv.GetNamedSecurityInfoW.argtypes = [
         wintypes.LPWSTR, wintypes.DWORD, wintypes.DWORD,
         ctypes.POINTER(ctypes.c_void_p), ctypes.c_void_p,
         ctypes.POINTER(ctypes.c_void_p), ctypes.c_void_p,
         ctypes.POINTER(ctypes.c_void_p)]
     adv.GetNamedSecurityInfoW.restype = wintypes.DWORD
-    adv.ConvertSecurityDescriptorToStringSecurityDescriptorW.argtypes = [
-        ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD,
-        ctypes.POINTER(wintypes.LPWSTR), ctypes.c_void_p]
-    adv.ConvertSecurityDescriptorToStringSecurityDescriptorW.restype = wintypes.BOOL
+    adv.GetSecurityDescriptorControl.argtypes = [
+        ctypes.c_void_p, ctypes.POINTER(wintypes.WORD),
+        ctypes.POINTER(wintypes.DWORD)]
+    adv.GetSecurityDescriptorControl.restype = wintypes.BOOL
 
     token = wintypes.HANDLE()
     if not adv.OpenProcessToken(kernel.GetCurrentProcess(), 0x0008,
                                 ctypes.byref(token)):
         raise WindowsScratchUnverified("SCRATCH_TOKEN_UNVERIFIED")
     try:
-        needed = wintypes.DWORD()
-        adv.GetTokenInformation(token, 1, None, 0, ctypes.byref(needed))
-        if needed.value < ctypes.sizeof(ctypes.c_void_p):
+        required = wintypes.DWORD()
+        adv.GetTokenInformation(token, 1, None, 0, ctypes.byref(required))
+        if required.value < ctypes.sizeof(ctypes.c_void_p):
             raise WindowsScratchUnverified("SCRATCH_TOKEN_UNVERIFIED")
-        buf = ctypes.create_string_buffer(needed.value)
-        if not adv.GetTokenInformation(token, 1, buf, needed,
-                                       ctypes.byref(needed)):
+        token_buf = ctypes.create_string_buffer(required.value)
+        if not adv.GetTokenInformation(token, 1, token_buf, required,
+                                       ctypes.byref(required)):
             raise WindowsScratchUnverified("SCRATCH_TOKEN_UNVERIFIED")
-        user_sid = ctypes.cast(buf, ctypes.POINTER(ctypes.c_void_p))[0]
-        sid_string = wintypes.LPWSTR()
-        if not adv.ConvertSidToStringSidW(user_sid, ctypes.byref(sid_string)):
-            raise WindowsScratchUnverified("SCRATCH_SID_UNVERIFIED")
-        try:
-            username_sid = sid_string.value
-        finally:
-            kernel.LocalFree(ctypes.cast(sid_string, ctypes.c_void_p))
+        user = ctypes.cast(token_buf, ctypes.POINTER(ctypes.c_void_p))[0]
         owner = ctypes.c_void_p()
         dacl = ctypes.c_void_p()
         sd = ctypes.c_void_p()
@@ -78,41 +94,56 @@ def verify_private_scratch(path: Path) -> None:
                 ctypes.byref(sd)) != 0:
             raise WindowsScratchUnverified("SCRATCH_DACL_UNVERIFIED")
         try:
-            if not owner.value or not dacl.value or not adv.EqualSid(
-                    owner, user_sid):
+            if not owner.value or not dacl.value or not adv.EqualSid(owner, user):
                 raise WindowsScratchUnverified("SCRATCH_OWNER_UNVERIFIED")
-            sddl = wintypes.LPWSTR()
-            if not adv.ConvertSecurityDescriptorToStringSecurityDescriptorW(
-                    sd, 1, 0x00000004, ctypes.byref(sddl), None):
-                raise WindowsScratchUnverified("SCRATCH_DACL_UNVERIFIED")
+            control = wintypes.WORD()
+            revision = wintypes.DWORD()
+            if not adv.GetSecurityDescriptorControl(
+                    sd, ctypes.byref(control), ctypes.byref(revision)):
+                raise WindowsScratchUnverified("SCRATCH_CONTROL_UNVERIFIED")
+            if not (control.value & 0x1000):  # SE_DACL_PROTECTED
+                raise WindowsScratchUnverified("SCRATCH_DACL_NOT_PROTECTED")
+            acl = ctypes.cast(dacl, ctypes.POINTER(_ACL)).contents
+            if acl.ace_count < 1 or acl.ace_count > 8:
+                raise WindowsScratchUnverified("SCRATCH_ACE_COUNT_UNVERIFIED")
+            system_sid = ctypes.c_void_p()
+            admin_sid = ctypes.c_void_p()
+            if (not adv.ConvertStringSidToSidW("S-1-5-18",
+                                               ctypes.byref(system_sid)) or
+                    not adv.ConvertStringSidToSidW("S-1-5-32-544",
+                                                   ctypes.byref(admin_sid))):
+                raise WindowsScratchUnverified("SCRATCH_BUILTIN_SIDS_UNVERIFIED")
             try:
-                descriptor = sddl.value or ""
-            finally:
-                kernel.LocalFree(ctypes.cast(sddl, ctypes.c_void_p))
-            if "D:" not in descriptor:
-                raise WindowsScratchUnverified("SCRATCH_DACL_UNVERIFIED")
-            dacl_text = descriptor.split("D:", 1)[1].split("S:", 1)[0]
-            entries = re.findall(r"\(([^()]*)\)", dacl_text)
-            if not entries:
-                raise WindowsScratchUnverified("SCRATCH_DACL_EMPTY")
-            authorized = {"SY", "BA", username_sid.upper()}
-            has_user_write = False
-            for ace in entries:
-                fields = ace.split(";")
-                if len(fields) < 6:
-                    raise WindowsScratchUnverified("SCRATCH_DACL_UNVERIFIED")
-                ace_type, rights, sid = fields[0], fields[2], fields[5]
-                if ace_type in ("A", "OA", "XA", "ZA"):
-                    if ace_type != "A" or sid.upper() not in authorized:
+                has_user_write = False
+                for idx in range(acl.ace_count):
+                    ace = ctypes.c_void_p()
+                    if not adv.GetAce(dacl, idx, ctypes.byref(ace)) or not ace.value:
+                        raise WindowsScratchUnverified("SCRATCH_ACE_UNVERIFIED")
+                    header = ctypes.cast(ace, ctypes.POINTER(_AceHeader)).contents
+                    if (header.ace_type != 0 or header.ace_flags & 0x10
+                            or header.ace_size < 12):
+                        raise WindowsScratchUnverified("SCRATCH_ACE_UNSAFE")
+                    # ACCESS_ALLOWED_ACE = ACE_HEADER(4) + AccessMask(4)
+                    # + SidStart. Sid pointer refers to the SID at +8.
+                    trustee = ctypes.c_void_p(ace.value + 8)
+                    if not adv.IsValidSid(trustee):
+                        raise WindowsScratchUnverified("SCRATCH_ACE_INVALID_SID")
+                    is_user = bool(adv.EqualSid(trustee, user))
+                    if not (is_user or adv.EqualSid(trustee, system_sid)
+                            or adv.EqualSid(trustee, admin_sid)):
                         raise WindowsScratchUnverified("SCRATCH_ACL_TOO_BROAD")
-                    if sid.upper() == username_sid.upper() and (
-                            "FA" in rights or "FW" in rights or
-                            rights.startswith("0x")):
+                    # FILE_ADD_FILE (0x2) / GENERIC_ALL (0x10000000)
+                    # / FILE_ALL_ACCESS (0x001f01ff)
+                    mask = ctypes.c_uint32.from_address(ace.value + 4).value
+                    if is_user and (mask & 0x2 or mask & 0x10000000):
                         has_user_write = True
-                elif ace_type != "D":
-                    raise WindowsScratchUnverified("SCRATCH_DACL_UNVERIFIED")
-            if not has_user_write:
-                raise WindowsScratchUnverified("SCRATCH_USER_WRITE_UNVERIFIED")
+                if not has_user_write:
+                    raise WindowsScratchUnverified("SCRATCH_USER_WRITE_UNVERIFIED")
+            finally:
+                if system_sid.value:
+                    kernel.LocalFree(system_sid)
+                if admin_sid.value:
+                    kernel.LocalFree(admin_sid)
         finally:
             if sd.value:
                 kernel.LocalFree(sd)
