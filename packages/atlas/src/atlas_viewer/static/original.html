@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas — abrir a experiência original</title>
+  <link rel="stylesheet" href="/original.css">
+  <script src="/original.js" defer></script>
+</head>
+<body>
+  <header class="bar">
+    <a href="/" class="brand" aria-label="Voltar ao Atlas candidato"><span class="mark">A</span> Atlas</a>
+    <div class="bar-note">Consulta local · sem envio de arquivos</div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="heading">
+      <div>
+        <p class="eyebrow">REUTILIZAÇÃO DIRETA · R4 / CADERNO</p>
+        <h1 id="heading">Seu Atlas original.<br><span>Sem refazer a interface.</span></h1>
+        <p>Abra o HTML já gerado pelo R4. A árvore interativa, tabelas e histórico são executados pelo próprio código da versão original, em uma área isolada do navegador.</p>
+      </div>
+      <label for="original-file" class="pick">Selecionar HTML original
+        <input type="file" id="original-file" accept=".html,text/html" data-testid="original-file">
+      </label>
+    </section>
+    <div class="info">
+      <p><strong>Escolha:</strong> <code>.r4/atlas/builds/&lt;id&gt;/index.html</code> do Caderno.</p>
+      <p>O arquivo <code>ATLAS-ATUAL.html</code> é apenas um ponteiro e não funciona isoladamente aqui.</p>
+      <p>Para todos os links locais funcionarem exatamente como antes, abra o HTML original diretamente no Windows.</p>
+    </div>
+    <p id="original-status" class="status" role="status" aria-live="polite">Selecione o arquivo HTML de sua última execução real.</p>
+    <section id="original-wrapper" class="preview" hidden aria-label="Interface original do Atlas">
+      <div class="preview-head"><strong>Atlas original — visualização local</strong>
+        <button type="button" id="original-clear">Fechar visualização</button></div>
+      <iframe id="original-frame" data-testid="original-frame" title="Atlas original do Caderno"
+        sandbox="allow-scripts allow-downloads" referrerpolicy="no-referrer"></iframe>
+    </section>
+    <div id="original-empty" class="empty">Nenhum HTML original carregado. O Atlas novo continua disponível normalmente.</div>
+  </main>
+</body>
+</html>

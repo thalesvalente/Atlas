@@ -170,6 +170,28 @@ class HTTPTests(unittest.TestCase):
         status, _, body = self.request("GET", "/api/catalog")
         self.assertEqual(json.loads(body)["sources"], [])
 
+    def test_original_html_presentation_is_file_api_only_and_opaque(self):
+        status, headers, body = self.request("GET", "/")
+        self.assertEqual(status, 200)
+        self.assertIn(b'href="/original"', body)
+        strict_csp = headers["Content-Security-Policy"]
+        self.assertNotIn("'unsafe-inline'", strict_csp)
+        status, headers, html = self.request("GET", "/original")
+        self.assertEqual(status, 200)
+        self.assertIn(b'sandbox="allow-scripts allow-downloads"', html)
+        self.assertNotIn(b"allow-same-origin", html)
+        self.assertIn(b'type="file"', html)
+        self.assertIn("connect-src 'none'", headers["Content-Security-Policy"])
+        self.assertIn("frame-src 'self' blob:", headers["Content-Security-Policy"])
+        status, _, source = self.request("GET", "/original.js")
+        self.assertEqual(status, 200)
+        self.assertIn(b"file.text()", source)
+        self.assertIn(b"frame.srcdoc = content", source)
+        self.assertNotIn(b"fetch(", source)
+        status, _, _ = self.request("GET", "/original.css")
+        self.assertEqual(status, 200)
+        self.assertEqual(self.request("GET", "/api/legacy-source")[0], 404)
+
     def test_dns_rebinding_and_cross_origin_are_rejected(self):
         self.assertEqual(self.request("GET", "/api/catalog", headers={"Host": "evil.example"})[0], 403)
         self.assertEqual(self.request("GET", "/api/catalog", headers={"Origin": "https://evil.example"})[0], 403)

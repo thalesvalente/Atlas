@@ -52,6 +52,42 @@ somente loopback. A interface não recebe paths de requisições do navegador. `
 retorna código 2 para fonte inválida; `dossier` escreve JSON derivado no stdout.
 Para testar o SDK sozinho, instale apenas `./packages/protocol`.
 
+### Abrir o Atlas original com a navegação histórica (sem reconstrução)
+
+O Atlas original do R4 e o Caderno central continuam **intactos**. Para
+reutilizar agora a interface original, o visualizador possui a opção
+**Atlas original** em `http://127.0.0.1:8765/original`. Ela abre, pelo
+**File API do próprio navegador**, um arquivo `index.html` **já gerado**
+por `R4-CADERNO.py ... atlas`, dentro de
+`<notebook-root>/.r4/atlas/builds/<id>/index.html`. Selecione esse
+`index.html`, **não** o ponteiro `ATLAS-ATUAL.html`. O HTML original,
+dados e JavaScript são exibidos sem cópias para o GitHub, upload HTTP,
+migração ou modificação de fontes. A visualização roda em iframe com
+origem isolada, scripts permitidos, rede negada e sem acesso ao DOM do
+Atlas novo. Links para arquivos privados do host podem não funcionar
+dentro do iframe — para usá-los, abra o HTML original diretamente.
+
+Para abrir exatamente como antes no Windows, sem passar pelo iframe:
+
+```powershell
+& .\scripts\ABRIR-ATLAS-ORIGINAL.ps1 -OpenExisting
+```
+
+Esse comando só abre o HTML já gerado. Para atualizar a projeção e
+abrir com o fluxo original `project → validate → atlas`:
+
+```powershell
+& .\scripts\ABRIR-ATLAS-ORIGINAL.ps1
+```
+
+Os defaults seguem a instalação histórica (`H:\Atlas009-CA01` e
+`H:\R4-Caderno-Cientifico`); `-CodeRoot` e `-NotebookRoot` podem
+ajustá-los. É necessário que esse código e esse caderno existam no
+computador. O comando **não** copia R4 para o repositório público.
+A experiência visual do HTML original não significa que o Atlas novo
+já tenha portado seu modelo de dados para RO-Crate ou que tenha
+paridade certificada. As duas arquiteturas permanecem separadas.
+
 ### Demonstração reproduzível instalada
 
 O [roteiro da PoC](docs/poc-reproducible.md) reutiliza o produtor ambiental público

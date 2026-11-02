@@ -9,10 +9,23 @@ from urllib.parse import urlsplit
 from .catalog import Catalog
 
 ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
+          "/original": ("original.html", "text/html; charset=utf-8"),
+          "/original.js": ("original.js", "text/javascript; charset=utf-8"),
+          "/original.css": ("original.css", "text/css; charset=utf-8"),
           "/app.js": ("app.js", "text/javascript; charset=utf-8"),
           "/style.css": ("style.css", "text/css; charset=utf-8")}
 CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; "
        "img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'; form-action 'none'")
+# The legacy HTML is interpreted ONLY inside an opaque-origin iframe.
+# This restricted presentation route permits its original inline bundle while
+# denying network access, file serving, top-level navigation and same-origin.
+ORIGINAL_CSP = (
+    "default-src 'none'; script-src 'self' 'unsafe-inline'; "
+    "style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; "
+    "frame-src 'self' blob:; connect-src 'none'; font-src 'none'; "
+    "object-src 'none'; base-uri 'none'; form-action 'none'; "
+    "frame-ancestors 'none'"
+)
 
 
 def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
@@ -23,14 +36,14 @@ def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
             # Avoid printing user-controlled titles, queries or local source paths.
             return
 
-        def _reply(self, status: int, body: bytes, content_type: str = "application/json; charset=utf-8") -> None:
+        def _reply(self, status: int, body: bytes, content_type: str = "application/json; charset=utf-8", *, csp: str = CSP) -> None:
             self.send_response(status)
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Referrer-Policy", "no-referrer")
-            self.send_header("Content-Security-Policy", CSP)
+            self.send_header("Content-Security-Policy", csp)
             self.send_header("Cross-Origin-Resource-Policy", "same-origin")
             self.end_headers()
             self.wfile.write(body)
@@ -58,7 +71,8 @@ def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
             path = urlsplit(self.path).path
             if path in ASSETS:
                 name, content_type = ASSETS[path]
-                self._reply(200, files("atlas_viewer").joinpath("static", name).read_bytes(), content_type)
+                self._reply(200, files("atlas_viewer").joinpath("static", name).read_bytes(), content_type,
+                            csp=ORIGINAL_CSP if path == "/original" else CSP)
             elif path == "/api/catalog":
                 self._json(200, catalog.snapshot())
             elif path == "/api/dossier":
