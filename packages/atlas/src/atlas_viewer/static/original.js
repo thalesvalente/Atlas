@@ -55,11 +55,28 @@ choose.addEventListener('change', async () => {
       message('Dados de apresentação original ausentes ou incompatíveis.', true);
       return;
     }
-    // Do not trust HTML as same-origin: the iframe is opaque-origin, has no
-    // form submission/top navigation, and is subject to a no-network CSP.
+    // Enforce the child document's OWN restrictive CSP, before any scripts.
+    // Its original CSP (including its script SHA) remains intact; policies
+    // intersect, so a user-selected document cannot enable network access.
+    // Do NOT serialize the parsed DOM: that could invalidate the original
+    // script SHA and corrupt source text.
+    const noNetworkPolicy = "default-src 'none'; connect-src 'none'; " +
+      "script-src 'unsafe-inline'; style-src 'unsafe-inline'; " +
+      "img-src data: blob:; font-src 'none'; media-src 'none'; " +
+      "worker-src 'none'; frame-src 'none'; object-src 'none'; " +
+      "base-uri 'none'; form-action 'none'";
+    const cspElement = '<meta http-equiv="Content-Security-Policy" content="' +
+      noNetworkPolicy + '">';
+    const headTag = /<head(?:\\s[^>]*)?>/i;
+    if (!headTag.test(content)) {
+      message('O HTML original está sem o cabeçalho obrigatório.', true);
+      return;
+    }
+    const confined = content.replace(headTag, tag => tag + cspElement);
+    // The iframe never receives allow-same-origin or allow-top-navigation.
     wrapper.hidden = false;
     empty.hidden = true;
-    frame.srcdoc = content;
+    frame.srcdoc = confined;
     message('Atlas original aberto localmente (' + data.records.length +
             ' registros declarados). Navegação e arquivos privados continuam separados.');
   } catch (_) {

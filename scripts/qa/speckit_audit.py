@@ -27,7 +27,7 @@ ORIGINAL_BRIDGE_BLOBS = {
     "packages/atlas/src/atlas_viewer/static/index.html":
         "e5729438fa85d239e63182455eba4eff18b43175",
     "tests/viewer/test_catalog_server.py":
-        "2aeb6c0e97e98ce362568fed9ea464d5cfe2bdea",
+        "190411a8eb75b393b03eb9fd8c91d55ca65059bb",
 }
 PRESENTATION_ORIGINALS = {
     "packages/protocol/src/caderno_protocol/read_model.py",
