@@ -18,6 +18,7 @@ def main() -> int:
     scenario = parser.add_mutually_exclusive_group()
     scenario.add_argument("--adversarial", action="store_true")
     scenario.add_argument("--related-references", action="store_true")
+    scenario.add_argument("--original", action="store_true")
     args = parser.parse_args()
     work = args.work.resolve()
     python = work / "viewer-env" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
@@ -33,6 +34,9 @@ def main() -> int:
         report = work / "browser-adversarial-report.json"
         extra = ["--expected-exact-integer", "9007199254740993"]
         sources = [source]
+    if args.original:
+        sources = []
+        report = work / "browser-original-report.json"
     if args.related_references:
         sources = []
         for label in ("A", "B"):
@@ -72,7 +76,8 @@ def main() -> int:
         expected = sum(len(s["read_model"]["runs"]) for s in catalog["sources"] if s["read_model"])
         if args.related_references and (len(catalog["sources"]) != 2 or expected != 8):
             raise RuntimeError("Both complete synthetic source packages must be consumed")
-        result = subprocess.run(["node", str(root / "scripts/qa/browser.mjs"), "--url", url,
+        browser_test = "browser_original.mjs" if args.original else "browser.mjs"
+        result = subprocess.run(["node", str(root / "scripts/qa" / browser_test), "--url", url,
                                  "--expected-sources", str(len(catalog["sources"])),
                                  "--expected-runs", str(expected), "--report", str(report), *extra],
                                 check=False, cwd=root)
