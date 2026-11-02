@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 from pathlib import Path
+import runpy
 import unittest
 
-from scripts.qa.speckit_audit import (
-    ORIGINAL_BRIDGE_BLOBS, git_blob_id, exact_original_bridge,
-)
-
 REPO = Path(__file__).resolve().parents[2]
+# scripts/ is an engineering entrypoint, not an installed Python package.
+# Load the real checker by path without changing the Atlas package boundary.
+AUDIT = runpy.run_path(str(REPO / "scripts/qa/speckit_audit.py"))
+ORIGINAL_BRIDGE_BLOBS = AUDIT["ORIGINAL_BRIDGE_BLOBS"]
+git_blob_id = AUDIT["git_blob_id"]
+exact_original_bridge = AUDIT["exact_original_bridge"]
 
 
 class ExactOriginalBridgeGuardTests(unittest.TestCase):
