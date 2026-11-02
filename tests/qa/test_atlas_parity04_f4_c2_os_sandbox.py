@@ -136,7 +136,7 @@ def test_linux_os_denials_or_windows_explicit_block():
     assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER", result
     checks = result["probe"]["checks"]
     assert {k for k in checks if k != "scratch_write"} == {
-        "outside_read", "source_write", "loopback_socket",
+        "outside_read", "source_read", "source_write", "loopback_socket",
         "external_socket", "descendant_fork"}
     assert all(v == "DENIED_BY_OS" for k, v in checks.items()
                if k != "scratch_write")
@@ -185,15 +185,17 @@ def test_report_no_clobber(synthetic):
         encoding="utf-8"))["fixture"] == "original"
 
 
-def test_exact_source_read_inside_native_profile():
+def test_synthetic_source_validated_without_worker_read():
     result = sandbox.run_synthetic_probe("success")
     assert result["descriptor_absent"] is True
     assert result["synthetic_source_unchanged"] is True
     assert result["probe"] is not None, result
     if sys.platform == "linux":
         assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER", result
-        assert result["probe"]["source_length_sample"] > 0
+        assert result["probe"]["source_bytes_read_by_worker"] == 0
+        assert result["probe"]["source_opened_by_worker"] is False
         assert result["probe"]["landlock_abi"] >= 3
+        assert result["probe"]["scratch_only_landlock_abi"] >= 3
         assert result["scratch_report_mode"] == 0o600
     else:
         assert result["qualification"] == (
@@ -225,7 +227,11 @@ def test_windows_breakaway_denied():
         pytest.skip("Linux denies fork/clone via seccomp")
     result = sandbox.run_synthetic_probe("breakaway")
     assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
-    assert result["probe"]["breakaway"] == "BREAKAWAY_DENIED_BY_JOB"
+    assert result["probe"]["breakaway"] == (
+        "BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL")
+    assert result["probe"]["positive_control_exit_code"] == 0
+    assert result["probe"]["process_in_job"] is True
+    assert result["probe"]["breakaway_winerror"] == 5
 
 
 def test_windows_descendants_killed_in_job():
@@ -412,7 +418,8 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
         assert detail["source_bytes_read_by_worker"] == 0
         assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
         assert set(detail["checks"]) == {
-            "outside_read", "source_write", "scratch_path_write",
+            "outside_read", "source_read", "source_write",
+            "scratch_path_write",
             "loopback_connect"}
         assert all(v == "DENIED_BY_OS"
                    for k, v in detail["checks"].items()
@@ -505,7 +512,11 @@ def test_windows_appcontainer_breakaway_denied_by_job(synthetic):
         wall_seconds=10, appcontainer=True)
     assert result["exit_code"] == 0, result
     report = json.loads((synthetic[2] / "os-probe-report.json").read_text())
-    assert report["breakaway"] == "BREAKAWAY_DENIED_BY_JOB"
+    assert report["breakaway"] == (
+        "BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL")
+    assert report["positive_control_exit_code"] == 0
+    assert report["process_in_job"] is True
+    assert report["breakaway_winerror"] == 5
 
 
 def test_windows_appcontainer_source_rename_denied_after_handle_pin(synthetic):
@@ -576,3 +587,36 @@ def test_native_handle_integer_conversion_rejects_forged_or_invalid():
     for invalid in (None, 0, ctypes.c_void_p(), -1, ctypes.c_void_p(-1)):
         with pytest.raises(NativeJobUnavailable, match="BROKER_HANDLE_INVALID"):
             _numeric_handle(invalid)
+
+
+
+def test_job_breakaway_classifier_refuses_unrelated_launch_errors():
+    """Unit-level negative control, separate from OS-native Job counterproof."""
+    from tools.atlas_legacy_presentation.os_worker import (
+        _is_job_breakaway_denial)
+    assert not _is_job_breakaway_denial(FileNotFoundError(2, "missing"))
+    assert not _is_job_breakaway_denial(PermissionError(13, "without winerror"))
+    class SimulatedNativeDenial(PermissionError):
+        winerror = 5
+    assert _is_job_breakaway_denial(SimulatedNativeDenial(13, "denied"))
+
+
+def test_forged_synthetic_path_direct_cli_never_opens_source(synthetic):
+    """A spoofed parent PID and correct fixture names never authorize data."""
+    source, outside, scratch = synthetic
+    secret = b"PRIVATE_BYTES_NOT_AUTHORIZED_FOR_TEST_WORKER"
+    source.write_bytes(secret)
+    worker = Path(sandbox.__file__).with_name("os_worker.py")
+    command = [sys.executable, "-I", "-S", str(worker),
+               "--source", str(source), "--outside", str(outside),
+               "--scratch", str(scratch), "--mode", "success",
+               "--supervisor-pid", str(os.getpid())]
+    response = subprocess.run(command, capture_output=True, timeout=8)
+    assert response.returncode == 78, response
+    assert secret not in response.stdout + response.stderr
+    report = scratch / "os-probe-report.json"
+    if report.exists():
+        assert secret not in report.read_bytes()
+        assert json.loads(report.read_text())["isolation"] == (
+            "OS_ISOLATION_UNVERIFIED")
+    assert source.read_bytes() == secret

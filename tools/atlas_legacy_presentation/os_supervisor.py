@@ -107,6 +107,10 @@ def run_synthetic_probe(mode: str, *, wall_seconds: float = MAX_WALL_SECONDS) ->
         else:
             scratch.mkdir(mode=0o700)
             scratch.chmod(0o700)
+            # A second native Landlock layer revokes access to all sources.
+            # The anchor is an internal, disposable, invented scratch file.
+            _write_invented(scratch / ".os-scratch-only-anchor",
+                            b"atlas-c2b-invented-landlock-scratch-anchor")
         source = inputs / "os-allowlisted.json"
         outside = inputs / "os-outside.json"
         _write_invented(source, _INVENTED_SOURCE)
@@ -218,7 +222,8 @@ def _probe_owned(source: Path, outside: Path, scratch: Path, mode: str, *,
             if mode == "denials":
                 checks = detail.get("checks", {})
                 if (set(checks) != {
-                        "outside_read", "source_write", "scratch_path_write",
+                        "outside_read", "source_read", "source_write",
+                        "scratch_path_write",
                         "loopback_connect"} or
                     any(v != "DENIED_BY_OS" for k, v in checks.items()
                         if k != "loopback_connect") or

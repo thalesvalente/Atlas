@@ -26,6 +26,71 @@ def _report(scratch: Path, payload: dict) -> None:
         verify_private_child(scratch, scratch / "os-probe-report.json")
 
 
+def _is_job_breakaway_denial(exc: OSError) -> bool:
+    """A native access-denied error, never arbitrary process-launch failure."""
+    return (isinstance(exc, PermissionError) and
+            getattr(exc, "winerror", None) == 5)
+
+
+def _native_breakaway_challenge() -> tuple[dict, int]:
+    """No Job attribution without an in-job worker and a working child control."""
+    import ctypes
+    from ctypes import wintypes
+    import subprocess
+
+    k = ctypes.WinDLL("kernel32", use_last_error=True)
+    k.GetCurrentProcess.restype = wintypes.HANDLE
+    k.IsProcessInJob.argtypes = [
+        wintypes.HANDLE, wintypes.HANDLE, ctypes.POINTER(wintypes.BOOL)]
+    k.IsProcessInJob.restype = wintypes.BOOL
+    inside = wintypes.BOOL()
+    if (not k.IsProcessInJob(
+            k.GetCurrentProcess(), None, ctypes.byref(inside))
+            or not inside.value):
+        return {"breakaway": "JOB_MEMBERSHIP_UNVERIFIED"}, 79
+
+    cmd = [sys.executable, "-I", "-S", "-c", "pass"]
+    io = {"stdin": subprocess.DEVNULL, "stdout": subprocess.DEVNULL,
+          "stderr": subprocess.DEVNULL}
+    try:
+        control = subprocess.Popen(cmd, **io)
+    except OSError as exc:
+        return {"breakaway": "CHILD_CREATION_CONTROL_FAILED",
+                "positive_control_winerror": getattr(exc, "winerror", None)}, 79
+    try:
+        control_rc = control.wait(timeout=4)
+    except subprocess.TimeoutExpired:
+        control.kill()
+        control.wait(timeout=4)
+        return {"breakaway": "CHILD_CREATION_CONTROL_TIMEOUT"}, 79
+    if control_rc != 0:
+        return {"breakaway": "CHILD_CREATION_CONTROL_NONZERO",
+                "positive_control_exit_code": control_rc}, 79
+
+    try:
+        probe = subprocess.Popen(cmd, creationflags=0x01000000, **io)
+    except OSError as exc:
+        native_denial = _is_job_breakaway_denial(exc)
+        return ({
+            "breakaway": ("BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL"
+                          if native_denial else "BREAKAWAY_UNVERIFIED_OS_ERROR"),
+            "positive_control_exit_code": control_rc,
+            "process_in_job": True,
+            "breakaway_winerror": getattr(exc, "winerror", None),
+        }, 0 if native_denial else 79)
+    # Process was created with the forbidden breakaway flag: fail closed.
+    try:
+        child_rc = probe.wait(timeout=4)
+    except subprocess.TimeoutExpired:
+        probe.kill()
+        probe.wait(timeout=4)
+        child_rc = None
+    return {"breakaway": "BREAKAWAY_CREATION_SUCCEEDED_UNSAFE",
+            "positive_control_exit_code": control_rc,
+            "process_in_job": True,
+            "breakaway_child_exit_code": child_rc}, 79
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source", type=Path, required=True)
@@ -100,19 +165,14 @@ def main() -> int:
             _report(args.scratch, {"sleep_started": True})
             time.sleep(90)
         elif args.mode == "success":
-            _report(args.scratch, {"job_probe": True})
+            # No AppContainer token/capability: direct CLI must fail closed.
+            return 78
         elif args.mode == "denials":
             _report(args.scratch, {"isolation": "OS_PROFILE_NOT_ENFORCED"})
         elif args.mode == "breakaway":
-            import subprocess
-            try:
-                child = subprocess.Popen([sys.executable, "-c", "pass"],
-                                         creationflags=0x01000000)
-                child.wait(timeout=4)
-                verdict = "BREAKAWAY_SUCCEEDED_UNSAFE"
-            except OSError:
-                verdict = "BREAKAWAY_DENIED_BY_JOB"
-            _report(args.scratch, {"breakaway": verdict})
+            verdict, status = _native_breakaway_challenge()
+            _report(args.scratch, verdict)
+            return status
         elif args.mode == "descendant":
             import subprocess
             child = subprocess.Popen(
@@ -126,9 +186,18 @@ def main() -> int:
     try:
         # -I -S: no user site/startup hooks. Trusted imports before source read.
         sys.path.insert(0, str(Path(__file__).resolve().parent))
-        from os_linux_isolation import enforce
+        from os_linux_isolation import enforce, _landlock
         evidence = enforce(args.source, args.scratch,
                            supervisor_pid=args.supervisor_pid)
+        # Stacked Landlock layers intersect at the kernel. The second layer
+        # allows only scratch (including its internally generated anchor);
+        # no caller-selected source has a readable handle or path.
+        import ctypes
+        scratch_abi = _landlock(
+            ctypes.CDLL(None, use_errno=True),
+            args.scratch / ".os-scratch-only-anchor", args.scratch)
+        evidence["scratch_only_landlock_abi"] = scratch_abi
+        evidence["source_bytes_read_by_worker"] = 0
     except Exception as exc:
         reason = (exc.args[0] if type(exc).__name__ == "IsolationUnavailable"
                   else "SETUP_FAILED")
@@ -157,16 +226,17 @@ def main() -> int:
                                "memory_probe": verdict, **evidence})
         return 0 if verdict == "MEMORY_ERROR_OS_LIMIT" else 79
     if args.mode == "success":
-        with args.source.open("rb") as handle:
-            payload = handle.read(128)
+        # Do not open any source named by an unauthenticated direct CLI.
         _report(args.scratch, {"isolation": "ENFORCED",
-                               "source_length_sample": len(payload),
+                               "source_bytes_read_by_worker": 0,
+                               "source_opened_by_worker": False,
                                **evidence})
         return 0
 
     checks = {}
     for name, action in (
         ("outside_read", lambda: args.outside.open("rb").read(1)),
+        ("source_read", lambda: args.source.open("rb").read(1)),
         ("source_write", lambda: args.source.open("ab").write(b"X")),
         ("loopback_socket", lambda: socket.socket(
             socket.AF_INET, socket.SOCK_STREAM)),
@@ -312,24 +382,16 @@ def _windows_broker_worker(args) -> int:
             time.sleep(90)
             return 0
         if args.mode == "breakaway":
-            import subprocess
-            try:
-                child = subprocess.Popen(
-                    [sys.executable, "-I", "-S", "-c", "pass"],
-                    creationflags=0x01000000, stdin=subprocess.DEVNULL,
-                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                child.wait(timeout=4)
-                verdict = "BREAKAWAY_SUCCEEDED_UNSAFE"
-            except OSError:
-                verdict = "BREAKAWAY_DENIED_BY_JOB"
-            report({"breakaway": verdict,
+            verdict, status = _native_breakaway_challenge()
+            report({**verdict,
                     "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
-            return 0 if verdict == "BREAKAWAY_DENIED_BY_JOB" else 79
+            return status
         if args.mode != "denials":
             return 78
         checks = {}
         for name, action in (
             ("outside_read", lambda: args.outside.open("rb").read(1)),
+            ("source_read", lambda: args.source.open("rb").read(1)),
             ("source_write", lambda: args.source.open("ab").write(b"x")),
             ("scratch_path_write", lambda: (
                 args.scratch / "broker-path-write.tmp").write_text("x")),
