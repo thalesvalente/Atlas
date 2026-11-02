@@ -15,16 +15,16 @@ SKILLS = {"analyze", "checklist", "clarify", "constitution", "converge",
 EDITABLE_ORIGINALS = {".gitignore", ".specify/toolchain.json", "README.md",
                       "THIRD_PARTY_NOTICES.md"}
 # CLOSE01 preserves its existing presentation scope. Feature 004 authorizes
-# the native endpoint/navigation changes below by EXACT candidate blob, not
-# an unrestricted writable path. Mutation tests still fail on any byte drift.
-# These pins are integrity scope, not independent review or scientific assent.
+# endpoint/navigation and regression changes by EXACT candidate blob, not an
+# unrestricted writable path. Negative mutation tests remain mandatory.
+# These pins scope integrity; they do not confer independent approval.
 ORIGINAL_BRIDGE_BLOBS = {
     "packages/atlas/src/atlas_viewer/server.py":
-        "72a638d21eb61bda12ec350405d6ffde151bf205",
+        "1352e3e7d3a0e7a4a835947437db0d756c54523f",
     "packages/atlas/src/atlas_viewer/static/index.html":
-        "510babb7e38f031335a1d0495a80aecea04d826c",
+        "b3f4bc39c61c3a57c4b99581dc0bbe53fef12abe",
     "tests/viewer/test_catalog_server.py":
-        "190411a8eb75b393b03eb9fd8c91d55ca65059bb",
+        "6de06c6ff842a139fbe2dd55331e3402a29654af",
 }
 PRESENTATION_ORIGINALS = {
     "packages/protocol/src/caderno_protocol/read_model.py",

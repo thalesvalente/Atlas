@@ -13,25 +13,18 @@ ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
           "/notebook": ("native_notebook.html", "text/html; charset=utf-8"),
           "/native_notebook.js": ("native_notebook.js", "text/javascript; charset=utf-8"),
           "/native_notebook.css": ("native_notebook.css", "text/css; charset=utf-8"),
+          "/native_rebuild.js": ("native_rebuild.js", "text/javascript; charset=utf-8"),
           "/native_graph.js": ("native_graph.js", "text/javascript; charset=utf-8"),
           "/parity02_p03_table.js": ("parity02_p03_table.js", "text/javascript; charset=utf-8"),
           "/parity02_p03_table.css": ("parity02_p03_table.css", "text/css; charset=utf-8"),
           "/original": ("original.html", "text/html; charset=utf-8"),
-          "/original.js": ("original.js", "text/javascript; charset=utf-8"),
           "/original.css": ("original.css", "text/css; charset=utf-8"),
           "/app.js": ("app.js", "text/javascript; charset=utf-8"),
           "/style.css": ("style.css", "text/css; charset=utf-8")}
+# All routes are native/trusted assets. The earlier executable HTML preview is
+# retired; /original is an inert reference guide, not an upload or srcdoc route.
 CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; "
        "img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'; form-action 'none'")
-# Transitional original-document route only. The native notebook route never
-# uses this policy, embeds HTML, or imports executable content from a producer.
-ORIGINAL_CSP = (
-    "default-src 'none'; script-src 'self' 'unsafe-inline'; "
-    "style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; "
-    "frame-src 'self' blob:; connect-src 'none'; font-src 'none'; "
-    "object-src 'none'; base-uri 'none'; form-action 'none'; "
-    "frame-ancestors 'none'"
-)
 
 
 def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
@@ -41,14 +34,14 @@ def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
         def log_message(self, format: str, *args: object) -> None:
             return
 
-        def _reply(self, status: int, body: bytes, content_type: str = "application/json; charset=utf-8", *, csp: str = CSP) -> None:
+        def _reply(self, status: int, body: bytes, content_type: str = "application/json; charset=utf-8") -> None:
             self.send_response(status)
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Referrer-Policy", "no-referrer")
-            self.send_header("Content-Security-Policy", csp)
+            self.send_header("Content-Security-Policy", CSP)
             self.send_header("Cross-Origin-Resource-Policy", "same-origin")
             self.end_headers()
             self.wfile.write(body)
@@ -77,8 +70,7 @@ def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
             path = url.path
             if path in ASSETS:
                 name, content_type = ASSETS[path]
-                self._reply(200, files("atlas_viewer").joinpath("static", name).read_bytes(), content_type,
-                            csp=ORIGINAL_CSP if path == "/original" else CSP)
+                self._reply(200, files("atlas_viewer").joinpath("static", name).read_bytes(), content_type)
             elif path == "/api/catalog":
                 self._json(200, catalog.snapshot())
             elif path == "/api/dossier":

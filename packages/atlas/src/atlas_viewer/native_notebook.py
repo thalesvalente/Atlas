@@ -1,8 +1,4 @@
-"""Generic native presentation payloads in existing, explicitly selected crates.
-
-This module has no producer imports and never evaluates HTML or follows URIs.
-The protocol remains unchanged: a view is an ordinary digest-bound File payload.
-"""
+"""Generic, change-checked native presentation over explicitly selected crates."""
 from __future__ import annotations
 
 import hashlib
@@ -18,6 +14,7 @@ from caderno_protocol.storage import (
     MAX_ARCHIVE_BYTES, MAX_EXPANDED_BYTES, MAX_METADATA_BYTES, MAX_PAYLOAD_BYTES,
     _regular_bytes, _strict_json,
 )
+from .native_values import entry_values
 
 MEDIA_TYPE = "application/vnd.atlas.native-view+json"
 VIEW_NS = "https://github.com/thalesvalente/Atlas/ns/presentation#"
@@ -35,12 +32,10 @@ def json_bytes(value: object) -> bytes:
 
 
 def _json_value(raw: str):
-    # Reuse the SDK duplicate-key / finite / precision policy also for scalars.
     return _strict_json(("{\"value\":" + raw + "}").encode("utf-8"))["value"]
 
 
 def restore_projection(entries: list[dict]) -> dict:
-    """Reassemble original values by JSON Pointer without numeric JS conversion."""
     root = None
     seen = set()
     for entry in entries:
@@ -88,6 +83,7 @@ def validate_entries(entries: list[dict]) -> None:
     if not isinstance(entries, list) or len(entries) > MAX_ENTRIES:
         raise NativeViewError("NATIVE_ENTRY_LIMIT")
     seen = set()
+    keys = {}
     for e in entries:
         if not isinstance(e, dict) or e.get("kind") not in KINDS:
             raise NativeViewError("NATIVE_ENTRY_TYPE")
@@ -97,58 +93,68 @@ def validate_entries(entries: list[dict]) -> None:
         if not e["uid"] or len(e["uid"]) > 256 or e["uid"] in seen:
             raise NativeViewError("NATIVE_IDENTITY_COLLISION")
         seen.add(e["uid"])
-        for key in ("native_id", "source_key", "parent_key", "parent_uid",
-                    "table_uid", "family", "status", "date"):
+        for key in ("native_id", "source_key", "parent_key", "parent_uid", "table_uid", "family", "status", "date"):
             if key in e and e[key] is not None and not isinstance(e[key], str):
                 raise NativeViewError("NATIVE_SCALAR_TYPE")
         fields = e.get("fields")
         if not isinstance(fields, list) or len(fields) > 4096:
             raise NativeViewError("NATIVE_FIELDS_LIMIT")
         for field in fields:
-            if not isinstance(field, dict) or any(not isinstance(field.get(k), str)
-                                                  for k in ("name", "text", "type")):
+            if not isinstance(field, dict) or any(not isinstance(field.get(k), str) for k in ("name", "text", "type")):
                 raise NativeViewError("NATIVE_FIELD_TYPE")
-        if e["kind"] == "row":
-            if not isinstance(e.get("table_uid"), str) or not isinstance(e.get("cells"), dict):
-                raise NativeViewError("NATIVE_ROW_INVALID")
-            for key, cell in e["cells"].items():
-                if (not isinstance(key, str) or not isinstance(cell, dict)
-                        or cell.get("type") not in ("null", "string", "integer", "number", "boolean", "array", "object")
-                        or not isinstance(cell.get("text"), str)):
-                    raise NativeViewError("NATIVE_CELL_INVALID")
+        # Integrity of raw_json alone is insufficient: independently check
+        # every displayed scalar/cell against the original value as well.
+        expected = entry_values(_json_value(e["raw_json"]), e["group"], e["kind"])
+        actual_fields = {f["name"]: f for f in fields}
+        if len(actual_fields) != len(fields) or actual_fields != {f["name"]: f for f in expected.pop("fields")}:
+            raise NativeViewError("NATIVE_DISPLAY_FIELDS_MISMATCH")
+        if any(e.get(k) != v for k, v in expected.items()):
+            raise NativeViewError("NATIVE_DISPLAY_VALUE_MISMATCH")
+        if e["kind"] in ("record", "node") and e.get("source_key"):
+            keys.setdefault((e["group"], e["source_key"]), []).append(e["uid"])
     if sum(e["kind"] == "node" for e in entries) > 10000:
         raise NativeViewError("NATIVE_NODE_LIMIT")
-    tables = {e["uid"] for e in entries if e["kind"] == "table"}
+    tables = {e["uid"]: e for e in entries if e["kind"] == "table"}
+    table_rows = {uid: 0 for uid in tables}
     for e in entries:
-        if e.get("parent_uid") is not None and e["parent_uid"] not in seen:
-            raise NativeViewError("NATIVE_PARENT_MISSING")
-        if e["kind"] == "row" and e["table_uid"] not in tables:
-            raise NativeViewError("NATIVE_TABLE_MISSING")
+        candidates = keys.get((e["group"], e.get("parent_key")), [])
+        resolution = ("RESOLVED" if len(candidates) == 1 else "COLLISION" if candidates else "UNRESOLVED") if e.get("parent_key") else "NOT_DECLARED"
+        parent = candidates[0] if resolution == "RESOLVED" else None
+        if e.get("parent_uid") != parent or e.get("parent_resolution") != resolution:
+            raise NativeViewError("NATIVE_PARENT_MISMATCH")
+        if e["kind"] == "row":
+            table = tables.get(e.get("table_uid"))
+            ordinal = e.get("ordinal")
+            if table is None or type(ordinal) is not int or ordinal < 0 or e["pointer"] != table["pointer"] + "/rows/" + str(ordinal):
+                raise NativeViewError("NATIVE_TABLE_MISSING_OR_MISMATCHED")
+            table_rows[table["uid"]] += 1
+    for uid, table in tables.items():
+        if type(table.get("row_count")) is not int or table["row_count"] != table_rows[uid]:
+            raise NativeViewError("NATIVE_TABLE_ROW_COUNT_MISMATCH")
 
 
 def _reader(path: Path, metadata_digest: str):
-    """Use SDK bounds and confinement; never accept a request-controlled path."""
     if path.suffix.lower() in (".zip", ".eln") and not path.is_dir():
         archive_bytes = _regular_bytes(path, MAX_ARCHIVE_BYTES)
         archive = zipfile.ZipFile(BytesIO(archive_bytes))
-        candidates = [i.filename for i in archive.infolist()
-                      if i.filename == "ro-crate-metadata.json" or i.filename.endswith("/ro-crate-metadata.json")]
-        if len(candidates) != 1:
+        try:
+            candidates = [i.filename for i in archive.infolist() if i.filename == "ro-crate-metadata.json" or i.filename.endswith("/ro-crate-metadata.json")]
+            if len(candidates) != 1:
+                raise NativeViewError("NATIVE_METADATA_AMBIGUOUS")
+            prefix = candidates[0][:-len("ro-crate-metadata.json")]
+            def read(name, limit):
+                if safe_relative_path(name) != name:
+                    raise NativeViewError("NATIVE_UNSAFE_PATH")
+                info = archive.getinfo(prefix + name)
+                if info.file_size > limit:
+                    raise NativeViewError("NATIVE_PAYLOAD_LIMIT")
+                return archive.read(info)
+            if hashlib.sha256(read("ro-crate-metadata.json", MAX_METADATA_BYTES)).hexdigest() != metadata_digest:
+                raise NativeViewError("NATIVE_SOURCE_CHANGED")
+            return read, archive.close
+        except Exception:
             archive.close()
-            raise NativeViewError("NATIVE_METADATA_AMBIGUOUS")
-        metadata_name = candidates[0]
-        prefix = metadata_name[:-len("ro-crate-metadata.json")]
-        def read(name, limit):
-            if safe_relative_path(name) != name:
-                raise NativeViewError("NATIVE_UNSAFE_PATH")
-            info = archive.getinfo(prefix + name)
-            if info.file_size > limit:
-                raise NativeViewError("NATIVE_PAYLOAD_LIMIT")
-            return archive.read(info)
-        if hashlib.sha256(read("ro-crate-metadata.json", MAX_METADATA_BYTES)).hexdigest() != metadata_digest:
-            archive.close()
-            raise NativeViewError("NATIVE_SOURCE_CHANGED")
-        return read, archive.close
+            raise
     base = path if path.is_dir() else path.parent
     metadata = base / "ro-crate-metadata.json" if path.is_dir() else path
     def read(name, limit):
@@ -162,12 +168,13 @@ def _reader(path: Path, metadata_digest: str):
     return read, finish
 
 
-def read_source(path: Path, source_id: str) -> tuple[dict, bytes | None]:
-    result = {"id": source_id, "status": "INVALID", "entries": [],
-              "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}
+def read_source(path: Path, source_id: str, *, expected_metadata: str | None = None) -> tuple[dict, bytes | None]:
+    result = {"id": source_id, "status": "INVALID", "entries": [], "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}
     try:
         package = load_package(path)
         result["metadata_sha256"] = package.metadata_sha256
+        if expected_metadata is not None and package.metadata_sha256 != expected_metadata:
+            raise NativeViewError("NATIVE_SOURCE_CHANGED")
         if not package.report.valid:
             result["errors"] = [e.code for e in package.report.errors]
             return result, None
@@ -188,13 +195,11 @@ def read_source(path: Path, source_id: str) -> tuple[dict, bytes | None]:
                 or not isinstance(expected_digest, str) or not re.fullmatch("[0-9a-f]{64}", expected_digest)):
             raise NativeViewError("NATIVE_MANIFEST_INVALID")
         read, finish = _reader(Path(path), package.metadata_sha256)
-        chunks = {}
-        total = 0
+        chunks, total = {}, 0
         try:
             for payload in payloads:
                 name = payload["@id"]
-                observation = package.payload_status.get(name, {})
-                if observation.get("status") != "AVAILABLE":
+                if package.payload_status.get(name, {}).get("status") != "AVAILABLE":
                     raise NativeViewError("NATIVE_PAYLOAD_NOT_VERIFIED")
                 raw = read(name, MAX_PAYLOAD_BYTES)
                 total += len(raw)
@@ -220,9 +225,8 @@ def read_source(path: Path, source_id: str) -> tuple[dict, bytes | None]:
         raw_projection = json_bytes(restore_projection(entries))
         if hashlib.sha256(raw_projection).hexdigest() != expected_digest:
             raise NativeViewError("NATIVE_PROJECTION_MISMATCH")
-        result.update(status="READY", entries=entries, revision=revision,
-                      projection_sha256=expected_digest, bytes_verified=total,
-                      authenticity="NOT_VERIFIED", scientific_approval="NOT_EVALUATED")
+        result.update(status="READY", entries=entries, revision=revision, projection_sha256=expected_digest,
+                      bytes_verified=total, authenticity="NOT_VERIFIED", scientific_approval="NOT_EVALUATED")
         return result, raw_projection
     except (OSError, ValueError, KeyError, TypeError, IndexError, RecursionError, zipfile.BadZipFile) as exc:
         result["entries"] = []
@@ -230,16 +234,46 @@ def read_source(path: Path, source_id: str) -> tuple[dict, bytes | None]:
         return result, None
 
 
+def _bound_read(source, observed):
+    if observed.get("status") != "READY" or observed.get("changed"):
+        return {"id": source.id, "name": observed.get("name", source.id),
+                "status": observed.get("status", "INVALID"), "entries": [],
+                "errors": ["NATIVE_CATALOG_CHANGED_REINDEX_REQUIRED"],
+                "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}, None
+    return read_source(source.path, source.id, expected_metadata=observed["metadata_sha256"])
+
+
+def _changed(result):
+    return {"id": result["id"], "name": result.get("name", result["id"]), "entries": [],
+            "status": "CHANGED", "errors": ["NATIVE_CATALOG_CHANGED_REINDEX_REQUIRED"],
+            "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}
+
+
 def snapshot(catalog) -> dict:
-    return {"version": "1", "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL",
-            "sources": [read_source(s.path, s.id)[0] for s in catalog.sources]}
+    # The native API shares Catalog's explicit-reindex contract. A GET cannot
+    # silently promote a newly replaced valid package to READY.
+    before = catalog.snapshot()
+    prior = {s["id"]: s for s in before["sources"]}
+    results = [_bound_read(s, prior[s.id])[0] for s in catalog.sources]
+    after = catalog.snapshot()
+    current = {s["id"]: s for s in after["sources"]}
+    for i, result in enumerate(results):
+        latest = current[result["id"]]
+        if before["generation"] != after["generation"] or latest["changed"]:
+            results[i] = _changed(result)
+    return {"version": "1", "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL", "sources": results}
 
 
 def export_source(catalog, source_id: str, expected_snapshot: str) -> bytes:
     source = next((s for s in catalog.sources if s.id == source_id), None)
     if source is None:
         raise NativeViewError("NATIVE_SOURCE_NOT_SELECTED")
-    result, raw = read_source(source.path, source.id)
-    if raw is None or result.get("metadata_sha256") != expected_snapshot:
+    before = catalog.snapshot()
+    observed = next(s for s in before["sources"] if s["id"] == source_id)
+    result, raw = _bound_read(source, observed)
+    after = catalog.snapshot()
+    latest = next(s for s in after["sources"] if s["id"] == source_id)
+    if (raw is None or result.get("metadata_sha256") != expected_snapshot
+            or latest["changed"] or before["generation"] != after["generation"]):
         raise NativeViewError("NATIVE_SNAPSHOT_CHANGED_OR_INVALID")
     return raw

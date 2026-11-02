@@ -31,13 +31,16 @@ class NativeHTTPTests(unittest.TestCase):
     def close(self):
         self.server.shutdown(); self.server.server_close(); self.thread.join(timeout=5)
 
-    def get(self, path, headers=None):
+    def request(self, method, path, body=None, headers=None):
         conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
-        conn.request("GET", path, headers=headers or {})
+        conn.request(method, path, body=body, headers=headers or {})
         response = conn.getresponse()
         answer = response.status, dict(response.getheaders()), response.read()
         conn.close()
         return answer
+
+    def get(self, path, headers=None):
+        return self.request("GET", path, headers=headers)
 
     def test_native_page_is_not_an_iframe_and_uses_strict_csp(self):
         status, headers, raw = self.get("/notebook")
@@ -45,7 +48,7 @@ class NativeHTTPTests(unittest.TestCase):
         self.assertNotIn(b"<iframe", raw)
         self.assertNotIn("unsafe-inline", headers["Content-Security-Policy"])
         self.assertIn(b"native_notebook.js", raw)
-        for asset in ("native_notebook.js", "native_graph.js", "native_notebook.css", "parity02_p03_table.js"):
+        for asset in ("native_notebook.js", "native_graph.js", "native_rebuild.js", "native_notebook.css", "parity02_p03_table.js"):
             self.assertEqual(self.get("/" + asset)[0], 200)
         self.assertIn(b'href="/notebook"', self.get("/")[2])
 
@@ -68,8 +71,24 @@ class NativeHTTPTests(unittest.TestCase):
         payload.write_bytes(b"corrupt")
         self.assertEqual(self.get(route)[0], 409)
         state = json.loads(self.get("/api/notebook")[2])["sources"][0]
-        self.assertEqual(state["status"], "INVALID")
+        self.assertEqual(state["status"], "CHANGED")
         self.assertEqual(state["entries"], [])
+
+    def test_valid_replacement_is_visible_only_after_explicit_same_origin_reindex(self):
+        metadata = self.package / "ro-crate-metadata.json"
+        doc, payloads = EXPORTER["build_package"]({"records": [{"id": "replacement"}]})
+        for name, raw in payloads.items(): (self.package / name).write_bytes(raw)
+        metadata.write_bytes(EXPORTER["dump"](doc))
+        before = json.loads(self.get("/api/notebook")[2])["sources"][0]
+        self.assertEqual(before["status"], "CHANGED")
+        self.assertEqual(before["entries"], [])
+        self.assertEqual(self.request("POST", "/api/reindex", "{}", {"Content-Type": "application/json"})[0], 403)
+        status, _, _ = self.request("POST", "/api/reindex", "{}", {
+            "Content-Type": "application/json", "Origin": f"http://127.0.0.1:{self.port}"})
+        self.assertEqual(status, 200)
+        after = json.loads(self.get("/api/notebook")[2])["sources"][0]
+        self.assertEqual(after["status"], "READY")
+        self.assertEqual(next(e["native_id"] for e in after["entries"] if e["kind"] == "record"), "replacement")
 
 
 if __name__ == "__main__":

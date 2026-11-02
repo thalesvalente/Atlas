@@ -1,158 +1,86 @@
 # Atlas
 
-**Interface local para explorar registros científicos de produtores independentes.**
-A candidata `0.1.0a1` abre pacotes, consulta projetos/experimentos/execuções, compara
-métricas com unidades, apresenta timeline/linhagem e exporta dossiês derivados.
+**Interface local para explorar registros científicos, sem alterar o acervo.**
 
-Status: **PR Draft / candidata de avaliação**. A direção arquitetural foi definida
-pelo operador; a escolha do perfil em ADR-0002 aguarda aceite humano. Não há release,
-promoção canônica, autenticação científica ou autorização de migração/retirada.
+Esta candidata possui uma experiência **nativa do Caderno**, além da consulta pelo protocolo público. A projeção original do R4 é reutilizada por um adaptador externo; a nova interface usa DOM/SVG e o componente P03, não um iframe ou o JavaScript do renderer antigo. O R4 e o Caderno existentes permanecem intactos. PR Draft: sem release, promoção científica ou autorização de migração/limpeza.
 
-## Separação de responsabilidades
+## Abrir o Caderno existente na interface nova
 
-| Unidade | Responsabilidade | Dependências em runtime |
-|---|---|---|
-| `packages/protocol` — caderno-protocol | Perfil, validação estrutural/semântica e leitura de snapshots | Python stdlib |
-| `packages/atlas` — atlas-viewer | Interface de consulta e índice derivado | caderno-protocol |
-| `examples/environmental` | Produtor ambiental explicitamente sintético | Especificação/SDK público |
-| Outros produtores | Exportação aditiva e mapeamentos próprios | Contrato público; fora da interface |
+Requisitos: Python 3.11+, navegador, código R4 confiável já funcional e a raiz do Caderno central. Instale explicitamente os dois pacotes públicos desta versão:
 
-Atlas não importa produtor legado, descobre worktrees, executa experimentos, aprova
-ciência ou modifica acervos. Fontes e payloads são somente leitura. Índice em memória
-é descartável; preferências ficam no navegador. Veja [ADR-0001](docs/architecture/ADR-0001-atlas-protocol-producers-storage.md)
-e [contrato A/B](docs/coordination/AB-CONTRACT.md).
-
-## Instalar e abrir a candidata
-
-Requisitos: Python 3.11+ e navegador. Os comandos seguintes partem desta branch.
-Crie e ative um ambiente virtual próprio (`python -m venv .venv`), então:
-
-```sh
+```powershell
 python -m pip install ./packages/protocol ./packages/atlas
-python examples/environmental/export.py demo-ambiental
-atlas serve --source demo-ambiental
 ```
 
-Abra `http://127.0.0.1:8765`. O corpus ambiental é inventado: dois projetos, três
-experimentos e quatro execuções com estados completo, parcial, falho e desconhecido.
-O exportador recusa sobrescrever diretórios existentes. A instalação pode baixar as
-ferramentas públicas de build fixadas; a consulta dos registros funciona offline.
+Na raiz do checkout Atlas atualizado, execute:
 
-Também é possível usar a fixture versionada sem gerar outra:
-
-```sh
-atlas serve --source examples/environmental/sample
-atlas inspect examples/environmental/sample
-atlas dossier --source examples/environmental/sample
-caderno-validate examples/environmental/sample
+```powershell
+& .\scripts\ABRIR-ATLAS-NATIVO.ps1 `
+  -CodeRoot 'H:\Atlas009-CA01' `
+  -NotebookRoot 'H:\R4-Caderno-Cientifico' `
+  -Output 'H:\Atlas-exports\consulta-nova'
 ```
 
-`--source` é repetível (até 16 fontes); IDs são escopados por fonte. O servidor é
-somente loopback. A interface não recebe paths de requisições do navegador. `inspect`
-retorna código 2 para fonte inválida; `dossier` escreve JSON derivado no stdout.
-Para testar o SDK sozinho, instale apenas `./packages/protocol`.
+Os exemplos usam os caminhos históricos documentados, que devem existir no seu computador. O pai de Output precisa existir; a pasta final deve ser **nova**, fora do código e do Caderno. O launcher não instala software automaticamente. Ele exporta a projeção usando `r4.campaigns.atlas.project`, inicia o Atlas instalado e abre `http://127.0.0.1:8765/notebook`. `-NoOpen` apenas deixa de abrir o navegador; Ctrl+C encerra o servidor criado pelo launcher.
 
-### Abrir o Atlas original com a navegação histórica (sem reconstrução)
+A interface oferece árvore estrutural com busca integral, pan/zoom/minimapa, registros e filtros, tabelas paginadas, recursos/dossiês, relações, linha do tempo, cobertura e exportação completa. `native_id` nulo permanece nulo; chaves estruturais e UIDs de consulta não viram identidade científica. Valores grandes, null e chave ausente são preservados. Coleções não interpretadas continuam acessíveis com seu JSON original.
 
-O Atlas original do R4 e o Caderno central continuam **intactos**. Para
-reutilizar agora a interface original, o visualizador possui a opção
-**Atlas original** em `http://127.0.0.1:8765/original`. Ela abre, pelo
-**File API do próprio navegador**, um arquivo `index.html` **já gerado**
-por `R4-CADERNO.py ... atlas`, dentro de
-`<notebook-root>/.r4/atlas/builds/<id>/index.html`. Selecione esse
-`index.html`, **não** o ponteiro `ATLAS-ATUAL.html`. O HTML original,
-dados e JavaScript são exibidos sem cópias para o GitHub, upload HTTP,
-migração ou modificação de fontes. A visualização roda em iframe com
-origem isolada, scripts permitidos, rede negada e sem acesso ao DOM do
-Atlas novo. Links para arquivos privados do host podem não funcionar
-dentro do iframe — para usá-los, abra o HTML original diretamente.
+O botão **Verificar alterações** não aceita uma fonte modificada como nova ciência. **Atualizar snapshot** reconstrói explicitamente o índice das fontes já selecionadas. Para atualizar a revisão do próprio Caderno, exporte outro pacote novo. Links documentais externos são apresentados como referências, sem download ou execução automática.
 
-Para abrir exatamente como antes no Windows, sem passar pelo iframe:
+[Guia operacional e instalação](specs/004-native-notebook-experience/quickstart.md) · [Spec](specs/004-native-notebook-experience/spec.md) · [Plano](specs/004-native-notebook-experience/plan.md) · [Tasks](specs/004-native-notebook-experience/tasks.md) · [Análise e limitações](specs/004-native-notebook-experience/analysis.md).
+
+## Referência original preservada
+
+O Atlas R4 antigo continua referência operacional até equivalência conferida no acervo real e aceite humano. Para abrir a visualização já gerada na instalação existente:
 
 ```powershell
 & .\scripts\ABRIR-ATLAS-ORIGINAL.ps1 -OpenExisting
 ```
 
-Esse comando só abre o HTML já gerado. Para atualizar a projeção e
-abrir com o fluxo original `project → validate → atlas`:
+`-CodeRoot` e `-NotebookRoot` permitem indicar explicitamente as raízes. A rota `/original` agora é apenas orientação inerte. A prévia anterior que executava HTML selecionado foi encerrada: não é necessária para a integração nativa e não é um leitor seguro genérico de HTML. Nenhum HTML histórico ou dado do operador foi excluído.
 
-```powershell
-& .\scripts\ABRIR-ATLAS-ORIGINAL.ps1
-```
+## Separação de responsabilidades
 
-Os defaults seguem a instalação histórica (`H:\Atlas009-CA01` e
-`H:\R4-Caderno-Cientifico`); `-CodeRoot` e `-NotebookRoot` podem
-ajustá-los. É necessário que esse código e esse caderno existam no
-computador. O comando **não** copia R4 para o repositório público.
-A experiência visual do HTML original não significa que o Atlas novo
-já tenha portado seu modelo de dados para RO-Crate ou que tenha
-paridade certificada. As duas arquiteturas permanecem separadas.
+| Unidade | Responsabilidade |
+|---|---|
+| `packages/protocol` — caderno-protocol | Perfil, validação e leitura dos pacotes; independente da UI e de produtores |
+| `packages/atlas` — atlas-viewer | Consulta, projeções derivadas e UI; sem imports R4 |
+| `tools/export_native_notebook.py` | Adaptador externo, opt-in, da projeção da instalação R4 escolhida |
+| Outros produtores | Exportação pelo mesmo contrato público |
 
-### Demonstração reproduzível instalada
+O payload de apresentação `atlas-native-view/1` é conteúdo de Files verificados no perfil já existente; não redefine o protocolo científico ou inventa atividades para nós legados. Campos originais são reconstruídos e conferidos por digest. O wheel do Atlas não inclui o produtor privado. Fontes somente leitura, saídas derivadas em diretório novo, sem providers, bancos obrigatórios ou SaaS.
 
-O [roteiro da PoC](docs/poc-reproducible.md) reutiliza o produtor ambiental público
-e a instalação limpa já verificada. Ele fornece o comando para construir/instalar
-wheels em ambientes vazios, abrir a interface, percorrer os cenários e inspecionar
-os recibos. Funciona sem repositório privado. A prova R4 → Caderno → Atlas usa a
-mesma interface de snapshots, com exportação e evidências mantidas no produtor.
-O harness de browser confere detalhes de todas as execuções, ausências, relações
-e pares de métricas compatíveis por fonte, sem nomes de domínio embutidos.
+[ADR-0001](docs/architecture/ADR-0001-atlas-protocol-producers-storage.md) e [contrato A/B](docs/coordination/AB-CONTRACT.md) permanecem vinculantes. Digest é integridade observada, não autenticidade, aprovação científica ou confirmação de presença dos documentos externos.
 
-## Contrato de dados candidato
-
-A recomendação é um perfil restrito sobre **RO-Crate 1.3 + Process Run Crate 0.6**.
-O grafo JSON-LD é o intercâmbio; o read model da interface é apenas uma projeção.
-Consulte [pesquisa](research/protocol-options.md), [ADR-0002](docs/architecture/ADR-0002-protocol-candidate.md)
-e [perfil 0.1.0a1](docs/protocol/0.1.0a1.md). A versão exata é obrigatória.
-
-O leitor aceita diretório expandido, documento de metadados e ZIP limitado sem extração.
-A extensão `.eln` por si só não certifica conformidade ELN; o perfil ELN estudado usa
-RO-Crate 1.2 e está fora do perfil nativo desta candidata. JSON-LD arbitrário não é
-aceito: o contexto é catalogado localmente e a forma suportada é explícita.
-
-Metadados têm limite de 2 MiB; payload individual, 8 MiB; payload agregado, 32 MiB;
-ZIP comprimido, 64 MiB; arquivo, 4096 membros; grafo, 10000 entidades; profundidade,
-20; razão de compressão, 200. URLs externas não são baixadas. Symlinks, traversal,
-colisões de nomes, arquivos especiais, JSON duplicado/NaN e versões desconhecidas
-são rejeitados ou apresentados com erro conforme o contrato.
-
-Digest verifica igualdade de bytes, não autoria ou data. `UNKNOWN`, `HOLD`, parcial,
-falha, dado ausente e origem declarada permanecem visíveis. Autenticidade não foi
-verificada. Qualquer resultado sintético continua identificado como tal.
-
-## Verificação reproduzível
+## Consulta pelo protocolo existente
 
 ```sh
-python -m pip install build==1.3.0 setuptools==80.9.0 wheel==0.45.1 jsonschema==4.25.1
-python scripts/run_checks.py
-python -O scripts/run_checks.py
-python scripts/qa/clean_install.py --repo . --work .ci-clean
-npm install --no-save playwright@1.62.1
-npx playwright install chromium
-python scripts/ci/run_browser.py --work .ci-clean
+atlas serve --source CAMINHO_DO_PACOTE
+atlas inspect CAMINHO_DO_PACOTE
+atlas dossier --source CAMINHO_DO_PACOTE
+caderno-validate CAMINHO_DO_PACOTE
 ```
 
-O runner de instalação constrói wheels de cópias, instala SDK e interface em ambientes
-vazios separados, usa `-I` fora da árvore e verifica ausência de dependências privadas,
-reconstrução e bytes intactos. O browser verifica a aplicação instalada, não mock.
-O diretório `--work` deve ser novo. A CI cobre Windows/Ubuntu, normal/`-O`, browser
-real e o validador de referência no escopo declarado em [conformidade](docs/protocol/conformance.md).
+`--source` é repetível até 16 fontes. Servidor somente loopback; requisições não escolhem novos paths. A rota `/` conserva comparação, métricas tipadas, detalhes, linhagem e dossiê do read model público. `/notebook` consome os payloads nativos de apresentação quando presentes. Fonte sem payload nativo continua válida na visão do protocolo.
 
-O ambiente de engenharia usa Spec Kit **1.2.3**, instalado com `uv tool` em
-ambiente isolado persistente. Scripts Python, templates e as 10 skills oficiais
-Codex estão versionados. Consulte a [configuração de um clone novo](docs/engineering/speckit-setup.md)
-e o [registro de validação desta instalação](docs/verification/SPECKIT-SETUP01.md).
-O [registro do ciclo anterior](specs/001-atlas021-protocol-interface/execution-log.md)
-permanece preservado como evidência histórica.
+O exemplo `examples/environmental/sample` é explicitamente inventado para demonstração de engenharia, não seu Caderno real. [PoC reproduzível](docs/poc-reproducible.md).
 
-## Limites da candidata
+## Intercâmbio e limites
 
-O perfil exige aceite antes de estabilização ou aplicação ao acervo real. O validador
-externo disponível cobre base RO-Crate 1.3; o perfil Process Run 0.6 também é verificado
-por regras explícitas e revisão, sem alegação de certificação externa inexistente.
-A leitura local não certifica segurança de um host adversarial. A avaliação de paridade
-com ferramentas legadas e a preservação física permanecem operações distintas.
+RO-Crate 1.3 + Process Run Crate 0.6 + Caderno 0.1.0a1. [Perfil](docs/protocol/0.1.0a1.md), [pesquisa](research/protocol-options.md) e [conformidade](docs/protocol/conformance.md) registram os limites. Versões/contextos desconhecidos e payloads inválidos são recusados. A extensão `.eln` sozinha não comprova conformidade.
 
-Nenhuma licença de software do produto foi escolhida. A divulgação desta candidata
-não concede licença open source. Referências e materiais públicos redistribuídos
-mantêm seus avisos próprios, conforme [avisos de terceiros](THIRD_PARTY_NOTICES.md).
+Metadados: 2 MiB; payload individual: 8 MiB; agregado: 32 MiB; ZIP: 64 MiB/4096 membros, razão máxima200. O exportador fragmenta Files sem truncar entradas; excesso de quota é erro explícito. A apresentação admite até100000 ocorrências e10000 nós dentro desses tetos. O navegador mostra janelas paginadas, sem descartar a população carregada. Não há certificação de segurança de host adversarial.
+
+## Verificação de engenharia
+
+O projeto contém Spec Kit1.2.3, scripts oficiais e10 skills em `.agents/skills`. A feature004 usa `SPECIFY_FEATURE_DIRECTORY` explícito e `SPECIFY_FEATURE_NO_PERSIST=1`; não altera o seletor global.
+
+```sh
+python scripts/run_checks.py
+python -O scripts/run_checks.py
+python -m unittest discover -s tests/viewer -p 'test_native_notebook*.py' -v
+```
+
+As Actions cobrem Windows/Ubuntu normal/-O, Spec Kit, instalação independente dos pacotes e Chromium real. O cenário nativo executa exporter/SDK/servidor/componentes e preserva screenshots/report. Dados de engenharia não substituem comparação no Caderno privado. O comando operacional no host e revisão independente no SHA final permanecem gates separados, registrados nas tasks e na PR.
+
+Nenhuma licença de software foi concedida por esta candidata; referências públicas preservam seus avisos em [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Sem merge, release, deploy, promoção ou limpeza implícitos.

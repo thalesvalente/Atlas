@@ -18,6 +18,7 @@ import sys
 from caderno_protocol import CONTEXT, PROFILE_ID, PROFILE_VERSION, PROCESS_PROFILE
 from caderno_protocol.model import RO_CRATE, validate_document
 from caderno_protocol.storage import MAX_METADATA_BYTES, MAX_PAYLOAD_BYTES, MAX_EXPANDED_BYTES, _strict_json, _regular_bytes
+from atlas_viewer.native_values import scalar, dtype, entry_values
 
 MEDIA_TYPE = "application/vnd.atlas.native-view+json"
 VIEW_NS = "https://github.com/thalesvalente/Atlas/ns/presentation#"
@@ -34,46 +35,18 @@ def pointer(base, key):
     return base + "/" + str(key).replace("~", "~0").replace("/", "~1")
 
 
-def scalar(value):
-    return value if isinstance(value, str) else dump(value).decode("utf-8")
-
-
-def dtype(value):
-    if value is None: return "null"
-    if isinstance(value, bool): return "boolean"
-    if isinstance(value, int): return "integer"
-    if isinstance(value, float): return "number"
-    if isinstance(value, str): return "string"
-    return "array" if isinstance(value, list) else "object"
-
-
 def project_to_entries(data: dict) -> list[dict]:
     if not isinstance(data, dict) or not isinstance(data.get("records"), list):
         raise ValueError("SOURCE_PROJECTION_RECORDS_REQUIRED")
     entries = []
     def add(value, path, group, kind, **extra):
-        row = value if isinstance(value, dict) else {"value": value}
-        def text(*keys):
-            for key in keys:
-                item = row.get(key)
-                if isinstance(item, str) and item: return item
-            return None
-        fields = [{"name": str(k), "type": dtype(v), "text": scalar(v)}
-                  for k, v in row.items() if not isinstance(v, (dict, list))]
         entry = {"uid": "view:" + str(len(entries)), "pointer": path,
-                 "group": group, "kind": kind,
-                 "title": text("title", "label", "name", "id", "native_id", "key") or group,
-                 "native_id": scalar(row["native_id"]) if row.get("native_id") is not None else
-                              scalar(row["id"]) if row.get("id") is not None and kind == "record" else None,
-                 "source_key": text("key", "id"), "parent_key": text("parent_key"),
-                 "parent_uid": None, "family": text("family"),
-                 "status": text("execution_state", "status", "result_state", "result_group"),
-                 "date": text("started_at", "startTime", "timestamp", "date", "scientific_at"),
-                 "fields": fields, "raw_json": dump(value).decode("utf-8"), **extra}
+                 "group": group, "kind": kind, **entry_values(value, group, kind),
+                 "parent_uid": None, "raw_json": dump(value).decode("utf-8"), **extra}
         entries.append(entry)
         if len(entries) > 100000: raise ValueError("NATIVE_ENTRY_LIMIT")
         return entry
-    # An exact structural skeleton preserves empty collections and scalars.
+    # Exact skeleton retains empty collections, unknown scalars and nulls.
     skeleton = {key: [] if isinstance(value, list) else {} if isinstance(value, dict)
                 else value for key, value in data.items()}
     add(skeleton, "", "$structure", "collection")
@@ -98,15 +71,13 @@ def project_to_entries(data: dict) -> list[dict]:
                 for n, row in enumerate(table["rows"]):
                     if not isinstance(row, dict) or not isinstance(row.get("cells"), dict):
                         raise ValueError("SOURCE_TABLE_CELLS_REQUIRED")
-                    cells = {k: {"text": scalar(v), "type": dtype(v)} for k, v in row["cells"].items()}
                     add(row, pointer(pointer(tp, "rows"), n), group, "row",
-                        table_uid=te["uid"], cells=cells, ordinal=n)
+                        table_uid=te["uid"], ordinal=n)
         elif isinstance(value, list):
             kind = "record" if group == "records" else "relation" if group == "edges" else "asset" if group in ASSETS else "collection"
             for i, row in enumerate(value): add(row, pointer(path, i), group, kind)
         elif isinstance(value, dict):
             add(value, path, group, "collection")
-    # Organizational parent lookup never turns a structural key into a native ID.
     keys = defaultdict(list)
     for entry in entries:
         if entry["kind"] in ("record", "node") and entry["source_key"]:
@@ -193,8 +164,6 @@ def export(data: dict, output: Path, *, forbidden_roots=()) -> dict:
     document, payloads = build_package(data)
     destination.mkdir()
     (destination / "data").mkdir()
-    # Metadata is published last, so an incomplete directory is not readable as
-    # a valid crate. Failures retain only this newly created output for review.
     for name, raw in payloads.items():
         with (destination / name).open("xb") as stream:
             stream.write(raw); stream.flush(); os.fsync(stream.fileno())
