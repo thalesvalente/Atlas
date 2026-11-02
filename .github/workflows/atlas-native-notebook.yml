@@ -5,8 +5,9 @@ on:
       - 'specs/004-native-notebook-experience/**'
       - 'tools/export_native_notebook.py'
       - 'packages/atlas/src/atlas_viewer/**'
-      - 'tests/viewer/test_native_notebook.py'
+      - 'tests/viewer/test_native_notebook*.py'
       - 'scripts/ABRIR-ATLAS-NATIVO.ps1'
+      - 'scripts/ci/run_native_notebook_browser.py'
       - 'scripts/qa/browser_native_notebook.mjs'
       - '.github/workflows/atlas-native-notebook.yml'
   workflow_dispatch:
@@ -45,7 +46,54 @@ jobs:
           python .specify/scripts/python/setup_tasks.py --json
           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
           git diff --exit-code -- .specify specs/004-native-notebook-experience
-      - name: Test actual exporter SDK and native reader
-        run: python -m unittest discover -s tests/viewer -p test_native_notebook.py -v
+      - name: Test actual exporter SDK native reader and HTTP
+        run: python -m unittest discover -s tests/viewer -p 'test_native_notebook*.py' -v
+      - name: Validate native PowerShell launcher syntax
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'scripts/ABRIR-ATLAS-NATIVO.ps1'), [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors.Count -gt 0) { throw ($errors | Out-String) }
       - name: Exact tested SHA
         run: git rev-parse HEAD
+  browser-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Install public packages and existing pinned browser tools
+        run: |
+          python -m pip install setuptools==80.9.0 wheel==0.45.1
+          python -m pip install --no-build-isolation ./packages/protocol ./packages/atlas
+          npm install --no-save playwright@1.62.1
+          npx playwright install --with-deps chromium
+      - name: Parse native modules and exercise installed product
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+          PYTHONUTF8: '1'
+        run: |
+          node --check packages/atlas/src/atlas_viewer/static/native_notebook.js
+          node --check packages/atlas/src/atlas_viewer/static/native_graph.js
+          python scripts/ci/run_native_notebook_browser.py --work .ci-native
+      - name: Preserve native browser evidence (no private corpus)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-native-notebook-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            .ci-native/browser-native*.json
+            .ci-native/browser-native*.png
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 14
