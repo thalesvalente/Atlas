@@ -1,6 +1,6 @@
 /* Native SVG camera over structural identities, never inferred scientific IDs.
- * Stable keyed SVG nodes and delegated handlers preserve double-click/focus
- * and avoid retaining detached nodes through long-lived AbortSignals.
+ * Stable keyed nodes and delegated handlers preserve double-click/focus.
+ * Large collections open at readable scale, not an invisible fit-to-all.
  */
 const NS='http://www.w3.org/2000/svg';
 function el(tag,attrs={},text=null,svg=false){const n=svg?document.createElementNS(NS,tag):document.createElement(tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,String(v));if(text!==null)n.textContent=text;return n;}
@@ -25,7 +25,12 @@ export function mountGraph(host,nodes,onSelect){
   function find(){const q=search.value.toLocaleLowerCase('pt-BR');const matches=nodes.filter(n=>[n.title,n.native_id,n.source_key].join(' ').toLocaleLowerCase('pt-BR').includes(q));if(matches.length){searchAt=(searchAt+1)%matches.length;locate(matches[searchAt].uid);}}
   button('Localizar / próximo',find);listen(search,'input',()=>{searchAt=-1;});listen(search,'keydown',e=>{if(e.key==='Enter'){e.preventDefault();find();}});
   function layout(){positions=new Map();const stack=roots.slice().reverse().map(id=>[id,0]),visited=new Set();let row=0,maxDepth=0;while(stack.length){const[id,depth]=stack.pop();if(visited.has(id))continue;visited.add(id);positions.set(id,{x:depth*255,y:row++*78});maxDepth=Math.max(depth,maxDepth);if(!collapsed.has(id)){const cs=children.get(id)||[];for(let i=cs.length-1;i>=0;i--)stack.push([cs[i],depth+1]);}}worldWidth=Math.max(280,(maxDepth+1)*255);worldHeight=Math.max(100,row*78);}
-  function fit(){zoom=Math.max(.00001,Math.min(1.2,(width-40)/worldWidth,(height-40)/worldHeight));px=20;py=20;draw();}
+  function fit(){
+    // Fit small hierarchies; for large collections use a readable viewport.
+    // Every node remains reachable by pan, minimap, search and the full list.
+    zoom=Math.max(.8,Math.min(1.2,(width-40)/worldWidth,(height-40)/worldHeight));
+    px=20;py=20;draw();
+  }
   function scale(factor){const next=Math.max(.00001,Math.min(4,zoom*factor)),ratio=next/zoom;px=width/2-(width/2-px)*ratio;py=height/2-(height/2-py)*ratio;zoom=next;draw();}
   function select(id){if(!byId.has(id))return;selected=id;for(const[key,node]of elements)node.setAttribute('aria-selected',String(key===id));onSelect(byId.get(id));}
   function toggle(id){if(!children.get(id)?.length)return;collapsed.has(id)?collapsed.delete(id):collapsed.add(id);layout();draw();elements.get(id)?.focus();}
