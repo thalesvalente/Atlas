@@ -50,8 +50,10 @@ def _native_breakaway_challenge(*, appcontainer: bool = False) -> tuple[dict, in
         return {"breakaway": "JOB_MEMBERSHIP_UNVERIFIED"}, 79
 
     cmd = [sys.executable, "-I", "-S", "-c", "pass"]
-    io = {"stdin": subprocess.DEVNULL, "stdout": subprocess.DEVNULL,
-          "stderr": subprocess.DEVNULL}
+    # A low-privilege AppContainer may not be allowed to open the special NUL
+    # device. Avoid conflating DEVNULL setup failure with OS process denial.
+    # No report/source handles are passed onward (close_fds=True).
+    io = {"close_fds": True}
     try:
         control = subprocess.Popen(cmd, **io)
     except OSError as exc:
@@ -91,6 +93,8 @@ def _native_breakaway_challenge(*, appcontainer: bool = False) -> tuple[dict, in
                 "process_in_job": True,
             }, 79)
         return {"breakaway": "CHILD_CREATION_CONTROL_FAILED",
+                "positive_control_error_type": type(exc).__name__,
+                "positive_control_errno": exc.errno,
                 "positive_control_winerror": getattr(exc, "winerror", None)}, 79
     try:
         control_rc = control.wait(timeout=4)
