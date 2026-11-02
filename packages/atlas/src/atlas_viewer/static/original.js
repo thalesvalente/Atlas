@@ -67,7 +67,7 @@ choose.addEventListener('change', async () => {
       "base-uri 'none'; form-action 'none'";
     const cspElement = '<meta http-equiv="Content-Security-Policy" content="' +
       noNetworkPolicy + '">';
-    const headTag = /<head(?:\\s[^>]*)?>/i;
+    const headTag = /<head(?:\s[^>]*)?>/i;
     if (!headTag.test(content)) {
       message('O HTML original está sem o cabeçalho obrigatório.', true);
       return;
