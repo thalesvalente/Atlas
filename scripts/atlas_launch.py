@@ -105,26 +105,36 @@ def _start_viewer(sources: list[str], port: int, view: str, no_open: bool,
         cmd.extend(("--source", source))
     process = subprocess.Popen(cmd, stdin=subprocess.DEVNULL)
     try:
+        # Probe a small static page, NOT /api/notebook: that endpoint expands,
+        # validates and serializes the entire Caderno. A 2-second timeout on
+        # full-data GET would spawn a new expensive read on each retry.
+        base = f"http://127.0.0.1:{port}"
+        route = "/notebook" if view == "Notebook" else "/"
         for _ in range(120):
             if process.poll() is not None:
                 raise RuntimeError("ATLAS_NOVO_SERVER_TERMINATED")
             try:
-                with urllib.request.urlopen(
-                    f"http://127.0.0.1:{port}/api/notebook" if view == "Notebook"
-                    else f"http://127.0.0.1:{port}/api/catalog", timeout=2,
-                ) as response:
-                    catalog = json.load(response)
-                observed = catalog.get("sources")
-                if not isinstance(observed, list):
-                    raise RuntimeError("ATLAS_NOVO_RESPONSE_INVALID")
-                if sources and not any(s.get("status") == "READY" for s in observed):
-                    raise RuntimeError("ATLAS_SELECTED_SOURCE_NOT_READY")
+                with urllib.request.urlopen(base + route, timeout=2):
+                    pass
                 break
             except (urllib.error.URLError, TimeoutError, ConnectionError):
                 time.sleep(.1)
         else:
             raise RuntimeError("ATLAS_NOVO_START_TIMEOUT")
-        url = f"http://127.0.0.1:{port}" + ("/notebook" if view == "Notebook" else "/")
+        if probe_only and sources:
+            # Explicit diagnostic: exactly ONE full-data request, with an
+            # extended deadline. Never retry a timed-out expensive read.
+            endpoint = "/api/notebook" if view == "Notebook" else "/api/catalog"
+            try:
+                with urllib.request.urlopen(base + endpoint, timeout=180) as response:
+                    catalog = json.load(response)
+            except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+                raise RuntimeError("ATLAS_NOVO_FULL_PROBE_UNAVAILABLE") from exc
+            observed = catalog.get("sources")
+            if (not isinstance(observed, list) or len(observed) != len(sources)
+                    or any(s.get("status") != "READY" for s in observed)):
+                raise RuntimeError("ATLAS_SELECTED_SOURCE_NOT_READY")
+        url = base + route
         print("ATLAS_NOVO_READY: " + url, flush=True)
         if not sources:
             print("ATLAS_EMPTY_CATALOG: nenhuma fonte declarada; sem dados inventados.", flush=True)

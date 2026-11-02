@@ -122,6 +122,73 @@ class AtlasNewLauncherTests(unittest.TestCase):
         )
         self.assertEqual(classifier("traceback from private data"), "DETAILS_LOCAL_ONLY")
 
+
+    def test_large_caderno_startup_probes_only_static_page(self):
+        # The full-data route can take many seconds on a legitimate large V2
+        # source. Never issue/retry it as a 2-second readiness probe.
+        from unittest.mock import patch
+        class FakeServer:
+            def __init__(self):
+                self.stopped = False
+            def poll(self):
+                return 0 if self.stopped else None
+            def wait(self, timeout=None):
+                self.stopped = True
+                return 0
+            def terminate(self):
+                self.stopped = True
+            def kill(self):
+                self.stopped = True
+
+        seen = []
+        def urlopen(url, timeout):
+            seen.append((url, timeout))
+            if "/api/notebook" in url or "/api/catalog" in url:
+                raise AssertionError("FULL_DATA_REQUEST_DURING_STARTUP")
+            return StringIO("ready")
+        launcher = LAUNCHER["_start_viewer"]
+        namespace = launcher.__globals__
+        with patch.object(namespace["subprocess"], "Popen", return_value=FakeServer()):
+            with patch.object(namespace["urllib"].request, "urlopen", side_effect=urlopen):
+                with redirect_stdout(StringIO()):
+                    self.assertEqual(launcher(["large-package"], unused_port(),
+                                              "Notebook", True, False), 0)
+        self.assertEqual(len(seen), 1, seen)
+        self.assertTrue(seen[0][0].endswith("/notebook"), seen)
+
+    def test_explicit_full_probe_reads_once_with_long_deadline(self):
+        from unittest.mock import patch
+        class FakeServer:
+            def __init__(self):
+                self.stopped = False
+            def poll(self):
+                return 0 if self.stopped else None
+            def wait(self, timeout=None):
+                self.stopped = True
+                return 0
+            def terminate(self):
+                self.stopped = True
+            def kill(self):
+                self.stopped = True
+
+        seen = []
+        def urlopen(url, timeout):
+            seen.append((url, timeout))
+            if url.endswith("/api/notebook"):
+                return StringIO(json.dumps({"sources": [{"status": "READY"}]}))
+            return StringIO("ready")
+        launcher = LAUNCHER["_start_viewer"]
+        namespace = launcher.__globals__
+        with patch.object(namespace["subprocess"], "Popen", return_value=FakeServer()):
+            with patch.object(namespace["urllib"].request, "urlopen", side_effect=urlopen):
+                with redirect_stdout(StringIO()):
+                    self.assertEqual(launcher(["large-package"], unused_port(),
+                                              "Notebook", True, True), 0)
+        self.assertEqual(len(seen), 2, seen)
+        self.assertTrue(seen[0][0].endswith("/notebook"), seen)
+        self.assertTrue(seen[1][0].endswith("/api/notebook"), seen)
+        self.assertGreaterEqual(seen[1][1], 120)
+
     def test_server_nonzero_exit_propagates_failure(self):
         # Source code/py subprocess need not be launched: verify the outcome
         # contract directly with a product-level process factory double.

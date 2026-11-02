@@ -109,6 +109,12 @@ python -m pip install .\packages\protocol .\packages\atlas
 & .\scripts\ABRIR-ATLAS.ps1 -LegacyCodeRoot 'H:\Atlas009-CA01' -LegacyNotebookRoot 'H:\R4-Caderno-Cientifico'
 ```
 
+O lançamento normal confirma prontidão pela **página estática**, não pela leitura
+integral da API em timeout de 2 segundos. A própria UI lê e verifica os dados
+uma vez, sem retry concorrente do launcher. Para uma prova explícita sem abrir
+navegador, use `-NoOpen -ProbeOnly`: essa opção realiza uma única leitura
+integral da API com limite de tempo maior e encerra seu próprio servidor.
+
 Se aparecer `NATIVE_COMPRESSED_AGGREGATE_LIMIT_NO_TRUNCATION`,
 `NATIVE_LOGICAL_LIMIT_NO_TRUNCATION` ou `NATIVE_SINGLE_ENTRY_TOO_LARGE`,
 o fail-closed é intencional. Preserve esse código para engenharia; não reduza o
