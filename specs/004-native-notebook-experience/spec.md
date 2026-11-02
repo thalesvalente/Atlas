@@ -29,6 +29,7 @@ Aceite: hashes de fontes de teste permanecem iguais; renderer não usa iframe/sr
 - FR-009: reutilizar o componente público P03 de tabelas e o servidor/SDK existentes; integrar em vez de clonar o R4.
 - FR-010: entregar launcher com uma chamada operacional, spec/plan/tasks rastreáveis, testes e CI vinculados ao SHA final; sem merge/release/deploy.
 - FR-011: iniciar o Atlas NOVO sem R4 ou Caderno legado instalado por `scripts/ABRIR-ATLAS.ps1`, com fontes fixadas do protocolo público ou vazio declarado; manter `ABRIR-ATLAS-NATIVO.ps1` como opção de compatibilidade do produtor legado, não entrada principal.
+- FR-012: o mesmo lançador principal deve permitir fonte histórica explicitamente escolhida via `-LegacyCodeRoot` e `-LegacyNotebookRoot`, invocando o adaptador fora do processo Atlas para criar uma projeção derivada temporária, abrindo a UI nova com o acervo sem exigir uma exportação manual. Falha do adaptador ou do produto propaga código não zero; sem cópia para GitHub, migração persistente, escrita no Caderno ou descoberta de fontes.
 
 ## Clarifications
 

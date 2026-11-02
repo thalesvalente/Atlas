@@ -24,6 +24,31 @@ pacote do protocolo novo por si só. O Atlas **não importa R4, não migra
 o acervo, nem lê automaticamente o armazenamento legado**. A conversão
 de uma fonte legada é responsabilidade de um produtor externo autorizado.
 
+## Leitura operacional do Caderno legado, sem passo manual de exportação
+
+Para abrir **o Atlas NOVO** diretamente com o Caderno histórico existente,
+sem executar o renderer HTML do R4:
+
+```powershell
+& .\scripts\ABRIR-ATLAS.ps1 `
+  -LegacyCodeRoot 'H:\Atlas009-CA01' `
+  -LegacyNotebookRoot 'H:\R4-Caderno-Cientifico'
+```
+
+O lançador usa `scripts/atlas_launch.py` e cria um único processo
+**externo** com o adaptador público `tools/export_native_notebook.py`
+para consultar a API R4 `project()`. O processo exportador termina, o
+`atlas_viewer` instalado recebe o pacote do protocolo em cache temporário
+e abre `http://127.0.0.1:8765/notebook`. Ao encerrar a sessão, somente
+o cache próprio daquela execução é removido. Se a fonte mudar durante a
+sessão, reinicie para obter uma nova projeção; não é leitura contínua em
+streaming nem edição do Caderno.
+
+O R4 é dependência **da origem legada confiável**, não do programa Atlas
+instalado. Não está autorizado copiar o leitor privado para o repositório
+público. A presença e permissões das raízes `H:\` devem ser verificadas
+no computador real, não presumidas em GitHub Actions.
+
 ## Compatibilidade LEGADA opcional: produzir pacote a partir de R4
 
 ## Preparar os dois pacotes públicos

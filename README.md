@@ -26,6 +26,31 @@ sem inventar um acervo. O servidor fica somente em 127.0.0.1 e encerra
 com Ctrl+C. O comando `python -m atlas_viewer serve --source ...` é a
 alternativa direta, sem PowerShell.
 
+**Acesso imediato ao Caderno legado no Atlas novo (sem migração persistente):**
+
+Quando os registros ainda estão no formato histórico privado, você pode abrir
+**o novo produto com dados reais em uma só execução**, sem gerar manualmente
+um pacote ou chamar o renderer antigo:
+
+```powershell
+& .\scripts\ABRIR-ATLAS.ps1 `
+  -LegacyCodeRoot 'H:\Atlas009-CA01' `
+  -LegacyNotebookRoot 'H:\R4-Caderno-Cientifico'
+```
+
+A compatibilidade funciona com um **adaptador externo em processo separado**
+(`tools/export_native_notebook.py`, reutilizando `r4.campaigns.atlas.project`).
+O Atlas instalado continua independente e consome apenas o pacote derivado,
+em diretório temporário da sessão. O cache é removido somente após o servidor
+encerrar, preservando os arquivos originais. Essas são raízes históricas
+**não verificadas** neste CHAT; selecione um código R4 confiável já funcional.
+Não há importação de `r4.*` no pacote `atlas_viewer`, nem
+migração/inserção de ciência no Caderno. Para atualização após novas gravações,
+encerre e reabra a sessão (nova projeção consistente).
+
+A leitura e equivalência com dados do seu host `H:\` ainda precisam
+de observação real no Windows; CI pública usa dados de engenharia, não o acervo.
+
 **O que é uma fonte:** um pacote RO-Crate/Caderno no perfil público suportado,
 não a pasta do Caderno legado do R4 nem `ATLAS-ATUAL.html`. A rota `/notebook`
 exige o payload opcional `atlas-native-view/1`; para outros pacotes válidos,

@@ -38,3 +38,5 @@ T001/T002 → T003/T004 → T005 → T006–T009 → T010–T013 → T014/T015 �
 - [x] R008 Usar prefixo curto fixo para staging em tools/export_native_notebook.py, aceitando basename válido de 240 bytes em filesystem POSIX.
 - [x] R009 Implementar launcher próprio `scripts/ABRIR-ATLAS.ps1` sem imports/discovery de R4, com fontes explícitas do protocolo, modo vazio honesto e seleção de rota; atualizar README/quickstart/CI.
 - [ ] R010 Validar visualmente o Atlas NOVO no Windows do operador com pacote real compatível; não confundir com Caderno R4 bruto.
+- [x] R011 Permitir abertura do Caderno legado em uma chamada no Atlas novo via processos separados, projetando apenas para cache temporário. Corrigir P1 de aspas PowerShell 5.1, P2 de exit code e cobrir a sessão com testes em tests/viewer/test_native_notebook_launcher.py e CI.
+- [ ] R012 Confirmar leitura no host Windows do acervo legado e navegação bilateral com Atlas antigo; cobertura de engenharia não é prova desta etapa.

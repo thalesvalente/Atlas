@@ -14,7 +14,8 @@ Reutilizar `r4.campaigns.atlas.project(root)` (referência R4 789611d618a4aa3e40
 - `packages/atlas/src/atlas_viewer/native_notebook.py`: leitor de payloads declarados/verificados e snapshot da API.
 - `packages/atlas/src/atlas_viewer/server.py`: rota fixa /notebook e /api/notebook.
 - `packages/atlas/src/atlas_viewer/static/native_notebook.*`: UI nativa; componente `parity02_p03_table.js/css` reaproveitado por blob.
-- `scripts/ABRIR-ATLAS.ps1`: **entrada principal do Atlas NOVO** independente do R4, sem aquisição ou descoberta implícita, usando apenas pacotes fixados do protocolo; modo vazio explícito.
+- `scripts/ABRIR-ATLAS.ps1`: **entrada principal do Atlas NOVO** independente do R4, usando apenas pacotes fixados do protocolo; modo vazio explícito, opção legada de raízes escolhidas.
+- `scripts/atlas_launch.py`: orquestração externa (fora do wheel/runtime), podendo chamar o adaptador R4 em processo SEPARADO para cache temporário. Não atribuir migração ou poder de leitura de dados privados ao servidor `atlas_viewer`.
 - `scripts/ABRIR-ATLAS-NATIVO.ps1`: somente compatibilidade externa com o produtor legado; preflight, export e abertura; sem instalação automática.
 - `tests/viewer/test_native_notebook.py`, `scripts/qa/browser_native_notebook.mjs`: contrato, integração e browser.
 
