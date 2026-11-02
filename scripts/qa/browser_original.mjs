@@ -79,6 +79,16 @@ try {
   await page.waitForTimeout(500);
   assert.deepEqual(evidence.sensitive_http_requests,[]);
   check('inline_bundle_cannot_exfiltrate_by_fetch_image_beacon_or_external_url');
+  // A forged "<head>" appearing in a leading comment MUST NOT receive a
+  // policy outside of the real head and must never execute arbitrary HTML.
+  await page.locator('#original-file').setInputFiles({
+    name:'index.html',mimeType:'text/html',
+    buffer:Buffer.from('<!-- <head> deliberately forged prefix -->' + localHTML)
+  });
+  assert.equal(await page.locator('#original-wrapper').isHidden(),true);
+  assert.match(await page.locator('#original-status').innerText(),
+    /Cabeçalho incompatível com o Atlas R4 histórico/);
+  check('leading_fake_head_comment_is_rejected_before_execution');
   await page.locator('#original-file').setInputFiles({
     name:'ATLAS-ATUAL.html',mimeType:'text/html',buffer:Buffer.from(
       "<!doctype html><html><head><meta http-equiv='refresh' content='0;url=builds/id/index.html'></head></html>")

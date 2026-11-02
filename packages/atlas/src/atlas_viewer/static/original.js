@@ -46,7 +46,9 @@ choose.addEventListener('change', async () => {
     }
     const dataScript = documentCopy.querySelector('script#data[type="application/json"]');
     if (!dataScript || !documentCopy.querySelector('.tab-panel') ||
-        !documentCopy.querySelector('meta[http-equiv="Content-Security-Policy" i]')) {
+        !documentCopy.querySelector('meta[http-equiv="Content-Security-Policy" i]') ||
+        documentCopy.querySelectorAll('script').length !== 2 ||
+        documentCopy.querySelectorAll('script:not([src])').length !== 2) {
       message('O arquivo não tem o contrato esperado do Atlas original R4.', true);
       return;
     }
@@ -67,12 +69,16 @@ choose.addEventListener('change', async () => {
       "base-uri 'none'; form-action 'none'";
     const cspElement = '<meta http-equiv="Content-Security-Policy" content="' +
       noNetworkPolicy + '">';
-    const headTag = /<head(?:\s[^>]*)?>/i;
-    if (!headTag.test(content)) {
-      message('O HTML original está sem o cabeçalho obrigatório.', true);
+    // The historical renderer uses this exact document prefix, verified
+    // against R4's versioned template.html. Reject comments or markup before
+    // the REAL head element rather than accidentally inserting CSP in a
+    // decoy comment/script. The original JS/data bytes are not serialized.
+    const historicStart = /^<!doctype html><html lang="pt-BR"><head>/i;
+    if (!historicStart.test(content)) {
+      message('Cabeçalho incompatível com o Atlas R4 histórico. Abra diretamente o arquivo original.', true);
       return;
     }
-    const confined = content.replace(headTag, tag => tag + cspElement);
+    const confined = content.replace(historicStart, head => head + cspElement);
     // The iframe never receives allow-same-origin or allow-top-navigation.
     wrapper.hidden = false;
     empty.hidden = true;
