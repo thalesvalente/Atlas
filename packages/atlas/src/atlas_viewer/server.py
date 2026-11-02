@@ -4,13 +4,25 @@ from __future__ import annotations
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 import json
-from urllib.parse import urlsplit
+from urllib.parse import parse_qs, urlsplit
 
 from .catalog import Catalog
+from .native_notebook import snapshot as native_snapshot, export_source, NativeViewError
 
 ASSETS = {"/": ("index.html", "text/html; charset=utf-8"),
+          "/notebook": ("native_notebook.html", "text/html; charset=utf-8"),
+          "/native_notebook.js": ("native_notebook.js", "text/javascript; charset=utf-8"),
+          "/native_notebook.css": ("native_notebook.css", "text/css; charset=utf-8"),
+          "/native_rebuild.js": ("native_rebuild.js", "text/javascript; charset=utf-8"),
+          "/native_graph.js": ("native_graph.js", "text/javascript; charset=utf-8"),
+          "/parity02_p03_table.js": ("parity02_p03_table.js", "text/javascript; charset=utf-8"),
+          "/parity02_p03_table.css": ("parity02_p03_table.css", "text/css; charset=utf-8"),
+          "/original": ("original.html", "text/html; charset=utf-8"),
+          "/original.css": ("original.css", "text/css; charset=utf-8"),
           "/app.js": ("app.js", "text/javascript; charset=utf-8"),
           "/style.css": ("style.css", "text/css; charset=utf-8")}
+# All routes are native/trusted assets. The earlier executable HTML preview is
+# retired; /original is an inert reference guide, not an upload or srcdoc route.
 CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; "
        "img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'; form-action 'none'")
 
@@ -20,7 +32,6 @@ def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
         server_version = "AtlasLocal/0.1"
 
         def log_message(self, format: str, *args: object) -> None:
-            # Avoid printing user-controlled titles, queries or local source paths.
             return
 
         def _reply(self, status: int, body: bytes, content_type: str = "application/json; charset=utf-8") -> None:
@@ -55,7 +66,8 @@ def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
         def do_GET(self) -> None:
             if not self._allowed():
                 return
-            path = urlsplit(self.path).path
+            url = urlsplit(self.path)
+            path = url.path
             if path in ASSETS:
                 name, content_type = ASSETS[path]
                 self._reply(200, files("atlas_viewer").joinpath("static", name).read_bytes(), content_type)
@@ -63,6 +75,23 @@ def make_server(catalog: Catalog, port: int = 8765) -> ThreadingHTTPServer:
                 self._json(200, catalog.snapshot())
             elif path == "/api/dossier":
                 self._json(200, catalog.dossier())
+            elif path == "/api/notebook":
+                if url.query:
+                    self._json(400, {"error": "FIXED_SOURCE_ALLOWLIST"})
+                else:
+                    self._json(200, native_snapshot(catalog))
+            elif path == "/api/notebook/export":
+                try:
+                    query = parse_qs(url.query, strict_parsing=True, max_num_fields=2)
+                    if set(query) != {"source", "snapshot"} or any(len(v) != 1 for v in query.values()):
+                        raise ValueError("INVALID_EXPORT_QUERY")
+                    raw = export_source(catalog, query["source"][0], query["snapshot"][0])
+                except NativeViewError as exc:
+                    self._json(409, {"error": str(exc)})
+                except ValueError:
+                    self._json(400, {"error": "FIXED_SOURCE_ALLOWLIST"})
+                else:
+                    self._reply(200, raw)
             else:
                 self._json(404, {"error": "NOT_FOUND"})
 

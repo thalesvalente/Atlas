@@ -5,3 +5,5 @@
 
 /* Related references keep long identifiers readable without widening the detail. */
 .related-references,.related-reference{min-width:0}.related-reference h4{font-size:1em;margin:0 0 8px;overflow-wrap:anywhere}.related-reference h4 small{display:block;font-weight:400;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}.related-reference .badge{white-space:normal;overflow-wrap:anywhere;max-width:100%}.related-reference .inline-link{font-size:inherit}
+
+.sidebar a.nav-button{text-decoration:none}

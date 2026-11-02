@@ -111,8 +111,7 @@ class CatalogTests(unittest.TestCase):
                 archive = self.root / ("bad-metadata.zip" if member.endswith(".json") else "bad-payload.zip")
                 with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as stream:
                     for path in self.source.rglob("*"):
-                        if path.is_file():
-                            stream.write(path, path.relative_to(self.source).as_posix())
+                        if path.is_file(): stream.write(path, path.relative_to(self.source).as_posix())
                 with zipfile.ZipFile(archive) as stream:
                     info = stream.getinfo(member)
                 raw = bytearray(archive.read_bytes())
@@ -149,15 +148,13 @@ class HTTPTests(unittest.TestCase):
         self.addCleanup(self.close)
 
     def close(self):
-        self.server.shutdown()
-        self.server.server_close()
-        self.thread.join(timeout=3)
+        self.server.shutdown(); self.server.server_close(); self.thread.join(timeout=3)
 
     def request(self, method, path, body=None, headers=None):
         conn = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
         conn.request(method, path, body=body, headers=headers or {})
         response = conn.getresponse()
-        result = (response.status, dict(response.getheaders()), response.read())
+        result = response.status, dict(response.getheaders()), response.read()
         conn.close()
         return result
 
@@ -167,8 +164,24 @@ class HTTPTests(unittest.TestCase):
         self.assertIn(b"Atlas", body)
         self.assertIn("default-src 'none'", headers["Content-Security-Policy"])
         self.assertNotIn("Access-Control-Allow-Origin", headers)
-        status, _, body = self.request("GET", "/api/catalog")
-        self.assertEqual(json.loads(body)["sources"], [])
+        self.assertEqual(json.loads(self.request("GET", "/api/catalog")[2])["sources"], [])
+
+    def test_original_reference_is_inert_and_native_navigation_is_separate(self):
+        status, _, body = self.request("GET", "/")
+        self.assertEqual(status, 200)
+        self.assertIn(b'class="button secondary" href="/notebook"', body)
+        self.assertIn(b'class="button secondary" href="/original"', body)
+        status, headers, html = self.request("GET", "/original")
+        self.assertEqual(status, 200)
+        self.assertNotIn(b"<iframe", html)
+        self.assertNotIn(b'type="file"', html)
+        self.assertNotIn(b"<script", html)
+        self.assertNotIn("unsafe-inline", headers["Content-Security-Policy"])
+        self.assertNotIn("frame-src", headers["Content-Security-Policy"])
+        self.assertIn(b'ABRIR-ATLAS-ORIGINAL.ps1', html)
+        self.assertIn(b'href="/notebook"', html)
+        self.assertEqual(self.request("GET", "/original.js")[0], 404)
+        self.assertEqual(self.request("GET", "/api/legacy-source")[0], 404)
 
     def test_dns_rebinding_and_cross_origin_are_rejected(self):
         self.assertEqual(self.request("GET", "/api/catalog", headers={"Host": "evil.example"})[0], 403)
