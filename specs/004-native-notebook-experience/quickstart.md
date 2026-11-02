@@ -2,6 +2,30 @@
 
 Use um checkout atualizado desta PR23. O R4 e seu Caderno já existentes ficam onde estão; não trocar branches ou limpar workspaces de outras frentes.
 
+## Abrir PRIMEIRO o Atlas NOVO (sem R4)
+
+Este é o produto reengenheirado. O launcher principal não exige `CodeRoot`
+nem `NotebookRoot`: ele recebe apenas pacotes explicitamente selecionados do
+**protocolo público Caderno**, que já existam no computador.
+
+```powershell
+python -m pip install ./packages/protocol ./packages/atlas
+& .\scripts\ABRIR-ATLAS.ps1 -Source 'CAMINHO_DO_PACOTE_CADERNO_COMPATIVEL'
+```
+
+Abre `http://127.0.0.1:8765/notebook`. `-View Protocol` apresenta as
+fontes compatíveis com o protocolo sem payload nativo, na rota `/`.
+`-NoOpen` mantém o servidor acessível sem abrir uma janela. Sem `-Source`,
+a aplicação inicia vazia, sem criar registros ou simular dados reais.
+`Ctrl+C` encerra o servidor iniciado.
+
+**Limite atual explícito:** a raiz `H:\R4-Caderno-Cientifico` não é um
+pacote do protocolo novo por si só. O Atlas **não importa R4, não migra
+o acervo, nem lê automaticamente o armazenamento legado**. A conversão
+de uma fonte legada é responsabilidade de um produtor externo autorizado.
+
+## Compatibilidade LEGADA opcional: produzir pacote a partir de R4
+
 ## Preparar os dois pacotes públicos
 
 Python 3.11+ e navegador são necessários. No ambiente Python escolhido, a instalação explícita do produto é:

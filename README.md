@@ -4,9 +4,41 @@
 
 Esta candidata possui uma experiência **nativa do Caderno**, além da consulta pelo protocolo público. A projeção original do R4 é reutilizada por um adaptador externo; a nova interface usa DOM/SVG e o componente P03, não um iframe ou o JavaScript do renderer antigo. O R4 e o Caderno existentes permanecem intactos. PR Draft: sem release, promoção científica ou autorização de migração/limpeza.
 
-## Abrir o Caderno existente na interface nova
+## Iniciar o Atlas NOVO — independente do R4
 
-Requisitos: Python 3.11+, navegador, código R4 confiável já funcional e a raiz do Caderno central. Instale explicitamente os dois pacotes públicos desta versão:
+A aplicação reengenheirada é `atlas-viewer`, no repositório **thalesvalente/Atlas**.
+Instale os dois pacotes do checkout desta PR (Python 3.11+):
+
+```powershell
+python -m pip install ./packages/protocol ./packages/atlas
+```
+
+Abra o **produto novo**, sem executar/importar R4 ou exigir o código Atlas009:
+
+```powershell
+& .\scripts\ABRIR-ATLAS.ps1 -Source 'CAMINHO_DO_PACOTE_CADERNO_COMPATIVEL'
+```
+
+O navegador abre **http://127.0.0.1:8765/notebook**. `-View Protocol`
+abre a visão genérica do protocolo em `/`; `-Source` pode listar até
+16 pacotes explicitamente escolhidos. Sem `-Source` a interface abre **vazia**,
+sem inventar um acervo. O servidor fica somente em 127.0.0.1 e encerra
+com Ctrl+C. O comando `python -m atlas_viewer serve --source ...` é a
+alternativa direta, sem PowerShell.
+
+**O que é uma fonte:** um pacote RO-Crate/Caderno no perfil público suportado,
+não a pasta do Caderno legado do R4 nem `ATLAS-ATUAL.html`. A rota `/notebook`
+exige o payload opcional `atlas-native-view/1`; para outros pacotes válidos,
+use `-View Protocol`. Não há leitura automática de pastas, descoberta de
+worktrees, migração ou conversão dentro do Atlas.
+
+## Adaptador legado OPCIONAL para ver o Caderno antigo no Atlas NOVO
+
+Para consultar registros ainda armazenados apenas no formato **legado do R4**,
+o produtor antigo pode exportar um pacote pelo **adaptador separado**.
+Isso não é o mecanismo de inicialização do novo produto, não instala R4
+dentro do Atlas e não altera o Caderno. Requisitos adicionais desta etapa
+opcional: código R4 confiável já funcional e a raiz do Caderno central.
 
 ```powershell
 python -m pip install ./packages/protocol ./packages/atlas
@@ -21,7 +53,7 @@ Na raiz do checkout Atlas atualizado, execute:
   -Output 'H:\Atlas-exports\consulta-nova'
 ```
 
-Os exemplos usam os caminhos históricos documentados, que devem existir no seu computador. O pai de Output precisa existir; a pasta final deve ser **nova**, fora do código e do Caderno. O launcher não instala software automaticamente. Ele exporta a projeção usando `r4.campaigns.atlas.project`, inicia o Atlas instalado e abre `http://127.0.0.1:8765/notebook`. `-NoOpen` apenas deixa de abrir o navegador; Ctrl+C encerra o servidor criado pelo launcher.
+Os exemplos usam os caminhos históricos documentados, que devem existir no seu computador. O pai de Output precisa existir; a pasta final deve ser **nova**, fora do código e do Caderno. O launcher não instala software automaticamente. Ele exporta a projeção usando `r4.campaigns.atlas.project`, inicia **o Atlas NOVO instalado** e abre `http://127.0.0.1:8765/notebook`. `-NoOpen` apenas deixa de abrir o navegador; Ctrl+C encerra o servidor criado pelo launcher.
 
 A interface oferece árvore estrutural com busca integral, pan/zoom/minimapa, registros e filtros, tabelas paginadas, recursos/dossiês, relações, linha do tempo, cobertura e exportação completa. `native_id` nulo permanece nulo; chaves estruturais e UIDs de consulta não viram identidade científica. Valores grandes, null e chave ausente são preservados. Coleções não interpretadas continuam acessíveis com seu JSON original.
 

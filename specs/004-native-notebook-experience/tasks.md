@@ -36,3 +36,5 @@ T001/T002 → T003/T004 → T005 → T006–T009 → T010–T013 → T014/T015 �
 - [ ] R006 Confirmar revisão independente de R004/R005 no SHA final; uma execução de CI verde não conclui este gate.
 - [x] R007 Rejeitar raw_json não canônico, ainda que sintaticamente válido e rehachado, antes de expor tabela como READY em packages/atlas/src/atlas_viewer/native_notebook.py; regressão em tests/viewer/test_native_notebook.py.
 - [x] R008 Usar prefixo curto fixo para staging em tools/export_native_notebook.py, aceitando basename válido de 240 bytes em filesystem POSIX.
+- [x] R009 Implementar launcher próprio `scripts/ABRIR-ATLAS.ps1` sem imports/discovery de R4, com fontes explícitas do protocolo, modo vazio honesto e seleção de rota; atualizar README/quickstart/CI.
+- [ ] R010 Validar visualmente o Atlas NOVO no Windows do operador com pacote real compatível; não confundir com Caderno R4 bruto.
