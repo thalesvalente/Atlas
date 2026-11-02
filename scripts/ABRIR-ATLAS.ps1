@@ -12,7 +12,9 @@ param(
 # The optional legacy reader is invoked out-of-process by atlas_launch.py.
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-$python = Get-Command -Name python -CommandType Application -ErrorAction Stop
+$python = Get-Command -Name python -CommandType Application -ErrorAction Stop | Select-Object -First 1
+# PowerShell 5.1 may resolve both the installed executable and the WindowsApps shim.
+# Keep ONE command object; enumerating .Source produced a corrupt multi-path executable.
 $launcher = Join-Path $PSScriptRoot 'atlas_launch.py'
 if (-not (Test-Path -LiteralPath $launcher -PathType Leaf)) {
     throw 'ATLAS_NOVO_LAUNCHER_MISSING'
