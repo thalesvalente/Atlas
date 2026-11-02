@@ -52,6 +52,17 @@ try{
   assert.ok(tableText.includes('NULL — valor declarado'));assert.ok(tableText.includes('MISSING — chave ausente'));
   await page.getByRole('button',{name:'Próxima →',exact:true}).click();assert.equal(await table.locator('tbody tr').count(),27);
   check('reused_p03_exact_numbers_null_missing_and_all_pages');
+  await page.getByRole('button',{name:'Detalhes da tabela',exact:true}).click();
+  const tableRaw=await page.getByTestId('native-raw').innerText();
+  assert.ok(tableRaw.includes('"Inteiro":9007199254740993'));
+  assert.equal(JSON.parse(tableRaw).rows.length,127);
+  let tableDownloadPromise=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Exportar esta ocorrência',exact:true}).click();
+  const tableDownload=await tableDownloadPromise;
+  const tableBytes=await fs.readFile(await tableDownload.path());
+  assert.equal(createHash('sha256').update(tableBytes).digest('hex'),args.get('--expected-table-digest'));
+  assert.equal(JSON.parse(tableBytes).rows.length,127);
+  check('table_detail_and_occurrence_export_contain_all_rows_exactly_without_rounding');
   let waiting=page.waitForEvent('download');await page.getByRole('button',{name:'JSON das linhas selecionadas',exact:true}).click();
   let download=await waiting;let bytes=await fs.readFile(await download.path());assert.ok(bytes.toString().includes('9007199254740993'));assert.equal(JSON.parse(bytes).length,127);
   waiting=page.waitForEvent('download');await page.getByRole('button',{name:'CSV protegido',exact:true}).click();download=await waiting;bytes=await fs.readFile(await download.path());

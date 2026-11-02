@@ -11,6 +11,7 @@ from pathlib import Path
 import runpy
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 
 from caderno_protocol import load_package
@@ -95,6 +96,35 @@ class NativeNotebookTests(unittest.TestCase):
         with self.assertRaises(FileExistsError): EXPORTER["export"](self.data, self.output)
         with self.assertRaisesRegex(ValueError, "DISJOINT"):
             EXPORTER["export"](self.data, self.output / "nested", forbidden_roots=[self.output])
+
+
+    def test_fsync_failure_keeps_final_path_unpublished_and_allows_retry(self):
+        target = self.root / "retry-same-name"
+        os_module = EXPORTER["export"].__globals__["os"]
+        with mock.patch.object(os_module, "fsync", side_effect=OSError("INJECTED_FSYNC_FAILURE")):
+            with self.assertRaisesRegex(OSError, "INJECTED_FSYNC_FAILURE"):
+                EXPORTER["export"](self.data, target)
+        self.assertFalse(target.exists(), "Partially written output was published")
+        staging = list(self.root.glob(".retry-same-name.atlas-staging-*"))
+        self.assertEqual(len(staging), 1, staging)
+        self.assertTrue((staging[0] / "data/view-0000.json").is_file())
+        receipt = EXPORTER["export"](self.data, target)
+        self.assertEqual(receipt["status"], "EXPORTED")
+        state, raw = read_source(target, "retry")
+        self.assertEqual(state["status"], "READY", state)
+        self.assertEqual(json.loads(raw), self.data)
+        self.assertTrue(staging[0].exists(), "Failed staging is retained for inspection")
+
+    def test_publish_cannot_replace_an_existing_destination(self):
+        target = self.root / "other-export"
+        first = EXPORTER["export"](self.data, target)
+        existing = {p.relative_to(target).as_posix(): p.read_bytes()
+                    for p in target.rglob("*") if p.is_file()}
+        with self.assertRaises(FileExistsError):
+            EXPORTER["export"](self.data, target)
+        self.assertEqual({p.relative_to(target).as_posix(): p.read_bytes()
+                          for p in target.rglob("*") if p.is_file()}, existing)
+        self.assertEqual(first["status"], "EXPORTED")
 
     def test_chunking_retains_order_and_snapshot(self):
         old = EXPORTER["build_package"].__globals__["MAX_PAYLOAD_BYTES"]

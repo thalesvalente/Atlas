@@ -31,3 +31,6 @@ T001/T002 → T003/T004 → T005 → T006–T009 → T010–T013 → T014/T015 �
 - [x] R001 Preservar native_id explicitamente nulo e conferir campos/células de apresentação contra raw_json.
 - [x] R002 Compartilhar a política de alteração/reindexação explícita do Catalog; GET nativo não promove pacote substituído a READY.
 - [x] R003 Manter o alvo DOM entre cliques e delegar handlers da árvore em elementos estáveis; eliminar retenção de nós descartados pelo AbortSignal.
+- [x] R004 Recompor o detalhe/exportação da tabela a partir das linhas verificadas sem JSON.parse que arredonde números, e testar em Chromium em scripts/qa/browser_native_notebook.mjs.
+- [x] R005 Construir pacotes em staging privado no mesmo filesystem e publicar atomicamente sem substituição; falha de fsync mantém staging para inspeção e permite retry em tests/viewer/test_native_notebook.py.
+- [ ] R006 Confirmar revisão independente de R004/R005 no SHA final; uma execução de CI verde não conclui este gate.

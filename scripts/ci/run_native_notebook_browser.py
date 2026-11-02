@@ -60,7 +60,8 @@ def main():
         else: raise TimeoutError("INSTALLED_NATIVE_SERVER_TIMEOUT")
         result = subprocess.run(["node", str(root / "scripts/qa/browser_native_notebook.mjs"),
                                  "--url", f"http://127.0.0.1:{port}", "--report", str(report_path),
-                                 "--expected-digest", first["projection_sha256"]], cwd=root, check=False)
+                                 "--expected-digest", first["projection_sha256"],
+                                 "--expected-table-digest", hashlib.sha256(exporter["dump"](table)).hexdigest()], cwd=root, check=False)
         same = hashes() == before
         if report_path.exists():
             report = json.loads(report_path.read_text(encoding="utf-8"))

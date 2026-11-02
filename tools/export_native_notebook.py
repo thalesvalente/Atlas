@@ -14,6 +14,9 @@ import json
 import os
 from pathlib import Path
 import sys
+import tempfile
+import ctypes
+import errno
 
 from caderno_protocol import CONTEXT, PROFILE_ID, PROFILE_VERSION, PROCESS_PROFILE
 from caderno_protocol.model import RO_CRATE, validate_document
@@ -152,6 +155,43 @@ def safe_root(path: Path) -> Path:
     return path.resolve(strict=True)
 
 
+
+def _sync_directory(path: Path) -> None:
+    """Flush directory entries on POSIX; Windows fsyncs each file."""
+    if os.name == "posix":
+        fd = os.open(path, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+
+
+def _publish_new_directory(staging: Path, destination: Path) -> None:
+    """Atomic publish without replacing an existing directory on supported hosts."""
+    if os.name == "nt":
+        # Windows os.rename refuses an existing destination.
+        os.rename(staging, destination)
+    elif sys.platform.startswith("linux"):
+        # Plain POSIX rename can replace an existing EMPTY directory. Linux's
+        # RENAME_NOREPLACE makes a concurrent export fail without overwriting it.
+        libc = ctypes.CDLL(None, use_errno=True)
+        renameat2 = getattr(libc, "renameat2", None)
+        if renameat2 is None:
+            raise OSError(errno.ENOSYS, "ATOMIC_NOREPLACE_UNAVAILABLE")
+        renameat2.argtypes = [
+            ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p,
+            ctypes.c_uint,
+        ]
+        renameat2.restype = ctypes.c_int
+        if renameat2(-100, os.fsencode(staging), -100,
+                     os.fsencode(destination), 1) != 0:
+            failure = ctypes.get_errno()
+            raise OSError(failure, os.strerror(failure), str(destination))
+    else:
+        # Do not fall back to potentially overwriting a directory.
+        raise OSError(errno.ENOSYS, "ATOMIC_NOREPLACE_UNAVAILABLE")
+
+
 def export(data: dict, output: Path, *, forbidden_roots=()) -> dict:
     output = output.absolute()
     parent = safe_root(output.parent)
@@ -162,13 +202,24 @@ def export(data: dict, output: Path, *, forbidden_roots=()) -> dict:
         if destination == root or destination.is_relative_to(root) or root.is_relative_to(destination):
             raise ValueError("OUTPUT_MUST_BE_DISJOINT")
     document, payloads = build_package(data)
-    destination.mkdir()
-    (destination / "data").mkdir()
+    # The final pathname must never describe a partially written package.
+    # Keep failed staging for inspection; a retry can use the same final name.
+    staging = Path(tempfile.mkdtemp(prefix=f".{destination.name}.atlas-staging-",
+                                    dir=parent))
+    (staging / "data").mkdir(mode=0o700)
     for name, raw in payloads.items():
-        with (destination / name).open("xb") as stream:
+        with (staging / name).open("xb") as stream:
             stream.write(raw); stream.flush(); os.fsync(stream.fileno())
-    with (destination / "ro-crate-metadata.json").open("xb") as stream:
+    with (staging / "ro-crate-metadata.json").open("xb") as stream:
         stream.write(dump(document)); stream.flush(); os.fsync(stream.fileno())
+    _sync_directory(staging / "data")
+    _sync_directory(staging)
+    if destination.exists() or destination.is_symlink():
+        raise FileExistsError("OUTPUT_MUST_BE_NEW")
+    _publish_new_directory(staging, destination)
+    # If parent directory fsync fails, the destination is already complete:
+    # never delete, overwrite or silently claim durable publication.
+    _sync_directory(parent)
     root = document["@graph"][1]
     return {"status": "EXPORTED", "output": str(destination),
             "revision": root[VIEW_NS + "revision"], "entries": root[VIEW_NS + "entryCount"],

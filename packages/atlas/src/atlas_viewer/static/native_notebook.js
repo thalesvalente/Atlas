@@ -15,7 +15,42 @@ function options(id,values,all){
   }
 }
 function download(name,content,type='application/json'){const blob=content instanceof Blob?content:new Blob([content],{type}),u=URL.createObjectURL(blob),a=el('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);}
-function detail(e){$('native-detail').hidden=false;const host=$('native-detail-body');host.replaceChildren(el('h3',e.title),el('p',e.kind+' · '+e.group,'muted'));const d=el('dl');for(const[k,v]of [['UID de consulta',e.uid],['ID original',e.native_id??'Não declarado'],['Chave estrutural',e.source_key??'Não declarada'],['Parente declarado',e.parent_key??'Não declarado'],['Resolução',e.parent_resolution??'Não aplicável'],['Pointer',e.pointer]])d.append(el('dt',k),el('dd',v));for(const f of e.fields)d.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));const pre=el('pre',e.raw_json);pre.dataset.testid='native-raw';host.append(d,el('h3','Valor original (JSON exato)'),pre,button('Exportar esta ocorrência',()=>download('atlas-occurrence.json',e.raw_json)));}
+
+function exactOccurrenceJSON(e){
+  if(e.kind!=='table')return e.raw_json;
+  // Table entries carry a validated rows:[] transport skeleton. Reinsert
+  // EVERY verified row's original raw JSON without JSON.parse/JS Number:
+  // scientific integers and decimal lexemes must remain byte-exact.
+  const rows=entries().filter(r=>r.kind==='row'&&r.table_uid===e.uid)
+    .sort((a,b)=>a.ordinal-b.ordinal);
+  if(rows.length!==e.row_count||rows.some((r,i)=>r.ordinal!==i))
+    throw Error('NATIVE_TABLE_OCCURRENCE_INCOMPLETE');
+  const head=e.raw_json;
+  let depth=0,offset=-1;
+  for(let i=0;i<head.length;i++){
+    const ch=head[i];
+    if(ch==='"'){
+      let j=i+1,escaped=false;
+      for(;j<head.length;j++){
+        if(escaped){escaped=false;continue;}
+        if(head[j]==='\\'){escaped=true;continue;}
+        if(head[j]==='"')break;
+      }
+      if(j>=head.length)break;
+      if(depth===1&&head.slice(i,j+1)==='"rows"'&&
+         head.slice(j+1,j+4)===':[]'){
+        if(offset!==-1)throw Error('NATIVE_TABLE_ROWS_AMBIGUOUS');
+        offset=j+2;
+      }
+      i=j;
+    } else if(ch==='{'||ch==='[')depth++;
+    else if(ch==='}'||ch===']')depth--;
+  }
+  if(offset<0)throw Error('NATIVE_TABLE_ROWS_MISSING');
+  return head.slice(0,offset+1)+rows.map(r=>r.raw_json).join(',')+
+    head.slice(offset+1);
+}
+function detail(e){const full=exactOccurrenceJSON(e);$('native-detail').hidden=false;const host=$('native-detail-body');host.replaceChildren(el('h3',e.title),el('p',e.kind+' · '+e.group,'muted'));const d=el('dl');for(const[k,v]of [['UID de consulta',e.uid],['ID original',e.native_id??'Não declarado'],['Chave estrutural',e.source_key??'Não declarada'],['Parente declarado',e.parent_key??'Não declarado'],['Resolução',e.parent_resolution??'Não aplicável'],['Pointer',e.pointer]])d.append(el('dt',k),el('dd',v));for(const f of e.fields)d.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));const pre=el('pre',full);pre.dataset.testid='native-raw';host.append(d,el('h3','Valor original (JSON exato)'),pre,button('Exportar esta ocorrência',()=>download('atlas-occurrence.json',full)));}
 function pager(host,total,pageSize=100){const pages=Math.max(1,Math.ceil(total/pageSize));state.page=Math.min(state.page,pages-1);const p=el('div',null,'pager'),prev=button('← Anterior',()=>{state.page--;render();}),next=button('Próxima →',()=>{state.page++;render();});prev.disabled=state.page===0;next.disabled=state.page+1>=pages;p.append(prev,el('span',`Página ${state.page+1}/${pages} · ${total} ocorrências na seleção`),next);host.append(p);return state.page*pageSize;}
 function grid(host,rows,columns){const wrap=el('div',null,'table-scroll'),table=el('table'),head=el('thead'),hr=el('tr');columns.forEach(c=>hr.append(el('th',c[0])));head.append(hr);table.append(head);const body=el('tbody');for(const e of rows){const tr=el('tr');tr.dataset.uid=e.uid;columns.forEach((c,i)=>{const td=el('td');if(i===0)td.append(button(c[1](e),()=>detail(e)));else td.textContent=c[1](e);tr.append(td);});body.append(tr);}table.append(body);wrap.append(table);host.append(wrap);}
 function showTree(host){const all=entries().filter(e=>e.kind==='node');const nodes=all.length?all:entries().filter(e=>e.kind==='record');host.append(el('h2','Árvore e linhagem'));if(!nodes.length){host.append(el('p','Nenhum nó estrutural declarado neste pacote.','empty'));return;}const gh=el('div');host.append(gh);state.graph=mountGraph(gh,nodes,detail);const selected=nodes.filter(matches);host.append(el('p',`${selected.length} de ${nodes.length} nós encontrados. A busca alcança todas as ocorrências, inclusive fora da janela gráfica.`,'muted'));const offset=pager(host,selected.length,40),links=el('div',null,'graph-results');for(const n of selected.slice(offset,offset+40))links.append(button(n.title,()=>state.graph.locate(n.uid)));host.append(links);}
