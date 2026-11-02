@@ -4,6 +4,7 @@ Inputs are invented unit data; this does not certify the private host corpus.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import os
@@ -105,7 +106,7 @@ class NativeNotebookTests(unittest.TestCase):
             with self.assertRaisesRegex(OSError, "INJECTED_FSYNC_FAILURE"):
                 EXPORTER["export"](self.data, target)
         self.assertFalse(target.exists(), "Partially written output was published")
-        staging = list(self.root.glob(".retry-same-name.atlas-staging-*"))
+        staging = list(self.root.glob(".atlas-native-staging-*"))
         self.assertEqual(len(staging), 1, staging)
         self.assertTrue((staging[0] / "data/view-0000.json").is_file())
         receipt = EXPORTER["export"](self.data, target)
@@ -125,6 +126,45 @@ class NativeNotebookTests(unittest.TestCase):
         self.assertEqual({p.relative_to(target).as_posix(): p.read_bytes()
                           for p in target.rglob("*") if p.is_file()}, existing)
         self.assertEqual(first["status"], "EXPORTED")
+
+
+    def test_noncanonical_table_json_rejected_even_when_payload_hashes_are_updated(self):
+        # These are parseable and reassemble into the SAME projection digest.
+        # A hostile producer must not bypass the lexical assumption in the UI.
+        payload = self.output / "data/view-0000.json"
+        metadata = self.output / "ro-crate-metadata.json"
+        original_chunk = json.loads(payload.read_text(encoding="utf-8"))
+        original_doc = json.loads(metadata.read_text(encoding="utf-8"))
+        for bad_rows in ('"rows": []', r'"r\u006fws":[]'):
+            with self.subTest(bad_rows=bad_rows):
+                chunk = copy.deepcopy(original_chunk)
+                table = next(e for e in chunk["entries"] if e["kind"] == "table")
+                self.assertIn('"rows":[]', table["raw_json"])
+                table["raw_json"] = table["raw_json"].replace('"rows":[]', bad_rows, 1)
+                raw = EXPORTER["dump"](chunk)
+                payload.write_bytes(raw)
+                doc = copy.deepcopy(original_doc)
+                entity = next(e for e in doc["@graph"] if e.get("@id") == "data/view-0000.json")
+                entity["cp:sha256"] = hashlib.sha256(raw).hexdigest()
+                entity["contentSize"] = len(raw)
+                metadata.write_bytes(EXPORTER["dump"](doc))
+                state, contents = read_source(self.output, "changed")
+                self.assertEqual(state["status"], "INVALID", state)
+                self.assertIn("NATIVE_NONCANONICAL_RAW_JSON", state["errors"])
+                self.assertEqual(state["entries"], [])
+                self.assertIsNone(contents)
+
+    @unittest.skipUnless(os.name == "posix", "POSIX component length regression")
+    def test_long_valid_destination_name_does_not_affect_staging_component(self):
+        # Many POSIX filesystems permit 255-byte components. The destination
+        # is valid but a prefix containing its entire basename is not.
+        target = self.root / ("v" * 240)
+        receipt = EXPORTER["export"](self.data, target)
+        self.assertEqual(receipt["status"], "EXPORTED")
+        self.assertTrue((target / "ro-crate-metadata.json").is_file())
+        state, raw = read_source(target, "long-name")
+        self.assertEqual(state["status"], "READY", state)
+        self.assertEqual(json.loads(raw), self.data)
 
     def test_chunking_retains_order_and_snapshot(self):
         old = EXPORTER["build_package"].__globals__["MAX_PAYLOAD_BYTES"]

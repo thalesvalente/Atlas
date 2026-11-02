@@ -104,7 +104,14 @@ def validate_entries(entries: list[dict]) -> None:
                 raise NativeViewError("NATIVE_FIELD_TYPE")
         # Integrity of raw_json alone is insufficient: independently check
         # every displayed scalar/cell against the original value as well.
-        expected = entry_values(_json_value(e["raw_json"]), e["group"], e["kind"])
+        original = _json_value(e["raw_json"])
+        # The producer emits canonical, sorted, compact JSON. The native UI
+        # reconstructs table rows lexically to preserve large integers, so
+        # alternate whitespace, escaped key spellings, etc must fail closed.
+        # A valid payload digest alone does not prove canonical transport.
+        if json_bytes(original).decode("utf-8") != e["raw_json"]:
+            raise NativeViewError("NATIVE_NONCANONICAL_RAW_JSON")
+        expected = entry_values(original, e["group"], e["kind"])
         actual_fields = {f["name"]: f for f in fields}
         if len(actual_fields) != len(fields) or actual_fields != {f["name"]: f for f in expected.pop("fields")}:
             raise NativeViewError("NATIVE_DISPLAY_FIELDS_MISMATCH")

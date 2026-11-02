@@ -204,7 +204,7 @@ def export(data: dict, output: Path, *, forbidden_roots=()) -> dict:
     document, payloads = build_package(data)
     # The final pathname must never describe a partially written package.
     # Keep failed staging for inspection; a retry can use the same final name.
-    staging = Path(tempfile.mkdtemp(prefix=f".{destination.name}.atlas-staging-",
+    staging = Path(tempfile.mkdtemp(prefix=".atlas-native-staging-",
                                     dir=parent))
     (staging / "data").mkdir(mode=0o700)
     for name, raw in payloads.items():

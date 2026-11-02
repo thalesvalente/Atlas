@@ -34,3 +34,5 @@ T001/T002 → T003/T004 → T005 → T006–T009 → T010–T013 → T014/T015 �
 - [x] R004 Recompor o detalhe/exportação da tabela a partir das linhas verificadas sem JSON.parse que arredonde números, e testar em Chromium em scripts/qa/browser_native_notebook.mjs.
 - [x] R005 Construir pacotes em staging privado no mesmo filesystem e publicar atomicamente sem substituição; falha de fsync mantém staging para inspeção e permite retry em tests/viewer/test_native_notebook.py.
 - [ ] R006 Confirmar revisão independente de R004/R005 no SHA final; uma execução de CI verde não conclui este gate.
+- [x] R007 Rejeitar raw_json não canônico, ainda que sintaticamente válido e rehachado, antes de expor tabela como READY em packages/atlas/src/atlas_viewer/native_notebook.py; regressão em tests/viewer/test_native_notebook.py.
+- [x] R008 Usar prefixo curto fixo para staging em tools/export_native_notebook.py, aceitando basename válido de 240 bytes em filesystem POSIX.
