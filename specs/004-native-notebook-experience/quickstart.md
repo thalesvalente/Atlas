@@ -45,7 +45,16 @@ sessão, reinicie para obter uma nova projeção; não é leitura contínua em
 streaming nem edição do Caderno.
 
 O R4 é dependência **da origem legada confiável**, não do programa Atlas
-instalado. Não está autorizado copiar o leitor privado para o repositório
+instalado. A raiz indicada em `-LegacyNotebookRoot` precisa ser um
+**workspace R4 válido** para `r4.campaigns.atlas.project()`, com
+`R4-WORKSPACE.json`; uma pasta com arquivos do Caderno pode não atender
+a esse contrato. Verifique com `Test-Path
+'H:\R4-Caderno-Cientifico\R4-WORKSPACE.json'`. Um erro
+`ATLAS_LEGACY_R4_WORKSPACE_MARKER_MISSING` bloqueia a leitura sem criar
+dados novos. Outros erros do adaptador agora mostram apenas códigos
+estruturados, sem conteúdo privado. Para a causa completa no próprio host,
+execute `tools/export_native_notebook.py` diretamente com saída nova em
+`$env:TEMP`. Não está autorizado copiar o leitor privado para o repositório
 público. A presença e permissões das raízes `H:\` devem ser verificadas
 no computador real, não presumidas em GitHub Actions.
 

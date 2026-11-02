@@ -11,6 +11,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+import re
 import socket
 import subprocess
 import sys
@@ -28,6 +29,30 @@ def _validated_source(value: str) -> str:
     return str(path)
 
 
+
+def _safe_adapter_reason(stderr: str) -> str:
+    """Return only structural codes, never source paths or free-form private data."""
+    for line in reversed(stderr.splitlines()[-20:]):
+        try:
+            result = json.loads(line)
+        except ValueError:
+            continue
+        if not isinstance(result, dict) or result.get("status") != "BLOCKED":
+            continue
+        message = result.get("error")
+        if not isinstance(message, str):
+            return "DETAILS_LOCAL_ONLY"
+        if re.fullmatch(r"[A-Z][A-Z0-9_:-]{2,159}", message):
+            return message
+        prefix = "No module named '"
+        if message.startswith(prefix) and message.endswith("'"):
+            module = message[len(prefix):-1]
+            if re.fullmatch(r"[A-Za-z][A-Za-z0-9_.]{0,79}", module):
+                return "PYTHON_MODULE_MISSING:" + module
+        return "DETAILS_LOCAL_ONLY"
+    return "DETAILS_LOCAL_ONLY"
+
+
 def _prepare_legacy(code_value: str, notebook_value: str, session: Path) -> str:
     code = Path(code_value).expanduser().absolute()
     notebook = Path(notebook_value).expanduser().absolute()
@@ -35,6 +60,11 @@ def _prepare_legacy(code_value: str, notebook_value: str, session: Path) -> str:
         raise ValueError("ATLAS_LEGACY_PRODUCER_NOT_FOUND")
     if not notebook.is_dir():
         raise ValueError("ATLAS_LEGACY_NOTEBOOK_NOT_FOUND")
+    # The existing R4 project() API calls validate_root(root), which requires
+    # R4-WORKSPACE.json. Merely pointing at a folder of notebook files does
+    # not satisfy that producer contract.
+    if not (notebook / "R4-WORKSPACE.json").is_file():
+        raise ValueError("ATLAS_LEGACY_R4_WORKSPACE_MARKER_MISSING")
     exporter = Path(__file__).resolve().parents[1] / "tools/export_native_notebook.py"
     if not exporter.is_file():
         raise ValueError("ATLAS_EXTERNAL_ADAPTER_NOT_FOUND")
@@ -48,9 +78,11 @@ def _prepare_legacy(code_value: str, notebook_value: str, session: Path) -> str:
                                errors="replace", capture_output=True, check=False)
     if completed.returncode:
         # Never emit notebook values or a private source path in an HTTP log.
-        raise RuntimeError("ATLAS_LEGACY_EXPORT_BLOCKED (exit " +
-                           str(completed.returncode) + "); execute the external " +
-                           "adapter locally for its detailed diagnostic.")
+        safe_reason = _safe_adapter_reason(completed.stderr)
+        raise RuntimeError("ATLAS_LEGACY_EXPORT_BLOCKED:" + safe_reason +
+                           " (exit " + str(completed.returncode) + "); " +
+                           "execute the external adapter locally if details " +
+                           "are needed.")
     try:
         receipt = json.loads(completed.stdout)
     except ValueError as exc:

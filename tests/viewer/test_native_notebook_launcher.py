@@ -52,6 +52,8 @@ class AtlasNewLauncherTests(unittest.TestCase):
             )
             notebook = root / "notebook source with spaces"
             notebook.mkdir()
+            marker = notebook / "R4-WORKSPACE.json"
+            marker.write_text('{"workspace_name":"R4"}', encoding="utf-8")
             # A source file must remain byte-for-byte unchanged after reading.
             record = notebook / "original-record.txt"
             record.write_bytes(b"historical-source-must-remain-intact")
@@ -66,7 +68,7 @@ class AtlasNewLauncherTests(unittest.TestCase):
             self.assertIn("ATLAS_LEGACY_ADAPTER_READY", output.getvalue())
             self.assertIn("ATLAS_NOVO_READY", output.getvalue())
             self.assertEqual(record.read_bytes(), b"historical-source-must-remain-intact")
-            self.assertEqual(sorted(notebook.iterdir()), [record])
+            self.assertEqual(sorted(notebook.iterdir()), sorted([record, marker]))
 
     def test_mismatched_legacy_args_fail_before_accessing_any_source(self):
         error = StringIO()
@@ -85,6 +87,40 @@ class AtlasNewLauncherTests(unittest.TestCase):
                 ])
             self.assertEqual(code, 2)
             self.assertIn("ATLAS_SOURCE_NOT_FOUND", error.getvalue())
+
+    def test_missing_workspace_marker_fails_before_running_producer(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            code = root / "code"
+            (code / "src/r4/campaigns").mkdir(parents=True)
+            (code / "src/r4/campaigns/atlas.py").write_text(
+                "raise AssertionError('must not load')", encoding="utf-8"
+            )
+            notebook = root / "legacy-only-folder"
+            notebook.mkdir()
+            with self.assertRaisesRegex(ValueError, "ATLAS_LEGACY_R4_WORKSPACE_MARKER_MISSING"):
+                LAUNCHER["_prepare_legacy"](str(code), str(notebook), root)
+            self.assertEqual(list(notebook.iterdir()), [])
+
+    def test_adapter_reports_safe_error_codes_without_private_paths(self):
+        classifier = LAUNCHER["_safe_adapter_reason"]
+        self.assertEqual(
+            classifier('{"status":"BLOCKED","error":"R4_WORKSPACE_REQUIRED"}'),
+            "R4_WORKSPACE_REQUIRED",
+        )
+        self.assertEqual(
+            classifier('{"status":"BLOCKED","error":"NATIVE_ENTRY_LIMIT"}'),
+            "NATIVE_ENTRY_LIMIT",
+        )
+        self.assertEqual(
+            classifier('{"status":"BLOCKED","error":"No module named ' + "'yaml'" + '"}'),
+            "PYTHON_MODULE_MISSING:yaml",
+        )
+        self.assertEqual(
+            classifier('{"status":"BLOCKED","error":"[Errno 2] H:\\\\private\\\\records"}'),
+            "DETAILS_LOCAL_ONLY",
+        )
+        self.assertEqual(classifier("traceback from private data"), "DETAILS_LOCAL_ONLY")
 
     def test_server_nonzero_exit_propagates_failure(self):
         # Source code/py subprocess need not be launched: verify the outcome
