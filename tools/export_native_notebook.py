@@ -1,0 +1,243 @@
+"""External, read-only adapter: existing notebook projection -> standard crate.
+
+The producer's existing project() API is reused, never copied into the viewer.
+No HTML parsing, source discovery, migrations, provider calls or overwrites.
+"""
+from __future__ import annotations
+
+import argparse
+from collections import defaultdict
+from datetime import datetime, timezone
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import sys
+
+from caderno_protocol import CONTEXT, PROFILE_ID, PROFILE_VERSION, PROCESS_PROFILE
+from caderno_protocol.model import RO_CRATE, validate_document
+from caderno_protocol.storage import MAX_METADATA_BYTES, MAX_PAYLOAD_BYTES, MAX_EXPANDED_BYTES, _strict_json, _regular_bytes
+
+MEDIA_TYPE = "application/vnd.atlas.native-view+json"
+VIEW_NS = "https://github.com/thalesvalente/Atlas/ns/presentation#"
+ASSETS = {"resources", "products", "product_items", "product_groups", "resource_documents",
+          "dossier_assessments", "dossier_packages"}
+
+
+def dump(value):
+    return json.dumps(value, ensure_ascii=False, allow_nan=False, sort_keys=True,
+                      separators=(",", ":")).encode("utf-8")
+
+
+def pointer(base, key):
+    return base + "/" + str(key).replace("~", "~0").replace("/", "~1")
+
+
+def scalar(value):
+    return value if isinstance(value, str) else dump(value).decode("utf-8")
+
+
+def dtype(value):
+    if value is None: return "null"
+    if isinstance(value, bool): return "boolean"
+    if isinstance(value, int): return "integer"
+    if isinstance(value, float): return "number"
+    if isinstance(value, str): return "string"
+    return "array" if isinstance(value, list) else "object"
+
+
+def project_to_entries(data: dict) -> list[dict]:
+    if not isinstance(data, dict) or not isinstance(data.get("records"), list):
+        raise ValueError("SOURCE_PROJECTION_RECORDS_REQUIRED")
+    entries = []
+    def add(value, path, group, kind, **extra):
+        row = value if isinstance(value, dict) else {"value": value}
+        def text(*keys):
+            for key in keys:
+                item = row.get(key)
+                if isinstance(item, str) and item: return item
+            return None
+        fields = [{"name": str(k), "type": dtype(v), "text": scalar(v)}
+                  for k, v in row.items() if not isinstance(v, (dict, list))]
+        entry = {"uid": "view:" + str(len(entries)), "pointer": path,
+                 "group": group, "kind": kind,
+                 "title": text("title", "label", "name", "id", "native_id", "key") or group,
+                 "native_id": scalar(row["native_id"]) if row.get("native_id") is not None else
+                              scalar(row["id"]) if row.get("id") is not None and kind == "record" else None,
+                 "source_key": text("key", "id"), "parent_key": text("parent_key"),
+                 "parent_uid": None, "family": text("family"),
+                 "status": text("execution_state", "status", "result_state", "result_group"),
+                 "date": text("started_at", "startTime", "timestamp", "date", "scientific_at"),
+                 "fields": fields, "raw_json": dump(value).decode("utf-8"), **extra}
+        entries.append(entry)
+        if len(entries) > 100000: raise ValueError("NATIVE_ENTRY_LIMIT")
+        return entry
+    # An exact structural skeleton preserves empty collections and scalars.
+    skeleton = {key: [] if isinstance(value, list) else {} if isinstance(value, dict)
+                else value for key, value in data.items()}
+    add(skeleton, "", "$structure", "collection")
+    for group, value in data.items():
+        path = pointer("", group)
+        if group == "lineage_graph" and isinstance(value, dict):
+            graph = {k: [] if k in ("nodes", "edges") and isinstance(v, list) else v
+                     for k, v in value.items()}
+            add(graph, path, group, "collection")
+            for collection in ("nodes", "edges"):
+                if isinstance(value.get(collection), list):
+                    for i, row in enumerate(value[collection]):
+                        add(row, pointer(pointer(path, collection), i), group + "." + collection,
+                            "node" if collection == "nodes" else "relation")
+        elif group == "result_tables" and isinstance(value, list):
+            for i, table in enumerate(value):
+                if not isinstance(table, dict) or not isinstance(table.get("rows"), list):
+                    raise ValueError("SOURCE_TABLE_INVALID")
+                tp = pointer(path, i)
+                head = {**table, "rows": []}
+                te = add(head, tp, group, "table", row_count=len(table["rows"]))
+                for n, row in enumerate(table["rows"]):
+                    if not isinstance(row, dict) or not isinstance(row.get("cells"), dict):
+                        raise ValueError("SOURCE_TABLE_CELLS_REQUIRED")
+                    cells = {k: {"text": scalar(v), "type": dtype(v)} for k, v in row["cells"].items()}
+                    add(row, pointer(pointer(tp, "rows"), n), group, "row",
+                        table_uid=te["uid"], cells=cells, ordinal=n)
+        elif isinstance(value, list):
+            kind = "record" if group == "records" else "relation" if group == "edges" else "asset" if group in ASSETS else "collection"
+            for i, row in enumerate(value): add(row, pointer(path, i), group, kind)
+        elif isinstance(value, dict):
+            add(value, path, group, "collection")
+    # Organizational parent lookup never turns a structural key into a native ID.
+    keys = defaultdict(list)
+    for entry in entries:
+        if entry["kind"] in ("record", "node") and entry["source_key"]:
+            keys[(entry["group"], entry["source_key"])].append(entry["uid"])
+    for entry in entries:
+        candidates = keys.get((entry["group"], entry["parent_key"]), [])
+        if entry["parent_key"]:
+            entry["parent_resolution"] = "RESOLVED" if len(candidates) == 1 else "COLLISION" if candidates else "UNRESOLVED"
+            if len(candidates) == 1: entry["parent_uid"] = candidates[0]
+        else:
+            entry["parent_resolution"] = "NOT_DECLARED"
+    return entries
+
+
+def build_package(data: dict, title: str = "Caderno — consulta nativa") -> tuple[dict, dict[str, bytes]]:
+    from atlas_viewer.native_notebook import validate_entries, restore_projection
+    entries = project_to_entries(data)
+    validate_entries(entries)
+    original = dump(data)
+    if dump(restore_projection(entries)) != original:
+        raise ValueError("NATIVE_ROUNDTRIP_MISMATCH")
+    integration = data.get("atlas_integration", {})
+    observed_revision = integration.get("notebook_revision") if isinstance(integration, dict) else None
+    revision = observed_revision if isinstance(observed_revision, str) and observed_revision else "projection-sha256:" + hashlib.sha256(original).hexdigest()
+    if len(revision) > 1024: raise ValueError("NATIVE_REVISION_LIMIT")
+    payloads, pending, size = {}, [], 0
+    def flush():
+        nonlocal pending, size
+        ordinal = len(payloads)
+        raw = dump({"format": "atlas-native-view", "version": "1", "revision": revision,
+                    "ordinal": ordinal, "entries": pending})
+        if len(raw) > MAX_PAYLOAD_BYTES: raise ValueError("NATIVE_PAYLOAD_LIMIT")
+        payloads[f"data/view-{ordinal:04d}.json"] = raw
+        pending, size = [], 0
+    for entry in entries:
+        needed = len(dump(entry)) + 1
+        if needed > MAX_PAYLOAD_BYTES - 4096: raise ValueError("NATIVE_SINGLE_ENTRY_TOO_LARGE")
+        if pending and size + needed > MAX_PAYLOAD_BYTES - 4096: flush()
+        pending.append(entry)
+        size += needed
+    if pending: flush()
+    if sum(map(len, payloads.values())) > MAX_EXPANDED_BYTES:
+        raise ValueError("NATIVE_AGGREGATE_LIMIT_NO_TRUNCATION")
+    ref = lambda eid: {"@id": eid}
+    root = {"@id": "./", "@type": "Dataset", "name": title,
+            "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+            "license": "Nenhuma licença adicional concedida; manter permissões das fontes.",
+            "datePublished": datetime.now(timezone.utc).isoformat(),
+            "conformsTo": [ref(PROCESS_PROFILE), ref(PROFILE_ID)],
+            "hasPart": [ref(p) for p in payloads], "mentions": [],
+            VIEW_NS + "version": "1", VIEW_NS + "revision": revision,
+            VIEW_NS + "entryCount": len(entries), VIEW_NS + "projectionDigest": hashlib.sha256(original).hexdigest()}
+    graph = [{"@id": "ro-crate-metadata.json", "@type": "CreativeWork", "about": ref("./"), "conformsTo": ref(RO_CRATE)}, root,
+             {"@id": PROCESS_PROFILE, "@type": ["CreativeWork", "http://www.w3.org/ns/dx/prof/Profile"], "name": "Process Run Crate", "version": "0.6"},
+             {"@id": PROFILE_ID, "@type": ["CreativeWork", "http://www.w3.org/ns/dx/prof/Profile"], "name": "Caderno", "version": PROFILE_VERSION}]
+    graph.extend({"@id": path, "@type": "File", "name": "Apresentação nativa " + str(i),
+                  "encodingFormat": MEDIA_TYPE, "cp:availability": "PRESENT",
+                  "cp:sha256": hashlib.sha256(raw).hexdigest(), "contentSize": len(raw)}
+                 for i, (path, raw) in enumerate(payloads.items()))
+    document = {"@context": CONTEXT, "@graph": graph}
+    report = validate_document(document)
+    if not report.valid or len(dump(document)) > MAX_METADATA_BYTES:
+        raise ValueError("EXPORTED_PROTOCOL_INVALID:" + ",".join(e.code for e in report.errors))
+    return document, payloads
+
+
+def safe_root(path: Path) -> Path:
+    path = path.absolute()
+    for part in (path, *path.parents):
+        if part.is_symlink() or (part.exists() and getattr(part.lstat(), "st_file_attributes", 0) & 0x400):
+            raise ValueError("SOURCE_REPARSE_UNSUPPORTED")
+    return path.resolve(strict=True)
+
+
+def export(data: dict, output: Path, *, forbidden_roots=()) -> dict:
+    output = output.absolute()
+    parent = safe_root(output.parent)
+    destination = parent / output.name
+    if destination.exists() or destination.is_symlink(): raise FileExistsError("OUTPUT_MUST_BE_NEW")
+    for root in forbidden_roots:
+        root = safe_root(Path(root))
+        if destination == root or destination.is_relative_to(root) or root.is_relative_to(destination):
+            raise ValueError("OUTPUT_MUST_BE_DISJOINT")
+    document, payloads = build_package(data)
+    destination.mkdir()
+    (destination / "data").mkdir()
+    # Metadata is published last, so an incomplete directory is not readable as
+    # a valid crate. Failures retain only this newly created output for review.
+    for name, raw in payloads.items():
+        with (destination / name).open("xb") as stream:
+            stream.write(raw); stream.flush(); os.fsync(stream.fileno())
+    with (destination / "ro-crate-metadata.json").open("xb") as stream:
+        stream.write(dump(document)); stream.flush(); os.fsync(stream.fileno())
+    root = document["@graph"][1]
+    return {"status": "EXPORTED", "output": str(destination),
+            "revision": root[VIEW_NS + "revision"], "entries": root[VIEW_NS + "entryCount"],
+            "projection_sha256": root[VIEW_NS + "projectionDigest"],
+            "provider_calls": 0, "scientific_approval": "NOT_EVALUATED"}
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--r4-code", type=Path, help="Checkout confiável do produtor já instalado; não é carregado no viewer")
+    source.add_argument("--projection", type=Path, help="JSON da projeção original já exportada, não HTML")
+    parser.add_argument("--notebook-root", type=Path)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args(argv)
+    try:
+        roots = []
+        if args.r4_code:
+            if args.notebook_root is None: parser.error("--notebook-root é obrigatório com --r4-code")
+            code, notebook = safe_root(args.r4_code), safe_root(args.notebook_root)
+            roots = [code, notebook]
+            sys.path.insert(0, str(code / "src"))
+            producer = importlib.import_module("r4.campaigns.atlas")
+            if not Path(producer.__file__).resolve().is_relative_to(code / "src"):
+                raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+            data = producer.project(notebook)
+        else:
+            source_file = safe_root(args.projection)
+            roots = [source_file.parent]
+            data = _strict_json(_regular_bytes(source_file, MAX_EXPANDED_BYTES))
+        receipt = export(data, args.output, forbidden_roots=roots)
+        print(json.dumps(receipt, ensure_ascii=False))
+        return 0
+    except (OSError, ValueError, ImportError, RuntimeError) as exc:
+        print(json.dumps({"status": "BLOCKED", "error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    sys.dont_write_bytecode = True
+    raise SystemExit(main())
