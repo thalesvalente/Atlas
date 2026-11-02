@@ -17,6 +17,18 @@ EDITABLE_ORIGINALS = {".gitignore", ".specify/toolchain.json", "README.md",
 # CLOSE01 authorizes only presentation and its existing browser/CI harness.
 # The default setup audit remains strict; persisted contracts and governance
 # are never exempted by this feature-specific opt-in.
+# This opt-in is narrower than a writable allowlist: only THESE exact Git
+# blobs of the newly approved local original-UI bridge are permitted.
+# Editing one byte of server/index/HTTP tests fails the protected baseline.
+# The original Spec Kit manifests/BASELINE and CLOSE01 allowlist stay unchanged.
+ORIGINAL_BRIDGE_BLOBS = {
+    "packages/atlas/src/atlas_viewer/server.py":
+        "a440c95d0801f64516d7335a6dbdc16ac04a970b",
+    "packages/atlas/src/atlas_viewer/static/index.html":
+        "e5729438fa85d239e63182455eba4eff18b43175",
+    "tests/viewer/test_catalog_server.py":
+        "2aeb6c0e97e98ce362568fed9ea464d5cfe2bdea",
+}
 PRESENTATION_ORIGINALS = {
     "packages/protocol/src/caderno_protocol/read_model.py",
     "packages/atlas/src/atlas_viewer/static/app.js",
@@ -25,6 +37,17 @@ PRESENTATION_ORIGINALS = {
     "scripts/ci/run_browser.py",
     ".github/workflows/atlas021.yml",
 }
+
+def git_blob_id(content: bytes) -> str:
+    """Git SHA-1 blob identity, used for exact scope checks, not scientific auth."""
+    header = f"blob {len(content)}\\0".encode("ascii")
+    return hashlib.sha1(header + content).hexdigest()
+
+
+def exact_original_bridge(name: str, content: bytes) -> bool:
+    """Only the three already-reviewed original-UI bridge blobs are allowed."""
+    expected = ORIGINAL_BRIDGE_BLOBS.get(name)
+    return expected is not None and git_blob_id(content) == expected
 
 
 def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dict:
@@ -41,6 +64,9 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dic
         path = root / name
         if not path.is_file() or path.read_bytes() != expected:
             if allow_presentation_delta and name in PRESENTATION_ORIGINALS and path.is_file():
+                authorized_changes.append(name)
+            elif (allow_presentation_delta and path.is_file()
+                  and exact_original_bridge(name, path.read_bytes())):
                 authorized_changes.append(name)
             else:
                 errors.append(f"Preserved baseline changed: {name}")
