@@ -111,7 +111,7 @@ class AtlasNewLauncherTests(unittest.TestCase):
         response = StringIO(json.dumps({"sources": []}))
         fake_response.read = response.read
         with patch.object(namespace["subprocess"], "Popen", return_value=NonzeroServer()):
-            with patch.object(namespace["urllib.request"], "urlopen", return_value=fake_response):
+            with patch.object(namespace["urllib"].request, "urlopen", return_value=fake_response):
                 with self.assertRaisesRegex(RuntimeError, "ATLAS_NOVO_SERVER_EXIT_9"):
                     launcher([], unused_port(), "Notebook", True, False)
 
