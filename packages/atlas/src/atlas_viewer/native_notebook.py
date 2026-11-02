@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import re
 import zipfile
+import zlib
 
 from caderno_protocol import load_package
 from caderno_protocol.model import safe_relative_path, types
@@ -17,6 +18,8 @@ from caderno_protocol.storage import (
 from .native_values import entry_values
 
 MEDIA_TYPE = "application/vnd.atlas.native-view+json"
+COMPRESSED_MEDIA_TYPE = "application/vnd.atlas.native-view+zlib"
+MAX_NATIVE_LOGICAL_BYTES = 256 * 1024 * 1024
 VIEW_NS = "https://github.com/thalesvalente/Atlas/ns/presentation#"
 MAX_ENTRIES = 100000
 KINDS = frozenset({"record", "node", "relation", "table", "row", "asset", "collection"})
@@ -175,6 +178,38 @@ def _reader(path: Path, metadata_digest: str):
     return read, finish
 
 
+
+def _decode_compressed(raw: bytes, payload: dict) -> bytes:
+    """Decompress one verified File with output quota and exact raw digest.
+
+    The read budget (32 MiB) applies to bytes stored on disk; this logical
+    limit is separate and enforced *before* parsing any expanded payload.
+    """
+    declared_size = payload.get(VIEW_NS + "rawSize")
+    declared_sha = payload.get(VIEW_NS + "rawSha256")
+    if (type(declared_size) is not int or not 1 <= declared_size <= MAX_PAYLOAD_BYTES
+            or not isinstance(declared_sha, str)
+            or not re.fullmatch(r"[0-9a-f]{64}", declared_sha)):
+        raise NativeViewError("NATIVE_COMPRESSED_MANIFEST_INVALID")
+    try:
+        inflater = zlib.decompressobj()
+        content = inflater.decompress(raw, declared_size + 1)
+        # Reject bombs, concatenated frames, corrupted streams and lying
+        # manifests. An early quota stop leaves unconsumed_tail or !eof.
+        if (len(content) > declared_size or not inflater.eof
+                or inflater.unused_data or inflater.unconsumed_tail):
+            raise NativeViewError("NATIVE_COMPRESSED_CHUNK_INVALID")
+        remainder = inflater.flush()
+        if remainder:
+            content += remainder
+        if len(content) != declared_size:
+            raise NativeViewError("NATIVE_COMPRESSED_CHUNK_INVALID")
+    except zlib.error as exc:
+        raise NativeViewError("NATIVE_COMPRESSED_CHUNK_INVALID") from exc
+    if hashlib.sha256(content).hexdigest() != declared_sha:
+        raise NativeViewError("NATIVE_RAW_DIGEST_MISMATCH")
+    return content
+
 def read_source(path: Path, source_id: str, *, expected_metadata: str | None = None) -> tuple[dict, bytes | None]:
     result = {"id": source_id, "status": "INVALID", "entries": [], "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}
     try:
@@ -188,12 +223,17 @@ def read_source(path: Path, source_id: str, *, expected_metadata: str | None = N
         graph = package.document["@graph"]
         root = next(e for e in graph if e["@id"] == "./")
         result["name"] = root.get("name", source_id)
-        payloads = [e for e in graph if "File" in types(e) and e.get("encodingFormat") == MEDIA_TYPE]
+        payloads = [e for e in graph if "File" in types(e)
+                    and e.get("encodingFormat") in (MEDIA_TYPE, COMPRESSED_MEDIA_TYPE)]
         if not payloads:
             result["status"] = "NO_NATIVE_PRESENTATION"
             return result, None
-        if root.get(VIEW_NS + "version") != "1":
+        version = root.get(VIEW_NS + "version")
+        if version not in ("1", "2"):
             raise NativeViewError("NATIVE_VERSION_UNSUPPORTED")
+        expected_encoding = COMPRESSED_MEDIA_TYPE if version == "2" else MEDIA_TYPE
+        if any(e.get("encodingFormat") != expected_encoding for e in payloads):
+            raise NativeViewError("NATIVE_ENCODING_MISMATCH")
         revision = root.get(VIEW_NS + "revision")
         count = root.get(VIEW_NS + "entryCount")
         expected_digest = root.get(VIEW_NS + "projectionDigest")
@@ -201,8 +241,12 @@ def read_source(path: Path, source_id: str, *, expected_metadata: str | None = N
                 or type(count) is not int or not 0 <= count <= MAX_ENTRIES
                 or not isinstance(expected_digest, str) or not re.fullmatch("[0-9a-f]{64}", expected_digest)):
             raise NativeViewError("NATIVE_MANIFEST_INVALID")
+        declared_logical = root.get(VIEW_NS + "logicalBytes")
+        if version == "2" and (type(declared_logical) is not int
+                               or not 1 <= declared_logical <= MAX_NATIVE_LOGICAL_BYTES):
+            raise NativeViewError("NATIVE_LOGICAL_MANIFEST_INVALID")
         read, finish = _reader(Path(path), package.metadata_sha256)
-        chunks, total = {}, 0
+        chunks, total, logical_total = {}, 0, 0
         try:
             for payload in payloads:
                 name = payload["@id"]
@@ -214,6 +258,11 @@ def read_source(path: Path, source_id: str, *, expected_metadata: str | None = N
                     raise NativeViewError("NATIVE_PAYLOAD_LIMIT")
                 if hashlib.sha256(raw).hexdigest() != payload.get("cp:sha256"):
                     raise NativeViewError("NATIVE_PAYLOAD_CHANGED")
+                if version == "2":
+                    raw = _decode_compressed(raw, payload)
+                logical_total += len(raw)
+                if logical_total > MAX_NATIVE_LOGICAL_BYTES:
+                    raise NativeViewError("NATIVE_LOGICAL_LIMIT")
                 chunk = _strict_json(raw)
                 ordinal = chunk.get("ordinal")
                 if (chunk.get("format") != "atlas-native-view" or chunk.get("version") != "1"
@@ -225,6 +274,8 @@ def read_source(path: Path, source_id: str, *, expected_metadata: str | None = N
             finish()
         if sorted(chunks) != list(range(len(chunks))):
             raise NativeViewError("NATIVE_CHUNK_SEQUENCE")
+        if version == "2" and logical_total != declared_logical:
+            raise NativeViewError("NATIVE_LOGICAL_SIZE_MISMATCH")
         entries = [e for i in range(len(chunks)) for e in chunks[i]]
         if len(entries) != count:
             raise NativeViewError("NATIVE_COUNT_MISMATCH")
@@ -233,7 +284,9 @@ def read_source(path: Path, source_id: str, *, expected_metadata: str | None = N
         if hashlib.sha256(raw_projection).hexdigest() != expected_digest:
             raise NativeViewError("NATIVE_PROJECTION_MISMATCH")
         result.update(status="READY", entries=entries, revision=revision, projection_sha256=expected_digest,
-                      bytes_verified=total, authenticity="NOT_VERIFIED", scientific_approval="NOT_EVALUATED")
+                      bytes_verified=total, logical_bytes_verified=logical_total,
+                      transport_version=version, authenticity="NOT_VERIFIED",
+                      scientific_approval="NOT_EVALUATED")
         return result, raw_projection
     except (OSError, ValueError, KeyError, TypeError, IndexError, RecursionError, zipfile.BadZipFile) as exc:
         result["entries"] = []

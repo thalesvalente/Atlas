@@ -24,7 +24,7 @@ Aceite: hashes de fontes de teste permanecem iguais; renderer não usa iframe/sr
 - FR-004: separar uid de apresentação, native_id e source_key; colisões e pais não resolvidos são visíveis, não se fabricam relações científicas.
 - FR-005: preservar todos os valores originais em JSON textual e apresentar números como texto lexical, sem round-trip pelo Number do navegador; não preencher ausências.
 - FR-006: ler somente fontes fixadas na CLI e payloads declarados com digest verificado; nenhuma rota recebe caminho arbitrário, nenhuma URL é baixada automaticamente.
-- FR-007: respeitar os limites existentes: metadados 2 MiB, payload individual 8 MiB, agregado 32 MiB; particionar a exportação ou recusar sem truncamento.
+- FR-007: respeitar os limites existentes do protocolo sobre bytes armazenados (metadados 2 MiB, File individual 8 MiB, agregado 32 MiB); para apresentações que excedam 32 MiB sem compressão, transportar blocos JSON em Files zlib versionados com limites separados de expansão (8 MiB/bloco e 256 MiB total), dupla verificação de hash/tamanho, sequência, contagem e digest original; falhar sem truncamento se a compressão não couber.
 - FR-008: renderizar texto e SVG próprios; não executar HTML importado. Links de documentos são referências explícitas, não autorização de acesso automático.
 - FR-009: reutilizar o componente público P03 de tabelas e o servidor/SDK existentes; integrar em vez de clonar o R4.
 - FR-010: entregar launcher com uma chamada operacional, spec/plan/tasks rastreáveis, testes e CI vinculados ao SHA final; sem merge/release/deploy.
@@ -37,4 +37,4 @@ O operador autorizou implementar esta integração, não copiar o acervo privado
 
 ## Success Criteria
 
-SC-001: pacote externo abre na UI nativa sem R4 no ambiente do viewer. SC-002: todas as coleções e contagens do input são preservadas e consultáveis. SC-003: navegação/tabelas/exportações verificadas em navegador real. SC-004: zero mutações de fontes. SC-005: comparação com acervo real e revisão independente não recebem PASS sem execução observada.
+SC-001: pacote externo abre na UI nativa sem R4 no ambiente do viewer. SC-006: projeção de engenharia cujo JSON de apresentação supera 32 MiB é consumida integralmente via transporte comprimido, mantendo 32 MiB de limite do pacote armazenado; metadados comprimidos adulterados são recusados. SC-002: todas as coleções e contagens do input são preservadas e consultáveis. SC-003: navegação/tabelas/exportações verificadas em navegador real. SC-004: zero mutações de fontes. SC-005: comparação com acervo real e revisão independente não recebem PASS sem execução observada.

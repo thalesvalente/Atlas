@@ -92,6 +92,29 @@ python -m atlas_viewer serve --source 'H:\Atlas-exports\consulta-nova' --port 87
 
 Também é aceito JSON da projeção já exportada: `--projection ARQUIVO_JSON --output DIRETORIO_NOVO`, em vez de `--r4-code/--notebook-root`. Não é HTML, não há flag synthetic nem ingestão silenciosa de diretórios.
 
+## Acervo extenso e diagnóstico do limite agregado
+
+O Atlas antigo pode exibir normalmente o Caderno, enquanto a representação intermediária
+do Atlas novo excede 32 MiB porque `raw_json` e os campos de exibição repetem
+informações. Na versão atual, o exportador tenta V2 zlib quando a soma dos JSONs
+excede 32 MiB. **Não é uma alteração do limite de 32 MiB dos pacotes armazenados**:
+o leitor verifica todos os chunks e impõe limites próprios de descompressão
+(8 MiB por File, 256 MiB de representação lógica). Valores científicos, hashes,
+revisão, contagem e ordem são preservados; não se trunca o acervo.
+
+Atualize a branch, sem merge:
+```powershell
+git pull --ff-only
+python -m pip install .\packages\protocol .\packages\atlas
+& .\scripts\ABRIR-ATLAS.ps1 -LegacyCodeRoot 'H:\Atlas009-CA01' -LegacyNotebookRoot 'H:\R4-Caderno-Cientifico'
+```
+
+Se aparecer `NATIVE_COMPRESSED_AGGREGATE_LIMIT_NO_TRUNCATION`,
+`NATIVE_LOGICAL_LIMIT_NO_TRUNCATION` ou `NATIVE_SINGLE_ENTRY_TOO_LARGE`,
+o fail-closed é intencional. Preserve esse código para engenharia; não reduza o
+acervo ou aumente quotas manualmente. O teste no host ainda é necessário para
+confirmar que a representação real cabe na nova versão.
+
 ## Navegação e atualização
 
 O menu Caderno nativo oferece árvore com busca de qualquer nó/zoom/pan/minimapa, registros, tabelas P03 paginadas, relações, recursos/dossiês, linha do tempo e cobertura. Detalhe distingue native_id, source_key e UID de consulta; valor original permanece exportável como JSON. Tabelas têm CSV protegido de fórmulas e JSON sem arredondamento.

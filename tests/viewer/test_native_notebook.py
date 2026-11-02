@@ -181,6 +181,75 @@ class NativeNotebookTests(unittest.TestCase):
         finally:
             EXPORTER["build_package"].__globals__["MAX_PAYLOAD_BYTES"] = old
 
+
+    def test_large_repeated_legacy_caderno_uses_bounded_compressed_transport(self):
+        # Reproduces the USER's failure mode: presentation overhead exceeds
+        # 32 MiB although the original producer can render the same source.
+        # Synthetic only, do not move private corpus into GitHub Actions.
+        large = projection()
+        large["records"] = [
+            {"id": "big-" + str(i), "title": "Experimento " + str(i),
+             "long_note": "ANOTACAO-CIENTIFICA-SINTETICA" * 26000}
+            for i in range(26)
+        ]
+        document, chunks = EXPORTER["build_package"](large)
+        root = next(x for x in document["@graph"] if x.get("@id") == "./")
+        version = EXPORTER["VIEW_NS"] + "version"
+        self.assertEqual(root[version], "2")
+        logical_bytes = root[EXPORTER["VIEW_NS"] + "logicalBytes"]
+        self.assertGreater(logical_bytes, 32 * 1024 * 1024)
+        self.assertLessEqual(logical_bytes, 256 * 1024 * 1024)
+        self.assertLessEqual(sum(map(len, chunks.values())), 32 * 1024 * 1024)
+        self.assertTrue(all(p.endswith(".json.zlib") for p in chunks))
+        target = self.root / "large-compressed"
+        receipt = EXPORTER["export"](large, target)
+        self.assertEqual(receipt["status"], "EXPORTED")
+        loaded = load_package(target)
+        self.assertTrue(loaded.report.valid, loaded.report.to_dict())
+        status, original = read_source(target, "synthetic-large")
+        self.assertEqual(status["status"], "READY", status)
+        self.assertEqual(status["transport_version"], "2")
+        self.assertEqual(status["logical_bytes_verified"], logical_bytes)
+        self.assertEqual(len([e for e in status["entries"] if e["kind"] == "record"]), 26)
+        self.assertEqual(hashlib.sha256(original).hexdigest(),
+                         hashlib.sha256(EXPORTER["dump"](large)).hexdigest())
+        self.assertEqual(json.loads(original), large)
+
+        # Even if the stored checksum remains valid, an altered rawSize or
+        # rawSha256 in metadata MUST fail before a READY presentation.
+        metadata = target / "ro-crate-metadata.json"
+        pristine = json.loads(metadata.read_text(encoding="utf-8"))
+        original_entity = next(e for e in pristine["@graph"]
+                               if e.get("encodingFormat") == EXPORTER["COMPRESSED_MEDIA_TYPE"])
+        for changed_field, new_value, expected_error in [
+            ("rawSize", original_entity[EXPORTER["VIEW_NS"] + "rawSize"] - 1,
+             "NATIVE_COMPRESSED_CHUNK_INVALID"),
+            ("rawSha256", "0" * 64, "NATIVE_RAW_DIGEST_MISMATCH"),
+        ]:
+            with self.subTest(changed_field=changed_field):
+                doc = copy.deepcopy(pristine)
+                entity = next(e for e in doc["@graph"]
+                              if e.get("encodingFormat") == EXPORTER["COMPRESSED_MEDIA_TYPE"])
+                entity[EXPORTER["VIEW_NS"] + changed_field] = new_value
+                metadata.write_bytes(EXPORTER["dump"](doc))
+                state, contents = read_source(target, "tampered")
+                self.assertEqual(state["status"], "INVALID", state)
+                self.assertIn(expected_error, state["errors"])
+                self.assertIsNone(contents)
+        metadata.write_bytes(EXPORTER["dump"](pristine))
+        recovered, raw = read_source(target, "restored")
+        self.assertEqual(recovered["status"], "READY", recovered)
+        self.assertEqual(json.loads(raw), large)
+
+    def test_incompressible_over_budget_fails_without_truncation(self):
+        former = EXPORTER["build_package"].__globals__["MAX_EXPANDED_BYTES"]
+        try:
+            EXPORTER["build_package"].__globals__["MAX_EXPANDED_BYTES"] = 128
+            with self.assertRaisesRegex(ValueError, "NATIVE_COMPRESSED_AGGREGATE_LIMIT_NO_TRUNCATION"):
+                EXPORTER["build_package"](self.data)
+        finally:
+            EXPORTER["build_package"].__globals__["MAX_EXPANDED_BYTES"] = former
+
     def test_wrong_projection_and_unknown_version_fail_closed(self):
         with self.assertRaises(ValueError): EXPORTER["build_package"]({"not_records": []})
         metadata = self.output / "ro-crate-metadata.json"

@@ -15,6 +15,7 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import zlib
 import ctypes
 import errno
 
@@ -24,6 +25,10 @@ from caderno_protocol.storage import MAX_METADATA_BYTES, MAX_PAYLOAD_BYTES, MAX_
 from atlas_viewer.native_values import scalar, dtype, entry_values
 
 MEDIA_TYPE = "application/vnd.atlas.native-view+json"
+COMPRESSED_MEDIA_TYPE = "application/vnd.atlas.native-view+zlib"
+# Bound the logical presentation separately from the protocol's 32 MiB
+# *stored* payload cap; no files or scientific records are truncated.
+MAX_NATIVE_LOGICAL_BYTES = 256 * 1024 * 1024
 VIEW_NS = "https://github.com/thalesvalente/Atlas/ns/presentation#"
 ASSETS = {"resources", "products", "product_items", "product_groups", "resource_documents",
           "dossier_assessments", "dossier_packages"}
@@ -122,8 +127,26 @@ def build_package(data: dict, title: str = "Caderno — consulta nativa") -> tup
         pending.append(entry)
         size += needed
     if pending: flush()
-    if sum(map(len, payloads.values())) > MAX_EXPANDED_BYTES:
-        raise ValueError("NATIVE_AGGREGATE_LIMIT_NO_TRUNCATION")
+    logical_bytes = sum(map(len, payloads.values()))
+    if logical_bytes > MAX_NATIVE_LOGICAL_BYTES:
+        raise ValueError("NATIVE_LOGICAL_LIMIT_NO_TRUNCATION")
+    compressed_meta = {}
+    if logical_bytes > MAX_EXPANDED_BYTES:
+        # Only the optional presentation Files are compressed. No modifications
+        # to the scientific protocol or its existing 32-MiB read budget.
+        original_payloads = payloads
+        payloads = {}
+        for name, raw in original_payloads.items():
+            path = name + ".zlib"
+            zipped = zlib.compress(raw, level=6)
+            payloads[path] = zipped
+            compressed_meta[path] = {
+                "rawSize": len(raw),
+                "rawSha256": hashlib.sha256(raw).hexdigest(),
+            }
+        if sum(map(len, payloads.values())) > MAX_EXPANDED_BYTES:
+            raise ValueError("NATIVE_COMPRESSED_AGGREGATE_LIMIT_NO_TRUNCATION")
+    transport_version = "2" if compressed_meta else "1"
     ref = lambda eid: {"@id": eid}
     root = {"@id": "./", "@type": "Dataset", "name": title,
             "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
@@ -131,14 +154,20 @@ def build_package(data: dict, title: str = "Caderno — consulta nativa") -> tup
             "datePublished": datetime.now(timezone.utc).isoformat(),
             "conformsTo": [ref(PROCESS_PROFILE), ref(PROFILE_ID)],
             "hasPart": [ref(p) for p in payloads], "mentions": [],
-            VIEW_NS + "version": "1", VIEW_NS + "revision": revision,
+            VIEW_NS + "version": transport_version, VIEW_NS + "revision": revision,
             VIEW_NS + "entryCount": len(entries), VIEW_NS + "projectionDigest": hashlib.sha256(original).hexdigest()}
+    if compressed_meta:
+        root[VIEW_NS + "logicalBytes"] = logical_bytes
     graph = [{"@id": "ro-crate-metadata.json", "@type": "CreativeWork", "about": ref("./"), "conformsTo": ref(RO_CRATE)}, root,
              {"@id": PROCESS_PROFILE, "@type": ["CreativeWork", "http://www.w3.org/ns/dx/prof/Profile"], "name": "Process Run Crate", "version": "0.6"},
              {"@id": PROFILE_ID, "@type": ["CreativeWork", "http://www.w3.org/ns/dx/prof/Profile"], "name": "Caderno", "version": PROFILE_VERSION}]
-    graph.extend({"@id": path, "@type": "File", "name": "Apresentação nativa " + str(i),
-                  "encodingFormat": MEDIA_TYPE, "cp:availability": "PRESENT",
-                  "cp:sha256": hashlib.sha256(raw).hexdigest(), "contentSize": len(raw)}
+    graph.extend(dict({"@id": path, "@type": "File", "name": "Apresentação nativa " + str(i),
+                  "encodingFormat": COMPRESSED_MEDIA_TYPE if compressed_meta else MEDIA_TYPE,
+                  "cp:availability": "PRESENT",
+                  "cp:sha256": hashlib.sha256(raw).hexdigest(), "contentSize": len(raw)},
+                 **({VIEW_NS + "rawSize": compressed_meta[path]["rawSize"],
+                     VIEW_NS + "rawSha256": compressed_meta[path]["rawSha256"]}
+                    if compressed_meta else {}))
                  for i, (path, raw) in enumerate(payloads.items()))
     document = {"@context": CONTEXT, "@graph": graph}
     report = validate_document(document)
