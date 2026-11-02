@@ -32,7 +32,7 @@ def _is_job_breakaway_denial(exc: OSError) -> bool:
             getattr(exc, "winerror", None) == 5)
 
 
-def _native_breakaway_challenge() -> tuple[dict, int]:
+def _native_breakaway_challenge(*, appcontainer: bool = False) -> tuple[dict, int]:
     """No Job attribution without an in-job worker and a working child control."""
     import ctypes
     from ctypes import wintypes
@@ -55,6 +55,41 @@ def _native_breakaway_challenge() -> tuple[dict, int]:
     try:
         control = subprocess.Popen(cmd, **io)
     except OSError as exc:
+        # In an AppContainer, the normal child might itself be denied by the
+        # operating system. This is NOT evidence that the Job blocked a
+        # breakaway. Make the second (flagged) attempt explicitly, too.
+        if appcontainer and _is_job_breakaway_denial(exc):
+            try:
+                flagged = subprocess.Popen(
+                    cmd, creationflags=0x01000000, **io)
+            except OSError as flagged_exc:
+                if _is_job_breakaway_denial(flagged_exc):
+                    return ({
+                        "breakaway": (
+                            "CHILD_AND_BREAKAWAY_CREATION_DENIED_BY_OS_NOT_JOB_PROOF"),
+                        "normal_child_winerror": 5,
+                        "breakaway_winerror": 5,
+                        "process_in_job": True,
+                        "job_specific_denial_proven": False,
+                    }, 0)
+                return ({
+                    "breakaway": "BREAKAWAY_UNVERIFIED_OS_ERROR",
+                    "normal_child_winerror": 5,
+                    "breakaway_winerror": getattr(
+                        flagged_exc, "winerror", None),
+                }, 79)
+            # Creating a breakaway child, even if the ordinary child was
+            # denied, is an unsafe native observation.
+            try:
+                flagged.wait(timeout=4)
+            except subprocess.TimeoutExpired:
+                flagged.kill()
+                flagged.wait(timeout=4)
+            return ({
+                "breakaway": "BREAKAWAY_CREATION_SUCCEEDED_UNSAFE",
+                "normal_child_winerror": 5,
+                "process_in_job": True,
+            }, 79)
         return {"breakaway": "CHILD_CREATION_CONTROL_FAILED",
                 "positive_control_winerror": getattr(exc, "winerror", None)}, 79
     try:
@@ -382,7 +417,7 @@ def _windows_broker_worker(args) -> int:
             time.sleep(90)
             return 0
         if args.mode == "breakaway":
-            verdict, status = _native_breakaway_challenge()
+            verdict, status = _native_breakaway_challenge(appcontainer=True)
             report({**verdict,
                     "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
             return status

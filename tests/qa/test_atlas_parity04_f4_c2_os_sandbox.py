@@ -503,20 +503,29 @@ def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic):
     assert not any(synthetic[2].glob("atlas-c2-*.json"))
 
 
-def test_windows_appcontainer_breakaway_denied_by_job(synthetic):
+def test_windows_appcontainer_child_escape_has_native_causal_attribution(synthetic):
     if sys.platform != "win32":
-        pytest.skip("Native AppContainer Job breakaway Windows-only")
+        pytest.skip("Native AppContainer child escape Windows-only")
     from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
     result = run_synthetic_job(
         _appcontainer_argv(synthetic, "breakaway"),
         wall_seconds=10, appcontainer=True)
-    assert result["exit_code"] == 0, result
-    report = json.loads((synthetic[2] / "os-probe-report.json").read_text())
-    assert report["breakaway"] == (
-        "BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL")
-    assert report["positive_control_exit_code"] == 0
+    report_path = synthetic[2] / "os-probe-report.json"
+    report = (json.loads(report_path.read_text()) if report_path.exists() else None)
+    assert result["exit_code"] == 0, {"native_job": result, "native_probe": report}
     assert report["process_in_job"] is True
     assert report["breakaway_winerror"] == 5
+    if report["breakaway"] == "BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL":
+        # Only a successful ordinary child control permits Job attribution.
+        assert report["positive_control_exit_code"] == 0
+    else:
+        # Both process attempts denied by the OS. Do NOT call this
+        # JOB_DENIED: the separate Job-only positive-control test proves
+        # the Job breakaway restriction in a launch-capable token.
+        assert report["breakaway"] == (
+            "CHILD_AND_BREAKAWAY_CREATION_DENIED_BY_OS_NOT_JOB_PROOF")
+        assert report["normal_child_winerror"] == 5
+        assert report["job_specific_denial_proven"] is False
 
 
 def test_windows_appcontainer_source_rename_denied_after_handle_pin(synthetic):
