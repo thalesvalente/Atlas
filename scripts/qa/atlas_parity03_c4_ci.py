@@ -130,7 +130,10 @@ def is_f2_documentation_successor():
 
 def load_ap04_guard():
     guard_path = ROOT / "scripts/qa/atlas_parity04_doc_ci.py"
-    if is_f2_documentation_successor():
+    k_guard = ROOT / "scripts/qa/atlas_parity04_k_doc_ci.py"
+    if k_guard.is_file():
+        guard_path = k_guard
+    elif is_f2_documentation_successor():
         guard_path = ROOT / "scripts/qa/atlas_parity04_f2_doc_ci.py"
     spec = importlib.util.spec_from_file_location(
         "atlas_parity04_doc_successor", guard_path)

@@ -19,6 +19,39 @@ import unittest
 SUITES = ("packages/protocol/tests", "tests/qa", "tests/viewer")
 
 
+def discover_suite(repo: Path, directory: Path, loader: unittest.TestLoader):
+    """Keep every current case and load the frozen F2 cases at their own source."""
+    guard_path = repo / "scripts/qa/atlas_parity04_k_doc_ci.py"
+    if directory != repo / "tests/qa" or not guard_path.is_file():
+        return loader.discover(str(directory), pattern="test_*.py",
+                               top_level_dir=str(directory)), None
+    name = "atlas_parity04_k_collection"
+    spec = importlib.util.spec_from_file_location(name, guard_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("K successor collection guard is unavailable")
+    guard = importlib.util.module_from_spec(spec)
+    sys.modules[name] = guard
+    spec.loader.exec_module(guard)
+    frozen = guard.load_frozen_f2_tests(repo)
+    suite = unittest.TestSuite()
+    for path in sorted(directory.glob("test_*.py")):
+        if path.name != "test_atlas_parity04_f2_doc_ci.py":
+            suite.addTests(loader.discover(str(directory), pattern=path.name,
+                                          top_level_dir=str(directory)))
+    suite.addTests(loader.loadTestsFromModule(frozen))
+    frozen_root = Path(frozen.ROOT).resolve()
+    provenance = {
+        "module": frozen.__name__, "source": str(Path(frozen.__file__).resolve()),
+        "tested_sha": subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=frozen_root, text=True).strip(),
+        "tested_tree": subprocess.check_output(
+            ["git", "rev-parse", "HEAD^{tree}"], cwd=frozen_root, text=True).strip(),
+        "scope": "Historical F2 controls tested at their immutable snapshot",
+        "current_successor_qualification": False,
+    }
+    return suite, provenance
+
+
 def case_ids(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
@@ -80,12 +113,14 @@ def probe(repo: Path, work: Path) -> dict:
     for relative in SUITES:
         directory = repo / relative
         loader = unittest.TestLoader()
-        suite = loader.discover(str(directory), pattern="test_*.py", top_level_dir=str(directory))
+        suite, frozen_f2 = discover_suite(repo, directory, loader)
         ids = list(case_ids(suite))
         result = unittest.TextTestRunner(stream=log, verbosity=2).run(suite)
         record = {"suite": relative, "collected": len(ids), "tests": result.testsRun,
                   "failures": len(result.failures), "errors": len(result.errors),
                   "skipped": len(result.skipped), "loader_errors": loader.errors, "test_ids": ids}
+        if frozen_f2 is not None:
+            record["frozen_f2_test_source"] = frozen_f2
         report["suites"].append(record)
         report["test_ids"].extend(ids)
         if (not result.wasSuccessful() or result.skipped or loader.errors
