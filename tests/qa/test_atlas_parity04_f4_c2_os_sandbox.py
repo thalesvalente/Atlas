@@ -410,7 +410,7 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic, rec
         pytest.fail("APPCONTAINER_OS_ENFORCEMENT_MISSING:" + str(exc))
     else:
         record_property("native_job_result", json.dumps(result, sort_keys=True))
-    assert result["appcontainer_token_verified"] is True
+        assert result["appcontainer_token_verified"] is True
         assert result["filesystem_network_confined"] is False
         report_path = scratch / "os-probe-report.json"
         detail = (json.loads(report_path.read_text())
