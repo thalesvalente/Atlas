@@ -20,8 +20,17 @@ function markSelection(){
   });
 }
 function closeDetail(restore=false){
+  const selected=state.detail,content=$('native-content');
+  let target;
+  if(restore){
+    const usable=node=>node?.isConnected&&!node.disabled&&node.getClientRects().length>0;
+    const occurrence=[...content.querySelectorAll('[data-uid],[data-row-id]')].find(node=>(node.dataset.uid||node.getAttribute('data-row-id'))===selected);
+    const occurrenceTrigger=occurrence?.querySelector('button:not(:disabled)')||(occurrence?.tabIndex>=0?occurrence:null);
+    const recovered=occurrenceTrigger||(state.table===selected?$('native-table-detail'):null);
+    target=[detailTrigger,recovered,...content.querySelectorAll('button,select,[tabindex="0"]')].find(usable);
+  }
   $('native-detail').hidden=true;state.detail=null;state.history=[];markSelection();
-  if(restore){if(detailTrigger?.isConnected)detailTrigger.focus();else $('native-content').querySelector('button,select,[tabindex="0"]')?.focus();}
+  if(restore){if(target)target.focus();else{content.tabIndex=-1;content.focus();}}
   detailTrigger=null;
 }
 function rerenderFocus(label){render();const target=[...$('native-content').querySelectorAll('button,select')].find(n=>(n.id||n.textContent)===label&&!n.disabled);if(target)target.focus();else{$('native-content').tabIndex=-1;$('native-content').focus();}}
@@ -153,6 +162,7 @@ function showTables(host){
     const cell=v=>{let s=String(v??'');if(/^[\s\u0000-\u001f]*[=+@-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
     download('atlas-table.csv',[cols.map(cell).join(','),...rows.map(r=>cols.map(c=>cell(r.cells[c]?.text??'')).join(','))].join('\r\n'),'text/csv;charset=utf-8');
   }));
+  tools.firstElementChild.id='native-table-detail';
   host.append(tools,el('p',`${rows.length} linhas selecionadas de ${allRows.length} carregadas; ${cols.length} colunas. Null e chave ausente permanecem distintos. CSV neutraliza fórmulas; JSON conserva os valores originais.`,'muted'));
   if(columnPages>1){const cp=el('div',null,'pager'),prev=button('← Colunas',()=>{state.columnPage--;closeDetail();rerenderFocus(state.columnPage===0?'Colunas →':'← Colunas');}),next=button('Colunas →',()=>{state.columnPage++;closeDetail();rerenderFocus(state.columnPage+1===columnPages?'← Colunas':'Colunas →');});prev.disabled=state.columnPage===0;next.disabled=state.columnPage+1===columnPages;cp.append(prev,el('span',`Janela de colunas ${state.columnPage+1}/${columnPages}`),next);host.append(cp);}
   if(!visibleColumns.length){host.append(el('p','A tabela não declara células; valores indisponíveis não são reconstruídos.','empty'));return;}

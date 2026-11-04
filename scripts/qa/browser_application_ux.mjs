@@ -61,6 +61,10 @@ try{
   await page.locator('[data-testid="native-context-back"]').click();
   assert.match(await page.locator('[data-testid="native-raw"]').innerText(),/"id":"record-root"/);
   check('record_table_row_structural_links_exact_identity_and_context_return');
+  await page.keyboard.press('Escape');assert.ok(await page.locator('#native-detail').isHidden());
+  assert.equal(await record.evaluate(node=>document.activeElement===node),true,'Context return recreates the record trigger; Escape must recover that occurrence');
+  await inViewport(record);
+  check('escape_after_two_context_returns_restores_recreated_record_trigger');
   await pane('tables').click();assert.ok(await page.locator('#native-detail').isHidden(),'Pane change clears old detail');
   const component=page.locator('[data-component="parity02-p03-table"]');
   const rowsSeen=new Set(),cellsSeen=new Set();
@@ -130,6 +134,17 @@ try{
       const trigger=page.locator('#native-content tbody').getByRole('button',{name:'Registro principal',exact:true});
       await trigger.focus();await page.keyboard.press('Enter');await assertFocus('#native-detail-title');await inViewport(page.locator('#native-detail-title'));
       await page.keyboard.press('Escape');assert.ok(await page.locator('#native-detail').isHidden());assert.equal(await trigger.evaluate(node=>document.activeElement===node),true);await inViewport(trigger);
+      await trigger.focus();await page.keyboard.press('Enter');
+      await page.locator('[data-testid="native-context-links"]').getByText(/^Referências recebidas/).click();
+      await page.locator('[data-testid="native-context-links"]').getByRole('button',{name:/^Tabela da aplicação.*record_id/}).click();
+      await assertFocus('#native-detail-title');await inViewport(page.locator('#native-detail-title'));
+      await page.locator('[data-testid="native-context-back"]').click();
+      assert.match(await page.locator('[data-testid="native-raw"]').innerText(),/"id":"record-root"/);
+      if(width===390)await page.keyboard.press('Escape');else await page.locator('#native-close-detail').click();
+      assert.ok(await page.locator('#native-detail').isHidden());
+      assert.equal(await trigger.evaluate(node=>document.activeElement===node),true,'Closing after context return must focus the recreated mobile record trigger');
+      await inViewport(trigger);
+      check('mobile_context_return_close_restores_recreated_record_trigger_'+width);
       await pane('tables').click();const tableTrigger=page.getByRole('button',{name:'Detalhes da tabela',exact:true});
       await tableTrigger.focus();await page.keyboard.press('Enter');await assertFocus('#native-detail-title');await inViewport(page.locator('#native-detail-title'));
       await page.keyboard.press('Escape');assert.ok(await page.locator('#native-detail').isHidden());assert.equal(await tableTrigger.evaluate(node=>document.activeElement===node),true);await inViewport(tableTrigger);
