@@ -39,14 +39,39 @@ export function declaredSourceAliases(entry){
   const values=JSON.parse(raw);return Array.isArray(values)?values.filter(value=>typeof value==='string'&&value):[];
 }
 
+/** Shared relation namespaces for both diagram endpoints and detail links. */
+export function buildNativeRelationIndexes(entries){
+  const identities=new Map(),keys=new Map(),allKeys=new Map(),scalarTypes=new Set(['string','integer','number','boolean']);
+  const token=field=>JSON.stringify([field.type,field.text]);
+  const add=(index,key,entry,basis)=>{
+    if(!index.has(key))index.set(key,new Map());const matches=index.get(key);
+    if(!matches.has(entry.uid))matches.set(entry.uid,{entry,bases:[]});
+    const match=matches.get(entry.uid);if(!match.bases.includes(basis))match.bases.push(basis);
+  };
+  for(const entry of entries){
+    if(!['record','node','asset','table','row'].includes(entry.kind))continue;
+    const fields=new Map((entry.fields||[]).map(field=>[field.name,field]));
+    const native=fields.get('native_id')||(!fields.has('native_id')&&entry.kind==='record'?fields.get('id'):null);
+    if(native&&scalarTypes.has(native.type))add(identities,token(native),entry,'native_id');
+    for(const alias of declaredSourceAliases(entry))add(identities,token({type:'string',text:alias}),entry,'source_ids');
+    if(typeof entry.source_key==='string'){
+      const key=token({type:'string',text:entry.source_key});add(identities,key,entry,'source_key');add(allKeys,key,entry,'source_key');
+      add(keys,JSON.stringify([entry.group,key]),entry,'source_key');
+    }
+  }
+  return{lookup(relation,field,keyed){
+    const matches=keyed?(relation.group==='lineage_graph.edges'?keys.get(JSON.stringify(['lineage_graph.nodes',token(field)])):allKeys.get(token(field))):identities.get(token(field));
+    return matches?[...matches.values()]:[];
+  }};
+}
+
 export function buildNativeNavigation(entries){
-  const byUid=new Map(entries.map(e=>[e.uid,e])),index=new Map(),recordIndex=new Map(),keyIndex=new Map(),fragments=new Map(),outgoing=new Map(),incoming=new Map(),evidence=new Map();
+  const byUid=new Map(entries.map(e=>[e.uid,e])),index=new Map(),recordIndex=new Map(),relationIndexes=buildNativeRelationIndexes(entries),fragments=new Map(),outgoing=new Map(),incoming=new Map(),evidence=new Map();
   const put=(map,value,uid)=>{if(typeof value!=='string'||!value)return;if(!map.has(value))map.set(value,new Set());map.get(value).add(uid);};
   for(const e of entries){
     const nativeField=e.fields.find(field=>field.name==='native_id')||(e.kind==='record'?e.fields.find(field=>field.name==='id'):null);
     const nativeText=nativeField?.type==='string'&&nativeField.text===e.native_id?e.native_id:null;
     for(const value of [e.source_key,nativeText])put(index,value,e.uid);
-    if(e.kind==='node')put(keyIndex,e.source_key,e.uid);
     const parts=nativeFragments(e.raw_json);fragments.set(e.uid,parts);
     if(e.kind==='record'){
       for(const value of [e.source_key,nativeText])put(recordIndex,value,e.uid);
@@ -55,8 +80,8 @@ export function buildNativeNavigation(entries){
     }
     evidence.set(e.uid,[...parts].filter(([name])=>evidenceFields.has(name)));
   }
-  const reference=(e,label,literal,map=index,direct=null)=>{
-    const candidates=direct?[direct].filter(uid=>byUid.has(uid)):
+  const reference=(e,label,literal,map=index,direct=null,explicitCandidates=null)=>{
+    const candidates=explicitCandidates!==null?explicitCandidates:direct?[direct].filter(uid=>byUid.has(uid)):
       typeof literal==='string'?[...(map.get(literal)||[])].filter(uid=>uid!==e.uid):[];
     const ref={label,literal,targets:candidates,resolution:literal===null?'NOT_DECLARED':candidates.length===1?'UNIQUE':candidates.length?'COLLISION':'UNRESOLVED'};
     outgoing.get(e.uid).push(ref);
@@ -78,7 +103,8 @@ export function buildNativeNavigation(entries){
       const parts=fragments.get(e.uid),keyed=parts.has(endpoint+'_key'),name=keyed?endpoint+'_key':endpoint;
       if(!parts.has(name))continue;
       const field=e.fields.find(f=>f.name===name);
-      if(field&&(field.type==='string'||field.type==='null'))reference(e,name,field.type==='null'?null:field.text,keyed?keyIndex:index);
+      if(field&&(field.type==='null'||field.type==='string'||(!keyed&&['integer','number','boolean'].includes(field.type))))
+        reference(e,name,field.type==='null'?null:field.text,index,null,field.type==='null'?[]:relationIndexes.lookup(e,field,keyed).map(match=>match.entry.uid));
       // Composite/numeric keys are explicit declarations even though they are
       // omitted from scalar fields. Preserve their exact literal and never
       // reinterpret the other endpoint field as a fallback scientific ID.

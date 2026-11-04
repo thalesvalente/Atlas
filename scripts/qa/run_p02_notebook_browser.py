@@ -29,9 +29,16 @@ def main():
     data["records"][0]["source_ids"] = ["declared-run-alias"]
     data["records"][0]["resources"] = ["evidence", "unresolved-resource", None]
     data["records"][1]["family"] = "G"
+    data["records"][1]["id"] = "record-only-key"
     data["lineage_graph"]["nodes"][1]["run_id"] = "declared-run-alias"
+    data["lineage_graph"]["nodes"].append({"key": "same", "native_id": None, "label": "Key collision node", "kind": "Run"})
     data["edges"].append({"id": "Composite-key-proof", "from": "evidence",
                            "from_key": ["not-interpreted"], "to_key": "child", "type": "MENTIONS"})
+    data["edges"].extend([
+        {"id": "General-key-collision", "from_key": "same", "to_key": "child", "type": "MENTIONS"},
+        {"id": "Record-only-key-proof", "from_key": "record-only-key", "to_key": "child", "type": "MENTIONS"},
+    ])
+    data["lineage_graph"]["edges"].append({"id": "Scoped-key-proof", "from_key": "same", "to_key": "child", "type": "DEPENDENCY"})
     table = data["result_tables"][0]
     table.update(id="Table-A", label="Tabela extensa " + "coluna de medição " * 35,
                  family="F", status="HOLD", record_id="declared-run-alias")
