@@ -1,0 +1,54 @@
+name: ATLAS AP04 C4 K successor
+
+on:
+  push:
+    branches: [ci/atlas-ap04-c4-k-successor-20261104]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-preflight:
+    name: Immutable Git source capture (NOT qualification)
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Capture only versioned objects and exact identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          git cat-file -e 508ccb257a44dc66da13d1edfec7f00ef5231d09^{commit}
+          git update-ref refs/c4-k/source 508ccb257a44dc66da13d1edfec7f00ef5231d09
+          git bundle create "$RUNNER_TEMP/c4-k-objects.bundle" HEAD refs/c4-k/source
+          git bundle verify "$RUNNER_TEMP/c4-k-objects.bundle"
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True).strip()
+          out = pathlib.Path(os.environ['RUNNER_TEMP'])
+          refs = {'baseline': '54bb16d350f7bc34fafb95438bd64a2397d58bf3',
+                  'consumer': '508ccb257a44dc66da13d1edfec7f00ef5231d09',
+                  'harness': git('rev-parse', 'HEAD')}
+          receipt = {'status': 'SOURCE_CAPTURE_ONLY_NOT_QUALIFIED',
+                     'run_id': os.environ['GITHUB_RUN_ID'],
+                     'objects': {k: {'sha': v, 'tree': git('rev-parse', v+'^{tree}'),
+                                    'parents': git('show', '-s', '--format=%P', v).split()}
+                                 for k, v in refs.items()},
+                     'bundle_sha256': hashlib.sha256((out/'c4-k-objects.bundle').read_bytes()).hexdigest()}
+          (out/'c4-k-source.json').write_text(json.dumps(receipt, indent=2)+'\n', encoding='utf-8')
+          print(json.dumps(receipt))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: c4-k-source-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/c4-k-objects.bundle
+            ${{ runner.temp }}/c4-k-source.json
+          if-no-files-found: error
+          retention-days: 3
