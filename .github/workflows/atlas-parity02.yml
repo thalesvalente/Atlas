@@ -59,14 +59,22 @@ jobs:
       - name: Preserve the frozen boundary or verify the one exact AP04 successor
         shell: bash
         run: |
-          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
-            python scripts/qa/atlas_parity04_f2_doc_ci.py boundary --output .ci-clean-inputs.json
+          if git merge-base --is-ancestor 54bb16d350f7bc34fafb95438bd64a2397d58bf3 HEAD; then
+            python scripts/qa/atlas_parity04_k_doc_ci.py boundary --output .ci-clean-inputs.json
           else
-            ap04_ancestry_status=$?
-            if [ "$ap04_ancestry_status" -ne 1 ]; then
-              exit "$ap04_ancestry_status"
+            k_ancestry_status=$?
+            if [ "$k_ancestry_status" -ne 1 ]; then
+              exit "$k_ancestry_status"
             fi
-            python scripts/qa/atlas_parity04_doc_ci.py boundary --output .ci-clean-inputs.json
+            if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+              python scripts/qa/atlas_parity04_f2_doc_ci.py boundary --output .ci-clean-inputs.json
+            else
+              ap04_ancestry_status=$?
+              if [ "$ap04_ancestry_status" -ne 1 ]; then
+                exit "$ap04_ancestry_status"
+              fi
+              python scripts/qa/atlas_parity04_doc_ci.py boundary --output .ci-clean-inputs.json
+            fi
           fi
       - name: Reuse installed-wheel independence and immutability harness
         run: python scripts/qa/clean_install.py --repo . --work "${{ runner.temp }}/atlas-c1-p06"
@@ -112,14 +120,22 @@ jobs:
         run: |
           specify version --json
           specify integration status --json
-          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
-            python scripts/qa/atlas_parity04_f2_doc_ci.py speckit
+          if git merge-base --is-ancestor 54bb16d350f7bc34fafb95438bd64a2397d58bf3 HEAD; then
+            python scripts/qa/atlas_parity04_k_doc_ci.py speckit
           else
-            ap04_ancestry_status=$?
-            if [ "$ap04_ancestry_status" -ne 1 ]; then
-              exit "$ap04_ancestry_status"
+            k_ancestry_status=$?
+            if [ "$k_ancestry_status" -ne 1 ]; then
+              exit "$k_ancestry_status"
             fi
-            python scripts/qa/atlas_parity04_doc_ci.py speckit
+            if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+              python scripts/qa/atlas_parity04_f2_doc_ci.py speckit
+            else
+              ap04_ancestry_status=$?
+              if [ "$ap04_ancestry_status" -ne 1 ]; then
+                exit "$ap04_ancestry_status"
+              fi
+              python scripts/qa/atlas_parity04_doc_ci.py speckit
+            fi
           fi
       - name: Resolve the 004 specification without persisting the active pointer
         run: |

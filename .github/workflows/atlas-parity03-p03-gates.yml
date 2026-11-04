@@ -42,14 +42,22 @@ jobs:
       - name: Bind frozen inputs and ownership to exact candidate
         shell: bash
         run: |
-          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
-            python scripts/qa/atlas_parity04_f2_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+          if git merge-base --is-ancestor 54bb16d350f7bc34fafb95438bd64a2397d58bf3 HEAD; then
+            python scripts/qa/atlas_parity04_k_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
           else
-            ap04_ancestry_status=$?
-            if [ "$ap04_ancestry_status" -ne 1 ]; then
-              exit "$ap04_ancestry_status"
+            k_ancestry_status=$?
+            if [ "$k_ancestry_status" -ne 1 ]; then
+              exit "$k_ancestry_status"
             fi
-            python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+              python scripts/qa/atlas_parity04_f2_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            else
+              ap04_ancestry_status=$?
+              if [ "$ap04_ancestry_status" -ne 1 ]; then
+                exit "$ap04_ancestry_status"
+              fi
+              python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            fi
           fi
       - name: Collect SDK and P03 tests with zero skips
         run: python scripts/qa/atlas_parity03_p03_ci.py tests
@@ -99,26 +107,42 @@ jobs:
       - name: Bind frozen inputs and ownership to exact candidate
         shell: bash
         run: |
-          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
-            python scripts/qa/atlas_parity04_f2_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+          if git merge-base --is-ancestor 54bb16d350f7bc34fafb95438bd64a2397d58bf3 HEAD; then
+            python scripts/qa/atlas_parity04_k_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
           else
-            ap04_ancestry_status=$?
-            if [ "$ap04_ancestry_status" -ne 1 ]; then
-              exit "$ap04_ancestry_status"
+            k_ancestry_status=$?
+            if [ "$k_ancestry_status" -ne 1 ]; then
+              exit "$k_ancestry_status"
             fi
-            python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+              python scripts/qa/atlas_parity04_f2_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            else
+              ap04_ancestry_status=$?
+              if [ "$ap04_ancestry_status" -ne 1 ]; then
+                exit "$ap04_ancestry_status"
+              fi
+              python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            fi
           fi
       - name: Exercise P03 in existing runner Chromium
         shell: bash
         run: |
-          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
-            python scripts/qa/atlas_parity04_f2_doc_ci.py p03-browser --output-dir .test-output/atlas-parity03-p03
+          if git merge-base --is-ancestor 54bb16d350f7bc34fafb95438bd64a2397d58bf3 HEAD; then
+            python scripts/qa/atlas_parity04_k_doc_ci.py p03-browser --output-dir .test-output/atlas-parity03-p03
           else
-            ap04_ancestry_status=$?
-            if [ "$ap04_ancestry_status" -ne 1 ]; then
-              exit "$ap04_ancestry_status"
+            k_ancestry_status=$?
+            if [ "$k_ancestry_status" -ne 1 ]; then
+              exit "$k_ancestry_status"
             fi
-            python scripts/qa/atlas_parity04_doc_ci.py p03-browser --output-dir .test-output/atlas-parity03-p03
+            if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+              python scripts/qa/atlas_parity04_f2_doc_ci.py p03-browser --output-dir .test-output/atlas-parity03-p03
+            else
+              ap04_ancestry_status=$?
+              if [ "$ap04_ancestry_status" -ne 1 ]; then
+                exit "$ap04_ancestry_status"
+              fi
+              python scripts/qa/atlas_parity04_doc_ci.py p03-browser --output-dir .test-output/atlas-parity03-p03
+            fi
           fi
       - name: Require browser receipts for this exact SHA
         if: always()
@@ -165,14 +189,22 @@ jobs:
         run: |
           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
           python .specify/scripts/python/resolve_template.py spec-template --json
-          if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
-            python scripts/qa/atlas_parity04_f2_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+          if git merge-base --is-ancestor 54bb16d350f7bc34fafb95438bd64a2397d58bf3 HEAD; then
+            python scripts/qa/atlas_parity04_k_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
           else
-            ap04_ancestry_status=$?
-            if [ "$ap04_ancestry_status" -ne 1 ]; then
-              exit "$ap04_ancestry_status"
+            k_ancestry_status=$?
+            if [ "$k_ancestry_status" -ne 1 ]; then
+              exit "$k_ancestry_status"
             fi
-            python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            if git merge-base --is-ancestor 04373bb910db2e6215cc8bc4212093b649e48456 HEAD; then
+              python scripts/qa/atlas_parity04_f2_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            else
+              ap04_ancestry_status=$?
+              if [ "$ap04_ancestry_status" -ne 1 ]; then
+                exit "$ap04_ancestry_status"
+              fi
+              python scripts/qa/atlas_parity04_doc_ci.py p03-inputs --output-dir .test-output/atlas-parity03-p03
+            fi
           fi
       - name: Preserve specification input evidence
         if: always()
