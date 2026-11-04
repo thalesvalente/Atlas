@@ -219,5 +219,76 @@ class AtlasNewLauncherTests(unittest.TestCase):
                     launcher([], unused_port(), "Notebook", True, False)
 
 
+    def test_compatibility_launcher_does_not_poll_full_api_during_startup(self):
+        script = (ROOT / "scripts/ABRIR-ATLAS-NATIVO.ps1").read_text(encoding="utf-8")
+        self.assertIn("atlas_launch.py", script)
+        self.assertIn("'--source'", script)
+        self.assertIn("'--probe-only'", script)
+        self.assertNotIn("/api/notebook", script)
+        self.assertNotIn("subprocess.Popen", script)
+        self.assertNotIn("urllib.request", script)
+        self.assertNotIn("-c $launch", script)
+
+    @unittest.skipUnless(os.name == "nt", "Windows PowerShell host required")
+    def test_compatibility_launcher_real_powershell_probe_and_clean_exit(self):
+        """Execute the compatibility PS entrypoint with synthetic R4 only.
+
+        This checks argv quoting, native startup, full READY probe, shutdown
+        and read-only preservation. It is NOT evidence for a private Caderno.
+        """
+        import hashlib
+        import shutil
+        import subprocess
+
+        shell = shutil.which("powershell.exe") or shutil.which("pwsh.exe")
+        if shell is None:
+            self.skipTest("PowerShell missing")
+        with tempfile.TemporaryDirectory(prefix="atlas-compat-ps-with-spaces-") as temp:
+            workspace = Path(temp)
+            code = workspace / "R4 synthetic producer"
+            campaigns = code / "src/r4/campaigns"
+            campaigns.mkdir(parents=True)
+            (campaigns / "atlas.py").write_text(
+                "from pathlib import Path\\n"
+                "def project(root):\\n"
+                "    assert Path(root).is_dir()\\n"
+                "    return {'records': [{'id': 'synthetic-probe'}], "
+                "'atlas_integration': {'notebook_revision': 'synthetic-win'}}\\n",
+                encoding="utf-8",
+            )
+            notebook = workspace / "notebook test only"
+            notebook.mkdir()
+            marker = notebook / "R4-WORKSPACE.json"
+            marker.write_text('{"workspace_name":"synthetic"}', encoding="utf-8")
+            original = notebook / "read-only-record.bin"
+            original.write_bytes(b"synthetic-notebook-source-unchanged")
+            digest = hashlib.sha256(original.read_bytes()).hexdigest()
+            output = workspace / "new output with spaces"
+            port = unused_port()
+            command = [
+                shell, "-NoProfile", "-NonInteractive", "-File",
+                str(ROOT / "scripts/ABRIR-ATLAS-NATIVO.ps1"),
+                "-CodeRoot", str(code),
+                "-NotebookRoot", str(notebook),
+                "-Output", str(output),
+                "-Port", str(port),
+                "-NoOpen", "-ProbeOnly",
+            ]
+            env = dict(os.environ, PYTHONUTF8="1")
+            completed = subprocess.run(command, cwd=ROOT, env=env, timeout=120,
+                                       capture_output=True, text=True,
+                                       encoding="utf-8", errors="replace", check=False)
+            self.assertEqual(completed.returncode, 0,
+                             completed.stdout[-1000:] + completed.stderr[-1500:])
+            self.assertIn("ATLAS_NOVO_READY:", completed.stdout)
+            self.assertTrue((output / "ro-crate-metadata.json").is_file())
+            self.assertEqual(hashlib.sha256(original.read_bytes()).hexdigest(), digest)
+            self.assertEqual(sorted(notebook.iterdir()), sorted([marker, original]))
+            with socket.socket() as check:
+                check.settimeout(2)
+                self.assertNotEqual(check.connect_ex(("127.0.0.1", port)), 0,
+                                    "Compatibility launcher left an orphan server")
+
+
 if __name__ == "__main__":
     unittest.main()
