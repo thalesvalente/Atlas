@@ -51,7 +51,35 @@ tinha revisão anterior e não foi usado como denominador. P05 e coordenação
 inspecionaram imagens reais desktop/mobile; a jornada contextual completa foi
 executada sem inventar vínculos, inclusive retorno à ocorrência original.
 
-Este sucessor altera somente documentação. Exige atestação de igualdade dos
+O encerramento daquele ciclo alterou somente documentação. Exige atestação de igualdade dos
 bytes executáveis e suas próprias Actions/Codex no HEAD final, publicados na
 PR #25. T015/T016 e R006/R010/R012/R014/R016 estão reconciliadas na matriz
 [final-close.md](final-close.md); aceite humano permanece separado.
+
+## Composição final de grafo e aplicação — 2026-11-04
+
+O código 0cd96bce6f275a187ed2baf790793b77b5ae18e3 sucede os recibos históricos.
+PR26/PR27 e correções por owner foram integradas com autoria/cherry-pick -x.
+Foram corrigidos a medição quadrática de labels, foco em acionadores recriados
+e treeitems, callbacks pendentes após fechar e paginação de alvos contextuais.
+A API adicional cancelPendingSelection() cancela apenas notificação; seleção,
+câmera, texto integral e identidade permanecem preservados. CI exige a API real.
+
+Actions: 41766058052 (2), 41766058186 (6), 41766058176 (5) e 41766058128 (1),
+todos SUCCESS no código acima. Codex completed sem findings, recibo 6621614930.
+Cinco harnesses instalados passaram 105 checks (14/17/8/15/51), sem JS ou
+requisições externas. P05 não autora verificou 32 arquivos iguais, 119 testes
+por modo (118 PASS/1 SKIP Windows), 13 grupos no Caderno real, 21 viewports,
+12 casos de foco/timer e três de paginação do registro real tardio; exports
+globais/tabelas exatos. As 684 fontes/625162319 bytes ficaram sem deltas.
+
+P05 e coordenação inspecionaram imagens reais desktop/mobile, tabelas e
+Relações, além da referência original composta sobre o mesmo snapshot.
+O teste sintético de paginação abrange quatro tipos; a reprodução real foi
+em registros. Uma falha inicial de preflight do harness scratch seguida por
+rerun isolado PASS permanece registrada, sem causa inferida ou apagamento.
+
+Este último sucessor altera somente os ledgers da Feature004. Requer sua
+própria CI/Codex, atestação dos 32 arquivos públicos e recibo do comando Windows;
+o recibo terminal na PR25 fixa o HEAD final. T015/T016 e
+R006/R010/R012/R014/R016 não são reabertas; aceite humano segue pendente.

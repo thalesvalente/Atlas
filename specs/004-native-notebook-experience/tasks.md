@@ -63,5 +63,12 @@ não reabrem T001–T014 nem tornam um recibo antigo prova de um SHA novo.
 
 ## Phase 6 — composição do handoff funcional da árvore PR #26
 
-- [ ] T026 Integrar os commits qualificados 76875b4/f985276 sobre cbf4b62, preservando autoria/API/identidades e ownership: grade de ramos, leitura a partir de 85%, minimapa estrutural, caminho ancestral, busca/seleção e teclado. Registrar revisão independente e corrigir somente findings materiais.
-- [ ] T027 Incluir a suíte exclusiva do grafo na CI sobre o wheel instalado; requalificar a composição completa com negativos, Chromium, Windows/Ubuntu, Codex e P05 não autora no Caderno real. Substituir o recibo terminal somente depois dos gates, preservando o recibo cbf4b62 como histórico.
+- [x] T026 Integrar 76875b4/f985276 e a correção de medição limitada 84e9382, preservando autoria/API/identidades: grade de ramos, escala legível mínima de 85%, minimapa, caminho ancestral e busca integral. O código aa4a25f recebeu sua própria CI 13/13, Codex e P05 no Caderno real; esse recibo permanece histórico.
+- [x] T027 Incluir o grafo instalado na CI e requalificar a composição. O código final 0cd96bc inclui a API aditiva cancelPendingSelection() de 84b032c, que cancela somente a notificação pendente; 15 gates do grafo e nove contraprovas obrigatórias de cancelamento na aplicação passaram. Seleção visual, câmera, teclado, locate e destroy foram preservados.
+
+## Phase 7 — aplicação não gráfica e fechamento da composição
+
+- [x] T028 Integrar seletivamente a PR #27 (c636f29/40388b5) e o reparo autoral 28892df sobre a base do integrador d9b05c5. Entregues foco/seleção/estados vazios, NULL versus vazio/ausência/UNKNOWN, reflow e exports exatos. Rota CSS única e pin exato de server.py mantêm os negativos do auditor. Nenhum delta de protocolo, leitor, launcher ou blobs P03.
+- [x] T029 Qualificar 0cd96bce6f275a187ed2baf790793b77b5ae18e3: 14/14 Actions Windows/Ubuntu normal/-O, 105 verificações Chromium/Chrome, Codex completed/zero findings e P05 não autora. P05 executou 119 testes por modo, 13 grupos no host, 21 viewports, 12 casos reais de foco/timer e três de paginação do registro tardio; exports exatos e fontes intactas. O encerramento documental exige atestação dos 32 arquivos e CI/review próprios no HEAD resultante; o recibo terminal da PR #25 fixa o SHA e o comando real, sem assinatura circular em commit.
+
+Os findings 4463040279, 4463092564, 4463092566 e P05_REAL_RECORD_PAGINATION_2a381 foram corrigidos com contraprovas antes/depois. O teste real de paginação confirmou registros; recursos/relações/coleções receberam contraprovas sintéticas, sem alegação de reprodução real nesses tipos. T015/T016 e R006/R010/R012/R014/R016 permanecem quitadas no escopo de engenharia. Aceite humano e promoção mantêm gates próprios.

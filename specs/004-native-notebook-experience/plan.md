@@ -75,3 +75,21 @@ A suíte gráfica antes executada localmente entra no gate Chromium da composiç
 usando os assets do wheel instalado. P05 requalifica o produto completo no
 snapshot real autorizado; Codex e Actions examinam o novo SHA integrado. O
 recibo anterior permanece histórico e não concede aceite à nova composição.
+
+### Fechamento da composição — 2026-11-04
+
+PR #27 e correções autorais de P01/P02 convergiram por cherry-pick -x no código
+0cd96bc. A interface permanece compatível e acrescenta
+`mountGraph(...).cancelPendingSelection()`: o host cancela a notificação de
+600 ms ao fechar detalhes ou pressionar Escape, inclusive com painel oculto,
+sem apagar seleção, câmera ou dados. Ao retornar de vínculos, o host recupera
+o treeitem por UID/data-native-node; em listas posiciona a página da população
+destino após limpar filtros, preservando a identidade da ocorrência.
+
+O workflow exclusivo application-ux exige a API real por
+`--require-graph-cancel`; não há skip implícito. A composição recebeu 14 jobs
+terminais, 105 checks de navegador, Codex e QA não autora no host. A matriz
+única permanece em final-close.md; recibos cbf4b62/aa4a25f são históricos e
+2a381 tem findings reproduzidos, não promoção. O sucessor final é apenas
+documental e exige atestação dos bytes, Actions/review próprios e recibo do
+comando Windows. Dados/capturas reais continuam fora de Git/Actions.
