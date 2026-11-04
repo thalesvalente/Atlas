@@ -1,0 +1,5 @@
+b5655859778bed08a6ccd318974b7df9f753fd245409062b52703e91d57055db  .github/workflows/atlas-parity04-k-successor.yml
+7fd15f754d0c3b2208b9ae7f767207ae2beef68cbbe416d1025c5ec5baecf678  docs/missions/atlas-parity-04/f4-c4-k-successor/README.md
+25f35f3deb7c2b355d3e62081129b50fe23a85cd7edb207ccf09bb5954a742e9  docs/missions/atlas-parity-04/f4-c4-k-successor/SOURCE-POLICY.json
+9073f060306095137e2db9fc2abc274d98da6bd847a9fae739c6bfb457391dd8  scripts/qa/atlas_parity04_k_doc_ci.py
+8aec1df011b56d8a882df1a202a0f88924d0d2964440bb5583b116a6727102b9  tests/qa/test_atlas_parity04_k_doc_ci.py
