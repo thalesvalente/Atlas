@@ -32,8 +32,11 @@ try{
   await family.click();
   const expandedRecords=page.locator('.r4-map-record');
   assert.equal(await expandedRecords.count(),2);
-  await expandedRecords.first().click();
-  assert.match(await page.locator('#native-detail-body').innerText(),/Registro/);
+  // Choose the exact declared record, not the first item sorted by title
+  // (the second synthetic record contains hostile HTML-looking text).
+  await page.locator('.r4-map-record[aria-label="Registro A"]').click();
+  assert.match(await page.locator('#native-detail-body').innerText(),/Registro A/);
+  assert.equal(await page.evaluate(()=>window.nativeInjected),undefined);
   await page.locator('#native-close-detail').click();
   await page.getByRole('button',{name:'Nós estruturais do Caderno'}).click();
   assert.equal(await page.locator('.r4-map').count(),0);
