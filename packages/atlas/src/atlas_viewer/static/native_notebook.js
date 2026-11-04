@@ -3,7 +3,7 @@ import {mountGraph} from './native_graph.js';
 import {buildNativeNavigation} from './native_navigation.js';
 import {mountLineage} from './native_lineage.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-const state={sources:[],source:null,pane:'tree',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[]};
+const state={sources:[],source:null,pane:'tree',treeMode:'structural',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[]};
 const el=(tag,text=null,cls='')=>{const n=document.createElement(tag);if(text!==null)n.textContent=String(text);if(cls)n.className=cls;return n;};
 const button=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
 let detailTrigger=null;
@@ -87,7 +87,7 @@ function exactOccurrenceJSON(e){
     head.slice(offset+1);
 }
 function navigation(){return state.navigation??=buildNativeNavigation(entries());}
-function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,page:state.page,table:state.table,columnPage:state.columnPage,detail:state.detail,search:$('native-search').value,family:$('native-family').value,status:$('native-status').value};}
+function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,treeMode:state.treeMode,page:state.page,table:state.table,columnPage:state.columnPage,detail:state.detail,search:$('native-search').value,family:$('native-family').value,status:$('native-status').value};}
 function pagedLinks(host,items,draw){
   let page=0;const content=el('div'),controls=el('div',null,'pager');host.append(content,controls);
   const show=()=>{content.replaceChildren();for(const item of items.slice(page*40,(page+1)*40))content.append(draw(item));controls.replaceChildren();if(items.length>40){const previous=button('← Vínculos',()=>{page--;show();}),next=button('Vínculos →',()=>{page++;show();});previous.disabled=page===0;next.disabled=(page+1)*40>=items.length;controls.append(previous,el('span',`${page*40+1}–${Math.min((page+1)*40,items.length)} de ${items.length}`),next);}};show();
@@ -96,6 +96,7 @@ function openOccurrence(uid){
   const target=navigation().byUid.get(uid);if(!target)return;
   if(state.detail)state.history.push(currentContext());state.detail=null;
   state.pane=({node:'tree',record:'records',table:'tables',row:'tables',asset:'assets',relation:'relations',collection:'coverage'})[target.kind]||'coverage';
+  if(target.kind==='node')state.treeMode='structural';
   state.page=0;state.columnPage=0;
   if(target.kind==='table'||target.kind==='row')state.table=target.table_uid||target.uid;
   for(const id of ['native-search','native-family','native-status'])$(id).value='';
@@ -111,7 +112,7 @@ function openOccurrence(uid){
 function returnToSelection(){
   const saved=state.history.pop();if(!saved)return;
   if(saved.source!==state.source?.id||saved.snapshot!==state.source?.metadata_sha256){state.history=[];message('O snapshot mudou; selecione novamente a ocorrência.',true);return;}
-  Object.assign(state,{pane:saved.pane,page:saved.page,table:saved.table,columnPage:saved.columnPage,detail:null});
+  Object.assign(state,{pane:saved.pane,treeMode:saved.treeMode,page:saved.page,table:saved.table,columnPage:saved.columnPage,detail:null});
   $('native-search').value=saved.search;$('native-family').value=saved.family;$('native-status').value=saved.status;
   render();const target=navigation().byUid.get(saved.detail);if(target){if(state.pane==='tree'&&state.graph)state.graph.locate(target.uid);detail(target,false);}
 }
@@ -140,14 +141,38 @@ function detail(e,remember=true,moveFocus=true){
   const full=exactOccurrenceJSON(e);$('native-detail').hidden=false;const host=$('native-detail-body');host.replaceChildren();
   if(state.history.length){const back=button('← Voltar à seleção anterior',returnToSelection);back.dataset.testid='native-context-back';host.append(back);}
   host.append(el('h3',e.title),el('p',e.kind+' · '+e.group,'muted'));const d=el('dl');
-  for(const[k,v]of [['Fonte',state.source.name||state.source.id],['Revisão',state.source.revision],['UID de consulta',e.uid],['ID original',declared(e,'native_id')],['Chave estrutural',declared(e,'source_key')],['Parente declarado',declared(e,'parent_key')],['Resolução',e.parent_resolution??'Não aplicável'],['Pointer',e.pointer]])d.append(el('dt',k),el('dd',v??'Não declarado'));
-  for(const f of e.fields)d.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));const pre=el('pre',full);pre.dataset.testid='native-raw';
-  host.append(d,relatedOccurrences(e),el('h3','Valor original (JSON exato)'),pre,button('Exportar esta ocorrência',()=>download('atlas-occurrence.json',full)));
+  for(const[k,v]of [['ID original',declared(e,'native_id')],['Família',declared(e,'family')],['Estado declarado',declared(e,'status')],['Pointer',e.pointer],['Fonte',state.source.name||state.source.id],['Revisão',state.source.revision]])d.append(el('dt',k),el('dd',v??'Não declarado'));
+  const technical=el('details',null,'application-identity'),identity=el('dl');technical.append(el('summary','Identidade, fonte e posição no snapshot'));
+  for(const[k,v]of [['UID de consulta',e.uid],['Chave estrutural',declared(e,'source_key')],['Parente declarado',declared(e,'parent_key')],['Resolução',e.parent_resolution??'Não aplicável']])identity.append(el('dt',k),el('dd',v??'Não declarado'));
+  technical.append(identity);const fields=el('dl',null,'application-fields');
+  for(const f of e.fields)fields.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));const pre=el('pre',full);pre.dataset.testid='native-raw';
+  host.append(d,relatedOccurrences(e),technical,el('h3','Campos originais'),fields,el('h3','Valor original (JSON exato)'),pre,button('Exportar esta ocorrência',()=>download('atlas-occurrence.json',full)));
   markSelection();if(moveFocus&&state.pane!=='tree')$('native-detail-title').focus();
 }
 function pager(host,total,pageSize=100){const pages=Math.max(1,Math.ceil(total/pageSize));state.page=Math.min(state.page,pages-1);const p=el('div',null,'pager'),prev=button('← Anterior',()=>{state.page--;closeDetail();rerenderFocus(state.page===0?'Próxima →':'← Anterior');}),next=button('Próxima →',()=>{state.page++;closeDetail();rerenderFocus(state.page+1>=pages?'← Anterior':'Próxima →');});prev.disabled=state.page===0;next.disabled=state.page+1>=pages;p.append(prev,el('span',`Página ${state.page+1}/${pages} · ${total} ocorrências na seleção`),next);host.append(p);return state.page*pageSize;}
 function grid(host,rows,columns){const wrap=el('div',null,'table-scroll'),table=el('table'),head=el('thead'),hr=el('tr');wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Tabela de ocorrências; role horizontalmente para consultar as colunas');columns.forEach(c=>{const th=el('th',c[0]);th.scope='col';hr.append(th);});head.append(hr);table.append(head);const body=el('tbody');for(const e of rows){const tr=el('tr');tr.dataset.uid=e.uid;columns.forEach((c,i)=>{const td=el('td');if(i===0)td.append(button(c[1](e),()=>detail(e)));else td.textContent=c[1](e);tr.append(td);});body.append(tr);}table.append(body);wrap.append(table);host.append(wrap);}
-function showTree(host){const all=entries().filter(e=>e.kind==='node');const nodes=all.length?all:entries().filter(e=>e.kind==='record');host.append(el('h2','Árvore e linhagem'));if(!nodes.length){host.append(el('p','Nenhum nó estrutural declarado neste pacote.','empty'));return;}const gh=el('div');host.append(gh);state.graph=mountGraph(gh,nodes,detail);const selected=nodes.filter(e=>matches(e));host.append(el('p',`${selected.length} de ${nodes.length} nós encontrados. A busca alcança todas as ocorrências, inclusive fora da janela gráfica.`,'muted'));const offset=pager(host,selected.length,40),links=el('div',null,'graph-results');for(const n of selected.slice(offset,offset+40))links.append(button(n.title,()=>state.graph.locate(n.uid)));host.append(links);}
+function showTree(host){
+  const all=entries().filter(e=>e.kind==='node'),records=entries().filter(e=>e.kind==='record');
+  let nodes=all.length?all:records;host.append(el('h2','Árvore e linhagem'));
+  const tools=el('div',null,'application-tree-organization'),label=el('label','Organização da árvore'),mode=el('select');mode.id='native-tree-mode';
+  for(const[value,text]of [['structural','Estrutura completa do snapshot'],['families','Registros por família declarada']]){const option=el('option',text);option.value=value;mode.append(option);}
+  mode.value=state.treeMode;label.append(mode);tools.append(label);host.append(tools);
+  mode.addEventListener('change',()=>{state.treeMode=mode.value;state.page=0;closeDetail();render();$('native-tree-mode').focus();});
+  if(state.treeMode==='families'){
+    const groups=new Map();nodes=[];
+    // These containers exist only in this view. Source entries, IDs and
+    // scientific parentage remain untouched and exports use original bytes.
+    for(const record of records){const family=record.family,key=JSON.stringify(family);if(!groups.has(key)){
+      const group={uid:'ui-family:'+groups.size,title:family===null||family===undefined?'Família não declarada':family===''?'Família vazia declarada':family,kind:'collection',group:'$ui-families',parent_uid:null,native_id:null,source_key:null,fields:[]};groups.set(key,group);nodes.push(group);
+    }nodes.push({...record,parent_uid:groups.get(key).uid});}
+    host.append(el('p','Agrupamento visual por família declarada. Não altera parentesco científico. A estrutura integral permanece na outra organização.','muted'));
+  }
+  if(!nodes.length){host.append(el('p','Nenhum nó estrutural declarado neste pacote.','empty'));return;}
+  const gh=el('div');host.append(gh);state.graph=mountGraph(gh,nodes,node=>{const original=navigation().byUid.get(node.uid);if(original)detail(original);});
+  const population=state.treeMode==='families'?records:nodes,selected=population.filter(e=>matches(e));
+  host.append(el('p',`${selected.length} de ${population.length} ${state.treeMode==='families'?'registros':'nós'} encontrados. A busca alcança todas as ocorrências, inclusive fora da janela gráfica.`,'muted'));
+  const offset=pager(host,selected.length,40),links=el('div',null,'graph-results');for(const n of selected.slice(offset,offset+40))links.append(button(n.title,()=>state.graph.locate(n.uid)));host.append(links);
+}
 function showRecords(host,kind='record'){const all=entries().filter(e=>e.kind===kind),rows=all.filter(e=>matches(e));host.append(el('h2',kind==='relation'?'Relações declaradas':'Registros do Caderno'));host.append(el('p',kind==='relation'?'Cada ocorrência mantém seus endpoints, tipo e evidência no detalhe. Nenhuma seta é inferida de datas.':'Identificadores repetidos são preservados como ocorrências separadas.','muted'));population(host,rows,all.length,'ocorrências');if(!rows.length)return;const offset=pager(host,rows.length);grid(host,rows.slice(offset,offset+100),[['Título / ocorrência',e=>e.title],['ID original',e=>declared(e,'native_id')],['Família',e=>declared(e,'family')],['Estado',e=>declared(e,'status')],['Coleção',e=>e.group]]);}
 function showTables(host){
   const allTables=entries().filter(e=>e.kind==='table'),byTable=new Map(allTables.map(t=>[t.uid,[]]));host.append(el('h2','Tabelas de resultados'));
@@ -205,6 +230,7 @@ function render(){
   document.querySelectorAll('[data-pane]').forEach(b=>{if(b.dataset.pane===state.pane)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
   const filters=[$('native-search').value.trim()&&'Busca: '+$('native-search').value.trim(),$('native-family').value&&'Família: '+$('native-family').value,$('native-status').value&&'Estado: '+$('native-status').value].filter(Boolean);
   $('native-selection').textContent=filters.length?filters.join(' · '):'Todas as ocorrências da revisão selecionada';$('native-clear').disabled=!filters.length;
+  $('native-selection').hidden=!filters.length;
   if(state.source?.status!=='READY'){host.append(el('p',state.source?'Esta fonte não está pronta para consulta. Verifique as alterações ou atualize o snapshot explicitamente.':'Nenhuma fonte disponível. Abra um pacote na entrada local do Atlas ou consulte a visão do protocolo.','empty'));return;}
   ({tree:showTree,records:showRecords,tables:showTables,relations:showRelations,assets:showAssets,timeline:showTimeline,coverage:showCoverage})[state.pane](host);markSelection();
 }
@@ -220,7 +246,7 @@ function selectSource(){
   }
   $('native-download').disabled=state.source?.status!=='READY';$('native-source').disabled=!state.sources.length;$('native-rebuild').disabled=!state.sources.length;
   $('native-revision').textContent=state.source?.revision?'Revisão: '+state.source.revision:'';
-  message(state.source?.status==='READY'?`${state.source.name} — payloads e recomposição verificados. Snapshot explícito; use Atualizar para reler.`:(state.source?.status??'Nenhuma fonte')+' — '+(state.source?.errors||[]).join(', '),state.source?.status!=='READY');render();
+  message(state.source?.status==='READY'?'Payloads e recomposição verificados · use Atualizar para reler.':(state.source?.status??'Nenhuma fonte')+' — '+(state.source?.errors||[]).join(', '),state.source?.status!=='READY');render();
 }
 async function load(){
   const request=++state.request;$('native-refresh').disabled=true;$('native-source').disabled=true;$('native-download').disabled=true;$('native-rebuild').disabled=true;$('native-content').setAttribute('aria-busy','true');message('Verificando os pacotes selecionados…');

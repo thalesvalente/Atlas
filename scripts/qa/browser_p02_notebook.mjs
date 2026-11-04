@@ -18,6 +18,7 @@ try{
   const page=await context.newPage();page.on('pageerror',error=>report.errors.push(error.message));
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='2');
+  await page.locator('.application-provenance>summary').click();
   const nodeTotal=await page.locator('#native-node-count').innerText(),globalSearch=page.locator('#native-search');
   assert.equal(await page.getByRole('treeitem',{name:'Nó global final fora do foco',exact:true}).count(),0);
   await globalSearch.fill('__P02_NO_NODE_MATCHES__');

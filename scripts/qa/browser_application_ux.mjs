@@ -26,6 +26,15 @@ try{
   const css=await page.request.get(origin+'/native_application.css');assert.equal(css.status(),200);assert.match(css.headers()['content-type'],/text\/css/);
   assert.equal(await page.locator('iframe').count(),0);
   check('installed_application_css_and_native_text_only_assets');
+  const desktopGraph=await page.locator('.graph-svg').boundingBox();
+  assert.ok(desktopGraph.y<620,'The initial desktop graph must leave at least 380px of work surface in a 1000px viewport');
+  const disclosure=page.locator('.application-provenance');
+  assert.equal(await disclosure.getAttribute('open'),null);
+  await disclosure.locator('summary').click();
+  assert.equal(await page.locator('#native-record-count').isVisible(),true);
+  assert.equal(await page.locator('#native-revision').isVisible(),true);
+  await disclosure.locator('summary').click();
+  check('desktop_work_surface_above_fold_population_revision_still_accessible');
   const pane=name=>page.locator('[data-pane="'+name+'"]');
   const screenshot=async name=>{const filename=reportPath.replace('.json','-'+name+'.png');await page.screenshot({path:filename,fullPage:name==='desktop'});report.screenshots.push(path.basename(filename));};
   const download=async(label,digest)=>{const waiting=page.waitForEvent('download');await page.getByRole('button',{name:label,exact:true}).click();const item=await waiting,bytes=await fs.readFile(await item.path());assert.equal(sha(bytes),digest,label+' must export the entire exact selection');return bytes;};
@@ -105,6 +114,23 @@ try{
     assert.equal(supported,true,'--require-graph-cancel requires the composed cancelPendingSelection API');
     check('required_graph_cancel_api_is_available');
   }
+  await page.locator('#native-tree-mode').selectOption('families');
+  const familyRecord=page.getByRole('treeitem',{name:'Registro principal',exact:true});
+  await familyRecord.focus();await page.keyboard.press('Enter');
+  assert.match(await page.locator('[data-testid="native-raw"]').innerText(),/"native_id":null/);
+  assert.doesNotMatch(await page.locator('[data-testid="native-raw"]').innerText(),/ui-family:/);
+  await page.locator('.application-identity summary').click();
+  assert.equal(await page.locator('#native-detail-body').getByText('/records/0',{exact:true}).isVisible(),true);
+  await page.locator('[data-testid="native-context-links"]').getByText(/^Referências recebidas/).click();
+  await page.locator('[data-testid="native-context-links"]').getByRole('button',{name:/^Tabela da aplicação.*record_id/}).click();
+  await page.locator('[data-testid="native-context-back"]').click();
+  assert.equal(await page.locator('#native-tree-mode').inputValue(),'families');
+  await page.keyboard.press('Escape');
+  assert.equal(await familyRecord.evaluate(node=>document.activeElement===node),true);
+  await download('Exportar projeção exata ↓',expected.projection_sha256);
+  await page.locator('#native-tree-mode').selectOption('structural');
+  assert.equal(await page.getByRole('treeitem',{name:'Raiz sintética',exact:true}).count(),1);
+  check('family_view_uses_original_occurrences_identity_export_bytes_and_restores_structural_tree');
   await pane('records').click();
   const record=page.locator('#native-content tbody').getByRole('button',{name:'Registro principal',exact:true});
   await record.focus();await page.keyboard.press('Enter');
@@ -188,7 +214,9 @@ try{
   }
   check('source_switch_clears_scope_and_all_empty_sections_are_explicit');
   await page.locator('#native-source').selectOption('source-3');await pane('tree').click();
+  await disclosure.locator('summary').click();
   assert.equal(await page.locator('#native-node-count').innerText(),'0');
+  await disclosure.locator('summary').click();
   const fallbackRoot=page.getByRole('treeitem',{name:'Registro raiz sem nós',exact:true});
   await fallbackRoot.focus();await page.keyboard.press('Enter');
   assert.equal(await fallbackRoot.evaluate(node=>document.activeElement===node),true,'Record fallback must retain graph keyboard ownership');
@@ -212,6 +240,8 @@ try{
   await page.locator('#native-source').selectOption('source-1');
   for(const width of [1440,390,320]){
     await page.setViewportSize({width,height:1000});
+    await pane('tree').click();await page.evaluate(()=>window.scrollTo(0,0));
+    if(width<800){assert.ok((await page.locator('#native-content').boundingBox()).y<750,'Mobile navigation and filters must not bury the work surface');check('mobile_work_surface_reachable_without_full_screen_of_navigation_'+width);}
     for(const name of ['records','tables','relations','assets','timeline','coverage']){
       await pane(name).click();assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),name+' overflows '+width);
     }
@@ -251,7 +281,9 @@ try{
   await page.setViewportSize({width:1440,height:1000});
   const failed='**/api/notebook';await page.route(failed,route=>route.fulfill({status:503,contentType:'application/json',body:'{}'}));
   await page.locator('#native-refresh').click();await page.waitForFunction(()=>document.getElementById('native-notice')?.textContent.includes('503'));
+  await disclosure.locator('summary').click();
   assert.equal(await page.locator('#native-source option').count(),0);assert.equal(await page.locator('#native-record-count').innerText(),'0');
+  await disclosure.locator('summary').click();
   assert.ok(await page.locator('#native-download').isDisabled());assert.ok(await page.locator('#native-detail').isHidden());
   await page.unroute(failed);await page.locator('#native-refresh').click();
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='5');

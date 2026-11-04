@@ -16,6 +16,7 @@ try{
   const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
   await page.goto(url,{waitUntil:'networkidle'});await page.getByTestId('native-notebook-nav').click();
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='2');
+  await page.locator('.application-provenance>summary').click();
   assert.equal(await page.locator('iframe').count(),0);
   assert.match(await page.locator('#native-revision').innerText(),/test-invented-revision/);
   assert.equal(await page.locator('#native-node-count').innerText(),'1202');
