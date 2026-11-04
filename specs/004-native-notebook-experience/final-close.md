@@ -12,7 +12,10 @@ Spec Kit CLI 1.2.3 e integração Codex conferidos no Windows; setup_plan.py,
 setup_tasks.py e check_prerequisites.py realmente executados com Feature004
 explícita e NO_PERSIST, sem alteração de feature.json. Checklist de requisitos:
 5/5 completo. Constitution ARC-01–09, ADR0001/0002 e AP04 lidos.
-Darwin local `adw_local` 0.0.1 executou doctor somente leitura; não possui o
+Darwin local `adw_local` 0.0.1 executou doctor somente leitura e gerou plano
+auxiliar pinado ao spec/blob/base para o recorte de código; esse plano não foi
+despachado nem usado para criar agentes/worktrees. A tentativa de incluir
+workflow foi recusada como PROTECTED_SCOPE, sem mudar a política. O auxiliar não possui o
 compilador de prompt V0/v0.03 neste ambiente. Nenhum prompt compilado é alegado
 como execução; TASKGEN/Source Bridge não são necessários para estes patches.
 PLAN/EXECUTE/REVIEW/INTEGRATE/QA/HANDOFF são coordenados em chat, com subagentes
@@ -39,7 +42,7 @@ FORA DO ACEITE preserva alternativa/futuro sem promovê-lo a funcionalidade pron
 | PAR008 timeline; PAR009 cobertura; PAR010 armazenamento consultivo | IMPLEMENTADA | Visões e campos declarados preservados; sem inferir causalidade, denominador, disponibilidade externa ou comandos de limpeza. |
 | PAR011 acesso externo; PAR012 independência/padrões; PAR015 integridade | IMPLEMENTADA | NativeView004 reutiliza project() externo; viewer/SDK independentes; requalificar fontes imutáveis e negativos. |
 | PR16 F3A; PR17 F3B | FORA DO ACEITE | Reuso seletivo: componente público P03 já incorporado por blob; F3A descriptor0.2.0 não substitui identidade estrutural da NativeView. Sem merge indiscriminado. |
-| PR18/19/20/21/22 C2-D/reader003/C2-B/C2-K/L0 | BLOQUEADA | P04 reconcilia alternativas separadas. Nenhum path/implementação/documentação C2-K não aprovada entra na candidata. |
+| PR18/19/20/21/22 C2-D/reader003/C2-B/C2-K/L0 | FORA DO ACEITE | Alternativas separadas, BLOQUEADAS nas próprias frentes. C2-B6a3a32bf tem AppContainer mas CI41374978935 falha checker histórico, finding4438318889 e aquisição zero-byte não qualificada. C2-K508ccb25 é proposta não aprovada, CI41361052428 falha guard e revisão ainda tem finding parent_key. Nenhum path/implementação/documentação C2-K entra na candidata004. |
 | PAR013 HL7/FHIR; issue2 BIM/IFC/IDS/SHACL | FORA DO ACEITE | Extensibilidade/futuro, sem alegar conformidade implementada. |
 | Estabilização ADR0002, aceite humano, G8/G9 | BLOQUEADA | Aceite/protocolo, merge/release/deploy e retenção têm autorizações próprias; esta missão não as concede. |
 
