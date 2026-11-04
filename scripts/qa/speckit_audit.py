@@ -14,9 +14,18 @@ SKILLS = {"analyze", "checklist", "clarify", "constitution", "converge",
           "implement", "plan", "specify", "tasks", "taskstoissues"}
 EDITABLE_ORIGINALS = {".gitignore", ".specify/toolchain.json", "README.md",
                       "THIRD_PARTY_NOTICES.md"}
-# CLOSE01 authorizes only presentation and its existing browser/CI harness.
-# The default setup audit remains strict; persisted contracts and governance
-# are never exempted by this feature-specific opt-in.
+# CLOSE01 preserves its existing presentation scope. Feature 004 authorizes
+# endpoint/navigation and regression changes by EXACT candidate blob, not an
+# unrestricted writable path. Negative mutation tests remain mandatory.
+# These pins scope integrity; they do not confer independent approval.
+ORIGINAL_BRIDGE_BLOBS = {
+    "packages/atlas/src/atlas_viewer/server.py":
+        "3926e308ffdf6fa5d2723622830d8ee0e682825c",
+    "packages/atlas/src/atlas_viewer/static/index.html":
+        "b3f4bc39c61c3a57c4b99581dc0bbe53fef12abe",
+    "tests/viewer/test_catalog_server.py":
+        "6de06c6ff842a139fbe2dd55331e3402a29654af",
+}
 PRESENTATION_ORIGINALS = {
     "packages/protocol/src/caderno_protocol/read_model.py",
     "packages/atlas/src/atlas_viewer/static/app.js",
@@ -25,6 +34,18 @@ PRESENTATION_ORIGINALS = {
     "scripts/ci/run_browser.py",
     ".github/workflows/atlas021.yml",
 }
+
+
+def git_blob_id(content: bytes) -> str:
+    """Git blob identity for exact scope checks, not scientific authenticity."""
+    header = f"blob {len(content)}\0".encode("ascii")
+    return hashlib.sha1(header + content).hexdigest()
+
+
+def exact_original_bridge(name: str, content: bytes) -> bool:
+    """Only explicitly scoped candidate bytes are allowed to change baseline."""
+    expected = ORIGINAL_BRIDGE_BLOBS.get(name)
+    return expected is not None and git_blob_id(content) == expected
 
 
 def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dict:
@@ -42,6 +63,9 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dic
         if not path.is_file() or path.read_bytes() != expected:
             if allow_presentation_delta and name in PRESENTATION_ORIGINALS and path.is_file():
                 authorized_changes.append(name)
+            elif (allow_presentation_delta and path.is_file()
+                  and exact_original_bridge(name, path.read_bytes())):
+                authorized_changes.append(name)
             else:
                 errors.append(f"Preserved baseline changed: {name}")
         else:
@@ -53,7 +77,6 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dic
 def audit(root: Path, *, allow_presentation_delta: bool = False) -> dict:
     baseline = audit_baseline(root, allow_presentation_delta=allow_presentation_delta)
     errors = baseline["errors"]
-
     managed = 0
     for integration, expected_count in (("codex", 10), ("speckit", 18)):
         manifest = json.loads((root / f".specify/integrations/{integration}.manifest.json").read_text(encoding="utf-8"))
@@ -67,12 +90,10 @@ def audit(root: Path, *, allow_presentation_delta: bool = False) -> dict:
             if not path.is_relative_to(root) or not path.is_file():
                 errors.append(f"Missing or invalid managed path: {name}")
                 continue
-            # The official manifest hashes normalized text (CRLF -> LF).
             content = path.read_text(encoding="utf-8").encode("utf-8")
             if hashlib.sha256(content).hexdigest() != expected_hash:
                 errors.append(f"Managed content changed: {name}")
             managed += 1
-
     actual_skills = {p.parent.name.removeprefix("speckit-")
                      for p in (root / ".agents/skills").glob("speckit-*/SKILL.md")}
     if actual_skills != SKILLS:
@@ -85,7 +106,6 @@ def audit(root: Path, *, allow_presentation_delta: bool = False) -> dict:
         frontmatter = text.split("---", 2)[1]
         if f'name: "speckit-{name}"' not in frontmatter or 'description: "' not in frontmatter:
             errors.append(f"Invalid skill name/description: {name}")
-
     scripts = sorted((root / ".specify/scripts/python").glob("*.py"))
     if len(scripts) != 6:
         errors.append("Expected six official Python scripts")
@@ -108,7 +128,7 @@ def audit(root: Path, *, allow_presentation_delta: bool = False) -> dict:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--allow-presentation-delta", action="store_true",
-                        help="Allow only the six existing presentation/test files authorized by feature 003 CLOSE01.")
+                        help="Allow CLOSE01 presentation scope and exact candidate endpoint/navigation blobs.")
     args = parser.parse_args()
     try:
         report = audit(Path(__file__).resolve().parents[2],

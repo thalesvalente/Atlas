@@ -1,0 +1,339 @@
+"""Generic, change-checked native presentation over explicitly selected crates."""
+from __future__ import annotations
+
+import hashlib
+from io import BytesIO
+import json
+from pathlib import Path
+import re
+import zipfile
+import zlib
+
+from caderno_protocol import load_package
+from caderno_protocol.model import safe_relative_path, types
+from caderno_protocol.storage import (
+    MAX_ARCHIVE_BYTES, MAX_EXPANDED_BYTES, MAX_METADATA_BYTES, MAX_PAYLOAD_BYTES,
+    _regular_bytes, _strict_json,
+)
+from .native_values import entry_values
+
+MEDIA_TYPE = "application/vnd.atlas.native-view+json"
+COMPRESSED_MEDIA_TYPE = "application/vnd.atlas.native-view+zlib"
+MAX_NATIVE_LOGICAL_BYTES = 256 * 1024 * 1024
+VIEW_NS = "https://github.com/thalesvalente/Atlas/ns/presentation#"
+MAX_ENTRIES = 100000
+KINDS = frozenset({"record", "node", "relation", "table", "row", "asset", "collection"})
+
+
+class NativeViewError(ValueError):
+    pass
+
+
+def json_bytes(value: object) -> bytes:
+    return json.dumps(value, ensure_ascii=False, allow_nan=False,
+                      sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def _json_value(raw: str):
+    return _strict_json(("{\"value\":" + raw + "}").encode("utf-8"))["value"]
+
+
+def restore_projection(entries: list[dict]) -> dict:
+    root = None
+    seen = set()
+    for entry in entries:
+        pointer = entry["pointer"]
+        if pointer in seen:
+            raise NativeViewError("NATIVE_DUPLICATE_POINTER")
+        seen.add(pointer)
+        value = _json_value(entry["raw_json"])
+        if pointer == "":
+            if root is not None or not isinstance(value, dict):
+                raise NativeViewError("NATIVE_ROOT_INVALID")
+            root = value
+            continue
+        if root is None or not pointer.startswith("/"):
+            raise NativeViewError("NATIVE_POINTER_ORDER")
+        parts = pointer[1:].split("/")
+        if any(re.search(r"~(?![01])", part) for part in parts):
+            raise NativeViewError("NATIVE_POINTER_ESCAPE")
+        parts = [part.replace("~1", "/").replace("~0", "~") for part in parts]
+        parent = root
+        for key in parts[:-1]:
+            if isinstance(parent, list) and re.fullmatch(r"0|[1-9][0-9]*", key):
+                parent = parent[int(key)]
+            elif isinstance(parent, dict):
+                parent = parent[key]
+            else:
+                raise NativeViewError("NATIVE_POINTER_PARENT")
+        key = parts[-1]
+        if isinstance(parent, list):
+            if not re.fullmatch(r"0|[1-9][0-9]*", key) or int(key) != len(parent):
+                raise NativeViewError("NATIVE_NONCONTIGUOUS_OCCURRENCE")
+            parent.append(value)
+        elif isinstance(parent, dict):
+            if key not in parent:
+                raise NativeViewError("NATIVE_POINTER_UNDECLARED")
+            parent[key] = value
+        else:
+            raise NativeViewError("NATIVE_POINTER_PARENT")
+    if root is None:
+        raise NativeViewError("NATIVE_ROOT_MISSING")
+    return root
+
+
+def validate_entries(entries: list[dict]) -> None:
+    if not isinstance(entries, list) or len(entries) > MAX_ENTRIES:
+        raise NativeViewError("NATIVE_ENTRY_LIMIT")
+    seen = set()
+    keys = {}
+    for e in entries:
+        if not isinstance(e, dict) or e.get("kind") not in KINDS:
+            raise NativeViewError("NATIVE_ENTRY_TYPE")
+        for key in ("uid", "pointer", "group", "title", "raw_json"):
+            if not isinstance(e.get(key), str):
+                raise NativeViewError("NATIVE_ENTRY_FIELD")
+        if not e["uid"] or len(e["uid"]) > 256 or e["uid"] in seen:
+            raise NativeViewError("NATIVE_IDENTITY_COLLISION")
+        seen.add(e["uid"])
+        for key in ("native_id", "source_key", "parent_key", "parent_uid", "table_uid", "family", "status", "date"):
+            if key in e and e[key] is not None and not isinstance(e[key], str):
+                raise NativeViewError("NATIVE_SCALAR_TYPE")
+        fields = e.get("fields")
+        if not isinstance(fields, list) or len(fields) > 4096:
+            raise NativeViewError("NATIVE_FIELDS_LIMIT")
+        for field in fields:
+            if not isinstance(field, dict) or any(not isinstance(field.get(k), str) for k in ("name", "text", "type")):
+                raise NativeViewError("NATIVE_FIELD_TYPE")
+        # Integrity of raw_json alone is insufficient: independently check
+        # every displayed scalar/cell against the original value as well.
+        original = _json_value(e["raw_json"])
+        # The producer emits canonical, sorted, compact JSON. The native UI
+        # reconstructs table rows lexically to preserve large integers, so
+        # alternate whitespace, escaped key spellings, etc must fail closed.
+        # A valid payload digest alone does not prove canonical transport.
+        if json_bytes(original).decode("utf-8") != e["raw_json"]:
+            raise NativeViewError("NATIVE_NONCANONICAL_RAW_JSON")
+        expected = entry_values(original, e["group"], e["kind"])
+        actual_fields = {f["name"]: f for f in fields}
+        if len(actual_fields) != len(fields) or actual_fields != {f["name"]: f for f in expected.pop("fields")}:
+            raise NativeViewError("NATIVE_DISPLAY_FIELDS_MISMATCH")
+        if any(e.get(k) != v for k, v in expected.items()):
+            raise NativeViewError("NATIVE_DISPLAY_VALUE_MISMATCH")
+        if e["kind"] in ("record", "node") and e.get("source_key"):
+            keys.setdefault((e["group"], e["source_key"]), []).append(e["uid"])
+    if sum(e["kind"] == "node" for e in entries) > 10000:
+        raise NativeViewError("NATIVE_NODE_LIMIT")
+    tables = {e["uid"]: e for e in entries if e["kind"] == "table"}
+    table_rows = {uid: 0 for uid in tables}
+    for e in entries:
+        candidates = keys.get((e["group"], e.get("parent_key")), [])
+        resolution = ("RESOLVED" if len(candidates) == 1 else "COLLISION" if candidates else "UNRESOLVED") if e.get("parent_key") else "NOT_DECLARED"
+        parent = candidates[0] if resolution == "RESOLVED" else None
+        if e.get("parent_uid") != parent or e.get("parent_resolution") != resolution:
+            raise NativeViewError("NATIVE_PARENT_MISMATCH")
+        if e["kind"] == "row":
+            table = tables.get(e.get("table_uid"))
+            ordinal = e.get("ordinal")
+            if table is None or type(ordinal) is not int or ordinal < 0 or e["pointer"] != table["pointer"] + "/rows/" + str(ordinal):
+                raise NativeViewError("NATIVE_TABLE_MISSING_OR_MISMATCHED")
+            table_rows[table["uid"]] += 1
+    for uid, table in tables.items():
+        if type(table.get("row_count")) is not int or table["row_count"] != table_rows[uid]:
+            raise NativeViewError("NATIVE_TABLE_ROW_COUNT_MISMATCH")
+
+
+def _reader(path: Path, metadata_digest: str):
+    if path.suffix.lower() in (".zip", ".eln") and not path.is_dir():
+        archive_bytes = _regular_bytes(path, MAX_ARCHIVE_BYTES)
+        archive = zipfile.ZipFile(BytesIO(archive_bytes))
+        try:
+            candidates = [i.filename for i in archive.infolist() if i.filename == "ro-crate-metadata.json" or i.filename.endswith("/ro-crate-metadata.json")]
+            if len(candidates) != 1:
+                raise NativeViewError("NATIVE_METADATA_AMBIGUOUS")
+            prefix = candidates[0][:-len("ro-crate-metadata.json")]
+            def read(name, limit):
+                if safe_relative_path(name) != name:
+                    raise NativeViewError("NATIVE_UNSAFE_PATH")
+                info = archive.getinfo(prefix + name)
+                if info.file_size > limit:
+                    raise NativeViewError("NATIVE_PAYLOAD_LIMIT")
+                return archive.read(info)
+            if hashlib.sha256(read("ro-crate-metadata.json", MAX_METADATA_BYTES)).hexdigest() != metadata_digest:
+                raise NativeViewError("NATIVE_SOURCE_CHANGED")
+            return read, archive.close
+        except Exception:
+            archive.close()
+            raise
+    base = path if path.is_dir() else path.parent
+    metadata = base / "ro-crate-metadata.json" if path.is_dir() else path
+    def read(name, limit):
+        if safe_relative_path(name) != name:
+            raise NativeViewError("NATIVE_UNSAFE_PATH")
+        return _regular_bytes(base / name, limit, base)
+    def finish():
+        if hashlib.sha256(_regular_bytes(metadata, MAX_METADATA_BYTES, base)).hexdigest() != metadata_digest:
+            raise NativeViewError("NATIVE_SOURCE_CHANGED")
+    finish()
+    return read, finish
+
+
+
+def _decode_compressed(raw: bytes, payload: dict) -> bytes:
+    """Decompress one verified File with output quota and exact raw digest.
+
+    The read budget (32 MiB) applies to bytes stored on disk; this logical
+    limit is separate and enforced *before* parsing any expanded payload.
+    """
+    declared_size = payload.get(VIEW_NS + "rawSize")
+    declared_sha = payload.get(VIEW_NS + "rawSha256")
+    if (type(declared_size) is not int or not 1 <= declared_size <= MAX_PAYLOAD_BYTES
+            or not isinstance(declared_sha, str)
+            or not re.fullmatch(r"[0-9a-f]{64}", declared_sha)):
+        raise NativeViewError("NATIVE_COMPRESSED_MANIFEST_INVALID")
+    try:
+        inflater = zlib.decompressobj()
+        content = inflater.decompress(raw, declared_size + 1)
+        # Reject bombs, concatenated frames, corrupted streams and lying
+        # manifests. An early quota stop leaves unconsumed_tail or !eof.
+        if (len(content) > declared_size or not inflater.eof
+                or inflater.unused_data or inflater.unconsumed_tail):
+            raise NativeViewError("NATIVE_COMPRESSED_CHUNK_INVALID")
+        remainder = inflater.flush()
+        if remainder:
+            content += remainder
+        if len(content) != declared_size:
+            raise NativeViewError("NATIVE_COMPRESSED_CHUNK_INVALID")
+    except zlib.error as exc:
+        raise NativeViewError("NATIVE_COMPRESSED_CHUNK_INVALID") from exc
+    if hashlib.sha256(content).hexdigest() != declared_sha:
+        raise NativeViewError("NATIVE_RAW_DIGEST_MISMATCH")
+    return content
+
+def read_source(path: Path, source_id: str, *, expected_metadata: str | None = None) -> tuple[dict, bytes | None]:
+    result = {"id": source_id, "status": "INVALID", "entries": [], "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}
+    try:
+        package = load_package(path)
+        result["metadata_sha256"] = package.metadata_sha256
+        if expected_metadata is not None and package.metadata_sha256 != expected_metadata:
+            raise NativeViewError("NATIVE_SOURCE_CHANGED")
+        if not package.report.valid:
+            result["errors"] = [e.code for e in package.report.errors]
+            return result, None
+        graph = package.document["@graph"]
+        root = next(e for e in graph if e["@id"] == "./")
+        result["name"] = root.get("name", source_id)
+        payloads = [e for e in graph if "File" in types(e)
+                    and e.get("encodingFormat") in (MEDIA_TYPE, COMPRESSED_MEDIA_TYPE)]
+        if not payloads:
+            result["status"] = "NO_NATIVE_PRESENTATION"
+            return result, None
+        version = root.get(VIEW_NS + "version")
+        if version not in ("1", "2"):
+            raise NativeViewError("NATIVE_VERSION_UNSUPPORTED")
+        expected_encoding = COMPRESSED_MEDIA_TYPE if version == "2" else MEDIA_TYPE
+        if any(e.get("encodingFormat") != expected_encoding for e in payloads):
+            raise NativeViewError("NATIVE_ENCODING_MISMATCH")
+        revision = root.get(VIEW_NS + "revision")
+        count = root.get(VIEW_NS + "entryCount")
+        expected_digest = root.get(VIEW_NS + "projectionDigest")
+        if (not isinstance(revision, str) or not revision or len(revision) > 1024
+                or type(count) is not int or not 0 <= count <= MAX_ENTRIES
+                or not isinstance(expected_digest, str) or not re.fullmatch("[0-9a-f]{64}", expected_digest)):
+            raise NativeViewError("NATIVE_MANIFEST_INVALID")
+        declared_logical = root.get(VIEW_NS + "logicalBytes")
+        if version == "2" and (type(declared_logical) is not int
+                               or not 1 <= declared_logical <= MAX_NATIVE_LOGICAL_BYTES):
+            raise NativeViewError("NATIVE_LOGICAL_MANIFEST_INVALID")
+        read, finish = _reader(Path(path), package.metadata_sha256)
+        chunks, total, logical_total = {}, 0, 0
+        try:
+            for payload in payloads:
+                name = payload["@id"]
+                if package.payload_status.get(name, {}).get("status") != "AVAILABLE":
+                    raise NativeViewError("NATIVE_PAYLOAD_NOT_VERIFIED")
+                raw = read(name, MAX_PAYLOAD_BYTES)
+                total += len(raw)
+                if total > MAX_EXPANDED_BYTES or len(raw) != payload.get("contentSize"):
+                    raise NativeViewError("NATIVE_PAYLOAD_LIMIT")
+                if hashlib.sha256(raw).hexdigest() != payload.get("cp:sha256"):
+                    raise NativeViewError("NATIVE_PAYLOAD_CHANGED")
+                if version == "2":
+                    raw = _decode_compressed(raw, payload)
+                logical_total += len(raw)
+                if logical_total > MAX_NATIVE_LOGICAL_BYTES:
+                    raise NativeViewError("NATIVE_LOGICAL_LIMIT")
+                chunk = _strict_json(raw)
+                ordinal = chunk.get("ordinal")
+                if (chunk.get("format") != "atlas-native-view" or chunk.get("version") != "1"
+                        or chunk.get("revision") != revision or type(ordinal) is not int
+                        or ordinal < 0 or ordinal in chunks or not isinstance(chunk.get("entries"), list)):
+                    raise NativeViewError("NATIVE_CHUNK_INVALID")
+                chunks[ordinal] = chunk["entries"]
+        finally:
+            finish()
+        if sorted(chunks) != list(range(len(chunks))):
+            raise NativeViewError("NATIVE_CHUNK_SEQUENCE")
+        if version == "2" and logical_total != declared_logical:
+            raise NativeViewError("NATIVE_LOGICAL_SIZE_MISMATCH")
+        entries = [e for i in range(len(chunks)) for e in chunks[i]]
+        if len(entries) != count:
+            raise NativeViewError("NATIVE_COUNT_MISMATCH")
+        validate_entries(entries)
+        raw_projection = json_bytes(restore_projection(entries))
+        if hashlib.sha256(raw_projection).hexdigest() != expected_digest:
+            raise NativeViewError("NATIVE_PROJECTION_MISMATCH")
+        result.update(status="READY", entries=entries, revision=revision, projection_sha256=expected_digest,
+                      bytes_verified=total, logical_bytes_verified=logical_total,
+                      transport_version=version, authenticity="NOT_VERIFIED",
+                      scientific_approval="NOT_EVALUATED")
+        return result, raw_projection
+    except (OSError, ValueError, KeyError, TypeError, IndexError, RecursionError, zipfile.BadZipFile) as exc:
+        result["entries"] = []
+        result["errors"] = [str(exc) if isinstance(exc, NativeViewError) else "NATIVE_SOURCE_INVALID"]
+        return result, None
+
+
+def _bound_read(source, observed):
+    if observed.get("status") != "READY" or observed.get("changed"):
+        return {"id": source.id, "name": observed.get("name", source.id),
+                "status": observed.get("status", "INVALID"), "entries": [],
+                "errors": ["NATIVE_CATALOG_CHANGED_REINDEX_REQUIRED"],
+                "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}, None
+    return read_source(source.path, source.id, expected_metadata=observed["metadata_sha256"])
+
+
+def _changed(result):
+    return {"id": result["id"], "name": result.get("name", result["id"]), "entries": [],
+            "status": "CHANGED", "errors": ["NATIVE_CATALOG_CHANGED_REINDEX_REQUIRED"],
+            "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"}
+
+
+def snapshot(catalog) -> dict:
+    # The native API shares Catalog's explicit-reindex contract. A GET cannot
+    # silently promote a newly replaced valid package to READY.
+    before = catalog.snapshot()
+    prior = {s["id"]: s for s in before["sources"]}
+    results = [_bound_read(s, prior[s.id])[0] for s in catalog.sources]
+    after = catalog.snapshot()
+    current = {s["id"]: s for s in after["sources"]}
+    for i, result in enumerate(results):
+        latest = current[result["id"]]
+        if before["generation"] != after["generation"] or latest["changed"]:
+            results[i] = _changed(result)
+    return {"version": "1", "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL", "sources": results}
+
+
+def export_source(catalog, source_id: str, expected_snapshot: str) -> bytes:
+    source = next((s for s in catalog.sources if s.id == source_id), None)
+    if source is None:
+        raise NativeViewError("NATIVE_SOURCE_NOT_SELECTED")
+    before = catalog.snapshot()
+    observed = next(s for s in before["sources"] if s["id"] == source_id)
+    result, raw = _bound_read(source, observed)
+    after = catalog.snapshot()
+    latest = next(s for s in after["sources"] if s["id"] == source_id)
+    if (raw is None or result.get("metadata_sha256") != expected_snapshot
+            or latest["changed"] or before["generation"] != after["generation"]):
+        raise NativeViewError("NATIVE_SNAPSHOT_CHANGED_OR_INVALID")
+    return raw

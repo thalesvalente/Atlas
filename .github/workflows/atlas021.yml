@@ -68,6 +68,10 @@ jobs:
         run: python scripts/ci/run_browser.py --work .ci-clean
       - name: Regress precision, repeated metrics and untrusted labels
         run: python scripts/ci/run_browser.py --work .ci-clean --adversarial
+      - name: Verify original HTML File API and network denial in real Chromium
+        run: |
+          node --check packages/atlas/src/atlas_viewer/static/original.js
+          python scripts/ci/run_browser.py --work .ci-clean --original
       - name: Verify related references, source identity, keyboard and 200 percent zoom
         run: python scripts/ci/run_browser.py --work .ci-clean --related-references
       - name: Preserve synthetic browser evidence for the tested candidate
