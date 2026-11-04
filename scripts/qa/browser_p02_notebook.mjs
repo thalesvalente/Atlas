@@ -18,6 +18,10 @@ try{
   const page=await context.newPage();page.on('pageerror',error=>report.errors.push(error.message));
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='2');
+  // The R4 thematic map is an alternative default for sufficiently rich
+  // sources; this scenario tests the complete structural tree explicitly.
+  const structuralMode=page.getByRole('button',{name:'Nós estruturais do Caderno'});
+  if(await structuralMode.count())await structuralMode.click();
   const nodeTotal=await page.locator('#native-node-count').innerText(),globalSearch=page.locator('#native-search');
   assert.equal(await page.getByRole('treeitem',{name:'Nó global final fora do foco',exact:true}).count(),0);
   await globalSearch.fill('__P02_NO_NODE_MATCHES__');

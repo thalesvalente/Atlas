@@ -27,12 +27,18 @@ try{
   assert.equal(await page.locator('iframe').count(),0);
   check('installed_application_css_and_native_text_only_assets');
   const pane=name=>page.locator('[data-pane="'+name+'"]');
+  async function selectStructuralTree(){
+    // The historical R4 map and the structural hierarchy are two modes.
+    // This journey checks the graph-specific keyboard contract explicitly.
+    const target=page.getByRole('button',{name:'Nós estruturais do Caderno'});
+    if(await target.count())await target.click();
+  }
   const screenshot=async name=>{const filename=reportPath.replace('.json','-'+name+'.png');await page.screenshot({path:filename,fullPage:name==='desktop'});report.screenshots.push(path.basename(filename));};
   const download=async(label,digest)=>{const waiting=page.waitForEvent('download');await page.getByRole('button',{name:label,exact:true}).click();const item=await waiting,bytes=await fs.readFile(await item.path());assert.equal(sha(bytes),digest,label+' must export the entire exact selection');return bytes;};
   const assertFocus=async selector=>assert.equal(await page.locator(selector).evaluate(node=>document.activeElement===node),true,'Expected focus on '+selector);
   const inViewport=async target=>assert.equal(await target.evaluate(node=>{const rect=node.getBoundingClientRect();return rect.top>=0&&rect.bottom<=innerHeight&&rect.left>=0&&rect.right<=innerWidth;}),true,'Focused content must be visible in the viewport');
   const treeContextReturn=async(width,closeMode)=>{
-    await pane('tree').click();
+    await pane('tree').click();await selectStructuralTree();
     const root=page.getByRole('treeitem',{name:'Raiz sintética',exact:true}),child=page.getByRole('treeitem',{name:'Filho sintético',exact:true});
     await root.focus();await page.keyboard.press('Enter');
     const uid=await root.getAttribute('data-native-node'),oldRoot=await root.elementHandle();assert.ok(uid);
@@ -49,7 +55,7 @@ try{
     check('tree_context_return_'+closeMode.toLowerCase()+'_restores_exact_node_focus_viewport_arrows_'+width);
   };
   const pendingTreeClose=async(width,closeMode,panelInitiallyVisible=true)=>{
-    await pane('tree').click();
+    await pane('tree').click();await selectStructuralTree();
     const root=page.getByRole('treeitem',{name:'Raiz sintética',exact:true}),child=page.getByRole('treeitem',{name:'Filho sintético',exact:true});
     await root.focus();
     if(panelInitiallyVisible){await page.keyboard.press('Enter');assert.ok(await page.locator('#native-detail').isVisible());}
@@ -73,7 +79,7 @@ try{
     check('required_graph_cancel_'+(panelInitiallyVisible?'visible':'hidden')+'_'+closeMode.toLowerCase()+'_keeps_detail_hidden_selection_camera_'+width);
   };
   const lateLinkedTarget=async(width,kind,closeMode)=>{
-    await page.locator('#native-source').selectOption('source-4');await pane('tree').click();
+    await page.locator('#native-source').selectOption('source-4');await pane('tree').click();await selectStructuralTree();
     await page.locator('#native-search').fill('__FILTER_EXCLUDES_THE_LINKED_TARGET__');
     await page.locator('#native-family').selectOption('ANCHOR');
     const node=page.getByRole('treeitem',{name:'Nó de navegação tardia',exact:true});await node.focus();await page.keyboard.press('Enter');
