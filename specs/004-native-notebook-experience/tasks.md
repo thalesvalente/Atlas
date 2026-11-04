@@ -59,3 +59,4 @@ não reabrem T001–T014 nem tornam um recibo antigo prova de um SHA novo.
 - [ ] T022 [US3] Obter Codex e P05 sem findings materiais nesse SHA; comparar funcional/visual/integridade com Caderno real; publicar recibo Draft com matriz única final-close.md e checklist de aceite humano.
 - [ ] T023 [US2] Fechar PAR004 já existente no AP04: navegar por referências declaradas entre nó/execução/tabela/linha/evidência, preservar fonte/revisão e oferecer retorno; ambiguidades permanecem explícitas.
 - [ ] T024 [US2] Fechar PAR007 já existente no AP04: apresentar relações tipadas declaradas em grafo navegável, sem confundir hierarquia com causalidade ou inventar endpoints ausentes.
+- [ ] T025 [US3] Requalificar a regressão Ctrl+clique da referência inerte: o job browser falhou duas vezes por espera de popup no runner Linux; ativar explicitamente a página de origem entre abas e registrar diagnóstico por link, mantendo o clique real e todas as negativas de navegação/rede.

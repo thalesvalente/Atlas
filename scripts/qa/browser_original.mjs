@@ -14,7 +14,7 @@ const url=args.get('--url'),reportPath=args.get('--report');
 if(!url||!reportPath)throw new Error('--url and --report required');
 const origin=new URL(url).origin;
 assert.ok(['localhost','127.0.0.1'].includes(new URL(url).hostname));
-const report={status:'FAIL',scenario:'original-reference-inert-native-surface',checks:[],sensitive_http_requests:[],errors:[]};
+const report={status:'FAIL',scenario:'original-reference-inert-native-surface',checks:[],sensitive_http_requests:[],errors:[],ctrl_clicks:[]};
 let browser,failure;
 try{
   browser=await playwright.chromium.launch({headless:true});
@@ -38,12 +38,19 @@ try{
   await page.goto(origin,{waitUntil:'networkidle'});
   await page.locator('#view-explore').waitFor({state:'visible'});
   for(const testid of ['native-notebook-nav','original-atlas-nav']){
+    // Closing a background tab does not consistently reactivate its opener
+    // in headless Chromium. Exercise Ctrl+click on a focused, visible page.
+    await page.bringToFront();
     const link=page.getByTestId(testid);
+    await link.scrollIntoViewIfNeeded();
+    await link.focus();
     assert.ok(!(await link.getAttribute('class')).split(/\s+/).includes('nav-button'));
+    const attempt={testid,href:await link.getAttribute('href'),opener_before:page.url(),page_count_before:context.pages().length,status:'WAITING'};report.ctrl_clicks.push(attempt);
     const opening=context.waitForEvent('page');
     await link.click({modifiers:['Control']});
     const popup=await opening;await popup.waitForLoadState('domcontentloaded');
     assert.ok(await page.locator('#view-explore').isVisible());
+    attempt.status='PASS';attempt.popup=popup.url();attempt.opener_after=page.url();
     await popup.close();
   }
   report.checks.push('ctrl_click_route_links_never_blank_the_origin_view');
