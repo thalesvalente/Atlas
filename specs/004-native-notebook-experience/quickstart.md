@@ -1,6 +1,6 @@
 # Abrir o Caderno na interface nativa
 
-Use um checkout atualizado desta PR23. O R4 e seu Caderno já existentes ficam onde estão; não trocar branches ou limpar workspaces de outras frentes.
+Use o checkout candidato da [PR Draft #25](https://github.com/thalesvalente/Atlas/pull/25), que converge PR23/24 e os handoffs qualificados. O checkout original, o R4 e o Caderno ficam preservados; não trocar branches ou limpar workspaces de outras frentes.
 
 ## Abrir PRIMEIRO o Atlas NOVO (sem R4)
 
@@ -130,3 +130,12 @@ O menu Caderno nativo oferece árvore com busca de qualquer nó/zoom/pan/minimap
 ## Conferência local
 
 Compare revisão/contagens com a projeção original; navegue até o último nó e linha, confira null, valores grandes, colisões, metadados de documentos e exportação completa. Mantenha logs/pacotes no host privado. Esta conferência é T016 e não foi simulada pelo teste Chromium de engenharia. Use o Atlas antigo como referência operacional; não retire arquivos ou implemente migração para concluir esse aceite.
+
+No fechamento, P05 executou essa conferência no Caderno real e inspecionou as
+capturas. A referência original de mesmo snapshot foi composta em scratch
+privado com os assets originais, sem chamar build/save_lineage nem escrever no
+Caderno; não é novo build oficial legado. A navegação por referências declaradas
+inclui nó, registro, tabela, linha/evidência e retorno. Duas tabelas declaradas
+vazias continuam vazias. Os recibos do HEAD final, a matriz e o checklist humano
+estão em [final-close.md](final-close.md) e na conversa da PR #25; não herdar
+qualificação para futuras alterações do produto ou do acervo.

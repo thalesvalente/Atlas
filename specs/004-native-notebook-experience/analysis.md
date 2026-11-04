@@ -26,6 +26,32 @@ Codex (`chatgpt-codex-connector`, autoria distinta) apontou no código nativo: n
 
 P03: JS f4c2bab174576caf9a6a5d564cb34f0483f0e316 e CSS 0fe2568ec80e40825bcd3e08e0d1eade09d03c5f, de ead1f753f52f22035326b7366dd2231c62775765; bytes reutilizados. O manifesto e a frente originais não são alterados. R4 project() é chamado externamente, não incorporado ao wheel. Nenhuma alteração de packages/protocol, ADR, feature.json, dados reais ou PRs de outros owners. Não houve subagente nativo: NATIVE_SUBAGENTS_NOT_AVAILABLE, writer único sequencial.
 
-## Limites e gates restantes
+## Limites e gates históricos do primeiro ciclo
 
 A estrutura genérica conserva todas as coleções e valores, mas não confere automaticamente equivalência visual/operacional de todo link do Caderno privado. R4 project() é uma dependência operacional confiável do host escolhido; esse ramo não foi executado contra H: neste CHAT. Nenhuma leitura/cópia do corpus para Actions é autorizada. T016 permanece NOT_RUN. A revisão terminal deve examinar o sucessor corrigido; COMMENTED com findings não é aprovação e T015 fica pendente até parecer verificável sem achado material. CI verde qualifica a implementação no escopo executado, não promoção/migração/retirada.
+
+## Reconciliação ATLAS-FINAL-CLOSE — 2026-11-03
+
+O estado histórico acima foi superado pela prova observada do fechamento, sem
+apagar seus limites. P01/P02/P03 executaram como agentes nativos reais com áreas
+exclusivas; P04 reconciliou alternativas C2-B/C2-K e P05 executou QA não autora.
+Um integrador aplicou commits por cherry-pick -x, sem merge de Draft.
+
+No código efad09dfaeaadd93da87a4c64979f80b9678caa6: CI 41750468698 (5/5),
+41750468913 (6/6) e 41750469060 (2/2) SUCCESS; Codex 6619316900 completed,
+has_any_findings=false/has_unresolved_findings=false. P05 conferiu instalação
+independente, 119 testes por modo normal/-O (118 PASS/1 SKIP), 12 grupos no
+Caderno real, 21 casos de viewport e exports integrais/exatos. Três findings
+foram efetivamente reproduzidos e corrigidos: fallback de chave composta,
+namespace divergente entre grafo/detalhe e callback da busca global da árvore.
+
+A referência visual usa os assets originais e o mesmo snapshot em composição
+local privada, não um build oficial novo do legado. O HTML histórico existente
+tinha revisão anterior e não foi usado como denominador. P05 e coordenação
+inspecionaram imagens reais desktop/mobile; a jornada contextual completa foi
+executada sem inventar vínculos, inclusive retorno à ocorrência original.
+
+Este sucessor altera somente documentação. Exige atestação de igualdade dos
+bytes executáveis e suas próprias Actions/Codex no HEAD final, publicados na
+PR #25. T015/T016 e R006/R010/R012/R014/R016 estão reconciliadas na matriz
+[final-close.md](final-close.md); aceite humano permanece separado.

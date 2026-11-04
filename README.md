@@ -2,6 +2,11 @@
 
 **Interface local para explorar registros científicos, sem alterar o acervo.**
 
+Candidata de fechamento: [PR Draft #25](https://github.com/thalesvalente/Atlas/pull/25).
+Árvore/linhagem, busca, vínculos com retorno, tabelas/exports e Windows foram
+conferidos com o Caderno real; [matriz e checklist](specs/004-native-notebook-experience/final-close.md).
+O recibo terminal fixa o SHA/CI/Codex/QA. Aceite humano permanece pendente.
+
 Esta candidata possui uma experiência **nativa do Caderno**, além da consulta pelo protocolo público. A projeção original do R4 é reutilizada por um adaptador externo; a nova interface usa DOM/SVG e o componente P03, não um iframe ou o JavaScript do renderer antigo. O R4 e o Caderno existentes permanecem intactos. PR Draft: sem release, promoção científica ou autorização de migração/limpeza.
 
 ## Iniciar o Atlas NOVO — independente do R4
@@ -43,13 +48,14 @@ A compatibilidade funciona com um **adaptador externo em processo separado**
 O Atlas instalado continua independente e consome apenas o pacote derivado,
 em diretório temporário da sessão. O cache é removido somente após o servidor
 encerrar, preservando os arquivos originais. Essas são raízes históricas
-**não verificadas** neste CHAT; selecione um código R4 confiável já funcional.
+conferidas somente no host e revisão registrados no recibo; selecione um código R4 confiável já funcional.
 Não há importação de `r4.*` no pacote `atlas_viewer`, nem
 migração/inserção de ciência no Caderno. Para atualização após novas gravações,
 encerre e reabra a sessão (nova projeção consistente).
 
-A leitura e equivalência com dados do seu host `H:\` ainda precisam
-de observação real no Windows; CI pública usa dados de engenharia, não o acervo.
+A comparação funcional, visual e de integridade no Windows foi observada na
+candidata de fechamento, com recibos privados e revisão de mesmo snapshot.
+CI pública usa dados de engenharia; não recebe o acervo nem concede aceite humano.
 
 **O que é uma fonte:** um pacote RO-Crate/Caderno no perfil público suportado,
 não a pasta do Caderno legado do R4 nem `ATLAS-ATUAL.html`. A rota `/notebook`
