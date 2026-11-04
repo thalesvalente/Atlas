@@ -1,12 +1,14 @@
 import {renderTable} from './parity02_p03_table.js';
 import {mountGraph} from './native_graph.js';
+import {buildNativeNavigation} from './native_navigation.js';
+import {mountLineage} from './native_lineage.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-const state={sources:[],source:null,pane:'tree',page:0,table:null,columnPage:0,graph:null,request:0};
+const state={sources:[],source:null,pane:'tree',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[]};
 const el=(tag,text=null,cls='')=>{const n=document.createElement(tag);if(text!==null)n.textContent=String(text);if(cls)n.className=cls;return n;};
 const button=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
 const entries=()=>state.source?.status==='READY'?state.source.entries:[];
 const textOf=e=>[e.title,e.native_id,e.source_key,e.family,e.status,e.raw_json,...e.fields.map(f=>f.text)].filter(x=>x!==null).join(' ');
-function matches(e){const q=$('native-search').value.toLocaleLowerCase('pt-BR').trim();return(!q||textOf(e).toLocaleLowerCase('pt-BR').includes(q))&&(!$('native-family').value||e.family===$('native-family').value)&&(!$('native-status').value||e.status===$('native-status').value);}
+function matches(e,context=null){const q=$('native-search').value.toLocaleLowerCase('pt-BR').trim();return(!q||textOf(e).toLocaleLowerCase('pt-BR').includes(q)||(context&&textOf(context).toLocaleLowerCase('pt-BR').includes(q)))&&(!$('native-family').value||(e.family??context?.family)===$('native-family').value)&&(!$('native-status').value||(e.status??context?.status)===$('native-status').value);}
 function message(text,error=false){$('native-notice').textContent=text;$('native-notice').classList.toggle('error',error);}
 function options(id,values,all){
   const s=$(id);s.replaceChildren();const o=el('option',all);o.value='';s.append(o);
@@ -50,20 +52,75 @@ function exactOccurrenceJSON(e){
   return head.slice(0,offset+1)+rows.map(r=>r.raw_json).join(',')+
     head.slice(offset+1);
 }
-function detail(e){const full=exactOccurrenceJSON(e);$('native-detail').hidden=false;const host=$('native-detail-body');host.replaceChildren(el('h3',e.title),el('p',e.kind+' · '+e.group,'muted'));const d=el('dl');for(const[k,v]of [['UID de consulta',e.uid],['ID original',e.native_id??'Não declarado'],['Chave estrutural',e.source_key??'Não declarada'],['Parente declarado',e.parent_key??'Não declarado'],['Resolução',e.parent_resolution??'Não aplicável'],['Pointer',e.pointer]])d.append(el('dt',k),el('dd',v));for(const f of e.fields)d.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));const pre=el('pre',full);pre.dataset.testid='native-raw';host.append(d,el('h3','Valor original (JSON exato)'),pre,button('Exportar esta ocorrência',()=>download('atlas-occurrence.json',full)));}
+function navigation(){return state.navigation??=buildNativeNavigation(entries());}
+function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,page:state.page,table:state.table,columnPage:state.columnPage,detail:state.detail,search:$('native-search').value,family:$('native-family').value,status:$('native-status').value};}
+function pagedLinks(host,items,draw){
+  let page=0;const content=el('div'),controls=el('div',null,'pager');host.append(content,controls);
+  const show=()=>{content.replaceChildren();for(const item of items.slice(page*40,(page+1)*40))content.append(draw(item));controls.replaceChildren();if(items.length>40){const previous=button('← Vínculos',()=>{page--;show();}),next=button('Vínculos →',()=>{page++;show();});previous.disabled=page===0;next.disabled=(page+1)*40>=items.length;controls.append(previous,el('span',`${page*40+1}–${Math.min((page+1)*40,items.length)} de ${items.length}`),next);}};show();
+}
+function openOccurrence(uid){
+  const target=navigation().byUid.get(uid);if(!target)return;
+  if(state.detail)state.history.push(currentContext());state.detail=null;
+  state.pane=({node:'tree',record:'records',table:'tables',row:'tables',asset:'assets',relation:'relations',collection:'coverage'})[target.kind]||'coverage';
+  state.page=target.kind==='row'?Math.floor(target.ordinal/100):0;state.columnPage=0;
+  if(target.kind==='table'||target.kind==='row')state.table=target.table_uid||target.uid;
+  for(const id of ['native-search','native-family','native-status'])$(id).value='';
+  render();if(target.kind==='node'&&state.graph)state.graph.locate(uid);detail(target,false);
+  $('native-detail').scrollIntoView({block:'nearest'});
+}
+function returnToSelection(){
+  const saved=state.history.pop();if(!saved)return;
+  if(saved.source!==state.source?.id||saved.snapshot!==state.source?.metadata_sha256){state.history=[];message('O snapshot mudou; selecione novamente a ocorrência.',true);return;}
+  Object.assign(state,{pane:saved.pane,page:saved.page,table:saved.table,columnPage:saved.columnPage,detail:null});
+  $('native-search').value=saved.search;$('native-family').value=saved.family;$('native-status').value=saved.status;
+  render();const target=navigation().byUid.get(saved.detail);if(target){if(target.kind==='node'&&state.graph)state.graph.locate(target.uid);detail(target,false);}
+}
+function relatedOccurrences(e){
+  const model=navigation(),section=el('section',null,'native-links');section.dataset.testid='native-context-links';
+  section.append(el('h3','Vínculos nesta fonte e revisão'),el('p','Referências declaradas e pertencimento estrutural permitem navegar; não comprovam derivação, autenticidade ou aceite.','muted'));
+  const outgoing=model.outgoing.get(e.uid)||[],incoming=model.incoming.get(e.uid)||[];
+  if(!outgoing.length&&!incoming.length)section.append(el('p','Nenhum vínculo entre ocorrências foi declarado. Os campos originais permanecem disponíveis abaixo.','muted'));
+  pagedLinks(section,outgoing,ref=>{
+    const item=el('div',null,'native-reference'),literal=ref.literal===null?'null':ref.literal;
+    if(ref.resolution==='UNIQUE'){const target=model.byUid.get(ref.targets[0]);item.append(button(ref.label+' → '+target.title,()=>openOccurrence(target.uid)));}
+    else if(ref.resolution==='COLLISION'){
+      const candidates=el('details');candidates.append(el('summary',`${ref.label}: ${literal} — AMBIGUOUS · ${ref.targets.length} ocorrências`));
+      pagedLinks(candidates,ref.targets,uid=>{const target=model.byUid.get(uid);return button(target.title+' · '+target.kind+' · '+target.uid,()=>openOccurrence(uid));});item.append(candidates);
+    }else item.append(el('p',`${ref.label}: ${literal} — ${ref.resolution==='NOT_DECLARED'?'não declarado':'UNRESOLVED nesta revisão'}`,'muted'));
+    return item;
+  });
+  if(incoming.length){const reverse=el('details');reverse.append(el('summary',`Referências recebidas · ${incoming.length}`));pagedLinks(reverse,incoming,ref=>{const target=model.byUid.get(ref.uid);return button(target.title+' · '+ref.label+(ref.resolution==='COLLISION'?' · alvo AMBIGUOUS':''),()=>openOccurrence(target.uid));});section.append(reverse);}
+  for(const[name,raw]of model.evidence.get(e.uid)||[]){const evidence=el('details',null,'native-evidence');evidence.dataset.testid='native-evidence';evidence.append(el('summary','Evidência e origem declaradas · '+name),el('pre',raw));section.append(evidence);}
+  return section;
+}
+function detail(e,remember=true){
+  if(!entries().includes(e))return;
+  if(remember&&state.detail&&state.detail!==e.uid)state.history.push(currentContext());state.detail=e.uid;
+  const full=exactOccurrenceJSON(e);$('native-detail').hidden=false;const host=$('native-detail-body');host.replaceChildren();
+  if(state.history.length){const back=button('← Voltar à seleção anterior',returnToSelection);back.dataset.testid='native-context-back';host.append(back);}
+  host.append(el('h3',e.title),el('p',e.kind+' · '+e.group,'muted'));const d=el('dl');
+  for(const[k,v]of [['Fonte',state.source.name||state.source.id],['Revisão',state.source.revision],['UID de consulta',e.uid],['ID original',e.native_id??'Não declarado'],['Chave estrutural',e.source_key??'Não declarada'],['Parente declarado',e.parent_key??'Não declarado'],['Resolução',e.parent_resolution??'Não aplicável'],['Pointer',e.pointer]])d.append(el('dt',k),el('dd',v??'Não declarado'));
+  for(const f of e.fields)d.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));const pre=el('pre',full);pre.dataset.testid='native-raw';
+  host.append(d,relatedOccurrences(e),el('h3','Valor original (JSON exato)'),pre,button('Exportar esta ocorrência',()=>download('atlas-occurrence.json',full)));
+}
 function pager(host,total,pageSize=100){const pages=Math.max(1,Math.ceil(total/pageSize));state.page=Math.min(state.page,pages-1);const p=el('div',null,'pager'),prev=button('← Anterior',()=>{state.page--;render();}),next=button('Próxima →',()=>{state.page++;render();});prev.disabled=state.page===0;next.disabled=state.page+1>=pages;p.append(prev,el('span',`Página ${state.page+1}/${pages} · ${total} ocorrências na seleção`),next);host.append(p);return state.page*pageSize;}
 function grid(host,rows,columns){const wrap=el('div',null,'table-scroll'),table=el('table'),head=el('thead'),hr=el('tr');columns.forEach(c=>hr.append(el('th',c[0])));head.append(hr);table.append(head);const body=el('tbody');for(const e of rows){const tr=el('tr');tr.dataset.uid=e.uid;columns.forEach((c,i)=>{const td=el('td');if(i===0)td.append(button(c[1](e),()=>detail(e)));else td.textContent=c[1](e);tr.append(td);});body.append(tr);}table.append(body);wrap.append(table);host.append(wrap);}
 function showTree(host){const all=entries().filter(e=>e.kind==='node');const nodes=all.length?all:entries().filter(e=>e.kind==='record');host.append(el('h2','Árvore e linhagem'));if(!nodes.length){host.append(el('p','Nenhum nó estrutural declarado neste pacote.','empty'));return;}const gh=el('div');host.append(gh);state.graph=mountGraph(gh,nodes,detail);const selected=nodes.filter(matches);host.append(el('p',`${selected.length} de ${nodes.length} nós encontrados. A busca alcança todas as ocorrências, inclusive fora da janela gráfica.`,'muted'));const offset=pager(host,selected.length,40),links=el('div',null,'graph-results');for(const n of selected.slice(offset,offset+40))links.append(button(n.title,()=>state.graph.locate(n.uid)));host.append(links);}
 function showRecords(host,kind='record'){const rows=entries().filter(e=>e.kind===kind&&matches(e));host.append(el('h2',kind==='relation'?'Relações declaradas':'Registros do Caderno'));host.append(el('p',kind==='relation'?'Cada ocorrência mantém seus endpoints, tipo e evidência no detalhe. Nenhuma seta é inferida de datas.':'Identificadores repetidos são preservados como ocorrências separadas.','muted'));const offset=pager(host,rows.length);grid(host,rows.slice(offset,offset+100),[['Título / ocorrência',e=>e.title],['ID original',e=>e.native_id??'—'],['Família',e=>e.family??'—'],['Estado',e=>e.status??'UNKNOWN'],['Coleção',e=>e.group]]);}
 function showTables(host){
-  const tables=entries().filter(e=>e.kind==='table');host.append(el('h2','Tabelas de resultados'));
-  if(!tables.length){host.append(el('p','Nenhuma tabela declarada.','empty'));return;}
+  const allTables=entries().filter(e=>e.kind==='table'),byTable=new Map(allTables.map(t=>[t.uid,[]]));host.append(el('h2','Tabelas de resultados'));
+  if(!allTables.length){host.append(el('p','Nenhuma tabela declarada.','empty'));return;}
+  for(const row of entries())if(row.kind==='row'&&byTable.has(row.table_uid))byTable.get(row.table_uid).push(row);
+  // A row can be found by any original field, in its declared table context.
+  // Context only scopes the selection; no scientific field is rewritten.
+  const tables=allTables.filter(t=>matches(t)||byTable.get(t.uid).some(r=>matches(r,t)));
+  host.append(el('p',`${tables.length} tabelas na seleção de ${allTables.length} carregadas.`,'muted'));
+  if(!tables.length){host.append(el('p','Nenhuma tabela ou linha corresponde à busca e aos filtros.','empty'));return;}
   if(!tables.some(t=>t.uid===state.table))state.table=tables[0].uid;
   const label=el('label','Tabela'),sel=el('select');sel.id='native-table-select';
   for(const t of tables){const o=el('option',t.title);o.value=t.uid;sel.append(o);}sel.value=state.table;
   sel.addEventListener('change',()=>{state.table=sel.value;state.page=0;state.columnPage=0;render();});label.append(sel);host.append(label);
-  const table=tables.find(t=>t.uid===state.table),allRows=entries().filter(e=>e.kind==='row'&&e.table_uid===state.table),query=$('native-search').value.toLocaleLowerCase('pt-BR');
-  const rows=allRows.filter(e=>!query||Object.values(e.cells).some(c=>c.text.toLocaleLowerCase('pt-BR').includes(query)));
+  const table=tables.find(t=>t.uid===state.table),allRows=byTable.get(state.table),rows=allRows.filter(e=>matches(e,table));
   const cols=[...new Set(allRows.flatMap(r=>Object.keys(r.cells)))],start=pager(host,rows.length),windowRows=rows.slice(start,start+100),columnPages=Math.max(1,Math.ceil(cols.length/32));
   state.columnPage=Math.min(state.columnPage,columnPages-1);const visibleColumns=cols.slice(state.columnPage*32,(state.columnPage+1)*32),tools=el('div',null,'toolbar');
   tools.append(button('Detalhes da tabela',()=>detail(table)),button('JSON das linhas selecionadas',()=>download('atlas-table-rows.json','['+rows.map(r=>r.raw_json).join(',')+']')),button('CSV protegido',()=>{
@@ -84,8 +141,22 @@ function showTables(host){
 }
 function showAssets(host){host.append(el('h2','Recursos, produtos e dossiês'));const rows=entries().filter(e=>e.kind==='asset'&&matches(e)),offset=pager(host,rows.length,40),cards=el('div',null,'cards');for(const e of rows.slice(offset,offset+40)){const card=el('article',null,'panel');card.append(el('span',e.group,'badge'),el('h3',e.title),el('code',e.native_id??e.source_key??e.uid),el('p',e.status??'Disponibilidade não inferida','muted'),button('Ver referência e detalhes',()=>detail(e)));cards.append(card);}host.append(cards,el('p','URIs são apresentadas como referências. O servidor não abre documentos externos nem recupera arquivos privados.','muted'));}
 function showTimeline(host){host.append(el('h2','Linha do tempo declarada'));const all=entries().filter(e=>e.kind==='record'&&matches(e));const rows=[...all].sort((a,b)=>{const x=Date.parse(a.date),y=Date.parse(b.date);if(Number.isFinite(x)!==Number.isFinite(y))return Number.isFinite(x)?-1:1;return Number.isFinite(x)?x-y:0;});const start=pager(host,rows.length),list=el('ol',null,'timeline');for(const e of rows.slice(start,start+100)){const li=el('li');li.append(el('time',e.date??'Data não declarada'),button(e.title,()=>detail(e)),el('span',' '+(e.status??'UNKNOWN'),'badge'));list.append(li);}host.append(list);}
-function showCoverage(host){host.append(el('h2','Cobertura e origens'));const counts=new Map();for(const e of entries())counts.set(e.group,(counts.get(e.group)||0)+1);const summary=el('div',null,'panel');summary.append(el('p','Contagens referem-se exclusivamente à projeção selecionada. Não são porcentagem de toda a história nem aceite científico.'));for(const[group,count]of counts)summary.append(el('p',group+': '+count));host.append(summary);const rows=entries().filter(e=>e.kind==='collection'&&e.group!=='$structure'&&matches(e)),start=pager(host,rows.length,40);for(const e of rows.slice(start,start+40)){const d=el('details',null,'panel');d.append(el('summary',e.group+' — '+e.title),el('pre',e.raw_json));host.append(d);}}
-function render(){if(state.graph){state.graph.destroy();state.graph=null;}const host=$('native-content');host.replaceChildren();document.querySelectorAll('[data-pane]').forEach(b=>{if(b.dataset.pane===state.pane)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});if(state.source?.status!=='READY'){host.append(el('p','Selecione um pacote exportado pelo adaptador nativo. Fontes de protocolo sem este payload continuam disponíveis na visão do protocolo.','empty'));return;}({tree:showTree,records:showRecords,tables:showTables,relations:h=>showRecords(h,'relation'),assets:showAssets,timeline:showTimeline,coverage:showCoverage})[state.pane](host);}
-function selectSource(){state.source=state.sources.find(s=>s.id===$('native-source').value)||null;state.page=0;state.table=null;state.columnPage=0;$('native-detail').hidden=true;const list=entries();options('native-family',list.filter(e=>e.kind==='record'||e.kind==='node').map(e=>e.family),'Todas');options('native-status',list.filter(e=>e.kind==='record'||e.kind==='node').map(e=>e.status),'Todos');$('native-record-count').textContent=list.filter(e=>e.kind==='record').length;$('native-node-count').textContent=list.filter(e=>e.kind==='node').length;$('native-table-count').textContent=list.filter(e=>e.kind==='table').length+' / '+list.filter(e=>e.kind==='row').length;$('native-asset-count').textContent=list.filter(e=>e.kind==='asset').length;$('native-download').disabled=state.source?.status!=='READY';$('native-revision').textContent=state.source?.revision?'Revisão: '+state.source.revision:'';message(state.source?.status==='READY'?`${state.source.name} — payloads e recomposição verificados. Snapshot explícito; use Atualizar para reler.`:(state.source?.status??'Nenhuma fonte')+' — '+(state.source?.errors||[]).join(', '),state.source?.status!=='READY');render();}
+function showCoverage(host){
+  host.append(el('h2','Cobertura e origens'));const counts=new Map(),structure=entries().find(e=>e.group==='$structure');
+  for(const e of entries())if(e.group!=='$structure')counts.set(e.group,(counts.get(e.group)||0)+1);
+  // Parse only container names/shapes. Scalar values below use verified lexical
+  // fields, never a JSON.parse/Number round trip.
+  const shape=structure?JSON.parse(structure.raw_json):{},empty=[];
+  for(const[key,value]of Object.entries(shape))if(value!==null&&typeof value==='object'&&!counts.has(key)){counts.set(key,0);empty.push([key,Array.isArray(value)?'[]':'{}']);}
+  const summary=el('div',null,'panel');summary.append(el('p','Contagens referem-se exclusivamente à projeção selecionada. Não são porcentagem de toda a história nem aceite científico.'));
+  for(const[group,count]of counts)summary.append(el('p',group+': '+count));host.append(summary);
+  if(structure?.fields.length){const globals=el('details',null,'panel'),values=el('dl');globals.append(el('summary','Valores globais da projeção'));for(const f of structure.fields)values.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));globals.append(values);host.append(globals);}
+  for(const[key,raw]of empty){const d=el('details',null,'panel');d.append(el('summary',key+' — coleção vazia'),el('pre',raw));host.append(d);}
+  const rows=entries().filter(e=>e.kind==='collection'&&e.group!=='$structure'&&matches(e)),start=pager(host,rows.length,40);
+  for(const e of rows.slice(start,start+40)){const d=el('details',null,'panel');d.append(el('summary',e.group+' — '+e.title),el('pre',e.raw_json));host.append(d);}
+}
+function showRelations(host){const graph=el('div');host.append(graph);state.lineage=mountLineage(graph,entries(),detail);showRecords(host,'relation');}
+function render(){if(state.graph){state.graph.destroy();state.graph=null;}if(state.lineage){state.lineage.destroy();state.lineage=null;}const host=$('native-content');host.replaceChildren();document.querySelectorAll('[data-pane]').forEach(b=>{if(b.dataset.pane===state.pane)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});if(state.source?.status!=='READY'){host.append(el('p','Selecione um pacote exportado pelo adaptador nativo. Fontes de protocolo sem este payload continuam disponíveis na visão do protocolo.','empty'));return;}({tree:showTree,records:showRecords,tables:showTables,relations:showRelations,assets:showAssets,timeline:showTimeline,coverage:showCoverage})[state.pane](host);}
+function selectSource(){state.source=state.sources.find(s=>s.id===$('native-source').value)||null;state.page=0;state.table=null;state.columnPage=0;state.navigation=null;state.detail=null;state.history=[];$('native-detail').hidden=true;$('native-detail-body').replaceChildren();const list=entries();options('native-family',list.map(e=>e.family),'Todas');options('native-status',list.map(e=>e.status),'Todos');$('native-record-count').textContent=list.filter(e=>e.kind==='record').length;$('native-node-count').textContent=list.filter(e=>e.kind==='node').length;$('native-table-count').textContent=list.filter(e=>e.kind==='table').length+' / '+list.filter(e=>e.kind==='row').length;$('native-asset-count').textContent=list.filter(e=>e.kind==='asset').length;$('native-download').disabled=state.source?.status!=='READY';$('native-revision').textContent=state.source?.revision?'Revisão: '+state.source.revision:'';message(state.source?.status==='READY'?`${state.source.name} — payloads e recomposição verificados. Snapshot explícito; use Atualizar para reler.`:(state.source?.status??'Nenhuma fonte')+' — '+(state.source?.errors||[]).join(', '),state.source?.status!=='READY');render();}
 async function load(){const request=++state.request;$('native-refresh').disabled=true;message('Verificando os pacotes selecionados…');try{const response=await fetch('/api/notebook',{cache:'no-store'});if(!response.ok)throw Error('Falha de leitura HTTP '+response.status);const data=await response.json();if(request!==state.request)return;const old=state.source?.id;state.sources=data.sources;const select=$('native-source');select.replaceChildren();for(const s of state.sources){const o=el('option',(s.name||s.id)+' · '+s.status);o.value=s.id;select.append(o);}select.value=state.sources.find(s=>s.id===old)?.id||state.sources.find(s=>s.status==='READY')?.id||state.sources[0]?.id||'';selectSource();}catch(e){if(request===state.request){state.sources=[];state.source=null;selectSource();message(e.message,true);}}finally{if(request===state.request)$('native-refresh').disabled=false;}}
 $('native-source').addEventListener('change',selectSource);$('native-refresh').addEventListener('click',load);$('native-close-detail').addEventListener('click',()=>{$('native-detail').hidden=true;});for(const id of ['native-search','native-family','native-status'])$(id).addEventListener(id==='native-search'?'input':'change',()=>{state.page=0;render();});$('native-clear').addEventListener('click',()=>{$('native-search').value='';$('native-family').value='';$('native-status').value='';state.page=0;render();});document.querySelectorAll('[data-pane]').forEach(b=>b.addEventListener('click',()=>{state.pane=b.dataset.pane;state.page=0;render();}));$('native-download').addEventListener('click',async()=>{const source=state.source;if(source?.status!=='READY')return;try{const response=await fetch('/api/notebook/export?'+new URLSearchParams({source:source.id,snapshot:source.metadata_sha256}));if(!response.ok)throw Error('Snapshot mudou ou ficou indisponível; atualize antes de exportar.');download('atlas-projection.json',await response.blob());}catch(e){message(e.message,true);}});load();
