@@ -17,6 +17,9 @@ try{
   await page.goto(url,{waitUntil:'networkidle'});await page.getByTestId('native-notebook-nav').click();
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='2');
   await page.locator('.application-provenance>summary').click();
+  assert.equal(await page.locator('#native-tree-mode').inputValue(),'editorial');
+  await page.locator('#native-tree-mode').selectOption('structural');
+  const inspect=async()=>{await page.locator('#native-detail').waitFor({state:'visible',timeout:3000});const d=page.locator('#native-detail .inspection');if(await page.locator('#native-detail').isVisible()&&await d.count()&&await d.getAttribute('open')===null){const focused=await page.locator(':focus').elementHandle();await d.locator(':scope>summary').click();if(focused){if(await focused.evaluate(n=>n.isConnected))await focused.focus();await focused.dispose();}}};
   assert.equal(await page.locator('iframe').count(),0);
   assert.match(await page.locator('#native-revision').innerText(),/test-invented-revision/);
   assert.equal(await page.locator('#native-node-count').innerText(),'1202');
@@ -68,15 +71,16 @@ try{
   assert.equal(await page.locator('#native-content tbody tr').count(),1);await page.locator('#native-clear').click();
   assert.equal(await page.locator('#native-content tbody tr').count(),2);assert.equal(await page.locator('#native-content img').count(),0);
   assert.equal(await page.evaluate(()=>window.nativeInjected),undefined);
-  await page.locator('#native-content tbody tr').first().getByRole('button').click();assert.match(await page.getByTestId('native-raw').innerText(),/"id":"same"/);
+  await page.locator('#native-content tbody tr').first().getByRole('button').click();await inspect();assert.match(await page.getByTestId('native-raw').innerText(),/"id":"same"/);
   check('duplicate_ids_preserved_status_filter_and_text_only_details');
-  await page.locator('[data-pane="tables"]').click();const table=page.locator('[data-component="parity02-p03-table"]');
+  await page.locator('[data-pane="tables"]').click();await page.locator('#native-table-view').selectOption('p03');const table=page.locator('[data-component="parity02-p03-table"]');
   assert.ok(await table.isVisible());assert.equal(await table.locator('tbody tr').count(),100);
   const tableText=await table.innerText();assert.ok(tableText.includes('9007199254740993'));
   assert.ok(tableText.includes('NULL — valor declarado'));assert.ok(tableText.includes('MISSING — chave ausente'));
   await page.getByRole('button',{name:'Próxima →',exact:true}).click();assert.equal(await table.locator('tbody tr').count(),27);
   check('reused_p03_exact_numbers_null_missing_and_all_pages');
   await page.getByRole('button',{name:'Detalhes da tabela',exact:true}).click();
+  await inspect();
   const tableRaw=await page.getByTestId('native-raw').innerText();
   assert.ok(tableRaw.includes('"Inteiro":9007199254740993'));
   assert.equal(JSON.parse(tableRaw).rows.length,127);
@@ -91,7 +95,7 @@ try{
   let download=await waiting;let bytes=await fs.readFile(await download.path());assert.ok(bytes.toString().includes('9007199254740993'));assert.equal(JSON.parse(bytes).length,127);
   waiting=page.waitForEvent('download');await page.getByRole('button',{name:'CSV protegido',exact:true}).click();download=await waiting;bytes=await fs.readFile(await download.path());
   assert.ok(bytes.toString().includes("'=1+1"));check('json_rows_not_rounded_and_csv_formula_neutralized');
-  await page.locator('[data-pane="assets"]').click();await page.getByRole('button',{name:'Ver referência e detalhes'}).first().click();assert.match(await page.getByTestId('native-raw').innerText(),/private\/never-opened/);
+  await page.locator('[data-pane="assets"]').click();await page.getByRole('button',{name:'Referência e detalhes'}).first().click();await inspect();assert.match(await page.getByTestId('native-raw').innerText(),/private\/never-opened/);
   await page.locator('[data-pane="timeline"]').click();assert.match(await page.locator('#native-content').innerText(),/2026-01-01T12:00:00Z/);assert.match(await page.locator('#native-content').innerText(),/Data não declarada/);
   await page.locator('[data-pane="coverage"]').click();assert.match(await page.locator('#native-content').innerText(),/unknown_nested/);
   await page.locator('[data-pane="relations"]').click();assert.equal(await page.locator('#native-content tbody tr').count(),1);check('resources_relations_timeline_and_unknown_collections_available');

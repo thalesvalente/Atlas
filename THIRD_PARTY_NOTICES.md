@@ -45,7 +45,20 @@ dependências explícitas dos ensaios. Não são incorporadas como código do vi
 ou do SDK. Versões, origens e limites estão em `research/protocol-options.md`,
 `docs/protocol/conformance.md` e nos workflows.
 
-Nenhuma fonte privada, fixture derivada de fonte privada, caminho de host ou histórico
-privado foi incorporado a esta árvore pública. A inspeção privada separada para
-compatibilidade é declarada em `docs/coordination/publication-policy.md`; não há
-alegação de processo clean-room.
+Na candidata inicial ATLAS021 nenhuma fonte privada ou fixture derivada havia sido
+incorporada. As transferências posteriores são delimitadas por seus próprios
+manifestos; não há alegação de processo clean-room.
+
+## Porte autorizado da apresentação Atlas v6.1 — A01
+
+Trechos da apresentação de `thalesvalente/R4-RNF-RES-FIX`, commit
+`2895d95f81a0436636227d02b504ed1dad3f2e36`, foram portados/adaptados conforme
+autorização expressa do proprietário em
+https://github.com/thalesvalente/Atlas/pull/18#issuecomment-6552216866.
+Atribuição: Thales Valente; arquivos, blobs, funções, adaptações e hashes de destino
+constam de `docs/missions/atlas-a01/REUSE-MANIFEST.json`. A inspeção delimitada não
+identificou bibliotecas de terceiros incorporadas nesses trechos; não constitui
+uma garantia universal de originalidade. A autorização não é uma licença geral
+do produto. Nenhuma licença nova é declarada. Dados privados e evidências locais
+não acompanham o porte. A política de transferência está em
+`docs/coordination/publication-policy.md`.

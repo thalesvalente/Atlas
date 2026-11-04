@@ -1,6 +1,28 @@
 # A01 — paridade visual Native View 004
 
-## Problema e comportamento resultante
+## Sucessão atual — porte da apresentação v6.1
+
+A continuação solicitada pelo operador porta código autorizado da apresentação
+original: funções de layout/cartões/câmera, CSS com escopo e composição segura de
+índice, detalhes, tabelas, produtos e relações. A árvore editorial é a entrada
+principal; estrutura técnica e P03 congelado são opções explícitas de inspeção.
+Tabelas recuperam a leitura essencial de cinco campos quando declarados, com
+ordem original integral reversível. O mesmo filtro governa registros e relações.
+Detalhes preservam área útil e a navegação móvel mantém mapa e filtros acessíveis.
+
+Origem, autorização, adaptações e manifesto de transferência estão em
+[REUSE-AND-PARITY](../missions/atlas-a01/REUSE-AND-PARITY.md) e
+[REUSE-MANIFEST](../missions/atlas-a01/REUSE-MANIFEST.json).
+Regressões de ausência/NULL, identidade, números, referências, exportação,
+segurança e foco continuam obrigatórias. Evidência real fica LOCAL, separada da
+CI sintética e do code review. HUMAN_ACCEPTANCE=PENDING, sem merge/release/deploy.
+
+## Registro histórico — candidata cosmética 0611e188 (sucedida)
+
+O texto abaixo descreve exclusivamente a candidata anterior e suas limitações,
+antes da solicitação de porte real. Não descreve a implementação sucessora.
+
+### Problema e comportamento resultante
 
 A candidata `32a0b1a` ocupava a maior parte da primeira tela com navegação,
 metadados e filtros, especialmente no celular. A árvore estrutural também
@@ -14,7 +36,7 @@ nos IDs científicos, nos detalhes exatos ou nas exportações. Detalhes prioriz
 identidade original, estado, fonte, revisão, pointer e navegação contextual; todos
 os campos e o JSON original continuam disponíveis. Os blobs P03 são preservados.
 
-## Escopo e integração
+### Escopo e integração
 
 Branch própria baseada no HEAD documental da PR #25. PR Draft empilhada na branch
 `integrate/atlas-final-close-20261103`; não altera a PR #25. Integração posterior
@@ -24,7 +46,7 @@ Ownership: `native_application.css`, `native_notebook.html/js`, regressões de
 aplicação/Native/P02 e este registro. Sem mudanças no produtor, fontes científicas,
 protocolo, descriptor 0.2.0, proposta 0.2.1 ou estado ativo do Spec Kit.
 
-## Evidência e limites
+### Evidência e limites
 
 O Atlas antigo foi executado com sua API oficial de build, sem copiar seu renderer
 para o produto novo, com saída derivada isolada e fonte explícita somente leitura.

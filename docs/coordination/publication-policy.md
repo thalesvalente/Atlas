@@ -12,6 +12,26 @@ open source aos consumidores. Dependências de teste e referências públicas ma
 suas licenças; material redistribuído deve ter origem/pin/licença em THIRD_PARTY_NOTICES.
 A entrega é uma PR Draft pré-release, sem publicação de pacote, release ou deploy.
 
-Manifesto de transferência privada→pública: conjunto vazio nesta candidata. Não há
-liberação implícita de transferência futura. Revisão independente deve confirmar
-paths e conteúdo antes da publicação.
+Manifesto de transferência privada→pública na candidata inicial ATLAS021: conjunto
+vazio. Esse registro histórico não descreve as sucessões explicitamente autorizadas.
+Não há liberação implícita de transferência futura. Revisão independente deve
+confirmar paths e conteúdo antes da publicação.
+
+## Sucessão A01 — apresentação v6.1 autorizada
+
+A autorização do proprietário registrada em
+https://github.com/thalesvalente/Atlas/pull/18#issuecomment-6552216866 permite
+reutilizar/adaptar e transferir os trechos necessários da apresentação antiga para
+recuperar funcionalidades no Atlas independente. A continuação A01 solicita
+explicitamente esse porte. O escopo e os blobs exatos estão em
+`docs/missions/atlas-a01/REUSE-MANIFEST.json` e a reconciliação em
+`docs/missions/atlas-a01/REUSE-AND-PARITY.md`.
+
+Somente funções e estilos de apresentação revisados são incorporados. Não são
+transferidos corpus, payloads embutidos, screenshots reais, fontes de experimentos,
+credenciais, caminhos de host, executores ou leitores de arquivos do produtor.
+O viewer continua sem dependência do runtime R4 e não executa scripts/HTML dos dados.
+O manifesto histórico C2/v5 e os blobs P03 permanecem congelados; A01 é sucessor
+delimitado, não autorização geral. Nenhuma licença de software foi escolhida ou
+inventada por este porte. A autorização de transferência não concede direitos
+sobre dependências de terceiros ou fontes não relacionadas no manifesto.

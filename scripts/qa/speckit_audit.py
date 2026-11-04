@@ -20,7 +20,7 @@ EDITABLE_ORIGINALS = {".gitignore", ".specify/toolchain.json", "README.md",
 # These pins scope integrity; they do not confer independent approval.
 ORIGINAL_BRIDGE_BLOBS = {
     "packages/atlas/src/atlas_viewer/server.py":
-        "3926e308ffdf6fa5d2723622830d8ee0e682825c",
+        "ccfbbf7e1f10e5f8a5939639c77adf8cb7c8dd43",
     "packages/atlas/src/atlas_viewer/static/index.html":
         "b3f4bc39c61c3a57c4b99581dc0bbe53fef12abe",
     "tests/viewer/test_catalog_server.py":
