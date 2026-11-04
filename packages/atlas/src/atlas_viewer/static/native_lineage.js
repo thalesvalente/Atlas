@@ -2,11 +2,10 @@
  * Endpoint values come from independently verified lexical fields, not a
  * JSON.parse/Number round trip. Ambiguous references stay ambiguous.
  */
-import {declaredSourceAliases} from './native_navigation.js';
+import {buildNativeRelationIndexes} from './native_navigation.js';
 const NS='http://www.w3.org/2000/svg';
 const PAGE_SIZE=6;
 const fieldMap=entry=>new Map((entry.fields||[]).map(field=>[field.name,field]));
-const token=field=>JSON.stringify([field.type,field.text]);
 const scalarTypes=new Set(['string','integer','number','boolean']);
 function relationFields(entry){
   const fields=fieldMap(entry),raw=entry.raw_json||'',endpointNames=new Map(['from','to','from_key','to_key'].map(name=>[JSON.stringify(name),name]));
@@ -27,23 +26,7 @@ function relationFields(entry){
 }
 
 export function buildLineage(entries){
-  const identities=new Map(),keys=new Map(),allKeys=new Map();
-  function add(index,key,entry,basis){
-    if(!index.has(key))index.set(key,new Map());
-    const matches=index.get(key);
-    if(!matches.has(entry.uid))matches.set(entry.uid,{entry,bases:[]});
-    const match=matches.get(entry.uid);if(!match.bases.includes(basis))match.bases.push(basis);
-  }
-  for(const entry of entries){
-    if(!['record','node','asset','table','row'].includes(entry.kind))continue;
-    const fields=fieldMap(entry),native=fields.get('native_id')||(!fields.has('native_id')&&entry.kind==='record'?fields.get('id'):null);
-    if(native&&scalarTypes.has(native.type))add(identities,token(native),entry,'native_id');
-    for(const alias of declaredSourceAliases(entry))add(identities,token({type:'string',text:alias}),entry,'source_ids');
-    if(typeof entry.source_key==='string'){
-      const key=token({type:'string',text:entry.source_key});
-      add(identities,key,entry,'source_key');add(allKeys,key,entry,'source_key');add(keys,JSON.stringify([entry.group,key]),entry,'source_key');
-    }
-  }
+  const indexes=buildNativeRelationIndexes(entries);
   function endpoint(relation,fields,side){
     const keyName=side+'_key',hasKey=fields.has(keyName),name=hasKey?keyName:side,field=fields.get(name);
     const result={side,field:name,value:field?.text??null,valueType:field?.type??null,candidates:[],status:'NOT_SCALAR_OR_ABSENT'};
@@ -51,10 +34,7 @@ export function buildLineage(entries){
     if(field.type==='null'){result.status='EXPLICIT_NULL';return result;}
     if(!scalarTypes.has(field.type)){result.status='NOT_INTERPRETED';return result;}
     if(hasKey&&field.type!=='string'){result.status='UNSUPPORTED_KEY_TYPE';return result;}
-    const lookup=hasKey?(relation.group==='lineage_graph.edges'
-      ?keys.get(JSON.stringify(['lineage_graph.nodes',token(field)])):allKeys.get(token(field)))
-      :identities.get(token(field));
-    result.candidates=lookup?[...lookup.values()]:[];
+    result.candidates=indexes.lookup(relation,field,hasKey);
     result.status=result.candidates.length===1?'RESOLVED':result.candidates.length?'COLLISION':'UNRESOLVED';
     return result;
   }

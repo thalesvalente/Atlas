@@ -29,6 +29,7 @@ entries.push(relation('numeric-ref',[scalar('from','integer','9007199254740993')
 entries.push(relation('alias-ref',[scalar('from','string','declared-alias'),scalar('to','string','not-present'),scalar('type','string','alias-reference')],'edges'));
 entries.push(relation('composite',[scalar('from','string','alpha'),scalar('to_key','string','beta'),scalar('type','string','composite-key')],'lineage_graph.edges','{"from":"alpha","from_key":["alpha"],"to_key":"beta","type":"composite-key"}'));
 entries.push(relation('collision-alias',[scalar('from','string','alpha'),scalar('to','string','beta'),scalar('type','string','unscoped-reference')],'edges'));
+entries.push(relation('general-key-collision',[scalar('from_key','string','alpha'),scalar('to_key','string','beta'),scalar('type','string','unscoped-key-reference')],'edges'));
 entries.push(relation('self-loop',[scalar('from_key','string','alpha'),scalar('to_key','string','alpha'),scalar('type','string','self-reference')]));
 for(let i=0;i<13;i++)entries.push(relation('page-'+i,[scalar('from_key','string','alpha'),scalar('to_key','string','beta'),scalar('type','string',i===12?'last-evidence':'page-reference')]));
 entries.push(relation('text-only',[scalar('from_key','string','alpha'),scalar('to_key','string','beta'),scalar('type','string','<img src=x onerror=window.lineageInjected=1>')]));
@@ -55,6 +56,7 @@ try{
   assert.equal(byId.get('null').from.status,'EXPLICIT_NULL');assert.deepEqual(byId.get('null').from.candidates,[]);
   assert.equal(byId.get('missing').from.status,'UNRESOLVED');assert.equal(byId.get('missing').to.status,'NOT_SCALAR_OR_ABSENT');
   assert.equal(byId.get('composite').from.status,'NOT_INTERPRETED');assert.deepEqual(byId.get('composite').from.candidates,[]);
+  assert.equal(byId.get('general-key-collision').from.status,'COLLISION');assert.deepEqual(byId.get('general-key-collision').from.candidates,['a','other-group']);
   check('scoped_keys_collisions_null_missing_and_composite_endpoints_stay_distinct');
   assert.deepEqual(byId.get('numeric-ref').from.candidates,['numeric']);assert.deepEqual(byId.get('numeric-ref').to.candidates,['string-number']);
   assert.deepEqual(byId.get('alias-ref').from.candidates,['alias']);assert.equal(byId.get('collision-alias').from.status,'COLLISION');
