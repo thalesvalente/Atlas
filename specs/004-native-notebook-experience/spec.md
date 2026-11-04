@@ -31,10 +31,12 @@ Aceite: hashes de fontes de teste permanecem iguais; renderer não usa iframe/sr
 - FR-011: iniciar o Atlas NOVO sem R4 ou Caderno legado instalado por `scripts/ABRIR-ATLAS.ps1`, com fontes fixadas do protocolo público ou vazio declarado; manter `ABRIR-ATLAS-NATIVO.ps1` como opção de compatibilidade do produtor legado, não entrada principal.
 - FR-012: o mesmo lançador principal deve permitir fonte histórica explicitamente escolhida via `-LegacyCodeRoot` e `-LegacyNotebookRoot`, invocando o adaptador fora do processo Atlas para criar uma projeção derivada temporária, abrindo a UI nova com o acervo sem exigir uma exportação manual. Falha do adaptador ou do produto propaga código não zero; sem cópia para GitHub, migração persistente, escrita no Caderno ou descoberta de fontes.
 
+- FR-013: para grafos com mais de 180 nós, a árvore abre com até 24 irmãos por nível e ramos internos recolhidos; busca e navegação revelam qualquer nó mesmo fora do foco inicial, sem descartar dados, confundir IDs nem inventar relações.
+
 ## Clarifications
 
 O operador autorizou implementar esta integração, não copiar o acervo privado para o GitHub. A saída é derivada local em diretório novo, fora do código e do Caderno. A extensão é conteúdo de File, não novo protocolo científico. O modo operacional não depende de flag synthetic. Dados inventados aparecem somente nos testes automatizados. Não há alteração da feature ativa global do Spec Kit.
 
 ## Success Criteria
 
-SC-001: pacote externo abre na UI nativa sem R4 no ambiente do viewer. SC-006: projeção de engenharia cujo JSON de apresentação supera 32 MiB é consumida integralmente via transporte comprimido, mantendo 32 MiB de limite do pacote armazenado; metadados comprimidos adulterados são recusados. SC-002: todas as coleções e contagens do input são preservadas e consultáveis. SC-003: navegação/tabelas/exportações verificadas em navegador real. SC-004: zero mutações de fontes. SC-005: comparação com acervo real e revisão independente não recebem PASS sem execução observada.
+SC-001: pacote externo abre na UI nativa sem R4 no ambiente do viewer. SC-006: projeção de engenharia cujo JSON de apresentação supera 32 MiB é consumida integralmente via transporte comprimido, mantendo 32 MiB de limite do pacote armazenado; metadados comprimidos adulterados são recusados. SC-002: todas as coleções e contagens do input são preservadas e consultáveis. SC-003: navegação/tabelas/exportações verificadas em navegador real. SC-007: em 1202 nós sintéticos, foco inicial com 25 itens, expansão progressiva com 49 e busca alcançando o último nó. SC-004: zero mutações de fontes. SC-005: comparação com acervo real e revisão independente não recebem PASS sem execução observada.
