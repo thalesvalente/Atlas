@@ -57,3 +57,5 @@ não reabrem T001–T014 nem tornam um recibo antigo prova de um SHA novo.
 - [ ] T020 [P] [US1] Corrigir o supervisor de compatibilidade em scripts/ABRIR-ATLAS-NATIVO.ps1 (finding 4446002065), reutilizando preflight leve e propagando falhas; teste real PowerShell 5.1 e negativos.
 - [ ] T021 Integrar somente commits qualificados, preservar autoria e executar regressões/negativos/Chromium/Actions Windows/Ubuntu em um SHA final.
 - [ ] T022 [US3] Obter Codex e P05 sem findings materiais nesse SHA; comparar funcional/visual/integridade com Caderno real; publicar recibo Draft com matriz única final-close.md e checklist de aceite humano.
+- [ ] T023 [US2] Fechar PAR004 já existente no AP04: navegar por referências declaradas entre nó/execução/tabela/linha/evidência, preservar fonte/revisão e oferecer retorno; ambiguidades permanecem explícitas.
+- [ ] T024 [US2] Fechar PAR007 já existente no AP04: apresentar relações tipadas declaradas em grafo navegável, sem confundir hierarquia com causalidade ou inventar endpoints ausentes.

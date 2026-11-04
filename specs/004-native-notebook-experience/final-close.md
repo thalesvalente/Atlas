@@ -32,9 +32,11 @@ FORA DO ACEITE preserva alternativa/futuro sem promovê-lo a funcionalidade pron
 | Finding4446002065 / FR010–012 | ABERTA | P03: launcher compat ainda repetia API integral; reaproveitar supervisor corrigido. |
 | T015 / R006 / parte review de R014 | ABERTA | Codex+P05 no SHA integrado; reviews antigos não são aprovação do sucessor. |
 | T016 / R010 / R012 / parte host de R014 / PAR014 | ABERTA | Windows real: comando, projeção, confronto funcional/visual e integridade; referência observada174registros/2911nós/5tabelas152linhas/912recursos não é teto. |
-| PAR002/PAR003 tabelas originais; PAR004 navegação | IMPLEMENTADA | Payload original, P03 table e detalhe/export por ocorrência; P02/P05 verificam filtros/linhas reais sem publicar conteúdo. |
+| PAR002/PAR003 tabelas originais | IMPLEMENTADA | Payload original, P03 table e detalhe/export por ocorrência; P02/P05 verificam filtros/linhas reais sem publicar conteúdo. |
+| PAR004 navegação contextual | ABERTA | Inspeção P04: detalhe genérico não demonstra jornada nó→execução→tabela→linha→evidência/retorno; P02 qualifica referências declaradas sem resolver ambiguidades arbitrariamente. |
 | PAR005 produtos/grupos/versões; PAR006 documentos/dossiês | IMPLEMENTADA | Coleções/metadados nativos genéricos; vínculos somente quando declarados; conferir acessibilidade no host. |
-| PAR007 relações; PAR008 timeline; PAR009 cobertura; PAR010 armazenamento consultivo | IMPLEMENTADA | Visões e campos declarados preservados; sem inferir causalidade, denominador, disponibilidade externa ou comandos de limpeza. |
+| PAR007 grafo de linhagem tipada | ABERTA | Relações são preservadas, mas tabela/detalhe não demonstram grafo navegável; P01 fecha somente relações declaradas, mantendo hierarquia separada. |
+| PAR008 timeline; PAR009 cobertura; PAR010 armazenamento consultivo | IMPLEMENTADA | Visões e campos declarados preservados; sem inferir causalidade, denominador, disponibilidade externa ou comandos de limpeza. |
 | PAR011 acesso externo; PAR012 independência/padrões; PAR015 integridade | IMPLEMENTADA | NativeView004 reutiliza project() externo; viewer/SDK independentes; requalificar fontes imutáveis e negativos. |
 | PR16 F3A; PR17 F3B | FORA DO ACEITE | Reuso seletivo: componente público P03 já incorporado por blob; F3A descriptor0.2.0 não substitui identidade estrutural da NativeView. Sem merge indiscriminado. |
 | PR18/19/20/21/22 C2-D/reader003/C2-B/C2-K/L0 | BLOQUEADA | P04 reconcilia alternativas separadas. Nenhum path/implementação/documentação C2-K não aprovada entra na candidata. |
