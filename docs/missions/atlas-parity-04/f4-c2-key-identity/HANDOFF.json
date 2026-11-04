@@ -1,17 +1,103 @@
 {
-  "schema": "ap04-f4-c2-k-handoff-v1",
+  "schema": "ap04-f4-c2-k-handoff-v2",
   "repo": "thalesvalente/Atlas",
   "branch": "docs/atlas-parity04-f4-key-identity-20261101",
+  "initial_head": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
   "base_commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
   "base_tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9",
-  "final_commit": "RESOLVE_EXACT_BRANCH_OR_PR_SHA_EXTERNALLY",
+  "identity_note": "arc09_subject is the immutable normative object; published receipt HEAD/tree/parent and CI/review are recorded separately in the PR, never inferred from a moving branch.",
+  "arc09_subject": {
+    "state": "FROZEN_UNAPPROVED",
+    "commit": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+    "tree": "c362df15ffebc1a0fd94f387ee9aacc47e94fc5b",
+    "files": [
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+        "blob_sha1": "351335256804a41a4f0638c0943937e5ef9cced3",
+        "sha256": "7b866f342d1475ad84de005f582349bf5126478b2f86e8cb927c1c4225a7ed7e"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+        "blob_sha1": "1504abff97f25431a50cafe280c2c8e94450ec14",
+        "sha256": "70ab936b8ddfca1379c3163d1c0dfb3cb955268b69d53a3fd6044b1de22a3d59"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+        "blob_sha1": "b3fb57b91263e6ea7686039f46400eecf30815b9",
+        "sha256": "7887023a09e1110d55b491dd26cf046e3116cf3951e69d2cd181a78bec099f85"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+        "blob_sha1": "a3b43305f78926675113b1012520bfb92ceed31a",
+        "sha256": "73e48e6a1ed0ccfc9685ce9a68f71af43d8dee85d6651a991e35ae0660ebc54b"
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+        "blob_sha1": "49dc02a5fed21d9f6cca074e8511dd006f6fda2c",
+        "sha256": "db20cff9f93c000b980ed346483375cb8b6a5c7be193c72431637a1efca43e25"
+      }
+    ]
+  },
   "technical_conclusion": "O0_INSUFFICIENT_O1_RECOMMENDED_CONDITIONALLY",
   "terminal_status": "C2_K_REVIEW_BLOCKED_EXACT",
-  "target_state_not_claimed": "C2_K_CONTRACT_CANDIDATE_REVIEWED",
-  "source_refs": "INPUT-SHAS.json",
   "proposed_version": "0.2.1",
   "current_approved_version": "0.2.0",
-  "tests_this_session": "STATIC_ONLY_NO_PYTHON_OR_BROWSER",
+  "proposal_status": "UNAPPROVED_VERSIONED_PROPOSAL",
+  "new_fields": [
+    "node.source_key_literal",
+    "node.parent_key_presence",
+    "reference.reference_basis",
+    "reference.declared_key_literal"
+  ],
+  "oracle_inventory": {
+    "main_ids": [
+      "A",
+      "B",
+      "C1",
+      "C2",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I"
+    ],
+    "supplemental_ids": [
+      "J",
+      "K",
+      "L",
+      "M"
+    ],
+    "json_entries": 14,
+    "pkey_documentary_rows": 12
+  },
+  "verification_kind": "AUTHOR_DOCUMENT_BYTES_AND_ORACLE_EXPECTATIONS_ONLY",
+  "independent_review": "INDEPENDENT_REVIEW_NOT_PROVEN",
+  "human_decision": "ARC09_HUMAN_DECISION_PENDING",
+  "copilot_findings_read": 15,
+  "initial_open_threads": 6,
+  "author_dispositions_documented": 15,
+  "source_refs": "INPUT-SHAS.json",
+  "unchanged_input_blob": "ed11aa5e13b53e689301f800eae3510e9e7fcddf",
+  "unchanged_fixture_blob": "49dc02a5fed21d9f6cca074e8511dd006f6fda2c",
+  "manifest_entries": 10,
+  "guard_handoff": "C4_AP04_F2_GUARD_SUCCESSION_REQUIRED_FOR_NEW_K_DOC_PATHS",
+  "guard_owner": "P02/C4",
+  "historical_ci": {
+    "run": 41361052428,
+    "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+    "matrix_failure": 4
+  },
+  "not_run": [
+    "DESCRIPTOR_0_2_1_IMPLEMENTATION",
+    "DESCRIPTOR_0_2_1_VALIDATOR",
+    "PRODUCT_0_2_1_TESTS",
+    "BROWSER",
+    "WINDOWS_HOST",
+    "PRIVATE_CORPUS",
+    "NATIVE_INDEPENDENT_QA",
+    "SPECKIT_CLI_ANALYZE"
+  ],
   "fixtures_invented": true,
   "native_independent_reviewer": false,
   "human_approval": false,
@@ -26,25 +112,19 @@
   "release": false,
   "deploy": false,
   "required_next": [
-    "REAL_DISTINCT_EXECUTOR_REVIEW_ON_EXACT_FINAL_SHA",
-    "EXPLICIT_ARC09_HUMAN_APPROVE_OR_REJECT_ON_EXACT_SHA",
-    "ONLY_AFTER_APPROVAL_SEPARATE_C2_F3A_F3B_IMPLEMENTATION_AND_TESTS",
-    "C2_D_C3_C4_DEPENDENCY_GATES"
+    "P02_C4_SCOPED_GUARD_SUCCESSION_ON_EXACT_SHA",
+    "P03_P04_NON_AUTHOR_REVIEW_OF_PUBLISHED_HEAD_AND_SUBJECT_BLOB_EQUIVALENCE",
+    "EXPLICIT_ARC09_HUMAN_DECISION_ON_IMMUTABLE_SUBJECT",
+    "ONLY_AFTER_APPROVAL_SEPARATE_C2_F3A_F3B_IMPLEMENTATION"
   ],
-  "docs": [
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/DECISION-REQUEST.md",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/INDEPENDENT-REVIEW.md",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/INPUT-SHAS.json",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/MANIFEST.sha256",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/RESULT.md",
-    "docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json"
-  ],
-  "independent_review": "INDEPENDENT_REVIEW_NOT_PROVEN",
-  "original_copilot_findings": 5,
-  "author_dispositions_documented": 5,
-  "guard_handoff": "C4_AP04_F2_GUARD_SUCCESSION_REQUIRED_FOR_NEW_K_DOC_PATHS"
+  "receipt_parent": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+  "documentary_checks": {
+    "environment": "Python 3.13.5 Linux scratch, no product imports",
+    "normal": "PASS",
+    "optimized": "PASS",
+    "oracle_expectations_checked": 14,
+    "checker_mutations_rejected_per_mode": 14,
+    "product_execution": "NOT_RUN",
+    "verification_binding": "Same document bytes must be confirmed by Git blob SHA readback on published receipt HEAD."
+  }
 }
