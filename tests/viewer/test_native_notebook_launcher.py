@@ -9,7 +9,10 @@ import json
 import os
 from pathlib import Path
 import runpy
+import shutil
 import socket
+import subprocess
+import sys
 import tempfile
 import unittest
 from contextlib import redirect_stdout, redirect_stderr
@@ -217,6 +220,66 @@ class AtlasNewLauncherTests(unittest.TestCase):
             with patch.object(namespace["urllib"].request, "urlopen", return_value=fake_response):
                 with self.assertRaisesRegex(RuntimeError, "ATLAS_NOVO_SERVER_EXIT_9"):
                     launcher([], unused_port(), "Notebook", True, False)
+
+
+@unittest.skipUnless(os.name == "nt", "PowerShell 5.1 is a Windows integration gate")
+class AtlasCompatibilityLauncherTests(unittest.TestCase):
+    def setUp(self):
+        self.scratch = tempfile.TemporaryDirectory(prefix="atlas-compat-with-spaces-")
+        self.addCleanup(self.scratch.cleanup)
+        root = Path(self.scratch.name)
+        self.code = root / "producer checkout with spaces"
+        campaigns = self.code / "src/r4/campaigns"
+        campaigns.mkdir(parents=True)
+        (campaigns / "atlas.py").write_text(
+            "def project(root):\n"
+            "    return {'records': [{'id': 'compat-record'}], "
+            "'atlas_integration': {'notebook_revision': 'compat-double-only'}}\n",
+            encoding="utf-8",
+        )
+        self.notebook = root / "source notebook with spaces"
+        self.notebook.mkdir()
+        (self.notebook / "R4-WORKSPACE.json").write_text(
+            '{"workspace_name":"R4"}', encoding="utf-8"
+        )
+        self.output = root / "persistent export with spaces"
+
+    def run_compatibility_launcher(self, port):
+        # Use the same installed interpreter as the test, rather than a host
+        # global Python. Real PS 5.1 catches its legacy native argv behaviour.
+        powershell = shutil.which("powershell.exe")
+        self.assertIsNotNone(powershell, "Windows CI must exercise PowerShell 5.1")
+        environment = dict(os.environ)
+        environment["PATH"] = str(Path(sys.executable).parent) + os.pathsep + environment.get("PATH", "")
+        return subprocess.run(
+            [powershell, "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+             str(ROOT / "scripts/ABRIR-ATLAS-NATIVO.ps1"),
+             "-CodeRoot", str(self.code), "-NotebookRoot", str(self.notebook),
+             "-Output", str(self.output), "-Port", str(port), "-NoOpen", "-ProbeOnly"],
+            env=environment, capture_output=True, text=True, encoding="utf-8",
+            errors="replace", timeout=90,
+        )
+
+    def test_compatibility_uses_shared_probe_and_preserves_persistent_export(self):
+        from atlas_viewer.native_notebook import read_source, restore_projection
+        before = {p.name: p.read_bytes() for p in self.notebook.iterdir()}
+        completed = self.run_compatibility_launcher(unused_port())
+        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+        self.assertIn("ATLAS_NOVO_READY", completed.stdout)
+        state, _ = read_source(self.output, "compat-source")
+        self.assertEqual(state["status"], "READY", state)
+        self.assertEqual(restore_projection(state["entries"])["records"], [{"id": "compat-record"}])
+        self.assertEqual(before, {p.name: p.read_bytes() for p in self.notebook.iterdir()})
+
+    def test_compatibility_propagates_shared_supervisor_failure(self):
+        with socket.socket() as occupied:
+            occupied.bind(("127.0.0.1", 0))
+            occupied.listen()
+            completed = self.run_compatibility_launcher(occupied.getsockname()[1])
+        self.assertNotEqual(completed.returncode, 0)
+        self.assertIn("ATLAS_NATIVE_SESSION_FAILED", completed.stdout + completed.stderr)
+        # A server startup failure must not delete the explicitly requested export.
+        self.assertTrue((self.output / "ro-crate-metadata.json").is_file())
 
 
 if __name__ == "__main__":
