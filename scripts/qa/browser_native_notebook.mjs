@@ -29,7 +29,14 @@ try{
   await page.getByRole('combobox',{name:'Organização do mapa'}).selectOption('native');
   const family=page.locator('.r4-map-family').first();
   assert.ok(await family.isVisible());
-  await family.click();
+  // Duplicate source IDs and an explicitly null endpoint must NOT turn into
+  // a false relation, even if filters leave only one candidate visible.
+  await page.getByRole('checkbox',{name:'Mostrar relações declaradas'}).check();
+  assert.equal(await page.locator('.r4-map-svg path[stroke="#278f97"]').count(),0);
+  await family.focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('data-r4-id')),
+    await family.getAttribute('data-r4-id'),'Keyboard focus must survive family redraw');
   const expandedRecords=page.locator('.r4-map-record');
   assert.equal(await expandedRecords.count(),2);
   // Choose the exact declared record, not the first item sorted by title

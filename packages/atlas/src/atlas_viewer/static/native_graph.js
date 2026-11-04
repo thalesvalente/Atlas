@@ -506,7 +506,7 @@ export function mountR4Map(host, records, onSelect, options={}) {
   toolbar.append(overlayLabel);
   const buttons=html('div','r4-map-buttons');toolbar.append(buttons);
   const scene=svgEl('svg',{'class':'r4-map-svg',viewBox:'0 0 960 640',
-    role:'group','aria-label':'Mapa temático por famílias da revisão'});
+    role:'group',tabindex:'-1','aria-label':'Mapa temático por famílias da revisão'});
   const world=svgEl('g'),edgeLayer=svgEl('g',{'aria-hidden':'true'}),cards=svgEl('g');
   world.append(edgeLayer,cards);scene.append(world);
   const bottom=html('div','r4-map-bottom'),mini=svgEl('svg',{'class':'r4-map-mini',viewBox:'0 0 200 108',
@@ -595,26 +595,21 @@ export function mountR4Map(host, records, onSelect, options={}) {
     }
     if(!overlay.checked)return;
     // Overlay only relations with unambiguous declared record IDs.
-    const claims=new Map();
-    for(const row of records){
-      const idField=(row.fields||[]).find(f=>f.name==='id'&&f.type==='string');
-      const key=idField?.text||row.source_key;
-      if(typeof key!=='string'||!key)continue;
-      if(!claims.has(key))claims.set(key,[]);
-      claims.get(key).push(row.uid);
-    }
     let shown=0;
-    for(const relationship of options.relations||[]){
-      let data;
-      try{data=JSON.parse(relationship.raw_json);}catch{continue;}
-      if(typeof data?.from!=='string'||typeof data?.to!=='string')continue;
-      const src=claims.get(data.from),dst=claims.get(data.to);
-      if(src?.length!==1||dst?.length!==1)continue;
-      const a=positions.get('record:'+src[0]),b=positions.get('record:'+dst[0]);
+    const verified=typeof options.resolvedRelations==='function'?
+      options.resolvedRelations():[];
+    // Both endpoints must be UNAMBIGUOUS under the canonical resolver.
+    // It processes from_key/to_key (including explicit null) before from/to
+    // and indexes the COMPLETE source, not the filtered presentation subset.
+    for(const declared of verified){
+      if(declared.from.status!=='RESOLVED'||declared.to.status!=='RESOLVED')continue;
+      const src=declared.from.candidates[0]?.entry,dst=declared.to.candidates[0]?.entry;
+      if(src?.kind!=='record'||dst?.kind!=='record')continue;
+      const a=positions.get('record:'+src.uid),b=positions.get('record:'+dst.uid);
       if(!a||!b)continue;
       link('M '+(a.x+a.w/2)+' '+a.y+' C '+(a.x+a.w/2)+' '+(a.y-35)+
         ' '+(b.x+b.w/2)+' '+(b.y-35)+' '+(b.x+b.w/2)+' '+b.y,
-        '#278f97',2,'6 4','Relação declarada: '+text(data.type||data.kind||'sem tipo'));
+        '#278f97',2,'6 4','Relação declarada: '+text(declared.type));
       shown++;
     }
     caption.dataset.relations=String(shown);
@@ -664,11 +659,18 @@ export function mountR4Map(host, records, onSelect, options={}) {
   });
   function render(){
     if(disposed)return;
+    const focusNode=document.activeElement?.closest?.('.r4-map-card');
+    const focusId=focusNode?.getAttribute('data-r4-id')??null;
     edgeLayer.replaceChildren();cards.replaceChildren();
     drawEdges();
     const inView=n=>(n.x+n.w)*zoom+tx>=0&&n.x*zoom+tx<=width&&
       (n.y+n.h)*zoom+ty>=0&&n.y*zoom+ty<=height;
     for(const n of drawn)if(inView(n))cards.append(card(n));
+    if(focusId!==null){
+      const replacement=[...cards.children].find(el=>el.getAttribute('data-r4-id')===focusId);
+      if(replacement)replacement.focus({preventScroll:true});
+      else scene.focus({preventScroll:true});
+    }
     drawMini();
     const shown=drawn.filter(n=>n.type==='record').length;
     caption.textContent=records.length+' registros disponíveis · '+familyNames.length+

@@ -1,7 +1,7 @@
 import {renderTable} from './parity02_p03_table.js';
 import {mountGraph, mountR4Map} from './native_graph.js';
 import {buildNativeNavigation} from './native_navigation.js';
-import {mountLineage} from './native_lineage.js';
+import {mountLineage, buildLineage} from './native_lineage.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 const state={sources:[],source:null,pane:'tree',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],treeMode:null};
 const el=(tag,text=null,cls='')=>{const n=document.createElement(tag);if(text!==null)n.textContent=String(text);if(cls)n.className=cls;return n;};
@@ -176,11 +176,11 @@ function showTree(host){
           editorial=candidate;
       }catch{/* Invalid optional presentation mapping remains unavailable. */}
     }
-    const relations=all.filter(e=>e.kind==='relation');
+    const resolvedRelations=()=>buildLineage(all);
     host.append(el('p',editorial?
       'Organização editorial declarada na revisão; não é prova de causalidade.':
       'Sem mapa editorial válido: famílias agrupadas em colunas neutras, sem inferir temas.','muted'));
-    state.graph=mountR4Map(graphHost,selectedRecords,detail,{editorial,relations});
+    state.graph=mountR4Map(graphHost,selectedRecords,detail,{editorial,resolvedRelations});
     host.append(el('p',selectedRecords.length+' de '+records.length+
       ' registros no mapa. Use Nós estruturais para explorar as '+structural.length+
       ' ocorrências estruturais; ambas as visões preservam os dados originais.','muted'));
