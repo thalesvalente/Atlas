@@ -249,11 +249,11 @@ class AtlasNewLauncherTests(unittest.TestCase):
             campaigns = code / "src/r4/campaigns"
             campaigns.mkdir(parents=True)
             (campaigns / "atlas.py").write_text(
-                "from pathlib import Path\\n"
-                "def project(root):\\n"
-                "    assert Path(root).is_dir()\\n"
+                "from pathlib import Path\n"
+                "def project(root):\n"
+                "    assert Path(root).is_dir()\n"
                 "    return {'records': [{'id': 'synthetic-probe'}], "
-                "'atlas_integration': {'notebook_revision': 'synthetic-win'}}\\n",
+                "'atlas_integration': {'notebook_revision': 'synthetic-win'}}\n",
                 encoding="utf-8",
             )
             notebook = workspace / "notebook test only"
