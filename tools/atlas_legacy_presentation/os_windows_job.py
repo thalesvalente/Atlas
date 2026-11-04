@@ -286,15 +286,46 @@ def run_synthetic_job(argv: list[str], *, wall_seconds: float = WALL_SECONDS,
             "loopback_worker_accepted":
                 profile._loopback_worker_accepted() if profile else None}
     finally:
+        # Cleanup is part of the control: do not race token/profile teardown
+        # with an unassigned suspended process or a surviving descendant.
+        cleanup_errors = []
         if created:
-            if not associated:
-                k.TerminateProcess(process.hProcess, 125)
-            k.CloseHandle(process.hThread)
-            k.CloseHandle(process.hProcess)
-        # KILL_ON_JOB_CLOSE covers children, including supervisor termination.
-        k.CloseHandle(job)
+            if associated:
+                if not k.TerminateJobObject(job, 125):
+                    cleanup_errors.append("JOB_CLEANUP_TERMINATION_FAILED")
+                drained = False
+                for _ in range(50):
+                    state = _Accounting()
+                    if not k.QueryInformationJobObject(
+                            job, 1, ctypes.byref(state),
+                            ctypes.sizeof(state), None):
+                        cleanup_errors.append("JOB_CLEANUP_ACCOUNTING_FAILED")
+                        break
+                    if state.ActiveProcesses == 0:
+                        drained = True
+                        break
+                    time.sleep(0.04)
+                if not drained:
+                    cleanup_errors.append("JOB_CLEANUP_DESCENDANTS_REMAIN")
+            else:
+                if (not k.TerminateProcess(process.hProcess, 125) or
+                        k.WaitForSingleObject(
+                            process.hProcess, 2000) != WAIT_OBJECT_0):
+                    cleanup_errors.append("JOB_UNASSIGNED_WORKER_CLEANUP_FAILED")
+            for handle in (process.hThread, process.hProcess):
+                if not k.CloseHandle(handle):
+                    cleanup_errors.append("JOB_PROCESS_HANDLE_CLOSE_FAILED")
+        # Automatic KILL_ON_JOB_CLOSE is also challenged by abrupt supervisor
+        # death in the native test, independently of this orderly cleanup.
+        if not k.CloseHandle(job):
+            cleanup_errors.append("JOB_HANDLE_CLOSE_FAILED")
         if profile:
-            profile.close()
+            try:
+                profile.close()
+            except Exception:
+                cleanup_errors.append("APPCONTAINER_PROFILE_CLEANUP_FAILED")
+        if cleanup_errors:
+            raise NativeJobUnavailable(cleanup_errors[0])
 
 
 class _StartupEx(ctypes.Structure):

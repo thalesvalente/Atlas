@@ -15,7 +15,8 @@ def _report(scratch: Path, payload: dict) -> None:
     # Test-only receipt, not a publishable descriptor.
     # Exclusive create: a hostile existing file can never be clobbered.
     with (scratch / "os-probe-report.json").open("x", encoding="utf-8") as fp:
-        json.dump({**payload, "worker_optimize": sys.flags.optimize},
+        json.dump({**payload, "worker_optimize": sys.flags.optimize,
+                   "worker_pid": os.getpid()},
                   fp, sort_keys=True)
         fp.flush()
         os.fsync(fp.fileno())
@@ -29,7 +30,52 @@ def _report(scratch: Path, payload: dict) -> None:
 def _is_job_breakaway_denial(exc: OSError) -> bool:
     """A native access-denied error, never arbitrary process-launch failure."""
     return (isinstance(exc, PermissionError) and
-            getattr(exc, "winerror", None) == 5)
+            getattr(exc, "winerror", None) == 5 and
+            getattr(exc, "_atlas_createprocess_call", False))
+
+
+
+class _NativeChild:
+    """Fixed synthetic child; no standard stream/NUL setup around CreateProcess."""
+    def __init__(self, *, sleep: bool = False, breakaway: bool = False):
+        import _winapi
+        import subprocess
+        command = [sys.executable, "-I", "-S", "-c",
+                   "import time; time.sleep(90)" if sleep else "pass"]
+        startup = subprocess.STARTUPINFO()
+        flags = 0x08000000 | (0x01000000 if breakaway else 0)
+        line = subprocess.list2cmdline(command)
+        # Only this native call can mark a classified process-creation error.
+        # Imports, argv preparation and handle cleanup remain outside it.
+        try:
+            process, thread, self.pid, _ = _winapi.CreateProcess(
+                sys.executable, line, None, None, False, flags,
+                None, None, startup)
+        except OSError as exc:
+            exc._atlas_createprocess_call = True
+            raise
+        self.handle = process
+        try:
+            _winapi.CloseHandle(thread)
+        except BaseException:
+            _winapi.TerminateProcess(process, 79)
+            _winapi.CloseHandle(process)
+            self.handle = None
+            raise
+
+    def wait(self, timeout: float):
+        import _winapi
+        import subprocess
+        if _winapi.WaitForSingleObject(self.handle, int(timeout * 1000)) != 0:
+            raise subprocess.TimeoutExpired("native synthetic child", timeout)
+        result = _winapi.GetExitCodeProcess(self.handle)
+        _winapi.CloseHandle(self.handle)
+        self.handle = None
+        return result
+
+    def kill(self):
+        import _winapi
+        _winapi.TerminateProcess(self.handle, 79)
 
 
 def _native_breakaway_challenge(*, appcontainer: bool = False) -> tuple[dict, int]:
@@ -49,26 +95,22 @@ def _native_breakaway_challenge(*, appcontainer: bool = False) -> tuple[dict, in
             or not inside.value):
         return {"breakaway": "JOB_MEMBERSHIP_UNVERIFIED"}, 79
 
-    cmd = [sys.executable, "-I", "-S", "-c", "pass"]
-    # A low-privilege AppContainer may not be allowed to open the special NUL
-    # device. Avoid conflating DEVNULL setup failure with OS process denial.
-    # No report/source handles are passed onward (close_fds=True).
-    io = {"close_fds": True}
     try:
-        control = subprocess.Popen(cmd, **io)
+        control = _NativeChild()
     except OSError as exc:
         # In an AppContainer, the normal child might itself be denied by the
         # operating system. This is NOT evidence that the Job blocked a
         # breakaway. Make the second (flagged) attempt explicitly, too.
         if appcontainer and _is_job_breakaway_denial(exc):
             try:
-                flagged = subprocess.Popen(
-                    cmd, creationflags=0x01000000, **io)
+                flagged = _NativeChild(breakaway=True)
             except OSError as flagged_exc:
                 if _is_job_breakaway_denial(flagged_exc):
                     return ({
                         "breakaway": (
                             "CHILD_AND_BREAKAWAY_CREATION_DENIED_BY_OS_NOT_JOB_PROOF"),
+                        "creation_api": "CreateProcessW",
+                        "creation_phase": "PROCESS_CREATE",
                         "normal_child_winerror": 5,
                         "breakaway_winerror": 5,
                         "process_in_job": True,
@@ -107,13 +149,15 @@ def _native_breakaway_challenge(*, appcontainer: bool = False) -> tuple[dict, in
                 "positive_control_exit_code": control_rc}, 79
 
     try:
-        probe = subprocess.Popen(cmd, creationflags=0x01000000, **io)
+        probe = _NativeChild(breakaway=True)
     except OSError as exc:
         native_denial = _is_job_breakaway_denial(exc)
         return ({
             "breakaway": ("BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL"
                           if native_denial else "BREAKAWAY_UNVERIFIED_OS_ERROR"),
             "positive_control_exit_code": control_rc,
+            "creation_api": "CreateProcessW",
+            "creation_phase": "PROCESS_CREATE",
             "process_in_job": True,
             "breakaway_winerror": getattr(exc, "winerror", None),
         }, 0 if native_denial else 79)
@@ -214,11 +258,10 @@ def main() -> int:
             return status
         elif args.mode == "descendant":
             import subprocess
-            child = subprocess.Popen(
-                [sys.executable, "-c", "import time; time.sleep(90)"],
-                stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL)
-            _report(args.scratch, {"descendant_started": child.pid})
+            child = _NativeChild(sleep=True)
+            _report(args.scratch, {"descendant_started": child.pid,
+                                  "creation_api": "CreateProcessW",
+                                  "creation_phase": "PROCESS_CREATE"})
             time.sleep(90)
         return 0
 
@@ -367,8 +410,26 @@ def _windows_broker_worker(args) -> int:
         expected_len = len(b'{"synthetic":true,"payload":"invented"}')
         if args.broker_source_length != expected_len:
             return 78
+        # The inherited capability must deny native reads, not merely carry
+        # a write-only label. This does not infer provenance from its integer.
+        k.ReadFile.argtypes = [
+            wintypes.HANDLE, ctypes.c_void_p, wintypes.DWORD,
+            ctypes.POINTER(wintypes.DWORD), ctypes.c_void_p]
+        k.ReadFile.restype = wintypes.BOOL
+        sample = ctypes.create_string_buffer(1)
+        count = wintypes.DWORD()
+        ctypes.set_last_error(0)
+        if k.ReadFile(args.broker_report_handle, sample, 1,
+                      ctypes.byref(count), None):
+            return 78
+        report_read_error = ctypes.get_last_error()
+        if report_read_error != 5:
+            return 78
         def report(payload):
             output = {**payload, "worker_optimize": sys.flags.optimize,
+                      "worker_pid": os.getpid(),
+                      "report_read_denied_os": True,
+                      "report_read_winerror": report_read_error,
                       "appcontainer_token_verified": True,
                       "source_bytes_read_by_worker": 0}
             data = json.dumps(output, sort_keys=True).encode("utf-8")
@@ -401,22 +462,25 @@ def _windows_broker_worker(args) -> int:
         if args.mode == "descendant":
             import subprocess
             try:
-                child = subprocess.Popen(
-                    [sys.executable, "-I", "-S", "-c",
-                     "import time; time.sleep(90)"],
-                    stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL)
+                child = _NativeChild(sleep=True)
             except OSError as exc:
                 # Child-creation denial is a distinct, valid negative proof.
                 # An unrelated runtime/loader error is NOT a security pass.
-                denied = isinstance(exc, PermissionError) and (
-                    exc.errno == 13 or getattr(exc, "winerror", None) == 5)
+                denied = _is_job_breakaway_denial(exc)
                 report({"child_spawn": "DENIED_BY_OS" if denied else
                         "UNVERIFIED_ERROR",
                         "child_os_errno": exc.errno,
+                        "child_os_winerror": getattr(exc, "winerror", None),
+                        "creation_api": "CreateProcessW" if getattr(
+                            exc, "_atlas_createprocess_call", False) else None,
+                        "creation_phase": "PROCESS_CREATE" if getattr(
+                            exc, "_atlas_createprocess_call", False) else "SETUP",
+                        "job_specific_denial_proven": False,
                         "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
                 return 0 if denied else 79
             report({"descendant_started": child.pid,
+                    "creation_api": "CreateProcessW",
+                    "creation_phase": "PROCESS_CREATE",
                     "isolation": "APPCONTAINER_NO_NETWORK_CAPABILITIES"})
             time.sleep(90)
             return 0

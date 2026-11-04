@@ -96,8 +96,9 @@ def test_windows_junction_rejected(synthetic):
                            outside, scratch)
 
 
-def test_native_memory_challenge():
+def test_native_memory_challenge(record_property):
     result = sandbox.run_synthetic_probe("memory")
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["timed_out"] is False
     assert result["descriptor_absent"] is True
     assert result["descriptor_published"] is False
@@ -118,8 +119,9 @@ def test_native_memory_challenge():
         assert result["probe"]["memory_metric"] == "RLIMIT_AS_virtual_address_space"
 
 
-def test_linux_os_denials_or_windows_explicit_block():
+def test_linux_os_denials_or_windows_explicit_block(record_property):
     result = sandbox.run_synthetic_probe("denials")
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["descriptor_absent"] is True
     assert result["synthetic_source_unchanged"] is True
     if sys.platform == "win32":
@@ -143,8 +145,9 @@ def test_linux_os_denials_or_windows_explicit_block():
     assert checks["scratch_write"] == "ALLOWED"
 
 
-def test_monotonic_wall_clock_30s_kills_blocked_worker():
+def test_monotonic_wall_clock_30s_kills_blocked_worker(record_property):
     result = sandbox.run_synthetic_probe("sleep", wall_seconds=30)
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["timed_out"] is True, result
     assert result["status"] == "OS_WALL_TIMEOUT_TERMINATED"
     assert result["elapsed_seconds"] >= 29
@@ -222,10 +225,11 @@ def test_seccomp_foreign_arch_is_kill_bpf():
     linux._seccomp(FakeLibc())
 
 
-def test_windows_breakaway_denied():
+def test_windows_breakaway_denied(record_property):
     if sys.platform != "win32":
         pytest.skip("Linux denies fork/clone via seccomp")
     result = sandbox.run_synthetic_probe("breakaway")
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["qualification"] == "OS_CONTROL_TESTED_IN_RUNNER_JOB_ONLY"
     assert result["probe"]["breakaway"] == (
         "BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL")
@@ -234,10 +238,11 @@ def test_windows_breakaway_denied():
     assert result["probe"]["breakaway_winerror"] == 5
 
 
-def test_windows_descendants_killed_in_job():
+def test_windows_descendants_killed_in_job(record_property):
     if sys.platform != "win32":
         pytest.skip("Linux denies fork via seccomp")
     result = sandbox.run_synthetic_probe("descendant", wall_seconds=2)
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["timed_out"] is True
     assert result["active_processes_after_timeout"] == 0
     assert result["descriptor_absent"] is True
@@ -380,7 +385,7 @@ def test_aarch64_socketpair_is_in_native_seccomp_denyset(monkeypatch):
 
 
 
-def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
+def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic, record_property):
     """Native process-token challenge, no mock, with exact inherited handles.
 
     A missing profile/runtime is a blocked result, never evidence of a pass.
@@ -404,7 +409,8 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
     except NativeJobUnavailable as exc:
         pytest.fail("APPCONTAINER_OS_ENFORCEMENT_MISSING:" + str(exc))
     else:
-        assert result["appcontainer_token_verified"] is True
+        record_property("native_job_result", json.dumps(result, sort_keys=True))
+    assert result["appcontainer_token_verified"] is True
         assert result["filesystem_network_confined"] is False
         report_path = scratch / "os-probe-report.json"
         detail = (json.loads(report_path.read_text())
@@ -413,8 +419,11 @@ def test_windows_appcontainer_broker_never_degrades_to_unconfined(synthetic):
         assert result["exit_code"] == 0, (
             "APPCONTAINER_NEGATIVE_PROBE_FAILED:" +
             repr({"outcome": result, "synthetic_checks": detail}))
+        record_property("native_probe", json.dumps(detail, sort_keys=True))
         assert detail is not None
         assert detail["appcontainer_token_verified"] is True
+        assert detail["report_read_denied_os"] is True
+        assert detail["report_read_winerror"] == 5
         assert detail["source_bytes_read_by_worker"] == 0
         assert detail["isolation"] == "APPCONTAINER_NO_NETWORK_CAPABILITIES"
         assert set(detail["checks"]) == {
@@ -464,13 +473,14 @@ def _appcontainer_argv(synthetic, mode: str) -> list[str]:
                    "--supervisor-pid", str(os.getpid())]
 
 
-def test_windows_appcontainer_memory_native_limit(synthetic):
+def test_windows_appcontainer_memory_native_limit(synthetic, record_property):
     if sys.platform != "win32":
         pytest.skip("Native AppContainer limit challenge is Windows-only")
     from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
     result = run_synthetic_job(
         _appcontainer_argv(synthetic, "memory"),
         wall_seconds=10, appcontainer=True)
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["appcontainer_token_verified"] is True
     assert result["job_memory_limit_bytes"] == 268435456
     assert result["timed_out"] is False
@@ -480,17 +490,19 @@ def test_windows_appcontainer_memory_native_limit(synthetic):
     assert report["source_bytes_read_by_worker"] == 0
 
 
-def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic):
+def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic, record_property):
     if sys.platform != "win32":
         pytest.skip("Native AppContainer descendants Windows-only")
     from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
     result = run_synthetic_job(
         _appcontainer_argv(synthetic, "descendant"),
         wall_seconds=3, appcontainer=True)
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["appcontainer_token_verified"] is True
     report_path = synthetic[2] / "os-probe-report.json"
     assert report_path.exists(), result
     detail = json.loads(report_path.read_text())
+    record_property("native_probe", json.dumps(detail, sort_keys=True))
     if result["timed_out"]:
         assert result["status"] == "OS_WALL_TIMEOUT_TERMINATED"
         assert result["active_processes_after_timeout"] == 0
@@ -500,10 +512,14 @@ def test_windows_appcontainer_descendants_killed_at_native_deadline(synthetic):
             "outcome": result, "synthetic_probe": detail}
         assert detail["child_spawn"] == "DENIED_BY_OS", detail
         assert detail["child_os_errno"] == 13
+        assert detail["child_os_winerror"] == 5
+        assert detail["job_specific_denial_proven"] is False
+    assert detail["creation_api"] == "CreateProcessW"
+    assert detail["creation_phase"] == "PROCESS_CREATE"
     assert not any(synthetic[2].glob("atlas-c2-*.json"))
 
 
-def test_windows_appcontainer_child_escape_has_native_causal_attribution(synthetic):
+def test_windows_appcontainer_child_escape_has_native_causal_attribution(synthetic, record_property):
     if sys.platform != "win32":
         pytest.skip("Native AppContainer child escape Windows-only")
     from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
@@ -512,7 +528,11 @@ def test_windows_appcontainer_child_escape_has_native_causal_attribution(synthet
         wall_seconds=10, appcontainer=True)
     report_path = synthetic[2] / "os-probe-report.json"
     report = (json.loads(report_path.read_text()) if report_path.exists() else None)
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["exit_code"] == 0, {"native_job": result, "native_probe": report}
+    record_property("native_probe", json.dumps(report, sort_keys=True))
+    assert report["creation_api"] == "CreateProcessW"
+    assert report["creation_phase"] == "PROCESS_CREATE"
     assert report["process_in_job"] is True
     assert report["breakaway_winerror"] == 5
     if report["breakaway"] == "BREAKAWAY_DENIED_BY_JOB_WITH_POSITIVE_CONTROL":
@@ -528,13 +548,14 @@ def test_windows_appcontainer_child_escape_has_native_causal_attribution(synthet
         assert report["job_specific_denial_proven"] is False
 
 
-def test_windows_appcontainer_source_rename_denied_after_handle_pin(synthetic):
+def test_windows_appcontainer_source_rename_denied_after_handle_pin(synthetic, record_property):
     if sys.platform != "win32":
         pytest.skip("Native Windows handle-sharing rule only")
     from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job
     result = run_synthetic_job(
         _appcontainer_argv(synthetic, "success"),
         wall_seconds=10, appcontainer=True, inject_source_swap=True)
+    record_property("native_job_result", json.dumps(result, sort_keys=True))
     assert result["source_swap_denied_os"] is True
     assert result["exit_code"] == 0, result
     assert synthetic[0].is_file()
@@ -607,7 +628,10 @@ def test_job_breakaway_classifier_refuses_unrelated_launch_errors():
     assert not _is_job_breakaway_denial(PermissionError(13, "without winerror"))
     class SimulatedNativeDenial(PermissionError):
         winerror = 5
-    assert _is_job_breakaway_denial(SimulatedNativeDenial(13, "denied"))
+    assert not _is_job_breakaway_denial(SimulatedNativeDenial(13, "setup"))
+    native = SimulatedNativeDenial(13, "native call")
+    native._atlas_createprocess_call = True
+    assert _is_job_breakaway_denial(native)
 
 
 def test_forged_synthetic_path_direct_cli_never_opens_source(synthetic):
@@ -629,3 +653,211 @@ def test_forged_synthetic_path_direct_cli_never_opens_source(synthetic):
         assert json.loads(report.read_text())["isolation"] == (
             "OS_ISOLATION_UNVERIFIED")
     assert source.read_bytes() == secret
+
+
+def test_windows_native_child_never_opens_nul_or_uses_popen(monkeypatch):
+    if sys.platform != "win32":
+        pytest.skip("Windows native process creation only")
+    from tools.atlas_legacy_presentation.os_worker import _NativeChild
+    def forbidden(*args, **kwargs):
+        raise PermissionError(13, "simulated NUL setup denial")
+    monkeypatch.setattr(subprocess, "Popen", forbidden)
+    child = _NativeChild()
+    try:
+        assert child.wait(timeout=4) == 0
+    finally:
+        if child.handle is not None:
+            child.kill()
+            child.wait(timeout=4)
+
+
+def test_windows_native_child_classifies_only_createprocess_errors(monkeypatch):
+    if sys.platform != "win32":
+        pytest.skip("Windows native process creation only")
+    import _winapi
+    from tools.atlas_legacy_presentation.os_worker import (
+        _NativeChild, _is_job_breakaway_denial)
+    class NativeDenied(PermissionError):
+        winerror = 5
+    def setup_error():
+        raise NativeDenied(13, "setup")
+    with monkeypatch.context() as m:
+        m.setattr(subprocess, "STARTUPINFO", setup_error)
+        with pytest.raises(NativeDenied) as caught:
+            _NativeChild()
+        assert not _is_job_breakaway_denial(caught.value)
+    for error, expected in (
+            (FileNotFoundError(2, "missing interpreter"), False),
+            (PermissionError(13, "no native code"), False),
+            (NativeDenied(13, "native denial"), True)):
+        def failed(*args, **kwargs):
+            assert args[4] is False  # No inherited source/report/std handles.
+            assert args[8].dwFlags == 0  # No STARTF_USESTDHANDLES.
+            raise error
+        with monkeypatch.context() as m:
+            m.setattr(_winapi, "CreateProcess", failed)
+            with pytest.raises(OSError) as caught:
+                _NativeChild()
+            assert _is_job_breakaway_denial(caught.value) is expected
+
+
+def test_windows_supervisor_crash_kills_worker_and_descendant(synthetic, record_property):
+    """Hold native process handles across parent death; PID reuse cannot pass."""
+    if sys.platform != "win32":
+        pytest.skip("Windows Job kill-on-close native counterproof only")
+    import _winapi
+    import time
+    source, outside, scratch = synthetic
+    script = (
+        "import os,sys; "
+        "from tools.atlas_legacy_presentation.os_windows_job import run_synthetic_job; "
+        "worker=" + repr(str(Path(sandbox.__file__).with_name("os_worker.py"))) + "; "
+        "args=[sys.executable,'-I']+(['-O'] if os.environ.get("
+        "'ATLAS_WORKER_OPTIMIZE')=='1' else [])+['-S',worker,"
+        "'--source'," + repr(str(source)) + ",'--outside'," +
+        repr(str(outside)) + ",'--scratch'," + repr(str(scratch)) +
+        ",'--mode','descendant','--supervisor-pid',str(os.getpid())]; "
+        "run_synthetic_job(args,wall_seconds=30)"
+    )
+    supervisor = subprocess.Popen(
+        [sys.executable, "-c", script], stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE, close_fds=True)
+    held = []
+    report = scratch / "os-probe-report.json"
+    try:
+        detail = None
+        deadline = time.monotonic() + 12
+        while time.monotonic() < deadline:
+            if report.exists():
+                try:
+                    detail = json.loads(report.read_text())
+                except (OSError, ValueError):
+                    pass
+                if detail and detail.get("descendant_started"):
+                    break
+            if supervisor.poll() is not None:
+                pytest.fail("SUPERVISOR_EXITED_BEFORE_CRASH_CHALLENGE:" +
+                            repr(supervisor.communicate(timeout=2)))
+            time.sleep(0.02)
+        assert detail and detail.get("descendant_started"), detail
+        for pid in (detail["worker_pid"], detail["descendant_started"]):
+            handle = _winapi.OpenProcess(0x00100001, False, pid)
+            held.append(handle)
+            assert _winapi.WaitForSingleObject(handle, 0) == 258
+        supervisor.kill()  # Abrupt death: no Python finally executes.
+        supervisor.wait(timeout=4)
+        for handle in held:
+            assert _winapi.WaitForSingleObject(handle, 4000) == 0
+        record_property("native_crash_proof", json.dumps({
+            "worker_pid": detail["worker_pid"],
+            "descendant_pid": detail["descendant_started"],
+            "both_alive_before_crash": True,
+            "both_signaled_after_crash": True,
+            "worker_optimize": detail["worker_optimize"]}, sort_keys=True))
+        assert not any(scratch.glob("atlas-c2-*.json"))
+        assert source.read_bytes() == sandbox._INVENTED_SOURCE
+    finally:
+        if supervisor.poll() is None:
+            supervisor.kill()
+            supervisor.wait(timeout=4)
+        for handle in held:
+            if _winapi.WaitForSingleObject(handle, 0) != 0:
+                _winapi.TerminateProcess(handle, 79)
+                _winapi.WaitForSingleObject(handle, 4000)
+            _winapi.CloseHandle(handle)
+        supervisor.communicate(timeout=4)
+
+
+def _positive_evidence_junit(path: Path, system: str):
+    """Parser fixture, never counted as a native sandbox observation."""
+    import xml.etree.ElementTree as ET
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    skips = evidence.LINUX_TESTS if system == "win32" else evidence.WINDOWS_TESTS
+    suite = ET.Element("testsuite", tests=str(len(evidence.REQUIRED_TESTS)),
+                       errors="0", failures="0", skipped=str(len(skips)))
+    for name in sorted(evidence.REQUIRED_TESTS):
+        case = ET.SubElement(suite, "testcase", name=name,
+                             classname=evidence.JUNIT_CLASS)
+        if name in skips:
+            ET.SubElement(case, "skipped", message=skips[name])
+    ET.ElementTree(suite).write(path, encoding="utf-8")
+    return suite
+
+
+def test_evidence_only_opposite_os_skips_are_permitted(tmp_path):
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    path = tmp_path / "junit.xml"
+    for system in ("win32", "linux"):
+        _positive_evidence_junit(path, system)
+        observed = evidence.observe_junit(path, system)
+        assert observed["gate"] == "OBSERVED_PASS", observed
+
+
+def test_evidence_mandatory_native_skip_fails_with_many_passes(tmp_path):
+    import xml.etree.ElementTree as ET
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    path = tmp_path / "junit.xml"
+    suite = _positive_evidence_junit(path, "win32")
+    name = "test_windows_appcontainer_broker_never_degrades_to_unconfined"
+    case = next(c for c in suite.findall("testcase") if c.get("name") == name)
+    ET.SubElement(case, "skipped", message="unsupported native setup")
+    suite.set("skipped", str(int(suite.get("skipped")) + 1))
+    ET.ElementTree(suite).write(path, encoding="utf-8")
+    observed = evidence.observe_junit(path, "win32")
+    assert observed["executed_non_skipped"] >= 15
+    assert "JUNIT_UNAUTHORIZED_SKIP:" + name in observed["errors"]
+    assert observed["gate"] == "OBSERVED_FAILED_OR_MISSING"
+
+
+def test_evidence_reverted_history_violation_is_not_silenced():
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    with pytest.raises(evidence.HistoryVerificationError) as caught:
+        evidence.verify_successor()
+    receipt = caught.value.receipt
+    assert receipt["historical_manifest_unchanged"] is True
+    assert receipt["historical_manifest_entries"] == 15
+    forbidden = [error for error in receipt["errors"]
+                 if error["code"] == "C2_B_UNAUTHORIZED_SUCCESSOR_PATH"]
+    assert {error["sha"] for error in forbidden} == {
+        "226afaaf7771c84f269335c6a40976758b9efbc0",
+        "aa2aa933625c88e75043b264d7090d1ddfaa293e"}
+    assert all(error["path"].endswith("/THREAT-MODEL.md")
+               for error in forbidden)
+    assert forbidden[0]["old_blob"] == forbidden[1]["new_blob"]
+    assert receipt["successors"][-1]["sha"] == evidence._git_text(
+        "rev-parse", "HEAD")
+
+
+def test_evidence_pytest_pass_cannot_override_history_failure(tmp_path, monkeypatch):
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    monkeypatch.chdir(tmp_path)
+    directory = tmp_path / ".test-output/atlas-parity04-f4-c2-os"
+    directory.mkdir(parents=True)
+    _positive_evidence_junit(directory / "junit.xml", sys.platform)
+    head = "a" * 40
+    monkeypatch.setenv("ATLAS_CHECKOUT_SHA", head)
+    monkeypatch.setenv("ATLAS_WORKER_OPTIMIZE", "0")
+    monkeypatch.setattr(evidence, "_git_text", lambda *args: head)
+    def invalid_history():
+        raise evidence.HistoryVerificationError({
+            "errors": [{"code": "C2_B_UNAUTHORIZED_SUCCESSOR_PATH",
+                        "sha": "b" * 40, "path": "historical-document"}]})
+    monkeypatch.setattr(evidence, "verify_successor", invalid_history)
+    assert evidence.main() == 2
+    receipt = json.loads((directory / "observed-ci.json").read_text())
+    assert receipt["pytest_gate"] == "OBSERVED_PASS"
+    assert receipt["checkout_sha_verified"] is True
+    assert receipt["historical_gate"] == "BLOCKED"
+    assert receipt["test_gate"] == "OBSERVED_FAILED_OR_MISSING"
+
+
+def test_evidence_frozen_manifest_mutation_rejected(monkeypatch):
+    from scripts.qa import atlas_parity04_f4_c2_os_evidence as evidence
+    original = evidence._git_bytes
+    def mutated(*args):
+        if args == ("show", "HEAD:" + evidence.C2_B_MANIFEST_PATH):
+            return b"mutated"
+        return original(*args)
+    monkeypatch.setattr(evidence, "_git_bytes", mutated)
+    with pytest.raises(ValueError, match="C2_B_HISTORICAL_MANIFEST_CHANGED"):
+        evidence.verify_successor()
