@@ -1,0 +1,91 @@
+{
+  "schema": "ap04-f4-c2-k-inputs-v1",
+  "branch": "docs/atlas-parity04-f4-key-identity-20261101",
+  "base_commit": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+  "base_tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9",
+  "prompt_commit": "315f7dbeffc80822e96068eed6b4af3193d1b6a7",
+  "prompt_blob": "703f4e90e2c244eea258d0e06af30643fcf7d309",
+  "fixed_commits": {
+    "R4_private_code_only": "5c145615c8a1bd601351badddccaf3acea474ed2",
+    "F1_sanitized": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+    "F2": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "F2_technical": "c3ea1e82938fd61cc5a22fee973352715a5bb527",
+    "C0_reader003": "d498504cd2c4d230088f86e04e55624bbe32df79",
+    "C1_F3A": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+    "F3B": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+    "C2_original": "258eda6153ffe602d3fa8e6b4fe7a2ad74edbbd7",
+    "C2_v5": "e349a09d439d292011bca4c0994cf8ab3e3fbf9f"
+  },
+  "source_blobs": [
+    [
+      "R4",
+      "src/r4/campaigns/experiment_lineage.py",
+      "da6697cd1b027acf482320f8e36d110c18beed29"
+    ],
+    [
+      "R4",
+      "src/r4/campaigns/experiment_lineage_sources.py",
+      "3c01af59d366f46906f1f05f6605b18869a73ffa"
+    ],
+    [
+      "R4",
+      "src/r4/campaigns/experiment_lineage_presentation.py",
+      "4e4a04bdccebb57381998ee42af6a16a54e24e7f"
+    ],
+    [
+      "R4",
+      "src/r4/campaigns/atlas_scientific_scope.py",
+      "2860369beaae7ef2de9be0611b4be217705a6962"
+    ],
+    [
+      "Atlas-C2",
+      "tools/atlas_legacy_presentation/descriptor.schema.json",
+      "e87767710b6eafd32d57fc68d5294610b0038571"
+    ],
+    [
+      "Atlas-C2",
+      "tools/atlas_legacy_presentation/semantics.py",
+      "c448663d84507178a8fb463d019a10a1a43f0cde"
+    ],
+    [
+      "Atlas-C2",
+      "tools/atlas_legacy_presentation/legacy_v5_descriptor.py",
+      "9a3f9c14a7b37ff5104914c11002a1191f4c4ba6"
+    ],
+    [
+      "Atlas-C2",
+      "tests/qa/test_atlas_parity04_f4_c2_v5_descriptor.py",
+      "73b56abf987536ae706753daabf8e2ca7cc9cf8c"
+    ],
+    [
+      "Atlas-C1",
+      "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+      "a7b12176801f0207aae7ed3b8469b9142d6da334"
+    ],
+    [
+      "Atlas-F2",
+      "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "7a40c7c9e566a04a7b2198dac44c82c75a0e618c"
+    ],
+    [
+      "Atlas-F2",
+      "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "25d79a11171c157bd3c7e0f98d1449a78237fd9c"
+    ]
+  ],
+  "scoped_human_precedent": {
+    "pr": 15,
+    "comment_id": 6539419419,
+    "approval": "APPROVED_SCOPED_0_2_0_ONLY"
+  },
+  "validation_in_session": "STATIC_GIT_SCHEMA_AND_SEMANTICS_REVIEW_AND_INVENTED_COUNTEREXAMPLES",
+  "not_run": [
+    "PYTHON",
+    "BROWSER",
+    "HOST",
+    "REAL_CORPUS",
+    "PRODUCT_CI",
+    "NATIVE_INDEPENDENT_REVIEW"
+  ],
+  "private_content_published": false
+}
