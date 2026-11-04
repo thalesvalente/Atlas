@@ -104,6 +104,7 @@ jobs:
         run: |
           node --check packages/atlas/src/atlas_viewer/static/native_notebook.js
           node --check packages/atlas/src/atlas_viewer/static/native_graph.js
+          node --check packages/atlas/src/atlas_viewer/static/native_r4map.js
           node --check packages/atlas/src/atlas_viewer/static/native_navigation.js
           node --check packages/atlas/src/atlas_viewer/static/native_lineage.js
           node scripts/qa/test_native_navigation.mjs

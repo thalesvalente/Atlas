@@ -20,6 +20,24 @@ try{
   assert.match(await page.locator('#native-revision').innerText(),/test-invented-revision/);
   assert.equal(await page.locator('#native-node-count').innerText(),'1202');
   assert.equal(await page.locator('#native-table-count').innerText(),'1 / 127');
+  // The historical R4 renderer is now an optional native view, not an
+  // imported HTML page. Verify semantic grouping and return to the complete
+  // structural tree before the existing 1202-node regression.
+  await page.getByRole('button',{name:'Mapa por temas e famílias (R4)'}).click();
+  assert.equal(await page.locator('.r4-map').count(),1);
+  assert.ok(await page.locator('.r4-map-root').isVisible());
+  await page.getByRole('combobox',{name:'Organização do mapa'}).selectOption('native');
+  const family=page.locator('.r4-map-family').first();
+  assert.ok(await family.isVisible());
+  await family.click();
+  const expandedRecords=page.locator('.r4-map-record');
+  assert.equal(await expandedRecords.count(),2);
+  await expandedRecords.first().click();
+  assert.match(await page.locator('#native-detail-body').innerText(),/Registro/);
+  await page.locator('#native-close-detail').click();
+  await page.getByRole('button',{name:'Nós estruturais do Caderno'}).click();
+  assert.equal(await page.locator('.r4-map').count(),0);
+  check('r4_visual_renderer_port_native_themes_and_reversible_structural_switch');
   const initialGraph=await page.locator('.graph-meta').innerText();
   assert.match(initialGraph,/1202 nós carregados/);
   assert.match(initialGraph,/25 no foco atual/);

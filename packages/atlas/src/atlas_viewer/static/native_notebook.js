@@ -1,9 +1,10 @@
 import {renderTable} from './parity02_p03_table.js';
 import {mountGraph} from './native_graph.js';
+import {mountR4Map} from './native_r4map.js';
 import {buildNativeNavigation} from './native_navigation.js';
 import {mountLineage} from './native_lineage.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-const state={sources:[],source:null,pane:'tree',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[]};
+const state={sources:[],source:null,pane:'tree',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],treeMode:null};
 const el=(tag,text=null,cls='')=>{const n=document.createElement(tag);if(text!==null)n.textContent=String(text);if(cls)n.className=cls;return n;};
 const button=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
 let detailTrigger=null;
@@ -87,7 +88,7 @@ function exactOccurrenceJSON(e){
     head.slice(offset+1);
 }
 function navigation(){return state.navigation??=buildNativeNavigation(entries());}
-function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,page:state.page,table:state.table,columnPage:state.columnPage,detail:state.detail,search:$('native-search').value,family:$('native-family').value,status:$('native-status').value};}
+function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,page:state.page,table:state.table,columnPage:state.columnPage,treeMode:state.treeMode,detail:state.detail,search:$('native-search').value,family:$('native-family').value,status:$('native-status').value};}
 function pagedLinks(host,items,draw){
   let page=0;const content=el('div'),controls=el('div',null,'pager');host.append(content,controls);
   const show=()=>{content.replaceChildren();for(const item of items.slice(page*40,(page+1)*40))content.append(draw(item));controls.replaceChildren();if(items.length>40){const previous=button('← Vínculos',()=>{page--;show();}),next=button('Vínculos →',()=>{page++;show();});previous.disabled=page===0;next.disabled=(page+1)*40>=items.length;controls.append(previous,el('span',`${page*40+1}–${Math.min((page+1)*40,items.length)} de ${items.length}`),next);}};show();
@@ -96,6 +97,7 @@ function openOccurrence(uid){
   const target=navigation().byUid.get(uid);if(!target)return;
   if(state.detail)state.history.push(currentContext());state.detail=null;
   state.pane=({node:'tree',record:'records',table:'tables',row:'tables',asset:'assets',relation:'relations',collection:'coverage'})[target.kind]||'coverage';
+  if(target.kind==='node')state.treeMode='structure';
   state.page=0;state.columnPage=0;
   if(target.kind==='table'||target.kind==='row')state.table=target.table_uid||target.uid;
   for(const id of ['native-search','native-family','native-status'])$(id).value='';
@@ -111,7 +113,7 @@ function openOccurrence(uid){
 function returnToSelection(){
   const saved=state.history.pop();if(!saved)return;
   if(saved.source!==state.source?.id||saved.snapshot!==state.source?.metadata_sha256){state.history=[];message('O snapshot mudou; selecione novamente a ocorrência.',true);return;}
-  Object.assign(state,{pane:saved.pane,page:saved.page,table:saved.table,columnPage:saved.columnPage,detail:null});
+  Object.assign(state,{pane:saved.pane,page:saved.page,table:saved.table,columnPage:saved.columnPage,treeMode:saved.treeMode,detail:null});
   $('native-search').value=saved.search;$('native-family').value=saved.family;$('native-status').value=saved.status;
   render();const target=navigation().byUid.get(saved.detail);if(target){if(state.pane==='tree'&&state.graph)state.graph.locate(target.uid);detail(target,false);}
 }
@@ -147,7 +149,52 @@ function detail(e,remember=true,moveFocus=true){
 }
 function pager(host,total,pageSize=100){const pages=Math.max(1,Math.ceil(total/pageSize));state.page=Math.min(state.page,pages-1);const p=el('div',null,'pager'),prev=button('← Anterior',()=>{state.page--;closeDetail();rerenderFocus(state.page===0?'Próxima →':'← Anterior');}),next=button('Próxima →',()=>{state.page++;closeDetail();rerenderFocus(state.page+1>=pages?'← Anterior':'Próxima →');});prev.disabled=state.page===0;next.disabled=state.page+1>=pages;p.append(prev,el('span',`Página ${state.page+1}/${pages} · ${total} ocorrências na seleção`),next);host.append(p);return state.page*pageSize;}
 function grid(host,rows,columns){const wrap=el('div',null,'table-scroll'),table=el('table'),head=el('thead'),hr=el('tr');wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Tabela de ocorrências; role horizontalmente para consultar as colunas');columns.forEach(c=>{const th=el('th',c[0]);th.scope='col';hr.append(th);});head.append(hr);table.append(head);const body=el('tbody');for(const e of rows){const tr=el('tr');tr.dataset.uid=e.uid;columns.forEach((c,i)=>{const td=el('td');if(i===0)td.append(button(c[1](e),()=>detail(e)));else td.textContent=c[1](e);tr.append(td);});body.append(tr);}table.append(body);wrap.append(table);host.append(wrap);}
-function showTree(host){const all=entries().filter(e=>e.kind==='node');const nodes=all.length?all:entries().filter(e=>e.kind==='record');host.append(el('h2','Árvore e linhagem'));if(!nodes.length){host.append(el('p','Nenhum nó estrutural declarado neste pacote.','empty'));return;}const gh=el('div');host.append(gh);state.graph=mountGraph(gh,nodes,detail);const selected=nodes.filter(e=>matches(e));host.append(el('p',`${selected.length} de ${nodes.length} nós encontrados. A busca alcança todas as ocorrências, inclusive fora da janela gráfica.`,'muted'));const offset=pager(host,selected.length,40),links=el('div',null,'graph-results');for(const n of selected.slice(offset,offset+40))links.append(button(n.title,()=>state.graph.locate(n.uid)));host.append(links);}
+function showTree(host){
+  const all=entries(),records=all.filter(e=>e.kind==='record');
+  const structural=all.filter(e=>e.kind==='node'),nodes=structural.length?structural:records;
+  host.append(el('h2','Árvore e linhagem'));
+  if(!nodes.length){host.append(el('p','Nenhuma estrutura ou registro declarado neste pacote.','empty'));return;}
+  if(state.treeMode===null)state.treeMode=records.length>=20?'thematic':'structure';
+  if(records.length&&structural.length){
+    const controls=el('div',null,'r4-view-toggle');
+    const renderMode=(value,label)=>{
+      const control=button(label,()=>{closeDetail();state.treeMode=value;render();});
+      control.setAttribute('aria-pressed',String(state.treeMode===value));
+      controls.append(control);
+    };
+    renderMode('thematic','Mapa por temas e famílias (R4)');
+    renderMode('structure','Nós estruturais do Caderno');
+    host.append(controls);
+  }
+  const graphHost=el('div');host.append(graphHost);
+  if(state.treeMode==='thematic'&&records.length){
+    const selectedRecords=records.filter(e=>matches(e));
+    let editorial=null;
+    const original=all.find(e=>e.pointer==='/editorial_map'&&e.kind==='collection');
+    if(original&&original.raw_json.length<=131072){
+      try{const candidate=JSON.parse(original.raw_json);
+        if(candidate?.schema==='r4-atlas-editorial-map/1'&&Array.isArray(candidate.themes))
+          editorial=candidate;
+      }catch{/* Invalid optional presentation mapping remains unavailable. */}
+    }
+    const relations=all.filter(e=>e.kind==='relation');
+    host.append(el('p',editorial?
+      'Organização editorial declarada na revisão; não é prova de causalidade.':
+      'Sem mapa editorial válido: famílias agrupadas em colunas neutras, sem inferir temas.','muted'));
+    state.graph=mountR4Map(graphHost,selectedRecords,detail,{editorial,relations});
+    host.append(el('p',selectedRecords.length+' de '+records.length+
+      ' registros no mapa. Use Nós estruturais para explorar as '+structural.length+
+      ' ocorrências estruturais; ambas as visões preservam os dados originais.','muted'));
+    return;
+  }
+  state.graph=mountGraph(graphHost,nodes,detail);
+  const selected=nodes.filter(e=>matches(e));
+  host.append(el('p',selected.length+' de '+nodes.length+
+    ' nós encontrados. A busca alcança todas as ocorrências, inclusive fora da janela gráfica.','muted'));
+  const offset=pager(host,selected.length,40),links=el('div',null,'graph-results');
+  for(const n of selected.slice(offset,offset+40))
+    links.append(button(n.title,()=>state.graph.locate(n.uid)));
+}
 function showRecords(host,kind='record'){const all=entries().filter(e=>e.kind===kind),rows=all.filter(e=>matches(e));host.append(el('h2',kind==='relation'?'Relações declaradas':'Registros do Caderno'));host.append(el('p',kind==='relation'?'Cada ocorrência mantém seus endpoints, tipo e evidência no detalhe. Nenhuma seta é inferida de datas.':'Identificadores repetidos são preservados como ocorrências separadas.','muted'));population(host,rows,all.length,'ocorrências');if(!rows.length)return;const offset=pager(host,rows.length);grid(host,rows.slice(offset,offset+100),[['Título / ocorrência',e=>e.title],['ID original',e=>declared(e,'native_id')],['Família',e=>declared(e,'family')],['Estado',e=>declared(e,'status')],['Coleção',e=>e.group]]);}
 function showTables(host){
   const allTables=entries().filter(e=>e.kind==='table'),byTable=new Map(allTables.map(t=>[t.uid,[]]));host.append(el('h2','Tabelas de resultados'));
@@ -209,7 +256,7 @@ function render(){
   ({tree:showTree,records:showRecords,tables:showTables,relations:showRelations,assets:showAssets,timeline:showTimeline,coverage:showCoverage})[state.pane](host);markSelection();
 }
 function selectSource(){
-  state.source=state.sources.find(s=>s.id===$('native-source').value)||null;state.page=0;state.table=null;state.columnPage=0;state.navigation=null;
+  state.source=state.sources.find(s=>s.id===$('native-source').value)||null;state.page=0;state.table=null;state.columnPage=0;state.navigation=null;state.treeMode=null;
   closeDetail();$('native-detail-body').replaceChildren();$('native-search').value='';
   const list=entries();options('native-family',list.map(e=>e.family),'Todas');options('native-status',list.map(e=>e.status),'Todos');
   const count=kind=>list.filter(e=>e.kind===kind).length;
