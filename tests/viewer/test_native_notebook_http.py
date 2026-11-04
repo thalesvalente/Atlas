@@ -48,7 +48,7 @@ class NativeHTTPTests(unittest.TestCase):
         self.assertNotIn(b"<iframe", raw)
         self.assertNotIn("unsafe-inline", headers["Content-Security-Policy"])
         self.assertIn(b"native_notebook.js", raw)
-        for asset in ("native_notebook.js", "native_graph.js", "native_rebuild.js", "native_notebook.css", "parity02_p03_table.js"):
+        for asset in ("native_notebook.js", "native_graph.js", "native_lineage.js", "native_navigation.js", "native_rebuild.js", "native_notebook.css", "parity02_p03_table.js"):
             self.assertEqual(self.get("/" + asset)[0], 200)
         self.assertIn(b'href="/notebook"', self.get("/")[2])
 
