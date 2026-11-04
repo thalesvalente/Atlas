@@ -56,8 +56,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 54,
-                "end_line": 54,
+                "start_line": 56,
+                "end_line": 56,
                 "sha256": "0c551f7afb10365533ed2d07dfec73c662a88e2b07f2b1e76dbdae303892af3c",
                 "lf_normalized_sha256": "0c551f7afb10365533ed2d07dfec73c662a88e2b07f2b1e76dbdae303892af3c"
               }
@@ -82,8 +82,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 55,
-                "end_line": 55,
+                "start_line": 57,
+                "end_line": 57,
                 "sha256": "53e70e9eb20b18007ac9048e542877b61bd77aa52391e6160e186f7f61083e9e",
                 "lf_normalized_sha256": "53e70e9eb20b18007ac9048e542877b61bd77aa52391e6160e186f7f61083e9e"
               }
@@ -100,7 +100,7 @@
             "sha256": "288a81bd639aa50b0bd3bd11344ce62afbbcf4eb1d97d7d71de1c3df244fa4ac",
             "lf_normalized_sha256": "288a81bd639aa50b0bd3bd11344ce62afbbcf4eb1d97d7d71de1c3df244fa4ac"
           },
-          "treatment": "REUSED_FUNCTION_BYTES",
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
           "destination_symbols": [
             {
               "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
@@ -108,10 +108,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 62,
-                "end_line": 62,
-                "sha256": "288a81bd639aa50b0bd3bd11344ce62afbbcf4eb1d97d7d71de1c3df244fa4ac",
-                "lf_normalized_sha256": "288a81bd639aa50b0bd3bd11344ce62afbbcf4eb1d97d7d71de1c3df244fa4ac"
+                "start_line": 64,
+                "end_line": 64,
+                "sha256": "94302a8b92adf8c354b2501239950f18c63429e04163d18477df022100309a98",
+                "lf_normalized_sha256": "94302a8b92adf8c354b2501239950f18c63429e04163d18477df022100309a98"
               }
             }
           ]
@@ -134,8 +134,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 35,
-                "end_line": 35,
+                "start_line": 37,
+                "end_line": 37,
                 "sha256": "6d3954cb77072fbf3f46afb687d3b24323dbc2d3ec6a9889113d141f0aac15c7",
                 "lf_normalized_sha256": "6d3954cb77072fbf3f46afb687d3b24323dbc2d3ec6a9889113d141f0aac15c7"
               }
@@ -160,8 +160,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 36,
-                "end_line": 36,
+                "start_line": 38,
+                "end_line": 38,
                 "sha256": "68636fff1c61e60c85cd65d648e20ea015a13aecda2cdb94585f9afda67b5e72",
                 "lf_normalized_sha256": "68636fff1c61e60c85cd65d648e20ea015a13aecda2cdb94585f9afda67b5e72"
               }
@@ -186,8 +186,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 64,
-                "end_line": 70,
+                "start_line": 66,
+                "end_line": 72,
                 "sha256": "88617fb457d4832ad126069473831545ae54dacfbc69e57bf75acf5b4f6a9af1",
                 "lf_normalized_sha256": "0597221b80da9944886de4e4956b4d03b55c113f0ac52c01471743ce5d393cd5"
               }
@@ -212,10 +212,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 71,
-                "end_line": 87,
-                "sha256": "074614f513cd0a003b68d4eb4e0fab686659aaf50a5451028df6013ef32c8c81",
-                "lf_normalized_sha256": "54e503109c5958849a3279f897baa24a7b2ff8c7087a3320193f45317ae494a4"
+                "start_line": 73,
+                "end_line": 89,
+                "sha256": "b90effbe2245fcb4d6f15af87415b0324e9837d17717c9d69f51c6e812eb9605",
+                "lf_normalized_sha256": "5bbc35aa68f16fd1ef436f8f90978edd58f729e619eae456bee0af8866c965ac"
               }
             }
           ]
@@ -238,8 +238,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 90,
-                "end_line": 96,
+                "start_line": 92,
+                "end_line": 98,
                 "sha256": "563665cf8927e3d62c459827b27b2183fc029d121b5f680c7d1f585839eee648",
                 "lf_normalized_sha256": "c1ea9da27fa4265e87a27baa2b900225223a2afe34f30566bd9f215f2140aa4f"
               }
@@ -264,10 +264,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 97,
-                "end_line": 150,
-                "sha256": "3fc2cbc2a65e05c5197e0d8722752ef8d6f0da912ce9751bb2e00c39a4e97e18",
-                "lf_normalized_sha256": "99f1628b59735a95f161c383cd5ab425821324c505d089b14a0f5fef487fe8d0"
+                "start_line": 99,
+                "end_line": 153,
+                "sha256": "34e881eb7782f745d90227c86c12c72f5d8220d5cbae21bdc44c4e65e1ddc9e2",
+                "lf_normalized_sha256": "a3248abbda9c827a1aae14da545f3b012c502e48b31af1a8e149a15f07056321"
               }
             }
           ]
@@ -290,8 +290,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 152,
-                "end_line": 156,
+                "start_line": 155,
+                "end_line": 159,
                 "sha256": "5549f25d330ee0aeeab6accc532ed7b5f0638ecc00b1e34f4eda9418fe467954",
                 "lf_normalized_sha256": "2b9c27b6d0a8815d820b8b7e8a1dc1f30a673695475a3c97c5df83c7ce8a6f10"
               }
@@ -316,8 +316,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 160,
-                "end_line": 173,
+                "start_line": 163,
+                "end_line": 176,
                 "sha256": "984469ee439c1633f40e7828f24caf3d504ed83848d931bb2a5f2d8de999b488",
                 "lf_normalized_sha256": "9607915ae97f5d301dd3f67e2a3ab2677422dd498ded699872f7a5cdd8c471bd"
               }
@@ -342,8 +342,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 174,
-                "end_line": 178,
+                "start_line": 177,
+                "end_line": 181,
                 "sha256": "0a37ef5aab88949dfcbd4f6ba8afb321c97ab3ce975444de6fda5a09706de8c7",
                 "lf_normalized_sha256": "e3e1eac84066c894e7469e2afa96a95ca11565bfaa874845cfef0b5f0a5bec3d"
               }
@@ -368,8 +368,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 179,
-                "end_line": 192,
+                "start_line": 182,
+                "end_line": 195,
                 "sha256": "07765c509902ea09a2a57fdf5b5eff49224e613c18da6f77fc4565f4a5493e1b",
                 "lf_normalized_sha256": "6b6dd7730172ad0a46029166e21d42cebc65d11a2fd34214a5d6f15dc092a6fa"
               }
@@ -396,8 +396,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 61,
-                "end_line": 61,
+                "start_line": 63,
+                "end_line": 63,
                 "sha256": "bfe1ddd20b2be4b5c418576c84f7fe7ad1e72cc8fd988c91bebab2c43d99494d",
                 "lf_normalized_sha256": "bfe1ddd20b2be4b5c418576c84f7fe7ad1e72cc8fd988c91bebab2c43d99494d"
               }
@@ -422,8 +422,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 89,
-                "end_line": 89,
+                "start_line": 91,
+                "end_line": 91,
                 "sha256": "b51cb0380c4c06545878048c394c8645d78229f3ba1722f04dbcc63b3c1e055b",
                 "lf_normalized_sha256": "b51cb0380c4c06545878048c394c8645d78229f3ba1722f04dbcc63b3c1e055b"
               }
@@ -466,10 +466,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 195,
-                "end_line": 220,
-                "sha256": "1c40b63147f3c10c95622d1dc428af6a504672ca9ec5f2f6bd6458c53b3028dc",
-                "lf_normalized_sha256": "a2c9b0e12496d9e62ff28a7d0746377ae4e62957abd576e9290bce53e41112f9"
+                "start_line": 198,
+                "end_line": 223,
+                "sha256": "defbfb4f988389b16988c017a32b284729baea33d997d02321eb64e0e3a88286",
+                "lf_normalized_sha256": "2ae61273f4e196faf9db0a5a7234c406331b26a653f3f197d4478d8539a801f3"
               }
             }
           ]
@@ -492,10 +492,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 221,
-                "end_line": 272,
-                "sha256": "9f1583a9e41074d53c73682bc66af9da75a8f8b5b96c2ab70c430a936bb61ff3",
-                "lf_normalized_sha256": "1f4811177cf40423653e027c69985b04a919c3f4deb2e478c9e708554cc69f32"
+                "start_line": 224,
+                "end_line": 275,
+                "sha256": "cb741a85e285daf53ea5004839ee4cd7586f2b1a4928945866d81ed6a09b9a8a",
+                "lf_normalized_sha256": "b90fc4cbfc03710aed40e855491694ab7779d67c2e6b437f7b10750ef04f23fb"
               }
             }
           ]
@@ -518,8 +518,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 47,
-                "end_line": 52,
+                "start_line": 49,
+                "end_line": 54,
                 "sha256": "ee499b94a5e5931d5f0bae9b99d43a990608fc4b02be7ac106a1e8ccf9cf711a",
                 "lf_normalized_sha256": "1bf7f2afa49887df9da4a7546bc018debfbb984d82f542e721dca14cdd15182c"
               }
@@ -544,8 +544,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 274,
-                "end_line": 274,
+                "start_line": 277,
+                "end_line": 277,
                 "sha256": "cf413923c92322aae1c5179f4d5764c773a3b905c478ef7d3ff13f0d9431b68a",
                 "lf_normalized_sha256": "cf413923c92322aae1c5179f4d5764c773a3b905c478ef7d3ff13f0d9431b68a"
               }
@@ -570,8 +570,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 275,
-                "end_line": 284,
+                "start_line": 278,
+                "end_line": 287,
                 "sha256": "f5b6f637fb098cba413a00b80587c44d8f4c32fce2b8bb9ea390be93c1fc7125",
                 "lf_normalized_sha256": "4fd61b02ab966eb694bfad3671ac8079964c7bbe31edc137ef1ace650392c922"
               }
@@ -596,8 +596,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 285,
-                "end_line": 285,
+                "start_line": 288,
+                "end_line": 288,
                 "sha256": "ed31fd55da248d5feff7b58b3a6e4df7af5037c0fd383eaf4e06b3816852b782",
                 "lf_normalized_sha256": "ed31fd55da248d5feff7b58b3a6e4df7af5037c0fd383eaf4e06b3816852b782"
               }
@@ -622,8 +622,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 286,
-                "end_line": 286,
+                "start_line": 289,
+                "end_line": 289,
                 "sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f",
                 "lf_normalized_sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f"
               }
@@ -648,8 +648,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 287,
-                "end_line": 287,
+                "start_line": 290,
+                "end_line": 290,
                 "sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2",
                 "lf_normalized_sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2"
               }
@@ -674,10 +674,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "COMPOSITION_CONTAINER_LINES_NOT_AST",
-                "start_line": 7,
-                "end_line": 299,
-                "sha256": "129a3cb94c4c3a5b9c804eec44312a5825520c27e71e3db4209ca2f364597a3f",
-                "lf_normalized_sha256": "4ceba07c6881744b011482be84ff27a46d806b8e134b268a6d5d05e54ea1144d"
+                "start_line": 8,
+                "end_line": 302,
+                "sha256": "733e095e656ece85fd63a824dcffc63084506e3744f551e1d4b14550ec071d02",
+                "lf_normalized_sha256": "8942a5b5113c6aed02c6cac1acced96f2ac1aa9b41d0ac140f481b726c991aca"
               }
             }
           ],
@@ -722,10 +722,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 42,
-                "end_line": 44,
-                "sha256": "76dc63fbbc8ccd5be24b89e1d070bfcb6a9371f42059681277cc7aeafc9c6958",
-                "lf_normalized_sha256": "4f673e11b9220ece497aea6908c008e459120b744407228eb22f2d2388801f74"
+                "start_line": 79,
+                "end_line": 81,
+                "sha256": "22e71335e36f24df4224fc301b5f18a5f9586fe22f8a223dae4b8e64687c9cbf",
+                "lf_normalized_sha256": "4f1dfcd81e8c225e70c296400ddebb348f7a9c0a6ba5d19c16c7168f78cc0ee0"
               }
             },
             {
@@ -828,8 +828,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 25,
-                "end_line": 25,
+                "start_line": 44,
+                "end_line": 44,
                 "sha256": "8d49de7c307afe46130016ca32fcd72ff48693ece2d10fecda3f1d7189476f7c",
                 "lf_normalized_sha256": "8d49de7c307afe46130016ca32fcd72ff48693ece2d10fecda3f1d7189476f7c"
               }
@@ -854,8 +854,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 27,
-                "end_line": 27,
+                "start_line": 46,
+                "end_line": 46,
                 "sha256": "f8e2cdc7dd8b82ac690f79ec3dbebf28b26a6e2cf1114ced82b9086860126bde",
                 "lf_normalized_sha256": "f8e2cdc7dd8b82ac690f79ec3dbebf28b26a6e2cf1114ced82b9086860126bde"
               }
@@ -880,8 +880,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 26,
-                "end_line": 26,
+                "start_line": 45,
+                "end_line": 45,
                 "sha256": "bf09524a28fc679f6f657cf1152ab06430827aa65a6b3b33f496d05a68cebb84",
                 "lf_normalized_sha256": "bf09524a28fc679f6f657cf1152ab06430827aa65a6b3b33f496d05a68cebb84"
               }
@@ -980,8 +980,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 45,
-                "end_line": 45,
+                "start_line": 82,
+                "end_line": 82,
                 "sha256": "e73880227a58931bf08217b23489cdce94008218bfdda84425219459fae46564",
                 "lf_normalized_sha256": "e73880227a58931bf08217b23489cdce94008218bfdda84425219459fae46564"
               }
@@ -1019,8 +1019,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 184,
-                "end_line": 187,
+                "start_line": 189,
+                "end_line": 192,
                 "sha256": "f7aeffd8700920c31c110c87baa7dfe9378c0f67c0770168373a4a52bcd071a4",
                 "lf_normalized_sha256": "7786deec26e97ccca0c4525a10933b13c116c1051ecaa1e50bfb3372b88f11f1"
               }
@@ -1045,10 +1045,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 57,
-                "end_line": 60,
-                "sha256": "902601bc2d4e7a2b7199cae183d4920a7eccbbf01fd12a717e208dcd25f0649d",
-                "lf_normalized_sha256": "ff9de6f76a236f1670a4610e09929898f2fc9b95d45816a85b35b8ce10530246"
+                "start_line": 68,
+                "end_line": 82,
+                "sha256": "86a84ce6f5bed36f633524e20e3e16b99466bf48e12913a1cac294d81e3a9c8f",
+                "lf_normalized_sha256": "55898a8f80e2dcc6e11ac5a6bd7e161691b001e813e80874ed8013edbbfc28c9"
               }
             },
             {
@@ -1057,8 +1057,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 56,
-                "end_line": 56,
+                "start_line": 58,
+                "end_line": 58,
                 "sha256": "d3995eb1a00a3de7dae6f3a1fd7eaf6d6067e9f8dd4b89c69fd2c92b82273e8d",
                 "lf_normalized_sha256": "d3995eb1a00a3de7dae6f3a1fd7eaf6d6067e9f8dd4b89c69fd2c92b82273e8d"
               }
@@ -1069,8 +1069,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 228,
-                "end_line": 238,
+                "start_line": 233,
+                "end_line": 243,
                 "sha256": "71b8efb424be101556753a23742c4af1aa8fa97407439d96eb570edcbfe07bd6",
                 "lf_normalized_sha256": "325f48e4c4e10c54f148940f09e0304eaa2016c54b9b1407615b449e159d964d"
               }
@@ -1117,8 +1117,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 49,
-                "end_line": 49,
+                "start_line": 86,
+                "end_line": 86,
                 "sha256": "3134013112e412fa0deb04bcf24ba6742e89ee9cd4b2a65bdf162228f2029da2",
                 "lf_normalized_sha256": "3134013112e412fa0deb04bcf24ba6742e89ee9cd4b2a65bdf162228f2029da2"
               }
@@ -1141,8 +1141,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 188,
-                "end_line": 227,
+                "start_line": 193,
+                "end_line": 232,
                 "sha256": "888653bae9ba386d177f6ee923d65e7172f36ed67fc09d00945a006a9c923c4d",
                 "lf_normalized_sha256": "233422b9e8f7fc91da564f7c2b0b878391d72b137f8f658f170c33cfecf60409"
               }
@@ -1168,8 +1168,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 52,
-                "end_line": 55,
+                "start_line": 54,
+                "end_line": 57,
                 "sha256": "2bad33e810067bd879d11c3856f9a59b6a9b48a7805a67f92a54374222f11945",
                 "lf_normalized_sha256": "015cfe0f60b46b15a7ae0047c1ceea23c28b0c56832d9b348745f53cc40f7e47"
               }
@@ -1180,8 +1180,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 254,
-                "end_line": 263,
+                "start_line": 259,
+                "end_line": 268,
                 "sha256": "e9140abaade13a4e6b3bc4e2d01bdc58ad55669a77643a911b37268c38d2a9b8",
                 "lf_normalized_sha256": "79d42b98fa9beb7bfdb1bd663aeb8faa869412bf3c98a88f9699020ab41599b0"
               }
@@ -1227,8 +1227,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 53,
-                "end_line": 53,
+                "start_line": 90,
+                "end_line": 90,
                 "sha256": "a1c7173a64a409c39451ea325ba33f9498da90ab7a2955c8a30bf82edaa9a7c5",
                 "lf_normalized_sha256": "a1c7173a64a409c39451ea325ba33f9498da90ab7a2955c8a30bf82edaa9a7c5"
               }
@@ -1239,8 +1239,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 52,
-                "end_line": 52,
+                "start_line": 89,
+                "end_line": 89,
                 "sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5",
                 "lf_normalized_sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5"
               }
@@ -1266,8 +1266,8 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 54,
-                "end_line": 54,
+                "start_line": 91,
+                "end_line": 91,
                 "sha256": "184058cc486378cb6137cf9b1f81f600be620bf6f9466b90734999215b952d8a",
                 "lf_normalized_sha256": "184058cc486378cb6137cf9b1f81f600be620bf6f9466b90734999215b952d8a"
               }
@@ -1278,14 +1278,41 @@
               "declaration_kind": "const",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 52,
-                "end_line": 52,
+                "start_line": 89,
+                "end_line": 89,
                 "sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5",
                 "lf_normalized_sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5"
               }
             }
           ],
           "adaptation_note": "Explicitly declared null/empty values stop precedence; absent values remain absent rather than becoming UNKNOWN."
+        },
+        {
+          "name": "hcRun",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 9,
+            "end_line": 9,
+            "sha256": "4df1e322011020e3561b80af5fa178cd2fd98bc1cf6fbe42be61c276df1e2884",
+            "lf_normalized_sha256": "4df1e322011020e3561b80af5fa178cd2fd98bc1cf6fbe42be61c276df1e2884"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "catalogContext",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 61,
+                "end_line": 67,
+                "sha256": "7c2cfd8887d4df0c81024fe44193ce751185170e6569b2edc9fc4434f987c711",
+                "lf_normalized_sha256": "af0e3298fae9e32c3eaa2dab1cb1422df0f9190355d29ef787aeba41ed0d227c"
+              }
+            }
+          ],
+          "adaptation_note": "Declared run/execution/stage/scope restored before opaque IDs, with field labels and safe DOM; original identities and NULL remain inspectable."
         },
         {
           "name": "hcMount",
@@ -1305,8 +1332,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 228,
-                "end_line": 238,
+                "start_line": 233,
+                "end_line": 243,
                 "sha256": "71b8efb424be101556753a23742c4af1aa8fa97407439d96eb570edcbfe07bd6",
                 "lf_normalized_sha256": "325f48e4c4e10c54f148940f09e0304eaa2016c54b9b1407615b449e159d964d"
               }
@@ -1331,10 +1358,10 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 57,
-                "end_line": 60,
-                "sha256": "902601bc2d4e7a2b7199cae183d4920a7eccbbf01fd12a717e208dcd25f0649d",
-                "lf_normalized_sha256": "ff9de6f76a236f1670a4610e09929898f2fc9b95d45816a85b35b8ce10530246"
+                "start_line": 68,
+                "end_line": 82,
+                "sha256": "86a84ce6f5bed36f633524e20e3e16b99466bf48e12913a1cac294d81e3a9c8f",
+                "lf_normalized_sha256": "55898a8f80e2dcc6e11ac5a6bd7e161691b001e813e80874ed8013edbbfc28c9"
               }
             }
           ]
@@ -1402,30 +1429,30 @@
   "destination_sha256": {
     "packages/atlas/src/atlas_viewer/static/native_legacy.css": "5a23422970b2f4fb32aed261075c515f7c2d75e15a22b348346932a2da323464",
     "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "9f918b89772316dbd62844d5c7065f5d1afd666965296b3d87e065223aaaada8",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "109cdca34f1ce1f217c7c0b159d0d85c8734baa535389625abbba70a55cd6046",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "87d9761aecf520769d98e0e325f16ed90737b0fa44bfeab11a5c8b102e1fb578",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "cd0c843a087048c4127feb85e72825a30156bedb8f48f5910fb886c6de1664c1",
-    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "85b40f121d5d450cf000815b59fdab2c66de0e980615ef00648100d56c399543",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "7e43808b1bc82b573f6c54997f91fbf8a53b1443c27b6ec4e899e04ab0808dec",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "87795434e8987108f7d94de22376697014da35c5d47e54c64a1b518707dcef9a",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "57f896a1a56c2636e9bdeec39373b7562952d028c3e9b4176c44ba7133b8a549",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "d8c0279251fc35ca7f481d6ba624d7ff14c0c2a47e49a90ef1996ac10dae286e",
     "packages/atlas/src/atlas_viewer/static/native_notebook.html": "9fca68fca7ccaf740e2713947b4af75ea9b5602c3e5610748e3801709df558df",
     "packages/atlas/src/atlas_viewer/static/native_navigation.js": "788ade52ea9138e9b802ddb3e06ae5dbcafda161f59913c356762f2d867badb3"
   },
   "destination_lf_normalized_sha256": {
     "packages/atlas/src/atlas_viewer/static/native_legacy.css": "51edfb97e824828f32433859aab633dcbb948df8a81ca2fb8521526e286a5568",
     "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "1c36b85ea4ae17636a7f35b22eed3bfd66c26258936200f2d6875219c2de0c78",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "5073386baf88902536c99c0952ec4abcbce8b3de6a2142b1688f61b61a8b85ae",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "47e1f5801787a8d6976728be7e88be9b88f0f065f4c86185b7967f3da6e045e0",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "a9479ec4d83f3290cd9b0fef03dc6f280ee9da471b9030b2a6abbccfdba4c6d0",
-    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "0f349fb5b00c9e2017b306ee32f59f77d44917e94802092b7e5dc1b40b68c443",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "270969e2326eff001bc7af8d0659ba0cce274cb50a861e0867593ed8f8a6d24e",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "0655a743fc1625b4afdb192c72c4cabc78789f20acfb88974b82269473ce6f03",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "4aa6962fb22360e3b3ceed43658f1ef6398f17ea55d18170f935b20f3e8e5fc1",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "491a5235030318fbaa6a07989110ae14f997557d08281b531eb3ecff29be453f",
     "packages/atlas/src/atlas_viewer/static/native_notebook.html": "1b4430a0fee8a17eddf94e834219fad6c8ca361b00ecfed5ed3b08908e2ed399",
     "packages/atlas/src/atlas_viewer/static/native_navigation.js": "788ade52ea9138e9b802ddb3e06ae5dbcafda161f59913c356762f2d867badb3"
   },
   "counts": {
     "source_files": 9,
-    "source_functions": 35,
+    "source_functions": 36,
     "source_declarations": 6,
-    "reused_function_bytes": 7,
+    "reused_function_bytes": 6,
     "reused_declaration_bytes": 1,
-    "adapted_code_or_composition": 33,
+    "adapted_code_or_composition": 35,
     "source_line_excerpts_not_function_hashes": 1,
     "destination_paths": 8
   },

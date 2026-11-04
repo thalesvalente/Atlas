@@ -22,6 +22,25 @@ export function literalText(value){
   if(typeof value==='object'){if(numberLiteral in value)return value[numberLiteral];if(Array.isArray(value))return value.length?value.map(literalText).join(' · '):'[] — lista vazia declarada';const fields=Object.entries(value);return fields.length?fields.map(([k,v])=>k+': '+literalText(v)).join('\n'):'{} — objeto vazio declarado';}
   return value===''?'"" — texto vazio declarado':String(value);
 }
+// Family identity is independent of its human label. Numeric tokens never pass
+// through Number, including values nested inside arrays or object families.
+function familyLiteral(value){
+  if(value===null)return 'null';
+  if(typeof value==='object'){
+    if(numberLiteral in value)return value[numberLiteral];
+    if(Array.isArray(value))return '['+value.map(familyLiteral).join(',')+']';
+    return '{'+Object.keys(value).sort().map(key=>JSON.stringify(key)+':'+familyLiteral(value[key])).join(',')+'}';
+  }
+  if(typeof value==='string')return JSON.stringify(value);
+  return String(value);
+}
+export function familyIdentity(value,present=true){
+  const numeric=value!==null&&typeof value==='object'&&numberLiteral in value;
+  const literal=present?familyLiteral(value):'';
+  const type=!present?'missing':value===null?'null':numeric||typeof value==='number'?(/^-?(?:0|[1-9]\d*)$/.test(literal)?'integer':'number'):Array.isArray(value)?'array':typeof value;
+  const label=!present?'Família não declarada':value===null?'NULL — família declarada':literalText(value);
+  return Object.freeze({key:JSON.stringify(['atlas-family/1',present,type,literal]),label,type,present});
+}
 export const KIND=Object.freeze(Object.assign(Object.create(null),{milestone:'Marco de engenharia',mission:'Missão / execução do caderno',run:'Run / tentativa registrada',recovery:'Recuperação',experiment:'Experimento registrado',investigation:'Investigação',presentation:'Apresentação',product:'Produto',observation:'Observação'}));
 export const COLORS=Object.freeze(Object.assign(Object.create(null),{published:'#147b59',technical:'#326d9c',failed:'#b54353',mixed:'#ae731e',blocked:'#858347',unknown:'#778b9a'}));
 export const EDGE=Object.freeze(Object.assign(Object.create(null),{PREDECESSOR:'Predecessor explícito',INPUT_FROM:'Entrada de',DERIVED_FROM:'Derivado de',PRODUCES:'Produz',PRESENTED_BY:'Apresentado por',HISTORICAL_CONTEXT:'Contexto histórico (não causal)',COMPARED_WITH:'Comparado com'}));
@@ -30,17 +49,35 @@ export const objectData=value=>value!==null&&typeof value==='object'&&!Array.isA
 const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 export function makePresentation(entries){
   const cache=new Map(),read=e=>{if(!cache.has(e.uid))cache.set(e.uid,literalValue(e.raw_json));return cache.get(e.uid);};
-  const family=(data,key)=>has(data,key)?data[key]===null?'NULL — família declarada':literalText(data[key]):'Família não declarada';
-  const records=entries.filter(e=>e.kind==='record').map(entry=>{const data=objectData(read(entry));return {...data,id:entry.uid,original_id:data.id,native_family:has(data,'native_family')?family(data,'native_family'):family(data,'family'),family:family(data,'family'),filterKind:has(data,'kind')?literalText(data.kind):'',filterStatus:has(data,'result_group')?literalText(data.result_group):entry.status??'',title:entry.title,entry};});
+  const identities=new Map(),families=new Map(),nativeFamilies=new Map();
+  const remember=identity=>{if(!identities.has(identity.key))identities.set(identity.key,identity);return identities.get(identity.key);};
+  // Decode only family fragments for non-record DTOs; broad filters must share
+  // this namespace without decoding every resource body into a domain object.
+  for(const entry of entries){
+    const fields=nativeFragments(entry.raw_json,{all:true});
+    const identity=fields.has('family')?familyIdentity(literalValue(fields.get('family'))):typeof entry.family==='string'?familyIdentity(entry.family):familyIdentity(undefined,false);
+    families.set(entry.uid,remember(identity));
+    if(entry.kind==='record')nativeFamilies.set(entry.uid,fields.has('native_family')?remember(familyIdentity(literalValue(fields.get('native_family')))):families.get(entry.uid));
+  }
+  const familyOf=entry=>families.get(entry.uid);
+  const labels=new Map(),groups=new Map(),suffix=identity=>({string:'texto',missing:'ausente'})[identity.type]??identity.type;
+  for(const identity of identities.values()){if(!groups.has(identity.label))groups.set(identity.label,[]);groups.get(identity.label).push(identity);}
+  for(const group of groups.values())for(const identity of group)labels.set(identity.key,group.length===1?identity.label:identity.label+' ['+suffix(identity)+']');
+  // Same-type composites can flatten to the same readable text; retain their
+  // distinct literal representations rather than using their label as a key.
+  const collisions=new Map();for(const[key,label]of labels){if(!collisions.has(label))collisions.set(label,[]);collisions.get(label).push(key);}
+  for(const keys of collisions.values())if(keys.length>1)for(const key of keys){const identity=identities.get(key);labels.set(key,identity.label+' ['+suffix(identity)+'; '+JSON.parse(key)[3]+']');}
+  const familyLabel=key=>labels.get(key)??'Família não reconhecida nesta revisão';
+  const records=entries.filter(e=>e.kind==='record').map(entry=>{const data=objectData(read(entry)),family=familyOf(entry),native=nativeFamilies.get(entry.uid);return {...data,id:entry.uid,original_id:data.id,familyKey:family.key,nativeFamilyKey:native.key,native_family:familyLabel(native.key),family:familyLabel(family.key),filterKind:has(data,'kind')?literalText(data.kind):'',filterStatus:has(data,'result_group')?literalText(data.result_group):entry.status??'',title:entry.title,entry};});
   const byUid=new Map(records.map(r=>[r.id,r])),navigation=buildNativeNavigation(entries);
   const edges=entries.filter(e=>e.kind==='relation'&&e.group==='edges').map(entry=>{const data=objectData(read(entry)),refs=navigation.outgoing.get(entry.uid)||[],find=n=>{const name=has(data,n+'_key')?n+'_key':n,ref=refs.find(r=>r.label===name);return {ref,literal:data[name],candidates:(ref?.targets||[]).map(uid=>navigation.byUid.get(uid)).filter(Boolean)};},from=find('from'),to=find('to');const recordEndpoint=endpoint=>endpoint.ref?.resolution==='UNIQUE'&&endpoint.candidates[0]?.kind==='record'?endpoint.candidates[0].uid:null;return {...data,type:typeof data.type==='string'?data.type:literalText(data.type),entry,from:recordEndpoint(from),to:recordEndpoint(to),fromResolution:from.ref?.resolution??'NOT_DECLARED',toResolution:to.ref?.resolution??'NOT_DECLARED',fromCandidates:from.candidates,toCandidates:to.candidates,originalFrom:from.literal,originalTo:to.literal};});
   const editorial=entries.find(e=>e.group==='editorial_map');
-  return {records,byUid,edges,editorial_map:editorial?read(editorial):null,read};
+  return {records,byUid,edges,editorial_map:editorial?read(editorial):null,read,familyOf,familyLabel};
 }
 // Adapted filterRecords: the same declared record population drives index,
 // editorial tree, record table, relations and timeline. No hardcoded taxonomy.
 export function recordMatches(record,{query='',family='',kind='',status=''}={}){
-  const r=record,q=norm(query).trim();return(!family||r.family===family)&&(!kind||r.filterKind===kind)&&(!status||r.filterStatus===status)&&(!q||norm([r.title,text(r.original_id),r.family,text(r.software),text(r.result),r.entry.native_id,r.entry.source_key,...r.entry.fields.map(f=>f.text),...(Array.isArray(r.source_ids)?r.source_ids.map(text):[]),...(Array.isArray(r.paths)?r.paths.map(text):[]),...(Array.isArray(r.notes)?r.notes.map(text):[])].join(' ')).includes(q));
+  const r=record,q=norm(query).trim();return(!family||r.familyKey===family)&&(!kind||r.filterKind===kind)&&(!status||r.filterStatus===status)&&(!q||norm([r.title,text(r.original_id),r.family,text(r.software),text(r.result),r.entry.native_id,r.entry.source_key,...r.entry.fields.map(f=>f.text),...(Array.isArray(r.source_ids)?r.source_ids.map(text):[]),...(Array.isArray(r.paths)?r.paths.map(text):[]),...(Array.isArray(r.notes)?r.notes.map(text):[])].join(' ')).includes(q));
 }
 export const recordSort=(a,b)=>String(a.family).localeCompare(String(b.family),'pt-BR')||a.title.localeCompare(b.title,'pt-BR');
 // Adapted renderRFTable: readable identification/name/description first; all

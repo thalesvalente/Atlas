@@ -90,7 +90,7 @@ try{
     await page.locator('#native-source').selectOption('source-4');await pane('tree').click();
     await page.locator('#native-search').fill('__FILTER_EXCLUDES_THE_LINKED_TARGET__');
     if(!await page.locator('#native-family').isVisible())await page.locator('.mobile-filters>summary').click();
-    await page.locator('#native-family').selectOption('ANCHOR');
+    await page.locator('#native-family').selectOption({label:'ANCHOR'});
     const node=page.getByRole('treeitem',{name:'Nó de navegação tardia',exact:true});await node.focus();await page.keyboard.press('Enter');
     const target=expected.late_targets[kind],reference=({record:'run_id',asset:'resource_id',relation:'source_id',collection:'group_id'})[kind];
   await inspect();
@@ -241,6 +241,19 @@ try{
   assert.ok((await page.locator('#native-content').innerText()).includes(expected.long_text));
   await page.getByRole('button',{name:'Detalhes da tabela',exact:true}).click();await download('Exportar esta ocorrência',expected.long_table_sha256);
   check('row_search_beyond_first_page_and_p03_long_value_fallback_without_loss');
+  await page.locator('#native-close-detail').click();
+  await page.locator('#native-family').selectOption({label:'TABLE_ONLY'});
+  await page.locator('#native-status').selectOption('TABLE_ONLY_STATE');
+  const savedFamily=await page.locator('#native-family').inputValue(),savedTable=await page.locator('#native-table-select').inputValue();
+  await page.getByRole('button',{name:'Detalhes da tabela',exact:true}).click();await inspect();
+  await page.locator('[data-testid="native-context-links"]').getByRole('button',{name:'record_id → Registro principal',exact:true}).click();
+  assert.equal(await page.locator('#native-family option').evaluateAll((nodes,value)=>nodes.some(node=>node.value===value),savedFamily),false,'The journey must actually replace technical-only family options');
+  await page.locator('[data-testid="native-context-back"]').click();
+  assert.equal(await page.locator('#native-family').inputValue(),savedFamily);
+  assert.equal(await page.locator('#native-status').inputValue(),'TABLE_ONLY_STATE');
+  assert.equal(await page.locator('#native-table-select').inputValue(),savedTable);
+  assert.equal(await page.locator('#native-table-select option').count(),1);
+  check('context_return_rebuilds_technical_family_and_status_options_before_restoring_selection');
   await page.locator('#native-source').selectOption('source-2');
   assert.ok(await page.locator('#native-detail').isHidden());assert.equal(await page.locator('[data-testid="native-context-back"]').count(),0);
   for(const name of ['records','assets','timeline','tables','relations','coverage']){

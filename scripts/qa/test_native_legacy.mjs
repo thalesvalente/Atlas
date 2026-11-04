@@ -5,8 +5,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildNativeNavigation, nativeFragments} from '../../packages/atlas/src/atlas_viewer/static/native_navigation.js';
-import {literalValue, literalText, makePresentation, recordMatches, presentationColumns, catalogTitle, catalogStatus} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_model.js';
-import {ASSET_COLLECTIONS, renderCatalog, renderPresentationDetail, renderReadingTable, renderRecordIndex, renderRecordPresentation, renderRelationPresentation} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_views.js';
+import {literalValue, literalText, familyIdentity, makePresentation, recordMatches, presentationColumns, catalogTitle, catalogStatus} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_model.js';
+import {ASSET_COLLECTIONS, renderCatalog, renderPresentationDetail, renderReadingTable, renderRecordIndex, renderRecordPresentation, renderRelationPresentation, renderDatasetNotice} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_views.js';
 import {mountEditorialTree} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_tree.js';
 
 const NULL = 'NULL — valor declarado';
@@ -246,7 +246,7 @@ test('search retains native identifiers, aliases, runs, accent folding and exact
   const r = makePresentation([e]).records[0];
   for (const query of ['run-unique', 'run-alias', 'execution-42', 'structural-1', 'acao sintetica', 'familia arvore', '9007199254740993']) assert.equal(recordMatches(r, {query}), true, query);
   assert.equal(recordMatches(r, {query: 'does-not-exist'}), false);
-  assert.equal(recordMatches(r, {family: 'Família Árvore', kind: 'run', status: NULL}), true);
+  assert.equal(recordMatches(r, {family: familyIdentity('Família Árvore').key, kind: 'run', status: NULL}), true);
   assert.equal(recordMatches(r, {kind: 'product'}), false);
   assert.equal(recordMatches(r, {status: 'PASS'}), false);
 });
@@ -320,7 +320,7 @@ test('editorial tree tolerates string proofs and null themes while preserving se
     const model = makePresentation([a, b, edge, editorial]);
     withDOM(host => {
       let selected;
-      const persistent = {expanded: new Set(['F1', 'F2']), relations: true};
+      const persistent = {expanded: new Set(model.records.map(r => r.nativeFamilyKey)), relations: true};
       const tree = mountEditorialTree(host, model, model.records, e => { selected = e; }, persistent);
       const proof = tags(host, 'path').find(path => path.classList.contains('tree-provenance'));
       assert.ok(proof, 'the resolved relation is rendered');
@@ -347,6 +347,7 @@ test('family values of different JSON types remain separate and navigable', () =
     rawEntry('family-number', 'record', '{"family":9007199254740993,"id":"number"}'),
   ]);
   const original = JSON.stringify(records), model = makePresentation(records);
+  assert.equal(new Set(model.records.map(r => r.familyKey)).size, records.length);
   assert.equal(new Set(model.records.map(r => r.family)).size, records.length);
   assert.equal(literalText(model.read(records[4]).family), '9007199254740993');
   withDOM(host => {
@@ -366,7 +367,7 @@ test('ambiguous endpoints do not become editorial evidence arrows', () => {
   const edge = entry('ambiguous-edge', 'relation', {from: 'same', to: 'B', type: 'PREDECESSOR'});
   const model = makePresentation([a, b, node, edge]);
   withDOM(host => {
-    const tree = mountEditorialTree(host, model, model.records, () => {}, {expanded: new Set(['F']), relations: true});
+    const tree = mountEditorialTree(host, model, model.records, () => {}, {expanded: new Set(model.records.map(r => r.nativeFamilyKey)), relations: true});
     assert.equal(tags(host, 'path').filter(path => path.classList.contains('tree-provenance')).length, 0);
     tree.destroy();
   });
@@ -404,10 +405,161 @@ test('structured kind and state metadata never coerce through object prototypes'
   const map=entry('structured-map','collection',{schema:'r4-atlas-editorial-map/1',themes:[{id:'T',title:'Theme',subtitle:{literal:null},families:['F']}]},{group:'editorial_map'});
   const model=makePresentation([r,map]);
   assert.ok(recordMatches(model.records[0],{kind:model.records[0].filterKind}));
-  withDOM(host=>{renderRecordIndex(host,model.records,1,null,()=>{});renderRecordPresentation(host,model.records,()=>{});const tree=mountEditorialTree(host,model,model.records,()=>{},{expanded:new Set(['F'])});tree.destroy();assert.ok(host.textContent.includes('Structured record'));});
+  withDOM(host=>{renderRecordIndex(host,model.records,1,null,()=>{});renderRecordPresentation(host,model.records,()=>{});const tree=mountEditorialTree(host,model,model.records,()=>{},{expanded:new Set(model.records.map(r=>r.nativeFamilyKey))});tree.destroy();assert.ok(host.textContent.includes('Structured record'));});
 });
 
 test('prototype-shaped declared labels do not resolve to inherited dictionary members',()=>{
  const r=entry('prototype-record','record',{id:'p',title:'Declared prototype label',kind:'constructor',result_group:'__proto__',family:'F'}),model=makePresentation([r]);
  withDOM(host=>{renderRecordPresentation(host,model.records,()=>{});assert.ok(host.textContent.includes('constructor'));assert.ok(!host.textContent.includes('[native code]'));assert.ok(!host.textContent.includes('[object Object]'));});
+});
+
+test('family identity retains JSON types, presence and numeric lexemes inside composites', () => {
+  const values = ['1', '"1"', '1.0', '-0', '0', 'null', 'false', '"false"', '[]', '{}', '""', '[1]', '["1"]'];
+  const identities = values.map(raw => familyIdentity(literalValue(raw)));
+  assert.equal(new Set(identities.map(i => i.key)).size, values.length);
+  assert.equal(familyIdentity(1).key, familyIdentity(literalValue('1')).key);
+  assert.equal(familyIdentity(literalValue('1')).type, 'integer');
+  assert.equal(familyIdentity(literalValue('1.0')).type, 'number');
+  assert.equal(familyIdentity('1').type, 'string');
+  assert.equal(familyIdentity(undefined, false).present, false);
+  assert.equal(familyIdentity(null).present, true);
+  assert.notEqual(familyIdentity(undefined, false).key, familyIdentity(null).key);
+  const raw = '{"decimal":0.12345678901234567890,"integer":9007199254740993,"nested":[-0,1.2300e-20,"9007199254740993"]}';
+  const identity = familyIdentity(literalValue(raw));
+  assert.equal(identity.type, 'object');
+  assert.equal(JSON.parse(identity.key)[3], raw, 'the opaque key contains exact canonical numeric tokens, not rounded values');
+  assert.notEqual(identity.key, familyIdentity(literalValue(raw.replace('9007199254740993', '9007199254740992'))).key);
+  assert.notEqual(identity.key, familyIdentity(raw).key, 'an object family and a string containing JSON remain different');
+});
+
+test('typed family keys isolate homonymous records without changing normal labels or raw exports', () => {
+  const records = freeze([
+    rawEntry('number-one', 'record', '{"family":1,"id":"number"}'),
+    entry('text-one', 'record', {family: '1', id: 'text'}),
+    entry('null-family', 'record', {family: null, id: 'null'}),
+    entry('null-label-text', 'record', {family: 'NULL — família declarada', id: 'null-label'}),
+    entry('missing-family', 'record', {id: 'missing'}),
+    entry('missing-label-text', 'record', {family: 'Família não declarada', id: 'missing-label'}),
+    entry('normal-family', 'record', {family: 'RNF', id: 'normal'}),
+  ]);
+  const before = JSON.stringify(records), model = makePresentation(records);
+  assert.equal(new Set(model.records.map(r => r.familyKey)).size, records.length);
+  assert.equal(new Set(model.records.map(r => r.family)).size, records.length);
+  assert.equal(model.byUid.get('number-one').family, '1 [integer]');
+  assert.equal(model.byUid.get('text-one').family, '1 [texto]');
+  assert.equal(model.byUid.get('normal-family').family, 'RNF');
+  for (const r of model.records) {
+    assert.equal(model.familyOf(r.entry).key, r.familyKey);
+    assert.equal(model.familyLabel(r.familyKey), r.family);
+    assert.deepEqual(model.records.filter(candidate => recordMatches(candidate, {family: r.familyKey})).map(candidate => candidate.id), [r.id]);
+    assert.equal(r.entry.raw_json, records.find(e => e.uid === r.id).raw_json);
+  }
+  assert.equal(recordMatches(model.byUid.get('normal-family'), {family: 'RNF'}), false, 'a display label is never interpreted as an identity key');
+  assert.equal(JSON.stringify(records), before);
+  assert.equal(literalText(model.read(records[0]).family), '1');
+  assert.equal(model.read(records[2]).family, null);
+  assert.equal(Object.hasOwn(model.read(records[4]), 'family'), false);
+});
+
+test('broad DTO family filters use the same typed namespace and only fall back when raw family is absent', () => {
+  const entries = freeze([
+    rawEntry('asset-number', 'asset', '{"family":1,"id":"number"}'),
+    entry('asset-text', 'asset', {family: '1', id: 'text'}),
+    entry('asset-fallback', 'asset', {id: 'fallback'}, {family: 'RNF'}),
+    entry('asset-raw-null', 'asset', {family: null, id: 'null'}, {family: 'RNF'}),
+    entry('asset-missing', 'asset', {id: 'missing'}, {family: null}),
+    entry('asset-empty-fallback', 'asset', {id: 'empty'}, {family: ''}),
+  ]);
+  const before = JSON.stringify(entries), model = makePresentation(entries);
+  assert.equal(model.records.length, 0);
+  assert.equal(model.familyOf(entries[0]).key, familyIdentity(literalValue('1')).key);
+  assert.equal(model.familyOf(entries[1]).key, familyIdentity('1').key);
+  assert.equal(model.familyLabel(model.familyOf(entries[0]).key), '1 [integer]');
+  assert.equal(model.familyLabel(model.familyOf(entries[1]).key), '1 [texto]');
+  assert.equal(model.familyOf(entries[2]).key, familyIdentity('RNF').key);
+  assert.equal(model.familyLabel(model.familyOf(entries[2]).key), 'RNF');
+  assert.equal(model.familyOf(entries[3]).key, familyIdentity(null).key, 'explicit raw null wins over a DTO string');
+  assert.equal(model.familyOf(entries[4]).key, familyIdentity(undefined, false).key);
+  assert.equal(model.familyOf(entries[5]).key, familyIdentity('').key);
+  assert.equal(JSON.stringify(entries), before);
+});
+
+test('native family aliases retain their own typed keys while ordinary family filters remain unchanged', () => {
+  const entries = freeze([
+    rawEntry('alias-number', 'record', '{"family":"RNF","id":"n","native_family":1}'),
+    entry('alias-text', 'record', {family: 'RNF', id: 's', native_family: '1'}),
+    entry('alias-null', 'record', {family: 'RNF', id: 'null', native_family: null}),
+    entry('alias-null-text', 'record', {family: 'RNF', id: 'text-null', native_family: 'NULL — família declarada'}),
+    entry('alias-absent', 'record', {family: 'RNF', id: 'absent'}),
+  ]);
+  const before = JSON.stringify(entries), model = makePresentation(entries);
+  assert.equal(new Set(model.records.map(r => r.familyKey)).size, 1);
+  assert.equal(new Set(model.records.map(r => r.nativeFamilyKey)).size, entries.length);
+  assert.equal(new Set(model.records.map(r => r.native_family)).size, entries.length);
+  assert.equal(model.records[0].nativeFamilyKey, familyIdentity(literalValue('1')).key);
+  assert.equal(model.records[1].nativeFamilyKey, familyIdentity('1').key);
+  assert.equal(model.records[2].nativeFamilyKey, familyIdentity(null).key);
+  assert.equal(model.records[4].nativeFamilyKey, model.records[4].familyKey);
+  assert.ok(model.records.every(r => r.family === 'RNF' && recordMatches(r, {family: familyIdentity('RNF').key})));
+  assert.equal(literalText(model.read(entries[0]).native_family), '1');
+  assert.equal(model.read(entries[2]).native_family, null);
+  assert.equal(JSON.stringify(entries), before);
+});
+
+test('same-type composite family labels cannot merge different numeric or string values', () => {
+  const entries = freeze([
+    rawEntry('array-number', 'record', '{"family":[1,2],"id":"a"}'),
+    entry('array-text', 'record', {family: ['1', '2'], id: 'b'}),
+    rawEntry('object-number', 'record', '{"family":{"a":1},"id":"c"}'),
+    entry('object-text', 'record', {family: {a: '1'}, id: 'd'}),
+  ]);
+  const model = makePresentation(entries);
+  assert.equal(new Set(model.records.map(r => r.familyKey)).size, entries.length);
+  assert.equal(new Set(model.records.map(r => r.family)).size, entries.length);
+  for (const r of model.records) assert.deepEqual(model.records.filter(candidate => recordMatches(candidate, {family: r.familyKey})).map(candidate => candidate.id), [r.id]);
+});
+
+test('editorial string membership cannot capture numeric, null or missing homonymous families', () => {
+  const records = freeze([
+    rawEntry('theme-number', 'record', '{"family":1,"id":"n"}'),
+    entry('theme-text', 'record', {family: '1', id: 's'}),
+    entry('theme-null', 'record', {family: null, id: 'null'}),
+    entry('theme-null-text', 'record', {family: 'NULL — família declarada', id: 'text-null'}),
+    entry('theme-missing', 'record', {id: 'missing'}),
+    entry('theme-missing-text', 'record', {family: 'Família não declarada', id: 'text-missing'}),
+  ]);
+  const editorial = entry('typed-editorial', 'collection', {schema: 'r4-atlas-editorial-map/1', themes: [{id: 'text-members', title: 'String members', families: ['1', 'NULL — família declarada', 'Família não declarada']}]}, {group: 'editorial_map'});
+  const model = makePresentation([...records, editorial]);
+  withDOM(host => {
+    const tree = mountEditorialTree(host, model, model.records, () => {}, {expanded: new Set(model.records.map(r => r.nativeFamilyKey))});
+    const theme = tags(host, 'g').find(g => g.getAttribute('data-graph-id') === 'theme:text-members');
+    assert.ok(theme, 'the declared string-only theme remains visible');
+    assert.equal(theme.getAttribute('aria-label'), 'String members: 3 registros');
+    for (const r of model.records) assert.ok(tags(host, 'g').some(g => g.getAttribute('data-graph-id') === 'family:' + r.nativeFamilyKey), 'every typed family keeps its own graph identity');
+    tree.destroy();
+  });
+});
+
+test('family relation aggregation uses reversible pairs even with literal NUL',()=>{
+ const a=entry('nul-a','record',{id:'A',title:'NUL family record',family:'F\u0000X'}),b=entry('nul-b','record',{id:'B',title:'Other family record',family:'G'}),e=entry('nul-edge','relation',{from:'A',to:'B',type:'PREDECESSOR'});
+ const model=makePresentation([a,b,e]);withDOM(host=>{const tree=mountEditorialTree(host,model,model.records,()=>{},{relations:true});assert.equal(tags(host,'path').filter(p=>p.classList.contains('tree-family-evidence')).length,1);assert.equal(tags(host,'g').filter(n=>n.classList.contains('svg-family')).length,2);tree.destroy();});
+});
+
+test('small SVG status and ordinal text reaches WCAG 4.5 while accents stay distinct',()=>{
+ const rgb=hex=>hex.replace('#','').match(/../g).map(pair=>parseInt(pair,16)/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4),lum=hex=>{const c=rgb(hex);return .2126*c[0]+.7152*c[1]+.0722*c[2];},contrast=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+ for(const group of ['published','technical','failed','mixed','blocked','unknown']){
+  const r=entry('ink-'+group,'record',{id:group,title:'Record '+group,family:'F',result:'Status '+group,result_group:group}),model=makePresentation([r]);
+  withDOM(host=>{const tree=mountEditorialTree(host,model,model.records,()=>{},{expanded:new Set([model.records[0].nativeFamilyKey])});for(const bg of ['#FFFFFF','#EFFAF8']){const label=tags(host,'text').find(n=>n.textContent==='Status '+group);assert.ok(label);assert.ok(contrast(label.getAttribute('fill'),bg)>=4.5,group+' status contrast');}const ordinal=tags(host,'text').find(n=>n.textContent==='01');assert.ok(ordinal);for(const bg of ['#5A91E6','#14A8A3','#9B81DE','#5F8BA2','#788D9B'])assert.ok(contrast(ordinal.getAttribute('fill'),bg)>=4.5,'ordinal contrast');tree.destroy();});
+ }
+});
+
+test('dataset notice keeps explicit states and meaningful warnings without orphan NULL paragraphs',()=>{
+ const table=entry('notice-table','table',{id:'T',status:null,source_warning:'Declared warning',reason:'Duplicate explanation',binding_gap:null,rows:[]}),model=makePresentation([table]),before=table.raw_json;
+ withDOM(host=>{renderDatasetNotice(host,table,model);assert.deepEqual(tags(host,'p').map(n=>n.textContent),['Declared warning']);assert.ok(host.textContent.includes('Estado'));assert.ok(host.textContent.includes(NULL));assert.equal(table.raw_json,before);});
+ const gap=entry('notice-gap','table',{id:'G',binding_gap:'Explicit unresolved binding',rows:[]}),other=makePresentation([gap]);withDOM(host=>{renderDatasetNotice(host,gap,other);assert.ok(host.textContent.includes('Vínculo com o Caderno: Explicit unresolved binding'));});
+});
+
+test('product catalog restores declared execution and stage before opaque identities',()=>{
+ const e=entry('context-product','asset',{id:'opaque-id',native_id:'RF-001',run_id:null,execution_id:'execution-declared',stage_id:'infer_nuclei',atlas_record_id:'opaque-record',group_id:'opaque-group',status:'LOADED',publication:null,human_review:'NOT_ASSESSED'},{group:'product_items'}),model=makePresentation([e]),before=e.raw_json;
+ withDOM(host=>{renderCatalog(host,[e],model,()=>{});const cells=tags(host,'tbody')[0].children[0].children;assert.ok(cells[1].textContent.includes('Execução'));assert.ok(cells[1].textContent.includes('execution-declared'));assert.ok(cells[1].textContent.includes('Estágio'));assert.ok(cells[1].textContent.includes('infer_nuclei'));assert.ok(tags(cells[1],'details').length);assert.ok(cells[1].textContent.includes('opaque-record'));assert.ok(cells[2].textContent.includes('LOADED'));assert.ok(cells[2].textContent.includes(NULL));assert.equal(e.raw_json,before);});
 });

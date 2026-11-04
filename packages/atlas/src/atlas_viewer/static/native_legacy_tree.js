@@ -2,13 +2,15 @@
  * Function-level provenance, source blobs and adaptations: REUSE-MANIFEST.json.
  * Only the verified Native View DTO supplies data; no imported HTML executes.
  */
-import {KIND,COLORS,EDGE,literalText} from './native_legacy_model.js';
+import {KIND,COLORS,EDGE,literalText,familyIdentity} from './native_legacy_model.js';
 const NS='http://www.w3.org/2000/svg';
+const STATUS_INK=Object.freeze(Object.assign(Object.create(null),{published:'#116b4d',technical:'#285f8a',failed:'#9e3447',mixed:'#87570d',blocked:'#666324',unknown:'#526978'}));
 export function mountEditorialTree(host,model,rows,onSelect,persistent={}){
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  const makeButton=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
  const controls=new Map(),$=id=>controls.get(id);
  const DATA={records:model.records,editorial_map:model.editorial_map,edges:model.edges.filter(e=>e.from&&e.to&&rows.some(r=>r.id===e.from)&&rows.some(r=>r.id===e.to))};
+ const familyLabel=key=>model.familyLabel(key);
  const R=model.byUid,visible=new Set(rows.map(r=>r.id)),expanded=persistent.expanded??=new Set();
  const filtered=()=>rows,num=value=>value.toLocaleString('pt-BR');
  let selected=persistent.selected??null,graphNodes=[],graphEdges=[],full=[0,0,940,600],box=persistent.box??[0,0,940,600],zoomReferenceWidth=persistent.zoomReferenceWidth??null,moved=false;
@@ -59,7 +61,7 @@ function wrapped(text,max=37,lines=2){const words=String(text).split(/\s+/),out=
 // Editorial membership is supplied by a hash-bound presentation map. Native
 // families remain literal; neutral columns below are only a balanced index.
 const TREE_THEME_PALETTE=['#5A91E6','#14A8A3','#9B81DE','#5F8BA2'];
-function nativeFamily(record){return record.native_family??record.family;}
+function nativeFamily(record){return record.nativeFamilyKey;}
 
 function neutralTreeThemes(families,prefix,title){
  if(!families.length)return [];
@@ -69,18 +71,18 @@ function neutralTreeThemes(families,prefix,title){
    subtitle:'Índice balanceado · sem inferência científica',families:members,neutral:true,color:'#788D9B'}));
 }
 function allTreeThemes(){
- const families=[...new Set(DATA.records.map(nativeFamily))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+ const families=[...new Set(DATA.records.map(nativeFamily))].sort((a,b)=>familyLabel(a).localeCompare(familyLabel(b),'pt-BR'));
  if(treeOrganizationMode()==='native')return neutralTreeThemes(families,'native','Famílias de origem');
  const map=DATA.editorial_map;
  if(map?.schema!=='r4-atlas-editorial-map/1'||!Array.isArray(map.themes))
   return neutralTreeThemes(families,'unmapped','Famílias sem tema associado');
  const known=new Set(families),claims=new Map();
- for(const theme of map.themes.filter(t=>t&&typeof t==='object'))for(const family of (Array.isArray(theme.families)?theme.families:[]))
-  if(known.has(family))claims.set(family,(claims.get(family)||0)+1);
+ for(const theme of map.themes.filter(t=>t&&typeof t==='object'))for(const member of (Array.isArray(theme.families)?theme.families:[])){
+  const family=familyIdentity(member).key;if(known.has(family))claims.set(family,(claims.get(family)||0)+1);}
  const themes=map.themes.filter(t=>t&&typeof t.id==='string'&&typeof t.title==='string').map((t,index)=>({
   id:t.id,title:t.title,subtitle:t.subtitle===undefined?'Organização editorial · não causal':literalText(t.subtitle),
   color:TREE_THEME_PALETTE[index%TREE_THEME_PALETTE.length],
-  families:(Array.isArray(t.families)?t.families:[]).filter(f=>known.has(f)&&claims.get(f)===1)
+  families:(Array.isArray(t.families)?t.families:[]).map(f=>familyIdentity(f).key).filter(f=>known.has(f)&&claims.get(f)===1)
  })).filter(t=>t.families.length);
  const mapped=new Set(themes.flatMap(t=>t.families));
  return [...themes,...neutralTreeThemes(families.filter(f=>!mapped.has(f)),'unmapped','Famílias sem tema associado')];
@@ -101,6 +103,7 @@ function drawNode(node,parent=svg,miniature=false) {
  const g=s('g',{transform:`translate(${node.x} ${node.y})`,class:'svg-node svg-'+node.type+(selectedNow?' selected':''),
    'data-graph-id':node.id,'data-native-node':isRoot||isTheme||isFamily?'':node.id,tabindex:miniature?-1:0,role:'button','aria-label':semanticRole});
  const accent=isRoot?'#43D9D2':isTheme||isFamily?node.color||'#788D9B':COLORS[typeof r?.result_group==='string'?r.result_group:'']||'#7D92A4';
+ const statusInk=STATUS_INK[typeof r?.result_group==='string'?r.result_group:'']||'#526978';
  const fill=isRoot?'#14354C':isTheme?'#EAF3FA':isFamily?'#FFFFFF':selectedNow?'#EFFAF8':'#FFFFFF';
  const outline=selectedNow?'#0E9189':isRoot?'#2C667B':isTheme?'#C9DFEE':isFamily?'#D8E5EF':'#DBE6EE';
  const corner=isRoot?18:isTheme?15:isFamily?13:11;
@@ -117,29 +120,29 @@ function drawNode(node,parent=svg,miniature=false) {
  }else if(isTheme){
   const sign=String(node.ordinal??1).padStart(2,'0');
   g.appendChild(s('rect',{x:17,y:14,width:35,height:29,rx:9,fill:accent}));
-  g.appendChild(s('text',{x:34.5,y:33.5,'font-size':13,'text-anchor':'middle','font-weight':800,fill:'#fff'},sign));
+  g.appendChild(s('text',{x:34.5,y:33.5,'font-size':13,'text-anchor':'middle','font-weight':800,fill:'#071F2E'},sign));
   for(const[i,line]of wrapped(node.title,36,2).entries())g.appendChild(s('text',{x:65,y:27+i*16,'font-size':15.5,'font-weight':750,fill:'#193B50'},line));
-  g.appendChild(s('text',{x:19,y:node.h-12,'font-size':11,fill:'#607D90'},node.subtitle||`${node.count} registros`));
+  g.appendChild(s('text',{x:19,y:node.h-12,'font-size':11,fill:'#496777'},node.subtitle||`${node.count} registros`));
  }else if(isFamily){
   const lines=wrapped(node.title,40,2);
   lines.forEach((line,i)=>g.appendChild(s('text',{x:17,y:25+i*17,'font-size':14.7,'font-weight':730,fill:'#17364C'},line)));
-  g.appendChild(s('text',{x:17,y:node.h-13,'font-size':11.1,'font-weight':530,fill:'#60788D'},`${num(node.count)} registros · ${expanded.has(node.title)?'recolher −':'expandir +'}`));
+  g.appendChild(s('text',{x:17,y:node.h-13,'font-size':11.1,'font-weight':530,fill:'#496777'},`${num(node.count)} registros · ${expanded.has(node.familyKey)?'recolher −':'expandir +'}`));
   const x=node.w-28;
   g.appendChild(s('circle',{cx:x,cy:23,r:11.8,fill:'#EFF6FB',stroke:'#CDE0EE'}));
-  g.appendChild(s('text',{x,y:27,'text-anchor':'middle','font-size':17,'font-weight':520,fill:'#386A87'},expanded.has(node.title)?'−':'+'));
+  g.appendChild(s('text',{x,y:27,'text-anchor':'middle','font-size':17,'font-weight':520,fill:'#386A87'},expanded.has(node.familyKey)?'−':'+'));
  }else{
   const lines=wrapped(node.title,node.w>=240?35:28,2);
   lines.forEach((line,i)=>g.appendChild(s('text',{x:15,y:25+i*16,'font-size':node.w>=240?12.8:12.1,'font-weight':730,fill:'#263D4C'},line)));
   const status=(r?.result===undefined?'':literalText(r.result)).replaceAll('_',' ').slice(0,node.w>=240?39:27);
-  g.appendChild(s('text',{x:15,y:node.h-28,'font-size':10.5,'font-weight':650,fill:accent},status));
-  g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#637C8D'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,38)));
+  g.appendChild(s('text',{x:15,y:node.h-28,'font-size':10.5,'font-weight':650,fill:statusInk},status));
+  g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#496777'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,38)));
  }
  g.appendChild(s('title',{},isRoot?'Abrir árvore completa; linhas de organização não significam causalidade.':isTheme?`${node.title}\n${node.count} registros; organização, sem inferir causalidade.`:isFamily?`${node.title}\n${node.count} registros; clique para expandir.`:`${r?.title}\n${r?.result}\n${r?.id}`));
  if(!miniature){
   const invoke=(focus=false)=>{
    if(isRoot){setBox([...full]);return;}
    if(isTheme){focusTheme(node.id);return;}
-   if(isFamily){toggleTreeFamily(node.title);return;}
+   if(isFamily){toggleTreeFamily(node.familyKey);return;}
    selectRecord(node.id,focus);
   };
   g.addEventListener('click',()=>{if(!moved)invoke(false);});
@@ -205,7 +208,7 @@ function layoutFamilies(){
   out.push({id:'theme:'+t.id,title:t.title,subtitle:`${count} registros · ${t.subtitle}`,type:'theme',theme:t.id,color:t.color,ordinal:i+1,x:bx+12,y:compact?160:185,w:branchWidth-24,h:compact?92:92,count});
   let y=compact?293:328;
   for(const set of t.sets){
-   const fam={id:'family:'+set.family,title:set.family,type:'family',theme:t.id,color:t.color,x:bx+22,y,w:branchWidth-44,h:compact?82:90,count:set.rows.length};
+   const fam={id:'family:'+set.family,title:familyLabel(set.family),familyKey:set.family,type:'family',theme:t.id,color:t.color,x:bx+22,y,w:branchWidth-44,h:compact?82:90,count:set.rows.length};
    out.push(fam);
    if(expanded.has(set.family)){
     const rs=orderFamilyRows(set.rows),startY=y+125,childH=102,gapY=120,childW=234;
@@ -257,15 +260,15 @@ function renderTreeLinks(){
  const summary=new Map();
  for(const e of (treeRelationsVisible()?DATA.edges:[])){const a=R.get(e.from),b=R.get(e.to);if(!a||!b||nativeFamily(a)===nativeFamily(b))continue;
   const fa=pos.get('family:'+nativeFamily(a)),fb=pos.get('family:'+nativeFamily(b));if(!fa||!fb)continue;
-  const key=nativeFamily(a)+'\u0000'+nativeFamily(b);if(!summary.has(key))summary.set(key,[]);summary.get(key).push(e);
+  const key=JSON.stringify([nativeFamily(a),nativeFamily(b)]);if(!summary.has(key))summary.set(key,[]);summary.get(key).push(e);
  }
  let lanes=0;
- for(const [key,es] of summary){const [src,dst]=key.split('\u0000');const a=pos.get('family:'+src),b=pos.get('family:'+dst);
+ for(const [key,es] of summary){const [src,dst]=JSON.parse(key);const a=pos.get('family:'+src),b=pos.get('family:'+dst);
   const color=es.some(e=>e.type==='INPUT_FROM'||e.type==='DERIVED_FROM')?'#2b7799':'#9cacb9';
   const x1=a.x+a.w,y1=a.y+20,x2=b.x+b.w,y2=b.y+20,offset=(lanes%4)*4;
   const ga=x1+14+offset,gb=x2+14+offset,top=Math.min(...graphNodes.filter(n=>n.type==='theme').map(n=>n.y))-14-offset;
   svgPath(`M${x1},${y1} H${ga} V${top} H${gb} V${y2} H${x2}`,color,2.1,'7 5',
-    `${es.length} relação(ões) entre ${src} e ${dst}, documentadas individualmente na aba Relações.`,'tree-family-evidence',true);
+    `${es.length} relação(ões) entre ${familyLabel(src)} e ${familyLabel(dst)}, documentadas individualmente na aba Relações.`,'tree-family-evidence',true);
   lanes++;
  }
  return {proofLinks,aggregateRelations:summary.size,visibleHierarchies:graphNodes.filter(n=>n.type==='family').length};

@@ -46,7 +46,9 @@ export function renderReadingTable(host,rows,originalColumns,select,{order='pres
 export function renderDatasetNotice(host,entry,model){
   const data=objectData(model.read(entry)),notice=element('section',undefined,'notice dataset-notice');notice.append(element('strong',entry.title));
   stateLines(notice,data,[['status','Estado'],['admission','Admissão'],['publication','Publicação'],['human_review','Revisão humana'],['availability','Disponibilidade']]);
-  for(const name of ['source_warning','reason','binding_gap'])if(own(data,name))notice.append(element('p',literalText(data[name])));
+  const warning=typeof data.source_warning==='string'&&data.source_warning?data.source_warning:typeof data.reason==='string'&&data.reason?data.reason:null;
+  if(warning!==null)notice.append(element('p',warning));
+  if(typeof data.binding_gap==='string'&&data.binding_gap)notice.append(element('p','Vínculo com o Caderno: '+data.binding_gap));
   host.append(notice);
 }
 export function renderRelationPresentation(host,edges,model,open){
@@ -54,7 +56,27 @@ export function renderRelationPresentation(host,edges,model,open){
   for(const edge of edges){const tr=element('tr');tr.dataset.uid=edge.entry.uid;const endpoint=(candidates,literal,resolution)=>{const td=element('td');if(candidates.length===1)td.append(action(candidates[0].title,()=>open(candidates[0].uid),'rowlink'));else if(candidates.length>1){const details=element('details');details.append(element('summary',`${literalText(literal)} · AMBIGUOUS (${candidates.length})`));for(const e of candidates)details.append(action(e.title+' · '+e.uid,()=>open(e.uid)));td.append(details);}else td.append(element('span',literalText(literal)),element('small',(resolution??'NOT_DECLARED')+' nesta revisão'));return td;};const type=element('td');type.append(action(EDGE[edge.type]??literalText(edge.type),()=>open(edge.entry.uid),'rowlink'));const source=element('td',edge.reason===undefined?'Justificativa não declarada':literalText(edge.reason));if(edge.proofs!==undefined){const d=element('details');d.append(element('summary','Fonte / prova declarada'),element('pre',literalText(edge.proofs)));source.append(d);}tr.append(endpoint(edge.fromCandidates,edge.originalFrom,edge.fromResolution),type,endpoint(edge.toCandidates,edge.originalTo,edge.toResolution),source);body.append(tr);}
 }
 export const ASSET_COLLECTIONS=[['products','Produtos e apresentações'],['product_items','Produtos / itens'],['product_groups','Grupos de produtos'],['resource_documents','Documentos e dossiês'],['resources','Recursos de apresentação e evidência'],['dossier_packages','Pacotes de dossiê'],['dossier_assessments','Avaliações documentais']];
+// Adapted hcRun: choose only meaningful declared context, retaining its field
+// label. NULL run_id is not promoted to another ID or an admission state.
+function catalogContext(host,data){
+  const fields=[['native_run_id','Run original'],['run_id','Run'],['execution_id','Execução'],['stage_id','Estágio'],['scope_id','Escopo'],['entity_type','Tipo'],['dossier','Dossiê'],['root_id','Raiz'],['kind','Tipo']];
+  const meaningful=([key])=>own(data,key)&&data[key]!==null&&data[key]!=='';
+  const run=fields.slice(0,3).find(meaningful),stage=fields.slice(3).find(meaningful);
+  if(run||stage){const selected=[run,stage].filter(Boolean);stateLines(host,data,selected);return;}
+  const declared=fields.filter(([key])=>own(data,key));if(declared.length)stateLines(host,data,declared);else host.append(element('span','Contexto não declarado','sub'));
+}
 export function renderCatalog(host,entries,model,select){
-  const body=tableFrame(host,['Produto / documento / referência','Identidade e contexto','Estado documental declarado','Acesso'],'catalog-reading');
-  for(const entry of entries){const value=model.read(entry),data=objectData(value),tr=element('tr');tr.dataset.uid=entry.uid;const name=element('td'),title=catalogTitle(data);name.append(action(literalText(title===undefined?entry.title:title),()=>select(entry),'rowlink'));if(value!==data)name.append(element('p','Valor literal: '+literalText(value)));if(data.role!==undefined)name.append(element('p',literalText(data.role),'sub'));const identity=element('td');for(const key of ['id','native_run_id','run_id','atlas_record_id','product_id','group_id'])if(data[key]!==undefined)identity.append(element('div',key+': '+literalText(data[key])));const status=element('td');badge(status,catalogStatus(data));stateLines(status,data,[['publication','Publicação'],['human_review','Revisão humana'],['availability','Disponibilidade'],['experimental_binding','Vínculo experimental']]);tr.append(name,identity,status,element('td'));tr.lastChild.append(action('Referência e detalhes',()=>select(entry)));body.append(tr);}
+  const body=tableFrame(host,['Produto / documento / referência','Execução / estágio / escopo','Estado documental declarado','Acesso'],'catalog-reading');
+  for(const entry of entries){
+    const value=model.read(entry),data=objectData(value),tr=element('tr');tr.dataset.uid=entry.uid;
+    const name=element('td'),title=catalogTitle(data);name.append(action(literalText(title===undefined?entry.title:title),()=>select(entry),'rowlink'));
+    if(value!==data)name.append(element('p','Valor literal: '+literalText(value)));if(data.role!==undefined)name.append(element('p',literalText(data.role),'sub'));
+    const context=element('td');catalogContext(context,data);
+    const identities=element('details',undefined,'catalog-identities');identities.append(element('summary','Identidades originais'));const values=element('dl',undefined,'declared-states');
+    for(const key of ['id','native_id','atlas_record_id','product_id','group_id','native_run_id','run_id','execution_id','stage_id'])if(own(data,key))values.append(element('dt',key),element('dd',literalText(data[key])));
+    if(values.childElementCount){identities.append(values);context.append(identities);}
+    const status=element('td');badge(status,catalogStatus(data));
+    if(['publication','human_review','availability','experimental_binding'].some(key=>own(data,key))){const more=element('details');more.append(element('summary','Publicação, revisão e disponibilidade'));stateLines(more,data,[['publication','Publicação'],['human_review','Revisão humana'],['availability','Disponibilidade'],['experimental_binding','Vínculo experimental']]);status.append(more);}
+    const access=element('td');access.append(action('Referência e detalhes',()=>select(entry)));tr.append(name,context,status,access);body.append(tr);
+  }
 }

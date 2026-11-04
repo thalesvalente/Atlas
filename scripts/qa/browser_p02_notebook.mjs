@@ -115,7 +115,7 @@ try{
   await page.locator('#native-status').selectOption('HOLD');
   assert.equal(await page.locator('#native-table-select option').count(),1,'Status filter must apply to tables');
   assert.equal(await page.locator('#native-content [data-row-id]').count(),2,'Rows without their own facets remain in their declared table context');
-  await page.locator('#native-family').selectOption('G');
+  await page.locator('#native-family').selectOption({label:'G'});
   assert.equal(await page.locator('#native-table-select').count(),0,'Incompatible facets must produce an honest empty selection');
   assert.match(await page.locator('#native-content').innerText(),/Nenhuma tabela/);
   check('table_family_status_filters_use_declared_context_and_empty_selection');
@@ -132,7 +132,7 @@ try{
   waiting=page.waitForEvent('download');await page.getByRole('button',{name:'CSV protegido',exact:true}).click();download=await waiting;bytes=await fs.readFile(await download.path());
   assert.ok(bytes.toString().includes("'=1+1"));
   check('filtered_table_exact_json_and_formula_safe_csv_preserved');
-  await page.locator('[data-pane="assets"]').click();await page.locator('#native-family').selectOption('Recurso');
+  await page.locator('[data-pane="assets"]').click();await page.locator('#native-family').selectOption({label:'Recurso'});
   assert.equal(await page.getByRole('button',{name:'Referência e detalhes'}).count(),1);
   check('filters_include_declared_resource_facets');
   await page.locator('#native-clear').click();await page.locator('[data-pane="coverage"]').click();

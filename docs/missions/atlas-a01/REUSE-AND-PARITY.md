@@ -37,6 +37,11 @@ recebem estados substitutos. Colisões entre registros e objetos técnicos usam
 a mesma resolução da navegação nativa; não se filtra um candidato para fabricar
 unicidade. Fontes com entradas escalares permanecem consultáveis.
 
+Famílias mantêm chaves tipadas separadas do rótulo: número/texto, ausência/NULL e
+nomes literais homônimos não se fundem no filtro nem no mapa editorial. Pares de
+famílias usam tuplas reversíveis, inclusive para nomes com NUL. O retorno de uma
+referência reconstrói as opções do contexto anterior antes de restaurar filtros.
+
 A árvore editorial passa a ser a entrada principal. O modo técnico continua
 explícito e conserva a expansão progressiva de grafos grandes. Tema/família é
 organização de leitura, não causalidade. Árvore editorial, índice, registros e
@@ -56,6 +61,12 @@ Os detalhes apresentam execução, publicação, admissão, revisão, documenta�
 produtos e relações antes da inspeção técnica. O painel não reduz a largura da
 árvore/tabela; em tela pequena ocupa uma faixa inferior com rolagem própria.
 Filtros e opções editoriais móveis recolhem ao entrar no breakpoint e podem ser reabertos. O cabeçalho evita repetir a introdução para manter o mapa alcançável.
+
+O catálogo recupera execução/estágio/escopo declarados antes das identidades
+opacas; IDs integrais e publicação/revisão continuam em seções semânticas de
+inspeção. Avisos de tabela priorizam a explicação da fonte e evitam NULL sem
+rótulo. A tinta dos textos pequenos e ordinais SVG foi adaptada para contraste
+mínimo 4.5:1 nos fundos testados, preservando os acentos originais.
 
 ## Validação e integração
 
