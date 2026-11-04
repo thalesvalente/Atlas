@@ -194,6 +194,7 @@ export function mountGraph(host, nodes, onSelect) {
     clearTimeout(selectionTimer);
     selected = id; active = id; updatePath(); draw(); if (notify) onSelect(byId.get(id));
   }
+  function cancelPendingSelection() { clearTimeout(selectionTimer); }
   function toggle(id) {
     if (!children.get(id)?.length) return;
     const old = positions.get(id);
@@ -407,5 +408,5 @@ export function mountGraph(host, nodes, onSelect) {
     layout(); if (selected !== null && positions.has(selected)) center(selected); else fit(); draw();
   });
   resize.observe(svg); layout(); updatePath(); fit();
-  return { locate, destroy() { disposed = true; clearTimeout(selectionTimer); resize.disconnect(); abort.abort(); elements.clear(); host.replaceChildren(); } };
+  return { locate, cancelPendingSelection, destroy() { disposed = true; clearTimeout(selectionTimer); resize.disconnect(); abort.abort(); elements.clear(); host.replaceChildren(); } };
 }

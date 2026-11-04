@@ -319,6 +319,32 @@ try {
       await page.waitForTimeout(100);assert.equal(await page.evaluate(()=>window.selections.length),2,'A single click must select exactly once');
     }
     check('fresh_double_click_survives_detail_callback_reflow_and_single_click_selects_once');
+    await open('star',undefined,{reflow:'1'});
+    const initialWidth=await page.locator('#graph-host').evaluate(node=>node.getBoundingClientRect().width);
+    await item('root').click();await page.waitForFunction(()=>window.selections.length===1,null,{timeout:1000});
+    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    assert.ok(await page.locator('#graph-host').evaluate(node=>node.getBoundingClientRect().width)<initialWidth,'First selection must exercise the detail callback reflow');
+    await item('child').click();
+    const cancellation=await page.evaluate(()=>{
+      const snapshot=()=>({selected:document.querySelector('.graph-node[aria-selected="true"]').getAttribute('data-native-node'),
+        transform:document.querySelector('.graph-svg > g').getAttribute('transform'),meta:document.querySelector('.graph-meta').textContent,
+        count:window.selections.length,unchanged:window.inputBefore===JSON.stringify(window.nodes)});
+      const before=snapshot();window.graph.cancelPendingSelection();window.graph.cancelPendingSelection();const after=snapshot();
+      document.querySelector('#selected').textContent='';return {before,after};
+    });
+    assert.deepEqual(cancellation.after,cancellation.before,'Canceling a pending notification must not change the visual selection, viewport or source');
+    assert.equal(cancellation.after.selected,'child');assert.equal(cancellation.after.count,1);assert.equal(cancellation.after.unchanged,true);
+    await page.waitForTimeout(720);assert.equal(await page.evaluate(()=>window.selections.length),1);
+    assert.equal(await page.locator('#selected').innerText(),'','Canceled notification must not reopen the closed detail output');
+    assert.equal(await selected().getAttribute('data-native-node'),'child');
+    await item('child').focus();await page.keyboard.press('Enter');assert.equal(await page.evaluate(()=>window.selections.length),2);
+    assert.equal(await page.evaluate(()=>window.selections.at(-1)===window.nodes.find(node=>node.uid==='child')),true);
+    await locate('root');assert.equal(await page.evaluate(()=>window.selections.length),3);
+    await item('child').click();await page.waitForFunction(()=>window.selections.length===4,null,{timeout:1000});
+    assert.equal(await page.evaluate(()=>window.selections.at(-1).uid),'child','A future click must still notify after an earlier cancellation');
+    await item('root').click();await page.evaluate(()=>{window.graph.destroy();window.graph.cancelPendingSelection();window.graph.cancelPendingSelection();});
+    await page.waitForTimeout(720);assert.equal(await page.evaluate(()=>window.selections.length),4);assert.equal(await page.locator('#graph-host > *').count(),0);
+    check('cancel_pending_selection_is_idempotent_preserves_visual_state_and_does_not_disable_future_callbacks');
     await page.evaluate(()=>window.graph.destroy());assert.equal(await page.locator('#graph-host > *').count(),0);
     check('destroy_removes_graph_and_listeners');
   }
