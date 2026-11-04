@@ -33,6 +33,24 @@ Aceite: hashes de fontes de teste permanecem iguais; renderer não usa iframe/sr
 
 - FR-013: para grafos com mais de 180 nós, a árvore abre com até 24 irmãos por nível e ramos internos recolhidos; busca e navegação revelam qualquer nó mesmo fora do foco inicial, sem descartar dados, confundir IDs nem inventar relações.
 
+## Reuso visual do renderer histórico (FR-014)
+
+FR-014: a interface nova deve oferecer a navegação familiar ao Atlas R4 por
+mapa de temas/famílias, com cartões, agrupamentos, zoom, minimapa e detalhe da
+ocorrência, usando SOMENTE a projeção nativa já verificada. Não executar HTML
+legado, importar `r4.*`, inserir dados privados, inventar temas, relações ou
+identidades. Um mapa editorial somente é usado quando explicitamente declarado
+na fonte; na ausência dele, a vista usa colunas neutras com famílias literais.
+A árvore estrutural integral permanece acessível no mesmo painel e é
+selecionável independentemente. A transferência se limita aos algoritmos
+visuais autorizados na PR #18; o produto continua independente.
+
+SC-008: em fixture sintética, alternar mapa R4→famílias literais→árvore
+estrutural, expandir famílias e acessar o detalhe da ocorrência exata; nenhuma
+chamada externa, erro JS ou perda de bytes. Com o acervo real, comparar o mapa
+temático do Atlas novo com o R4 para a mesma revisão e validar visualmente
+separadamente no Windows.
+
 ## Clarifications
 
 O operador autorizou implementar esta integração, não copiar o acervo privado para o GitHub. A saída é derivada local em diretório novo, fora do código e do Caderno. A extensão é conteúdo de File, não novo protocolo científico. O modo operacional não depende de flag synthetic. Dados inventados aparecem somente nos testes automatizados. Não há alteração da feature ativa global do Spec Kit.

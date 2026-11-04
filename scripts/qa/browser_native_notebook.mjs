@@ -20,6 +20,88 @@ try{
   assert.match(await page.locator('#native-revision').innerText(),/test-invented-revision/);
   assert.equal(await page.locator('#native-node-count').innerText(),'1202');
   assert.equal(await page.locator('#native-table-count').innerText(),'1 / 127');
+  // The historical R4 renderer is now an optional native view, not an
+  // imported HTML page. Verify semantic grouping and return to the complete
+  // structural tree before the existing 1202-node regression.
+  await page.getByRole('button',{name:'Mapa por temas e famílias (R4)'}).click();
+  assert.equal(await page.locator('.r4-map').count(),1);
+  assert.ok(await page.locator('.r4-map-root').isVisible());
+  await page.getByRole('combobox',{name:'Organização do mapa'}).selectOption('native');
+  const family=page.locator('.r4-map-family').first();
+  assert.ok(await family.isVisible());
+  // Duplicate source IDs and an explicitly null endpoint must NOT turn into
+  // a false relation, even if filters leave only one candidate visible.
+  await page.getByRole('checkbox',{name:'Mostrar relações declaradas'}).check();
+  assert.equal(await page.locator('.r4-map-svg path[stroke="#278f97"]').count(),0);
+  await family.focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.evaluate(()=>document.activeElement?.getAttribute('data-r4-id')),
+    await family.getAttribute('data-r4-id'),'Keyboard focus must survive family redraw');
+  const expandedRecords=page.locator('.r4-map-record');
+  assert.equal(await expandedRecords.count(),2);
+  // Choose the exact declared record, not the first item sorted by title
+  // (the second synthetic record contains hostile HTML-looking text).
+  await page.locator('.r4-map-record[aria-label="Registro A"]').click();
+  assert.match(await page.locator('#native-detail-body').innerText(),/Registro A/);
+  assert.equal(await page.evaluate(()=>window.nativeInjected),undefined);
+  await page.locator('#native-close-detail').click();
+  await page.getByRole('button',{name:'Nós estruturais do Caderno'}).click();
+  assert.equal(await page.locator('.r4-map').count(),0);
+  check('r4_visual_renderer_port_native_themes_and_reversible_structural_switch');
+
+  // Integration counterproof with a *filtered* presentation. The source has
+  // A twice, B and C once. A→B must remain ambiguous even though only one
+  // A is visible. from_key:null must not fall back to from:"A".
+  const overlayProof=await page.evaluate(async()=>{
+    const {mountR4Map}=await import('/native_graph.js');
+    const {buildLineage}=await import('/native_lineage.js');
+    const record=(uid,id)=>({
+      uid,kind:'record',group:'records',title:'Registro '+uid,family:'F',
+      native_id:id,source_key:id,
+      raw_json:JSON.stringify({id,family:'F'}),
+      fields:[{name:'id',type:'string',text:id},{name:'family',type:'string',text:'F'}]
+    });
+    const relation=(uid,data)=>({
+      uid,kind:'relation',group:'edges',title:uid,raw_json:JSON.stringify(data),
+      fields:Object.entries(data).map(([name,v])=>({
+        name,type:v===null?'null':'string',text:v===null?'null':v
+      }))
+    });
+    const a1=record('ra1','A'),a2=record('ra2','A'),
+      b=record('rb','B'),c=record('rc','C');
+    const all=[a1,a2,b,c,
+      relation('ambiguous',{from:'A',to:'B'}),
+      relation('explicit-null',{from_key:null,from:'A',to:'B'}),
+      relation('unique',{from:'B',to:'C'})];
+    // Simulate a filter hiding a2. Identity resolution must still use ALL.
+    const visible=[a1,b,c];
+    const host=document.createElement('div');host.style.width='1100px';
+    document.body.append(host);
+    const chart=mountR4Map(host,visible,()=>{},{
+      resolvedRelations:()=>buildLineage(all)
+    });
+    try{
+      const checkbox=host.querySelector('.r4-map-overlay input');
+      checkbox.checked=true;checkbox.dispatchEvent(new Event('change',{bubbles:true}));
+      host.querySelector('.r4-map-family').dispatchEvent(
+        new MouseEvent('click',{bubbles:true}));
+      const statuses=Object.fromEntries(buildLineage(all).map(
+        item=>[item.relation.uid,item.from.status]));
+      return {
+        statuses,
+        renderedEdges:host.querySelectorAll('path[stroke="#278f97"]').length,
+        displayedRecords:host.querySelectorAll('.r4-map-record').length
+      };
+    }finally{chart.destroy();host.remove();}
+  });
+  assert.equal(overlayProof.displayedRecords,3);
+  assert.equal(overlayProof.statuses.ambiguous,'COLLISION');
+  assert.equal(overlayProof.statuses['explicit-null'],'EXPLICIT_NULL');
+  assert.equal(overlayProof.statuses.unique,'RESOLVED');
+  assert.equal(overlayProof.renderedEdges,1,
+    'Only B→C is unambiguous; A→B must not appear after filtering');
+  check('r4_overlay_positive_and_negative_unfiltered_identity_null_precedence');
+
   const initialGraph=await page.locator('.graph-meta').innerText();
   assert.match(initialGraph,/1202 nós carregados/);
   assert.match(initialGraph,/25 no foco atual/);

@@ -18,6 +18,10 @@ try{
   const page=await context.newPage();page.on('pageerror',error=>report.errors.push(error.message));
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='2');
+  // The R4 thematic map is an alternative default for sufficiently rich
+  // sources; this scenario tests the complete structural tree explicitly.
+  const structuralMode=page.getByRole('button',{name:'Nós estruturais do Caderno'});
+  if(await structuralMode.count())await structuralMode.click();
   const nodeTotal=await page.locator('#native-node-count').innerText(),globalSearch=page.locator('#native-search');
   assert.equal(await page.getByRole('treeitem',{name:'Nó global final fora do foco',exact:true}).count(),0);
   await globalSearch.fill('__P02_NO_NODE_MATCHES__');
@@ -25,6 +29,11 @@ try{
   assert.equal(await page.locator('.graph-results button').count(),0);assert.deepEqual(report.errors,[]);
   await globalSearch.fill('Nó global final fora do foco');
   await page.getByText(new RegExp('^1 de '+nodeTotal+' nós encontrados\\.')).waitFor({timeout:3000});
+  const structuralLinks=await page.locator('.graph-results button').allTextContents();
+  console.log('P02_STRUCTURAL_LINK_DEBUG',JSON.stringify({
+    links:structuralLinks,modeButtons:await page.locator('.r4-view-toggle button').allTextContents(),
+    summary:(await page.locator('#native-content').innerText()).slice(0,1000)
+  }));
   await page.locator('.graph-results').getByRole('button',{name:'Nó global final fora do foco',exact:true}).click();
   assert.equal(await page.locator('.graph-node[aria-selected="true"][aria-label="Nó global final fora do foco"]').count(),1);
   assert.match(await page.locator('[data-testid="native-raw"]').innerText(),/"key":"global-199"/);
