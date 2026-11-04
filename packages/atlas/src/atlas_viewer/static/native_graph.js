@@ -62,6 +62,15 @@ export function mountGraph(host,nodes,onSelect){
     zoom=Math.max(zoom,.8);px=width/2-(pos.x+130)*zoom;py=height/2-(pos.y+36)*zoom;
     selected=id;draw();onSelect(byId.get(id));
   }
+  function fitLabel(text,value){
+    // Bound only the visual label; full identity remains in the tooltip,
+    // accessible name and selected source occurrence. Character counts alone
+    // cannot keep wide glyphs or long source keys inside the 260px card.
+    const full=String(value),chars=[...full];let end=Math.min(chars.length,80);
+    text.textContent=chars.slice(0,end).join('')+(end<chars.length?'…':'');
+    if(text.getComputedTextLength()>234){let low=0,high=end;while(low<high){const mid=Math.ceil((low+high)/2);text.textContent=chars.slice(0,mid).join('')+'…';if(text.getComputedTextLength()<=234)low=mid;else high=mid-1;}text.textContent=chars.slice(0,low).join('')+'…';}
+    text.append(el('title',{},full,true));
+  }
   function draw(){
     if(disposed)return;world.setAttribute('transform',`translate(${px} ${py}) scale(${zoom})`);
     const candidates=[];for(const[id,p]of positions)if((p.x+265)*zoom+px>=0&&p.x*zoom+px<=width&&(p.y+74)*zoom+py>=0&&p.y*zoom+py<=height)candidates.push([id,p]);
@@ -71,7 +80,7 @@ export function mountGraph(host,nodes,onSelect){
     for(const[id,p]of visible){const pp=positions.get(parents.get(id));if(pp)edges.append(el('path',{class:'graph-edge',d:`M ${pp.x+260} ${pp.y+36} H ${p.x-12} V ${p.y+36} H ${p.x}`},null,true));}
     for(const[id,p]of visible){
       const n=byId.get(id);let g=elements.get(id);
-      if(!g){g=el('g',{class:'graph-node',role:'treeitem',tabindex:0,'data-native-node':id,'aria-label':n.title},null,true);g.append(el('rect',{width:260,height:74,rx:10},null,true));const t=el('text',{x:13,y:28,class:'node-title'},[...n.title].slice(0,36).join('')+([...n.title].length>36?'…':''),true);t.append(el('title',{},n.title,true));g.append(t,el('text',{x:13,y:53,class:'meta'},cycles.has(id)?'Ciclo declarado · consultar detalhe':n.native_id??n.source_key??'Sem ID científico',true));nodeLayer.append(g);elements.set(id,g);}
+      if(!g){g=el('g',{class:'graph-node',role:'treeitem',tabindex:0,'data-native-node':id,'aria-label':n.title},null,true);g.append(el('rect',{width:260,height:74,rx:10},null,true));const title=el('text',{x:13,y:28,class:'node-title'},null,true),identity=el('text',{x:13,y:53,class:'meta'},null,true);g.append(title,identity);nodeLayer.append(g);fitLabel(title,n.title);fitLabel(identity,cycles.has(id)?'Ciclo declarado · consultar detalhe':n.native_id??n.source_key??'Sem ID científico');elements.set(id,g);}
       g.setAttribute('transform',`translate(${p.x} ${p.y})`);g.setAttribute('aria-selected',String(selected===id));if(children.get(id).length)g.setAttribute('aria-expanded',String(!collapsed.has(id)));
     }
     mini.replaceChildren(el('rect',{class:'bounds',width:180,height:78},null,true));const sx=180/worldWidth,sy=78/worldHeight;mini.append(el('rect',{class:'camera',x:Math.max(0,-px/zoom*sx),y:Math.max(0,-py/zoom*sy),width:Math.min(180,width/zoom*sx),height:Math.min(78,height/zoom*sy)},null,true));

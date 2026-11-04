@@ -49,6 +49,20 @@ try{
   assert.ok(await page.locator('.graph-mini').isVisible());
   for(let i=0;i<6;i++){await page.getByRole('button',{name:'Reduzir −',exact:true}).click();await page.getByRole('button',{name:'Ampliar +',exact:true}).click();}
   check('all_1202_nodes_searchable_with_zoom_and_minimap');
+  const labelGeometry=await page.evaluate(async()=>{
+    const {mountGraph}=await import('/native_graph.js'),host=document.createElement('div');
+    host.style.width='600px';document.body.append(host);
+    const node={uid:'wide-label-test',title:'W'.repeat(100)+' 🧪',native_id:null,source_key:'source-key/'.repeat(50)};
+    let selected;const graph=mountGraph(host,[node],value=>{selected=value;});
+    try{
+      graph.locate(node.uid);const item=host.querySelector('.graph-node'),title=item.querySelector('.node-title'),identity=item.querySelector('.meta');
+      return {titleWidth:title.getComputedTextLength(),identityWidth:identity.getComputedTextLength(),titleTooltip:title.querySelector('title').textContent,identityTooltip:identity.querySelector('title').textContent,accessibleName:item.getAttribute('aria-label'),sameOccurrence:selected===node,nativeId:selected.native_id};
+    }finally{graph.destroy();host.remove();}
+  });
+  assert.ok(labelGeometry.titleWidth<=234&&labelGeometry.identityWidth<=234,'Visual labels must fit inside the card');
+  assert.equal(labelGeometry.titleTooltip,'W'.repeat(100)+' 🧪');assert.equal(labelGeometry.accessibleName,labelGeometry.titleTooltip);
+  assert.equal(labelGeometry.identityTooltip,'source-key/'.repeat(50));assert.equal(labelGeometry.sameOccurrence,true);assert.equal(labelGeometry.nativeId,null);
+  check('wide_titles_and_long_keys_fit_cards_without_changing_original_identity');
   await page.locator('[data-pane="records"]').click();await page.locator('#native-status').selectOption('HOLD');
   assert.equal(await page.locator('#native-content tbody tr').count(),1);await page.locator('#native-clear').click();
   assert.equal(await page.locator('#native-content tbody tr').count(),2);assert.equal(await page.locator('#native-content img').count(),0);
