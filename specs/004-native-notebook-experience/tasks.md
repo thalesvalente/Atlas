@@ -73,5 +73,5 @@ não reabrem T001–T014 nem tornam um recibo antigo prova de um SHA novo.
 
 Os findings 4463040279, 4463092564, 4463092566 e P05_REAL_RECORD_PAGINATION_2a381 foram corrigidos com contraprovas antes/depois. O teste real de paginação confirmou registros; recursos/relações/coleções receberam contraprovas sintéticas, sem alegação de reprodução real nesses tipos. T015/T016 e R006/R010/R012/R014/R016 permanecem quitadas no escopo de engenharia. Aceite humano e promoção mantêm gates próprios.
 
-- [x] R017 Portar os algoritmos e apresentação visual de temas/famílias do R4 para módulo nativo opcional `native_r4map.js/css`, com esquema genérico e sem `r4.*` no runtime. Preservar a árvore estrutural, valores e relações verificadas. Adicionar teste de navegação por famílias no browser sintético.
+- [x] R017 Portar os algoritmos e apresentação visual de temas/famílias do R4 para módulo de apresentação no `native_graph.js` com CSS isolado no `native_notebook.css`, com esquema genérico e sem `r4.*` no runtime. Preservar a árvore estrutural, valores e relações verificadas. Adicionar teste de navegação por famílias no browser sintético.
 - [ ] R018 Conferir a equivalência visual e navegacional do mapa temático da candidata no Windows com o renderer R4 para o MESMO snapshot, sem publicar dados privados; não confundir CI sintética com aceite visual humano.

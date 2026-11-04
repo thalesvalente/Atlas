@@ -1,6 +1,5 @@
 import {renderTable} from './parity02_p03_table.js';
-import {mountGraph} from './native_graph.js';
-import {mountR4Map} from './native_r4map.js';
+import {mountGraph, mountR4Map} from './native_graph.js';
 import {buildNativeNavigation} from './native_navigation.js';
 import {mountLineage} from './native_lineage.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
