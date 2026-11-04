@@ -86,7 +86,7 @@ function relatedOccurrences(e){
     else if(ref.resolution==='COLLISION'){
       const candidates=el('details');candidates.append(el('summary',`${ref.label}: ${literal} — AMBIGUOUS · ${ref.targets.length} ocorrências`));
       pagedLinks(candidates,ref.targets,uid=>{const target=model.byUid.get(uid);return button(target.title+' · '+target.kind+' · '+target.uid,()=>openOccurrence(uid));});item.append(candidates);
-    }else item.append(el('p',`${ref.label}: ${literal} — ${ref.resolution==='NOT_DECLARED'?'não declarado':'UNRESOLVED nesta revisão'}`,'muted'));
+    }else item.append(el('p',`${ref.label}: ${literal} — ${ref.resolution==='NOT_DECLARED'?'não declarado':ref.resolution==='NOT_INTERPRETED'?'não interpretado nesta revisão':'UNRESOLVED nesta revisão'}`,'muted'));
     return item;
   });
   if(incoming.length){const reverse=el('details');reverse.append(el('summary',`Referências recebidas · ${incoming.length}`));pagedLinks(reverse,incoming,ref=>{const target=model.byUid.get(ref.uid);return button(target.title+' · '+ref.label+(ref.resolution==='COLLISION'?' · alvo AMBIGUOUS':''),()=>openOccurrence(target.uid));});section.append(reverse);}

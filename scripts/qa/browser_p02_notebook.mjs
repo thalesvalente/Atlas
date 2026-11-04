@@ -42,6 +42,12 @@ try{
   assert.ok(!(await page.locator('[data-testid="native-context-links"]').innerText()).includes('Tabela extensa'));
   await page.locator('#native-source').selectOption('source-1');
   check('source_switch_invalidates_navigation_history_and_alias_context');
+  await page.locator('[data-pane="relations"]').click();
+  await page.locator('#native-content tbody').getByRole('button',{name:'Composite-key-proof',exact:true}).click();
+  const relationLinks=page.locator('[data-testid="native-context-links"]');
+  assert.match(await relationLinks.innerText(),/from_key: \["not-interpreted"\].*não interpretado/);
+  assert.equal(await relationLinks.getByRole('button',{name:/^from →/}).count(),0);
+  check('explicit_composite_endpoint_key_is_not_interpreted_or_fallen_back');
   await page.locator('[data-pane="tables"]').click();
   await page.locator('#native-search').fill('  Row-ID-Only  ');
   assert.equal(await page.locator('#native-content [data-row-id]').count(),1,'Table search must trim and search row identifiers outside cells');

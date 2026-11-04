@@ -35,4 +35,24 @@ const stringReference=entry('string-reference','node',{run_id:'9007199254740993'
 assert.equal(buildNativeNavigation([numericIdentity,stringReference]).outgoing.get('string-reference')[0].resolution,'UNRESOLVED');
 const otherSnapshot=buildNativeNavigation([entry('other-node','node',{run_id:'run-alias'})]);
 assert.equal(otherSnapshot.outgoing.get('other-node')[0].resolution,'UNRESOLVED');
-console.log(JSON.stringify({status:'PASS_SCOPED',checks:['declared_aliases_string_only','unique_context_links','ambiguous_aliases_not_first_match','explicit_null_without_fallback','transport_table_membership','resources_missing_and_null','exact_nested_evidence_lexemes','numeric_identity_not_coerced_to_string_reference','source_snapshot_isolation']}));
+for(const endpoint of ['from','to'])for(const value of [['not-interpreted'],{key:'not-interpreted'},42,false]){
+  const composite=entry('composite','relation',{[endpoint]:'R',[endpoint+'_key']:value});
+  const refs=buildNativeNavigation([record,composite]).outgoing.get('composite');
+  assert.equal(refs.length,1);
+  assert.equal(refs[0].label,endpoint+'_key');
+  assert.equal(refs[0].resolution,'NOT_INTERPRETED');
+  assert.equal(refs[0].literal,JSON.stringify(value));
+  assert.deepEqual(refs[0].targets,[]);
+}
+const nestedKey=entry('nested-key','relation',{from:'R',nested:{from_key:['not-top-level']}});
+assert.deepEqual(buildNativeNavigation([record,nestedKey]).outgoing.get('nested-key')[0].targets,['record']);
+const exactKey=entry('numeric-key','relation',{from:'R'}, {raw_json:'{"from":"R","from_key":9007199254740993}',fields:[{name:'from',type:'string',text:'R'},{name:'from_key',type:'integer',text:'9007199254740993'}]});
+assert.equal(buildNativeNavigation([record,exactKey]).outgoing.get('numeric-key')[0].literal,'9007199254740993');
+for(const endpoint of ['from','to']){
+  const explicitNull=entry('null-key','relation',{[endpoint]:'R',[endpoint+'_key']:null}),missingKey=entry('missing-key','relation',{[endpoint]:'R'});
+  const explicit=buildNativeNavigation([record,explicitNull]).outgoing.get('null-key')[0];
+  assert.equal(explicit.label,endpoint+'_key');assert.equal(explicit.resolution,'NOT_DECLARED');assert.deepEqual(explicit.targets,[]);
+  const fallback=buildNativeNavigation([record,missingKey]).outgoing.get('missing-key')[0];
+  assert.equal(fallback.label,endpoint);assert.equal(fallback.resolution,'UNIQUE');assert.deepEqual(fallback.targets,['record']);
+}
+console.log(JSON.stringify({status:'PASS_SCOPED',checks:['declared_aliases_string_only','unique_context_links','ambiguous_aliases_not_first_match','explicit_null_without_fallback','transport_table_membership','resources_missing_and_null','exact_nested_evidence_lexemes','numeric_identity_not_coerced_to_string_reference','source_snapshot_isolation','explicit_array_object_numeric_keys_never_fall_back','exact_large_numeric_key_retained_without_interpretation','absent_key_only_allows_endpoint_fallback']}));

@@ -5,6 +5,7 @@ const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 const scalarReferences=new Set(['record_id','atlas_record_id','run_id','native_run_id','external_run_id','execution_id','source_execution_id','source_run_id','resolved_run_id','table_id','row_id','resource_id','document_id','product_id','group_id','item_id','source_id']);
 const listReferences=new Set(['resources','document_ids','product_ids','group_ids','item_ids','rf_refs']);
 const evidenceFields=new Set(['evidence','trace','source','sources','reference','dossier_ref']);
+const endpointFields=new Set(['from','to','from_key','to_key']);
 
 /** Exact top-level JSON fragments; numbers never pass through JS Number. */
 export function nativeFragments(raw){
@@ -26,7 +27,7 @@ export function nativeFragments(raw){
       else if(ch==='}'||ch===']'){if(depth===0)break;depth--;}
       else if(ch===','&&depth===0)break;
     }
-    if(listReferences.has(key)||evidenceFields.has(key)||key==='source_ids')fragments.set(key,raw.slice(start,i).trim());
+    if(listReferences.has(key)||evidenceFields.has(key)||endpointFields.has(key)||key==='source_ids')fragments.set(key,raw.slice(start,i).trim());
     if(raw[i]==='}')break;
   }
   return fragments;
@@ -74,8 +75,14 @@ export function buildNativeNavigation(entries){
       reference(e,field.name,field.type==='null'?null:field.text,map);
     }
     if(e.kind==='relation')for(const endpoint of ['from','to']){
-      const keyed=e.fields.find(f=>f.name===endpoint+'_key'),field=keyed||e.fields.find(f=>f.name===endpoint);
-      if(field&&(field.type==='string'||field.type==='null'))reference(e,field.name,field.type==='null'?null:field.text,keyed?keyIndex:index);
+      const parts=fragments.get(e.uid),keyed=parts.has(endpoint+'_key'),name=keyed?endpoint+'_key':endpoint;
+      if(!parts.has(name))continue;
+      const field=e.fields.find(f=>f.name===name);
+      if(field&&(field.type==='string'||field.type==='null'))reference(e,name,field.type==='null'?null:field.text,keyed?keyIndex:index);
+      // Composite/numeric keys are explicit declarations even though they are
+      // omitted from scalar fields. Preserve their exact literal and never
+      // reinterpret the other endpoint field as a fallback scientific ID.
+      else outgoing.get(e.uid).push({label:name,literal:parts.get(name),targets:[],resolution:'NOT_INTERPRETED'});
     }
     for(const[name,raw]of fragments.get(e.uid)){
       if(!listReferences.has(name))continue;
