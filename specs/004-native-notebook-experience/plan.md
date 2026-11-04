@@ -59,3 +59,19 @@ consultáveis, árvore legível e navegável, filtros/seleção, tabelas/exports
 revisão, nunca limites fixos. Bytes do acervo permanecem iguais; dados privados
 e screenshots reais ficam locais. CI verde, QA técnica e decisão humana são
 atos separados. A matriz única de fechamento fica em [final-close.md](final-close.md).
+
+### Sucessão funcional pelo handoff PR #26
+
+O handoff D.INSTANCE de grafo sucede o código qualificado cbf4b62, sem mover o
+checkout do executor. Integração exclusiva: commits 76875b4 e f985276 por
+cherry-pick -x, mantendo `mountGraph(host,nodes,onSelect) -> {locate,destroy}`.
+As mudanças de produto são limitadas ao grafo e CSS `.graph-*`; não incorporam
+renderer R4, formatos, protocolo ou implementação C2-K. A seleção visual é
+imediata; o callback de detalhe por clique simples aguarda 600 ms para preservar
+o duplo clique, enquanto teclado/locate permanecem imediatos. Essa interação
+deve ser conferida junto com filtros globais, troca de fonte/painel e retorno.
+
+A suíte gráfica antes executada localmente entra no gate Chromium da composição,
+usando os assets do wheel instalado. P05 requalifica o produto completo no
+snapshot real autorizado; Codex e Actions examinam o novo SHA integrado. O
+recibo anterior permanece histórico e não concede aceite à nova composição.

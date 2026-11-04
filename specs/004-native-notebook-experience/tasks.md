@@ -60,3 +60,8 @@ não reabrem T001–T014 nem tornam um recibo antigo prova de um SHA novo.
 - [x] T023 [US2] PAR004 demonstrada no Caderno real: nó→registro→tabela→linha/evidência→Voltar três vezes ao nó original; detalhes/exports exatos, fonte/revisão preservadas e ambiguidades não resolvidas automaticamente.
 - [x] T024 [US2] PAR007 entregue: grafo de relações tipadas, busca integral, seleção de endpoints, paginação, teclado/pan/zoom; um resolver tipado/scoped compartilhado com os detalhes, sem causalidade inferida.
 - [x] T025 [US3] Regressão Ctrl+clique requalificada no Linux em efad09d: origem explicitamente ativada/focada entre abas, diagnóstico por link, clique real/negativas preservados; ATLAS021 41750468913 terminou 6/6 SUCCESS.
+
+## Phase 6 — composição do handoff funcional da árvore PR #26
+
+- [ ] T026 Integrar os commits qualificados 76875b4/f985276 sobre cbf4b62, preservando autoria/API/identidades e ownership: grade de ramos, leitura a partir de 85%, minimapa estrutural, caminho ancestral, busca/seleção e teclado. Registrar revisão independente e corrigir somente findings materiais.
+- [ ] T027 Incluir a suíte exclusiva do grafo na CI sobre o wheel instalado; requalificar a composição completa com negativos, Chromium, Windows/Ubuntu, Codex e P05 não autora no Caderno real. Substituir o recibo terminal somente depois dos gates, preservando o recibo cbf4b62 como histórico.

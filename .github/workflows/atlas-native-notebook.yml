@@ -16,6 +16,9 @@ on:
       - 'scripts/qa/browser_p01_lineage.mjs'
       - 'scripts/ci/run_p01_lineage_browser.py'
       - 'scripts/qa/test_native_navigation.mjs'
+      - 'scripts/qa/browser_native_graph.mjs'
+      - 'scripts/ci/run_native_graph_browser.py'
+      - 'tests/graph/**'
       - '.github/workflows/atlas-native-notebook.yml'
   workflow_dispatch:
 permissions:
@@ -107,6 +110,7 @@ jobs:
           python scripts/ci/run_native_notebook_browser.py --work .ci-native
           python scripts/qa/run_p02_notebook_browser.py --work .ci-native/p02
           python scripts/ci/run_p01_lineage_browser.py --work .ci-native/p01
+          python scripts/ci/run_native_graph_browser.py --work .ci-native/graph
       - name: Preserve native browser evidence (no private corpus)
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -119,6 +123,8 @@ jobs:
             .ci-native/p02/browser-p02*.png
             .ci-native/p01/browser-p01*.json
             .ci-native/p01/browser-p01*.png
+            .ci-native/graph/after-graph-report.json
+            .ci-native/graph/after-*.png
           if-no-files-found: warn
           include-hidden-files: true
           retention-days: 14
