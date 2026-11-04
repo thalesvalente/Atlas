@@ -1,25 +1,27 @@
-# O0–O3: comparação de alternativas e riscos
+# O0–O3: alternativas, riscos e fronteiras
 
-| Opção | Reconstitui parent/edges? | Fidelidade e custo | Decisão |
-|---|---|---|---|
-| **O0** — descriptor 0.2.0 sem mudança | Não nos casos A/B/C/D; `unmapped_fields` preserva literais, não ponte validada | Seguro/fail-closed, mas hierarquia navegável incompleta. Fazer link na UI ignorando `validate_descriptor` seria mudança oculta de semântica | **Insuficiente como solução integral**; pode continuar fallback com gaps |
-| **O1** — 0.2.1 com chave estrutural tipada | Sim quando `key` original for única e prova explicitar `parent_key` ou `from_key/to_key`; null/ambíguas não se resolvem | Mudança pequena mas exige atualização coordenada de schema/semântica Python/F3A/F3B, testes e ARC-09 | **Recomendada com decisão humana prévia** |
-| **O2** — sidecar UI de navegação | Possível, mas gerencia segunda entrada e duas fontes de resolução/TTL | Maior risco de split-brain, versões/índices divergentes, precisa ARC-09 também | **Não preferida** |
-| **O3** — renderer R4 ou `r4.*` no novo viewer | Pode reutilizar apresentação histórica | Contraria limite externo O1→File API O3, ARC-04/07, Caderno e isolamento de produto | **Rejeitada sem nova arquitetura aprovada** |
+**Estado de O1:** `UNAPPROVED_VERSIONED_PROPOSAL`. Conclusão: `O0_INSUFFICIENT_O1_RECOMMENDED_CONDITIONALLY`. O contrato vigente continua 0.2.0; a proposta não autoriza implementação.
 
-**Compatibilidade de shape:** `node.parent` e `node.parent_key_literal` já são obrigatórios no schema 0.2.0; O1 adiciona somente `node.source_key_literal` e os dois campos tipados de `$defs.reference`, sem substituir os campos antigos. A key original é obrigatória nos nós R4 v5, e duplicidade/ausência rejeita atomicamente.
+| Opção | Navegação e fidelidade | Decisão |
+|---|---|---|
+| O0 — descriptor 0.2.0 | Unmapped fields preserva literais, mas não prova ponte estrutural; UI não pode contornar native-only | Insuficiente como solução integral; fallback seguro com gaps |
+| O1 — 0.2.1 tipada e segregada | Índice original por fonte/snapshot/key e prova literal; native ID permanece separado | Recomendada condicionalmente a ARC-09 e revisão independente |
+| O2 — sidecar UI | Segunda entrada, fonte de resolução e ciclo de vida; risco de split-brain | Não preferida; também exigiria ARC-09 |
+| O3 — renderer R4/import r4.* | Acopla produtor/host ao viewer e viola segregação ARC-04/07 | Rejeitada sem nova arquitetura aprovada |
 
-## Riscos com mitigação mandatória em O1
+**Delta completo:** O1 adiciona `node.source_key_literal`, `node.parent_key_presence`, `reference.reference_basis` e `reference.declared_key_literal`. `node.parent` e `node.parent_key_literal` já são obrigatórios em 0.2.0. Presença distingue ABSENT/EXPLICIT_NULL/PRESENT; parent vazio, inválido ou acima de 65.536 rejeita atomicamente. A key original ausente/inválida/duplicada também rejeita; nunca fabricar uma key.
 
-1. **Promoção indevida à ciência:** `source_key_literal`/`declared_key_literal` nunca entram em `native_id`; `ui_id` não vira native nem navigation_id durável. `LEGACY_DERIVED` em todo payload.
-2. **Colisão de namespaces:** índice SOURCE_STRUCTURAL_KEY estritamente nos nós originais de `lineage_graph`, por source/snapshot, sem usar records, tables, assets ou `identity.native_id`.
-3. **Ambiguidade:** duplicata key estrutural provoca erro de entrada; colisão native continua `COLLISION`. Não escolher ocorrência por ordem/completude.
-4. **Causalidade falsa:** link navegacional não muda `ORGANIZATIONAL_MEMBERSHIP` em `DECLARED_LINEAGE`; preservar provas e direção dos edges.
-5. **Regressão:** F3A JS e `semantics.py` hoje rejeitam link não-nativo; atualizar somente depois da aprovação e medir em CI/browser; F3B mantém tokens segregados e export fiel.
-6. **Envelope:** preservar JSON Schema Draft2020-12 fechado, 32MiB, 10.000 nós, 100.000 relações, 128 tabelas, limites de strings/lexema, TTL≤3600s, RAM-only. Quota excedida rejeita importação inteira.
-7. **Contextos:** source/snapshot não autenticam ciência, mas segregam navegação. Expiração, troca de importação e sessão invalidam links.
-8. **Governança:** ARC-09 exige revisão realmente independente e decisão versionada no SHA; aceite 0.2.0 PR#15 não aprova 0.2.1.
-9. **Rollback:** recusar 0.2.1, manter 0.2.0; descartar somente derivado temporário próprio, não fonte.
-10. **CI documental:** guard de paths exatos pode rejeitar esta pasta; não afrouxar controles/pins, remeter sucessão justificada a C4.
+## Mitigações mandatórias
 
-Caderno 0.1.0a1, RO-Crate 1.3, Process Run 0.6, reader003, SDK/Catalog continuam independentes; HL7/FHIR `FUTURE_CAPABILITY_ONLY`. Sem novos tipos Project/Experiment, sem status científico aprovado e sem poderes de migração/retention.
+1. Identidade: key é estrutural, ui_id/navigation_id são derivados e temporários; nenhum preenche native_id. Todo envelope permanece LEGACY_DERIVED.
+2. Namespaces: índice SOURCE_STRUCTURAL_KEY somente em nós ORIGINAIS comprovados de lineage_graph, por fonte/snapshot; excluir records, tables, assets, stubs e derivados.
+3. Ambiguidade: duplicidade estrutural rejeita o input; colisão nativa permanece COLLISION, sem primeiro/último/mais completo.
+4. Ausência: NULL_ENDPOINT exige declared_id, declared_key_literal e target_navigation_id null; presença/prova distinguem omissão e null. Referência válida sem alvo é UNRESOLVED/ORPHAN; ciclo tem gap TREE_CYCLE, não é ORPHAN nem novo tree_state. Root exige declaração explícita consistente.
+5. Causalidade: link navegável não muda MEMBER_OF/ORGANIZATIONAL_MEMBERSHIP para DECLARED_LINEAGE, autenticidade ou ciência aceita. Preservar direção, prova e repetições.
+6. Regressão: Python/F3A/F3B devem alinhar dispatch e regras somente após aprovação; executar CI/browser próprios e preservar bindings nativos, tokens segregados e export fiel.
+7. Limites: schema fechado, 32 MiB, 10.000 nós, 100.000 relações, 128 tabelas e demais quotas; TTL máximo 3600 s, RAM-only, sem URI/rede automática. Excesso rejeita o todo, sem truncamento.
+8. Contexto e privacidade: source/snapshot segregam, não autenticam. Troca de importação/sessão e expiração invalidam links; não publicar dados privados ou abrir fontes por URI.
+9. Governança/rollback: revisão não autora e decisão humana no objeto imutável; aprovação 0.2.0 não aprova 0.2.1. Rollback recusa 0.2.1 e descarta só derivado próprio, nunca fonte.
+10. CI: guard de paths K continua bloqueio de P02/C4; não alterar pins, manifests históricos, allowlist ou continue-on-error para obter verde.
+
+Caderno 0.1.0a1, RO-Crate 1.3, Process Run 0.6, reader003 e SDK/Catalog permanecem independentes. HL7/FHIR é FUTURE_CAPABILITY_ONLY. Sem novos tipos Project/Experiment artificiais, migração, retirada, limpeza, poderes de host ou aprovação científica.

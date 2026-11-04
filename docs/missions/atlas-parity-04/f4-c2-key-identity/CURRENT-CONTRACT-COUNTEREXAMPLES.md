@@ -1,47 +1,58 @@
-# Contraprovas estáticas da identidade — sem dados de origem
+# Contraprovas documentais de identidade — fontes inventadas
 
-**Nomes, IDs, literais, snapshots e grafos aqui são todos INVENTADOS.** O arquivo `SYNTHETIC-IDENTITY-FIXTURES.json` contém as formas JSON do perfil de origem e os oráculos candidatos. Nenhum representa dado privado ou teste real de 0.2.1.
+Os 14 oráculos JSON em SYNTHETIC-IDENTITY-FIXTURES.json são inventados e preservados byte a byte: dez principais A/B/C1/C2/D/E/F/G/H/I e quatro suplementares J/K/L/M. Não são descriptors completos nem resultados de execução da versão 0.2.1.
 
-## Invariantes do contrato hoje
+## Contrato vigente e delta candidato
 
-`lineage_graph.nodes[].key` é único na população estrutural do snapshot; `ui_id` é derivado; `native_id` pode ser null. Em 0.2.0, objetos `$defs.node` e `$defs.reference` são fechados; o contrato só conhece `declared_id` e referência `RESOLVED` baseada em native_id único no contexto. `target_navigation_id` sozinho não é prova; o validador e F3A comparam `declared_id` ao native_id. `unmapped_fields` retém texto, não o converte em link.
+`key` é identidade estrutural, `ui_id` é derivado e `native_id` conserva a identidade nativa comprovada ou null. `parent_key/from_key/to_key` são referências estruturais. No 0.2.0, `declared_id`/RESOLVED exige native ID original único no contexto; navigation ID sozinho e unmapped_fields não provam resolução.
 
-## Matriz
+O1 propõe somente `node.source_key_literal`, `node.parent_key_presence`, `reference.reference_basis` e `reference.declared_key_literal`, preservando `node.parent` e `node.parent_key_literal` já requeridos. Sem ARC-09, nenhum consumidor é alterado.
 
-| Caso | Entrada original inventada | O0 / 0.2.0 | O1 proposto / 0.2.1 |
+| Caso | Entrada inventada | O0 / 0.2.0 | O1 / expectativa não executada |
 |---|---|---|---|
-| **A** | Pai `key=p-A` / `native_id=native-A`; filho `parent_key=p-A` | Não há native_id=p-A; `UNRESOLVED`, pai existe mas não navega | Resolver por chave estrutural p-A ao pai ORIGINAL; native-A permanece native-A |
-| **B** | Pai de grafo `key=rec-B` / `native_id=null`; outro `records[].id=rec-B` | Resolver por native escolheria registro errado; o C2 atual recusa entrada por namespace | Índice separado `lineage_graph.nodes[]` aponta apenas pai correto |
-| **C** | Snapshots C1/C2, ambos com `key=shared-C`, pais distintos | Associação por texto sem contexto criaria cross-snapshot; 0.2 não resolve native null | Endereçar (`source_id`, `snapshot_id`, key) e invalidar links antigos |
-| **D** | 50 pares de nós com native_id duplicado, chaves estruturais diferentes; 50 filhos explicitamente vinculados | Native ID por si só tem `COLLISION`; chave dos filhos não corresponde ao índice nativo | 50 pais navegáveis por key única; pesquisas pelos 50 native IDs permanecem `COLLISION` |
-| **E** | Nó original sem `key`; outro nó declara `parent_key=missing-E` | Parser R4 v5 rejeita a entrada (key obrigatória) | Rejeição **atômica** do payload, sem emitir descriptor parcial nem inventar key de `ui_id`/label |
-| **F** | Dois nós com `key=duplicate-F` no mesmo snapshot | Parser R4 v5 recusa | Mesmo erro atômico, jamais escolher primeiro/último |
-| **G** | Nós válidos `key=root-G`, `key=child-G`; filho declara `parent_key=absent-G` | Referência nativa não resolve | `UNRESOLVED`, target null, `ORPHAN` e `binding_gap=true`; sem pai inventado |
-| **H** | `cycle-H-1.parent_key=cycle-H-2` e `cycle-H-2.parent_key=cycle-H-1` | Ciclo precisa permanecer explícito | Ambos os alvos podem ser estruturalmente únicos, mas `TREE_CYCLE`/gap impede declarar árvore íntegra |
-| **I** | `MEMBER_OF` de `member-I` para `group-I` por `from_key/to_key` | Native-only perde link se `native_id=null` | Ambos endpoints navegam por chave; `ORGANIZATIONAL_MEMBERSHIP` permanece não causal |
+| A | Pai key=p-A/native_id=native-A; filho parent_key=p-A | Sem native p-A: UNRESOLVED | Resolver ao pai original; native-A inalterado |
+| B | Pai key=rec-B/native=null; records.id=rec-B | C2 recusa R4_V5_PARENT_SCOPE_UNREPRESENTABLE | Resolver somente no namespace estrutural, não ao record |
+| C1/C2 | key=shared-C em snapshots diferentes | Texto não prova identidade entre snapshots | Cada referência permanece no próprio snapshot |
+| D | 50 pares nativos colidentes e 50 filhos; 150 nodes/50 edges | Colisões nativas não elegem alvo | 50 parents estruturais únicos; native lookup COLLISION |
+| E | Nó sem key | Input R4 v5 inválido | REJECT_MISSING_STRUCTURAL_KEY_ATOMIC, sem key inventada |
+| F | Duas ocorrências key=dup-F | Input duplicado | REJECT_DUPLICATE_STRUCTURAL_KEY_ATOMIC, sem primeiro/último |
+| G | child-G referencia absent-G, sem alvo | Native lookup não resolve | UNRESOLVED, target null, ORPHAN, binding_gap=true |
+| H | cycle-H-1 e cycle-H-2 são pais recíprocos | Ciclo não pode desaparecer | Duas refs resolvidas; gap TREE_CYCLE, binding_gap=true, sem árvore acíclica |
+| I | MEMBER_OF member-I para group-I por keys | Native null perde ligação | Endpoints estruturais, ORGANIZATIONAL_MEMBERSHIP/NON_CAUSAL; ciência NOT_EVALUATED |
+| J | parent_key ausente | Nullable sozinho perde a diferença | ABSENT, NULL_ENDPOINT, PARENT_UNKNOWN |
+| K | parent_key:null | Nullable sozinho perde a diferença | EXPLICIT_NULL, NULL_ENDPOINT, PARENT_UNKNOWN; raiz só com root=true comprovado |
+| L | parent_key com 3000 caracteres x | Não é ID nativo válido por inferência | PRESENT; 3000 caracteres íntegros, UNRESOLVED/ORPHAN/gap |
+| M | NATIVE_ID com key não null; STRUCTURAL com declared_id não null | Não misturar contratos | Ambos rejeitados pelas condições futuras allOf/if/then |
 
-## Contraexemplo mínimo A
+Em A, `{key:"p-A",native_id:"native-A",ui_id:"ui-p-A"}` não permite `declared_id="p-A"` RESOLVED em 0.2.0. Copiar key para native falsifica identidade; não navegar é seguro, porém incompleto. Em B, o mesmo texto pertence a outro namespace. O0 não oferece simultaneamente fidelidade, navegação estrutural e validação native-only.
 
-O pai tem `{key:"p-A",native_id:"native-A",ui_id:"ui-p-A"}`; filho, `{key:"c-A",native_id:null,parent_key:"p-A"}`. A ligação é declarada por `parent_key` e tem alvo estrutural literal único; não é prova de native_id. Marcar `reference.declared_id="p-A"`, `resolution="RESOLVED"` e `target_navigation_id` do pai violaria o `semantics.py` e o F3A 0.2.0. Copiar `key` a `native_id` é falsificação de identidade científica. Deixar `UNRESOLVED` é seguro, porém perde o clique legítimo. **O0 não satisfaz simultaneamente fidelidade, navegação e validação estrita.**
+## Matriz PKEY de entrada — complemento documental, não novos fixtures JSON
 
-## Rejeições exigidas para 0.2.1
+Para um nó original com key válida; entradas inventadas. `PRESENT` abaixo conserva exatamente o literal. REJECT_ATOMIC não emite parent, tree_state ou descriptor parcial.
 
-- Referência `SOURCE_STRUCTURAL_KEY` com `declared_id != null`, `declared_key_literal` ausente, alvo stub, locator ausente, source/snapshot diferente ou destino não pertencente a `lineage_graph.nodes[]`: FAIL.
-- Referência nativa com `declared_key_literal != null`, colisão de native com destino eleito, ou alias por ui_id/title/hash/ordinal: FAIL.
-- Structural key duplicada na coleção/snapshot ou key original ausente/null/vazia/não string/>2048: rejeição integral do payload R4 v5. A referência G com chave **alvo ausente**, mas input válido, é `UNRESOLVED`; não confundir com E. Nunca preencher key nem criar pai/Project/Experiment.
-- `node.parent` e `node.parent_key_literal` já são requeridos em 0.2.0 e continuam em 0.2.1; `source_key_literal` só é opcional no schema (semanticamente obrigatório em nó original `lineage_graph`). `PARENT_RESOLVED` sob `SOURCE_STRUCTURAL_KEY` exige `node.parent_key_literal == node.parent.declared_key_literal`, alvo SOURCE_ENTITY original único, prova de campo e navigation_id da ocorrência. Sob `NATIVE_ID`, as invariantes nativas de 0.2.0 permanecem.
-- `MEMBER_OF` é organizacional, não causal; outros tipos e `causal_status` mantêm distinção. Repetições, null endpoints, órfãos, Run isolado e ciclos seguem explícitos; `H` não vira árvore acíclica e `I` não recebe prova causal por conseguir navegar.
-- Desconhecidos, tamanhos acima de quota, cross-session, nova importação/TTL: rejeitar ou invalidar, sem subconjunto apresentado como completo.
+| ID | parent_key na fonte | Presença / resultado exigido |
+|---|---|---|
+| PKEY-01 | propriedade ausente | ABSENT; parent literal null; NULL_ENDPOINT |
+| PKEY-02 | null | EXPLICIT_NULL; parent literal null; NULL_ENDPOINT |
+| PKEY-03 | "" | REJECT_ATOMIC |
+| PKEY-04 | 0 | REJECT_ATOMIC |
+| PKEY-05 | false | REJECT_ATOMIC |
+| PKEY-06 | {} | REJECT_ATOMIC |
+| PKEY-07 | [] | REJECT_ATOMIC |
+| PKEY-08 | "p-A" | PRESENT; RESOLVED somente com alvo original único |
+| PKEY-09 | "missing" | PRESENT; UNRESOLVED/ORPHAN se sem alvo |
+| PKEY-10 | string de 65.537 caracteres | REJECT_ATOMIC, sem truncamento |
+| PKEY-11 | " " | PRESENT; espaço literal, nunca trim para ausência |
+| PKEY-12 | string de 65.536 caracteres | PRESENT; íntegra, UNRESOLVED/ORPHAN pois key indexável tem no máximo 2048 |
 
-**Casos adicionais G/H/I:** inventados e também incluídos nos oráculos JSON; `G` distingue referência a alvo inexistente de entrada sem key, `H` testa ciclo apesar de endpoints resolvidos e `I` testa navegação sem causalidade. Sem execução de validator 0.2.1.
+Para J/K/PKEY-01/02, `node.parent` continua obrigatório: `reference_basis=SOURCE_STRUCTURAL_KEY`, `declared_id=null`, `declared_key_literal=null`, `target_navigation_id=null`, `resolution=NULL_ENDPOINT`, contexto exato e prova de ausência ou de null. Sem root booleano true comprovado: PARENT_UNKNOWN/gap; com ele e sem parent não nulo: ROOT_DECLARED, binding_gap=false para parent. Root=true contraditório com parent não nulo rejeita. String vazia ou tipo inválido não se converte em NULL_ENDPOINT, ORPHAN ou raiz.
 
-**Método:** leitura dos códigos nos SHAs de `INPUT-SHAS.json` e contraprovas de invariantes. Não foi executado `validate_descriptor`, F3A, F3B, nem ensaio com origem privada. Os casos são **oráculos para testes futuros**, não relatório PASS.
+H conserva tree_state=PARENT_RESOLVED e refs RESOLVED, mas TREE_CYCLE é gap (contagem 2), não enum de tree_state. Não remover arestas, inventar raiz ou marcar descendentes não cíclicos. ORPHAN é referência válida sem alvo, não ciclo nem input inválido.
 
-## Oráculos suplementares J–M (inteiramente inventados, não executados)
+## Rejeições e preservações obrigatórias na proposta
 
-- **J — pai ausente:** nó de linhagem sem propriedade `parent_key`; `parent_key_presence=ABSENT`, `parent_key_literal=null`, `node.parent` obrigatório com `reference_basis=SOURCE_STRUCTURAL_KEY`, `declared_id=null`, `declared_key_literal=null`, `resolution=NULL_ENDPOINT`, `target_navigation_id=null`; `PARENT_UNKNOWN` sem `root=true` original.
-- **K — null explícito:** `parent_key:null`; `parent_key_presence=EXPLICIT_NULL` e referência `NULL_ENDPOINT`, sem perder a diferença para J. Apenas declaração comprovada `root=true` autoriza `ROOT_DECLARED`.
-- **L — referência longa:** `parent_key` de 3000 caracteres é preservada integralmente em `parent_key_literal` e `declared_key_literal` (limite 65.536); nenhuma chave indexável de nó excede 2048, portanto `UNRESOLVED`, `ORPHAN`, `binding_gap=true`. Não truncar nem inventar `native_id`.
-- **M — base mista:** com `NATIVE_ID`, `declared_key_literal` não null é rejeitado; com `SOURCE_STRUCTURAL_KEY`, `declared_id` não null é rejeitado. São negativos do futuro schema `allOf/if/then`, não testes instalados.
+Base estrutural com declared_id não null, literal ausente, falso locator/prova, contexto diferente, alvo stub/derivado/record ou key duplicada rejeita. Base nativa com declared_key_literal não null ou escolha de native colidente rejeita. Nenhuma resolução usa ui_id, título, hash, path ou ordinal como identidade. Igualdade de texto não autentica nem aprova ciência.
 
-Esses oráculos serão executados por C2/F3A somente após decisão ARC-09; documentação estática não constitui CI 0.2.1 nem revisão independente.
+Para PARENT_RESOLVED estrutural, parent_key_literal == parent.declared_key_literal, alvo original único e navigation ID da ocorrência. Base nativa mantém a igualdade 0.2.0. MEMBER_OF não ganha causalidade; nulls, repetições, órfãos e Run externo continuam explícitos. Quotas, versões desconhecidas e contexto expirado rejeitam/inativam sem apresentar subconjunto como completo. Não criar Project, Experiment, pai, ID científico ou conteúdo privado.
+
+**Método:** inspeção dos bytes e das expectativas documentadas, com checker reproduzível em INDEPENDENT-REVIEW. Não foi executado validate_descriptor 0.2.1, renderer, F3A/F3B, browser ou origem privada. Os oráculos continuam entradas para testes de produto futuros após ARC-09.
