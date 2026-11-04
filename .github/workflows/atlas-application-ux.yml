@@ -6,6 +6,8 @@ on:
       - 'packages/atlas/src/atlas_viewer/**'
       - 'scripts/qa/*application_ux*'
       - 'scripts/qa/test_native_legacy.mjs'
+      - 'scripts/qa/speckit_audit.py'
+      - 'tests/qa/test_speckit_presentation_audit.py'
       - '.github/workflows/atlas-application-ux.yml'
   workflow_dispatch:
 permissions:

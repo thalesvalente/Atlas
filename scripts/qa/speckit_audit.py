@@ -26,6 +26,13 @@ ORIGINAL_BRIDGE_BLOBS = {
     "tests/viewer/test_catalog_server.py":
         "6de06c6ff842a139fbe2dd55331e3402a29654af",
 }
+# A01's explicit owner transfer authorization requires a successor to the initial
+# empty-transfer policy. Scope that documentary change by exact blob, separately
+# from runtime pins; neither governance paths nor future policy bytes are allowed.
+A01_TRANSFER_DOCUMENT_BLOBS = {
+    "docs/coordination/publication-policy.md":
+        "59e7723608ef73e4746bb64a9acd8aeca5e3778b",
+}
 PRESENTATION_ORIGINALS = {
     "packages/protocol/src/caderno_protocol/read_model.py",
     "packages/atlas/src/atlas_viewer/static/app.js",
@@ -48,6 +55,12 @@ def exact_original_bridge(name: str, content: bytes) -> bool:
     return expected is not None and git_blob_id(content) == expected
 
 
+def exact_a01_transfer_document(name: str, content: bytes) -> bool:
+    """Only the explicitly authorized A01 transfer-policy revision is scoped."""
+    expected = A01_TRANSFER_DOCUMENT_BLOBS.get(name)
+    return expected is not None and git_blob_id(content) == expected
+
+
 def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dict:
     errors: list[str] = []
     preserved = 0
@@ -64,7 +77,8 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dic
             if allow_presentation_delta and name in PRESENTATION_ORIGINALS and path.is_file():
                 authorized_changes.append(name)
             elif (allow_presentation_delta and path.is_file()
-                  and exact_original_bridge(name, path.read_bytes())):
+                  and (exact_original_bridge(name, path.read_bytes())
+                       or exact_a01_transfer_document(name, path.read_bytes()))):
                 authorized_changes.append(name)
             else:
                 errors.append(f"Preserved baseline changed: {name}")
