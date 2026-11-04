@@ -38,7 +38,7 @@ jobs:
           git rev-parse HEAD
           node --check packages/atlas/src/atlas_viewer/static/native_notebook.js
           node --check scripts/qa/browser_application_ux.mjs
-          python scripts/qa/run_application_ux_browser.py --work .ci-application-ux
+          python scripts/qa/run_application_ux_browser.py --work .ci-application-ux --require-graph-cancel
       - name: Preserve synthetic application evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

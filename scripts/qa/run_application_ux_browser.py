@@ -50,7 +50,8 @@ def fixture():
             {"id": "record-unknown", "title": "Registro UNKNOWN", "status": "UNKNOWN"},
             {"title": "Registro sem ID", "status": None},
             {"id": "record-empty-id", "native_id": "", "title": "Registro com textos vazios", "status": ""}],
-        "lineage_graph": {"nodes": [{"key": "root", "native_id": None, "label": "Raiz sintética", "run_id": "record-root"}], "edges": []},
+        "lineage_graph": {"nodes": [{"key": "root", "native_id": None, "label": "Raiz sintética", "run_id": "record-root"},
+                                    {"key": "child", "parent_key": "root", "native_id": "child-native", "label": "Filho sintético", "run_id": "record-root"}], "edges": []},
         "edges": [{"id": "relation-main", "from_key": "record-root", "to": "synthetic-reference", "type": "MENTIONS"}],
         "result_tables": [table, long_table],
         "resources": [{"id": "synthetic-reference", "title": "Dossiê sintético", "uri": "https://example.invalid/never-opened", "availability": "UNKNOWN"}],
@@ -63,7 +64,18 @@ def fixture():
                 "records": [{"id": "fallback-root", "title": "Registro raiz sem nós"},
                             {"id": "fallback-child", "parent_key": "fallback-root", "title": "Registro filho sem nós"}],
                 "lineage_graph": {"nodes": [], "edges": []}, "result_tables": [], "resources": [], "edges": []}
-    return data, empty, table, long_table, fallback
+    late = {
+        "schema": "synthetic-late-linked-populations", "atlas_integration": {"notebook_revision": "INVENTED_LATE_POPULATIONS_REVISION"},
+        "records": [{"id": f"late-record-{index:03d}", "title": f"Registro tardio {index:03d}", "family": "LATE"} for index in range(205)],
+        "lineage_graph": {"nodes": [{"key": "late-root", "native_id": None, "label": "Nó de navegação tardia", "family": "ANCHOR",
+                                      "run_id": "late-record-157", "resource_id": "late-asset-057",
+                                      "source_id": "late-relation-157", "group_id": "late-collection-057"}], "edges": []},
+        "resources": [{"id": f"late-asset-{index:03d}", "title": f"Recurso tardio {index:03d}", "family": "LATE"} for index in range(85)],
+        "edges": [{"id": f"late-relation-{index:03d}", "title": f"Relação tardia {index:03d}", "type": "MENTIONS", "family": "LATE"} for index in range(205)],
+        "invented_collections": [{"id": f"late-collection-{index:03d}", "title": f"Coleção tardia {index:03d}", "family": "LATE"} for index in range(85)],
+        "result_tables": [],
+    }
+    return data, empty, table, long_table, fallback, late
 
 
 def expected_csv(rows, scalar):
@@ -84,6 +96,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--require-graph-cancel", action="store_true", required=True,
+                        help="Require the composed graph cancellation API and real delayed-callback close regressions.")
     args = parser.parse_args()
     root, work = args.repo.resolve(), args.work.resolve()
     work.mkdir(parents=True, exist_ok=False)
@@ -106,12 +120,14 @@ def main():
         report_path.write_text(json.dumps({"status": "FAIL", "error": "INSTALLED_APPLICATION_ASSET_DRIFT", "installed_asset_hashes": asset_hashes}, indent=2), encoding="utf-8")
         raise RuntimeError("INSTALLED_APPLICATION_ASSET_DRIFT:" + ",".join(mismatched))
     exporter = runpy.run_path(str(root / "tools/export_native_notebook.py"))
-    data, empty, table, long_table, fallback = fixture()
-    sources = [work / "source-application", work / "source-empty", work / "source-record-tree"]
+    data, empty, table, long_table, fallback, late = fixture()
+    sources = [work / "source-application", work / "source-empty", work / "source-record-tree", work / "source-late-populations"]
     receipt = exporter["export"](data, sources[0])
     exporter["export"](empty, sources[1])
     exporter["export"](fallback, sources[2])
+    exporter["export"](late, sources[3])
     entries = exporter["project_to_entries"](data)
+    late_entries = exporter["project_to_entries"](late)
     table_entry = next(entry for entry in entries if entry["kind"] == "table" and entry["source_key"] == table["id"])
     table_rows = [entry for entry in entries if entry.get("table_uid") == table_entry["uid"]]
     manifest = {
@@ -124,6 +140,10 @@ def main():
         "table_uid": table_entry["uid"],
         "rows": [{"uid": entry["uid"], "pointer": entry["pointer"], "cells": entry["cells"]} for entry in table_rows],
         "columns": sorted({column for row in table["rows"] for column in row["cells"]}),
+        "late_targets": {kind: {"uid": target["uid"], "pointer": target["pointer"], "title": target["title"], "source_key": target["source_key"]}
+                         for kind, key in (("record", "late-record-157"), ("asset", "late-asset-057"),
+                                           ("relation", "late-relation-157"), ("collection", "late-collection-057"))
+                         for target in late_entries if target["kind"] == kind and target["source_key"] == key},
         "decimal_coverage": "JSON float plus 30-digit decimal text; Decimal is unsupported by the existing stdlib exporter",
     }
     expected = work / "application-expected.json"
@@ -136,7 +156,7 @@ def main():
         sock.bind(("127.0.0.1", 0))
         port = sock.getsockname()[1]
     process = subprocess.Popen([sys.executable, "-I", "-m", "atlas_viewer", "serve", "--port", str(port),
-                                "--source", str(sources[0]), "--source", str(sources[1]), "--source", str(sources[2])],
+                                "--source", str(sources[0]), "--source", str(sources[1]), "--source", str(sources[2]), "--source", str(sources[3])],
                                cwd=work, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
     try:
         for _ in range(100):
@@ -145,16 +165,18 @@ def main():
             try:
                 with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/notebook", timeout=2) as response:
                     snapshot = json.load(response)
-                    if len(snapshot["sources"]) != 3 or any(source["status"] != "READY" for source in snapshot["sources"]):
+                    if len(snapshot["sources"]) != 4 or any(source["status"] != "READY" for source in snapshot["sources"]):
                         raise RuntimeError("SYNTHETIC_APPLICATION_EXPORT_NOT_CONSUMED")
                     break
             except OSError:
                 time.sleep(.1)
         else:
             raise TimeoutError("INSTALLED_APPLICATION_SERVER_TIMEOUT")
-        result = subprocess.run(["node", str(Path(__file__).with_name("browser_application_ux.mjs")),
-                                 "--url", f"http://127.0.0.1:{port}/notebook", "--report", str(report_path),
-                                 "--expected", str(expected), "--synthetic-metadata", str(sources[0] / "ro-crate-metadata.json")],
+        browser_command = ["node", str(Path(__file__).with_name("browser_application_ux.mjs")),
+                           "--url", f"http://127.0.0.1:{port}/notebook", "--report", str(report_path),
+                           "--expected", str(expected), "--synthetic-metadata", str(sources[0] / "ro-crate-metadata.json"),
+                           "--require-graph-cancel", "true"]
+        result = subprocess.run(browser_command,
                                 cwd=root, check=False)
         same = hashes() == before
         if report_path.exists():

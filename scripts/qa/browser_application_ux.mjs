@@ -9,7 +9,9 @@ const args=new Map();for(let i=2;i<process.argv.length;i+=2)args.set(process.arg
 const url=args.get('--url'),reportPath=args.get('--report'),origin=new URL(url).origin;
 assert.ok(['127.0.0.1','localhost'].includes(new URL(url).hostname));
 const expected=JSON.parse(await fs.readFile(args.get('--expected'),'utf8'));
-const report={status:'FAIL',scope:'INSTALLED_APPLICATION_UX_SYNTHETIC_ONLY',browser_channel:process.env.PLAYWRIGHT_CHANNEL||'chromium',checks:[],errors:[],external_requests:[],screenshots:[]};
+const requireGraphCancel=args.get('--require-graph-cancel')==='true';
+assert.equal(requireGraphCancel,true,'Application qualification requires explicit --require-graph-cancel true');
+const report={status:'FAIL',scope:'INSTALLED_APPLICATION_UX_SYNTHETIC_ONLY',browser_channel:process.env.PLAYWRIGHT_CHANNEL||'chromium',checks:[],errors:[],external_requests:[],screenshots:[],graph_cancel_gate:{required:true,status:'PENDING',cases:[]}};
 const check=name=>report.checks.push(name),sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 let browser,failure,originalMetadata;
 const metadataPath=args.get('--synthetic-metadata');
@@ -29,6 +31,80 @@ try{
   const download=async(label,digest)=>{const waiting=page.waitForEvent('download');await page.getByRole('button',{name:label,exact:true}).click();const item=await waiting,bytes=await fs.readFile(await item.path());assert.equal(sha(bytes),digest,label+' must export the entire exact selection');return bytes;};
   const assertFocus=async selector=>assert.equal(await page.locator(selector).evaluate(node=>document.activeElement===node),true,'Expected focus on '+selector);
   const inViewport=async target=>assert.equal(await target.evaluate(node=>{const rect=node.getBoundingClientRect();return rect.top>=0&&rect.bottom<=innerHeight&&rect.left>=0&&rect.right<=innerWidth;}),true,'Focused content must be visible in the viewport');
+  const treeContextReturn=async(width,closeMode)=>{
+    await pane('tree').click();
+    const root=page.getByRole('treeitem',{name:'Raiz sintética',exact:true}),child=page.getByRole('treeitem',{name:'Filho sintético',exact:true});
+    await root.focus();await page.keyboard.press('Enter');
+    const uid=await root.getAttribute('data-native-node'),oldRoot=await root.elementHandle();assert.ok(uid);
+    await page.locator('[data-testid="native-context-links"]').getByRole('button',{name:'run_id → Registro principal',exact:true}).click();
+    await page.locator('[data-testid="native-context-back"]').click();
+    assert.equal(await oldRoot.evaluate(node=>node.isConnected),false,'The journey must actually recreate the graph node');await oldRoot.dispose();
+    assert.equal(await root.getAttribute('data-native-node'),uid);
+    if(closeMode==='Escape')await page.keyboard.press('Escape');else await page.locator('#native-close-detail').click();
+    assert.ok(await page.locator('#native-detail').isHidden());
+    assert.equal(await root.evaluate(node=>document.activeElement===node),true,'Closing a returned tree detail must recover the exact recreated node');
+    await inViewport(root);await page.keyboard.press('ArrowDown');
+    assert.equal(await child.evaluate(node=>document.activeElement===node),true,'Arrow navigation must continue from the restored tree node');
+    assert.ok(await page.locator('#native-detail').isHidden());
+    check('tree_context_return_'+closeMode.toLowerCase()+'_restores_exact_node_focus_viewport_arrows_'+width);
+  };
+  const pendingTreeClose=async(width,closeMode,panelInitiallyVisible=true)=>{
+    await pane('tree').click();
+    const root=page.getByRole('treeitem',{name:'Raiz sintética',exact:true}),child=page.getByRole('treeitem',{name:'Filho sintético',exact:true});
+    await root.focus();
+    if(panelInitiallyVisible){await page.keyboard.press('Enter');assert.ok(await page.locator('#native-detail').isVisible());}
+    else assert.ok(await page.locator('#native-detail').isHidden());
+    await child.evaluate(node=>node.addEventListener('click',()=>{window.__applicationPendingClickAt=performance.now();},{once:true}));
+    await child.click();
+    if(!panelInitiallyVisible)await page.evaluate(()=>{window.__applicationFocusBeforeClose=document.activeElement;});
+    if(closeMode==='Escape')await page.keyboard.press('Escape');else await page.locator('#native-close-detail').click();
+    const elapsed=await page.evaluate(()=>performance.now()-window.__applicationPendingClickAt);
+    assert.ok(elapsed<600,'The detail must be closed before the pending 600ms callback, observed '+elapsed+'ms');
+    assert.ok(await page.locator('#native-detail').isHidden());
+    if(!panelInitiallyVisible)assert.equal(await page.evaluate(()=>document.activeElement===window.__applicationFocusBeforeClose),true,'Escape with an already-hidden detail must cancel pending selection without moving focus');
+    await page.waitForTimeout(100);
+    const camera=await page.locator('.graph-svg > g').getAttribute('transform'),selected=await page.locator('.graph-node[aria-selected="true"]').getAttribute('data-native-node');
+    assert.equal(selected,await child.getAttribute('data-native-node'),'Pending selection must remain selected after closing');
+    await page.waitForTimeout(750);
+    assert.ok(await page.locator('#native-detail').isHidden(),'A cancelled delayed selection must not reopen the closed panel');
+    assert.equal(await page.locator('.graph-node[aria-selected="true"]').getAttribute('data-native-node'),selected);
+    assert.equal(await page.locator('.graph-svg > g').getAttribute('transform'),camera,'Camera must remain stable after close layout has settled');
+    report.graph_cancel_gate.cases.push({width,close:closeMode,panel_initially_visible:panelInitiallyVisible,status:'PASS',closed_before_callback_ms:elapsed});
+    check('required_graph_cancel_'+(panelInitiallyVisible?'visible':'hidden')+'_'+closeMode.toLowerCase()+'_keeps_detail_hidden_selection_camera_'+width);
+  };
+  const lateLinkedTarget=async(width,kind,closeMode)=>{
+    await page.locator('#native-source').selectOption('source-4');await pane('tree').click();
+    await page.locator('#native-search').fill('__FILTER_EXCLUDES_THE_LINKED_TARGET__');
+    await page.locator('#native-family').selectOption('ANCHOR');
+    const node=page.getByRole('treeitem',{name:'Nó de navegação tardia',exact:true});await node.focus();await page.keyboard.press('Enter');
+    const target=expected.late_targets[kind],reference=({record:'run_id',asset:'resource_id',relation:'source_id',collection:'group_id'})[kind];
+    await page.locator('[data-testid="native-context-links"]').getByRole('button',{name:reference+' → '+target.title,exact:true}).click();
+    assert.equal(await page.locator('#native-source').inputValue(),'source-4');
+    assert.equal(await page.locator('#native-search').inputValue(),'');assert.equal(await page.locator('#native-family').inputValue(),'');
+    const targetPane=({record:'records',asset:'assets',relation:'relations',collection:'coverage'})[kind];
+    assert.equal(await pane(targetPane).getAttribute('aria-current'),'page');
+    assert.ok((await page.locator('#native-content .pager').first().innerText()).includes('Página 2/3'),'Linked target must be on its actual later population page');
+    const occurrence=page.locator('#native-content [data-uid="'+target.uid+'"]');assert.equal(await occurrence.count(),1,'The exact linked occurrence must be rendered');
+    assert.ok(await occurrence.isVisible());
+    assert.ok((await page.locator('#native-detail-body').innerText()).includes(target.pointer));
+    assert.match(await page.locator('[data-testid="native-raw"]').innerText(),new RegExp('"id":"'+target.source_key+'"'));
+    const trigger=kind==='collection'?occurrence.locator('summary').first():occurrence.getByRole('button').first();
+    if(closeMode==='Escape')await page.keyboard.press('Escape');else await page.locator('#native-close-detail').click();
+    assert.ok(await page.locator('#native-detail').isHidden());
+    assert.equal(await trigger.evaluate(element=>document.activeElement===element),true,'Closing a linked later-page detail must focus that exact occurrence');
+    await inViewport(trigger);
+    check('late_link_'+kind+'_'+closeMode.toLowerCase()+'_actual_page_uid_focus_viewport_'+width);
+  };
+  {
+    const supported=await page.evaluate(async()=>{
+      const {mountGraph}=await import('/native_graph.js'),model=await(await fetch('/api/notebook')).json();
+      const host=document.createElement('div');host.style.width='800px';document.body.append(host);
+      const graph=mountGraph(host,model.sources[0].entries.filter(entry=>entry.kind==='node'),()=>{});
+      try{return typeof graph.cancelPendingSelection==='function';}finally{graph.destroy();host.remove();}
+    });
+    assert.equal(supported,true,'--require-graph-cancel requires the composed cancelPendingSelection API');
+    check('required_graph_cancel_api_is_available');
+  }
   await pane('records').click();
   const record=page.locator('#native-content tbody').getByRole('button',{name:'Registro principal',exact:true});
   await record.focus();await page.keyboard.press('Enter');
@@ -123,12 +199,27 @@ try{
   assert.equal(await fallbackChild.evaluate(node=>document.activeElement===node),true);
   assert.match(await page.locator('[data-testid="native-raw"]').innerText(),/"id":"fallback-child"/);
   check('record_tree_fallback_enter_arrows_preserve_treeitem_focus');
+  const fallbackUid=await fallbackChild.getAttribute('data-native-node'),oldFallbackChild=await fallbackChild.elementHandle();
+  await page.locator('[data-testid="native-context-links"]').getByRole('button',{name:'parent_uid → Registro raiz sem nós',exact:true}).click();
+  await page.locator('[data-testid="native-context-back"]').click();
+  assert.equal(await oldFallbackChild.evaluate(node=>node.isConnected),false);await oldFallbackChild.dispose();
+  assert.equal(await fallbackChild.getAttribute('data-native-node'),fallbackUid);
+  await page.keyboard.press('Escape');assert.ok(await page.locator('#native-detail').isHidden());
+  assert.equal(await fallbackChild.evaluate(node=>document.activeElement===node),true,'Fallback record tree must recover its exact recreated child after context return');
+  await inViewport(fallbackChild);await page.keyboard.press('ArrowUp');
+  assert.equal(await fallbackRoot.evaluate(node=>document.activeElement===node),true);
+  check('record_tree_fallback_parent_context_return_restores_child_focus_and_arrow_up');
   await page.locator('#native-source').selectOption('source-1');
   for(const width of [1440,390,320]){
     await page.setViewportSize({width,height:1000});
     for(const name of ['records','tables','relations','assets','timeline','coverage']){
       await pane(name).click();assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),name+' overflows '+width);
     }
+    for(const closeMode of ['Escape','Close']){
+      await treeContextReturn(width,closeMode);
+      await pendingTreeClose(width,closeMode);
+    }
+    await pendingTreeClose(width,'Escape',false);
     if(width!==1440){
       await pane('records').click();
       const trigger=page.locator('#native-content tbody').getByRole('button',{name:'Registro principal',exact:true});
@@ -150,6 +241,9 @@ try{
       await page.keyboard.press('Escape');assert.ok(await page.locator('#native-detail').isHidden());assert.equal(await tableTrigger.evaluate(node=>document.activeElement===node),true);await inViewport(tableTrigger);
       check('mobile_record_table_detail_focus_visible_escape_restores_visible_trigger_'+width);
     }
+    for(const closeMode of ['Escape','Close'])await lateLinkedTarget(width,'record',closeMode);
+    for(const kind of ['asset','relation','collection'])await lateLinkedTarget(width,kind,width===390?'Close':'Escape');
+    await page.locator('#native-source').selectOption('source-1');
     await pane(width===1440?'records':'tables').click();await page.evaluate(()=>window.scrollTo(0,0));await screenshot(width===1440?'desktop':'mobile-'+width);
     if(width!==1440){await page.locator('#native-content').scrollIntoViewIfNeeded();await screenshot('mobile-'+width+'-table');}
     check('all_non_graph_sections_reflow_'+width);
@@ -176,6 +270,7 @@ try{
   await fs.writeFile(metadataPath,originalMetadata);originalMetadata=null;await rebuild();
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='5');
   check('changed_synthetic_metadata_invalidates_snapshot_explicit_reindex_restores_consistency');
+  assert.equal(report.graph_cancel_gate.cases.length,9);report.graph_cancel_gate.status='PASS_SCOPED';
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.external_requests,[]);check('no_javascript_errors_or_automatic_external_requests');
   report.status='PASS_SCOPED';
 }catch(error){failure=error;report.error=error.stack||error.message;}
