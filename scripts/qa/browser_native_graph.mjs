@@ -44,6 +44,9 @@ if (!baselineRef) {
 const fixtureScript = `import {mountGraph} from '/native_graph.js';
 const node=(uid,title,parent_uid=null,extra={})=>({uid,title,parent_uid,native_id:null,source_key:uid,group:'Inventado',...extra});
 function fixture(kind){
+  if(kind==='long-word'||kind==='long-words')return [node('long-label',
+    (kind==='long-word'?'𝕎'.repeat(16384):'palavra 🧪 '.repeat(4096))+' FIM-TÍTULO-🧪',null,
+    {source_key:'🔑/'.repeat(8192)+' FIM-CHAVE-🔑',native_id:null})];
   if(kind==='star')return [node('root','Família'),node('child','Execução','root',{native_id:'R1'}),
     ...Array.from({length:1200},(_,i)=>node('node-'+i,i===1199?'Último nó da coleção':'Nó sintético '+i,'root',{native_id:'native-'+i}))];
   if(kind==='identity')return [
@@ -62,7 +65,16 @@ function fixture(kind){
   }
   return result;
 }
-window.nodes=fixture(new URL(location.href).searchParams.get('dataset')||'star');
+const dataset=new URL(location.href).searchParams.get('dataset')||'star';
+window.nodes=fixture(dataset);
+if(dataset==='long-word'||dataset==='long-words'){
+  const originalMeasure=CanvasRenderingContext2D.prototype.measureText;
+  window.measureProbe={calls:0,max_codepoints:0};
+  CanvasRenderingContext2D.prototype.measureText=function(text){
+    window.measureProbe.calls++;window.measureProbe.max_codepoints=Math.max(window.measureProbe.max_codepoints,Array.from(String(text)).length);
+    return originalMeasure.call(this,text);
+  };
+}
 window.inputBefore=JSON.stringify(window.nodes);window.selections=[];window.gestureEvents=[];window.gestureTimes=[];
 for(const type of ['click','dblclick'])document.addEventListener(type,event=>{
   if(event.target.closest?.('.graph-node')){window.gestureEvents.push(type+':'+event.detail);window.gestureTimes.push(performance.now());}
@@ -312,6 +324,24 @@ try {
   }
   await measureInteractions('star','node-1199');
   await measureInteractions('branches','leaf-9-289');
+  if(!baselineRef)for(const dataset of ['long-word','long-words']){
+    await open(dataset);const input=await page.evaluate(()=>({duration:window.mountDuration,probe:window.measureProbe,
+      title:window.nodes[0].title,key:window.nodes[0].source_key,
+      aria:document.querySelector('.graph-node').getAttribute('aria-label'),
+      titleTooltip:document.querySelector('.graph-node > title').textContent,
+      keyTooltip:document.querySelector('.graph-node-meta title').textContent,
+      labels:[...document.querySelectorAll('.graph-node text')].map(label=>label.firstChild?.textContent||'')}));
+    assert.ok(input.duration<1000,`${dataset}: one valid long-label occurrence must not block graph mount`);
+    assert.ok(input.probe.calls<=256&&input.probe.max_codepoints<=161,`${dataset}: measurements must use a bounded visual prefix`);
+    assert.equal(input.aria,input.title);assert.equal(input.titleTooltip,input.title);assert.equal(input.keyTooltip,input.key);
+    assert.ok(input.labels.every(label=>!/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/u.test(label)),'Visual clipping must preserve Unicode code points');
+    const search=page.getByRole('searchbox',{name:'Localizar nó na árvore'});await search.fill('FIM-TÍTULO-🧪');await search.press('Enter');
+    assert.equal(await page.evaluate(()=>window.selections.at(-1)===window.nodes[0]&&window.selections.at(-1).native_id===null),true);
+    await search.fill('FIM-CHAVE-🔑');await search.press('Enter');assert.equal(await selected().getAttribute('data-native-node'),'long-label');
+    assert.equal(await page.evaluate(()=>window.inputBefore===JSON.stringify(window.nodes)),true);
+    report.metrics[dataset]={mount_ms:input.duration,...input.probe,original_title_codepoints:Array.from(input.title).length,original_key_codepoints:Array.from(input.key).length};
+  }
+  if(!baselineRef)check('long_words_word_lists_and_unicode_use_bounded_measurement_without_losing_identity_or_search');
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.external_requests,[]);
   check('no_page_errors_or_external_requests');
   report.status=baselineRef?'BASELINE_CAPTURED':'PASS_SCOPED';

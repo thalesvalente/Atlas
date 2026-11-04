@@ -224,12 +224,27 @@ export function mountGraph(host, nodes, onSelect) {
     active = id; selected = id; center(id); updatePath(); draw(); onSelect(byId.get(id)); return true;
   }
   const measure = document.createElement('canvas').getContext('2d');
+  function visualPrefix(text) {
+    // Bound presentation work before any canvas measurement or word wrapping.
+    // Keep the complete original in search, accessible names and tooltips.
+    const chars = [];
+    for (const character of String(text)) {
+      if (chars.length === 160) return { chars, clipped: true };
+      chars.push(character);
+    }
+    return { chars, clipped: false };
+  }
   function shortText(text, maxWidth, font) {
-    text = String(text); measure.font = font;
-    if (measure.measureText(text).width <= maxWidth) return text;
-    const chars = Array.from(text);
-    while (chars.length && measure.measureText(chars.join('') + '…').width > maxWidth) chars.pop();
-    return chars.join('') + '…';
+    const { chars, clipped } = visualPrefix(text); measure.font = font;
+    const candidate = chars.join('') + (clipped ? '…' : '');
+    if (measure.measureText(candidate).width <= maxWidth) return candidate;
+    let low = 0, high = chars.length;
+    while (low < high) {
+      const mid = Math.ceil((low + high) / 2);
+      if (measure.measureText(chars.slice(0, mid).join('') + '…').width <= maxWidth) low = mid;
+      else high = mid - 1;
+    }
+    return chars.slice(0, low).join('') + '…';
   }
   function makeNode(id) {
     const node = byId.get(id), title = String(node.title ?? 'Sem título');
@@ -237,7 +252,8 @@ export function mountGraph(host, nodes, onSelect) {
       'data-native-node': id, 'aria-label': title }, null, true);
     group.append(el('rect', { width: CARD_W, height: CARD_H, rx: 12 }, null, true), el('title', {}, title, true));
     // Two measured title lines stay inside the card, including wide Unicode IDs.
-    const words = title.split(/\s+/), lines = ['']; measure.font = '650 17px system-ui';
+    const preview = visualPrefix(title);
+    const words = (preview.chars.join('') + (preview.clipped ? '…' : '')).split(/\s+/), lines = ['']; measure.font = '650 17px system-ui';
     for (let i = 0; i < words.length; i++) {
       const test = lines[lines.length - 1] + (lines[lines.length - 1] ? ' ' : '') + words[i];
       if (measure.measureText(test).width > 234 && lines.length === 1 && lines[0]) lines.push(words[i]);
