@@ -1,0 +1,151 @@
+{
+  "status": "BASELINE_CAPTURED",
+  "scope": "ISOLATED_NATIVE_GRAPH_SYNTHETIC_ONLY",
+  "tested_sha": "7c72d9c863871f3541eadb6aac85cab864ad559f",
+  "baseline_ref": "7c72d9c863871f3541eadb6aac85cab864ad559f",
+  "checks": [
+    "pr24_progressive_25_then_49_and_full_population_retained",
+    "last_of_1202_locatable_outside_initial_window",
+    "no_page_errors_or_external_requests"
+  ],
+  "metrics": {
+    "star_initial": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "cards": [
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        }
+      ],
+      "meta": "1202 nós carregados · 25 no foco atual · 6 na janela · zoom 100.0% · 1177 fora da vista inicial, disponíveis na busca · 0 nós em ciclo. Duplo clique ou espaço expande/recolhe. Linhas representam parentesco estrutural, não causalidade.",
+      "focus": null,
+      "overflow": false
+    },
+    "branches_initial": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "cards": [
+        {
+          "width": 264.4921875,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        }
+      ],
+      "meta": "2911 nós carregados · 11 no foco atual · 6 na janela · zoom 100.0% · 2900 fora da vista inicial, disponíveis na busca · 0 nós em ciclo. Duplo clique ou espaço expande/recolhe. Linhas representam parentesco estrutural, não causalidade.",
+      "focus": null,
+      "overflow": false
+    },
+    "mobile_initial": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cards": [
+        {
+          "width": 264.4921875,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        },
+        {
+          "width": 260,
+          "height": 74
+        }
+      ],
+      "meta": "2911 nós carregados · 11 no foco atual · 5 na janela · zoom 100.0% · 2900 fora da vista inicial, disponíveis na busca · 0 nós em ciclo. Duplo clique ou espaço expande/recolhe. Linhas representam parentesco estrutural, não causalidade.",
+      "focus": null,
+      "overflow": false
+    },
+    "benchmark_star": {
+      "mount_ms": 1,
+      "last_locate_ms": 0.7999999970197678,
+      "expand_all_ms": 0.5999999940395355,
+      "pan_p95_ms": 0.5,
+      "pan_max_ms": 0.6000000089406967,
+      "graph_cards_in_dom": 6,
+      "mini_nodes": 0
+    },
+    "benchmark_branches": {
+      "mount_ms": 2.1000000089406967,
+      "last_locate_ms": 1.2000000029802322,
+      "expand_all_ms": 1.2999999970197678,
+      "pan_p95_ms": 0.4000000059604645,
+      "pan_max_ms": 0.6000000089406967,
+      "graph_cards_in_dom": 6,
+      "mini_nodes": 0
+    }
+  },
+  "errors": [],
+  "external_requests": [],
+  "screenshots": [
+    "before-star-desktop.png",
+    "before-branches-desktop.png",
+    "before-branches-mobile.png",
+    "before-star-mobile.png"
+  ],
+  "performance_guidance_ms": {
+    "mount": 1000,
+    "interaction_p95": 100,
+    "product_sla": false
+  },
+  "timing_scope": "Synchronous graph handlers plus forced SVG layout; browser startup, network and asynchronous paint excluded",
+  "performance_observations": [],
+  "source_sha256": {
+    "native_graph_js": "0501f1073bd02d8fe9c9439b9bcc6eed4786dfd95ae77b19989a87d3bc564e17",
+    "native_notebook_css": "fbde628f8e52a9f04e9d230a78fe0ffbec8298195ae6cc888b87aca728a8314e"
+  }
+}
