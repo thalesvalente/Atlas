@@ -124,6 +124,24 @@ try{
     check('required_graph_cancel_api_is_available');
   }
   await page.locator('#native-tree-mode').selectOption('editorial');
+  for(const width of [1440,390]){
+    await page.setViewportSize({width,height:width===390?844:1000});
+    if(width===390)await page.waitForFunction(()=>matchMedia('(max-width:720px)').matches&&!document.querySelector('.mobile-filters').open);
+    if(!await page.locator('#native-record-index .node-card').filter({hasText:'Registro principal'}).isVisible())await page.locator('.mobile-filters>summary').click();
+    await page.locator('#native-record-index .node-card').filter({hasText:'Registro principal'}).click();
+    const visibleSelection=await page.locator('.editorial-svg .svg-record.selected').evaluate(node=>{
+      const r=node.getBoundingClientRect(),d=document.getElementById('native-detail').getBoundingClientRect();
+      return {card:{left:r.left,top:r.top,right:r.right,bottom:r.bottom},drawer:{left:d.left,top:d.top,right:d.right,bottom:d.bottom},width:innerWidth,height:innerHeight};
+    });
+    const {card:r,drawer:d,height}=visibleSelection;
+    assert.ok(r.left>=0&&r.top>=0&&r.right<=width&&r.bottom<=height,'Selected card must fit the viewport: '+JSON.stringify(visibleSelection));
+    assert.ok(r.right<=d.left||r.left>=d.right||r.bottom<=d.top||r.top>=d.bottom,'Details must not obscure the selected card: '+JSON.stringify(visibleSelection));
+    assert.ok(r.right-r.left>=180&&r.bottom-r.top>=70,'Selection must remain legible beside or above details');
+    await page.locator('#native-close-detail').click();
+    assert.ok(await page.locator('#native-detail').isHidden());
+    check('editorial_selection_unobscured_and_legible_with_details_'+width);
+  }
+  await page.setViewportSize({width:1440,height:1000});
   await page.locator('#native-record-index .node-card').filter({hasText:'Registro principal'}).click();
   const familyRecord=page.locator('.editorial-svg').getByRole('button',{name:'Registro principal',exact:true});
   await inspect();

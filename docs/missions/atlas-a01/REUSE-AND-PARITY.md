@@ -60,6 +60,11 @@ fórmulas declarados. A inspeção P03 usa seus blobs congelados inalterados.
 Os detalhes apresentam execução, publicação, admissão, revisão, documentação,
 produtos e relações antes da inspeção técnica. O painel não reduz a largura da
 árvore/tabela; em tela pequena ocupa uma faixa inferior com rolagem própria.
+Ao focar um registro, a câmera considera a região visível livre desse painel;
+no celular, traz o mapa à área útil antes de enquadrar o cartão acima dos detalhes.
+Isso adapta a câmera original à composição com sobreposição, sem encobrir a seleção.
+Títulos sem espaços quebram em linhas; o título integral permanece no nome
+acessível, na descrição SVG, nos detalhes e nas exportações.
 Filtros e opções editoriais móveis recolhem ao entrar no breakpoint e podem ser reabertos. O cabeçalho evita repetir a introdução para manter o mapa alcançável.
 
 O catálogo recupera execução/estágio/escopo declarados antes das identidades

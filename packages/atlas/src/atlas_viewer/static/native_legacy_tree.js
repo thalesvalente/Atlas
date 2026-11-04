@@ -5,7 +5,7 @@
 import {KIND,COLORS,EDGE,literalText,familyIdentity} from './native_legacy_model.js';
 const NS='http://www.w3.org/2000/svg';
 const STATUS_INK=Object.freeze(Object.assign(Object.create(null),{published:'#116b4d',technical:'#285f8a',failed:'#9e3447',mixed:'#87570d',blocked:'#666324',unknown:'#526978'}));
-export function mountEditorialTree(host,model,rows,onSelect,persistent={}){
+export function mountEditorialTree(host,model,rows,onSelect,persistent={},options={}){
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  const makeButton=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
  const controls=new Map(),$=id=>controls.get(id);
@@ -52,9 +52,13 @@ export function mountEditorialTree(host,model,rows,onSelect,persistent={}){
   renderTreeLinks();graphNodes.forEach(n=>drawNode(n));
   if(preserve)setBox(old);else comfortable();
  }
- function selectRecord(uid,focus=false){const hadFocus=document.activeElement?.getAttribute('data-graph-id')===uid;selected=uid;persistent.selected=uid;const r=R.get(uid);if(!r)return;expanded.add(nativeFamily(r));renderGraph(true);if(hadFocus)[...svg.querySelectorAll('[data-graph-id]')].find(n=>n.getAttribute('data-graph-id')===uid)?.focus();onSelect(r.entry);if(focus)focusNode(uid);}
+ function selectRecord(uid,focus=false){const hadFocus=document.activeElement?.getAttribute('data-graph-id')===uid;selected=uid;persistent.selected=uid;const r=R.get(uid);if(!r)return;expanded.add(nativeFamily(r));renderGraph(true);if(hadFocus)[...svg.querySelectorAll('[data-graph-id]')].find(n=>n.getAttribute('data-graph-id')===uid)?.focus();onSelect(r.entry);if(focus||selectedIsObscured(uid))focusNode(uid);}
 function s(tag,attr={},text){const e=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attr))e.setAttribute(k,String(v));if(text!==undefined)e.textContent=text;return e;}
-function wrapped(text,max=37,lines=2){const words=String(text).split(/\s+/),out=[];let l='';for(const w of words){if((l+' '+w).trim().length>max){if(l)out.push(l);l=w;}else l=(l+' '+w).trim();}if(l)out.push(l);const r=out.slice(0,lines);if(out.length>lines)r[lines-1]=r[lines-1].slice(0,max-1)+'…';return r;}
+function wrapped(text,max=37,lines=2){
+ const words=String(text).split(/\s+/).flatMap(word=>{const chars=Array.from(word),chunks=[];for(let i=0;i<chars.length;i+=max)chunks.push(chars.slice(i,i+max).join(''));return chunks;}),out=[];let l='';
+ for(const w of words){if(Array.from((l+' '+w).trim()).length>max){if(l)out.push(l);l=w;}else l=(l+' '+w).trim();}if(l)out.push(l);
+ const r=out.slice(0,lines);if(out.length>lines)r[lines-1]=Array.from(r[lines-1]).slice(0,max-1).join('')+'…';return r;
+}
 // R4 v5 — A navigation taxonomy with explicit (and separate) evidence edges.
 // Root/theme/family arcs say ONLY that records are listed under an editorial
 // family. They never assert scientific or chronological causality.
@@ -285,7 +289,37 @@ function setBox(b){
  $('zoomLabel').textContent=Math.round(zoomReferenceWidth/b[2]*100)+'%';
  updateMini();
 }
-function focusNode(id){const n=graphNodes.find(x=>x.id===id);if(!n)return;setBox([n.x-65,n.y-80,n.w+130,n.h+160]);}
+// The Native drawer is an overlay, unlike the original reserved detail column.
+// Fit the selection in the visible, unobstructed region without shrinking the map.
+function focusArea(){
+ const rect=svg.getBoundingClientRect(),width=globalThis.innerWidth??rect.left+rect.width,height=globalThis.innerHeight??rect.top+rect.height;
+ let regions=[{left:Math.max(rect.left,0)+12,top:Math.max(rect.top,0)+12,right:Math.min(rect.left+rect.width,width)-12,bottom:Math.min(rect.top+rect.height,height)-12}];
+ for(const obstacle of options.obstructions?.()??[]){
+  const left=obstacle.left-12,top=obstacle.top-12,right=obstacle.right+12,bottom=obstacle.bottom+12;
+  regions=regions.flatMap(r=>right<=r.left||left>=r.right||bottom<=r.top||top>=r.bottom?[r]:[
+   {...r,right:Math.min(r.right,left)},{...r,left:Math.max(r.left,right)},
+   {...r,bottom:Math.min(r.bottom,top)},{...r,top:Math.max(r.top,bottom)}
+  ]).filter(r=>r.right>r.left&&r.bottom>r.top);
+ }
+ regions.sort((a,b)=>(b.right-b.left)*(b.bottom-b.top)-(a.right-a.left)*(a.bottom-a.top));
+ return {rect,area:regions[0]};
+}
+function selectedIsObscured(id){
+ if(!(options.obstructions?.()??[]).length)return false;
+ const node=[...svg.querySelectorAll('[data-graph-id]')].find(n=>n.getAttribute('data-graph-id')===id),r=node?.getBoundingClientRect();if(!r)return false;
+ return r.left<0||r.top<0||r.right>(globalThis.innerWidth??Infinity)||r.bottom>(globalThis.innerHeight??Infinity)||(options.obstructions?.()??[]).some(o=>r.left<o.right&&r.right>o.left&&r.top<o.bottom&&r.bottom>o.top);
+}
+function focusNode(id){
+ const n=graphNodes.find(x=>x.id===id);if(!n)return;
+ let {rect,area}=focusArea();
+ // On a narrow screen the map may start below the bottom sheet. Bring the
+ // work surface into view before choosing the available camera rectangle.
+ if(!area||area.right-area.left<180||area.bottom-area.top<180){svg.scrollIntoView?.({block:'center',inline:'nearest',behavior:'instant'});({rect,area}=focusArea());}
+ if(!area||!rect.width||!rect.height){setBox([n.x-65,n.y-80,n.w+130,n.h+160]);return;}
+ const scale=Math.min((area.right-area.left)/(n.w+130),(area.bottom-area.top)/(n.h+160));
+ const cx=(area.left+area.right)/2-rect.left,cy=(area.top+area.bottom)/2-rect.top;
+ setBox([n.x+n.w/2-cx/scale,n.y+n.h/2-cy/scale,rect.width/scale,rect.height/scale]);
+}
 function zoom(f,cx,cy){const rect=svg.getBoundingClientRect();if(!rect.width)return;const p=screenToWorld(cx??rect.left+rect.width/2,cy??rect.top+rect.height/2);const w=box[2]/f;if(w<150||w>Math.max(30000,full[2]*4))return;setBox([p.x-(p.x-box[0])/f,p.y-(p.y-box[1])/f,w,box[3]/f]);}
 function updateMini(){if(!mini||!full)return;mini.replaceChildren();mini.setAttribute('viewBox',full.join(' '));for(const n of graphNodes)mini.appendChild(s('rect',{x:n.x,y:n.y,width:n.w,height:n.h,rx:8,fill:n.type==='root'?'#264e6c':n.type==='theme'?'#549caa':n.type==='family'?'#77b8c5':n.id===selected?'#d49841':'#b9cbd8'}));mini.appendChild(s('rect',{x:box[0],y:box[1],width:box[2],height:box[3],fill:'#25789b0d',stroke:'#26759b','stroke-width':Math.max(2,full[2]/200)}));}
  organization.addEventListener('change',()=>{persistent.organization=organization.value;renderGraph();});

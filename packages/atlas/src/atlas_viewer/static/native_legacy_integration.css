@@ -66,6 +66,7 @@
 .legacy-port .sidebar .searchbox{display:flex;align-items:center;gap:6px}.legacy-port .sidebar .searchbox input{width:0;flex:1;min-width:0}.legacy-port .sidebar .searchbox button{font-size:11px;padding:7px 9px;min-height:36px}
 .legacy-port .editorial-options{margin:0;border:0;padding:0}.legacy-port .editorial-options>summary{display:none}
 @media(max-width:720px){
+ .legacy-port .mobile-filters[open] .node-list{display:block}
  .legacy-port .intro>div:first-child{display:none}.legacy-port .intro{padding:10px 12px;margin-bottom:8px}.legacy-port .intro .hero-links{margin:0;justify-content:flex-start}
  .legacy-port .application-tree-organization label{display:flex;flex-direction:row;align-items:center;width:100%;font-size:10px;gap:6px}.legacy-port .application-tree-organization select{width:0;flex:1;min-width:0;font-size:11px}
  .legacy-port .editorial-tree .toolbar button{font-size:10px;padding:5px 7px;min-height:32px}.legacy-port .editorial-tree .button-group{gap:5px}

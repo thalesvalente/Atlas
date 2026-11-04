@@ -378,6 +378,22 @@ test('ambiguous endpoints do not become editorial evidence arrows', () => {
   });
 });
 
+test('long unbroken editorial titles wrap without losing the exact accessible title', () => {
+  const title='correction-run-'+ 'b9f599d6338e22125b1faaa5'.repeat(3)+'😀';
+  const record=entry('long-editorial-title','record',{id:'long',title,family:'F'}),model=makePresentation([record]);
+  withDOM(host=>{
+    const tree=mountEditorialTree(host,model,model.records,()=>{},{expanded:new Set([model.records[0].nativeFamilyKey])});
+    const card=tags(host,'g').find(n=>n.classList.contains('svg-record'));
+    const titleLines=tags(card,'text').slice(0,2);
+    assert.equal(titleLines.length,2);
+    assert.ok(titleLines.every(n=>Array.from(n.textContent).length<=28));
+    assert.ok(titleLines[1].textContent.endsWith('…'));
+    assert.equal(card.getAttribute('aria-label'),title);
+    assert.ok(tags(card,'title')[0].textContent.includes(title));
+    tree.destroy();
+  });
+});
+
 test('relation presentation distinguishes explicit null, uninterpreted key and unresolved reference', () => {
   const record = entry('relation-record', 'record', {id: 'R', family: 'F'});
   for (const [key, expected] of [[null, 'NOT_DECLARED'], [['R'], 'NOT_INTERPRETED'], ['missing', 'UNRESOLVED']]) {

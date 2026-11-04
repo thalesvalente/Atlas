@@ -177,7 +177,7 @@ function showTree(host){
   mode.addEventListener('change',()=>{state.treeMode=mode.value;state.page=0;closeDetail();render();$('native-tree-mode').focus();});
   if(state.treeMode==='editorial'){
     const rows=visibleRecords();if(!rows.length){population(host,rows,presentation().records.length,'registros');return;}
-    state.graph=mountEditorialTree(host,presentation(),rows,e=>detail(e),state.editorial);return;
+    state.graph=mountEditorialTree(host,presentation(),rows,e=>detail(e),state.editorial,{obstructions:()=>$('native-detail').hidden?[]:[$('native-detail').getBoundingClientRect()]});return;
   }
   const all=entries().filter(e=>e.kind==='node'),nodes=all.length?all:entries().filter(e=>e.kind==='record');
   host.append(el('h2','Estrutura técnica completa'),el('p','Contexto integral: os filtros abaixo selecionam resultados da busca; este grafo mantém todos os objetos técnicos. Use a árvore editorial para navegar apenas pelos registros do filtro.','notice'));
