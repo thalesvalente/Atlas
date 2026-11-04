@@ -45,3 +45,15 @@ T001/T002 → T003/T004 → T005 → T006–T009 → T010–T013 → T014/T015 �
 - [x] R015 Corrigir preflight de grande volume: `scripts/atlas_launch.py` verifica apenas `/notebook` (pequeno) durante startup; `--probe-only` realiza uma única verificação integral, com timeout estendido e sem novas requisições concorrentes. Contraprovas em `tests/viewer/test_native_notebook_launcher.py`.
 
 - [x] R016 Foco inicial progressivo de árvores grandes no `native_graph.js`: 24 irmãos por nível, branches internas recolhidas, cartões legíveis e pesquisa sem perda. Regressão Playwright em `scripts/qa/browser_native_notebook.mjs` com 1202 nós e último descendente.
+
+## Phase 5 — fechamento funcional ATLAS-FINAL-CLOSE
+
+Os recibos desta fase reconciliam T015/T016 e R006/R010/R012/R014/R016;
+não reabrem T001–T014 nem tornam um recibo antigo prova de um SHA novo.
+
+- [x] T017 Fixar contrato, DAG e ownership em plan.md; conferir Spec Kit 1.2.3 real, baseline/PRs e checkout preservado.
+- [ ] T018 [P] [US2] Qualificar P01: rótulos extensos cabem nos cartões sem perda de identidade; grafo/busca/teclado em scripts/qa/browser_native_notebook.mjs.
+- [ ] T019 [P] [US2] Qualificar P02: busca/filtros das demais telas, coleções originais e reflow 320/390/1440, com regressões próprias.
+- [ ] T020 [P] [US1] Corrigir o supervisor de compatibilidade em scripts/ABRIR-ATLAS-NATIVO.ps1 (finding 4446002065), reutilizando preflight leve e propagando falhas; teste real PowerShell 5.1 e negativos.
+- [ ] T021 Integrar somente commits qualificados, preservar autoria e executar regressões/negativos/Chromium/Actions Windows/Ubuntu em um SHA final.
+- [ ] T022 [US3] Obter Codex e P05 sem findings materiais nesse SHA; comparar funcional/visual/integridade com Caderno real; publicar recibo Draft com matriz única final-close.md e checklist de aceite humano.

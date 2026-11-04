@@ -30,3 +30,32 @@ Pacote válido pelo SDK; precisão/ausência/colisão; fraude de hash, versão d
 
 ## Integração / rollback
 Commits incrementais na PR #23 com lease do HEAD. P03 importado por blob do próprio repo, fontes/manifests históricos intactos. Rollback é retornar à aplicação anterior e continuar usando o Atlas R4; não tocar no Caderno. Mudanças de source files pinados exigem atualização explícita da auditoria scoped com negativos, nunca desativar checks.
+
+## Fechamento funcional ATLAS-FINAL-CLOSE — 2026-11-03
+
+Esta missão sucede o fluxo de writer único acima. Base conferida: PR23
+`a1b45d2f361c1900c7c8569b32def2601a3d4464` → PR24
+`7c72d9c863871f3541eadb6aac85cab864ad559f`; ambas continuam Draft.
+Um integrador mantém `integrate/atlas-final-close-20261103`, com checkout
+original preservado e worktrees exclusivas para três agentes nativos reais.
+Não há merge de Draft, rebase, force push ou atualização das branches das frentes.
+
+Contrato de interfaces: `mountGraph(host,nodes,onSelect)` e o payload Native View
+permanecem compatíveis; P01 altera grafo/harness nativo, P02 altera as demais
+telas e harness próprio, P03 altera launchers/testes de runtime. Protocolo,
+exportação de valores exatos e blobs públicos P03 permanecem preservados.
+Coordenação é a única writer de specs e workflow compartilhado. P04 reconcilia
+C2-B/C2-K sem integrá-los; P05, sem autoria dos patches, qualifica a candidata.
+
+DAG: contrato → (P01 || P02 || P03; P04 separado) → revisão de ownership e
+cherry-pick -x → um SHA candidato congelado → código normal/-O, negativos,
+Chromium e Actions Windows/Ubuntu → Codex + P05 + confronto no Windows real
+→ recibo na PR Draft e aceite humano. Cada patch material posterior invalida
+as provas anteriores para o novo SHA e exige requalificação correspondente.
+
+Aceite funcional: comando único no Windows, todas as coleções/ocorrências
+consultáveis, árvore legível e navegável, filtros/seleção, tabelas/exports
+íntegros e reflow 1440/390/320. Contagens privadas observadas são referência de
+revisão, nunca limites fixos. Bytes do acervo permanecem iguais; dados privados
+e screenshots reais ficam locais. CI verde, QA técnica e decisão humana são
+atos separados. A matriz única de fechamento fica em [final-close.md](final-close.md).
