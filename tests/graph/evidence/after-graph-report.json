@@ -1,0 +1,271 @@
+{
+  "status": "PASS_SCOPED",
+  "scope": "ISOLATED_NATIVE_GRAPH_SYNTHETIC_ONLY",
+  "tested_sha": "76875b451434bfc0b44cad8679ecef367e8ace80",
+  "baseline_ref": null,
+  "checks": [
+    "pr24_progressive_25_then_49_and_full_population_retained",
+    "last_of_1202_locatable_outside_initial_window",
+    "double_click_space_and_stable_focus",
+    "tree_keyboard_right_left_up_down_home_end_enter",
+    "search_result_ancestral_path_and_empty_search_feedback",
+    "mouse_pan_wheel_zoom_floor_and_minimap_nodes",
+    "focus_of_retained_offscreen_node_recenters_after_fit",
+    "all_2911_synthetic_branches_reachable_and_immutable",
+    "mobile_390_navigation_zoom_floor_and_no_document_overflow",
+    "null_ids_colliding_native_ids_orphans_and_declared_cycles_preserved",
+    "fresh_double_click_survives_detail_callback_reflow_and_single_click_selects_once",
+    "destroy_removes_graph_and_listeners",
+    "no_page_errors_or_external_requests"
+  ],
+  "metrics": {
+    "star_initial": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "cards": [
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.7999267578125
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.7999267578125
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.7999267578125
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.7999267578125
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.39999389648438,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.4000244140625,
+          "height": 91.79998779296875
+        }
+      ],
+      "meta": "1202 nós carregados · 25 no foco atual · 21 na janela · zoom 85% (mínimo legível 85%) · 1177 recolhidos ou progressivos, todos disponíveis na busca · 0 nós em ciclo.",
+      "focus": null,
+      "overflow": false
+    },
+    "desktop_min_zoom": 0.85,
+    "star_all_1202": {
+      "total": 1202,
+      "failures": [],
+      "p95_ms": 0.4000000059604645,
+      "max_ms": 4.200000002980232,
+      "total_ms": 286.10000002384186,
+      "unchanged": true
+    },
+    "branches_initial": {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "cards": [
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        },
+        {
+          "width": 284,
+          "height": 108
+        }
+      ],
+      "meta": "2911 nós carregados · 11 no foco atual · 11 na janela · zoom 100% (mínimo legível 85%) · 2900 recolhidos ou progressivos, todos disponíveis na busca · 0 nós em ciclo.",
+      "focus": null,
+      "overflow": false
+    },
+    "branches_all_2911": {
+      "total": 2911,
+      "failures": [],
+      "p95_ms": 0.4000000059604645,
+      "max_ms": 22.099999994039536,
+      "total_ms": 869.5000005066395,
+      "unchanged": true
+    },
+    "mobile_initial": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cards": [
+        {
+          "width": 241.40000915527344,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.40000915527344,
+          "height": 91.79998779296875
+        },
+        {
+          "width": 241.40000915527344,
+          "height": 91.7999267578125
+        },
+        {
+          "width": 241.40000915527344,
+          "height": 91.79998779296875
+        }
+      ],
+      "meta": "2911 nós carregados · 11 no foco atual · 4 na janela · zoom 85% (mínimo legível 85%) · 2900 recolhidos ou progressivos, todos disponíveis na busca · 0 nós em ciclo.",
+      "focus": null,
+      "overflow": false
+    },
+    "mobile_min_zoom": 0.85,
+    "identity_cycles_null_collisions": {
+      "total": 8,
+      "failures": [],
+      "p95_ms": 0.7000000029802322,
+      "max_ms": 0.7000000029802322,
+      "total_ms": 2.4000000208616257,
+      "unchanged": true
+    },
+    "single_click_callback_latency_ms": [
+      636,
+      625
+    ],
+    "slow_double_click_gap_ms": 462.20000000298023,
+    "benchmark_star": {
+      "mount_ms": 3.4000000059604645,
+      "last_locate_ms": 10.399999991059303,
+      "expand_all_ms": 9.200000002980232,
+      "pan_p95_ms": 0.5,
+      "pan_max_ms": 0.6000000089406967,
+      "graph_cards_in_dom": 21,
+      "mini_nodes": 1202
+    },
+    "benchmark_branches": {
+      "mount_ms": 5.899999991059303,
+      "last_locate_ms": 3.7000000029802322,
+      "expand_all_ms": 23.200000002980232,
+      "pan_p95_ms": 0.5,
+      "pan_max_ms": 0.5999999940395355,
+      "graph_cards_in_dom": 10,
+      "mini_nodes": 2911
+    }
+  },
+  "errors": [],
+  "external_requests": [],
+  "screenshots": [
+    "after-star-desktop.png",
+    "after-branches-desktop.png",
+    "after-branches-selected-desktop.png",
+    "after-branches-mobile.png",
+    "after-branches-selected-mobile.png",
+    "after-star-mobile.png"
+  ],
+  "performance_guidance_ms": {
+    "mount": 1000,
+    "interaction_p95": 100,
+    "product_sla": false
+  },
+  "timing_scope": "Synchronous graph handlers plus forced SVG layout; browser startup, network and asynchronous paint excluded",
+  "performance_observations": [],
+  "source_sha256": {
+    "native_graph_js": "9bac583d5ab6cc132bbf870d3590a1db865a60b2df487c0a7315986786960e51",
+    "native_notebook_css": "c9753ba55a6804635cba709a875fc471e76c21ebdb86860e3a3a35fc20574fb1"
+  },
+  "tested_files_dirty": false
+}
