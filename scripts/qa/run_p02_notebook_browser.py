@@ -32,6 +32,10 @@ def main():
     data["records"][1]["id"] = "record-only-key"
     data["lineage_graph"]["nodes"][1]["run_id"] = "declared-run-alias"
     data["lineage_graph"]["nodes"].append({"key": "same", "native_id": None, "label": "Key collision node", "kind": "Run"})
+    data["lineage_graph"]["nodes"].extend(
+        {"key": f"global-{index}", "parent_key": "root", "native_id": None,
+         "label": "Nó global final fora do foco" if index == 199 else f"Nó global {index}", "kind": "Run"}
+        for index in range(200))
     data["edges"].append({"id": "Composite-key-proof", "from": "evidence",
                            "from_key": ["not-interpreted"], "to_key": "child", "type": "MENTIONS"})
     data["edges"].extend([
