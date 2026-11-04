@@ -20,11 +20,18 @@ try{
   assert.match(await page.locator('#native-revision').innerText(),/test-invented-revision/);
   assert.equal(await page.locator('#native-node-count').innerText(),'1202');
   assert.equal(await page.locator('#native-table-count').innerText(),'1 / 127');
+  const initialGraph=await page.locator('.graph-meta').innerText();
+  assert.match(initialGraph,/1202 nós carregados/);
+  assert.match(initialGraph,/25 no foco atual/);
+  assert.ok(await page.locator('.graph-node').count()<=25,'First view must not render all 1202 nodes');
   const initialRoot=page.getByRole('treeitem',{name:'Família',exact:true});
   assert.ok(await initialRoot.isVisible());
   const geometry=await initialRoot.boundingBox();
   assert.ok(geometry.width>=170&&geometry.height>=40,'Large tree must open with readable nodes, not 0.5 percent fit');
   check('exporter_output_reaches_installed_native_ui_with_readable_tree_without_iframe');
+  await page.getByRole('button',{name:'Mostrar mais nós +24'}).click();
+  assert.match(await page.locator('.graph-meta').innerText(),/49 no foco atual/);
+  check('large_tree_initial_focus_progressively_reveals_siblings');
   const search=page.getByRole('searchbox',{name:'Localizar nó na árvore'});
   await search.fill('Família');await page.getByRole('button',{name:'Localizar / próximo',exact:true}).click();
   const rootNode=page.getByRole('treeitem',{name:'Família',exact:true});
@@ -35,6 +42,8 @@ try{
   check('double_click_and_keyboard_toggle_preserve_node_target_and_focus');
   await search.fill('Último nó da coleção');await page.getByRole('button',{name:'Localizar / próximo',exact:true}).click();
   assert.match(await page.locator('#native-detail-body').innerText(),/native-1199/);
+  assert.equal(await page.locator('.graph-node[aria-selected="true"][aria-label="Último nó da coleção"]').count(),1);
+  check('search_reaches_last_node_beyond_initial_24_siblings');
   const transform=await page.locator('.graph-svg > g').getAttribute('transform');
   await page.getByRole('button',{name:'Ampliar +',exact:true}).click();assert.notEqual(await page.locator('.graph-svg > g').getAttribute('transform'),transform);
   assert.ok(await page.locator('.graph-mini').isVisible());
