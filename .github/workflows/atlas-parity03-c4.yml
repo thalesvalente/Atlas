@@ -91,10 +91,19 @@ jobs:
       - name: Install official CLI 1.2.3 inside its isolated environment
         run: python -m pip install specify-cli==1.2.3
       - name: Verify CLI, managed assets and strict C4 authorization
+        shell: bash
         run: |
           specify version --json
           specify integration status --json
-          python scripts/qa/speckit_audit.py --allow-presentation-delta --allow-p03-c4-delta
+          if git merge-base --is-ancestor 54bb16d350f7bc34fafb95438bd64a2397d58bf3 HEAD; then
+            python scripts/qa/atlas_parity04_k_doc_ci.py speckit
+          else
+            k_ancestry_status=$?
+            if [ "$k_ancestry_status" -ne 1 ]; then
+              exit "$k_ancestry_status"
+            fi
+            python scripts/qa/speckit_audit.py --allow-presentation-delta --allow-p03-c4-delta
+          fi
       - name: Resolve C4 spec, plan and tasks without writing a shared pointer
         run: |
           python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks

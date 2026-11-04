@@ -12,13 +12,14 @@ import tempfile
 import tokenize
 import types
 import unittest
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[2]
 GUARD_PATH = "scripts/qa/atlas_parity04_k_doc_ci.py"
 TEST_PATH = "tests/qa/test_atlas_parity04_k_doc_ci.py"
-EXPECTED_GUARD_SHA256 = '78a49a9183b5942ddb65602997f6ffa089836a405aef9bfc4375a467d937d5e6'
-APPROVED_EXTERNAL_HASHES = {'.github/workflows/atlas-parity02.yml': '4af24eca5ac8838b7cde70837e2a280dad8b5e5501185338806cc766533b1b4e', '.github/workflows/atlas-parity03-p03-gates.yml': 'bf9866bad49b578e5d7b11cabcb4205cd6f753fb8e7cc3926bb4cf4d01ead7f0', '.github/workflows/atlas-parity04-doc.yml': 'e59dc02fe16cd9565ba7d4152c6aba0435f53c091e6de2c69173a35dcd31f260', '.github/workflows/atlas003-speckit.yml': '205281c0ef8c75a188fea2236a4dbe7fc82b588d27606612d504846b297dd068', '.github/workflows/atlas021.yml': '03aac2ea8243e8799edfd9bff66a9bb670e5fd0320b480a342311bb16448a2e8', 'docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json': '24cdb857746b481257f90972c0602cf5b77377286d8be5607224872d1dda4fb7', 'docs/missions/atlas-parity-04/c4-k-successor-ci/RESULT.md': '593dcfb947a8e473d731aef10439fafce022b6b7c48b052c1b3311fea745a148', 'scripts/qa/atlas_parity02_p06_installed_checks.py': 'e59663002278ce231dfbd65b8f5242e49977ce6eab6a877346a2fc79e0d30c5e', 'scripts/qa/atlas_parity03_c4_ci.py': '206052c28d341c399037c6900a912c2310899e1af77134b7ce2d75444137f031', 'scripts/run_checks.py': '7f54ba3033c3ef88fd42781bd7d62aae83ab99d23a825848a35098f16d447a05'}
+EXPECTED_GUARD_SHA256 = 'c5f306eacfe5c057c2b7930f44171cff85b0803b1ab21cb370c23e6eac009853'
+APPROVED_EXTERNAL_HASHES = {'.github/workflows/atlas-parity02.yml': '4af24eca5ac8838b7cde70837e2a280dad8b5e5501185338806cc766533b1b4e', '.github/workflows/atlas-parity03-c4.yml': '56a2ec70a741b26d095846b3766788f0ca4eacdce1288b344cf2fdbb6e1183a5', '.github/workflows/atlas-parity03-p03-gates.yml': 'bf9866bad49b578e5d7b11cabcb4205cd6f753fb8e7cc3926bb4cf4d01ead7f0', '.github/workflows/atlas-parity04-doc.yml': 'e59dc02fe16cd9565ba7d4152c6aba0435f53c091e6de2c69173a35dcd31f260', '.github/workflows/atlas003-speckit.yml': '205281c0ef8c75a188fea2236a4dbe7fc82b588d27606612d504846b297dd068', '.github/workflows/atlas021.yml': '03aac2ea8243e8799edfd9bff66a9bb670e5fd0320b480a342311bb16448a2e8', 'docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json': '24cdb857746b481257f90972c0602cf5b77377286d8be5607224872d1dda4fb7', 'docs/missions/atlas-parity-04/c4-k-successor-ci/RESULT.md': '35effe6a75ddd846824bf2ff374acd63830cc1e50cb3b57eeea143b28008d948', 'scripts/qa/atlas_parity02_p06_installed_checks.py': 'e59663002278ce231dfbd65b8f5242e49977ce6eab6a877346a2fc79e0d30c5e', 'scripts/qa/atlas_parity03_c4_ci.py': '206052c28d341c399037c6900a912c2310899e1af77134b7ce2d75444137f031', 'scripts/run_checks.py': '7f54ba3033c3ef88fd42781bd7d62aae83ab99d23a825848a35098f16d447a05'}
 
 
 def normalized_guard_source(raw):
@@ -298,6 +299,68 @@ class KSuccessorGitTests(unittest.TestCase):
         with self.assertRaises(GUARD.GuardError):
             self.verify(paths={"docs/k/A.md", "docs/k/B.md"})
 
+    def forbidden_then_restored(self):
+        original = self.repo.git("show", self.repo.base + ":docs/historical/F2.md")
+        self.repo.write("docs/historical/F2.md", b"Forbidden intermediate historical edit\n")
+        forbidden = self.repo.commit("Synthetic prohibited history before graft")
+        self.repo.write("docs/historical/F2.md", original)
+        self.repo.write("docs/k/A.md", b"Candidate A\n")
+        return forbidden, self.repo.commit("Synthetic restored final tree")
+
+    def test_rejects_info_grafts_hiding_reverted_forbidden_commit(self):
+        forbidden, head = self.forbidden_then_restored()
+        self.assertNotEqual(forbidden, self.repo.base)
+        grafts = self.repo.root / ".git/info/grafts"
+        grafts.parent.mkdir(parents=True, exist_ok=True)
+        grafts.write_text(f"{head} {self.repo.base}\n", encoding="ascii")
+        visible = self.repo.git("rev-list", "--parents", "-n", "1", head).decode("ascii").split()
+        self.assertEqual(visible, [head, self.repo.base])
+        with self.assertRaises(GUARD.GuardError):
+            self.verify(head)
+
+    def test_rejects_environment_graft_file_hiding_reverted_forbidden_commit(self):
+        _, head = self.forbidden_then_restored()
+        grafts = self.repo.root / ".git/alternate-grafts"
+        grafts.write_text(f"{head} {self.repo.base}\n", encoding="ascii")
+        with mock.patch.dict(os.environ, {"GIT_GRAFT_FILE": str(grafts)}):
+            visible = subprocess.check_output(
+                ["git", "-C", str(self.repo.root), "rev-list", "--parents", "-n", "1", head],
+                stderr=subprocess.PIPE).decode("ascii").split()
+            self.assertEqual(visible, [head, self.repo.base])
+            with self.assertRaises(GUARD.GuardError):
+                self.verify(head)
+
+    def test_raw_parent_traversal_rejects_graft_even_without_metadata_gate(self):
+        forbidden, head = self.forbidden_then_restored()
+        grafts = self.repo.root / ".git/info/grafts"
+        grafts.parent.mkdir(parents=True, exist_ok=True)
+        grafts.write_text(f"{head} {self.repo.base}\n", encoding="ascii")
+        visible = self.repo.git("rev-list", "--parents", "-n", "1", head).decode("ascii").split()
+        self.assertEqual(visible, [head, self.repo.base])
+        self.assertIn(forbidden.encode("ascii"),
+                      self.repo.git("--no-replace-objects", "cat-file", "commit", head))
+        with mock.patch.object(GUARD, "verify_repository_view", return_value=None) as metadata_gate:
+            with self.assertRaisesRegex(GUARD.GuardError, "Unauthorized intermediate path"):
+                self.verify(head)
+            metadata_gate.assert_called_once_with(self.repo.root)
+
+    def test_rejects_replace_ref_or_uses_raw_forbidden_history(self):
+        _, head = self.forbidden_then_restored()
+        self.repo.git("replace", "--graft", head, self.repo.base)
+        visible = self.repo.git("rev-list", "--parents", "-n", "1", head).decode("ascii").split()
+        self.assertEqual(visible, [head, self.repo.base])
+        self.assertTrue((self.repo.root / ".git/refs/replace" / head).is_file())
+        with self.assertRaises(GUARD.GuardError):
+            self.verify(head)
+
+    def test_rejects_shallow_view_even_when_baseline_ancestry_appears_valid(self):
+        head = self.repo.overlay()
+        (self.repo.root / ".git/shallow").write_text(self.repo.base + "\n", encoding="ascii")
+        self.assertEqual(self.repo.git("rev-parse", "--is-shallow-repository").strip(), b"true")
+        self.repo.git("merge-base", "--is-ancestor", self.repo.base, head)
+        with self.assertRaises(GUARD.GuardError):
+            self.verify(head)
+
     def test_accepts_canonical_full_path_manifest_from_git_blobs(self):
         head, paths = self.repo.manifested_overlay()
         GUARD.verify_manifest(self.repo.root, head, "docs/k/MANIFEST.sha256", paths)
@@ -333,6 +396,46 @@ class KSuccessorGitTests(unittest.TestCase):
         head, paths = self.repo.manifested_overlay(lines)
         with self.assertRaises(GUARD.GuardError):
             GUARD.verify_manifest(self.repo.root, head, "docs/k/MANIFEST.sha256", paths)
+
+
+class KSpecKitSuccessorTests(unittest.TestCase):
+    def authorization(self, status="PASS"):
+        return {"status": status,
+                "tested_sha": GUARD.git(ROOT, "rev-parse", "HEAD"),
+                "tested_tree": GUARD.git(ROOT, "rev-parse", "HEAD^{tree}")}
+
+    def test_accepts_only_exact_historical_collector_error_with_source_authorization(self):
+        authorization = self.authorization()
+        historical = {"status": "FAIL", "errors": ["Preserved baseline changed: scripts/run_checks.py"]}
+        auditor = mock.Mock(return_value=historical)
+        with mock.patch.object(GUARD, "load_module", return_value=types.SimpleNamespace(audit=auditor)) as loader:
+            result = GUARD.speckit_successor(ROOT, authorization)
+        loader.assert_called_once_with("atlas_unchanged_speckit_k", ROOT / "scripts/qa/speckit_audit.py")
+        auditor.assert_called_once_with(ROOT, allow_presentation_delta=True, allow_p03_c4_delta=True)
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(result["tested_sha"], authorization["tested_sha"])
+        self.assertEqual(result["tested_tree"], authorization["tested_tree"])
+        self.assertEqual(result["historical_default_audit"], historical)
+        self.assertEqual(result["authorized_successor_control"], {
+            "path": "scripts/run_checks.py",
+            "sha256": hashlib.sha256((ROOT / "scripts/run_checks.py").read_bytes()).hexdigest()})
+        self.assertFalse(result["generic_exclusions"])
+        self.assertFalse(result["architectural_approval"])
+
+    def test_rejects_additional_or_missing_historical_speckit_errors(self):
+        expected = "Preserved baseline changed: scripts/run_checks.py"
+        for errors in ([expected, "Another managed file changed"], []):
+            with self.subTest(errors=errors):
+                auditor = types.SimpleNamespace(audit=mock.Mock(return_value={"status": "FAIL", "errors": errors}))
+                with mock.patch.object(GUARD, "load_module", return_value=auditor):
+                    with self.assertRaises(GUARD.GuardError):
+                        GUARD.speckit_successor(ROOT, self.authorization())
+
+    def test_rejects_failed_infrastructure_authorization_before_loading_speckit(self):
+        with mock.patch.object(GUARD, "load_module") as loader:
+            with self.assertRaises(GUARD.GuardError):
+                GUARD.speckit_successor(ROOT, self.authorization(status="FAIL"))
+        loader.assert_not_called()
 
 
 class KGuardSourcePreflightTests(unittest.TestCase):

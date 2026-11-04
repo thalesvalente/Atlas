@@ -37,14 +37,22 @@ MODIFIED_PATHS = frozenset((
     ".github/workflows/atlas-parity02.yml",
     ".github/workflows/atlas-parity03-p03-gates.yml",
     ".github/workflows/atlas-parity04-doc.yml",
+    ".github/workflows/atlas-parity03-c4.yml",
     ".github/workflows/atlas003-speckit.yml", ".github/workflows/atlas021.yml",
     "scripts/qa/atlas_parity03_c4_ci.py",
     "scripts/qa/atlas_parity02_p06_installed_checks.py",
     "scripts/run_checks.py",
 ))
 INFRA_PATHS = MODIFIED_PATHS | {GUARD_PATH, TEST_PATH, BINDING_PATH, RESULT_PATH}
+FROZEN_INFRA_EPOCHS = {
+    "333ba38c6533e1279f8a1cc2cdeb335a23844d68": {
+        "tree": "6ed2a7d8531e6280aa6be7b9a2c791e793f475b3",
+        "parent": BASE_SHA,
+        "state": "FAILED_TECHNICAL_ATTEMPT_SPECKIT_AND_GRAFT_FINDING",
+    },
+}
 # BEGIN_APPROVED_HASHES
-APPROVED_HASHES = {'.github/workflows/atlas-parity02.yml': '4af24eca5ac8838b7cde70837e2a280dad8b5e5501185338806cc766533b1b4e', '.github/workflows/atlas-parity03-p03-gates.yml': 'bf9866bad49b578e5d7b11cabcb4205cd6f753fb8e7cc3926bb4cf4d01ead7f0', '.github/workflows/atlas-parity04-doc.yml': 'e59dc02fe16cd9565ba7d4152c6aba0435f53c091e6de2c69173a35dcd31f260', '.github/workflows/atlas003-speckit.yml': '205281c0ef8c75a188fea2236a4dbe7fc82b588d27606612d504846b297dd068', '.github/workflows/atlas021.yml': '03aac2ea8243e8799edfd9bff66a9bb670e5fd0320b480a342311bb16448a2e8', 'docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json': '24cdb857746b481257f90972c0602cf5b77377286d8be5607224872d1dda4fb7', 'docs/missions/atlas-parity-04/c4-k-successor-ci/RESULT.md': '593dcfb947a8e473d731aef10439fafce022b6b7c48b052c1b3311fea745a148', 'scripts/qa/atlas_parity02_p06_installed_checks.py': 'e59663002278ce231dfbd65b8f5242e49977ce6eab6a877346a2fc79e0d30c5e', 'scripts/qa/atlas_parity03_c4_ci.py': '206052c28d341c399037c6900a912c2310899e1af77134b7ce2d75444137f031', 'scripts/run_checks.py': '7f54ba3033c3ef88fd42781bd7d62aae83ab99d23a825848a35098f16d447a05', 'tests/qa/test_atlas_parity04_k_doc_ci.py': '63849b04db09ac450c22fe46eba681abc3fe1c42d5bcdbaf819afb93d0330637'}
+APPROVED_HASHES = {'.github/workflows/atlas-parity02.yml': '4af24eca5ac8838b7cde70837e2a280dad8b5e5501185338806cc766533b1b4e', '.github/workflows/atlas-parity03-c4.yml': '56a2ec70a741b26d095846b3766788f0ca4eacdce1288b344cf2fdbb6e1183a5', '.github/workflows/atlas-parity03-p03-gates.yml': 'bf9866bad49b578e5d7b11cabcb4205cd6f753fb8e7cc3926bb4cf4d01ead7f0', '.github/workflows/atlas-parity04-doc.yml': 'e59dc02fe16cd9565ba7d4152c6aba0435f53c091e6de2c69173a35dcd31f260', '.github/workflows/atlas003-speckit.yml': '205281c0ef8c75a188fea2236a4dbe7fc82b588d27606612d504846b297dd068', '.github/workflows/atlas021.yml': '03aac2ea8243e8799edfd9bff66a9bb670e5fd0320b480a342311bb16448a2e8', 'docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json': '24cdb857746b481257f90972c0602cf5b77377286d8be5607224872d1dda4fb7', 'docs/missions/atlas-parity-04/c4-k-successor-ci/RESULT.md': '35effe6a75ddd846824bf2ff374acd63830cc1e50cb3b57eeea143b28008d948', 'scripts/qa/atlas_parity02_p06_installed_checks.py': 'e59663002278ce231dfbd65b8f5242e49977ce6eab6a877346a2fc79e0d30c5e', 'scripts/qa/atlas_parity03_c4_ci.py': '206052c28d341c399037c6900a912c2310899e1af77134b7ce2d75444137f031', 'scripts/run_checks.py': '7f54ba3033c3ef88fd42781bd7d62aae83ab99d23a825848a35098f16d447a05', 'tests/qa/test_atlas_parity04_k_doc_ci.py': 'e40684899bbe6624c354052ebee63cacd91ac38cb22b6191736260665130643d'}
 # END_APPROVED_HASHES
 _SNAPSHOTS = {}
 
@@ -75,6 +83,30 @@ def exact_commit(root, sha):
             "An exact immutable commit SHA is required")
     require(git(root, "rev-parse", sha + "^{commit}") == sha, "Commit object differs")
     return sha
+
+
+def raw_commit(root, sha):
+    exact_commit(root, sha)
+    raw = git(root, "cat-file", "commit", sha, binary=True)
+    require(hashlib.sha1(b"commit " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest() == sha,
+            "Raw commit content differs from its immutable object ID")
+    headers = raw.split(b"\n\n", 1)[0].split(b"\n")
+    trees = [line[5:].decode("ascii") for line in headers if line.startswith(b"tree ")]
+    parents = [line[7:].decode("ascii") for line in headers if line.startswith(b"parent ")]
+    require(len(trees) == 1 and all(re.fullmatch(r"[a-f0-9]{40}", oid) for oid in trees + parents),
+            "Raw commit tree/parent header differs")
+    return trees[0], parents
+
+
+def verify_repository_view(root):
+    require(git(root, "rev-parse", "--is-shallow-repository") == "false", "Shallow history is unauthorized")
+    require(not any(os.environ.get(name) for name in ("GIT_GRAFT_FILE", "GIT_SHALLOW_FILE", "GIT_REPLACE_REF_BASE")),
+            "Alternate genealogy environment is unauthorized")
+    graft_path = Path(git(root, "rev-parse", "--git-path", "info/grafts"))
+    if not graft_path.is_absolute():
+        graft_path = Path(root) / graft_path
+    require(not graft_path.exists(), "Graft metadata is unauthorized")
+    require(not git(root, "for-each-ref", "--format=%(refname)", "refs/replace/"), "Replacement refs are unauthorized")
 
 
 def safe_path(path):
@@ -122,27 +154,32 @@ def verify_records(root, ref, expected_records):
 
 
 def verify_leg(root, baseline_sha, head_sha, expected_paths, modified_paths=(), expected_records=None):
+    verify_repository_view(root)
     exact_commit(root, baseline_sha)
     exact_commit(root, head_sha)
     expected_paths, modified_paths = set(expected_paths), set(modified_paths)
     for path in expected_paths:
         safe_path(path)
     require(modified_paths <= expected_paths, "Modified ownership exceeds exact path set")
-    ancestry = subprocess.run(["git", "--no-replace-objects", "merge-base", "--is-ancestor",
-                               baseline_sha, head_sha], cwd=root, capture_output=True).returncode
-    require(ancestry == 0, "Invalid exact baseline ancestry")
+    raw_commit(root, baseline_sha)
+    chain, seen, cursor = [], set(), head_sha
+    while cursor != baseline_sha:
+        require(cursor not in seen and len(chain) < 10000, "Invalid or excessive raw commit ancestry")
+        seen.add(cursor)
+        tree, parents = raw_commit(root, cursor)
+        require(len(parents) == 1, "Nonlinear, merge or unrelated raw ancestry is unauthorized")
+        chain.append((cursor, tree, parents[0]))
+        cursor = parents[0]
     previous, history = baseline_sha, []
-    for line in git(root, "rev-list", "--reverse", "--parents", baseline_sha + ".." + head_sha).splitlines():
-        parts = line.split()
-        require(len(parts) == 2 and parts[1] == previous, "Nonlinear or merge history is unauthorized")
-        commit = parts[0]
+    for commit, tree, parent in reversed(chain):
+        require(parent == previous, "Raw parent identity differs")
         changes = changes_between(root, previous, commit)
         require(set(changes) <= expected_paths, "Unauthorized intermediate path: " + str(sorted(set(changes) - expected_paths)))
         for path, (old, new) in changes.items():
             require(new is not None and new[:2] == ("100644", "blob"), "Deletion, symlink or forbidden mode: " + path)
             require(old is None or old[:2] == ("100644", "blob"), "Forbidden prior mode: " + path)
         history.append({"commit": commit, "parent": previous,
-                        "tree": git(root, "rev-parse", commit + "^{tree}"), "paths": sorted(changes)})
+                        "tree": tree, "paths": sorted(changes)})
         previous = commit
     require(previous == head_sha, "Incomplete commit ancestry")
     changes = changes_between(root, baseline_sha, head_sha)
@@ -203,9 +240,8 @@ def verify_binding(root, binding):
     head = exact_commit(root, binding["head"])
     require(git(root, "rev-parse", head + "^{tree}") == binding["tree"], "K tree differs")
     require(git(root, "rev-list", "--parents", "-n", "1", head).split() == [head, binding["parent"]], "K parent differs")
-    require(subprocess.run(["git", "--no-replace-objects", "merge-base", "--is-ancestor", OBSERVED_K_SHA, head],
-                           cwd=root, capture_output=True).returncode == 0, "K observed ancestry was replaced")
     history = verify_leg(root, BASE_SHA, head, K_PATHS, expected_records=binding["files"])
+    require(OBSERVED_K_SHA in {item["commit"] for item in history}, "K observed ancestry was replaced")
     require([item["commit"] for item in history] == binding["commits"], "K intermediate commit inventory differs")
     require(isinstance(binding["p01_receipt"], str) and binding["p01_receipt"].startswith("https://github.com/thalesvalente/Atlas/"), "Terminal P01 receipt is absent")
     manifest = verify_manifest(root, head, K_ROOT + "MANIFEST.sha256", K_PATHS)
@@ -258,6 +294,11 @@ def verify_infrastructure(root, head):
         require(target.is_file() and not target.is_symlink() and records[path][:2] == ("100644", "blob"), "Nonregular current infrastructure")
         require(target.read_bytes() == object_bytes(root, head, path), "Checkout bytes differ: " + path)
     for item in history:
+        if item["commit"] in FROZEN_INFRA_EPOCHS:
+            epoch = FROZEN_INFRA_EPOCHS[item["commit"]]
+            require(item["tree"] == epoch["tree"] and item["parent"] == epoch["parent"],
+                    "Frozen technical attempt identity differs")
+            continue
         for path in item["paths"]:
             raw = object_bytes(root, item["commit"], path)
             if path == GUARD_PATH:
@@ -325,6 +366,7 @@ def audit(root=ROOT):
         report.update(status="PASS", mode="AP04_C4_K_DOCUMENTARY_SUCCESSOR",
                       state="C4_K_SUCCESSOR_QUALIFIED_FOR_COMPOSITION" if binding["status"] == "PASS" else "C4_K_HARNESS_READY_AWAITING_K_SHA",
                       infrastructure_history=history, k_input=binding,
+                      frozen_technical_attempts=FROZEN_INFRA_EPOCHS,
                       frozen_f2={"sha": BASE_SHA, "tree": BASE_TREE, "status": historical["status"]},
                       frozen_boundary=historical["frozen_boundary"],
                       protected_paths="EVERY_BASELINE_PATH_EXCEPT_EXACT_INFRA_MODIFICATIONS",
@@ -386,6 +428,24 @@ def regression(root, output, junit_path):
     return 0 if report["status"] == "PASS" else 1
 
 
+def speckit_successor(root, authorization):
+    require(authorization["status"] == "PASS", "Spec Kit requires exact infrastructure authorization")
+    original = load_module("atlas_unchanged_speckit_k", root / "scripts/qa/speckit_audit.py")
+    historical_result = original.audit(root, allow_presentation_delta=True, allow_p03_c4_delta=True)
+    expected_error = "Preserved baseline changed: scripts/run_checks.py"
+    require(historical_result["status"] == "FAIL" and historical_result["errors"] == [expected_error],
+            "Spec Kit detected changes outside the exact C4-K control successor")
+    control_path = "scripts/run_checks.py"
+    require(digest((root / control_path).read_bytes()) == APPROVED_HASHES[control_path],
+            "Exact source collector control authorization differs")
+    return {"status": "PASS", "scope": "C4_K_EXACT_SPECKIT_CONTROL_SUCCESSOR",
+            "tested_sha": authorization["tested_sha"], "tested_tree": authorization["tested_tree"],
+            "historical_default_audit": historical_result,
+            "authorized_successor_control": {"path": control_path, "sha256": APPROVED_HASHES[control_path]},
+            "default_auditor_unchanged": True, "generic_exclusions": False,
+            "architectural_approval": False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["audit", "boundary", "classify", "regression", "speckit", "p03-inputs", "p03-browser", "installed", "validate-k"])
@@ -417,7 +477,10 @@ def main():
                 stream.write("mode=" + report["mode"] + "\n")
         return 0
     if args.command == "speckit":
-        command = ["scripts/qa/speckit_audit.py", "--allow-presentation-delta", "--allow-p03-c4-delta"]
+        result = speckit_successor(ROOT, report)
+        save(args.output, result)
+        print("C4_K_SPECKIT_SUCCESSOR=" + json.dumps(result, ensure_ascii=False))
+        return 0
     else:
         command = ["scripts/qa/atlas_parity03_c4_ci.py", {"p03-inputs": "inputs", "p03-browser": "p03-browser", "installed": "installed"}[args.command]]
         if args.command == "installed":

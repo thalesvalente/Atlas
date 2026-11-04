@@ -40,7 +40,7 @@ O sucessor mantém os guards, testes, manifestos e pins históricos. Audita a F2
 no checkout temporário da base imutável e compara integralmente as árvores de cada
 commit das duas frentes. Todo path fora do ownership exato permanece protegido,
 inclusive alterações intermediárias posteriormente revertidas. O histórico próprio
-aceita somente oito controles modificados e quatro novos arquivos explícitos.
+aceita somente nove controles modificados e quatro novos arquivos explícitos.
 Os hashes desses controles têm autorização independente antes de executar o guard.
 
 O ownership K possui os onze paths publicados originais. A entrega final somente
@@ -57,6 +57,19 @@ adulterado, ancestry inválida e merge inesperado. Os 32 testes F2 executam no
 snapshot histórico e conservam seus IDs e atribuição; os testes atuais executam
 na árvore própria. Coleções instaladas preservam o corpus herdado de 191 IDs,
 sem confundir prova histórica com qualificação atual da sucessão.
+
+A primeira tentativa técnica 333ba38c6533e1279f8a1cc2cdeb335a23844d68, tree
+6ed2a7d8531e6280aa6be7b9a2c791e793f475b3, é preservada como época imutável,
+com os FAILs de Spec Kit e o finding de grafts explicitamente não qualificados.
+O sucessor corrige a genealogia por bytes brutos de commits e rehash de seus OIDs;
+recusa grafts, replace refs e visões shallow, incluindo alterações de ambiente.
+Assim, rev-list ou merge-base não concedem autoridade sobre parents reais.
+
+O auditor Spec Kit original continua intacto e recusa scripts/run_checks.py.
+O sucessor exige que esse seja seu único erro, após auditoria integral e autorização
+independente dos bytes exatos desse controle de CI. Seu recibo preserva o FAIL do
+auditor padrão e declara a sucessão explícita apenas desse controle; qualquer
+erro adicional é rejeitado. Não há flag ou exclusão genérica no auditor histórico.
 
 Recibos externos da PR própria identificam HEAD, tree, parent, execuções efetivas,
 plataforma, versão Python, modo e findings/review. Este arquivo não se autoatribui
