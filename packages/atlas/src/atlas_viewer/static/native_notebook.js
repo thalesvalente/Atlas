@@ -168,7 +168,7 @@ function showTree(host){
     host.append(el('p','Agrupamento visual por família declarada. Não altera parentesco científico. A estrutura integral permanece na outra organização.','muted'));
   }
   if(!nodes.length){host.append(el('p','Nenhum nó estrutural declarado neste pacote.','empty'));return;}
-  const gh=el('div');host.append(gh);state.graph=mountGraph(gh,nodes,node=>{const original=navigation().byUid.get(node.uid);if(original)detail(original);});
+  const gh=el('div');host.append(gh);state.graph=mountGraph(gh,nodes,node=>{const original=navigation().byUid.get(node.uid);if(original)detail(original);else closeDetail();});
   const population=state.treeMode==='families'?records:nodes,selected=population.filter(e=>matches(e));
   host.append(el('p',`${selected.length} de ${population.length} ${state.treeMode==='families'?'registros':'nós'} encontrados. A busca alcança todas as ocorrências, inclusive fora da janela gráfica.`,'muted'));
   const offset=pager(host,selected.length,40),links=el('div',null,'graph-results');for(const n of selected.slice(offset,offset+40))links.append(button(n.title,()=>state.graph.locate(n.uid)));host.append(links);
