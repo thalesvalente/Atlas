@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {checkMinimap,checkExecutionStates} from './browser_a01_lqa.mjs';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 const {chromium}=require(process.env.ATLAS_PLAYWRIGHT_MODULE||'playwright');
@@ -130,7 +131,16 @@ try{
     }
     await page.locator('[data-pane="assets"]').click();
   }
+  const lqaFailures=[];
+  for(const [name,run] of [
+    ['LQA-01',()=>checkMinimap(browser,url,context,expected.execution_cases[0].id,report)],
+    ['LQA-02',()=>checkExecutionStates(context,url,expected.execution_cases,report)]
+  ]){
+    try{await run();check(name);}
+    catch(error){lqaFailures.push(name+' '+error.message);}
+  }
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.external_requests,[]);
+  assert.deepEqual(lqaFailures,[]);
   report.status='PASS';
 }catch(error){failure=error;report.failure=error.stack||String(error);}
 finally{if(browser)await browser.close();await fs.writeFile(reportPath,JSON.stringify(report,null,2)+'\n');}

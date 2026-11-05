@@ -20,6 +20,38 @@ import urllib.request
 import atlas_viewer
 
 
+# Independent browser oracle. Tones describe execution, not publication.
+STATE_CASES = [
+    ({"execution_state": "FAILED", "result_group": "published", "result": "SUCCEEDED"}, "FAILED", "failed"),
+    ({"execution_state": "SUCCEEDED", "result_group": "failed"}, "SUCCEEDED", "succeeded"),
+    ({"execution_state": "failed"}, "failed", "failed"),
+    ({"status": "FAILED", "result_state": "SUCCEEDED"}, "FAILED", "failed"),
+    ({"status": "SUCCEEDED"}, "SUCCEEDED", "succeeded"),
+    ({"result_state": "SUCCEEDED"}, "SUCCEEDED", "succeeded"),
+    ({"result_group": "technical"}, "technical", "technical"),
+    ({"result_group": "published"}, "published", "neutral"),
+    ({"result": "SUCCEEDED"}, "SUCCEEDED", "succeeded"),
+    ({"execution_state": None, "result": "FAILED"}, "NULL — valor declarado", "neutral"),
+    ({"status": "", "result_state": "FAILED"}, '"" — texto vazio declarado', "neutral"),
+    ({"result_state": False, "result_group": "failed"}, "false", "neutral"),
+    ({"execution_state": 0, "status": "SUCCEEDED"}, "0", "neutral"),
+    ({}, None, "neutral"),
+    ({"execution_state": "UNKNOWN"}, "UNKNOWN", "neutral"),
+    ({"execution_state": "FAILED-ish"}, "FAILED-ish", "neutral"),
+    ({"execution_state": "FAILED "}, "FAILED ", "neutral"),
+    ({"execution_state": "__proto__"}, "__proto__", "neutral"),
+    ({"execution_state": "<img src=x onerror=alert(1)>"}, "<img src=x onerror=alert(1)>", "neutral"),
+    ({"execution_state": ["FAILED"]}, "FAILED", "neutral"),
+    ({"execution_state": {"state": "FAILED"}}, "state: FAILED", "neutral"),
+    ({"execution_state": "mixed"}, "mixed", "mixed"),
+    ({"execution_state": "blocked"}, "blocked", "blocked"),
+]
+
+
+def state_id(index):
+    return f"invented-lqa-state-{index:02d}"
+
+
 def fixture():
     rows = []
     for i in range(205):
@@ -40,9 +72,15 @@ def fixture():
              {"id": "empty-nucleus", "nucleus_id": "", "cells": {"ID": "EMPTY"}},
              {"id": "missing-nucleus", "cells": {"ID": "MISSING"}}]},
     ]
+    records = [
+        {"id": state_id(i), "title": f"Execução inventada para QA {i:02d}",
+         "kind": "run", "family": "LQA_SYNTHETIC", **fields}
+        for i, (fields, _, _) in enumerate(STATE_CASES)
+    ]
+    records[0]["summary"] = "\\n".join(["Linha inventada para rolar os detalhes."] * 240)
     return {"schema": "synthetic-a01-regressions",
             "atlas_integration": {"notebook_revision": "INVENTED_A01_FIX_REVISION"},
-            "records": [], "lineage_graph": {"nodes": [], "edges": []}, "edges": [],
+            "records": records, "lineage_graph": {"nodes": [], "edges": []}, "edges": [],
             "result_tables": tables,
             "resources": [{"id": f"asset-{i:02d}", "label": f"Documento sintético {i:02d}",
                            "run_id": "R", "stage_id": "S", "status": "HOLD",
@@ -86,6 +124,10 @@ def main():
     expected = {"table_uid": table["uid"], "row_uid": rows[104]["uid"],
                 "selected_json": exporter["dump"](data["result_tables"][0]["rows"][:105]).decode("utf-8"),
                 "selected_csv": expected_csv(data["result_tables"][0]["rows"][:105], exporter["scalar"])}
+    expected["execution_cases"] = [
+        {"id": state_id(i), "text": text, "tone": tone, "fields": fields}
+        for i, (fields, text, tone) in enumerate(STATE_CASES)
+    ]
     expected_path = work / "a01-expected.json"
     expected_path.write_text(json.dumps(expected, ensure_ascii=False), encoding="utf-8")
     report_path = work / "browser-application-a01-report.json"

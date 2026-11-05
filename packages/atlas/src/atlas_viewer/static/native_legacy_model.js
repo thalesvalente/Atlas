@@ -107,6 +107,18 @@ export const catalogStatus=x=>firstDeclared(x,['documentary_status','terminal_st
 export const EXECUTION_STATE_FIELDS=Object.freeze(['execution_state','status','result_state','result_group','result']);
 export const recordExecutionState=value=>firstDeclared(value,EXECUTION_STATE_FIELDS);
 
+const EXECUTION_INK=Object.freeze({
+  succeeded:'#116b4d',technical:'#285f8a',failed:'#9e3447',mixed:'#87570d',blocked:'#666324',
+});
+// A publication label alone carries no execution verdict. Only exact state
+// tokens, matched case-insensitively, can select a non-neutral presentation.
+export function recordExecutionPresentation(record){
+  const state=recordExecutionState(record),key=typeof state==='string'?state.toLowerCase():'';
+  const tone=has(EXECUTION_INK,key)?key:'neutral';
+  return {state,tone,ink:EXECUTION_INK[tone]??'#526978',
+    accent:COLORS[tone==='succeeded'?'published':tone]??'#7d92a4'};
+}
+
 // OLD tables-coverage.js scopes project/run/stage/admission to table metadata,
 // and nucleus_id to the original row. No aliases or inferred domain taxonomy.
 export const TABLE_FILTER_FIELDS=Object.freeze([

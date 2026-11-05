@@ -2,7 +2,7 @@
  * renderRFTable/renderRelations and hcMount/hcRender. See REUSE-MANIFEST.json.
  * Native entries and literal values are inputs; no HTML, URL or script imports.
  */
-import {KIND,EDGE,literalText,readingColumns,catalogTitle,catalogStatus,recordSort,objectData,recordExecutionState} from './native_legacy_model.js';
+import {KIND,EDGE,literalText,readingColumns,catalogTitle,catalogStatus,recordSort,objectData,recordExecutionPresentation} from './native_legacy_model.js';
 export const element=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;};
 export const action=(text,fn,cls='')=>{const b=element('button',text,cls);b.type='button';b.addEventListener('click',fn);return b;};
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
@@ -10,19 +10,25 @@ const originalIdentity=r=>{const field=r.entry.fields.find(f=>f.name==='native_i
 function stateLines(host,data,fields){const dl=element('dl',undefined,'declared-states');for(const[key,label]of fields)if(own(data,key))dl.append(element('dt',label),element('dd',literalText(data[key])));if(dl.childElementCount)host.append(dl);}
 function badge(host,value,group){if(value!==undefined)host.append(element('span',literalText(value),'badge '+(typeof group==='string'&&/^[a-z]+$/.test(group)?group:'')));}
 const heading=(host,title,description)=>{const h=element('div',undefined,'section-head'),left=element('div');left.append(element('h2',title));if(description)left.append(element('p',description,'sub'));h.append(left);host.append(h);return h;};
+function executionBadge(host,record,omitMissing=false){
+  const {state,tone}=recordExecutionPresentation(record);
+  if(state===undefined&&omitMissing)return;
+  const text=literalText(state),indicator=element('span',text,'badge '+tone);
+  indicator.dataset.executionTone=tone;indicator.title='Execução · '+text;host.append(indicator);
+}
 function tableFrame(host,headers,cls=''){const wrap=element('div',undefined,'table-wrap '+cls);wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Tabela; role horizontalmente para consultar todas as colunas');const table=element('table'),thead=element('thead'),tr=element('tr');for(const label of headers){const th=element('th',label);th.scope='col';tr.append(th);}thead.append(tr);const tbody=element('tbody');table.append(thead,tbody);wrap.append(table);host.append(wrap);return tbody;}
 export function renderRecordIndex(host,rows,total,selected,select){
-  host.replaceChildren();for(const r of [...rows].sort(recordSort)){const b=action('',()=>select(r.entry),'node-card'+(selected===r.id?' selected':''));b.dataset.uid=r.id;b.setAttribute('aria-current',selected===r.id?'true':'false');const title=element('span',r.title,'title'),meta=element('span',undefined,'meta'),dot=element('i',undefined,'dot '+(typeof r.result_group==='string'&&/^[a-z]+$/.test(r.result_group)?r.result_group:''));meta.append(dot,document.createTextNode(KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)));b.append(title,meta);host.append(b);}if(!rows.length)host.append(element('p','Nenhum registro neste filtro. Use Limpar.','sub'));
+  host.replaceChildren();for(const r of [...rows].sort(recordSort)){const b=action('',()=>select(r.entry),'node-card'+(selected===r.id?' selected':''));b.dataset.uid=r.id;b.setAttribute('aria-current',selected===r.id?'true':'false');const title=element('span',r.title,'title'),meta=element('span',undefined,'meta'),execution=recordExecutionPresentation(r),dot=element('i',undefined,'dot '+execution.tone);dot.dataset.executionTone=execution.tone;dot.setAttribute('role','img');dot.setAttribute('aria-label','Execução · '+literalText(execution.state));dot.title=dot.getAttribute('aria-label');meta.append(dot,document.createTextNode(KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)));b.append(title,meta);host.append(b);}if(!rows.length)host.append(element('p','Nenhum registro neste filtro. Use Limpar.','sub'));
 }
 export function renderRecordPresentation(host,rows,select){
   const body=tableFrame(host,['Registro / identificador original','Tipo / família','Resultado da execução','Publicação / revisão','Artefatos'],'record-reading');
-  for(const r of rows){const tr=element('tr');tr.dataset.uid=r.id;const name=element('td');name.append(action(r.title,()=>select(r.entry),'rowlink'),element('code',originalIdentity(r),'record-id'));const kind=element('td');kind.append(element('b',KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)),element('p',r.family,'sub'));const result=element('td');badge(result,literalText(recordExecutionState(r)),r.result_group);const states=element('td');stateLines(states,r,[['publication','Publicação'],['admission','Admissão'],['human_review','Revisão humana']]);if(!states.childElementCount)states.append(element('span','Publicação / revisão não declaradas','sub'));const artifacts=element('td',Array.isArray(r.resources)?`${r.resources.length} referências declaradas`:'Referências não declaradas');tr.append(name,kind,result,states,artifacts);body.append(tr);}
+  for(const r of rows){const tr=element('tr');tr.dataset.uid=r.id;const name=element('td');name.append(action(r.title,()=>select(r.entry),'rowlink'),element('code',originalIdentity(r),'record-id'));const kind=element('td');kind.append(element('b',KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)),element('p',r.family,'sub'));const result=element('td');executionBadge(result,r);const states=element('td');stateLines(states,r,[['publication','Publicação'],['admission','Admissão'],['human_review','Revisão humana']]);if(!states.childElementCount)states.append(element('span','Publicação / revisão não declaradas','sub'));const artifacts=element('td',Array.isArray(r.resources)?`${r.resources.length} referências declaradas`:'Referências não declaradas');tr.append(name,kind,result,states,artifacts);body.append(tr);}
 }
 export function renderPresentationDetail(host,entry,model,navigation,open){
   const value=model.read(entry),data=objectData(value),r=model.byUid.get(entry.uid);host.append(element('div',r?(KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)):entry.group,'kicker'),element('h2',r?.title??literalText(catalogTitle(data)===undefined?entry.title:catalogTitle(data))));
   if(value!==data)host.append(element('p','Valor literal: '+literalText(value)));
   if(r)host.append(element('p',r.family,'sub'),element('code',originalIdentity(r),'record-id'));else if(entry.native_id!==null)host.append(element('code',entry.native_id,'record-id'));
-  const tags=element('div',undefined,'tags');badge(tags,r?recordExecutionState(data):data.result,data.result_group);badge(tags,data.retention);host.append(tags);
+  const tags=element('div',undefined,'tags');if(r)executionBadge(tags,r,true);else badge(tags,data.result,data.result_group);badge(tags,data.retention);host.append(tags);
   if(entry.kind==='row'){host.append(element('h3','Campos literais da linha'));const fields=element('dl',undefined,'declared-states');for(const[name,cell]of Object.entries(entry.cells))fields.append(element('dt',name),element('dd',cell.type==='null'?'NULL — valor declarado':cell.text));host.append(fields);}
   const links=[...(navigation.outgoing.get(entry.uid)||[]),...(navigation.incoming.get(entry.uid)||[]).map(ref=>({...ref,targets:[ref.uid]}))];
   const targets=[...new Set(links.filter(ref=>ref.resolution==='UNIQUE').flatMap(ref=>ref.targets))].map(uid=>navigation.byUid.get(uid)).filter(Boolean);

@@ -2,9 +2,8 @@
  * Function-level provenance, source blobs and adaptations: REUSE-MANIFEST.json.
  * Only the verified Native View DTO supplies data; no imported HTML executes.
  */
-import {KIND,COLORS,EDGE,literalText,familyIdentity,recordExecutionState} from './native_legacy_model.js';
+import {KIND,EDGE,literalText,familyIdentity,recordExecutionPresentation} from './native_legacy_model.js';
 const NS='http://www.w3.org/2000/svg';
-const STATUS_INK=Object.freeze(Object.assign(Object.create(null),{published:'#116b4d',technical:'#285f8a',failed:'#9e3447',mixed:'#87570d',blocked:'#666324',unknown:'#526978'}));
 export function mountEditorialTree(host,model,rows,onSelect,persistent={},options={}){
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  const makeButton=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
@@ -38,7 +37,18 @@ export function mountEditorialTree(host,model,rows,onSelect,persistent={},option
  function treeRelationsVisible(){return relations.checked;}
  const map=el('div',undefined,'map');map.tabIndex=0;map.setAttribute('role','region');map.setAttribute('aria-label','Árvore editorial; arraste, use setas, +, − e Home');controls.set('map',map);
  const svg=document.createElementNS(NS,'svg');svg.classList.add('editorial-svg');svg.setAttribute('preserveAspectRatio','xMidYMin meet');svg.setAttribute('role','group');svg.setAttribute('aria-label','Mapa editorial de registros');map.append(svg);
- const minimap=el('div',undefined,'editorial-minimap'),mini=document.createElementNS(NS,'svg');mini.setAttribute('aria-hidden','true');minimap.append(mini);map.append(minimap);
+ const minimap=el('div',undefined,'editorial-minimap'),mini=document.createElementNS(NS,'svg');
+ minimap.tabIndex=0;minimap.setAttribute('role','region');minimap.setAttribute('aria-label','Minimapa da árvore editorial; use setas, +, − e Home');
+ mini.setAttribute('aria-hidden','true');minimap.append(mini);map.append(minimap);
+ let minimapAnchor=null;
+ function placeMinimap(){
+  const anchor=options.minimapAnchor?.()??null;
+  if(anchor===minimapAnchor)return;
+  minimapAnchor=anchor;
+  // The open drawer reserves an actual slot before its close button.
+  if(anchor)anchor.before(minimap);
+  else map.append(minimap);
+ }
  map.append(el('div','Arraste para explorar · roda ou +/− para aproximar · Home mostra tudo','map-hint'));frame.append(map);
  frame.append(el('p','Tema e família organizam a leitura. Não declaram parentesco, causalidade nem aprovação científica.','graph-explanation'));
  function comfortable(){
@@ -103,12 +113,12 @@ function svgPath(d,color,width=1.6,dash='',desc='',klass='tree-link',arrow=false
 }
 function drawNode(node,parent=svg,miniature=false) {
  const isRoot=node.type==='root',isTheme=node.type==='theme',isFamily=node.type==='family';
- const r=R.get(node.id),selectedNow=r?.id===selected,executionState=r?recordExecutionState(r):undefined,stateLabel=executionState===undefined?'':literalText(executionState),stateCategory=typeof executionState==='string'?executionState.toLowerCase():'';
+ const r=R.get(node.id),selectedNow=r?.id===selected,execution=recordExecutionPresentation(r);
+ const stateLabel=execution.state===undefined?'':literalText(execution.state);
  const semanticRole=isRoot?'Mapa do Atlas':isTheme?`${node.title}: ${node.count} registros`:isFamily?`${node.title}: ${node.count} registros; expandir ou recolher`:r?.title??node.title;
  const g=s('g',{transform:`translate(${node.x} ${node.y})`,class:'svg-node svg-'+node.type+(selectedNow?' selected':''),
    'data-graph-id':node.id,'data-native-node':isRoot||isTheme||isFamily?'':node.id,tabindex:miniature?-1:0,role:'button','aria-label':semanticRole});
- const accent=isRoot?'#43D9D2':isTheme||isFamily?node.color||'#788D9B':COLORS[stateCategory]||'#7D92A4';
- const statusInk=STATUS_INK[stateCategory]||'#526978';
+ const accent=isRoot?'#43D9D2':isTheme||isFamily?node.color||'#788D9B':execution.accent;
  const fill=isRoot?'#14354C':isTheme?'#EAF3FA':isFamily?'#FFFFFF':selectedNow?'#EFFAF8':'#FFFFFF';
  const outline=selectedNow?'#0E9189':isRoot?'#2C667B':isTheme?'#C9DFEE':isFamily?'#D8E5EF':'#DBE6EE';
  const corner=isRoot?18:isTheme?15:isFamily?13:11;
@@ -139,7 +149,7 @@ function drawNode(node,parent=svg,miniature=false) {
   const lines=wrapped(node.title,node.w>=240?35:28,2);
   lines.forEach((line,i)=>g.appendChild(s('text',{x:15,y:25+i*16,'font-size':node.w>=240?12.8:12.1,'font-weight':730,fill:'#263D4C'},line)));
   const status=stateLabel.replaceAll('_',' ').slice(0,node.w>=240?39:27);
-  g.appendChild(s('text',{x:15,y:node.h-28,'font-size':10.5,'font-weight':650,fill:statusInk},status));
+  g.appendChild(s('text',{x:15,y:node.h-28,'font-size':10.5,'font-weight':650,fill:execution.ink},status));
   g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#496777'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,38)));
  }
  g.appendChild(s('title',{},isRoot?'Abrir árvore completa; linhas de organização não significam causalidade.':isTheme?`${node.title}\n${node.count} registros; organização, sem inferir causalidade.`:isFamily?`${node.title}\n${node.count} registros; clique para expandir.`:[r?.title,stateLabel,r?.id].filter(value=>value!==undefined&&value!=='').join('\n')));
@@ -331,8 +341,9 @@ function updateMini(){if(!mini||!full)return;mini.replaceChildren();mini.setAttr
  map.addEventListener('pointermove',event=>{if(!drag)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(!moved&&Math.hypot(dx,dy)<4)return;moved=true;if(!map.hasPointerCapture(drag.id))map.setPointerCapture(drag.id);const rect=svg.getBoundingClientRect(),scale=Math.max(box[2]/rect.width,box[3]/rect.height);setBox([drag.box[0]-dx*scale,drag.box[1]-dy*scale,drag.box[2],drag.box[3]]);});
  const stop=()=>{if(drag&&map.hasPointerCapture(drag.id))map.releasePointerCapture(drag.id);drag=null;};map.addEventListener('pointerup',stop);map.addEventListener('pointercancel',stop);
  map.addEventListener('wheel',event=>{event.preventDefault();zoom(event.deltaY<0?1.14:.877,event.clientX,event.clientY);},{passive:false});
- map.addEventListener('keydown',event=>{if(event.target!==map)return;let handled=true;if(event.key==='+'||event.key==='=')zoom(1.18);else if(event.key==='-')zoom(1/1.18);else if(event.key==='Home'||event.key==='0')setBox([...full]);else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)){const dx=event.key==='ArrowLeft'?-.08:event.key==='ArrowRight'?.08:0,dy=event.key==='ArrowUp'?-.08:event.key==='ArrowDown'?.08:0;setBox([box[0]+dx*box[2],box[1]+dy*box[3],box[2],box[3]]);}else handled=false;if(handled)event.preventDefault();});
+ function cameraKey(event){if(event.target!==event.currentTarget)return;let handled=true;if(event.key==='+'||event.key==='=')zoom(1.18);else if(event.key==='-')zoom(1/1.18);else if(event.key==='Home'||event.key==='0')setBox([...full]);else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)){const dx=event.key==='ArrowLeft'?-.08:event.key==='ArrowRight'?.08:0,dy=event.key==='ArrowUp'?-.08:event.key==='ArrowDown'?.08:0;setBox([box[0]+dx*box[2],box[1]+dy*box[3],box[2],box[3]]);}else handled=false;if(handled)event.preventDefault();}
+ map.addEventListener('keydown',cameraKey);minimap.addEventListener('keydown',cameraKey);
  minimap.addEventListener('click',event=>{const p=screenToWorld(event.clientX,event.clientY,mini);setBox([p.x-box[2]/2,p.y-box[3]/2,box[2],box[3]]);});
- renderGraph(Boolean(persistent.box));
- return {locate(uid){const r=R.get(uid);if(!r||!visible.has(uid))return false;selectRecord(uid,true);return true;},destroy(){media?.removeEventListener('change',responsiveOptions);persistent.box=[...box];persistent.zoomReferenceWidth=zoomReferenceWidth;stop();},cancelPendingSelection(){stop();},camera(){return [...box];}};
+ placeMinimap();renderGraph(Boolean(persistent.box));
+ return {placeMinimap,locate(uid){const r=R.get(uid);if(!r||!visible.has(uid))return false;selectRecord(uid,true);return true;},destroy(){media?.removeEventListener('change',responsiveOptions);persistent.box=[...box];persistent.zoomReferenceWidth=zoomReferenceWidth;if(minimapAnchor)minimap.remove();stop();},cancelPendingSelection(){stop();},camera(){return [...box];}};
 }

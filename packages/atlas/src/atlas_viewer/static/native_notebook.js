@@ -33,7 +33,7 @@ function closeDetail(restore=false){
     const recovered=occurrenceTrigger||(state.table===selected?$('native-table-detail'):null);
     target=[detailTrigger,recovered,...content.querySelectorAll('button,select,[tabindex="0"]')].find(usable);
   }
-  $('native-detail').hidden=true;state.detail=null;state.history=[];markSelection();
+  $('native-detail').hidden=true;state.graph?.placeMinimap?.();state.detail=null;state.history=[];markSelection();
   if(restore){if(target){target.focus();target.scrollIntoView({block:'nearest',inline:'nearest'});}else{content.tabIndex=-1;content.focus();}}
   detailTrigger=null;
 }
@@ -157,7 +157,7 @@ function detail(e,remember=true,moveFocus=true){
   if(!entries().includes(e))return;
   const trigger=document.activeElement;if($('native-content').contains(trigger)||$('native-record-index').contains(trigger))detailTrigger=trigger;
   if(remember&&state.detail&&state.detail!==e.uid)state.history.push(currentContext());state.detail=e.uid;
-  const full=exactOccurrenceJSON(e);$('native-detail').hidden=false;const host=$('native-detail-body');host.replaceChildren();
+  const full=exactOccurrenceJSON(e);$('native-detail').hidden=false;state.graph?.placeMinimap?.();const host=$('native-detail-body');host.replaceChildren();
   if(state.history.length){const back=button('← Voltar à seleção anterior',returnToSelection);back.dataset.testid='native-context-back';host.append(back);}
   renderPresentationDetail(host,e,presentation(),navigation(),openOccurrence);
   const inspection=el('details',null,'inspection');inspection.append(el('summary','Inspecionar identidade, vínculos, campos e JSON exato'),el('p',e.kind+' · '+e.group,'muted'));const d=el('dl');
@@ -177,7 +177,10 @@ function showTree(host){
   mode.addEventListener('change',()=>{state.treeMode=mode.value;state.page=0;closeDetail();render();$('native-tree-mode').focus();});
   if(state.treeMode==='editorial'){
     const rows=visibleRecords();if(!rows.length){population(host,rows,presentation().records.length,'registros');return;}
-    state.graph=mountEditorialTree(host,presentation(),rows,e=>detail(e),state.editorial,{obstructions:()=>$('native-detail').hidden?[]:[$('native-detail').getBoundingClientRect()]});return;
+    state.graph=mountEditorialTree(host,presentation(),rows,e=>detail(e),state.editorial,{
+      obstructions:()=>$('native-detail').hidden?[]:[$('native-detail').getBoundingClientRect()],
+      minimapAnchor:()=>$('native-detail').hidden?null:$('native-close-detail'),
+    });return;
   }
   const all=entries().filter(e=>e.kind==='node'),nodes=all.length?all:entries().filter(e=>e.kind==='record');
   host.append(el('h2','Estrutura técnica completa'),el('p','Contexto integral: os filtros abaixo selecionam resultados da busca; este grafo mantém todos os objetos técnicos. Use a árvore editorial para navegar apenas pelos registros do filtro.','notice'));
