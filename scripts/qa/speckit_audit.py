@@ -55,6 +55,25 @@ def exact_original_bridge(name: str, content: bytes) -> bool:
     return expected is not None and git_blob_id(content) == expected
 
 
+# Feature 005 adds only these fixed static assets to the accepted server blob.
+# Removing exactly one of each approved line must recover the original pin.
+# This is a constrained successor proof, not a new unrestricted runtime pin.
+TRIAGE_STATIC_ASSETS = ("native_triage_model", "native_retention", "native_triage_ui")
+
+
+def exact_triage_static_successor(name: str, content: bytes) -> bool:
+    if name != "packages/atlas/src/atlas_viewer/server.py":
+        return False
+    reduced = content
+    for asset in TRIAGE_STATIC_ASSETS:
+        line = (f'          "/{asset}.js": ("{asset}.js", '
+                '"text/javascript; charset=utf-8"),\n').encode("utf-8")
+        if reduced.count(line) != 1:
+            return False
+        reduced = reduced.replace(line, b"", 1)
+    return exact_original_bridge(name, reduced)
+
+
 def exact_a01_transfer_document(name: str, content: bytes) -> bool:
     """Only the explicitly authorized A01 transfer-policy revision is scoped."""
     expected = A01_TRANSFER_DOCUMENT_BLOBS.get(name)
@@ -78,6 +97,7 @@ def audit_baseline(root: Path, *, allow_presentation_delta: bool = False) -> dic
                 authorized_changes.append(name)
             elif (allow_presentation_delta and path.is_file()
                   and (exact_original_bridge(name, path.read_bytes())
+                       or exact_triage_static_successor(name, path.read_bytes())
                        or exact_a01_transfer_document(name, path.read_bytes()))):
                 authorized_changes.append(name)
             else:
