@@ -9,12 +9,21 @@ const args=new Map();for(let i=2;i<process.argv.length;i+=2)args.set(process.arg
 const url=args.get('--url'),reportPath=args.get('--report'),origin=new URL(url).origin;
 assert.ok(['127.0.0.1','localhost'].includes(new URL(url).hostname));
 const report={status:'FAIL',checks:[],errors:[],external_requests:[]},check=name=>report.checks.push(name);
-let browser,failure;
+let browser,page,failure;
+const downloadControl=async control=>{
+  report.last_download_control=await control.innerText();
+  try{const [file]=await Promise.all([page.waitForEvent('download'),control.click()]);return file;}
+  catch(error){
+    try{report.download_failure_geometry=await control.evaluate(node=>{const r=node.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {rect:{x:r.x,y:r.y,width:r.width,height:r.height},hit:hit?.tagName,hit_id:hit?.id,obscured_by_detail:!!hit?.closest('#native-detail')};});}
+    catch(probeError){report.download_probe_error=String(probeError);}
+    throw error;
+  }
+};
 try{
   browser=await chromium.launch({headless:true});
   const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});
   await context.route('**/*',async route=>{const u=route.request().url();if(/^https?:/.test(u)&&new URL(u).origin!==origin){report.external_requests.push(u);await route.abort();}else await route.continue();});
-  const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
+  page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
   await page.goto(url,{waitUntil:'networkidle'});await page.getByTestId('native-notebook-nav').click();
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='2');
   await page.locator('.application-provenance>summary').click();
@@ -85,23 +94,20 @@ try{
   const tableRaw=await page.getByTestId('native-raw').innerText();
   assert.ok(tableRaw.includes('"Inteiro":9007199254740993'));
   assert.equal(JSON.parse(tableRaw).rows.length,127);
-  let tableDownloadPromise=page.waitForEvent('download');
-  await page.getByRole('button',{name:'Exportar esta ocorrência',exact:true}).click();
-  const tableDownload=await tableDownloadPromise;
+  const tableDownload=await downloadControl(page.getByRole('button',{name:'Exportar esta ocorrência',exact:true}));
   const tableBytes=await fs.readFile(await tableDownload.path());
   assert.equal(createHash('sha256').update(tableBytes).digest('hex'),args.get('--expected-table-digest'));
   assert.equal(JSON.parse(tableBytes).rows.length,127);
   check('table_detail_and_occurrence_export_contain_all_rows_exactly_without_rounding');
-  let waiting=page.waitForEvent('download');await page.getByRole('button',{name:'JSON das linhas selecionadas',exact:true}).click();
-  let download=await waiting;let bytes=await fs.readFile(await download.path());assert.ok(bytes.toString().includes('9007199254740993'));assert.equal(JSON.parse(bytes).length,127);
-  waiting=page.waitForEvent('download');await page.getByRole('button',{name:'CSV protegido',exact:true}).click();download=await waiting;bytes=await fs.readFile(await download.path());
+  let download=await downloadControl(page.getByRole('button',{name:'JSON das linhas selecionadas',exact:true}));let bytes=await fs.readFile(await download.path());assert.ok(bytes.toString().includes('9007199254740993'));assert.equal(JSON.parse(bytes).length,127);
+  download=await downloadControl(page.getByRole('button',{name:'CSV protegido',exact:true}));bytes=await fs.readFile(await download.path());
   assert.ok(bytes.toString().includes("'=1+1"));check('json_rows_not_rounded_and_csv_formula_neutralized');
   await openNativePane(page,'assets');await page.getByRole('button',{name:'Referência e detalhes'}).first().click();await inspect();assert.match(await page.getByTestId('native-raw').innerText(),/private\/never-opened/);
   await openNativePane(page,'timeline');assert.match(await page.locator('#native-content').innerText(),/2026-01-01T12:00:00Z/);assert.match(await page.locator('#native-content').innerText(),/Data não declarada/);
   await openNativePane(page,'coverage');assert.match(await page.locator('#native-content').innerText(),/unknown_nested/);
   await openNativePane(page,'relations');assert.equal(await page.locator('#native-content tbody tr').count(),1);check('resources_relations_timeline_and_unknown_collections_available');
   await page.locator('#native-source').selectOption('source-2');assert.match(await page.locator('#native-revision').innerText(),/separate-invented-source/);assert.equal(await page.locator('#native-table-count').innerText(),'1 / 2');assert.ok(await page.locator('#native-detail').isHidden());
-  await page.locator('#native-source').selectOption('source-1');waiting=page.waitForEvent('download');await page.locator('#native-download').click();download=await waiting;bytes=await fs.readFile(await download.path());
+  await page.locator('#native-source').selectOption('source-1');download=await downloadControl(page.locator('#native-download'));bytes=await fs.readFile(await download.path());
   assert.equal(createHash('sha256').update(bytes).digest('hex'),args.get('--expected-digest'));check('source_switch_clears_selection_and_full_export_matches_original_projection');
   const rebuilt=page.waitForResponse(r=>r.url()===origin+'/api/reindex'&&r.request().method()==='POST');
   const reloaded=page.waitForEvent('load');
@@ -120,6 +126,8 @@ try{
   await page.screenshot({path:reportPath.replace('.json','-mobile.png'),fullPage:true});
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.external_requests,[]);check('mobile_reflow_no_page_errors_and_no_external_requests');
   report.status='PASS_SCOPED';
-}catch(e){failure=e;report.error=e.stack||e.message;}
+}catch(e){failure=e;report.error=e.stack||e.message;
+  if(page)try{await fs.mkdir(path.dirname(reportPath),{recursive:true});report.failure_screenshot=path.basename(reportPath.replace('.json','-failure.png'));await page.screenshot({path:reportPath.replace('.json','-failure.png')});}catch(captureError){report.failure_capture_error=String(captureError);}
+}
 finally{if(browser)await browser.close();await fs.mkdir(path.dirname(reportPath),{recursive:true});await fs.writeFile(reportPath,JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));}
 if(failure)process.exitCode=1;

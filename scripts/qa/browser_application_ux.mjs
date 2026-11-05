@@ -14,13 +14,22 @@ const requireGraphCancel=args.get('--require-graph-cancel')==='true';
 assert.equal(requireGraphCancel,true,'Application qualification requires explicit --require-graph-cancel true');
 const report={status:'FAIL',scope:'INSTALLED_APPLICATION_UX_SYNTHETIC_ONLY',browser_channel:process.env.PLAYWRIGHT_CHANNEL||'chromium',checks:[],errors:[],external_requests:[],screenshots:[],graph_cancel_gate:{required:true,status:'PENDING',cases:[]}};
 const check=name=>report.checks.push(name),sha=bytes=>createHash('sha256').update(bytes).digest('hex');
-let browser,failure,originalMetadata;
+let browser,page,failure,originalMetadata;
 const metadataPath=args.get('--synthetic-metadata');
+const downloadControl=async control=>{
+  report.last_download_control=await control.innerText();
+  try{const [file]=await Promise.all([page.waitForEvent('download'),control.click()]);return file;}
+  catch(error){
+    try{report.download_failure_geometry=await control.evaluate(node=>{const r=node.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {rect:{x:r.x,y:r.y,width:r.width,height:r.height},hit:hit?.tagName,hit_id:hit?.id,obscured_by_detail:!!hit?.closest('#native-detail')};});}
+    catch(probeError){report.download_probe_error=String(probeError);}
+    throw error;
+  }
+};
 try{
   browser=await chromium.launch({headless:true,...(process.env.PLAYWRIGHT_CHANNEL?{channel:process.env.PLAYWRIGHT_CHANNEL}:{})});
   const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});
   await context.route('**/*',async route=>{const value=route.request().url();if(/^https?:/.test(value)&&new URL(value).origin!==origin){report.external_requests.push(value);await route.abort();}else await route.continue();});
-  const page=await context.newPage();page.on('pageerror',error=>report.errors.push(error.message));
+  page=await context.newPage();page.on('pageerror',error=>report.errors.push(error.message));
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('native-record-count')?.textContent==='5');
   assert.equal(await page.locator('link[href="/native_legacy.css"]').count(),1);
@@ -42,7 +51,7 @@ try{
   const inspect=async()=>{await page.locator('#native-detail').waitFor({state:'visible',timeout:3000});const d=page.locator('#native-detail .inspection');if(await page.locator('#native-detail').isVisible()&&await d.count()&&await d.getAttribute('open')===null){const focused=await page.locator(':focus').elementHandle();await d.locator(':scope>summary').click();if(focused){if(await focused.evaluate(n=>n.isConnected))await focused.focus();await focused.dispose();}}};
   const pane=name=>page.locator('[data-pane="'+name+'"]');
   const screenshot=async name=>{const filename=reportPath.replace('.json','-'+name+'.png');await page.screenshot({path:filename,fullPage:name==='desktop'});report.screenshots.push(path.basename(filename));};
-  const download=async(label,digest)=>{if(label==='Exportar esta ocorrência')await inspect();const waiting=page.waitForEvent('download');await page.getByRole('button',{name:label,exact:true}).click();const item=await waiting,bytes=await fs.readFile(await item.path());assert.equal(sha(bytes),digest,label+' must export the entire exact selection');return bytes;};
+  const download=async(label,digest)=>{if(label==='Exportar esta ocorrência')await inspect();const item=await downloadControl(page.getByRole('button',{name:label,exact:true})),bytes=await fs.readFile(await item.path());assert.equal(sha(bytes),digest,label+' must export the entire exact selection');return bytes;};
   const assertFocus=async selector=>assert.equal(await page.locator(selector).evaluate(node=>document.activeElement===node),true,'Expected focus on '+selector);
   const inViewport=async target=>{const r=await target.evaluate(node=>{const rect=node.getBoundingClientRect();return {top:rect.top,bottom:rect.bottom,left:rect.left,right:rect.right,width:innerWidth,height:innerHeight,text:node.textContent.slice(0,100)};});assert.ok(r.top>=0&&r.bottom<=r.height&&r.left>=0&&r.right<=r.width,'Focused content must be visible in the viewport: '+JSON.stringify(r));};
   const treeContextReturn=async(width,closeMode)=>{
@@ -255,7 +264,7 @@ try{
   const csv=await download('CSV protegido',expected.csv_sha256);assert.ok(csv.toString().includes('9007199254740993'));assert.ok(csv.toString().includes("'=1+1"));
   await page.getByRole('button',{name:'Detalhes da tabela',exact:true}).click();
   await download('Exportar esta ocorrência',expected.table_sha256);
-  const fullWaiting=page.waitForEvent('download');await page.locator('#native-download').click();const full=await fullWaiting;assert.equal(sha(await fs.readFile(await full.path())),expected.projection_sha256);
+  const full=await downloadControl(page.locator('#native-download'));assert.equal(sha(await fs.readFile(await full.path())),expected.projection_sha256);
   check('whole_selection_csv_rows_occurrence_projection_downloads_byte_exact');
   await page.locator('#native-search').fill('row-204');
   assert.ok(await page.locator('#native-detail').isHidden(),'Filters clear a stale detail');
@@ -387,7 +396,9 @@ try{
   assert.equal(report.graph_cancel_gate.cases.length,9);report.graph_cancel_gate.status='PASS_SCOPED';
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.external_requests,[]);check('no_javascript_errors_or_automatic_external_requests');
   report.status='PASS_SCOPED';
-}catch(error){failure=error;report.error=error.stack||error.message;}
+}catch(error){failure=error;report.error=error.stack||error.message;
+  if(page)try{await fs.mkdir(path.dirname(reportPath),{recursive:true});report.failure_screenshot=path.basename(reportPath.replace('.json','-failure.png'));await page.screenshot({path:reportPath.replace('.json','-failure.png')});}catch(captureError){report.failure_capture_error=String(captureError);}
+}
 finally{
   if(originalMetadata)await fs.writeFile(metadataPath,originalMetadata);
   if(browser)await browser.close();
