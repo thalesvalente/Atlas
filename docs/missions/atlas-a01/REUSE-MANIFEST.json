@@ -1,0 +1,1462 @@
+{
+  "schema": "atlas-a01-presentation-transfer/1",
+  "authorization": "https://github.com/thalesvalente/Atlas/pull/18#issuecomment-6552216866",
+  "owner_request": "A01 continuation explicitly requesting actual reviewed presentation code reuse",
+  "attribution": "Thales Valente",
+  "license": "NO_NEW_SOFTWARE_LICENSE_SELECTED; limited explicit owner transfer authorization",
+  "scope": "Presentation functions/styles/composition only",
+  "review_scope": "Source history and necessary snippets reviewed; no bundled external JS libraries or third-party headers identified in these snippets; no universal originality warranty",
+  "hash_conventions": {
+    "source_blob": "Git SHA-1 object ID at source_commit; includes Git blob framing.",
+    "source_git_blob_sha256": "SHA-256 of raw Git blob content, UTF-8 LF; excludes Git object framing.",
+    "source_checkout_sha256": "SHA-256 of independently checked local source file bytes, currently UTF-8 CRLF; separate from the Git blob hash.",
+    "spans": "One-based inclusive reviewed declaration/source line spans; UTF-8 bytes with the terminal line ending excluded. These are explicit formatting spans, not AST ranges. Source spans use Git LF; destination spans retain current checkout line endings and also provide LF-normalized hashes.",
+    "byte_reuse": "Only exact same-name single declarations with byte-identical complete recorded spans; never renamed or composed mappings. Span labels do not imply an AST parser.",
+    "destination_sha256": "SHA-256 of complete current destination checkout bytes. destination_lf_normalized_sha256 separately makes newline conversion explicit."
+  },
+  "exclusions": [
+    "embedded projection and experimental corpus",
+    "host paths and secrets",
+    "producer runtime",
+    "localURL/resourceURL/command/file reader and file imports",
+    "hardcoded producer taxonomy and shortcuts",
+    "innerHTML/template payload execution",
+    "historical C2/v5 manifests and frozen P03 bytes"
+  ],
+  "transfers": [
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "source_blob": "edb8ea622ff2ae1bd01daa5bd2377696ff8cde95",
+      "source_git_blob_sha256": "5a77ac9cfa5bc112254326aac64bf61dcf49a0813931d787167f766cf1c9eb5c",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "45f15dd9ea4d5fbce381be36d1849860ef38552a04f239651827f7d61b09b0fb",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js"
+      ],
+      "functions": [
+        {
+          "name": "s",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 2,
+            "end_line": 2,
+            "sha256": "0c551f7afb10365533ed2d07dfec73c662a88e2b07f2b1e76dbdae303892af3c",
+            "lf_normalized_sha256": "0c551f7afb10365533ed2d07dfec73c662a88e2b07f2b1e76dbdae303892af3c"
+          },
+          "treatment": "REUSED_FUNCTION_BYTES",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "s",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 67,
+                "end_line": 67,
+                "sha256": "0c551f7afb10365533ed2d07dfec73c662a88e2b07f2b1e76dbdae303892af3c",
+                "lf_normalized_sha256": "0c551f7afb10365533ed2d07dfec73c662a88e2b07f2b1e76dbdae303892af3c"
+              }
+            }
+          ]
+        },
+        {
+          "name": "wrapped",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 3,
+            "end_line": 3,
+            "sha256": "53e70e9eb20b18007ac9048e542877b61bd77aa52391e6160e186f7f61083e9e",
+            "lf_normalized_sha256": "53e70e9eb20b18007ac9048e542877b61bd77aa52391e6160e186f7f61083e9e"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "wrapped",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 68,
+                "end_line": 72,
+                "sha256": "dab6b5005714c934d1f664f46ddfc98ae51902d92c218452398815cec3c5ae4f",
+                "lf_normalized_sha256": "dab6b5005714c934d1f664f46ddfc98ae51902d92c218452398815cec3c5ae4f"
+              }
+            }
+          ]
+        },
+        {
+          "name": "nativeFamily",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 10,
+            "end_line": 10,
+            "sha256": "288a81bd639aa50b0bd3bd11344ce62afbbcf4eb1d97d7d71de1c3df244fa4ac",
+            "lf_normalized_sha256": "288a81bd639aa50b0bd3bd11344ce62afbbcf4eb1d97d7d71de1c3df244fa4ac"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "nativeFamily",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 79,
+                "end_line": 79,
+                "sha256": "94302a8b92adf8c354b2501239950f18c63429e04163d18477df022100309a98",
+                "lf_normalized_sha256": "94302a8b92adf8c354b2501239950f18c63429e04163d18477df022100309a98"
+              }
+            }
+          ]
+        },
+        {
+          "name": "treeOrganizationMode",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 11,
+            "end_line": 11,
+            "sha256": "ade3c3db88b284067a9216da81709e778561b5dc17488a31fc660004a35ece02",
+            "lf_normalized_sha256": "ade3c3db88b284067a9216da81709e778561b5dc17488a31fc660004a35ece02"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "treeOrganizationMode",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 36,
+                "end_line": 36,
+                "sha256": "6d3954cb77072fbf3f46afb687d3b24323dbc2d3ec6a9889113d141f0aac15c7",
+                "lf_normalized_sha256": "6d3954cb77072fbf3f46afb687d3b24323dbc2d3ec6a9889113d141f0aac15c7"
+              }
+            }
+          ]
+        },
+        {
+          "name": "treeRelationsVisible",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 12,
+            "end_line": 12,
+            "sha256": "cf584b5fb912bdcecdbc18191e759ddd0b2e0c4a2211a58b6a8e6cc11d39ae21",
+            "lf_normalized_sha256": "cf584b5fb912bdcecdbc18191e759ddd0b2e0c4a2211a58b6a8e6cc11d39ae21"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "treeRelationsVisible",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 37,
+                "end_line": 37,
+                "sha256": "68636fff1c61e60c85cd65d648e20ea015a13aecda2cdb94585f9afda67b5e72",
+                "lf_normalized_sha256": "68636fff1c61e60c85cd65d648e20ea015a13aecda2cdb94585f9afda67b5e72"
+              }
+            }
+          ]
+        },
+        {
+          "name": "neutralTreeThemes",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 13,
+            "end_line": 19,
+            "sha256": "0597221b80da9944886de4e4956b4d03b55c113f0ac52c01471743ce5d393cd5",
+            "lf_normalized_sha256": "0597221b80da9944886de4e4956b4d03b55c113f0ac52c01471743ce5d393cd5"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "neutralTreeThemes",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 81,
+                "end_line": 87,
+                "sha256": "0597221b80da9944886de4e4956b4d03b55c113f0ac52c01471743ce5d393cd5",
+                "lf_normalized_sha256": "0597221b80da9944886de4e4956b4d03b55c113f0ac52c01471743ce5d393cd5"
+              }
+            }
+          ]
+        },
+        {
+          "name": "allTreeThemes",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 20,
+            "end_line": 36,
+            "sha256": "ce7be349c31d12dabc4b3cd07bcade7885fbc7a493abeda8071083619b787c11",
+            "lf_normalized_sha256": "ce7be349c31d12dabc4b3cd07bcade7885fbc7a493abeda8071083619b787c11"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "allTreeThemes",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 88,
+                "end_line": 104,
+                "sha256": "5bbc35aa68f16fd1ef436f8f90978edd58f729e619eae456bee0af8866c965ac",
+                "lf_normalized_sha256": "5bbc35aa68f16fd1ef436f8f90978edd58f729e619eae456bee0af8866c965ac"
+              }
+            }
+          ]
+        },
+        {
+          "name": "svgPath",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 38,
+            "end_line": 44,
+            "sha256": "c1ea9da27fa4265e87a27baa2b900225223a2afe34f30566bd9f215f2140aa4f",
+            "lf_normalized_sha256": "c1ea9da27fa4265e87a27baa2b900225223a2afe34f30566bd9f215f2140aa4f"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "svgPath",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 107,
+                "end_line": 113,
+                "sha256": "c1ea9da27fa4265e87a27baa2b900225223a2afe34f30566bd9f215f2140aa4f",
+                "lf_normalized_sha256": "c1ea9da27fa4265e87a27baa2b900225223a2afe34f30566bd9f215f2140aa4f"
+              }
+            }
+          ]
+        },
+        {
+          "name": "drawNode",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 45,
+            "end_line": 98,
+            "sha256": "07710115a48a6ef1b86be05ae1577d8a3257eb391d8e7706a6d25a066bc4f3b1",
+            "lf_normalized_sha256": "07710115a48a6ef1b86be05ae1577d8a3257eb391d8e7706a6d25a066bc4f3b1"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "drawNode",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 114,
+                "end_line": 168,
+                "sha256": "2f72d5bf23e6ca5faed1e9c27a71bf13031a2789f0ebcc67c858024b248dc7b3",
+                "lf_normalized_sha256": "2f72d5bf23e6ca5faed1e9c27a71bf13031a2789f0ebcc67c858024b248dc7b3"
+              }
+            }
+          ]
+        },
+        {
+          "name": "focusTheme",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 99,
+            "end_line": 103,
+            "sha256": "2b9c27b6d0a8815d820b8b7e8a1dc1f30a673695475a3c97c5df83c7ce8a6f10",
+            "lf_normalized_sha256": "2b9c27b6d0a8815d820b8b7e8a1dc1f30a673695475a3c97c5df83c7ce8a6f10"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "focusTheme",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 170,
+                "end_line": 174,
+                "sha256": "2b9c27b6d0a8815d820b8b7e8a1dc1f30a673695475a3c97c5df83c7ce8a6f10",
+                "lf_normalized_sha256": "2b9c27b6d0a8815d820b8b7e8a1dc1f30a673695475a3c97c5df83c7ce8a6f10"
+              }
+            }
+          ]
+        },
+        {
+          "name": "changeTreeWithoutCameraJump",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 107,
+            "end_line": 119,
+            "sha256": "79f677dbed9f4ddc37959533c86e3aa10ae2227331a600cf2f249d8f6c8d494b",
+            "lf_normalized_sha256": "79f677dbed9f4ddc37959533c86e3aa10ae2227331a600cf2f249d8f6c8d494b"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "changeTreeWithoutCameraJump",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 178,
+                "end_line": 191,
+                "sha256": "9607915ae97f5d301dd3f67e2a3ab2677422dd498ded699872f7a5cdd8c471bd",
+                "lf_normalized_sha256": "9607915ae97f5d301dd3f67e2a3ab2677422dd498ded699872f7a5cdd8c471bd"
+              }
+            }
+          ]
+        },
+        {
+          "name": "toggleTreeFamily",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 120,
+            "end_line": 124,
+            "sha256": "e3e1eac84066c894e7469e2afa96a95ca11565bfaa874845cfef0b5f0a5bec3d",
+            "lf_normalized_sha256": "e3e1eac84066c894e7469e2afa96a95ca11565bfaa874845cfef0b5f0a5bec3d"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "toggleTreeFamily",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 192,
+                "end_line": 196,
+                "sha256": "e3e1eac84066c894e7469e2afa96a95ca11565bfaa874845cfef0b5f0a5bec3d",
+                "lf_normalized_sha256": "e3e1eac84066c894e7469e2afa96a95ca11565bfaa874845cfef0b5f0a5bec3d"
+              }
+            }
+          ]
+        },
+        {
+          "name": "orderFamilyRows",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 125,
+            "end_line": 138,
+            "sha256": "e8e16d2fa00fa2342182dc678e4fed1890ff507c93623c20acac06b4ba6ded07",
+            "lf_normalized_sha256": "e8e16d2fa00fa2342182dc678e4fed1890ff507c93623c20acac06b4ba6ded07"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "orderFamilyRows",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 197,
+                "end_line": 210,
+                "sha256": "6b6dd7730172ad0a46029166e21d42cebc65d11a2fd34214a5d6f15dc092a6fa",
+                "lf_normalized_sha256": "6b6dd7730172ad0a46029166e21d42cebc65d11a2fd34214a5d6f15dc092a6fa"
+              }
+            }
+          ]
+        }
+      ],
+      "declarations": [
+        {
+          "name": "TREE_THEME_PALETTE",
+          "source_declaration_kind": "const",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 9,
+            "end_line": 9,
+            "sha256": "bfe1ddd20b2be4b5c418576c84f7fe7ad1e72cc8fd988c91bebab2c43d99494d",
+            "lf_normalized_sha256": "bfe1ddd20b2be4b5c418576c84f7fe7ad1e72cc8fd988c91bebab2c43d99494d"
+          },
+          "treatment": "REUSED_DECLARATION_BYTES",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "TREE_THEME_PALETTE",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 78,
+                "end_line": 78,
+                "sha256": "bfe1ddd20b2be4b5c418576c84f7fe7ad1e72cc8fd988c91bebab2c43d99494d",
+                "lf_normalized_sha256": "bfe1ddd20b2be4b5c418576c84f7fe7ad1e72cc8fd988c91bebab2c43d99494d"
+              }
+            }
+          ]
+        },
+        {
+          "name": "LINK_COLORS",
+          "source_declaration_kind": "const",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 37,
+            "end_line": 37,
+            "sha256": "9c387f9d6b28bb7aac9eab6d6880c758b7eb217a9667db2400588e88ead2a93e",
+            "lf_normalized_sha256": "9c387f9d6b28bb7aac9eab6d6880c758b7eb217a9667db2400588e88ead2a93e"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "LINK_COLORS",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 106,
+                "end_line": 106,
+                "sha256": "b51cb0380c4c06545878048c394c8645d78229f3ba1722f04dbcc63b3c1e055b",
+                "lf_normalized_sha256": "b51cb0380c4c06545878048c394c8645d78229f3ba1722f04dbcc63b3c1e055b"
+              }
+            }
+          ]
+        }
+      ],
+      "treatment": "FUNCTIONS_DECLARATIONS_AND_COMPOSITION_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "source_blob": "1b6d4afa13a6a3b9f47779ad07636d3a52209e2c",
+      "source_git_blob_sha256": "f55714d94c26ff84aa9b239eee29ab8877786a3591a0a876f8f263c315bc707c",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "3b22e578785fb376944a05cfef2e44f2bc8aed1597d560837e98c55d0b123154",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js"
+      ],
+      "functions": [
+        {
+          "name": "layoutFamilies",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 1,
+            "end_line": 26,
+            "sha256": "6f1ad05a17a38ec545f14c0719ff2e2a04edffb36a398154c5d21e4e1e2670e0",
+            "lf_normalized_sha256": "6f1ad05a17a38ec545f14c0719ff2e2a04edffb36a398154c5d21e4e1e2670e0"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "layoutFamilies",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 213,
+                "end_line": 238,
+                "sha256": "2ae61273f4e196faf9db0a5a7234c406331b26a653f3f197d4478d8539a801f3",
+                "lf_normalized_sha256": "2ae61273f4e196faf9db0a5a7234c406331b26a653f3f197d4478d8539a801f3"
+              }
+            }
+          ]
+        },
+        {
+          "name": "renderTreeLinks",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 27,
+            "end_line": 78,
+            "sha256": "cbc8a43fe17ec3013f1c010f5d917004e5014c2541009962990d239dd3c1c5b6",
+            "lf_normalized_sha256": "cbc8a43fe17ec3013f1c010f5d917004e5014c2541009962990d239dd3c1c5b6"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "renderTreeLinks",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 239,
+                "end_line": 290,
+                "sha256": "b90fc4cbfc03710aed40e855491694ab7779d67c2e6b437f7b10750ef04f23fb",
+                "lf_normalized_sha256": "b90fc4cbfc03710aed40e855491694ab7779d67c2e6b437f7b10750ef04f23fb"
+              }
+            }
+          ]
+        },
+        {
+          "name": "renderGraph",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 80,
+            "end_line": 117,
+            "sha256": "78a8855e24f8786b576b6e4aa31edfa5a5f1c9e9f8d413763c0a7b1429e37d78",
+            "lf_normalized_sha256": "78a8855e24f8786b576b6e4aa31edfa5a5f1c9e9f8d413763c0a7b1429e37d78"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "renderGraph",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 60,
+                "end_line": 65,
+                "sha256": "1bf7f2afa49887df9da4a7546bc018debfbb984d82f542e721dca14cdd15182c",
+                "lf_normalized_sha256": "1bf7f2afa49887df9da4a7546bc018debfbb984d82f542e721dca14cdd15182c"
+              }
+            }
+          ]
+        },
+        {
+          "name": "screenToWorld",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 118,
+            "end_line": 118,
+            "sha256": "cf413923c92322aae1c5179f4d5764c773a3b905c478ef7d3ff13f0d9431b68a",
+            "lf_normalized_sha256": "cf413923c92322aae1c5179f4d5764c773a3b905c478ef7d3ff13f0d9431b68a"
+          },
+          "treatment": "REUSED_FUNCTION_BYTES",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "screenToWorld",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 292,
+                "end_line": 292,
+                "sha256": "cf413923c92322aae1c5179f4d5764c773a3b905c478ef7d3ff13f0d9431b68a",
+                "lf_normalized_sha256": "cf413923c92322aae1c5179f4d5764c773a3b905c478ef7d3ff13f0d9431b68a"
+              }
+            }
+          ]
+        },
+        {
+          "name": "setBox",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 119,
+            "end_line": 128,
+            "sha256": "4fd61b02ab966eb694bfad3671ac8079964c7bbe31edc137ef1ace650392c922",
+            "lf_normalized_sha256": "4fd61b02ab966eb694bfad3671ac8079964c7bbe31edc137ef1ace650392c922"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "setBox",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 293,
+                "end_line": 302,
+                "sha256": "4fd61b02ab966eb694bfad3671ac8079964c7bbe31edc137ef1ace650392c922",
+                "lf_normalized_sha256": "4fd61b02ab966eb694bfad3671ac8079964c7bbe31edc137ef1ace650392c922"
+              }
+            }
+          ]
+        },
+        {
+          "name": "focusNode",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 129,
+            "end_line": 129,
+            "sha256": "ed31fd55da248d5feff7b58b3a6e4df7af5037c0fd383eaf4e06b3816852b782",
+            "lf_normalized_sha256": "ed31fd55da248d5feff7b58b3a6e4df7af5037c0fd383eaf4e06b3816852b782"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "focusNode",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 323,
+                "end_line": 334,
+                "sha256": "34867f6b0b3336d95aebbea04ec13a0df6f2d0d6176057115c56113ab536056a",
+                "lf_normalized_sha256": "34867f6b0b3336d95aebbea04ec13a0df6f2d0d6176057115c56113ab536056a"
+              }
+            }
+          ]
+        },
+        {
+          "name": "zoom",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 130,
+            "end_line": 130,
+            "sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f",
+            "lf_normalized_sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f"
+          },
+          "treatment": "REUSED_FUNCTION_BYTES",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "zoom",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 335,
+                "end_line": 335,
+                "sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f",
+                "lf_normalized_sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f"
+              }
+            }
+          ]
+        },
+        {
+          "name": "updateMini",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 131,
+            "end_line": 131,
+            "sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2",
+            "lf_normalized_sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2"
+          },
+          "treatment": "REUSED_FUNCTION_BYTES",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "updateMini",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 336,
+                "end_line": 336,
+                "sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2",
+                "lf_normalized_sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2"
+              }
+            }
+          ]
+        },
+        {
+          "name": "installTreeControls",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 132,
+            "end_line": 147,
+            "sha256": "272c7c5691ffea3db32bec77069155b62bab18a23de45eae8d950249a3983983",
+            "lf_normalized_sha256": "272c7c5691ffea3db32bec77069155b62bab18a23de45eae8d950249a3983983"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+              "symbol": "mountEditorialTree",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "COMPOSITION_CONTAINER_LINES_NOT_AST",
+                "start_line": 7,
+                "end_line": 349,
+                "sha256": "f6aa1251c44d481ae8080e5eee15d4656d3a65b4255008ab1083b9ae10f1132b",
+                "lf_normalized_sha256": "f6aa1251c44d481ae8080e5eee15d4656d3a65b4255008ab1083b9ae10f1132b"
+              }
+            }
+          ],
+          "adaptation_note": "Controls/event wiring composed inside mountEditorialTree; mapped container is an explicit line span, not an extracted standalone destination function."
+        }
+      ],
+      "declarations": [],
+      "treatment": "FUNCTIONS_DECLARATIONS_AND_COMPOSITION_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/app.js",
+      "source_blob": "b2319103191100f818f69170bfe92abb16a62464",
+      "source_git_blob_sha256": "dec52f67c9f606adcdb7faa52ca8b5f80ebbed9355058d40ea1bde8f478d8c54",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "2cc22500d15398851aa63f979333957b39258ff9a5880e38cacead460f6bae71",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+        "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+        "packages/atlas/src/atlas_viewer/static/native_notebook.js"
+      ],
+      "functions": [
+        {
+          "name": "filterRecords",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 49,
+            "end_line": 49,
+            "sha256": "d6e2634855f63091e003322b733d82f668897b3ef0093e432e9981bc357a1358",
+            "lf_normalized_sha256": "d6e2634855f63091e003322b733d82f668897b3ef0093e432e9981bc357a1358"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "recordMatches",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 90,
+                "end_line": 94,
+                "sha256": "c54d630723ae995ce6ae7c592a7092886c635dca4c90110223d205a95a605809",
+                "lf_normalized_sha256": "c54d630723ae995ce6ae7c592a7092886c635dca4c90110223d205a95a605809"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "symbol": "recordFilters",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 48,
+                "end_line": 48,
+                "sha256": "7d426962fdf83f6c6920627c798e770a4ab00b59291ebad276ebf931e77823d3",
+                "lf_normalized_sha256": "7d426962fdf83f6c6920627c798e770a4ab00b59291ebad276ebf931e77823d3"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "symbol": "visibleRecords",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 49,
+                "end_line": 49,
+                "sha256": "f4d9117456d75dc232e172734774042f6a0ec7e3c5f0236c033bf385bd489937",
+                "lf_normalized_sha256": "f4d9117456d75dc232e172734774042f6a0ec7e3c5f0236c033bf385bd489937"
+              }
+            }
+          ],
+          "adaptation_note": "Filter predicate and shared filtered population; producer globals/callbacks replaced by Native View state; search includes explicit aliases and exact scalar fields."
+        },
+        {
+          "name": "renderList",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 50,
+            "end_line": 50,
+            "sha256": "24499772dfd0ae13c4e2367dbfcb67745c027c3d679ae36f2d8a51d9e4a4cfdc",
+            "lf_normalized_sha256": "24499772dfd0ae13c4e2367dbfcb67745c027c3d679ae36f2d8a51d9e4a4cfdc"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderRecordIndex",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 20,
+                "end_line": 22,
+                "sha256": "d69191a651de5adfd49bc6bae225caa1aca073b3788540775ac28b661bc5c2e7",
+                "lf_normalized_sha256": "d69191a651de5adfd49bc6bae225caa1aca073b3788540775ac28b661bc5c2e7"
+              }
+            }
+          ],
+          "adaptation_note": "Renamed to renderRecordIndex in views; safe text/DOM and occurrence UID callbacks replace HTML interpolation."
+        }
+      ],
+      "declarations": [
+        {
+          "name": "norm",
+          "source_declaration_kind": "const",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 5,
+            "end_line": 5,
+            "sha256": "33b3117050e74958156c270006aa539f1c4a8018983cb6f947bb832c0bb4cf06",
+            "lf_normalized_sha256": "33b3117050e74958156c270006aa539f1c4a8018983cb6f947bb832c0bb4cf06"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "norm",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 6,
+                "end_line": 6,
+                "sha256": "e04082d05c49a14e490e8b5ef6434d297a0985641249ba8a52eedf4e74750896",
+                "lf_normalized_sha256": "e04082d05c49a14e490e8b5ef6434d297a0985641249ba8a52eedf4e74750896"
+              }
+            }
+          ]
+        },
+        {
+          "name": "KIND",
+          "source_declaration_kind": "const",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 7,
+            "end_line": 7,
+            "sha256": "37d7457f7e4f0c96c762c5452551e08ea296ddbce68f9807b7e5b0811de2e83c",
+            "lf_normalized_sha256": "37d7457f7e4f0c96c762c5452551e08ea296ddbce68f9807b7e5b0811de2e83c"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "KIND",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 44,
+                "end_line": 44,
+                "sha256": "8d49de7c307afe46130016ca32fcd72ff48693ece2d10fecda3f1d7189476f7c",
+                "lf_normalized_sha256": "8d49de7c307afe46130016ca32fcd72ff48693ece2d10fecda3f1d7189476f7c"
+              }
+            }
+          ]
+        },
+        {
+          "name": "EDGE",
+          "source_declaration_kind": "const",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 10,
+            "end_line": 10,
+            "sha256": "8bd9b05c367958fdc766eddd56e4ceaec4a6ef484d9ff8ed588eb78ce5e0fbfe",
+            "lf_normalized_sha256": "8bd9b05c367958fdc766eddd56e4ceaec4a6ef484d9ff8ed588eb78ce5e0fbfe"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "EDGE",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 46,
+                "end_line": 46,
+                "sha256": "f8e2cdc7dd8b82ac690f79ec3dbebf28b26a6e2cf1114ced82b9086860126bde",
+                "lf_normalized_sha256": "f8e2cdc7dd8b82ac690f79ec3dbebf28b26a6e2cf1114ced82b9086860126bde"
+              }
+            }
+          ]
+        },
+        {
+          "name": "COLORS",
+          "source_declaration_kind": "const",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 12,
+            "end_line": 12,
+            "sha256": "cc7b6120eebaa1296c9ac463b32940047c0f4372d7c611682f630de984acf6e0",
+            "lf_normalized_sha256": "cc7b6120eebaa1296c9ac463b32940047c0f4372d7c611682f630de984acf6e0"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "COLORS",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 45,
+                "end_line": 45,
+                "sha256": "bf09524a28fc679f6f657cf1152ab06430827aa65a6b3b33f496d05a68cebb84",
+                "lf_normalized_sha256": "bf09524a28fc679f6f657cf1152ab06430827aa65a6b3b33f496d05a68cebb84"
+              }
+            }
+          ]
+        }
+      ],
+      "treatment": "FUNCTIONS_DECLARATIONS_AND_COMPOSITION_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/records-products.js",
+      "source_blob": "e72e328b9faab3fe891c6af82690a4db45ab7f2f",
+      "source_git_blob_sha256": "91ec18488b2978050f50b8cc8a8f8787b2f99a3fe8c90f8175e59599179e9808",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "db1f91096c930f53d7a204d60a432dd2a1d8b1b25028e676b3c67100a794ea7f",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+        "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+        "packages/atlas/src/atlas_viewer/static/native_notebook.js"
+      ],
+      "functions": [
+        {
+          "name": "recordJourney",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 3,
+            "end_line": 3,
+            "sha256": "91240421627512ebb4c4544ba6df6dcb242c62f7d70377468f08a2ae7623134f",
+            "lf_normalized_sha256": "91240421627512ebb4c4544ba6df6dcb242c62f7d70377468f08a2ae7623134f"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderPresentationDetail",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 27,
+                "end_line": 45,
+                "sha256": "5bb360d6ada46e07cdcc467586193dda797cdb2a9cd0db71a03b301ceeb964c6",
+                "lf_normalized_sha256": "5bb360d6ada46e07cdcc467586193dda797cdb2a9cd0db71a03b301ceeb964c6"
+              }
+            }
+          ],
+          "adaptation_note": "Integrated in the detail renderer through explicitly resolved Native references; synthetic product-ID aliases and direct file/URI links excluded."
+        },
+        {
+          "name": "renderDetails",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 5,
+            "end_line": 5,
+            "sha256": "bb5564288ac5ba6b8572e78c2cccd7f0a6503ba8d390289921f12057744482c2",
+            "lf_normalized_sha256": "bb5564288ac5ba6b8572e78c2cccd7f0a6503ba8d390289921f12057744482c2"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderPresentationDetail",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 27,
+                "end_line": 45,
+                "sha256": "5bb360d6ada46e07cdcc467586193dda797cdb2a9cd0db71a03b301ceeb964c6",
+                "lf_normalized_sha256": "5bb360d6ada46e07cdcc467586193dda797cdb2a9cd0db71a03b301ceeb964c6"
+              }
+            }
+          ],
+          "adaptation_note": "Safe DOM composition, literal metadata, separate declared states and exact-JSON inspection; no local reader or PowerShell command."
+        },
+        {
+          "name": "recordRows",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 10,
+            "end_line": 10,
+            "sha256": "76f0f14668d5196e482b5085c59f2f117a7bd9e1191ff55416cbb1589a0c15fc",
+            "lf_normalized_sha256": "76f0f14668d5196e482b5085c59f2f117a7bd9e1191ff55416cbb1589a0c15fc"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "recordSort",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 95,
+                "end_line": 95,
+                "sha256": "e73880227a58931bf08217b23489cdce94008218bfdda84425219459fae46564",
+                "lf_normalized_sha256": "e73880227a58931bf08217b23489cdce94008218bfdda84425219459fae46564"
+              }
+            }
+          ],
+          "adaptation_note": "Family/title browsing sort only; no claim to port every historical sort or export mode."
+        },
+        {
+          "name": "renderRecordTable",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 11,
+            "end_line": 11,
+            "sha256": "799fc9a504272e1fbd54b90d5f7653b691543c57da979dcffc63a02d469eab15",
+            "lf_normalized_sha256": "799fc9a504272e1fbd54b90d5f7653b691543c57da979dcffc63a02d469eab15"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderRecordPresentation",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 23,
+                "end_line": 26,
+                "sha256": "4500e06c0deed1a6b70580b1bda15b14b5fc735a06f99f7e0c532cf3dbf75015",
+                "lf_normalized_sha256": "4500e06c0deed1a6b70580b1bda15b14b5fc735a06f99f7e0c532cf3dbf75015"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "symbol": "showRecords",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 192,
+                "end_line": 195,
+                "sha256": "7786deec26e97ccca0c4525a10933b13c116c1051ecaa1e50bfb3372b88f11f1",
+                "lf_normalized_sha256": "7786deec26e97ccca0c4525a10933b13c116c1051ecaa1e50bfb3372b88f11f1"
+              }
+            }
+          ]
+        },
+        {
+          "name": "renderProducts",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "SOURCE_LINE_EXCERPT_NOT_FUNCTION_HASH",
+            "start_line": 14,
+            "end_line": 15,
+            "sha256": "4c89a1e0928110ac5e0d06a43dc2e1b3ddc3783a26060661d32f49d14089351d",
+            "lf_normalized_sha256": "4c89a1e0928110ac5e0d06a43dc2e1b3ddc3783a26060661d32f49d14089351d"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderCatalog",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 74,
+                "end_line": 88,
+                "sha256": "55898a8f80e2dcc6e11ac5a6bd7e161691b001e813e80874ed8013edbbfc28c9",
+                "lf_normalized_sha256": "55898a8f80e2dcc6e11ac5a6bd7e161691b001e813e80874ed8013edbbfc28c9"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "ASSET_COLLECTIONS",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 64,
+                "end_line": 64,
+                "sha256": "d3995eb1a00a3de7dae6f3a1fd7eaf6d6067e9f8dd4b89c69fd2c92b82273e8d",
+                "lf_normalized_sha256": "d3995eb1a00a3de7dae6f3a1fd7eaf6d6067e9f8dd4b89c69fd2c92b82273e8d"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "symbol": "showAssets",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 255,
+                "end_line": 265,
+                "sha256": "325f48e4c4e10c54f148940f09e0304eaa2016c54b9b1407615b449e159d964d",
+                "lf_normalized_sha256": "325f48e4c4e10c54f148940f09e0304eaa2016c54b9b1407615b449e159d964d"
+              }
+            }
+          ],
+          "adaptation_note": "Product collection/detail composition adapted to the unified Native catalog. Historical edition cards, local-root setters, link generation and file access are not transferred. This is not a verbatim renderProducts implementation."
+        }
+      ],
+      "declarations": [],
+      "treatment": "FUNCTIONS_DECLARATIONS_AND_COMPOSITION_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/tables-coverage.js",
+      "source_blob": "c346b9414ce6d01d087d17bbfa2531911aaaef7b",
+      "source_git_blob_sha256": "90ed39589a2c7d61d4c9465d237f2f5219ea78c1e110d91443274f4a9bd054da",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "c04bffe61c8a1faa57682c5da4e1b6161d1d20a444914ea853ebedb387bcf16f",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+        "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+        "packages/atlas/src/atlas_viewer/static/native_notebook.js"
+      ],
+      "functions": [
+        {
+          "name": "renderRFTable",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 31,
+            "end_line": 35,
+            "sha256": "66e9f28d71777a2af7e0fbdde0c491374dfb5b9beac1524bf36dc095585a86b9",
+            "lf_normalized_sha256": "66e9f28d71777a2af7e0fbdde0c491374dfb5b9beac1524bf36dc095585a86b9"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "presentationColumns",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 99,
+                "end_line": 99,
+                "sha256": "3134013112e412fa0deb04bcf24ba6742e89ee9cd4b2a65bdf162228f2029da2",
+                "lf_normalized_sha256": "3134013112e412fa0deb04bcf24ba6742e89ee9cd4b2a65bdf162228f2029da2"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderReadingTable",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 46,
+                "end_line": 51,
+                "sha256": "c1313ab68f63907afa94c451373c703fcd988e64a9e15e2246d8bc57909a4d34",
+                "lf_normalized_sha256": "c1313ab68f63907afa94c451373c703fcd988e64a9e15e2246d8bc57909a4d34"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "symbol": "showTables",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 212,
+                "end_line": 254,
+                "sha256": "1a52346711c8729c21a8448c25236e2a03aec1f75db232f0f25654e7a5ecdc86",
+                "lf_normalized_sha256": "1a52346711c8729c21a8448c25236e2a03aec1f75db232f0f25654e7a5ecdc86"
+              }
+            }
+          ],
+          "adaptation_note": "Readable column priority plus reversible original order; all declared columns/cells remain available; numeric values/exports use verified lexemes."
+        },
+        {
+          "name": "renderRelations",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 42,
+            "end_line": 42,
+            "sha256": "88926af699e5432b8a4cf51b3c63dd7e708f0cdac5977a8b10da186812aba8c3",
+            "lf_normalized_sha256": "88926af699e5432b8a4cf51b3c63dd7e708f0cdac5977a8b10da186812aba8c3"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderRelationPresentation",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 60,
+                "end_line": 63,
+                "sha256": "015cfe0f60b46b15a7ae0047c1ceea23c28b0c56832d9b348745f53cc40f7e47",
+                "lf_normalized_sha256": "015cfe0f60b46b15a7ae0047c1ceea23c28b0c56832d9b348745f53cc40f7e47"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "symbol": "showRelations",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 281,
+                "end_line": 290,
+                "sha256": "79d42b98fa9beb7bfdb1bd663aeb8faa869412bf3c98a88f9699020ab41599b0",
+                "lf_normalized_sha256": "79d42b98fa9beb7bfdb1bd663aeb8faa869412bf3c98a88f9699020ab41599b0"
+              }
+            }
+          ]
+        }
+      ],
+      "declarations": [],
+      "treatment": "FUNCTIONS_DECLARATIONS_AND_COMPOSITION_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "source_blob": "62512aa30f016c1fba844fdb8f62030830b4907b",
+      "source_git_blob_sha256": "2269c1a9ee00351b2a68aa4b28dd637d3b1e4039b359f9fcb03f45c276285784",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "16596499daaa992c717b6b80fdd161adb4926d686f8ea2e7cf9b0d768980256a",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+        "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+        "packages/atlas/src/atlas_viewer/static/native_notebook.js"
+      ],
+      "functions": [
+        {
+          "name": "hcTitle",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 7,
+            "end_line": 7,
+            "sha256": "5f40ee7776a6905bfc3c0b1340e7332f457d86bf54003cab5a1b4aacc901e0a1",
+            "lf_normalized_sha256": "5f40ee7776a6905bfc3c0b1340e7332f457d86bf54003cab5a1b4aacc901e0a1"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "catalogTitle",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 103,
+                "end_line": 103,
+                "sha256": "a1c7173a64a409c39451ea325ba33f9498da90ab7a2955c8a30bf82edaa9a7c5",
+                "lf_normalized_sha256": "a1c7173a64a409c39451ea325ba33f9498da90ab7a2955c8a30bf82edaa9a7c5"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "firstDeclared",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 102,
+                "end_line": 102,
+                "sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5",
+                "lf_normalized_sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5"
+              }
+            }
+          ],
+          "adaptation_note": "Explicitly declared null/empty values stop precedence; no inferred fallback replaces a declared value."
+        },
+        {
+          "name": "hcStatus",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 8,
+            "end_line": 8,
+            "sha256": "0f2925be74ab45df636411d7da1c8c225f8b75aeca40c061b6604a6c2bf252cd",
+            "lf_normalized_sha256": "0f2925be74ab45df636411d7da1c8c225f8b75aeca40c061b6604a6c2bf252cd"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "catalogStatus",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 104,
+                "end_line": 104,
+                "sha256": "184058cc486378cb6137cf9b1f81f600be620bf6f9466b90734999215b952d8a",
+                "lf_normalized_sha256": "184058cc486378cb6137cf9b1f81f600be620bf6f9466b90734999215b952d8a"
+              }
+            },
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "symbol": "firstDeclared",
+              "declaration_kind": "const",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 102,
+                "end_line": 102,
+                "sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5",
+                "lf_normalized_sha256": "126383e45525405ed3a70b792ebd6d732cabfa38faaab16a9813609057170de5"
+              }
+            }
+          ],
+          "adaptation_note": "Explicitly declared null/empty values stop precedence; absent values remain absent rather than becoming UNKNOWN."
+        },
+        {
+          "name": "hcRun",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 9,
+            "end_line": 9,
+            "sha256": "4df1e322011020e3561b80af5fa178cd2fd98bc1cf6fbe42be61c276df1e2884",
+            "lf_normalized_sha256": "4df1e322011020e3561b80af5fa178cd2fd98bc1cf6fbe42be61c276df1e2884"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "catalogContext",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 67,
+                "end_line": 73,
+                "sha256": "af0e3298fae9e32c3eaa2dab1cb1422df0f9190355d29ef787aeba41ed0d227c",
+                "lf_normalized_sha256": "af0e3298fae9e32c3eaa2dab1cb1422df0f9190355d29ef787aeba41ed0d227c"
+              }
+            }
+          ],
+          "adaptation_note": "Declared run/execution/stage/scope restored before opaque IDs, with field labels and safe DOM; original identities and NULL remain inspectable."
+        },
+        {
+          "name": "hcMount",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 15,
+            "end_line": 15,
+            "sha256": "e7fb3d0f98505e65928768e0190a120e0672ed530940af21446778356770c50f",
+            "lf_normalized_sha256": "e7fb3d0f98505e65928768e0190a120e0672ed530940af21446778356770c50f"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "symbol": "showAssets",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 255,
+                "end_line": 265,
+                "sha256": "325f48e4c4e10c54f148940f09e0304eaa2016c54b9b1407615b449e159d964d",
+                "lf_normalized_sha256": "325f48e4c4e10c54f148940f09e0304eaa2016c54b9b1407615b449e159d964d"
+              }
+            }
+          ]
+        },
+        {
+          "name": "hcRender",
+          "source_declaration_kind": "function",
+          "source_span": {
+            "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+            "start_line": 13,
+            "end_line": 13,
+            "sha256": "d0ea951a1279c03b1eddb281521b76f08e1bd6b1d47b60cadf5cd152728bbb5b",
+            "lf_normalized_sha256": "d0ea951a1279c03b1eddb281521b76f08e1bd6b1d47b60cadf5cd152728bbb5b"
+          },
+          "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION",
+          "destination_symbols": [
+            {
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "symbol": "renderCatalog",
+              "declaration_kind": "function",
+              "span": {
+                "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
+                "start_line": 74,
+                "end_line": 88,
+                "sha256": "55898a8f80e2dcc6e11ac5a6bd7e161691b001e813e80874ed8013edbbfc28c9",
+                "lf_normalized_sha256": "55898a8f80e2dcc6e11ac5a6bd7e161691b001e813e80874ed8013edbbfc28c9"
+              }
+            }
+          ]
+        }
+      ],
+      "declarations": [],
+      "treatment": "FUNCTIONS_DECLARATIONS_AND_COMPOSITION_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/style.css",
+      "source_blob": "229a751a355880b4ccdc97c6593a38d1655da04c",
+      "source_git_blob_sha256": "3fe5a6780cf4ab8ede87694fb7af2dc200e7612b4767ead3ef9c4fcdbce3e230",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "5c2079d8791546113419b1bb3b6dafdd75d5873a70094575db9727f61725ccd4",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy.css"
+      ],
+      "functions": [],
+      "declarations": [],
+      "treatment": "SCOPED_STYLESHEET_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/theme.css",
+      "source_blob": "e3495c8730ab9ebeca2185055bc6375badbdb198",
+      "source_git_blob_sha256": "507229e929bcd20bb93f5a217f21ef0baab4af243d0f8b2055a73ecb11015f2d",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "2c4b75224d4a5084895abc40ed60ea17dcc20bb9f6124440ebf8048ba257e836",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_legacy.css"
+      ],
+      "functions": [],
+      "declarations": [],
+      "treatment": "SCOPED_STYLESHEET_PORT",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    },
+    {
+      "source_repository": "thalesvalente/R4-RNF-RES-FIX",
+      "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+      "source_path": "src/r4/presentation/atlas_assets/template.html",
+      "source_blob": "cced3e3b2943272df0cac97f0123c0dce83dcbb2",
+      "source_git_blob_sha256": "0eb365917f3eb7c6dd24e68d73a66e7fa5d13043128ee084ff15c5c13b014334",
+      "source_git_line_endings": "LF",
+      "source_checkout_sha256": "82adef9f21ed2c4ebd3cb18b921e47adaf6f68c0af5bc9e5a8c0a957ec79ce66",
+      "source_checkout_line_endings": "CRLF",
+      "source_checkout_matches_git_after_crlf_normalization": true,
+      "destination_paths": [
+        "packages/atlas/src/atlas_viewer/static/native_notebook.html"
+      ],
+      "functions": [],
+      "declarations": [],
+      "treatment": "SAFE_DOM_STRUCTURE_ADAPTATION_NO_EXECUTABLE_HTML",
+      "reason": "Recover original presentation through verified Native DTOs, exact values and safe DOM; no embedded data or producer runtime."
+    }
+  ],
+  "destination_sha256": {
+    "packages/atlas/src/atlas_viewer/static/native_legacy.css": "5a23422970b2f4fb32aed261075c515f7c2d75e15a22b348346932a2da323464",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "4663297cbaa6c9ea7d7fedf54fc21083c18b57c43c02684ceab72d9098d90c4a",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "d5dbe0140510e7c1180f2439ea77297503c9a4606e783260aa7f64c1f8cb480f",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "34a8a891b934c67638b8f7d8ac42df44fc25c6b65d04fbd24665fbae73e37d01",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "9a04344b0eab378cbbaad0246d39fc85463eb3ed619d6746588de4cc96069b88",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "75a7ff5ceae56702203a7228f0d1d10bf2bd691e5ba82f3f801d97743d86ccc1",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.html": "9fca68fca7ccaf740e2713947b4af75ea9b5602c3e5610748e3801709df558df",
+    "packages/atlas/src/atlas_viewer/static/native_navigation.js": "788ade52ea9138e9b802ddb3e06ae5dbcafda161f59913c356762f2d867badb3"
+  },
+  "destination_lf_normalized_sha256": {
+    "packages/atlas/src/atlas_viewer/static/native_legacy.css": "51edfb97e824828f32433859aab633dcbb948df8a81ca2fb8521526e286a5568",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "4663297cbaa6c9ea7d7fedf54fc21083c18b57c43c02684ceab72d9098d90c4a",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "d5dbe0140510e7c1180f2439ea77297503c9a4606e783260aa7f64c1f8cb480f",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "34a8a891b934c67638b8f7d8ac42df44fc25c6b65d04fbd24665fbae73e37d01",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "9a04344b0eab378cbbaad0246d39fc85463eb3ed619d6746588de4cc96069b88",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "75a7ff5ceae56702203a7228f0d1d10bf2bd691e5ba82f3f801d97743d86ccc1",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.html": "1b4430a0fee8a17eddf94e834219fad6c8ca361b00ecfed5ed3b08908e2ed399",
+    "packages/atlas/src/atlas_viewer/static/native_navigation.js": "788ade52ea9138e9b802ddb3e06ae5dbcafda161f59913c356762f2d867badb3"
+  },
+  "counts": {
+    "source_files": 9,
+    "source_functions": 36,
+    "source_declarations": 6,
+    "reused_function_bytes": 4,
+    "reused_declaration_bytes": 1,
+    "adapted_code_or_composition": 37,
+    "source_line_excerpts_not_function_hashes": 1,
+    "destination_paths": 8
+  },
+  "data_payloads_transferred": false,
+  "runtime_r4_dependency": false,
+  "human_acceptance": "PENDING"
+}

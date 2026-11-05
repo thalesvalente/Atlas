@@ -53,7 +53,10 @@ def fixture():
         "lineage_graph": {"nodes": [{"key": "root", "native_id": None, "label": "Raiz sintética", "run_id": "record-root"},
                                     {"key": "child", "parent_key": "root", "native_id": "child-native", "label": "Filho sintético", "run_id": "record-root"}], "edges": []},
         "edges": [{"id": "relation-main", "from_key": "record-root", "to": "synthetic-reference", "type": "MENTIONS"}],
-        "result_tables": [table, long_table],
+        "result_tables": [table, long_table,
+                          {"id": "table-context-only", "label": "Tabela com facetas exclusivas",
+                           "family": "TABLE_ONLY", "status": "TABLE_ONLY_STATE",
+                           "record_id": "record-root", "rows": []}],
         "resources": [{"id": "synthetic-reference", "title": "Dossiê sintético", "uri": "https://example.invalid/never-opened", "availability": "UNKNOWN"}],
         "coverage": {"scope": "INVENTED_DATA_ONLY"}, "empty_collection": [], "global_null": None,
         "global_integer": 9007199254740993,
@@ -193,7 +196,12 @@ def main():
             if not same:
                 report["status"] = "FAIL"
             report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-        return result.returncode if same else 1
+        if result.returncode or not same:
+            return result.returncode if same else 1
+        # Additive A01 gate: preserve every original check and its source oracle.
+        a01 = subprocess.run([sys.executable, str(Path(__file__).with_name("run_a01_application_ux_browser.py")),
+                              "--work", str(work), "--repo", str(root)], cwd=root, check=False)
+        return a01.returncode
     finally:
         process.terminate()
         try:

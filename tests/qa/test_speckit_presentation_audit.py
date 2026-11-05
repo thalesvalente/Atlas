@@ -23,7 +23,7 @@ class PresentationAuditTests(unittest.TestCase):
             ".specify/memory/constitution.md",
             ".agents/skills/speckit-implement/SKILL.md",
         )
-        for name in AUDIT.PRESENTATION_ORIGINALS | set(self.protected):
+        for name in AUDIT.PRESENTATION_ORIGINALS | set(self.protected) | set(AUDIT.A01_TRANSFER_DOCUMENT_BLOBS):
             path = self.root / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("synthetic baseline\n", encoding="utf-8")
@@ -65,6 +65,18 @@ class PresentationAuditTests(unittest.TestCase):
         name = "packages/atlas/src/atlas_viewer/static/app.js"
         (self.root / name).unlink()
         self.assertIn(f"Preserved baseline changed: {name}", self.report(True)["errors"])
+
+    def test_a01_policy_successor_requires_exact_bytes_and_explicit_opt_in(self):
+        name = "docs/coordination/publication-policy.md"
+        content = (ROOT / name).read_bytes()
+        (self.root / name).write_bytes(content)
+        self.assertEqual(self.report()["errors"], [f"Preserved baseline changed: {name}"])
+        self.assertEqual(self.report(True)["errors"], [])
+        self.assertEqual(self.report(True)["authorized_presentation_changes"], [name])
+        self.assertFalse(AUDIT.exact_a01_transfer_document(name + ".unexpected", content))
+        self.assertFalse(AUDIT.exact_a01_transfer_document(".specify/memory/constitution.md", content))
+        (self.root / name).write_bytes(content + b" ")
+        self.assertEqual(self.report(True)["errors"], [f"Preserved baseline changed: {name}"])
 
 
 if __name__ == "__main__":

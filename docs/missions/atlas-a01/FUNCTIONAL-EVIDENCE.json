@@ -1,0 +1,46 @@
+{
+  "scope": "CHAT_AUTHENTICATED_SOURCE_VIEW_NOT_FULL_CHECKOUT",
+  "baseline_sha": "f6bed418a611c5254d3cd6c8fa814e71c8591c48",
+  "baseline_tree": "f27e41590dc2bf83c0abfb60769f0b52b960fbaf",
+  "environment": {"node": "v22.16.0", "python": "Python 3.13.5"},
+  "logs": [
+    {"file": "red-f01-f02.tap", "command": "node --test scripts/qa/test_native_a01_fix.mjs", "exit": 1, "tests": 29, "pass": 6, "fail": 23, "skip": 0, "sha256": "36d9d77461ee3b73e456446e6775c05365910c5c0889280b388ddf76c518a287"},
+    {"file": "green-f01-f02.tap", "command": "node --test scripts/qa/test_native_a01_fix.mjs", "exit": 0, "tests": 29, "pass": 29, "fail": 0, "skip": 0, "sha256": "80eaa525740ebc1638aa8cf20f8420e06d2b798bd7ee2603397ffb6dbfdaefc0"},
+    {"file": "red-f03.tap", "command": "node --test scripts/qa/test_native_a01_fix.mjs", "exit": 1, "tests": 36, "pass": 29, "fail": 7, "skip": 0, "sha256": "7b43a7c553ef12e052926aa7bd5487586bf388ee2ab5ff58f433af91a44cd845"},
+    {"file": "green-f01-f03.tap", "command": "node --test scripts/qa/test_native_a01_fix.mjs", "exit": 0, "tests": 36, "pass": 36, "fail": 0, "skip": 0, "sha256": "22fb37bd76ba8554605cbd78f3415beb24ffb91f04dd6cb092afbe9fe3636f9d"}
+  ],
+  "red_f01_f02_failures": ["execution_state", "result_state", "result_group", "explicit NULL", "explicit empty text", "NULL wins over lower priority", "empty text wins over lower priority", "canonical order", "status wins over result_state and legacy result", "result_state NULL wins over group", "false is declared", "zero token is declared", "nested metrics", "arbitrary array", "mixed nested arrays", "decoded escaped Unicode", "large integer exact token", "decimal exact token", "exponent exact token", "negative zero exact token", "prototype-looking keys remain data", "HTML and URL remain inert data", "search still combines with every record filter"],
+  "browser": {
+    "http_local": "BLOCKED: net::ERR_BLOCKED_BY_ADMINISTRATOR",
+    "offline": "PASS_SCOPED_ONLY",
+    "offline_scope": "OFFLINE_SCOPED_DOM_NOT_INSTALLED_VIEWER_NOT_FINAL_CSS",
+    "offline_checks": 10,
+    "offline_errors": [],
+    "offline_external_requests": [],
+    "offline_viewports": [1440, 390, 320],
+    "installed_viewer": "PENDING_CI_AT_RECEIPT_CREATION"
+  },
+  "source_blobs": {
+    "scripts/qa/run_application_ux_browser.py": "e0ed0dc4b06eff05244d1d4ca460c874a8cf86d5",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "2039cce654b77dd1be7db0135927b9606ab6708e",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "70d850a09505b786b935149805f0dfabe224dcec",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "c1b5e7034a2ad9ba69e4476edf780097b20678c5",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "aef7a1981c53d8f149f41a59923a37bad2040f29",
+    "packages/atlas/src/atlas_viewer/static/native_navigation.js": "fbf48ab16e64ff682db5ddd5d510d324f07c7863"
+  },
+  "candidate_blobs": {
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "06f2fb13d5a2800c71389a35e6a7fd75eb05be61",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "cea8be2657f44a55697c1aaa481db1d2b1c4fa28",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "8355b99b35e0a00091198d22bedea9fafed50082",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "e169265361710851679ea7e120cfc78b03114c94",
+    "scripts/qa/browser_application_ux_a01.mjs": "d43aa8fec853c8dfec44cdfedbc4cf8f13882fee",
+    "scripts/qa/run_a01_application_ux_browser.py": "06a358e3639871ffd0883efc7c33103df43f3e3f",
+    "scripts/qa/run_application_ux_browser.py": "e3b3b000d01e38255a3cd3d295ec7f4013bb9273",
+    "scripts/qa/test_native_a01_fix.mjs": "2cc42716cf04ddf40cbb2f66f4439c56600c0f32",
+    "tests/viewer/test_native_notebook_a01_fix.py": "19c6dc7b666b4e98d54af11197a55d1b78e889eb"
+  },
+  "spec_kit_cli": "NOT_RUN_NOT_INSTALLED",
+  "native_subagents": "NOT_AVAILABLE",
+  "human_acceptance": "PENDING",
+  "note": "Compact execution receipt; raw logs retained in the CHAT evidence handoff. Final CI/review must be read by exact commit SHA in PR32, not inferred from this prequalification receipt."
+}

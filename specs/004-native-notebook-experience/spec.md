@@ -9,7 +9,7 @@ O operador aponta o código R4 já instalado e a raiz do Caderno. O exportador e
 Aceite: abrir o pacote no Atlas exibe revisão, registros, nós, relações, tabelas e recursos; campo original não consumido permanece acessível no detalhe/exportação. Fonte alterada ou pacote inválido não recebe READY.
 
 ### US2 — Navegar sem iframe (P1)
-O operador navega por árvore, registros, tabelas, recursos/dossiês, linha do tempo e cobertura usando componentes nativos da aplicação. Busca, filtros, seleção, paginação, zoom e exportação funcionam sobre o snapshot escolhido, sem executar JavaScript legado.
+O operador navega por árvore, registros, tabelas, recursos/dossiês, linha do tempo e cobertura usando componentes nativos da aplicação. Busca, filtros, seleção, paginação, zoom e exportação funcionam sobre o snapshot escolhido, sem executar scripts ou HTML recebidos dos dados. Código de apresentação original explicitamente autorizado pode ser revisado, portado e versionado como componente confiável do Atlas, com manifesto de transferência; isso não autoriza executar a aplicação legada dentro do viewer.
 Aceite: identidade estrutural, ID científico, ocorrências repetidas, ausência/null, números exatos e estado declarado permanecem distintos. Toda página informa população total versus seleção; nada é descartado silenciosamente por top-N. O Atlas original continua referência operacional externa.
 
 ### US3 — Comparar e conservar (P1)
@@ -26,12 +26,12 @@ Aceite: hashes de fontes de teste permanecem iguais; renderer não usa iframe/sr
 - FR-006: ler somente fontes fixadas na CLI e payloads declarados com digest verificado; nenhuma rota recebe caminho arbitrário, nenhuma URL é baixada automaticamente.
 - FR-007: respeitar os limites existentes do protocolo sobre bytes armazenados (metadados 2 MiB, File individual 8 MiB, agregado 32 MiB); para apresentações que excedam 32 MiB sem compressão, transportar blocos JSON em Files zlib versionados com limites separados de expansão (8 MiB/bloco e 256 MiB total), dupla verificação de hash/tamanho, sequência, contagem e digest original; falhar sem truncamento se a compressão não couber.
 - FR-008: renderizar texto e SVG próprios; não executar HTML importado. Links de documentos são referências explícitas, não autorização de acesso automático.
-- FR-009: reutilizar o componente público P03 de tabelas e o servidor/SDK existentes; integrar em vez de clonar o R4.
+- FR-009: preservar o componente público P03 de tabelas congelado e seus manifestos como opção de inspeção, e reutilizar o servidor/SDK existentes. A camada de leitura pode adaptar a composição autorizada do original, com ordem visual de colunas declarada e reversível, cabeçalhos/valores literais e exportações originais independentes dessa ordem. Não clonar o runtime R4.
 - FR-010: entregar launcher com uma chamada operacional, spec/plan/tasks rastreáveis, testes e CI vinculados ao SHA final; sem merge/release/deploy.
 - FR-011: iniciar o Atlas NOVO sem R4 ou Caderno legado instalado por `scripts/ABRIR-ATLAS.ps1`, com fontes fixadas do protocolo público ou vazio declarado; manter `ABRIR-ATLAS-NATIVO.ps1` como opção de compatibilidade do produtor legado, não entrada principal.
 - FR-012: o mesmo lançador principal deve permitir fonte histórica explicitamente escolhida via `-LegacyCodeRoot` e `-LegacyNotebookRoot`, invocando o adaptador fora do processo Atlas para criar uma projeção derivada temporária, abrindo a UI nova com o acervo sem exigir uma exportação manual. Falha do adaptador ou do produto propaga código não zero; sem cópia para GitHub, migração persistente, escrita no Caderno ou descoberta de fontes.
 
-- FR-013: para grafos com mais de 180 nós, a árvore abre com até 24 irmãos por nível e ramos internos recolhidos; busca e navegação revelam qualquer nó mesmo fora do foco inicial, sem descartar dados, confundir IDs nem inventar relações.
+- FR-013: no modo explícito de objetos técnicos, grafos com mais de 180 nós abrem com até 24 irmãos por nível e ramos internos recolhidos; busca e navegação revelam qualquer nó mesmo fora do foco inicial, sem descartar dados, confundir IDs nem inventar relações. A entrada principal usa a organização editorial de registros declarados, distinguindo tema/família de parentesco ou causalidade científica. Índice, árvore editorial e relações de registros usam a mesma população filtrada; contexto técnico integral é identificado como tal.
 
 ## Clarifications
 

@@ -8,7 +8,7 @@ const evidenceFields=new Set(['evidence','trace','source','sources','reference',
 const endpointFields=new Set(['from','to','from_key','to_key']);
 
 /** Exact top-level JSON fragments; numbers never pass through JS Number. */
-export function nativeFragments(raw){
+export function nativeFragments(raw,{all=false}={}){
   const fragments=new Map();if(raw[0]!=='{')return fragments;
   const stringEnd=start=>{let escaped=false;for(let i=start+1;i<raw.length;i++){if(escaped){escaped=false;continue;}if(raw[i]==='\\'){escaped=true;continue;}if(raw[i]==='"')return i+1;}return raw.length;};
   let i=1;
@@ -27,7 +27,7 @@ export function nativeFragments(raw){
       else if(ch==='}'||ch===']'){if(depth===0)break;depth--;}
       else if(ch===','&&depth===0)break;
     }
-    if(listReferences.has(key)||evidenceFields.has(key)||endpointFields.has(key)||key==='source_ids')fragments.set(key,raw.slice(start,i).trim());
+    if(all||listReferences.has(key)||evidenceFields.has(key)||endpointFields.has(key)||key==='source_ids')fragments.set(key,raw.slice(start,i).trim());
     if(raw[i]==='}')break;
   }
   return fragments;

@@ -16,6 +16,8 @@ on:
       - 'scripts/qa/browser_p01_lineage.mjs'
       - 'scripts/ci/run_p01_lineage_browser.py'
       - 'scripts/qa/test_native_navigation.mjs'
+      - 'scripts/qa/speckit_audit.py'
+      - 'tests/qa/test_speckit_presentation_audit.py'
       - 'scripts/qa/browser_native_graph.mjs'
       - 'scripts/ci/run_native_graph_browser.py'
       - 'tests/graph/**'

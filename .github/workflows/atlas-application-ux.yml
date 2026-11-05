@@ -5,6 +5,9 @@ on:
       - 'specs/004-native-notebook-experience/**'
       - 'packages/atlas/src/atlas_viewer/**'
       - 'scripts/qa/*application_ux*'
+      - 'scripts/qa/test_native_legacy.mjs'
+      - 'scripts/qa/speckit_audit.py'
+      - 'tests/qa/test_speckit_presentation_audit.py'
       - '.github/workflows/atlas-application-ux.yml'
   workflow_dispatch:
 permissions:
@@ -38,6 +41,7 @@ jobs:
           git rev-parse HEAD
           node --check packages/atlas/src/atlas_viewer/static/native_notebook.js
           node --check scripts/qa/browser_application_ux.mjs
+          node scripts/qa/test_native_legacy.mjs
           python scripts/qa/run_application_ux_browser.py --work .ci-application-ux --require-graph-cancel
       - name: Preserve synthetic application evidence
         if: always()
