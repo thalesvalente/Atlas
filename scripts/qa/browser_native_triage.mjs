@@ -20,6 +20,7 @@ const attr = value => JSON.stringify(value);
 const result = (page, key) => page.locator('[data-result-uid=' + attr(uid(key)) + ']');
 const batchBox = (page, key) => page.locator('#native-content [data-batch-uid=' + attr(uid(key)) + ']').first();
 const selectedCount = async page => Number(await page.locator('#native-batch-summary').getAttribute('data-selected-count'));
+const navigationCount = async (page, pane) => Number(await page.locator('[data-pane="' + pane + '"] .application-nav-count').textContent());
 const clickAction = async (page, id) => {
   const control = await revealNativeControl(page, page.locator('#' + id));
   await control.click();
@@ -93,6 +94,11 @@ try {
     assert.equal(await page.locator('#native-execution').count(), 1, 'Execution must have its own coherent filter');
     for (const pane of ['overview', 'search', 'experiments', 'baselines', 'tree', 'records', 'tables', 'assets', 'relations', 'timeline', 'coverage', 'selected', 'retention']) {
       assert.equal(await page.locator('[data-pane="' + pane + '"]').count(), 1, pane + ' is a unique navigation destination');
+    }
+    // Nine explicit run/experiment/attempt records accompany the bulk runs.
+    for (const [pane, count] of Object.entries({search: Object.keys(expected.uids).length,
+      experiments: expected.bulk_records + 9, baselines: 2, selected: 0, retention: 0})) {
+      assert.equal(await navigationCount(page, pane), count, pane + ' reports the actual synthetic snapshot or batch population');
     }
     assert.equal(await page.getByRole('menu').count(), 0, 'Ordinary navigation is not an ARIA application menu');
     assert.equal(await page.locator('#native-menu-toggle').getAttribute('aria-controls'), 'native-sidebar');
@@ -239,6 +245,14 @@ try {
     await openNativePane(page, 'tables');
     assert.equal(await selectedCount(page), visible + 1);
     await openNativePane(page, 'records');
+    const filterStart = performance.now();
+    await page.locator('#native-search').fill('volume');
+    assert.match(await page.locator('#native-select-filtered').innerText(), new RegExp('\\(' + expected.bulk_records + '\\)$'));
+    assert.equal(await batchBox(page, 'run-rf-proof').count(), 0);
+    assert.ok(await page.locator('#native-content [data-batch-uid]').count() > 0);
+    const filterElapsed = Math.round(performance.now() - filterStart);
+    report.bulk_filter_ms = filterElapsed;
+    assert.ok(filterElapsed <= 2000, 'SC-003: filtering 1,200+ loaded records responds within 2 s (observed ' + filterElapsed + 'ms)');
     await page.locator('#native-search').fill('M11');
     assert.equal(await selectedCount(page), visible + 1);
     assert.ok(Number(await page.locator('#native-batch-summary').getAttribute('data-hidden-count')) >= visible);
@@ -248,7 +262,7 @@ try {
     assert.equal(await selectedCount(page), expected.total_records);
     const elapsed = Math.round(performance.now() - start);
     report.bulk_select_ms = elapsed;
-    assert.ok(elapsed < 5000, 'Selecting 1,200+ records must keep the UI responsive (observed ' + elapsed + 'ms)');
+    assert.ok(elapsed <= 2000, 'SC-003: selecting 1,200+ loaded records responds within 2 s (observed ' + elapsed + 'ms)');
     await openNativePane(page, 'selected');
     assert.match(await page.locator('#native-batch-summary').innerText(), new RegExp(String(expected.total_records)));
     await clickAction(page, 'native-clear-batch');
@@ -395,6 +409,88 @@ try {
     assert.deepEqual(table.table_rows.rows.map(row => row.raw_json), expected.table_rows_raw_json);
     assert.ok(dossier.pending_verifications.length > 0);
     assert.equal(dossier.provenance.physical_presence_verified, false);
+  });
+
+  await check('UX_UI_01_deselection_refreshes_dossier_export_plan_controls_and_intentions', async () => {
+    await clickAction(page, 'native-clear-batch');
+    for (const key of ['run-rf-proof', 'state-missing']) {
+      await search(page, key);
+      await batchBox(page, key).check();
+    }
+    await filteredClear(page);
+    await clickAction(page, 'native-dossier');
+    assert.equal(await selectedCount(page), 2);
+    assert.equal(await navigationCount(page, 'selected'), 2);
+    assert.equal(await navigationCount(page, 'retention'), 2);
+    assert.equal(await batchBox(page, 'state-missing').isChecked(), true);
+    await batchBox(page, 'state-missing').click();
+    assert.equal(await selectedCount(page), 1);
+    assert.equal(await result(page, 'state-missing').count(), 0, 'Dossier removes a deselected card before any navigation');
+    const dossier = JSON.parse(await download(page, '#native-export-dossier', 'synthetic-triage-dossier-current-selection.json'));
+    assert.deepEqual(dossier.selection.map(item => item.uid), [uid('run-rf-proof')]);
+    assert.deepEqual(dossier.items.map(item => item.identity.uid), [uid('run-rf-proof')]);
+    assert.equal(dossier.items[0].raw_json, expected.raw_json['run-rf-proof']);
+
+    await search(page, 'state-missing');
+    await batchBox(page, 'state-missing').check();
+    await filteredClear(page);
+    await page.locator('#native-retention').click();
+    await page.locator('[data-intent-uid=' + attr(uid('run-rf-proof')) + ']').selectOption('REVIEW_FOR_REMOVAL');
+    await page.locator('[data-intent-uid=' + attr(uid('state-missing')) + ']').selectOption('KEEP_ESSENTIALS');
+    assert.equal(await batchBox(page, 'state-missing').isChecked(), true);
+    await batchBox(page, 'state-missing').click();
+    assert.equal(await selectedCount(page), 1);
+    assert.equal(await result(page, 'state-missing').count(), 0);
+    assert.equal(await page.locator('[data-intent-uid=' + attr(uid('state-missing')) + ']').count(), 0,
+      'An unselected item must not retain an actionable intention control');
+    assert.equal(await page.locator('#native-content [data-intent-uid]').count(), 1);
+    assert.equal(await navigationCount(page, 'selected'), 1);
+    assert.equal(await navigationCount(page, 'retention'), 1);
+    const plan = JSON.parse(await download(page, '#native-export-plan', 'synthetic-retention-current-selection.json'));
+    assert.deepEqual(plan.selection.map(item => item.uid), [uid('run-rf-proof')]);
+    assert.deepEqual(plan.items.map(item => item.identity.uid), [uid('run-rf-proof')]);
+    assert.equal(plan.items[0].intent, 'REVIEW_FOR_REMOVAL');
+    assert.equal(plan.items[0].protection.removal_authorized, false);
+
+    await search(page, 'state-missing');
+    await batchBox(page, 'state-missing').check();
+    await page.locator('#native-retention').click();
+    assert.equal(await page.locator('[data-intent-uid=' + attr(uid('state-missing')) + ']').inputValue(), 'UNDECIDED',
+      'Reselecting an item does not revive the removed intention');
+    // Restore the original four-item batch and session annotation for the
+    // existing source/revision invalidation task below.
+    for (const key of ['M1.1', 'name-only-baseline']) {
+      await search(page, key);
+      await batchBox(page, key).check();
+    }
+    await filteredClear(page);
+    assert.equal(await selectedCount(page), 4);
+  });
+
+  await check('UX_UI_03_04_baseline_annotation_updates_active_list_filtered_total_and_navigation', async () => {
+    await openNativePane(page, 'baselines');
+    assert.equal(await navigationCount(page, 'baselines'), 3);
+    assert.equal(await page.locator('#native-content [data-result-uid]').count(), 3);
+    assert.match(await page.locator('#native-select-filtered').innerText(), /\(3\)$/);
+    await result(page, 'name-only-baseline').getByRole('button', {name: 'Ver detalhes', exact: true}).click();
+    await page.getByRole('button', {name: 'Remover anotação de sessão', exact: true}).click();
+    assert.equal(await page.locator('[data-pane="baselines"]').getAttribute('aria-current'), 'page');
+    assert.equal(await result(page, 'name-only-baseline').count(), 0, 'The active baseline list refreshes immediately after removal');
+    assert.equal(await page.locator('#native-content [data-result-uid]').count(), 2);
+    assert.equal(await navigationCount(page, 'baselines'), 2);
+    assert.match(await page.locator('#native-select-filtered').innerText(), /\(2\)$/);
+    assert.equal(await selectedCount(page), 4, 'Removing a designation does not remove an explicit batch selection');
+    await page.getByRole('textbox', {name: 'Motivo da anotação do operador (somente sessão)', exact: true})
+      .fill('Designação sintética explícita do operador para QA; sem aprovação científica.');
+    await page.getByRole('button', {name: 'Anotar baseline nesta sessão', exact: true}).click();
+    assert.equal(await result(page, 'name-only-baseline').count(), 1, 'The active baseline list refreshes immediately after designation');
+    assert.match(await result(page, 'name-only-baseline').innerText(), /Designação do operador nesta sessão/);
+    assert.equal(await page.locator('#native-content [data-result-uid]').count(), 3);
+    assert.equal(await navigationCount(page, 'baselines'), 3);
+    assert.match(await page.locator('#native-select-filtered').innerText(), /\(3\)$/);
+    assert.equal(await navigationCount(page, 'selected'), 4);
+    assert.equal(await navigationCount(page, 'retention'), 4);
+    await page.keyboard.press('Escape');
   });
 
   await check('G13_hostile_labels_URLs_and_prototype_names_remain_inert', async () => {
