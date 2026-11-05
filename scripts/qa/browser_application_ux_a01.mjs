@@ -1,3 +1,4 @@
+import {openNativePane} from './browser_native_triage_navigation.mjs';
 /** A01 functional gates. Real browser; synthetic sources only; no external IO. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -24,7 +25,7 @@ try{
   const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('native-revision')?.textContent.includes('INVENTED_A01_FIX_REVISION'));
-  await page.locator('[data-pane="tables"]').click();
+  await openNativePane(page,'tables');
   const control=key=>page.locator('#native-table-filter-'+key);
   const choose=async(key,label)=>{
     await control(key).selectOption({label});
@@ -107,7 +108,7 @@ try{
   assert.equal(component.negative,false);assert.equal(component.inert,true);assert.equal(component.unchanged,true);
   check('chromium_component_state_precedence_nested_search_lexical_security');
 
-  await page.locator('[data-pane="assets"]').click();
+  await openNativePane(page,'assets');
   for(const width of [1440,390,320]){
     await page.setViewportSize({width,height:1000});
     const layout=await page.locator('.catalog-reading').evaluate(wrap=>{
@@ -125,11 +126,11 @@ try{
     if(width===1440){assert.ok(layout.tableWidth<=layout.wrapWidth+1,'Normal desktop catalog must fit its work surface');assert.ok(layout.rowHeight<115,'Compact synthetic catalog row');}
     const screenshot=reportPath.replace('.json','-'+width+'.png');await page.screenshot({path:screenshot,fullPage:false});report.screenshots.push(path.basename(screenshot));
     check('compact_catalog_all_data_accessible_reflow_'+width);
-    await page.locator('[data-pane="tables"]').click();
+    await openNativePane(page,'tables');
     for(const key of Object.keys(filterValues)){
       const box=await control(key).boundingBox();assert.ok(box&&box.width>0&&box.x>=0&&box.x+box.width<=width+1);
     }
-    await page.locator('[data-pane="assets"]').click();
+    await openNativePane(page,'assets');
   }
   const lqaFailures=[];
   for(const [name,run] of [

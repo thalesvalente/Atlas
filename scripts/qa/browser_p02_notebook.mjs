@@ -1,3 +1,4 @@
+import {openNativePane,selectNativeOption} from './browser_native_triage_navigation.mjs';
 /** Focused screen regressions against the installed viewer and real exporter. */
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -64,14 +65,14 @@ try{
   check('declared_alias_journey_node_record_table_row_exact_evidence_and_return');
   await page.locator('#native-source').selectOption('source-2');
   assert.ok(await page.locator('#native-detail').isHidden());assert.equal(await page.locator('[data-testid="native-context-back"]').count(),0);
-  await page.locator('[data-pane="records"]').click();await page.locator('#native-content tbody tr').first().getByRole('button').click();
+  await openNativePane(page,'records');await page.locator('#native-content tbody tr').first().getByRole('button').click();
   await inspect();
   assert.match(await page.locator('#native-detail-body').innerText(),/INVENTED_P02_OTHER_SNAPSHOT/);
   await inspect();
   assert.ok(!(await page.locator('[data-testid="native-context-links"]').innerText()).includes('Tabela extensa'));
   await page.locator('#native-source').selectOption('source-1');
   check('source_switch_invalidates_navigation_history_and_alias_context');
-  await page.locator('[data-pane="relations"]').click();
+  await openNativePane(page,'relations');
   await page.locator('#native-relation-mode').selectOption('technical');
   await page.locator('#native-content tbody').getByRole('button',{name:'Composite-key-proof',exact:true}).click();
   await inspect();
@@ -101,7 +102,7 @@ try{
   assert.match(await page.locator('[data-testid="native-raw"]').innerText(),/"key":"same"/);
   await page.locator('[data-testid="native-context-back"]').click();
   check('lineage_structural_keys_remain_scoped_to_lineage_nodes');
-  await page.locator('[data-pane="tables"]').click();
+  await openNativePane(page,'tables');
   await page.locator('#native-search').fill('  Row-ID-Only  ');
   assert.equal(await page.locator('#native-content [data-row-id]').count(),1,'Table search must trim and search row identifiers outside cells');
   check('table_search_includes_row_identifiers_and_trims_query');
@@ -112,10 +113,10 @@ try{
   assert.equal(await page.locator('#native-content [data-row-id]').count(),1);
   check('table_metadata_search_reaches_other_tables_and_preserves_rows');
   await page.locator('#native-clear').click();
-  await page.locator('#native-status').selectOption('HOLD');
+  await selectNativeOption(page,'native-documentary','HOLD');
   assert.equal(await page.locator('#native-table-select option').count(),1,'Status filter must apply to tables');
   assert.equal(await page.locator('#native-content [data-row-id]').count(),2,'Rows without their own facets remain in their declared table context');
-  await page.locator('#native-family').selectOption({label:'G'});
+  await selectNativeOption(page,'native-family',{label:'G'});
   assert.equal(await page.locator('#native-table-select').count(),0,'Incompatible facets must produce an honest empty selection');
   assert.match(await page.locator('#native-content').innerText(),/Nenhuma tabela/);
   check('table_family_status_filters_use_declared_context_and_empty_selection');
@@ -132,10 +133,10 @@ try{
   waiting=page.waitForEvent('download');await page.getByRole('button',{name:'CSV protegido',exact:true}).click();download=await waiting;bytes=await fs.readFile(await download.path());
   assert.ok(bytes.toString().includes("'=1+1"));
   check('filtered_table_exact_json_and_formula_safe_csv_preserved');
-  await page.locator('[data-pane="assets"]').click();await page.locator('#native-family').selectOption({label:'Recurso'});
+  await openNativePane(page,'assets');await selectNativeOption(page,'native-family',{label:'Recurso'});
   assert.equal(await page.getByRole('button',{name:'Referência e detalhes'}).count(),1);
   check('filters_include_declared_resource_facets');
-  await page.locator('#native-clear').click();await page.locator('[data-pane="coverage"]').click();
+  await page.locator('#native-clear').click();await openNativePane(page,'coverage');
   await page.getByText('Valores globais da projeção',{exact:true}).click();
   const coverage=await page.locator('#native-content').innerText();
   assert.ok(coverage.includes('unknown_empty'));assert.ok(coverage.includes('unknown_null'));assert.ok(coverage.includes('9007199254740993'));
@@ -146,7 +147,7 @@ try{
   for(const width of [1440,390,320]){
     await page.setViewportSize({width,height:1000});
     for(const pane of ['records','tables','relations','assets','timeline','coverage']){
-      await page.locator('[data-pane="'+pane+'"]').click();
+      await openNativePane(page,pane);
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${pane} overflows at ${width}px`);
     }
     check('all_screens_long_values_reflow_'+width);

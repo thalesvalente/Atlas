@@ -1,3 +1,4 @@
+import {openNativePane,revealNativeControl} from './browser_native_triage_navigation.mjs';
 import assert from 'node:assert/strict';
 
 const panels = [
@@ -30,12 +31,8 @@ async function openNotebook(page,url,report){
 
 async function chooseRecord(page,id){
   await page.locator('#native-search').fill(id);
-  const filters=page.locator('.mobile-filters');
-  if(await filters.getAttribute('open')===null){
-    const summary=filters.locator('summary');
-    if(await summary.isVisible()) await summary.click();
-  }
   const index=page.locator('#native-record-index [data-uid]');
+  await revealNativeControl(page,index);
   assert.equal(await index.count(),1);
   await index.click();
   return index;
@@ -158,7 +155,7 @@ export async function checkExecutionStates(context,url,cases,report){
   const failures=[];
   try{
     for(const scenario of cases){
-      await page.locator('[data-pane="tree"]').click();
+      await openNativePane(page,'tree');
       const index=await chooseRecord(page,scenario.id);
       const node=page.locator('.svg-record.selected');
       const label=node.locator('text').nth(-2);
@@ -173,7 +170,7 @@ export async function checkExecutionStates(context,url,cases,report){
       const dot=await index.locator('.dot').evaluate(el=>getComputedStyle(el).backgroundColor);
       const raw=JSON.parse(await page.locator('[data-testid="native-raw"]').textContent());
       for(const [key,value] of Object.entries(scenario.fields)) assert.deepEqual(raw[key],value);
-      await page.locator('[data-pane="records"]').click();
+      await openNativePane(page,'records');
       const badge=page.locator('.record-reading tbody tr td:nth-child(3) .badge');
       const tableText=await badge.textContent();
       const tableStyle=await badge.evaluate(el=>[getComputedStyle(el).color,getComputedStyle(el).backgroundColor]);
