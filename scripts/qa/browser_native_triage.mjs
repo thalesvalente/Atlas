@@ -14,7 +14,41 @@ assert.ok(['127.0.0.1', 'localhost'].includes(new URL(url).hostname), 'QA uses a
 const expected = JSON.parse(await fs.readFile(args.get('--expected'), 'utf8'));
 assert.equal(expected.fixture_scope, 'INVENTED_DATA_ONLY');
 const report = {status: 'FAIL', scope: 'FEATURE005_SYNTHETIC_BROWSER_TASKS', phase: 'BROWSER_BOOTSTRAP',
-  checks: [], errors: [], external_requests: [], requests: [], layout: [], screenshots: [], timings_ms: {}};
+  checks: [], errors: [], external_requests: [], requests: [], layout: [], screenshots: [], timings_ms: {},
+  contrast: [], focused_results: [], breakpoint_controls: []};
+const contrastRatio = (foreground, background) => {
+  const luminance = color => {
+    const match = /^rgba?\(([^)]+)\)$/.exec(color);
+    assert.ok(match, 'Contrast probe requires a computed sRGB color: ' + color);
+    const channels = match[1].split(',').map(Number);
+    assert.ok(channels.length === 3 || (channels.length === 4 && channels[3] === 1),
+      'Contrast probe must not treat a translucent color as opaque: ' + color);
+    return channels.slice(0, 3).map(value => value / 255)
+      .map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+      .reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
+  };
+  const values = [luminance(foreground), luminance(background)].sort((a, b) => a - b);
+  return (values[1] + .05) / (values[0] + .05);
+};
+// Read the actual cascade and the nearest painted surface; never infer a pass
+// from the intended CSS token. The current gradients have opaque sRGB stops.
+const readContrastSamples = samples => samples.map(sample => {
+  const node = document.querySelector(sample.selector);
+  if (!node) throw Error('Missing contrast target: ' + sample.selector);
+  let surface = sample.background ? document.querySelector(sample.background) : node;
+  while (surface) {
+    const style = getComputedStyle(surface);
+    const stops = style.backgroundImage.match(/rgba?\([^)]+\)/g);
+    const solid = style.backgroundColor;
+    if (stops?.length || (solid && solid !== 'rgba(0, 0, 0, 0)')) {
+      return {...sample, foreground: getComputedStyle(node)[sample.property || 'color'],
+        backgrounds: stops || [solid], background_image: style.backgroundImage,
+        surface: surface.id || surface.className};
+    }
+    surface = surface.parentElement;
+  }
+  throw Error('No painted background for contrast target: ' + sample.selector);
+});
 const uid = key => expected.uids[key];
 const attr = value => JSON.stringify(value);
 const result = (page, key) => page.locator('[data-result-uid=' + attr(uid(key)) + ']');
@@ -527,7 +561,7 @@ try {
     assert.equal(await selectedCount(page), 0, 'Returning to the earlier revision must not silently revive stale selection');
   });
 
-  const viewports = [{width: 1440, height: 1200}, {width: 1024, height: 900},
+  const viewports = [{width: 1440, height: 1200}, {width: 1101, height: 900}, {width: 1024, height: 900},
     {width: 800, height: 1000}, {width: 390, height: 844}, {width: 320, height: 740}];
   for (const viewport of viewports) {
     await check('G11_responsive_keyboard_touch_focus_and_minimap_' + viewport.width, async () => {
@@ -574,8 +608,73 @@ try {
         }
         await search(layoutPage, 'run-rf-proof');
         await batchBox(layoutPage, 'run-rf-proof').check();
+        const textSamples = await layoutPage.evaluate(readContrastSamples, [
+          {selector: '.triage-query label[for="native-source"]'},
+          {selector: '.triage-query label[for="native-search"]'},
+          {selector: '.intro p'},
+          {selector: '.triage-result[data-batch-selected="true"] .muted'},
+        ]);
+        for (const sample of textSamples) {
+          sample.minimum_ratio = Math.min(...sample.backgrounds.map(background => contrastRatio(sample.foreground, background)));
+          report.contrast.push({viewport: viewport.width, kind: 'text', ...sample});
+          assert.ok(sample.minimum_ratio >= 4.5, sample.selector + ' requires 4.5:1 text contrast: ' + JSON.stringify(sample));
+        }
         await layoutPage.locator('[data-locate-uid=' + attr(uid('run-rf-proof')) + ']').click();
         assert.equal(await selectedCount(layoutPage), 1);
+        if (viewport.width === 1101) {
+          assert.equal(await toggle.getAttribute('aria-expanded'), 'true', 'The breakpoint probe requires the open sidebar');
+          assert.equal(await layoutPage.locator('#native-detail').isVisible(), true);
+          for (const id of ['native-source', 'native-search', 'native-search-all', 'native-download']) {
+            const control = layoutPage.locator('#' + id);
+            await control.scrollIntoViewIfNeeded();
+            const probe = await control.evaluate(node => {
+              const box = node.getBoundingClientRect(), detail = document.getElementById('native-detail').getBoundingClientRect();
+              const points = [.2, .5, .8].flatMap(x => [.2, .5, .8].map(y => [box.x + box.width * x, box.y + box.height * y]));
+              return {id: node.id, rect: {x: box.x, y: box.y, width: box.width, height: box.height},
+                hit_points: points.filter(([x, y]) => node.contains(document.elementFromPoint(x, y))).length,
+                in_viewport: box.left >= 0 && box.top >= 0 && box.right <= innerWidth && box.bottom <= innerHeight,
+                intersects_detail: box.left < detail.right && box.right > detail.left && box.top < detail.bottom && box.bottom > detail.top};
+            });
+            report.breakpoint_controls.push({viewport: viewport.width, ...probe});
+            assert.equal(probe.hit_points, 9, id + ' must receive real pointer input with sidebar and details open');
+            assert.equal(probe.in_viewport, true, id + ' remains within the viewport');
+            assert.equal(probe.intersects_detail, false, id + ' must not overlap the details drawer');
+          }
+          const screenshot = reportPath.replace('.json', '-controls-1101.png');
+          await layoutPage.screenshot({path: screenshot, fullPage: false});
+          report.screenshots.push(path.basename(screenshot));
+        }
+        await layoutPage.getByRole('button', {name: 'Focar seleção', exact: true}).click();
+        const focused = await layoutPage.locator('.editorial-svg .svg-record.selected').evaluate(node => {
+          const card = node.querySelector('.node-surface').getBoundingClientRect(), map = node.ownerSVGElement.getBoundingClientRect();
+          const detail = document.getElementById('native-detail').getBoundingClientRect();
+          const title = node.querySelector('text'), scale = title.getScreenCTM();
+          const identity = node.getAttribute('data-graph-id');
+          const points = [.1, .3, .5, .7, .9].flatMap(x => [.1, .3, .5, .7, .9].map(y => [card.x + card.width * x, card.y + card.height * y]));
+          const occluded = points.flatMap(([x, y]) => {
+            const hit = document.elementFromPoint(x, y);
+            // The batch checkbox is a sibling of the record group. It belongs
+            // to this card only when the exact presentation UID agrees.
+            if (node.contains(hit) || hit?.closest('.svg-batch')?.getAttribute('data-batch-uid') === identity) return [];
+            return [{x, y, tag: hit?.tagName, id: hit?.id,
+              batch_bar: Boolean(hit?.closest('#native-batch-bar')), detail: Boolean(hit?.closest('#native-detail'))}];
+          });
+          return {uid: identity, rect: {x: card.x, y: card.y, width: card.width, height: card.height},
+            hit_points: points.length - occluded.length, occluded_points: occluded,
+            font_px: parseFloat(getComputedStyle(title).fontSize) * Math.hypot(scale.a, scale.b),
+            whole: card.left >= Math.max(0, map.left) - 1 && card.right <= Math.min(innerWidth, map.right) + 1 &&
+              card.top >= Math.max(0, map.top) - 1 && card.bottom <= Math.min(innerHeight, map.bottom) + 1,
+            intersects_detail: card.left < detail.right && card.right > detail.left && card.top < detail.bottom && card.bottom > detail.top};
+        });
+        report.focused_results.push({viewport: viewport.width, ...focused});
+        assert.equal(focused.uid, uid('run-rf-proof'));
+        assert.equal(focused.whole, true, 'The focused result is entirely visible inside its map and viewport');
+        assert.equal(focused.intersects_detail, false, 'Details must not obscure the focused result');
+        assert.equal(focused.hit_points, 25, 'The focused result or its own batch checkbox receives all 25 pointer samples');
+        assert.ok(focused.font_px >= 8, 'The focused result retains the accepted A01 minimum title size');
+        const taskScreenshot = reportPath.replace('.json', '-task-' + viewport.width + '.png');
+        await layoutPage.screenshot({path: taskScreenshot, fullPage: false});
+        report.screenshots.push(path.basename(taskScreenshot));
         const mini = layoutPage.locator('.editorial-minimap');
         await mini.scrollIntoViewIfNeeded();
         const geometry = await mini.evaluate(node => {
@@ -613,12 +712,27 @@ try {
             visible: box.width > 0 && box.height > 0 && box.top >= 0 && box.bottom <= innerHeight};
         });
         assert.ok(focus.outline !== 'none' && focus.width >= 2 && focus.visible, 'Keyboard focus is visible and not obscured');
+        const [focusSample] = await layoutPage.evaluate(readContrastSamples,
+          [{selector: ':focus', property: 'outlineColor', background: '.topbar'}]);
+        assert.equal(await layoutPage.locator(':focus').evaluate(node => Boolean(node.closest('.topbar'))), true,
+          'The focus contrast probe measures a header control against the header background');
+        focusSample.minimum_ratio = Math.min(...focusSample.backgrounds.map(background => contrastRatio(focusSample.foreground, background)));
+        report.contrast.push({viewport: viewport.width, kind: 'focus', ...focusSample});
+        assert.ok(focusSample.minimum_ratio >= 3, 'Header focus requires 3:1 contrast: ' + JSON.stringify(focusSample));
+        focus.contrast = focusSample;
         geometry.keyboard_focus = focus;
         geometry.touch = touch;
         report.layout.push(geometry);
         const screenshot = reportPath.replace('.json', '-' + viewport.width + '.png');
         await layoutPage.screenshot({path: screenshot, fullPage: false});
         report.screenshots.push(path.basename(screenshot));
+      } catch (error) {
+        const screenshot = reportPath.replace('.json', '-failure-' + viewport.width + '.png');
+        try {
+          await layoutPage.screenshot({path: screenshot, fullPage: false});
+          report.screenshots.push(path.basename(screenshot));
+        } catch (captureError) { report.failure_capture_error = String(captureError); }
+        throw error;
       } finally {
         await layoutContext.close();
       }
