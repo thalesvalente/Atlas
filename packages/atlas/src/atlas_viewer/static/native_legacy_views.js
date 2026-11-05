@@ -2,7 +2,7 @@
  * renderRFTable/renderRelations and hcMount/hcRender. See REUSE-MANIFEST.json.
  * Native entries and literal values are inputs; no HTML, URL or script imports.
  */
-import {KIND,EDGE,literalText,readingColumns,catalogTitle,catalogStatus,recordSort,objectData} from './native_legacy_model.js';
+import {KIND,EDGE,literalText,readingColumns,catalogTitle,catalogStatus,recordSort,objectData,recordExecutionState} from './native_legacy_model.js';
 export const element=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;};
 export const action=(text,fn,cls='')=>{const b=element('button',text,cls);b.type='button';b.addEventListener('click',fn);return b;};
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
@@ -16,20 +16,20 @@ export function renderRecordIndex(host,rows,total,selected,select){
 }
 export function renderRecordPresentation(host,rows,select){
   const body=tableFrame(host,['Registro / identificador original','Tipo / família','Resultado da execução','Publicação / revisão','Artefatos'],'record-reading');
-  for(const r of rows){const tr=element('tr');tr.dataset.uid=r.id;const name=element('td');name.append(action(r.title,()=>select(r.entry),'rowlink'),element('code',originalIdentity(r),'record-id'));const kind=element('td');kind.append(element('b',KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)),element('p',r.family,'sub'));const result=element('td');badge(result,own(r,'result')?r.result:own(r,'status')?r.status:literalText(undefined),r.result_group);const states=element('td');stateLines(states,r,[['publication','Publicação'],['admission','Admissão'],['human_review','Revisão humana']]);if(!states.childElementCount)states.append(element('span','Publicação / revisão não declaradas','sub'));const artifacts=element('td',Array.isArray(r.resources)?`${r.resources.length} referências declaradas`:'Referências não declaradas');tr.append(name,kind,result,states,artifacts);body.append(tr);}
+  for(const r of rows){const tr=element('tr');tr.dataset.uid=r.id;const name=element('td');name.append(action(r.title,()=>select(r.entry),'rowlink'),element('code',originalIdentity(r),'record-id'));const kind=element('td');kind.append(element('b',KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)),element('p',r.family,'sub'));const result=element('td');badge(result,literalText(recordExecutionState(r)),r.result_group);const states=element('td');stateLines(states,r,[['publication','Publicação'],['admission','Admissão'],['human_review','Revisão humana']]);if(!states.childElementCount)states.append(element('span','Publicação / revisão não declaradas','sub'));const artifacts=element('td',Array.isArray(r.resources)?`${r.resources.length} referências declaradas`:'Referências não declaradas');tr.append(name,kind,result,states,artifacts);body.append(tr);}
 }
 export function renderPresentationDetail(host,entry,model,navigation,open){
   const value=model.read(entry),data=objectData(value),r=model.byUid.get(entry.uid);host.append(element('div',r?(KIND[typeof r.kind==='string'?r.kind:'']??literalText(r.kind)):entry.group,'kicker'),element('h2',r?.title??literalText(catalogTitle(data)===undefined?entry.title:catalogTitle(data))));
   if(value!==data)host.append(element('p','Valor literal: '+literalText(value)));
   if(r)host.append(element('p',r.family,'sub'),element('code',originalIdentity(r),'record-id'));else if(entry.native_id!==null)host.append(element('code',entry.native_id,'record-id'));
-  const tags=element('div',undefined,'tags');badge(tags,data.result,data.result_group);badge(tags,data.retention);host.append(tags);
+  const tags=element('div',undefined,'tags');badge(tags,r?recordExecutionState(data):data.result,data.result_group);badge(tags,data.retention);host.append(tags);
   if(entry.kind==='row'){host.append(element('h3','Campos literais da linha'));const fields=element('dl',undefined,'declared-states');for(const[name,cell]of Object.entries(entry.cells))fields.append(element('dt',name),element('dd',cell.type==='null'?'NULL — valor declarado':cell.text));host.append(fields);}
   const links=[...(navigation.outgoing.get(entry.uid)||[]),...(navigation.incoming.get(entry.uid)||[]).map(ref=>({...ref,targets:[ref.uid]}))];
   const targets=[...new Set(links.filter(ref=>ref.resolution==='UNIQUE').flatMap(ref=>ref.targets))].map(uid=>navigation.byUid.get(uid)).filter(Boolean);
   const journey=targets.filter(e=>e.kind==='table'||e.kind==='asset'&&['product_items','dossier_packages','dossier_assessments'].includes(e.group));
   if(journey.length){const section=element('section',undefined,'record-journey');section.append(element('h3','Produtos, tabelas e dossiês'));for(const e of journey)section.append(action(e.title+(e.kind==='table'?` · ${e.row_count} linhas`:''),()=>open(e.uid)));host.append(section);}
   if(data.summary!==undefined)host.append(element('p',literalText(data.summary)));
-  stateLines(host,data,[['result','Execução'],['publication','Publicação'],['admission','Admissão'],['human_review','Revisão humana'],['experimental_binding','Vínculo experimental'],['content_status','Conteúdo'],['model','Modelo'],['reasoning','Raciocínio'],['controller_reasoning','Raciocínio do controlador']]);
+  stateLines(host,data,[['execution_state','Execução · execution_state'],['status','Estado · status'],['result_state','Resultado · result_state'],['result_group','Grupo · result_group'],['result','Execução · result'],['publication','Publicação'],['admission','Admissão'],['human_review','Revisão humana'],['experimental_binding','Vínculo experimental'],['content_status','Conteúdo'],['model','Modelo'],['reasoning','Raciocínio'],['controller_reasoning','Raciocínio do controlador']]);
   if(data.current_notebook_observation!==undefined){const observation=element('details');observation.append(element('summary','Observação atual do Caderno'),element('pre',literalText(data.current_notebook_observation)));host.append(observation);}
   if(data.metrics!==undefined){const metrics=element('details');metrics.append(element('summary','Métricas declaradas'),element('pre',literalText(data.metrics)));host.append(metrics);}
   const resources=targets.filter(e=>e.kind==='asset'&&['resources','resource_documents'].includes(e.group));

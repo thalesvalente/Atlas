@@ -44,7 +44,6 @@ export function familyIdentity(value,present=true){
 export const KIND=Object.freeze(Object.assign(Object.create(null),{milestone:'Marco de engenharia',mission:'Missão / execução do caderno',run:'Run / tentativa registrada',recovery:'Recuperação',experiment:'Experimento registrado',investigation:'Investigação',presentation:'Apresentação',product:'Produto',observation:'Observação'}));
 export const COLORS=Object.freeze(Object.assign(Object.create(null),{published:'#147b59',technical:'#326d9c',failed:'#b54353',mixed:'#ae731e',blocked:'#858347',unknown:'#778b9a'}));
 export const EDGE=Object.freeze(Object.assign(Object.create(null),{PREDECESSOR:'Predecessor explícito',INPUT_FROM:'Entrada de',DERIVED_FROM:'Derivado de',PRODUCES:'Produz',PRESENTED_BY:'Apresentado por',HISTORICAL_CONTEXT:'Contexto histórico (não causal)',COMPARED_WITH:'Comparado com'}));
-const text=v=>v===null||v===undefined?'':literalText(v);
 export const objectData=value=>value!==null&&typeof value==='object'&&!Array.isArray(value)&&!(numberLiteral in value)?value:Object.create(null);
 const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 export function makePresentation(entries){
@@ -76,8 +75,22 @@ export function makePresentation(entries){
 }
 // Adapted filterRecords: the same declared record population drives index,
 // editorial tree, record table, relations and timeline. No hardcoded taxonomy.
+// Lazily index the complete validated payload, not a whitelist of fields.
+// literalValue decodes strings but retains every numeric token; literalText
+// visits arrays/objects without invoking payload-provided coercion methods.
+// One weak cache entry per derived record/snapshot, released with that snapshot.
+const recordSearchCache=new WeakMap();
+function recordSearchText(record){
+  if(!recordSearchCache.has(record))recordSearchCache.set(record,norm([
+    record.title,record.family,record.entry.native_id??'',record.entry.source_key??'',
+    literalText(literalValue(record.entry.raw_json))
+  ].join('\n')));
+  return recordSearchCache.get(record);
+}
 export function recordMatches(record,{query='',family='',kind='',status=''}={}){
-  const r=record,q=norm(query).trim();return(!family||r.familyKey===family)&&(!kind||r.filterKind===kind)&&(!status||r.filterStatus===status)&&(!q||norm([r.title,text(r.original_id),r.family,text(r.software),text(r.result),r.entry.native_id,r.entry.source_key,...r.entry.fields.map(f=>f.text),...(Array.isArray(r.source_ids)?r.source_ids.map(text):[]),...(Array.isArray(r.paths)?r.paths.map(text):[]),...(Array.isArray(r.notes)?r.notes.map(text):[])].join(' ')).includes(q));
+  const q=norm(query).trim();
+  return(!family||record.familyKey===family)&&(!kind||record.filterKind===kind)&&
+    (!status||record.filterStatus===status)&&(!q||recordSearchText(record).includes(q));
 }
 export const recordSort=(a,b)=>String(a.family).localeCompare(String(b.family),'pt-BR')||a.title.localeCompare(b.title,'pt-BR');
 // Adapted renderRFTable: readable identification/name/description first; all
@@ -89,3 +102,38 @@ export function readingColumns(columns){const ordered=presentationColumns(column
 const firstDeclared=(value,names)=>{const data=objectData(value);for(const name of names)if(has(data,name))return data[name];return undefined;};
 export const catalogTitle=x=>firstDeclared(x,['label','title','name','native_id','unit_id','native_path','source_path','id']);
 export const catalogStatus=x=>firstDeclared(x,['documentary_status','terminal_status','assessment_after','status','binding_status','technical_admission','availability','publication']);
+// Native View precedence (native_notebook.js declared/status), by own-key
+// presence, not truthiness. result is retained only as a legacy-only fallback.
+export const EXECUTION_STATE_FIELDS=Object.freeze(['execution_state','status','result_state','result_group','result']);
+export const recordExecutionState=value=>firstDeclared(value,EXECUTION_STATE_FIELDS);
+
+// OLD tables-coverage.js scopes project/run/stage/admission to table metadata,
+// and nucleus_id to the original row. No aliases or inferred domain taxonomy.
+export const TABLE_FILTER_FIELDS=Object.freeze([
+  ['project','Projeto','table'],['run_id','Execução','table'],
+  ['stage','Estágio','table'],['admission','Admissão','table'],
+  ['nucleus_id','Núcleo','row'],
+].map(Object.freeze));
+const tableFacetCache=new WeakMap();
+export function tableFacet(entry,field){
+  if(!tableFacetCache.has(entry))tableFacetCache.set(entry,{parts:nativeFragments(entry.raw_json,{all:true}),facets:new Map()});
+  const cache=tableFacetCache.get(entry);
+  if(!cache.facets.has(field)){
+    const present=cache.parts.has(field),raw=present?cache.parts.get(field):'',value=present?literalValue(raw):undefined;
+    const identity=familyIdentity(value,present);
+    cache.facets.set(field,Object.freeze({key:JSON.stringify(['atlas-table-filter/1',field,present,identity.type,raw]),present,type:identity.type,raw,label:present?literalText(value):'AUSENTE — chave não declarada'}));
+  }
+  return cache.facets.get(field);
+}
+export function tableFilterOptions(entries,field){
+  const dimension=TABLE_FILTER_FIELDS.find(([key])=>key===field);if(!dimension)return[];
+  const facets=entries.filter(e=>e.kind===dimension[2]).map(e=>tableFacet(e,field));
+  if(!facets.some(f=>f.present))return[];
+  const unique=[...new Map(facets.map(f=>[f.key,f])).values()],counts=new Map();
+  for(const f of unique)counts.set(f.label,(counts.get(f.label)||0)+1);
+  return unique.map(f=>({...f,label:counts.get(f.label)>1?f.label+' ['+f.type+'; '+f.raw+']':f.label}))
+    .sort((a,b)=>a.label.localeCompare(b.label,'pt-BR')||a.key.localeCompare(b.key));
+}
+export function tableMatchesFilters(entry,filters={}){
+  return TABLE_FILTER_FIELDS.every(([field,,kind])=>entry.kind!==kind||!filters[field]||tableFacet(entry,field).key===filters[field]);
+}
