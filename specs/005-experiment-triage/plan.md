@@ -15,8 +15,10 @@ O0 reconciliação+spec → O1 (modelo/retenção || integração UI || testes b
 | triage_domain | work/atlas-triage-domain-20261105 / wt-domain | native_triage_model.js, native_retention.js, test_native_triage.mjs |
 | triage_browser_tests | test/atlas-triage-browser-20261105 / wt-browser-triage | fixture/harness novos; adaptação de navegação dos harness browser existentes sem retirar asserts; workflow próprio e reporter TAP |
 | ux_research_review | sessão não autora, leitura | fontes oficiais e revisão adversarial da composição |
+| final_regression_audit | sessão não autora, leitura | revisão final de deltas, contraste, geometria e screenshots; nenhum commit autoral |
+| browser_final_probes | checkout de integração, ownership temporário de um arquivo | somente browser_native_triage.mjs: provas adicionais de contraste, 1101 px e cartão focado; integração pelo root |
 
-Todos partem do SHA aceito 8e0e400d5220efceb6dd881772e5b07825442970. Integrar commits com cherry-pick -x; sem mexer branches anteriores, limpar worktrees ou force-push. Identidade técnica Git Codex não é assinatura humana independente.
+A linhagem parte do SHA aceito 8e0e400d5220efceb6dd881772e5b07825442970. Os owners revalidam o checkpoint antes de cada frente; no máximo três subagentes simultâneos, um writer por arquivo. Commits dos worktrees foram integrados com cherry-pick -x; os probes finais de um arquivo foram integrados pelo root após liberação do ownership. Sem mexer branches anteriores, limpar worktrees ou force-push. Identidade técnica Git Codex não é assinatura humana independente.
 
 ## Research / decisões
 Navegação sem role=menu, duas camadas; desktop 260 px em coluna reservada, recolhida liberando espaço; mobile painel modal temporário com foco confinado/retornado. Filtros contextuais recolhíveis, chips sempre visíveis. Barra de lote em fluxo sticky com rolagem e sem cobrir detalhes/minimapa. Reconhecimento, visibilidade de estado e prevenção de erros orientam apresentação tipada e intenções explícitas.

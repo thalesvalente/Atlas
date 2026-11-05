@@ -1,0 +1,25 @@
+{
+  "status": "PASS_SCOPED",
+  "checks": [
+    "exporter_output_reaches_installed_native_ui_with_readable_tree_without_iframe",
+    "large_tree_initial_focus_progressively_reveals_siblings",
+    "double_click_and_keyboard_toggle_preserve_node_target_and_focus",
+    "search_reaches_last_node_beyond_initial_24_siblings",
+    "all_1202_nodes_searchable_with_zoom_and_minimap",
+    "wide_titles_and_long_keys_fit_cards_without_changing_original_identity",
+    "duplicate_ids_preserved_status_filter_and_text_only_details",
+    "reused_p03_exact_numbers_null_missing_and_all_pages",
+    "table_detail_and_occurrence_export_contain_all_rows_exactly_without_rounding",
+    "json_rows_not_rounded_and_csv_formula_neutralized",
+    "resources_relations_timeline_and_unknown_collections_available",
+    "source_switch_clears_selection_and_full_export_matches_original_projection",
+    "explicit_update_button_rebuilds_fixed_source_catalog",
+    "mobile_reflow_no_page_errors_and_no_external_requests"
+  ],
+  "errors": [],
+  "external_requests": [],
+  "last_download_control": "Exportar projeção exata ↓",
+  "source_bytes_unchanged": true,
+  "tested_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+  "scope": "INSTALLED_NATIVE_UI_ENGINEERING_NOT_PRIVATE_HOST_PARITY"
+}

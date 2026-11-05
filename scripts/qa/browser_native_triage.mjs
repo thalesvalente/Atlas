@@ -595,6 +595,9 @@ try {
           await focusable.last().focus();
           await layoutPage.keyboard.press('Tab');
           assert.equal(await sidebar.evaluate(node => node.contains(document.activeElement)), true, 'Tab does not escape the temporary modal drawer');
+          await focusable.first().focus();
+          await layoutPage.keyboard.press('Shift+Tab');
+          assert.equal(await focusable.last().evaluate(node => document.activeElement === node), true, 'Shift+Tab wraps to the last control inside the temporary drawer');
           await layoutPage.keyboard.press('Escape');
           assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
           assert.equal(await toggle.evaluate(node => document.activeElement === node), true);
