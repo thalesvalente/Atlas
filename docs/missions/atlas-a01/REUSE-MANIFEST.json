@@ -266,8 +266,8 @@
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
                 "start_line": 104,
                 "end_line": 158,
-                "sha256": "34e881eb7782f745d90227c86c12c72f5d8220d5cbae21bdc44c4e65e1ddc9e2",
-                "lf_normalized_sha256": "a3248abbda9c827a1aae14da545f3b012c502e48b31af1a8e149a15f07056321"
+                "sha256": "94a87821c8ff96d7b1ca698d9961b54c5934b385aa533819d4f16a84a00ce0ce",
+                "lf_normalized_sha256": "560456acdfd71e8900e3b5dabde201dcee2d8405e8241f340eefb640c33d09e1"
               }
             }
           ]
@@ -676,8 +676,8 @@
                 "kind": "COMPOSITION_CONTAINER_LINES_NOT_AST",
                 "start_line": 8,
                 "end_line": 338,
-                "sha256": "1672a32f5d03d5507cf1d088f6f463e48a5c9fe512bb04c17d6d28f05dcc8904",
-                "lf_normalized_sha256": "30d8baca50c13a00241db58be2dd55d5c77a61c6968449cfca507175dbd4c4d4"
+                "sha256": "792fb7226df88b43f2c63a269b23db928e6d3a7c47d116e66a3db59530185717",
+                "lf_normalized_sha256": "b8e79369bae8034ec2e21ca48f893dbf4c08b2b76bd862c87cb62382fb1695df"
               }
             }
           ],
@@ -1430,7 +1430,7 @@
     "packages/atlas/src/atlas_viewer/static/native_legacy.css": "5a23422970b2f4fb32aed261075c515f7c2d75e15a22b348346932a2da323464",
     "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "22a9962b97f281cb975c379372f7fc058ed22f81511967ab6b7a02706475a6b9",
     "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "7e43808b1bc82b573f6c54997f91fbf8a53b1443c27b6ec4e899e04ab0808dec",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "47eea6321a75d7c805cefb93edc7154caf0ec43ce17c91b01ba27b7e9c50902b",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "ddcaed9b73e1c947242f0117d13d74ba7f02d99499a198cae3d8f32c814e91ac",
     "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "57f896a1a56c2636e9bdeec39373b7562952d028c3e9b4176c44ba7133b8a549",
     "packages/atlas/src/atlas_viewer/static/native_notebook.js": "2ed261968f56c88646a0afb141e2336fac19aac3ca7743bd4c5c43447a32b301",
     "packages/atlas/src/atlas_viewer/static/native_notebook.html": "9fca68fca7ccaf740e2713947b4af75ea9b5602c3e5610748e3801709df558df",
@@ -1440,7 +1440,7 @@
     "packages/atlas/src/atlas_viewer/static/native_legacy.css": "51edfb97e824828f32433859aab633dcbb948df8a81ca2fb8521526e286a5568",
     "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "57e548c35a060f5d555c448bb419c06f9dcbe269d272e29a3fa5a14e965532c3",
     "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "270969e2326eff001bc7af8d0659ba0cce274cb50a861e0867593ed8f8a6d24e",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "743124925bf9fe744be0558d7fcf7c1760085807b683e5f50c1c2291983010f2",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "73f19608fae9d74433135368c5eb998b35382aec9033bc8522960912932aabce",
     "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "4aa6962fb22360e3b3ceed43658f1ef6398f17ea55d18170f935b20f3e8e5fc1",
     "packages/atlas/src/atlas_viewer/static/native_notebook.js": "c5562123dd7fc0cf2b407d4fd8bdc1acf59d579b2b983fd387355e2fd5a2cf73",
     "packages/atlas/src/atlas_viewer/static/native_notebook.html": "1b4430a0fee8a17eddf94e834219fad6c8ca361b00ecfed5ed3b08908e2ed399",
