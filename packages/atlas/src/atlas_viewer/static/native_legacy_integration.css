@@ -107,7 +107,7 @@
 @media(max-width:720px){.legacy-port .table-domain-filters label{flex-basis:120px}.legacy-port .table-domain-filters button{min-height:36px}}
 
 /* Feature 005: one principal navigation, contextual filters and explicit batch. */
-.triage{scroll-padding-top:160px}.triage :is(button,summary,input,select){scroll-margin-block:170px 220px}
+.triage{--muted:#536c7b;scroll-padding-top:160px}.triage :is(button,summary,input,select){scroll-margin-block:170px 220px}
 .triage .topbar{gap:16px;min-height:80px;height:auto}.triage .topbar .heading{flex:1;min-width:0}
 .triage #native-menu-toggle{min-height:44px;flex-shrink:0;background:#fff;color:#193a3d;font-size:12px;max-width:180px;white-space:normal}
 .triage .app-shell{grid-template-columns:minmax(0,1fr);min-height:calc(100vh - 80px)}
@@ -155,8 +155,9 @@
 .triage .triage-compare{max-width:100%;overflow:auto}.triage .triage-compare table{min-width:650px;width:100%}.triage .triage-compare th,.triage .triage-compare td{min-width:120px;max-width:280px;font-size:12px}
 .triage .triage-reference-copy{width:100%;min-height:140px;font:12px/1.5 monospace;white-space:pre-wrap;overflow-wrap:anywhere}
 .triage :is(summary,button,input,select):focus-visible{outline:3px solid #176488;outline-offset:3px}
+.triage .topbar :is(button,a):focus-visible{outline:3px solid #8bd5db;outline-offset:3px}
 /* Keep the initial work surface within reach; empty filter chrome has no job. */
-.triage .intro{padding:10px 16px;margin-bottom:8px}.triage .intro h2{margin:0}.triage .intro p{margin:4px 0 0}
+.triage .intro{padding:10px 16px;margin-bottom:8px}.triage .intro h2{margin:0}.triage .intro p{margin:4px 0 0;color:var(--muted)}
 .triage .triage-query{margin:8px 0}.triage .mobile-filters{margin:8px 0}
 .triage .triage-active-filters:has(#native-clear:disabled){display:none}
 .triage .application-provenance{margin:6px 0}.triage .triage-select-actions{margin:6px 0}
@@ -165,6 +166,7 @@
  .triage:has(#native-detail:not([hidden])) .triage-batch-bar{margin-right:440px}
  .triage:has(#native-detail:not([hidden])) :is(.intro,.triage-query,.mobile-filters,.triage-active-filters,.application-provenance,.triage-select-actions){margin-right:440px}
  .triage:has(#native-detail:not([hidden])) .intro{flex-wrap:wrap}
+ .triage:has(#native-detail:not([hidden])) .triage-query{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
 }
 @media(max-width:1100px){.triage .topbar h1{font-size:17px}.triage .topbar .eyebrow{font-size:9px}.triage main{padding:16px}.triage .triage-query{grid-template-columns:1fr 1.5fr}}
 @media(max-width:720px){

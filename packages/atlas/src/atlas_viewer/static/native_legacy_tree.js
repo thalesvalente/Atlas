@@ -148,9 +148,9 @@ function drawNode(node,parent=svg,miniature=false) {
  }else{
   const lines=wrapped(node.title,node.w>=240?35:28,2);
   lines.forEach((line,i)=>g.appendChild(s('text',{x:15,y:25+i*16,'font-size':node.w>=240?12.8:12.1,'font-weight':730,fill:'#263D4C'},line)));
-  const status=stateLabel.replaceAll('_',' ').slice(0,options.onBatchToggle?26:node.w>=240?39:27);
+  const status=stateLabel.replaceAll('_',' ').slice(0,node.w>=240?39:27);
   g.appendChild(s('text',{x:15,y:node.h-28,'font-size':10.5,'font-weight':650,fill:execution.ink},status));
-  g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#496777'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,options.onBatchToggle?26:38)));
+  g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#496777'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,38)));
  }
  g.appendChild(s('title',{},isRoot?'Abrir árvore completa; linhas de organização não significam causalidade.':isTheme?`${node.title}\n${node.count} registros; organização, sem inferir causalidade.`:isFamily?`${node.title}\n${node.count} registros; clique para expandir.`:[r?.title,stateLabel,r?.id].filter(value=>value!==undefined&&value!=='').join('\n')));
  if(!miniature){

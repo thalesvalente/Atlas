@@ -5,8 +5,15 @@
 export async function openNativePane(page, name) {
   const destination = page.locator('[data-pane="' + name + '"]');
   const toggle = page.locator('#native-menu-toggle');
-  if (await toggle.count() && await toggle.getAttribute('aria-expanded') === 'false') {
-    await toggle.click();
+  if (await toggle.count()) {
+    // A viewport change updates CSS before the media-query event updates the
+    // labelled drawer state. Wait for that observable state before deciding
+    // whether a real click is needed; never click a stale desktop rail.
+    await page.waitForFunction(() => {
+      const mobile = matchMedia('(max-width:720px)').matches;
+      return mobile === (document.getElementById('native-menu-toggle').textContent === 'Menu');
+    });
+    if (await toggle.getAttribute('aria-expanded') === 'false') await toggle.click();
   }
   await revealNativeControl(page, destination);
   await destination.click();
