@@ -161,8 +161,10 @@
 .triage .triage-active-filters:has(#native-clear:disabled){display:none}
 .triage .application-provenance{margin:6px 0}.triage .triage-select-actions{margin:6px 0}
 @media(min-width:1101px){
- .triage .workspace:has(>.detail:not([hidden])) :is(.graph-toolbar,.editorial-tree .toolbar,.editorial-tree .tree-controls){margin-right:440px}
+ .triage .workspace:has(>.detail:not([hidden])) :is(.graph-toolbar,.editorial-tree .toolbar,.editorial-tree .tree-controls,#native-content>.toolbar){margin-right:440px}
  .triage:has(#native-detail:not([hidden])) .triage-batch-bar{margin-right:440px}
+ .triage:has(#native-detail:not([hidden])) :is(.intro,.triage-query,.mobile-filters,.triage-active-filters,.application-provenance,.triage-select-actions){margin-right:440px}
+ .triage:has(#native-detail:not([hidden])) .intro{flex-wrap:wrap}
 }
 @media(max-width:1100px){.triage .topbar h1{font-size:17px}.triage .topbar .eyebrow{font-size:9px}.triage main{padding:16px}.triage .triage-query{grid-template-columns:1fr 1.5fr}}
 @media(max-width:720px){
