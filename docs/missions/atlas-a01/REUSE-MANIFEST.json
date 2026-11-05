@@ -597,9 +597,9 @@
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
                 "start_line": 313,
-                "end_line": 323,
-                "sha256": "0e197dbe9eb07e6073bb29062e3c1e5d6feac5f0b68fa4929caf3d0077ee6b6a",
-                "lf_normalized_sha256": "7b4a918adf533e43de535a83a8b0539b61bf0cc8bb90d65f96d6ac40a20edabc"
+                "end_line": 324,
+                "sha256": "b23c5fb000a6b23460bca704f4fc4aee3a6f7c2c890b50326c7e78fde6e505b4",
+                "lf_normalized_sha256": "34867f6b0b3336d95aebbea04ec13a0df6f2d0d6176057115c56113ab536056a"
               }
             }
           ]
@@ -622,8 +622,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 324,
-                "end_line": 324,
+                "start_line": 325,
+                "end_line": 325,
                 "sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f",
                 "lf_normalized_sha256": "43c800566353ebe7e2f925816f4aad0341096b5cf1b2e93b3646397747e2345f"
               }
@@ -648,8 +648,8 @@
               "declaration_kind": "function",
               "span": {
                 "kind": "REVIEWED_DECLARATION_LINES_NOT_AST",
-                "start_line": 325,
-                "end_line": 325,
+                "start_line": 326,
+                "end_line": 326,
                 "sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2",
                 "lf_normalized_sha256": "729e85992fa62ad2781f36d8b08c57463e50c940075bc66520e0d26974be40e2"
               }
@@ -675,9 +675,9 @@
               "span": {
                 "kind": "COMPOSITION_CONTAINER_LINES_NOT_AST",
                 "start_line": 8,
-                "end_line": 337,
-                "sha256": "5dcfd2f4a721c9958fb96a406f9617fb629ff7d34d46413ce1e5ec472ecf26db",
-                "lf_normalized_sha256": "88713401fd69c264d84d8d441b4bbe7ccfb8dee09b17e319c8b7681dd48457d6"
+                "end_line": 338,
+                "sha256": "1672a32f5d03d5507cf1d088f6f463e48a5c9fe512bb04c17d6d28f05dcc8904",
+                "lf_normalized_sha256": "30d8baca50c13a00241db58be2dd55d5c77a61c6968449cfca507175dbd4c4d4"
               }
             }
           ],
@@ -1428,9 +1428,9 @@
   ],
   "destination_sha256": {
     "packages/atlas/src/atlas_viewer/static/native_legacy.css": "5a23422970b2f4fb32aed261075c515f7c2d75e15a22b348346932a2da323464",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "5ecb56e54ac713a5c8a0fffd46ca49735daba41a7efe530760d91f2c7c8a6079",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "22a9962b97f281cb975c379372f7fc058ed22f81511967ab6b7a02706475a6b9",
     "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "7e43808b1bc82b573f6c54997f91fbf8a53b1443c27b6ec4e899e04ab0808dec",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "1ab11d54f9024c3627e9551b3c11c3d53f14c7c47b4355f1aa09efefad423dab",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "47eea6321a75d7c805cefb93edc7154caf0ec43ce17c91b01ba27b7e9c50902b",
     "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "57f896a1a56c2636e9bdeec39373b7562952d028c3e9b4176c44ba7133b8a549",
     "packages/atlas/src/atlas_viewer/static/native_notebook.js": "2ed261968f56c88646a0afb141e2336fac19aac3ca7743bd4c5c43447a32b301",
     "packages/atlas/src/atlas_viewer/static/native_notebook.html": "9fca68fca7ccaf740e2713947b4af75ea9b5602c3e5610748e3801709df558df",
@@ -1438,9 +1438,9 @@
   },
   "destination_lf_normalized_sha256": {
     "packages/atlas/src/atlas_viewer/static/native_legacy.css": "51edfb97e824828f32433859aab633dcbb948df8a81ca2fb8521526e286a5568",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "0274da76291c4ab8c76d62d37c4680f7dc07f7e5edb87d9f5b938522ca616de9",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "57e548c35a060f5d555c448bb419c06f9dcbe269d272e29a3fa5a14e965532c3",
     "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "270969e2326eff001bc7af8d0659ba0cce274cb50a861e0867593ed8f8a6d24e",
-    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "5a6af48eedca2fe7de18387b3a8a8177ddac7c06345d61042279ea0e6584a80f",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "743124925bf9fe744be0558d7fcf7c1760085807b683e5f50c1c2291983010f2",
     "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "4aa6962fb22360e3b3ceed43658f1ef6398f17ea55d18170f935b20f3e8e5fc1",
     "packages/atlas/src/atlas_viewer/static/native_notebook.js": "c5562123dd7fc0cf2b407d4fd8bdc1acf59d579b2b983fd387355e2fd5a2cf73",
     "packages/atlas/src/atlas_viewer/static/native_notebook.html": "1b4430a0fee8a17eddf94e834219fad6c8ca361b00ecfed5ed3b08908e2ed399",

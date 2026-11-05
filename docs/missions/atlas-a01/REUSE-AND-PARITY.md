@@ -63,6 +63,8 @@ produtos e relações antes da inspeção técnica. O painel não reduz a largur
 Ao focar um registro, a câmera considera a região visível livre desse painel;
 no celular, traz o mapa à área útil antes de enquadrar o cartão acima dos detalhes.
 Isso adapta a câmera original à composição com sobreposição, sem encobrir a seleção.
+O painel usa faixa inferior também em larguras intermediárias até 1100px;
+o foco reduz a margem lateral de contexto em áreas estreitas para manter o cartão legível.
 Títulos sem espaços quebram em linhas; o título integral permanece no nome
 acessível, na descrição SVG, nos detalhes e nas exportações.
 Filtros e opções editoriais móveis recolhem ao entrar no breakpoint e podem ser reabertos. O cabeçalho evita repetir a introdução para manter o mapa alcançável.

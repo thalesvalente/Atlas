@@ -317,7 +317,8 @@ function focusNode(id){
  // work surface into view before choosing the available camera rectangle.
  if(!area||area.right-area.left<180||area.bottom-area.top<180){svg.scrollIntoView?.({block:'center',inline:'nearest',behavior:'instant'});({rect,area}=focusArea());}
  if(!area||!rect.width||!rect.height){setBox([n.x-65,n.y-80,n.w+130,n.h+160]);return;}
- const scale=Math.min((area.right-area.left)/(n.w+130),(area.bottom-area.top)/(n.h+160));
+ const horizontalPadding=area.right-area.left<400?32:130;
+ const scale=Math.min((area.right-area.left)/(n.w+horizontalPadding),(area.bottom-area.top)/(n.h+160));
  const cx=(area.left+area.right)/2-rect.left,cy=(area.top+area.bottom)/2-rect.top;
  setBox([n.x+n.w/2-cx/scale,n.y+n.h/2-cy/scale,rect.width/scale,rect.height/scale]);
 }

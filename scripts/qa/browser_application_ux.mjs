@@ -124,8 +124,8 @@ try{
     check('required_graph_cancel_api_is_available');
   }
   await page.locator('#native-tree-mode').selectOption('editorial');
-  for(const width of [1440,390]){
-    await page.setViewportSize({width,height:width===390?844:1000});
+  for(const width of [1440,1024,800,390,320]){
+    await page.setViewportSize({width,height:width<=720?844:1000});
     if(width===390)await page.waitForFunction(()=>matchMedia('(max-width:720px)').matches&&!document.querySelector('.mobile-filters').open);
     if(!await page.locator('#native-record-index .node-card').filter({hasText:'Registro principal'}).isVisible())await page.locator('.mobile-filters>summary').click();
     if(width===390){
