@@ -196,7 +196,12 @@ def main():
             if not same:
                 report["status"] = "FAIL"
             report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
-        return result.returncode if same else 1
+        if result.returncode or not same:
+            return result.returncode if same else 1
+        # Additive A01 gate: preserve every original check and its source oracle.
+        a01 = subprocess.run([sys.executable, str(Path(__file__).with_name("run_a01_application_ux_browser.py")),
+                              "--work", str(work), "--repo", str(root)], cwd=root, check=False)
+        return a01.returncode
     finally:
         process.terminate()
         try:

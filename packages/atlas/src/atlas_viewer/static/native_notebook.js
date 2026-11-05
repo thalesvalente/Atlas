@@ -2,11 +2,11 @@ import {renderTable} from './parity02_p03_table.js';
 import {mountGraph} from './native_graph.js';
 import {buildNativeNavigation} from './native_navigation.js';
 import {mountLineage} from './native_lineage.js';
-import {makePresentation,recordMatches,recordSort,norm,literalText,catalogTitle,catalogStatus} from './native_legacy_model.js';
+import {makePresentation,recordMatches,recordSort,norm,literalText,catalogTitle,catalogStatus,TABLE_FILTER_FIELDS,tableFilterOptions,tableMatchesFilters} from './native_legacy_model.js';
 import {mountEditorialTree} from './native_legacy_tree.js';
 import {renderRecordIndex,renderRecordPresentation,renderPresentationDetail,renderReadingTable,renderDatasetNotice,renderRelationPresentation,renderCatalog,ASSET_COLLECTIONS} from './native_legacy_views.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-const state={sources:[],source:null,pane:'tree',treeMode:'editorial',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],presentation:null,editorial:{},tableView:'reading',columnOrder:'presentation',assetGroup:'product_items',relationMode:'records'};
+const state={sources:[],source:null,pane:'tree',treeMode:'editorial',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],presentation:null,editorial:{},tableView:'reading',columnOrder:'presentation',tableFilters:{},assetGroup:'product_items',relationMode:'records'};
 const el=(tag,text=null,cls='')=>{const n=document.createElement(tag);if(text!==null)n.textContent=String(text);if(cls)n.className=cls;return n;};
 const button=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
 let detailTrigger=null;
@@ -42,7 +42,7 @@ function population(host,rows,total,noun){
   const p=el('p',null,'application-population');p.append(el('strong',String(rows.length)),document.createTextNode(` ${noun} na seleção de ${total} nesta revisão.`));host.append(p);
   if(!rows.length){const empty=el('div',null,'empty');empty.append(el('h3',total?'Nenhum resultado para estes filtros':'Nenhuma ocorrência declarada'),el('p',total?'Ajuste a busca ou limpe os filtros para explorar esta seção.':'Esta seção está vazia na revisão selecionada. As outras visualizações continuam disponíveis.'));if(total)empty.append(button('Limpar filtros',clearFilters));host.append(empty);}
 }
-function clearFilters(){for(const id of ['native-search','native-family','native-status','native-kind'])$(id).value='';state.page=0;state.columnPage=0;closeDetail();state.editorial={};render();}
+function clearFilters(){state.tableFilters={};for(const id of ['native-search','native-family','native-status','native-kind'])$(id).value='';state.page=0;state.columnPage=0;closeDetail();state.editorial={};render();}
 const entries=()=>state.source?.status==='READY'?state.source.entries:[];
 const presentation=()=>state.presentation??=makePresentation(entries());
 const recordFilters=()=>({query:$('native-search').value,family:$('native-family').value,kind:$('native-kind').value,status:$('native-status').value});
@@ -103,7 +103,7 @@ function exactOccurrenceJSON(e){
     head.slice(offset+1);
 }
 function navigation(){return state.navigation??=buildNativeNavigation(entries());}
-function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,treeMode:state.treeMode,page:state.page,table:state.table,columnPage:state.columnPage,tableView:state.tableView,columnOrder:state.columnOrder,assetGroup:state.assetGroup,relationMode:state.relationMode,detail:state.detail,search:$('native-search').value,family:$('native-family').value,status:$('native-status').value,kind:$('native-kind').value};}
+function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,treeMode:state.treeMode,page:state.page,table:state.table,columnPage:state.columnPage,tableView:state.tableView,columnOrder:state.columnOrder,tableFilters:{...state.tableFilters},assetGroup:state.assetGroup,relationMode:state.relationMode,detail:state.detail,search:$('native-search').value,family:$('native-family').value,status:$('native-status').value,kind:$('native-kind').value};}
 function pagedLinks(host,items,draw){
   let page=0;const content=el('div'),controls=el('div',null,'pager');host.append(content,controls);
   const show=()=>{content.replaceChildren();for(const item of items.slice(page*40,(page+1)*40))content.append(draw(item));controls.replaceChildren();if(items.length>40){const previous=button('← Vínculos',()=>{page--;show();}),next=button('Vínculos →',()=>{page++;show();});previous.disabled=page===0;next.disabled=(page+1)*40>=items.length;controls.append(previous,el('span',`${page*40+1}–${Math.min((page+1)*40,items.length)} de ${items.length}`),next);}};show();
@@ -115,7 +115,7 @@ function openOccurrence(uid){
   if(target.kind==='node')state.treeMode='structural';
   if(target.kind==='asset')state.assetGroup=target.group;
   if(target.kind==='relation')state.relationMode=target.group==='edges'?'records':'technical';
-  state.page=0;state.columnPage=0;
+  state.page=0;state.columnPage=0;state.tableFilters={};
   if(target.kind==='table'||target.kind==='row')state.table=target.table_uid||target.uid;
   for(const id of ['native-search','native-family','native-status','native-kind'])$(id).value='';
   if(target.kind==='row')state.page=Math.floor(target.ordinal/100);
@@ -130,7 +130,7 @@ function openOccurrence(uid){
 function returnToSelection(){
   const saved=state.history.pop();if(!saved)return;
   if(saved.source!==state.source?.id||saved.snapshot!==state.source?.metadata_sha256){state.history=[];message('O snapshot mudou; selecione novamente a ocorrência.',true);return;}
-  Object.assign(state,{pane:saved.pane,treeMode:saved.treeMode,page:saved.page,table:saved.table,columnPage:saved.columnPage,tableView:saved.tableView,columnOrder:saved.columnOrder,assetGroup:saved.assetGroup,relationMode:saved.relationMode,detail:null});
+  Object.assign(state,{pane:saved.pane,treeMode:saved.treeMode,page:saved.page,table:saved.table,columnPage:saved.columnPage,tableView:saved.tableView,columnOrder:saved.columnOrder,tableFilters:{...saved.tableFilters},assetGroup:saved.assetGroup,relationMode:saved.relationMode,detail:null});
   contextualFilterOptions();
   $('native-search').value=saved.search;$('native-family').value=saved.family;$('native-status').value=saved.status;$('native-kind').value=saved.kind;
   render();const target=navigation().byUid.get(saved.detail);if(target){if(state.pane==='tree'&&state.graph)state.graph.locate(target.uid);detail(target,false);}
@@ -190,20 +190,39 @@ function showRecords(host,kind='record'){
   const all=entries().filter(e=>e.kind===kind),rows=kind==='record'?visibleRecords().sort(recordSort):all.filter(e=>matches(e));host.append(el('h2',kind==='relation'?'Relações declaradas':'Registros e resultados das fontes integradas'),el('p','Execução, publicação, admissão e revisão são estados distintos. IDs repetidos permanecem como ocorrências separadas.','muted'));population(host,rows,all.length,'ocorrências');if(!rows.length)return;const offset=pager(host,rows.length);
   if(kind==='record')renderRecordPresentation(host,rows.slice(offset,offset+100),detail);else grid(host,rows.slice(offset,offset+100),[['Relação',e=>e.title],['Coleção',e=>e.group]]);
 }
+function tableFilterControls(host){
+  const controls=el('fieldset',null,'table-tools table-domain-filters');
+  controls.append(el('legend','Filtros declarados das tabelas'));
+  for(const[field,title]of TABLE_FILTER_FIELDS){
+    const values=tableFilterOptions(entries(),field);if(!values.length)continue;
+    const label=el('label',title),select=el('select');select.id='native-table-filter-'+field;
+    select.setAttribute('aria-label',title+' da tabela');
+    const all=el('option','Todos');all.value='';select.append(all);
+    for(const value of values){const option=el('option',value.label);option.value=value.key;select.append(option);}
+    select.value=state.tableFilters[field]||'';label.append(select);controls.append(label);
+    select.addEventListener('change',()=>{state.tableFilters[field]=select.value;state.page=0;state.columnPage=0;closeDetail();rerenderFocus(select.id);});
+  }
+  if(controls.children.length===1)return;
+  const clear=button('Limpar filtros da tabela',()=>{state.tableFilters={};state.page=0;state.columnPage=0;closeDetail();rerenderFocus('native-table-clear');});
+  clear.id='native-table-clear';clear.disabled=!Object.values(state.tableFilters).some(Boolean);controls.append(clear);host.append(controls);
+}
 function showTables(host){
   const allTables=entries().filter(e=>e.kind==='table'),byTable=new Map(allTables.map(t=>[t.uid,[]]));host.append(el('h2','Tabelas de resultados'));
   if(!allTables.length){host.append(el('p','Nenhuma tabela declarada.','empty'));return;}
   for(const row of entries())if(row.kind==='row'&&byTable.has(row.table_uid))byTable.get(row.table_uid).push(row);
+  tableFilterControls(host);
   // A row can be found by any original field, in its declared table context.
   // Context only scopes the selection; no scientific field is rewritten.
-  const tables=allTables.filter(t=>matches(t)||byTable.get(t.uid).some(r=>matches(r,t)));
+  const rowMatches=(row,table)=>tableMatchesFilters(row,state.tableFilters)&&matches(row,table);
+  const tables=allTables.filter(t=>tableMatchesFilters(t,state.tableFilters)&&
+    ((!state.tableFilters.nucleus_id&&matches(t))||byTable.get(t.uid).some(r=>rowMatches(r,t))));
   host.append(el('p',`${tables.length} tabelas na seleção de ${allTables.length} carregadas.`,'muted'));
   if(!tables.length){host.append(el('p','Nenhuma tabela ou linha corresponde à busca e aos filtros.','empty'));return;}
   if(!tables.some(t=>t.uid===state.table))state.table=tables[0].uid;
   const label=el('label','Tabela'),sel=el('select');sel.id='native-table-select';
   for(const t of tables){const o=el('option',t.title);o.value=t.uid;sel.append(o);}sel.value=state.table;
   sel.addEventListener('change',()=>{state.table=sel.value;state.page=0;state.columnPage=0;closeDetail();rerenderFocus('native-table-select');});label.append(sel);host.append(label);
-  const table=tables.find(t=>t.uid===state.table),allRows=byTable.get(state.table),rows=allRows.filter(e=>matches(e,table));
+  const table=tables.find(t=>t.uid===state.table),allRows=byTable.get(state.table),rows=allRows.filter(e=>rowMatches(e,table));
   renderDatasetNotice(host,table,presentation());
   const cols=[...new Set(allRows.flatMap(r=>Object.keys(r.cells)))],start=pager(host,rows.length),windowRows=rows.slice(start,start+100),columnPages=Math.max(1,Math.ceil(cols.length/32));
   state.columnPage=Math.min(state.columnPage,columnPages-1);const visibleColumns=cols.slice(state.columnPage*32,(state.columnPage+1)*32),tools=el('div',null,'toolbar');
@@ -271,6 +290,8 @@ function render(){
   const host=$('native-content');host.replaceChildren();contextualFilterOptions();
   document.querySelectorAll('[data-pane]').forEach(b=>{if(b.dataset.pane===state.pane)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
   const filters=[$('native-search').value.trim()&&'Busca: '+$('native-search').value.trim(),$('native-family').value&&'Família: '+presentation().familyLabel($('native-family').value),$('native-status').value&&'Estado: '+$('native-status').value,$('native-kind').value&&'Tipo: '+$('native-kind').value].filter(Boolean);
+  const tableFilterCount=Object.values(state.tableFilters).filter(Boolean).length;
+  if(state.pane==='tables'&&tableFilterCount)filters.push('Filtros de tabelas: '+tableFilterCount);
   $('native-selection').textContent=filters.length?filters.join(' · '):'Todas as ocorrências da revisão selecionada';$('native-clear').disabled=!filters.length;
   $('native-selection').hidden=!filters.length;
   const records=visibleRecords();$('native-index-count').textContent=`${records.length} / ${presentation().records.length} registros`;
@@ -279,7 +300,7 @@ function render(){
   ({tree:showTree,records:showRecords,tables:showTables,relations:showRelations,assets:showAssets,timeline:showTimeline,coverage:showCoverage})[state.pane](host);markSelection();
 }
 function selectSource(){
-  state.source=state.sources.find(s=>s.id===$('native-source').value)||null;state.page=0;state.table=null;state.columnPage=0;state.navigation=null;state.presentation=null;state.editorial={};
+  state.source=state.sources.find(s=>s.id===$('native-source').value)||null;state.page=0;state.table=null;state.columnPage=0;state.navigation=null;state.presentation=null;state.editorial={};state.tableFilters={};
   closeDetail();$('native-detail-body').replaceChildren();$('native-search').value='';
   const list=entries(),records=presentation().records;contextualFilterOptions({preserve:false});options('native-kind',records.map(r=>r.filterKind),'Todos os tipos');options('native-status',records.map(r=>r.filterStatus),'Todos os resultados');
   const count=kind=>list.filter(e=>e.kind===kind).length;
