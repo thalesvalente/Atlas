@@ -116,7 +116,10 @@ def main() -> int:
                 time.sleep(.1)
         else:
             raise TimeoutError("TRIAGE_SERVER_TIMEOUT")
-        result = subprocess.run(["node", str(root / "scripts/qa/browser_native_triage.mjs"),
+        # The oracle may come from a successor checkout while --repo points at
+        # the immutable baseline. This permits a genuine RED on the same tests
+        # without copying or changing baseline product files.
+        result = subprocess.run(["node", str(Path(__file__).with_name("browser_native_triage.mjs")),
                                  "--url", f"http://127.0.0.1:{port}/notebook", "--expected", str(expected_path),
                                  "--report", str(report_path)], cwd=root, check=False)
         result_code = result.returncode
