@@ -128,6 +128,12 @@ try{
     await page.setViewportSize({width,height:width===390?844:1000});
     if(width===390)await page.waitForFunction(()=>matchMedia('(max-width:720px)').matches&&!document.querySelector('.mobile-filters').open);
     if(!await page.locator('#native-record-index .node-card').filter({hasText:'Registro principal'}).isVisible())await page.locator('.mobile-filters>summary').click();
+    if(width===390){
+      await page.getByRole('button',{name:'Zoom confortável',exact:true}).click();
+      const orientation=await page.locator('.editorial-svg').evaluate(svg=>{const m=svg.getBoundingClientRect(),r=svg.querySelector('.svg-root .node-surface').getBoundingClientRect();return {left:r.left,right:r.right,mapLeft:m.left,mapRight:m.right};});
+      assert.ok(orientation.left>=orientation.mapLeft&&orientation.right<=orientation.mapRight,'The initial comfortable camera must show the complete root horizontally: '+JSON.stringify(orientation));
+      check('mobile_editorial_comfortable_camera_keeps_root_title_inside_map');
+    }
     await page.locator('#native-record-index .node-card').filter({hasText:'Registro principal'}).click();
     const visibleSelection=await page.locator('.editorial-svg .svg-record.selected').evaluate(node=>{
       const r=node.getBoundingClientRect(),d=document.getElementById('native-detail').getBoundingClientRect();

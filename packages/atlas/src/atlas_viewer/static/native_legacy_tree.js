@@ -42,9 +42,10 @@ export function mountEditorialTree(host,model,rows,onSelect,persistent={},option
  map.append(el('div','Arraste para explorar · roda ou +/− para aproximar · Home mostra tudo','map-hint'));frame.append(map);
  frame.append(el('p','Tema e família organizam a leitura. Não declaram parentesco, causalidade nem aprovação científica.','graph-explanation'));
  function comfortable(){
-  const aspect=Math.max(.75,map.clientWidth/Math.max(350,map.clientHeight)),mobile=map.clientWidth<480,targetW=mobile?Math.min(450,full[2]):full[2];
-  const legibleHeight=Math.min(full[3],Math.max(450,targetW/aspect*(mobile?1:.83))),themes=graphNodes.filter(n=>n.type==='theme'),middle=themes[Math.floor(themes.length/2)];
-  const x=mobile&&middle?Math.max(0,middle.x+middle.w/2-targetW/2):full[0];setBox([x,full[1],targetW,legibleHeight]);
+  const aspect=Math.max(.75,map.clientWidth/Math.max(350,map.clientHeight)),mobile=map.clientWidth<480,themes=graphNodes.filter(n=>n.type==='theme'),middle=themes[Math.floor(themes.length/2)];
+  const anchor=graphNodes.find(n=>n.type==='root')??middle;
+  const targetW=mobile?Math.min(Math.max(450,(anchor?.w??0)+46),full[2]):full[2],legibleHeight=Math.min(full[3],Math.max(450,targetW/aspect*(mobile?1:.83)));
+  const x=mobile&&anchor?Math.max(0,anchor.x+anchor.w/2-targetW/2):full[0];setBox([x,full[1],targetW,legibleHeight]);
  }
  function renderGraph(preserve=false){
   const old=[...box],result=layoutFamilies();graphNodes=result.nodes;graphEdges=[];full=result.box;svg.replaceChildren();
