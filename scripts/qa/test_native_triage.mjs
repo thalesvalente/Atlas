@@ -147,6 +147,24 @@ test('multiple facets combine without conflating publication and admission',()=>
   assert.equal(model.diagnose({query:'never-in-this-snapshot'}).status,'NOT_FOUND_IN_SNAPSHOT');
 });
 
+test('documentary status is distinct from execution and uses presence precedence',()=>{
+  const run=entry('run','record',{kind:'run',status:'FAILED'}),table=entry('table','table',{status:'TABLE_ONLY_STATE'}),
+    explicit=entry('explicit','record',{kind:'run',status:'SUCCEEDED',documentary_status:'REVIEW_PENDING'}),
+    nul=entry('null','table',{documentary_status:null,status:'TABLE_ONLY_STATE'}),model=createTriageModel(source([run,table,explicit,nul]));
+  assert.equal(model.facet(run,'documentary').present,false);
+  assert.equal(model.facet(table,'execution').present,false);
+  assert.deepEqual(ids(model.search({documentary:keyFor(model,table,'documentary')})),['table']);
+  assert.equal(model.facet(nul,'documentary').raw,'null');
+  assert.equal(model.facet(explicit,'execution').label,'SUCCEEDED');
+  assert.equal(model.facet(explicit,'documentary').label,'REVIEW_PENDING');
+});
+
+test('publication, admission and review NULL values stop their declared fallback',()=>{
+  const e=entry('null','record',{kind:'run',publication:null,publication_status:'published',admission:'',technical_admission:'ACCEPTED',review:false,review_state:'APPROVED'}),model=createTriageModel(source([e]));
+  assert.equal(model.facet(e,'publication').raw,'null');assert.equal(model.facet(e,'admission').raw,'""');assert.equal(model.facet(e,'review').raw,'false');
+  assert.equal(model.facet(e,'__proto__').present,false);
+});
+
 test('diagnosis distinguishes wrong type and absent requested dimensions',()=>{
   const table=entry('t','table',{id:'M1.1'}),run=entry('r','record',{id:'R',kind:'run',execution_state:'FAILED'}),model=createTriageModel(source([table,run]));
   assert.equal(model.diagnose({query:'M1.1',kind:keyFor(model,run,'kind')}).status,'TYPE_NOT_MATCHING');
@@ -166,6 +184,14 @@ test('evidence filtering distinguishes references, NULL, empty and absent withou
   assert.equal(model.options('evidence').length,5);
   for(const e of items)assert.deepEqual(ids(model.search({evidence:keyFor(model,e,'evidence')})),[e.uid]);
   assert.match(model.facet(items[3],'evidence').label,/não verificada/);
+});
+
+test('only declared links are navigable and missing links are not invented from names',()=>{
+  const table=entry('table','table',{id:'M1.1',record_id:'run-real'}),run=entry('run','record',{id:'run-real',kind:'run'}),
+    unlinked=entry('unlinked','record',{id:'M11',title:'M1.1 similar name',kind:'experiment'}),model=createTriageModel(source([table,run,unlinked]));
+  const links=model.links(table);assert.equal(links.status,'DECLARED_REFERENCES');
+  assert(links.outgoing.some(link=>link.label==='record_id'&&link.resolution==='UNIQUE'&&link.targets[0]==='run'));
+  assert.equal(model.links(unlinked).status,'LINK_NOT_PROVEN');
 });
 
 test('selection key includes source, revision, digest, UID and kind, never just title',()=>{
@@ -245,6 +271,15 @@ test('missing metadata stays absent while explicit NULL is exported and explaine
   assert(!Object.hasOwn(plan.items[0].declared,'metrics'));
   assert.equal(plan.items[1].declared.metrics[0].type,'null');assert.equal(plan.items[1].declared.metrics[0].raw_json,'null');
   assert(plan.items[0].gaps.some(x=>x.includes('Métricas')));assert(plan.items[1].gaps.some(x=>x.includes('NULL')));
+});
+
+test('table dossier includes complete exact rows without replacing the transport skeleton',()=>{
+  const table=entry('t','table',{id:'M1.1',rows:[]},{row_count:2}),
+    row0=rawEntry('r0','row','{"id":"RF0","cells":{"value":9007199254740993}}',{table_uid:'t',ordinal:0}),
+    row1=rawEntry('r1','row','{"id":"RF1","cells":{"value":0.123456789012345678901}}',{table_uid:'t',ordinal:1}),s=source([table,row0,row1]);
+  const item=buildDossier(s,[table]).items[0];assert.equal(item.raw_json,table.raw_json);
+  assert.equal(item.table_rows.count,2);assert.deepEqual(item.table_rows.rows.map(row=>row.raw_json),[row0.raw_json,row1.raw_json]);
+  assert.throws(()=>buildDossier(source([table,row0]),[table]),/TABLE_ROWS_INCOMPLETE/);
 });
 
 test('baseline, failed runs and unknown retention all remain protected even on removal intent',()=>{
