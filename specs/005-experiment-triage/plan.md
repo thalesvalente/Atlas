@@ -11,9 +11,9 @@ O0 reconciliação+spec → O1 (modelo/retenção || integração UI || testes b
 
 | Owner nativo | Branch/worktree | Escrita exclusiva |
 | --- | --- | --- |
-| root | feat/atlas-experiment-triage-20261105 / atlas | Feature005, HTML/CSS/controller, extensão aditiva da árvore, rotas estáticas e gate exato, CI e integração |
+| root | feat/atlas-experiment-triage-20261105 / atlas | Feature005, HTML/CSS/controller, extensão aditiva da árvore, rotas estáticas e gate exato, integração e ajuste final de CI |
 | triage_domain | work/atlas-triage-domain-20261105 / wt-domain | native_triage_model.js, native_retention.js, test_native_triage.mjs |
-| triage_browser_tests | test/atlas-triage-browser-20261105 / wt-browser-triage | fixture/harness novos; adaptação de navegação dos harness browser existentes sem retirar asserts |
+| triage_browser_tests | test/atlas-triage-browser-20261105 / wt-browser-triage | fixture/harness novos; adaptação de navegação dos harness browser existentes sem retirar asserts; workflow próprio e reporter TAP |
 | ux_research_review | sessão não autora, leitura | fontes oficiais e revisão adversarial da composição |
 
 Todos partem do SHA aceito 8e0e400d5220efceb6dd881772e5b07825442970. Integrar commits com cherry-pick -x; sem mexer branches anteriores, limpar worktrees ou force-push. Identidade técnica Git Codex não é assinatura humana independente.

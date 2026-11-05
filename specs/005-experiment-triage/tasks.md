@@ -5,12 +5,12 @@
 - [x] T002 Criar Feature005 com template/scripts oficiais, sem estado global; spec/plan/checklists e API de integração.
 
 ## O1 — Incrementos paralelos
-- [ ] T003 [P] [US1] Reproduzir divergência de execução e ausências reais com testes RED.
-- [ ] T004 [P] [US1] Implementar modelo tipado de busca/facetas/baselines e negativos.
-- [ ] T005 [P] [US1] Implementar lateral responsiva, busca global, filtros contextuais e localizar.
-- [ ] T006 [P] [US2] Implementar ledger e controles de lote sincronizados, revisão e comparação.
-- [ ] T007 [P] [US3] Implementar dossiê/plano inerte, intenções, proteção fail-closed e exportação.
-- [ ] T008 [P] Criar fixture 1200+, tarefas T01–T10 e browser em cinco viewports; adaptar navegação dos harness anteriores sem enfraquecê-los.
+- [x] T003 [P] [US1] Reproduzir divergência de execução e ausências reais com testes RED.
+- [x] T004 [P] [US1] Implementar modelo tipado de busca/facetas/baselines e negativos.
+- [x] T005 [P] [US1] Implementar lateral responsiva, busca global, filtros contextuais e localizar.
+- [x] T006 [P] [US2] Implementar ledger e controles de lote sincronizados, revisão e comparação.
+- [x] T007 [P] [US3] Implementar dossiê/plano inerte, intenções, proteção fail-closed e exportação.
+- [x] T008 [P] Criar fixture 1200+, tarefas T01–T10 e browser em cinco viewports; adaptar navegação dos harness anteriores sem enfraquecê-los.
 
 ## O2/O3 — Composição e qualificação
 - [ ] T009 Integrar commits com autoria/linhagem, revisar escopo e preservar baselines/P03.
