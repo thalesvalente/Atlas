@@ -1,17 +1,85 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Atlas — Caderno científico</title><link rel="stylesheet" href="/native_notebook.css"><link rel="stylesheet" href="/parity02_p03_table.css"><link rel="stylesheet" href="/native_legacy.css"><link rel="stylesheet" href="/native_legacy_integration.css"><script type="module" src="/native_notebook.js"></script><script src="/native_rebuild.js" defer></script></head>
-<body class="application legacy-port"><a class="skip" href="#native-main">Pular para o conteúdo</a>
-<header class="topbar"><a class="brand" href="/" aria-label="Atlas — visão do protocolo">A<span>tlas</span></a><div class="heading"><div class="eyebrow">CADERNO CIENTÍFICO / EXPLORADOR</div><h1>História experimental, resultados e evidências</h1></div><button class="quiet" id="native-refresh">Verificar alterações</button><span class="meta-date">Consulta local<br>Fontes preservadas</span></header>
-<div class="app-shell"><aside class="sidebar" aria-label="Busca e índice dos registros">
-<label for="native-source">Fonte / snapshot</label><select id="native-source" aria-label="Fonte do Caderno"></select>
-<label for="native-search">Encontrar em toda a história</label><div class="searchbox"><span aria-hidden="true">⌕</span><input id="native-search" type="search" placeholder="Título, identificador, família, run…" autocomplete="off"><button id="native-clear" type="button">Limpar</button></div>
-<details class="mobile-filters" open><summary>Filtros e índice de registros</summary><label for="native-family">Família</label><select id="native-family"><option value="">Todas as famílias</option></select><div class="filter-row"><div><label for="native-kind">Tipo de registro</label><select id="native-kind"><option value="">Todos os tipos</option></select></div><div><label for="native-status">Resultado</label><select id="native-status"><option value="">Todos</option></select></div></div><div class="navlist-head"><b id="native-index-count">0 registros</b></div><div id="native-record-index" class="node-list" aria-label="Índice integral de registros"></div></details>
-<div class="sidebar-foot"><b>Resultados ≠ apresentações ≠ relatos</b><p>Estados ausentes permanecem ausentes. A consulta não regenera experimentos.</p><a href="/">Visão do protocolo</a></div></aside>
-<main id="native-main" tabindex="-1"><div class="intro"><div><h2>Atlas de experimentos, resultados e apresentações.</h2><p>Explore a revisão selecionada por temas, famílias e referências documentadas.</p></div><div class="hero-links"><button id="native-download" disabled>Exportar projeção exata ↓</button><button id="native-rebuild">Atualizar snapshot</button></div></div>
-<div id="native-notice" class="notice" role="status" aria-live="polite">Abrindo pacotes selecionados…</div>
-<details class="application-provenance"><summary>População, revisão e limites da consulta</summary><section class="stats" aria-label="População do snapshot"><div class="stat"><span>Registros</span><strong id="native-record-count">0</strong></div><div class="stat"><span>Nós estruturais</span><strong id="native-node-count">0</strong></div><div class="stat"><span>Tabelas / linhas</span><strong id="native-table-count">0</strong></div><div class="stat"><span>Recursos</span><strong id="native-asset-count">0</strong></div></section><div class="context"><span id="native-revision"></span><span>Apresentação derivada · autenticidade não verificada · sem aprovação científica</span></div></details>
-<nav id="native-tabs" class="tabs" aria-label="Visualizações do Caderno"><button data-pane="tree" aria-current="page">Árvore</button><button data-pane="records">Registros e resultados</button><button data-pane="assets">Produtos e documentos</button><button data-pane="tables">Tabelas</button><button data-pane="relations">Relações</button><button data-pane="timeline">Linha do tempo</button><button data-pane="coverage">Cobertura e origens</button></nav>
-<p id="native-selection" class="application-selection" role="status" aria-live="polite"></p>
-<section id="native-workspace" class="workspace" aria-label="Consulta do snapshot"><div id="native-content" aria-busy="true"></div><aside id="native-detail" class="detail detail-pane" hidden aria-labelledby="native-detail-title"><div class="detail-head"><h2 id="native-detail-title" tabindex="-1">Detalhes</h2><button id="native-close-detail" aria-label="Fechar detalhes">×</button></div><div id="native-detail-body"></div></aside></section>
-<footer>Projeção documental · fontes preservadas · referências não são abertas automaticamente · sem aprovação científica.</footer>
-</main></div></body></html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas — Caderno científico</title>
+<link rel="stylesheet" href="/native_notebook.css"><link rel="stylesheet" href="/parity02_p03_table.css">
+<link rel="stylesheet" href="/native_legacy.css"><link rel="stylesheet" href="/native_legacy_integration.css">
+<script type="module" src="/native_notebook.js"></script><script src="/native_rebuild.js" defer></script>
+</head>
+<body class="application legacy-port triage">
+<a class="skip" href="#native-main">Pular para o conteúdo</a>
+<header class="topbar">
+  <button id="native-menu-toggle" type="button" aria-controls="native-sidebar" aria-expanded="false">Menu</button>
+  <a class="brand" href="/" aria-label="Atlas — visão do protocolo">A<span>tlas</span></a>
+  <div class="heading"><div class="eyebrow">CADERNO CIENTÍFICO / EXPLORADOR</div><h1>História experimental, resultados e evidências</h1></div>
+  <button class="quiet" id="native-refresh">Verificar alterações</button>
+</header>
+<button id="native-nav-backdrop" type="button" tabindex="-1" aria-hidden="true" hidden></button>
+<div class="app-shell">
+<aside id="native-sidebar" class="sidebar" aria-labelledby="native-nav-title" hidden>
+  <div class="triage-nav-head"><h2 id="native-nav-title">Explorar o Caderno</h2><button id="native-nav-close" type="button" aria-label="Fechar navegação">Fechar</button></div>
+  <nav id="native-tabs" aria-label="Navegação principal do Caderno">
+    <ul>
+      <li><button data-pane="overview">Visão geral</button></li>
+      <li><button data-pane="search">Busca global</button></li>
+      <li><details open><summary>Explorar registros</summary><ul>
+        <li><button data-pane="experiments">Experimentos e execuções</button></li>
+        <li><button data-pane="baselines">Baselines</button></li>
+        <li><button data-pane="tree" aria-current="page">Árvore e linhagem</button></li>
+        <li><button data-pane="records">Registros</button></li>
+        <li><button data-pane="tables">Tabelas</button></li>
+        <li><button data-pane="assets">Recursos e documentos</button></li>
+      </ul></details></li>
+      <li><details open><summary>Consultar contexto</summary><ul>
+        <li><button data-pane="relations">Relações</button></li>
+        <li><button data-pane="timeline">Linha do tempo</button></li>
+        <li><button data-pane="coverage">Cobertura e origens</button></li>
+      </ul></details></li>
+      <li><details open><summary>Inspecionar o lote</summary><ul>
+        <li><button data-pane="selected">Selecionados</button></li>
+        <li><button data-pane="retention">Plano de retenção</button></li>
+      </ul></details></li>
+    </ul>
+  </nav>
+  <div class="sidebar-foot"><b>Consulta com fontes preservadas</b><p>Seleção e intenções não autorizam exclusão.</p><a href="/">Visão do protocolo</a></div>
+</aside>
+<main id="native-main" tabindex="-1">
+  <div class="intro"><div><h2>Explore. Compare. Preserve.</h2><p>Registros, tabelas e evidências com identidade e origem explícitas.</p></div><div class="hero-links"><button id="native-download" disabled>Exportar projeção exata ↓</button><button id="native-rebuild">Atualizar snapshot</button></div></div>
+  <div id="native-notice" class="notice" role="status" aria-live="polite">Abrindo pacotes selecionados…</div>
+  <section class="triage-query" aria-label="Busca e contexto">
+    <label for="native-source">Fonte / snapshot<select id="native-source" aria-label="Fonte do Caderno"></select></label>
+    <label class="triage-search-label" for="native-search">Encontrar nesta revisão<div class="searchbox"><input id="native-search" type="search" placeholder="Título, identificador, família, run…" autocomplete="off"><button id="native-search-all" type="button">Busca global</button></div></label>
+  </section>
+  <details class="mobile-filters" id="native-filters">
+    <summary>Filtros contextuais <span id="native-filter-count"></span></summary>
+    <div class="triage-filter-grid">
+      <label for="native-family">Família<select id="native-family"><option value="">Todas</option></select></label>
+      <label for="native-kind">Tipo de registro / ocorrência<select id="native-kind"><option value="">Todos</option></select></label>
+      <label for="native-execution">Estado de execução<select id="native-execution"><option value="">Todos</option></select></label>
+      <label for="native-status">Grupo do resultado<select id="native-status"><option value="">Todos</option></select></label>
+      <label for="native-publication">Publicação<select id="native-publication"><option value="">Todas</option></select></label>
+      <label for="native-admission">Admissão<select id="native-admission"><option value="">Todas</option></select></label>
+      <label for="native-review">Revisão<select id="native-review"><option value="">Todas</option></select></label>
+      <label for="native-documentary">Estado documental<select id="native-documentary"><option value="">Todos</option></select></label>
+      <label for="native-baseline">Designação de baseline<select id="native-baseline"><option value="">Todas</option></select></label>
+      <label for="native-evidence">Evidências / artefatos<select id="native-evidence"><option value="">Todos</option></select></label>
+      <label for="native-from">Desde a data declarada<input id="native-from" type="date"></label>
+      <label for="native-to">Até a data declarada<input id="native-to" type="date"></label>
+    </div>
+    <details class="triage-index"><summary>Índice de registros · <span id="native-index-count">0 registros</span></summary><div id="native-record-index" class="node-list" aria-label="Índice integral de registros"></div></details>
+  </details>
+  <div class="triage-active-filters"><div id="native-filter-chips" aria-label="Filtros ativos"></div><button id="native-clear" type="button">Limpar filtros</button></div>
+  <p id="native-selection" class="application-selection" role="status" aria-live="polite"></p>
+  <details class="application-provenance"><summary>População, revisão e limites da consulta</summary><section class="stats" aria-label="População do snapshot"><div class="stat"><span>Registros</span><strong id="native-record-count">0</strong></div><div class="stat"><span>Nós estruturais</span><strong id="native-node-count">0</strong></div><div class="stat"><span>Tabelas / linhas</span><strong id="native-table-count">0</strong></div><div class="stat"><span>Recursos</span><strong id="native-asset-count">0</strong></div></section><div class="context"><span id="native-revision"></span><span>Apresentação derivada · autenticidade não verificada · sem aprovação científica</span></div></details>
+  <section id="native-batch-bar" class="triage-batch-bar" aria-label="Ações sobre a seleção explícita" hidden>
+    <p id="native-batch-summary" role="status" aria-live="polite"></p>
+    <div class="triage-batch-actions"><button id="native-compare">Comparar</button><button id="native-retention">Preparar plano de retenção</button><details><summary>Mais ações</summary><div class="triage-more-actions"><button id="native-batch-details">Ver detalhes</button><button id="native-copy-references">Copiar referências</button><button id="native-batch-links">Ver vínculos declarados</button><button id="native-dossier">Preparar dossiê</button><button id="native-clear-batch">Limpar seleção</button></div></details></div>
+  </section>
+  <div class="triage-select-actions"><button id="native-select-visible">Selecionar visíveis</button><button id="native-select-filtered">Selecionar todos os resultados filtrados</button></div>
+  <section id="native-workspace" class="workspace" aria-label="Consulta do snapshot"><div id="native-content" aria-busy="true"></div><aside id="native-detail" class="detail detail-pane" hidden aria-labelledby="native-detail-title"><div class="detail-head"><h2 id="native-detail-title" tabindex="-1">Detalhes</h2><button id="native-close-detail" aria-label="Fechar detalhes">×</button></div><div id="native-detail-body"></div></aside></section>
+  <footer>Fontes preservadas · planos são propostas · referências não são abertas automaticamente · sem aprovação científica.</footer>
+</main>
+</div>
+</body>
+</html>

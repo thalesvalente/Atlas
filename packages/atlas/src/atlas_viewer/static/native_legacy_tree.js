@@ -148,9 +148,9 @@ function drawNode(node,parent=svg,miniature=false) {
  }else{
   const lines=wrapped(node.title,node.w>=240?35:28,2);
   lines.forEach((line,i)=>g.appendChild(s('text',{x:15,y:25+i*16,'font-size':node.w>=240?12.8:12.1,'font-weight':730,fill:'#263D4C'},line)));
-  const status=stateLabel.replaceAll('_',' ').slice(0,node.w>=240?39:27);
+  const status=stateLabel.replaceAll('_',' ').slice(0,options.onBatchToggle?26:node.w>=240?39:27);
   g.appendChild(s('text',{x:15,y:node.h-28,'font-size':10.5,'font-weight':650,fill:execution.ink},status));
-  g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#496777'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,38)));
+  g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#496777'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,options.onBatchToggle?26:38)));
  }
  g.appendChild(s('title',{},isRoot?'Abrir árvore completa; linhas de organização não significam causalidade.':isTheme?`${node.title}\n${node.count} registros; organização, sem inferir causalidade.`:isFamily?`${node.title}\n${node.count} registros; clique para expandir.`:[r?.title,stateLabel,r?.id].filter(value=>value!==undefined&&value!=='').join('\n')));
  if(!miniature){
@@ -165,6 +165,20 @@ function drawNode(node,parent=svg,miniature=false) {
   g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();invoke(true);}});
  }
  parent.appendChild(g);
+ // A sibling control keeps focus/detail activation distinct from batch choice.
+ // Editorial containers never receive a checkbox or cascade a selection.
+ if(!miniature&&r&&options.onBatchToggle){
+  const selectedBatch=Boolean(options.isBatchSelected?.(r.entry));
+  const check=s('g',{transform:`translate(${node.x+node.w-40} ${node.y+node.h-39})`,class:'svg-batch',
+   role:'checkbox',tabindex:0,'data-batch-uid':r.entry.uid,'aria-checked':String(selectedBatch),
+   'aria-label':'Selecionar '+r.title+' no lote'});
+  check.append(s('rect',{x:0,y:0,width:34,height:34,rx:6,fill:selectedBatch?'#1a627c':'#fff',stroke:'#537e91','stroke-width':1.5}),
+   s('text',{x:17,y:24,'text-anchor':'middle','font-size':23,fill:'#fff'},selectedBatch?'✓':''));
+  check.addEventListener('pointerdown',event=>event.stopPropagation());
+  check.addEventListener('click',event=>{event.stopPropagation();options.onBatchToggle(r.entry);});
+  check.addEventListener('keydown',event=>{if(event.key===' '||event.key==='Enter'){event.preventDefault();event.stopPropagation();options.onBatchToggle(r.entry);}});
+  parent.append(check);
+ }
 }
 
 function focusTheme(id){const theme=graphNodes.find(n=>n.id===id);if(!theme)return;
@@ -299,6 +313,7 @@ function setBox(b){
  svg.setAttribute('viewBox',b.join(' '));
  $('zoomLabel').textContent=Math.round(zoomReferenceWidth/b[2]*100)+'%';
  updateMini();
+ queueMicrotask(()=>options.onVisibilityChange?.());
 }
 // The Native drawer is an overlay, unlike the original reserved detail column.
 // Fit the selection in the visible, unobstructed region without shrinking the map.
