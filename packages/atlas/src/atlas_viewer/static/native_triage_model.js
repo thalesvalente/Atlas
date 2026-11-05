@@ -99,8 +99,8 @@ export function baselineDesignation(source,entry,annotations=new Map()){
     sourceConfirmed,operatorDesignated:Boolean(annotation),conflict,
     declarations:declarations.map(({field,raw})=>({field,raw_json:raw})),
     explanation:sourceConfirmed?'Designação declarada; não comprova execução ou aceite científico.':
-      annotation?'Anotação explícita do operador; o DTO da fonte permanece intacto.':
-      conflict?'Declarações contraditórias; confirmação recusada.':'Nome, publicação e resultado não são prova de baseline.'};
+      conflict?'Declarações contraditórias; confirmação recusada.':
+      annotation?'Anotação explícita do operador; o DTO da fonte permanece intacto.':'Nome, publicação e resultado não são prova de baseline.'};
   if(annotation)result.annotation=annotation;
   if(fields.has('baseline_ref'))result.reference={raw_json:fields.get('baseline_ref'),status:'REFERENCE_ONLY_NOT_A_DESIGNATION'};
   return result;

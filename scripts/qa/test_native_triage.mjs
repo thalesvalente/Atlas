@@ -121,6 +121,17 @@ test('explicit baseline designation and contradictory declarations are separate'
   assert.equal(model.baseline(conflict).status,'CONFLICT');assert.equal(model.baseline(conflict).confirmed,false);
 });
 
+test('baseline conflict explanation takes precedence while retaining the operator note',()=>{
+  const e=entry('conflict-note','record',{kind:'baseline',is_baseline:false}),s=source([e]),ledger=new SelectionLedger(s),model=createTriageModel(s);
+  ledger.annotateBaseline(e,'Nota');const baseline=model.baseline(e,ledger.annotations);
+  assert.equal(baseline.status,'CONFLICT');assert.equal(baseline.confirmed,false);assert.equal(baseline.sourceConfirmed,false);
+  assert.match(baseline.explanation,/contraditórias/);assert.equal(baseline.annotation.note,'Nota');assert.equal(baseline.operatorDesignated,true);
+  const item=buildRetentionPlan(s,[e],ledger).items[0];
+  assert.equal(item.baseline.explanation,baseline.explanation);
+  assert.equal(item.protection.status,'PROTECTED');assert.equal(item.protection.removal_authorized,false);
+  assert(item.protection.reasons.includes('BASELINE_DECLARATION_CONFLICT'));
+});
+
 test('operator baseline annotation is session-scoped, attributable and never mutates DTO',()=>{
   const e=entry('manual','table',{id:'table',label:'Tabela sem designação'}),s=source([e]),before=e.raw_json,ledger=new SelectionLedger(s),model=createTriageModel(s);
   assert(model.options('baseline').some(x=>x.key==='OPERATOR_SESSION'));
