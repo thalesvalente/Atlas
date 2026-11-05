@@ -50,6 +50,8 @@ jobs:
         run: python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
       - name: Execute triage selection and fail-closed retention regressions
         run: node --test --test-reporter=tap scripts/qa/test_native_triage.mjs
+      - name: Reconcile current selection annotations and exact row context
+        run: node --test --test-reporter=tap scripts/qa/test_native_triage_ui.mjs
       - name: Preserve the complete A01 regression gate under Node 24
         run: python tests/viewer/test_native_notebook_a01_fix.py -v
       - name: Verify the exact Feature 005 static-route scope and hostile negatives
