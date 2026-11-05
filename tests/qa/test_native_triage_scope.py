@@ -1,7 +1,6 @@
 """Feature 005 may only add the three fixed assets to the accepted server bytes."""
 from pathlib import Path
 import importlib.util
-import subprocess
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -15,7 +14,15 @@ class TriageStaticScopeTests(unittest.TestCase):
     def test_successor_recovers_exact_accepted_server_and_changes_no_handlers(self):
         content = (ROOT / NAME).read_bytes()
         self.assertTrue(AUDIT.exact_triage_static_successor(NAME, content))
-        baseline = subprocess.check_output(['git', 'show', '8e0e400d5220efceb6dd881772e5b07825442970:' + NAME], cwd=ROOT)
+        # Recover the accepted bytes without requiring historical objects in a
+        # shallow CI checkout. The historical blob pin itself is unchanged.
+        baseline = content
+        for asset in ('native_triage_model', 'native_retention', 'native_triage_ui'):
+            line = (f'          "/{asset}.js": ("{asset}.js", '
+                    '"text/javascript; charset=utf-8"),\n').encode('utf-8')
+            self.assertEqual(baseline.count(line), 1)
+            baseline = baseline.replace(line, b'', 1)
+        self.assertEqual(AUDIT.git_blob_id(baseline), 'ccfbbf7e1f10e5f8a5939639c77adf8cb7c8dd43')
         self.assertTrue(AUDIT.exact_original_bridge(NAME, baseline))
         self.assertFalse(AUDIT.exact_triage_static_successor(NAME, baseline))
 

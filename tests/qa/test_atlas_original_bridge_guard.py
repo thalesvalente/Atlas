@@ -20,6 +20,16 @@ class ExactOriginalBridgeGuardTests(unittest.TestCase):
         for path, expected in ORIGINAL_BRIDGE_BLOBS.items():
             with self.subTest(path=path):
                 real_source_bytes = (REPO / path).read_bytes()
+                if path == 'packages/atlas/src/atlas_viewer/server.py':
+                    # Feature 005 is a strictly constrained successor, never a
+                    # replacement of the published original blob's identity.
+                    self.assertFalse(exact_original_bridge(path, real_source_bytes))
+                    self.assertTrue(AUDIT['exact_triage_static_successor'](path, real_source_bytes))
+                    for asset in ('native_triage_model', 'native_retention', 'native_triage_ui'):
+                        line = (f'          "/{asset}.js": ("{asset}.js", '
+                                '"text/javascript; charset=utf-8"),\n').encode('utf-8')
+                        self.assertEqual(real_source_bytes.count(line), 1)
+                        real_source_bytes = real_source_bytes.replace(line, b'', 1)
                 self.assertEqual(git_blob_id(real_source_bytes), expected)
                 self.assertTrue(exact_original_bridge(path, real_source_bytes))
                 self.assertFalse(exact_original_bridge(path, real_source_bytes + b" "))
