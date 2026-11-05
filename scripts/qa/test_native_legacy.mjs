@@ -615,7 +615,7 @@ for (const [name, states, selected] of [
       assert.ok(statusText, 'SVG status text must exist');
       assert.ok(tooltip, 'SVG tooltip must exist');
       assert.equal(statusText.textContent, selected===null?'':selected.replaceAll('_',' ').slice(0,27), 'SVG card');
-      assert.equal(tooltip.textContent, ['CXR01 synthetic',selected,'cxr01-record'].filter(v=>v!==null).join('\\n'), 'SVG title');
+      assert.equal(tooltip.textContent, ['CXR01 synthetic',selected,'cxr01-record'].filter(v=>v!==null).join('\n'), 'SVG title');
       renderRecordPresentation(tableHost,model.records,()=>{});
       assert.equal(tags(tableHost,'tbody')[0].children[0].children[2].textContent, selected??'Não declarado', 'record table');
       renderPresentationDetail(detailHost,original,model,buildNativeNavigation([original]),()=>{});
