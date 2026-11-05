@@ -166,6 +166,42 @@ try {
     assert.equal(await batchBox(page, 'state-empty').count(), 0);
   });
 
+  await check('G3_G4_declared_period_evidence_individual_chips_and_search_diagnostics', async () => {
+    await filteredClear(page);
+    await showFilters(page);
+    await page.locator('#native-from').fill('2026-10-01');
+    await page.locator('#native-to').fill('2026-10-01');
+    await choose(page, 'native-execution', 'SUCCEEDED');
+    assert.equal(await page.locator('#native-content [data-batch-uid]').count(), 1);
+    assert.equal(await batchBox(page, 'run-rf-proof').count(), 1);
+    await page.getByRole('button', {name: /^Remover filtro Estado de execução:/}).click();
+    assert.equal(await page.locator('#native-execution').inputValue(), '');
+    assert.equal(await page.locator('#native-from').inputValue(), '2026-10-01');
+    assert.equal(await page.locator('#native-to').inputValue(), '2026-10-01');
+    assert.equal(await page.locator('#native-content [data-batch-uid]').count(), 1);
+    await filteredClear(page);
+    await choose(page, 'native-evidence', 'Referências declaradas; presença física não verificada');
+    assert.equal(await batchBox(page, 'run-rf-proof').count(), 1);
+    assert.equal(await batchBox(page, 'state-missing').count(), 0);
+    await page.getByRole('button', {name: /^Remover filtro Evidência e artefatos:/}).click();
+    assert.equal(await page.locator('#native-evidence').inputValue(), '');
+
+    await search(page, 'M1.1');
+    await choose(page, 'native-kind', 'Execução (run)');
+    assert.equal(await page.locator('[data-result-uid]').count(), 0);
+    await page.getByText('Diagnóstico da busca e campos ausentes', {exact: true}).click();
+    assert.match(await page.locator('#native-content').innerText(), /TYPE_NOT_MATCHING/);
+    await filteredClear(page);
+    await search(page, 'M1.1');
+    await choose(page, 'native-execution', 'SUCCEEDED');
+    await page.getByText('Diagnóstico da busca e campos ausentes', {exact: true}).click();
+    assert.match(await page.locator('#native-content').innerText(), /FIELD_ABSENT/);
+    await filteredClear(page);
+    await search(page, 'NO-SUCH-ATLAS-ITEM-8465');
+    await page.getByText('Diagnóstico da busca e campos ausentes', {exact: true}).click();
+    assert.match(await page.locator('#native-content').innerText(), /NOT_FOUND_IN_SNAPSHOT/);
+  });
+
   await check('T03_locate_expands_editorial_groups_and_focuses_exact_result', async () => {
     await filteredClear(page);
     await search(page, 'volume-1199');
@@ -245,6 +281,9 @@ try {
   });
 
   await check('T06_T07_T08_retention_export_is_exact_protected_and_non_executable', async () => {
+    await openNativePane(page, 'baselines');
+    await batchBox(page, 'M1.1').check();
+    assert.equal(await selectedCount(page), 3);
     await page.locator('#native-retention').click();
     assert.match(await page.locator('#native-content').innerText(), /A medir no ambiente LOCAL/);
     await page.locator('[data-intent-uid=' + attr(uid('run-rf-proof')) + ']').selectOption('REVIEW_FOR_REMOVAL');
@@ -256,17 +295,18 @@ try {
     assert.equal(plan.DELETE_AUTHORIZED, 'NO');
     assert.equal(plan.source.revision, expected.revision_a);
     assert.match(plan.source.metadata_sha256, /^[a-f0-9]{64}$/);
-    assert.equal(plan.selection.length, 2);
-    assert.equal(new Set(plan.selection.map(item => item.selection_key)).size, 2);
-    assert.deepEqual(new Set(plan.selection.map(item => item.uid)), new Set([uid('run-rf-proof'), uid('state-missing')]));
+    assert.equal(plan.selection.length, 3);
+    assert.equal(new Set(plan.selection.map(item => item.selection_key)).size, 3);
+    assert.deepEqual(new Set(plan.selection.map(item => item.uid)), new Set([uid('run-rf-proof'), uid('state-missing'), uid('M1.1')]));
     for (const item of plan.selection) {
       assert.equal(item.source_revision, expected.revision_a);
       assert.equal(item.source_metadata_sha256, plan.source.metadata_sha256);
       assert.equal(item.source_id, plan.source.id);
-      assert.equal(item.dto_kind, 'record');
+      assert.equal(item.dto_kind, item.uid === uid('M1.1') ? 'table' : 'record');
     }
     const baseline = plan.items.find(item => item.identity.uid === uid('run-rf-proof'));
     const missing = plan.items.find(item => item.identity.uid === uid('state-missing'));
+    const table = plan.items.find(item => item.identity.uid === uid('M1.1'));
     assert.equal(baseline.raw_json, expected.raw_json['run-rf-proof']);
     assert.ok(baseline.raw_json.includes('9007199254740993'));
     assert.ok(baseline.raw_json.includes('0.123456789012345678901'));
@@ -284,6 +324,13 @@ try {
     assert.equal(missing.intent, 'UNDECIDED');
     assert.equal(missing.execution.present, false);
     assert.ok(missing.gaps.length > 0);
+    assert.equal(table.type, 'table');
+    assert.equal(table.execution.present, false, 'A requirements table is never classified as an execution');
+    assert.equal(table.raw_json, expected.raw_json['M1.1']);
+    assert.equal(table.table_rows.status, 'COMPLETE_FOR_SNAPSHOT');
+    assert.equal(table.table_rows.count, 39);
+    assert.equal(table.table_rows.transport_skeleton, true);
+    assert.deepEqual(table.table_rows.rows.map(row => row.raw_json), expected.table_rows_raw_json);
     assert.equal(plan.space_estimate.status, 'NOT_MEASURED');
     assert.equal(plan.space_estimate.label, 'A medir no ambiente LOCAL');
     assert.equal(plan.provenance.source_read_only, true);
@@ -303,6 +350,51 @@ try {
     assert.equal(await batchBox(page, 'baseline-reference-only').count(), 0);
     assert.equal(await batchBox(page, 'M1').count(), 0);
     assert.equal(await batchBox(page, 'M11').count(), 0);
+  });
+
+  await check('G5_operator_baseline_annotation_has_source_revision_and_is_exported_without_DTO_mutation', async () => {
+    await search(page, 'name-only-baseline');
+    await result(page, 'name-only-baseline').getByRole('button', {name: 'Ver detalhes', exact: true}).click();
+    const label = 'Motivo da anotação do operador (somente sessão)';
+    const note = 'Designação sintética explícita do operador para QA; sem aprovação científica.';
+    await page.getByRole('textbox', {name: label, exact: true}).fill(note);
+    await page.getByRole('button', {name: 'Anotar baseline nesta sessão', exact: true}).click();
+    assert.match(await page.locator('#native-detail-body').innerText(), /Designação do operador nesta sessão/);
+    await page.keyboard.press('Escape');
+    await openNativePane(page, 'baselines');
+    assert.equal(await batchBox(page, 'name-only-baseline').count(), 1);
+    await batchBox(page, 'name-only-baseline').check();
+    assert.equal(await selectedCount(page), 4);
+    await page.locator('#native-retention').click();
+    const plan = JSON.parse(await download(page, '#native-export-plan', 'synthetic-retention-with-annotation.json'));
+    const annotated = plan.items.find(item => item.identity.uid === uid('name-only-baseline'));
+    assert.equal(annotated.baseline.status, 'OPERATOR_SESSION');
+    assert.equal(annotated.baseline.sourceConfirmed, false);
+    assert.equal(annotated.baseline.operatorDesignated, true);
+    assert.equal(annotated.baseline.annotation.origin, 'OPERATOR_SESSION');
+    assert.equal(annotated.baseline.annotation.note, note);
+    assert.equal(annotated.baseline.annotation.selection_key, annotated.identity.selection_key);
+    assert.equal(annotated.baseline.annotation.snapshot_key, plan.snapshot_key);
+    assert.equal(annotated.raw_json, expected.raw_json['name-only-baseline']);
+    assert.equal(Object.hasOwn(JSON.parse(annotated.raw_json), 'baseline'), false);
+    assert.equal(annotated.protection.removal_authorized, false);
+  });
+
+  await check('G8_dossier_export_preserves_selection_exact_records_table_rows_and_pending_verifications', async () => {
+    await clickAction(page, 'native-dossier');
+    assert.match(await page.locator('#native-content').innerText(), /Dossiê dos selecionados/);
+    const dossier = JSON.parse(await download(page, '#native-export-dossier', 'synthetic-triage-dossier.json'));
+    assert.equal(dossier.schema, 'atlas-triage-dossier/1');
+    assert.equal(dossier.status, 'PROPOSAL_ONLY');
+    assert.equal(dossier.DELETE_AUTHORIZED, 'NO');
+    assert.equal(dossier.selection.length, 4);
+    assert.equal(dossier.source.revision, expected.revision_a);
+    const run = dossier.items.find(item => item.identity.uid === uid('run-rf-proof'));
+    const table = dossier.items.find(item => item.identity.uid === uid('M1.1'));
+    assert.equal(run.raw_json, expected.raw_json['run-rf-proof']);
+    assert.deepEqual(table.table_rows.rows.map(row => row.raw_json), expected.table_rows_raw_json);
+    assert.ok(dossier.pending_verifications.length > 0);
+    assert.equal(dossier.provenance.physical_presence_verified, false);
   });
 
   await check('G13_hostile_labels_URLs_and_prototype_names_remain_inert', async () => {
@@ -325,13 +417,15 @@ try {
   });
 
   await check('G6_switching_source_revision_invalidates_selection_intents_and_session_state', async () => {
-    assert.equal(await selectedCount(page), 2);
+    assert.equal(await selectedCount(page), 4);
     await page.locator('#native-source').selectOption('source-2');
     await page.waitForFunction(revision => document.getElementById('native-revision')?.textContent.includes(revision), expected.revision_b);
     assert.equal(await selectedCount(page), 0);
     assert.equal(await page.locator('#native-batch-bar').isHidden(), true);
     await openNativePane(page, 'selected');
     assert.equal(await page.locator('#native-content [data-batch-uid]').count(), 0);
+    await openNativePane(page, 'baselines');
+    assert.equal(await batchBox(page, 'name-only-baseline').count(), 0, 'Session baseline annotation is invalidated with its source revision');
     await page.locator('#native-source').selectOption('source-1');
     assert.equal(await selectedCount(page), 0, 'Returning to the earlier revision must not silently revive stale selection');
   });

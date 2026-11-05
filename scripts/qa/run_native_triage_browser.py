@@ -75,7 +75,10 @@ def main() -> int:
     expected = {"fixture_scope": "INVENTED_DATA_ONLY", "total_records": len(data["records"]), "bulk_records": 1200,
                 "revision_a": "INVENTED_TRIAGE_REVISION_A", "revision_b": "INVENTED_TRIAGE_REVISION_B",
                 "uids": {key: entry["uid"] for key, entry in known.items()},
-                "raw_json": {key: known[key]["raw_json"] for key in ("run-rf-proof", "state-missing", "hostile-record")},
+                "raw_json": {key: known[key]["raw_json"] for key in ("run-rf-proof", "state-missing", "hostile-record", "M1.1", "name-only-baseline")},
+                "table_rows_raw_json": [entry["raw_json"] for entry in sorted(
+                    (entry for entry in entries if entry.get("table_uid") == known["M1.1"]["uid"]),
+                    key=lambda entry: entry["ordinal"])],
                 "table_json": exporter["dump"](data["result_tables"][0]).decode("utf-8"),
                 "table_rows": 39, "ordinary_records": [record["id"] for record in data["records"]]}
     expected_path = work / "triage-expected.json"
