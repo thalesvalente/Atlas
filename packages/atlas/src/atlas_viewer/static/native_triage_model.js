@@ -24,7 +24,7 @@ const ASSET_TYPES=Object.freeze(Object.assign(Object.create(null),{
 }));
 const ALIASES=Object.freeze({
   publication:['publication','publication_status'],admission:['admission','technical_admission','admission_status'],
-  review:['review','review_state','review_status'],result_group:['result_group'],
+  review:['human_review','review','review_state','review_status'],result_group:['result_group'],
   date:['started_at','startTime','timestamp','date','scientific_at'],
 });
 export const TRIAGE_DIMENSIONS=Object.freeze([

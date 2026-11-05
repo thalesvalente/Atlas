@@ -12,6 +12,7 @@ const PENDING=Object.freeze(['LOCAL_CURRENT_INVENTORY','DEPENDENCY_GRAPH','DOSSI
 const GROUPS=Object.freeze([
   ['scientific_identity','Identidade original',['native_id','id','experiment_id','run_id','execution_id','mission_id','attempt_id']],
   ['family','Família',['family','native_family']],
+  ['review','Revisão',['human_review','review','review_state','review_status']],
   ['configurations','Configurações',['configuration','config','configs','configuration_ref','parameters','settings','hyperparameters','seed']],
   ['code_revisions','Código e revisões',['code_revision','code_revisions','commit','commit_sha','code_ref','git_sha','revision','software','source_revision','code']],
   ['results','Resultados',['results','result','result_state','result_group','outputs']],

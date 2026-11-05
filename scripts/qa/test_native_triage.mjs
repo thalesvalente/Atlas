@@ -165,6 +165,32 @@ test('publication, admission and review NULL values stop their declared fallback
   assert.equal(model.facet(e,'__proto__').present,false);
 });
 
+test('human_review has the A01 detail precedence independently of publication',()=>{
+  const reviewed=entry('reviewed','record',{kind:'run',human_review:'PENDING',review:'APPROVED',publication:'published'}),
+    absent=entry('absent','record',{kind:'run',publication:'published'}),
+    nul=entry('null','record',{kind:'run',human_review:null,review:'APPROVED',publication:'published'}),
+    empty=entry('empty','record',{kind:'run',human_review:'',review_state:'APPROVED',publication:'published'}),
+    model=createTriageModel(source([reviewed,absent,nul,empty]));
+  assert.equal(model.facet(reviewed,'review').field,'human_review');
+  assert.equal(model.facet(reviewed,'review').raw,'"PENDING"');
+  assert.equal(model.facet(nul,'review').raw,'null');assert.equal(model.facet(empty,'review').raw,'""');
+  assert.equal(model.facet(absent,'review').present,false);
+  assert.equal(model.options('review').length,4);
+  assert.equal(model.options('publication').length,1);
+  for(const e of [reviewed,absent,nul,empty])assert.deepEqual(ids(model.search({review:keyFor(model,e,'review')})),[e.uid]);
+});
+
+test('dossier exports declared human_review including NULL and preserves alternatives',()=>{
+  const e=entry('review','record',{kind:'run',human_review:null,review_status:'APPROVED',publication:'published'}),s=source([e]);
+  for(const builder of [buildRetentionPlan,buildDossier]){
+    const item=builder(s,[e]).items[0];
+    assert.equal(item.declared.review[0].field,'human_review');assert.equal(item.declared.review[0].raw_json,'null');
+    assert.equal(item.declared.review[1].field,'review_status');assert.equal(item.declared.review[1].raw_json,'"APPROVED"');
+    assert(item.gaps.some(gap=>gap.includes('human_review')&&gap.includes('NULL')));
+    assert.equal(item.raw_json,e.raw_json);
+  }
+});
+
 test('diagnosis distinguishes wrong type and absent requested dimensions',()=>{
   const table=entry('t','table',{id:'M1.1'}),run=entry('r','record',{id:'R',kind:'run',execution_state:'FAILED'}),model=createTriageModel(source([table,run]));
   assert.equal(model.diagnose({query:'M1.1',kind:keyFor(model,run,'kind')}).status,'TYPE_NOT_MATCHING');
