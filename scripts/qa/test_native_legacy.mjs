@@ -565,7 +565,7 @@ test('small SVG status and ordinal text reaches WCAG 4.5 while accents stay dist
  const rgb=hex=>hex.replace('#','').match(/../g).map(pair=>parseInt(pair,16)/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4),lum=hex=>{const c=rgb(hex);return .2126*c[0]+.7152*c[1]+.0722*c[2];},contrast=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
  for(const group of ['published','technical','failed','mixed','blocked','unknown']){
   const r=entry('ink-'+group,'record',{id:group,title:'Record '+group,family:'F',result:'Status '+group,result_group:group}),model=makePresentation([r]);
-  withDOM(host=>{const tree=mountEditorialTree(host,model,model.records,()=>{},{expanded:new Set([model.records[0].nativeFamilyKey])});for(const bg of ['#FFFFFF','#EFFAF8']){const label=tags(host,'text').find(n=>n.textContent==='Status '+group);assert.ok(label);assert.ok(contrast(label.getAttribute('fill'),bg)>=4.5,group+' status contrast');}const ordinal=tags(host,'text').find(n=>n.textContent==='01');assert.ok(ordinal);for(const bg of ['#5A91E6','#14A8A3','#9B81DE','#5F8BA2','#788D9B'])assert.ok(contrast(ordinal.getAttribute('fill'),bg)>=4.5,'ordinal contrast');tree.destroy();});
+  withDOM(host=>{const tree=mountEditorialTree(host,model,model.records,()=>{},{expanded:new Set([model.records[0].nativeFamilyKey])});for(const bg of ['#FFFFFF','#EFFAF8']){const label=tags(host,'text').find(n=>n.textContent===group);assert.ok(label);assert.ok(contrast(label.getAttribute('fill'),bg)>=4.5,group+' status contrast');}const ordinal=tags(host,'text').find(n=>n.textContent==='01');assert.ok(ordinal);for(const bg of ['#5A91E6','#14A8A3','#9B81DE','#5F8BA2','#788D9B'])assert.ok(contrast(ordinal.getAttribute('fill'),bg)>=4.5,'ordinal contrast');tree.destroy();});
  }
 });
 
@@ -579,3 +579,59 @@ test('product catalog restores declared execution and stage before opaque identi
  const e=entry('context-product','asset',{id:'opaque-id',native_id:'RF-001',run_id:null,execution_id:'execution-declared',stage_id:'infer_nuclei',atlas_record_id:'opaque-record',group_id:'opaque-group',status:'LOADED',publication:null,human_review:'NOT_ASSESSED'},{group:'product_items'}),model=makePresentation([e]),before=e.raw_json;
  withDOM(host=>{renderCatalog(host,[e],model,()=>{});const cells=tags(host,'tbody')[0].children[0].children;assert.ok(cells[1].textContent.includes('Execução'));assert.ok(cells[1].textContent.includes('execution-declared'));assert.ok(cells[1].textContent.includes('Estágio'));assert.ok(cells[1].textContent.includes('infer_nuclei'));assert.ok(tags(cells[1],'details').length);assert.ok(cells[1].textContent.includes('opaque-record'));assert.ok(cells[2].textContent.includes('LOADED'));assert.ok(cells[2].textContent.includes(NULL));assert.equal(e.raw_json,before);});
 });
+
+
+    
+// CXR-01: exercise the actual SVG card and <title> tooltip, not a mock
+// formatter. The same DTO occurrence must agree with the table and detail.
+for (const [name, states, selected] of [
+  ['execution_state overrides legacy result', {execution_state:'FAILED', result:'SUCCEEDED'}, 'FAILED'],
+  ['execution_state alone', {execution_state:'FAILED'}, 'FAILED'],
+  ['status overrides result_state and result', {status:'BLOCKED', result_state:'SUCCEEDED', result:'SUCCEEDED'}, 'BLOCKED'],
+  ['result_state overrides legacy result', {result_state:'FAILED', result:'SUCCEEDED'}, 'FAILED'],
+  ['result_group overrides legacy result', {result_group:'failed', result:'SUCCEEDED'}, 'failed'],
+  ['explicit NULL takes precedence', {execution_state:null, result:'SUCCEEDED'}, 'NULL — valor declarado'],
+  ['explicit empty text takes precedence', {execution_state:'', result:'SUCCEEDED'}, '"" — texto vazio declarado'],
+  ['explicit false takes precedence', {execution_state:false, result:'SUCCEEDED'}, 'false'],
+  ['explicit zero takes precedence', {execution_state:0, result:'SUCCEEDED'}, '0'],
+  ['all state fields absent', {}, null],
+  ['legacy result is the final fallback', {result:'SUCCEEDED'}, 'SUCCEEDED'],
+  ['HTML-shaped state remains inert text', {execution_state:'<img src=x onerror=alert(1)>', result:'SUCCEEDED'}, '<img src=x onerror=alert(1)>'],
+]) {
+  test('CXR-01 tree, table and detail agree: '+name, () => {
+    const original = entry('cxr01-record','record',{id:'ORIGINAL-1',title:'CXR01 synthetic',family:'F', ...states});
+    const raw = original.raw_json, model = makePresentation([original]), r = model.records[0];
+    withDOM(host => {
+      let selectedEntry;
+      const treeHost = new MemoryNode('section');
+      const tableHost = new MemoryNode('section');
+      const detailHost = new MemoryNode('section');
+      host.append(treeHost, tableHost, detailHost);
+      const tree = mountEditorialTree(treeHost,model,model.records,e=>{selectedEntry=e;},{expanded:new Set([r.nativeFamilyKey])});
+      const card = tags(treeHost,'g').find(n=>n.getAttribute('data-graph-id')===original.uid);
+      assert.ok(card, 'record card must be visible');
+      const statusText = tags(card,'text').find(n=>n.getAttribute('y')==='74');
+      const tooltip = tags(card,'title')[0];
+      assert.ok(statusText, 'SVG status text must exist');
+      assert.ok(tooltip, 'SVG tooltip must exist');
+      assert.equal(statusText.textContent, selected===null?'':selected.replaceAll('_',' ').slice(0,27), 'SVG card');
+      assert.equal(tooltip.textContent, ['CXR01 synthetic',selected,'cxr01-record'].filter(v=>v!==null).join('\\n'), 'SVG title');
+      renderRecordPresentation(tableHost,model.records,()=>{});
+      assert.equal(tags(tableHost,'tbody')[0].children[0].children[2].textContent, selected??'Não declarado', 'record table');
+      renderPresentationDetail(detailHost,original,model,buildNativeNavigation([original]),()=>{});
+      const badges=tags(detailHost,'span').filter(n=>n.classList.contains('badge'));
+      assert.equal(badges[0]?.textContent??null,selected, 'record detail primary state');
+      assert.equal(tree.locate(original.uid),true,'navigation');
+      assert.equal(selectedEntry,original,'selected occurrence identity');
+      assert.equal(card.getAttribute('data-native-node'),original.uid,'SVG native identity');
+      assert.equal(tags(host,'script').length,0,'no executable script');
+      assert.equal(tags(host,'img').length,0,'no HTML execution');
+      if (name==='execution_state overrides legacy result') {
+        assert.equal(statusText.getAttribute('fill'),'#9e3447','selected FAILED must not retain a green group ink');
+      }
+      tree.destroy();
+    });
+    assert.equal(original.raw_json,raw,'DTO not mutated');
+    assert.equal(model.records[0].entry,original,'reference not rewritten');
+  });
+}
