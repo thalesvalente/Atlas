@@ -56,10 +56,14 @@ function matches(e,context=null){
   if(filters.query&&!model.matches(e,{query:filters.query},annotations)&&!model.matches(context,{query:filters.query},annotations))return false;
   for(const [key,value]of Object.entries(filters)){
     if(!value||key==='query'||key==='from'||key==='to')continue;
-    const target=key==='kind'||!model.facet(e,key,annotations).present?context:e;
+    if(key==='kind'){
+      if(!model.matches(e,{kind:value},annotations)&&!model.matches(context,{kind:value},annotations))return false;
+      continue;
+    }
+    const target=!model.facet(e,key,annotations).present?context:e;
     if(!model.matches(target,{[key]:value},annotations))return false;
   }
-  const dated=e.date?e:context;
+  const dated=model.facet(e,'date').present?e:context;
   return model.matches(dated,{from:filters.from,to:filters.to},annotations);
 }
 function message(text,error=false){$('native-notice').textContent=text;$('native-notice').classList.toggle('error',error);$('native-notice').setAttribute('role',error?'alert':'status');}
@@ -317,10 +321,12 @@ function selectSource(){
   closeDetail();$('native-detail-body').replaceChildren();$('native-search').value='';
   const list=entries();triage.bindSource(state.source);contextualFilterOptions({preserve:false});
   const count=kind=>list.filter(e=>e.kind===kind).length;
+  const triageCounts=triage.navigationCounts();
   $('native-record-count').textContent=count('record');$('native-node-count').textContent=count('node');$('native-table-count').textContent=count('table')+' / '+count('row');$('native-asset-count').textContent=count('asset');
   for(const b of document.querySelectorAll('[data-pane]')){
     let badge=b.querySelector('.application-nav-count');if(!badge){badge=el('span',null,'application-nav-count');badge.setAttribute('aria-hidden','true');b.append(badge);}
-    badge.textContent=b.dataset.pane==='relations'?presentation().edges.length:count(({tree:'record',records:'record',tables:'table',relations:'relation',assets:'asset',timeline:'record',coverage:'collection'})[b.dataset.pane]);
+    badge.hidden=b.dataset.pane==='overview';
+    badge.textContent=triageCounts[b.dataset.pane]??(b.dataset.pane==='relations'?presentation().edges.length:count(({tree:'record',records:'record',tables:'table',relations:'relation',assets:'asset',timeline:'record',coverage:'collection'})[b.dataset.pane]));
   }
   $('native-download').disabled=state.source?.status!=='READY';$('native-source').disabled=!state.sources.length;$('native-rebuild').disabled=!state.sources.length;
   $('native-revision').textContent=state.source?.revision?'Revisão: '+state.source.revision:'';

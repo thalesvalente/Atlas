@@ -28,9 +28,9 @@ export class NativeTriageUI {
     this.ledger=new SelectionLedger({entries:[]});this.mode='list';this.page=0;this.filtered=[];
     this.initSidebar();
     $('native-search-all').addEventListener('click',()=>hooks.navigate('search'));
-    $('native-select-visible').addEventListener('click',()=>{this.ledger.selectMany(this.visibleEntries());this.syncBatch();});
-    $('native-select-filtered').addEventListener('click',()=>{this.ledger.selectMany(this.filtered);this.syncBatch();});
-    $('native-clear-batch').addEventListener('click',()=>{this.ledger.clear();this.syncBatch();if(['selected','retention'].includes(hooks.pane()))hooks.refresh();});
+    $('native-select-visible').addEventListener('click',()=>{this.ledger.selectMany(this.visibleEntries());this.selectionChanged();});
+    $('native-select-filtered').addEventListener('click',()=>{this.ledger.selectMany(this.filtered);this.selectionChanged();});
+    $('native-clear-batch').addEventListener('click',()=>{this.ledger.clear();this.selectionChanged();});
     for(const[id,mode]of [['native-compare','compare'],['native-batch-details','details'],['native-batch-links','links'],['native-dossier','dossier']]){
       $(id).addEventListener('click',()=>{this.mode=mode;this.page=0;hooks.navigate('selected');});
     }
@@ -146,7 +146,7 @@ export class NativeTriageUI {
     wrapper.append(input,element('span',label));
     input.addEventListener('click',event=>event.stopPropagation());
     input.addEventListener('keydown',event=>event.stopPropagation());
-    input.addEventListener('change',()=>{this.ledger.toggle(entry);this.syncBatch();});return wrapper;
+    input.addEventListener('change',()=>this.toggle(entry));return wrapper;
   }
   decorate(){
     for(const node of $('native-content').querySelectorAll('tr[data-uid],li[data-uid],article[data-uid],details[data-uid]')){
@@ -171,6 +171,13 @@ export class NativeTriageUI {
   afterRender(filteredEntries){
     this.filtered=filteredEntries;this.decorate();this.renderFilterChips();this.syncBatch();
   }
+  navigationCounts(){
+    const items=this.model.items;
+    return {search:items.length,
+      experiments:items.filter(e=>e.kind==='record'&&TYPE_EXPERIMENTS.has(this.model.type(e).key)).length,
+      baselines:items.filter(e=>this.model.baseline(e,this.ledger.annotations).confirmed).length,
+      selected:this.ledger.size,retention:this.ledger.size};
+  }
   syncBatch(){
     const selected=this.ledger.entries();
     for(const node of document.querySelectorAll('[data-batch-uid]')){
@@ -192,26 +199,40 @@ export class NativeTriageUI {
     for(const id of ['native-compare','native-retention','native-batch-details','native-copy-references','native-batch-links','native-dossier']){
       const node=$(id);node.dataset.batchCount=String(selected.length);node.setAttribute('aria-label',node.textContent+' · '+selected.length+' itens');
     }
-    for(const pane of ['selected','retention']){
-      const nav=document.querySelector(`[data-pane="${pane}"]`);const badge=nav?.querySelector('.application-nav-count');if(badge)badge.textContent=String(selected.length);
+    for(const [pane,count]of Object.entries(this.navigationCounts())){
+      const nav=document.querySelector(`[data-pane="${pane}"]`);const badge=nav?.querySelector('.application-nav-count');if(badge)badge.textContent=String(count);
     }
   }
   refreshSnapshotNotice(){
     if(this.invalidated){this.hooks.message('A fonte ou revisão mudou. A seleção, as anotações e as intenções anteriores foram invalidadas; forme um novo lote.');this.invalidated=false;}
   }
-  toggle(entry){this.ledger.toggle(entry);this.syncBatch();}
+  selectionChanged(){
+    if(!['selected','retention'].includes(this.hooks.pane())){this.syncBatch();return;}
+    const active=document.activeElement,uid=active?.dataset?.batchUid,id=active?.id;
+    this.hooks.refresh();
+    const same=id?$(id):[...$('native-content').querySelectorAll('[data-batch-uid]')].find(n=>n.dataset.batchUid===uid);
+    if(same&&!same.disabled&&same.getClientRects().length){same.focus({preventScroll:true});return;}
+    const fallback=$('native-content').querySelector('[data-batch-uid],h2');
+    if(fallback){if(fallback.tagName==='H2')fallback.tabIndex=-1;fallback.focus({preventScroll:true});}
+  }
+  toggle(entry){this.ledger.toggle(entry);this.selectionChanged();}
   addDetailControls(host,entry){
     host.prepend(this.checkControl(entry,'Incluir no lote'));
     const designation=this.model.baseline(entry,this.ledger.annotations),section=element('section',undefined,'triage-annotation');
     section.append(element('h3','Designação de baseline'),element('p',designation.label));
     if(designation.reference)section.append(element('p','Referência a baseline declarada; não designa este item como baseline.'));
     const label=element('label','Motivo da anotação do operador (somente sessão)'),input=element('input');input.type='text';input.maxLength=1000;input.placeholder='Referência ou justificativa verificável';label.append(input);section.append(label);
-    const remove=button('Remover anotação de sessão',()=>{this.ledger.removeAnnotation(entry);this.hooks.detail(entry);this.filterOptions();});
+    const remove=button('Remover anotação de sessão',()=>{
+      this.ledger.removeAnnotation(entry);this.filterOptions();this.hooks.refresh();
+      section.querySelector('p').textContent=this.model.baseline(entry,this.ledger.annotations).label;
+      remove.hidden=true;input.focus();
+      this.hooks.message('Anotação de sessão removida; os resultados e o lote disponível refletem a designação atual.');
+    });
     remove.hidden=!this.ledger.annotations.has(selectionKey(this.source,entry));
     section.append(button('Anotar baseline nesta sessão',()=>{
       if(!input.value.trim()){input.setCustomValidity('Informe a justificativa da designação.');input.reportValidity();return;}
       input.setCustomValidity('');this.ledger.annotateBaseline(entry,input.value.trim());
-      this.filterOptions();this.hooks.message('Baseline anotada pelo operador nesta fonte/revisão; a fonte original permanece intacta.');
+      this.filterOptions();this.hooks.refresh();this.hooks.message('Baseline anotada pelo operador nesta fonte/revisão; a fonte original permanece intacta.');
       const status=section.querySelector('p');status.textContent=this.model.baseline(entry,this.ledger.annotations).label;
       remove.hidden=false;
       this.syncBatch();
@@ -284,7 +305,10 @@ export class NativeTriageUI {
     const modes=element('div',undefined,'toolbar');for(const[key,label]of [['list','Lista'],['compare','Comparar'],['details','Detalhes'],['links','Vínculos'],['dossier','Dossiê']]){const b=button(label,()=>{this.mode=key;this.page=0;this.hooks.refresh();});if(key===this.mode)b.setAttribute('aria-current','true');modes.append(b);}host.append(modes);
     if(this.mode==='dossier'){
       const dossier=buildDossier(this.source,selected,{annotations:this.ledger.annotations,intents:this.ledger.intents});
-      host.append(element('p','Dossiê derivado da seleção, com lacunas explícitas. Um resumo não comprova preservação dos artefatos.','notice'),button('Exportar dossiê JSON',()=>this.hooks.download('atlas-triage-dossier.json',JSON.stringify(dossier,null,2)),'native-export-dossier'));
+      host.append(element('p','Dossiê derivado da seleção, com lacunas explícitas. Um resumo não comprova preservação dos artefatos.','notice'),button('Exportar dossiê JSON',()=>{
+        const current=buildDossier(this.source,this.ledger.entries(),{annotations:this.ledger.annotations,intents:this.ledger.intents});
+        this.hooks.download('atlas-triage-dossier.json',JSON.stringify(current,null,2));
+      },'native-export-dossier'));
       this.pageRows(host,dossier.items,item=>this.planCard(item,false));return;
     }
     if(this.mode==='compare'){
