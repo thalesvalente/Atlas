@@ -95,8 +95,9 @@ try {
     for (const pane of ['overview', 'search', 'experiments', 'baselines', 'tree', 'records', 'tables', 'assets', 'relations', 'timeline', 'coverage', 'selected', 'retention']) {
       assert.equal(await page.locator('[data-pane="' + pane + '"]').count(), 1, pane + ' is a unique navigation destination');
     }
+    // Search includes every DTO; uids only indexes records, tables and assets.
     // Nine explicit run/experiment/attempt records accompany the bulk runs.
-    for (const [pane, count] of Object.entries({search: Object.keys(expected.uids).length,
+    for (const [pane, count] of Object.entries({search: expected.total_entries,
       experiments: expected.bulk_records + 9, baselines: 2, selected: 0, retention: 0})) {
       assert.equal(await navigationCount(page, pane), count, pane + ' reports the actual synthetic snapshot or batch population');
     }

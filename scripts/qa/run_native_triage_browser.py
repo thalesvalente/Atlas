@@ -73,6 +73,7 @@ def main() -> int:
     known = {entry["source_key"]: entry for entry in entries
              if entry.get("source_key") and entry["kind"] in {"record", "table", "asset"}}
     expected = {"fixture_scope": "INVENTED_DATA_ONLY", "total_records": len(data["records"]), "bulk_records": 1200,
+                "total_entries": len(entries),
                 "revision_a": "INVENTED_TRIAGE_REVISION_A", "revision_b": "INVENTED_TRIAGE_REVISION_B",
                 "uids": {key: entry["uid"] for key, entry in known.items()},
                 "raw_json": {key: known[key]["raw_json"] for key in ("run-rf-proof", "state-missing", "hostile-record", "M1.1", "name-only-baseline")},
