@@ -1,0 +1,449 @@
+/** Feature 005 tasks and adversarial QA. Installed product, real browser, invented data. */
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import {openNativePane, revealNativeControl} from './browser_native_triage_navigation.mjs';
+
+const require = createRequire(import.meta.url);
+const {chromium} = require(process.env.ATLAS_PLAYWRIGHT_MODULE || 'playwright');
+const args = new Map();
+for (let index = 2; index < process.argv.length; index += 2) args.set(process.argv[index], process.argv[index + 1]);
+const url = args.get('--url'), reportPath = args.get('--report'), origin = new URL(url).origin;
+assert.ok(['127.0.0.1', 'localhost'].includes(new URL(url).hostname), 'QA uses a loopback server only');
+const expected = JSON.parse(await fs.readFile(args.get('--expected'), 'utf8'));
+assert.equal(expected.fixture_scope, 'INVENTED_DATA_ONLY');
+const report = {status: 'FAIL', scope: 'FEATURE005_SYNTHETIC_BROWSER_TASKS', phase: 'BROWSER_BOOTSTRAP',
+  checks: [], errors: [], external_requests: [], requests: [], layout: [], screenshots: [], timings_ms: {}};
+const uid = key => expected.uids[key];
+const attr = value => JSON.stringify(value);
+const result = (page, key) => page.locator('[data-result-uid=' + attr(uid(key)) + ']');
+const batchBox = (page, key) => page.locator('#native-content [data-batch-uid=' + attr(uid(key)) + ']').first();
+const selectedCount = async page => Number(await page.locator('#native-batch-summary').getAttribute('data-selected-count'));
+const clickAction = async (page, id) => {
+  const control = await revealNativeControl(page, page.locator('#' + id));
+  await control.click();
+};
+const filteredClear = async page => {
+  const clear = page.locator('#native-clear');
+  if (await clear.isEnabled()) await clear.click();
+};
+const showFilters = async page => {
+  const disclosure = page.locator('.mobile-filters');
+  if (await disclosure.count() && await disclosure.getAttribute('open') === null) {
+    await disclosure.locator('summary').first().click();
+  }
+};
+const choose = async (page, control, label) => {
+  await showFilters(page);
+  await page.locator('#' + control).selectOption({label});
+};
+const search = async (page, query) => {
+  await openNativePane(page, 'search');
+  await page.locator('#native-search').fill(query);
+};
+const check = async (name, fn) => {
+  const start = performance.now();
+  await fn();
+  report.timings_ms[name] = Math.round(performance.now() - start);
+  report.checks.push(name);
+};
+const download = async (page, control, name) => {
+  const pending = page.waitForEvent('download');
+  await page.locator(control).click();
+  const value = await pending;
+  const text = await fs.readFile(await value.path(), 'utf8');
+  await fs.writeFile(path.join(path.dirname(reportPath), name), text);
+  return text;
+};
+
+let browser, failure;
+try {
+  browser = await chromium.launch({headless: true,
+    ...(process.env.ATLAS_CHROMIUM_EXECUTABLE ? {executablePath: process.env.ATLAS_CHROMIUM_EXECUTABLE} : {})});
+  report.browser_version = browser.version();
+  const context = await browser.newContext({viewport: {width: 1440, height: 1200}, acceptDownloads: true});
+  const protectNetwork = async context => {
+    await context.route('**/*', async route => {
+      const request = route.request(), target = request.url();
+      if (/^https?:/.test(target)) {
+        report.requests.push({method: request.method(), path: new URL(target).pathname});
+        if (new URL(target).origin !== origin) {
+          report.external_requests.push(target);
+          await route.abort();
+          return;
+        }
+      }
+      await route.continue();
+    });
+  };
+  await protectNetwork(context);
+  const page = await context.newPage();
+  page.on('pageerror', error => report.errors.push(error.message));
+  page.setDefaultTimeout(10000);
+  await page.goto(url, {waitUntil: 'networkidle'});
+  await page.waitForFunction(revision => document.getElementById('native-revision')?.textContent.includes(revision), expected.revision_a);
+  report.phase = 'FEATURE_TASKS';
+
+  await check('G2_navigation_destinations_semantics_and_real_new_controls', async () => {
+    // On the accepted baseline these assertions genuinely fail: the new
+    // navigation and execution filter do not exist. A launch failure is BLOCKED.
+    assert.equal(await page.locator('#native-menu-toggle').count(), 1, 'Responsive navigation control is required');
+    assert.equal(await page.locator('#native-sidebar').count(), 1);
+    assert.equal(await page.locator('#native-execution').count(), 1, 'Execution must have its own coherent filter');
+    for (const pane of ['overview', 'search', 'experiments', 'baselines', 'tree', 'records', 'tables', 'assets', 'relations', 'timeline', 'coverage', 'selected', 'retention']) {
+      assert.equal(await page.locator('[data-pane="' + pane + '"]').count(), 1, pane + ' is a unique navigation destination');
+    }
+    assert.equal(await page.getByRole('menu').count(), 0, 'Ordinary navigation is not an ARIA application menu');
+    assert.equal(await page.locator('#native-menu-toggle').getAttribute('aria-controls'), 'native-sidebar');
+  });
+
+  await check('T01_M1_1_is_a_39_row_table_with_typed_search_reason_not_a_run', async () => {
+    await search(page, 'M1.1');
+    const table = result(page, 'M1.1');
+    assert.equal(await table.count(), 1);
+    assert.equal(await table.getAttribute('data-result-type'), 'table');
+    const text = await table.innerText();
+    assert.match(text, /Tabela/i);
+    assert.match(text, /M1\.1 · RF baseline preservada/);
+    assert.doesNotMatch(text, /SUCCEEDED/);
+    assert.match(text, /título|identificador|\bID\b|label|campo|correspond/i, 'Every hit explains its matching field');
+    assert.equal(await result(page, 'M1').count(), 0);
+    assert.equal(await result(page, 'M11').count(), 0);
+    await openNativePane(page, 'tables');
+    assert.match(await page.locator('#native-content').innerText(), /39 linhas/);
+    await search(page, 'M1');
+    assert.equal(await result(page, 'M1').count(), 1);
+    assert.equal(await result(page, 'M11').count(), 0);
+    assert.equal(await result(page, 'M1.1').count(), 0);
+    await search(page, 'M11');
+    assert.equal(await result(page, 'M11').count(), 1);
+    assert.equal(await result(page, 'M1').count(), 0);
+    assert.equal(await result(page, 'M1.1').count(), 0);
+  });
+
+  await check('T02_execution_filter_matches_badges_and_preserves_documentary_dimensions', async () => {
+    await filteredClear(page);
+    await openNativePane(page, 'experiments');
+    await choose(page, 'native-execution', 'SUCCEEDED');
+    await choose(page, 'native-status', 'failed');
+    assert.equal(await batchBox(page, 'run-rf-proof').count(), 1);
+    assert.equal(await batchBox(page, 'run-failed-published').count(), 0);
+    assert.equal(await batchBox(page, 'run-blocked-published').count(), 0);
+    await filteredClear(page);
+    await choose(page, 'native-execution', 'FAILED');
+    await choose(page, 'native-publication', 'published');
+    assert.equal(await batchBox(page, 'run-failed-published').count(), 1);
+    assert.equal(await batchBox(page, 'run-rf-proof').count(), 0);
+    await choose(page, 'native-admission', 'HOLD');
+    await choose(page, 'native-review', 'PENDING');
+    assert.equal(await batchBox(page, 'run-failed-published').count(), 1);
+    await filteredClear(page);
+    await choose(page, 'native-execution', 'BLOCKED');
+    await choose(page, 'native-publication', 'published');
+    assert.equal(await batchBox(page, 'run-blocked-published').count(), 1);
+    assert.equal(await batchBox(page, 'run-rf-proof').count(), 0);
+  });
+
+  await check('G4_NULL_empty_missing_UNKNOWN_remain_four_different_states', async () => {
+    await filteredClear(page);
+    await openNativePane(page, 'records');
+    for (const [label, positive, negatives] of [
+      ['NULL — valor declarado', 'state-null', ['state-empty', 'state-missing', 'state-unknown']],
+      ['"" — texto vazio declarado', 'state-empty', ['state-null', 'state-missing', 'state-unknown']],
+      ['UNKNOWN', 'state-unknown', ['state-null', 'state-empty', 'state-missing']],
+    ]) {
+      await choose(page, 'native-execution', label);
+      assert.equal(await batchBox(page, positive).count(), 1, label);
+      for (const negative of negatives) assert.equal(await batchBox(page, negative).count(), 0, label + ' excludes ' + negative);
+    }
+    await showFilters(page);
+    const missingOption = page.locator('#native-execution option').filter({hasText: /AUSENTE|Não declarado|não declarad/i});
+    assert.equal(await missingOption.count(), 1);
+    await page.locator('#native-execution').selectOption(await missingOption.getAttribute('value'));
+    assert.equal(await batchBox(page, 'state-missing').count(), 1);
+    assert.equal(await batchBox(page, 'state-null').count(), 0);
+    assert.equal(await batchBox(page, 'state-empty').count(), 0);
+  });
+
+  await check('T03_locate_expands_editorial_groups_and_focuses_exact_result', async () => {
+    await filteredClear(page);
+    await search(page, 'volume-1199');
+    await page.locator('[data-locate-uid=' + attr(uid('volume-1199')) + ']').click();
+    assert.equal(await page.locator('[data-pane="tree"]').getAttribute('aria-current'), 'page');
+    const selected = page.locator('.editorial-svg .svg-record.selected');
+    assert.equal(await selected.getAttribute('data-graph-id'), uid('volume-1199'));
+    assert.equal(await selected.evaluate(node => document.activeElement === node || node.contains(document.activeElement)), true);
+    assert.equal(await page.locator('#native-detail').isVisible(), true);
+    assert.match(await page.locator('#native-detail-body').innerText(), /Execução de volume 1199/);
+    await page.keyboard.press('Escape');
+  });
+
+  let planningRequestStart;
+  await check('T04_visible_batch_is_not_all_filtered_and_survives_pages_views_filters', async () => {
+    await filteredClear(page);
+    await openNativePane(page, 'records');
+    if (await selectedCount(page)) await clickAction(page, 'native-clear-batch');
+    const visible = await page.locator('#native-content [data-batch-uid]').count();
+    assert.ok(visible > 0 && visible < expected.total_records);
+    planningRequestStart = report.requests.length;
+    await page.locator('#native-select-visible').click();
+    assert.equal(await selectedCount(page), visible);
+    assert.equal(Number(await page.locator('#native-batch-summary').getAttribute('data-visible-count')), visible);
+    await page.locator('#native-content').getByRole('button', {name: 'Próxima →', exact: true}).click();
+    assert.equal(await selectedCount(page), visible);
+    assert.equal(Number(await page.locator('#native-batch-summary').getAttribute('data-visible-count')), 0);
+    const nextCheckbox = page.locator('#native-content [data-batch-uid]').first();
+    await nextCheckbox.check();
+    assert.equal(await selectedCount(page), visible + 1);
+    await openNativePane(page, 'tree');
+    assert.equal(await selectedCount(page), visible + 1);
+    await page.getByRole('button', {name: 'Recolher', exact: true}).click();
+    assert.equal(await selectedCount(page), visible + 1);
+    await openNativePane(page, 'tables');
+    assert.equal(await selectedCount(page), visible + 1);
+    await openNativePane(page, 'records');
+    await page.locator('#native-search').fill('M11');
+    assert.equal(await selectedCount(page), visible + 1);
+    assert.ok(Number(await page.locator('#native-batch-summary').getAttribute('data-hidden-count')) >= visible);
+    await filteredClear(page);
+    const start = performance.now();
+    await page.locator('#native-select-filtered').click();
+    assert.equal(await selectedCount(page), expected.total_records);
+    const elapsed = Math.round(performance.now() - start);
+    report.bulk_select_ms = elapsed;
+    assert.ok(elapsed < 5000, 'Selecting 1,200+ records must keep the UI responsive (observed ' + elapsed + 'ms)');
+    await openNativePane(page, 'selected');
+    assert.match(await page.locator('#native-batch-summary').innerText(), new RegExp(String(expected.total_records)));
+    await clickAction(page, 'native-clear-batch');
+    assert.equal(await selectedCount(page), 0);
+    assert.equal(await page.locator('#native-batch-bar').isHidden(), true);
+  });
+
+  await check('T05_compare_selected_and_inspect_only_declared_references', async () => {
+    await filteredClear(page);
+    await openNativePane(page, 'records');
+    await page.locator('#native-search').fill('run-rf-proof');
+    await batchBox(page, 'run-rf-proof').check();
+    await page.locator('#native-search').fill('state-missing');
+    await batchBox(page, 'state-missing').check();
+    assert.equal(await selectedCount(page), 2);
+    await filteredClear(page);
+    await page.locator('#native-compare').click();
+    const text = await page.locator('#native-content').innerText();
+    assert.match(text, /Execução RF comprovada na fixture/);
+    assert.match(text, /Registro sem estado nem retenção/);
+    assert.match(text, /SUCCEEDED/);
+    assert.match(text, /Não declarado|AUSENTE/);
+    await clickAction(page, 'native-batch-links');
+    assert.match(await page.locator('#native-content').innerText(), /resource-proof|Dossiê sintético declarado/);
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'], {origin});
+    await clickAction(page, 'native-copy-references');
+    const copied = await page.evaluate(() => navigator.clipboard.readText());
+    assert.ok(copied.includes(uid('run-rf-proof')) && copied.includes(uid('state-missing')));
+    assert.ok(copied.includes(expected.revision_a), 'Copied references include their exact revision');
+  });
+
+  await check('T06_T07_T08_retention_export_is_exact_protected_and_non_executable', async () => {
+    await page.locator('#native-retention').click();
+    assert.match(await page.locator('#native-content').innerText(), /A medir no ambiente LOCAL/);
+    await page.locator('[data-intent-uid=' + attr(uid('run-rf-proof')) + ']').selectOption('REVIEW_FOR_REMOVAL');
+    const serialized = await download(page, '#native-export-plan', 'synthetic-retention-plan.json');
+    const plan = JSON.parse(serialized);
+    assert.equal(plan.schema, 'atlas-retention-plan/1');
+    assert.equal(plan.version, 1);
+    assert.equal(plan.status, 'PROPOSAL_ONLY');
+    assert.equal(plan.DELETE_AUTHORIZED, 'NO');
+    assert.equal(plan.source.revision, expected.revision_a);
+    assert.match(plan.source.metadata_sha256, /^[a-f0-9]{64}$/);
+    assert.equal(plan.selection.length, 2);
+    assert.equal(new Set(plan.selection.map(item => item.selection_key)).size, 2);
+    assert.deepEqual(new Set(plan.selection.map(item => item.uid)), new Set([uid('run-rf-proof'), uid('state-missing')]));
+    for (const item of plan.selection) {
+      assert.equal(item.source_revision, expected.revision_a);
+      assert.equal(item.source_metadata_sha256, plan.source.metadata_sha256);
+      assert.equal(item.source_id, plan.source.id);
+      assert.equal(item.dto_kind, 'record');
+    }
+    const baseline = plan.items.find(item => item.identity.uid === uid('run-rf-proof'));
+    const missing = plan.items.find(item => item.identity.uid === uid('state-missing'));
+    assert.equal(baseline.raw_json, expected.raw_json['run-rf-proof']);
+    assert.ok(baseline.raw_json.includes('9007199254740993'));
+    assert.ok(baseline.raw_json.includes('0.123456789012345678901'));
+    assert.equal(baseline.baseline.sourceConfirmed, true);
+    assert.equal(baseline.intent, 'REVIEW_FOR_REMOVAL');
+    for (const item of plan.items) {
+      assert.equal(item.protection.status, 'PROTECTED');
+      assert.equal(item.protection.removal_authorized, false);
+      assert.ok(item.protection.reasons.length > 0);
+      assert.ok(item.pending_verifications.length > 0);
+      assert.equal(Object.hasOwn(item, 'command'), false);
+      assert.equal(Object.hasOwn(item, 'script'), false);
+    }
+    assert.equal(missing.raw_json, expected.raw_json['state-missing']);
+    assert.equal(missing.intent, 'UNDECIDED');
+    assert.equal(missing.execution.present, false);
+    assert.ok(missing.gaps.length > 0);
+    assert.equal(plan.space_estimate.status, 'NOT_MEASURED');
+    assert.equal(plan.space_estimate.label, 'A medir no ambiente LOCAL');
+    assert.equal(plan.provenance.source_read_only, true);
+    assert.equal(plan.provenance.physical_presence_verified, false);
+    assert.ok(plan.pending_verifications.length > 0);
+    assert.equal(await page.getByRole('button', {name: /^(Apagar|Excluir|Remover arquivos|Executar descarte)/i}).count(), 0);
+    report.retention = {schema: plan.schema, selection: plan.selection.length, status: plan.status,
+      DELETE_AUTHORIZED: plan.DELETE_AUTHORIZED, exact_original_json: true, protected: plan.items.length};
+  });
+
+  await check('G5_baseline_designation_is_not_inferred_from_name_or_reference', async () => {
+    await filteredClear(page);
+    await openNativePane(page, 'baselines');
+    assert.equal(await batchBox(page, 'run-rf-proof').count(), 1);
+    assert.equal(await batchBox(page, 'M1.1').count(), 1);
+    assert.equal(await batchBox(page, 'name-only-baseline').count(), 0);
+    assert.equal(await batchBox(page, 'baseline-reference-only').count(), 0);
+    assert.equal(await batchBox(page, 'M1').count(), 0);
+    assert.equal(await batchBox(page, 'M11').count(), 0);
+  });
+
+  await check('G13_hostile_labels_URLs_and_prototype_names_remain_inert', async () => {
+    await search(page, 'hostile-record');
+    const hostile = result(page, 'hostile-record');
+    assert.equal(await hostile.count(), 1);
+    assert.match(await hostile.innerText(), /<img/);
+    assert.equal(await hostile.locator('img,script,iframe,object').count(), 0);
+    assert.equal(await page.evaluate(() => Boolean(globalThis.__triageInjected || Object.prototype.polluted)), false);
+    assert.deepEqual(report.external_requests, []);
+    assert.deepEqual(report.errors, []);
+  });
+
+  await check('T10_selection_comparison_planning_make_no_HTTP_or_source_write_requests', async () => {
+    const operations = report.requests.slice(planningRequestStart);
+    assert.deepEqual(operations, [], 'Selection, comparison, filtering and proposals stay within the loaded snapshot');
+    assert.deepEqual(report.external_requests, []);
+    assert.equal(report.requests.some(request => !['GET', 'HEAD'].includes(request.method)), false);
+    report.selection_planning_http_requests = operations.length;
+  });
+
+  await check('G6_switching_source_revision_invalidates_selection_intents_and_session_state', async () => {
+    assert.equal(await selectedCount(page), 2);
+    await page.locator('#native-source').selectOption('source-2');
+    await page.waitForFunction(revision => document.getElementById('native-revision')?.textContent.includes(revision), expected.revision_b);
+    assert.equal(await selectedCount(page), 0);
+    assert.equal(await page.locator('#native-batch-bar').isHidden(), true);
+    await openNativePane(page, 'selected');
+    assert.equal(await page.locator('#native-content [data-batch-uid]').count(), 0);
+    await page.locator('#native-source').selectOption('source-1');
+    assert.equal(await selectedCount(page), 0, 'Returning to the earlier revision must not silently revive stale selection');
+  });
+
+  const viewports = [{width: 1440, height: 1200}, {width: 1024, height: 900},
+    {width: 800, height: 1000}, {width: 390, height: 844}, {width: 320, height: 740}];
+  for (const viewport of viewports) {
+    await check('G11_responsive_keyboard_touch_focus_and_minimap_' + viewport.width, async () => {
+      const touch = viewport.width <= 390;
+      const layoutContext = await browser.newContext({viewport, isMobile: touch, hasTouch: touch, acceptDownloads: true});
+      await protectNetwork(layoutContext);
+      const layoutPage = await layoutContext.newPage();
+      layoutPage.on('pageerror', error => report.errors.push(error.message));
+      layoutPage.setDefaultTimeout(10000);
+      try {
+        await layoutPage.goto(url, {waitUntil: 'networkidle'});
+        await layoutPage.waitForFunction(() => !document.getElementById('native-download')?.disabled);
+        const toggle = layoutPage.locator('#native-menu-toggle'), sidebar = layoutPage.locator('#native-sidebar');
+        const initiallyExpanded = await toggle.getAttribute('aria-expanded') === 'true';
+        if (viewport.width === 1440) {
+          assert.equal(initiallyExpanded, true, 'Wide desktop navigation is initially visible');
+          const sidebarBox = await sidebar.boundingBox();
+          assert.ok(sidebarBox.width >= 240 && sidebarBox.width <= 280);
+          const before = await layoutPage.locator('#native-main').boundingBox();
+          await toggle.click();
+          const after = await layoutPage.locator('#native-main').boundingBox();
+          assert.ok(after.width > before.width, 'Collapsing the rail returns width to the work area');
+          await toggle.click();
+        } else if (touch) {
+          assert.equal(initiallyExpanded, false, 'Mobile navigation is a temporary panel');
+          assert.match(await toggle.innerText(), /Menu/);
+          await toggle.tap();
+          assert.equal(await sidebar.isVisible(), true);
+          assert.equal(await sidebar.evaluate(node => node.contains(document.activeElement)), true);
+          const focusable = sidebar.locator('button:visible, a:visible, input:visible, select:visible, [tabindex="0"]:visible');
+          await focusable.last().focus();
+          await layoutPage.keyboard.press('Tab');
+          assert.equal(await sidebar.evaluate(node => node.contains(document.activeElement)), true, 'Tab does not escape the temporary modal drawer');
+          await layoutPage.keyboard.press('Escape');
+          assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
+          assert.equal(await toggle.evaluate(node => document.activeElement === node), true);
+          await layoutPage.keyboard.press('Enter');
+          assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
+          await layoutPage.locator('#native-nav-close').click();
+          assert.equal(await toggle.evaluate(node => document.activeElement === node), true);
+          await layoutPage.keyboard.press('Space');
+          assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
+          await layoutPage.keyboard.press('Escape');
+        }
+        await search(layoutPage, 'run-rf-proof');
+        await batchBox(layoutPage, 'run-rf-proof').check();
+        await layoutPage.locator('[data-locate-uid=' + attr(uid('run-rf-proof')) + ']').click();
+        assert.equal(await selectedCount(layoutPage), 1);
+        const mini = layoutPage.locator('.editorial-minimap');
+        await mini.scrollIntoViewIfNeeded();
+        const geometry = await mini.evaluate(node => {
+          const box = node.getBoundingClientRect();
+          const points = [.1, .3, .5, .7, .9].flatMap(x => [.1, .3, .5, .7, .9].map(y => [box.x + box.width * x, box.y + box.height * y]));
+          const close = document.getElementById('native-close-detail'), closeBox = close.getBoundingClientRect();
+          return {viewport: [innerWidth, innerHeight], mini: {x: box.x, y: box.y, width: box.width, height: box.height},
+            hit_points: points.filter(([x, y]) => node.contains(document.elementFromPoint(x, y))).length,
+            in_viewport: box.x >= 0 && box.y >= 0 && box.right <= innerWidth && box.bottom <= innerHeight,
+            close_reachable: close.contains(document.elementFromPoint(closeBox.x + closeBox.width / 2, closeBox.y + closeBox.height / 2)),
+            document_width: document.documentElement.scrollWidth};
+        });
+        assert.equal(geometry.hit_points, 25, 'Batch bar, menu and details must not occlude the minimap');
+        assert.equal(geometry.in_viewport, true);
+        assert.equal(geometry.close_reachable, true);
+        assert.ok(geometry.document_width <= viewport.width + 1, 'Horizontal overflow remains in dedicated scroll regions');
+        const cameraBefore = await layoutPage.locator('.editorial-svg').getAttribute('viewBox');
+        const point = {x: geometry.mini.x + geometry.mini.width * .15, y: geometry.mini.y + geometry.mini.height * .15};
+        if (touch) await layoutPage.touchscreen.tap(point.x, point.y);
+        else await layoutPage.mouse.click(point.x, point.y);
+        assert.notEqual(await layoutPage.locator('.editorial-svg').getAttribute('viewBox'), cameraBefore, 'Real pointer input changes the camera');
+        await layoutPage.keyboard.press('Escape');
+        assert.equal(await selectedCount(layoutPage), 1);
+        for (const control of ['native-menu-toggle', 'native-select-visible', 'native-select-filtered']) {
+          const node = layoutPage.locator('#' + control);
+          await node.scrollIntoViewIfNeeded();
+          const bounds = await node.boundingBox();
+          assert.ok(bounds && bounds.width >= 24 && bounds.height >= 24, control + ' has a minimum 24px target');
+        }
+        await toggle.focus();
+        await layoutPage.keyboard.press('Tab');
+        const focus = await layoutPage.locator(':focus').evaluate(node => {
+          const box = node.getBoundingClientRect(), style = getComputedStyle(node);
+          return {outline: style.outlineStyle, width: parseFloat(style.outlineWidth),
+            visible: box.width > 0 && box.height > 0 && box.top >= 0 && box.bottom <= innerHeight};
+        });
+        assert.ok(focus.outline !== 'none' && focus.width >= 2 && focus.visible, 'Keyboard focus is visible and not obscured');
+        geometry.keyboard_focus = focus;
+        geometry.touch = touch;
+        report.layout.push(geometry);
+        const screenshot = reportPath.replace('.json', '-' + viewport.width + '.png');
+        await layoutPage.screenshot({path: screenshot, fullPage: false});
+        report.screenshots.push(path.basename(screenshot));
+      } finally {
+        await layoutContext.close();
+      }
+    });
+  }
+  assert.deepEqual(report.errors, []);
+  assert.deepEqual(report.external_requests, []);
+  report.status = 'PASS';
+  report.phase = 'COMPLETE';
+} catch (error) {
+  failure = error;
+  report.failure = error.stack || String(error);
+  if (report.phase === 'BROWSER_BOOTSTRAP') report.status = 'BLOCKED';
+} finally {
+  if (browser) await browser.close();
+  await fs.writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
+}
+if (failure) throw failure;
+console.log(JSON.stringify({status: report.status, checks: report.checks.length, report: reportPath}));
