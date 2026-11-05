@@ -2,7 +2,7 @@
  * Function-level provenance, source blobs and adaptations: REUSE-MANIFEST.json.
  * Only the verified Native View DTO supplies data; no imported HTML executes.
  */
-import {KIND,COLORS,EDGE,literalText,familyIdentity} from './native_legacy_model.js';
+import {KIND,COLORS,EDGE,literalText,familyIdentity,recordExecutionState} from './native_legacy_model.js';
 const NS='http://www.w3.org/2000/svg';
 const STATUS_INK=Object.freeze(Object.assign(Object.create(null),{published:'#116b4d',technical:'#285f8a',failed:'#9e3447',mixed:'#87570d',blocked:'#666324',unknown:'#526978'}));
 export function mountEditorialTree(host,model,rows,onSelect,persistent={},options={}){
@@ -103,12 +103,12 @@ function svgPath(d,color,width=1.6,dash='',desc='',klass='tree-link',arrow=false
 }
 function drawNode(node,parent=svg,miniature=false) {
  const isRoot=node.type==='root',isTheme=node.type==='theme',isFamily=node.type==='family';
- const r=R.get(node.id),selectedNow=r?.id===selected;
+ const r=R.get(node.id),selectedNow=r?.id===selected,executionState=r?recordExecutionState(r):undefined,stateLabel=executionState===undefined?'':literalText(executionState),stateCategory=typeof executionState==='string'?executionState.toLowerCase():'';
  const semanticRole=isRoot?'Mapa do Atlas':isTheme?`${node.title}: ${node.count} registros`:isFamily?`${node.title}: ${node.count} registros; expandir ou recolher`:r?.title??node.title;
  const g=s('g',{transform:`translate(${node.x} ${node.y})`,class:'svg-node svg-'+node.type+(selectedNow?' selected':''),
    'data-graph-id':node.id,'data-native-node':isRoot||isTheme||isFamily?'':node.id,tabindex:miniature?-1:0,role:'button','aria-label':semanticRole});
- const accent=isRoot?'#43D9D2':isTheme||isFamily?node.color||'#788D9B':COLORS[typeof r?.result_group==='string'?r.result_group:'']||'#7D92A4';
- const statusInk=STATUS_INK[typeof r?.result_group==='string'?r.result_group:'']||'#526978';
+ const accent=isRoot?'#43D9D2':isTheme||isFamily?node.color||'#788D9B':COLORS[stateCategory]||'#7D92A4';
+ const statusInk=STATUS_INK[stateCategory]||'#526978';
  const fill=isRoot?'#14354C':isTheme?'#EAF3FA':isFamily?'#FFFFFF':selectedNow?'#EFFAF8':'#FFFFFF';
  const outline=selectedNow?'#0E9189':isRoot?'#2C667B':isTheme?'#C9DFEE':isFamily?'#D8E5EF':'#DBE6EE';
  const corner=isRoot?18:isTheme?15:isFamily?13:11;
@@ -138,11 +138,11 @@ function drawNode(node,parent=svg,miniature=false) {
  }else{
   const lines=wrapped(node.title,node.w>=240?35:28,2);
   lines.forEach((line,i)=>g.appendChild(s('text',{x:15,y:25+i*16,'font-size':node.w>=240?12.8:12.1,'font-weight':730,fill:'#263D4C'},line)));
-  const status=(r?.result===undefined?'':literalText(r.result)).replaceAll('_',' ').slice(0,node.w>=240?39:27);
+  const status=stateLabel.replaceAll('_',' ').slice(0,node.w>=240?39:27);
   g.appendChild(s('text',{x:15,y:node.h-28,'font-size':10.5,'font-weight':650,fill:statusInk},status));
   g.appendChild(s('text',{x:15,y:node.h-12,'font-size':10,fill:'#496777'},(KIND[typeof r?.kind==='string'?r.kind:'']??'').slice(0,38)));
  }
- g.appendChild(s('title',{},isRoot?'Abrir árvore completa; linhas de organização não significam causalidade.':isTheme?`${node.title}\n${node.count} registros; organização, sem inferir causalidade.`:isFamily?`${node.title}\n${node.count} registros; clique para expandir.`:`${r?.title}\n${r?.result}\n${r?.id}`));
+ g.appendChild(s('title',{},isRoot?'Abrir árvore completa; linhas de organização não significam causalidade.':isTheme?`${node.title}\n${node.count} registros; organização, sem inferir causalidade.`:isFamily?`${node.title}\n${node.count} registros; clique para expandir.`:[r?.title,stateLabel,r?.id].filter(value=>value!==undefined&&value!=='').join('\n')));
  if(!miniature){
   const invoke=(focus=false)=>{
    if(isRoot){setBox([...full]);return;}
