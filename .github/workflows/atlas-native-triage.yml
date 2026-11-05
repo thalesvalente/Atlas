@@ -1,0 +1,106 @@
+name: Atlas native triage and retention
+
+'on':
+  pull_request:
+    paths:
+      - 'specs/005-experiment-triage/**'
+      - 'packages/atlas/src/atlas_viewer/**'
+      - 'scripts/qa/*native_triage*'
+      - 'scripts/qa/make_triage_fixture.py'
+      - 'scripts/qa/speckit_audit.py'
+      - 'tests/qa/test_native_triage_scope.py'
+      - 'tests/viewer/test_native_notebook_a01_fix.py'
+      - '.github/workflows/atlas-native-triage.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  domain-and-scope:
+    name: Triagem / domínio e escopo (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      SPECIFY_FEATURE_DIRECTORY: specs/005-experiment-triage
+      SPECIFY_FEATURE_NO_PERSIST: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Verify the exact published candidate
+        env:
+          ATLAS_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python -c "import os,subprocess; sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(); print(sha); actual_tree=subprocess.check_output(['git','rev-parse','HEAD^{tree}'],text=True).strip(); print(actual_tree); expected=os.environ['ATLAS_EXPECTED_SHA']; raise SystemExit(0 if sha==expected else 'WRONG_TESTED_SHA')"
+      - name: Check Feature 005 prerequisites without persisting feature state
+        run: python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
+      - name: Execute triage selection and fail-closed retention regressions
+        run: node --test --test-reporter=tap scripts/qa/test_native_triage.mjs
+      - name: Preserve the complete A01 regression gate under Node 24
+        run: python tests/viewer/test_native_notebook_a01_fix.py -v
+      - name: Verify the exact Feature 005 static-route scope and hostile negatives
+        run: python tests/qa/test_native_triage_scope.py -v
+
+  browser-triage:
+    name: Triagem / aplicação instalada e Chromium
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Install the public packages and existing pinned browser tooling
+        run: |
+          python -m pip install setuptools==80.9.0 wheel==0.45.1
+          python -m pip install --no-deps --no-build-isolation ./packages/protocol ./packages/atlas
+          npm install --no-save playwright@1.62.1
+          npx playwright install --with-deps chromium
+      - name: Verify the exact published candidate and parse UI modules
+        env:
+          ATLAS_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python -c "import os,subprocess; sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(); print(sha); expected=os.environ['ATLAS_EXPECTED_SHA']; raise SystemExit(0 if sha==expected else 'WRONG_TESTED_SHA')"
+          node --check packages/atlas/src/atlas_viewer/static/native_notebook.js
+          node --check packages/atlas/src/atlas_viewer/static/native_triage_ui.js
+          node --check scripts/qa/browser_native_triage.mjs
+      - name: Execute T01 to T10 with 1200+ invented records at five viewports
+        run: python scripts/qa/run_native_triage_browser.py --work .ci-native-triage
+      - name: Preserve synthetic reports screenshots and non-executable exports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-native-triage-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            .ci-native-triage/browser-native-triage-report*.json
+            .ci-native-triage/browser-native-triage-report*.png
+            .ci-native-triage/synthetic-*.json
+            .ci-native-triage/source-hashes-*.json
+            .ci-native-triage/triage-expected.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14

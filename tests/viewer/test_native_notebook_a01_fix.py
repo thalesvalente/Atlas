@@ -11,7 +11,7 @@ class A01PresentationRegressionTests(unittest.TestCase):
         node = shutil.which("node")
         self.assertIsNotNone(node, "Node is required by the existing presentation development suite")
         result = subprocess.run(
-            [node, "--test", str(root / "scripts/qa/test_native_a01_fix.mjs")],
+            [node, "--test", "--test-reporter=tap", str(root / "scripts/qa/test_native_a01_fix.mjs")],
             cwd=root, capture_output=True, text=True, encoding="utf-8", timeout=60,
             check=False,
         )
