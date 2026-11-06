@@ -34,7 +34,10 @@ com identidades científicas. Retenção continua proposta; DELETE_AUTHORIZED=NO
    separadamente. delta_provenance conserva os hashes do inventário histórico e do
    recibo. O plano é ancorado por seus bytes exatos; KEEP_FULL não pode mudar no lote.
 6. Associar IDs opacos de arquivos a roots/paths locais autorizados via argumentos
-   explícitos; nenhuma referência científica vira path automaticamente. Somente os
+   explícitos. Conferir paths absolutos canônicos, inclusive dos três documentos CLI;
+   no Windows, usar nomes físicos completos, sem aliases 8.3, symlinks ou junctions.
+   Não seguir links recebidos nos dados para obter um destino aparentemente válido.
+   Nenhuma referência científica vira path automaticamente. Somente os
    arquivos selecionados e dotados de hash serão relidos pela ferramenta.
 
 ## EXECUTE

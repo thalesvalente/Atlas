@@ -111,8 +111,12 @@ opacas; um campo `path`, `url`, `root` ou outro campo extra no inventário é re
 Referências que apareçam no JSON científico bruto permanecem texto inerte.
 
 Somente `roots` e `files`, argumentos explícitos do chamador LOCAL/CLI, habilitam
-leituras. Cada root deve ser diretório local absoluto, sem componente symlink ou
-junction. Cada relative_path usa segmentos separados por `/`; `..`, `.`, segmentos
+leituras. Cada root deve ser diretório local absoluto e canônico, sem componente
+symlink ou junction. Os paths dos três documentos CLI seguem a mesma fronteira.
+No Windows, usar o nome físico completo, sem aliases curtos 8.3. A ferramenta recusa
+divergência entre o path normalizado e realpath; não resolve links para autorizar
+seus destinos. Conferir os paths do operador no preflight, sem converter referências
+do inventário em autorização. Cada relative_path usa segmentos separados por `/`; `..`, `.`, segmentos
 vazios, barras invertidas, caminhos absolutos/UNC, drives, ADS, URLs, nomes reservados
 Windows, caracteres de controle, `%` e componentes com ponto/espaço final são recusados.
 Não há fallback por nome, glob, inferência de UID ou busca recursiva.

@@ -3,7 +3,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdir, writeFile, symlink, link} from 'node:fs/promises';
+import {mkdir, writeFile, symlink, link, realpath} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -269,6 +269,24 @@ test('unresolved bindings stay partial without inventing files or physical prese
   assertProtected(report, fixture);
   assert.deepEqual(report.items[0].file_ids, []);
   assert.equal(report.items[0].validation_status, 'UNRESOLVED');
+});
+
+test('synthetic temporary roots use canonical paths before explicit authorization', async t => {
+  const fixture = makeFixture(), corpus = await materializeCorpus(fixture);
+  t.diagnostic(JSON.stringify({platform: process.platform,
+    allocated_base: corpus.allocatedBase, canonical_base: corpus.base}));
+  assert.equal(corpus.base, await realpath(corpus.allocatedBase));
+  assert.equal(corpus.corpus, await realpath(corpus.corpus));
+  const before = await fixtureTree(corpus.base);
+  const report = await auditRetention({...encodeFixture(fixture), roots: corpus.roots, files: corpus.files});
+  assertProtected(report, fixture);
+  assert(report.file_verification.every(file => file.status === 'VERIFIED_CURRENT_READ'));
+  const allocatedRoot = path.join(corpus.allocatedBase, 'corpus');
+  const folded = value => process.platform === 'win32' ? value.toLowerCase() : value;
+  if (folded(allocatedRoot) !== folded(corpus.corpus)) {
+    await rejected({...encodeFixture(fixture), roots: {corpus: allocatedRoot}, files: corpus.files}, 'EXTERNAL_LINK');
+  }
+  assert.deepEqual(await fixtureTree(corpus.base), before);
 });
 
 test('shared consumers and declared backups retain protection after verified reads', async () => {

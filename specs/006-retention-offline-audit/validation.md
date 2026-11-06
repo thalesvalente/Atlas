@@ -19,8 +19,8 @@ T015: PR #33, comentário 6676134041. O corpo antigo da PR #33 não foi modifica
 
 Composição Git real: cherry-pick --no-commit -x de N02 sobre N03, sem conflito;
 árvore inicial de composição `05a36c0c8d327b489fd17e7b786eb469617699fc`.
-Acrescentamos somente este fechamento documental e o handoff LOCAL antes de fixar
-o commit terminal. A publicação pelo conector preserva os autores das entradas,
+Acrescentamos este fechamento documental e o handoff LOCAL antes da primeira
+publicação composta. A publicação pelo conector preserva os autores das entradas,
 o parent N03 e a referência explícita ao commit N02. Não houve merge de PR.
 
 ## Spec Kit real
@@ -79,11 +79,29 @@ promover aceite de outro SHA.
 | N02-SEC-02 | shared:false contradizia múltiplos consumidores/categoria compartilhada | Rejeição explícita; dois testes independentes |
 | N02-SEC-03 | Nomes COM/LPT com sobrescritos Windows eram aceitos no Linux | Recusa portátil; seis nomes no negativo de paths |
 | N02-DOC-01 | Nome do argumento de hash confundia envelope novo com inventário histórico | HASH_N02_ENVELOPE; hashes históricos preservados em delta_provenance |
+| N02-CI-01 | No Windows,11 testes físicos falharam na comparação realpath da raiz temporária, antes da leitura | Canonicalizar somente a raiz sintética recém-criada; teste explícito registra path alocado/canônico; módulo de produto e negativos de links intactos |
 
 Nomes reservados: [documentação Microsoft](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file).
 Os testes de protótipos e shared estavam vermelhos na primeira revisão e foram
 reproduzidos/verificados pelo revisor distinto do writer. Os35 testes não são sua
 própria revisão independente. A matriz de autoria está em evidence/recovery.json.
+
+### Primeira composição e correção da fixture Windows
+
+O composto `f123ff702efdd63f8c915924145797cac9f0a0e5`, tree
+`8675d5192145db8e161c61e1e8a25c67d285eefb`, teve18/19 jobs SUCCESS. O job Windows N02
+[127739007717](https://github.com/thalesvalente/Atlas/actions/runs/42171149877/job/127739007717)
+teve24/35 grupos PASS e11 FAIL, todos bloqueados por EXTERNAL_LINK ao conferir a raiz
+temporária. Esses resultados não qualificam esse SHA para LOCAL. Codex Review desse
+SHA foi concluído sem findings (PR35, comentário6678068571; recibo6678100244).
+
+A correção atua somente na preparação do diretório sintético criado pelo próprio
+teste. Não afrouxa inspectedPath, não converte paths dos dados e não amplia códigos
+aceitos nos negativos. A suíte passa a36 grupos e registra os dois nomes temporários
+no runner, para verificar a causa. O contrato LOCAL explicita caminhos canônicos.
+O novo SHA precisa de CI e Codex Review próprios; os resultados finais ficam no recibo
+P00_HANDOFF. O módulo do produto mantém SHA-256
+`478803d3361acbc3832b8d91ce8709d7ad0b9737f456a3c2b42e26e2555d9ffe`.
 
 ## Gates terminais e limites
 

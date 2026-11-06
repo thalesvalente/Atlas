@@ -1,6 +1,6 @@
 /** Invented N02 fixtures. Plans come from the unchanged Feature 005 exporter. */
 import {createHash} from 'node:crypto';
-import {mkdtemp, mkdir, writeFile, readdir, readFile, readlink} from 'node:fs/promises';
+import {mkdtemp, mkdir, writeFile, readdir, readFile, readlink, realpath} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {nativeFragments} from '../../packages/atlas/src/atlas_viewer/static/native_navigation.js';
@@ -85,7 +85,10 @@ export function encodeFixture(fixture, {rebindPlan = false} = {}) {
 
 /** Deliberately retain small synthetic directories: no cleanup/deletion command. */
 export async function materializeCorpus(fixture) {
-  const base = await mkdtemp(path.join(tmpdir(), 'atlas-n02-invented-'));
+  const allocatedBase = await mkdtemp(path.join(tmpdir(), 'atlas-n02-invented-'));
+  // Only this newly created synthetic directory is canonicalized. Windows TEMP
+  // may use a short-name alias; the audit must still reject caller-supplied links.
+  const base = await realpath(allocatedBase);
   const corpus = path.join(base, 'corpus');
   await mkdir(path.join(corpus, 'data'), {recursive: true});
   const files = {}, paths = {};
@@ -96,7 +99,7 @@ export async function materializeCorpus(fixture) {
     files[id] = {root_id: 'corpus', relative_path};
     paths[id] = destination;
   }
-  return {base, corpus, roots: {corpus}, files, paths};
+  return {allocatedBase, base, corpus, roots: {corpus}, files, paths};
 }
 
 /** No-follow observation of this fixture only, for before/after equality. */
