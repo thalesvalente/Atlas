@@ -1,5 +1,6 @@
 """End-to-end cases for the local CLI. All payload files are synthetic."""
 
+from contextlib import ExitStack
 import hashlib
 import json
 import os
@@ -8,6 +9,7 @@ import subprocess
 import sys
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 REPO = Path(__file__).resolve().parents[2]
 EXPORTED = REPO / "specs/005-experiment-triage/examples/retention-plan.synthetic.json"
@@ -62,6 +64,7 @@ class BindingTest(unittest.TestCase):
                 "uid": identity["uid"], "dto_kind": identity["dto_kind"],
                 "raw_sha256": sha(item["raw_json"].encode("utf-8")),
                 "coverage": "COMPLETE", "files": [f"file-{i}"],
+                "validation_status": "VERIFIED", "evidence_scope": "PHYSICAL_BINDING",
             }
             if "source_key" in identity:
                 binding["source_key"] = identity["source_key"]
@@ -213,13 +216,15 @@ class BindingTest(unittest.TestCase):
         self.assertEqual(next(f for f in report["files"] if f["id"] == "file-0")["selected_indices"], [0])
 
     def test_failed_experiment_and_unproven_backup_do_not_make_eligible(self):
-        self.assertIn("FAILED", self.plan["items"][0]["raw_json"])
-        self.plan["items"][0]["intent"] = "REVIEW_FOR_REMOVAL"
+        failed = self.plan["items"][1]
+        failed["raw_json"] = '{"execution_state":"FAILED",' + failed["raw_json"][1:]
+        failed["intent"] = "REVIEW_FOR_REMOVAL"
+        self.inventory["bindings"][1]["raw_sha256"] = sha(failed["raw_json"].encode("utf-8"))
         self.save_plan()
         report = self.accepted()
-        self.assertEqual(report["items"][0]["eligibility"], "BLOCKED")
-        self.assertIn("BACKUP_UNVERIFIED", report["items"][0]["blockers"])
-        self.assertFalse(report["items"][0]["removal_authorized"])
+        self.assertEqual(report["items"][1]["eligibility"], "BLOCKED")
+        self.assertIn("BACKUP_UNVERIFIED", report["items"][1]["blockers"])
+        self.assertFalse(report["items"][1]["removal_authorized"])
         self.assertIsNone(report["space"]["recoverable_bytes"])
         self.assertEqual(report["space"]["recoverable_status"], "RECOVERABLE_SPACE_UNKNOWN")
 
@@ -264,6 +269,166 @@ class BindingTest(unittest.TestCase):
         self.plan["items"][0]["declared"]["artifacts"] = [{"raw_json": '"../../unauthorized"'}]
         self.save_plan()
         self.accepted()
+
+    def test_dtype_claim_cannot_replace_authenticated_identity(self):
+        identity = self.plan["selection"][0]
+        identity["dto_kind"] = "node"
+        identity.pop("record_kind")
+        identity["selection_key"] = wire([
+            "atlas-selection/1", self.plan["snapshot_key"], identity["uid"], "node", [False],
+        ]).decode("utf-8")
+        self.plan["items"][0]["identity"] = identity
+        self.save_plan()
+        self.rejected("INVENTORY_IDENTITY_MISMATCH")
+
+    def test_lexical_identity_keeps_large_integers_exact(self):
+        item = self.plan["items"][1]
+        item["raw_json"] = '{"native_id":9007199254740993,' + item["raw_json"][1:]
+        identity = item["identity"]
+        identity["original_id"] = {"field": "native_id", "type": "integer",
+                                   "raw_json": "9007199254740993", "display": "9007199254740993"}
+        self.plan["selection"][1] = identity
+        self.inventory["bindings"][1]["raw_sha256"] = sha(item["raw_json"].encode("utf-8"))
+        self.save_plan()
+        self.accepted()
+        identity["original_id"]["raw_json"] = "9007199254740992"
+        self.save_plan()
+        self.rejected("ORIGINAL_IDENTITY_MISMATCH")
+
+    def test_duplicate_json_key_is_rejected_even_with_a_valid_pin(self):
+        raw = wire(self.inventory).replace(b'"dependency_scope":"COMPLETE"',
+                                           b'"dependency_scope":"UNKNOWN","dependency_scope":"COMPLETE"')
+        self.rejected("DUPLICATE_JSON_KEY", inventory_bytes=raw)
+
+    def test_conflicting_baseline_projection_is_rejected(self):
+        self.plan["items"][0]["baseline"]["sourceConfirmed"] = False
+        self.save_plan()
+        self.rejected("BASELINE_MISMATCH")
+
+    def test_alias_to_same_root_and_nested_root_are_rejected(self):
+        child = self.root / "nested"
+        child.mkdir()
+        for target in (self.root, child):
+            with self.subTest(target=target.name):
+                self.rejected("ROOT_ALIAS_COLLISION", extra=("--root", f"alias={target}"))
+
+    def test_folded_path_alias_is_rejected_without_opening_it(self):
+        self.inventory["files"].append(dict(self.inventory["files"][0], id="alias", path="DATA-0.BIN"))
+        self.rejected("FILE_ALIAS_COLLISION")
+
+    def test_unproved_link_is_rejected_before_reading_files(self):
+        self.inventory["bindings"][0]["files"] = ["undeclared"]
+        self.rejected("LINK_NOT_PROVEN")
+
+    def test_documentary_witness_never_closes_physical_coverage(self):
+        binding = self.inventory["bindings"][2]
+        binding["evidence_scope"] = "DOCUMENTARY_WITNESS"
+        self.rejected("INVALID_BINDING_EVIDENCE")
+        binding["coverage"] = "PARTIAL"
+        self.inventory["dependency_scope"] = "UNKNOWN"
+        report = self.accepted()
+        self.assertIn("DOCUMENTARY_WITNESS_ONLY", report["items"][2]["blockers"])
+        self.assertFalse(report["space"]["logical_complete"])
+
+    def add_backup_copy(self):
+        primary = self.inventory["files"][1]
+        (self.backup_root / "copy.bin").write_bytes((self.root / primary["path"]).read_bytes())
+        self.inventory["files"].append(dict(primary, id="copy-1", root="backup", path="copy.bin"))
+        self.inventory["backups"].append({"primary": "file-1", "copy": "copy-1"})
+        self.plan["items"][1]["intent"] = "REVIEW_FOR_REMOVAL"
+        self.save_plan()
+
+    def test_copy_and_restore_are_separate_and_restore_can_be_added(self):
+        self.add_backup_copy()
+        item = self.accepted()["items"][1]
+        self.assertIn("BACKUP_RESTORE_UNPROVEN", item["blockers"])
+        self.assertIn("BACKUP_INDEPENDENCE_UNPROVEN", item["blockers"])
+        delta = {**self.inventory, "parent_sha256": sha(wire(self.inventory)),
+                 "files": [], "bindings": [],
+                 "backups": [{"primary": "file-1", "copy": "copy-1",
+                              "restore_evidence": "synthetic-restore",
+                              "independence_evidence": "synthetic-independent"}]}
+        path = self.temp / "backup-delta.json"
+        path.write_bytes(wire(delta))
+        report = self.accepted(extra=("--inventory", str(path), "--inventory-sha256", sha(wire(delta))))
+        self.assertNotIn("BACKUP_RESTORE_UNPROVEN", report["items"][1]["blockers"])
+        self.assertIn("BACKUP_INDEPENDENCE_UNPROVEN", report["items"][1]["blockers"])
+        self.assertTrue(report["files"][1]["backup_copy_verified"])
+
+    def test_review_only_with_all_evidence_still_preserves_no_authorization(self):
+        from tools.atlas_retention_binding.binding import build_report
+        from tools.atlas_retention_binding.inventory import Inventory
+        from tools.atlas_retention_binding.plan import read_plan
+
+        self.add_backup_copy()
+        self.inventory["backups"][0].update(independence_evidence="synthetic-independent",
+                                            restore_evidence="synthetic-restore")
+        source, items = read_plan(self.plan)
+        inventory = Inventory(source)
+        inventory.append(self.inventory, sha(wire(self.inventory)))
+        volumes = {"file-0": 1, "file-1": 1, "file-2": 1, "copy-1": 2}
+        with patch("tools.atlas_retention_binding.binding.verify_files", return_value=volumes):
+            report = build_report(inventory, items, inventory.select(items), {})
+        self.assertEqual(report["items"][1]["eligibility"], "REVIEW_ONLY")
+        self.assertFalse(report["items"][1]["removal_authorized"])
+        self.assertEqual(report["space"]["recoverable_status"], "RECOVERABLE_SPACE_UNKNOWN")
+
+    def test_complete_keep_full_lot_has_zero_potential_recovery(self):
+        for item in self.plan["items"]:
+            item["intent"] = "KEEP_FULL"
+        self.save_plan()
+        report = self.accepted()
+        self.assertEqual(report["space"]["recoverable_status"], "ZERO_PROTECTED")
+        self.assertEqual(report["space"]["recoverable_bytes"], 0)
+
+    def test_identical_replacement_during_hashing_is_detected_or_prevented(self):
+        from tools.atlas_retention_binding.contracts import Rejected
+        from tools.atlas_retention_binding.filesystem import consume, inspect, open_root
+
+        filename = self.root / "data-0.bin"
+        data = filename.read_bytes()
+        replacement = self.root / "replacement.bin"
+        replacement.write_bytes(data)
+
+        def swap_during_read(read, size, collect):
+            if os.name == "nt":
+                with self.assertRaises(PermissionError):
+                    replacement.replace(filename)
+            else:
+                replacement.replace(filename)
+            return consume(read, size, collect)
+
+        with ExitStack() as stack:
+            root = open_root(stack, self.root)
+            with patch("tools.atlas_retention_binding.filesystem.consume", side_effect=swap_during_read):
+                if os.name == "nt":
+                    inspect(root, (filename.name,), expected_sha=sha(data), size=len(data))
+                else:
+                    with self.assertRaisesRegex(Rejected, "^FILE_CHANGED$"):
+                        inspect(root, (filename.name,), expected_sha=sha(data), size=len(data))
+
+    def test_batch_rechecks_previously_hashed_names(self):
+        from tools.atlas_retention_binding.binding import inspect, verify_files
+        from tools.atlas_retention_binding.contracts import Rejected
+        from tools.atlas_retention_binding.filesystem import open_root
+        from tools.atlas_retention_binding.inventory import File
+
+        name = self.root / "data-0.bin"
+        replacement = self.root / "replacement.bin"
+        replacement.write_bytes(name.read_bytes())
+        files = {value["id"]: File.read(value) for value in self.inventory["files"]}
+
+        def swap_after_first_file(*args, **kwargs):
+            result = inspect(*args, **kwargs)
+            if args[1] == (name.name,):
+                replacement.replace(name)
+            return result
+
+        with ExitStack() as stack:
+            root = open_root(stack, self.root)
+            with patch("tools.atlas_retention_binding.binding.inspect", side_effect=swap_after_first_file):
+                with self.assertRaisesRegex(Rejected, "^FILE_CHANGED$"):
+                    verify_files({"corpus": root}, files, files.keys())
 
 
 if __name__ == "__main__":
