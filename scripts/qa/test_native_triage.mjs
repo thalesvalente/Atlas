@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {performance} from 'node:perf_hooks';
 import {nativeFragments} from '../../packages/atlas/src/atlas_viewer/static/native_navigation.js';
-import {makePresentation,recordExecutionState,recordMatches} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_model.js';
+import {makePresentation,recordExecutionState,recordExecutionPresentation,recordMatches} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_model.js';
 import {createTriageModel,SelectionLedger,selectionKey,snapshotKey,entryType} from '../../packages/atlas/src/atlas_viewer/static/native_triage_model.js';
 import {RETENTION_INTENTS,buildRetentionPlan,buildDossier,copyReferences} from '../../packages/atlas/src/atlas_viewer/static/native_retention.js';
 
@@ -41,6 +41,36 @@ test('execution filter follows badge precedence and keeps documentary result sep
   assert.deepEqual(ids(model.search({execution:keyFor(model,failed,'execution')})),['failed']);
   assert.deepEqual(ids(model.search({result_group:keyFor(model,passed,'result_group')})),['passed']);
   assert.equal(model.facet(passed,'execution').label,'SUCCEEDED');
+});
+
+test('documentary publication cannot supply an execution state on a legacy mission',()=>{
+  const items=['published','PUBLISHED_PASS_WITH_WARNINGS','NOT_PUBLISHED','SNAPSHOT_PUBLISHED'].map((value,i)=>
+    entry('document'+i,'record',{kind:'mission',result_group:value,result:value,publication:'UNKNOWN'}));
+  const model=createTriageModel(source(items));
+  for(const e of items){
+    const raw=JSON.parse(e.raw_json),execution=model.facet(e,'execution');
+    assert.equal(execution.present,false);
+    assert.equal(execution.raw,null);
+    assert.equal(execution.tone,'neutral');
+    assert.equal(recordExecutionPresentation(raw).state,undefined);
+    assert.deepEqual(ids(model.search({result_group:keyFor(model,e,'result_group')})),[e.uid]);
+    assert.equal(model.facet(e,'publication').raw,'"UNKNOWN"');
+  }
+  assert.equal(model.options('execution').length,1);
+  const plan=buildRetentionPlan(source(items),items);
+  assert.deepEqual(plan.items.map(item=>item.raw_json),items.map(e=>e.raw_json));
+  assert.equal(plan.items[0].declared.results.find(value=>value.field==='result_group').raw_json,'"published"');
+});
+
+test('legacy execution tokens still drive badges and filters with their original lexemes',()=>{
+  const failed=entry('legacy-failed','record',{kind:'mission',result_group:'failed',result:'PUBLISHED'});
+  const resultOnly=entry('legacy-succeeded','record',{kind:'run',result:'SUCCEEDED'});
+  const model=createTriageModel(source([failed,resultOnly]));
+  assert.equal(model.facet(failed,'execution').raw,'"failed"');
+  assert.equal(model.facet(failed,'execution').field,'result_group');
+  assert.equal(model.facet(failed,'execution').tone,'failed');
+  assert.equal(model.facet(resultOnly,'execution').raw,'"SUCCEEDED"');
+  assert.equal(model.facet(resultOnly,'execution').field,'result');
 });
 
 test('M1.1 result is a table and a declaration does not create an execution',()=>{

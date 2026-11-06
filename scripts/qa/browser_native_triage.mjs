@@ -205,6 +205,12 @@ try {
     assert.equal(await batchBox(page, 'state-missing').count(), 1);
     assert.equal(await batchBox(page, 'state-null').count(), 0);
     assert.equal(await batchBox(page, 'state-empty').count(), 0);
+    await filteredClear(page);
+    await search(page, 'state-missing');
+    assert.match(await result(page, 'state-missing').innerText(), /Execução: AUSENTE/);
+    assert.equal(await page.locator('#native-execution option').filter({hasText: /^published$/i}).count(), 0);
+    await choose(page, 'native-status', 'published');
+    assert.equal(await result(page, 'state-missing').count(), 1);
   });
 
   await check('G3_G4_declared_period_evidence_individual_chips_and_search_diagnostics', async () => {

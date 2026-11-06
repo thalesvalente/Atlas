@@ -3,7 +3,7 @@
  */
 import {nativeFragments,buildNativeNavigation} from './native_navigation.js';
 import {literalValue,literalText,objectData,familyIdentity,makePresentation,norm,
-  EXECUTION_STATE_FIELDS,recordExecutionState,recordExecutionPresentation} from './native_legacy_model.js';
+  recordExecutionPresentation} from './native_legacy_model.js';
 
 const own=(o,k)=>o!==null&&o!==undefined&&Object.prototype.hasOwnProperty.call(o,k);
 const rawCache=new WeakMap(),dataCache=new WeakMap();
@@ -161,11 +161,9 @@ export function createTriageModel(source,presentation=null){
       value={...value,key:JSON.stringify(['atlas-triage-kind/1',entry.kind,value.key])};
       if(raw!==undefined&&(!scientific||type(entry).key!=='record'))value.label=type(entry).label;
     }else if(dimension==='execution'){
-      const key=entry.kind==='record'?first(fields,EXECUTION_STATE_FIELDS):undefined;
-      const state=entry.kind==='record'?recordExecutionState(data(entry)):undefined;
-      value=typedFacet(dimension,key===undefined?undefined:fields.get(key),key??null,
-        {tone:entry.kind==='record'?recordExecutionPresentation(data(entry)).tone:'neutral',
-          label:key===undefined?'AUSENTE — campo não declarado':literalText(state)});
+      const {field,state,tone}=recordExecutionPresentation(entry.kind==='record'?data(entry):undefined);
+      value=typedFacet(dimension,field===undefined?undefined:fields.get(field),field??null,
+        {tone,label:field===undefined?'AUSENTE — campo não declarado':literalText(state)});
     }else if(dimension==='evidence')value=evidenceFacet(entry);
     else{
       const names=dimension==='documentary'?(entry.kind==='record'?['documentary_status']:['documentary_status','status','terminal_status']):own(ALIASES,dimension)?ALIASES[dimension]:[];
