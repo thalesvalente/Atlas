@@ -105,3 +105,77 @@
 .legacy-port .table-domain-filters label{flex:1 1 140px;min-width:0;max-width:100%}
 .legacy-port .table-domain-filters select{width:100%;min-width:0;max-width:100%;min-height:34px}
 @media(max-width:720px){.legacy-port .table-domain-filters label{flex-basis:120px}.legacy-port .table-domain-filters button{min-height:36px}}
+
+/* Feature 005: one principal navigation, contextual filters and explicit batch. */
+.triage{--muted:#536c7b;scroll-padding-top:160px}.triage :is(button,summary,input,select){scroll-margin-block:170px 220px}
+.triage .topbar{gap:16px;min-height:80px;height:auto}.triage .topbar .heading{flex:1;min-width:0}
+.triage #native-menu-toggle{min-height:44px;flex-shrink:0;background:#fff;color:#193a3d;font-size:12px;max-width:180px;white-space:normal}
+.triage .app-shell{grid-template-columns:minmax(0,1fr);min-height:calc(100vh - 80px)}
+.triage.triage-nav-open .app-shell{grid-template-columns:clamp(240px,19vw,280px) minmax(0,1fr)}
+.triage .sidebar{height:calc(100vh - 16px);top:8px;padding:16px 12px;overflow:auto;border-right:1px solid var(--line)}
+.triage .triage-nav-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}.triage .triage-nav-head h2{font-size:14px;margin:0;flex:1}
+.triage .sidebar nav{display:block}.triage .sidebar nav ul{list-style:none;padding:0;margin:0}.triage .sidebar nav ul ul{padding-left:9px}
+.triage .sidebar nav button{width:100%;white-space:normal;min-height:40px;margin:2px 0;padding:8px 10px;font-size:12px;display:flex;justify-content:space-between;gap:6px}
+.triage .sidebar nav button[aria-current=page]{background:#17475e;color:#fff;border-radius:6px}
+.triage .sidebar details{border:0;padding:0;margin:12px 0}.triage .sidebar summary{font-size:11px;font-weight:700;color:#486879;min-height:32px;cursor:pointer;padding:6px}
+.triage .sidebar-foot{font-size:11px;padding:16px 8px 8px;border-top:1px solid var(--line);margin-top:16px}
+.triage #native-nav-close{min-height:36px;font-size:11px;padding:6px}.triage #native-nav-backdrop{position:fixed;inset:0;background:#132c45a6;z-index:49;border:0;border-radius:0}
+.triage .triage-query{display:grid;grid-template-columns:minmax(180px,1fr) minmax(260px,2fr);gap:14px;margin:14px 0}
+.triage .triage-query label{min-width:0;font-size:12px;margin:0}.triage .triage-query select{width:100%;min-height:44px}
+.triage .searchbox{display:flex;gap:7px;align-items:stretch;min-width:0}.triage .searchbox input{flex:1;width:0;min-width:0;min-height:44px}.triage .searchbox button{white-space:normal;font-size:12px;min-width:70px;min-height:44px}
+.triage .mobile-filters{padding:0;border:1px solid var(--line);border-radius:8px;background:white;margin:10px 0}
+.triage .mobile-filters>summary{display:block;padding:12px;cursor:pointer;font-size:12px;font-weight:650;min-height:44px}
+.triage .mobile-filters>summary::before{content:'▸ ';display:inline}.triage .mobile-filters[open]>summary::before{content:'▾ '}
+.triage .triage-filter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;padding:12px;border-top:1px solid var(--line)}
+.triage .triage-filter-grid label{min-width:0;margin:0;font-size:11px}.triage .triage-filter-grid :is(select,input){width:100%;min-width:0;min-height:40px}
+.triage .triage-index{margin:0 12px 12px;font-size:12px}.triage .triage-index summary{cursor:pointer;min-height:32px;padding:7px 0}
+.triage .node-list{max-height:240px;min-height:0;overflow:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.triage .node-list button{min-width:0;margin:0}.triage .triage-active-filters{display:flex;gap:8px;align-items:flex-start;margin:8px 0}.triage #native-filter-chips{display:flex;flex:1;gap:6px;flex-wrap:wrap;min-width:0}
+.triage .triage-chip{font-size:11px;min-height:32px;background:#eaf3f7;white-space:normal;max-width:100%;overflow-wrap:anywhere;text-align:left}
+.triage #native-clear{min-height:36px;flex-shrink:0;font-size:11px}.triage .application-selection{margin:6px 0 10px}
+.triage .triage-batch-bar{position:sticky;top:0;z-index:10;background:#e7f3f4;border:1px solid #91bdc6;border-radius:9px;padding:10px 12px;margin:10px 0;box-shadow:0 4px 12px #17364b12;max-width:100%}
+.triage #native-batch-summary{font-size:12px;line-height:1.5;margin:0 0 7px;overflow-wrap:anywhere}
+.triage .triage-batch-actions{display:flex;gap:7px;align-items:flex-start;flex-wrap:wrap}.triage .triage-batch-actions>button{min-height:40px;font-size:12px}
+.triage .triage-batch-actions>details{padding:0;margin:0;border:0;min-width:0}.triage .triage-batch-actions summary{min-height:40px;padding:9px 12px;font-size:12px;cursor:pointer}
+.triage .triage-more-actions{display:flex;gap:7px;flex-wrap:wrap;padding-top:8px}.triage .triage-more-actions button{font-size:12px;min-height:40px}
+.triage .triage-select-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.triage .triage-select-actions button{font-size:12px;min-height:40px;white-space:normal}
+.triage .triage-result-list{display:grid;gap:12px}.triage .triage-result{padding:14px;border:1px solid var(--line);border-radius:9px;background:#fff;min-width:0;overflow-wrap:anywhere}
+.triage .triage-result[data-batch-selected=true]{border-color:#2c788d;background:#f0f8fa}.triage .triage-result-head{display:flex;gap:10px;align-items:flex-start}
+.triage .triage-result-head h3{font-size:15px;margin:2px 0;flex:1;min-width:0}.triage .triage-result-head h3 button{padding:0;border:0;font:inherit;color:#155d7a;background:none;text-align:left;white-space:normal;overflow-wrap:anywhere}
+.triage .triage-type{font-size:10px;font-weight:750;letter-spacing:.04em;color:#426475;text-transform:uppercase;margin:0 0 5px}
+.triage .triage-result .triage-match{font-size:12px;color:#486779;white-space:pre-wrap;overflow-wrap:anywhere;margin:7px 0}
+.triage .triage-result .triage-result-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.triage .triage-result-actions button{font-size:12px;min-height:36px}
+.triage .triage-check{display:inline-flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;min-width:36px;min-height:36px;cursor:pointer;margin:0;color:#244f65;font-size:11px;flex-shrink:0}
+.triage .triage-check input{width:20px;height:20px;min-height:20px;margin:0;accent-color:#226c81}.triage .record-reading .triage-check{display:flex;justify-content:flex-start;margin-bottom:5px}
+.triage .svg-batch{cursor:pointer;outline:none}.triage .svg-batch:focus-visible rect{stroke:#145fa0;stroke-width:3}.triage .svg-batch[aria-checked=true] rect{fill:#1a627c}.triage .svg-batch text{pointer-events:none}
+.triage .triage-plan-intent{font-size:12px;display:block;margin:10px 0}.triage .triage-plan-intent select{display:block;width:100%;min-height:42px;margin-top:5px}
+.triage .triage-protection{padding:9px 11px;background:#fff6e3;border-left:3px solid #946b1f;font-size:12px;overflow-wrap:anywhere}
+.triage .triage-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.triage .triage-metric{padding:16px;background:white;border:1px solid var(--line);border-radius:9px}.triage .triage-metric strong{font-size:26px;display:block}.triage .triage-metric span{font-size:12px}
+.triage .triage-annotation{font-size:12px;padding-top:12px;border-top:1px solid var(--line);margin-top:12px}.triage .triage-annotation input{width:100%;min-height:42px}.triage .triage-annotation button{min-height:40px;margin-top:8px}
+.triage .triage-compare{max-width:100%;overflow:auto}.triage .triage-compare table{min-width:650px;width:100%}.triage .triage-compare th,.triage .triage-compare td{min-width:120px;max-width:280px;font-size:12px}
+.triage .triage-reference-copy{width:100%;min-height:140px;font:12px/1.5 monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.triage :is(summary,button,input,select):focus-visible{outline:3px solid #176488;outline-offset:3px}
+.triage .topbar :is(button,a):focus-visible{outline:3px solid #8bd5db;outline-offset:3px}
+/* Keep the initial work surface within reach; empty filter chrome has no job. */
+.triage .intro{padding:10px 16px;margin-bottom:8px}.triage .intro h2{margin:0}.triage .intro p{margin:4px 0 0;color:var(--muted)}
+.triage .triage-query{margin:8px 0}.triage .mobile-filters{margin:8px 0}
+.triage .triage-active-filters:has(#native-clear:disabled){display:none}
+.triage .application-provenance{margin:6px 0}.triage .triage-select-actions{margin:6px 0}
+@media(min-width:1101px){
+ .triage .workspace:has(>.detail:not([hidden])) :is(.graph-toolbar,.editorial-tree .toolbar,.editorial-tree .tree-controls,#native-content>.toolbar){margin-right:440px}
+ .triage:has(#native-detail:not([hidden])) .triage-batch-bar{margin-right:440px}
+ .triage:has(#native-detail:not([hidden])) :is(.intro,.triage-query,.mobile-filters,.triage-active-filters,.application-provenance,.triage-select-actions){margin-right:440px}
+ .triage:has(#native-detail:not([hidden])) .intro{flex-wrap:wrap}
+ .triage:has(#native-detail:not([hidden])) .triage-query{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+}
+@media(max-width:1100px){.triage .topbar h1{font-size:17px}.triage .topbar .eyebrow{font-size:9px}.triage main{padding:16px}.triage .triage-query{grid-template-columns:1fr 1.5fr}}
+@media(max-width:720px){
+ .triage .topbar{gap:8px;padding:10px 12px;min-height:64px}.triage .topbar .heading{display:none}.triage .topbar .brand{margin-right:auto}.triage #native-menu-toggle{min-width:64px;max-width:100px}.triage #native-refresh{font-size:10px;max-width:110px;white-space:normal;min-height:44px}
+ .triage .app-shell,.triage.triage-nav-open .app-shell{display:block}.triage .sidebar{position:fixed;inset:8px auto 8px 8px;width:min(290px,calc(100vw - 32px));height:auto;max-height:calc(100dvh - 16px);z-index:50;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 50px #16344d55;background:white;padding:14px}
+ .triage .sidebar nav{display:block;overflow:visible}.triage .sidebar nav button{min-height:44px;padding:9px 10px;font-size:13px}.triage .sidebar-foot{display:block}.triage #native-nav-close{min-height:44px;min-width:60px}
+ .triage main{padding:12px}.triage .triage-query{grid-template-columns:1fr;gap:10px}.triage .triage-query label{font-size:11px}.triage .triage-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px;gap:10px}
+ .triage .triage-filter-grid :is(select,input){font-size:12px;min-height:44px;padding:8px 6px}.triage .triage-active-filters{flex-wrap:wrap}.triage #native-clear{min-height:44px}.triage .triage-chip{min-height:44px}
+ .triage .triage-batch-bar{padding:8px;top:0}.triage #native-batch-summary{font-size:11px}.triage .triage-batch-actions{gap:6px}.triage .triage-batch-actions>button{flex:1 1 110px;padding:7px;min-height:44px;font-size:11px}.triage .triage-batch-actions>details{width:100%}.triage .triage-batch-actions summary{min-height:44px;padding:10px 6px}
+ .triage .triage-more-actions{max-height:160px;overflow:auto}.triage .triage-more-actions button{min-height:44px;flex:1 1 120px}.triage .triage-select-actions button{flex:1 1 130px;min-height:44px;font-size:11px;padding:7px}
+ .triage .triage-result{padding:12px}.triage .triage-result-head h3{font-size:14px}.triage .triage-check{min-width:44px;min-height:44px}.triage .triage-result-actions button{min-height:44px;max-width:100%;white-space:normal}.triage .triage-index .node-list{display:block}.triage .node-card{margin-bottom:5px}
+}

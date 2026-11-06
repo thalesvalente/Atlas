@@ -1,0 +1,21 @@
+{
+  "status": "PASS_SCOPED",
+  "scope": "SYNTHETIC_LINEAGE_COMPONENT_NOT_PRIVATE_HOST_ACCEPTANCE",
+  "checks": [
+    "scoped_keys_collisions_null_missing_and_composite_endpoints_stay_distinct",
+    "large_integer_lexemes_string_ids_and_explicit_aliases_never_coerce",
+    "typed_svg_edges_and_endpoint_keyboard_selection_reach_original_occurrences",
+    "ambiguous_reference_requires_explicit_candidate_selection",
+    "pagination_and_integral_search_reach_last_relation_beyond_first_window",
+    "type_filter_zoom_and_keyboard_pan_work",
+    "self_reference_preserves_one_endpoint_occurrence",
+    "mobile_layout_text_only_types_no_errors_and_no_external_requests"
+  ],
+  "errors": [],
+  "external_requests": [],
+  "tested_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+  "installed_module_sha256": {
+    "native_lineage.js": "48ad868362957c5fcc52708349ffb99a619ed067e532dc82e373b1b20ff59908",
+    "native_navigation.js": "788ade52ea9138e9b802ddb3e06ae5dbcafda161f59913c356762f2d867badb3"
+  }
+}

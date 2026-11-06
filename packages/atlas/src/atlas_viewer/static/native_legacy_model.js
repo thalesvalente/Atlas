@@ -102,20 +102,34 @@ export function readingColumns(columns){const ordered=presentationColumns(column
 const firstDeclared=(value,names)=>{const data=objectData(value);for(const name of names)if(has(data,name))return data[name];return undefined;};
 export const catalogTitle=x=>firstDeclared(x,['label','title','name','native_id','unit_id','native_path','source_path','id']);
 export const catalogStatus=x=>firstDeclared(x,['documentary_status','terminal_status','assessment_after','status','binding_status','technical_admission','availability','publication']);
-// Native View precedence (native_notebook.js declared/status), by own-key
-// presence, not truthiness. result is retained only as a legacy-only fallback.
-export const EXECUTION_STATE_FIELDS=Object.freeze(['execution_state','status','result_state','result_group','result']);
-export const recordExecutionState=value=>firstDeclared(value,EXECUTION_STATE_FIELDS);
-
 const EXECUTION_INK=Object.freeze({
   succeeded:'#116b4d',technical:'#285f8a',failed:'#9e3447',mixed:'#87570d',blocked:'#666324',
 });
+const EXECUTION_STATE_FIELDS=Object.freeze(['execution_state','status','result_state']);
+const LEGACY_RESULT_FIELDS=Object.freeze(['result_group','result']);
+const PUBLICATION_VALUES=new Set(['published','not_published','snapshot_published','published_pass_with_warnings']);
+function recordExecutionField(data){
+  // Explicit fields preserve even NULL, empty and unknown values. Legacy
+  // result fields can also carry documentary publication instead of execution.
+  for(const field of EXECUTION_STATE_FIELDS)if(has(data,field))return field;
+  for(const field of LEGACY_RESULT_FIELDS){
+    if(!has(data,field))continue;
+    const value=data[field];
+    if(typeof value!=='string'||!PUBLICATION_VALUES.has(value.toLowerCase()))return field;
+  }
+  return undefined;
+}
+export function recordExecutionState(record){
+  const data=objectData(record),field=recordExecutionField(data);
+  return field===undefined?undefined:data[field];
+}
 // A publication label alone carries no execution verdict. Only exact state
 // tokens, matched case-insensitively, can select a non-neutral presentation.
 export function recordExecutionPresentation(record){
-  const state=recordExecutionState(record),key=typeof state==='string'?state.toLowerCase():'';
+  const data=objectData(record),field=recordExecutionField(data);
+  const state=field===undefined?undefined:data[field],key=typeof state==='string'?state.toLowerCase():'';
   const tone=has(EXECUTION_INK,key)?key:'neutral';
-  return {state,tone,ink:EXECUTION_INK[tone]??'#526978',
+  return {field,state,tone,ink:EXECUTION_INK[tone]??'#526978',
     accent:COLORS[tone==='succeeded'?'published':tone]??'#7d92a4'};
 }
 

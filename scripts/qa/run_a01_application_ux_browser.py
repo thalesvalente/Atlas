@@ -29,7 +29,7 @@ STATE_CASES = [
     ({"status": "SUCCEEDED"}, "SUCCEEDED", "succeeded"),
     ({"result_state": "SUCCEEDED"}, "SUCCEEDED", "succeeded"),
     ({"result_group": "technical"}, "technical", "technical"),
-    ({"result_group": "published"}, "published", "neutral"),
+    ({"result_group": "published", "result": "PUBLISHED"}, None, "neutral"),
     ({"result": "SUCCEEDED"}, "SUCCEEDED", "succeeded"),
     ({"execution_state": None, "result": "FAILED"}, "NULL — valor declarado", "neutral"),
     ({"status": "", "result_state": "FAILED"}, '"" — texto vazio declarado', "neutral"),

@@ -563,7 +563,7 @@ test('family relation aggregation uses reversible pairs even with literal NUL',(
 
 test('small SVG status and ordinal text reaches WCAG 4.5 while accents stay distinct',()=>{
  const rgb=hex=>hex.replace('#','').match(/../g).map(pair=>parseInt(pair,16)/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4),lum=hex=>{const c=rgb(hex);return .2126*c[0]+.7152*c[1]+.0722*c[2];},contrast=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
- for(const group of ['published','technical','failed','mixed','blocked','unknown']){
+ for(const group of ['succeeded','technical','failed','mixed','blocked','unknown']){
   const r=entry('ink-'+group,'record',{id:group,title:'Record '+group,family:'F',result:'Status '+group,result_group:group}),model=makePresentation([r]);
   withDOM(host=>{const tree=mountEditorialTree(host,model,model.records,()=>{},{expanded:new Set([model.records[0].nativeFamilyKey])});for(const bg of ['#FFFFFF','#EFFAF8']){const label=tags(host,'text').find(n=>n.textContent===group);assert.ok(label);assert.ok(contrast(label.getAttribute('fill'),bg)>=4.5,group+' status contrast');}const ordinal=tags(host,'text').find(n=>n.textContent==='01');assert.ok(ordinal);for(const bg of ['#5A91E6','#14A8A3','#9B81DE','#5F8BA2','#788D9B'])assert.ok(contrast(ordinal.getAttribute('fill'),bg)>=4.5,'ordinal contrast');tree.destroy();});
  }

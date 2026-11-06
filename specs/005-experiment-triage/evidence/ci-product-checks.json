@@ -1,0 +1,177 @@
+{
+  "scope": "PRODUCT_CANDIDATE_PUBLIC_SYNTHETIC",
+  "tested_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+  "tested_tree": "23b1c290aedf511c0903eaf9dd016296ec7ebe8b",
+  "checks": [
+    {
+      "name": "windows-latest / Python optimize=0",
+      "id": 127540235539,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583839/job/127540235539",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:20:48Z"
+    },
+    {
+      "name": "application-ux",
+      "id": 127540235527,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583741/job/127540235527",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:20:38Z"
+    },
+    {
+      "name": "Triagem / domínio e escopo (windows-latest)",
+      "id": 127540235498,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583734/job/127540235498",
+      "started_at": "2026-11-05T21:19:31Z",
+      "completed_at": "2026-11-05T21:19:57Z"
+    },
+    {
+      "name": "ubuntu-latest / Python optimize=0",
+      "id": 127540235311,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583839/job/127540235311",
+      "started_at": "2026-11-05T21:19:31Z",
+      "completed_at": "2026-11-05T21:19:52Z"
+    },
+    {
+      "name": "Triagem / domínio e escopo (ubuntu-latest)",
+      "id": 127540235209,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583734/job/127540235209",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:19:39Z"
+    },
+    {
+      "name": "ubuntu-latest / Python optimize=1",
+      "id": 127540235192,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583839/job/127540235192",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:19:58Z"
+    },
+    {
+      "name": "Installed viewer / Chromium desktop and mobile",
+      "id": 127540235159,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583839/job/127540235159",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:20:55Z"
+    },
+    {
+      "name": "windows-latest / Python optimize=1",
+      "id": 127540235140,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583839/job/127540235140",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:20:49Z"
+    },
+    {
+      "name": "Public standards comparison and RO-Crate 1.3 reference",
+      "id": 127540235102,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583839/job/127540235102",
+      "started_at": "2026-11-05T21:19:31Z",
+      "completed_at": "2026-11-05T21:20:03Z"
+    },
+    {
+      "name": "atlas003-specification (windows-latest)",
+      "id": 127540235002,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583730/job/127540235002",
+      "started_at": "2026-11-05T21:19:31Z",
+      "completed_at": "2026-11-05T21:20:24Z"
+    },
+    {
+      "name": "Triagem / aplicação instalada e Chromium",
+      "id": 127540234890,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583734/job/127540234890",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:20:31Z"
+    },
+    {
+      "name": "native (windows-latest, 0)",
+      "id": 127540234746,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583767/job/127540234746",
+      "started_at": "2026-11-05T21:19:31Z",
+      "completed_at": "2026-11-05T21:20:12Z"
+    },
+    {
+      "name": "native (ubuntu-latest, 0)",
+      "id": 127540234723,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583767/job/127540234723",
+      "started_at": "2026-11-05T21:19:31Z",
+      "completed_at": "2026-11-05T21:19:49Z"
+    },
+    {
+      "name": "native (windows-latest, 1)",
+      "id": 127540234707,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583767/job/127540234707",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:20:23Z"
+    },
+    {
+      "name": "browser-native",
+      "id": 127540234693,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583767/job/127540234693",
+      "started_at": "2026-11-05T21:19:31Z",
+      "completed_at": "2026-11-05T21:20:54Z"
+    },
+    {
+      "name": "atlas003-specification (ubuntu-latest)",
+      "id": 127540234676,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583730/job/127540234676",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:19:49Z"
+    },
+    {
+      "name": "native (ubuntu-latest, 1)",
+      "id": 127540234452,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42111583767/job/127540234452",
+      "started_at": "2026-11-05T21:19:30Z",
+      "completed_at": "2026-11-05T21:19:55Z"
+    }
+  ]
+}

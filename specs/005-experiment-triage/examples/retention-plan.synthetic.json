@@ -1,0 +1,684 @@
+{
+  "schema": "atlas-retention-plan/1",
+  "version": 1,
+  "status": "PROPOSAL_ONLY",
+  "DELETE_AUTHORIZED": "NO",
+  "source": {
+    "id": "invented-triage-example",
+    "name": "Caderno — consulta nativa",
+    "revision": "INVENTED_TRIAGE_REVISION_A",
+    "metadata_sha256": "d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b"
+  },
+  "snapshot_key": "[\"atlas-snapshot-selection/1\",[true,\"invented-triage-example\"],[true,\"INVENTED_TRIAGE_REVISION_A\"],[true,\"d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b\"]]",
+  "selection": [
+    {
+      "selection_key": "[\"atlas-selection/1\",\"[\\\"atlas-snapshot-selection/1\\\",[true,\\\"invented-triage-example\\\"],[true,\\\"INVENTED_TRIAGE_REVISION_A\\\"],[true,\\\"d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b\\\"]]\",\"view:4\",\"record\",[true,\"\\\"run\\\"\"]]",
+      "source_id": "invented-triage-example",
+      "uid": "view:4",
+      "dto_kind": "record",
+      "source_revision": "INVENTED_TRIAGE_REVISION_A",
+      "source_metadata_sha256": "d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b",
+      "source_key": "run-rf-proof",
+      "original_id": {
+        "field": "id",
+        "type": "string",
+        "raw_json": "\"run-rf-proof\"",
+        "display": "run-rf-proof"
+      },
+      "record_kind": {
+        "field": "kind",
+        "type": "string",
+        "raw_json": "\"run\"",
+        "display": "run"
+      }
+    },
+    {
+      "selection_key": "[\"atlas-selection/1\",\"[\\\"atlas-snapshot-selection/1\\\",[true,\\\"invented-triage-example\\\"],[true,\\\"INVENTED_TRIAGE_REVISION_A\\\"],[true,\\\"d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b\\\"]]\",\"view:8\",\"record\",[true,\"\\\"record\\\"\"]]",
+      "source_id": "invented-triage-example",
+      "uid": "view:8",
+      "dto_kind": "record",
+      "source_revision": "INVENTED_TRIAGE_REVISION_A",
+      "source_metadata_sha256": "d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b",
+      "source_key": "state-missing",
+      "original_id": {
+        "field": "id",
+        "type": "string",
+        "raw_json": "\"state-missing\"",
+        "display": "state-missing"
+      },
+      "record_kind": {
+        "field": "kind",
+        "type": "string",
+        "raw_json": "\"record\"",
+        "display": "record"
+      }
+    },
+    {
+      "selection_key": "[\"atlas-selection/1\",\"[\\\"atlas-snapshot-selection/1\\\",[true,\\\"invented-triage-example\\\"],[true,\\\"INVENTED_TRIAGE_REVISION_A\\\"],[true,\\\"d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b\\\"]]\",\"view:1216\",\"table\",[false]]",
+      "source_id": "invented-triage-example",
+      "uid": "view:1216",
+      "dto_kind": "table",
+      "source_revision": "INVENTED_TRIAGE_REVISION_A",
+      "source_metadata_sha256": "d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b",
+      "source_key": "M1.1",
+      "original_id": {
+        "field": "id",
+        "type": "string",
+        "raw_json": "\"M1.1\"",
+        "display": "M1.1"
+      }
+    }
+  ],
+  "items": [
+    {
+      "identity": {
+        "selection_key": "[\"atlas-selection/1\",\"[\\\"atlas-snapshot-selection/1\\\",[true,\\\"invented-triage-example\\\"],[true,\\\"INVENTED_TRIAGE_REVISION_A\\\"],[true,\\\"d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b\\\"]]\",\"view:4\",\"record\",[true,\"\\\"run\\\"\"]]",
+        "source_id": "invented-triage-example",
+        "uid": "view:4",
+        "dto_kind": "record",
+        "source_revision": "INVENTED_TRIAGE_REVISION_A",
+        "source_metadata_sha256": "d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b",
+        "source_key": "run-rf-proof",
+        "original_id": {
+          "field": "id",
+          "type": "string",
+          "raw_json": "\"run-rf-proof\"",
+          "display": "run-rf-proof"
+        },
+        "record_kind": {
+          "field": "kind",
+          "type": "string",
+          "raw_json": "\"run\"",
+          "display": "run"
+        }
+      },
+      "title": "Execução RF comprovada na fixture",
+      "type": "run",
+      "type_label": "Execução (run)",
+      "raw_json": "{\"admission\":\"HOLD\",\"baseline\":true,\"code_revision\":\"0123456789abcdef0123456789abcdef01234567\",\"configuration\":{\"mode\":\"INVENTED\",\"seed\":71},\"dependencies\":[\"resource-shared\"],\"evidence\":[{\"kind\":\"SYNTHETIC_REFERENCE\",\"source_id\":\"resource-proof\"}],\"execution_state\":\"SUCCEEDED\",\"family\":\"A · Triagem\",\"id\":\"run-rf-proof\",\"kind\":\"run\",\"limitations\":[\"Invented for software QA\"],\"metrics\":{\"decimal_text\":\"0.123456789012345678901\",\"integer\":9007199254740993,\"zero\":-0.0},\"publication\":\"published\",\"resources\":[\"resource-proof\"],\"result_group\":\"failed\",\"results\":{\"verdict\":\"SYNTHETIC_ONLY\"},\"review\":\"PENDING\",\"started_at\":\"2026-10-01T12:30:00Z\",\"title\":\"Execução RF comprovada na fixture\"}",
+      "baseline": {
+        "status": "SOURCE_DECLARED",
+        "label": "Designação explícita da fonte",
+        "confirmed": true,
+        "sourceConfirmed": true,
+        "operatorDesignated": false,
+        "conflict": false,
+        "declarations": [
+          {
+            "field": "baseline",
+            "raw_json": "true"
+          }
+        ],
+        "explanation": "Designação declarada; não comprova execução ou aceite científico."
+      },
+      "execution": {
+        "key": "[\"atlas-triage-facet/1\",\"execution\",true,\"string\",\"\\\"SUCCEEDED\\\"\"]",
+        "present": true,
+        "type": "string",
+        "raw": "\"SUCCEEDED\"",
+        "field": "execution_state",
+        "label": "SUCCEEDED",
+        "tone": "succeeded"
+      },
+      "intent": "UNDECIDED",
+      "declared": {
+        "scientific_identity": [
+          {
+            "field": "id",
+            "type": "string",
+            "raw_json": "\"run-rf-proof\"",
+            "display": "run-rf-proof"
+          }
+        ],
+        "family": [
+          {
+            "field": "family",
+            "type": "string",
+            "raw_json": "\"A · Triagem\"",
+            "display": "A · Triagem"
+          }
+        ],
+        "review": [
+          {
+            "field": "review",
+            "type": "string",
+            "raw_json": "\"PENDING\"",
+            "display": "PENDING"
+          }
+        ],
+        "configurations": [
+          {
+            "field": "configuration",
+            "type": "object",
+            "raw_json": "{\"mode\":\"INVENTED\",\"seed\":71}",
+            "display": "mode: INVENTED\nseed: 71"
+          }
+        ],
+        "code_revisions": [
+          {
+            "field": "code_revision",
+            "type": "string",
+            "raw_json": "\"0123456789abcdef0123456789abcdef01234567\"",
+            "display": "0123456789abcdef0123456789abcdef01234567"
+          }
+        ],
+        "results": [
+          {
+            "field": "results",
+            "type": "object",
+            "raw_json": "{\"verdict\":\"SYNTHETIC_ONLY\"}",
+            "display": "verdict: SYNTHETIC_ONLY"
+          },
+          {
+            "field": "result_group",
+            "type": "string",
+            "raw_json": "\"failed\"",
+            "display": "failed"
+          }
+        ],
+        "metrics": [
+          {
+            "field": "metrics",
+            "type": "object",
+            "raw_json": "{\"decimal_text\":\"0.123456789012345678901\",\"integer\":9007199254740993,\"zero\":-0.0}",
+            "display": "decimal_text: 0.123456789012345678901\ninteger: 9007199254740993\nzero: -0.0"
+          }
+        ],
+        "limitations": [
+          {
+            "field": "limitations",
+            "type": "array",
+            "raw_json": "[\"Invented for software QA\"]",
+            "display": "Invented for software QA"
+          }
+        ],
+        "dependencies": [
+          {
+            "field": "dependencies",
+            "type": "array",
+            "raw_json": "[\"resource-shared\"]",
+            "display": "resource-shared"
+          }
+        ],
+        "artifacts": [
+          {
+            "field": "resources",
+            "type": "array",
+            "raw_json": "[\"resource-proof\"]",
+            "display": "resource-proof"
+          }
+        ],
+        "evidence": [
+          {
+            "field": "evidence",
+            "type": "array",
+            "raw_json": "[{\"kind\":\"SYNTHETIC_REFERENCE\",\"source_id\":\"resource-proof\"}]",
+            "display": "kind: SYNTHETIC_REFERENCE\nsource_id: resource-proof"
+          }
+        ],
+        "dates": [
+          {
+            "field": "started_at",
+            "type": "string",
+            "raw_json": "\"2026-10-01T12:30:00Z\"",
+            "display": "2026-10-01T12:30:00Z"
+          }
+        ]
+      },
+      "gaps": [
+        "Declarações de preservação: não declarados nesta ocorrência.",
+        "Referências físicas, dependências e backups: a verificar no ambiente LOCAL."
+      ],
+      "protection": {
+        "status": "PROTECTED",
+        "removal_authorized": false,
+        "reasons": [
+          "BASELINE_DESIGNATED",
+          "SOURCE_PRESERVATION_REQUIRED",
+          "LOCAL_INVENTORY_NOT_VERIFIED",
+          "DEPENDENCIES_NOT_VERIFIED",
+          "DOSSIER_PRESERVATION_NOT_VERIFIED",
+          "BACKUP_NOT_VERIFIED",
+          "RETENTION_POLICY_NOT_VERIFIED",
+          "SPACE_NOT_MEASURED",
+          "HUMAN_BATCH_AUTHORIZATION_MISSING",
+          "ARTIFACT_UNIQUENESS_NOT_VERIFIED",
+          "CONFIGURATION_NECESSITY_NOT_VERIFIED",
+          "SHARED_DEPENDENCIES_NOT_VERIFIED"
+        ]
+      },
+      "pending_verifications": [
+        "LOCAL_CURRENT_INVENTORY",
+        "DEPENDENCY_GRAPH",
+        "DOSSIER_PRESERVATION",
+        "BACKUP_OR_APPLICABLE_POLICY",
+        "RECOVERABLE_SPACE_ESTIMATE",
+        "HUMAN_BATCH_AUTHORIZATION"
+      ]
+    },
+    {
+      "identity": {
+        "selection_key": "[\"atlas-selection/1\",\"[\\\"atlas-snapshot-selection/1\\\",[true,\\\"invented-triage-example\\\"],[true,\\\"INVENTED_TRIAGE_REVISION_A\\\"],[true,\\\"d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b\\\"]]\",\"view:8\",\"record\",[true,\"\\\"record\\\"\"]]",
+        "source_id": "invented-triage-example",
+        "uid": "view:8",
+        "dto_kind": "record",
+        "source_revision": "INVENTED_TRIAGE_REVISION_A",
+        "source_metadata_sha256": "d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b",
+        "source_key": "state-missing",
+        "original_id": {
+          "field": "id",
+          "type": "string",
+          "raw_json": "\"state-missing\"",
+          "display": "state-missing"
+        },
+        "record_kind": {
+          "field": "kind",
+          "type": "string",
+          "raw_json": "\"record\"",
+          "display": "record"
+        }
+      },
+      "title": "Registro sem estado nem retenção",
+      "type": "record",
+      "type_label": "Registro",
+      "raw_json": "{\"family\":\"A · Triagem\",\"id\":\"state-missing\",\"kind\":\"record\",\"title\":\"Registro sem estado nem retenção\"}",
+      "baseline": {
+        "status": "NOT_DECLARED",
+        "label": "Designação não declarada",
+        "confirmed": false,
+        "sourceConfirmed": false,
+        "operatorDesignated": false,
+        "conflict": false,
+        "declarations": [],
+        "explanation": "Nome, publicação e resultado não são prova de baseline."
+      },
+      "execution": {
+        "key": "[\"atlas-triage-facet/1\",\"execution\",false,\"missing\",null]",
+        "present": false,
+        "type": "missing",
+        "raw": null,
+        "field": null,
+        "label": "AUSENTE — campo não declarado",
+        "tone": "neutral"
+      },
+      "intent": "UNDECIDED",
+      "declared": {
+        "scientific_identity": [
+          {
+            "field": "id",
+            "type": "string",
+            "raw_json": "\"state-missing\"",
+            "display": "state-missing"
+          }
+        ],
+        "family": [
+          {
+            "field": "family",
+            "type": "string",
+            "raw_json": "\"A · Triagem\"",
+            "display": "A · Triagem"
+          }
+        ]
+      },
+      "gaps": [
+        "Revisão: não declarados nesta ocorrência.",
+        "Configurações: não declarados nesta ocorrência.",
+        "Código e revisões: não declarados nesta ocorrência.",
+        "Resultados: não declarados nesta ocorrência.",
+        "Métricas: não declarados nesta ocorrência.",
+        "Limitações: não declarados nesta ocorrência.",
+        "Dependências: não declarados nesta ocorrência.",
+        "Artefatos: não declarados nesta ocorrência.",
+        "Evidência: não declarados nesta ocorrência.",
+        "Declarações de preservação: não declarados nesta ocorrência.",
+        "Datas: não declarados nesta ocorrência.",
+        "Referências físicas, dependências e backups: a verificar no ambiente LOCAL."
+      ],
+      "protection": {
+        "status": "PROTECTED",
+        "removal_authorized": false,
+        "reasons": [
+          "SOURCE_PRESERVATION_REQUIRED",
+          "LOCAL_INVENTORY_NOT_VERIFIED",
+          "DEPENDENCIES_NOT_VERIFIED",
+          "DOSSIER_PRESERVATION_NOT_VERIFIED",
+          "BACKUP_NOT_VERIFIED",
+          "RETENTION_POLICY_NOT_VERIFIED",
+          "SPACE_NOT_MEASURED",
+          "HUMAN_BATCH_AUTHORIZATION_MISSING"
+        ]
+      },
+      "pending_verifications": [
+        "LOCAL_CURRENT_INVENTORY",
+        "DEPENDENCY_GRAPH",
+        "DOSSIER_PRESERVATION",
+        "BACKUP_OR_APPLICABLE_POLICY",
+        "RECOVERABLE_SPACE_ESTIMATE",
+        "HUMAN_BATCH_AUTHORIZATION"
+      ]
+    },
+    {
+      "identity": {
+        "selection_key": "[\"atlas-selection/1\",\"[\\\"atlas-snapshot-selection/1\\\",[true,\\\"invented-triage-example\\\"],[true,\\\"INVENTED_TRIAGE_REVISION_A\\\"],[true,\\\"d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b\\\"]]\",\"view:1216\",\"table\",[false]]",
+        "source_id": "invented-triage-example",
+        "uid": "view:1216",
+        "dto_kind": "table",
+        "source_revision": "INVENTED_TRIAGE_REVISION_A",
+        "source_metadata_sha256": "d0a85220d13fdeef0c98700220e55dcdeac0f9b15aad7b1a58f319cd6c28d62b",
+        "source_key": "M1.1",
+        "original_id": {
+          "field": "id",
+          "type": "string",
+          "raw_json": "\"M1.1\"",
+          "display": "M1.1"
+        }
+      },
+      "title": "M1.1 · RF baseline preservada",
+      "type": "table",
+      "type_label": "Tabela",
+      "raw_json": "{\"baseline\":true,\"family\":\"RF sintético\",\"id\":\"M1.1\",\"label\":\"M1.1 · RF baseline preservada\",\"record_id\":\"run-rf-proof\",\"rows\":[]}",
+      "baseline": {
+        "status": "SOURCE_DECLARED",
+        "label": "Designação explícita da fonte",
+        "confirmed": true,
+        "sourceConfirmed": true,
+        "operatorDesignated": false,
+        "conflict": false,
+        "declarations": [
+          {
+            "field": "baseline",
+            "raw_json": "true"
+          }
+        ],
+        "explanation": "Designação declarada; não comprova execução ou aceite científico."
+      },
+      "execution": {
+        "key": "[\"atlas-triage-facet/1\",\"execution\",false,\"missing\",null]",
+        "present": false,
+        "type": "missing",
+        "raw": null,
+        "field": null,
+        "label": "AUSENTE — campo não declarado",
+        "tone": "neutral"
+      },
+      "intent": "KEEP_FULL",
+      "declared": {
+        "scientific_identity": [
+          {
+            "field": "id",
+            "type": "string",
+            "raw_json": "\"M1.1\"",
+            "display": "M1.1"
+          }
+        ],
+        "family": [
+          {
+            "field": "family",
+            "type": "string",
+            "raw_json": "\"RF sintético\"",
+            "display": "RF sintético"
+          }
+        ]
+      },
+      "gaps": [
+        "Revisão: não declarados nesta ocorrência.",
+        "Configurações: não declarados nesta ocorrência.",
+        "Código e revisões: não declarados nesta ocorrência.",
+        "Resultados: não declarados nesta ocorrência.",
+        "Métricas: não declarados nesta ocorrência.",
+        "Limitações: não declarados nesta ocorrência.",
+        "Dependências: não declarados nesta ocorrência.",
+        "Artefatos: não declarados nesta ocorrência.",
+        "Evidência: não declarados nesta ocorrência.",
+        "Declarações de preservação: não declarados nesta ocorrência.",
+        "Datas: não declarados nesta ocorrência.",
+        "Referências físicas, dependências e backups: a verificar no ambiente LOCAL."
+      ],
+      "protection": {
+        "status": "PROTECTED",
+        "removal_authorized": false,
+        "reasons": [
+          "BASELINE_DESIGNATED",
+          "SOURCE_PRESERVATION_REQUIRED",
+          "LOCAL_INVENTORY_NOT_VERIFIED",
+          "DEPENDENCIES_NOT_VERIFIED",
+          "DOSSIER_PRESERVATION_NOT_VERIFIED",
+          "BACKUP_NOT_VERIFIED",
+          "RETENTION_POLICY_NOT_VERIFIED",
+          "SPACE_NOT_MEASURED",
+          "HUMAN_BATCH_AUTHORIZATION_MISSING"
+        ]
+      },
+      "pending_verifications": [
+        "LOCAL_CURRENT_INVENTORY",
+        "DEPENDENCY_GRAPH",
+        "DOSSIER_PRESERVATION",
+        "BACKUP_OR_APPLICABLE_POLICY",
+        "RECOVERABLE_SPACE_ESTIMATE",
+        "HUMAN_BATCH_AUTHORIZATION"
+      ],
+      "table_rows": {
+        "status": "COMPLETE_FOR_SNAPSHOT",
+        "transport_skeleton": true,
+        "count": 39,
+        "rows": [
+          {
+            "uid": "view:1217",
+            "ordinal": 0,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-00\",\"Inteiro exato\":9007199254740993,\"Nome\":\"Requisito inventado 00\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-00\"}"
+          },
+          {
+            "uid": "view:1218",
+            "ordinal": 1,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-01\",\"Inteiro exato\":9007199254740994,\"Nome\":\"Requisito inventado 01\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-01\"}"
+          },
+          {
+            "uid": "view:1219",
+            "ordinal": 2,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-02\",\"Inteiro exato\":9007199254740995,\"Nome\":\"Requisito inventado 02\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-02\"}"
+          },
+          {
+            "uid": "view:1220",
+            "ordinal": 3,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-03\",\"Inteiro exato\":9007199254740996,\"Nome\":\"Requisito inventado 03\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-03\"}"
+          },
+          {
+            "uid": "view:1221",
+            "ordinal": 4,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-04\",\"Inteiro exato\":9007199254740997,\"Nome\":\"Requisito inventado 04\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-04\"}"
+          },
+          {
+            "uid": "view:1222",
+            "ordinal": 5,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-05\",\"Inteiro exato\":9007199254740998,\"Nome\":\"Requisito inventado 05\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-05\"}"
+          },
+          {
+            "uid": "view:1223",
+            "ordinal": 6,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-06\",\"Inteiro exato\":9007199254740999,\"Nome\":\"Requisito inventado 06\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-06\"}"
+          },
+          {
+            "uid": "view:1224",
+            "ordinal": 7,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-07\",\"Inteiro exato\":9007199254741000,\"Nome\":\"Requisito inventado 07\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-07\"}"
+          },
+          {
+            "uid": "view:1225",
+            "ordinal": 8,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-08\",\"Inteiro exato\":9007199254741001,\"Nome\":\"Requisito inventado 08\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-08\"}"
+          },
+          {
+            "uid": "view:1226",
+            "ordinal": 9,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-09\",\"Inteiro exato\":9007199254741002,\"Nome\":\"Requisito inventado 09\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-09\"}"
+          },
+          {
+            "uid": "view:1227",
+            "ordinal": 10,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-10\",\"Inteiro exato\":9007199254741003,\"Nome\":\"Requisito inventado 10\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-10\"}"
+          },
+          {
+            "uid": "view:1228",
+            "ordinal": 11,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-11\",\"Inteiro exato\":9007199254741004,\"Nome\":\"Requisito inventado 11\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-11\"}"
+          },
+          {
+            "uid": "view:1229",
+            "ordinal": 12,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-12\",\"Inteiro exato\":9007199254741005,\"Nome\":\"Requisito inventado 12\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-12\"}"
+          },
+          {
+            "uid": "view:1230",
+            "ordinal": 13,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-13\",\"Inteiro exato\":9007199254741006,\"Nome\":\"Requisito inventado 13\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-13\"}"
+          },
+          {
+            "uid": "view:1231",
+            "ordinal": 14,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-14\",\"Inteiro exato\":9007199254741007,\"Nome\":\"Requisito inventado 14\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-14\"}"
+          },
+          {
+            "uid": "view:1232",
+            "ordinal": 15,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-15\",\"Inteiro exato\":9007199254741008,\"Nome\":\"Requisito inventado 15\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-15\"}"
+          },
+          {
+            "uid": "view:1233",
+            "ordinal": 16,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-16\",\"Inteiro exato\":9007199254741009,\"Nome\":\"Requisito inventado 16\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-16\"}"
+          },
+          {
+            "uid": "view:1234",
+            "ordinal": 17,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-17\",\"Inteiro exato\":9007199254741010,\"Nome\":\"Requisito inventado 17\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-17\"}"
+          },
+          {
+            "uid": "view:1235",
+            "ordinal": 18,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-18\",\"Inteiro exato\":9007199254741011,\"Nome\":\"Requisito inventado 18\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-18\"}"
+          },
+          {
+            "uid": "view:1236",
+            "ordinal": 19,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-19\",\"Inteiro exato\":9007199254741012,\"Nome\":\"Requisito inventado 19\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-19\"}"
+          },
+          {
+            "uid": "view:1237",
+            "ordinal": 20,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-20\",\"Inteiro exato\":9007199254741013,\"Nome\":\"Requisito inventado 20\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-20\"}"
+          },
+          {
+            "uid": "view:1238",
+            "ordinal": 21,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-21\",\"Inteiro exato\":9007199254741014,\"Nome\":\"Requisito inventado 21\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-21\"}"
+          },
+          {
+            "uid": "view:1239",
+            "ordinal": 22,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-22\",\"Inteiro exato\":9007199254741015,\"Nome\":\"Requisito inventado 22\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-22\"}"
+          },
+          {
+            "uid": "view:1240",
+            "ordinal": 23,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-23\",\"Inteiro exato\":9007199254741016,\"Nome\":\"Requisito inventado 23\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-23\"}"
+          },
+          {
+            "uid": "view:1241",
+            "ordinal": 24,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-24\",\"Inteiro exato\":9007199254741017,\"Nome\":\"Requisito inventado 24\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-24\"}"
+          },
+          {
+            "uid": "view:1242",
+            "ordinal": 25,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-25\",\"Inteiro exato\":9007199254741018,\"Nome\":\"Requisito inventado 25\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-25\"}"
+          },
+          {
+            "uid": "view:1243",
+            "ordinal": 26,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-26\",\"Inteiro exato\":9007199254741019,\"Nome\":\"Requisito inventado 26\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-26\"}"
+          },
+          {
+            "uid": "view:1244",
+            "ordinal": 27,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-27\",\"Inteiro exato\":9007199254741020,\"Nome\":\"Requisito inventado 27\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-27\"}"
+          },
+          {
+            "uid": "view:1245",
+            "ordinal": 28,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-28\",\"Inteiro exato\":9007199254741021,\"Nome\":\"Requisito inventado 28\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-28\"}"
+          },
+          {
+            "uid": "view:1246",
+            "ordinal": 29,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-29\",\"Inteiro exato\":9007199254741022,\"Nome\":\"Requisito inventado 29\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-29\"}"
+          },
+          {
+            "uid": "view:1247",
+            "ordinal": 30,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-30\",\"Inteiro exato\":9007199254741023,\"Nome\":\"Requisito inventado 30\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-30\"}"
+          },
+          {
+            "uid": "view:1248",
+            "ordinal": 31,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-31\",\"Inteiro exato\":9007199254741024,\"Nome\":\"Requisito inventado 31\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-31\"}"
+          },
+          {
+            "uid": "view:1249",
+            "ordinal": 32,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-32\",\"Inteiro exato\":9007199254741025,\"Nome\":\"Requisito inventado 32\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-32\"}"
+          },
+          {
+            "uid": "view:1250",
+            "ordinal": 33,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-33\",\"Inteiro exato\":9007199254741026,\"Nome\":\"Requisito inventado 33\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-33\"}"
+          },
+          {
+            "uid": "view:1251",
+            "ordinal": 34,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-34\",\"Inteiro exato\":9007199254741027,\"Nome\":\"Requisito inventado 34\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-34\"}"
+          },
+          {
+            "uid": "view:1252",
+            "ordinal": 35,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-35\",\"Inteiro exato\":9007199254741028,\"Nome\":\"Requisito inventado 35\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-35\"}"
+          },
+          {
+            "uid": "view:1253",
+            "ordinal": 36,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-36\",\"Inteiro exato\":9007199254741029,\"Nome\":\"Requisito inventado 36\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-36\"}"
+          },
+          {
+            "uid": "view:1254",
+            "ordinal": 37,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-37\",\"Inteiro exato\":9007199254741030,\"Nome\":\"Requisito inventado 37\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-37\"}"
+          },
+          {
+            "uid": "view:1255",
+            "ordinal": 38,
+            "raw_json": "{\"cells\":{\"Critério de aceite\":\"Somente validação de engenharia\",\"Descrição\":\"Linha de requisitos, não uma execução experimental.\",\"ID\":\"RF-38\",\"Inteiro exato\":9007199254741031,\"Nome\":\"Requisito inventado 38\",\"Núcleo\":\"INVENTED\"},\"id\":\"synthetic-rf-38\"}"
+          }
+        ]
+      }
+    }
+  ],
+  "pending_verifications": [
+    "LOCAL_CURRENT_INVENTORY",
+    "DEPENDENCY_GRAPH",
+    "DOSSIER_PRESERVATION",
+    "BACKUP_OR_APPLICABLE_POLICY",
+    "RECOVERABLE_SPACE_ESTIMATE",
+    "HUMAN_BATCH_AUTHORIZATION"
+  ],
+  "space_estimate": {
+    "status": "NOT_MEASURED",
+    "label": "A medir no ambiente LOCAL"
+  },
+  "provenance": {
+    "mode": "DERIVED_SESSION_PROPOSAL",
+    "source_read_only": true,
+    "physical_presence_verified": false,
+    "scientific_acceptance": "NOT_ASSERTED",
+    "operator_intentions_are_commands": false,
+    "notes": "Identidades e conteúdo pertencem ao snapshot declarado. Digest não prova autenticidade; resumo não prova preservação."
+  }
+}

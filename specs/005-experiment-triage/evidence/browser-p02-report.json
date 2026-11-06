@@ -1,0 +1,27 @@
+{
+  "status": "PASS_SCOPED",
+  "scope": "INSTALLED_NATIVE_UI_ENGINEERING_NOT_PRIVATE_HOST_PARITY",
+  "checks": [
+    "global_tree_search_no_match_hidden_node_location_and_clear_population",
+    "declared_alias_journey_node_record_table_row_exact_evidence_and_return",
+    "source_switch_invalidates_navigation_history_and_alias_context",
+    "explicit_composite_endpoint_key_is_not_interpreted_or_fallen_back",
+    "general_structural_keys_preserve_record_node_collisions",
+    "general_structural_keys_reach_unique_records",
+    "lineage_structural_keys_remain_scoped_to_lineage_nodes",
+    "table_search_includes_row_identifiers_and_trims_query",
+    "table_metadata_search_reaches_other_tables_and_preserves_rows",
+    "table_family_status_filters_use_declared_context_and_empty_selection",
+    "filtered_table_exact_json_and_formula_safe_csv_preserved",
+    "filters_include_declared_resource_facets",
+    "empty_collections_and_exact_global_scalars_are_consultable",
+    "full_projection_export_matches_original_bytes",
+    "all_screens_long_values_reflow_1440",
+    "all_screens_long_values_reflow_390",
+    "all_screens_long_values_reflow_320"
+  ],
+  "errors": [],
+  "external_requests": [],
+  "source_bytes_unchanged": true,
+  "tested_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0"
+}

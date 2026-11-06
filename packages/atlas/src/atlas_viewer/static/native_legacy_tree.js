@@ -165,6 +165,20 @@ function drawNode(node,parent=svg,miniature=false) {
   g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();invoke(true);}});
  }
  parent.appendChild(g);
+ // A sibling control keeps focus/detail activation distinct from batch choice.
+ // Editorial containers never receive a checkbox or cascade a selection.
+ if(!miniature&&r&&options.onBatchToggle){
+  const selectedBatch=Boolean(options.isBatchSelected?.(r.entry));
+  const check=s('g',{transform:`translate(${node.x+node.w-40} ${node.y+node.h-39})`,class:'svg-batch',
+   role:'checkbox',tabindex:0,'data-batch-uid':r.entry.uid,'aria-checked':String(selectedBatch),
+   'aria-label':'Selecionar '+r.title+' no lote'});
+  check.append(s('rect',{x:0,y:0,width:34,height:34,rx:6,fill:selectedBatch?'#1a627c':'#fff',stroke:'#537e91','stroke-width':1.5}),
+   s('text',{x:17,y:24,'text-anchor':'middle','font-size':23,fill:'#fff'},selectedBatch?'✓':''));
+  check.addEventListener('pointerdown',event=>event.stopPropagation());
+  check.addEventListener('click',event=>{event.stopPropagation();options.onBatchToggle(r.entry);});
+  check.addEventListener('keydown',event=>{if(event.key===' '||event.key==='Enter'){event.preventDefault();event.stopPropagation();options.onBatchToggle(r.entry);}});
+  parent.append(check);
+ }
 }
 
 function focusTheme(id){const theme=graphNodes.find(n=>n.id===id);if(!theme)return;
@@ -299,6 +313,7 @@ function setBox(b){
  svg.setAttribute('viewBox',b.join(' '));
  $('zoomLabel').textContent=Math.round(zoomReferenceWidth/b[2]*100)+'%';
  updateMini();
+ queueMicrotask(()=>options.onVisibilityChange?.());
 }
 // The Native drawer is an overlay, unlike the original reserved detail column.
 // Fit the selection in the visible, unobstructed region without shrinking the map.

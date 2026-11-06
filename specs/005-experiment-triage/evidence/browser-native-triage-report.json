@@ -1,0 +1,1489 @@
+{
+  "status": "PASS",
+  "scope": "FEATURE005_SYNTHETIC_BROWSER_TASKS",
+  "phase": "COMPLETE",
+  "checks": [
+    "G2_navigation_destinations_semantics_and_real_new_controls",
+    "T01_M1_1_is_a_39_row_table_with_typed_search_reason_not_a_run",
+    "T02_execution_filter_matches_badges_and_preserves_documentary_dimensions",
+    "G4_NULL_empty_missing_UNKNOWN_remain_four_different_states",
+    "G3_G4_declared_period_evidence_individual_chips_and_search_diagnostics",
+    "T03_locate_expands_editorial_groups_and_focuses_exact_result",
+    "T04_visible_batch_is_not_all_filtered_and_survives_pages_views_filters",
+    "T05_compare_selected_and_inspect_only_declared_references",
+    "T06_T07_T08_retention_export_is_exact_protected_and_non_executable",
+    "G5_baseline_designation_is_not_inferred_from_name_or_reference",
+    "G5_operator_baseline_annotation_has_source_revision_and_is_exported_without_DTO_mutation",
+    "G8_dossier_export_preserves_selection_exact_records_table_rows_and_pending_verifications",
+    "UX_UI_01_deselection_refreshes_dossier_export_plan_controls_and_intentions",
+    "UX_UI_03_04_baseline_annotation_updates_active_list_filtered_total_and_navigation",
+    "G13_hostile_labels_URLs_and_prototype_names_remain_inert",
+    "T10_selection_comparison_planning_make_no_HTTP_or_source_write_requests",
+    "G6_switching_source_revision_invalidates_selection_intents_and_session_state",
+    "G11_responsive_keyboard_touch_focus_and_minimap_1440",
+    "G11_responsive_keyboard_touch_focus_and_minimap_1101",
+    "G11_responsive_keyboard_touch_focus_and_minimap_1024",
+    "G11_responsive_keyboard_touch_focus_and_minimap_800",
+    "G11_responsive_keyboard_touch_focus_and_minimap_390",
+    "G11_responsive_keyboard_touch_focus_and_minimap_320"
+  ],
+  "errors": [],
+  "external_requests": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.css"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_integration.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_rebuild.js"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_ui.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_graph.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_navigation.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_lineage.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_tree.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_views.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_retention.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.css"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_integration.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_rebuild.js"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_ui.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_graph.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_navigation.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_lineage.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_tree.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_views.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_retention.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.css"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_integration.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_rebuild.js"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_ui.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_graph.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_navigation.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_lineage.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_tree.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_views.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_retention.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.css"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_integration.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_rebuild.js"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_ui.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_graph.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_navigation.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_lineage.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_tree.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_views.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_retention.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.css"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_integration.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_rebuild.js"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_ui.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_graph.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_navigation.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_lineage.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_tree.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_views.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_retention.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.css"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_integration.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_rebuild.js"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_ui.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_graph.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_navigation.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_lineage.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_tree.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_views.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_retention.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/notebook"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.css"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_integration.css"
+    },
+    {
+      "method": "GET",
+      "path": "/native_notebook.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_rebuild.js"
+    },
+    {
+      "method": "GET",
+      "path": "/parity02_p03_table.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_ui.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_graph.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_navigation.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_lineage.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_tree.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_legacy_views.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_triage_model.js"
+    },
+    {
+      "method": "GET",
+      "path": "/native_retention.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook"
+    }
+  ],
+  "layout": [
+    {
+      "viewport": [
+        1440,
+        1200
+      ],
+      "mini": {
+        "x": 1208,
+        "y": 142,
+        "width": 145,
+        "height": 95
+      },
+      "hit_points": 25,
+      "in_viewport": true,
+      "close_reachable": true,
+      "document_width": 1440,
+      "keyboard_focus": {
+        "outline": "solid",
+        "width": 3,
+        "visible": true,
+        "contrast": {
+          "selector": ":focus",
+          "property": "outlineColor",
+          "background": ".topbar",
+          "foreground": "rgb(139, 213, 219)",
+          "backgrounds": [
+            "rgb(17, 43, 66)",
+            "rgb(16, 60, 82)",
+            "rgb(16, 90, 96)"
+          ],
+          "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+          "surface": "topbar",
+          "minimum_ratio": 4.763086143651761
+        }
+      },
+      "touch": false
+    },
+    {
+      "viewport": [
+        1101,
+        900
+      ],
+      "mini": {
+        "x": 869,
+        "y": 142,
+        "width": 145,
+        "height": 95
+      },
+      "hit_points": 25,
+      "in_viewport": true,
+      "close_reachable": true,
+      "document_width": 1101,
+      "keyboard_focus": {
+        "outline": "solid",
+        "width": 3,
+        "visible": true,
+        "contrast": {
+          "selector": ":focus",
+          "property": "outlineColor",
+          "background": ".topbar",
+          "foreground": "rgb(139, 213, 219)",
+          "backgrounds": [
+            "rgb(17, 43, 66)",
+            "rgb(16, 60, 82)",
+            "rgb(16, 90, 96)"
+          ],
+          "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+          "surface": "topbar",
+          "minimum_ratio": 4.763086143651761
+        }
+      },
+      "touch": false
+    },
+    {
+      "viewport": [
+        1024,
+        900
+      ],
+      "mini": {
+        "x": 827,
+        "y": 568,
+        "width": 110,
+        "height": 75
+      },
+      "hit_points": 25,
+      "in_viewport": true,
+      "close_reachable": true,
+      "document_width": 1024,
+      "keyboard_focus": {
+        "outline": "solid",
+        "width": 3,
+        "visible": true,
+        "contrast": {
+          "selector": ":focus",
+          "property": "outlineColor",
+          "background": ".topbar",
+          "foreground": "rgb(139, 213, 219)",
+          "backgrounds": [
+            "rgb(17, 43, 66)",
+            "rgb(16, 60, 82)",
+            "rgb(16, 90, 96)"
+          ],
+          "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+          "surface": "topbar",
+          "minimum_ratio": 4.763086143651761
+        }
+      },
+      "touch": false
+    },
+    {
+      "viewport": [
+        800,
+        1000
+      ],
+      "mini": {
+        "x": 603,
+        "y": 630,
+        "width": 110,
+        "height": 75
+      },
+      "hit_points": 25,
+      "in_viewport": true,
+      "close_reachable": true,
+      "document_width": 800,
+      "keyboard_focus": {
+        "outline": "solid",
+        "width": 3,
+        "visible": true,
+        "contrast": {
+          "selector": ":focus",
+          "property": "outlineColor",
+          "background": ".topbar",
+          "foreground": "rgb(139, 213, 219)",
+          "backgrounds": [
+            "rgb(17, 43, 66)",
+            "rgb(16, 60, 82)",
+            "rgb(16, 90, 96)"
+          ],
+          "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+          "surface": "topbar",
+          "minimum_ratio": 4.763086143651761
+        }
+      },
+      "touch": false
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "mini": {
+        "x": 219,
+        "y": 541.28125,
+        "width": 100,
+        "height": 70
+      },
+      "hit_points": 25,
+      "in_viewport": true,
+      "close_reachable": true,
+      "document_width": 390,
+      "keyboard_focus": {
+        "outline": "solid",
+        "width": 3,
+        "visible": true,
+        "contrast": {
+          "selector": ":focus",
+          "property": "outlineColor",
+          "background": ".topbar",
+          "foreground": "rgb(139, 213, 219)",
+          "backgrounds": [
+            "rgb(17, 43, 66)",
+            "rgb(16, 60, 82)",
+            "rgb(16, 90, 96)"
+          ],
+          "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+          "surface": "topbar",
+          "minimum_ratio": 4.763086143651761
+        }
+      },
+      "touch": true
+    },
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "mini": {
+        "x": 149,
+        "y": 476.8125,
+        "width": 100,
+        "height": 70
+      },
+      "hit_points": 25,
+      "in_viewport": true,
+      "close_reachable": true,
+      "document_width": 320,
+      "keyboard_focus": {
+        "outline": "solid",
+        "width": 3,
+        "visible": true,
+        "contrast": {
+          "selector": ":focus",
+          "property": "outlineColor",
+          "background": ".topbar",
+          "foreground": "rgb(139, 213, 219)",
+          "backgrounds": [
+            "rgb(17, 43, 66)",
+            "rgb(16, 60, 82)",
+            "rgb(16, 90, 96)"
+          ],
+          "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+          "surface": "topbar",
+          "minimum_ratio": 4.763086143651761
+        }
+      },
+      "touch": true
+    }
+  ],
+  "screenshots": [
+    "browser-native-triage-report-task-1440.png",
+    "browser-native-triage-report-1440.png",
+    "browser-native-triage-report-controls-1101.png",
+    "browser-native-triage-report-task-1101.png",
+    "browser-native-triage-report-1101.png",
+    "browser-native-triage-report-task-1024.png",
+    "browser-native-triage-report-1024.png",
+    "browser-native-triage-report-task-800.png",
+    "browser-native-triage-report-800.png",
+    "browser-native-triage-report-task-390.png",
+    "browser-native-triage-report-390.png",
+    "browser-native-triage-report-task-320.png",
+    "browser-native-triage-report-320.png"
+  ],
+  "timings_ms": {
+    "G2_navigation_destinations_semantics_and_real_new_controls": 82,
+    "T01_M1_1_is_a_39_row_table_with_typed_search_reason_not_a_run": 387,
+    "T02_execution_filter_matches_badges_and_preserves_documentary_dimensions": 539,
+    "G4_NULL_empty_missing_UNKNOWN_remain_four_different_states": 249,
+    "G3_G4_declared_period_evidence_individual_chips_and_search_diagnostics": 1077,
+    "T03_locate_expands_editorial_groups_and_focuses_exact_result": 327,
+    "T04_visible_batch_is_not_all_filtered_and_survives_pages_views_filters": 1616,
+    "T05_compare_selected_and_inspect_only_declared_references": 498,
+    "T06_T07_T08_retention_export_is_exact_protected_and_non_executable": 323,
+    "G5_baseline_designation_is_not_inferred_from_name_or_reference": 95,
+    "G5_operator_baseline_annotation_has_source_revision_and_is_exported_without_DTO_mutation": 479,
+    "G8_dossier_export_preserves_selection_exact_records_table_rows_and_pending_verifications": 130,
+    "UX_UI_01_deselection_refreshes_dossier_export_plan_controls_and_intentions": 1542,
+    "UX_UI_03_04_baseline_annotation_updates_active_list_filtered_total_and_navigation": 309,
+    "G13_hostile_labels_URLs_and_prototype_names_remain_inert": 113,
+    "T10_selection_comparison_planning_make_no_HTTP_or_source_write_requests": 0,
+    "G6_switching_source_revision_invalidates_selection_intents_and_session_state": 334,
+    "G11_responsive_keyboard_touch_focus_and_minimap_1440": 1692,
+    "G11_responsive_keyboard_touch_focus_and_minimap_1101": 1821,
+    "G11_responsive_keyboard_touch_focus_and_minimap_1024": 1592,
+    "G11_responsive_keyboard_touch_focus_and_minimap_800": 1512,
+    "G11_responsive_keyboard_touch_focus_and_minimap_390": 1544,
+    "G11_responsive_keyboard_touch_focus_and_minimap_320": 1637
+  },
+  "contrast": [
+    {
+      "viewport": 1440,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-source\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 1440,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-search\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 1440,
+      "kind": "text",
+      "selector": ".intro p",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(233, 245, 248)",
+        "rgb(248, 251, 255)"
+      ],
+      "background_image": "linear-gradient(115deg, rgb(233, 245, 248), rgb(248, 251, 255))",
+      "surface": "intro",
+      "minimum_ratio": 4.97024574935025
+    },
+    {
+      "viewport": 1440,
+      "kind": "text",
+      "selector": ".triage-result[data-batch-selected=\"true\"] .muted",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(240, 248, 250)"
+      ],
+      "background_image": "none",
+      "surface": "triage-result",
+      "minimum_ratio": 5.136424571433855
+    },
+    {
+      "viewport": 1440,
+      "kind": "focus",
+      "selector": ":focus",
+      "property": "outlineColor",
+      "background": ".topbar",
+      "foreground": "rgb(139, 213, 219)",
+      "backgrounds": [
+        "rgb(17, 43, 66)",
+        "rgb(16, 60, 82)",
+        "rgb(16, 90, 96)"
+      ],
+      "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+      "surface": "topbar",
+      "minimum_ratio": 4.763086143651761
+    },
+    {
+      "viewport": 1101,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-source\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 1101,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-search\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 1101,
+      "kind": "text",
+      "selector": ".intro p",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(233, 245, 248)",
+        "rgb(248, 251, 255)"
+      ],
+      "background_image": "linear-gradient(115deg, rgb(233, 245, 248), rgb(248, 251, 255))",
+      "surface": "intro",
+      "minimum_ratio": 4.97024574935025
+    },
+    {
+      "viewport": 1101,
+      "kind": "text",
+      "selector": ".triage-result[data-batch-selected=\"true\"] .muted",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(240, 248, 250)"
+      ],
+      "background_image": "none",
+      "surface": "triage-result",
+      "minimum_ratio": 5.136424571433855
+    },
+    {
+      "viewport": 1101,
+      "kind": "focus",
+      "selector": ":focus",
+      "property": "outlineColor",
+      "background": ".topbar",
+      "foreground": "rgb(139, 213, 219)",
+      "backgrounds": [
+        "rgb(17, 43, 66)",
+        "rgb(16, 60, 82)",
+        "rgb(16, 90, 96)"
+      ],
+      "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+      "surface": "topbar",
+      "minimum_ratio": 4.763086143651761
+    },
+    {
+      "viewport": 1024,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-source\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 1024,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-search\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 1024,
+      "kind": "text",
+      "selector": ".intro p",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(233, 245, 248)",
+        "rgb(248, 251, 255)"
+      ],
+      "background_image": "linear-gradient(115deg, rgb(233, 245, 248), rgb(248, 251, 255))",
+      "surface": "intro",
+      "minimum_ratio": 4.97024574935025
+    },
+    {
+      "viewport": 1024,
+      "kind": "text",
+      "selector": ".triage-result[data-batch-selected=\"true\"] .muted",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(240, 248, 250)"
+      ],
+      "background_image": "none",
+      "surface": "triage-result",
+      "minimum_ratio": 5.136424571433855
+    },
+    {
+      "viewport": 1024,
+      "kind": "focus",
+      "selector": ":focus",
+      "property": "outlineColor",
+      "background": ".topbar",
+      "foreground": "rgb(139, 213, 219)",
+      "backgrounds": [
+        "rgb(17, 43, 66)",
+        "rgb(16, 60, 82)",
+        "rgb(16, 90, 96)"
+      ],
+      "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+      "surface": "topbar",
+      "minimum_ratio": 4.763086143651761
+    },
+    {
+      "viewport": 800,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-source\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 800,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-search\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage triage-nav-open",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 800,
+      "kind": "text",
+      "selector": ".intro p",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(233, 245, 248)",
+        "rgb(248, 251, 255)"
+      ],
+      "background_image": "linear-gradient(115deg, rgb(233, 245, 248), rgb(248, 251, 255))",
+      "surface": "intro",
+      "minimum_ratio": 4.97024574935025
+    },
+    {
+      "viewport": 800,
+      "kind": "text",
+      "selector": ".triage-result[data-batch-selected=\"true\"] .muted",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(240, 248, 250)"
+      ],
+      "background_image": "none",
+      "surface": "triage-result",
+      "minimum_ratio": 5.136424571433855
+    },
+    {
+      "viewport": 800,
+      "kind": "focus",
+      "selector": ":focus",
+      "property": "outlineColor",
+      "background": ".topbar",
+      "foreground": "rgb(139, 213, 219)",
+      "backgrounds": [
+        "rgb(17, 43, 66)",
+        "rgb(16, 60, 82)",
+        "rgb(16, 90, 96)"
+      ],
+      "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+      "surface": "topbar",
+      "minimum_ratio": 4.763086143651761
+    },
+    {
+      "viewport": 390,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-source\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 390,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-search\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 390,
+      "kind": "text",
+      "selector": ".intro p",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(233, 245, 248)",
+        "rgb(248, 251, 255)"
+      ],
+      "background_image": "linear-gradient(115deg, rgb(233, 245, 248), rgb(248, 251, 255))",
+      "surface": "intro",
+      "minimum_ratio": 4.97024574935025
+    },
+    {
+      "viewport": 390,
+      "kind": "text",
+      "selector": ".triage-result[data-batch-selected=\"true\"] .muted",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(240, 248, 250)"
+      ],
+      "background_image": "none",
+      "surface": "triage-result",
+      "minimum_ratio": 5.136424571433855
+    },
+    {
+      "viewport": 390,
+      "kind": "focus",
+      "selector": ":focus",
+      "property": "outlineColor",
+      "background": ".topbar",
+      "foreground": "rgb(139, 213, 219)",
+      "backgrounds": [
+        "rgb(17, 43, 66)",
+        "rgb(16, 60, 82)",
+        "rgb(16, 90, 96)"
+      ],
+      "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+      "surface": "topbar",
+      "minimum_ratio": 4.763086143651761
+    },
+    {
+      "viewport": 320,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-source\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 320,
+      "kind": "text",
+      "selector": ".triage-query label[for=\"native-search\"]",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(243, 247, 251)"
+      ],
+      "background_image": "none",
+      "surface": "application legacy-port triage",
+      "minimum_ratio": 5.135321807036988
+    },
+    {
+      "viewport": 320,
+      "kind": "text",
+      "selector": ".intro p",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(233, 245, 248)",
+        "rgb(248, 251, 255)"
+      ],
+      "background_image": "linear-gradient(115deg, rgb(233, 245, 248), rgb(248, 251, 255))",
+      "surface": "intro",
+      "minimum_ratio": 4.97024574935025
+    },
+    {
+      "viewport": 320,
+      "kind": "text",
+      "selector": ".triage-result[data-batch-selected=\"true\"] .muted",
+      "foreground": "rgb(83, 108, 123)",
+      "backgrounds": [
+        "rgb(240, 248, 250)"
+      ],
+      "background_image": "none",
+      "surface": "triage-result",
+      "minimum_ratio": 5.136424571433855
+    },
+    {
+      "viewport": 320,
+      "kind": "focus",
+      "selector": ":focus",
+      "property": "outlineColor",
+      "background": ".topbar",
+      "foreground": "rgb(139, 213, 219)",
+      "backgrounds": [
+        "rgb(17, 43, 66)",
+        "rgb(16, 60, 82)",
+        "rgb(16, 90, 96)"
+      ],
+      "background_image": "linear-gradient(110deg, rgb(17, 43, 66) 0%, rgb(16, 60, 82) 53%, rgb(16, 90, 96) 100%)",
+      "surface": "topbar",
+      "minimum_ratio": 4.763086143651761
+    }
+  ],
+  "focused_results": [
+    {
+      "viewport": 1440,
+      "uid": "view:4",
+      "rect": {
+        "x": 525.3466796875,
+        "y": 988.1885375976562,
+        "width": 256.900390625,
+        "height": 111.98223876953125
+      },
+      "hit_points": 25,
+      "occluded_points": [],
+      "font_px": 13.284166116785102,
+      "whole": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 1101,
+      "uid": "view:4",
+      "rect": {
+        "x": 352.893310546875,
+        "y": 709.722900390625,
+        "width": 229.21337890625,
+        "height": 99.91357421875
+      },
+      "hit_points": 25,
+      "occluded_points": [],
+      "font_px": 11.852487176171067,
+      "whole": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 1024,
+      "uid": "view:4",
+      "rect": {
+        "x": 287.7067565917969,
+        "y": 533.4581298828125,
+        "width": 273.5864562988281,
+        "height": 119.255615234375
+      },
+      "hit_points": 25,
+      "occluded_points": [],
+      "font_px": 14.146991901232294,
+      "whole": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 800,
+      "uid": "view:4",
+      "rect": {
+        "x": 418.6995544433594,
+        "y": 428.4215087890625,
+        "width": 202.60086059570312,
+        "height": 88.313232421875
+      },
+      "hit_points": 25,
+      "occluded_points": [],
+      "font_px": 10.476371281917878,
+      "whole": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 390,
+      "uid": "view:4",
+      "rect": {
+        "x": 105.10090637207031,
+        "y": 361.438232421875,
+        "width": 179.7981719970703,
+        "height": 78.37353515625
+      },
+      "hit_points": 25,
+      "occluded_points": [],
+      "font_px": 9.29725637544204,
+      "whole": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 320,
+      "uid": "view:4",
+      "rect": {
+        "x": 67.86808013916016,
+        "y": 293.4961853027344,
+        "width": 184.26382446289062,
+        "height": 80.32012939453125
+      },
+      "hit_points": 25,
+      "occluded_points": [],
+      "font_px": 9.528172594659674,
+      "whole": true,
+      "intersects_detail": false
+    }
+  ],
+  "breakpoint_controls": [
+    {
+      "viewport": 1101,
+      "id": "native-source",
+      "rect": {
+        "x": 265,
+        "y": 313.078125,
+        "width": 119,
+        "height": 44
+      },
+      "hit_points": 9,
+      "in_viewport": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 1101,
+      "id": "native-search",
+      "rect": {
+        "x": 398,
+        "y": 313.078125,
+        "width": 121.03125,
+        "height": 44
+      },
+      "hit_points": 9,
+      "in_viewport": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 1101,
+      "id": "native-search-all",
+      "rect": {
+        "x": 526.03125,
+        "y": 313.078125,
+        "width": 109.96875,
+        "height": 44
+      },
+      "hit_points": 9,
+      "in_viewport": true,
+      "intersects_detail": false
+    },
+    {
+      "viewport": 1101,
+      "id": "native-download",
+      "rect": {
+        "x": 299.796875,
+        "y": 198.4375,
+        "width": 169.203125,
+        "height": 34
+      },
+      "hit_points": 9,
+      "in_viewport": true,
+      "intersects_detail": false
+    }
+  ],
+  "browser_version": "151.0.7922.34",
+  "bulk_filter_ms": 90,
+  "bulk_select_ms": 36,
+  "retention": {
+    "schema": "atlas-retention-plan/1",
+    "selection": 3,
+    "status": "PROPOSAL_ONLY",
+    "DELETE_AUTHORIZED": "NO",
+    "exact_original_json": true,
+    "protected": 3
+  },
+  "selection_planning_http_requests": 0,
+  "source_bytes_unchanged": true,
+  "source_hashes_before": {
+    "source-triage-a/data/view-0000.json": "0a61b90abf12f957cd0aefb023f423cf4faec4041ac18e610c6fcb8d18c2a418",
+    "source-triage-a/ro-crate-metadata.json": "a9a469adeafc33603cf5cce5331980a2fde637008bb52f24c228523c3594aa59",
+    "source-triage-b/data/view-0000.json": "720f81525ade75bd921b1d14e2ed50dfee377e83774bedb2f76286d7afda4247",
+    "source-triage-b/ro-crate-metadata.json": "bf6b2efbc1e54c85e7e2546a7cb6267310b8963224f84f714ca64728d71e4dae"
+  },
+  "source_hashes_after": {
+    "source-triage-a/data/view-0000.json": "0a61b90abf12f957cd0aefb023f423cf4faec4041ac18e610c6fcb8d18c2a418",
+    "source-triage-a/ro-crate-metadata.json": "a9a469adeafc33603cf5cce5331980a2fde637008bb52f24c228523c3594aa59",
+    "source-triage-b/data/view-0000.json": "720f81525ade75bd921b1d14e2ed50dfee377e83774bedb2f76286d7afda4247",
+    "source-triage-b/ro-crate-metadata.json": "bf6b2efbc1e54c85e7e2546a7cb6267310b8963224f84f714ca64728d71e4dae"
+  },
+  "installed_import_outside_source": true,
+  "r4_installed": false,
+  "installed_assets_equal_candidate": true,
+  "installed_module_path": "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/atlas_viewer/__init__.py",
+  "installed_asset_hashes": {
+    "__init__.py": {
+      "candidate_sha256": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f",
+      "installed_sha256": "2f5e6607d036d98d44d14b445735ff6c67bcaee9b6a15cf4988a3c60a2a1941f"
+    },
+    "__main__.py": {
+      "candidate_sha256": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf",
+      "installed_sha256": "60e290c0896a593d6bd4b08ca802150f76c7c0da174fd402f51904e9ec8494bf"
+    },
+    "catalog.py": {
+      "candidate_sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3",
+      "installed_sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3"
+    },
+    "native_notebook.py": {
+      "candidate_sha256": "d63f37904bc76bdc5944d77c94f0f9a76ffd77df2b93e26c088374602591dbad",
+      "installed_sha256": "d63f37904bc76bdc5944d77c94f0f9a76ffd77df2b93e26c088374602591dbad"
+    },
+    "native_values.py": {
+      "candidate_sha256": "28e9f4ca2d2cd29842855b53e51fe7df5d5d9ef66d3451c1a7ab1c3cc8433742",
+      "installed_sha256": "28e9f4ca2d2cd29842855b53e51fe7df5d5d9ef66d3451c1a7ab1c3cc8433742"
+    },
+    "server.py": {
+      "candidate_sha256": "cb50d7a06163dd15e055820a4bf818405c759de14d00d73e01b7165f70cf19e3",
+      "installed_sha256": "cb50d7a06163dd15e055820a4bf818405c759de14d00d73e01b7165f70cf19e3"
+    },
+    "static/app.js": {
+      "candidate_sha256": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb",
+      "installed_sha256": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb"
+    },
+    "static/index.html": {
+      "candidate_sha256": "5a10401aca2e396a0f2c0af48c52f3faaaaaeec6cf01a97771b67f144905eda3",
+      "installed_sha256": "5a10401aca2e396a0f2c0af48c52f3faaaaaeec6cf01a97771b67f144905eda3"
+    },
+    "static/native_application.css": {
+      "candidate_sha256": "152d365c657cf1477895996b818fbfa44e2cf1aa8c1476e2875c57a4002b986c",
+      "installed_sha256": "152d365c657cf1477895996b818fbfa44e2cf1aa8c1476e2875c57a4002b986c"
+    },
+    "static/native_graph.js": {
+      "candidate_sha256": "c2d57be9cc80903f3f59467f576d3e9c460e915c3048ab2f654704599d7cc372",
+      "installed_sha256": "c2d57be9cc80903f3f59467f576d3e9c460e915c3048ab2f654704599d7cc372"
+    },
+    "static/native_legacy.css": {
+      "candidate_sha256": "51edfb97e824828f32433859aab633dcbb948df8a81ca2fb8521526e286a5568",
+      "installed_sha256": "51edfb97e824828f32433859aab633dcbb948df8a81ca2fb8521526e286a5568"
+    },
+    "static/native_legacy_integration.css": {
+      "candidate_sha256": "a8ae67dd793f98c5c9b13ca265476dd32a03237346a3a35b126b1606484b2f4c",
+      "installed_sha256": "a8ae67dd793f98c5c9b13ca265476dd32a03237346a3a35b126b1606484b2f4c"
+    },
+    "static/native_legacy_model.js": {
+      "candidate_sha256": "d5dbe0140510e7c1180f2439ea77297503c9a4606e783260aa7f64c1f8cb480f",
+      "installed_sha256": "d5dbe0140510e7c1180f2439ea77297503c9a4606e783260aa7f64c1f8cb480f"
+    },
+    "static/native_legacy_tree.js": {
+      "candidate_sha256": "4036070497dd6f7a77f87ba462be7da77401d934a6b4852d0f83b71764f21477",
+      "installed_sha256": "4036070497dd6f7a77f87ba462be7da77401d934a6b4852d0f83b71764f21477"
+    },
+    "static/native_legacy_views.js": {
+      "candidate_sha256": "9a04344b0eab378cbbaad0246d39fc85463eb3ed619d6746588de4cc96069b88",
+      "installed_sha256": "9a04344b0eab378cbbaad0246d39fc85463eb3ed619d6746588de4cc96069b88"
+    },
+    "static/native_lineage.js": {
+      "candidate_sha256": "48ad868362957c5fcc52708349ffb99a619ed067e532dc82e373b1b20ff59908",
+      "installed_sha256": "48ad868362957c5fcc52708349ffb99a619ed067e532dc82e373b1b20ff59908"
+    },
+    "static/native_navigation.js": {
+      "candidate_sha256": "788ade52ea9138e9b802ddb3e06ae5dbcafda161f59913c356762f2d867badb3",
+      "installed_sha256": "788ade52ea9138e9b802ddb3e06ae5dbcafda161f59913c356762f2d867badb3"
+    },
+    "static/native_notebook.css": {
+      "candidate_sha256": "a2655eeab1bae7acba575f7e115dd50efd5a5a6b28458f28b70b167b191390e1",
+      "installed_sha256": "a2655eeab1bae7acba575f7e115dd50efd5a5a6b28458f28b70b167b191390e1"
+    },
+    "static/native_notebook.html": {
+      "candidate_sha256": "a59a2285c14b54f2dfcf5422132fce1744d610ddc4938cf0611273c913f33f66",
+      "installed_sha256": "a59a2285c14b54f2dfcf5422132fce1744d610ddc4938cf0611273c913f33f66"
+    },
+    "static/native_notebook.js": {
+      "candidate_sha256": "9c3526d4f702c9a59abf5782eeaed01c40cf2aab7e8e649af335bc677625fbff",
+      "installed_sha256": "9c3526d4f702c9a59abf5782eeaed01c40cf2aab7e8e649af335bc677625fbff"
+    },
+    "static/native_rebuild.js": {
+      "candidate_sha256": "10a76175c9eb32c5f37f67ec332d3d3fa7b3f2681ebe2a34708768ab634c3d11",
+      "installed_sha256": "10a76175c9eb32c5f37f67ec332d3d3fa7b3f2681ebe2a34708768ab634c3d11"
+    },
+    "static/native_retention.js": {
+      "candidate_sha256": "63dadb2bcb3873989a4ecffaafe0e14684b1fe997684235f1066c25e2521d667",
+      "installed_sha256": "63dadb2bcb3873989a4ecffaafe0e14684b1fe997684235f1066c25e2521d667"
+    },
+    "static/native_triage_model.js": {
+      "candidate_sha256": "e63e00798e9b42e1ee7f9d8d1e9ebd33207ce754aa7031273f12b53a805e74f0",
+      "installed_sha256": "e63e00798e9b42e1ee7f9d8d1e9ebd33207ce754aa7031273f12b53a805e74f0"
+    },
+    "static/native_triage_ui.js": {
+      "candidate_sha256": "672822b4caae3993820ad97402ac9d090e5eb33c3d6e4e4fe0bd38000f6d8b99",
+      "installed_sha256": "672822b4caae3993820ad97402ac9d090e5eb33c3d6e4e4fe0bd38000f6d8b99"
+    },
+    "static/original.css": {
+      "candidate_sha256": "beccc24a8ed8023f1c94b17ab8eebb354886bc60818a6a0992de316df899f13b",
+      "installed_sha256": "beccc24a8ed8023f1c94b17ab8eebb354886bc60818a6a0992de316df899f13b"
+    },
+    "static/original.html": {
+      "candidate_sha256": "18e48480fe9368e5d79d5ea8d3a3216d43cc3f8e90ee8863b9acf15674d0598e",
+      "installed_sha256": "18e48480fe9368e5d79d5ea8d3a3216d43cc3f8e90ee8863b9acf15674d0598e"
+    },
+    "static/original.js": {
+      "candidate_sha256": "49f3c15c1ac23eb7d0f5206adf5846ed5c3b2106e597d8cf243f9e35a9b51f11",
+      "installed_sha256": "49f3c15c1ac23eb7d0f5206adf5846ed5c3b2106e597d8cf243f9e35a9b51f11"
+    },
+    "static/parity02_p03_table.css": {
+      "candidate_sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+      "installed_sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0"
+    },
+    "static/parity02_p03_table.js": {
+      "candidate_sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+      "installed_sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744"
+    },
+    "static/style.css": {
+      "candidate_sha256": "6204bcb2ca06a7878fdf85beaaf757932c2935222bfcf3f350d96e24d3f531da",
+      "installed_sha256": "6204bcb2ca06a7878fdf85beaaf757932c2935222bfcf3f350d96e24d3f531da"
+    }
+  },
+  "tested_sha": "3a9e1e3d2727c69175768abb437bdcbc47cfabf0",
+  "tested_tree": "23b1c290aedf511c0903eaf9dd016296ec7ebe8b",
+  "tested_files_status": [],
+  "browser_exit_code": 0
+}
