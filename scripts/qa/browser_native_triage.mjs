@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createRequire} from 'node:module';
 import {openNativePane, revealNativeControl} from './browser_native_triage_navigation.mjs';
+import {runN03Checks} from './browser_native_triage_n03.mjs';
 
 const require = createRequire(import.meta.url);
 const {chromium} = require(process.env.ATLAS_PLAYWRIGHT_MODULE || 'playwright');
@@ -747,6 +748,7 @@ try {
       }
     });
   }
+  await runN03Checks({browser, check, expected, protectNetwork, report, url});
   assert.deepEqual(report.errors, []);
   assert.deepEqual(report.external_requests, []);
   report.status = 'PASS';

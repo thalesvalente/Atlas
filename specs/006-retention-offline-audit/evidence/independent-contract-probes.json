@@ -1,0 +1,106 @@
+{
+  "scope": "INDEPENDENT_SYNTHETIC_PROBES",
+  "repo": "/workspace/scratch/8b2cf78b2a0b/wt-n02",
+  "results": [
+    {
+      "name": "authentic exported proposal with inert external references remains protected",
+      "status": "PASS",
+      "details": {
+        "runtime_import": "VERIFIED_SCOPED",
+        "validation_status": "PARTIAL"
+      }
+    },
+    {
+      "name": "a verified physical binding cannot be empty",
+      "status": "PASS",
+      "details": {
+        "rejection": "CONTRADICTORY_IDENTITY_OR_INTENT"
+      }
+    },
+    {
+      "name": "shared false contradicts two declared consumers",
+      "status": "PASS",
+      "details": {
+        "rejection": "CONTRADICTORY_IDENTITY_OR_INTENT"
+      }
+    },
+    {
+      "name": "shared false contradicts SHARED_ARTIFACT category",
+      "status": "PASS",
+      "details": {
+        "rejection": "CONTRADICTORY_IDENTITY_OR_INTENT"
+      }
+    },
+    {
+      "name": "claim of proven backup cannot be smuggled into the inventory",
+      "status": "PASS",
+      "details": {
+        "rejection": "MALFORMED"
+      }
+    },
+    {
+      "name": "inventory paths are never accepted as resolution authority",
+      "status": "PASS",
+      "details": {
+        "rejection": "MALFORMED"
+      }
+    },
+    {
+      "name": "duplicate lexical keys in raw scientific JSON are refused",
+      "status": "PASS",
+      "details": {
+        "rejection": "MALFORMED"
+      }
+    },
+    {
+      "name": "confusable duplicate JSON key with unicode escape is refused",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "snapshot hash is an external mandatory anchor",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "invalid UTF8 cannot be silently replaced by U+FFFD",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "symlink under allowed root is refused without changing fixture bytes",
+      "status": "PASS",
+      "details": {
+        "rejection": "EXTERNAL_LINK"
+      }
+    },
+    {
+      "name": "same physical path cannot be assigned to multiple inventory IDs",
+      "status": "PASS",
+      "details": {
+        "rejection": "FILE_IDENTITY_AMBIGUOUS"
+      }
+    },
+    {
+      "name": "POSIX slash plus Windows ADS path is rejected",
+      "status": "PASS",
+      "details": {
+        "rejection": "UNSAFE_PATH"
+      }
+    },
+    {
+      "name": "Windows COM superscript device name is rejected on every host",
+      "status": "PASS",
+      "details": {
+        "rejection": "UNSAFE_PATH"
+      }
+    },
+    {
+      "name": "a file absent from selected bindings is not opened",
+      "status": "PASS",
+      "details": null
+    }
+  ],
+  "passed": 15,
+  "failed": 0
+}
