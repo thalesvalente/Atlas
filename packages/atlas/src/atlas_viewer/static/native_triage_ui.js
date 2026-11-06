@@ -131,7 +131,10 @@ export class NativeTriageUI {
       if(event.shiftKey&&(document.activeElement===first||document.activeElement===sidebar)){event.preventDefault();last?.focus();}
       else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
     });
-    mobile.addEventListener('change',()=>{this.navState.mobile=false;this.applySidebar(true);});
+    mobile.addEventListener('change',()=>{
+      const drawerWasOpen=this.navState.mobile;
+      this.navState.mobile=false;this.applySidebar(drawerWasOpen);
+    });
     wide.addEventListener('change',()=>this.applySidebar());
     this.applySidebar();
   }
@@ -145,7 +148,9 @@ export class NativeTriageUI {
     input.checked=this.ledger.has(entry);input.setAttribute('aria-label','Selecionar '+entry.title+' · '+this.model.type(entry).label);
     wrapper.append(input,element('span',label));
     input.addEventListener('click',event=>event.stopPropagation());
-    input.addEventListener('keydown',event=>event.stopPropagation());
+    input.addEventListener('keydown',event=>{
+      if(event.key===' '||event.key==='Enter')event.stopPropagation();
+    });
     input.addEventListener('change',()=>this.toggle(entry));return wrapper;
   }
   decorate(){
@@ -207,9 +212,19 @@ export class NativeTriageUI {
     if(this.invalidated){this.hooks.message('A fonte ou revisão mudou. A seleção, as anotações e as intenções anteriores foram invalidadas; forme um novo lote.');this.invalidated=false;}
   }
   selectionChanged(){
-    if(!['selected','retention'].includes(this.hooks.pane())){this.syncBatch();return;}
-    const active=document.activeElement,uid=active?.dataset?.batchUid,id=active?.id;
+    const active=document.activeElement,batchBar=$('native-batch-bar');
+    const hidingBatch=!this.ledger.size&&batchBar.contains(active);
+    if(!['selected','retention'].includes(this.hooks.pane())){
+      this.syncBatch();
+      if(hidingBatch){
+        const visible=$('native-select-visible');
+        (visible.disabled?$('native-search'):visible).focus();
+      }
+      return;
+    }
     this.hooks.refresh();
+    if(active===document.activeElement&&active.isConnected&&active.getClientRects().length)return;
+    const uid=active?.dataset?.batchUid,id=active?.id;
     const same=id?$(id):[...$('native-content').querySelectorAll('[data-batch-uid]')].find(n=>n.dataset.batchUid===uid);
     if(same&&!same.disabled&&same.getClientRects().length){same.focus({preventScroll:true});return;}
     const fallback=$('native-content').querySelector('[data-batch-uid],h2');
