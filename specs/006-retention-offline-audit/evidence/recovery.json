@@ -1,0 +1,52 @@
+{
+  "schema": "atlas-n02-recovery/1",
+  "status": "N02_NOT_FOUND_IN_VERIFIED_SOURCES",
+  "repository": "thalesvalente/Atlas",
+  "verified_branches": 38,
+  "verified_pull_requests": 33,
+  "reachable_commits": 270,
+  "search_scope": "GitHub branches/PRs/comments plus full Git history; not private unshared host",
+  "feature005": {
+    "pr": 33,
+    "sha": "46e18bd5c90b922b78cf6731f83ceedc4c09df85",
+    "tree": "64a4f683b9f30329b67feedbf30aedcddd1b7d0e"
+  },
+  "n03": {
+    "pr": 34,
+    "sha": "209b3f1fc9ab478c8d2adb84e0bb61f22106ad79",
+    "tree": "748b906cab917ab2bd1cd5b15ff8d462d6b0de4a",
+    "checks_success": 17,
+    "browser_groups_pass": 27,
+    "review_status": "completed",
+    "review_findings": false,
+    "review_comment": 6677298657,
+    "runs": [
+      42165509181,
+      42165509254,
+      42165509113,
+      42165509169,
+      42165509174
+    ]
+  },
+  "a01_accepted_sha": "8e0e400d5220efceb6dd881772e5b07825442970",
+  "t015_acceptance_comment": 6676134041,
+  "sanitized_contract": "ATLAS_N01_R_N02_SANITIZED/1",
+  "reuse": [
+    "buildRetentionPlan",
+    "snapshotKey",
+    "selectionKey",
+    "existing Feature005 regressions",
+    "N03 exact original commit"
+  ],
+  "private_inventory_runtime_import": "NOT_RUN",
+  "DELETE_AUTHORIZED": "NO",
+  "excluded": "R4 N03-HK1",
+  "implementation": "tools/atlas_retention_audit.mjs",
+  "implementation_sha256": "478803d3361acbc3832b8d91ce8709d7ad0b9737f456a3c2b42e26e2555d9ffe",
+  "agent_roles": {
+    "root": "N02 product and spec author; sole integrator",
+    "recover_n02": "recovery, then test author in exclusive files",
+    "verify_n03": "N03 read-only reviewer, then exclusive new workflow author",
+    "n02_security": "non-author of product and main test suite; independent contract and filesystem probes"
+  }
+}

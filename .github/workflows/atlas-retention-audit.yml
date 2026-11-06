@@ -1,0 +1,49 @@
+name: Atlas offline retention audit
+
+'on':
+  pull_request:
+    paths:
+      - 'tools/atlas_retention_audit.mjs'
+      - 'scripts/qa/*retention_audit*'
+      - 'specs/006-retention-offline-audit/**'
+      - 'packages/atlas/src/atlas_viewer/static/native_retention.js'
+      - 'packages/atlas/src/atlas_viewer/static/native_triage_model.js'
+      - 'packages/atlas/src/atlas_viewer/static/native_navigation.js'
+      - 'packages/atlas/src/atlas_viewer/static/native_legacy_model.js'
+      - '.github/workflows/atlas-retention-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-audit:
+    name: N02 / auditoria offline (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Verify exact published SHA and record its tree
+        env:
+          ATLAS_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: >-
+          node -e "const {execFileSync} = require('node:child_process');
+          const sha = execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim();
+          const tree = execFileSync('git', ['rev-parse', 'HEAD^{tree}'], {encoding: 'utf8'}).trim();
+          console.log(JSON.stringify({sha, tree}));
+          if (sha !== process.env.ATLAS_EXPECTED_SHA) { console.error('WRONG_TESTED_SHA'); process.exit(1); }"
+      - name: Parse the offline audit module
+        run: node --check tools/atlas_retention_audit.mjs
+      - name: Verify synthetic contracts and hostile read-only cases
+        run: node --test --test-reporter=tap scripts/qa/test_retention_audit.mjs
