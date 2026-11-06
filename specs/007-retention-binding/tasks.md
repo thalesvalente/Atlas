@@ -1,9 +1,9 @@
-# Tasks — Feature 006
+# Tasks — Feature 007
 
 ## Setup e contrato
 
-- [x] T001 Reconciliar SHA, owners, refs e exportador em `specs/006-retention-binding/plan.md`.
-- [x] T002 Especificar a interface e suas premissas em `specs/006-retention-binding/contracts/local-inventory.md`.
+- [x] T001 Reconciliar SHA, owners, refs e exportador em `specs/007-retention-binding/plan.md`.
+- [x] T002 Especificar a interface e suas premissas em `specs/007-retention-binding/contracts/local-inventory.md`.
 
 ## US1 — Reconciliação autenticada
 
@@ -22,9 +22,9 @@
 
 ## Qualificação
 
-- [x] T009 Executar GREEN normal e otimizado em Windows e Ubuntu conforme `specs/006-retention-binding/quickstart.md`.
+- [x] T009 Executar GREEN normal e otimizado em Windows e Ubuntu conforme `specs/007-retention-binding/quickstart.md`.
 - [x] T010 Qualificar negativos de substituição, desvio de raiz e duplicidade de evidência em `tests/atlas_retention_binding/`.
-- [ ] T011 Verificar Actions e solicitar uma Codex Review no head da Draft conforme `specs/006-retention-binding/plan.md`.
-- [ ] T012 Entregar o handoff com SHA, tree, evidências e lacunas para LOCAL conforme `specs/006-retention-binding/contracts/local-inventory.md`.
+- [ ] T011 Verificar Actions e solicitar uma Codex Review no head da Draft conforme `specs/007-retention-binding/plan.md`.
+- [ ] T012 Entregar o handoff com SHA, tree, evidências e lacunas para LOCAL conforme `specs/007-retention-binding/contracts/local-inventory.md`.
 
 T001 → T002 → RED (T003, T005, T007) → T004 → T006 → T008 → T009–T010 → T011–T012. Resultados externos ficam no recibo do SHA candidato.

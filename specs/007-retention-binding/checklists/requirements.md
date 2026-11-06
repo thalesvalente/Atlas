@@ -1,4 +1,4 @@
-# Checklist de requisitos — Feature 006
+# Checklist de requisitos — Feature 007
 
 - [x] Binding exato compatível com o plano de origem.
 - [x] Critérios verificáveis para seleção, integridade, arquivos, cobertura, retenção e saída.

@@ -31,7 +31,9 @@ class BindingTest(unittest.TestCase):
     def setUp(self):
         temp = TemporaryDirectory()
         self.addCleanup(temp.cleanup)
-        self.temp = Path(temp.name)
+        # Runners can expose TEMP via a Windows 8.3 alias. Use its real name
+        # for the synthetic fixture while keeping alias rejection in the CLI.
+        self.temp = Path(temp.name).resolve(strict=True)
         self.root = self.temp / "corpus"
         self.root.mkdir()
         self.backup_root = self.temp / "backup"

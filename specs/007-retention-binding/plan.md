@@ -1,4 +1,4 @@
-# Plano — Feature 006
+# Plano — Feature 007
 
 ## Technical Context
 
@@ -6,11 +6,11 @@ CLI offline em Python 3.12+ e biblioteca padrão, fora dos pacotes do Atlas. Lei
 
 ## Constitution Check
 
-ARC-01–09 aplicadas. Propostas, vínculos, digest, autenticação de origem, preservação física e decisão humana são evidências distintas. Atlas continua como interface. A N02 fica em `tools/atlas_retention_binding/**`, `tests/atlas_retention_binding/**` e `specs/006-retention-binding/**`.
+ARC-01–09 aplicadas. Propostas, vínculos, digest, autenticação de origem, preservação física e decisão humana são evidências distintas. Atlas continua como interface. A N02 fica em `tools/atlas_retention_binding/**`, `tests/atlas_retention_binding/**` e `specs/007-retention-binding/**`.
 
 ## Reconciliação
 
-A PR #33 está aberta em Draft sobre a #32. Sua ponta e a branch `feat/atlas-experiment-triage-20261105` apontam para `46e18bd5c90b922b78cf6731f83ceedc4c09df85`, tree `64a4f683b9f30329b67feedbf30aedcddd1b7d0e`. A N02 parte desse commit e mira a branch da #33. O número 006 foi conferido nas refs remotas e na árvore de trabalho N03 disponível. O corpo histórico da #33 registra um candidato anterior. A verificação do head usa refs e recibos por SHA.
+A PR #33 está aberta em Draft sobre a #32. Sua ponta e a branch `feat/atlas-experiment-triage-20261105` apontam para `46e18bd5c90b922b78cf6731f83ceedc4c09df85`, tree `64a4f683b9f30329b67feedbf30aedcddd1b7d0e`. A N02 parte desse commit e mira a branch da #33. A reconciliação antes do push confirmou 007 livre nas refs remotas. A publicação paralela da Feature 006 reservou o número utilizado no RED inicial. O corpo histórico da #33 registra um candidato anterior. A verificação do head usa refs e recibos por SHA.
 
 ## Design
 

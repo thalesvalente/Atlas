@@ -1,4 +1,4 @@
-# Feature 006 — Binding local de propostas de retenção
+# Feature 007 — Binding local de propostas de retenção
 
 **Branch** `feat/atlas-retention-binding-readonly-20261106`
 **Criada** 2026-11-06 · **Entrada** P02 / ATLAS-N02
