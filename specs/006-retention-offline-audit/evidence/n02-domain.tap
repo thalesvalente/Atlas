@@ -1,0 +1,220 @@
+TAP version 13
+# Subtest: N02 imports the real F005 export without requiring private files
+ok 1 - N02 imports the real F005 export without requiring private files
+  ---
+  duration_ms: 15.208085
+  type: 'test'
+  ...
+# Subtest: lexical record kind, large numbers, decimal and full table rows survive import
+ok 2 - lexical record kind, large numbers, decimal and full table rows survive import
+  ---
+  duration_ms: 4.067528
+  type: 'test'
+  ...
+# Subtest: JSON transport and object-key order do not invalidate the canonical F005 export
+ok 3 - JSON transport and object-key order do not invalidate the canonical F005 export
+  ---
+  duration_ms: 4.578898
+  type: 'test'
+  ...
+# Subtest: missing and NULL revisions each work and remain distinct identities
+ok 4 - missing and NULL revisions each work and remain distinct identities
+  ---
+  duration_ms: 10.901953
+  type: 'test'
+  ...
+# Subtest: valid operator annotation and all permitted intentions remain protected proposals
+ok 5 - valid operator annotation and all permitted intentions remain protected proposals
+  ---
+  duration_ms: 10.022989
+  type: 'test'
+  ...
+# Subtest: external inventory and snapshot digest anchors are mandatory
+ok 6 - external inventory and snapshot digest anchors are mandatory
+  ---
+  duration_ms: 6.977261
+  type: 'test'
+  ...
+# Subtest: self-declared inventory integrity cannot compensate for altered bytes or plan digest
+ok 7 - self-declared inventory integrity cannot compensate for altered bytes or plan digest
+  ---
+  duration_ms: 2.652806
+  type: 'test'
+  ...
+# Subtest: stale source id, revision, metadata digest and snapshot key are rejected
+ok 8 - stale source id, revision, metadata digest and snapshot key are rejected
+  ---
+  duration_ms: 5.090269
+  type: 'test'
+  ...
+# Subtest: source readiness and snapshot UID ambiguity fail closed
+ok 9 - source readiness and snapshot UID ambiguity fail closed
+  ---
+  duration_ms: 2.576962
+  type: 'test'
+  ...
+# Subtest: malformed UTF-8, invalid JSON and non-object documents are rejected
+ok 10 - malformed UTF-8, invalid JSON and non-object documents are rejected
+  ---
+  duration_ms: 15.120143
+  type: 'test'
+  ...
+# Subtest: duplicate JSON keys are rejected even when anchors match the duplicate bytes
+ok 11 - duplicate JSON keys are rejected even when anchors match the duplicate bytes
+  ---
+  duration_ms: 2.968592
+  type: 'test'
+  ...
+# Subtest: duplicates hidden in scientific raw JSON are not accepted as unambiguous identity
+ok 12 - duplicates hidden in scientific raw JSON are not accepted as unambiguous identity
+  ---
+  duration_ms: 1.563004
+  type: 'test'
+  ...
+# Subtest: UID, selection key, original lexical identity and type contradictions are rejected
+ok 13 - UID, selection key, original lexical identity and type contradictions are rejected
+  ---
+  duration_ms: 11.592994
+  type: 'test'
+  ...
+# Subtest: altered lexical content, missing table rows and swapped row order are rejected
+ok 14 - altered lexical content, missing table rows and swapped row order are rejected
+  ---
+  duration_ms: 5.570001
+  type: 'test'
+  ...
+# Subtest: plan status, schema version, provenance and deletion flags cannot be promoted
+ok 15 - plan status, schema version, provenance and deletion flags cannot be promoted
+  ---
+  duration_ms: 14.977703
+  type: 'test'
+  ...
+# Subtest: contradictory or executable intentions in plan and binding are rejected
+ok 16 - contradictory or executable intentions in plan and binding are rejected
+  ---
+  duration_ms: 9.77826
+  type: 'test'
+  ...
+# Subtest: inventory row order, identity, duplicate file IDs and unresolved references are validated
+ok 17 - inventory row order, identity, duplicate file IDs and unresolved references are validated
+  ---
+  duration_ms: 10.39575
+  type: 'test'
+  ...
+# Subtest: a file with multiple consumers cannot declare shared false
+ok 18 - a file with multiple consumers cannot declare shared false
+  ---
+  duration_ms: 2.11095
+  type: 'test'
+  ...
+# Subtest: SHARED_ARTIFACT cannot declare shared false even with only one consumer
+ok 19 - SHARED_ARTIFACT cannot declare shared false even with only one consumer
+  ---
+  duration_ms: 3.150883
+  type: 'test'
+  ...
+# Subtest: unknown inventory fields and forged integrity or backup claims are rejected
+ok 20 - unknown inventory fields and forged integrity or backup claims are rejected
+  ---
+  duration_ms: 12.994085
+  type: 'test'
+  ...
+# Subtest: unresolved bindings stay partial without inventing files or physical presence
+ok 21 - unresolved bindings stay partial without inventing files or physical presence
+  ---
+  duration_ms: 2.78108
+  type: 'test'
+  ...
+# Subtest: shared consumers and declared backups retain protection after verified reads
+ok 22 - shared consumers and declared backups retain protection after verified reads
+  ---
+  duration_ms: 28.9294
+  type: 'test'
+  ...
+# Subtest: missing selective digest never causes a physical read or a fabricated PASS
+ok 23 - missing selective digest never causes a physical read or a fabricated PASS
+  ---
+  duration_ms: 6.821417
+  type: 'test'
+  ...
+# Subtest: unselected files remain unopened even when their authorized locator does not exist
+ok 24 - unselected files remain unopened even when their authorized locator does not exist
+  ---
+  duration_ms: 11.364429
+  type: 'test'
+  ...
+# Subtest: operator locators reject traversal, absolute, UNC, ADS, reserved and encoded paths
+ok 25 - operator locators reject traversal, absolute, UNC, ADS, reserved and encoded paths
+  ---
+  duration_ms: 36.044399
+  type: 'test'
+  ...
+# Subtest: unknown file/root IDs and non-absolute roots have no fallback lookup
+ok 26 - unknown file/root IDs and non-absolute roots have no fallback lookup
+  ---
+  duration_ms: 8.453685
+  type: 'test'
+  ...
+# Subtest: external directory symlink or Windows junction is refused before reading target bytes
+ok 27 - external directory symlink or Windows junction is refused before reading target bytes
+  ---
+  duration_ms: 6.921776
+  type: 'test'
+  ...
+# Subtest: root paths containing a symlink or junction cannot authorize corpus access
+ok 28 - root paths containing a symlink or junction cannot authorize corpus access
+  ---
+  duration_ms: 5.129968
+  type: 'test'
+  ...
+# Subtest: hardlinked artifacts are rejected even when their bytes and digests match
+ok 29 - hardlinked artifacts are rejected even when their bytes and digests match
+  ---
+  duration_ms: 10.117973
+  type: 'test'
+  ...
+# Subtest: two opaque IDs cannot claim the same physical file under different bindings
+ok 30 - two opaque IDs cannot claim the same physical file under different bindings
+  ---
+  duration_ms: 5.260609
+  type: 'test'
+  ...
+# Subtest: substituted same-size bytes fail digest verification without modifying any file
+ok 31 - substituted same-size bytes fail digest verification without modifying any file
+  ---
+  duration_ms: 6.224657
+  type: 'test'
+  ...
+# Subtest: missing files and directories are not accepted as verified regular files
+ok 32 - missing files and directories are not accepted as verified regular files
+  ---
+  duration_ms: 7.599558
+  type: 'test'
+  ...
+# Subtest: CLI reads explicit inputs, writes only stdout and exits 0 with a protected review
+ok 33 - CLI reads explicit inputs, writes only stdout and exits 0 with a protected review
+  ---
+  duration_ms: 96.61438
+  type: 'test'
+  ...
+# Subtest: CLI refuses unknown/destructive, duplicate and valueless options with exit 2
+ok 34 - CLI refuses unknown/destructive, duplicate and valueless options with exit 2
+  ---
+  duration_ms: 439.145165
+  type: 'test'
+  ...
+# Subtest: CLI contract rejection is structured and does not disclose a failed input path
+ok 35 - CLI contract rejection is structured and does not disclose a failed input path
+  ---
+  duration_ms: 86.252355
+  type: 'test'
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1011.385037
