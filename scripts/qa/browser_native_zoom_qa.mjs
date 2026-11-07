@@ -86,6 +86,17 @@ export async function runZoomReflowChecks({browser, check, protectNetwork, repor
         assert.ok(overview.total_visible_records>=1);
         assert.ok(overview.samples.every(s=>s.has_semantic_name),
           'Graphic nodes require accessible names even when overview text is small');
+        // A real toolbar action tests the reduced overview, close to the
+        // operator's 88% tree view, without modifying the graph's DOM or camera.
+        await page.getByRole('button',{name:'Afastar',exact:true}).click();
+        const reduced=await readSvg(page,sample.dpr);
+        assert.equal(reduced.total_visible_records,overview.total_visible_records);
+        assert.ok(reduced.smallest_css_px < overview.smallest_css_px,
+          'Zoom-out must actually reduce apparent SVG label size');
+        await page.locator('.editorial-svg').scrollIntoViewIfNeeded();
+        const reducedScreenshot=reportPath.replace('.json','-reduced-overview-'+sample.percent+'.png');
+        await page.screenshot({path:reducedScreenshot,fullPage:false});
+        report.screenshots.push(reducedScreenshot.split('/').at(-1));
         const index=page.locator('#native-record-index [data-uid]').first();
         await revealNativeControl(page,index);
         await index.click();
@@ -121,7 +132,7 @@ export async function runZoomReflowChecks({browser, check, protectNetwork, repor
           focused.has_detail_panel,
           'Focusing an SVG record must preserve an accessible route to full details');
         const warning=[
-          ...(overview.small_overview_count ? ['Overview labels under 12 CSS px: focus or details needed'] : []),
+          ...(overview.small_overview_count || reduced.small_overview_count ? ['Reduced overview labels under 12 CSS px: focus or details needed'] : []),
           ...(!focused.visible_in_viewport || focused.overlaps_detail || !focused.center_hittable
             ? ['Focused SVG card not fully exposed in this viewport; human Chrome check required'] : [])
         ];
@@ -129,7 +140,7 @@ export async function runZoomReflowChecks({browser, check, protectNetwork, repor
         await page.screenshot({path:screenshot,fullPage:false});
         report.screenshots.push(screenshot.split('/').at(-1));
         report.zoom_audit.push({case:'svg',percent:sample.percent,
-          overview,focused,warning,screenshot:screenshot.split('/').at(-1)});
+          overview,reduced,focused,warning,screenshot:screenshot.split('/').at(-1),reducedScreenshot:reducedScreenshot.split('/').at(-1)});
       });
     } finally {await context.close();}
   }
