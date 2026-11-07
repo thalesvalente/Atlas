@@ -1,0 +1,789 @@
+{
+  "schema": "atlas-a01-presentation-destination-successor/1",
+  "purpose": "Current destination-byte reconciliation after A01 transfer and later Atlas product changes. Historical source transfer provenance remains immutable.",
+  "observation": {
+    "destination_files_observed_at_commit": "4bb80f3445256cb8b348e7dcec8735cdf8bad2eb",
+    "original_manifest_path": "docs/missions/atlas-a01/REUSE-MANIFEST.json",
+    "original_manifest_blob_sha1": "5101d0e7ff0e227f42dd28196ca66f4685fea024",
+    "original_manifest_scope": "HISTORICAL_AUTHORIZATION_AND_TRANSFER_WITNESS_NOT_CURRENT_HEAD_HASHES",
+    "source_commit": "2895d95f81a0436636227d02b504ed1dad3f2e36",
+    "authorization": "https://github.com/thalesvalente/Atlas/pull/18#issuecomment-6552216866"
+  },
+  "hash_convention": "SHA-256 over exact Git blob UTF-8 bytes; LF-normalized bytes equal exact blob in the eight current destinations.",
+  "destination_sha256": {
+    "packages/atlas/src/atlas_viewer/static/native_legacy.css": "51edfb97e824828f32433859aab633dcbb948df8a81ca2fb8521526e286a5568",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "85c16580d6087c2e4e367ada6b1b5205804d4d772bccdaf3ac20f875d1dac5e5",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "433dfd4ebc937f6088ce4581da7393de2a7d13b424d80ef4c29b70f2fb3f88eb",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "4036070497dd6f7a77f87ba462be7da77401d934a6b4852d0f83b71764f21477",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "641b0fe6704fb0ee379840aa80e53dcec2c880e678978bf63558e53f5b8ce476",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "9c3526d4f702c9a59abf5782eeaed01c40cf2aab7e8e649af335bc677625fbff",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.html": "a59a2285c14b54f2dfcf5422132fce1744d610ddc4938cf0611273c913f33f66",
+    "packages/atlas/src/atlas_viewer/static/native_navigation.js": "49e6666a2e95db32354b3e7094226d14565489eb40d383ff616bed8f2c12879d"
+  },
+  "destination_git_blob_sha1": {
+    "packages/atlas/src/atlas_viewer/static/native_legacy.css": "547314b8447fc97fbff00fe2e81f46ee5351e4a3",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css": "8c767a02a99223468f421b4766d72973d17e9bc0",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_model.js": "46e292e81ac3661ab5581570b7024d6753f2a0af",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js": "d44e1afd90e74371e4cacc6ad351418c663cae34",
+    "packages/atlas/src/atlas_viewer/static/native_legacy_views.js": "a56b39a6bf8946381ee7e8b2785f37b4e025bd94",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.js": "818942997cf9925651c995f2a491cdfe86b192cf",
+    "packages/atlas/src/atlas_viewer/static/native_notebook.html": "926ff6965a924103f65ba2fca7258e804de08b5b",
+    "packages/atlas/src/atlas_viewer/static/native_navigation.js": "1756f8b3c8c08e5164cae3c164802761f18c1946"
+  },
+  "historic_source_span_policy": "The original 52 destination-symbol mappings remain historical (A01 transfer time). Their old line ranges MUST NOT be interpreted as current source spans. A current anchor below is a verified declaration line, NOT an AST span or new source-transfer claim.",
+  "current_declaration_anchors": [
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "s",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 67,
+        "end_line": 67
+      },
+      "current_declaration_lines": [
+        67
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "REUSED_FUNCTION_BYTES"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "wrapped",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 68,
+        "end_line": 72
+      },
+      "current_declaration_lines": [
+        68
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "nativeFamily",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 79,
+        "end_line": 79
+      },
+      "current_declaration_lines": [
+        79
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "treeOrganizationMode",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 36,
+        "end_line": 36
+      },
+      "current_declaration_lines": [
+        36
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "treeRelationsVisible",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 37,
+        "end_line": 37
+      },
+      "current_declaration_lines": [
+        37
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "neutralTreeThemes",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 81,
+        "end_line": 87
+      },
+      "current_declaration_lines": [
+        81
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "allTreeThemes",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 88,
+        "end_line": 104
+      },
+      "current_declaration_lines": [
+        88
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "svgPath",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 107,
+        "end_line": 113
+      },
+      "current_declaration_lines": [
+        107
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "drawNode",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 114,
+        "end_line": 168
+      },
+      "current_declaration_lines": [
+        114
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "focusTheme",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 170,
+        "end_line": 174
+      },
+      "current_declaration_lines": [
+        184
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "changeTreeWithoutCameraJump",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 178,
+        "end_line": 191
+      },
+      "current_declaration_lines": [
+        192
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "toggleTreeFamily",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 192,
+        "end_line": 196
+      },
+      "current_declaration_lines": [
+        206
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "orderFamilyRows",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 197,
+        "end_line": 210
+      },
+      "current_declaration_lines": [
+        211
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "TREE_THEME_PALETTE",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 78,
+        "end_line": 78
+      },
+      "current_declaration_lines": [
+        78
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "REUSED_DECLARATION_BYTES"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-cards.js",
+      "symbol": "LINK_COLORS",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 106,
+        "end_line": 106
+      },
+      "current_declaration_lines": [
+        106
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "layoutFamilies",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 213,
+        "end_line": 238
+      },
+      "current_declaration_lines": [
+        227
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "renderTreeLinks",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 239,
+        "end_line": 290
+      },
+      "current_declaration_lines": [
+        253
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "renderGraph",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 60,
+        "end_line": 65
+      },
+      "current_declaration_lines": [
+        60
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "screenToWorld",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 292,
+        "end_line": 292
+      },
+      "current_declaration_lines": [
+        306
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "REUSED_FUNCTION_BYTES"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "setBox",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 293,
+        "end_line": 302
+      },
+      "current_declaration_lines": [
+        307
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "focusNode",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 323,
+        "end_line": 334
+      },
+      "current_declaration_lines": [
+        338
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "zoom",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 335,
+        "end_line": 335
+      },
+      "current_declaration_lines": [
+        350
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "REUSED_FUNCTION_BYTES"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "updateMini",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 336,
+        "end_line": 336
+      },
+      "current_declaration_lines": [
+        351
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "REUSED_FUNCTION_BYTES"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/graph-layout.js",
+      "symbol": "mountEditorialTree",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "historical_destination_span": {
+        "start_line": 7,
+        "end_line": 349
+      },
+      "current_declaration_lines": [
+        7
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "recordMatches",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 90,
+        "end_line": 94
+      },
+      "current_declaration_lines": [
+        90
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "recordFilters",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "historical_destination_span": {
+        "start_line": 48,
+        "end_line": 48
+      },
+      "current_declaration_lines": [
+        50
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "visibleRecords",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "historical_destination_span": {
+        "start_line": 49,
+        "end_line": 49
+      },
+      "current_declaration_lines": [
+        51
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "renderRecordIndex",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 20,
+        "end_line": 22
+      },
+      "current_declaration_lines": [
+        20
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "norm",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 6,
+        "end_line": 6
+      },
+      "current_declaration_lines": [
+        6
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "KIND",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 44,
+        "end_line": 44
+      },
+      "current_declaration_lines": [
+        44
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "EDGE",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 46,
+        "end_line": 46
+      },
+      "current_declaration_lines": [
+        46
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/app.js",
+      "symbol": "COLORS",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 45,
+        "end_line": 45
+      },
+      "current_declaration_lines": [
+        45
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "renderPresentationDetail",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 27,
+        "end_line": 45
+      },
+      "current_declaration_lines": [
+        27
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "renderPresentationDetail",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 27,
+        "end_line": 45
+      },
+      "current_declaration_lines": [
+        27
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "recordSort",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 95,
+        "end_line": 95
+      },
+      "current_declaration_lines": [
+        95
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "renderRecordPresentation",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 23,
+        "end_line": 26
+      },
+      "current_declaration_lines": [
+        23
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "showRecords",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "historical_destination_span": {
+        "start_line": 192,
+        "end_line": 195
+      },
+      "current_declaration_lines": [
+        206
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "renderCatalog",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 74,
+        "end_line": 88
+      },
+      "current_declaration_lines": [
+        74
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "ASSET_COLLECTIONS",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 64,
+        "end_line": 64
+      },
+      "current_declaration_lines": [
+        64
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/records-products.js",
+      "symbol": "showAssets",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "historical_destination_span": {
+        "start_line": 255,
+        "end_line": 265
+      },
+      "current_declaration_lines": [
+        271
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/tables-coverage.js",
+      "symbol": "presentationColumns",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 99,
+        "end_line": 99
+      },
+      "current_declaration_lines": [
+        99
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/tables-coverage.js",
+      "symbol": "renderReadingTable",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 46,
+        "end_line": 51
+      },
+      "current_declaration_lines": [
+        46
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/tables-coverage.js",
+      "symbol": "showTables",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "historical_destination_span": {
+        "start_line": 212,
+        "end_line": 254
+      },
+      "current_declaration_lines": [
+        226
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/tables-coverage.js",
+      "symbol": "renderRelationPresentation",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 60,
+        "end_line": 63
+      },
+      "current_declaration_lines": [
+        60
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/tables-coverage.js",
+      "symbol": "showRelations",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "historical_destination_span": {
+        "start_line": 281,
+        "end_line": 290
+      },
+      "current_declaration_lines": [
+        297
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "symbol": "catalogTitle",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 103,
+        "end_line": 103
+      },
+      "current_declaration_lines": [
+        103
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "symbol": "firstDeclared",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 102,
+        "end_line": 102
+      },
+      "current_declaration_lines": [
+        102
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "symbol": "catalogStatus",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 104,
+        "end_line": 104
+      },
+      "current_declaration_lines": [
+        104
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "symbol": "firstDeclared",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "historical_destination_span": {
+        "start_line": 102,
+        "end_line": 102
+      },
+      "current_declaration_lines": [
+        102
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "symbol": "catalogContext",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 67,
+        "end_line": 73
+      },
+      "current_declaration_lines": [
+        67
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "symbol": "showAssets",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "historical_destination_span": {
+        "start_line": 255,
+        "end_line": 265
+      },
+      "current_declaration_lines": [
+        271
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    },
+    {
+      "original_source": "src/r4/presentation/atlas_assets/historical-catalog.js",
+      "symbol": "renderCatalog",
+      "destination_path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "historical_destination_span": {
+        "start_line": 74,
+        "end_line": 88
+      },
+      "current_declaration_lines": [
+        74
+      ],
+      "current_status": "DIRECT_DECLARATION_FOUND",
+      "treatment": "ADAPTED_REVIEWED_CODE_OR_COMPOSITION"
+    }
+  ],
+  "verified_current_critical_function_ranges": [
+    {
+      "symbol": "drawNode",
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "start_line": 114,
+      "end_line": 182,
+      "kind": "MANUALLY_INSPECTED_COMPLETE_FUNCTION"
+    },
+    {
+      "symbol": "focusNode",
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "start_line": 338,
+      "end_line": 349,
+      "kind": "MANUALLY_INSPECTED_COMPLETE_FUNCTION"
+    }
+  ],
+  "limits": [
+    "No source snippets newly imported from R4 by this successor; no new rights or transfer authorization.",
+    "Changed destination hashes reflect post-transfer edits; bytes must be revalidated on every future changed HEAD.",
+    "No data payloads, private notebook, third-party executable code, or provider runtime included.",
+    "Current declaration anchors are evidence of location, not one-to-one semantic equivalence to source function names.",
+    "Source-history spans remain tied to their original pinned commit and frozen manifest.",
+    "The successor does not approve scientific use, parity with R4, release, or removal of legacy code."
+  ],
+  "verification_script": "scripts/qa/verify_a01_reuse_successor.py"
+}
