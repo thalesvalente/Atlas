@@ -2,6 +2,28 @@
  * docs/missions/atlas-a01/REUSE-MANIFEST.json. No producer runtime or data bundled.
  */
 import {nativeFragments,buildNativeNavigation} from './native_navigation.js';
+/** Reversible CSV for verified rows. Numeric tokens never pass through Number.
+ * All data cells contain JSON strings/objects, so spreadsheet formula prefixes
+ * cannot execute and no apostrophe needs to be removed to recover a value.
+ * The compatible display CSV remains a separate, deliberately lossy option.
+ */
+export function typedTableCsv(table,rows,columns){
+  const quote=value=>'"'+String(value).replace(/"/g,'""')+'"';
+  const header=['atlas.format','atlas.table_uid','atlas.row_uid','atlas.pointer','atlas.row_json',...columns.map(name=>'cell:'+JSON.stringify(name))];
+  const lines=[header];
+  for(const row of rows){
+    const cellsRaw=nativeFragments(row.raw_json,{all:true}).get('cells');
+    if(!cellsRaw||cellsRaw[0]!=='{')throw Error('NATIVE_ROW_CELLS_REQUIRED');
+    const cells=nativeFragments(cellsRaw,{all:true});
+    const values=columns.map(name=>{
+      if(!cells.has(name))return '{"type":"missing"}';
+      const token=cells.get(name),type=token==='null'?'null':token[0]==='"'?'string':token[0]==='{'?'object':token[0]==='['?'array':/^(true|false)$/.test(token)?'boolean':/[.eE]/.test(token)?'number':'integer';
+      return '{"type":'+JSON.stringify(type)+',"value":'+token+'}';
+    });
+    lines.push(['atlas-table-csv/1',JSON.stringify(table.uid),JSON.stringify(row.uid),JSON.stringify(row.pointer),row.raw_json,...values]);
+  }
+  return lines.map(line=>line.map(quote).join(',')).join('\r\n');
+}
 const numberLiteral=Symbol('JSON numeric lexeme');
 export const norm=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 // Structured metadata is decoded without converting scientific numeric values.

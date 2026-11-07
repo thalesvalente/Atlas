@@ -8,6 +8,51 @@ import {buildNativeNavigation, nativeFragments} from '../../packages/atlas/src/a
 import {literalValue, literalText, familyIdentity, makePresentation, recordMatches, presentationColumns, catalogTitle, catalogStatus} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_model.js';
 import {ASSET_COLLECTIONS, renderCatalog, renderPresentationDetail, renderReadingTable, renderRecordIndex, renderRecordPresentation, renderRelationPresentation, renderDatasetNotice} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_views.js';
 import {mountEditorialTree} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_tree.js';
+import * as legacyModel from '../../packages/atlas/src/atlas_viewer/static/native_legacy_model.js';
+
+test('typed CSV preserves absent/null/empty/typed numbers/formulas and full row identity', () => {
+  const raws = [
+    '{"cells":{},"native_id":null}',
+    '{"cells":{"x":""},"id":"same"}',
+    '{"cells":{"x":null},"id":"same"}',
+    '{"cells":{"x":"null"}}',
+    '{"cells":{"x":9007199254740993}}',
+    '{"cells":{"x":"9007199254740993"}}',
+    '{"cells":{"x":"=1+1"}}',
+    '{"cells":{"x":"\'=1+1"}}',
+    '{"cells":{"x":-1.25e-7,"line\\nquote":"a,\\\"b\\n"}}',
+  ];
+  const rows = raws.map((raw_json, i) => ({uid:'view:'+i,pointer:'/result_tables/0/rows/'+i,raw_json}));
+  const before = JSON.stringify(rows);
+  const csv = legacyModel.typedTableCsv({uid:'=hostile-table'}, rows, ['x','line\nquote']);
+  // Independent RFC4180 reader, including embedded newlines and quote escapes.
+  const records = []; let record=[],field='',quoted=false;
+  for(let i=0;i<csv.length;i++){
+    const ch=csv[i];
+    if(ch==='"'){if(quoted&&csv[i+1]==='"'){field+='"';i++;}else quoted=!quoted;}
+    else if(!quoted&&ch===','){record.push(field);field='';}
+    else if(!quoted&&ch==='\r'&&csv[i+1]==='\n'){record.push(field);records.push(record);record=[];field='';i++;}
+    else field+=ch;
+  }
+  record.push(field);records.push(record);
+  assert.equal(records.length, rows.length+1);
+  for(const record of records)for(const cell of record)assert.doesNotMatch(cell,/^[\s\u0000-\u001f]*[=+@-]/);
+  const values=records.slice(1).map((record,i)=>{
+    assert.equal(record[0],'atlas-table-csv/1');
+    assert.equal(JSON.parse(record[1]),'=hostile-table');
+    assert.equal(JSON.parse(record[2]),rows[i].uid);
+    assert.equal(JSON.parse(record[3]),rows[i].pointer);
+    assert.equal(record[4],raws[i]);
+    return record[5];
+  });
+  assert.equal(new Set(values).size,values.length);
+  assert.equal(values[0],'{"type":"missing"}');
+  assert.equal(values[4],'{"type":"integer","value":9007199254740993}');
+  assert.equal(values[8],'{"type":"number","value":-1.25e-7}');
+  assert.equal(JSON.parse(values[6]).value,'=1+1');
+  assert.equal(JSON.stringify(rows),before);
+  assert.ok(legacyModel.typedTableCsv({uid:'T'},[],[]).includes('atlas.row_json'));
+});
 
 const NULL = 'NULL — valor declarado';
 const freeze = value => {

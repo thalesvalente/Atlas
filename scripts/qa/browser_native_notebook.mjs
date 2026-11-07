@@ -102,6 +102,14 @@ try{
   let download=await downloadControl(page.getByRole('button',{name:'JSON das linhas selecionadas',exact:true}));let bytes=await fs.readFile(await download.path());assert.ok(bytes.toString().includes('9007199254740993'));assert.equal(JSON.parse(bytes).length,127);
   download=await downloadControl(page.getByRole('button',{name:'CSV protegido',exact:true}));bytes=await fs.readFile(await download.path());
   assert.ok(bytes.toString().includes("'=1+1"));check('json_rows_not_rounded_and_csv_formula_neutralized');
+  download=await downloadControl(page.getByRole('button',{name:'CSV tipado das linhas',exact:true}));bytes=await fs.readFile(await download.path());
+  const typedCsv=bytes.toString();assert.ok(typedCsv.includes('atlas.row_json'));assert.ok(typedCsv.includes('atlas-table-csv/1'));
+  assert.ok(typedCsv.includes('{""type"":""integer"",""value"":9007199254740993}'));
+  assert.ok(typedCsv.includes('{""type"":""missing""}'));
+  assert.ok(typedCsv.includes('{""type"":""null"",""value"":null}'));
+  assert.ok(typedCsv.includes('{""type"":""string"",""value"":""=1+1""}'));
+  assert.equal((typedCsv.match(/atlas-table-csv\/1/g)||[]).length,127);
+  check('typed_csv_download_preserves_all_127_selected_rows_presence_types_and_numeric_tokens');
   await openNativePane(page,'assets');await page.getByRole('button',{name:'Referência e detalhes'}).first().click();await inspect();assert.match(await page.getByTestId('native-raw').innerText(),/private\/never-opened/);
   await openNativePane(page,'timeline');assert.match(await page.locator('#native-content').innerText(),/2026-01-01T12:00:00Z/);assert.match(await page.locator('#native-content').innerText(),/Data não declarada/);
   await openNativePane(page,'coverage');assert.match(await page.locator('#native-content').innerText(),/unknown_nested/);

@@ -3,7 +3,7 @@ import {NativeTriageUI} from './native_triage_ui.js';
 import {mountGraph} from './native_graph.js';
 import {buildNativeNavigation} from './native_navigation.js';
 import {mountLineage} from './native_lineage.js';
-import {makePresentation,recordMatches,recordSort,norm,literalText,catalogTitle,catalogStatus,TABLE_FILTER_FIELDS,tableFilterOptions,tableMatchesFilters} from './native_legacy_model.js';
+import {makePresentation,recordMatches,recordSort,norm,literalText,catalogTitle,catalogStatus,TABLE_FILTER_FIELDS,tableFilterOptions,tableMatchesFilters,typedTableCsv} from './native_legacy_model.js';
 import {mountEditorialTree} from './native_legacy_tree.js';
 import {renderRecordIndex,renderRecordPresentation,renderPresentationDetail,renderReadingTable,renderDatasetNotice,renderRelationPresentation,renderCatalog,ASSET_COLLECTIONS} from './native_legacy_views.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
@@ -248,9 +248,9 @@ function showTables(host){
   tools.append(button('Detalhes da tabela',()=>detail(table)),button('JSON das linhas selecionadas',()=>download('atlas-table-rows.json','['+rows.map(r=>r.raw_json).join(',')+']')),button('CSV protegido',()=>{
     const cell=v=>{let s=String(v??'');if(/^[\s\u0000-\u001f]*[=+@-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
     download('atlas-table.csv',[cols.map(cell).join(','),...rows.map(r=>cols.map(c=>cell(r.cells[c]?.text??'')).join(','))].join('\r\n'),'text/csv;charset=utf-8');
-  }));
+  }),button('CSV tipado das linhas',()=>download('atlas-table-typed.csv',typedTableCsv(table,rows,cols),'text/csv;charset=utf-8')));
   tools.firstElementChild.id='native-table-detail';
-  host.append(tools,el('p',`${rows.length} linhas selecionadas de ${allRows.length} carregadas; ${cols.length} colunas. Null e chave ausente permanecem distintos. CSV neutraliza fórmulas; JSON conserva os valores originais.`,'muted'));
+  host.append(tools,el('p',`${rows.length} linhas selecionadas de ${allRows.length} carregadas; ${cols.length} colunas. CSV protegido serve à leitura e pode confundir tipos ou valores ausentes. CSV tipado e JSON conservam presença, tipos e valores originais; o CSV tipado inclui a linha completa.`,'muted'));
   if(columnPages>1&&state.tableView==='p03'){const cp=el('div',null,'pager'),prev=button('← Colunas',()=>{state.columnPage--;closeDetail();rerenderFocus(state.columnPage===0?'Colunas →':'← Colunas');}),next=button('Colunas →',()=>{state.columnPage++;closeDetail();rerenderFocus(state.columnPage+1===columnPages?'← Colunas':'Colunas →');});prev.disabled=state.columnPage===0;next.disabled=state.columnPage+1===columnPages;cp.append(prev,el('span',`Janela de colunas ${state.columnPage+1}/${columnPages}`),next);host.append(cp);}
   if(!visibleColumns.length){host.append(el('p','A tabela não declara células; valores indisponíveis não são reconstruídos.','empty'));return;}
   const descriptor={version:'p03-table/1',semantic_status:'CANDIDATE_PRESENTATION',title:table.title,description:'Valores da projeção original; somente a janela visível é paginada.',columns:visibleColumns.map((c,i)=>({id:'c'+i,label:c,type:'string'})),rows:windowRows.map(r=>{
@@ -260,7 +260,7 @@ function showTables(host){
   for(const[value,text]of [['reading','Leitura organizada'],['p03','Inspeção P03 congelada']]){const o=el('option',text);o.value=value;view.append(o);}view.value=state.tableView;viewLabel.append(view);viewTools.append(viewLabel);
   const orderLabel=el('label','Ordem de colunas'),order=el('select');order.id='native-column-order';for(const[value,text]of [['presentation','Identificação → nome → descrição → critérios'],['original','Ordem original do snapshot']]){const o=el('option',text);o.value=value;order.append(o);}order.value=state.columnOrder;orderLabel.append(order);viewTools.append(orderLabel);host.append(viewTools);
   view.addEventListener('change',()=>{state.tableView=view.value;closeDetail();rerenderFocus('native-table-view');});order.addEventListener('change',()=>{state.columnOrder=order.value;closeDetail();rerenderFocus('native-column-order');});
-  host.append(el('p','A ordem de leitura é somente apresentação, reversível. Cabeçalhos e valores são literais; CSV e JSON mantêm a ordem original e os valores exatos.','muted'));
+  host.append(el('p','A ordem de leitura é somente apresentação, reversível. As exportações mantêm a ordem original das colunas; CSV tipado e JSON conservam os valores exatos.','muted'));
   if(state.tableView==='reading')renderReadingTable(host,windowRows,cols,detail,{order:state.columnOrder});
   else try{host.append(renderTable(document,descriptor));}catch(error){
     host.append(el('p','Conteúdo excede o limite visual do P03; exibindo texto completo sem truncar valores.','notice'));
