@@ -72,6 +72,24 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
         'Checkbox and interactive title must align compactly');
       report.visual_readability.push({viewport: 1440, header, cell, identity});
     });
+    await check('UX_READABILITY_05_tablet_compact_controls_and_header', async () => {
+      await page.setViewportSize({width: 780, height: 845});
+      const toggle = await inspect(page, '#native-menu-toggle');
+      const primary = await inspect(page, '#native-retention');
+      const mode = await inspect(page, '#native-content > .toolbar button');
+      const geometry = await page.locator('.triage-compare-identity').first().evaluate(node => {
+        const check = node.querySelector('.triage-check').getBoundingClientRect();
+        const title = node.querySelector('.triage-compare-title').getBoundingClientRect();
+        return {gap: title.left-check.right, aligned: Math.abs((check.top+check.height/2)-(title.top+title.height/2)) <= 24,
+          documentOverflow: document.documentElement.scrollWidth-innerWidth};
+      });
+      assert.equal(toggle.color, 'rgb(247, 251, 255)', 'Navigation toggle must match dark header theme');
+      assert.ok(toggle.height >= 36 && toggle.height <= 44 && toggle.font >= 14);
+      assert.ok(primary.height >= 36 && primary.height <= 42 && mode.height >= 36 && mode.height <= 42);
+      assert.ok(geometry.aligned && geometry.gap >= 4 && geometry.gap <= 24);
+      assert.ok(geometry.documentOverflow <= 1, 'Tablet comparison should keep horizontal scrolling inside its region');
+      report.visual_readability.push({viewport: 780, toggle, primary, mode, geometry});
+    });
     await check('UX_TYPE_HIERARCHY_06_region_labels_and_tree_controls', async () => {
       await openNativePane(page, 'tree');
       const samples = {
@@ -132,24 +150,6 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
           'Text spacing must not hide the tree mode control');
         report.visual_readability.push({viewport: 1440, text_spacing: samples});
       } finally {await styled.close();}
-    });
-    await check('UX_READABILITY_05_tablet_compact_controls_and_header', async () => {
-      await page.setViewportSize({width: 780, height: 845});
-      const toggle = await inspect(page, '#native-menu-toggle');
-      const primary = await inspect(page, '#native-retention');
-      const mode = await inspect(page, '#native-content > .toolbar button');
-      const geometry = await page.locator('.triage-compare-identity').first().evaluate(node => {
-        const check = node.querySelector('.triage-check').getBoundingClientRect();
-        const title = node.querySelector('.triage-compare-title').getBoundingClientRect();
-        return {gap: title.left-check.right, aligned: Math.abs((check.top+check.height/2)-(title.top+title.height/2)) <= 24,
-          documentOverflow: document.documentElement.scrollWidth-innerWidth};
-      });
-      assert.equal(toggle.color, 'rgb(247, 251, 255)', 'Navigation toggle must match dark header theme');
-      assert.ok(toggle.height >= 36 && toggle.height <= 44 && toggle.font >= 14);
-      assert.ok(primary.height >= 36 && primary.height <= 42 && mode.height >= 36 && mode.height <= 42);
-      assert.ok(geometry.aligned && geometry.gap >= 4 && geometry.gap <= 24);
-      assert.ok(geometry.documentOverflow <= 1, 'Tablet comparison should keep horizontal scrolling inside its region');
-      report.visual_readability.push({viewport: 780, toggle, primary, mode, geometry});
     });
   } finally {
     await context.close();
