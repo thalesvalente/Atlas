@@ -331,7 +331,12 @@ export class NativeTriageUI {
       const table=element('table'),head=element('thead'),tr=element('tr');for(const name of ['Identidade / título','Tipo / família','Execução','Publicação / admissão / revisão','Baseline','Referências']){const th=element('th',name);th.scope='col';tr.append(th);}head.append(tr);table.append(head);
       const body=element('tbody');
       this.pageRows(host,selected,entry=>{const row=element('tr');row.dataset.uid=entry.uid;
-        const title=element('td');title.append(this.checkControl(entry),button(entry.title,()=>this.hooks.detail(entry)),element('code',entry.uid));row.append(title);
+        const title=element('td');
+        const identity=element('div',undefined,'triage-compare-identity');
+        const identityText=element('div',undefined,'triage-compare-item');
+        const open=button(entry.title,()=>this.hooks.detail(entry));open.className='triage-compare-title';
+        identityText.append(open,element('code',entry.uid));
+        identity.append(this.checkControl(entry),identityText);title.append(identity);row.append(title);
         row.append(element('td',this.model.type(entry).label+'\n'+this.model.facet(entry,'family').label),element('td',this.model.facet(entry,'execution').label));
         row.append(element('td',['publication','admission','review'].map(key=>key+': '+this.model.facet(entry,key).label).join('\n')),element('td',this.model.baseline(entry,this.ledger.annotations).label));
         const refs=element('td');refs.append(button('Ver referências declaradas',()=>this.hooks.detail(entry)));row.append(refs);body.append(row);return element('span');});
