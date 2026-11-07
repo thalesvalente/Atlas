@@ -63,7 +63,7 @@ def main() -> None:
             fail("UNEXPECTED_CRLF_DESTINATION " + path)
         expected_lines[path] = raw.decode("utf-8").splitlines()
     original_symbols = [
-        (src["source_path"], record["name"], dst["path"])
+        (src["source_path"], dst["symbol"], dst["path"])
         for src in previous["transfers"]
         for record in [*src.get("functions", []), *src.get("declarations", [])]
         for dst in record.get("destination_symbols", [])
