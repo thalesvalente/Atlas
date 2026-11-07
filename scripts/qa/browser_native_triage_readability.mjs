@@ -22,19 +22,19 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
     await check('UX_READABILITY_01_search_and_batch_are_legible', async () => {
       const field = await inspect(page, '#native-search');
       const card = await inspect(page, '.triage-result-head h3');
-      const nav = await inspect(page, '#native-sidebar nav button[data-pane="tree"]');
-      assert.ok(field.font >= 14 && card.font >= 16 && nav.font >= 14,
-        'Search, card heading and navigation must use the new readable type scale');
+      assert.ok(field.font >= 14 && card.font >= 16,
+        'Search field and result heading must use the new readable type scale');
       await page.locator('#native-content input[data-batch-uid]').first().check();
-      const summary = await inspect(page, '#native-batch-summary');
-      const primary = await inspect(page, '#native-retention');
-      assert.ok(summary.font >= 14 && primary.font >= 13 && primary.height >= 44,
-        'Selection summary and retention primary action must be readable and touch-sized');
-      assert.equal(primary.color, 'rgb(255, 255, 255)');
-      report.visual_readability.push({viewport: 1440, field, card, nav, summary, primary});
+      report.visual_readability.push({viewport: 1440, field, card});
     });
     await check('UX_READABILITY_02_selected_modes_are_clustered_and_clear', async () => {
       await openNativePane(page, 'selected');
+      const nav = await inspect(page, '#native-sidebar nav button[data-pane="tree"]');
+      const summary = await inspect(page, '#native-batch-summary');
+      const primary = await inspect(page, '#native-retention');
+      assert.ok(nav.font >= 14 && summary.font >= 14 && primary.font >= 13 && primary.height >= 44,
+        'Selected modes must provide legible navigation, summary and primary action');
+      assert.equal(primary.color, 'rgb(255, 255, 255)');
       const toolbar = await inspect(page, '#native-content > .toolbar');
       const actions = await page.locator('#native-content > .toolbar button').evaluateAll(nodes =>
         nodes.map(node => {const style = getComputedStyle(node), bounds = node.getBoundingClientRect();
@@ -45,7 +45,7 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
       assert.ok(actions.at(-1).left - actions[0].left < 750,
         'Selected-view actions should form a compact group, not span the entire viewport');
       assert.equal(await page.locator('#native-content > .toolbar button[aria-current="true"]').count(), 1);
-      report.visual_readability.push({viewport: 1440, toolbar, actions});
+      report.visual_readability.push({viewport: 1440, nav, summary, primary, toolbar, actions});
     });
     await check('UX_READABILITY_03_comparison_headers_and_cells_are_readable', async () => {
       await page.locator('#native-content > .toolbar button').filter({hasText: /^Comparar$/}).click();
@@ -67,6 +67,7 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
     await openNativePane(phone, 'search');
     await phone.locator('#native-search').fill('run-rf-proof');
     await phone.locator('#native-content input[data-batch-uid]').first().check();
+    await openNativePane(phone, 'selected');
     await check('UX_READABILITY_04_mobile_actions_remain_legible_without_global_overflow', async () => {
       const primary = await inspect(phone, '#native-retention');
       const summary = await inspect(phone, '#native-batch-summary');
