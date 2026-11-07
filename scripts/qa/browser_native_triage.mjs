@@ -6,6 +6,7 @@ import {createRequire} from 'node:module';
 import {openNativePane, revealNativeControl} from './browser_native_triage_navigation.mjs';
 import {runN03Checks} from './browser_native_triage_n03.mjs';
 import {runReadabilityChecks} from './browser_native_triage_readability.mjs';
+import {runZoomReflowChecks} from './browser_native_zoom_qa.mjs';
 
 const require = createRequire(import.meta.url);
 const {chromium} = require(process.env.ATLAS_PLAYWRIGHT_MODULE || 'playwright');
@@ -751,6 +752,7 @@ try {
   }
   await runN03Checks({browser, check, expected, protectNetwork, report, url});
   await runReadabilityChecks({browser, check, protectNetwork, report, url});
+  await runZoomReflowChecks({browser, check, protectNetwork, report, url, reportPath});
   assert.deepEqual(report.errors, []);
   assert.deepEqual(report.external_requests, []);
   report.status = 'PASS';
