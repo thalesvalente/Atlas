@@ -24,11 +24,11 @@ incluindo BLOCKED/NOT_RUN, sem conceder paridade plena ou retirada.
   Caderno e alterações alheias (FR-007/008, plan: escopo congelado).
 - [x] T009 [P] [US1] Atualizar PAR-001–015 e roteiro/evidência Chrome em recibos
   privados P01; corrigir apenas defeitos materiais nos componentes Atlas (FR-006/007, SC-004).
-- [ ] T010 [P] [US2] Separar produtor/renderer e entrypoints/aliases em
+- [x] T010 [P] [US2] Separar produtor/renderer e entrypoints/aliases em
   src/r4/campaigns/notebook_query_projection.py, atlas.py e cli.py no R4 (FR-008).
-- [ ] T011 [US2] Substituir launcher/CLI/migração, testes e documentação R4;
+- [x] T011 [US2] Substituir launcher/CLI/migração, testes e documentação R4;
   preservar nove assets e fallback, reconciliar C01–C09 (FR-009, SC-005).
-- [ ] T012 [US2] Qualificar contratos, negativos, cold start/refresh e consumo
+- [x] T012 [US2] Qualificar contratos, negativos, cold start/refresh e consumo
   Atlas independente com fixtures isoladas em tests R4 (FR-010).
 - [ ] T013 Qualificar diff final por QA P03, CI Windows/Ubuntu e Codex Review nas
   PRs Draft correspondentes; recibos próprios por SHA (FR-011).
@@ -36,7 +36,7 @@ incluindo BLOCKED/NOT_RUN, sem conceder paridade plena ou retirada.
   conferir Git/processos/limpeza e manter decisões humanas separadas (SC-006).
 - [x] T015 [US2] Atualizar tools/export_native_notebook.py, guardas dos launchers,
   README e testes de fronteira para consumir somente a API produtora (FR-008/009).
-- [ ] T016 [US1] Corrigir defeitos relatados pelo operador: separar seleção/título
+- [x] T016 [US1] Corrigir defeitos relatados pelo operador: separar seleção/título
   no catálogo e tornar desmarcar todos acessível em native_notebook.html,
   native_triage_ui.js e native_legacy_integration.css, com RED/GREEN e regressão
   sintética; conferir RNF/RES contra o snapshot sem inventar conteúdo (FR-006/007).

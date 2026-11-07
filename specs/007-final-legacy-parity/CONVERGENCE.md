@@ -52,3 +52,46 @@ local não prova cobertura global, origem assinada ou aceite científico.
 
 Código válido publicado em branch própria/PR Draft #39. Sem alteração R4,
 execução de produtor real, merge, release, deploy ou autorização de retirada.
+
+## Continuação de uso e consumidores
+
+Constituição ARC-01–09 reavaliada sem alteração. Spec/plan/tasks existentes
+estendidos para FR-006–011 e SC-004–006; 17 requisitos/critérios cobertos por
+T001–T016. Helpers oficiais 1.2.3 executados com seleção explícita de 007 e
+NO_PERSIST; setup-plan preservou o plano existente. Auditoria dos 28 assets
+gerenciados passou com o escopo de apresentação já autorizado. Sem hooks locais,
+nova feature, worktree ou documento redundante.
+
+O relato do operador identificou junção do texto de seleção ao título e ação de
+zerar seleção escondida. A correção torna o botão existente Desmarcar todos (N)
+visível junto aos seletores, mantém seleção/contagem e preserva anotações e foco.
+Três contraprovas iniciais e duas independentes de foco reproduziram RED;
+GREEN local 14/14 e regressão Node 135/135. A geometria de catálogo e interação
+entram no workflow Chromium sintético existente. Isso não concede Chrome PASS.
+
+O adaptador externo e guardas dos launchers passaram a exigir a API produtora
+separada. Três subprocessos sintéticos provaram exportação sem renderer,
+recusa de checkout somente legado e propagação de erro sem publicar pacote.
+Regressão Python 39 casos por modo normal/-O: 38 PASS e um SKIP POSIX no Windows.
+O manifesto A01 histórico permanece intacto; apenas o sucessor de destinos foi
+reconciliado contra o commit de implementação desta continuação.
+
+Na candidata R4 separada, o produtor mantém os três corpos AST da main e
+atlas.project como alias; launcher/CLI/migração/documentação foram atualizados
+e os nove assets preservados. Testes selecionados 125/125 e QA focal não autora
+25/25. A integração detectou e corrigiu colisão entre diretórios de projeção e
+pacote sem relaxar a guarda do exportador. Cold start, nova revisão/refresh,
+pin obsoleto e exportação direta passaram com subprocessos/HTTP e fixtures
+científicas inventadas. Produtor no Caderno original permanece NOT_RUN.
+
+As três capturas legadas fornecidas pelo operador conferem com os dados do
+snapshot servido anterior: contadores 159/45/162/69/3131, cinco tabelas RF com
+39/85/28/0/0 linhas e seis registros de timeline com títulos/datas/estados.
+Essa equivalência informacional não comprova a UI corrigida. RNF/RES não estão
+presentes na coleção de tabelas desse snapshot; não foram inventados.
+
+T013/T014 ficam abertos neste snapshot documental até os recibos terminais de
+CI/review por SHA e handoff. O estado de paridade permanece PARTIAL_EXACT até
+requalificação visual do operador; a comparação de uso OLD/NEW ainda não foi
+realizada. Não há nova tarefa de código conhecida além de eventual finding
+material; gates externos permanecem explícitos e não são promovidos a PASS.
