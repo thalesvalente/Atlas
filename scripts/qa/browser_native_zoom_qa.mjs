@@ -90,20 +90,41 @@ export async function runZoomReflowChecks({browser, check, protectNetwork, repor
         await revealNativeControl(page,index);
         await index.click();
         await page.getByRole('button',{name:'Focar seleção',exact:true}).click();
+        // Bring the graphic surface into the visible viewport before sampling
+        // actual record exposure; do not confuse an off-screen SVG DOM node
+        // with a readable record.
+        await page.locator('.editorial-svg').scrollIntoViewIfNeeded();
         const focused=await page.locator('.editorial-svg .svg-record.selected').evaluate((node,dpr)=>{
           const title=node.querySelector('text'),matrix=title?.getScreenCTM();
           const css_px=matrix ? parseFloat(getComputedStyle(title).fontSize) *
             Math.hypot(matrix.a,matrix.b) : null;
+          const rect=node.getBoundingClientRect();
+          const detail=document.querySelector('#native-detail');
+          const detailRect=detail.getBoundingClientRect();
+          const overlapsDetail=!detail.hidden && rect.left<detailRect.right &&
+            rect.right>detailRect.left && rect.top<detailRect.bottom &&
+            rect.bottom>detailRect.top;
+          const visibleInViewport=rect.right>0 && rect.left<innerWidth &&
+            rect.bottom>0 && rect.top<innerHeight;
+          const pointX=Math.min(innerWidth-1,Math.max(1,rect.left+rect.width/2));
+          const pointY=Math.min(innerHeight-1,Math.max(1,rect.top+rect.height/2));
+          const hit=document.elementFromPoint(pointX,pointY);
           return {css_px,physical_px:css_px===null?null:css_px*dpr,
-            has_detail_panel:!document.querySelector('#native-detail').hidden,
-            has_accessible_name:Boolean(node.getAttribute('aria-label') || node.querySelector('title'))};
+            has_detail_panel:!detail.hidden,
+            has_accessible_name:Boolean(node.getAttribute('aria-label') || node.querySelector('title')),
+            visible_in_viewport:visibleInViewport,overlaps_detail:overlapsDetail,
+            center_hittable:node.contains(hit),
+            rect:{x:rect.left,y:rect.top,w:rect.width,h:rect.height},
+            css_viewport:{width:innerWidth,height:innerHeight}};
         },sample.dpr);
         assert.ok(focused.css_px>0 && focused.has_accessible_name &&
           focused.has_detail_panel,
           'Focusing an SVG record must preserve an accessible route to full details');
-        const warning=overview.small_overview_count
-          ? 'Overview labels under 12 CSS px: use focus/details; investigate scalable text UX'
-          : null;
+        const warning=[
+          ...(overview.small_overview_count ? ['Overview labels under 12 CSS px: focus or details needed'] : []),
+          ...(!focused.visible_in_viewport || focused.overlaps_detail || !focused.center_hittable
+            ? ['Focused SVG card not fully exposed in this viewport; human Chrome check required'] : [])
+        ];
         const screenshot=reportPath.replace('.json','-zoom-'+sample.percent+'.png');
         await page.screenshot({path:screenshot,fullPage:false});
         report.screenshots.push(screenshot.split('/').at(-1));
