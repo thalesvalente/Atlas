@@ -81,8 +81,13 @@ export function buildNativeNavigation(entries){
     evidence.set(e.uid,[...parts].filter(([name])=>evidenceFields.has(name)));
   }
   const reference=(e,label,literal,map=index,direct=null,explicitCandidates=null)=>{
-    const candidates=explicitCandidates!==null?explicitCandidates:direct?[direct].filter(uid=>byUid.has(uid)):
-      typeof literal==='string'?[...(map.get(literal)||[])].filter(uid=>uid!==e.uid):[];
+    // Resolve against the complete snapshot before suppressing a sole self-reference.
+    // A duplicate native ID containing this occurrence is still a COLLISION;
+    // removing self first would silently fabricate a UNIQUE foreign target.
+    const allCandidates=explicitCandidates!==null?explicitCandidates:direct?[direct].filter(uid=>byUid.has(uid)):
+      typeof literal==='string'?[...(map.get(literal)||[])]:[];
+    const soleSelf=explicitCandidates===null&&!direct&&allCandidates.length===1&&allCandidates[0]===e.uid;
+    const candidates=soleSelf?[]:allCandidates;
     const ref={label,literal,targets:candidates,resolution:literal===null?'NOT_DECLARED':candidates.length===1?'UNIQUE':candidates.length?'COLLISION':'UNRESOLVED'};
     outgoing.get(e.uid).push(ref);
     for(const uid of candidates){if(!incoming.has(uid))incoming.set(uid,[]);incoming.get(uid).push({uid:e.uid,label,resolution:ref.resolution});}
