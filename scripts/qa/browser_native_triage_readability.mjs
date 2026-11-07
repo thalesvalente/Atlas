@@ -32,7 +32,7 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
       const nav = await inspect(page, '#native-sidebar nav button[data-pane="tree"]');
       const summary = await inspect(page, '#native-batch-summary');
       const primary = await inspect(page, '#native-retention');
-      assert.ok(nav.font >= 14 && summary.font >= 14 && primary.font >= 13 && primary.height >= 44,
+      assert.ok(nav.font >= 14 && summary.font >= 14 && primary.font >= 14 && primary.height >= 36 && primary.height <= 42,
         'Selected modes must provide legible navigation, summary and primary action');
       assert.equal(primary.color, 'rgb(255, 255, 255)');
       const toolbar = await inspect(page, '#native-content > .toolbar');
@@ -41,7 +41,7 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
           return {font: Number.parseFloat(style.fontSize), height: bounds.height, left: bounds.left};}));
       assert.equal(toolbar.justify, 'flex-start');
       assert.equal(actions.length, 5);
-      assert.ok(actions.every(action => action.font >= 13 && action.height >= 44));
+      assert.ok(actions.every(action => action.font >= 14 && action.height >= 36 && action.height <= 42));
       assert.ok(actions.at(-1).left - actions[0].left < 750,
         'Selected-view actions should form a compact group, not span the entire viewport');
       assert.equal(await page.locator('#native-content > .toolbar button[aria-current="true"]').count(), 1);
@@ -51,8 +51,44 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
       await page.locator('#native-content > .toolbar button').filter({hasText: /^Comparar$/}).click();
       const header = await inspect(page, '#native-content .triage-compare thead th');
       const cell = await inspect(page, '#native-content .triage-compare tbody td');
-      assert.ok(header.font >= 13 && cell.font >= 14, 'Comparison table has readable headers and data');
-      report.visual_readability.push({viewport: 1440, header, cell});
+      assert.ok(header.font >= 14 && cell.font >= 15, 'Comparison table has readable headers and data');
+      const identity = await page.locator('.triage-compare-identity').first().evaluate(node => {
+        const check = node.querySelector('.triage-check');
+        const input = check.querySelector('input');
+        const label = check.querySelector('span');
+        const title = node.querySelector('.triage-compare-title');
+        const cb = check.getBoundingClientRect(), tb = title.getBoundingClientRect();
+        return {checkTextVisible: getComputedStyle(label).display !== 'none',
+          accessibleName: input.getAttribute('aria-label'), checked: input.checked,
+          checkboxWidth: cb.width, checkboxHeight: cb.height,
+          titleFont: Number.parseFloat(getComputedStyle(title).fontSize),
+          titleButtonHeight: tb.height, gap: tb.left - cb.right,
+          sameRow: Math.abs((cb.top+cb.height/2) - (tb.top+tb.height/2)) <= 24};
+      });
+      assert.equal(identity.checkTextVisible, false, 'Redundant selection label should not crowd the title');
+      assert.match(identity.accessibleName, /^Selecionar /, 'Input must retain accessible name');
+      assert.equal(identity.checked, true, 'Selection must survive switching to compare mode');
+      assert.ok(identity.titleFont >= 15 && identity.checkboxHeight >= 36 && identity.sameRow && identity.gap >= 4 && identity.gap <= 24,
+        'Checkbox and interactive title must align compactly');
+      report.visual_readability.push({viewport: 1440, header, cell, identity});
+    });
+    await check('UX_READABILITY_05_tablet_compact_controls_and_header', async () => {
+      await page.setViewportSize({width: 780, height: 845});
+      const toggle = await inspect(page, '#native-menu-toggle');
+      const primary = await inspect(page, '#native-retention');
+      const mode = await inspect(page, '#native-content > .toolbar button');
+      const geometry = await page.locator('.triage-compare-identity').first().evaluate(node => {
+        const check = node.querySelector('.triage-check').getBoundingClientRect();
+        const title = node.querySelector('.triage-compare-title').getBoundingClientRect();
+        return {gap: title.left-check.right, aligned: Math.abs((check.top+check.height/2)-(title.top+title.height/2)) <= 24,
+          documentOverflow: document.documentElement.scrollWidth-innerWidth};
+      });
+      assert.equal(toggle.color, 'rgb(247, 251, 255)', 'Navigation toggle must match dark header theme');
+      assert.ok(toggle.height >= 36 && toggle.height <= 44 && toggle.font >= 14);
+      assert.ok(primary.height >= 36 && primary.height <= 42 && mode.height >= 36 && mode.height <= 42);
+      assert.ok(geometry.aligned && geometry.gap >= 4 && geometry.gap <= 24);
+      assert.ok(geometry.documentOverflow <= 1, 'Tablet comparison should keep horizontal scrolling inside its region');
+      report.visual_readability.push({viewport: 780, toggle, primary, mode, geometry});
     });
   } finally {
     await context.close();
