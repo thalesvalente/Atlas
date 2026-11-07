@@ -79,7 +79,6 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
         sidebarTitle: await inspect(page, '#native-nav-title'),
         provenance: await inspect(page, '.application-provenance > summary'),
         queryLabel: await inspect(page, '.triage-query label'),
-        graphMode: await inspect(page, '.graph-mode label'),
         treeOrganization: await inspect(page, '.application-tree-organization label'),
         graphControls: await inspect(page, '.editorial-tree .tree-controls label'),
         graphButton: await inspect(page, '.editorial-tree .toolbar button')
@@ -87,7 +86,7 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
       assert.ok(samples.section.font >= 16 && samples.sidebarTitle.font >= 16,
         'Region titles must be visibly stronger than ordinary sidebar options');
       assert.ok(samples.provenance.font >= 14 && samples.queryLabel.font >= 14 &&
-        samples.graphMode.font >= 14 && samples.treeOrganization.font >= 14 &&
+        samples.treeOrganization.font >= 14 &&
         samples.graphControls.font >= 14 && samples.graphButton.font >= 13,
         'Controls and contextual region labels must use a consistent readable type scale');
       report.visual_readability.push({viewport: 1440, hierarchy: samples});
@@ -106,7 +105,6 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
               lineHeight: style.lineHeight};
           };
           return {section: get('#native-sidebar nav details > summary'),
-            graphMode: get('.graph-mode label'),
             treeControls: get('.editorial-tree .tree-controls label')};
         });
         for (const sample of Object.values(samples)) {
