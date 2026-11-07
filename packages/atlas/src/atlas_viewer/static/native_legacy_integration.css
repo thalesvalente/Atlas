@@ -179,3 +179,254 @@
  .triage .triage-more-actions{max-height:160px;overflow:auto}.triage .triage-more-actions button{min-height:44px;flex:1 1 120px}.triage .triage-select-actions button{flex:1 1 130px;min-height:44px;font-size:11px;padding:7px}
  .triage .triage-result{padding:12px}.triage .triage-result-head h3{font-size:14px}.triage .triage-check{min-width:44px;min-height:44px}.triage .triage-result-actions button{min-height:44px;max-width:100%;white-space:normal}.triage .triage-index .node-list{display:block}.triage .node-card{margin-bottom:5px}
 }
+
+/* Visual refinement scoped to selected records, their cards and comparison.
+   The accepted tree and minimap keep their original viewport geometry. */
+.triage .triage-query :is(input,select){font-size:14px;line-height:1.35}
+.triage .triage-result-list{gap:14px}
+.triage .triage-result{padding:18px;border-radius:12px}
+.triage .triage-result-head h3{font-size:17px;line-height:1.4}
+.triage .triage-type{font-size:12px}
+.triage .triage-result .triage-match{font-size:13px;line-height:1.5}
+.triage .triage-result-actions{gap:9px}
+.triage .triage-result-actions button{font-size:13px;min-height:44px;padding:9px 12px}
+.triage .triage-result .triage-check{font-size:13px;gap:8px;min-height:44px}
+.triage .triage-result .triage-check input{width:22px;height:22px;min-height:22px}
+.triage #native-content>.toolbar{justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:12px 0 14px}
+.triage #native-content>.toolbar button{font-size:13px;font-weight:650;min-height:44px;padding:9px 14px;border-radius:9px}
+.triage #native-content>.toolbar button[aria-current=true]{background:#17475e;border-color:#17475e;color:#fff}
+.triage .triage-compare th,.triage .triage-compare td{font-size:14px;line-height:1.55;padding:13px 15px}
+.triage .triage-compare th{font-size:13px;font-weight:700}
+.triage .triage-compare .triage-check{font-size:13px;min-height:44px;gap:8px}
+.triage .triage-compare .triage-check input{width:22px;height:22px;min-height:22px}
+
+/* These controls are enlarged only while the selected-item modes are open.
+   They must not shrink the work area used by tree focus/minimap tests. */
+.triage:has(#native-content>.toolbar) .triage-nav-head h2{font-size:16px}
+.triage:has(#native-content>.toolbar) .sidebar nav button{font-size:14px;line-height:1.4;min-height:44px;padding:10px 12px}
+.triage:has(#native-content>.toolbar) .sidebar summary,
+.triage:has(#native-content>.toolbar) .sidebar-foot{font-size:13px;line-height:1.5}
+.triage:has(#native-content>.toolbar) .application-nav-count{font-size:12px}
+.triage:has(#native-content>.toolbar) .intro p,
+.triage:has(#native-content>.toolbar) .application-provenance,
+.triage:has(#native-content>.toolbar) .application-selection{font-size:13px;line-height:1.5}
+.triage:has(#native-content>.toolbar) .triage-query label,
+.triage:has(#native-content>.toolbar) .triage-filter-grid label{font-size:14px;line-height:1.4}
+.triage:has(#native-content>.toolbar) .mobile-filters>summary{font-size:14px}
+.triage:has(#native-content>.toolbar) .triage-batch-bar{padding:12px 14px;margin:10px 0}
+.triage:has(#native-content>.toolbar) #native-batch-summary{font-size:14px;line-height:1.4;margin-bottom:7px;font-weight:600}
+.triage:has(#native-content>.toolbar) .triage-batch-actions,
+.triage:has(#native-content>.toolbar) .triage-more-actions,
+.triage:has(#native-content>.toolbar) .triage-select-actions{gap:10px;align-items:center}
+.triage:has(#native-content>.toolbar) .triage-batch-actions>button,
+.triage:has(#native-content>.toolbar) .triage-batch-actions summary,
+.triage:has(#native-content>.toolbar) .triage-more-actions button,
+.triage:has(#native-content>.toolbar) .triage-select-actions button{
+  min-height:44px;padding:10px 14px;border-radius:9px;font-size:13px;line-height:1.35;font-weight:650
+}
+.triage:has(#native-content>.toolbar) .triage-batch-actions summary{
+  display:inline-flex;align-items:center;border:1px solid #aec7d2;background:#fff;list-style:none
+}
+.triage:has(#native-content>.toolbar) .triage-batch-actions summary::-webkit-details-marker{display:none}
+.triage:has(#native-content>.toolbar) .triage-batch-actions summary::after{content:'▾';margin-left:9px}
+.triage:has(#native-content>.toolbar) .triage-batch-actions details[open]>summary::after{content:'▴'}
+.triage:has(#native-content>.toolbar) .triage-batch-actions>details[open]{flex:1 1 100%;padding:10px 12px;background:#f8fbfc;border:1px solid #c7dde5;border-radius:10px}
+.triage:has(#native-content>.toolbar) .triage-more-actions{padding-top:10px;align-items:stretch}
+.triage:has(#native-content>.toolbar) .triage-select-actions{margin:6px 0}
+.triage:has(#native-content>.toolbar) #native-retention{background:#176a7a;border-color:#176a7a;color:#fff}
+.triage:has(#native-content>.toolbar) #native-retention:hover{background:#115666;border-color:#115666;color:#fff}
+.triage:has(#native-content>.toolbar) .detail-pane .kicker,
+.triage:has(#native-content>.toolbar) .detail-pane .sub,
+.triage:has(#native-content>.toolbar) .detail-pane .result-line,
+.triage:has(#native-content>.toolbar) .detail-pane .record-id{font-size:13px;line-height:1.5}
+.triage:has(#native-content>.toolbar) .detail-pane h3{font-size:15px}
+.triage:has(#native-content>.toolbar) .detail-pane button{font-size:13px;min-height:40px;padding:8px 10px}
+.triage:has(#native-content>.toolbar) .detail-pane .button-row{gap:8px}
+@media(max-width:720px){
+  .triage .triage-result{padding:14px}
+  .triage .triage-result-head h3{font-size:16px}
+  .triage .triage-compare th,.triage .triage-compare td{font-size:13px;padding:10px 12px}
+  .triage:has(#native-content>.toolbar) .sidebar nav button{font-size:13px;min-height:44px;padding:9px 10px}
+  .triage:has(#native-content>.toolbar) .triage-query label{font-size:13px}
+  .triage:has(#native-content>.toolbar) #native-batch-summary{font-size:13px}
+  .triage:has(#native-content>.toolbar) .triage-batch-bar{padding:10px 12px}
+}
+
+/* Atlas F005 compact controls and comparison identity — user visual QA R2.
+   Large, readable text with restrained vertical density; no tree geometry changes. */
+.triage #native-menu-toggle{
+  background:#214c63;color:#f7fbff;border:1px solid #5d8499;
+  border-radius:8px;min-height:38px;height:auto;padding:7px 12px;
+  font-size:14px;font-weight:650;line-height:1.25;
+  max-width:none;box-shadow:none
+}
+.triage #native-menu-toggle:hover{background:#2d6178;border-color:#9dc5d5;color:#fff}
+.triage #native-menu-toggle::before{content:"☰";font-size:15px;margin-right:3px}
+.triage #native-refresh{background:#214c63;color:#f7fbff;border:1px solid #5d8499;min-height:38px;padding:7px 12px;font-size:13px}
+.triage #native-refresh:hover{background:#2d6178;color:#fff;border-color:#9dc5d5}
+.triage .sidebar nav button{font-size:14px;line-height:1.35;padding:7px 10px;min-height:38px}
+.triage .sidebar summary{font-size:13px;line-height:1.4;min-height:28px;padding:4px 6px}
+.triage .sidebar-foot{font-size:13px;line-height:1.5}
+.triage .application-nav-count{font-size:12px}
+.triage .triage-compare th,.triage .triage-compare td{
+  font-size:15px;line-height:1.4;padding:10px 12px
+}
+.triage .triage-compare th{font-size:14px;font-weight:700}
+.triage .triage-compare-identity{display:flex;align-items:center;gap:10px;min-width:0}
+.triage .triage-compare-identity .triage-check{
+  position:relative;flex:0 0 36px;display:inline-flex;align-items:center;
+  justify-content:center;margin:0;padding:0;min-width:36px;min-height:36px;
+  border:1px solid #cbdbe6;border-radius:8px;background:#fff
+}
+.triage .triage-compare-identity .triage-check>span{display:none}
+.triage .triage-compare-identity .triage-check input{
+  width:20px;height:20px;min-height:20px;margin:0
+}
+.triage .triage-compare-item{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0}
+.triage .triage-compare .triage-compare-title{
+  background:transparent;border:0;box-shadow:none;border-radius:3px;
+  color:#155d7a;font-size:15px;font-weight:650;line-height:1.35;
+  min-height:0;min-width:0;max-width:100%;padding:2px 0;
+  text-align:left;white-space:normal;overflow-wrap:anywhere;justify-content:flex-start
+}
+.triage .triage-compare .triage-compare-title:hover{background:transparent;color:#0c486b;text-decoration:underline}
+.triage .triage-compare-item code{display:block;font-size:12px;line-height:1.3;color:#5a7181;overflow-wrap:anywhere}
+.triage:has(#native-content>.toolbar) .sidebar nav button{font-size:14px;line-height:1.35;min-height:38px;padding:7px 10px}
+.triage:has(#native-content>.toolbar) .triage-batch-bar{padding:8px 10px;margin:6px 0}
+.triage:has(#native-content>.toolbar) #native-batch-summary{font-size:14px;line-height:1.35;margin:0 0 6px}
+.triage:has(#native-content>.toolbar) .triage-batch-actions,
+.triage:has(#native-content>.toolbar) .triage-more-actions,
+.triage:has(#native-content>.toolbar) .triage-select-actions{gap:7px}
+.triage:has(#native-content>.toolbar) .triage-batch-actions>button,
+.triage:has(#native-content>.toolbar) .triage-batch-actions summary,
+.triage:has(#native-content>.toolbar) .triage-more-actions button,
+.triage:has(#native-content>.toolbar) .triage-select-actions button{
+  min-height:36px;padding:6px 11px;border-radius:8px;font-size:14px;line-height:1.25;font-weight:650
+}
+.triage:has(#native-content>.toolbar) .triage-batch-actions summary{padding:6px 11px}
+.triage:has(#native-content>.toolbar) .triage-more-actions{padding-top:6px}
+.triage:has(#native-content>.toolbar) .triage-select-actions{margin:4px 0 5px}
+.triage:has(#native-content>.toolbar) #native-content>h2{font-size:23px;margin:3px 0}
+.triage:has(#native-content>.toolbar) #native-content>p.muted{font-size:13px;margin:2px 0 4px}
+.triage #native-content>.toolbar{gap:6px;margin:6px 0 8px}
+.triage #native-content>.toolbar button{
+  min-height:36px;padding:6px 11px;border-radius:8px;font-size:14px;line-height:1.25
+}
+.triage .triage-compare table{border-spacing:0}
+.triage .triage-compare tbody td{vertical-align:middle}
+.triage .triage-result{padding:14px}
+.triage:has(#native-content>.toolbar) .detail-pane .kicker,
+.triage:has(#native-content>.toolbar) .detail-pane .sub,
+.triage:has(#native-content>.toolbar) .detail-pane .result-line,
+.triage:has(#native-content>.toolbar) .detail-pane .record-id{font-size:14px;line-height:1.45}
+.triage:has(#native-content>.toolbar) .detail-pane button{font-size:14px;min-height:36px;padding:6px 10px}
+@media(max-width:720px){
+  .triage #native-menu-toggle,.triage #native-refresh{min-height:44px}
+  .triage .sidebar nav button,
+  .triage:has(#native-content>.toolbar) .sidebar nav button{min-height:44px;font-size:14px}
+  .triage:has(#native-content>.toolbar) .triage-batch-actions>button,
+  .triage:has(#native-content>.toolbar) .triage-batch-actions summary,
+  .triage:has(#native-content>.toolbar) .triage-more-actions button,
+  .triage:has(#native-content>.toolbar) .triage-select-actions button,
+  .triage #native-content>.toolbar button{min-height:44px;font-size:14px}
+  .triage .triage-compare td,.triage .triage-compare th{font-size:14px;padding:10px 11px}
+}
+
+/* Keep mobile header at the accepted height: wrapped refresh text must not
+   push the tree/minimap below the fold at 720px. Touch targets remain 44px. */
+@media(max-width:720px){
+  .triage #native-menu-toggle{height:44px;max-height:44px;padding:5px 8px;line-height:1.15;font-size:12px}
+  .triage #native-refresh{height:44px;max-height:44px;padding:5px 8px;line-height:1.15;font-size:11px}
+}
+
+/* ATLAS-TYPE-HIERARCHY-R1 — IHC typography tokens.
+   WCAG 2.2 AA guides contrast, reflow and user text spacing; font sizes
+   are product design choices, not falsely attributed to WCAG or IEEE.
+   Keep the graph camera and data semantics unchanged. */
+.triage{
+  --atlas-type-heading:22px;
+  --atlas-type-section:16px;
+  --atlas-type-body:15px;
+  --atlas-type-control:14px;
+  --atlas-type-support:13px;
+  --atlas-type-leading:1.4;
+}
+.triage .triage-nav-head h2{
+  font-size:var(--atlas-type-section);line-height:1.3;font-weight:750
+}
+.triage .sidebar nav details>summary,
+.triage:has(#native-content>.toolbar) .sidebar nav details>summary{
+  font-size:var(--atlas-type-section);font-weight:750;
+  line-height:1.3;min-height:30px;padding:4px 7px;color:#25546b
+}
+.triage .sidebar .sidebar-foot b{font-size:var(--atlas-type-control)}
+.triage .intro h2{font-size:var(--atlas-type-heading);line-height:1.25}
+.triage .intro p{font-size:var(--atlas-type-support);line-height:1.45}
+.triage .mobile-filters>summary,
+.triage .application-provenance>summary{
+  font-size:var(--atlas-type-control);font-weight:700;
+  line-height:1.35;color:#2e566e
+}
+.triage .application-provenance>summary{min-height:28px;padding:3px 0}
+.triage .triage-query label,
+.triage .triage-filter-grid label{
+  font-size:var(--atlas-type-control);line-height:1.35
+}
+.triage .triage-filter-grid :is(input,select){
+  font-size:var(--atlas-type-control);line-height:1.4
+}
+.triage .triage-index summary{font-size:var(--atlas-type-control);font-weight:650}
+.triage .application-tree-organization label,
+.triage .graph-mode label,
+.triage .editorial-tree .tree-controls label{
+  font-size:var(--atlas-type-control);font-weight:650;line-height:1.3;color:#36566a
+}
+.triage .graph-mode select,
+.triage .application-tree-organization select,
+.triage .editorial-tree .tree-controls select{
+  font-size:var(--atlas-type-control);line-height:1.25
+}
+.triage .graph-mode{padding:7px 10px;margin-bottom:8px;gap:6px 8px}
+.triage .graph-mode select{padding:5px 7px;min-height:34px}
+.triage .editorial-tree .tree-controls{padding:6px 10px;gap:6px 10px;margin-bottom:8px}
+.triage .editorial-tree .toolbar{padding:7px 9px;gap:5px}
+.triage .editorial-tree .toolbar button,
+.triage .graph-toolbar .graph-button{
+  font-size:var(--atlas-type-support);line-height:1.2;
+  min-height:34px;padding:5px 8px
+}
+.triage .editorial-tree .toolbar #zoomLabel,
+.triage .editorial-tree .tree-controls>span,
+.triage .graph-search-status,
+.triage .graph-path,
+.triage .graph-meta,
+.triage .graph-help,
+.triage .graph-explanation{
+  font-size:var(--atlas-type-support);line-height:1.45
+}
+.triage .triage-batch-bar #native-batch-summary{
+  font-size:var(--atlas-type-support);line-height:1.35;margin-bottom:6px
+}
+.triage .triage-select-actions button,
+.triage .triage-batch-actions>button,
+.triage .triage-batch-actions summary{
+  font-size:var(--atlas-type-control);line-height:1.25
+}
+.triage .triage-select-actions button{padding:6px 10px;min-height:36px}
+@media(max-width:720px){
+  /* Fit the accepted tree/minimap viewport while allowing accessible wrapping. */
+  .triage .sidebar nav details>summary,
+  .triage:has(#native-content>.toolbar) .sidebar nav details>summary{
+    font-size:var(--atlas-type-section);min-height:32px;padding:4px 7px
+  }
+  .triage .triage-query label{font-size:var(--atlas-type-control)}
+  .triage .triage-filter-grid label{font-size:var(--atlas-type-control)}
+  .triage .triage-select-actions button,
+  .triage .triage-batch-actions>button,
+  .triage .triage-batch-actions summary{min-height:44px}
+  .triage .editorial-tree .toolbar{padding:5px 7px}
+  .triage .editorial-tree .toolbar button{font-size:var(--atlas-type-support);min-height:34px;padding:4px 6px}
+  .triage .editorial-tree .tree-controls{padding:5px 8px;gap:5px 8px}
+  .triage .graph-mode{padding:5px 8px;margin-bottom:6px}
+  .triage .graph-mode select{min-height:34px}
+}
