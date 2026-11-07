@@ -84,11 +84,10 @@ pacote sem relaxar a guarda do exportador. Cold start, nova revisão/refresh,
 pin obsoleto e exportação direta passaram com subprocessos/HTTP e fixtures
 científicas inventadas. Produtor no Caderno original permanece NOT_RUN.
 
-As três capturas legadas fornecidas pelo operador conferem com os dados do
-snapshot servido anterior: contadores 159/45/162/69/3131, cinco tabelas RF com
-39/85/28/0/0 linhas e seis registros de timeline com títulos/datas/estados.
-Essa equivalência informacional não comprova a UI corrigida. RNF/RES não estão
-presentes na coleção de tabelas desse snapshot; não foram inventados.
+A comparação das capturas legadas fornecidas pelo operador foi registrada
+somente nos recibos privados. Essa equivalência informacional delimitada não
+comprova a UI corrigida nem cobertura global. Coleções ausentes da fonte não
+foram inventadas para produzir opções de interface.
 
 T013/T014 ficam abertos neste snapshot documental até os recibos terminais de
 CI/review por SHA e handoff. O estado de paridade permanece PARTIAL_EXACT até
