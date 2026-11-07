@@ -38,3 +38,16 @@ dos consumidores. Checkouts que oferecem somente o renderer histórico são
 recusados; não há fallback de importação para `r4.campaigns.atlas`. O fluxo
 preferido entre aplicações é exportar a projeção no R4 e usar `--projection`.
 O runtime instalado do viewer continua independente de R4.
+
+Na visão geral, **Acervo declarado pela fonte** usa populações da revisão
+completa e indica informações não declaradas. **Sua sessão de consulta** mostra
+seleção e anotações locais. Os totais agregados da navegação têm unidades próprias;
+não representam automaticamente a mesma população de um indicador da fonte.
+
+Em Tabelas, **Organização das linhas** permite **Agrupar por núcleo declarado**
+ou **Ordem original das linhas**. O núcleo vem do metadado explícito da linha ou
+de uma coluna de núcleo declarada; não é inferido de um ID ou título. O grupo
+identifica quantas linhas aparecem na página e quantas pertencem à seleção.
+Valores ausentes, NULL e texto vazio não são reunidos em um valor inventado.
+Os filtros e a paginação permanecem operacionais. JSON e CSV tipado usam todas
+as linhas filtradas na ordem original, independentemente do agrupamento visual.

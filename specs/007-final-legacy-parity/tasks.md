@@ -49,13 +49,13 @@ Conclusão de T009 significa entrega da matriz/roteiro/recibo, não Chrome PASS.
 
 ## Phase 5: Refinar a aplicação após reteste
 
-- [ ] T017 [US1] Compactar identidade/seleção no catálogo em
+- [x] T017 [US1] Compactar identidade/seleção no catálogo em
   native_triage_ui.js/native_legacy_views.js/native_legacy_integration.css e
   preservar guardas de espaço, overflow e foco em testes Node/Chromium (FR-012).
-- [ ] T018 [US1] Separar populações declaradas da fonte de agregações e estado
+- [x] T018 [US1] Separar populações declaradas da fonte de agregações e estado
   local na visão geral e navegação, com testes ausência/zero em
   native_legacy_model.js/native_triage_ui.js/native_notebook.js (FR-013, SC-007).
-- [ ] T019 [US1] Acrescentar agrupamento reversível por núcleo declarado à leitura
+- [x] T019 [US1] Acrescentar agrupamento reversível por núcleo declarado à leitura
   de tabelas em native_notebook.js/native_legacy_model.js e testes de filtros,
   paginação, campos e JSON/CSV integral (FR-014, SC-008).
 - [ ] T020 Qualificar T017–T019 por QA não autora, instalação, CI e Codex Review

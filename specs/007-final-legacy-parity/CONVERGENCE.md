@@ -102,3 +102,28 @@ O catálogo passou a separar o controle em linha própria com margem vertical;
 a guarda de espaço e ausência de overflow foi mantida. Diagnósticos são gravados
 antes das asserções. Node 135/135 e QA local 14/14 passaram; o GREEN renderizado
 do sucessor depende de CI própria, registrado fora deste snapshot documental.
+
+## Refinamento do reteste: resumo e núcleo
+
+O novo pedido do operador acrescenta FR-012–014 e SC-007/008, mantendo a Feature
+007. A análise cobre 22 requisitos/critérios por T001–T020, sem mudança ARC ou de
+protocolo. P01 permanece writer único da UI; P03 audita sem escrever no código.
+
+O catálogo agora permite seleção e título na mesma linha com quebra controlada.
+A visão geral separa populações declaradas, agregações de navegação e contadores
+locais, preservando ausência, zero explícito e tokens numéricos exatos. A leitura
+por núcleo usa somente metadados/células declarados, mantém identidade contextual
+e oferece ordem original reversível. Exportações continuam usando as linhas
+originais filtradas. Localização e retorno de página respeitam a organização.
+
+RED inicial: quatro contraprovas de modelo/DOM; achados de revisão também
+reproduziram contador local desatualizado e destino de baselines ambíguo. Todos
+foram corrigidos. GREEN focal 60/60 e regressão Node 141/141; QA independente
+executou 19 casos de UI/contraprovas, incluindo localização paginada com núcleos
+intercalados, preservação de UID/raw e contadores locais sem alterar a fonte.
+Nenhuma declaração conflitante foi promovida a baseline confirmada.
+
+Fixtures e novas verificações Chromium usam somente dados inventados, incluindo
+invariância de JSON/CSV ao agrupar, contagens de origem/sessão e catálogo compacto.
+O gate renderizado requer CI e Codex Review do novo SHA; resultados anteriores
+permanecem históricos. Reteste manual e uso OLD/NEW mantêm gates próprios.
