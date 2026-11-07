@@ -46,6 +46,8 @@ jobs:
         env:
           ATLAS_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python -c "import os,subprocess; sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(); print(sha); actual_tree=subprocess.check_output(['git','rev-parse','HEAD^{tree}'],text=True).strip(); print(actual_tree); expected=os.environ['ATLAS_EXPECTED_SHA']; raise SystemExit(0 if sha==expected else 'WRONG_TESTED_SHA')"
+      - name: Qualify the A01 post-transfer successor manifest against current bytes
+        run: python scripts/qa/verify_a01_reuse_successor.py
       - name: Check Feature 005 prerequisites without persisting feature state
         run: python .specify/scripts/python/check_prerequisites.py --json --require-spec --require-tasks --include-tasks
       - name: Execute triage selection and fail-closed retention regressions
