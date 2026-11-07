@@ -27,6 +27,15 @@ assert.ok(!model.outgoing.get('relation').some(ref=>ref.label==='from'));
 assert.deepEqual(model.outgoing.get('row').find(ref=>ref.label==='table_uid').targets,['table']);
 assert.deepEqual(model.outgoing.get('record').map(ref=>ref.resolution),['UNIQUE','UNRESOLVED','NOT_DECLARED']);
 assert.equal(model.incoming.get('record').length,2);
+// Regression: duplicate native ID, where the referring occurrence also owns
+// the ID, must not become an invented UNIQUE link to the other occurrence.
+const repeatedSelf=entry('repeated-self','record',{id:'R',run_id:'R'});
+const repeatedOther=entry('repeated-other','record',{id:'R'});
+const repeatedNavigation=buildNativeNavigation([repeatedSelf,repeatedOther]);
+const repeatedRef=repeatedNavigation.outgoing.get(repeatedSelf.uid).find(ref=>ref.label==='run_id');
+assert.equal(repeatedRef.resolution,'COLLISION');
+assert.deepEqual(repeatedRef.targets,['repeated-self','repeated-other']);
+assert.equal(buildNativeNavigation([repeatedSelf]).outgoing.get(repeatedSelf.uid).find(ref=>ref.label==='run_id').resolution,'UNRESOLVED');
 const exact='{"evidence":[{"number":9007199254740993,"text":"quoted \\\"value\\\", comma"}],"nested":{"evidence":[1]},"source_ids":[9007199254740993,"literal-alias"]}';
 assert.equal(nativeFragments(exact).get('evidence'),'[{"number":9007199254740993,"text":"quoted \\\"value\\\", comma"}]');
 const numeric=entry('numeric','record',{id:'N'});numeric.raw_json=exact;
@@ -86,4 +95,4 @@ for(const endpoint of ['from','to']){
   const navigation=buildNativeNavigation(all).outgoing.get(relation.uid)[0],lineage=buildLineage(all)[0][endpoint];
   assert.deepEqual(navigation.targets,['numeric-native']);assert.deepEqual(navigation.targets,lineage.candidates.map(match=>match.entry.uid));
 }
-console.log(JSON.stringify({status:'PASS_SCOPED',checks:['declared_aliases_string_only','unique_context_links','ambiguous_aliases_not_first_match','explicit_null_without_fallback','transport_table_membership','resources_missing_and_null','exact_nested_evidence_lexemes','numeric_identity_not_coerced_to_string_reference','source_snapshot_isolation','explicit_array_object_numeric_keys_never_fall_back','exact_large_numeric_key_retained_without_interpretation','absent_key_only_allows_endpoint_fallback','keyed_navigation_lineage_same_candidates_and_collisions','lineage_collection_scope_excludes_foreign_keys','keyed_references_never_use_native_ids_or_aliases','unkeyed_typed_id_and_declared_alias_policy_matches_lineage']}));
+console.log(JSON.stringify({status:'PASS_SCOPED',checks:['declared_aliases_string_only','unique_context_links','ambiguous_aliases_not_first_match','explicit_null_without_fallback','transport_table_membership','resources_missing_and_null','exact_nested_evidence_lexemes','numeric_identity_not_coerced_to_string_reference','source_snapshot_isolation','explicit_array_object_numeric_keys_never_fall_back','exact_large_numeric_key_retained_without_interpretation','absent_key_only_allows_endpoint_fallback','keyed_navigation_lineage_same_candidates_and_collisions','same_id_self_collision_not_unique','lineage_collection_scope_excludes_foreign_keys','keyed_references_never_use_native_ids_or_aliases','unkeyed_typed_id_and_declared_alias_policy_matches_lineage']}));
