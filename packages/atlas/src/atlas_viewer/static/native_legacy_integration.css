@@ -206,7 +206,7 @@
 .triage .triage-batch-actions details[open]>summary::after{content:'▴'}
 .triage .triage-batch-actions>details[open]{flex:1 1 100%;padding:10px 12px;background:#f8fbfc;border:1px solid #c7dde5;border-radius:10px}
 .triage .triage-more-actions{padding-top:10px;align-items:stretch}
-.triage .triage-select-actions{margin:12px 0 16px}
+.triage .triage-select-actions{margin:4px 0}
 .triage #native-retention{background:#176a7a;border-color:#176a7a;color:#fff}
 .triage #native-retention:hover{background:#115666;border-color:#115666;color:#fff}
 .triage #native-retention:focus-visible{outline:3px solid #176488;outline-offset:3px}
@@ -247,3 +247,10 @@
   .triage .record-reading th,.triage .record-reading td{font-size:13px;padding:10px 12px}
   .triage .triage-batch-bar{padding:12px}
 }
+
+/* Keep the accepted initial graph work surface above the fold.
+   Increase text/control legibility without stacking extra top chrome. */
+.triage .intro{padding:8px 14px;margin-bottom:4px}
+.triage .triage-query{margin:4px 0}
+.triage .mobile-filters{margin:5px 0}
+.triage .application-provenance{margin:4px 0}
