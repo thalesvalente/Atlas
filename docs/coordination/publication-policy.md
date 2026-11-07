@@ -35,3 +35,23 @@ O manifesto histórico C2/v5 e os blobs P03 permanecem congelados; A01 é sucess
 delimitado, não autorização geral. Nenhuma licença de software foi escolhida ou
 inventada por este porte. A autorização de transferência não concede direitos
 sobre dependências de terceiros ou fontes não relacionadas no manifesto.
+
+## Sucessão da evidência de bytes A01 na integração à main (2026-11-07)
+
+O `docs/missions/atlas-a01/REUSE-MANIFEST.json` é o **testemunho histórico
+congelado** da transferência autorizada. Suas posições e SHA-256 de destinos
+representam o instante do porte; **não** são os hashes dos arquivos modificados
+pelas melhorias posteriores da árvore, triagem e acessibilidade.
+
+Para a candidata atual, o mapa de **oito destinos** com hashes de bytes Git,
+identificações dos símbolos e posições de declarações atualizadas está em
+`docs/missions/atlas-a01/REUSE-SUCCESSOR-20261107.json`. Os intervalos
+completos de `drawNode` e `focusNode` são qualificados separadamente.
+`scripts/qa/verify_a01_reuse_successor.py` verifica ambos os manifestos
+contra a árvore atual no CI Windows/Ubuntu, recusando deriva de qualquer blob.
+
+O sucessor **não** autoriza transferência nova de código privado, não muda
+licença, não contém dados científicos e não revoga a proveniência original.
+Sua validade é vinculada aos bytes atestados, não a commits futuros que os alterem.
+Integrar o produto independente à `main` não demonstra paridade integral com
+CA-01 nem permite retirar a interface antiga do R4 sem gate específico.
