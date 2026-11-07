@@ -92,11 +92,26 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
       report.visual_readability.push({viewport: 1440, hierarchy: samples});
     });
     await check('UX_TYPE_HIERARCHY_07_custom_text_spacing_preserves_navigation', async () => {
-      const tag = await page.addStyleTag({content:
-        '.triage .sidebar nav details > summary, .triage .graph-mode label, .triage .editorial-tree .tree-controls label {' +
-        'line-height:1.5 !important;letter-spacing:.12em !important;word-spacing:.16em !important}'});
+      // Simulate user overrides as a same-origin stylesheet response. Do not
+      // disable or bypass the Atlas CSP (style-src 'self').
+      const styled = await browser.newContext({viewport: {width: 1440, height: 900}});
+      await protectNetwork(styled);
+      await styled.route('**/native_legacy_integration.css', async route => {
+        const response = await route.fetch();
+        assert.equal(response.status(), 200);
+        const original = await response.text();
+        const override = '\n/* Synthetic WCAG 1.4.12 text spacing sample */\n' +
+          '.triage .sidebar nav details > summary, .triage .application-tree-organization label, ' +
+          '.triage .editorial-tree .tree-controls label {' +
+          'line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}';
+        await route.fulfill({response, body: original + override});
+      });
+      const styledPage = await styled.newPage();
       try {
-        const samples = await page.evaluate(() => {
+        await styledPage.goto(url);
+        await styledPage.waitForFunction(() => !document.getElementById('native-download')?.disabled);
+        await openNativePane(styledPage, 'tree');
+        const samples = await styledPage.evaluate(() => {
           const get = selector => {
             const n = document.querySelector(selector), r = n.getBoundingClientRect();
             const style = getComputedStyle(n);
@@ -105,16 +120,18 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
               lineHeight: style.lineHeight};
           };
           return {section: get('#native-sidebar nav details > summary'),
+            navigationMode: get('.application-tree-organization label'),
             treeControls: get('.editorial-tree .tree-controls label')};
         });
         for (const sample of Object.values(samples)) {
-          assert.ok(sample.visible && sample.scrollHeight <= sample.clientHeight + 2,
-            'Custom text spacing must not clip a region heading');
+          assert.ok(sample.visible && sample.scrollHeight <= sample.clientHeight + 2 &&
+            Number.parseFloat(sample.letterSpacing) > 0,
+            'The sampled region heading must reflow without clipping under user text spacing');
         }
-        assert.equal(await page.locator('#native-tree-mode').count(), 1,
+        assert.equal(await styledPage.locator('#native-tree-mode').count(), 1,
           'Text spacing must not hide the tree mode control');
         report.visual_readability.push({viewport: 1440, text_spacing: samples});
-      } finally {await tag.evaluate(n => n.remove());}
+      } finally {await styled.close();}
     });
     await check('UX_READABILITY_05_tablet_compact_controls_and_header', async () => {
       await page.setViewportSize({width: 780, height: 845});
