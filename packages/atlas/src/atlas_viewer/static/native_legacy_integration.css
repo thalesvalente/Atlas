@@ -331,3 +331,10 @@
   .triage #native-content>.toolbar button{min-height:44px;font-size:14px}
   .triage .triage-compare td,.triage .triage-compare th{font-size:14px;padding:10px 11px}
 }
+
+/* Keep mobile header at the accepted height: wrapped refresh text must not
+   push the tree/minimap below the fold at 720px. Touch targets remain 44px. */
+@media(max-width:720px){
+  .triage #native-menu-toggle{height:44px;max-height:44px;padding:5px 8px;line-height:1.15;font-size:12px}
+  .triage #native-refresh{height:44px;max-height:44px;padding:5px 8px;line-height:1.15;font-size:11px}
+}
