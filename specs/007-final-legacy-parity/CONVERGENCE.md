@@ -89,8 +89,16 @@ somente nos recibos privados. Essa equivalência informacional delimitada não
 comprova a UI corrigida nem cobertura global. Coleções ausentes da fonte não
 foram inventadas para produzir opções de interface.
 
-T013/T014 ficam abertos neste snapshot documental até os recibos terminais de
-CI/review por SHA e handoff. O estado de paridade permanece PARTIAL_EXACT até
+T013 fica aberto neste snapshot documental até os recibos terminais de
+CI/review por SHA. O handoff privado consolida resultados e gates separados.
+O estado de paridade permanece PARTIAL_EXACT até
 requalificação visual do operador; a comparação de uso OLD/NEW ainda não foi
 realizada. Não há nova tarefa de código conhecida além de eventual finding
 material; gates externos permanecem explícitos e não são promovidos a PASS.
+
+A primeira CI da continuação aprovou domínio/escopo nos dois OS, mas a nova
+guarda geométrica falhou na largura intermediária após passar em desktop.
+O catálogo passou a separar o controle em linha própria com margem vertical;
+a guarda de espaço e ausência de overflow foi mantida. Diagnósticos são gravados
+antes das asserções. Node 135/135 e QA local 14/14 passaram; o GREEN renderizado
+do sucessor depende de CI própria, registrado fora deste snapshot documental.

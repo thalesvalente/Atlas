@@ -32,7 +32,7 @@ incluindo BLOCKED/NOT_RUN, sem conceder paridade plena ou retirada.
   Atlas independente com fixtures isoladas em tests R4 (FR-010).
 - [ ] T013 Qualificar diff final por QA P03, CI Windows/Ubuntu e Codex Review nas
   PRs Draft correspondentes; recibos próprios por SHA (FR-011).
-- [ ] T014 Integrar matrizes/contratos, ordem e rollback em handoff privado P00;
+- [x] T014 Integrar matrizes/contratos, ordem e rollback em handoff privado P00;
   conferir Git/processos/limpeza e manter decisões humanas separadas (SC-006).
 - [x] T015 [US2] Atualizar tools/export_native_notebook.py, guardas dos launchers,
   README e testes de fronteira para consumir somente a API produtora (FR-008/009).
