@@ -303,9 +303,10 @@ export class NativeTriageUI {
       host.append(element('h2','Visão geral desta revisão'),element('p','Escolha uma área ou pesquise uma identidade. A tabela, o experimento e a execução conservam sua natureza.','muted'));
       host.append(element('h3','Acervo declarado pela fonte'),element('p','Populações da revisão completa, independentes dos filtros e da seleção de sessão. Cada indicador conserva a população declarada; ausência não significa zero.','muted'));
       const metrics=element('div',undefined,'triage-metrics');
+      const areaLabels={records:'Abrir registros',tables:'Abrir tabelas de resultados',assets:'Abrir recursos e documentos',coverage:'Ver cobertura e origens'};
       for(const metric of snapshotPopulationMetrics(this.model.items)){
         const card=element('section',undefined,'triage-metric');card.dataset.populationId=metric.id;card.dataset.populationPath=metric.path;
-        card.append(element('strong',metric.value),element('span',metric.label),element('p',metric.help,'muted'),button('Explorar '+metric.label.toLowerCase(),()=>this.hooks.navigate(metric.destination)));metrics.append(card);
+        card.append(element('strong',metric.value),element('span',metric.label),element('p',metric.help,'muted'),button(areaLabels[metric.destination],()=>this.hooks.navigate(metric.destination)));metrics.append(card);
       }host.append(metrics);
       const assets=this.model.items.filter(e=>e.kind==='asset').length,collections=this.model.items.filter(e=>e.kind==='collection').length;
       host.append(element('p',`${assets} itens em coleções de recursos e documentos; ${collections} ocorrências auxiliares de contexto, cobertura e origens. Esses totais agregam coleções distintas e não substituem as populações específicas acima.`,'muted'));

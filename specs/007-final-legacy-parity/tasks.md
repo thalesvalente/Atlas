@@ -63,3 +63,9 @@ Conclusão de T009 significa entrega da matriz/roteiro/recibo, não Chrome PASS.
   (SC-007/008, FR-011).
 
 T017–T019 compartilham P01 como único writer; T020 depende das três entregas.
+
+## Phase 6: Convergence
+
+- [x] T021 [US1] Fazer os botões de indicadores descreverem a área de destino em
+  native_triage_ui.js, sem prometer filtragem de subpopulação que não executam;
+  testar destino e contexto preservados (FR-013, partial).

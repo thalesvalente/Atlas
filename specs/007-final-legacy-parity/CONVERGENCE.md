@@ -127,3 +127,10 @@ Fixtures e novas verificações Chromium usam somente dados inventados, incluind
 invariância de JSON/CSV ao agrupar, contagens de origem/sessão e catálogo compacto.
 O gate renderizado requer CI e Codex Review do novo SHA; resultados anteriores
 permanecem históricos. Reteste manual e uso OLD/NEW mantêm gates próprios.
+
+A convergência encontrou uma lacuna de rótulo/destino dos indicadores e anexou
+T021, elevando a rastreabilidade a 22 requisitos/critérios e 21 tasks. Os botões
+agora nomeiam a área ampla que abrem, preservando contexto e contagens. A
+contraprova independente de navegação passou; regressão Node 142/142. Não resta
+lacuna de código conhecida neste recorte após revisão local; CI/review do SHA
+sucessor e prova manual continuam separados do resultado técnico anterior.

@@ -301,6 +301,30 @@ test('UX-UI-07 overview session cards update after clear and annotation changes 
   assert.notEqual(doc.activeElement,doc.getElementById('native-clear-batch'));
 }));
 
+test('UX-UI-07 population actions name destination areas while keeping the existing collection context',()=>withUI({pane:'overview',select:false},({ui,host})=>{
+  const metadata=entry('shape',{records:[],result_tables:[],product_items:[],resource_documents:[],storage_observations:[],frontier_catalog:[]},'collection',{group:'$structure'}),
+    product=entry('product',{title:'Invented product'},'asset',{group:'product_items'}),
+    docs=['doc-a','doc-b'].map(uid=>entry(uid,{title:'Invented document'},'asset',{group:'resource_documents'})),s=source([metadata,product,...docs]),before=JSON.stringify(s);
+  ui.source=s;ui.model=createTriageModel(s);ui.ledger=new SelectionLedger(s);
+  const context={pane:'overview',assetGroup:'resource_documents',page:4,columnPage:2};
+  const start=controllerText.indexOf('function navigatePane(pane){'),end=controllerText.indexOf('\nfunction locateEntry(',start);
+  assert(start>=0&&end>start,'The actual navigatePane source is required');
+  ui.hooks.navigate=vm.runInNewContext('('+controllerText.slice(start,end)+')',{state:context,
+    triage:{page:1,afterNavigation:()=>{}},closeDetail:()=>{},render:()=>{}},{timeout:1000});
+  host.replaceChildren();ui.renderPane(host,'overview');
+  const metric=id=>host.querySelector(`[data-population-id="${id}"]`);
+  assert.equal(metric('product_items').querySelector('strong').textContent,'1');
+  assert.equal(ui.model.items.filter(item=>item.group===context.assetGroup).length,2,'The remembered document population differs from the source product count');
+  const action=metric('product_items').querySelector('button');assert.equal(action.textContent,'Abrir recursos e documentos');action.click();
+  assert.equal(context.pane,'assets');assert.equal(context.assetGroup,'resource_documents','Opening the area preserves the current collection, rather than promising the product subset');
+  for(const id of ['notebook_index','storage_observations','frontier_catalog']){
+    const broad=metric(id).querySelector('button');assert.equal(broad.textContent,'Ver cobertura e origens');broad.click();assert.equal(context.pane,'coverage');
+  }
+  assert.equal(metric('records').querySelector('button').textContent,'Abrir registros');
+  assert.equal(metric('result_tables').querySelector('button').textContent,'Abrir tabelas de resultados');
+  assert.equal(JSON.stringify(s),before);
+}));
+
 for(const pane of ['selected','retention'])test(`UX-UI-05 clear-all in ${pane} moves focus away from its disabled control`,()=>withUI({pane,mode:'list'},({ui,doc})=>{
   const clear=doc.getElementById('native-clear-batch');clear.focus();
   ui.ledger.clear();ui.selectionChanged();
