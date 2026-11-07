@@ -1,7 +1,9 @@
 # Plano incremental
 
 Reusar leitor Native View, projeção preservada, testes e componentes aprovados.
-P00 é writer exclusivo de código. Agentes A/B/C produzem recibos privados.
+O incremento anterior teve P00 como writer exclusivo. Nesta continuação,
+P01 escreve somente interface/testes Atlas, P02 consumidores/testes R4 e P03
+audita sem escrever nos arquivos auditados. P00 integra e mantém estes artefatos.
 
 1. Autenticar fontes/SHAs e executar Spec Kit instalado sem instalar ferramentas,
    sem trocar feature.json e sem reconstruir inventários válidos.
@@ -15,3 +17,22 @@ P00 é writer exclusivo de código. Agentes A/B/C produzem recibos privados.
 
 Sem nova rota HTTP, dependência, worktree, mudança de schema, execução de produtor,
 migração, exclusão científica, merge, release ou deploy.
+
+## Continuação P01/P02 — escopo congelado
+
+Reusar a candidata instalada #39, os relatórios e inventários delimitados.
+P01 reconcilia revisão/pins/processos e produz matriz por capacidade. Chrome
+bloqueado termina o controle de UI e encaminha roteiro manual; não se tenta outro
+canal para contornar a política. Corrigir somente defeito material reproduzido.
+
+P02 preserva a raiz canônica R4 com alterações preexistentes e reutiliza checkout
+existente limpo, em branch independente derivada da main revalidada. Separa o
+produtor científico do renderer com a menor extração compatível, mantém aliases,
+atualiza launcher/CLI/migração/documentação e testa exportação para Atlas sem
+executar a UI histórica. Não instala responsabilidades R4 no viewer.
+
+P03 revisa matrizes, testes negativos, contratos, completude, rollback e invariantes
+científicos. Nenhum arquivo tem dois writers. P00 confere integração com fixtures,
+publica somente código/documentação liberados em PR Draft e acompanha CI/review
+dos novos SHAs. Evidências científicas e caminhos privados ficam fora do Git.
+Aceite humano, execução científica real e retirada conservam gates separados.

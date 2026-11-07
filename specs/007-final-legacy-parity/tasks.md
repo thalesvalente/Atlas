@@ -17,3 +17,32 @@ T006 recebeu 19/19 Actions SUCCESS e Codex completed/zero findings em
 `29380daa17ae97151eb6db5239cc3f0df337f89f`. O sucessor documental recebe recibo
 terminal próprio na PR Draft #39. T007 significa entrega de parecer limitado,
 incluindo BLOCKED/NOT_RUN, sem conceder paridade plena ou retirada.
+
+## Phase 4: Continuação de uso real e consumidores
+
+- [x] T008 Reconciliar #39, main R4, checkout existente e ownership; preservar
+  Caderno e alterações alheias (FR-007/008, plan: escopo congelado).
+- [x] T009 [P] [US1] Atualizar PAR-001–015 e roteiro/evidência Chrome em recibos
+  privados P01; corrigir apenas defeitos materiais nos componentes Atlas (FR-006/007, SC-004).
+- [ ] T010 [P] [US2] Separar produtor/renderer e entrypoints/aliases em
+  src/r4/campaigns/notebook_query_projection.py, atlas.py e cli.py no R4 (FR-008).
+- [ ] T011 [US2] Substituir launcher/CLI/migração, testes e documentação R4;
+  preservar nove assets e fallback, reconciliar C01–C09 (FR-009, SC-005).
+- [ ] T012 [US2] Qualificar contratos, negativos, cold start/refresh e consumo
+  Atlas independente com fixtures isoladas em tests R4 (FR-010).
+- [ ] T013 Qualificar diff final por QA P03, CI Windows/Ubuntu e Codex Review nas
+  PRs Draft correspondentes; recibos próprios por SHA (FR-011).
+- [ ] T014 Integrar matrizes/contratos, ordem e rollback em handoff privado P00;
+  conferir Git/processos/limpeza e manter decisões humanas separadas (SC-006).
+- [x] T015 [US2] Atualizar tools/export_native_notebook.py, guardas dos launchers,
+  README e testes de fronteira para consumir somente a API produtora (FR-008/009).
+- [ ] T016 [US1] Corrigir defeitos relatados pelo operador: separar seleção/título
+  no catálogo e tornar desmarcar todos acessível em native_notebook.html,
+  native_triage_ui.js e native_legacy_integration.css, com RED/GREEN e regressão
+  sintética; conferir RNF/RES contra o snapshot sem inventar conteúdo (FR-006/007).
+
+US1 e US2 seguem independentes após T008; bloqueio de Chrome não interrompe US2.
+T013 depende de T010–T012; T014 preserva qualquer pendência factual de US1.
+T015 também precede T013 e consome o contrato estabilizado por T010.
+T016 decorre do teste manual parcial; sua correção técnica não concede aceite humano.
+Conclusão de T009 significa entrega da matriz/roteiro/recibo, não Chrome PASS.

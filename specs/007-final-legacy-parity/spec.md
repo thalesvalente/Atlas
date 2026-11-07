@@ -26,3 +26,42 @@ governada por ARC-01–09. Não concede merge nem retirada do R4.
   bloqueado recebe BLOCKED, sem promoção a PASS por HTTP ou Chromium sintético.
 
 HL7/FHIR permanece extensibilidade futura. Não altera protocolo ou ciência.
+
+## Continuação operacional autorizada — 2026-11-07
+
+Reutilizar a PR #39 e PAR-001–015; a frente R4 tem branch/PR próprias.
+O operador autoriza a separação mínima de produtor/interface e a substituição
+dos consumidores C01–C09, preservando fontes científicas e rollback histórico.
+
+US1: como usuário do Atlas, recuperar informação e concluir tarefas essenciais
+pela aplicação nova, com equivalência verificável por capacidade (SC-004).
+US2: como operador R4, validar e exportar a ciência para o Atlas independente,
+com falhas explícitas e retorno ao histórico preservado (SC-005).
+
+- FR-006: avaliar capacidade e resultado, sem exigir os mesmos controles ou layout.
+  Usar EQUIVALENT, SUPERIOR_REPLACEMENT, INTENTIONAL_DIFFERENCE, MATERIAL_GAP
+  ou NOT_PROVEN. Superioridade exige mesma necessidade atendida, informação
+  essencial, identidade/proveniência/estados, ausência de regressão material e
+  benefício demonstrável; ausência de prova nunca equivale a PASS.
+- FR-007: comprovar percursos essenciais no Chrome Windows real ou registrar
+  WAIT_HUMAN_EXACT. Respeitar interrupção de segurança; HTTP/Chromium sintético
+  e comparação de conteúdo não completam esse gate. Não preparar a demonstração
+  modificando o Caderno.
+- FR-008: manter produção, projeção, validação, ledger, históricos, migração e
+  verificadores científicos no R4. Oferecer entrypoint de dados independente do
+  renderer; conservar contratos e aliases científicos utilizados legitimamente.
+- FR-009: substituir launcher e consumidores operacionais pertinentes C01–C09,
+  com argumentos/caminhos, erros e exit codes preservados e rollback explícito.
+  Identificar os nove assets legados, sem excluí-los.
+- FR-010: qualificar inicialização e refresh, fonte ausente/obsoleta, revisão
+  incompatível, pacote inválido, erros/subprocessos e rollback com fixtures
+  isoladas. Produtor/migração reais no Caderno original permanecem NOT_RUN.
+- FR-011: integrar recibos de owners e QA não autora, CI Windows/Ubuntu e Codex
+  Review vinculados aos SHAs finais. Separar aprovação técnica de aceite humano.
+
+- SC-004: PAR-001–015 registram fluxo OLD/NEW, informação, diferença, teste,
+  classificação, evidência e resultado, com dimensão Chrome explícita.
+- SC-005: C01–C09 têm classificação de responsabilidade, dependências diretas e
+  reversas, contrato de substituição/rollback e testes de fronteira verificáveis.
+- SC-006: prontidão de retirada só é concedida com P01 e P02 concluídos/revisados;
+  nunca autoriza remoção. KEEP_FULL=5, DELETE_AUTHORIZED=NO.
