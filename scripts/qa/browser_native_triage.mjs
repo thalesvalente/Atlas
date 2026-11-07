@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createRequire} from 'node:module';
 import {openNativePane, revealNativeControl} from './browser_native_triage_navigation.mjs';
 import {runN03Checks} from './browser_native_triage_n03.mjs';
+import {runReadabilityChecks} from './browser_native_triage_readability.mjs';
 
 const require = createRequire(import.meta.url);
 const {chromium} = require(process.env.ATLAS_PLAYWRIGHT_MODULE || 'playwright');
@@ -16,7 +17,7 @@ const expected = JSON.parse(await fs.readFile(args.get('--expected'), 'utf8'));
 assert.equal(expected.fixture_scope, 'INVENTED_DATA_ONLY');
 const report = {status: 'FAIL', scope: 'FEATURE005_SYNTHETIC_BROWSER_TASKS', phase: 'BROWSER_BOOTSTRAP',
   checks: [], errors: [], external_requests: [], requests: [], layout: [], screenshots: [], timings_ms: {},
-  contrast: [], focused_results: [], breakpoint_controls: []};
+  contrast: [], focused_results: [], breakpoint_controls: [], visual_readability: []};
 const contrastRatio = (foreground, background) => {
   const luminance = color => {
     const match = /^rgba?\(([^)]+)\)$/.exec(color);
@@ -749,6 +750,7 @@ try {
     });
   }
   await runN03Checks({browser, check, expected, protectNetwork, report, url});
+  await runReadabilityChecks({browser, check, protectNetwork, report, url});
   assert.deepEqual(report.errors, []);
   assert.deepEqual(report.external_requests, []);
   report.status = 'PASS';
