@@ -164,11 +164,16 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
           const checkBounds = label.getBoundingClientRect(), titleBounds = title.getBoundingClientRect();
           return {text: cell.textContent, accessibleName: label.querySelector('input').getAttribute('aria-label'),
             gap: titleBounds.left - checkBounds.right, below: titleBounds.top - checkBounds.bottom,
+            label: {x: checkBounds.x, y: checkBounds.y, width: checkBounds.width, height: checkBounds.height,
+              display: getComputedStyle(label).display, marginBottom: getComputedStyle(label).marginBottom},
+            title: {x: titleBounds.x, y: titleBounds.y, width: titleBounds.width, height: titleBounds.height},
             documentOverflow: document.documentElement.scrollWidth - innerWidth};
         });
+        report.visual_readability.push({viewport: width, catalog_selection: geometry});
         assert.match(geometry.text, /^Selecionar\s+\S/, 'Selection text does not join the document title');
         assert.match(geometry.accessibleName, /^Selecionar /);
-        assert.ok(geometry.gap >= 8 || geometry.below >= 4, 'Selection and title have a visible gap or separate lines');
+        assert.ok(geometry.gap >= 8 || geometry.below >= 4,
+          `Selection and title have a visible gap or separate lines at ${width}px: ${JSON.stringify(geometry)}`);
         assert.ok(geometry.documentOverflow <= 1, 'Catalog spacing must keep horizontal scrolling inside the table region');
         if (await clear.isEnabled()) await clear.click();
         for (const select of ['native-select-visible', 'native-select-filtered']) {
@@ -194,7 +199,6 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
           assert.deepEqual(focus, {tag: 'H2', connected: true, disabled: false},
             'Clearing a selected/retention view restores focus to a connected heading');
         }
-        report.visual_readability.push({viewport: width, catalog_selection: geometry});
       });
     }
   } finally {

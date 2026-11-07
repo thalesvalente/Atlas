@@ -147,7 +147,7 @@
 .triage .triage-result .triage-result-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.triage .triage-result-actions button{font-size:12px;min-height:36px}
 .triage .triage-check{display:inline-flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;min-width:36px;min-height:36px;cursor:pointer;margin:0;color:#244f65;font-size:11px;flex-shrink:0}
 .triage .triage-check input{width:20px;height:20px;min-height:20px;margin:0;accent-color:#226c81}.triage .record-reading .triage-check{display:flex;justify-content:flex-start;margin-bottom:5px}
-.triage .catalog-reading .triage-check{margin-inline-end:10px}
+.triage .catalog-reading .triage-check{display:flex;justify-content:flex-start;margin-bottom:6px}
 .triage .svg-batch{cursor:pointer;outline:none}.triage .svg-batch:focus-visible rect{stroke:#145fa0;stroke-width:3}.triage .svg-batch[aria-checked=true] rect{fill:#1a627c}.triage .svg-batch text{pointer-events:none}
 .triage .triage-plan-intent{font-size:12px;display:block;margin:10px 0}.triage .triage-plan-intent select{display:block;width:100%;min-height:42px;margin-top:5px}
 .triage .triage-protection{padding:9px 11px;background:#fff6e3;border-left:3px solid #946b1f;font-size:12px;overflow-wrap:anywhere}
