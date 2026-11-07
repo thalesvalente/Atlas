@@ -115,8 +115,8 @@ export async function runZoomReflowChecks({browser, check, protectNetwork, repor
           const overlapsDetail=!detail.hidden && rect.left<detailRect.right &&
             rect.right>detailRect.left && rect.top<detailRect.bottom &&
             rect.bottom>detailRect.top;
-          const visibleInViewport=rect.right>0 && rect.left<innerWidth &&
-            rect.bottom>0 && rect.top<innerHeight;
+          const visibleInViewport=rect.left>=0 && rect.right<=innerWidth &&
+            rect.top>=0 && rect.bottom<=innerHeight;
           const pointX=Math.min(innerWidth-1,Math.max(1,rect.left+rect.width/2));
           const pointY=Math.min(innerHeight-1,Math.max(1,rect.top+rect.height/2));
           const hit=document.elementFromPoint(pointX,pointY);
@@ -141,6 +141,11 @@ export async function runZoomReflowChecks({browser, check, protectNetwork, repor
         report.screenshots.push(screenshot.split('/').at(-1));
         report.zoom_audit.push({case:'svg',percent:sample.percent,
           overview,reduced,focused,warning,screenshot:screenshot.split('/').at(-1),reducedScreenshot:reducedScreenshot.split('/').at(-1)});
+        // Fail CLOSED on actual focused-node exposure. Keep report + screenshot
+        // before asserting so the CI artifacts still contain diagnostics.
+        assert.ok(focused.visible_in_viewport && !focused.overlaps_detail &&
+          focused.center_hittable,
+          'Focused SVG record must be fully in the CSS viewport, unobscured by details, and pointer-hittable');
       });
     } finally {await context.close();}
   }
