@@ -72,6 +72,52 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
         'Checkbox and interactive title must align compactly');
       report.visual_readability.push({viewport: 1440, header, cell, identity});
     });
+    await check('UX_TYPE_HIERARCHY_06_region_labels_and_tree_controls', async () => {
+      await openNativePane(page, 'tree');
+      const samples = {
+        section: await inspect(page, '#native-sidebar nav details > summary'),
+        sidebarTitle: await inspect(page, '#native-nav-title'),
+        provenance: await inspect(page, '.application-provenance > summary'),
+        queryLabel: await inspect(page, '.triage-query label'),
+        graphMode: await inspect(page, '.graph-mode label'),
+        treeOrganization: await inspect(page, '.application-tree-organization label'),
+        graphControls: await inspect(page, '.editorial-tree .tree-controls label'),
+        graphButton: await inspect(page, '.editorial-tree .toolbar button')
+      };
+      assert.ok(samples.section.font >= 16 && samples.sidebarTitle.font >= 16,
+        'Region titles must be visibly stronger than ordinary sidebar options');
+      assert.ok(samples.provenance.font >= 14 && samples.queryLabel.font >= 14 &&
+        samples.graphMode.font >= 14 && samples.treeOrganization.font >= 14 &&
+        samples.graphControls.font >= 14 && samples.graphButton.font >= 13,
+        'Controls and contextual region labels must use a consistent readable type scale');
+      report.visual_readability.push({viewport: 1440, hierarchy: samples});
+    });
+    await check('UX_TYPE_HIERARCHY_07_custom_text_spacing_preserves_navigation', async () => {
+      const tag = await page.addStyleTag({content:
+        '.triage .sidebar nav details > summary, .triage .graph-mode label, .triage .editorial-tree .tree-controls label {' +
+        'line-height:1.5 !important;letter-spacing:.12em !important;word-spacing:.16em !important}'});
+      try {
+        const samples = await page.evaluate(() => {
+          const get = selector => {
+            const n = document.querySelector(selector), r = n.getBoundingClientRect();
+            const style = getComputedStyle(n);
+            return {visible: r.width > 0 && r.height > 0, scrollHeight: n.scrollHeight,
+              clientHeight: n.clientHeight, letterSpacing: style.letterSpacing,
+              lineHeight: style.lineHeight};
+          };
+          return {section: get('#native-sidebar nav details > summary'),
+            graphMode: get('.graph-mode label'),
+            treeControls: get('.editorial-tree .tree-controls label')};
+        });
+        for (const sample of Object.values(samples)) {
+          assert.ok(sample.visible && sample.scrollHeight <= sample.clientHeight + 2,
+            'Custom text spacing must not clip a region heading');
+        }
+        assert.equal(await page.locator('#native-tree-mode').count(), 1,
+          'Text spacing must not hide the tree mode control');
+        report.visual_readability.push({viewport: 1440, text_spacing: samples});
+      } finally {await tag.evaluate(n => n.remove());}
+    });
     await check('UX_READABILITY_05_tablet_compact_controls_and_header', async () => {
       await page.setViewportSize({width: 780, height: 845});
       const toggle = await inspect(page, '#native-menu-toggle');
