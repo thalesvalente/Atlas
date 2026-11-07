@@ -46,3 +46,20 @@ T013 depende de T010–T012; T014 preserva qualquer pendência factual de US1.
 T015 também precede T013 e consome o contrato estabilizado por T010.
 T016 decorre do teste manual parcial; sua correção técnica não concede aceite humano.
 Conclusão de T009 significa entrega da matriz/roteiro/recibo, não Chrome PASS.
+
+## Phase 5: Refinar a aplicação após reteste
+
+- [ ] T017 [US1] Compactar identidade/seleção no catálogo em
+  native_triage_ui.js/native_legacy_views.js/native_legacy_integration.css e
+  preservar guardas de espaço, overflow e foco em testes Node/Chromium (FR-012).
+- [ ] T018 [US1] Separar populações declaradas da fonte de agregações e estado
+  local na visão geral e navegação, com testes ausência/zero em
+  native_legacy_model.js/native_triage_ui.js/native_notebook.js (FR-013, SC-007).
+- [ ] T019 [US1] Acrescentar agrupamento reversível por núcleo declarado à leitura
+  de tabelas em native_notebook.js/native_legacy_model.js e testes de filtros,
+  paginação, campos e JSON/CSV integral (FR-014, SC-008).
+- [ ] T020 Qualificar T017–T019 por QA não autora, instalação, CI e Codex Review
+  no novo SHA; reconciliar matrizes e handoff privados sem herdar PASS de 191304d
+  (SC-007/008, FR-011).
+
+T017–T019 compartilham P01 como único writer; T020 depende das três entregas.

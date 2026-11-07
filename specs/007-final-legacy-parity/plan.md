@@ -36,3 +36,18 @@ científicos. Nenhum arquivo tem dois writers. P00 confere integração com fixt
 publica somente código/documentação liberados em PR Draft e acompanha CI/review
 dos novos SHAs. Evidências científicas e caminhos privados ficam fora do Git.
 Aceite humano, execução científica real e retirada conservam gates separados.
+
+## Reteste: densidade, resumo e agrupamento
+
+P01 reutiliza componentes do catálogo e cards de visão geral, corrigindo a
+densidade da identificação com alinhamento que permita quebra controlada.
+As métricas declaradas são recuperadas da apresentação autenticada; métricas de
+consulta/sessão ficam nomeadas em contexto próprio, com denominadores explícitos.
+Nenhuma contagem, título ou conteúdo das capturas privadas entra nas fixtures.
+
+O agrupamento por núcleo é estado de apresentação: não altera a sequência raw
+das linhas usada em exportações, nem cria identidade ou relação científica.
+Acesso centralizado a campos declarados evita heurísticas por nome de projeto.
+P03 revisa semântica dos contadores, ausência/zero, completos campos e população
+agrupada. P00 mantém manifesto sucessor, instalação isolada e CI/review por novo
+SHA; a sessão de reteste manual permanece separada da automação bloqueada.

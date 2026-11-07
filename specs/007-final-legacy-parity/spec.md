@@ -65,3 +65,25 @@ com falhas explícitas e retorno ao histórico preservado (SC-005).
   reversas, contrato de substituição/rollback e testes de fronteira verificáveis.
 - SC-006: prontidão de retirada só é concedida com P01 e P02 concluídos/revisados;
   nunca autoriza remoção. KEEP_FULL=5, DELETE_AUTHORIZED=NO.
+
+## Refinamento após reteste do operador
+
+As capturas de reteste identificaram densidade excessiva do catálogo e mistura
+de populações da fonte com estado local na visão geral. O operador também pediu
+agrupamento dos requisitos pelo núcleo informado. A continuação permanece em 007.
+
+- FR-012: manter catálogo compacto em desktop, intermediário e móvel, com seleção
+  e título separados de forma legível, sem impor uma linha vazia adicional por
+  controle quando há espaço disponível. Preservar foco e área de clique.
+- FR-013: distinguir resumo declarado da fonte, agregações da navegação e estado
+  da sessão. Expor populações essenciais antes recuperáveis no resumo legado,
+  com rótulo, unidade e origem verificáveis. Ausência não pode virar zero; zero
+  declarado permanece zero. Não inferir execução ou aceite a partir de contagens.
+- FR-014: permitir agrupamento reversível das linhas de requisitos pelo núcleo
+  explicitamente declarado. Valores sem núcleo têm grupo identificado, sem
+  inferência por título/ID. Preservar campos, identidades, tipos, filtros,
+  paginação e exportações integrais em JSON/CSV tipado.
+- SC-007: contraprovas sintéticas distinguem resumo da fonte e seleção/baselines
+  locais; verificam ausência/zero e agregações com denominadores diferentes.
+- SC-008: agrupamento mantém a mesma população e conteúdo exportado, enquanto
+  catálogo continua legível e compacto nas larguras qualificadas pela CI.
