@@ -14,8 +14,8 @@ $root = Split-Path -Parent $PSScriptRoot
 $exporter = Join-Path $root 'tools\export_native_notebook.py'
 $launcher = Join-Path $PSScriptRoot 'atlas_launch.py'
 if (-not (Test-Path -LiteralPath $launcher -PathType Leaf)) { throw 'ATLAS_NOVO_LAUNCHER_MISSING' }
-if (-not (Test-Path -LiteralPath (Join-Path $CodeRoot 'src\r4\campaigns\atlas.py') -PathType Leaf)) {
-    throw 'ATLAS_PRODUCER_CODE_MISSING: selecione o checkout R4 já funcional.'
+if (-not (Test-Path -LiteralPath (Join-Path $CodeRoot 'src\r4\campaigns\notebook_query_projection.py') -PathType Leaf)) {
+    throw 'ATLAS_PRODUCER_CODE_MISSING: selecione o checkout R4 com a API produtora notebook_query_projection.'
 }
 if (-not (Test-Path -LiteralPath $NotebookRoot -PathType Container)) { throw 'ATLAS_NOTEBOOK_MISSING' }
 if (Test-Path -LiteralPath $Output) { throw 'ATLAS_OUTPUT_MUST_BE_NEW' }

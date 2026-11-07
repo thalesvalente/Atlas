@@ -56,7 +56,7 @@ def _safe_adapter_reason(stderr: str) -> str:
 def _prepare_legacy(code_value: str, notebook_value: str, session: Path) -> str:
     code = Path(code_value).expanduser().absolute()
     notebook = Path(notebook_value).expanduser().absolute()
-    if not (code / "src/r4/campaigns/atlas.py").is_file():
+    if not (code / "src/r4/campaigns/notebook_query_projection.py").is_file():
         raise ValueError("ATLAS_LEGACY_PRODUCER_NOT_FOUND")
     if not notebook.is_dir():
         raise ValueError("ATLAS_LEGACY_NOTEBOOK_NOT_FOUND")

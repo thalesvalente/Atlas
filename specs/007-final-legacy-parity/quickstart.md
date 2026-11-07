@@ -31,3 +31,10 @@ O parser atual rejeita decimais que perderiam valor; não promete preservar zero
 significativos/lexemas não canônicos de novas fontes arbitrárias.
 
 CI/HTTP não substituem Chrome real, autenticação upstream ou aceite humano.
+
+O adaptador externo `--r4-code` requer a API produtora
+`r4.campaigns.notebook_query_projection.project` da candidata R4 de substituição
+dos consumidores. Checkouts que oferecem somente o renderer histórico são
+recusados; não há fallback de importação para `r4.campaigns.atlas`. O fluxo
+preferido entre aplicações é exportar a projeção no R4 e usar `--projection`.
+O runtime instalado do viewer continua independente de R4.

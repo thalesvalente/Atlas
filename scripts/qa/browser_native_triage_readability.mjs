@@ -151,6 +151,52 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
         report.visual_readability.push({viewport: 1440, text_spacing: samples});
       } finally {await styled.close();}
     });
+    for (const width of [1440, 780, 390]) {
+      await page.setViewportSize({width, height: 900});
+      if (await page.locator('#native-clear').isEnabled()) await page.locator('#native-clear').click();
+      await openNativePane(page, 'assets');
+      await check(`UX_SELECTION_08_catalog_spacing_and_discoverable_deselect_all_${width}`, async () => {
+        const clear = page.locator('.triage-select-actions #native-clear-batch');
+        assert.equal(await clear.count(), 1, 'Deselect-all is beside select-visible/filter, outside More actions');
+        assert.equal(await clear.locator('xpath=ancestor::details').count(), 0);
+        const geometry = await page.locator('.catalog-reading tbody td').first().evaluate(cell => {
+          const label = cell.querySelector('.triage-check'), title = cell.querySelector('.rowlink');
+          const checkBounds = label.getBoundingClientRect(), titleBounds = title.getBoundingClientRect();
+          return {text: cell.textContent, accessibleName: label.querySelector('input').getAttribute('aria-label'),
+            gap: titleBounds.left - checkBounds.right, below: titleBounds.top - checkBounds.bottom,
+            documentOverflow: document.documentElement.scrollWidth - innerWidth};
+        });
+        assert.match(geometry.text, /^Selecionar\s+\S/, 'Selection text does not join the document title');
+        assert.match(geometry.accessibleName, /^Selecionar /);
+        assert.ok(geometry.gap >= 8 || geometry.below >= 4, 'Selection and title have a visible gap or separate lines');
+        assert.ok(geometry.documentOverflow <= 1, 'Catalog spacing must keep horizontal scrolling inside the table region');
+        if (await clear.isEnabled()) await clear.click();
+        for (const select of ['native-select-visible', 'native-select-filtered']) {
+          await page.locator('#' + select).click();
+          const count = Number(await page.locator('#native-batch-summary').getAttribute('data-selected-count'));
+          assert.ok(count > 0);
+          assert.equal(await clear.innerText(), `Desmarcar todos (${count})`);
+          await clear.click();
+          assert.equal(await clear.innerText(), 'Desmarcar todos (0)');
+          assert.equal(await clear.isDisabled(), true);
+          assert.equal(await page.locator('#native-batch-summary').getAttribute('data-selected-count'), '0');
+          assert.equal(await page.locator('#native-content input[data-batch-uid]:checked').count(), 0);
+          assert.equal(await page.locator('#native-select-visible').evaluate(node => node === document.activeElement), true);
+        }
+        for (const pane of ['selected', 'retention']) {
+          await openNativePane(page, 'assets');
+          await page.locator('#native-select-visible').click();
+          await openNativePane(page, pane);
+          await clear.click();
+          assert.equal(await clear.isDisabled(), true);
+          const focus = await page.evaluate(() => ({tag: document.activeElement.tagName,
+            connected: document.activeElement.isConnected, disabled: !!document.activeElement.disabled}));
+          assert.deepEqual(focus, {tag: 'H2', connected: true, disabled: false},
+            'Clearing a selected/retention view restores focus to a connected heading');
+        }
+        report.visual_readability.push({viewport: width, catalog_selection: geometry});
+      });
+    }
   } finally {
     await context.close();
   }

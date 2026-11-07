@@ -157,7 +157,11 @@ export class NativeTriageUI {
     for(const node of $('native-content').querySelectorAll('tr[data-uid],li[data-uid],article[data-uid],details[data-uid]')){
       const entry=this.model.byUid.get(node.dataset.uid);if(!entry||node.querySelector('[data-batch-uid]'))continue;
       const host=node.tagName==='TR'?node.firstElementChild:node;
-      if(host)host.prepend(this.checkControl(entry));
+      if(host){
+        const control=this.checkControl(entry);
+        if(node.tagName==='TR')host.prepend(control,document.createTextNode(' '));
+        else host.prepend(control);
+      }
     }
   }
   visibleEntries(){
@@ -201,6 +205,8 @@ export class NativeTriageUI {
     const visibleButton=$('native-select-visible'),allButton=$('native-select-filtered');
     visibleButton.textContent=`Selecionar visíveis (${visible.length})`;visibleButton.disabled=!visible.length;
     allButton.textContent=`Selecionar todos os resultados filtrados (${this.filtered.length})`;allButton.disabled=!this.filtered.length;
+    const clearButton=$('native-clear-batch');
+    clearButton.textContent=`Desmarcar todos (${selected.length})`;clearButton.disabled=!selected.length;
     for(const id of ['native-compare','native-retention','native-batch-details','native-copy-references','native-batch-links','native-dossier']){
       const node=$(id);node.dataset.batchCount=String(selected.length);node.setAttribute('aria-label',node.textContent+' · '+selected.length+' itens');
     }
@@ -213,7 +219,7 @@ export class NativeTriageUI {
   }
   selectionChanged(){
     const active=document.activeElement,batchBar=$('native-batch-bar');
-    const hidingBatch=!this.ledger.size&&batchBar.contains(active);
+    const hidingBatch=!this.ledger.size&&(batchBar.contains(active)||active===$('native-clear-batch'));
     if(!['selected','retention'].includes(this.hooks.pane())){
       this.syncBatch();
       if(hidingBatch){
@@ -223,7 +229,7 @@ export class NativeTriageUI {
       return;
     }
     this.hooks.refresh();
-    if(active===document.activeElement&&active.isConnected&&active.getClientRects().length)return;
+    if(active===document.activeElement&&active.isConnected&&!active.disabled&&active.getClientRects().length)return;
     const uid=active?.dataset?.batchUid,id=active?.id;
     const same=id?$(id):[...$('native-content').querySelectorAll('[data-batch-uid]')].find(n=>n.dataset.batchUid===uid);
     if(same&&!same.disabled&&same.getClientRects().length){same.focus({preventScroll:true});return;}

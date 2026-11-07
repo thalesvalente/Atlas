@@ -17,6 +17,8 @@ const staticRoot=process.env.ATLAS_TRIAGE_STATIC_ROOT?
 const {NativeTriageUI}=await import(new URL('native_triage_ui.js',staticRoot));
 const {createTriageModel,SelectionLedger}=await import(new URL('native_triage_model.js',staticRoot));
 const {nativeFragments}=await import(new URL('native_navigation.js',staticRoot));
+const {makePresentation}=await import(new URL('native_legacy_model.js',staticRoot));
+const {renderCatalog}=await import(new URL('native_legacy_views.js',staticRoot));
 const controllerText=readFileSync(new URL('native_notebook.js',staticRoot),'utf8');
 const matchesStart=controllerText.indexOf('function matches(e,context=null){');
 const matchesEnd=controllerText.indexOf('\nfunction message(',matchesStart);
@@ -105,7 +107,7 @@ const CONTROL_IDS=['native-family','native-kind','native-execution','native-stat
   'native-review','native-documentary','native-baseline','native-evidence','native-search','native-from','native-to',
   'native-filter-chips','native-filter-count','native-clear','native-selection','native-batch-summary','native-batch-bar',
   'native-select-visible','native-select-filtered','native-compare','native-retention','native-batch-details',
-  'native-copy-references','native-batch-links','native-dossier'];
+  'native-copy-references','native-batch-links','native-dossier','native-clear-batch'];
 function withUI({pane='selected',mode='dossier',select=true}={},run){
   const previous=globalThis.document,doc={activeElement:null};doc.body=new MemoryNode('body',doc);doc.activeElement=doc.body;
   doc.createElement=tag=>{assert(!['script','iframe'].includes(tag));return new MemoryNode(tag,doc);};
@@ -208,3 +210,54 @@ test('UX-UI-04 navigation counts use typed populations and current session desig
   assert.deepEqual(ui.navigationCounts(),{search:3,experiments:1,baselines:2,selected:2,retention:2});
   ui.ledger.removeAnnotation(table);assert.equal(ui.navigationCounts().baselines,1);assert.equal(JSON.stringify(s),before);
 });
+
+test('UX-UI-05 clear selection is exposed beside select-visible and select-filtered without a disclosure',()=>{
+  const html=readFileSync(new URL('native_notebook.html',staticRoot),'utf8');
+  const selectionActions=html.match(/<div class="triage-select-actions">([\s\S]*?)<\/div>/)?.[1];
+  assert(selectionActions,'Selection action group must exist');
+  assert.match(selectionActions,/id="native-select-visible"/);
+  assert.match(selectionActions,/id="native-select-filtered"/);
+  assert.match(selectionActions,/id="native-clear-batch"/,'Deselect-all must be discoverable next to the two selection controls');
+  assert.doesNotMatch(selectionActions,/<details\b/,'Clearing the batch must not require opening More actions');
+  assert.equal([...html.matchAll(/id="native-clear-batch"/g)].length,1,'The existing clear control stays unique');
+});
+
+test('UX-UI-05 deselect-all exposes the current count and clears hidden selections without losing session annotations',()=>withUI({pane:'search',select:false},({ui,doc,a,b})=>{
+  const clear=doc.getElementById('native-clear-batch');
+  assert.equal(clear.disabled,true,'Empty selection has an inactive, visible clear action');
+  assert.equal(clear.textContent,'Desmarcar todos (0)');
+  ui.ledger.selectMany([a,b]);ui.ledger.setIntent(a,'KEEP_ESSENTIALS');
+  ui.ledger.annotateBaseline(a,'Annotation independent from selection');ui.syncBatch();
+  assert.equal(clear.disabled,false);assert.equal(clear.textContent,'Desmarcar todos (2)');
+  doc.getElementById('native-search').value='Execução A';ui.syncBatch();
+  assert.equal(doc.getElementById('native-batch-summary').dataset.hiddenCount,'1');
+  clear.focus();ui.ledger.clear();ui.selectionChanged();
+  assert.equal(ui.ledger.size,0);assert.equal(ui.ledger.intents.size,0);
+  assert.equal(ui.ledger.annotations.size,1,'Clearing selection does not erase the independent baseline annotation');
+  assert.equal(clear.disabled,true);assert.equal(clear.textContent,'Desmarcar todos (0)');
+  assert.equal(doc.getElementById('native-batch-summary').dataset.selectedCount,'0');
+  assert.equal(doc.getElementById('native-batch-bar').hidden,true);
+  assert.equal(doc.activeElement,doc.getElementById('native-select-visible'),'Focus must leave a just-disabled clear button');
+  assert.ok(doc.querySelectorAll('[data-batch-uid]').every(node=>!node.checked));
+}));
+
+test('UX-UI-06 catalog selection text remains separate from the document title and preserves its detail callback',()=>withUI({pane:'assets',select:false},({ui,host})=>{
+  const asset=entry('document',{title:'Documento sintético'},'asset',{group:'resource_documents'}),s=source([asset]),before=JSON.stringify(s);
+  ui.source=s;ui.ledger=new SelectionLedger(s);ui.model=createTriageModel(s);host.replaceChildren();
+  let opened=null;renderCatalog(host,[asset],makePresentation([asset]),value=>{opened=value;});ui.decorate();
+  const name=host.querySelector('td'),control=name.querySelector('input'),title=name.querySelector('button');
+  assert.match(name.textContent,/^Selecionar\s+Documento sintético$/,'Selection label must not concatenate with the document name');
+  assert.equal(title.textContent,'Documento sintético');title.click();assert.equal(opened,asset);
+  assert.match(control.getAttribute('aria-label'),/^Selecionar Documento sintético/);
+  control.checked=true;control.dispatchEvent({type:'change'});assert.equal(ui.ledger.has(asset),true);
+  assert.equal(JSON.stringify(s),before);
+}));
+
+for(const pane of ['selected','retention'])test(`UX-UI-05 clear-all in ${pane} moves focus away from its disabled control`,()=>withUI({pane,mode:'list'},({ui,doc})=>{
+  const clear=doc.getElementById('native-clear-batch');clear.focus();
+  ui.ledger.clear();ui.selectionChanged();
+  assert.equal(clear.disabled,true);assert.equal(ui.ledger.size,0);
+  assert.notEqual(doc.activeElement,clear,'A just-disabled clear button must not retain keyboard focus');
+  assert.equal(doc.activeElement.isConnected,true);assert.equal(doc.activeElement.disabled,false);
+  assert.equal(doc.activeElement.tagName,'H2');
+}));

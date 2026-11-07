@@ -39,12 +39,14 @@ um pacote ou chamar o renderer antigo:
 
 ```powershell
 & .\scripts\ABRIR-ATLAS.ps1 `
-  -LegacyCodeRoot 'H:\Atlas009-CA01' `
+  -LegacyCodeRoot 'H:\R4-produtor-atualizado' `
   -LegacyNotebookRoot 'H:\R4-Caderno-Cientifico'
 ```
 
 A compatibilidade funciona com um **adaptador externo em processo separado**
-(`tools/export_native_notebook.py`, reutilizando `r4.campaigns.atlas.project`).
+(`tools/export_native_notebook.py`, reutilizando a API produtora
+`r4.campaigns.notebook_query_projection.project`). O checkout deve conter essa
+API; uma revisão que ofereça somente o renderer histórico será recusada.
 O Atlas instalado continua independente e consome apenas o pacote derivado,
 em diretório temporário da sessão. O cache é removido somente após o servidor
 encerrar, preservando os arquivos originais. Essas são raízes históricas
@@ -79,12 +81,19 @@ Na raiz do checkout Atlas atualizado, execute:
 
 ```powershell
 & .\scripts\ABRIR-ATLAS-NATIVO.ps1 `
-  -CodeRoot 'H:\Atlas009-CA01' `
+  -CodeRoot 'H:\R4-produtor-atualizado' `
   -NotebookRoot 'H:\R4-Caderno-Cientifico' `
   -Output 'H:\Atlas-exports\consulta-nova'
 ```
 
-Os exemplos usam os caminhos históricos documentados, que devem existir no seu computador. O pai de Output precisa existir; a pasta final deve ser **nova**, fora do código e do Caderno. O launcher não instala software automaticamente. Ele exporta a projeção usando `r4.campaigns.atlas.project`, inicia **o Atlas NOVO instalado** e abre `http://127.0.0.1:8765/notebook`. `-NoOpen` apenas deixa de abrir o navegador; Ctrl+C encerra o servidor criado pelo launcher.
+Os caminhos dos exemplos devem ser substituídos pelas raízes confiáveis do host.
+O pai de Output precisa existir; a pasta final deve ser **nova**, fora do código
+e do Caderno. O launcher não instala software automaticamente. Ele usa
+`r4.campaigns.notebook_query_projection.project`, inicia **o Atlas NOVO instalado**
+e abre `http://127.0.0.1:8765/notebook`. `-NoOpen` apenas deixa de abrir o navegador;
+Ctrl+C encerra o servidor criado pelo launcher. O fluxo entre aplicações também
+aceita JSON previamente exportado pelo produtor via `--projection`; o viewer
+consome somente o pacote e não precisa do renderer R4.
 
 A interface oferece árvore estrutural com busca integral, pan/zoom/minimapa, registros e filtros, tabelas paginadas, recursos/dossiês, relações, linha do tempo, cobertura e exportação completa. `native_id` nulo permanece nulo; chaves estruturais e UIDs de consulta não viram identidade científica. Valores grandes, null e chave ausente são preservados. Coleções não interpretadas continuam acessíveis com seu JSON original.
 

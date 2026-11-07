@@ -45,7 +45,7 @@ class AtlasNewLauncherTests(unittest.TestCase):
             code = root / "producer checkout with spaces"
             campaigns = code / "src/r4/campaigns"
             campaigns.mkdir(parents=True)
-            (campaigns / "atlas.py").write_text(
+            (campaigns / "notebook_query_projection.py").write_text(
                 "from pathlib import Path\n"
                 "def project(root):\n"
                 "    assert Path(root).is_dir()\n"
@@ -96,7 +96,7 @@ class AtlasNewLauncherTests(unittest.TestCase):
             root = Path(folder)
             code = root / "code"
             (code / "src/r4/campaigns").mkdir(parents=True)
-            (code / "src/r4/campaigns/atlas.py").write_text(
+            (code / "src/r4/campaigns/notebook_query_projection.py").write_text(
                 "raise AssertionError('must not load')", encoding="utf-8"
             )
             notebook = root / "legacy-only-folder"
@@ -231,7 +231,7 @@ class AtlasCompatibilityLauncherTests(unittest.TestCase):
         self.code = root / "producer checkout with spaces"
         campaigns = self.code / "src/r4/campaigns"
         campaigns.mkdir(parents=True)
-        (campaigns / "atlas.py").write_text(
+        (campaigns / "notebook_query_projection.py").write_text(
             "def project(root):\n"
             "    return {'records': [{'id': 'compat-record'}], "
             "'atlas_integration': {'notebook_revision': 'compat-double-only'}}\n",

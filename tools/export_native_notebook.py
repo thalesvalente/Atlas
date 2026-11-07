@@ -1,6 +1,6 @@
 """External, read-only adapter: existing notebook projection -> standard crate.
 
-The producer's existing project() API is reused, never copied into the viewer.
+The producer-only project() API is reused, never copied into the viewer.
 No HTML parsing, source discovery, migrations, provider calls or overwrites.
 """
 from __future__ import annotations
@@ -259,7 +259,7 @@ def export(data: dict, output: Path, *, forbidden_roots=()) -> dict:
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     source = parser.add_mutually_exclusive_group(required=True)
-    source.add_argument("--r4-code", type=Path, help="Checkout confiável do produtor já instalado; não é carregado no viewer")
+    source.add_argument("--r4-code", type=Path, help="Checkout confiável com notebook_query_projection.project; não é carregado no viewer")
     source.add_argument("--projection", type=Path, help="JSON da projeção original já exportada, não HTML")
     parser.add_argument("--notebook-root", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -271,7 +271,7 @@ def main(argv=None):
             code, notebook = safe_root(args.r4_code), safe_root(args.notebook_root)
             roots = [code, notebook]
             sys.path.insert(0, str(code / "src"))
-            producer = importlib.import_module("r4.campaigns.atlas")
+            producer = importlib.import_module("r4.campaigns.notebook_query_projection")
             if not Path(producer.__file__).resolve().is_relative_to(code / "src"):
                 raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
             data = producer.project(notebook)
