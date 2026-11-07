@@ -57,7 +57,7 @@ def fixture(revision: str = "INVENTED_TRIAGE_REVISION_A", bulk: int = 1200) -> d
                         "started_at": "2026-11-01T10:00:00Z"})
     table = {"id": "M1.1", "label": "M1.1 · RF baseline preservada", "family": "RF sintético",
              "baseline": True, "record_id": "run-rf-proof", "rows": [
-                 {"id": f"synthetic-rf-{index:02d}", "cells": {
+                 {"id": f"synthetic-rf-{index:02d}", "nucleus_id": f"INVENTED-CORE-{index % 3}", "cells": {
                      "ID": f"RF-{index:02d}", "Núcleo": "INVENTED", "Nome": f"Requisito inventado {index:02d}",
                      "Descrição": "Linha de requisitos, não uma execução experimental.",
                      "Critério de aceite": "Somente validação de engenharia", "Inteiro exato": 9007199254740993 + index}}
@@ -71,7 +71,8 @@ def fixture(revision: str = "INVENTED_TRIAGE_REVISION_A", bulk: int = 1200) -> d
                  "uri": "https://example.invalid/never-opened", "availability": "UNKNOWN"},
                 {"id": "resource-shared", "title": "Dependência compartilhada inventada", "kind": "resource",
                  "shared": True, "availability": "UNKNOWN"}],
-            "coverage": {"scope": "INVENTED_DATA_ONLY"}}
+            "product_items": [],
+            "coverage": {"scope": "INVENTED_DATA_ONLY", "source_rows": {"operational_index": 7}}}
 
 
 def revised_fixture(data: dict) -> dict:

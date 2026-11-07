@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createRequire} from 'node:module';
+import {createHash} from 'node:crypto';
 import {openNativePane, revealNativeControl} from './browser_native_triage_navigation.mjs';
 import {runN03Checks} from './browser_native_triage_n03.mjs';
 import {runReadabilityChecks} from './browser_native_triage_readability.mjs';
@@ -140,6 +141,58 @@ try {
     }
     assert.equal(await page.getByRole('menu').count(), 0, 'Ordinary navigation is not an ARIA application menu');
     assert.equal(await page.locator('#native-menu-toggle').getAttribute('aria-controls'), 'native-sidebar');
+  });
+
+  await check('UX_SOURCE_09_overview_declared_populations_are_distinct_from_session_and_aggregate_counts', async () => {
+    await openNativePane(page, 'overview');
+    const count = id => page.locator(`[data-population-id="${id}"] strong`).innerText();
+    assert.equal(await count('records'), String(expected.total_records));
+    assert.equal(await count('notebook_index'), '7', 'Read the invented declared operational index, not typed run records');
+    assert.equal(await count('product_items'), '0', 'An explicitly empty collection is zero');
+    assert.equal(await count('storage_observations'), 'Não declarado', 'Absent source population must not become zero');
+    assert.equal(await count('frontier_catalog'), 'Não declarado');
+    assert.equal(await count('result_tables'), '1');
+    assert.equal(await page.locator('[data-session-count="selected"] strong').innerText(), '0');
+    assert.equal(await page.locator('[data-session-count="annotations"] strong').innerText(), '0');
+    await page.locator('[data-session-count="annotations"]').getByRole('button', {name: 'Ver baselines da fonte e da sessão', exact: true}).click();
+    assert.equal(await page.locator('[data-result-uid]').count(), 2, 'The explicitly named destination also includes declared source baselines');
+    await openNativePane(page, 'overview');
+    await openNativePane(page, 'records');await page.locator('#native-select-visible').click();
+    await openNativePane(page, 'overview');
+    assert.ok(Number(await page.locator('[data-session-count="selected"] strong').innerText()) > 0);
+    await page.locator('#native-clear-batch').click();
+    assert.equal(await page.locator('[data-session-count="selected"] strong').innerText(), '0', 'Overview session count updates immediately when the ledger clears');
+    assert.equal(await count('records'), String(expected.total_records), 'Clearing the session does not change source population cards');
+    assert.match(await page.locator('#native-content').innerText(), /Sua sessão de consulta/);
+    assert.match(await page.locator('[data-pane="assets"]').getAttribute('title'), /agregado/);
+    assert.match(await page.locator('[data-pane="coverage"]').getAttribute('title'), /várias coleções/);
+  });
+
+  await check('UX_REQUIREMENTS_10_grouping_is_declared_reversible_and_export_order_is_unchanged', async () => {
+    await openNativePane(page, 'tables');
+    const grouping = page.locator('#native-table-grouping');
+    assert.equal(await grouping.inputValue(), 'nucleus');
+    assert.equal(await page.locator('.requirement-group').count(), 3);
+    const groupedIds = await page.locator('[data-row-id]').evaluateAll(nodes => nodes.map(node => node.dataset.rowId));
+    assert.equal(groupedIds.length, expected.table_rows);
+    const downloadText = async label => {
+      const pending = page.waitForEvent('download');
+      await page.getByRole('button', {name: label, exact: true}).click();
+      return fs.readFile(await (await pending).path(), 'utf8');
+    };
+    const groupedJSON = await downloadText('JSON das linhas selecionadas');
+    const groupedCSV = await downloadText('CSV tipado das linhas');
+    assert.equal(groupedJSON, '[' + expected.table_rows_raw_json.join(',') + ']');
+    await grouping.selectOption('original');
+    assert.equal(await page.locator('.requirement-group').count(), 0);
+    const originalIds = await page.locator('[data-row-id]').evaluateAll(nodes => nodes.map(node => node.dataset.rowId));
+    assert.deepEqual([...groupedIds].sort(), [...originalIds].sort(), 'Every original occurrence appears once');
+    assert.notDeepEqual(groupedIds, originalIds, 'Interleaved invented nuclei really change the reading organization');
+    assert.equal(await downloadText('JSON das linhas selecionadas'), groupedJSON);
+    assert.equal(await downloadText('CSV tipado das linhas'), groupedCSV);
+    report.requirement_grouping = {groups: 3, rows: groupedIds.length, export_order_unchanged: true,
+      json_sha256: createHash('sha256').update(groupedJSON).digest('hex'), csv_sha256: createHash('sha256').update(groupedCSV).digest('hex')};
+    await grouping.selectOption('nucleus');
   });
 
   await check('T01_M1_1_is_a_39_row_table_with_typed_search_reason_not_a_run', async () => {

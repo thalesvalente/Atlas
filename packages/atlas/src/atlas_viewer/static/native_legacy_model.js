@@ -185,3 +185,49 @@ export function tableFilterOptions(entries,field){
 export function tableMatchesFilters(entry,filters={}){
   return TABLE_FILTER_FIELDS.every(([field,,kind])=>entry.kind!==kind||!filters[field]||tableFacet(entry,field).key===filters[field]);
 }
+
+// Source populations retain their declared meaning. Session selections and
+// inferred experiment types never supply an operational notebook count.
+export function snapshotPopulationMetrics(entries){
+  const structure=entries.find(e=>e.group==='$structure'),shape=structure?nativeFragments(structure.raw_json,{all:true}):new Map();
+  const count=group=>{
+    if(!shape.has(group))return 'Não declarado';
+    const raw=shape.get(group);
+    return raw[0]==='['?String(entries.filter(e=>e.group===group&&e.kind!=='row').length):literalText(literalValue(raw));
+  };
+  const coverage=entries.find(e=>e.group==='coverage'&&e.pointer==='/coverage');
+  let operational='Não declarado';
+  if(coverage){const fields=nativeFragments(coverage.raw_json,{all:true}),source=fields.get('source_rows');
+    if(source?.[0]==='{'){const rows=nativeFragments(source,{all:true});if(rows.has('operational_index'))operational=literalText(literalValue(rows.get('operational_index')));}
+  }
+  return [
+    {id:'records',label:'Registros de projeção',value:count('records'),path:'/records',destination:'records',help:'Ocorrências da projeção selecionada; não é o total de execuções científicas.'},
+    {id:'notebook_index',label:'Execuções no índice do Caderno',value:operational,path:'/coverage/source_rows/operational_index',destination:'coverage',help:'Contagem declarada pelo índice operacional da fonte; não inferida de títulos, tipos ou estados.'},
+    {id:'product_items',label:'Itens de produto',value:count('product_items'),path:'/product_items',destination:'assets',help:'Coleção de itens de produto; distinta de documentos, recursos e grupos de produtos.'},
+    {id:'storage_observations',label:'Objetos físicos observados',value:count('storage_observations'),path:'/storage_observations',destination:'coverage',help:'Observações históricas declaradas pela fonte; não é um inventário físico atual nem espaço recuperável.'},
+    {id:'frontier_catalog',label:'Limites históricos catalogados',value:count('frontier_catalog'),path:'/frontier_catalog',destination:'coverage',help:'Entradas do catálogo de fronteiras históricas; não é contagem de objetos físicos.'},
+    {id:'result_tables',label:'Tabelas de resultados',value:count('result_tables'),path:'/result_tables',destination:'tables',help:'Conjuntos declarados nesta revisão, inclusive tabelas explicitamente vazias.'},
+  ];
+}
+
+// A presentation-only grouping. Original row objects, cell sets and order used
+// by JSON/CSV exports stay untouched. NULL/empty/missing are distinct groups.
+export function groupRequirementRows(rows,scope={}){
+  const groups=new Map();
+  for(const row of rows){
+    const parts=nativeFragments(row.raw_json,{all:true}),cells=parts.get('cells'),fields=cells?.[0]==='{'?nativeFragments(cells,{all:true}):new Map();
+    let field='nucleus_id',raw=parts.get(field),present=parts.has(field);
+    if(!present){field=['Núcleo / Módulo','Núcleo','Nucleo','nucleus_id'].find(name=>fields.has(name));present=field!==undefined;raw=present?fields.get(field):undefined;}
+    const identity=familyIdentity(present?literalValue(raw):undefined,present);
+    const key=JSON.stringify(['atlas-nucleus-group/1',scope.sourceId??'',scope.snapshot??'',row.table_uid??'',identity.key]);
+    if(!groups.has(key))groups.set(key,{key,label:!present?'Não declarado':literalText(literalValue(raw)),type:identity.type,rows:[],description:null});
+    const group=groups.get(key);group.rows.push(row);
+    // Display the complete declared module name when the stable wrapper ID
+    // groups rows. Never derive a nucleus or business ID from a requirement ID.
+    if(present&&parts.has('nucleus_id')&&identity.type==='string'&&raw!=='""'&&!group.description&&fields.has('Núcleo / Módulo')){
+      const description=literalValue(fields.get('Núcleo / Módulo'));
+      if(typeof description==='string'&&description)group.description=description;
+    }
+  }
+  return [...groups.values()].map(group=>({...group,label:group.description??group.label}));
+}

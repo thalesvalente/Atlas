@@ -75,7 +75,8 @@ export function renderCatalog(host,entries,model,select){
   const body=tableFrame(host,['Produto / documento / referência','Execução / estágio / escopo','Estado documental declarado','Acesso'],'catalog-reading');
   for(const entry of entries){
     const value=model.read(entry),data=objectData(value),tr=element('tr');tr.dataset.uid=entry.uid;
-    const name=element('td'),title=catalogTitle(data);name.append(action(literalText(title===undefined?entry.title:title),()=>select(entry),'rowlink'));
+    const name=element('td'),title=catalogTitle(data),identity=element('div',undefined,'catalog-identity');
+    identity.append(action(literalText(title===undefined?entry.title:title),()=>select(entry),'rowlink'));name.append(identity);
     if(value!==data)name.append(element('p','Valor literal: '+literalText(value)));if(data.role!==undefined)name.append(element('p',literalText(data.role),'sub'));
     const context=element('td');catalogContext(context,data);
     const identities=element('details',undefined,'catalog-identities');identities.append(element('summary','Identidades originais'));const values=element('dl',undefined,'declared-states');

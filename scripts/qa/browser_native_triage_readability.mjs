@@ -167,6 +167,7 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
             label: {x: checkBounds.x, y: checkBounds.y, width: checkBounds.width, height: checkBounds.height,
               display: getComputedStyle(label).display, marginBottom: getComputedStyle(label).marginBottom},
             title: {x: titleBounds.x, y: titleBounds.y, width: titleBounds.width, height: titleBounds.height},
+            rowHeight: cell.parentElement.getBoundingClientRect().height,
             documentOverflow: document.documentElement.scrollWidth - innerWidth};
         });
         report.visual_readability.push({viewport: width, catalog_selection: geometry});
@@ -175,6 +176,11 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
         assert.ok(geometry.gap >= 8 || geometry.below >= 4,
           `Selection and title have a visible gap or separate lines at ${width}px: ${JSON.stringify(geometry)}`);
         assert.ok(geometry.documentOverflow <= 1, 'Catalog spacing must keep horizontal scrolling inside the table region');
+        if (width === 1440) {
+          const centers = Math.abs(geometry.label.y + geometry.label.height / 2 - geometry.title.y - geometry.title.height / 2);
+          assert.ok(geometry.gap >= 8 && centers <= 16 && geometry.rowHeight <= 76,
+            `Wide catalog identity stays on a compact row without reducing the accessible checkbox: ${JSON.stringify(geometry)}`);
+        }
         if (await clear.isEnabled()) await clear.click();
         for (const select of ['native-select-visible', 'native-select-filtered']) {
           await page.locator('#' + select).click();

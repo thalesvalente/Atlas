@@ -1,7 +1,7 @@
 /** Feature 005: trusted DOM only. Session decisions never mutate source DTOs. */
 import {createTriageModel, SelectionLedger, selectionKey, TRIAGE_DIMENSIONS} from './native_triage_model.js';
 import {buildRetentionPlan, buildDossier, copyReferences, RETENTION_INTENTS} from './native_retention.js';
-import {literalText} from './native_legacy_model.js';
+import {literalText,snapshotPopulationMetrics} from './native_legacy_model.js';
 
 const $ = id => document.getElementById(id);
 const element = (tag, text, cls='') => {
@@ -156,7 +156,7 @@ export class NativeTriageUI {
   decorate(){
     for(const node of $('native-content').querySelectorAll('tr[data-uid],li[data-uid],article[data-uid],details[data-uid]')){
       const entry=this.model.byUid.get(node.dataset.uid);if(!entry||node.querySelector('[data-batch-uid]'))continue;
-      const host=node.tagName==='TR'?node.firstElementChild:node;
+      const cell=node.tagName==='TR'?node.firstElementChild:null,host=cell?(cell.querySelector('.catalog-identity')||cell):node;
       if(host){
         const control=this.checkControl(entry);
         if(node.tagName==='TR')host.prepend(control,document.createTextNode(' '));
@@ -207,6 +207,10 @@ export class NativeTriageUI {
     allButton.textContent=`Selecionar todos os resultados filtrados (${this.filtered.length})`;allButton.disabled=!this.filtered.length;
     const clearButton=$('native-clear-batch');
     clearButton.textContent=`Desmarcar todos (${selected.length})`;clearButton.disabled=!selected.length;
+    for(const[id,count]of [['selected',selected.length],['annotations',this.ledger.annotations.size]]){
+      const value=document.querySelector(`[data-session-count="${id}"]`)?.querySelector('strong');
+      if(value)value.textContent=String(count);
+    }
     for(const id of ['native-compare','native-retention','native-batch-details','native-copy-references','native-batch-links','native-dossier']){
       const node=$(id);node.dataset.batchCount=String(selected.length);node.setAttribute('aria-label',node.textContent+' · '+selected.length+' itens');
     }
@@ -297,10 +301,22 @@ export class NativeTriageUI {
     if(!['overview','search','experiments','baselines','selected','retention'].includes(pane))return null;
     if(pane==='overview'){
       host.append(element('h2','Visão geral desta revisão'),element('p','Escolha uma área ou pesquise uma identidade. A tabela, o experimento e a execução conservam sua natureza.','muted'));
+      host.append(element('h3','Acervo declarado pela fonte'),element('p','Populações da revisão completa, independentes dos filtros e da seleção de sessão. Cada indicador conserva a população declarada; ausência não significa zero.','muted'));
       const metrics=element('div',undefined,'triage-metrics');
-      for(const[label,count,destination]of [['Registros',this.model.items.filter(e=>e.kind==='record').length,'records'],['Tabelas',this.model.items.filter(e=>e.kind==='table').length,'tables'],['Baselines designadas',this.model.items.filter(e=>this.model.baseline(e,this.ledger.annotations).confirmed).length,'baselines'],['No lote',this.ledger.entries().length,'selected']]){
-        const card=element('section',undefined,'triage-metric');card.append(element('strong',count),element('span',label),button('Explorar '+label.toLowerCase(),()=>this.hooks.navigate(destination)));metrics.append(card);
-      }host.append(metrics);return [];
+      for(const metric of snapshotPopulationMetrics(this.model.items)){
+        const card=element('section',undefined,'triage-metric');card.dataset.populationId=metric.id;card.dataset.populationPath=metric.path;
+        card.append(element('strong',metric.value),element('span',metric.label),element('p',metric.help,'muted'),button('Explorar '+metric.label.toLowerCase(),()=>this.hooks.navigate(metric.destination)));metrics.append(card);
+      }host.append(metrics);
+      const assets=this.model.items.filter(e=>e.kind==='asset').length,collections=this.model.items.filter(e=>e.kind==='collection').length;
+      host.append(element('p',`${assets} itens em coleções de recursos e documentos; ${collections} ocorrências auxiliares de contexto, cobertura e origens. Esses totais agregam coleções distintas e não substituem as populações específicas acima.`,'muted'));
+      host.append(element('h3','Sua sessão de consulta'));
+      const session=element('div',undefined,'triage-metrics triage-session-metrics');
+      for(const[id,label,count,destination]of [['selected','Itens selecionados',this.ledger.size,'selected'],['annotations','Anotações de baseline nesta sessão',this.ledger.annotations.size,'baselines']]){
+        const card=element('section',undefined,'triage-metric');card.dataset.sessionCount=id;
+        card.append(element('strong',count),element('span',label),button(id==='annotations'?'Ver baselines da fonte e da sessão':'Explorar '+label.toLowerCase(),()=>this.hooks.navigate(destination)));
+        if(id==='annotations')card.append(element('p','A lista de baselines inclui designações da fonte e anotações da sessão; declarações conflitantes não são confirmadas.','muted'));
+        session.append(card);
+      }host.append(session,element('p','Seleção e anotações pertencem à sessão. Não alteram o acervo nem concedem aprovação científica.','muted'));return [];
     }
     if(pane==='retention'){this.renderPlan(host);return this.ledger.entries();}
     if(pane==='selected'){this.renderSelected(host);return this.ledger.entries();}

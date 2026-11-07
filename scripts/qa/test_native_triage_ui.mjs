@@ -246,11 +246,59 @@ test('UX-UI-06 catalog selection text remains separate from the document title a
   ui.source=s;ui.ledger=new SelectionLedger(s);ui.model=createTriageModel(s);host.replaceChildren();
   let opened=null;renderCatalog(host,[asset],makePresentation([asset]),value=>{opened=value;});ui.decorate();
   const name=host.querySelector('td'),control=name.querySelector('input'),title=name.querySelector('button');
+  assert(name.querySelector('.catalog-identity'),'Catalog title and checkbox share a compact wrapping identity group');
+  assert.equal(control.parentNode.parentNode,name.querySelector('.catalog-identity'));
   assert.match(name.textContent,/^Selecionar\s+Documento sintético$/,'Selection label must not concatenate with the document name');
   assert.equal(title.textContent,'Documento sintético');title.click();assert.equal(opened,asset);
   assert.match(control.getAttribute('aria-label'),/^Selecionar Documento sintético/);
   control.checked=true;control.dispatchEvent({type:'change'});assert.equal(ui.ledger.has(asset),true);
   assert.equal(JSON.stringify(s),before);
+}));
+
+test('UX-UI-07 overview separates declared source metrics from local selection and annotation state',()=>withUI({pane:'search'},({ui,host,a,b})=>{
+  const metadata=entry('structure',{records:[],result_tables:[],product_items:[],storage_observations:[],frontier_catalog:[],coverage:{}},'collection',{group:'$structure'}),
+    coverage=entry('coverage',{source_rows:{operational_index:7}},'collection',{group:'coverage',pointer:'/coverage'}),
+    product=entry('product',{title:'Invented product'},'asset',{group:'product_items'}),s=source([metadata,coverage,a,b,product]);
+  ui.source=s;ui.model=createTriageModel(s);ui.ledger=new SelectionLedger(s);ui.ledger.selectMany([a]);
+  ui.ledger.annotateBaseline(b,'Local annotation');host.replaceChildren();ui.renderPane(host,'overview');
+  const metrics=host.querySelectorAll('[data-population-id]'),counts=new Map(metrics.map(node=>[node.dataset.populationId,node.querySelector('strong').textContent]));
+  assert.equal(counts.get('records'),'2');assert.equal(counts.get('notebook_index'),'7');assert.equal(counts.get('product_items'),'1');
+  assert.equal(counts.get('storage_observations'),'0');assert.equal(counts.get('frontier_catalog'),'0');
+  assert.match(host.textContent,/Sua sessão de consulta/);assert.match(host.textContent,/Anotações de baseline nesta sessão/);
+  assert.equal(host.querySelectorAll('[data-session-count]').find(node=>node.dataset.sessionCount==='selected').querySelector('strong').textContent,'1');
+  assert.equal(host.querySelectorAll('[data-session-count]').find(node=>node.dataset.sessionCount==='annotations').querySelector('strong').textContent,'1');
+}));
+
+test('UX-UI-07 baseline annotation action names the combined destination without promoting source conflicts',()=>withUI({pane:'search',select:false},({ui,host})=>{
+  const declared=entry('source-baseline',{baseline:true}),conflict=entry('conflicting-baseline',{baseline:true,is_baseline:false}),s=source([declared,conflict]),before=JSON.stringify(s);
+  ui.source=s;ui.model=createTriageModel(s);ui.ledger=new SelectionLedger(s);
+  let destination;ui.hooks.navigate=pane=>{destination=pane;};
+  const overview=()=>{host.replaceChildren();ui.renderPane(host,'overview');return host.querySelectorAll('[data-session-count]').find(node=>node.dataset.sessionCount==='annotations');};
+  let card=overview();assert.equal(card.querySelector('strong').textContent,'0');
+  const action=card.querySelector('button');assert.equal(action.textContent,'Ver baselines da fonte e da sessão');
+  assert.match(host.textContent,/inclui designações da fonte e anotações da sessão/);
+  action.click();assert.equal(destination,'baselines');
+  host.replaceChildren();assert.deepEqual(ui.renderPane(host,'baselines').map(item=>item.uid),['source-baseline']);
+  ui.ledger.annotateBaseline(conflict,'Keep the note without overriding the declared conflict');
+  card=overview();assert.equal(card.querySelector('strong').textContent,'1','The note exists even when confirmation is refused');
+  assert.equal(ui.model.baseline(conflict,ui.ledger.annotations).confirmed,false);
+  host.replaceChildren();assert.deepEqual(ui.renderPane(host,'baselines').map(item=>item.uid),['source-baseline']);
+  assert.equal(JSON.stringify(s),before);
+}));
+
+test('UX-UI-07 overview session cards update after clear and annotation changes without rerendering source populations',()=>withUI({pane:'overview'},({ui,host,doc,a,b})=>{
+  const metadata=entry('structure',{records:[]},'collection',{group:'$structure'}),s=source([metadata,a,b]);
+  ui.source=s;ui.model=createTriageModel(s);ui.ledger=new SelectionLedger(s);ui.ledger.selectMany([a]);
+  host.replaceChildren();ui.renderPane(host,'overview');ui.afterRender([]);
+  const sourceCard=host.querySelector('[data-population-id="records"]'),sourceCount=sourceCard.querySelector('strong');
+  const local=id=>host.querySelector(`[data-session-count="${id}"]`).querySelector('strong').textContent;
+  assert.equal(local('selected'),'1');assert.equal(sourceCount.textContent,'2');
+  doc.getElementById('native-clear-batch').focus();ui.ledger.clear();ui.selectionChanged();
+  assert.equal(local('selected'),'0','The visible overview card must follow the actual cleared ledger');
+  assert.equal(sourceCount.textContent,'2');assert.equal(host.querySelector('[data-population-id="records"]'),sourceCard,'Updating session cards must not rerender or change declared source populations');
+  ui.ledger.annotateBaseline(a,'Local note');ui.syncBatch();assert.equal(local('annotations'),'1');
+  ui.ledger.removeAnnotation(a);ui.syncBatch();assert.equal(local('annotations'),'0');
+  assert.notEqual(doc.activeElement,doc.getElementById('native-clear-batch'));
 }));
 
 for(const pane of ['selected','retention'])test(`UX-UI-05 clear-all in ${pane} moves focus away from its disabled control`,()=>withUI({pane,mode:'list'},({ui,doc})=>{

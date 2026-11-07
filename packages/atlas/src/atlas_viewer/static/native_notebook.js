@@ -3,11 +3,11 @@ import {NativeTriageUI} from './native_triage_ui.js';
 import {mountGraph} from './native_graph.js';
 import {buildNativeNavigation} from './native_navigation.js';
 import {mountLineage} from './native_lineage.js';
-import {makePresentation,recordMatches,recordSort,norm,literalText,catalogTitle,catalogStatus,TABLE_FILTER_FIELDS,tableFilterOptions,tableMatchesFilters,typedTableCsv} from './native_legacy_model.js';
+import {makePresentation,recordMatches,recordSort,norm,literalText,catalogTitle,catalogStatus,TABLE_FILTER_FIELDS,tableFilterOptions,tableMatchesFilters,typedTableCsv,groupRequirementRows} from './native_legacy_model.js';
 import {mountEditorialTree} from './native_legacy_tree.js';
 import {renderRecordIndex,renderRecordPresentation,renderPresentationDetail,renderReadingTable,renderDatasetNotice,renderRelationPresentation,renderCatalog,ASSET_COLLECTIONS} from './native_legacy_views.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-const state={sources:[],source:null,pane:'tree',treeMode:'editorial',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],presentation:null,editorial:{},tableView:'reading',columnOrder:'presentation',tableFilters:{},assetGroup:'product_items',relationMode:'records'};
+const state={sources:[],source:null,pane:'tree',treeMode:'editorial',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],presentation:null,editorial:{},tableView:'reading',tableGrouping:'nucleus',columnOrder:'presentation',tableFilters:{},assetGroup:'product_items',relationMode:'records'};
 const el=(tag,text=null,cls='')=>{const n=document.createElement(tag);if(text!==null)n.textContent=String(text);if(cls)n.className=cls;return n;};
 const button=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
 let detailTrigger=null,triage=null;
@@ -115,7 +115,7 @@ function exactOccurrenceJSON(e){
     head.slice(offset+1);
 }
 function navigation(){return state.navigation??=buildNativeNavigation(entries());}
-function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,treeMode:state.treeMode,page:state.page,table:state.table,columnPage:state.columnPage,tableView:state.tableView,columnOrder:state.columnOrder,tableFilters:{...state.tableFilters},assetGroup:state.assetGroup,relationMode:state.relationMode,detail:state.detail,triageFilters:triage.filters(),search:$('native-search').value,family:$('native-family').value,status:$('native-status').value,kind:$('native-kind').value};}
+function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,treeMode:state.treeMode,page:state.page,table:state.table,columnPage:state.columnPage,tableView:state.tableView,tableGrouping:state.tableGrouping,columnOrder:state.columnOrder,tableFilters:{...state.tableFilters},assetGroup:state.assetGroup,relationMode:state.relationMode,detail:state.detail,triageFilters:triage.filters(),search:$('native-search').value,family:$('native-family').value,status:$('native-status').value,kind:$('native-kind').value};}
 function pagedLinks(host,items,draw){
   let page=0;const content=el('div'),controls=el('div',null,'pager');host.append(content,controls);
   const show=()=>{content.replaceChildren();for(const item of items.slice(page*40,(page+1)*40))content.append(draw(item));controls.replaceChildren();if(items.length>40){const previous=button('← Vínculos',()=>{page--;show();}),next=button('Vínculos →',()=>{page++;show();});previous.disabled=page===0;next.disabled=(page+1)*40>=items.length;controls.append(previous,el('span',`${page*40+1}–${Math.min((page+1)*40,items.length)} de ${items.length}`),next);}};show();
@@ -130,7 +130,10 @@ function openOccurrence(uid){
   state.page=0;state.columnPage=0;state.tableFilters={};
   if(target.kind==='table'||target.kind==='row')state.table=target.table_uid||target.uid;
   triage.resetFilters();
-  if(target.kind==='row')state.page=Math.floor(target.ordinal/100);
+  if(target.kind==='row'){
+    const original=entries().filter(e=>e.kind==='row'&&e.table_uid===target.table_uid),ordered=state.tableGrouping==='nucleus'?groupRequirementRows(original,{sourceId:state.source.id,snapshot:state.source.metadata_sha256}).flatMap(group=>group.rows):original;
+    state.page=Math.floor(Math.max(0,ordered.findIndex(row=>row.uid===target.uid))/100);
+  }
   else if(['record','relation','asset','collection'].includes(target.kind)){
     const population=target.kind==='record'?visibleRecords().sort(recordSort).map(r=>r.entry):entries().filter(e=>e.kind===target.kind&&(e.kind!=='collection'||e.group!=='$structure')&&(e.kind!=='asset'||e.group===state.assetGroup)&&(e.kind!=='relation'||state.relationMode==='technical'||e.group==='edges')&&matches(e));
     const index=population.findIndex(e=>e.uid===target.uid),pageSize=target.kind==='asset'?50:target.kind==='collection'?40:100;
@@ -142,7 +145,7 @@ function openOccurrence(uid){
 function returnToSelection(){
   const saved=state.history.pop();if(!saved)return;
   if(saved.source!==state.source?.id||saved.snapshot!==state.source?.metadata_sha256){state.history=[];message('O snapshot mudou; selecione novamente a ocorrência.',true);return;}
-  Object.assign(state,{pane:saved.pane,treeMode:saved.treeMode,page:saved.page,table:saved.table,columnPage:saved.columnPage,tableView:saved.tableView,columnOrder:saved.columnOrder,tableFilters:{...saved.tableFilters},assetGroup:saved.assetGroup,relationMode:saved.relationMode,detail:null});
+  Object.assign(state,{pane:saved.pane,treeMode:saved.treeMode,page:saved.page,table:saved.table,columnPage:saved.columnPage,tableView:saved.tableView,tableGrouping:saved.tableGrouping??'nucleus',columnOrder:saved.columnOrder,tableFilters:{...saved.tableFilters},assetGroup:saved.assetGroup,relationMode:saved.relationMode,detail:null});
   contextualFilterOptions();
   triage.restoreFilters(saved.triageFilters||{query:saved.search,family:saved.family,result_group:saved.status,kind:saved.kind});
   render();const target=navigation().byUid.get(saved.detail);if(target){if(state.pane==='tree'&&state.graph)state.graph.locate(target.uid);detail(target,false);}
@@ -243,7 +246,8 @@ function showTables(host){
   state.batchFiltered=[table];
   host.append(triage.checkControl(table,'Incluir tabela no lote'));
   renderDatasetNotice(host,table,presentation());
-  const cols=[...new Set(allRows.flatMap(r=>Object.keys(r.cells)))],start=pager(host,rows.length),windowRows=rows.slice(start,start+100),columnPages=Math.max(1,Math.ceil(cols.length/32));
+  const nucleusGroups=groupRequirementRows(rows,{sourceId:state.source.id,snapshot:state.source.metadata_sha256}),displayRows=state.tableGrouping==='nucleus'?nucleusGroups.flatMap(group=>group.rows):rows;
+  const cols=[...new Set(allRows.flatMap(r=>Object.keys(r.cells)))],start=pager(host,rows.length),windowRows=displayRows.slice(start,start+100),columnPages=Math.max(1,Math.ceil(cols.length/32));
   state.columnPage=Math.min(state.columnPage,columnPages-1);const visibleColumns=cols.slice(state.columnPage*32,(state.columnPage+1)*32),tools=el('div',null,'toolbar');
   tools.append(button('Detalhes da tabela',()=>detail(table)),button('JSON das linhas selecionadas',()=>download('atlas-table-rows.json','['+rows.map(r=>r.raw_json).join(',')+']')),button('CSV protegido',()=>{
     const cell=v=>{let s=String(v??'');if(/^[\s\u0000-\u001f]*[=+@-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
@@ -253,19 +257,27 @@ function showTables(host){
   host.append(tools,el('p',`${rows.length} linhas selecionadas de ${allRows.length} carregadas; ${cols.length} colunas. CSV protegido serve à leitura e pode confundir tipos ou valores ausentes. CSV tipado e JSON conservam presença, tipos e valores originais; o CSV tipado inclui a linha completa.`,'muted'));
   if(columnPages>1&&state.tableView==='p03'){const cp=el('div',null,'pager'),prev=button('← Colunas',()=>{state.columnPage--;closeDetail();rerenderFocus(state.columnPage===0?'Colunas →':'← Colunas');}),next=button('Colunas →',()=>{state.columnPage++;closeDetail();rerenderFocus(state.columnPage+1===columnPages?'← Colunas':'Colunas →');});prev.disabled=state.columnPage===0;next.disabled=state.columnPage+1===columnPages;cp.append(prev,el('span',`Janela de colunas ${state.columnPage+1}/${columnPages}`),next);host.append(cp);}
   if(!visibleColumns.length){host.append(el('p','A tabela não declara células; valores indisponíveis não são reconstruídos.','empty'));return;}
-  const descriptor={version:'p03-table/1',semantic_status:'CANDIDATE_PRESENTATION',title:table.title,description:'Valores da projeção original; somente a janela visível é paginada.',columns:visibleColumns.map((c,i)=>({id:'c'+i,label:c,type:'string'})),rows:windowRows.map(r=>{
-    const cells=Object.create(null),missing_reasons=Object.create(null);visibleColumns.forEach((c,i)=>{const key='c'+i;if(!own(r.cells,c)){missing_reasons[key]='MISSING — chave ausente';}else if(r.cells[c].type==='null'){cells[key]=null;missing_reasons[key]='NULL — valor declarado';}else cells[key]=r.cells[c].text;});return{id:r.uid,cells,missing_reasons};
-  })};
   const viewTools=el('div',null,'table-tools'),viewLabel=el('label','Apresentação'),view=el('select');view.id='native-table-view';
   for(const[value,text]of [['reading','Leitura organizada'],['p03','Inspeção P03 congelada']]){const o=el('option',text);o.value=value;view.append(o);}view.value=state.tableView;viewLabel.append(view);viewTools.append(viewLabel);
-  const orderLabel=el('label','Ordem de colunas'),order=el('select');order.id='native-column-order';for(const[value,text]of [['presentation','Identificação → nome → descrição → critérios'],['original','Ordem original do snapshot']]){const o=el('option',text);o.value=value;order.append(o);}order.value=state.columnOrder;orderLabel.append(order);viewTools.append(orderLabel);host.append(viewTools);
+  const orderLabel=el('label','Ordem de colunas'),order=el('select');order.id='native-column-order';for(const[value,text]of [['presentation','Identificação → nome → descrição → critérios'],['original','Ordem original do snapshot']]){const o=el('option',text);o.value=value;order.append(o);}order.value=state.columnOrder;orderLabel.append(order);viewTools.append(orderLabel);
+  const groupingLabel=el('label','Organização das linhas'),grouping=el('select');grouping.id='native-table-grouping';for(const[value,text]of [['nucleus','Agrupar por núcleo declarado'],['original','Ordem original das linhas']]){const o=el('option',text);o.value=value;grouping.append(o);}grouping.value=state.tableGrouping;groupingLabel.append(grouping);viewTools.append(groupingLabel);host.append(viewTools);
+  grouping.addEventListener('change',()=>{state.tableGrouping=grouping.value;state.page=0;closeDetail();rerenderFocus('native-table-grouping');});
   view.addEventListener('change',()=>{state.tableView=view.value;closeDetail();rerenderFocus('native-table-view');});order.addEventListener('change',()=>{state.columnOrder=order.value;closeDetail();rerenderFocus('native-column-order');});
-  host.append(el('p','A ordem de leitura é somente apresentação, reversível. As exportações mantêm a ordem original das colunas; CSV tipado e JSON conservam os valores exatos.','muted'));
-  if(state.tableView==='reading')renderReadingTable(host,windowRows,cols,detail,{order:state.columnOrder});
-  else try{host.append(renderTable(document,descriptor));}catch(error){
-    host.append(el('p','Conteúdo excede o limite visual do P03; exibindo texto completo sem truncar valores.','notice'));
-    grid(host,windowRows,[['Ocorrência',r=>r.uid],...visibleColumns.map(c=>[c,r=>own(r.cells,c)?r.cells[c].text:'MISSING'])]);
-  }
+  host.append(el('p','Organização e ordem de leitura são apresentações reversíveis. O agrupamento usa somente o núcleo declarado; ausências ficam em Não declarado. JSON e CSV mantêm as linhas e colunas na ordem original da seleção, com seus valores exatos.','muted'));
+  const drawRows=(target,visibleRows)=>{
+    if(state.tableView==='reading'){renderReadingTable(target,visibleRows,cols,detail,{order:state.columnOrder});return;}
+    const descriptor={version:'p03-table/1',semantic_status:'CANDIDATE_PRESENTATION',title:table.title,description:'Valores da projeção original; somente a janela visível é paginada.',columns:visibleColumns.map((c,i)=>({id:'c'+i,label:c,type:'string'})),rows:visibleRows.map(r=>{
+      const cells=Object.create(null),missing_reasons=Object.create(null);visibleColumns.forEach((c,i)=>{const key='c'+i;if(!own(r.cells,c)){missing_reasons[key]='MISSING — chave ausente';}else if(r.cells[c].type==='null'){cells[key]=null;missing_reasons[key]='NULL — valor declarado';}else cells[key]=r.cells[c].text;});return{id:r.uid,cells,missing_reasons};
+    })};
+    try{target.append(renderTable(document,descriptor));}catch(error){target.append(el('p','Conteúdo excede o limite visual do P03; exibindo texto completo sem truncar valores.','notice'));grid(target,visibleRows,[['Ocorrência',r=>r.uid],...visibleColumns.map(c=>[c,r=>own(r.cells,c)?r.cells[c].text:'MISSING'])]);}
+  };
+  if(state.tableGrouping==='nucleus'){
+    const visible=new Set(windowRows.map(row=>row.uid));
+    for(const group of nucleusGroups){const groupRows=group.rows.filter(row=>visible.has(row.uid));if(!groupRows.length)continue;
+      const section=el('section',null,'requirement-group');section.dataset.nucleusGroup=group.key;
+      section.append(el('h3',`Núcleo: ${group.label} · ${groupRows.length} nesta página de ${group.rows.length} linhas do grupo na seleção`));drawRows(section,groupRows);host.append(section);
+    }
+  }else drawRows(host,windowRows);
   host.querySelectorAll('[data-row-id]').forEach(tr=>{tr.tabIndex=0;const row=windowRows.find(r=>r.uid===tr.getAttribute('data-row-id'));tr.setAttribute('aria-label','Detalhes da linha '+(row.ordinal+1));tr.addEventListener('click',()=>detail(row));tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();detail(row);}});});
 }
 function showAssets(host){
@@ -287,7 +299,7 @@ function showCoverage(host){
   // fields, never a JSON.parse/Number round trip.
   const shape=structure?JSON.parse(structure.raw_json):{},empty=[];
   for(const[key,value]of Object.entries(shape))if(value!==null&&typeof value==='object'&&!counts.has(key)){counts.set(key,0);empty.push([key,Array.isArray(value)?'[]':'{}']);}
-  const summary=el('div',null,'panel');summary.append(el('p','Contagens referem-se exclusivamente à projeção selecionada. Não são porcentagem de toda a história nem aceite científico.'));
+  const summary=el('div',null,'panel');summary.append(el('p','Esta área agrega ocorrências de contexto, cobertura e origens de coleções distintas. Seu contador de navegação não é a quantidade de limites históricos nem uma porcentagem de cobertura científica. As contagens referem-se exclusivamente à projeção selecionada.'));
   for(const[group,count]of counts)summary.append(el('p',group+': '+count));host.append(summary);
   if(structure?.fields.length){const globals=el('details',null,'panel'),values=el('dl');globals.dataset.uid=structure.uid;globals.append(el('summary','Valores globais da projeção'));for(const f of structure.fields)values.append(el('dt',f.name+' ['+f.type+']'),el('dd',f.text));globals.append(values);host.append(globals);}
   for(const[key,raw]of empty){const d=el('details',null,'panel');d.append(el('summary',key+' — coleção vazia'),el('pre',raw));host.append(d);}
@@ -327,6 +339,8 @@ function selectSource(){
     let badge=b.querySelector('.application-nav-count');if(!badge){badge=el('span',null,'application-nav-count');badge.setAttribute('aria-hidden','true');b.append(badge);}
     badge.hidden=b.dataset.pane==='overview';
     badge.textContent=triageCounts[b.dataset.pane]??(b.dataset.pane==='relations'?presentation().edges.length:count(({tree:'record',records:'record',tables:'table',relations:'relation',assets:'asset',timeline:'record',coverage:'collection'})[b.dataset.pane]));
+    if(b.dataset.pane==='assets')b.title='Total agregado das coleções de produtos, recursos, documentos e dossiês; cada coleção pode ser consultada separadamente.';
+    if(b.dataset.pane==='coverage')b.title='Total de ocorrências auxiliares de contexto, cobertura e origens; inclui várias coleções e não é a contagem de limites históricos nem um percentual científico.';
   }
   $('native-download').disabled=state.source?.status!=='READY';$('native-source').disabled=!state.sources.length;$('native-rebuild').disabled=!state.sources.length;
   $('native-revision').textContent=state.source?.revision?'Revisão: '+state.source.revision:'';

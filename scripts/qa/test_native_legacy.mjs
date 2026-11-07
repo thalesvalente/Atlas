@@ -10,6 +10,63 @@ import {ASSET_COLLECTIONS, renderCatalog, renderPresentationDetail, renderReadin
 import {mountEditorialTree} from '../../packages/atlas/src/atlas_viewer/static/native_legacy_tree.js';
 import * as legacyModel from '../../packages/atlas/src/atlas_viewer/static/native_legacy_model.js';
 
+test('overview reads declared source populations separately and preserves absent/null/zero/exact counts',()=>{
+  assert.equal(typeof legacyModel.snapshotPopulationMetrics,'function');
+  const structure=entry('structure','collection',{records:[],result_tables:[],product_items:[],storage_observations:[],frontier_catalog:[],coverage:{}},{group:'$structure'});
+  const coverage=rawEntry('coverage','collection','{"source_rows":{"operational_index":9007199254740993}}',{group:'coverage',pointer:'/coverage'});
+  const items=[structure,coverage,entry('r1','record',{}),entry('r2','record',{}),entry('t1','table',{rows:[]},{group:'result_tables'}),
+    ...['p1','p2','p3'].map(id=>entry(id,'asset',{}, {group:'product_items'})),entry('s1','collection',{}, {group:'storage_observations'}),
+    ...['f1','f2','f3','f4'].map(id=>entry(id,'collection',{}, {group:'frontier_catalog'}))];
+  const before=JSON.stringify(items),metrics=legacyModel.snapshotPopulationMetrics(items),byId=new Map(metrics.map(item=>[item.id,item]));
+  assert.equal(byId.get('records').value,'2');assert.equal(byId.get('notebook_index').value,'9007199254740993');
+  assert.equal(byId.get('product_items').value,'3');assert.equal(byId.get('storage_observations').value,'1');assert.equal(byId.get('frontier_catalog').value,'4');
+  assert.equal(byId.get('result_tables').value,'1');assert.equal(byId.get('notebook_index').path,'/coverage/source_rows/operational_index');
+  const missing=new Map(legacyModel.snapshotPopulationMetrics([entry('empty','collection',{records:[],product_items:[]},{group:'$structure'})]).map(m=>[m.id,m]));
+  assert.equal(missing.get('product_items').value,'0');assert.equal(missing.get('notebook_index').value,'Não declarado');
+  assert.equal(missing.get('storage_observations').value,'Não declarado');
+  for(const [raw,expected]of [['0','0'],['null','NULL — valor declarado'],['""','"" — texto vazio declarado']]){
+    const item=rawEntry('count','collection','{"source_rows":{"operational_index":'+raw+'}}',{group:'coverage',pointer:'/coverage'});
+    assert.equal(legacyModel.snapshotPopulationMetrics([structure,item]).find(m=>m.id==='notebook_index').value,expected);
+  }
+  assert.equal(JSON.stringify(items),before);
+});
+
+test('requirements group only by declared nucleus, retain table scope/types and never invent business IDs or cells',()=>{
+  assert.equal(typeof legacyModel.groupRequirementRows,'function');
+  const rows=[
+    entry('a1','row',{id:'RF-A',nucleus_id:'A',cells:{'Núcleo / Módulo':'A — invented module',Nome:'First'}},{table_uid:'T',ordinal:0}),
+    entry('b1','row',{id:'RF-B',nucleus_id:'B',cells:{Nome:'Second'}},{table_uid:'T',ordinal:1}),
+    entry('a2','row',{native_id:null,nucleus_id:'A',cells:{Nome:'Third'}},{table_uid:'T',ordinal:2}),
+    entry('missing','row',{id:'RF-A-not-a-nucleus',cells:{Nome:'No declared nucleus'}},{table_uid:'T',ordinal:3}),
+    entry('null','row',{nucleus_id:null,cells:{'Núcleo / Módulo':'Do not override NULL'}},{table_uid:'T',ordinal:4}),
+    entry('empty','row',{nucleus_id:'',cells:{}},{table_uid:'T',ordinal:5}),
+    rawEntry('number','row','{"nucleus_id":1,"cells":{}}',{table_uid:'T',ordinal:6}),
+    entry('string','row',{nucleus_id:'1',cells:{}},{table_uid:'T',ordinal:7}),
+    entry('other-table','row',{nucleus_id:'A',cells:{}},{table_uid:'OTHER',ordinal:0})];
+  const before=JSON.stringify(rows),groups=legacyModel.groupRequirementRows(rows);
+  assert.equal(groups.length,8);assert.deepEqual(groups[0].rows.map(r=>r.uid),['a1','a2']);
+  assert.match(groups[0].label,/A — invented module/);
+  assert.equal(groups.find(group=>group.rows.some(row=>row.uid==='missing')).label,'Não declarado');
+  assert.notEqual(groups.find(g=>g.rows[0].uid==='number').key,groups.find(g=>g.rows[0].uid==='string').key);
+  assert.notEqual(groups[0].key,groups.find(g=>g.rows[0].uid==='other-table').key);
+  assert.equal(new Set(groups.flatMap(group=>group.rows.map(row=>row.uid))).size,rows.length);
+  assert.equal(JSON.stringify(rows),before,'Grouping does not mutate rows or manufacture nucleus cells/native IDs');
+  assert.equal(JSON.parse(rows[2].raw_json).cells['Núcleo / Módulo'],undefined);
+  assert.equal(JSON.parse(rows[2].raw_json).native_id,null);
+});
+
+test('nucleus presentation pages preserve every filtered occurrence and exact export data',()=>{
+  const rows=Array.from({length:205},(_,index)=>entry('paged-'+index,'row',{native_id:null,nucleus_id:['INVENTED-A','INVENTED-B','UNKNOWN'][index%3],cells:{Nome:'Invented '+index}},{table_uid:'PAGED',ordinal:index}));
+  const before=JSON.stringify(rows),csvBefore=legacyModel.typedTableCsv({uid:'PAGED'},rows,['Nome']);
+  const grouped=legacyModel.groupRequirementRows(rows,{sourceId:'fixture-source',snapshot:'fixture-revision'}),ordered=grouped.flatMap(group=>group.rows);
+  const pages=[ordered.slice(0,100),ordered.slice(100,200),ordered.slice(200)];
+  assert.deepEqual(pages.map(page=>page.length),[100,100,5]);
+  assert.equal(new Set(pages.flat().map(row=>row.uid)).size,205);
+  assert.ok(grouped.some(group=>group.rows.some(row=>pages[0].includes(row))&&group.rows.some(row=>pages[1].includes(row))),'A declared nucleus may continue on another page');
+  assert.ok(grouped.some(group=>group.label==='UNKNOWN'),'Declared UNKNOWN stays distinct from absence');
+  assert.equal(JSON.stringify(rows),before);assert.equal(legacyModel.typedTableCsv({uid:'PAGED'},rows,['Nome']),csvBefore);
+});
+
 test('typed CSV preserves absent/null/empty/typed numbers/formulas and full row identity', () => {
   const raws = [
     '{"cells":{},"native_id":null}',
