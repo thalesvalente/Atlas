@@ -1,0 +1,113 @@
+[
+  {
+    "id": "PAR-005",
+    "historical": "Produtos/grupos/versões/apresentações",
+    "current": "Coleções e estágios/execuções declarados no catálogo nativo; preserva null/empty/unknown.",
+    "tests": [
+      "native_legacy catalog includes classical products",
+      "product catalog restores declared execution and stage"
+    ],
+    "counterevidence": "Não inferir produto de nome/MIME ou ID científico de agrupamento editorial.",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "evidence": [
+      "spec004 spec/plan",
+      "spec007 spec",
+      "native_legacy_model.js",
+      "P02-CI-EVIDENCE.json"
+    ],
+    "human_gate": "Private OLD/NEW/ChromeWindows exact acceptance remains separate."
+  },
+  {
+    "id": "PAR-006",
+    "historical": "Documentos/recursos/dossiês",
+    "current": "Campos originais, UID/ID, disponibilidade e JSON integral consultáveis.",
+    "tests": [
+      "native_legacy null/scalars/arrays inspectable",
+      "hostile labels",
+      "native parity"
+    ],
+    "counterevidence": "URI não autoriza download; export não aprova ciência.",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "evidence": [
+      "spec004 spec/plan",
+      "spec007 spec",
+      "native_legacy_model.js",
+      "P02-CI-EVIDENCE.json"
+    ],
+    "human_gate": "Private OLD/NEW/ChromeWindows exact acceptance remains separate."
+  },
+  {
+    "id": "PAR-007",
+    "historical": "Grafo/árvore/relações",
+    "current": "Resolução nativa exata, colisões visíveis, busca alcança todos os nós; árvore editorial distinta de parentesco técnico.",
+    "tests": [
+      "native_legacy relation endpoints/ambiguous endpoints",
+      "native graph browser"
+    ],
+    "counterevidence": "Não fabricar aresta para null/unresolved nem causalidade por tema.",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "evidence": [
+      "spec004 spec/plan",
+      "spec007 spec",
+      "native_legacy_model.js",
+      "P02-CI-EVIDENCE.json"
+    ],
+    "human_gate": "Private OLD/NEW/ChromeWindows exact acceptance remains separate."
+  },
+  {
+    "id": "PAR-008",
+    "historical": "Histórico/timeline",
+    "current": "Tempos declarados e UNKNOWN preservados; observação não substitui evento.",
+    "tests": [
+      "P06 time offsets",
+      "P09 unknown values/times",
+      "native parity allfields"
+    ],
+    "counterevidence": "Não converter mtime/publicação/indexação em tempo científico.",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "evidence": [
+      "spec004 spec/plan",
+      "spec007 spec",
+      "native_legacy_model.js",
+      "P02-CI-EVIDENCE.json"
+    ],
+    "human_gate": "Private OLD/NEW/ChromeWindows exact acceptance remains separate."
+  },
+  {
+    "id": "PAR-009",
+    "historical": "Cobertura/perdas/populações",
+    "current": "Overview separa source populations, navegação e sessão; preserva ausência/null/zero/exato.",
+    "tests": [
+      "native_legacy overview test",
+      "spec007 FR013/SC007",
+      "native parity pin tests"
+    ],
+    "counterevidence": "Sem universo privado conhecido não inferir completude, denominador ou percentual.",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "evidence": [
+      "spec004 spec/plan",
+      "spec007 spec",
+      "native_legacy_model.js",
+      "P02-CI-EVIDENCE.json"
+    ],
+    "human_gate": "Private OLD/NEW/ChromeWindows exact acceptance remains separate."
+  },
+  {
+    "id": "PAR-010",
+    "historical": "Storage observacional",
+    "current": "Resumo declarado e notices consultáveis, readonly; não há poder de limpeza ou migração.",
+    "tests": [
+      "native_legacy overview/dataset notice",
+      "native_notebook immutable source tests"
+    ],
+    "counterevidence": "Não prometer espaço recuperado ou existência de arquivos não observados.",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "evidence": [
+      "spec004 spec/plan",
+      "spec007 spec",
+      "native_legacy_model.js",
+      "P02-CI-EVIDENCE.json"
+    ],
+    "human_gate": "Private OLD/NEW/ChromeWindows exact acceptance remains separate."
+  }
+]

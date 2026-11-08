@@ -1,0 +1,332 @@
+{
+  "id": "ATLAS-CONVERGENCE-O0-20261108",
+  "status": "G0_SOURCE_PASS_G1_PRODUCT_FIXED_O1_RELEASED",
+  "observed_at_utc": "2026-11-08T22:07:46.052549+00:00",
+  "repository": "thalesvalente/Atlas",
+  "visibility": "public",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "head_state": "detached clean clone in Chat runtime",
+  "remote": "https://github.com/thalesvalente/Atlas.git",
+  "targets": [
+    {
+      "pr": 40,
+      "state": "open",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "docs/atlas-pending24-portability-20261108",
+      "head_sha": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+      "head_tree": "358d5d44a094d60ea6899b308392369968c00957",
+      "base_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "prior_head_matches": null
+    },
+    {
+      "pr": 31,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "ci/atlas-ap04-c4-k-successor-p02-native-20261104",
+      "head_sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "head_tree": "9b4c9fb2c7dc9fcc3832f44bae091d4833bbbfed",
+      "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 30,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "ci/atlas-ap04-c4-k-successor-20261104",
+      "head_sha": "95012ba70a288feb9562fb7869afc8d219627c19",
+      "head_tree": "80e867d35c92e5bd6e99226d50a43e5ea1d084c6",
+      "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 22,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "docs/ap04-f4-l0-codex-desktop-handoff-20261101",
+      "head_sha": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "head_tree": "de4328906273489faf4fca74291b30dcc96864e2",
+      "base_sha": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 21,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "docs/atlas-parity04-f4-key-identity-20261101",
+      "head_sha": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "head_tree": "f2ba38b893cacf290038fa88b5d782294f36e1c2",
+      "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 20,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "feat/atlas-parity04-f4-c2-os-isolation-20261101",
+      "head_sha": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "head_tree": "0cb607d457f0ebb83b62f3cbae8dec68d43ba7e6",
+      "base_sha": "dcd219bf592f47590413424adfdf6513a0daa18f",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 19,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "docs/atlas-parity04-f4-reader003-20261031",
+      "head_sha": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "head_tree": "4f0c6360d429507af1946a094c27b790c9894477",
+      "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 18,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "feat/atlas-parity04-f4-external-reader-20261031",
+      "head_sha": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "head_tree": "982da6af550229c45cef5b6bdbca5c1e4bcb4d12",
+      "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 17,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "feat/atlas-parity04-f3b-tables-20261031",
+      "head_sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "head_tree": "ac3dec6de49bf55dc25115bfb35dd364b1a2f690",
+      "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 16,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "feat/atlas-parity04-f3a-graph-20261031",
+      "head_sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "head_tree": "1ba41dd01b118a008ca33061131e9181a2600548",
+      "base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 15,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "docs/atlas-parity04-f2-legacy-contract-20261030",
+      "head_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "head_tree": "1372dd532b2323fc1ebaa5c2f00b6d537c636dc9",
+      "base_sha": "a237f446e54927eeeda8ed5e8e9daa83ee09dcb7",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 14,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "docs/atlas-parity04-plan-of-record-20261030",
+      "head_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "head_tree": "a02e8b6e6d82a743de4a31e9835c3d18e29d8947",
+      "base_sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 13,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "integrate/atlas-parity03-c4-full-candidate-20261027",
+      "head_sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "head_tree": "0a622663ca40232d6143659f82cfe9ce43702e90",
+      "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 12,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "qa/atlas-parity03-c3-contract-gate-20261027",
+      "head_sha": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "head_tree": "928fec43fb493387a48789a226f59988587a19a2",
+      "base_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 11,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "integrate/atlas-parity03-c1-core-20261027",
+      "head_sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "head_tree": "7a9bbc1765bbbf3897760ccc50a0b22aec3ee239",
+      "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 10,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "qa/atlas-parity03-c2-p03-gates-20261027",
+      "head_sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "head_tree": "d60783a212b3593e7677ca8761557ad7b758e763",
+      "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 9,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "work/atlas-parity02-p01-contracts-20261027",
+      "head_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "head_tree": "e27541f68039dc09b3e29198be937f50978752a2",
+      "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 8,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "work/atlas-parity02-p02-c0-20261027",
+      "head_sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "head_tree": "03384f39d92b1b543cc32f5b7297a54ced0cd1a6",
+      "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 7,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "work/atlas-parity02-p03-components-20261027",
+      "head_sha": "ead1f753f52f22035326b7366dd2231c62775765",
+      "head_tree": "624c1ad386666ed2db046a05b0a66530a5ee24c1",
+      "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "prior_head_matches": true
+    },
+    {
+      "pr": 6,
+      "state": "closed",
+      "merged_at": null,
+      "draft": true,
+      "head_ref": "work/atlas-parity02-p06-qa-20261027",
+      "head_sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "head_tree": "f4e57bcde025a9d96b3638cfaeb11f68c592508c",
+      "base_sha": "c2d00fb137cac1d62d6b7cb045ddbe055355a4c5",
+      "prior_head_matches": true
+    }
+  ],
+  "prior_audit": {
+    "sha256": "84a23d77fca38b87d7e8c91108eb34cc5038791620263704a3014baae467724f",
+    "comments_revalidated": 19,
+    "unchanged": 19,
+    "file_matrix_rebuild": "NOT_REQUESTED_REUSE_EXISTING_1016_ENTRIES"
+  },
+  "attachment_sha256": "42663edeadfa72935367f5e884f4297c32272c56ab012db23dd24378a4c7ac0e",
+  "attachment_manifest_verified": 11,
+  "ownership": {
+    "P00": "single integrator and product/documentation writer; remote publisher",
+    "P01": {
+      "prs": [
+        6,
+        7,
+        9,
+        10,
+        12,
+        14,
+        15,
+        19,
+        21,
+        31
+      ],
+      "write_area": "agents/P01 only; product read only in O1"
+    },
+    "P02": {
+      "prs": [
+        8,
+        11,
+        13,
+        16,
+        17
+      ],
+      "write_area": "agents/P02 only; product read only in O1"
+    },
+    "P03": {
+      "prs": [
+        18,
+        20,
+        22
+      ],
+      "write_area": "agents/P03 only; product read only in O1"
+    }
+  },
+  "cross_review": {
+    "P01": "P02",
+    "P02": "P03",
+    "P03": "P01"
+  },
+  "product_invariants": [
+    "read-only fixed sources; literal values including missing/null/numeric tokens",
+    "producer outside viewer; no automatic migration or scientific promotion",
+    "external descriptor 0.2.0 retained; descriptor 0.2.1 and ARC09 frozen candidate NOT_APPROVED",
+    "protocol and native presentation are distinct public interfaces",
+    "no acquisition from private corpus; no new source paths through HTTP",
+    "PR40 immutable separate deliverable, not merged",
+    "main unchanged; no branch deletion, deploy, release, merge, force push, private publication"
+  ],
+  "tests": [
+    "reproduce actual baseline defects on synthetic inputs before patches",
+    "separate / from /notebook; session/snapshot/stale selection and type/error/graph/table/export controls",
+    "check historical L0 validator defects presence in main before repair",
+    "map build/wheel/HTTP/browser/CI and AP04 PAR005-010 requirements individually",
+    "preserve negative guards and protected blobs; Ubuntu/Windows normal/-O and Chromium final SHA",
+    "independent cross-review and independent final product review; exact final SHA CI",
+    "clean remote clone portability; private recovery explicitly excluded"
+  ],
+  "speckit": {
+    "version_in_repo": "1.2.3",
+    "skill": "speckit-analyze",
+    "helper_prerequisites": {
+      "001": 0,
+      "004": 0,
+      "007": 0
+    },
+    "cli": "NOT_RUN_NOT_INSTALLED",
+    "extensions_present": false,
+    "global_selector_mutation": false,
+    "instruction_conflict": "AGENTS suggests isolated installation; explicit mission forbids unapproved installation. Existing skills/helpers used."
+  },
+  "allowed_remote_mutations": [
+    "one or few own branches and Draft PRs for justified corrections/public evidence",
+    "GitHub Actions for authorized tests",
+    "complementary comments containing genuinely new proof; @codex review eligible final PR"
+  ],
+  "human_decisions": [
+    "ARC09 frozen proposal 0.2.1 version-bound approval",
+    "OLD/NEW private usage/zoom exact acceptance beyond #39 restricted acceptance",
+    "private production acquisition and historical L0 witness",
+    "merge/deploy/release/branch deletion"
+  ],
+  "local_gate": "LOCAL_NOT_REQUIRED_FOR_O1_SYNTHETIC_REMOTE_WORK; private-only acceptance preserved separately",
+  "workspace_preflight": {
+    "status": "",
+    "ignored": "",
+    "worktrees": "worktree /workspace/scratch/34abaf002e3a/atlas-convergence/repo\nHEAD 8f8fe01c3041361aa2607194d66af6a640d834ad\ndetached",
+    "locks": [],
+    "tracked_count": 306
+  }
+}

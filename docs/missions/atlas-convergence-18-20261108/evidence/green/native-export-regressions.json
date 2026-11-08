@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/viewer",
+    "-p",
+    "test_native_notebook.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "base_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "scope": "source tree; no installation; root candidate diff",
+  "log": "native-export-regressions.log"
+}

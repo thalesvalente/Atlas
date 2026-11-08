@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "scripts/qa/speckit_audit.py",
+    "--allow-presentation-delta"
+  ],
+  "exit_code": 0,
+  "scope": "candidate source tree; protected task ledgers restored exactly; guard unmodified",
+  "prior_failure": "speckit-guard.log",
+  "log": "speckit-guard-corrected.log"
+}

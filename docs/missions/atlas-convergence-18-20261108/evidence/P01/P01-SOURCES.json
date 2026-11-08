@@ -1,0 +1,170 @@
+[
+  {
+    "pr": 6,
+    "ref": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+    "path": "scripts/qa/atlas_parity02_p06_audit.py",
+    "blob": "bb44542a821a315b8d9e5313f89aad0e50110c5f",
+    "bytes": 3899
+  },
+  {
+    "pr": 6,
+    "ref": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+    "path": "tests/qa/test_atlas_parity02_p06_semantics.py",
+    "blob": "97725f95b52a81307413e101da8fcdbd2f084192",
+    "bytes": 18130
+  },
+  {
+    "pr": 6,
+    "ref": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+    "path": "scripts/qa/atlas_parity02_p06_browser.mjs",
+    "blob": "e441e8e6262f0379e60da37d96a0beb3efbef902",
+    "bytes": 4944
+  },
+  {
+    "pr": 7,
+    "ref": "ead1f753f52f22035326b7366dd2231c62775765",
+    "path": "docs/missions/atlas-parity-02/p03-components/INTEGRATION-CONTRACT.md",
+    "blob": "c5241316ecf4520b08dc0f08513867448191e240",
+    "bytes": 6878
+  },
+  {
+    "pr": 7,
+    "ref": "ead1f753f52f22035326b7366dd2231c62775765",
+    "path": "packages/atlas/src/atlas_viewer/parity02_p03_metadata.py",
+    "blob": "2150d3140f4c89f70f73c9e6e05883bb39f6ce0a",
+    "bytes": 10619
+  },
+  {
+    "pr": 9,
+    "ref": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "path": "docs/contracts/atlas-parity-02/p01/PRESENTATION-CONTRACTS.md",
+    "blob": "6a5e2804550a558e7d07f2cd12b9cae4171cc795",
+    "bytes": 18951
+  },
+  {
+    "pr": 9,
+    "ref": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "path": "docs/contracts/atlas-parity-02/p01/COVERAGE-CONTRACT.md",
+    "blob": "a3d560a681a51adc4772104bf2b10c45a76c67c0",
+    "bytes": 14628
+  },
+  {
+    "pr": 9,
+    "ref": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "path": "docs/contracts/atlas-parity-02/p01/validate_examples.py",
+    "blob": "787aa11e7a89b418bec8916f1a7329fa41504931",
+    "bytes": 24581
+  },
+  {
+    "pr": 9,
+    "ref": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "path": "docs/missions/atlas-parity-02/p01-contracts/DECISIONS-AND-GAPS.md",
+    "blob": "08f90f2195493bc7b02ce37c1c7e32db8e2d6e36",
+    "bytes": 6610
+  },
+  {
+    "pr": 10,
+    "ref": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "path": "scripts/qa/atlas_parity03_p03_ci.py",
+    "blob": "b5338403d395c93ec3aa7ff0283569ce52aadd46",
+    "bytes": 12265
+  },
+  {
+    "pr": 10,
+    "ref": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "path": "scripts/qa/atlas_parity03_p03_browser.mjs",
+    "blob": "e960f8bc9f285facd6a8111e44359b09e81fd93a",
+    "bytes": 29272
+  },
+  {
+    "pr": 12,
+    "ref": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+    "path": "docs/contracts/atlas-parity-02/p01/run_contract_gate.py",
+    "blob": "cf1725e6814f7444cc3b96961667d2e5c70a160b",
+    "bytes": 12654
+  },
+  {
+    "pr": 14,
+    "ref": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+    "path": "docs/missions/atlas-parity-04/ACTION-PLAN.md",
+    "blob": "de728c827a960cf9bcb2e22e20b5d205aa199781",
+    "bytes": 7010
+  },
+  {
+    "pr": 14,
+    "ref": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+    "path": "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+    "blob": "feb9ab242a857fb377724acb9e904b2f89f1f2b9",
+    "bytes": 2702
+  },
+  {
+    "pr": 14,
+    "ref": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+    "path": "docs/missions/atlas-parity-04/DECISION-REGISTER.md",
+    "blob": "e40075b866987f22f234e86a9c0ea789dc6fe3c9",
+    "bytes": 5931
+  },
+  {
+    "pr": 15,
+    "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+    "blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+    "bytes": 64656
+  },
+  {
+    "pr": 15,
+    "ref": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+    "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+    "blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+    "bytes": 12120
+  },
+  {
+    "pr": 19,
+    "ref": "d498504cd2c4d230088f86e04e55624bbe32df79",
+    "path": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+    "blob": "4cba947bd931b2c932198076f143068967ce909c",
+    "bytes": 12265
+  },
+  {
+    "pr": 19,
+    "ref": "d498504cd2c4d230088f86e04e55624bbe32df79",
+    "path": "docs/missions/atlas-parity-04/f4-c0-reader003/CONTRACT-DELTA.md",
+    "blob": "2b6ab97e6919d2b5d85584217603ff534a888c48",
+    "bytes": 6955
+  },
+  {
+    "pr": 19,
+    "ref": "d498504cd2c4d230088f86e04e55624bbe32df79",
+    "path": "docs/missions/atlas-parity-04/f4-c0-reader003/SECURITY-AND-ROLLBACK.md",
+    "blob": "ea8b297b041d7075a9ea9a7bfa3d3788e4243962",
+    "bytes": 9408
+  },
+  {
+    "pr": 21,
+    "ref": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+    "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DECISION-REQUEST.md",
+    "blob": "11fc39f610e02045362ade5c3a97b1ba5350a737",
+    "bytes": 3412
+  },
+  {
+    "pr": 31,
+    "ref": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "path": "scripts/qa/atlas_parity04_k_doc_ci.py",
+    "blob": "f51445174e7c1fb7f7a7d4b65b008e8edc6f3100",
+    "bytes": 27649
+  },
+  {
+    "pr": 31,
+    "ref": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "path": "tests/qa/test_atlas_parity04_k_doc_ci.py",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "bytes": 25710
+  },
+  {
+    "pr": 31,
+    "ref": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "path": "docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json",
+    "blob": "7c50cce99fc809b2028e64aee1050111587e8c85",
+    "bytes": 3791
+  }
+]

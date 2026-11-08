@@ -55,6 +55,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
+      - name: Regress protocol snapshot identity and request ordering
+        run: node --test scripts/qa/test_protocol_snapshot.mjs
       - name: Build and install in isolated environments
         run: |
           git rev-parse HEAD

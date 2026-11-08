@@ -1,0 +1,205 @@
+{
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "groups": {
+    "protocol": [
+      {
+        "path": "packages/protocol/pyproject.toml",
+        "baseline_blob": "743702fc8594f5d71d5ac5e936d7ff1ac5df7ea1",
+        "working_blob": "743702fc8594f5d71d5ac5e936d7ff1ac5df7ea1",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/__init__.py",
+        "baseline_blob": "6c119a2ba9b5707dd4f4ef3f65061c19cb615259",
+        "working_blob": "6c119a2ba9b5707dd4f4ef3f65061c19cb615259",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/__main__.py",
+        "baseline_blob": "eb1d136bc0a96b00ae1753ed9a4d3b5ea4deca45",
+        "working_blob": "eb1d136bc0a96b00ae1753ed9a4d3b5ea4deca45",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/model.py",
+        "baseline_blob": "4f477966dd6adb7a819d7d9b934a39cab7ba8122",
+        "working_blob": "4f477966dd6adb7a819d7d9b934a39cab7ba8122",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/read_model.py",
+        "baseline_blob": "5988b605760ab242e99de6ce484ed57569f8f475",
+        "working_blob": "5988b605760ab242e99de6ce484ed57569f8f475",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt",
+        "baseline_blob": "57bc88a15a0ee8266c259b2667e64608d3f7e292",
+        "working_blob": "57bc88a15a0ee8266c259b2667e64608d3f7e292",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/NOTICE.txt",
+        "baseline_blob": "f755d7ff816dfe9f91c6b77ab2d9039e0123e363",
+        "working_blob": "f755d7ff816dfe9f91c6b77ab2d9039e0123e363",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+        "baseline_blob": "ac6bd4b0f064d836a670698424d390682a03235c",
+        "working_blob": "ac6bd4b0f064d836a670698424d390682a03235c",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+        "baseline_blob": "1f453d63522479c58f259a897015e51c0223b162",
+        "working_blob": "1f453d63522479c58f259a897015e51c0223b162",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+        "baseline_blob": "dbba84967bfa3c3dd828ec2800cabdbe292da0d8",
+        "working_blob": "dbba84967bfa3c3dd828ec2800cabdbe292da0d8",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/src/caderno_protocol/storage.py",
+        "baseline_blob": "cc6114458778945b2cd1a8719e955151a3291fdd",
+        "working_blob": "cc6114458778945b2cd1a8719e955151a3291fdd",
+        "same": true
+      },
+      {
+        "path": "packages/protocol/tests/test_sdk.py",
+        "baseline_blob": "e2dc1d5327c7b53a3b33fc9d2d6735d503b13dc1",
+        "working_blob": "e2dc1d5327c7b53a3b33fc9d2d6735d503b13dc1",
+        "same": true
+      }
+    ],
+    "architecture_governance": [
+      {
+        "path": ".specify/memory/constitution.md",
+        "baseline_blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+        "working_blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+        "same": true
+      },
+      {
+        "path": "AGENTS.md",
+        "baseline_blob": "c19ccc55e54f1274dac8408480f7a3e9ecc30f85",
+        "working_blob": "c19ccc55e54f1274dac8408480f7a3e9ecc30f85",
+        "same": true
+      },
+      {
+        "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+        "baseline_blob": "a2190a257987aa9a2da276857cdb713ac24dd520",
+        "working_blob": "a2190a257987aa9a2da276857cdb713ac24dd520",
+        "same": true
+      },
+      {
+        "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+        "baseline_blob": "17265f1a7293d7885825d9dc1982b1e1dec2b567",
+        "working_blob": "17265f1a7293d7885825d9dc1982b1e1dec2b567",
+        "same": true
+      },
+      {
+        "path": "docs/coordination/A-DATA-REQUIREMENTS.md",
+        "baseline_blob": "da8a1d0b3a176b21a3f22927fa661c3a786ac49b",
+        "working_blob": "da8a1d0b3a176b21a3f22927fa661c3a786ac49b",
+        "same": true
+      },
+      {
+        "path": "docs/coordination/A-MIGRATION-DISPOSITION.json",
+        "baseline_blob": "0d8daef8f048cedc398d27fb1654729181f40d13",
+        "working_blob": "0d8daef8f048cedc398d27fb1654729181f40d13",
+        "same": true
+      },
+      {
+        "path": "docs/coordination/AB-CONTRACT.md",
+        "baseline_blob": "7f067f719fd4bc6efb5153c569216a7cf2e89f02",
+        "working_blob": "7f067f719fd4bc6efb5153c569216a7cf2e89f02",
+        "same": true
+      },
+      {
+        "path": "docs/coordination/publication-policy.md",
+        "baseline_blob": "59e7723608ef73e4746bb64a9acd8aeca5e3778b",
+        "working_blob": "59e7723608ef73e4746bb64a9acd8aeca5e3778b",
+        "same": true
+      },
+      {
+        "path": "docs/protocol/0.1.0a1.md",
+        "baseline_blob": "a60f5bb82156c1cbb04344217415f0ab5deecaef",
+        "working_blob": "a60f5bb82156c1cbb04344217415f0ab5deecaef",
+        "same": true
+      },
+      {
+        "path": "docs/protocol/SDK.md",
+        "baseline_blob": "adaab213b7428cba3fb89ec56c072e1e333b0e0b",
+        "working_blob": "adaab213b7428cba3fb89ec56c072e1e333b0e0b",
+        "same": true
+      },
+      {
+        "path": "docs/protocol/conformance.md",
+        "baseline_blob": "654ae2ad757a3dafe62746330031f78afc6d2199",
+        "working_blob": "654ae2ad757a3dafe62746330031f78afc6d2199",
+        "same": true
+      },
+      {
+        "path": "docs/protocol/profile-manifest.json",
+        "baseline_blob": "c4c8e348f1959151eeb4022c0ee18d4b0e35ca8b",
+        "working_blob": "c4c8e348f1959151eeb4022c0ee18d4b0e35ca8b",
+        "same": true
+      }
+    ],
+    "protected_p03": [
+      {
+        "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+        "baseline_blob": "0fe2568ec80e40825bcd3e08e0d1eade09d03c5f",
+        "working_blob": "0fe2568ec80e40825bcd3e08e0d1eade09d03c5f",
+        "same": true
+      },
+      {
+        "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+        "baseline_blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+        "working_blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+        "same": true
+      }
+    ],
+    "historical_missions": [
+      {
+        "path": "docs/missions/atlas-a01/FUNCTIONAL-CONVERGENCE.md",
+        "baseline_blob": "46f2f925aca249e7d872aaf8a9224e1d3fff3fd2",
+        "working_blob": "46f2f925aca249e7d872aaf8a9224e1d3fff3fd2",
+        "same": true
+      },
+      {
+        "path": "docs/missions/atlas-a01/FUNCTIONAL-EVIDENCE.json",
+        "baseline_blob": "f6bd0d93a2d4e57450ae1b6c45dee39fe807c052",
+        "working_blob": "f6bd0d93a2d4e57450ae1b6c45dee39fe807c052",
+        "same": true
+      },
+      {
+        "path": "docs/missions/atlas-a01/LQA-FIX.md",
+        "baseline_blob": "5ac6df19b7b5455f5048870dc5d25c56e6d58e09",
+        "working_blob": "5ac6df19b7b5455f5048870dc5d25c56e6d58e09",
+        "same": true
+      },
+      {
+        "path": "docs/missions/atlas-a01/REUSE-AND-PARITY.md",
+        "baseline_blob": "19951535a049ed61692ec43c7e415d4ef6b537a8",
+        "working_blob": "19951535a049ed61692ec43c7e415d4ef6b537a8",
+        "same": true
+      },
+      {
+        "path": "docs/missions/atlas-a01/REUSE-MANIFEST.json",
+        "baseline_blob": "5101d0e7ff0e227f42dd28196ca66f4685fea024",
+        "working_blob": "5101d0e7ff0e227f42dd28196ca66f4685fea024",
+        "same": true
+      },
+      {
+        "path": "docs/missions/atlas-a01/REUSE-SUCCESSOR-20261107.json",
+        "baseline_blob": "345c37a6b9317c846d442ce864b408df8ef6dc61",
+        "working_blob": "345c37a6b9317c846d442ce864b408df8ef6dc61",
+        "same": true
+      }
+    ]
+  }
+}

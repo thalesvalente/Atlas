@@ -4,6 +4,8 @@
 const $ = id => document.getElementById(id);
 const state = {catalog: null, runs: [], selected: new Set(), view: 'explore', detail: null};
 const key = (source, id) => JSON.stringify([source, id]);
+// Verification time/status may change without accepting a new source snapshot.
+const snapshotKey = catalog => catalog ? JSON.stringify([catalog.generation,catalog.indexed_at,catalog.sources.map(s=>[s.id,s.metadata_sha256])]) : null;
 const element = (tag, text, cls) => {const e = document.createElement(tag); if(text !== undefined) e.textContent = String(text); if(cls) e.className = cls; return e;};
 const clear = id => $(id).replaceChildren();
 const display = v => v === null || v === undefined ? 'Ausente' : typeof v === 'object' ? JSON.stringify(v) : String(v);
@@ -11,8 +13,15 @@ const badge = (text, kind) => element('span', text, 'badge ' + (kind || text || 
 const runName = r => r.name || r.id;
 
 function announce(text, error = false) {$('notice').textContent = text; $('notice').className = error ? 'notice error' : 'notice';}
-function savePreferences() {try {localStorage.setItem('atlas.preferences.v1', JSON.stringify({query:$('search').value,project:$('project-filter').value,experiment:$('experiment-filter').value,status:$('status-filter').value}));} catch (_) {}}
-function restorePreferences() {try {const p = JSON.parse(localStorage.getItem('atlas.preferences.v1') || '{}'); for(const [field,id] of [['query','search'],['project','project-filter'],['experiment','experiment-filter'],['status','status-filter']]) if(typeof p[field] === 'string') $(id).value = p[field];} catch (_) {}}
+function savePreferences() {try {localStorage.setItem('atlas.preferences.v1', JSON.stringify({query:$('search').value,project:$('project-filter').value,experiment:$('experiment-filter').value,status:$('status-filter').value,snapshot:snapshotKey(state.catalog)}));} catch (_) {}}
+function restorePreferences() {
+  try {
+    const p=JSON.parse(localStorage.getItem('atlas.preferences.v1') || '{}');
+    for(const [field,id] of [['query','search'],['status','status-filter']])if(typeof p[field]==='string')$(id).value=p[field];
+    // source-N is ordinal, so an old preference must not select a different source.
+    if(p.snapshot===snapshotKey(state.catalog))for(const [field,id] of [['project','project-filter'],['experiment','experiment-filter']])if(typeof p[field]==='string')$(id).value=p[field];
+  } catch (_) {}
+}
 function runLink(run,label=runName(run)) {const b = element('button', label, 'inline-link'); b.type='button'; b.addEventListener('click', () => showDetail(run)); return b;}
 function sourceLink(sourceId) {const b = element('button', 'Ver fonte e validação', 'source-anchor'); b.addEventListener('click', () => {showView('sources'); const c=document.getElementById('card-'+sourceId); if(c){c.focus();c.scrollIntoView({block:'nearest'});}});return b;}
 function findEntity(sourceId, id) {const s = state.catalog.sources.find(x => x.id===sourceId); return (s?.read_model?.entities || []).find(x => x['@id']===id);}
@@ -21,20 +30,27 @@ function entityLink(sourceId, id, label) {const run=state.runs.find(x=>x._source
 function setOptions(id, items, title) {const control=$(id),previous=control.value;control.replaceChildren();const all=element('option',title);all.value='';control.append(all);for(const item of items){const option=element('option',item.name);option.value=item.key;control.append(option);}control.value=previous;}
 
 function updateCatalog(catalog, restore=false) {
+  const replaced=state.catalog!==null && snapshotKey(state.catalog)!==snapshotKey(catalog);
+  if(replaced){
+    state.selected.clear();state.detail=null;$('detail').hidden=true;clear('detail-content');
+    $('project-filter').value='';$('experiment-filter').value='';
+  }
   state.catalog=catalog;state.runs=[];
   const projects=[],experiments=[];
   for(const source of catalog.sources){const model=source.read_model;if(!model)continue;for(const p of model.projects)projects.push({...p,key:key(source.id,p.id),name:p.name});for(const e of model.experiments)experiments.push({...e,key:key(source.id,e.id)});for(const r of model.runs)state.runs.push({...r,_sourceId:source.id,_sourceName:source.name,_key:key(source.id,r.id)});}
   const validKeys=new Set(state.runs.map(r=>r._key));state.selected=new Set([...state.selected].filter(k=>validKeys.has(k)));
   setOptions('project-filter',projects,'Todos os projetos');setOptions('experiment-filter',experiments,'Todos os experimentos');
   if(restore)restorePreferences();
+  if(restore || replaced)savePreferences();
   $('projects-count').textContent=projects.length;$('experiments-count').textContent=experiments.length;$('runs-count').textContent=state.runs.length;$('nav-count').textContent=state.runs.length;$('sources-count').textContent=catalog.sources.filter(s=>s.report.valid).length;
-  $('indexed-at').textContent='Índice observado: '+catalog.indexed_at;
+  $('indexed-at').textContent='Indexado em: '+catalog.indexed_at+' · Consulta em: '+catalog.observed_at;
   const changes=catalog.sources.filter(s=>s.changed);$('change-notice').hidden=changes.length===0;$('change-notice').textContent=changes.length?`${changes.length} fonte(s) alterada(s). A tela mostra o snapshot anterior; reconstrua o índice para atualizar os registros.`:'';
   const invalid=catalog.sources.filter(s=>!s.report.valid);
   if(!catalog.sources.length)announce('Nenhuma fonte declarada. Abra o Atlas com --source para consultar um pacote.');
   else if(invalid.length)announce(`${invalid.length} fonte(s) inválida(s) ou inacessível(is). Consulte Fontes e validade para ver os erros; seus registros não foram indexados.`,true);
   else announce(`${catalog.sources.length} fonte(s) aberta(s) pelo perfil candidato. Registros sintéticos e estados de revisão permanecem identificados.`);
   if(catalog.collisions.length)announce($('notice').textContent+' IDs repetidos entre fontes são mantidos separados; nenhum registro foi sobrescrito.',Boolean(invalid.length));
+  if(replaced)announce($('notice').textContent+' Novo snapshot: seleções e filtros de fonte anteriores foram descartados.',Boolean(invalid.length));
   renderRuns();renderComparison();renderTimeline();renderLineage();renderSources();renderDossier();
   if(state.detail){const current=state.runs.find(r=>r._key===state.detail);if(current)showDetail(current,false);else{$('detail').hidden=true;state.detail=null;}}
 }
@@ -93,11 +109,25 @@ function renderComparison(){if(!state.catalog)return;clear('compare-content');co
 
 function renderTimeline(){clear('timeline-content');const runs=[...state.runs].sort((a,b)=>{if(!a.started_at)return b.started_at?1:0;if(!b.started_at)return -1;return Date.parse(a.started_at)-Date.parse(b.started_at);});for(const r of runs){const item=element('li');item.append(element('time',r.started_at || 'Sem data declarada'),runLink(r));const meta=element('div','', 'metadata');meta.append(badge(r.status),element('small','Origem temporal: '+r.timestamp_origin,'muted'));item.append(meta,element('small',r._sourceName,'muted'));$('timeline-content').append(item);}if(!runs.length)$('timeline-content').append(element('li','Nenhuma execução disponível.'));}
 function renderLineage(){clear('lineage-content');const host=$('lineage-content');const box=element('div','', 'table-wrap');const table=element('table');const head=element('thead'),header=element('tr');for(const text of ['Origem','Relação','Destino','Fonte'])header.append(element('th',text));head.append(header);table.append(head);const body=element('tbody');let count=0;for(const source of state.catalog.sources)for(const relation of source.read_model?.relations || []){const row=element('tr');for(const id of [relation.source,relation.target]){const cell=element('td');cell.append(entityLink(source.id,id));if(id===relation.source){row.append(cell);const kind=element('td');kind.append(element('span',{input:'entrada de',output:'produziu',derived_from:'derivado de'}[relation.kind] || relation.kind,'relation'));row.append(kind);}else row.append(cell);}const s=element('td',source.name);s.append(sourceLink(source.id));row.append(s);body.append(row);count++;}table.append(body);box.append(table);host.append(count?box:element('div','Nenhuma relação declarada nas fontes abertas.','empty'));}
-function renderSources(){clear('sources-content');for(const s of state.catalog.sources){const card=element('article','', 'panel source-card');card.id='card-'+s.id;card.tabIndex=-1;card.append(element('h3',s.name),badge(s.status));const dl=element('dl');addDefinition(dl,'Perfil',s.version);addDefinition(dl,'Sintaxe / semântica do perfil',s.report.valid?'Conforme ao candidato':'Não conforme');addDefinition(dl,'Autenticidade',s.authenticity);addDefinition(dl,'Aprovação científica',s.scientific_approval);addDefinition(dl,'Integridade de metadados',s.metadata_sha256 || 'Indisponível');card.append(dl);if(s.changed)card.append(element('p',s.change_message,'compare-note'));const issues=[...(s.report.errors || []),...(s.report.warnings || [])];const details=element('details');details.append(element('summary',`${issues.length} erro(s) ou aviso(s)`));for(const issue of issues)details.append(element('p',`${issue.code}: ${issue.message} (${issue.path || issue.entity_id || ''})`));card.append(details);card.append(element('p','Uma validação positiva não certifica resultados ou autenticidade.','muted'));$('sources-content').append(card);}if(!state.catalog.sources.length)$('sources-content').append(element('div','Nenhuma fonte declarada.','empty'));}
-function renderDossier(){$('dossier-summary').textContent=`${state.catalog.sources.length} fonte(s) · ${state.runs.length} execução(ões) · snapshot observado em ${state.catalog.indexed_at}`;clear('limitations');for(const text of state.catalog.limitations)$('limitations').append(element('li',text));}
+function renderSources(){clear('sources-content');for(const s of state.catalog.sources){const card=element('article','', 'panel source-card');card.id='card-'+s.id;card.tabIndex=-1;card.append(element('h3',s.name),badge(s.status));const dl=element('dl');addDefinition(dl,'Perfil',s.version);addDefinition(dl,'Sintaxe / semântica do perfil',s.report.valid?'Conforme ao candidato':'Não conforme');addDefinition(dl,'Publicação declarada do pacote',s.read_model?.source?.date_published);addDefinition(dl,'Autenticidade',s.authenticity);addDefinition(dl,'Aprovação científica',s.scientific_approval);addDefinition(dl,'Integridade de metadados',s.metadata_sha256 || 'Indisponível');card.append(dl);if(s.changed)card.append(element('p',s.change_message,'compare-note'));const issues=[...(s.report.errors || []),...(s.report.warnings || [])];const details=element('details');details.append(element('summary',`${issues.length} erro(s) ou aviso(s)`));for(const issue of issues)details.append(element('p',`${issue.code}: ${issue.message} (${issue.path || issue.entity_id || ''})`));card.append(details);card.append(element('p','Uma validação positiva não certifica resultados ou autenticidade.','muted'));$('sources-content').append(card);}if(!state.catalog.sources.length)$('sources-content').append(element('div','Nenhuma fonte declarada.','empty'));}
+function renderDossier(){$('dossier-summary').textContent=`${state.catalog.sources.length} fonte(s) · ${state.runs.length} execução(ões) · índice gerado em ${state.catalog.indexed_at} · consulta em ${state.catalog.observed_at}`;clear('limitations');for(const text of state.catalog.limitations)$('limitations').append(element('li',text));}
 function showView(view){state.view=view;for(const node of document.querySelectorAll('.view'))node.hidden=node.id!=='view-'+view;for(const button of document.querySelectorAll('.nav-button')){const active=button.dataset.view===view;button.classList.toggle('active',active);if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}$('detail').hidden=true;state.detail=null;}
 
-async function load(reindex=false){$('refresh').disabled=true;try{const response=await fetch(reindex?'/api/reindex':'/api/catalog',reindex?{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}:{});if(!response.ok)throw new Error('Falha local HTTP '+response.status);updateCatalog(await response.json(),state.catalog===null);if(reindex)announce('Índice reconstruído sem modificar as fontes. '+$('notice').textContent,state.catalog.sources.some(s=>!s.report.valid));}catch(error){announce('Não foi possível consultar o Atlas: '+error.message,true);}finally{$('refresh').disabled=false;}}
+let loadQueue=Promise.resolve(),pendingLoads=0;
+function load(reindex=false){
+  pendingLoads++;$('refresh').disabled=true;
+  // A later GET must observe the completed rebuild, not race its POST.
+  const operation=loadQueue.then(async()=>{
+    try{
+      const response=await fetch(reindex?'/api/reindex':'/api/catalog',reindex?{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}:{});
+      if(!response.ok)throw new Error('Falha local HTTP '+response.status);
+      updateCatalog(await response.json(),state.catalog===null);
+      if(reindex)announce('Índice reconstruído sem modificar as fontes. '+$('notice').textContent,state.catalog.sources.some(s=>!s.report.valid));
+    }catch(error){announce('Não foi possível consultar o Atlas: '+error.message,true);}
+    finally{pendingLoads--;$('refresh').disabled=pendingLoads>0;}
+  });
+  loadQueue=operation;return operation;
+}
 for(const button of document.querySelectorAll('.nav-button'))button.addEventListener('click',()=>showView(button.dataset.view));
 for(const id of ['search','project-filter','experiment-filter','status-filter'])$(id).addEventListener(id==='search'?'input':'change',()=>{savePreferences();renderRuns();});
 $('filters').addEventListener('submit',event=>event.preventDefault());

@@ -1,0 +1,1828 @@
+{
+  "reviewer": "/root/p03_reader",
+  "subject": "/root/p01_contracts",
+  "status": "PASS",
+  "head": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "read_only_repo_status": "",
+  "artifact_count": 22,
+  "source_count": 57,
+  "coverage": {
+    "P01-JOURNEY-CROSSWALK.json": {
+      "count": 28,
+      "unique": 28,
+      "expected": 28
+    },
+    "P01-EXAMPLE-CROSSWALK.json": {
+      "count": 46,
+      "unique": 46,
+      "expected": 46
+    },
+    "P01-C2-28-FILES.json": {
+      "count": 28,
+      "unique": 28,
+      "expected": 28
+    },
+    "C2-P03-35-TEST-CROSSWALK.json": {
+      "count": 35,
+      "unique": 35,
+      "expected": 35
+    },
+    "P01-PAR005-010.json": {
+      "count": 6,
+      "unique": 6,
+      "expected": 6
+    },
+    "P01-N01-24.json": {
+      "count": 24,
+      "unique": 24,
+      "expected": 24
+    },
+    "P01-ARC09-FROZEN.json": {
+      "count": 5,
+      "unique": 5,
+      "expected": 5
+    },
+    "K-NEGATIVES-PRESERVED.json": {
+      "count": 68,
+      "unique": 68,
+      "expected": 68
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/C2-P03-35-TEST-CROSSWALK.json",
+      "sha256": "6862dea2a277eef93c795867836d7e333916cc10b43f4272ab7152972dd0d5c2",
+      "bytes": 20106
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/HUMAN-APPROVAL-READBACK.json",
+      "sha256": "4ebe863c07e9b7f8baffbfdd7e8c0326f9ae4f4fa2d4a8f901188c4b919c4101",
+      "bytes": 12795
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/K-NEGATIVES-PRESERVED.json",
+      "sha256": "e2594d6a99ba964b51e2b21a173845f831772c52c763ef85119f0737972866d5",
+      "bytes": 35312
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-ALL-SOURCES.json",
+      "sha256": "5de589a57c4386a7161adace615efc16a8f7ff8f55c3724d805228c2142e4d89",
+      "bytes": 19052
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-ARC09-FROZEN.json",
+      "sha256": "7da781aea99251530775d2ef684be1fa44eff08efc167bb0ed76cddf395c710e",
+      "bytes": 2558
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-C2-28-FILES.json",
+      "sha256": "b472a47a434cc815a1e6b265005aad869f1ba42e2ec36ff8e464fa1fbce50f9d",
+      "bytes": 15220
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-CHECKS-PRELIMINARY.json",
+      "sha256": "522cafbd2431222d78b737cb1da1b127616c7f09f7deb68b7bec58a11e0e1e2e",
+      "bytes": 4332
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-CHECKS.json",
+      "sha256": "4dc37428369e316897bd1837d51d4551c72c6fbb30ca97aba7a407c5ade937e1",
+      "bytes": 13330
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-EXAMPLE-CROSSWALK.json",
+      "sha256": "3e7d958458ea7bd8dc0a9eb781bcfad55ade955f270e206fe65a3cad67091661",
+      "bytes": 33123
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-JOURNEY-CROSSWALK.json",
+      "sha256": "355c49544281937d9f7ca6f96c6d055807c19a2494fbfa1e54d5c3af15581891",
+      "bytes": 57227
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-MATRIX.json",
+      "sha256": "d26f129f6cb3d10a7306557db0abdd6333dc38e87763e3815ca71d2fa82c70f4",
+      "bytes": 27841
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-MATRIX.md",
+      "sha256": "bc72a5ff84303ff09daaa8dacc3695bc7de982f66d6e5294e264a13082701994",
+      "bytes": 5059
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-N01-24.json",
+      "sha256": "952caa46ba00d815bb551e6b37655201867f5c7d54398a7fd422df30108835c0",
+      "bytes": 7973
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-PAR005-010.json",
+      "sha256": "c1702e57e4175920df8852ebe432de91908f788c2fb1e03e26afd0e0ccdd6145",
+      "bytes": 4040
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-SOURCES.json",
+      "sha256": "f3bf92afc1d0158e512019e04863700e2fa61dabc84f89e7350e32e5e12c9216",
+      "bytes": 5378
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P03-HISTORICAL-TEST-IDS.json",
+      "sha256": "651537422db692f8bc4cd218c64fcf9b2e181b507cac1da7987070feba6cade3",
+      "bytes": 2401
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P06-SEMANTICS-ON-MAIN-0.log",
+      "sha256": "bf766360e67fe89cce2e0aa40586341d9bd3b2bdc855af333d5a1e12cd7e3115",
+      "bytes": 1386
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P06-SEMANTICS-ON-MAIN-1.log",
+      "sha256": "f8ae2afd894955c84b1e51ee8bb1c19215965d928ed6322d227fa009c45641c5",
+      "bytes": 1386
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P09-READER-PROBES-ON-MAIN-0.log",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "bytes": 1385
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P09-READER-PROBES-ON-MAIN-1.log",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "bytes": 1385
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P09-READER-PROBES-ON-MAIN.json",
+      "sha256": "d01f74ae314b70b7460e7127978dcb537389f85517052d39ab53ca2a687a2475",
+      "bytes": 4603
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/finish_p01.py",
+      "sha256": "089ead3111dbbf3e5eee04bb1eff7b88548813e46ca38aa26ef04904d820d1b2",
+      "bytes": 20896
+    }
+  ],
+  "sources": [
+    {
+      "sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "path": "scripts/qa/atlas_parity02_p06_audit.py",
+      "blob": "bb44542a821a315b8d9e5313f89aad0e50110c5f",
+      "sha256": "7a44db74e4ecbf1938e5d13c06552f6b0be2220fad75f559f3dd10e9adab8c6b",
+      "bytes": 3899
+    },
+    {
+      "sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "path": "tests/qa/test_atlas_parity02_p06_semantics.py",
+      "blob": "97725f95b52a81307413e101da8fcdbd2f084192",
+      "sha256": "f928721a1f2b195a1d4ca14c926e216f14d69780b21fdd6b5065ece5fdc5a3ec",
+      "bytes": 18130
+    },
+    {
+      "sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "path": "scripts/qa/atlas_parity02_p06_browser.mjs",
+      "blob": "e441e8e6262f0379e60da37d96a0beb3efbef902",
+      "sha256": "49ee944819d33f3b2fe246e4e2ee63e3b05b843eebe35a27d81855b64f228543",
+      "bytes": 4944
+    },
+    {
+      "sha": "ead1f753f52f22035326b7366dd2231c62775765",
+      "path": "docs/missions/atlas-parity-02/p03-components/INTEGRATION-CONTRACT.md",
+      "blob": "c5241316ecf4520b08dc0f08513867448191e240",
+      "sha256": "a1be7f21366537aac405f19e4cf1fc1664763e511d46516b437bc1c92cc9acaf",
+      "bytes": 6878
+    },
+    {
+      "sha": "ead1f753f52f22035326b7366dd2231c62775765",
+      "path": "packages/atlas/src/atlas_viewer/parity02_p03_metadata.py",
+      "blob": "2150d3140f4c89f70f73c9e6e05883bb39f6ce0a",
+      "sha256": "90368cc2df6b886d08f92fbb5f88b0924a886f3233a51a07ad1863e07965df95",
+      "bytes": 10619
+    },
+    {
+      "sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "path": "docs/contracts/atlas-parity-02/p01/PRESENTATION-CONTRACTS.md",
+      "blob": "6a5e2804550a558e7d07f2cd12b9cae4171cc795",
+      "sha256": "2e0b9c87d0ec1d37e08b38fd4f3c7cedba33cdc75c80b2b5b6c40e6e7cb40e16",
+      "bytes": 18951
+    },
+    {
+      "sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "path": "docs/contracts/atlas-parity-02/p01/COVERAGE-CONTRACT.md",
+      "blob": "a3d560a681a51adc4772104bf2b10c45a76c67c0",
+      "sha256": "dccf239b4ed915b13b114eddd42f54099439907d3e6c6afb76c49c93688b922f",
+      "bytes": 14628
+    },
+    {
+      "sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "path": "docs/contracts/atlas-parity-02/p01/validate_examples.py",
+      "blob": "787aa11e7a89b418bec8916f1a7329fa41504931",
+      "sha256": "1075fc8e6531caaeccaa957bfe2ada5f9a86809853d34acccf7cb8a73cac3791",
+      "bytes": 24581
+    },
+    {
+      "sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "path": "docs/missions/atlas-parity-02/p01-contracts/DECISIONS-AND-GAPS.md",
+      "blob": "08f90f2195493bc7b02ce37c1c7e32db8e2d6e36",
+      "sha256": "2c78b4b7d28511131b29efe86b05335e1fe5078efddd3b19edf91858d788e23b",
+      "bytes": 6610
+    },
+    {
+      "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "path": "scripts/qa/atlas_parity03_p03_ci.py",
+      "blob": "b5338403d395c93ec3aa7ff0283569ce52aadd46",
+      "sha256": "d05481a8c0326924d52a565cc8e3ecae03bc0617a59c74d85dc162cc2654ee60",
+      "bytes": 12265
+    },
+    {
+      "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "path": "scripts/qa/atlas_parity03_p03_browser.mjs",
+      "blob": "e960f8bc9f285facd6a8111e44359b09e81fd93a",
+      "sha256": "75cf2bfe5e75945fff5b4fa8ac77d55ac5bb2796a3dc4f345b41c3629eff3b14",
+      "bytes": 29272
+    },
+    {
+      "sha": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "path": "docs/contracts/atlas-parity-02/p01/run_contract_gate.py",
+      "blob": "cf1725e6814f7444cc3b96961667d2e5c70a160b",
+      "sha256": "83aa769518217410231c16ad0ce507306ce72ea53feaf6ecc15a7e76e887a1bc",
+      "bytes": 12654
+    },
+    {
+      "sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "path": "docs/missions/atlas-parity-04/ACTION-PLAN.md",
+      "blob": "de728c827a960cf9bcb2e22e20b5d205aa199781",
+      "sha256": "1d0a192833998e2709a973f0125029aa1f1ad71d0827f2e17aaa7fb69152cc83",
+      "bytes": 7010
+    },
+    {
+      "sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "path": "docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+      "blob": "feb9ab242a857fb377724acb9e904b2f89f1f2b9",
+      "sha256": "54cfa1c2160aa2338db773016f46186497bace69c67a7e93eefaffeb5cb25c59",
+      "bytes": 2702
+    },
+    {
+      "sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "path": "docs/missions/atlas-parity-04/DECISION-REGISTER.md",
+      "blob": "e40075b866987f22f234e86a9c0ea789dc6fe3c9",
+      "sha256": "ee37ff757284a3aba5c053ebc1851cb6d58fca4fbf2ca2cce63cf593a78bc1f9",
+      "bytes": 5931
+    },
+    {
+      "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "blob": "25d79a11171c157bd3c7e0f98d1449a78237fd9c",
+      "sha256": "25e829797f99693fab455bffba5f1752da2a17c680329ec5041c46b01bafd8a4",
+      "bytes": 64656
+    },
+    {
+      "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "path": "docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "blob": "7a40c7c9e566a04a7b2198dac44c82c75a0e618c",
+      "sha256": "2d64dff0ac66c958411521dd910df90a46a08491e5efa8174114432ae570cbd2",
+      "bytes": 12120
+    },
+    {
+      "sha": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "path": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+      "blob": "4cba947bd931b2c932198076f143068967ce909c",
+      "sha256": "abb3b5ea8defe08aefa3829a0737fe45a1f04952bd99e9914e8b64dbc7e462aa",
+      "bytes": 12265
+    },
+    {
+      "sha": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/CONTRACT-DELTA.md",
+      "blob": "2b6ab97e6919d2b5d85584217603ff534a888c48",
+      "sha256": "369bb12eef7509d6106e1b104fd9979c4c3f00626a81b177fff5c2e43fdee06e",
+      "bytes": 6955
+    },
+    {
+      "sha": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "path": "docs/missions/atlas-parity-04/f4-c0-reader003/SECURITY-AND-ROLLBACK.md",
+      "blob": "ea8b297b041d7075a9ea9a7bfa3d3788e4243962",
+      "sha256": "c261d33cf969eb51d5c0a908565988f0c8a2d97a2e82b1f264c85a51b6fea62f",
+      "bytes": 9408
+    },
+    {
+      "sha": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DECISION-REQUEST.md",
+      "blob": "11fc39f610e02045362ade5c3a97b1ba5350a737",
+      "sha256": "4aa7cbec4e71a2b5537fd8045220427951a3a3a6e1be16a5bc13d58f9b3765d0",
+      "bytes": 3412
+    },
+    {
+      "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "path": "scripts/qa/atlas_parity04_k_doc_ci.py",
+      "blob": "f51445174e7c1fb7f7a7d4b65b008e8edc6f3100",
+      "sha256": "04c4cbc4e445ebb1274fe7d357d63a9b1443b381677f528ff306afc551008de6",
+      "bytes": 27649
+    },
+    {
+      "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "path": "tests/qa/test_atlas_parity04_k_doc_ci.py",
+      "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+      "sha256": "e40684899bbe6624c354052ebee63cacd91ac38cb22b6191736260665130643d",
+      "bytes": 25710
+    },
+    {
+      "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "path": "docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json",
+      "blob": "7c50cce99fc809b2028e64aee1050111587e8c85",
+      "sha256": "24cdb857746b481257f90972c0602cf5b77377286d8be5607224872d1dda4fb7",
+      "bytes": 3791
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "README.md",
+      "blob": "79f1ce63ae6980c798f798ac4e15f21698dceb71",
+      "sha256": "37d047d87440fba7c476e7d4456c2f431c64845519cb2349bb4e6326b0c0fc45",
+      "bytes": 10416
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/001-atlas021-protocol-interface/spec.md",
+      "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+      "sha256": "8b3edcff89de737cfaf330824d9013fbc5eb2023959c224b37a5c6399475eae3",
+      "bytes": 8600
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/004-native-notebook-experience/spec.md",
+      "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+      "sha256": "ac5ec42a49e13f7123d67e83f13837a18f890a31557ef7f6e91b91696d5fd5fc",
+      "bytes": 6951
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/004-native-notebook-experience/plan.md",
+      "blob": "147356641c7e8d784e6d71571acbb07af87487af",
+      "sha256": "4cef3c2664414c0ea99f1dc92d116e37ad235dbb3f99f60e15e39861052cbe33",
+      "bytes": 8462
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/004-native-notebook-experience/research.md",
+      "blob": "2a17f4f5c6752d187276f1e23d3a1cdbc0a84635",
+      "sha256": "f553cf029c3a56e72c4776af25067a0328d9d16571bc63dc0106f418ca6074ea",
+      "bytes": 1649
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+      "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+      "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+      "bytes": 3399
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/007-final-legacy-parity/spec.md",
+      "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+      "sha256": "b998e108930a8ea0939515af02bbe1f86b9ac9f8eec69217d1844728042c7905",
+      "bytes": 6558
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/catalog.py",
+      "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+      "sha256": "2afcf20bb5f7a7270367afa9547495b77ff65ae0e626986bee65ff2b0323d0c3",
+      "bytes": 6648
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/app.js",
+      "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+      "sha256": "6a68dedffc82a6bac563592544cf62ccabb079feee4681676604f1046b97d7fb",
+      "bytes": 21547
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "blob": "c0fced5f4893be6e0ea52bf935dd20dbd6932332",
+      "sha256": "8db9d69f9e24d2b64f77907f3e01bc0c4a7ba490270f4208e967d0a3e692f6f2",
+      "bytes": 19470
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+      "blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+      "sha256": "53f3b22c20376b27a2b9359033ba0d18682a53a36afa14a8915600fd00d8e744",
+      "bytes": 17822
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+      "blob": "0fe2568ec80e40825bcd3e08e0d1eade09d03c5f",
+      "sha256": "cd78a52433ac073acda0aa4a43c6b0e64e0a756a4c5312f2c9e18f03154362b0",
+      "bytes": 1829
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/protocol/src/caderno_protocol/read_model.py",
+      "blob": "5988b605760ab242e99de6ce484ed57569f8f475",
+      "sha256": "d312dbb04fa9f9a69ac5383fb94f3f570f0ea4eb2020d44f9a8e1d7a28e36013",
+      "bytes": 5182
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": ".github/workflows/atlas021.yml",
+      "blob": "1a4ea4dc79ef084067974567f042a2d4ac558495",
+      "sha256": "8ba0c796e0269545ce91d7d2b5a63dfaf65180bc1562e64e916a438b825fbb5e",
+      "bytes": 4959
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/run_checks.py",
+      "blob": "c5a21f86e91e3a55d514fb54818ee146eedbce39",
+      "sha256": "87f4adb90dfc8281033e25e52f0b37d13ea662d3151ce8f697629850a247568a",
+      "bytes": 1437
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/clean_install.py",
+      "blob": "1891a35fc20e70cd6c5c9d345be2295e4055fbdc",
+      "sha256": "df0ccf3b35963c7b9d4e580b780bb6c54ecbe3180214aebbf3fd297e11c909da",
+      "bytes": 6533
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/test_native_legacy.mjs",
+      "blob": "6140e80bb226b75593b276437e6f67e99e51f4bc",
+      "sha256": "1586009cf1824229a71ea08db5d944dae45b0b487b8612f927a1d1b95ab5b081",
+      "bytes": 51083
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/browser.mjs",
+      "blob": "d86bc75571667a8770593475225ed3ffd2bccb0a",
+      "sha256": "a48ba41ef30fa2182ef87cd0e40529cdc3811e3d6fa30479bc8c95aad97fcfb4",
+      "bytes": 27643
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/browser_native_notebook.mjs",
+      "blob": "493a654e6979ee1a712f3ecb7c9bc104e83dc968",
+      "sha256": "81e8ed390d048c6dee58b7ded42a9564ae99665430efc0cd85352139447dca7c",
+      "bytes": 13737
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/browser_native_graph.mjs",
+      "blob": "fa63fab44ee4b4f217816babcfb924f79eff99c5",
+      "sha256": "86e5b778fcab855cda1e17ffd677758e5d1bd6faccb2667785cdf373a9e6751c",
+      "bytes": 28740
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "tests/viewer/test_catalog_server.py",
+      "blob": "6de06c6ff842a139fbe2dd55331e3402a29654af",
+      "sha256": "ae2cddd1e03ce6463f568b0d6deedac0d150fefbcadb0ece6e5784a65641b7af",
+      "bytes": 10529
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "tests/viewer/test_related_references.py",
+      "blob": "c21a86a75a43efac5c7c6d68c0e73cf808487538",
+      "sha256": "c0f24d5fb49ba1076cec8237c7860ae5297ebdfc7fe6f40b2b1c95dd8de1741d",
+      "bytes": 11223
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "tests/viewer/test_native_notebook.py",
+      "blob": "764f2c7a6de1102b6e1c369f863c63051ce4c981",
+      "sha256": "d9310c6407b7ed1cebb6504001c55c9e5a8bf0777157eb99c92a6da63075fcad",
+      "bytes": 14653
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "tests/viewer/test_native_notebook_http.py",
+      "blob": "a6941e7ecd2d73d1748b91e7493c8848915698a1",
+      "sha256": "af124a217fc3152ccd790e44592527bdf9a58a5b3455ddd9c61bbc61405ca7bf",
+      "bytes": 4792
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "tests/viewer/test_native_notebook_parity.py",
+      "blob": "57d2e7cc09b27eef98e703d878d98748ed219d0f",
+      "sha256": "6f28b3aa3a2a08604b48bf2b674272aace9351d5fec0fb9003180282e200c0c4",
+      "bytes": 4226
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "tests/qa/test_architecture_boundaries.py",
+      "blob": "6b0fa9d510f0d3cd6b26321970cef66ea50d371d",
+      "sha256": "a578a847c0199663997e73a87030cfba98d8dc7510e880e229c26a590c52729c",
+      "bytes": 2747
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "tests/qa/test_protocol_adversarial.py",
+      "blob": "73cffa3fd07c71cddd8b7d73e74e59bdf826e930",
+      "sha256": "af44e5b3729f2bcc870e73bcb2d5e4ce3d22d59b4ac2905d7f70ed9225c44cfa",
+      "bytes": 18434
+    },
+    {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/protocol/tests/test_sdk.py",
+      "blob": "e2dc1d5327c7b53a3b33fc9d2d6735d503b13dc1",
+      "sha256": "19f65ab70a36dc269ab8a4ac3ea76961cb36408f5dbeae704fd4ad88632284c9",
+      "bytes": 9110
+    },
+    {
+      "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+      "blob": "351335256804a41a4f0638c0943937e5ef9cced3",
+      "sha256": "7b866f342d1475ad84de005f582349bf5126478b2f86e8cb927c1c4225a7ed7e",
+      "bytes": 4417
+    },
+    {
+      "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+      "blob": "1504abff97f25431a50cafe280c2c8e94450ec14",
+      "sha256": "70ab936b8ddfca1379c3163d1c0dfb3cb955268b69d53a3fd6044b1de22a3d59",
+      "bytes": 6211
+    },
+    {
+      "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+      "blob": "b3fb57b91263e6ea7686039f46400eecf30815b9",
+      "sha256": "7887023a09e1110d55b491dd26cf046e3116cf3951e69d2cd181a78bec099f85",
+      "bytes": 11952
+    },
+    {
+      "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+      "blob": "a3b43305f78926675113b1012520bfb92ceed31a",
+      "sha256": "73e48e6a1ed0ccfc9685ce9a68f71af43d8dee85d6651a991e35ae0660ebc54b",
+      "bytes": 3515
+    },
+    {
+      "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+      "blob": "49dc02a5fed21d9f6cca074e8511dd006f6fda2c",
+      "sha256": "db20cff9f93c000b980ed346483375cb8b6a5c7be193c72431637a1efca43e25",
+      "bytes": 67629
+    }
+  ],
+  "checks": [
+    {
+      "id": "baseline",
+      "status": "PASS",
+      "head": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "tree": "6f6083d05fff569f0ba5c46ba45d62056155246f"
+    },
+    {
+      "id": "ownership",
+      "status": "PASS",
+      "author": "/root/p01_contracts",
+      "reviewer": "/root/p03_reader"
+    },
+    {
+      "id": "matrix_pin",
+      "status": "PASS"
+    },
+    {
+      "id": "handoff_pin",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:C2-P03-35-TEST-CROSSWALK.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:HUMAN-APPROVAL-READBACK.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:K-NEGATIVES-PRESERVED.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-ALL-SOURCES.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-ARC09-FROZEN.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-C2-28-FILES.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-CHECKS-PRELIMINARY.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-CHECKS.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-EXAMPLE-CROSSWALK.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-JOURNEY-CROSSWALK.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-MATRIX.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-MATRIX.md",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-N01-24.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-PAR005-010.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P01-SOURCES.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P03-HISTORICAL-TEST-IDS.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P06-SEMANTICS-ON-MAIN-0.log",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P06-SEMANTICS-ON-MAIN-1.log",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P09-READER-PROBES-ON-MAIN-0.log",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P09-READER-PROBES-ON-MAIN-1.log",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:P09-READER-PROBES-ON-MAIN.json",
+      "status": "PASS"
+    },
+    {
+      "id": "artifact:finish_p01.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:9b0a500b6612d260a9f9bd8a4c8da1be4841cf48:scripts/qa/atlas_parity02_p06_audit.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:9b0a500b6612d260a9f9bd8a4c8da1be4841cf48:tests/qa/test_atlas_parity02_p06_semantics.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:9b0a500b6612d260a9f9bd8a4c8da1be4841cf48:scripts/qa/atlas_parity02_p06_browser.mjs",
+      "status": "PASS"
+    },
+    {
+      "id": "source:ead1f753f52f22035326b7366dd2231c62775765:docs/missions/atlas-parity-02/p03-components/INTEGRATION-CONTRACT.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:ead1f753f52f22035326b7366dd2231c62775765:packages/atlas/src/atlas_viewer/parity02_p03_metadata.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7:docs/contracts/atlas-parity-02/p01/PRESENTATION-CONTRACTS.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7:docs/contracts/atlas-parity-02/p01/COVERAGE-CONTRACT.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7:docs/contracts/atlas-parity-02/p01/validate_examples.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7:docs/missions/atlas-parity-02/p01-contracts/DECISIONS-AND-GAPS.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:f625f8be40156fd9fe4572a0ac2074910efd96cf:scripts/qa/atlas_parity03_p03_ci.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:f625f8be40156fd9fe4572a0ac2074910efd96cf:scripts/qa/atlas_parity03_p03_browser.mjs",
+      "status": "PASS"
+    },
+    {
+      "id": "source:c0b42a17710fdf3cef3ec4ea13c840796d57d18f:docs/contracts/atlas-parity-02/p01/run_contract_gate.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:47c94d27aeb7717eebb30804f01cd2cd33507c8a:docs/missions/atlas-parity-04/ACTION-PLAN.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:47c94d27aeb7717eebb30804f01cd2cd33507c8a:docs/missions/atlas-parity-04/PARITY-MATRIX.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "source:47c94d27aeb7717eebb30804f01cd2cd33507c8a:docs/missions/atlas-parity-04/DECISION-REGISTER.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:54bb16d350f7bc34fafb95438bd64a2397d58bf3:docs/missions/atlas-parity-04/f2-legacy-contract/EPHEMERAL-PRESENTATION-CONTRACT.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:54bb16d350f7bc34fafb95438bd64a2397d58bf3:docs/missions/atlas-parity-04/f2-legacy-contract/IDENTITY-AND-LOSS-POLICY.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d498504cd2c4d230088f86e04e55624bbe32df79:specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d498504cd2c4d230088f86e04e55624bbe32df79:docs/missions/atlas-parity-04/f4-c0-reader003/CONTRACT-DELTA.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d498504cd2c4d230088f86e04e55624bbe32df79:docs/missions/atlas-parity-04/f4-c0-reader003/SECURITY-AND-ROLLBACK.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:38f7b07602ed407e1fca54a5053861f7605dd9f5:docs/missions/atlas-parity-04/f4-c2-key-identity/DECISION-REQUEST.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:6d854b5471473d8548c9e9b271db55a52301ee1c:scripts/qa/atlas_parity04_k_doc_ci.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:6d854b5471473d8548c9e9b271db55a52301ee1c:tests/qa/test_atlas_parity04_k_doc_ci.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:6d854b5471473d8548c9e9b271db55a52301ee1c:docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:README.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:specs/001-atlas021-protocol-interface/spec.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:specs/004-native-notebook-experience/spec.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:specs/004-native-notebook-experience/plan.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:specs/004-native-notebook-experience/research.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:specs/004-native-notebook-experience/contracts/native-view.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:specs/007-final-legacy-parity/spec.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:packages/atlas/src/atlas_viewer/catalog.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:packages/atlas/src/atlas_viewer/static/app.js",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:packages/protocol/src/caderno_protocol/read_model.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:.github/workflows/atlas021.yml",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:scripts/run_checks.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:scripts/qa/clean_install.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:scripts/qa/test_native_legacy.mjs",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:scripts/qa/browser.mjs",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:scripts/qa/browser_native_notebook.mjs",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:scripts/qa/browser_native_graph.mjs",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:tests/viewer/test_catalog_server.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:tests/viewer/test_related_references.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:tests/viewer/test_native_notebook.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:tests/viewer/test_native_notebook_http.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:tests/viewer/test_native_notebook_parity.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:tests/qa/test_architecture_boundaries.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:tests/qa/test_protocol_adversarial.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:8f8fe01c3041361aa2607194d66af6a640d834ad:packages/protocol/tests/test_sdk.py",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d5bdc86ef68cad2f5d503945ca788c3a74df4839:docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d5bdc86ef68cad2f5d503945ca788c3a74df4839:docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d5bdc86ef68cad2f5d503945ca788c3a74df4839:docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d5bdc86ef68cad2f5d503945ca788c3a74df4839:docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+      "status": "PASS"
+    },
+    {
+      "id": "source:d5bdc86ef68cad2f5d503945ca788c3a74df4839:docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:P01-JOURNEY-CROSSWALK.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:P01-EXAMPLE-CROSSWALK.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:P01-C2-28-FILES.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:C2-P03-35-TEST-CROSSWALK.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:P01-PAR005-010.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:P01-N01-24.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:P01-ARC09-FROZEN.json",
+      "status": "PASS"
+    },
+    {
+      "id": "coverage:K-NEGATIVES-PRESERVED.json",
+      "status": "PASS"
+    },
+    {
+      "id": "matrix_prs",
+      "status": "PASS"
+    },
+    {
+      "id": "matrix_requirements",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P06-PROTECTED",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P06-SEMANTICS",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P06-WHEEL-HTTP",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P06-BROWSER",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P03-TABLE",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P03-METADATA",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P03-SYNTHETIC",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P03-ISOLATION",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P01-28-JOURNEYS",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P01-READER-PROBES",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P01-TIMES",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P01-ADR",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:P01-WORKSHEETS",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:C2-28-FILES",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:C2-47-NO-SKIP",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:C2-FROZEN-INACTIVE",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:C2-BUILD-HTTP-BROWSER",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:C3-PINS",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:C3-28-46-9-11",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:C3-OPT-ARCH",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:AP04-PAR005-010",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:AP04-AUTHORITY",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:AP04-PLAN",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F2-APPROVAL",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F2-O1-O3-TTL",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F2-IDENTITY-LOSS",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F2-QUOTAS",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F4-C0-ROUTES",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F4-C0-N24",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F4-C0-HARDLIMITS",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:F4-C0-FRESHNESS-TTL",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:ARC09-FROZEN5",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:ARC09-ORACLES",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:ARC09-HUMAN",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:K-TERMINAL",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:K-GIT-NEGATIVES",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:K-PREFLIGHT-MANIFEST",
+      "status": "PASS"
+    },
+    {
+      "id": "requirement_shape:K-SPECKIT-SUCCESSION",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:.github/workflows/atlas-parity03-p03-gates.yml",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/ARTIFACT-INDEX.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/BROWSER-RECEIPT.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/BUILD-AND-INSTALL.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/CI-CODE-RECEIPT.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/HANDOFF.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/HTTP-RECEIPT.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/INDEPENDENT-REVIEW.md",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/INITIAL-RECONCILIATION.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/INPUT-SHAS.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/LIMITATIONS.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/MANIFEST.sha256",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/RED-AND-CORRECTION.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/RESULT.md",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/SPEC-KIT-METHOD.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:docs/missions/atlas-parity-03/c2-p03-qualification/TEST-RECEIPT.json",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:scripts/qa/atlas_parity03_p03_browser.mjs",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:scripts/qa/atlas_parity03_p03_build.py",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:scripts/qa/atlas_parity03_p03_ci.py",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:scripts/qa/atlas_parity03_p03_harness.css",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:scripts/qa/atlas_parity03_p03_harness.py",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:scripts/qa/atlas_parity03_p03_http.py",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:scripts/qa/atlas_parity03_p03_requirements.txt",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/analysis.md",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/checklists/requirements.md",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/plan.md",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/spec.md",
+      "status": "PASS"
+    },
+    {
+      "id": "c2_blob:specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/tasks.md",
+      "status": "PASS"
+    },
+    {
+      "id": "arc09_terminal:docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+      "status": "PASS"
+    },
+    {
+      "id": "arc09_terminal:docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+      "status": "PASS"
+    },
+    {
+      "id": "arc09_terminal:docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+      "status": "PASS"
+    },
+    {
+      "id": "arc09_terminal:docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+      "status": "PASS"
+    },
+    {
+      "id": "arc09_terminal:docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessStreamTests::test_handler_parser_serves_only_fixed_resources",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessStreamTests::test_no_payload_traversal_catalog_or_arbitrary_files",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessStreamTests::test_cross_origin_and_wrong_host_are_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessStreamTests::test_mutation_methods_cannot_write",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessStreamTests::test_fixture_transport_preserves_numbers_and_inert_text",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessStreamTests::test_reading_harness_keeps_fixture_bytes",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessStreamTests::test_existing_app_does_not_load_p03",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessHTTPTests::test_real_http_serves_only_fixed_resources",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessHTTPTests::test_no_payload_traversal_catalog_or_arbitrary_files",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessHTTPTests::test_cross_origin_and_wrong_host_are_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessHTTPTests::test_mutation_methods_cannot_write",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_harness.py::HarnessHTTPTests::test_fixture_transport_preserves_numbers_and_inert_text",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_source_pair_is_explicit_and_collision_free",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_file_name_and_mime_do_not_infer_document_or_product",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_declared_and_observed_availability_are_separate",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_missing_calculated_digest_stays_absent",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_digest_mismatch_preserves_both_values_without_approval",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_mentions_are_neutral_and_do_not_become_outputs",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_input_output_derivation_directions_match_graph",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_forged_read_model_output_is_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_projected_reference_must_be_declared_in_entities",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_non_action_result_field_does_not_create_production",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_html_uri_and_unicode_remain_exact_strings",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_no_io_and_no_mutation_or_aliasing",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_empty_and_missing_metadata_remain_explicit",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_invalid_identity_duplicates_and_types_have_codes",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_conflicting_availability_or_declared_digest_is_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_invalid_status_digest_and_text_are_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_numeric_false_source_digest_is_not_treated_as_missing",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_item_and_text_boundaries_are_enforced",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_numeric_metadata_is_not_coerced_or_exposed_as_product_value",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_metadata.py::MetadataProjectionTests::test_sdk_read_model_of_existing_synthetic_package_is_consumable",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_renderers.py::RendererBehaviorTests::test_metadata_javascript_behavior",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_renderers.py::RendererBehaviorTests::test_real_renderers_with_dom_recorder_not_browser",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/viewer/test_atlas_parity02_p03_table.py::TableBehaviorTests::test_candidate_table_behavior_suite",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_accepts_exact_addition_and_authorized_control_modification",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_extra_path",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_missing_authorized_path",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_final_historical_document_change",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_changed_then_reverted_historical_document",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_extra_path_added_then_removed",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_pinned_object_substitution",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_false_pinned_hash_for_matching_blob",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_symlink_mode",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_executable_document_mode",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_gitlink_object",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_unauthorized_rename",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_added_document_deleted_then_readded",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_unrelated_ancestry",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_merge_ancestry_even_with_only_authorized_paths",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_info_grafts_hiding_reverted_forbidden_commit",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_environment_graft_file_hiding_reverted_forbidden_commit",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_raw_parent_traversal_rejects_graft_even_without_metadata_gate",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_replace_ref_or_uses_raw_forbidden_history",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_shallow_view_even_when_baseline_ancestry_appears_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_accepts_canonical_full_path_manifest_from_git_blobs",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_content_hash_tampering",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_path_traversal_in_manifest",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_duplicate_path",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_missing_entry",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_unordered_entries",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSpecKitSuccessorTests::test_accepts_only_exact_historical_collector_error_with_source_authorization",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSpecKitSuccessorTests::test_rejects_additional_or_missing_historical_speckit_errors",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KSpecKitSuccessorTests::test_rejects_failed_infrastructure_authorization_before_loading_speckit",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_authorizes_all_source_except_literal_hash_table",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_executable_hash_table",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_executable_statement_sharing_table_line",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_duplicate_literal_table_keys",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_non_utf8_codec_before_execution",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_accepts_independently_pinned_control_inventory",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_rehashed_external_control_even_with_matching_own_test_hash",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_exact_frozen_epoch_tree_and_parent_are_required",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_documents_deletion_and_rename_are_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_repair_transient_unauthorized_change_reverted_remains_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_protected_governance_product_audits_manifests_and_reader_are_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_overlay_must_be_exact_canonical_and_owned",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_transient_unapproved_control_revision_reverted_remains_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_repair_mode_removal_and_unexpected_parent_are_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_guard_source_has_independent_authorization",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_control_table_expression_is_rejected_before_import",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_non_utf8_codec_cannot_hide_execution",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_control_inventory_and_test_bytes_are_independently_pinned",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_security_guards_contain_no_optimized_away_assert",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2GitObjectBatchTests::test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2GitObjectBatchTests::test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+      "status": "PASS"
+    },
+    {
+      "id": "historical_method:tests/qa/test_atlas_parity04_f2_doc_ci.py::F2GitObjectBatchTests::test_batch_requests_and_commit_headers_fail_closed",
+      "status": "PASS"
+    },
+    {
+      "id": "examples_exact_ids",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:current-profile-minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:current-profile-second-source",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-current-missing-reference",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-current-synthetic-approval",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-current-missing-value-reason",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:presentation-minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:presentation-contextual-collision",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:presentation-explicit-input",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-mention-as-input",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-cross-source-resolution",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-document-as-run",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-duplicate-contextual-id",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-stable-ordinal-link",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-event-from-file-time",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-timezone-missing",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-unknown-time-precision",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-input-subject-document",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:table-typed-minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:table-incompatible-explicit",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:table-semantic-unknown",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-type",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-order",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-column-order",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-missing-reason",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-lexical-loss",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-comparison-unit",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-comparison-missing",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-unknown-semantic",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-table-promoted-protocol",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:coverage-minimal",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:coverage-denominator-unknown",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:coverage-empty-universe",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-unknown-zero",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-no-unknown-reason",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-denominator-scope",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-denominator-unit",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-fractional-count",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-negative-count",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-boolean-count",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-subset-exceeds",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-required-sidecar",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-inferred-collection",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-known-without-evidence",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-loss-mismatch",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-coverage-zero-denominator-percent",
+      "status": "PASS"
+    },
+    {
+      "id": "example_original:negative-json-numeric-overflow",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Hash/pin/count/AST identity validation. No historical execution claimed; semantic review recorded separately."
+}

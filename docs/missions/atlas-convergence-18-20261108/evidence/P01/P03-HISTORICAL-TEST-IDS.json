@@ -1,0 +1,57 @@
+[
+  {
+    "path": "tests/viewer/test_atlas_parity02_p03_harness.py",
+    "tests": [
+      "test_handler_parser_serves_only_fixed_resources",
+      "test_no_payload_traversal_catalog_or_arbitrary_files",
+      "test_cross_origin_and_wrong_host_are_rejected",
+      "test_mutation_methods_cannot_write",
+      "test_fixture_transport_preserves_numbers_and_inert_text",
+      "test_reading_harness_keeps_fixture_bytes",
+      "test_existing_app_does_not_load_p03",
+      "test_real_http_serves_only_fixed_resources",
+      "test_no_payload_traversal_catalog_or_arbitrary_files",
+      "test_cross_origin_and_wrong_host_are_rejected",
+      "test_mutation_methods_cannot_write",
+      "test_fixture_transport_preserves_numbers_and_inert_text"
+    ]
+  },
+  {
+    "path": "tests/viewer/test_atlas_parity02_p03_metadata.py",
+    "tests": [
+      "test_source_pair_is_explicit_and_collision_free",
+      "test_file_name_and_mime_do_not_infer_document_or_product",
+      "test_declared_and_observed_availability_are_separate",
+      "test_missing_calculated_digest_stays_absent",
+      "test_digest_mismatch_preserves_both_values_without_approval",
+      "test_mentions_are_neutral_and_do_not_become_outputs",
+      "test_input_output_derivation_directions_match_graph",
+      "test_forged_read_model_output_is_rejected",
+      "test_projected_reference_must_be_declared_in_entities",
+      "test_non_action_result_field_does_not_create_production",
+      "test_html_uri_and_unicode_remain_exact_strings",
+      "test_no_io_and_no_mutation_or_aliasing",
+      "test_empty_and_missing_metadata_remain_explicit",
+      "test_invalid_identity_duplicates_and_types_have_codes",
+      "test_conflicting_availability_or_declared_digest_is_rejected",
+      "test_invalid_status_digest_and_text_are_rejected",
+      "test_numeric_false_source_digest_is_not_treated_as_missing",
+      "test_item_and_text_boundaries_are_enforced",
+      "test_numeric_metadata_is_not_coerced_or_exposed_as_product_value",
+      "test_sdk_read_model_of_existing_synthetic_package_is_consumable"
+    ]
+  },
+  {
+    "path": "tests/viewer/test_atlas_parity02_p03_renderers.py",
+    "tests": [
+      "test_metadata_javascript_behavior",
+      "test_real_renderers_with_dom_recorder_not_browser"
+    ]
+  },
+  {
+    "path": "tests/viewer/test_atlas_parity02_p03_table.py",
+    "tests": [
+      "test_candidate_table_behavior_suite"
+    ]
+  }
+]

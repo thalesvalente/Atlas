@@ -1,0 +1,286 @@
+[
+  {
+    "id": "N01",
+    "historical": "Contexto fonte/snapshot/ID",
+    "current": "UID/nativeID/source_key separados",
+    "tests": [
+      "native parity",
+      "occurrences JS"
+    ],
+    "counterevidence": "Não mesclar mesmo ID entre contextos",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N02",
+    "historical": "Colisões",
+    "current": "Ocorrências preservadas, typed keys e ambiguidade",
+    "tests": [
+      "native endpoints",
+      "numeric identity JS"
+    ],
+    "counterevidence": "Não escolher primeiro colidente",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N03",
+    "historical": "UID vs nativeID",
+    "current": "Apresentação separada da identidade original",
+    "tests": [
+      "spec004 FR004",
+      "native parity"
+    ],
+    "counterevidence": "UID não vira ciência",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N04",
+    "historical": "NULL endpoint",
+    "current": "NULL literal preservado",
+    "tests": [
+      "native relation presentation JS"
+    ],
+    "counterevidence": "Não inventar target",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N05",
+    "historical": "Unresolved",
+    "current": "Referência não resolvida não cria travessia",
+    "tests": [
+      "native ambiguous endpoints JS"
+    ],
+    "counterevidence": "Sem aresta por rótulo",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N06",
+    "historical": "Contagens sobrepostas",
+    "current": "Populações declaradas por camada",
+    "tests": [
+      "native overview JS"
+    ],
+    "counterevidence": "Não somar subconjuntos",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N07",
+    "historical": "Tabelas sem vínculo",
+    "current": "Coleção completa e exportação mantidas",
+    "tests": [
+      "native parity",
+      "native browser"
+    ],
+    "counterevidence": "Sem descarte por orfandade",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N08",
+    "historical": "ID não admitido",
+    "current": "NativeID ausente/null preservado",
+    "tests": [
+      "native occurrences JS"
+    ],
+    "counterevidence": "Não inventar ID científico",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N09",
+    "historical": "Run vs stub",
+    "current": "Originais e estados declarados preservados",
+    "tests": [
+      "P09 document_product_not_runs",
+      "native parity"
+    ],
+    "counterevidence": "File não vira execução",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N10",
+    "historical": "Ausência/null/vazio/zero",
+    "current": "Tokens e CSV tipado reversível",
+    "tests": [
+      "typed CSV JS",
+      "native parity"
+    ],
+    "counterevidence": "Não normalizar valores",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N11",
+    "historical": "Lexemas",
+    "current": "Raw tokens/display_value verificados",
+    "tests": [
+      "numeric identity JS",
+      "native noncanonical JSON test"
+    ],
+    "counterevidence": "Sem roundtrip Number",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N12",
+    "historical": "HTML/JS",
+    "current": "TextContent/SVG próprios e CSP",
+    "tests": [
+      "hostile labels JS",
+      "native HTTP/browser"
+    ],
+    "counterevidence": "Sem execução/rede externa",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N13",
+    "historical": "CSV/JSON",
+    "current": "CSV protegido/tipado, JSON integral",
+    "tests": [
+      "typed CSV JS"
+    ],
+    "counterevidence": "Neutralização declarada sem mudar JSON",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N14",
+    "historical": "Fronteira de I/O",
+    "current": "Bug atual P03: rejeitar módulo fora da raiz ANTES de importar; patch P00 via#18",
+    "tests": [
+      "P03 symlink RED",
+      "P00 O3 pending"
+    ],
+    "counterevidence": "Não alegar O1 sandbox/Windows hardbudget/TOCTOU completos",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "PENDING_PATCH_OTHER_OWNER"
+  },
+  {
+    "id": "N15",
+    "historical": "URIs",
+    "current": "Referências inertes, sem download automático",
+    "tests": [
+      "P06 passive URIs",
+      "native browser"
+    ],
+    "counterevidence": "URI não é autorização de acesso",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N16",
+    "historical": "Mudança/frescor",
+    "current": "Pinsha/revisão,digest e reindex explícito",
+    "tests": [
+      "native parity wrongpin/selfconsistentdifferent",
+      "native HTTP"
+    ],
+    "counterevidence": "Hash próprio não prova origem/frescor; O1 race não implementado",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N17",
+    "historical": "Versão/cota/falha",
+    "current": "NativeView rejeita versão/hash/chunk/limites; protocolo pode permanecer válido",
+    "tests": [
+      "native tests",
+      "P02 READY/INVALID15checks"
+    ],
+    "counterevidence": "Quotas NativeView diferentes das0.2.0",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N18",
+    "historical": "Sessão/reindex/TTL",
+    "current": "Contexto nativo; patch P02 para raiz; TTL manual0.2.0 não ativado",
+    "tests": [
+      "native HTTP",
+      "P02 F001–003 pending"
+    ],
+    "counterevidence": "Não alegar equivalência de TTL3600",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "PENDING_PATCH_OTHER_OWNER"
+  },
+  {
+    "id": "N19",
+    "historical": "Universo desconhecido",
+    "current": "Ausência não zero, denominação por população",
+    "tests": [
+      "native overview JS",
+      "spec007 FR013"
+    ],
+    "counterevidence": "0/0 não vira100%",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N20",
+    "historical": "Digest e ciência",
+    "current": "Dimensões separadas",
+    "tests": [
+      "P06 authority states",
+      "native parity"
+    ],
+    "counterevidence": "Integridade não aprova ciência",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N21",
+    "historical": "Semântica declarada",
+    "current": "Catálogo usa coleções declaradas; sem MIME heurístico",
+    "tests": [
+      "native catalog JS",
+      "P09 documents_not_runs"
+    ],
+    "counterevidence": "Não inferir produto/admissão científica",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N22",
+    "historical": "Independência",
+    "current": "Wheels SDK/viewer sem R4/sidecar obrigatório",
+    "tests": [
+      "clean_install",
+      "architecture",
+      "native standalone"
+    ],
+    "counterevidence": "Produtor permanece externo",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N23",
+    "historical": "Browser/acervo",
+    "current": "CI sintética atual separada de aceites privados",
+    "tests": [
+      "main CI",
+      "spec007 FR007"
+    ],
+    "counterevidence": "HTTP/Chromium não são ChromeWindows humano",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  },
+  {
+    "id": "N24",
+    "historical": "Conformidade",
+    "current": "Paridade pinada por campo;0.2.1 não instalado",
+    "tests": [
+      "native parity",
+      "frozenARC09"
+    ],
+    "counterevidence": "Checker documental não é produto0.2.1",
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "status": "SCOPED_EVIDENCE"
+  }
+]

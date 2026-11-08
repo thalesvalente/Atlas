@@ -1,0 +1,270 @@
+[
+  {
+    "id": "P01-P06-SEMANTICS-0",
+    "cmd": [
+      "python",
+      "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/sources/6/tests/qa/test_atlas_parity02_p06_semantics.py",
+      "-v"
+    ],
+    "cwd": "repo at baseline",
+    "environment": {
+      "python": "Python 3.12.14",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "ATLAS_TEST_REPO": "main source tree",
+      "PYTHONPATH": "main protocol/src and atlas/src, NOT installed wheel"
+    },
+    "source_test_sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+    "product_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+    "exit_code": 0,
+    "log": "P06-SEMANTICS-ON-MAIN-0.log",
+    "log_sha256": "bf766360e67fe89cce2e0aa40586341d9bd3b2bdc855af333d5a1e12cd7e3115",
+    "output": "test_decimal_precision_loss_is_rejected_without_rounding_or_source_fallback (__main__.Parity02P06SemanticsTests.test_decimal_precision_loss_is_rejected_without_rounding_or_source_fallback) ... ok\ntest_execution_review_integrity_and_unknown_time_remain_separate (__main__.Parity02P06SemanticsTests.test_execution_review_integrity_and_unknown_time_remain_separate) ... ok\ntest_integer_zero_boolean_decimal_precision_and_absence_are_preserved (__main__.Parity02P06SemanticsTests.test_integer_zero_boolean_decimal_precision_and_absence_are_preserved) ... ok\ntest_passive_uri_mentions_remain_literal_without_network_or_execution (__main__.Parity02P06SemanticsTests.test_passive_uri_mentions_remain_literal_without_network_or_execution) ... ok\ntest_repeated_ids_do_not_mix_values_or_mentions_between_sources (__main__.Parity02P06SemanticsTests.test_repeated_ids_do_not_mix_values_or_mentions_between_sources) ... ok\ntest_time_offsets_and_neutral_mentions_do_not_reverse_declared_lineage (__main__.Parity02P06SemanticsTests.test_time_offsets_and_neutral_mentions_do_not_reverse_declared_lineage) ... ok\ntest_unsupported_or_unsafe_sources_do_not_receive_another_sources_preview (__main__.Parity02P06SemanticsTests.test_unsupported_or_unsafe_sources_do_not_receive_another_sources_preview) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.146s\n\nOK\n"
+  },
+  {
+    "id": "P01-P06-SEMANTICS-1",
+    "cmd": [
+      "python",
+      "-O",
+      "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/sources/6/tests/qa/test_atlas_parity02_p06_semantics.py",
+      "-v"
+    ],
+    "cwd": "repo at baseline",
+    "environment": {
+      "python": "Python 3.12.14",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "ATLAS_TEST_REPO": "main source tree",
+      "PYTHONPATH": "main protocol/src and atlas/src, NOT installed wheel"
+    },
+    "source_test_sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+    "product_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+    "exit_code": 0,
+    "log": "P06-SEMANTICS-ON-MAIN-1.log",
+    "log_sha256": "f8ae2afd894955c84b1e51ee8bb1c19215965d928ed6322d227fa009c45641c5",
+    "output": "test_decimal_precision_loss_is_rejected_without_rounding_or_source_fallback (__main__.Parity02P06SemanticsTests.test_decimal_precision_loss_is_rejected_without_rounding_or_source_fallback) ... ok\ntest_execution_review_integrity_and_unknown_time_remain_separate (__main__.Parity02P06SemanticsTests.test_execution_review_integrity_and_unknown_time_remain_separate) ... ok\ntest_integer_zero_boolean_decimal_precision_and_absence_are_preserved (__main__.Parity02P06SemanticsTests.test_integer_zero_boolean_decimal_precision_and_absence_are_preserved) ... ok\ntest_passive_uri_mentions_remain_literal_without_network_or_execution (__main__.Parity02P06SemanticsTests.test_passive_uri_mentions_remain_literal_without_network_or_execution) ... ok\ntest_repeated_ids_do_not_mix_values_or_mentions_between_sources (__main__.Parity02P06SemanticsTests.test_repeated_ids_do_not_mix_values_or_mentions_between_sources) ... ok\ntest_time_offsets_and_neutral_mentions_do_not_reverse_declared_lineage (__main__.Parity02P06SemanticsTests.test_time_offsets_and_neutral_mentions_do_not_reverse_declared_lineage) ... ok\ntest_unsupported_or_unsafe_sources_do_not_receive_another_sources_preview (__main__.Parity02P06SemanticsTests.test_unsupported_or_unsafe_sources_do_not_receive_another_sources_preview) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.152s\n\nOK\n"
+  },
+  {
+    "id": "P01-P09-READER-PROBES-0",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-c",
+      "import runpy,json; x=runpy.run_path('/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/sources/9/docs/contracts/atlas-parity-02/p01/validate_examples.py'); print(json.dumps(x[\"reader_probes\"](),indent=2))"
+    ],
+    "product_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+    "test_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "mode": "normal",
+    "exit_code": 0,
+    "log": "P09-READER-PROBES-ON-MAIN-0.log",
+    "log_sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+    "status": "PASS",
+    "results": [
+      {
+        "id": "CURRENT_ENTITIES",
+        "status": "PASS",
+        "detail": "All 13 declared graph entities survive in entities."
+      },
+      {
+        "id": "DOCUMENT_PRODUCT_NOT_RUNS",
+        "status": "PASS",
+        "detail": "Document, product and table-file metadata do not create additional runs."
+      },
+      {
+        "id": "MENTION_NEUTRAL_ORDER",
+        "status": "PASS",
+        "detail": "Duplicate mention deduplicated in order, with zero experimental edges inferred."
+      },
+      {
+        "id": "UNKNOWN_VALUES_TIMES",
+        "status": "PASS",
+        "detail": "Absent value, declared precision and unknown event time are preserved."
+      },
+      {
+        "id": "TABLE_METADATA_ONLY",
+        "status": "PASS",
+        "detail": "A table file is representable as metadata; no typed grid is fabricated."
+      },
+      {
+        "id": "SOURCE_SCOPED_COLLISION",
+        "status": "PASS",
+        "detail": "Same entity IDs in two sources retain different source-local titles."
+      },
+      {
+        "id": "ORDINAL_REORDER_LIMIT",
+        "status": "PASS",
+        "detail": "Reordering changes which bytes source-1 denotes; stable identity is not asserted."
+      },
+      {
+        "id": "INVALID_SOURCE_NOT_INDEXED",
+        "status": "PASS",
+        "detail": "The current reader rejects a missing target; no alternate source is searched."
+      },
+      {
+        "id": "INPUT_BYTES_UNCHANGED",
+        "status": "PASS",
+        "detail": "Observed synthetic inputs are byte-identical after these reads."
+      }
+    ]
+  },
+  {
+    "id": "P01-P09-READER-PROBES-1",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-O",
+      "-c",
+      "import runpy,json; x=runpy.run_path('/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/sources/9/docs/contracts/atlas-parity-02/p01/validate_examples.py'); print(json.dumps(x[\"reader_probes\"](),indent=2))"
+    ],
+    "product_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+    "test_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "mode": "optimized",
+    "exit_code": 0,
+    "log": "P09-READER-PROBES-ON-MAIN-1.log",
+    "log_sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+    "status": "PASS",
+    "results": [
+      {
+        "id": "CURRENT_ENTITIES",
+        "status": "PASS",
+        "detail": "All 13 declared graph entities survive in entities."
+      },
+      {
+        "id": "DOCUMENT_PRODUCT_NOT_RUNS",
+        "status": "PASS",
+        "detail": "Document, product and table-file metadata do not create additional runs."
+      },
+      {
+        "id": "MENTION_NEUTRAL_ORDER",
+        "status": "PASS",
+        "detail": "Duplicate mention deduplicated in order, with zero experimental edges inferred."
+      },
+      {
+        "id": "UNKNOWN_VALUES_TIMES",
+        "status": "PASS",
+        "detail": "Absent value, declared precision and unknown event time are preserved."
+      },
+      {
+        "id": "TABLE_METADATA_ONLY",
+        "status": "PASS",
+        "detail": "A table file is representable as metadata; no typed grid is fabricated."
+      },
+      {
+        "id": "SOURCE_SCOPED_COLLISION",
+        "status": "PASS",
+        "detail": "Same entity IDs in two sources retain different source-local titles."
+      },
+      {
+        "id": "ORDINAL_REORDER_LIMIT",
+        "status": "PASS",
+        "detail": "Reordering changes which bytes source-1 denotes; stable identity is not asserted."
+      },
+      {
+        "id": "INVALID_SOURCE_NOT_INDEXED",
+        "status": "PASS",
+        "detail": "The current reader rejects a missing target; no alternate source is searched."
+      },
+      {
+        "id": "INPUT_BYTES_UNCHANGED",
+        "status": "PASS",
+        "detail": "Observed synthetic inputs are byte-identical after these reads."
+      }
+    ]
+  },
+  {
+    "id": "P01-MAIN-CI",
+    "status": "PASS_REUSED_O0_VERIFIED",
+    "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+    "runs": [
+      42429516799,
+      42429516812,
+      42429516868,
+      42429516784,
+      42429516816,
+      42429516778
+    ],
+    "jobs": 19,
+    "exit_code": null,
+    "evidence": "../../evidence/o0/main-checks.json",
+    "limitation": "Baseline only; final candidate requires own CI"
+  },
+  {
+    "id": "P01-ARC09-BLOBS",
+    "status": "PASS",
+    "exit_code": 0,
+    "command": "git rev-parse for five paths at d5bdc86 and PR21HEAD; compare",
+    "results": [
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+        "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+        "blob": "351335256804a41a4f0638c0943937e5ef9cced3",
+        "sha256": "7b866f342d1475ad84de005f582349bf5126478b2f86e8cb927c1c4225a7ed7e",
+        "url": "https://github.com/thalesvalente/Atlas/blob/d5bdc86ef68cad2f5d503945ca788c3a74df4839/docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+        "same_blob_at_pr21_head": true
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+        "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+        "blob": "1504abff97f25431a50cafe280c2c8e94450ec14",
+        "sha256": "70ab936b8ddfca1379c3163d1c0dfb3cb955268b69d53a3fd6044b1de22a3d59",
+        "url": "https://github.com/thalesvalente/Atlas/blob/d5bdc86ef68cad2f5d503945ca788c3a74df4839/docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+        "same_blob_at_pr21_head": true
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+        "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+        "blob": "b3fb57b91263e6ea7686039f46400eecf30815b9",
+        "sha256": "7887023a09e1110d55b491dd26cf046e3116cf3951e69d2cd181a78bec099f85",
+        "url": "https://github.com/thalesvalente/Atlas/blob/d5bdc86ef68cad2f5d503945ca788c3a74df4839/docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+        "same_blob_at_pr21_head": true
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+        "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+        "blob": "a3b43305f78926675113b1012520bfb92ceed31a",
+        "sha256": "73e48e6a1ed0ccfc9685ce9a68f71af43d8dee85d6651a991e35ae0660ebc54b",
+        "url": "https://github.com/thalesvalente/Atlas/blob/d5bdc86ef68cad2f5d503945ca788c3a74df4839/docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+        "same_blob_at_pr21_head": true
+      },
+      {
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+        "sha": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+        "blob": "49dc02a5fed21d9f6cca074e8511dd006f6fda2c",
+        "sha256": "db20cff9f93c000b980ed346483375cb8b6a5c7be193c72431637a1efca43e25",
+        "url": "https://github.com/thalesvalente/Atlas/blob/d5bdc86ef68cad2f5d503945ca788c3a74df4839/docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+        "same_blob_at_pr21_head": true
+      }
+    ],
+    "limitation": "Blob identity, not approval"
+  },
+  {
+    "id": "P01-HUMAN-RECEIPTS",
+    "status": "VERIFIED",
+    "exit_code": null,
+    "evidence": "HUMAN-APPROVAL-READBACK.json",
+    "receipts": [
+      "#5/6406839421",
+      "#15/6539419419"
+    ],
+    "limitation": "Direction/scoped0.2.0 only; no0.2.1 release/science"
+  },
+  {
+    "id": "P01-HISTORICAL-TESTS",
+    "status": "REUSED_NOT_REEXECUTED",
+    "exit_code": null,
+    "evidence": "/workspace/scratch/c50b5f701290/atlas-pr19/output/ATLAS-PR19-TECHNICAL-DISPOSITION.md",
+    "limitation": "46worksheets/35P03/42table and K/F2 from prior receipt; partial33/36K remains partial"
+  },
+  {
+    "id": "P01-FINAL-CANDIDATE-CI",
+    "status": "PENDING_P00_O3",
+    "exit_code": null
+  },
+  {
+    "id": "P01-INDEPENDENT-REVIEW",
+    "status": "PENDING_P03",
+    "exit_code": null
+  },
+  {
+    "id": "P01-PRIVATE-LOCAL",
+    "status": "NOT_RUN_NOT_REQUIRED_FOR_SCOPE",
+    "exit_code": null,
+    "limitation": "No private data or hostWindows/GUI/hardbudget proof; public synthetic work does not require CodexLocal"
+  }
+]

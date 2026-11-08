@@ -1,0 +1,2119 @@
+{
+  "schema": "atlas-independent-review/1",
+  "reviewer": "/root/p01_contracts",
+  "author": "/root",
+  "independence": "REAL_DISTINCT_NON_AUTHOR_PRODUCT_REVIEW",
+  "phase": "O3_CONTRACTS",
+  "status": "PASS_SCOPED_CONTRACTS_PUBLICATION_READY",
+  "gate": "CONTRACT_SCOPE_PUBLIC_EVIDENCE_AND_PROTECTED_BASELINE_PASS; FINAL_COMMIT_ATTESTATION_PENDING",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "observed_head": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "branch": "fix/atlas-convergence18-20261108",
+  "reviewed_at_utc": "2026-11-08T22:42:30.777261+00:00",
+  "tested_sha": null,
+  "working_files": [
+    {
+      "path": ".github/workflows/atlas021.yml",
+      "working_blob": "531d61d65398cd8552e9750637c523f946e7d21d",
+      "sha256": "8a32dad77e5881b0f363e486b2a10b051b462b0bf15181ec861dbdf9d2325b64",
+      "bytes": 5092
+    },
+    {
+      "path": "README.md",
+      "working_blob": "f4f1dcc7eef39c0b011480399b2fff388e0b8980",
+      "sha256": "bc2df80185d6fe2248dc5dd0ba118fe52aafbea4923fd9e8f964953bce91fdff",
+      "bytes": 11254
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/ATLAS-CONVERGENCE-DAG.md",
+      "working_blob": "b3ba9a87966821ddaf1b0486b710fe8b314d3b4a",
+      "sha256": "9b9111858bd34ecdc5db343258de7e48734115558783acc81d2a085e761fe02b",
+      "bytes": 3576
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/ATLAS-CONVERGENCE-DECISIONS-18.csv",
+      "working_blob": "2402fa8e68287fe092717efa0d1078ec9dbfb0aa",
+      "sha256": "0b32639cc3923f045c094e5fe8b75871c631a05cb54f31e7929551462229339b",
+      "bytes": 322338
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/ATLAS-CONVERGENCE-DECISIONS-18.md",
+      "working_blob": "49dfbdae9aeaef982f50a322deebb1ae2530e9b1",
+      "sha256": "d9b858756565fc2af827fa46f2cae294acf9de875f86828547bf97b2e1d1fbec",
+      "bytes": 11855
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/ATLAS-CONVERGENCE-HANDOFF.md",
+      "working_blob": "bd53f1dbe9a0ac2bb6f95dfa1af5af484b7056d0",
+      "sha256": "c34bed8fe72e5b205bbde709475b2368d77ddaa3389e03803fe1d730829f299a",
+      "bytes": 5059
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/ATLAS-CONVERGENCE-PORTABILITY.md",
+      "working_blob": "1ed482de6bbbe416621f6029bb814263e88b2fe4",
+      "sha256": "b80b12a2f91a3e2d707585f67ced9d4d2b1747fd528c08b1bae7fd79f20d2fc4",
+      "bytes": 4220
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/PUBLIC-EVIDENCE-MANIFEST.json",
+      "working_blob": "591c6b20693970600d6098bebf72bd38701f5a44",
+      "sha256": "6189662d05814dfac551205a9250582f901cad8b7e018e66395acdce85def454",
+      "bytes": 19550
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/REQUIREMENTS-84.json",
+      "working_blob": "6b495c4033a55f886176e88745688d5f54ad91b0",
+      "sha256": "b30dc4776f2afd8da943df60349d6518c623124121c5346e1846b8e250bdba51",
+      "bytes": 295077
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/O0-CONTRACT.json",
+      "working_blob": "0022cdb4b59e1656b40c2fe13d9e5a2a5e6c6f57",
+      "sha256": "3646f3e4e7b9082263a12c06d92a5840eee3fb300cfc0a2d912021205e0217f5",
+      "bytes": 11787
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/O2-DECISIONS.json",
+      "working_blob": "e3469c4de3f9ca2fbcba095673bbff744e5eae2a",
+      "sha256": "0f4a180ad46c6f1534f1a476d6500384fd8209221a951c5767cb36fe6cb4b6f8",
+      "bytes": 38665
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/C2-P03-35-TEST-CROSSWALK.json",
+      "working_blob": "a4d299ccf17c817318954058526153bc0743ea36",
+      "sha256": "6862dea2a277eef93c795867836d7e333916cc10b43f4272ab7152972dd0d5c2",
+      "bytes": 20106
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/HUMAN-APPROVAL-READBACK.json",
+      "working_blob": "d8a0dd38e8870b01ed81a921796d010e9723164b",
+      "sha256": "4ebe863c07e9b7f8baffbfdd7e8c0326f9ae4f4fa2d4a8f901188c4b919c4101",
+      "bytes": 12795
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/K-NEGATIVES-PRESERVED.json",
+      "working_blob": "772f2ac4c079181b02310eebaec8202fcee4db60",
+      "sha256": "e2594d6a99ba964b51e2b21a173845f831772c52c763ef85119f0737972866d5",
+      "bytes": 35312
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-ALL-SOURCES.json",
+      "working_blob": "63aece8c717bc199ede634bf1871ffd00e1b9209",
+      "sha256": "5de589a57c4386a7161adace615efc16a8f7ff8f55c3724d805228c2142e4d89",
+      "bytes": 19052
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-ARC09-FROZEN.json",
+      "working_blob": "e14277e2e0467dab4a4ac1b11fc3ff045fcc3daf",
+      "sha256": "7da781aea99251530775d2ef684be1fa44eff08efc167bb0ed76cddf395c710e",
+      "bytes": 2558
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-C2-28-FILES.json",
+      "working_blob": "29020cbe6775685da173bc4ab24b7249d317bc66",
+      "sha256": "b472a47a434cc815a1e6b265005aad869f1ba42e2ec36ff8e464fa1fbce50f9d",
+      "bytes": 15220
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-CHECKS-PRELIMINARY.json",
+      "working_blob": "33ce4c9a0c5460d83a650cdcc34d831cd69efcc3",
+      "sha256": "522cafbd2431222d78b737cb1da1b127616c7f09f7deb68b7bec58a11e0e1e2e",
+      "bytes": 4332
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-CHECKS.json",
+      "working_blob": "bf0be6be723c453adba150e436048a73f8e93810",
+      "sha256": "4dc37428369e316897bd1837d51d4551c72c6fbb30ca97aba7a407c5ade937e1",
+      "bytes": 13330
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-EXAMPLE-CROSSWALK.json",
+      "working_blob": "9c678e36a9d26a073ec2bcc70bb61607af358cc9",
+      "sha256": "3e7d958458ea7bd8dc0a9eb781bcfad55ade955f270e206fe65a3cad67091661",
+      "bytes": 33123
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-HANDOFF.json",
+      "working_blob": "75eaad5e4c3136152f2a30dce22943447d4ba224",
+      "sha256": "35137f1a25f5c679e3f670cd2fe4ad3a0743924bf967a310f8d082821af5728a",
+      "bytes": 6159
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-JOURNEY-CROSSWALK.json",
+      "working_blob": "b6e2ebb95e8316b262890480d6386f97b016b652",
+      "sha256": "355c49544281937d9f7ca6f96c6d055807c19a2494fbfa1e54d5c3af15581891",
+      "bytes": 57227
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-MATRIX.json",
+      "working_blob": "c11bca76a371655f744e6db7070e2bc922c98436",
+      "sha256": "d26f129f6cb3d10a7306557db0abdd6333dc38e87763e3815ca71d2fa82c70f4",
+      "bytes": 27841
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-N01-24.json",
+      "working_blob": "690340d69ebeb488e734c5e347122a7198840f76",
+      "sha256": "952caa46ba00d815bb551e6b37655201867f5c7d54398a7fd422df30108835c0",
+      "bytes": 7973
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-PAR005-010.json",
+      "working_blob": "4406e09cedf29544472f1a935f79eca56b601796",
+      "sha256": "c1702e57e4175920df8852ebe432de91908f788c2fb1e03e26afd0e0ccdd6145",
+      "bytes": 4040
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-PROTECTED-BASELINE.json",
+      "working_blob": "8936afa2d799a506a186915c153bd242011ea462",
+      "sha256": "314510bd2342542b1b24fc0e3034d6294814eb3b31eed449926d9325bc1d40c5",
+      "bytes": 7897
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-REVIEW-P00-CONTRACTS.json",
+      "working_blob": "ac13cd725fec9694a3eadc9e8b5ca7d9bddc8021",
+      "sha256": "d32cee44d2895f7ac6fa82e37d73e1609bfaeab959a7d617c2a1f91dfb14c595",
+      "bytes": 12495
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-REVIEW-P02.json",
+      "working_blob": "9c1fce876a8f9a7b829d6072d26d754b4858dd2f",
+      "sha256": "03d78707f92512ccc2bf6f91dddbaec55c3703b8fd1b6166d9e936922fa58ff6",
+      "bytes": 7160
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P01-SOURCES.json",
+      "working_blob": "d853a24129e1fd2f0a35dc2c264dc4de802a5cba",
+      "sha256": "f3bf92afc1d0158e512019e04863700e2fa61dabc84f89e7350e32e5e12c9216",
+      "bytes": 5378
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P03-HISTORICAL-TEST-IDS.json",
+      "working_blob": "98882f118c9a4b8da1c9b115da127d7b7d32aa71",
+      "sha256": "651537422db692f8bc4cd218c64fcf9b2e181b507cac1da7987070feba6cade3",
+      "bytes": 2401
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P06-SEMANTICS-ON-MAIN-0.log",
+      "working_blob": "ae293bbb8274af15170dfb6cf4b688791921b8b4",
+      "sha256": "bf766360e67fe89cce2e0aa40586341d9bd3b2bdc855af333d5a1e12cd7e3115",
+      "bytes": 1386
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P06-SEMANTICS-ON-MAIN-1.log",
+      "working_blob": "5ed227139f2331f22d8086d205b0010d7e01ea45",
+      "sha256": "f8ae2afd894955c84b1e51ee8bb1c19215965d928ed6322d227fa009c45641c5",
+      "bytes": 1386
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P09-READER-PROBES-ON-MAIN-0.log",
+      "working_blob": "7a991cdbda14e736fe5a175c074104dbda1b7fd2",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "bytes": 1385
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P09-READER-PROBES-ON-MAIN-1.log",
+      "working_blob": "7a991cdbda14e736fe5a175c074104dbda1b7fd2",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "bytes": 1385
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/P09-READER-PROBES-ON-MAIN.json",
+      "working_blob": "1a0d6b70f2f74172d2318c6351ba0678beeffb7a",
+      "sha256": "d01f74ae314b70b7460e7127978dcb537389f85517052d39ab53ca2a687a2475",
+      "bytes": 4603
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P01/finish_p01.py",
+      "working_blob": "4e942f7fa7eee59c843cc82bdd9f6136f5ac183a",
+      "sha256": "089ead3111dbbf3e5eee04bb1eff7b88548813e46ca38aa26ef04904d820d1b2",
+      "bytes": 20896
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-CHECKS.json",
+      "working_blob": "738ba845d9ecc13fa77029522de9c679463183b5",
+      "sha256": "a49f0b0b95c28c737f5f12043f65639be844683975041c0c05fe4b3d07089678",
+      "bytes": 9886
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-CI-EVIDENCE.json",
+      "working_blob": "3e803411bb068f37dc916ea1f361b2c6cbcc2c16",
+      "sha256": "0644494b7d438af375e34be18a25d42ac5538c342ec9b27452d28e07a917ee87",
+      "bytes": 24225
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-HANDOFF.json",
+      "working_blob": "e048361b9dc25cfc50d2deed38e17b5c1d8dd641",
+      "sha256": "473931ed2d45a283beb9f87f802d5f216b792fa8b8eaa37c2cc512ee84161c95",
+      "bytes": 5744
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-MATRIX.json",
+      "working_blob": "eb645f6f6e9e0744c10fcdfecddf9257931fb1b4",
+      "sha256": "55e73a38d929e2829eb6a1df3a132ee0c350594e3f2f7ba96c96db718ca3686c",
+      "bytes": 91320
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-REVIEW-P00-UI.json",
+      "working_blob": "f4d9b63dbcad3e2443958e500f77b55632f26db7",
+      "sha256": "94059d4b294c25cef7b7d15fc2e8584cad3c81842fa1c84512e8fc05df146ebd",
+      "bytes": 7310
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-REVIEW-P03-PROBES.json",
+      "working_blob": "4171abc85090baed9cff1efd3cfa9d1d4fb51d6c",
+      "sha256": "6e1f33cf307f089fec2809bdaccf2cd4a6d409847eb94a3d88b0451a36fe6978",
+      "bytes": 11409
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-REVIEW-P03.json",
+      "working_blob": "a5ea1dfb4812f1fd8042796070f1994c010b0a9e",
+      "sha256": "f07087e0a2dd4b91ff95b33d6fad76e55d704bbf6ae9e274392eb9e05c5b7160",
+      "bytes": 7519
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-SOURCES.json",
+      "working_blob": "f63c46983bd05cd5fc5d7c144c6d32521a908cb5",
+      "sha256": "63b6d6c48f602a5d87b04fd6f7746347f3fee08b80af0f048e69cbcb8fc3b952",
+      "bytes": 13855
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-UI-INDEPENDENT-CHECKS.json",
+      "working_blob": "0222fa08a96112ef12a16ee705187069414cc3b1",
+      "sha256": "ee7314e91e3dfac69042f5c7653cd1716ec8b326a4a1634d7b422ef644c11b6d",
+      "bytes": 1636
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/P02-UI-REVIEW-INPUT.json",
+      "working_blob": "38b77b3c94cc72b6bc77f2a4cc70c728bec3eeaa",
+      "sha256": "c8c971e84256e1d337f6d7a90bdf8796a758e78079154ba710b52ac7fd3099b6",
+      "bytes": 764
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/app-preferences-probe.json",
+      "working_blob": "8ca1c51523561036c81b4e7f93d533a1894329a4",
+      "sha256": "a185dedd33214f4526bbbdecc491141d87a6ef98339c856ba495503f4d38b58f",
+      "bytes": 1382
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/app-race-probe.json",
+      "working_blob": "c2cd84c7b30900d03263f869e31d60ea49240906",
+      "sha256": "901816947d3277ef16d3ff2c7a1895a2cafc11877266fab326f290b06f382bc0",
+      "bytes": 707
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/app-snapshot-probe.json",
+      "working_blob": "cd5b5b5b499da017532aa2b8bab2a7eb26d4d39e",
+      "sha256": "82e96645c2b3418b644123cbda45d1193254919905d0aa2d56b841b897c67a84",
+      "bytes": 3259
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/catalog_scenarios.json",
+      "working_blob": "03f26c465a4dbf010d4c05c870d2f745ec456d40",
+      "sha256": "b16a935756a177440113b206bd3f944c46132474adc92a1e369333a0d6793730",
+      "bytes": 484420
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/native-limits-probe.json",
+      "working_blob": "8e6dd9ee5a0917fce43fc536669ae89fa06a06a0",
+      "sha256": "8765f62c9ee2b951dbc003cdaa2df0109c47269296d507b9e854145ac08a02e5",
+      "bytes": 726
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/native_scenarios.json",
+      "working_blob": "8e5ca670237d7789b3ad311e26134c0b7ae46142",
+      "sha256": "20cfc612392f56fa861f180989787bcbbaa35e33eaf44c29db128d419b559ec9",
+      "bytes": 13207
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/probe_app_preferences.mjs",
+      "working_blob": "4ad1c51e1ba15d79eea346da38d8ccc040b78d6d",
+      "sha256": "6de0e7d3d84abc9b22f195593ccc2f7aa2eb7a1b590797392d23d848b0730fd8",
+      "bytes": 3668
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/probe_app_race.mjs",
+      "working_blob": "0636b3892b473938dd34f8167fd50554453a3c3c",
+      "sha256": "15e33b9875580f785dc16db60550a71d05cd2ecb01b3c37f2f0de8640f67bf93",
+      "bytes": 3092
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/probe_app_snapshot.mjs",
+      "working_blob": "347604a9e37e3d666416969619a2a48a110e3f83",
+      "sha256": "a939a431803b9793211245d0422c51226cf0539ce74a974e077609e4b960bd01",
+      "bytes": 3586
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/probe_native_limits.py",
+      "working_blob": "b124175db09921dc826e339a4ebc4c40d584b43b",
+      "sha256": "38e07bb98269f5d11ea8068d27781c93ec6f4acdc2f483336b6120be98c187fa",
+      "bytes": 2708
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/probe_source_contracts.py",
+      "working_blob": "16e2d59c86c2264b99a19a8d4bb58613fd47ab13",
+      "sha256": "b5f16e39d398cc4b413495b971d368cfb35bb2c1055da78d80bc2749e8c3fbf0",
+      "bytes": 6115
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/review_ui_independent.mjs",
+      "working_blob": "a588337f695e07841ad08afdd1fc877168aa8aab",
+      "sha256": "7332f0d6a973d21f13f8ee724adea7a0b2d9e935b1ce3bdcb6802fb61274e987",
+      "bytes": 11539
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P02/source-contract-probes.json",
+      "working_blob": "43c46e2d247501355bf63b1ac1d3d9aa99c8e68f",
+      "sha256": "b570041600b9836588ef5b47e6ea25eb773c16f4ff348acb4fbca294938b839f",
+      "bytes": 154880
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/P03-CHECKS.json",
+      "working_blob": "9c519aa78a7e93be940a0e51c07d7618d6d5943c",
+      "sha256": "9348be214b5770ef94985003956efc92d471eda064b1fcc6bd666c4dc86ade25",
+      "bytes": 3621
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/P03-HANDOFF.json",
+      "working_blob": "d54a173ff4f1f7f76037538dca543d6c94ea4321",
+      "sha256": "e81fc5e189a9b1a125d4f608dff4ccd33ca7cd1121e7b51c8c907a09db52b1e1",
+      "bytes": 3257
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/P03-MATRIX.json",
+      "working_blob": "c10aaba3278f79e2f1d0158fce6c053ef48650bd",
+      "sha256": "272b4e45aab4c1d8b7f8a2e0801a564fdcab8556b3b887419715cdf976accd98",
+      "bytes": 51938
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/P03-REVIEW-P01-EVIDENCE.json",
+      "working_blob": "37c7f8ee215e94dc2a2753f4fabcf9e97f94f534",
+      "sha256": "4f6ae92514fb3dccfac650a747479730679316058ba6fb150af14eca2334cf3f",
+      "bytes": 66479
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/P03-REVIEW-P01.json",
+      "working_blob": "6e721deecfec79af0b55ac768c86141c896afc16",
+      "sha256": "cd917057e390bd97d88f9f959c8dedab5c08ccdcb7f1287f9865abb31b7a1130",
+      "bytes": 9180
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/P03-SOURCES.json",
+      "working_blob": "0985ceaf2732a2d31485b6619eaa04c1990fa465",
+      "sha256": "28d21c5ee8ec872f7270546ffd27f9386e144a00cfb962a984c1fcc8f5e3d67e",
+      "bytes": 17714
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/P03-VALIDATION.json",
+      "working_blob": "ddd6ef8e6591ab34e654bf59de9811b32dd125b3",
+      "sha256": "414653ac795103a7174e24a2fea7356cd9ec15d35613c09f7456b97dd30d02f6",
+      "bytes": 283
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/current-producer-preimport-red.json",
+      "working_blob": "341f1006a56df02f13bd474736c06873851dfcc1",
+      "sha256": "70292da52e6364afcf930c27cbd0213fab15ef50748af48409efd6df1a16f1df",
+      "bytes": 732
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/main-presence-and-os-deltas.json",
+      "working_blob": "a2cef8cd7d1bf3d615c040f27b26828ab296ed6e",
+      "sha256": "926ef8c0f8594e4571b09ca8fc1c48828934e1988283fb6e2260bfd1a880ab44",
+      "bytes": 3438
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/main-source-tests-normal.json",
+      "working_blob": "0de85cbf798caec02708c7f1180141fcabcfc636",
+      "sha256": "fda8bd3396eb7b209bee2122892a021740481cd8ce36aff16887a9babdf29b07",
+      "bytes": 6488
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/main-source-tests-normal.log",
+      "working_blob": "2db2c2ccc247d41a1661d6125d7f09f6dabc1ddf",
+      "sha256": "3f7328a89620b9b0085d69f1934821557ff494f1f0539c4f5a680c533e3f5a1c",
+      "bytes": 5356
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/main-source-tests-optimized.json",
+      "working_blob": "521f2eeed3b8a2f9bffc80b347c082ce4227809e",
+      "sha256": "406c32d3373c6c6717e00fcf5b0dc0ade456c2074f9cbdd80bd7387609fed64b",
+      "bytes": 6491
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/main-source-tests-optimized.log",
+      "working_blob": "3c2bee70ac8044f35ed7f8509557de25c295683e",
+      "sha256": "a949b58d75beb7f58ae6a0f2f447d0a11c318a3b7aff1500514286b6249d33e1",
+      "bytes": 5356
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/probe_producer_origin.py",
+      "working_blob": "749649e2fcfa3f520fb9a38ff80b72b21ff1f7cd",
+      "sha256": "33c07d5ebd32db38a8fe57129fc09bc871220b5543a80ff97a71458635aba618",
+      "bytes": 3716
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/producer-origin-baseline-red.json",
+      "working_blob": "6de3cb4a2426ebb0b3ca687c9ee7227809d6e2fc",
+      "sha256": "a8a073f5881b8a190d443841ac22422cfbda324b105807f46a61afebb346d7fa",
+      "bytes": 940
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/review_p01_evidence.py",
+      "working_blob": "3591443b6e6b08732c11b2996479c80483148517",
+      "sha256": "d3e7f0198fd8b3e9012e595b673290ed9cb436814b50c701acbe55bb396e3586",
+      "bytes": 6066
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/P03/run_main_checks.py",
+      "working_blob": "15b4496c57909818f6c1f620fa2a3d64c9bfb86a",
+      "sha256": "1e73f0a4d04c93617a4d03aa8199d0c64bb5b292ea2a1aa3f5d9e5098a486968",
+      "bytes": 3723
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/a01-preservation.json",
+      "working_blob": "23a9e98bd72c986da932e9890ce8f196ec7bc5d5",
+      "sha256": "d1252b8e7c04656d6888807ba37284fb2f5a7a3d162f6319bca44ad8c4f210c0",
+      "bytes": 333
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/a01-preservation.log",
+      "working_blob": "594ceacf886fcc3cfa7b5f7f22b786d56194f4cf",
+      "sha256": "a96e31e02a56e1f8f6cac15eba2921587296d9a60fff54f082f52a8090448dbf",
+      "bytes": 235
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/architecture.json",
+      "working_blob": "0b670a78931bdc76a25304c426b94df978434eff",
+      "sha256": "359e49ef63534a00af83be955091433b3c3f780516b9541668943f074dd50769",
+      "bytes": 492
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/architecture.log",
+      "working_blob": "831881903777618878a6c659a5b4f9b1042bb88e",
+      "sha256": "3bc6004e5f550d267b0827cf02cf75b7c2762bcfeb4b73beb85044b65defc52b",
+      "bytes": 48
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/native-export-regressions.json",
+      "working_blob": "4c36a5500b2ce9a4592d9e7f7b75bed0f0a5d3e5",
+      "sha256": "dd4f6861f61337584583db11fc581177eaa8a8cf69dae24c9dcb428697c2dc79",
+      "bytes": 417
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/native-export-regressions.log",
+      "working_blob": "8f573790504c6cff12ec46252ebc002345e86e5a",
+      "sha256": "7c0392dec2c0f8bea886ca8a04397e0e1e1a87484563cd7c29bd8f795ce1ef78",
+      "bytes": 2269
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/producer-origin-normal.json",
+      "working_blob": "bdee9d35ea39420dc448f6ab31b26ce6139c6c57",
+      "sha256": "da8f0e421210d428cd1f0e8e7b970ab926ace954b93ea6b7a4ea84bf66e1e481",
+      "bytes": 970
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/producer-origin-normal.log",
+      "working_blob": "8d391fdb3143a3a0e957bc843dc1940e32b38d21",
+      "sha256": "aa95626ccd0413440dd1bc650a4e19f4dea43ae5763ed804f78da41cad10ff47",
+      "bytes": 1354
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/producer-origin-optimized.json",
+      "working_blob": "7812b43759b7094d2f27477fe95f4cf17eafc7ab",
+      "sha256": "9146d370589952553e64989f3fd7105d684ffa94f2f34d10774abfd7337381d6",
+      "bytes": 983
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/producer-origin-optimized.log",
+      "working_blob": "554dea2d502aae6a18b386270a4e8ee0cf1c4d92",
+      "sha256": "2f88f2a8038c1bcc2b5c9f5a353a7311fba37d3d705d7e6d24505d5aff81aeda",
+      "bytes": 1354
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/protocol-snapshot.json",
+      "working_blob": "afb7549032becbe0b7f839d79ca78004f909afaa",
+      "sha256": "2a2375fd2ca571115ec7ee2f054c2f5af2792e196e87e9fb6a6e4e6df226a8c1",
+      "bytes": 903
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/protocol-snapshot.log",
+      "working_blob": "c882ca97571bd603c00e8d2ba8210a7d443f402b",
+      "sha256": "7c58aeba8cce73fc62b65216b926e6fee53b92c108f0c3e85d430a4e5b40d946",
+      "bytes": 2311
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/speckit-guard-corrected.json",
+      "working_blob": "7fed87a4e5658fc07671530aec7fc79fd977a589",
+      "sha256": "564fa0024f697de5c61b51dc4dc46e31c6a60b2cab40096dcf7d3b64c393e44d",
+      "bytes": 308
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/speckit-guard-corrected.log",
+      "working_blob": "95188b28cb2b8d2b74917fd70540944eca0441c0",
+      "sha256": "be26f6e2f902f9775fc0fee1138df6208391ab30cafb2857b71488f3b7fc4ec6",
+      "bytes": 844
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/speckit-guard.json",
+      "working_blob": "edb10a08dfc2fb1c85e8b374236d02ec98394447",
+      "sha256": "6f009a035e2509ba7c27faa9742182819f5ed6e9f374b2e921e3eb7786b05313",
+      "bytes": 351
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/green/speckit-guard.log",
+      "working_blob": "0978c1fbc273a141a48b03f50c899bb9a1b92243",
+      "sha256": "1e0aa5d8272888e0cf83c59789caf2fbcda17be2c95955931d42738af6c9e6d7",
+      "bytes": 928
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/red/producer-origin-review-corrected-opt0.json",
+      "working_blob": "1b4115f11983943000867b857dd11f8a5d9f8c99",
+      "sha256": "a9dceae23bdb3183d00f2848e60fc82f8985cc25e35e01eb5ff6ab8f70b63fc6",
+      "bytes": 561
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/red/producer-origin-review-corrected-opt0.log",
+      "working_blob": "f8ecb39dc122413ea3cacd680cfde140af929428",
+      "sha256": "653984eea92f0eb51f9aba243f6a24f49c3c345ea3d20fc9e5e4416abe9d5388",
+      "bytes": 7156
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/red/producer-origin-review-corrected-opt1.json",
+      "working_blob": "d3662678252e1fc1aefa2be36a877dfcd87b9038",
+      "sha256": "d4da106b65d33a60d8083f32e1b4afa3052ec79d67d4c54a066e908b2e9782e7",
+      "bytes": 570
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/red/producer-origin-review-corrected-opt1.log",
+      "working_blob": "d83b3596c86c0c2e345a2c7b0de48b01de74cfc7",
+      "sha256": "1dec8e4b5f5ecfcb927c5b8f2f0aed92f925d4281b139082b2b48f6fe3ecfda7",
+      "bytes": 7156
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/red/protocol-snapshot-complete-regression.json",
+      "working_blob": "9a205e7fed3f5259c353a39e6f804ef06917b051",
+      "sha256": "a42db3ba3c9997be4ef697f6ece7a835802ce444527d6c61fe5df99a20e9a68a",
+      "bytes": 416
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/evidence/red/protocol-snapshot-complete-regression.log",
+      "working_blob": "9769d0464fb7662cd541c6a02f05d3415e199e7f",
+      "sha256": "d8ac95afd38f46443a73ae8c2238654a498b42d08d5e1a8e165d6b5adb90e40f",
+      "bytes": 5803
+    },
+    {
+      "path": "docs/missions/atlas-convergence-18-20261108/tasks.md",
+      "working_blob": "ddf4f07cec9a7eaeb9dbb7bb2bdde94117979638",
+      "sha256": "a0cda29d81919da01017f5a173cdf731f00e84ed5be320d801ba220df74d76c7",
+      "bytes": 1795
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/app.js",
+      "working_blob": "a47568daf391498910dcf81fa52f8b805bf847fa",
+      "sha256": "38a09b5c54d899f583ac8bfa5453b104403eba52c5dfdd9e53dc4652f02638af",
+      "bytes": 22956
+    },
+    {
+      "path": "scripts/qa/browser.mjs",
+      "working_blob": "e64c70170f41b3f3a82357d7007262e991b85f6a",
+      "sha256": "64add6d4c117d23062ae04afdbd18f4114eed56bad692439ea1b5878db4b2ff8",
+      "bytes": 31149
+    },
+    {
+      "path": "scripts/qa/test_protocol_snapshot.mjs",
+      "working_blob": "f4e9e283f9b5d7a1993a115b79ce7289c5d9eea8",
+      "sha256": "a57269959ef861dc82dab7af137099afc705e2eddb7ae33e4643adb340e351e7",
+      "bytes": 8635
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_producer_origin.py",
+      "working_blob": "e1e78be7db2e248bce862cdb2dc6b12ff130d141",
+      "sha256": "5e4051b7afcf902895705ed7d608ff7a4336cf064e055770ba5bd9cf022a09a3",
+      "bytes": 7308
+    },
+    {
+      "path": "tools/export_native_notebook.py",
+      "working_blob": "c348606572e185dec1e368622be33233c0f50cd0",
+      "sha256": "cf52b36dcdd19e67f8114577b603815e8ec13c9c8ede00c43ac68f5164e2096e",
+      "bytes": 19275
+    }
+  ],
+  "checks": [
+    {
+      "id": "C01",
+      "status": "PASS",
+      "scope": "README / handoff / decisions",
+      "finding": "18/18 decisions and four retained repairs preserve current product scope. Main, prior19audit, PR40 and restrictive human#39 acceptance clearly separated from final candidate qualification."
+    },
+    {
+      "id": "C02",
+      "status": "PASS",
+      "scope": "0.2.0 / ARC09 authority",
+      "finding": "NativeView Files and optional external descriptor0.2.0 are separate; approval0.2.0 retained,0.2.1 remains version-bound human decision. Five norms and20historicalrefs remain exact; no O1 sandbox/TTL claims transferred."
+    },
+    {
+      "id": "C03",
+      "status": "PASS",
+      "scope": "Task ledger correction",
+      "finding": "Original tasks001 and004 are now byte-identical to baseline. New C18-T001–004 mission ledger references approved specs without rewriting frozen tasks or guards. Unchecked tasks and terminal receipt convention do not fabricate completed CI."
+    },
+    {
+      "id": "C04",
+      "status": "PASS_AFTER_CORRECTION",
+      "scope": "Actual protected baseline guard",
+      "command": [
+        "python",
+        "-B",
+        "scripts/qa/speckit_audit.py",
+        "--allow-presentation-delta"
+      ],
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/repo",
+      "exit_code": 0,
+      "result": {
+        "status": "PASS",
+        "baseline": "a6e57c9c6748b4a0d50b554613c93e2b8a785554",
+        "preserved_original_files": 95,
+        "managed_files": 28,
+        "official_skills": 10,
+        "python_scripts": 6,
+        "errors": []
+      },
+      "finding": "Independent execution on current diff. Auditor/pins/exceptions unchanged. Previous root FAIL is preserved in evidence/green/speckit-guard.json despite historical folder name; corrected receipt records exit0."
+    },
+    {
+      "id": "C05",
+      "status": "PASS",
+      "scope": "All tracked baseline files",
+      "finding": "306 baseline tracked files compared; only five allowed paths changed, other301 byte-identical. No protected task/spec/skill/protocol/governance/P03/history edits remain. New paths limited to mission evidence and two regressions."
+    },
+    {
+      "id": "C06",
+      "status": "PASS",
+      "scope": "Evidence manifest/counts",
+      "finding": "89 files match manifest hashes.84unique principal requirements plus240crosswalk items=324CSV records. These are not324new tests;68K/F2 are methods/cases including positives and negatives."
+    },
+    {
+      "id": "C07",
+      "status": "PASS",
+      "scope": "Evidence semantic boundaries",
+      "finding": "Frozen O1 matrices retain originalOPEN findings. O3/terminal receipts resolve later states. RED7/10state and6/8origin cases, -O correction and realrepeat are explicit. P03-18-05 equivalence is expressly limited to producer/viewer separation and fixedHTTPpaths."
+    },
+    {
+      "id": "C08",
+      "status": "PASS",
+      "scope": "Public source review",
+      "finding": "Reviewed evidence originates in public repository/receipts and syntheticChat fixtures. Regex triage found no credential tokens, private keys or userWindows home paths. G:/H: only occur in text excluding access. Scratch paths are execution provenance, not private corpus or requiredcloneinputs."
+    },
+    {
+      "id": "C09",
+      "status": "PASS",
+      "scope": "Portability and links",
+      "finding": "All relative Markdownlinks resolve, including READMEhandoff. Clone instructions require exactSHA/tree and no alternates/grafts/replacements. Canonical current regressions are portable; historical harness scripts preserve source provenance without claiming they run from arbitraryclonepaths."
+    },
+    {
+      "id": "C10",
+      "status": "PASS",
+      "scope": "Workflow and scope",
+      "finding": "Workflow only adds Node regression; no removed/weakened checks,pins orhistoricalguard exceptions. No generic entity detail or new protocol semantics introduced."
+    }
+  ],
+  "protected_evidence": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-PROTECTED-BASELINE.json",
+  "remote_ref_checks": [
+    {
+      "pr": 40,
+      "ref": "refs/remotes/origin/docs/atlas-pending24-portability-20261108",
+      "expected": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+      "observed": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+      "same": true
+    },
+    {
+      "pr": 31,
+      "ref": "refs/remotes/origin/ci/atlas-ap04-c4-k-successor-p02-native-20261104",
+      "expected": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "observed": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "same": true
+    },
+    {
+      "pr": 30,
+      "ref": "refs/remotes/origin/ci/atlas-ap04-c4-k-successor-20261104",
+      "expected": "95012ba70a288feb9562fb7869afc8d219627c19",
+      "observed": "95012ba70a288feb9562fb7869afc8d219627c19",
+      "same": true
+    },
+    {
+      "pr": 22,
+      "ref": "refs/remotes/origin/docs/ap04-f4-l0-codex-desktop-handoff-20261101",
+      "expected": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "observed": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "same": true
+    },
+    {
+      "pr": 21,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-f4-key-identity-20261101",
+      "expected": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "observed": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "same": true
+    },
+    {
+      "pr": 20,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f4-c2-os-isolation-20261101",
+      "expected": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "observed": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "same": true
+    },
+    {
+      "pr": 19,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-f4-reader003-20261031",
+      "expected": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "observed": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "same": true
+    },
+    {
+      "pr": 18,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f4-external-reader-20261031",
+      "expected": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "observed": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "same": true
+    },
+    {
+      "pr": 17,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f3b-tables-20261031",
+      "expected": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "observed": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "same": true
+    },
+    {
+      "pr": 16,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f3a-graph-20261031",
+      "expected": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "observed": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "same": true
+    },
+    {
+      "pr": 15,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-f2-legacy-contract-20261030",
+      "expected": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "observed": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "same": true
+    },
+    {
+      "pr": 14,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-plan-of-record-20261030",
+      "expected": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "observed": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "same": true
+    },
+    {
+      "pr": 13,
+      "ref": "refs/remotes/origin/integrate/atlas-parity03-c4-full-candidate-20261027",
+      "expected": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "observed": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "same": true
+    },
+    {
+      "pr": 12,
+      "ref": "refs/remotes/origin/qa/atlas-parity03-c3-contract-gate-20261027",
+      "expected": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "observed": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "same": true
+    },
+    {
+      "pr": 11,
+      "ref": "refs/remotes/origin/integrate/atlas-parity03-c1-core-20261027",
+      "expected": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "observed": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "same": true
+    },
+    {
+      "pr": 10,
+      "ref": "refs/remotes/origin/qa/atlas-parity03-c2-p03-gates-20261027",
+      "expected": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "observed": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "same": true
+    },
+    {
+      "pr": 9,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p01-contracts-20261027",
+      "expected": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "observed": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "same": true
+    },
+    {
+      "pr": 8,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p02-c0-20261027",
+      "expected": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "observed": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "same": true
+    },
+    {
+      "pr": 7,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p03-components-20261027",
+      "expected": "ead1f753f52f22035326b7366dd2231c62775765",
+      "observed": "ead1f753f52f22035326b7366dd2231c62775765",
+      "same": true
+    },
+    {
+      "pr": 6,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p06-qa-20261027",
+      "expected": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "observed": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "same": true
+    }
+  ],
+  "arc09_checks": [
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+      "blob": "351335256804a41a4f0638c0943937e5ef9cced3",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+      "blob": "1504abff97f25431a50cafe280c2c8e94450ec14",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+      "blob": "b3fb57b91263e6ea7686039f46400eecf30815b9",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+      "blob": "a3b43305f78926675113b1012520bfb92ceed31a",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+      "blob": "49dc02a5fed21d9f6cca074e8511dd006f6fda2c",
+      "same": true
+    }
+  ],
+  "findings": [],
+  "pending_gates": [
+    "P00 must refresh public evidence manifest to include this superseding authorreview receipt; preserve initialpre-guard receipt as historical if distributed.",
+    "Confirm audited file blobs/SHA256 at exact publishedcommit; subsequentchanges need delta review.",
+    "Actions and Codex results at finalSHA, independentUI/origin reviews and clean-clone portability remain P00 terminal gates; this contractreview does not substitute them."
+  ],
+  "product_qa": "CONTRACTS_PASS_OTHER_REVIEWS_AND_FINAL_CI_SEPARATE",
+  "historical_matrices": "P01/P02 O1 frozen artifact hashes unchanged",
+  "merge_authorized": false,
+  "release_deploy_branch_deletion_authorized": false,
+  "corrections_to_previous_review": [
+    {
+      "id": "P01-CONTRACT-GUARD-001",
+      "severity": "RESOLVED_BEFORE_COMMIT",
+      "previous_review_sha256": "d32cee44d2895f7ac6fa82e37d73e1609bfaeab959a7d617c2a1f91dfb14c595",
+      "previous_review_archive": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-REVIEW-P00-CONTRACTS-PRE-GUARD.json",
+      "issue": "InitialC04 accepted append-only changes to tasks001/004 without enforcing the stronger byte-frozen SpecKit baseline. Root actualguard identified this forbiddenappend; initialreviewis superseded on that point.",
+      "resolution": "Root removed only new taskappends, preserved originals exactly and placed C18ledger in new mission directory. Reviewer ran unchangedguard successfully; failure and correction retained.",
+      "guard_changed": false,
+      "norms_rewritten": false
+    }
+  ],
+  "unchanged_baseline_files": [
+    {
+      "path": ".agents/skills/speckit-analyze/SKILL.md",
+      "blob": "94d794ebb1d49cac7dac4948875b127cb3a3bf7d"
+    },
+    {
+      "path": ".agents/skills/speckit-checklist/SKILL.md",
+      "blob": "5b3de7f83180cb6b87f2d8383111ff74a61a10d8"
+    },
+    {
+      "path": ".agents/skills/speckit-clarify/SKILL.md",
+      "blob": "f6230d59f4fe490bfb8cd843f026f5f98b46a223"
+    },
+    {
+      "path": ".agents/skills/speckit-constitution/SKILL.md",
+      "blob": "b43f9b0fb3fee0ba2c925f6e3847e698d0e792bf"
+    },
+    {
+      "path": ".agents/skills/speckit-converge/SKILL.md",
+      "blob": "25f0b90d365046ecf4cef08c05bfa1de6ee85844"
+    },
+    {
+      "path": ".agents/skills/speckit-implement/SKILL.md",
+      "blob": "d5ab23f45ad74fff2fa539528174717b94ad68da"
+    },
+    {
+      "path": ".agents/skills/speckit-plan/SKILL.md",
+      "blob": "e79eca83309b2e5ecc3c589ce997738dbb38e6aa"
+    },
+    {
+      "path": ".agents/skills/speckit-specify/SKILL.md",
+      "blob": "95a1e012a83f2df4d9259c46731cc3df070be8b3"
+    },
+    {
+      "path": ".agents/skills/speckit-tasks/SKILL.md",
+      "blob": "98ce1f90c5d4298d295fae9eb7c9a761f5c6d924"
+    },
+    {
+      "path": ".agents/skills/speckit-taskstoissues/SKILL.md",
+      "blob": "a215787d208d615885ae4f87ac974e2ee575ef8a"
+    },
+    {
+      "path": ".gitattributes",
+      "blob": "d0d6371de329ffb232ba2fb9b79732165a702be7"
+    },
+    {
+      "path": ".github/workflows/atlas-application-ux.yml",
+      "blob": "c0153e45eeb0b504789c5ce87b803f6b9cc4c2a4"
+    },
+    {
+      "path": ".github/workflows/atlas-native-notebook.yml",
+      "blob": "bde046a6e15ebdd13057f421eb9957bbd32d3a9b"
+    },
+    {
+      "path": ".github/workflows/atlas-native-triage.yml",
+      "blob": "5626b40dffc90db1b454c1c75b2ae35d196dc3ae"
+    },
+    {
+      "path": ".github/workflows/atlas-retention-audit.yml",
+      "blob": "05ca0955678993d2616a3523723a5a7f4ce31b61"
+    },
+    {
+      "path": ".github/workflows/atlas003-speckit.yml",
+      "blob": "44872945ae639ef81371b1f8312e98f1e77cc17e"
+    },
+    {
+      "path": ".gitignore",
+      "blob": "c7f9292fe60bb446208d29876f62d2cb01a4f26a"
+    },
+    {
+      "path": ".specify/.gitignore",
+      "blob": "bcd485e2c783d694e304d0f924f6961063a3f273"
+    },
+    {
+      "path": ".specify/UPSTREAM-LICENSE.txt",
+      "blob": "28a50fa22639e32febe14e4ffc7a732b0ba8c90a"
+    },
+    {
+      "path": ".specify/init-options.json",
+      "blob": "4d2b09c7f5648710b636f05f67d25654105d7cde"
+    },
+    {
+      "path": ".specify/integration.json",
+      "blob": "faad359eda046642a8b0da7359f88991a87f3edc"
+    },
+    {
+      "path": ".specify/integrations/codex.manifest.json",
+      "blob": "5615c653f4998b5377d38af0a0a7f360ff825ad0"
+    },
+    {
+      "path": ".specify/integrations/speckit.manifest.json",
+      "blob": "8253931f770d288b6bd8b62ec5ab5a1fd5bcd8ce"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6"
+    },
+    {
+      "path": ".specify/scripts/powershell/check-prerequisites.ps1",
+      "blob": "5f00626f98d9a7094e3c611fb86a1d1714ec34eb"
+    },
+    {
+      "path": ".specify/scripts/powershell/common.ps1",
+      "blob": "ea2c69c819c5bbd5fed25fa2d33c0a6868b3946d"
+    },
+    {
+      "path": ".specify/scripts/powershell/create-new-feature.ps1",
+      "blob": "cd8a2d2b3c676650cb0061d011e392eb1d8395f8"
+    },
+    {
+      "path": ".specify/scripts/powershell/resolve-template.ps1",
+      "blob": "70aee0aca0f1cdbb8bfe2569cb1631b74ca6f24a"
+    },
+    {
+      "path": ".specify/scripts/powershell/setup-plan.ps1",
+      "blob": "88b342c8bb87378cb6b83ca44e7690427caf7b4d"
+    },
+    {
+      "path": ".specify/scripts/powershell/setup-tasks.ps1",
+      "blob": "34eb4fcc61d7f63e92450eb21745ceeb3cee1301"
+    },
+    {
+      "path": ".specify/scripts/python/check_prerequisites.py",
+      "blob": "7bfdf91018884748b99da00b4efa1d561cbd7d70"
+    },
+    {
+      "path": ".specify/scripts/python/common.py",
+      "blob": "e619cec242a716cdf9ac6d5b955ba117a4a5797a"
+    },
+    {
+      "path": ".specify/scripts/python/create_new_feature.py",
+      "blob": "2099a7370828b3f8a7953632d301afae6e3791ed"
+    },
+    {
+      "path": ".specify/scripts/python/resolve_template.py",
+      "blob": "580e22b55715783aad694dfe6e6a39fa7e72d228"
+    },
+    {
+      "path": ".specify/scripts/python/setup_plan.py",
+      "blob": "113b27ca2c1a5c9a7175cf1890ba5e7b8689fd25"
+    },
+    {
+      "path": ".specify/scripts/python/setup_tasks.py",
+      "blob": "31c7b1ae417839c7b84f9e18acfa239a2ecbf241"
+    },
+    {
+      "path": ".specify/templates/checklist-template.md",
+      "blob": "84b5a3acccba193cfe6e76ab0c480460f6287785"
+    },
+    {
+      "path": ".specify/templates/constitution-template.md",
+      "blob": "a4670ff46919b276a4c9663b4ca51830108fcfc0"
+    },
+    {
+      "path": ".specify/templates/plan-template.md",
+      "blob": "ee04d9fb03bbf4b7c4debf7da003afd5e7bf6855"
+    },
+    {
+      "path": ".specify/templates/spec-template.md",
+      "blob": "ceb28776215a098e977650ac090c785dcbf53651"
+    },
+    {
+      "path": ".specify/templates/tasks-template.md",
+      "blob": "c37fc7074e66857220244997617c9ce265b87b6c"
+    },
+    {
+      "path": ".specify/toolchain.json",
+      "blob": "7df25341afc98764c15d68c7d019bd1481235f65"
+    },
+    {
+      "path": ".specify/workflows/speckit/workflow.yml",
+      "blob": "571318af4d6e7c88c82c367c6de3d40fb65efd59"
+    },
+    {
+      "path": ".specify/workflows/workflow-registry.json",
+      "blob": "3ea521b47c105ca96eb0c936aa6df81153ab0097"
+    },
+    {
+      "path": "AGENTS.md",
+      "blob": "c19ccc55e54f1274dac8408480f7a3e9ecc30f85"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "blob": "c04204dda37071d40e65a1d1023ccbf05681905c"
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "blob": "a2190a257987aa9a2da276857cdb713ac24dd520"
+    },
+    {
+      "path": "docs/architecture/ADR-0002-protocol-candidate.md",
+      "blob": "17265f1a7293d7885825d9dc1982b1e1dec2b567"
+    },
+    {
+      "path": "docs/coordination/A-DATA-REQUIREMENTS.md",
+      "blob": "da8a1d0b3a176b21a3f22927fa661c3a786ac49b"
+    },
+    {
+      "path": "docs/coordination/A-MIGRATION-DISPOSITION.json",
+      "blob": "0d8daef8f048cedc398d27fb1654729181f40d13"
+    },
+    {
+      "path": "docs/coordination/AB-CONTRACT.md",
+      "blob": "7f067f719fd4bc6efb5153c569216a7cf2e89f02"
+    },
+    {
+      "path": "docs/coordination/publication-policy.md",
+      "blob": "59e7723608ef73e4746bb64a9acd8aeca5e3778b"
+    },
+    {
+      "path": "docs/engineering/speckit-setup.md",
+      "blob": "c486fff753f8b27284a852ea85a435e4cae24630"
+    },
+    {
+      "path": "docs/missions/atlas-a01/FUNCTIONAL-CONVERGENCE.md",
+      "blob": "46f2f925aca249e7d872aaf8a9224e1d3fff3fd2"
+    },
+    {
+      "path": "docs/missions/atlas-a01/FUNCTIONAL-EVIDENCE.json",
+      "blob": "f6bd0d93a2d4e57450ae1b6c45dee39fe807c052"
+    },
+    {
+      "path": "docs/missions/atlas-a01/LQA-FIX.md",
+      "blob": "5ac6df19b7b5455f5048870dc5d25c56e6d58e09"
+    },
+    {
+      "path": "docs/missions/atlas-a01/REUSE-AND-PARITY.md",
+      "blob": "19951535a049ed61692ec43c7e415d4ef6b537a8"
+    },
+    {
+      "path": "docs/missions/atlas-a01/REUSE-MANIFEST.json",
+      "blob": "5101d0e7ff0e227f42dd28196ca66f4685fea024"
+    },
+    {
+      "path": "docs/missions/atlas-a01/REUSE-SUCCESSOR-20261107.json",
+      "blob": "345c37a6b9317c846d442ce864b408df8ef6dc61"
+    },
+    {
+      "path": "docs/poc-reproducible.md",
+      "blob": "5082bb7b01f6bb0516613c90b5b8107c18770b72"
+    },
+    {
+      "path": "docs/protocol/0.1.0a1.md",
+      "blob": "a60f5bb82156c1cbb04344217415f0ab5deecaef"
+    },
+    {
+      "path": "docs/protocol/SDK.md",
+      "blob": "adaab213b7428cba3fb89ec56c072e1e333b0e0b"
+    },
+    {
+      "path": "docs/protocol/conformance.md",
+      "blob": "654ae2ad757a3dafe62746330031f78afc6d2199"
+    },
+    {
+      "path": "docs/protocol/profile-manifest.json",
+      "blob": "c4c8e348f1959151eeb4022c0ee18d4b0e35ca8b"
+    },
+    {
+      "path": "docs/reviews/A4-POC-FOCO01.md",
+      "blob": "c8ddd0d96ad39879f16a0056af43180465a1700e"
+    },
+    {
+      "path": "docs/reviews/A4-coordination-review.md",
+      "blob": "a463c54b00a4bc505531d2e5a3795f82ea6a7455"
+    },
+    {
+      "path": "docs/reviews/A4-decompression-review.json",
+      "blob": "8a9013abe61481ef96b45f160852d6ba15af8f73"
+    },
+    {
+      "path": "docs/reviews/A4-implementation-review.md",
+      "blob": "ba516eb3ce742f5163872f90df6102700accf36e"
+    },
+    {
+      "path": "docs/reviews/A4-local-verification.json",
+      "blob": "e3111c19f0906faf9e5954a31375339386588adc"
+    },
+    {
+      "path": "docs/reviews/A4-requirements-checklist.md",
+      "blob": "0938c49736d974825c8d72f3b8e7ee862f131960"
+    },
+    {
+      "path": "docs/verification/FOCO01-local.json",
+      "blob": "a23946ba4b00976bda5cb03dcd49f158ffc9b070"
+    },
+    {
+      "path": "docs/verification/FOCO01-ui.json",
+      "blob": "7b7df23d0b9562752b9b3877e13803ebd825d876"
+    },
+    {
+      "path": "docs/verification/FOCO01-ui.md",
+      "blob": "b272ac1f86f82584985a189f8ae81259061c6ec9"
+    },
+    {
+      "path": "docs/verification/README.md",
+      "blob": "3ecb25656e4e134ffedb11358700d91ff49927c2"
+    },
+    {
+      "path": "docs/verification/SPECKIT-SETUP01.json",
+      "blob": "a22a1c7d13f9157d80a5e3670fd8200939e5097c"
+    },
+    {
+      "path": "docs/verification/SPECKIT-SETUP01.md",
+      "blob": "4d62dcee41a25e465adf861321d09e23e6cab1f3"
+    },
+    {
+      "path": "docs/verification/atlas-a01-visual-parity.md",
+      "blob": "1bda940e530ff5d6c67195e0bcf6fc628f06e26d"
+    },
+    {
+      "path": "docs/verification/desktop.png",
+      "blob": "4782fb8e34e9d3bb52664010d934e407ea75b197"
+    },
+    {
+      "path": "docs/verification/integrated-local.json",
+      "blob": "c832fd98eb49acd5da6e0b16e57182a0c83ed0f8"
+    },
+    {
+      "path": "docs/verification/mobile.png",
+      "blob": "85c52bdf3ec662f50e5e5df1c22f09ac9777d0ce"
+    },
+    {
+      "path": "examples/environmental/README.md",
+      "blob": "40260c6b98170d1804e7336c924e3028f8a61d57"
+    },
+    {
+      "path": "examples/environmental/export.py",
+      "blob": "5f29ba5b2fb2353a6c663b7f67748142880a1a25"
+    },
+    {
+      "path": "examples/environmental/sample/data/calibration.csv",
+      "blob": "44694cdb47658efe1f0b5fc65c9c92412704804a"
+    },
+    {
+      "path": "examples/environmental/sample/data/partial.csv",
+      "blob": "392bc83159a230bb768fbbb8ac99f43aaacde1c5"
+    },
+    {
+      "path": "examples/environmental/sample/data/water.csv",
+      "blob": "37c6f15356fe25574c7fdb27b8fe0c2b19ac604b"
+    },
+    {
+      "path": "examples/environmental/sample/ro-crate-metadata.json",
+      "blob": "cb6fcae86260619d1e5adf816edd78c7ce1a9fc1"
+    },
+    {
+      "path": "examples/upstream/process-run-0.6/LICENSE.txt",
+      "blob": "57bc88a15a0ee8266c259b2667e64608d3f7e292"
+    },
+    {
+      "path": "examples/upstream/process-run-0.6/NOTICE.md",
+      "blob": "fd5cee249153e3fd25ca222a5397f569cf2c2fd3"
+    },
+    {
+      "path": "examples/upstream/process-run-0.6/ro-crate-metadata.json",
+      "blob": "9110ef0d8862dbe07add3cd78c0380e80c2d2494"
+    },
+    {
+      "path": "packages/atlas/pyproject.toml",
+      "blob": "b8d92964ea01871e5de03a1d2a7ea1c6342d5e58"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/__init__.py",
+      "blob": "dc3faa628b6946a65449193789a7124bc61540ea"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/__main__.py",
+      "blob": "dbd1701744007f60c6482edd243df83a53831458"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/catalog.py",
+      "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+      "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/native_values.py",
+      "blob": "952d956c77bbcb38c75936748331fcfe8e81f349"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/server.py",
+      "blob": "05cbf5584561bb74ebded60c001df7b835ad864a"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/index.html",
+      "blob": "b3f4bc39c61c3a57c4b99581dc0bbe53fef12abe"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_application.css",
+      "blob": "9d23addb11f8cdac6399aafc7757bb2bda439eb9"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_graph.js",
+      "blob": "0dcd0227fadc77aabdeaaaac51a9a4d13a900a2a"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy.css",
+      "blob": "547314b8447fc97fbff00fe2e81f46ee5351e4a3"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_integration.css",
+      "blob": "fd9ffa6c997154307b62df5c97319142806a1b12"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "blob": "c0fced5f4893be6e0ea52bf935dd20dbd6932332"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_tree.js",
+      "blob": "d44e1afd90e74371e4cacc6ad351418c663cae34"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "blob": "b0971359d2e7406d0ace7e38b370b4a3c96a6e4f"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_lineage.js",
+      "blob": "cef0e65cffb9f75984bb2375bd58c972391129ba"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_navigation.js",
+      "blob": "1756f8b3c8c08e5164cae3c164802761f18c1946"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_notebook.css",
+      "blob": "e624be8e9c964188d08944ab93972cda46fab65e"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_notebook.html",
+      "blob": "21c91be078447c6a99447e5c6dc9c8bf1108ae53"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "blob": "972abb3428271d549e9d3d505b6191a6000289ad"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_rebuild.js",
+      "blob": "391d85ab543e6aa257ee929c3e19a024f0d7677d"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_retention.js",
+      "blob": "005546a6dde62e6a04ff31f249d10bc67d52b209"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_triage_model.js",
+      "blob": "48dd420213185980239587d485f9ecb534bc8bb9"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/native_triage_ui.js",
+      "blob": "7612308b0201293e7070a12da489dcd0c96f7912"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/original.css",
+      "blob": "313dafd28e811e3169bfbe6738a3cb4e2585ae02"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/original.html",
+      "blob": "37e37657c7828061183aad8817ef35cdfbd49c81"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/original.js",
+      "blob": "818476504bdf94b27048be83579221ea71977294"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+      "blob": "0fe2568ec80e40825bcd3e08e0d1eade09d03c5f"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+      "blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/style.css",
+      "blob": "df38f34e917c4be45bdcdf51cfe7ad8edea11957"
+    },
+    {
+      "path": "packages/protocol/pyproject.toml",
+      "blob": "743702fc8594f5d71d5ac5e936d7ff1ac5df7ea1"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/__init__.py",
+      "blob": "6c119a2ba9b5707dd4f4ef3f65061c19cb615259"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/__main__.py",
+      "blob": "eb1d136bc0a96b00ae1753ed9a4d3b5ea4deca45"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/model.py",
+      "blob": "4f477966dd6adb7a819d7d9b934a39cab7ba8122"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/read_model.py",
+      "blob": "5988b605760ab242e99de6ce484ed57569f8f475"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/APACHE-2.0.txt",
+      "blob": "57bc88a15a0ee8266c259b2667e64608d3f7e292"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/NOTICE.txt",
+      "blob": "f755d7ff816dfe9f91c6b77ab2d9039e0123e363"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/context-catalog.json",
+      "blob": "ac6bd4b0f064d836a670698424d390682a03235c"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/ro-crate-1.3-context.jsonld",
+      "blob": "1f453d63522479c58f259a897015e51c0223b162"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/resources/schema.json",
+      "blob": "dbba84967bfa3c3dd828ec2800cabdbe292da0d8"
+    },
+    {
+      "path": "packages/protocol/src/caderno_protocol/storage.py",
+      "blob": "cc6114458778945b2cd1a8719e955151a3291fdd"
+    },
+    {
+      "path": "packages/protocol/tests/test_sdk.py",
+      "blob": "e2dc1d5327c7b53a3b33fc9d2d6735d503b13dc1"
+    },
+    {
+      "path": "research/check_eln_official.py",
+      "blob": "5a1d7d8d6cee01789c56fb28330ce2ae1d80e5f4"
+    },
+    {
+      "path": "research/compare_candidates.py",
+      "blob": "da09a603a4e66712a041e140345cb560c2c569ad"
+    },
+    {
+      "path": "research/evidence/comparison.json",
+      "blob": "99a3f1ed7584bbcfd07e57e3a590499571405952"
+    },
+    {
+      "path": "research/evidence/eln-official-checks.json",
+      "blob": "9e9fa3125a51af9197a990dfd473289c06a66eec"
+    },
+    {
+      "path": "research/evidence/eln-rocrate-1.2.json",
+      "blob": "4da6c0bba8e72352d5f78c5930c83762097b8ded"
+    },
+    {
+      "path": "research/evidence/environmental-rocrate-1.3.json",
+      "blob": "7fef485fa71ffefb84d681cd24f23810a09c88e5"
+    },
+    {
+      "path": "research/evidence/official-example-rocrate-1.3.json",
+      "blob": "54a3f8188c819e0b370ae15e31479664fd73414d"
+    },
+    {
+      "path": "research/protocol-options.md",
+      "blob": "19d2e25c43523009da50ca8e5a4a97ff11e9f188"
+    },
+    {
+      "path": "research/validate_reference.py",
+      "blob": "8cd014afe9f7fba6c6cf5286b9122eba85570450"
+    },
+    {
+      "path": "scripts/ABRIR-ATLAS-NATIVO.ps1",
+      "blob": "52257532776c4ca28118df2084bff70b1de028d5"
+    },
+    {
+      "path": "scripts/ABRIR-ATLAS-ORIGINAL.ps1",
+      "blob": "6218a8b36214395313aa4ba6f4774f9e382954e4"
+    },
+    {
+      "path": "scripts/ABRIR-ATLAS.ps1",
+      "blob": "103afebdfc1a550a370ba8fe7b332a9599207933"
+    },
+    {
+      "path": "scripts/atlas_launch.py",
+      "blob": "7cda6e8ef8d8a1fce04ae0611814561652b38c32"
+    },
+    {
+      "path": "scripts/ci/run_browser.py",
+      "blob": "70e52c7bc41dadfcb2f36b11abbdbc42037816a6"
+    },
+    {
+      "path": "scripts/ci/run_native_graph_browser.py",
+      "blob": "91d89575cdd74b3c2cfd470d62b08a3aae10ce95"
+    },
+    {
+      "path": "scripts/ci/run_native_notebook_browser.py",
+      "blob": "17583722f7473a72dbd4a6f610844cfa432f96ce"
+    },
+    {
+      "path": "scripts/ci/run_p01_lineage_browser.py",
+      "blob": "2839f3eed556e101066af6a8fc2f6928f7c3f1ec"
+    },
+    {
+      "path": "scripts/qa/architecture_audit.py",
+      "blob": "1f4446dd85b55e2cd8b1e6063bc1eca24fd30b67"
+    },
+    {
+      "path": "scripts/qa/browser_a01_lqa.mjs",
+      "blob": "61259fd151ac3d31a26cd83bf8022d31f1dc5d5f"
+    },
+    {
+      "path": "scripts/qa/browser_application_ux.mjs",
+      "blob": "5f420b0786cb087589950a8dd7ff52f3fc0400d8"
+    },
+    {
+      "path": "scripts/qa/browser_application_ux_a01.mjs",
+      "blob": "ea53a6affb19a3e45f3e55955c4d886ea6250afe"
+    },
+    {
+      "path": "scripts/qa/browser_native_graph.mjs",
+      "blob": "fa63fab44ee4b4f217816babcfb924f79eff99c5"
+    },
+    {
+      "path": "scripts/qa/browser_native_notebook.mjs",
+      "blob": "493a654e6979ee1a712f3ecb7c9bc104e83dc968"
+    },
+    {
+      "path": "scripts/qa/browser_native_triage.mjs",
+      "blob": "b02fff805be45cceb1564318572436d86fc935dc"
+    },
+    {
+      "path": "scripts/qa/browser_native_triage_n03.mjs",
+      "blob": "3a08ef28345ecb0298966f9c6271671c2e4bc6a0"
+    },
+    {
+      "path": "scripts/qa/browser_native_triage_navigation.mjs",
+      "blob": "5aea959492b41ed904c4c5291d44a72a47dc14dd"
+    },
+    {
+      "path": "scripts/qa/browser_native_triage_readability.mjs",
+      "blob": "7792dc75ce4fc580805f3e669a615b30d65f3991"
+    },
+    {
+      "path": "scripts/qa/browser_native_zoom_qa.mjs",
+      "blob": "44942ea0147a3fc2dbbbfdcb1734921f558158fd"
+    },
+    {
+      "path": "scripts/qa/browser_original.mjs",
+      "blob": "670e4a9c0db3b69f9fea93a536575edcb84add73"
+    },
+    {
+      "path": "scripts/qa/browser_p01_lineage.mjs",
+      "blob": "f8c4ce239dffa923d37ec715d481f7b7934e551f"
+    },
+    {
+      "path": "scripts/qa/browser_p02_notebook.mjs",
+      "blob": "ae1d14cbe1b415756737f51e3dc57086a4b8b327"
+    },
+    {
+      "path": "scripts/qa/clean_install.py",
+      "blob": "1891a35fc20e70cd6c5c9d345be2295e4055fbdc"
+    },
+    {
+      "path": "scripts/qa/make_adversarial_fixture.py",
+      "blob": "590ffcf30049e9ea5f5e1c0de097dc13f3cdf388"
+    },
+    {
+      "path": "scripts/qa/make_related_references_fixture.py",
+      "blob": "f6804b1f15762146add863a8307d17b440e41b82"
+    },
+    {
+      "path": "scripts/qa/make_triage_fixture.py",
+      "blob": "8956de3c20e272df418fe4253c779463d1b9ac7b"
+    },
+    {
+      "path": "scripts/qa/retention_audit_fixture.mjs",
+      "blob": "e8ce2de5d3cd4429c70597eddcfbbc568dff4de3"
+    },
+    {
+      "path": "scripts/qa/run_a01_application_ux_browser.py",
+      "blob": "fd719bb967bddb4f8119eb552db36627576d1463"
+    },
+    {
+      "path": "scripts/qa/run_application_ux_browser.py",
+      "blob": "e3b3b000d01e38255a3cd3d295ec7f4013bb9273"
+    },
+    {
+      "path": "scripts/qa/run_native_triage_browser.py",
+      "blob": "3f557cb2221b981ff652961e52b28ff6e789e2ae"
+    },
+    {
+      "path": "scripts/qa/run_p02_notebook_browser.py",
+      "blob": "aef7cde09ef3b5dad70c80cbdc418130c178334a"
+    },
+    {
+      "path": "scripts/qa/speckit_audit.py",
+      "blob": "f1d369d471db98ddc1ff44c6cf2fd99c3949c79c"
+    },
+    {
+      "path": "scripts/qa/test_native_a01_fix.mjs",
+      "blob": "2cc42716cf04ddf40cbb2f66f4439c56600c0f32"
+    },
+    {
+      "path": "scripts/qa/test_native_legacy.mjs",
+      "blob": "6140e80bb226b75593b276437e6f67e99e51f4bc"
+    },
+    {
+      "path": "scripts/qa/test_native_navigation.mjs",
+      "blob": "e63f63a87e1fa103af49d6c9af710120bb6c37f4"
+    },
+    {
+      "path": "scripts/qa/test_native_triage.mjs",
+      "blob": "abffac149e71721f8197f46dea05987d30d35cb7"
+    },
+    {
+      "path": "scripts/qa/test_native_triage_ui.mjs",
+      "blob": "f9573ed07ab29bc832446973a7313e811cfbafa4"
+    },
+    {
+      "path": "scripts/qa/test_retention_audit.mjs",
+      "blob": "1e5f223a47bd8f3f66d683c036ebfe158e3dfd02"
+    },
+    {
+      "path": "scripts/qa/verify_a01_reuse_successor.py",
+      "blob": "ce0369f2061bd2e5ba897606c64e7e29096bdef8"
+    },
+    {
+      "path": "scripts/run_checks.py",
+      "blob": "c5a21f86e91e3a55d514fb54818ee146eedbce39"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/analysis.md",
+      "blob": "a96ec64a58fd777fc7c40d11bcfb90feaec8cad2"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/checklists/requirements.md",
+      "blob": "5dc4394e2d63602d4982d366dffa613430cd4701"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/checklists/security-architecture.md",
+      "blob": "94208203ff4355f61f4a961c1670ced07420b60f"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/clarifications.md",
+      "blob": "0e3d1866112d2a5ffd82a72915916d8f9468386c"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/contracts/interface.md",
+      "blob": "c9c53b40322f3b766040c5e811d2cc606ea015e8"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/convergence.md",
+      "blob": "151a0370f52b33c036178f62fd77276d6d34c319"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/data-model.md",
+      "blob": "0451b7ba5bb9272b2f31dbc2516a1fbf96b5274b"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/execution-log.md",
+      "blob": "086324e09baa775068cf5f386d2a85ba21443346"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/plan.md",
+      "blob": "d5ac461bbb33a149c0b2d66e88780192b5a95912"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/quickstart.md",
+      "blob": "eee6e8a1ac307723e24c9aa2679a61a365ae8463"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/research.md",
+      "blob": "347dcfb6a69e8683b905b37c44907f3abf3c920f"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/spec.md",
+      "blob": "039a217eba8cabd65554447ab51694b382855ac2"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/tasks.md",
+      "blob": "21c7e01ab38b043512cd12753ba9eb24986f8d8c"
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/traceability.md",
+      "blob": "b886185c2efbcf829874dbd296963794ca1921d8"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/analysis.md",
+      "blob": "14eb417f23c1e349423d77db235201b9e581d566"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/checklists/requirements.md",
+      "blob": "cb666ef7e8edc99d0e486b0fbbb5431c043134b3"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/checklists/security-architecture.md",
+      "blob": "d85164942528c3f3e1a1b3cef51353cbfe2e6ce1"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/clarifications.md",
+      "blob": "b946dbe279b81d0507fb77340f60463c22c84259"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/contracts/demo.md",
+      "blob": "5fc962a59acddb9e35e1990500aad825e49aca68"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/convergence.md",
+      "blob": "84a4869569a738895763c4ada865cfb2267f4ac6"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/data-model.md",
+      "blob": "584ec560481f4790bc6fa9bada815d381cb27325"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/execution-log.md",
+      "blob": "514ab1516caa9b343d40f4f44765ddef2437de70"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/plan.md",
+      "blob": "d3a7f7f9e23c736b71c9402df985745134a55495"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/quickstart.md",
+      "blob": "6be7024dfae08273739f4a6a2a57871dd72426f3"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/research.md",
+      "blob": "7a504bb0e026a4216a9534c69cbdd08ce5ab71e6"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/spec.md",
+      "blob": "8b9467c2267704c4620c3fed64d0b71da756eb20"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/tasks.md",
+      "blob": "65f627c711c817258e26d5bcb47a4986c9aaaebb"
+    },
+    {
+      "path": "specs/002-atlas021-poc-r4/traceability.md",
+      "blob": "fa151048715722e82878503c64dbedb23c5875ce"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/analysis.md",
+      "blob": "62a2fb81c779c6fd50fdd02e818627e492af0d02"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/checklists/requirements.md",
+      "blob": "cc297a62335faa8ca2b57a97462222e63de5c221"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/clarifications.md",
+      "blob": "7f20675c6c72d579d61598438ab59915edf3c610"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/contracts/reader.md",
+      "blob": "eb4feb7b4f829d97b048fc9d343861d9297ec04b"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/convergence.md",
+      "blob": "adda9abb9e547fe1a6356e1e341174f11fb4d528"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/data-model.md",
+      "blob": "1b28557f88910a6cc7d0cb0c74af0a76fc708858"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/plan.md",
+      "blob": "76aa1b8ab9077a1511d01fd622aa42ae1c902c6a"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/quickstart.md",
+      "blob": "d2b6c92d63bb5405d85dea2f44e17f237c641baf"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/research.md",
+      "blob": "67b50912c617d44ece280de513533c7854e01558"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/spec.md",
+      "blob": "dcdb17f2ace005107c23478b441bf36f71a4cf4b"
+    },
+    {
+      "path": "specs/003-producer-selective-preview/tasks.md",
+      "blob": "3de2275096c38e6ee84f74f8d1f865328ce203a2"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/analysis.md",
+      "blob": "d8bd53e7a53235aea57cca9609ab6fc829dc7eda"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/checklists/requirements.md",
+      "blob": "7da0826559febeb1d6fa707cd17c8e57b100f60a"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+      "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/data-model.md",
+      "blob": "9bcb0fb36134a819b0fe301c8913d1be6a4ec0c2"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/final-close.md",
+      "blob": "48864dcee39aacec5fc7d7a48650401635fa12d4"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/plan.md",
+      "blob": "147356641c7e8d784e6d71571acbb07af87487af"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/quickstart.md",
+      "blob": "674faf74b08e0da067be2cf043e3dff100238f68"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/research.md",
+      "blob": "2a17f4f5c6752d187276f1e23d3a1cdbc0a84635"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/spec.md",
+      "blob": "85748f53fb4432c5384bec2005babd5efad3dad2"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/tasks.md",
+      "blob": "e3096e05810aac6bef5e2d3615fe205752b870e2"
+    },
+    {
+      "path": "specs/005-experiment-triage/checklists/accessibility-security.md",
+      "blob": "b0ed9b5c2d7d07b026724489406d9b6cf3f78661"
+    },
+    {
+      "path": "specs/005-experiment-triage/checklists/requirements.md",
+      "blob": "eab1ddfbe6d063131eda99647dfda17ce6c1c54e"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/README.md",
+      "blob": "84c505cdd015eeba93a3ce38300f25b902a2c6a3"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/after-graph-report.json",
+      "blob": "0ffe3f10c902fe0c6c6473a1706151d74433e448"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-application-a01-report.json",
+      "blob": "8006a80661f7c639d6318bc94c58aa57888d93ea"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-application-report.json",
+      "blob": "5f2ab430e170db2c90c43ef86874f6a43eb101ed"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-report.json",
+      "blob": "e78f548ef37150ab88191855a601fb6ae3d16ea0"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report-controls-1101.png",
+      "blob": "96e80738c95fdf741334bea0d3580e108c67abb1"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report-task-1024.png",
+      "blob": "95a81919afbe11628fe5c560fd64a5d6a803a36f"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report-task-1101.png",
+      "blob": "eccb42dba316350f07586d2cb7f6caee5ae0fd38"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report-task-1440.png",
+      "blob": "f29ef53310d77bb92d413ccb7538a18c96a1ab55"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report-task-320.png",
+      "blob": "f0c00a5ca61fcd92b477858c1b39b865a65a0e8a"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report-task-390.png",
+      "blob": "cd9da3758f0b696441bf08082a4aaeb5b455d09d"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report-task-800.png",
+      "blob": "f8b0a712334c67e246d95b95596344be90e8896e"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-native-triage-report.json",
+      "blob": "00e539bd075088ff79114524f748734226ce9b4e"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-p01-lineage.json",
+      "blob": "0fcfb204d410ade6196cee62090d9bc31a782a3b"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/browser-p02-report.json",
+      "blob": "343e0e024df90c9c78c5d80a64ef1e0b456d09ef"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/ci-product-checks.json",
+      "blob": "d2604ce2fbc9cba0b25aca6e8e8a12716c8c9be9"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/implementation-publication-map.json",
+      "blob": "7c8915bb0b2ee73587f2f5e03c43d49a0bcd59a5"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/manifest.json",
+      "blob": "8fe4979d144e379d520c4f5aa1da1edd081263ce"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/source-hashes-after.json",
+      "blob": "824872cfd4250aeb2a229a65daf63067b5848d93"
+    },
+    {
+      "path": "specs/005-experiment-triage/evidence/source-hashes-before.json",
+      "blob": "824872cfd4250aeb2a229a65daf63067b5848d93"
+    },
+    {
+      "path": "specs/005-experiment-triage/examples/README.md",
+      "blob": "939289d03f0c84c6f2c68d6782e071174fbe9ebb"
+    },
+    {
+      "path": "specs/005-experiment-triage/examples/retention-plan.synthetic.json",
+      "blob": "18d11398f516cdd967cca52d3dca52d057e71935"
+    },
+    {
+      "path": "specs/005-experiment-triage/plan.md",
+      "blob": "52cb782d69731dd24d78a9529de17ef0b0a814fd"
+    },
+    {
+      "path": "specs/005-experiment-triage/spec.md",
+      "blob": "422b8b76f386fae634c2efdf0cf6693949dc868b"
+    },
+    {
+      "path": "specs/005-experiment-triage/tasks.md",
+      "blob": "74ffdc02928c1c8da5f1271b5f28978667a7a676"
+    },
+    {
+      "path": "specs/005-experiment-triage/validation.md",
+      "blob": "30a7884587121f3ed7d06c53fc1b7bf5a6546c0d"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/LOCAL_HANDOFF.md",
+      "blob": "be5b859ccac04c21650ba75363a1cc579c45bbda"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/contracts/local.md",
+      "blob": "dbd8a4f0255f5472042559c5df3da53687a183f7"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/evidence/independent-contract-probes.json",
+      "blob": "f3a0aee2cbd6cc4487204928d85c36f7abc28d8b"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/evidence/n02-domain.tap",
+      "blob": "e15bb510f8c14a153a33c0a8ee6bf4cd81365777"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/evidence/recovery.json",
+      "blob": "07155b9827aac90da60b0b38c6882361e44b707d"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/plan.md",
+      "blob": "8c4371bc188c256f1c75ce2e6d49ab06d5c4c519"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/spec.md",
+      "blob": "24275e5bb0d81325e7b5e0e93daa2afb3bd69e84"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/tasks.md",
+      "blob": "e1afcc1a9cb4de42dcfab5b9c9e768beba2b7fe5"
+    },
+    {
+      "path": "specs/006-retention-offline-audit/validation.md",
+      "blob": "795c97dfeebc5ca0a9e1cafa6be67eed80ff5d04"
+    },
+    {
+      "path": "specs/007-final-legacy-parity/CONVERGENCE.md",
+      "blob": "74c93bf216d81ac47398fb3eff75bbd01d505efe"
+    },
+    {
+      "path": "specs/007-final-legacy-parity/plan.md",
+      "blob": "b87290ab362e02ecf8a20bcc534e9bd7a725ada2"
+    },
+    {
+      "path": "specs/007-final-legacy-parity/quickstart.md",
+      "blob": "3d327d0f04ebd19cdcc1adf5a873ebfb8fb5ae9d"
+    },
+    {
+      "path": "specs/007-final-legacy-parity/spec.md",
+      "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8"
+    },
+    {
+      "path": "specs/007-final-legacy-parity/tasks.md",
+      "blob": "aa7bde1ccae96aba93185e9f2b656b2b918d3bdd"
+    },
+    {
+      "path": "tests/graph/README.txt",
+      "blob": "a699fd7f599d3f627592f23483fd5e5424a11aa3"
+    },
+    {
+      "path": "tests/graph/evidence/after-branches-desktop.png",
+      "blob": "16c1c375f11dbcfa3c40791ea504e20cc9ebafc6"
+    },
+    {
+      "path": "tests/graph/evidence/after-branches-mobile.png",
+      "blob": "da68080bedb351cce445e0b4a83f0d9fd55b13cf"
+    },
+    {
+      "path": "tests/graph/evidence/after-branches-selected-desktop.png",
+      "blob": "8fe69c5a048f784e515c3e1bcb62606eee5b44e5"
+    },
+    {
+      "path": "tests/graph/evidence/after-branches-selected-mobile.png",
+      "blob": "ad3be1e6fc8f5c9f0e61e810c1e48d0db624f792"
+    },
+    {
+      "path": "tests/graph/evidence/after-graph-report.json",
+      "blob": "5b024cb54da5c0bcb38c88b05f131214196092ee"
+    },
+    {
+      "path": "tests/graph/evidence/after-star-desktop.png",
+      "blob": "f1154d558ccdf72d4dcceec7a9dd1c58606b6ec7"
+    },
+    {
+      "path": "tests/graph/evidence/after-star-mobile.png",
+      "blob": "367c3dfb753b0d195100e1369bf5ef4ff56dcaca"
+    },
+    {
+      "path": "tests/graph/evidence/before-branches-desktop.png",
+      "blob": "2d7980152ddf341a01c7e28ca29650ece6f7a770"
+    },
+    {
+      "path": "tests/graph/evidence/before-branches-mobile.png",
+      "blob": "983a9587ceabebdbfe199126ade676f56a6a0c96"
+    },
+    {
+      "path": "tests/graph/evidence/before-graph-report.json",
+      "blob": "7a97c75209556c7d761aca62ba3aba2759bbaf09"
+    },
+    {
+      "path": "tests/graph/evidence/before-star-desktop.png",
+      "blob": "5cae7789758950b272fe88224a5d4459a1021f46"
+    },
+    {
+      "path": "tests/graph/evidence/before-star-mobile.png",
+      "blob": "d075da2a6deb6645000d2cc1955004687029d557"
+    },
+    {
+      "path": "tests/qa/test_architecture_boundaries.py",
+      "blob": "6b0fa9d510f0d3cd6b26321970cef66ea50d371d"
+    },
+    {
+      "path": "tests/qa/test_atlas_original_bridge_guard.py",
+      "blob": "cbacf9b83a181b2f5ad6cf10ff366be9e96c921b"
+    },
+    {
+      "path": "tests/qa/test_native_triage_scope.py",
+      "blob": "3bf44e0a4de781a22dfbcff5e7ae8f07a81cfa0a"
+    },
+    {
+      "path": "tests/qa/test_poc_required_boundaries.py",
+      "blob": "a09e66b2004f6d5f16b1ba1f8c8a60584f9537fb"
+    },
+    {
+      "path": "tests/qa/test_protocol_adversarial.py",
+      "blob": "73cffa3fd07c71cddd8b7d73e74e59bdf826e930"
+    },
+    {
+      "path": "tests/qa/test_speckit_presentation_audit.py",
+      "blob": "51190c6874da5cd0ebee279274e83eac7f0cd1f1"
+    },
+    {
+      "path": "tests/viewer/test_catalog_server.py",
+      "blob": "6de06c6ff842a139fbe2dd55331e3402a29654af"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook.py",
+      "blob": "764f2c7a6de1102b6e1c369f863c63051ce4c981"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_a01_fix.py",
+      "blob": "cf09ef0decd52f0e1423c5dc1f17b41562446594"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_http.py",
+      "blob": "a6941e7ecd2d73d1748b91e7493c8848915698a1"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_launcher.py",
+      "blob": "a57dcae3d488cb7bd8b1ec4c39959685abd38cfc"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_parity.py",
+      "blob": "57d2e7cc09b27eef98e703d878d98748ed219d0f"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_producer_boundary.py",
+      "blob": "71bd6d9a1802fc73a0a47b4d9a60cb18d5e9b0ac"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_review.py",
+      "blob": "4740d793350b5ec5172067c916aaeb1517a8f88e"
+    },
+    {
+      "path": "tests/viewer/test_related_references.py",
+      "blob": "c21a86a75a43efac5c7c6d68c0e73cf808487538"
+    },
+    {
+      "path": "tools/atlas_retention_audit.mjs",
+      "blob": "8a82d2777417121f643ae59d141a27f523216ac0"
+    },
+    {
+      "path": "tools/verify_native_parity.py",
+      "blob": "e5c2c311cc086dd312b864fd9db115ce0738ee7c"
+    }
+  ],
+  "public_manifest_reviewed_sha256": "6189662d05814dfac551205a9250582f901cad8b7e018e66395acdce85def454",
+  "review_is_not_execution_of_historical_tasks": true
+}

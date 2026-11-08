@@ -1,0 +1,147 @@
+{
+  "reviewer": "/root/p02_ui",
+  "product_author": "/root",
+  "independence": "P02 read-only on product; own probes/receipts only",
+  "status": "PASS_SCOPED_UNCOMMITTED_UI",
+  "gate": "UI_DOMAIN_AND_CODE_REVIEW_PASSED; INSTALLED_BROWSER_AND_FINAL_SHA_CI_PENDING",
+  "branch": "fix/atlas-convergence18-20261108",
+  "preimage_head": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "preimage_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "reviewed_files": [
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/app.js",
+      "preimage_blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+      "worktree_blob": "a47568daf391498910dcf81fa52f8b805bf847fa",
+      "sha256": "38a09b5c54d899f583ac8bfa5453b104403eba52c5dfdd9e53dc4652f02638af",
+      "bytes": 22956,
+      "stable_after_review": true,
+      "worktree_blob_after": "a47568daf391498910dcf81fa52f8b805bf847fa"
+    },
+    {
+      "path": "scripts/qa/test_protocol_snapshot.mjs",
+      "preimage_blob": null,
+      "worktree_blob": "f4e9e283f9b5d7a1993a115b79ce7289c5d9eea8",
+      "sha256": "a57269959ef861dc82dab7af137099afc705e2eddb7ae33e4643adb340e351e7",
+      "bytes": 8635,
+      "stable_after_review": true,
+      "worktree_blob_after": "f4e9e283f9b5d7a1993a115b79ce7289c5d9eea8"
+    },
+    {
+      "path": "scripts/qa/browser.mjs",
+      "preimage_blob": "d86bc75571667a8770593475225ed3ffd2bccb0a",
+      "worktree_blob": "e64c70170f41b3f3a82357d7007262e991b85f6a",
+      "sha256": "64add6d4c117d23062ae04afdbd18f4114eed56bad692439ea1b5878db4b2ff8",
+      "bytes": 31149,
+      "stable_after_review": true,
+      "review_scope": "STATIC_REVIEW_ONLY_NO_BROWSER_EXECUTION",
+      "unchanged": false
+    },
+    {
+      "path": ".github/workflows/atlas021.yml",
+      "preimage_blob": "1a4ea4dc79ef084067974567f042a2d4ac558495",
+      "worktree_blob": "531d61d65398cd8552e9750637c523f946e7d21d",
+      "sha256": "8a32dad77e5881b0f363e486b2a10b051b462b0bf15181ec861dbdf9d2325b64",
+      "bytes": 5092,
+      "stable_after_review": true,
+      "review_scope": "WORKFLOW_DIFF_ONLY_ADDS_EXISTING_NODE_TEST_COMMAND",
+      "unchanged": false
+    },
+    {
+      "path": "scripts/ci/run_browser.py",
+      "preimage_blob": "70e52c7bc41dadfcb2f36b11abbdbc42037816a6",
+      "worktree_blob": "70e52c7bc41dadfcb2f36b11abbdbc42037816a6",
+      "sha256": "1dcbd6db1855210cf6ba111e5136db8fe7c669a0e99d1aedf36172923c6e1225",
+      "bytes": 5234,
+      "stable_after_review": true,
+      "review_scope": "UNCHANGED_SOURCE_IMMUTABILITY_AND_INSTALLED_WHEEL_GUARD",
+      "unchanged": true
+    }
+  ],
+  "executed": [
+    {
+      "command": "node --test scripts/qa/test_protocol_snapshot.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/repo",
+      "exit_code": 0,
+      "tests": 10,
+      "pass": 10,
+      "fail": 0,
+      "skip": 0,
+      "duration_ms": 104.482781,
+      "author": "P00",
+      "reviewer_execution": "P02"
+    },
+    {
+      "command": "node review_ui_independent.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02",
+      "exit_code": 0,
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "scope": "Real app state/render-detail/source/date functions with actual public synthetic Catalog DTOs and minimal DOM model. Not browser/HTTP/wheel/host certification.",
+      "receipt": "P02-UI-INDEPENDENT-CHECKS.json",
+      "sha256": "ee7314e91e3dfac69042f5c7653cd1716ec8b326a4a1634d7b422ef644c11b6d"
+    },
+    {
+      "command": "node --check scripts/qa/browser.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/repo",
+      "exit_code": 0,
+      "scope": "Syntax only; not Playwright/browser run"
+    },
+    {
+      "command": "node --check scripts/qa/test_protocol_snapshot.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/repo",
+      "exit_code": 0,
+      "scope": "Syntax only"
+    }
+  ],
+  "findings": [],
+  "resolved_baseline_findings": [
+    {
+      "id": "P02-F001",
+      "status": "GREEN_IN_REVIEWED_BYTES",
+      "evidence": "Explicit same-ID changed rebuild clears A+B/detail; GET verification preserves; samebytes rebuild/restart invalidate."
+    },
+    {
+      "id": "P02-F002",
+      "status": "GREEN_IN_REVIEWED_BYTES",
+      "evidence": "Serial GET/POST order, maximum one in-flight request; HTTP/JSON/initial errors drain queue; refresh disabled until all operations complete."
+    },
+    {
+      "id": "P02-F003",
+      "status": "GREEN_IN_REVIEWED_BYTES",
+      "evidence": "Sameepoch reload restores valid source filters; restart/reorder/legacy preferences clear scopes; free query/status persist; blocked localStorage safe."
+    }
+  ],
+  "additional_review": [
+    "snapshotKey includes generation/indexed_at/ordered source ID and metadata hash; excludes observed_at/status/changed",
+    "Current Catalog verify preserves old metadata and read_model until explicit rebuild; comparison therefore does not silently accept changed bytes",
+    "Date labels separate indexed_at, observed_at, and declared publication; undefined publication stays Ausente",
+    "No protocol/API/descriptor0.2.0/NativeView/P03 assets/private trust change in the UI patch",
+    "P00 tests use stubbed drawing and cannot alone certify DOM, keyboard, focus or installed wheel; Actions browser remains required",
+    "Installed-browser harness verifies declared publication and distinct observation/index timestamps, selects one run per source, keeps hidden-source selection during filtering, GET preserves detail and source filters, explicit rebuild clears entire selection/detail/scoped filters while preserving query/status",
+    "Browser harness uses immutable source records for rebuild; A-changed/B-unchanged mutation remains in real synthetic DTO and Node tests, without weakening the installed runner source-bytes guard",
+    "run_browser.py remains byte-identical; existing source_hashes before/after equality and installed wheel server remain in force",
+    "Workflow atlas021.yml remains pinned to PR head SHA and adds only node --test scripts/qa/test_protocol_snapshot.mjs; existing browser, cross-OS Python and upload evidence gates unchanged",
+    "One initial read command referenced nonexistent scripts/qa/run_browser.py and exited2; corrected to scripts/ci/run_browser.py for review. No product/test failure implied."
+  ],
+  "final_sha_requalification": {
+    "status": "PENDING_COMMIT_AND_REMOTE_ACTIONS",
+    "required": "Verify published final commit contains exact reviewed blobs; re-review any material UI change; inspect installed-browser checks and exact-SHA CI."
+  },
+  "browser_runtime": "NOT_RUN; known sandbox socket denial, no retry/bypass/installation",
+  "local_gate": "LOCAL_NOT_REQUIRED",
+  "artifacts": [
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-UI-REVIEW-INPUT.json",
+      "sha256": "c8c971e84256e1d337f6d7a90bdf8796a758e78079154ba710b52ac7fd3099b6"
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-UI-INDEPENDENT-CHECKS.json",
+      "sha256": "ee7314e91e3dfac69042f5c7653cd1716ec8b326a4a1634d7b422ef644c11b6d"
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/review_ui_independent.mjs",
+      "sha256": "7332f0d6a973d21f13f8ee724adea7a0b2d9e935b1ce3bdcb6802fb61274e987"
+    }
+  ]
+}

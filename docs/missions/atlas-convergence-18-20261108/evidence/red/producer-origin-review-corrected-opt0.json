@@ -1,0 +1,14 @@
+{
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py",
+    "-v"
+  ],
+  "optimized": false,
+  "exit_code": 1,
+  "test_sha256": "1a8eb77401ddbe32dfce7b71f272f191c948abdbdbbbec17a61cb29b8d1ac0cf",
+  "log": "producer-origin-review-corrected-opt0.log",
+  "independent_review_fix": "Explicit -O propagated and measured in isolated adapter child"
+}

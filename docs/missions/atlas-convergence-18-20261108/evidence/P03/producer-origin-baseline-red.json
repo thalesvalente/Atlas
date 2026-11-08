@@ -1,0 +1,26 @@
+{
+  "command": "python -B probe_producer_origin.py --repo <Atlas checkout>",
+  "scope": "synthetic source-tree subprocess; no installed-wheel or hostile-host certification",
+  "cases": [
+    {
+      "case": "module_symlink",
+      "expected": "source outside selected root rejected before execution",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+      "outside_module_executed": true,
+      "package_published": false,
+      "result": "RED"
+    },
+    {
+      "case": "ambient_package_shadows_selected_namespace",
+      "expected": "source outside selected root rejected before execution",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+      "outside_module_executed": true,
+      "package_published": false,
+      "result": "RED"
+    }
+  ]
+}

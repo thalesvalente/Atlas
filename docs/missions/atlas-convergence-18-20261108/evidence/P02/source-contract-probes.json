@@ -1,0 +1,4121 @@
+{
+  "status": "PASS",
+  "scope": "synthetic in-process Catalog/native reader; NOT browser/HTTP or private-host validation",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "checks": [
+    {
+      "name": "verify_retains_original_read_model_before_explicit_rebuild",
+      "status": "PASS",
+      "actual": {
+        "source": {
+          "name": "Caderno ambiental sintético",
+          "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+          "metadata_sha256": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25",
+          "profiles": [
+            "https://w3id.org/ro/wfrun/process/0.6",
+            "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+          ],
+          "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+          "validation": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              {
+                "code": "UNKNOWN_TIME",
+                "path": "urn:caderno:synthetic-environment:run-r4",
+                "message": "No run timestamp was supplied; the viewer must preserve unknown time."
+              }
+            ],
+            "scope": "caderno-0.1.0a1-restricted-serialization",
+            "authenticity": "NOT_VERIFIED",
+            "scientific_acceptance": "NOT_EVALUATED"
+          },
+          "date_published": "2026-10-24",
+          "source_name": "A"
+        },
+        "projects": [
+          {
+            "id": "urn:caderno:synthetic-environment:project-water",
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:project-calibration",
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          }
+        ],
+        "experiments": [
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-river",
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration"
+          }
+        ],
+        "runs": [
+          {
+            "id": "urn:caderno:synthetic-environment:run-r1",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "COMPLETED",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T09:00:00Z",
+            "ended_at": "2026-10-24T09:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r1",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.5,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.5"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r1",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/water.csv",
+              "urn:caderno:synthetic-environment:metric-r1"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/water.csv",
+                "name": "data/water.csv",
+                "media_type": "text/csv",
+                "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                  "size": 47
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r2",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "PARTIAL",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T10:00:00Z",
+            "ended_at": "2026-10-24T10:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r2",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.8,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.8"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r2",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/partial.csv",
+              "urn:caderno:synthetic-environment:metric-r2"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/partial.csv",
+                "name": "data/partial.csv",
+                "media_type": "text/csv",
+                "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                  "size": 37
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": [
+              "urn:caderno:synthetic-environment:run-r1"
+            ]
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r3",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "status": "FAILED",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T11:00:00Z",
+            "ended_at": "2026-10-24T11:00:10Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r3",
+                "name": "nitrate",
+                "property_id": "urn:environmental:quantity:nitrate",
+                "value": null,
+                "type": "number",
+                "unit": "mg/L",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r3",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "urn:caderno:synthetic-environment:metric-r3"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r4",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "status": "UNKNOWN",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "UNKNOWN",
+            "started_at": null,
+            "ended_at": null,
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r4",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": null,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r4",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "https://example.invalid/synthetic-large-data.csv",
+              "urn:caderno:synthetic-environment:metric-r4"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "https://example.invalid/synthetic-large-data.csv",
+                "name": "Grande arquivo externo — não baixado",
+                "media_type": "text/csv",
+                "declared_digest": null,
+                "availability": {
+                  "declared": "EXTERNAL",
+                  "status": "EXTERNAL_UNRESOLVED"
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "data/water.csv",
+            "name": "data/water.csv",
+            "media_type": "text/csv",
+            "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+              "size": 47
+            },
+            "description": ""
+          },
+          {
+            "id": "data/calibration.csv",
+            "name": "data/calibration.csv",
+            "media_type": "text/csv",
+            "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+              "size": 35
+            },
+            "description": ""
+          },
+          {
+            "id": "data/partial.csv",
+            "name": "data/partial.csv",
+            "media_type": "text/csv",
+            "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+              "size": 37
+            },
+            "description": ""
+          },
+          {
+            "id": "https://example.invalid/synthetic-large-data.csv",
+            "name": "Grande arquivo externo — não baixado",
+            "media_type": "text/csv",
+            "declared_digest": null,
+            "availability": {
+              "declared": "EXTERNAL",
+              "status": "EXTERNAL_UNRESOLVED"
+            },
+            "description": ""
+          }
+        ],
+        "relations": [
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "data/water.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "urn:caderno:synthetic-environment:metric-r1",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "derived_from"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r2",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "data/partial.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:metric-r2",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r3",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r3",
+            "target": "urn:caderno:synthetic-environment:metric-r3",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r4",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "https://example.invalid/synthetic-large-data.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "urn:caderno:synthetic-environment:metric-r4",
+            "kind": "output"
+          }
+        ],
+        "entities": [
+          {
+            "@id": "ro-crate-metadata.json",
+            "@type": "CreativeWork",
+            "about": {
+              "@id": "./"
+            },
+            "conformsTo": {
+              "@id": "https://w3id.org/ro/crate/1.3"
+            }
+          },
+          {
+            "@id": "./",
+            "@type": "Dataset",
+            "name": "Caderno ambiental sintético",
+            "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+            "datePublished": "2026-10-24",
+            "license": "Rights not granted; synthetic review candidate only. No software license is selected by this metadata.",
+            "conformsTo": [
+              {
+                "@id": "https://w3id.org/ro/wfrun/process/0.6"
+              },
+              {
+                "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+              }
+            ],
+            "hasPart": [
+              {
+                "@id": "urn:caderno:synthetic-environment:project-water"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:project-calibration"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-river"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+              },
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "data/calibration.csv"
+              },
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              }
+            ],
+            "mentions": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r2"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r3"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r4"
+              }
+            ],
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED"
+          },
+          {
+            "@id": "https://w3id.org/ro/wfrun/process/0.6",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Process Run Crate",
+            "version": "0.6"
+          },
+          {
+            "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Caderno candidate profile",
+            "version": "0.1.0a1"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:software",
+            "@type": "SoftwareApplication",
+            "name": "Gerador ambiental sintético",
+            "version": "0.1.0a1",
+            "url": "https://github.com/thalesvalente/Atlas/tree/main/examples/environmental"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:agent",
+            "@type": "Organization",
+            "name": "Equipe fictícia de demonstração"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-water",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-calibration",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-river",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-calibration"
+            }
+          },
+          {
+            "@id": "data/water.csv",
+            "@type": "File",
+            "name": "data/water.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "contentSize": 47
+          },
+          {
+            "@id": "data/calibration.csv",
+            "@type": "File",
+            "name": "data/calibration.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "contentSize": 35
+          },
+          {
+            "@id": "data/partial.csv",
+            "@type": "File",
+            "name": "data/partial.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "contentSize": 37
+          },
+          {
+            "@id": "https://example.invalid/synthetic-large-data.csv",
+            "@type": "File",
+            "name": "Grande arquivo externo — não baixado",
+            "cp:availability": "EXTERNAL",
+            "encodingFormat": "text/csv"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r1",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.5,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r1",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r1",
+            "@type": "CreateAction",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "COMPLETED",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/CompletedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r1"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T09:00:00Z",
+            "endTime": "2026-10-24T09:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r2",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.8,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r2",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r2",
+            "@type": "CreateAction",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "PARTIAL",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r2"
+              }
+            ],
+            "prov:wasDerivedFrom": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              }
+            ],
+            "startTime": "2026-10-24T10:00:00Z",
+            "endTime": "2026-10-24T10:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r3",
+            "@type": "PropertyValue",
+            "name": "nitrate",
+            "propertyID": "urn:environmental:quantity:nitrate",
+            "value": null,
+            "unitText": "mg/L",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r3",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r3",
+            "@type": "CreateAction",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+            },
+            "cp:executionStatus": "FAILED",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r3"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T11:00:00Z",
+            "endTime": "2026-10-24T11:00:10Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r4",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": null,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r4",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r4",
+            "@type": "CreateAction",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+            },
+            "cp:executionStatus": "UNKNOWN",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "UNKNOWN",
+            "actionStatus": {
+              "@id": "http://schema.org/PotentialActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r4"
+              }
+            ],
+            "prov:wasDerivedFrom": []
+          }
+        ],
+        "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+      },
+      "expected": {
+        "source": {
+          "name": "Caderno ambiental sintético",
+          "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+          "metadata_sha256": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25",
+          "profiles": [
+            "https://w3id.org/ro/wfrun/process/0.6",
+            "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+          ],
+          "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+          "validation": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              {
+                "code": "UNKNOWN_TIME",
+                "path": "urn:caderno:synthetic-environment:run-r4",
+                "message": "No run timestamp was supplied; the viewer must preserve unknown time."
+              }
+            ],
+            "scope": "caderno-0.1.0a1-restricted-serialization",
+            "authenticity": "NOT_VERIFIED",
+            "scientific_acceptance": "NOT_EVALUATED"
+          },
+          "date_published": "2026-10-24",
+          "source_name": "A"
+        },
+        "projects": [
+          {
+            "id": "urn:caderno:synthetic-environment:project-water",
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:project-calibration",
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          }
+        ],
+        "experiments": [
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-river",
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration"
+          }
+        ],
+        "runs": [
+          {
+            "id": "urn:caderno:synthetic-environment:run-r1",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "COMPLETED",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T09:00:00Z",
+            "ended_at": "2026-10-24T09:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r1",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.5,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.5"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r1",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/water.csv",
+              "urn:caderno:synthetic-environment:metric-r1"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/water.csv",
+                "name": "data/water.csv",
+                "media_type": "text/csv",
+                "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                  "size": 47
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r2",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "PARTIAL",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T10:00:00Z",
+            "ended_at": "2026-10-24T10:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r2",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.8,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.8"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r2",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/partial.csv",
+              "urn:caderno:synthetic-environment:metric-r2"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/partial.csv",
+                "name": "data/partial.csv",
+                "media_type": "text/csv",
+                "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                  "size": 37
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": [
+              "urn:caderno:synthetic-environment:run-r1"
+            ]
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r3",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "status": "FAILED",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T11:00:00Z",
+            "ended_at": "2026-10-24T11:00:10Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r3",
+                "name": "nitrate",
+                "property_id": "urn:environmental:quantity:nitrate",
+                "value": null,
+                "type": "number",
+                "unit": "mg/L",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r3",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "urn:caderno:synthetic-environment:metric-r3"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r4",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "status": "UNKNOWN",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "UNKNOWN",
+            "started_at": null,
+            "ended_at": null,
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r4",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": null,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r4",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "https://example.invalid/synthetic-large-data.csv",
+              "urn:caderno:synthetic-environment:metric-r4"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "https://example.invalid/synthetic-large-data.csv",
+                "name": "Grande arquivo externo — não baixado",
+                "media_type": "text/csv",
+                "declared_digest": null,
+                "availability": {
+                  "declared": "EXTERNAL",
+                  "status": "EXTERNAL_UNRESOLVED"
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "data/water.csv",
+            "name": "data/water.csv",
+            "media_type": "text/csv",
+            "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+              "size": 47
+            },
+            "description": ""
+          },
+          {
+            "id": "data/calibration.csv",
+            "name": "data/calibration.csv",
+            "media_type": "text/csv",
+            "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+              "size": 35
+            },
+            "description": ""
+          },
+          {
+            "id": "data/partial.csv",
+            "name": "data/partial.csv",
+            "media_type": "text/csv",
+            "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+              "size": 37
+            },
+            "description": ""
+          },
+          {
+            "id": "https://example.invalid/synthetic-large-data.csv",
+            "name": "Grande arquivo externo — não baixado",
+            "media_type": "text/csv",
+            "declared_digest": null,
+            "availability": {
+              "declared": "EXTERNAL",
+              "status": "EXTERNAL_UNRESOLVED"
+            },
+            "description": ""
+          }
+        ],
+        "relations": [
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "data/water.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "urn:caderno:synthetic-environment:metric-r1",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "derived_from"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r2",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "data/partial.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:metric-r2",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r3",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r3",
+            "target": "urn:caderno:synthetic-environment:metric-r3",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r4",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "https://example.invalid/synthetic-large-data.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "urn:caderno:synthetic-environment:metric-r4",
+            "kind": "output"
+          }
+        ],
+        "entities": [
+          {
+            "@id": "ro-crate-metadata.json",
+            "@type": "CreativeWork",
+            "about": {
+              "@id": "./"
+            },
+            "conformsTo": {
+              "@id": "https://w3id.org/ro/crate/1.3"
+            }
+          },
+          {
+            "@id": "./",
+            "@type": "Dataset",
+            "name": "Caderno ambiental sintético",
+            "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+            "datePublished": "2026-10-24",
+            "license": "Rights not granted; synthetic review candidate only. No software license is selected by this metadata.",
+            "conformsTo": [
+              {
+                "@id": "https://w3id.org/ro/wfrun/process/0.6"
+              },
+              {
+                "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+              }
+            ],
+            "hasPart": [
+              {
+                "@id": "urn:caderno:synthetic-environment:project-water"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:project-calibration"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-river"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+              },
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "data/calibration.csv"
+              },
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              }
+            ],
+            "mentions": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r2"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r3"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r4"
+              }
+            ],
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED"
+          },
+          {
+            "@id": "https://w3id.org/ro/wfrun/process/0.6",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Process Run Crate",
+            "version": "0.6"
+          },
+          {
+            "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Caderno candidate profile",
+            "version": "0.1.0a1"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:software",
+            "@type": "SoftwareApplication",
+            "name": "Gerador ambiental sintético",
+            "version": "0.1.0a1",
+            "url": "https://github.com/thalesvalente/Atlas/tree/main/examples/environmental"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:agent",
+            "@type": "Organization",
+            "name": "Equipe fictícia de demonstração"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-water",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-calibration",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-river",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-calibration"
+            }
+          },
+          {
+            "@id": "data/water.csv",
+            "@type": "File",
+            "name": "data/water.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "contentSize": 47
+          },
+          {
+            "@id": "data/calibration.csv",
+            "@type": "File",
+            "name": "data/calibration.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "contentSize": 35
+          },
+          {
+            "@id": "data/partial.csv",
+            "@type": "File",
+            "name": "data/partial.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "contentSize": 37
+          },
+          {
+            "@id": "https://example.invalid/synthetic-large-data.csv",
+            "@type": "File",
+            "name": "Grande arquivo externo — não baixado",
+            "cp:availability": "EXTERNAL",
+            "encodingFormat": "text/csv"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r1",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.5,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r1",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r1",
+            "@type": "CreateAction",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "COMPLETED",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/CompletedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r1"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T09:00:00Z",
+            "endTime": "2026-10-24T09:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r2",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.8,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r2",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r2",
+            "@type": "CreateAction",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "PARTIAL",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r2"
+              }
+            ],
+            "prov:wasDerivedFrom": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              }
+            ],
+            "startTime": "2026-10-24T10:00:00Z",
+            "endTime": "2026-10-24T10:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r3",
+            "@type": "PropertyValue",
+            "name": "nitrate",
+            "propertyID": "urn:environmental:quantity:nitrate",
+            "value": null,
+            "unitText": "mg/L",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r3",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r3",
+            "@type": "CreateAction",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+            },
+            "cp:executionStatus": "FAILED",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r3"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T11:00:00Z",
+            "endTime": "2026-10-24T11:00:10Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r4",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": null,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r4",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r4",
+            "@type": "CreateAction",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+            },
+            "cp:executionStatus": "UNKNOWN",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "UNKNOWN",
+            "actionStatus": {
+              "@id": "http://schema.org/PotentialActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r4"
+              }
+            ],
+            "prov:wasDerivedFrom": []
+          }
+        ],
+        "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+      }
+    },
+    {
+      "name": "verify_marks_changed_source",
+      "status": "PASS",
+      "actual": "CHANGED",
+      "expected": "CHANGED"
+    },
+    {
+      "name": "rebuild_preserves_source_and_run_identifiers",
+      "status": "PASS",
+      "actual": "urn:caderno:synthetic-environment:run-r1",
+      "expected": "urn:caderno:synthetic-environment:run-r1"
+    },
+    {
+      "name": "rebuild_accepts_explicit_new_snapshot",
+      "status": "PASS",
+      "actual": "P02_CHANGED_SAME_ID",
+      "expected": "P02_CHANGED_SAME_ID"
+    },
+    {
+      "name": "unaffected_B_read_model_retained",
+      "status": "PASS",
+      "actual": {
+        "source": {
+          "name": "Caderno ambiental sintético",
+          "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+          "metadata_sha256": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25",
+          "profiles": [
+            "https://w3id.org/ro/wfrun/process/0.6",
+            "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+          ],
+          "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+          "validation": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              {
+                "code": "UNKNOWN_TIME",
+                "path": "urn:caderno:synthetic-environment:run-r4",
+                "message": "No run timestamp was supplied; the viewer must preserve unknown time."
+              }
+            ],
+            "scope": "caderno-0.1.0a1-restricted-serialization",
+            "authenticity": "NOT_VERIFIED",
+            "scientific_acceptance": "NOT_EVALUATED"
+          },
+          "date_published": "2026-10-24",
+          "source_name": "B"
+        },
+        "projects": [
+          {
+            "id": "urn:caderno:synthetic-environment:project-water",
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:project-calibration",
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          }
+        ],
+        "experiments": [
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-river",
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration"
+          }
+        ],
+        "runs": [
+          {
+            "id": "urn:caderno:synthetic-environment:run-r1",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "COMPLETED",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T09:00:00Z",
+            "ended_at": "2026-10-24T09:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r1",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.5,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.5"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r1",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/water.csv",
+              "urn:caderno:synthetic-environment:metric-r1"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/water.csv",
+                "name": "data/water.csv",
+                "media_type": "text/csv",
+                "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                  "size": 47
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r2",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "PARTIAL",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T10:00:00Z",
+            "ended_at": "2026-10-24T10:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r2",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.8,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.8"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r2",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/partial.csv",
+              "urn:caderno:synthetic-environment:metric-r2"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/partial.csv",
+                "name": "data/partial.csv",
+                "media_type": "text/csv",
+                "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                  "size": 37
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": [
+              "urn:caderno:synthetic-environment:run-r1"
+            ]
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r3",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "status": "FAILED",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T11:00:00Z",
+            "ended_at": "2026-10-24T11:00:10Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r3",
+                "name": "nitrate",
+                "property_id": "urn:environmental:quantity:nitrate",
+                "value": null,
+                "type": "number",
+                "unit": "mg/L",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r3",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "urn:caderno:synthetic-environment:metric-r3"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r4",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "status": "UNKNOWN",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "UNKNOWN",
+            "started_at": null,
+            "ended_at": null,
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r4",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": null,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r4",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "https://example.invalid/synthetic-large-data.csv",
+              "urn:caderno:synthetic-environment:metric-r4"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "https://example.invalid/synthetic-large-data.csv",
+                "name": "Grande arquivo externo — não baixado",
+                "media_type": "text/csv",
+                "declared_digest": null,
+                "availability": {
+                  "declared": "EXTERNAL",
+                  "status": "EXTERNAL_UNRESOLVED"
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "data/water.csv",
+            "name": "data/water.csv",
+            "media_type": "text/csv",
+            "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+              "size": 47
+            },
+            "description": ""
+          },
+          {
+            "id": "data/calibration.csv",
+            "name": "data/calibration.csv",
+            "media_type": "text/csv",
+            "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+              "size": 35
+            },
+            "description": ""
+          },
+          {
+            "id": "data/partial.csv",
+            "name": "data/partial.csv",
+            "media_type": "text/csv",
+            "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+              "size": 37
+            },
+            "description": ""
+          },
+          {
+            "id": "https://example.invalid/synthetic-large-data.csv",
+            "name": "Grande arquivo externo — não baixado",
+            "media_type": "text/csv",
+            "declared_digest": null,
+            "availability": {
+              "declared": "EXTERNAL",
+              "status": "EXTERNAL_UNRESOLVED"
+            },
+            "description": ""
+          }
+        ],
+        "relations": [
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "data/water.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "urn:caderno:synthetic-environment:metric-r1",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "derived_from"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r2",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "data/partial.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:metric-r2",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r3",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r3",
+            "target": "urn:caderno:synthetic-environment:metric-r3",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r4",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "https://example.invalid/synthetic-large-data.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "urn:caderno:synthetic-environment:metric-r4",
+            "kind": "output"
+          }
+        ],
+        "entities": [
+          {
+            "@id": "ro-crate-metadata.json",
+            "@type": "CreativeWork",
+            "about": {
+              "@id": "./"
+            },
+            "conformsTo": {
+              "@id": "https://w3id.org/ro/crate/1.3"
+            }
+          },
+          {
+            "@id": "./",
+            "@type": "Dataset",
+            "name": "Caderno ambiental sintético",
+            "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+            "datePublished": "2026-10-24",
+            "license": "Rights not granted; synthetic review candidate only. No software license is selected by this metadata.",
+            "conformsTo": [
+              {
+                "@id": "https://w3id.org/ro/wfrun/process/0.6"
+              },
+              {
+                "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+              }
+            ],
+            "hasPart": [
+              {
+                "@id": "urn:caderno:synthetic-environment:project-water"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:project-calibration"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-river"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+              },
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "data/calibration.csv"
+              },
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              }
+            ],
+            "mentions": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r2"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r3"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r4"
+              }
+            ],
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED"
+          },
+          {
+            "@id": "https://w3id.org/ro/wfrun/process/0.6",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Process Run Crate",
+            "version": "0.6"
+          },
+          {
+            "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Caderno candidate profile",
+            "version": "0.1.0a1"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:software",
+            "@type": "SoftwareApplication",
+            "name": "Gerador ambiental sintético",
+            "version": "0.1.0a1",
+            "url": "https://github.com/thalesvalente/Atlas/tree/main/examples/environmental"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:agent",
+            "@type": "Organization",
+            "name": "Equipe fictícia de demonstração"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-water",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-calibration",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-river",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-calibration"
+            }
+          },
+          {
+            "@id": "data/water.csv",
+            "@type": "File",
+            "name": "data/water.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "contentSize": 47
+          },
+          {
+            "@id": "data/calibration.csv",
+            "@type": "File",
+            "name": "data/calibration.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "contentSize": 35
+          },
+          {
+            "@id": "data/partial.csv",
+            "@type": "File",
+            "name": "data/partial.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "contentSize": 37
+          },
+          {
+            "@id": "https://example.invalid/synthetic-large-data.csv",
+            "@type": "File",
+            "name": "Grande arquivo externo — não baixado",
+            "cp:availability": "EXTERNAL",
+            "encodingFormat": "text/csv"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r1",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.5,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r1",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r1",
+            "@type": "CreateAction",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "COMPLETED",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/CompletedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r1"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T09:00:00Z",
+            "endTime": "2026-10-24T09:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r2",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.8,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r2",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r2",
+            "@type": "CreateAction",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "PARTIAL",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r2"
+              }
+            ],
+            "prov:wasDerivedFrom": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              }
+            ],
+            "startTime": "2026-10-24T10:00:00Z",
+            "endTime": "2026-10-24T10:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r3",
+            "@type": "PropertyValue",
+            "name": "nitrate",
+            "propertyID": "urn:environmental:quantity:nitrate",
+            "value": null,
+            "unitText": "mg/L",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r3",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r3",
+            "@type": "CreateAction",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+            },
+            "cp:executionStatus": "FAILED",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r3"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T11:00:00Z",
+            "endTime": "2026-10-24T11:00:10Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r4",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": null,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r4",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r4",
+            "@type": "CreateAction",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+            },
+            "cp:executionStatus": "UNKNOWN",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "UNKNOWN",
+            "actionStatus": {
+              "@id": "http://schema.org/PotentialActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r4"
+              }
+            ],
+            "prov:wasDerivedFrom": []
+          }
+        ],
+        "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+      },
+      "expected": {
+        "source": {
+          "name": "Caderno ambiental sintético",
+          "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+          "metadata_sha256": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25",
+          "profiles": [
+            "https://w3id.org/ro/wfrun/process/0.6",
+            "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+          ],
+          "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+          "validation": {
+            "valid": true,
+            "errors": [],
+            "warnings": [
+              {
+                "code": "UNKNOWN_TIME",
+                "path": "urn:caderno:synthetic-environment:run-r4",
+                "message": "No run timestamp was supplied; the viewer must preserve unknown time."
+              }
+            ],
+            "scope": "caderno-0.1.0a1-restricted-serialization",
+            "authenticity": "NOT_VERIFIED",
+            "scientific_acceptance": "NOT_EVALUATED"
+          },
+          "date_published": "2026-10-24",
+          "source_name": "B"
+        },
+        "projects": [
+          {
+            "id": "urn:caderno:synthetic-environment:project-water",
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:project-calibration",
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          }
+        ],
+        "experiments": [
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-river",
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-water"
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration"
+          }
+        ],
+        "runs": [
+          {
+            "id": "urn:caderno:synthetic-environment:run-r1",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "COMPLETED",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T09:00:00Z",
+            "ended_at": "2026-10-24T09:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r1",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.5,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.5"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r1",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/water.csv",
+              "urn:caderno:synthetic-environment:metric-r1"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/water.csv",
+                "name": "data/water.csv",
+                "media_type": "text/csv",
+                "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+                  "size": 47
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r2",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-river",
+            "status": "PARTIAL",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T10:00:00Z",
+            "ended_at": "2026-10-24T10:01:00Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r2",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": 24.8,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": null,
+                "display_value": "24.8"
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r2",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "data/partial.csv",
+              "urn:caderno:synthetic-environment:metric-r2"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "data/partial.csv",
+                "name": "data/partial.csv",
+                "media_type": "text/csv",
+                "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+                  "size": 37
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": [
+              "urn:caderno:synthetic-environment:run-r1"
+            ]
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r3",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-water",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "status": "FAILED",
+            "review_status": "HOLD",
+            "synthetic": true,
+            "timestamp_origin": "DECLARED",
+            "started_at": "2026-10-24T11:00:00Z",
+            "ended_at": "2026-10-24T11:00:10Z",
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r3",
+                "name": "nitrate",
+                "property_id": "urn:environmental:quantity:nitrate",
+                "value": null,
+                "type": "number",
+                "unit": "mg/L",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r3",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "urn:caderno:synthetic-environment:metric-r3"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          },
+          {
+            "id": "urn:caderno:synthetic-environment:run-r4",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "project_id": "urn:caderno:synthetic-environment:project-calibration",
+            "experiment_id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "status": "UNKNOWN",
+            "review_status": "UNKNOWN",
+            "synthetic": true,
+            "timestamp_origin": "UNKNOWN",
+            "started_at": null,
+            "ended_at": null,
+            "metrics": [
+              {
+                "id": "urn:caderno:synthetic-environment:metric-r4",
+                "name": "temperature",
+                "property_id": "urn:environmental:quantity:temperature",
+                "value": null,
+                "type": "number",
+                "unit": "degC",
+                "precision": 1,
+                "missing_reason": "Medição sintética não produzida neste cenário.",
+                "display_value": null
+              }
+            ],
+            "parameters": [
+              {
+                "id": "urn:caderno:synthetic-environment:parameter-r4",
+                "name": "Janela de amostragem",
+                "property_id": "urn:environmental:parameter:sample-window",
+                "value": 60,
+                "type": "integer",
+                "unit": "s",
+                "precision": null,
+                "missing_reason": null,
+                "display_value": "60"
+              }
+            ],
+            "inputs": [
+              "data/calibration.csv"
+            ],
+            "outputs": [
+              "https://example.invalid/synthetic-large-data.csv",
+              "urn:caderno:synthetic-environment:metric-r4"
+            ],
+            "related_references": [],
+            "artifacts": [
+              {
+                "id": "data/calibration.csv",
+                "name": "data/calibration.csv",
+                "media_type": "text/csv",
+                "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                "availability": {
+                  "declared": "PRESENT",
+                  "status": "AVAILABLE",
+                  "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+                  "size": 35
+                },
+                "description": ""
+              },
+              {
+                "id": "https://example.invalid/synthetic-large-data.csv",
+                "name": "Grande arquivo externo — não baixado",
+                "media_type": "text/csv",
+                "declared_digest": null,
+                "availability": {
+                  "declared": "EXTERNAL",
+                  "status": "EXTERNAL_UNRESOLVED"
+                },
+                "description": ""
+              }
+            ],
+            "agent_id": "urn:caderno:synthetic-environment:agent",
+            "instrument_id": "urn:caderno:synthetic-environment:software",
+            "derived_from": []
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "data/water.csv",
+            "name": "data/water.csv",
+            "media_type": "text/csv",
+            "declared_digest": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+              "size": 47
+            },
+            "description": ""
+          },
+          {
+            "id": "data/calibration.csv",
+            "name": "data/calibration.csv",
+            "media_type": "text/csv",
+            "declared_digest": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+              "size": 35
+            },
+            "description": ""
+          },
+          {
+            "id": "data/partial.csv",
+            "name": "data/partial.csv",
+            "media_type": "text/csv",
+            "declared_digest": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "availability": {
+              "declared": "PRESENT",
+              "status": "AVAILABLE",
+              "sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+              "size": 37
+            },
+            "description": ""
+          },
+          {
+            "id": "https://example.invalid/synthetic-large-data.csv",
+            "name": "Grande arquivo externo — não baixado",
+            "media_type": "text/csv",
+            "declared_digest": null,
+            "availability": {
+              "declared": "EXTERNAL",
+              "status": "EXTERNAL_UNRESOLVED"
+            },
+            "description": ""
+          }
+        ],
+        "relations": [
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "data/water.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r1",
+            "target": "urn:caderno:synthetic-environment:metric-r1",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:run-r1",
+            "kind": "derived_from"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r2",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "data/partial.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r2",
+            "target": "urn:caderno:synthetic-environment:metric-r2",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r3",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r3",
+            "target": "urn:caderno:synthetic-environment:metric-r3",
+            "kind": "output"
+          },
+          {
+            "source": "data/calibration.csv",
+            "target": "urn:caderno:synthetic-environment:run-r4",
+            "kind": "input"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "https://example.invalid/synthetic-large-data.csv",
+            "kind": "output"
+          },
+          {
+            "source": "urn:caderno:synthetic-environment:run-r4",
+            "target": "urn:caderno:synthetic-environment:metric-r4",
+            "kind": "output"
+          }
+        ],
+        "entities": [
+          {
+            "@id": "ro-crate-metadata.json",
+            "@type": "CreativeWork",
+            "about": {
+              "@id": "./"
+            },
+            "conformsTo": {
+              "@id": "https://w3id.org/ro/crate/1.3"
+            }
+          },
+          {
+            "@id": "./",
+            "@type": "Dataset",
+            "name": "Caderno ambiental sintético",
+            "description": "Dados inventados exclusivamente para testar interoperabilidade. Nenhuma medição representa o mundo real.",
+            "datePublished": "2026-10-24",
+            "license": "Rights not granted; synthetic review candidate only. No software license is selected by this metadata.",
+            "conformsTo": [
+              {
+                "@id": "https://w3id.org/ro/wfrun/process/0.6"
+              },
+              {
+                "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+              }
+            ],
+            "hasPart": [
+              {
+                "@id": "urn:caderno:synthetic-environment:project-water"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:project-calibration"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-river"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+              },
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "data/calibration.csv"
+              },
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              }
+            ],
+            "mentions": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r2"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r3"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r4"
+              }
+            ],
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED"
+          },
+          {
+            "@id": "https://w3id.org/ro/wfrun/process/0.6",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Process Run Crate",
+            "version": "0.6"
+          },
+          {
+            "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+            "@type": [
+              "CreativeWork",
+              "http://www.w3.org/ns/dx/prof/Profile"
+            ],
+            "name": "Caderno candidate profile",
+            "version": "0.1.0a1"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:software",
+            "@type": "SoftwareApplication",
+            "name": "Gerador ambiental sintético",
+            "version": "0.1.0a1",
+            "url": "https://github.com/thalesvalente/Atlas/tree/main/examples/environmental"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:agent",
+            "@type": "Organization",
+            "name": "Equipe fictícia de demonstração"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-water",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Águas — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:project-calibration",
+            "@type": [
+              "Dataset",
+              "cp:Project"
+            ],
+            "name": "Calibração — demonstração sintética",
+            "description": "Projeto fictício para testes do contrato público."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-river",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Comparação de temperatura",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-nutrient",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Nutrientes — ensaio interrompido",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-water"
+            }
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:experiment-sensor",
+            "@type": [
+              "Dataset",
+              "cp:Experiment"
+            ],
+            "name": "Verificação de sensor sem data conhecida",
+            "description": "Experimento inteiramente sintético.",
+            "isPartOf": {
+              "@id": "urn:caderno:synthetic-environment:project-calibration"
+            }
+          },
+          {
+            "@id": "data/water.csv",
+            "@type": "File",
+            "name": "data/water.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "2c5499ee772844f9dfaaef21f85562e7db916c4fe22dee7d0845d43649cf2f0a",
+            "contentSize": 47
+          },
+          {
+            "@id": "data/calibration.csv",
+            "@type": "File",
+            "name": "data/calibration.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "df18068dcec3fb889bdfc3346c6f761a9852bca5ec27a21c2a70a7c815bdd22e",
+            "contentSize": 35
+          },
+          {
+            "@id": "data/partial.csv",
+            "@type": "File",
+            "name": "data/partial.csv",
+            "encodingFormat": "text/csv",
+            "cp:availability": "PRESENT",
+            "cp:sha256": "7d54201cc2b83c19b1859722daf69f9b257f2902d8487524514cf4c111a011aa",
+            "contentSize": 37
+          },
+          {
+            "@id": "https://example.invalid/synthetic-large-data.csv",
+            "@type": "File",
+            "name": "Grande arquivo externo — não baixado",
+            "cp:availability": "EXTERNAL",
+            "encodingFormat": "text/csv"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r1",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.5,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r1",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r1",
+            "@type": "CreateAction",
+            "name": "Coleta simulada A",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "COMPLETED",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/CompletedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/water.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r1"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r1"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T09:00:00Z",
+            "endTime": "2026-10-24T09:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r2",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": 24.8,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r2",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r2",
+            "@type": "CreateAction",
+            "name": "Coleta simulada B — parcial",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-river"
+            },
+            "cp:executionStatus": "PARTIAL",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "data/partial.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r2"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r2"
+              }
+            ],
+            "prov:wasDerivedFrom": [
+              {
+                "@id": "urn:caderno:synthetic-environment:run-r1"
+              }
+            ],
+            "startTime": "2026-10-24T10:00:00Z",
+            "endTime": "2026-10-24T10:01:00Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r3",
+            "@type": "PropertyValue",
+            "name": "nitrate",
+            "propertyID": "urn:environmental:quantity:nitrate",
+            "value": null,
+            "unitText": "mg/L",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r3",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r3",
+            "@type": "CreateAction",
+            "name": "Ensaio simulado — falha",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-nutrient"
+            },
+            "cp:executionStatus": "FAILED",
+            "cp:reviewStatus": "HOLD",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "DECLARED",
+            "actionStatus": {
+              "@id": "http://schema.org/FailedActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r3"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r3"
+              }
+            ],
+            "prov:wasDerivedFrom": [],
+            "startTime": "2026-10-24T11:00:00Z",
+            "endTime": "2026-10-24T11:00:10Z"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:metric-r4",
+            "@type": "PropertyValue",
+            "name": "temperature",
+            "propertyID": "urn:environmental:quantity:temperature",
+            "value": null,
+            "unitText": "degC",
+            "cp:valueType": "number",
+            "cp:precision": 1,
+            "cp:missingReason": "Medição sintética não produzida neste cenário."
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:parameter-r4",
+            "@type": "PropertyValue",
+            "name": "Janela de amostragem",
+            "propertyID": "urn:environmental:parameter:sample-window",
+            "value": 60,
+            "unitText": "s",
+            "cp:valueType": "integer"
+          },
+          {
+            "@id": "urn:caderno:synthetic-environment:run-r4",
+            "@type": "CreateAction",
+            "name": "Estado desconhecido do sensor fictício",
+            "description": "Execução fictícia do produtor ambiental independente.",
+            "instrument": {
+              "@id": "urn:caderno:synthetic-environment:software"
+            },
+            "agent": {
+              "@id": "urn:caderno:synthetic-environment:agent"
+            },
+            "cp:experiment": {
+              "@id": "urn:caderno:synthetic-environment:experiment-sensor"
+            },
+            "cp:executionStatus": "UNKNOWN",
+            "cp:reviewStatus": "UNKNOWN",
+            "cp:synthetic": true,
+            "cp:timestampOrigin": "UNKNOWN",
+            "actionStatus": {
+              "@id": "http://schema.org/PotentialActionStatus"
+            },
+            "object": [
+              {
+                "@id": "data/calibration.csv"
+              }
+            ],
+            "result": [
+              {
+                "@id": "https://example.invalid/synthetic-large-data.csv"
+              },
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:metrics": [
+              {
+                "@id": "urn:caderno:synthetic-environment:metric-r4"
+              }
+            ],
+            "cp:parameters": [
+              {
+                "@id": "urn:caderno:synthetic-environment:parameter-r4"
+              }
+            ],
+            "prov:wasDerivedFrom": []
+          }
+        ],
+        "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+      }
+    },
+    {
+      "name": "native_ready_valid_synthetic_package",
+      "status": "PASS",
+      "actual": "READY",
+      "expected": "READY"
+    },
+    {
+      "name": "native_export_exact_roundtrip",
+      "status": "PASS",
+      "actual": {
+        "coverage": {
+          "status": "UNKNOWN"
+        },
+        "records": [
+          {
+            "flag": false,
+            "id": "r",
+            "missing_test": null,
+            "native_id": null,
+            "number": 9007199254740993,
+            "title": "Synthetic unchanged",
+            "zero": 0
+          }
+        ]
+      },
+      "expected": {
+        "records": [
+          {
+            "id": "r",
+            "title": "Synthetic unchanged",
+            "native_id": null,
+            "number": 9007199254740993,
+            "flag": false,
+            "zero": 0,
+            "missing_test": null
+          }
+        ],
+        "coverage": {
+          "status": "UNKNOWN"
+        }
+      }
+    },
+    {
+      "name": "native_literal_integer_preserved",
+      "status": "PASS",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "native_changed_source_has_no_entries",
+      "status": "PASS",
+      "actual": [
+        "CHANGED",
+        []
+      ],
+      "expected": [
+        "CHANGED",
+        []
+      ]
+    },
+    {
+      "name": "native_stale_export_rejected",
+      "status": "PASS",
+      "actual": "NATIVE_SNAPSHOT_CHANGED_OR_INVALID",
+      "expected": "NATIVE_SNAPSHOT_CHANGED_OR_INVALID"
+    },
+    {
+      "name": "native_rebuild_accepts_new_selected_snapshot",
+      "status": "PASS",
+      "actual": "READY",
+      "expected": "READY"
+    },
+    {
+      "name": "presentation_error_does_not_invalidate_public_protocol",
+      "status": "PASS",
+      "actual": "READY",
+      "expected": "READY"
+    },
+    {
+      "name": "forged_presentation_rejected_without_mutating_protocol_read_model",
+      "status": "PASS",
+      "actual": {
+        "id": "source-1",
+        "name": "Caderno — consulta nativa",
+        "status": "READY",
+        "version": "0.1.0a1",
+        "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+        "report": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "scope": "caderno-0.1.0a1-restricted-serialization",
+          "authenticity": "NOT_VERIFIED",
+          "scientific_acceptance": "NOT_EVALUATED"
+        },
+        "read_model": {
+          "source": {
+            "name": "Caderno — consulta nativa",
+            "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+            "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+            "profiles": [
+              "https://w3id.org/ro/wfrun/process/0.6",
+              "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+            ],
+            "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+            "validation": {
+              "valid": true,
+              "errors": [],
+              "warnings": [],
+              "scope": "caderno-0.1.0a1-restricted-serialization",
+              "authenticity": "NOT_VERIFIED",
+              "scientific_acceptance": "NOT_EVALUATED"
+            },
+            "date_published": "2026-11-08T22:16:07.683247+00:00",
+            "source_name": "native"
+          },
+          "projects": [],
+          "experiments": [],
+          "runs": [],
+          "artifacts": [
+            {
+              "id": "data/view-0000.json",
+              "name": "Apresentação nativa 0",
+              "media_type": "application/vnd.atlas.native-view+json",
+              "declared_digest": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+              "availability": {
+                "declared": "PRESENT",
+                "status": "AVAILABLE",
+                "sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+                "size": 895
+              },
+              "description": ""
+            }
+          ],
+          "relations": [],
+          "entities": [
+            {
+              "@id": "ro-crate-metadata.json",
+              "@type": "CreativeWork",
+              "about": {
+                "@id": "./"
+              },
+              "conformsTo": {
+                "@id": "https://w3id.org/ro/crate/1.3"
+              }
+            },
+            {
+              "@id": "./",
+              "@type": "Dataset",
+              "conformsTo": [
+                {
+                  "@id": "https://w3id.org/ro/wfrun/process/0.6"
+                },
+                {
+                  "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+                }
+              ],
+              "datePublished": "2026-11-08T22:16:07.683247+00:00",
+              "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+              "hasPart": [
+                {
+                  "@id": "data/view-0000.json"
+                }
+              ],
+              "https://github.com/thalesvalente/Atlas/ns/presentation#entryCount": 2,
+              "https://github.com/thalesvalente/Atlas/ns/presentation#projectionDigest": "05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+              "https://github.com/thalesvalente/Atlas/ns/presentation#revision": "projection-sha256:05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+              "https://github.com/thalesvalente/Atlas/ns/presentation#version": "1",
+              "license": "Nenhuma licença adicional concedida; manter permissões das fontes.",
+              "mentions": [],
+              "name": "Caderno — consulta nativa"
+            },
+            {
+              "@id": "https://w3id.org/ro/wfrun/process/0.6",
+              "@type": [
+                "CreativeWork",
+                "http://www.w3.org/ns/dx/prof/Profile"
+              ],
+              "name": "Process Run Crate",
+              "version": "0.6"
+            },
+            {
+              "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+              "@type": [
+                "CreativeWork",
+                "http://www.w3.org/ns/dx/prof/Profile"
+              ],
+              "name": "Caderno",
+              "version": "0.1.0a1"
+            },
+            {
+              "@id": "data/view-0000.json",
+              "@type": "File",
+              "contentSize": 895,
+              "cp:availability": "PRESENT",
+              "cp:sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+              "encodingFormat": "application/vnd.atlas.native-view+json",
+              "name": "Apresentação nativa 0"
+            }
+          ],
+          "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+        },
+        "changed": false,
+        "authenticity": "NOT_VERIFIED",
+        "scientific_approval": "NOT_EVALUATED"
+      },
+      "expected": {
+        "id": "source-1",
+        "name": "Caderno — consulta nativa",
+        "status": "READY",
+        "version": "0.1.0a1",
+        "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+        "report": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "scope": "caderno-0.1.0a1-restricted-serialization",
+          "authenticity": "NOT_VERIFIED",
+          "scientific_acceptance": "NOT_EVALUATED"
+        },
+        "read_model": {
+          "source": {
+            "name": "Caderno — consulta nativa",
+            "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+            "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+            "profiles": [
+              "https://w3id.org/ro/wfrun/process/0.6",
+              "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+            ],
+            "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+            "validation": {
+              "valid": true,
+              "errors": [],
+              "warnings": [],
+              "scope": "caderno-0.1.0a1-restricted-serialization",
+              "authenticity": "NOT_VERIFIED",
+              "scientific_acceptance": "NOT_EVALUATED"
+            },
+            "date_published": "2026-11-08T22:16:07.683247+00:00",
+            "source_name": "native"
+          },
+          "projects": [],
+          "experiments": [],
+          "runs": [],
+          "artifacts": [
+            {
+              "id": "data/view-0000.json",
+              "name": "Apresentação nativa 0",
+              "media_type": "application/vnd.atlas.native-view+json",
+              "declared_digest": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+              "availability": {
+                "declared": "PRESENT",
+                "status": "AVAILABLE",
+                "sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+                "size": 895
+              },
+              "description": ""
+            }
+          ],
+          "relations": [],
+          "entities": [
+            {
+              "@id": "ro-crate-metadata.json",
+              "@type": "CreativeWork",
+              "about": {
+                "@id": "./"
+              },
+              "conformsTo": {
+                "@id": "https://w3id.org/ro/crate/1.3"
+              }
+            },
+            {
+              "@id": "./",
+              "@type": "Dataset",
+              "conformsTo": [
+                {
+                  "@id": "https://w3id.org/ro/wfrun/process/0.6"
+                },
+                {
+                  "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+                }
+              ],
+              "datePublished": "2026-11-08T22:16:07.683247+00:00",
+              "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+              "hasPart": [
+                {
+                  "@id": "data/view-0000.json"
+                }
+              ],
+              "https://github.com/thalesvalente/Atlas/ns/presentation#entryCount": 2,
+              "https://github.com/thalesvalente/Atlas/ns/presentation#projectionDigest": "05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+              "https://github.com/thalesvalente/Atlas/ns/presentation#revision": "projection-sha256:05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+              "https://github.com/thalesvalente/Atlas/ns/presentation#version": "1",
+              "license": "Nenhuma licença adicional concedida; manter permissões das fontes.",
+              "mentions": [],
+              "name": "Caderno — consulta nativa"
+            },
+            {
+              "@id": "https://w3id.org/ro/wfrun/process/0.6",
+              "@type": [
+                "CreativeWork",
+                "http://www.w3.org/ns/dx/prof/Profile"
+              ],
+              "name": "Process Run Crate",
+              "version": "0.6"
+            },
+            {
+              "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+              "@type": [
+                "CreativeWork",
+                "http://www.w3.org/ns/dx/prof/Profile"
+              ],
+              "name": "Caderno",
+              "version": "0.1.0a1"
+            },
+            {
+              "@id": "data/view-0000.json",
+              "@type": "File",
+              "contentSize": 895,
+              "cp:availability": "PRESENT",
+              "cp:sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+              "encodingFormat": "application/vnd.atlas.native-view+json",
+              "name": "Apresentação nativa 0"
+            }
+          ],
+          "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+        },
+        "changed": false,
+        "authenticity": "NOT_VERIFIED",
+        "scientific_approval": "NOT_EVALUATED"
+      }
+    },
+    {
+      "name": "presentation_error_status_isolated",
+      "status": "PASS",
+      "actual": "INVALID",
+      "expected": "INVALID"
+    },
+    {
+      "name": "presentation_error_specific_reason",
+      "status": "PASS",
+      "actual": [
+        "NATIVE_DISPLAY_VALUE_MISMATCH"
+      ],
+      "expected": [
+        "NATIVE_DISPLAY_VALUE_MISMATCH"
+      ]
+    }
+  ]
+}

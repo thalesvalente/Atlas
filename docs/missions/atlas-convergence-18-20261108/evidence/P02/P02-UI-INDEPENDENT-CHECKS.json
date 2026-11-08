@@ -1,0 +1,47 @@
+{
+  "reviewer": "/root/p02_ui",
+  "author": "/root",
+  "status": "PASS_SCOPED",
+  "scope": "Real app state/render-detail/source/date functions with actual public synthetic Catalog DTOs and minimal DOM model. Not browser/HTTP/wheel/host certification.",
+  "app_sha256": "38a09b5c54d899f583ac8bfa5453b104403eba52c5dfdd9e53dc4652f02638af",
+  "fixtures_sha256": "b16a935756a177440113b206bd3f944c46132474adc92a1e369333a0d6793730",
+  "tests": [
+    {
+      "name": "actual_GET_verification_preserves_A_B_and_original_detail_with_changed_notice",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_changed_rebuild_same_ID_clears_all_and_persists_new_binding_B_unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "same_bytes_explicit_rebuild_and_fresh_process_invalidate_context",
+      "status": "PASS"
+    },
+    {
+      "name": "ordered_source_digest_binding_detects_reassignment_even_when_epoch_fields_reused",
+      "status": "PASS"
+    },
+    {
+      "name": "real_catalog_preferences_reload_same_epoch_then_restart_cannot_rebind_ordinal",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy_or_blocked_localStorage_never_restores_unbound_source_filters",
+      "status": "PASS"
+    },
+    {
+      "name": "HTTP_and_JSON_failures_do_not_break_serial_queue_or_release_refresh_early",
+      "status": "PASS"
+    },
+    {
+      "name": "initial_request_error_allows_queued_rebuild_to_initialize_and_restore_free_preferences",
+      "status": "PASS"
+    },
+    {
+      "name": "declared_publication_and_observation_dates_render_separately_without_fabrication",
+      "status": "PASS"
+    }
+  ],
+  "code_stable": true
+}

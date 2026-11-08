@@ -1,0 +1,22 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "scripts/qa/test_protocol_snapshot.mjs"
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "linux"
+  },
+  "base_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "tree_state": "root authored candidate diff before commit",
+  "exit_code": 0,
+  "log": "protocol-snapshot.log",
+  "file_sha256": {
+    "packages/atlas/src/atlas_viewer/static/app.js": "38a09b5c54d899f583ac8bfa5453b104403eba52c5dfdd9e53dc4652f02638af",
+    "tools/export_native_notebook.py": "cf52b36dcdd19e67f8114577b603815e8ec13c9c8ede00c43ac68f5164e2096e",
+    "scripts/qa/test_protocol_snapshot.mjs": "a57269959ef861dc82dab7af137099afc705e2eddb7ae33e4643adb340e351e7",
+    "tests/viewer/test_native_notebook_producer_origin.py": "1a8eb77401ddbe32dfce7b71f272f191c948abdbdbbbec17a61cb29b8d1ac0cf"
+  }
+}

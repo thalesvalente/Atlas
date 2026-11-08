@@ -1,0 +1,15 @@
+{
+  "id": "P03-CURRENT-PRODUCER-PREIMPORT-001",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "fixture": "synthetic symlink producer module outside explicitly selected code root",
+  "expected": "reject before executing module outside selected root",
+  "returncode": 2,
+  "stdout": "",
+  "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+  "outside_module_executed": true,
+  "package_published": false,
+  "source_blob": "58e68daaffe5054258b60e67192802553cb0cf21",
+  "source_sha256": "be4a6f26f0ab85c226118638aa742b763f3ca43f560a78270cd3a542748936b9",
+  "execution": "Chat Linux source-tree subprocess -I -B, no package installation or private data",
+  "result": "RED"
+}

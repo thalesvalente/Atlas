@@ -1,0 +1,486 @@
+{
+  "scope": "Public repository evidence and synthetic Chat execution only; no private corpus or host backup",
+  "path_note": "Absolute scratch/temp paths in receipts identify the execution environment; they are not user corpus paths or portability inputs. Canonical portable regression scripts live in scripts/qa and tests/viewer.",
+  "author_receipts_unchanged": true,
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "decision_counts": {
+    "SUPERSEDED_BY_DESIGN": 10,
+    "RETAIN_AND_IMPLEMENT": 4,
+    "REJECTED_WITH_REASON": 3,
+    "DEFERRED_HUMAN_DECISION": 1
+  },
+  "main_requirements": 84,
+  "crosswalk_items": 240,
+  "files": [
+    {
+      "path": "evidence/P01/C2-P03-35-TEST-CROSSWALK.json",
+      "sha256": "6862dea2a277eef93c795867836d7e333916cc10b43f4272ab7152972dd0d5c2",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/HUMAN-APPROVAL-READBACK.json",
+      "sha256": "4ebe863c07e9b7f8baffbfdd7e8c0326f9ae4f4fa2d4a8f901188c4b919c4101",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/K-NEGATIVES-PRESERVED.json",
+      "sha256": "e2594d6a99ba964b51e2b21a173845f831772c52c763ef85119f0737972866d5",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-ALL-SOURCES.json",
+      "sha256": "5de589a57c4386a7161adace615efc16a8f7ff8f55c3724d805228c2142e4d89",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-ARC09-FROZEN.json",
+      "sha256": "7da781aea99251530775d2ef684be1fa44eff08efc167bb0ed76cddf395c710e",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-C2-28-FILES.json",
+      "sha256": "b472a47a434cc815a1e6b265005aad869f1ba42e2ec36ff8e464fa1fbce50f9d",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-CHECKS-PRELIMINARY.json",
+      "sha256": "522cafbd2431222d78b737cb1da1b127616c7f09f7deb68b7bec58a11e0e1e2e",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-CHECKS.json",
+      "sha256": "4dc37428369e316897bd1837d51d4551c72c6fbb30ca97aba7a407c5ade937e1",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-EXAMPLE-CROSSWALK.json",
+      "sha256": "3e7d958458ea7bd8dc0a9eb781bcfad55ade955f270e206fe65a3cad67091661",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-HANDOFF.json",
+      "sha256": "35137f1a25f5c679e3f670cd2fe4ad3a0743924bf967a310f8d082821af5728a",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-JOURNEY-CROSSWALK.json",
+      "sha256": "355c49544281937d9f7ca6f96c6d055807c19a2494fbfa1e54d5c3af15581891",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-MATRIX.json",
+      "sha256": "d26f129f6cb3d10a7306557db0abdd6333dc38e87763e3815ca71d2fa82c70f4",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-N01-24.json",
+      "sha256": "952caa46ba00d815bb551e6b37655201867f5c7d54398a7fd422df30108835c0",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-PAR005-010.json",
+      "sha256": "c1702e57e4175920df8852ebe432de91908f788c2fb1e03e26afd0e0ccdd6145",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-PROTECTED-BASELINE.json",
+      "sha256": "314510bd2342542b1b24fc0e3034d6294814eb3b31eed449926d9325bc1d40c5",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-REVIEW-P00-CONTRACTS-PRE-GUARD.json",
+      "sha256": "d32cee44d2895f7ac6fa82e37d73e1609bfaeab959a7d617c2a1f91dfb14c595",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-REVIEW-P00-CONTRACTS.json",
+      "sha256": "5e5b3303362385e9a884d92a0686b02a47ca377b6652e2dd7d6a670c181dc928",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-REVIEW-P02.json",
+      "sha256": "03d78707f92512ccc2bf6f91dddbaec55c3703b8fd1b6166d9e936922fa58ff6",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P01-SOURCES.json",
+      "sha256": "f3bf92afc1d0158e512019e04863700e2fa61dabc84f89e7350e32e5e12c9216",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P03-HISTORICAL-TEST-IDS.json",
+      "sha256": "651537422db692f8bc4cd218c64fcf9b2e181b507cac1da7987070feba6cade3",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P06-SEMANTICS-ON-MAIN-0.log",
+      "sha256": "bf766360e67fe89cce2e0aa40586341d9bd3b2bdc855af333d5a1e12cd7e3115",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P06-SEMANTICS-ON-MAIN-1.log",
+      "sha256": "f8ae2afd894955c84b1e51ee8bb1c19215965d928ed6322d227fa009c45641c5",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P09-READER-PROBES-ON-MAIN-0.log",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P09-READER-PROBES-ON-MAIN-1.log",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/P09-READER-PROBES-ON-MAIN.json",
+      "sha256": "d01f74ae314b70b7460e7127978dcb537389f85517052d39ab53ca2a687a2475",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P01/finish_p01.py",
+      "sha256": "089ead3111dbbf3e5eee04bb1eff7b88548813e46ca38aa26ef04904d820d1b2",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-CHECKS.json",
+      "sha256": "a49f0b0b95c28c737f5f12043f65639be844683975041c0c05fe4b3d07089678",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-CI-EVIDENCE.json",
+      "sha256": "0644494b7d438af375e34be18a25d42ac5538c342ec9b27452d28e07a917ee87",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-HANDOFF.json",
+      "sha256": "473931ed2d45a283beb9f87f802d5f216b792fa8b8eaa37c2cc512ee84161c95",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-MATRIX.json",
+      "sha256": "55e73a38d929e2829eb6a1df3a132ee0c350594e3f2f7ba96c96db718ca3686c",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-REVIEW-P00-UI.json",
+      "sha256": "94059d4b294c25cef7b7d15fc2e8584cad3c81842fa1c84512e8fc05df146ebd",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-REVIEW-P03-PROBES.json",
+      "sha256": "6e1f33cf307f089fec2809bdaccf2cd4a6d409847eb94a3d88b0451a36fe6978",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-REVIEW-P03.json",
+      "sha256": "f07087e0a2dd4b91ff95b33d6fad76e55d704bbf6ae9e274392eb9e05c5b7160",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-SOURCES.json",
+      "sha256": "63b6d6c48f602a5d87b04fd6f7746347f3fee08b80af0f048e69cbcb8fc3b952",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-UI-INDEPENDENT-CHECKS.json",
+      "sha256": "ee7314e91e3dfac69042f5c7653cd1716ec8b326a4a1634d7b422ef644c11b6d",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/P02-UI-REVIEW-INPUT.json",
+      "sha256": "c8c971e84256e1d337f6d7a90bdf8796a758e78079154ba710b52ac7fd3099b6",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/app-preferences-probe.json",
+      "sha256": "a185dedd33214f4526bbbdecc491141d87a6ef98339c856ba495503f4d38b58f",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/app-race-probe.json",
+      "sha256": "901816947d3277ef16d3ff2c7a1895a2cafc11877266fab326f290b06f382bc0",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/app-snapshot-probe.json",
+      "sha256": "82e96645c2b3418b644123cbda45d1193254919905d0aa2d56b841b897c67a84",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/catalog_scenarios.json",
+      "sha256": "b16a935756a177440113b206bd3f944c46132474adc92a1e369333a0d6793730",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/native-limits-probe.json",
+      "sha256": "8765f62c9ee2b951dbc003cdaa2df0109c47269296d507b9e854145ac08a02e5",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/native_scenarios.json",
+      "sha256": "20cfc612392f56fa861f180989787bcbbaa35e33eaf44c29db128d419b559ec9",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/probe_app_preferences.mjs",
+      "sha256": "6de0e7d3d84abc9b22f195593ccc2f7aa2eb7a1b590797392d23d848b0730fd8",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/probe_app_race.mjs",
+      "sha256": "15e33b9875580f785dc16db60550a71d05cd2ecb01b3c37f2f0de8640f67bf93",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/probe_app_snapshot.mjs",
+      "sha256": "a939a431803b9793211245d0422c51226cf0539ce74a974e077609e4b960bd01",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/probe_native_limits.py",
+      "sha256": "38e07bb98269f5d11ea8068d27781c93ec6f4acdc2f483336b6120be98c187fa",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/probe_source_contracts.py",
+      "sha256": "b5f16e39d398cc4b413495b971d368cfb35bb2c1055da78d80bc2749e8c3fbf0",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/review_ui_independent.mjs",
+      "sha256": "7332f0d6a973d21f13f8ee724adea7a0b2d9e935b1ce3bdcb6802fb61274e987",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P02/source-contract-probes.json",
+      "sha256": "b570041600b9836588ef5b47e6ea25eb773c16f4ff348acb4fbca294938b839f",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/P03-CHECKS.json",
+      "sha256": "9348be214b5770ef94985003956efc92d471eda064b1fcc6bd666c4dc86ade25",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/P03-HANDOFF.json",
+      "sha256": "e81fc5e189a9b1a125d4f608dff4ccd33ca7cd1121e7b51c8c907a09db52b1e1",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/P03-MATRIX.json",
+      "sha256": "272b4e45aab4c1d8b7f8a2e0801a564fdcab8556b3b887419715cdf976accd98",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/P03-REVIEW-P01-EVIDENCE.json",
+      "sha256": "4f6ae92514fb3dccfac650a747479730679316058ba6fb150af14eca2334cf3f",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/P03-REVIEW-P01.json",
+      "sha256": "cd917057e390bd97d88f9f959c8dedab5c08ccdcb7f1287f9865abb31b7a1130",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/P03-SOURCES.json",
+      "sha256": "28d21c5ee8ec872f7270546ffd27f9386e144a00cfb962a984c1fcc8f5e3d67e",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/P03-VALIDATION.json",
+      "sha256": "414653ac795103a7174e24a2fea7356cd9ec15d35613c09f7456b97dd30d02f6",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/current-producer-preimport-red.json",
+      "sha256": "70292da52e6364afcf930c27cbd0213fab15ef50748af48409efd6df1a16f1df",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/main-presence-and-os-deltas.json",
+      "sha256": "926ef8c0f8594e4571b09ca8fc1c48828934e1988283fb6e2260bfd1a880ab44",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/main-source-tests-normal.json",
+      "sha256": "fda8bd3396eb7b209bee2122892a021740481cd8ce36aff16887a9babdf29b07",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/main-source-tests-normal.log",
+      "sha256": "3f7328a89620b9b0085d69f1934821557ff494f1f0539c4f5a680c533e3f5a1c",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/main-source-tests-optimized.json",
+      "sha256": "406c32d3373c6c6717e00fcf5b0dc0ade456c2074f9cbdd80bd7387609fed64b",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/main-source-tests-optimized.log",
+      "sha256": "a949b58d75beb7f58ae6a0f2f447d0a11c318a3b7aff1500514286b6249d33e1",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/probe_producer_origin.py",
+      "sha256": "33c07d5ebd32db38a8fe57129fc09bc871220b5543a80ff97a71458635aba618",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/producer-origin-baseline-red.json",
+      "sha256": "a8a073f5881b8a190d443841ac22422cfbda324b105807f46a61afebb346d7fa",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/review_p01_evidence.py",
+      "sha256": "d3e7f0198fd8b3e9012e595b673290ed9cb436814b50c701acbe55bb396e3586",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/P03/run_main_checks.py",
+      "sha256": "1e73f0a4d04c93617a4d03aa8199d0c64bb5b292ea2a1aa3f5d9e5098a486968",
+      "treatment": "EXACT_PUBLIC_OR_SYNTHETIC_AUTHOR_RECEIPT"
+    },
+    {
+      "path": "evidence/O0-CONTRACT.json",
+      "sha256": "3646f3e4e7b9082263a12c06d92a5840eee3fb300cfc0a2d912021205e0217f5",
+      "treatment": "EXACT_ROOT_RECEIPT"
+    },
+    {
+      "path": "evidence/O2-DECISIONS.json",
+      "sha256": "0f4a180ad46c6f1534f1a476d6500384fd8209221a951c5767cb36fe6cb4b6f8",
+      "treatment": "EXACT_ROOT_RECEIPT"
+    },
+    {
+      "path": "evidence/red/producer-origin-review-corrected-opt0.json",
+      "sha256": "a9dceae23bdb3183d00f2848e60fc82f8985cc25e35e01eb5ff6ab8f70b63fc6",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/red/producer-origin-review-corrected-opt0.log",
+      "sha256": "653984eea92f0eb51f9aba243f6a24f49c3c345ea3d20fc9e5e4416abe9d5388",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/red/producer-origin-review-corrected-opt1.json",
+      "sha256": "d4da106b65d33a60d8083f32e1b4afa3052ec79d67d4c54a066e908b2e9782e7",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/red/producer-origin-review-corrected-opt1.log",
+      "sha256": "1dec8e4b5f5ecfcb927c5b8f2f0aed92f925d4281b139082b2b48f6fe3ecfda7",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/red/protocol-snapshot-complete-regression.json",
+      "sha256": "a42db3ba3c9997be4ef697f6ece7a835802ce444527d6c61fe5df99a20e9a68a",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/red/protocol-snapshot-complete-regression.log",
+      "sha256": "d8ac95afd38f46443a73ae8c2238654a498b42d08d5e1a8e165d6b5adb90e40f",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/a01-preservation.json",
+      "sha256": "d1252b8e7c04656d6888807ba37284fb2f5a7a3d162f6319bca44ad8c4f210c0",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/a01-preservation.log",
+      "sha256": "a96e31e02a56e1f8f6cac15eba2921587296d9a60fff54f082f52a8090448dbf",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/architecture.json",
+      "sha256": "359e49ef63534a00af83be955091433b3c3f780516b9541668943f074dd50769",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/architecture.log",
+      "sha256": "3bc6004e5f550d267b0827cf02cf75b7c2762bcfeb4b73beb85044b65defc52b",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/native-export-regressions.json",
+      "sha256": "dd4f6861f61337584583db11fc581177eaa8a8cf69dae24c9dcb428697c2dc79",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/native-export-regressions.log",
+      "sha256": "7c0392dec2c0f8bea886ca8a04397e0e1e1a87484563cd7c29bd8f795ce1ef78",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-normal.json",
+      "sha256": "da8f0e421210d428cd1f0e8e7b970ab926ace954b93ea6b7a4ea84bf66e1e481",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-normal.log",
+      "sha256": "aa95626ccd0413440dd1bc650a4e19f4dea43ae5763ed804f78da41cad10ff47",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-optimized.json",
+      "sha256": "9146d370589952553e64989f3fd7105d684ffa94f2f34d10774abfd7337381d6",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-optimized.log",
+      "sha256": "2f88f2a8038c1bcc2b5c9f5a353a7311fba37d3d705d7e6d24505d5aff81aeda",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-relative-normal.json",
+      "sha256": "0006fa612a098f29214e0f55cc393ff1518d74080cc9fba47084fb6c07593a78",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-relative-normal.log",
+      "sha256": "68296087f78a284e2fbab3b79451d59146ecec79dd54f0f64c44483d4cb907b8",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-relative-optimized.json",
+      "sha256": "4e6606c14a30055d5ea7355572edad5f61eaac891af44a984ca8dfa3ef003bbd",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/producer-origin-relative-optimized.log",
+      "sha256": "9803399c84268b914654796fe923d171d1a49d8c564c8c270233272eadab0783",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/protocol-snapshot.json",
+      "sha256": "2a2375fd2ca571115ec7ee2f054c2f5af2792e196e87e9fb6a6e4e6df226a8c1",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/protocol-snapshot.log",
+      "sha256": "7c58aeba8cce73fc62b65216b926e6fee53b92c108f0c3e85d430a4e5b40d946",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/speckit-guard-corrected.json",
+      "sha256": "564fa0024f697de5c61b51dc4dc46e31c6a60b2cab40096dcf7d3b64c393e44d",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/speckit-guard-corrected.log",
+      "sha256": "be26f6e2f902f9775fc0fee1138df6208391ab30cafb2857b71488f3b7fc4ec6",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/speckit-guard.json",
+      "sha256": "6f009a035e2509ba7c27faa9742182819f5ed6e9f374b2e921e3eb7786b05313",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    },
+    {
+      "path": "evidence/green/speckit-guard.log",
+      "sha256": "1e0aa5d8272888e0cf83c59789caf2fbcda17be2c95955931d42738af6c9e6d7",
+      "treatment": "EXACT_SYNTHETIC_EXECUTION_RECEIPT"
+    }
+  ]
+}

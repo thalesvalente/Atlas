@@ -1,0 +1,12 @@
+test_decimal_precision_loss_is_rejected_without_rounding_or_source_fallback (__main__.Parity02P06SemanticsTests.test_decimal_precision_loss_is_rejected_without_rounding_or_source_fallback) ... ok
+test_execution_review_integrity_and_unknown_time_remain_separate (__main__.Parity02P06SemanticsTests.test_execution_review_integrity_and_unknown_time_remain_separate) ... ok
+test_integer_zero_boolean_decimal_precision_and_absence_are_preserved (__main__.Parity02P06SemanticsTests.test_integer_zero_boolean_decimal_precision_and_absence_are_preserved) ... ok
+test_passive_uri_mentions_remain_literal_without_network_or_execution (__main__.Parity02P06SemanticsTests.test_passive_uri_mentions_remain_literal_without_network_or_execution) ... ok
+test_repeated_ids_do_not_mix_values_or_mentions_between_sources (__main__.Parity02P06SemanticsTests.test_repeated_ids_do_not_mix_values_or_mentions_between_sources) ... ok
+test_time_offsets_and_neutral_mentions_do_not_reverse_declared_lineage (__main__.Parity02P06SemanticsTests.test_time_offsets_and_neutral_mentions_do_not_reverse_declared_lineage) ... ok
+test_unsupported_or_unsafe_sources_do_not_receive_another_sources_preview (__main__.Parity02P06SemanticsTests.test_unsupported_or_unsafe_sources_do_not_receive_another_sources_preview) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.146s
+
+OK

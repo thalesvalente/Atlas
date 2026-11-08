@@ -1,0 +1,319 @@
+[
+  {
+    "path": ".github/workflows/atlas-parity03-p03-gates.yml",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "2d97905680519d6110e2627c3e337c7c853629a6",
+    "goal": "Orquestração/dependências da qualificação",
+    "successor": [
+      ".github/workflows/atlas021.yml"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/ARTIFACT-INDEX.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "b6b13d30492eedff11d44321243ab4b4e89d0b28",
+    "goal": "Recibo histórico específico ARTIFACT-INDEX.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/BROWSER-RECEIPT.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "d43096c39fb7bbc609d58caa9cfe5545520aeb57",
+    "goal": "Recibo histórico específico BROWSER-RECEIPT.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/BUILD-AND-INSTALL.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "432ae22fbcd2dc8ecb62a5190af64feff8e4c48c",
+    "goal": "Recibo histórico específico BUILD-AND-INSTALL.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/CI-CODE-RECEIPT.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "ae034459aa123481db810610a197591ca8dfbd1a",
+    "goal": "Recibo histórico específico CI-CODE-RECEIPT.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/HANDOFF.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "e34b1ba479bffe33b8c877ee88b5090ef94d20df",
+    "goal": "Recibo histórico específico HANDOFF.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/HTTP-RECEIPT.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "465ad5d432f9fc012230e19366b64cc25fb30baf",
+    "goal": "Recibo histórico específico HTTP-RECEIPT.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/INDEPENDENT-REVIEW.md",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "1312a177a0fda89cad85c01583246b6478c8879c",
+    "goal": "Recibo histórico específico INDEPENDENT-REVIEW.md",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/INITIAL-RECONCILIATION.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "1454423642105064f9cab0f453b22961d006b955",
+    "goal": "Recibo histórico específico INITIAL-RECONCILIATION.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/INPUT-SHAS.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "dd9c14eee1892a51d091acb684db815515236d1c",
+    "goal": "Recibo histórico específico INPUT-SHAS.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/LIMITATIONS.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "3e0967548f5fa361404b6b36ab007a2d64395616",
+    "goal": "Recibo histórico específico LIMITATIONS.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/MANIFEST.sha256",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "6ec2869bb59ef14e975a6bea0532ed3dc9113e5d",
+    "goal": "Recibo histórico específico MANIFEST.sha256",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/RED-AND-CORRECTION.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "a918ac2a2d025204775795c33998a727ff81c26b",
+    "goal": "Recibo histórico específico RED-AND-CORRECTION.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/RESULT.md",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "b6fb700fb781e1ec0ce32bf23874d4a7ca56e505",
+    "goal": "Recibo histórico específico RESULT.md",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/SPEC-KIT-METHOD.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "efbee1e32a2c987f9c428b3975f966ca018f759d",
+    "goal": "Recibo histórico específico SPEC-KIT-METHOD.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "docs/missions/atlas-parity-03/c2-p03-qualification/TEST-RECEIPT.json",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "63f327e993d0bc134ce4e9113f130d2eca4f00bc",
+    "goal": "Recibo histórico específico TEST-RECEIPT.json",
+    "successor": [
+      "Preserve pinned receipt; O0 main CI is separate new evidence"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "scripts/qa/atlas_parity03_p03_browser.mjs",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "e960f8bc9f285facd6a8111e44359b09e81fd93a",
+    "goal": "Browser real P03: lexemas/foco/reflow/inércia",
+    "successor": [
+      "scripts/qa/browser_native_notebook.mjs",
+      "scripts/qa/browser_native_graph.mjs"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "scripts/qa/atlas_parity03_p03_build.py",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "2a5630cb897c5a0190459a332165529712f6c931",
+    "goal": "Instalação isolada de wheels",
+    "successor": [
+      "scripts/qa/clean_install.py",
+      ".github/workflows/atlas021.yml"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "scripts/qa/atlas_parity03_p03_ci.py",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "b5338403d395c93ec3aa7ff0283569ce52aadd46",
+    "goal": "47 testes exatos/zero skips/pins históricos",
+    "successor": [
+      "scripts/run_checks.py",
+      ".github/workflows/atlas021.yml"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "scripts/qa/atlas_parity03_p03_harness.css",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "38dff18243d92cbcf57a8eba1abd1d18b30a6a20",
+    "goal": "Demonstrador P03 isolado",
+    "successor": [
+      "spec004 NativeView active composition"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "scripts/qa/atlas_parity03_p03_harness.py",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "eafe6fea2cf64f88a12401626558291354a0da28",
+    "goal": "Demonstrador P03 isolado",
+    "successor": [
+      "spec004 NativeView active composition"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "scripts/qa/atlas_parity03_p03_http.py",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "ac924193c95d06db8d43667f17f190040f3217a7",
+    "goal": "HTTP real de rotas fixas",
+    "successor": [
+      "tests/viewer/test_catalog_server.py",
+      "tests/viewer/test_native_notebook_http.py"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "scripts/qa/atlas_parity03_p03_requirements.txt",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "83879267beb01dedbf451c222b833d3fbdb1fef6",
+    "goal": "Orquestração/dependências da qualificação",
+    "successor": [
+      ".github/workflows/atlas021.yml"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/analysis.md",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "e5dd7ea9c72ba96304ccb20acfbdda38ce5e39aa",
+    "goal": "Plano/contrato/tasks da qualificação C2",
+    "successor": [
+      "specs/004-native-notebook-experience",
+      "specs/007-final-legacy-parity"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/checklists/requirements.md",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "cba3e2aa876cb4479b98604a2e458ff9eb46b165",
+    "goal": "Plano/contrato/tasks da qualificação C2",
+    "successor": [
+      "specs/004-native-notebook-experience",
+      "specs/007-final-legacy-parity"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/plan.md",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "99425f39a385a8e470dc6a458012e648be38bc12",
+    "goal": "Plano/contrato/tasks da qualificação C2",
+    "successor": [
+      "specs/004-native-notebook-experience",
+      "specs/007-final-legacy-parity"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/spec.md",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "9e538edff92c9e04b43b55e3bbb0c6c6c50f3148",
+    "goal": "Plano/contrato/tasks da qualificação C2",
+    "successor": [
+      "specs/004-native-notebook-experience",
+      "specs/007-final-legacy-parity"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  },
+  {
+    "path": "specs/004-atlas-parity-c0/workstreams/p03-components/c2-qualification/tasks.md",
+    "sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+    "blob": "14b746161aae41e3939aca509f7da3ccf750e17b",
+    "goal": "Plano/contrato/tasks da qualificação C2",
+    "successor": [
+      "specs/004-native-notebook-experience",
+      "specs/007-final-legacy-parity"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "counterevidence": "Não portar layout antigo, exigência 47/zero-skip ou inatividade P03. Evidência histórica não é CI do produto novo."
+  }
+]

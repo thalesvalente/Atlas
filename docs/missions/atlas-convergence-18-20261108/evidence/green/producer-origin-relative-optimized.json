@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-O",
+    "-B",
+    "tests/viewer/test_native_notebook_producer_origin.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "scope": "current source bytes; regular and namespace positive cases also import a sibling relatively; isolated child optimization is observed",
+  "log": "producer-origin-relative-optimized.log",
+  "test_sha256": "5e4051b7afcf902895705ed7d608ff7a4336cf064e055770ba5bd9cf022a09a3",
+  "exporter_sha256": "cf52b36dcdd19e67f8114577b603815e8ec13c9c8ede00c43ac68f5164e2096e"
+}

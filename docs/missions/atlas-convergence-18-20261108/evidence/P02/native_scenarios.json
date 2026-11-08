@@ -1,0 +1,382 @@
+{
+  "initial": {
+    "id": "source-1",
+    "status": "READY",
+    "entries": [
+      {
+        "date": null,
+        "family": null,
+        "fields": [],
+        "group": "$structure",
+        "kind": "collection",
+        "native_id": null,
+        "parent_key": null,
+        "parent_resolution": "NOT_DECLARED",
+        "parent_uid": null,
+        "pointer": "",
+        "raw_json": "{\"coverage\":{},\"records\":[]}",
+        "source_key": null,
+        "status": null,
+        "title": "$structure",
+        "uid": "view:0"
+      },
+      {
+        "date": null,
+        "family": null,
+        "fields": [
+          {
+            "name": "id",
+            "text": "r",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "text": "Synthetic unchanged",
+            "type": "string"
+          },
+          {
+            "name": "native_id",
+            "text": "null",
+            "type": "null"
+          },
+          {
+            "name": "number",
+            "text": "9007199254740993",
+            "type": "integer"
+          },
+          {
+            "name": "flag",
+            "text": "false",
+            "type": "boolean"
+          },
+          {
+            "name": "zero",
+            "text": "0",
+            "type": "integer"
+          },
+          {
+            "name": "missing_test",
+            "text": "null",
+            "type": "null"
+          }
+        ],
+        "group": "records",
+        "kind": "record",
+        "native_id": null,
+        "parent_key": null,
+        "parent_resolution": "NOT_DECLARED",
+        "parent_uid": null,
+        "pointer": "/records/0",
+        "raw_json": "{\"flag\":false,\"id\":\"r\",\"missing_test\":null,\"native_id\":null,\"number\":9007199254740993,\"title\":\"Synthetic unchanged\",\"zero\":0}",
+        "source_key": "r",
+        "status": null,
+        "title": "Synthetic unchanged",
+        "uid": "view:1"
+      },
+      {
+        "date": null,
+        "family": null,
+        "fields": [
+          {
+            "name": "status",
+            "text": "UNKNOWN",
+            "type": "string"
+          }
+        ],
+        "group": "coverage",
+        "kind": "collection",
+        "native_id": null,
+        "parent_key": null,
+        "parent_resolution": "NOT_DECLARED",
+        "parent_uid": null,
+        "pointer": "/coverage",
+        "raw_json": "{\"status\":\"UNKNOWN\"}",
+        "source_key": null,
+        "status": "UNKNOWN",
+        "title": "coverage",
+        "uid": "view:2"
+      }
+    ],
+    "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL",
+    "metadata_sha256": "262954131e5f59d4bdeee244502f32cb4bda5f7c39fed434babb14e1366331cf",
+    "name": "Caderno — consulta nativa",
+    "revision": "projection-sha256:567af709583d05a15131e6e53cdcd89665ef79de43f9ce6228058cb54b46423f",
+    "projection_sha256": "567af709583d05a15131e6e53cdcd89665ef79de43f9ce6228058cb54b46423f",
+    "bytes_verified": 1582,
+    "logical_bytes_verified": 1582,
+    "transport_version": "1",
+    "authenticity": "NOT_VERIFIED",
+    "scientific_approval": "NOT_EVALUATED"
+  },
+  "changed": {
+    "id": "source-1",
+    "name": "Caderno — consulta nativa",
+    "entries": [],
+    "status": "CHANGED",
+    "errors": [
+      "NATIVE_CATALOG_CHANGED_REINDEX_REQUIRED"
+    ],
+    "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL"
+  },
+  "bad_presentation": {
+    "id": "source-1",
+    "status": "INVALID",
+    "entries": [],
+    "authority": "DERIVED_NOT_SCIENTIFIC_APPROVAL",
+    "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+    "name": "Caderno — consulta nativa",
+    "errors": [
+      "NATIVE_DISPLAY_VALUE_MISMATCH"
+    ]
+  },
+  "protocol_before": {
+    "id": "source-1",
+    "name": "Caderno — consulta nativa",
+    "status": "READY",
+    "version": "0.1.0a1",
+    "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+    "report": {
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "scope": "caderno-0.1.0a1-restricted-serialization",
+      "authenticity": "NOT_VERIFIED",
+      "scientific_acceptance": "NOT_EVALUATED"
+    },
+    "read_model": {
+      "source": {
+        "name": "Caderno — consulta nativa",
+        "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+        "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+        "profiles": [
+          "https://w3id.org/ro/wfrun/process/0.6",
+          "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+        ],
+        "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "scope": "caderno-0.1.0a1-restricted-serialization",
+          "authenticity": "NOT_VERIFIED",
+          "scientific_acceptance": "NOT_EVALUATED"
+        },
+        "date_published": "2026-11-08T22:16:07.683247+00:00",
+        "source_name": "native"
+      },
+      "projects": [],
+      "experiments": [],
+      "runs": [],
+      "artifacts": [
+        {
+          "id": "data/view-0000.json",
+          "name": "Apresentação nativa 0",
+          "media_type": "application/vnd.atlas.native-view+json",
+          "declared_digest": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+          "availability": {
+            "declared": "PRESENT",
+            "status": "AVAILABLE",
+            "sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+            "size": 895
+          },
+          "description": ""
+        }
+      ],
+      "relations": [],
+      "entities": [
+        {
+          "@id": "ro-crate-metadata.json",
+          "@type": "CreativeWork",
+          "about": {
+            "@id": "./"
+          },
+          "conformsTo": {
+            "@id": "https://w3id.org/ro/crate/1.3"
+          }
+        },
+        {
+          "@id": "./",
+          "@type": "Dataset",
+          "conformsTo": [
+            {
+              "@id": "https://w3id.org/ro/wfrun/process/0.6"
+            },
+            {
+              "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+            }
+          ],
+          "datePublished": "2026-11-08T22:16:07.683247+00:00",
+          "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+          "hasPart": [
+            {
+              "@id": "data/view-0000.json"
+            }
+          ],
+          "https://github.com/thalesvalente/Atlas/ns/presentation#entryCount": 2,
+          "https://github.com/thalesvalente/Atlas/ns/presentation#projectionDigest": "05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+          "https://github.com/thalesvalente/Atlas/ns/presentation#revision": "projection-sha256:05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+          "https://github.com/thalesvalente/Atlas/ns/presentation#version": "1",
+          "license": "Nenhuma licença adicional concedida; manter permissões das fontes.",
+          "mentions": [],
+          "name": "Caderno — consulta nativa"
+        },
+        {
+          "@id": "https://w3id.org/ro/wfrun/process/0.6",
+          "@type": [
+            "CreativeWork",
+            "http://www.w3.org/ns/dx/prof/Profile"
+          ],
+          "name": "Process Run Crate",
+          "version": "0.6"
+        },
+        {
+          "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+          "@type": [
+            "CreativeWork",
+            "http://www.w3.org/ns/dx/prof/Profile"
+          ],
+          "name": "Caderno",
+          "version": "0.1.0a1"
+        },
+        {
+          "@id": "data/view-0000.json",
+          "@type": "File",
+          "contentSize": 895,
+          "cp:availability": "PRESENT",
+          "cp:sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+          "encodingFormat": "application/vnd.atlas.native-view+json",
+          "name": "Apresentação nativa 0"
+        }
+      ],
+      "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+    },
+    "changed": false,
+    "authenticity": "NOT_VERIFIED",
+    "scientific_approval": "NOT_EVALUATED"
+  },
+  "protocol_after": {
+    "id": "source-1",
+    "name": "Caderno — consulta nativa",
+    "status": "READY",
+    "version": "0.1.0a1",
+    "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+    "report": {
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "scope": "caderno-0.1.0a1-restricted-serialization",
+      "authenticity": "NOT_VERIFIED",
+      "scientific_acceptance": "NOT_EVALUATED"
+    },
+    "read_model": {
+      "source": {
+        "name": "Caderno — consulta nativa",
+        "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+        "metadata_sha256": "dfaf29ca8ff796121e5441b7ea61aa2c67144e8dccfe4ff3223d728b2f490c69",
+        "profiles": [
+          "https://w3id.org/ro/wfrun/process/0.6",
+          "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+        ],
+        "candidate_profile": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "scope": "caderno-0.1.0a1-restricted-serialization",
+          "authenticity": "NOT_VERIFIED",
+          "scientific_acceptance": "NOT_EVALUATED"
+        },
+        "date_published": "2026-11-08T22:16:07.683247+00:00",
+        "source_name": "native"
+      },
+      "projects": [],
+      "experiments": [],
+      "runs": [],
+      "artifacts": [
+        {
+          "id": "data/view-0000.json",
+          "name": "Apresentação nativa 0",
+          "media_type": "application/vnd.atlas.native-view+json",
+          "declared_digest": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+          "availability": {
+            "declared": "PRESENT",
+            "status": "AVAILABLE",
+            "sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+            "size": 895
+          },
+          "description": ""
+        }
+      ],
+      "relations": [],
+      "entities": [
+        {
+          "@id": "ro-crate-metadata.json",
+          "@type": "CreativeWork",
+          "about": {
+            "@id": "./"
+          },
+          "conformsTo": {
+            "@id": "https://w3id.org/ro/crate/1.3"
+          }
+        },
+        {
+          "@id": "./",
+          "@type": "Dataset",
+          "conformsTo": [
+            {
+              "@id": "https://w3id.org/ro/wfrun/process/0.6"
+            },
+            {
+              "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md"
+            }
+          ],
+          "datePublished": "2026-11-08T22:16:07.683247+00:00",
+          "description": "Projeção de consulta derivada da API original; não concede aprovação científica.",
+          "hasPart": [
+            {
+              "@id": "data/view-0000.json"
+            }
+          ],
+          "https://github.com/thalesvalente/Atlas/ns/presentation#entryCount": 2,
+          "https://github.com/thalesvalente/Atlas/ns/presentation#projectionDigest": "05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+          "https://github.com/thalesvalente/Atlas/ns/presentation#revision": "projection-sha256:05fa8e36c1608d62e426f445e91c894bb2b4498e1139c22e1f7934ffbb200013",
+          "https://github.com/thalesvalente/Atlas/ns/presentation#version": "1",
+          "license": "Nenhuma licença adicional concedida; manter permissões das fontes.",
+          "mentions": [],
+          "name": "Caderno — consulta nativa"
+        },
+        {
+          "@id": "https://w3id.org/ro/wfrun/process/0.6",
+          "@type": [
+            "CreativeWork",
+            "http://www.w3.org/ns/dx/prof/Profile"
+          ],
+          "name": "Process Run Crate",
+          "version": "0.6"
+        },
+        {
+          "@id": "https://github.com/thalesvalente/Atlas/blob/feat/atlas021-interface-protocol/docs/protocol/0.1.0a1.md",
+          "@type": [
+            "CreativeWork",
+            "http://www.w3.org/ns/dx/prof/Profile"
+          ],
+          "name": "Caderno",
+          "version": "0.1.0a1"
+        },
+        {
+          "@id": "data/view-0000.json",
+          "@type": "File",
+          "contentSize": 895,
+          "cp:availability": "PRESENT",
+          "cp:sha256": "44202d635433944eaab1a5437451fb39ca453dae3926b10b2ffc12b521eb37cf",
+          "encodingFormat": "application/vnd.atlas.native-view+json",
+          "name": "Apresentação nativa 0"
+        }
+      ],
+      "authority": "DERIVED_REBUILDABLE_NOT_SCIENTIFIC_APPROVAL"
+    },
+    "changed": false,
+    "authenticity": "NOT_VERIFIED",
+    "scientific_approval": "NOT_EVALUATED"
+  }
+}

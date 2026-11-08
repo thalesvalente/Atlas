@@ -1,0 +1,11 @@
+{
+  "referenced_tests_present": true,
+  "references": 17,
+  "unique_tests": 32,
+  "artifact_hashes_match": true,
+  "source_blobs_match": true,
+  "three_prs_exact": true,
+  "requirements": 17,
+  "author_not_product_writer": true,
+  "status": "PASS_DELIVERABLE_INTERNAL_CONSISTENCY"
+}

@@ -1,0 +1,147 @@
+{
+  "owner": "/root/p01_contracts",
+  "phase": "O1",
+  "status": "FROZEN_FOR_P03_REVIEW",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "disposition_count": 10,
+  "counts": {
+    "journeys": 28,
+    "cases": 46,
+    "c2files": 28,
+    "p03methods": 35,
+    "par": 6,
+    "n": 24,
+    "arc09": 5,
+    "k_f2": 68
+  },
+  "new_tests": {
+    "P06normal": 7,
+    "P06optimized": 7,
+    "P09normal": 9,
+    "P09optimized": 9,
+    "exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "product_edits": 0,
+  "remote_mutations": 0,
+  "local_required": false,
+  "independent_review": "PENDING_P03",
+  "final_candidate_ci": "PENDING_P00_O3",
+  "artifacts": {
+    "C2-P03-35-TEST-CROSSWALK.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/C2-P03-35-TEST-CROSSWALK.json",
+      "sha256": "6862dea2a277eef93c795867836d7e333916cc10b43f4272ab7152972dd0d5c2",
+      "bytes": 20106
+    },
+    "HUMAN-APPROVAL-READBACK.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/HUMAN-APPROVAL-READBACK.json",
+      "sha256": "4ebe863c07e9b7f8baffbfdd7e8c0326f9ae4f4fa2d4a8f901188c4b919c4101",
+      "bytes": 12795
+    },
+    "K-NEGATIVES-PRESERVED.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/K-NEGATIVES-PRESERVED.json",
+      "sha256": "e2594d6a99ba964b51e2b21a173845f831772c52c763ef85119f0737972866d5",
+      "bytes": 35312
+    },
+    "P01-ALL-SOURCES.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-ALL-SOURCES.json",
+      "sha256": "5de589a57c4386a7161adace615efc16a8f7ff8f55c3724d805228c2142e4d89",
+      "bytes": 19052
+    },
+    "P01-ARC09-FROZEN.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-ARC09-FROZEN.json",
+      "sha256": "7da781aea99251530775d2ef684be1fa44eff08efc167bb0ed76cddf395c710e",
+      "bytes": 2558
+    },
+    "P01-C2-28-FILES.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-C2-28-FILES.json",
+      "sha256": "b472a47a434cc815a1e6b265005aad869f1ba42e2ec36ff8e464fa1fbce50f9d",
+      "bytes": 15220
+    },
+    "P01-CHECKS-PRELIMINARY.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-CHECKS-PRELIMINARY.json",
+      "sha256": "522cafbd2431222d78b737cb1da1b127616c7f09f7deb68b7bec58a11e0e1e2e",
+      "bytes": 4332
+    },
+    "P01-CHECKS.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-CHECKS.json",
+      "sha256": "4dc37428369e316897bd1837d51d4551c72c6fbb30ca97aba7a407c5ade937e1",
+      "bytes": 13330
+    },
+    "P01-EXAMPLE-CROSSWALK.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-EXAMPLE-CROSSWALK.json",
+      "sha256": "3e7d958458ea7bd8dc0a9eb781bcfad55ade955f270e206fe65a3cad67091661",
+      "bytes": 33123
+    },
+    "P01-JOURNEY-CROSSWALK.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-JOURNEY-CROSSWALK.json",
+      "sha256": "355c49544281937d9f7ca6f96c6d055807c19a2494fbfa1e54d5c3af15581891",
+      "bytes": 57227
+    },
+    "P01-MATRIX.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-MATRIX.json",
+      "sha256": "d26f129f6cb3d10a7306557db0abdd6333dc38e87763e3815ca71d2fa82c70f4",
+      "bytes": 27841
+    },
+    "P01-MATRIX.md": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-MATRIX.md",
+      "sha256": "bc72a5ff84303ff09daaa8dacc3695bc7de982f66d6e5294e264a13082701994",
+      "bytes": 5059
+    },
+    "P01-N01-24.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-N01-24.json",
+      "sha256": "952caa46ba00d815bb551e6b37655201867f5c7d54398a7fd422df30108835c0",
+      "bytes": 7973
+    },
+    "P01-PAR005-010.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-PAR005-010.json",
+      "sha256": "c1702e57e4175920df8852ebe432de91908f788c2fb1e03e26afd0e0ccdd6145",
+      "bytes": 4040
+    },
+    "P01-SOURCES.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-SOURCES.json",
+      "sha256": "f3bf92afc1d0158e512019e04863700e2fa61dabc84f89e7350e32e5e12c9216",
+      "bytes": 5378
+    },
+    "P03-HISTORICAL-TEST-IDS.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P03-HISTORICAL-TEST-IDS.json",
+      "sha256": "651537422db692f8bc4cd218c64fcf9b2e181b507cac1da7987070feba6cade3",
+      "bytes": 2401
+    },
+    "P06-SEMANTICS-ON-MAIN-0.log": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P06-SEMANTICS-ON-MAIN-0.log",
+      "sha256": "bf766360e67fe89cce2e0aa40586341d9bd3b2bdc855af333d5a1e12cd7e3115",
+      "bytes": 1386
+    },
+    "P06-SEMANTICS-ON-MAIN-1.log": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P06-SEMANTICS-ON-MAIN-1.log",
+      "sha256": "f8ae2afd894955c84b1e51ee8bb1c19215965d928ed6322d227fa009c45641c5",
+      "bytes": 1386
+    },
+    "P09-READER-PROBES-ON-MAIN-0.log": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P09-READER-PROBES-ON-MAIN-0.log",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "bytes": 1385
+    },
+    "P09-READER-PROBES-ON-MAIN-1.log": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P09-READER-PROBES-ON-MAIN-1.log",
+      "sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+      "bytes": 1385
+    },
+    "P09-READER-PROBES-ON-MAIN.json": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P09-READER-PROBES-ON-MAIN.json",
+      "sha256": "d01f74ae314b70b7460e7127978dcb537389f85517052d39ab53ca2a687a2475",
+      "bytes": 4603
+    },
+    "finish_p01.py": {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/finish_p01.py",
+      "sha256": "089ead3111dbbf3e5eee04bb1eff7b88548813e46ca38aa26ef04904d820d1b2",
+      "bytes": 20896
+    }
+  }
+}

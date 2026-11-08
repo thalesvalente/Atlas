@@ -1,0 +1,60 @@
+{
+  "status": "BASELINE_DEFECT_REPRODUCED",
+  "scope": "actual app.js updateCatalog in Node VM with presentation-only stubs; NOT browser QA",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "defect": "P02-F001: explicit snapshot replacement silently carries old source+ID comparison selections and opens replacement detail",
+  "expected_on_changed_snapshot": {
+    "selected": [],
+    "detail": null
+  },
+  "observations": [
+    {
+      "name": "same_bytes_rebuild",
+      "selected": [
+        "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+        "[\"source-2\",\"urn:caderno:synthetic-environment:run-r1\"]"
+      ],
+      "detail": "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+      "detailPresented": "Coleta simulada A",
+      "notice": "2 fonte(s) aberta(s) pelo perfil candidato. Registros sintéticos e estados de revisão permanecem identificados. IDs repetidos entre fontes são mantidos separados; nenhum registro foi sobrescrito.",
+      "catalog_generation": 2,
+      "source_A_hash": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25"
+    },
+    {
+      "name": "GET_verification_before_explicit_rebuild",
+      "selected": [
+        "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+        "[\"source-2\",\"urn:caderno:synthetic-environment:run-r1\"]"
+      ],
+      "detail": "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+      "detailPresented": "Coleta simulada A",
+      "notice": "2 fonte(s) aberta(s) pelo perfil candidato. Registros sintéticos e estados de revisão permanecem identificados. IDs repetidos entre fontes são mantidos separados; nenhum registro foi sobrescrito.",
+      "catalog_generation": 2,
+      "source_A_hash": "38de02af0341aea55b0f8ca09f3bd278afe9c210a7f4923c6578a9fe040e6f25"
+    },
+    {
+      "name": "explicit_changed_rebuild_same_source_id_and_run_id",
+      "selected": [
+        "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+        "[\"source-2\",\"urn:caderno:synthetic-environment:run-r1\"]"
+      ],
+      "detail": "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+      "detailPresented": "P02_CHANGED_SAME_ID",
+      "notice": "2 fonte(s) aberta(s) pelo perfil candidato. Registros sintéticos e estados de revisão permanecem identificados. IDs repetidos entre fontes são mantidos separados; nenhum registro foi sobrescrito.",
+      "catalog_generation": 3,
+      "source_A_hash": "22947711f1f6dd5addaa490d38099aca704075ce86d5ab9cfcffe0ad89bb2126"
+    },
+    {
+      "name": "fresh_Catalog_session_same_positional_ids",
+      "selected": [
+        "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+        "[\"source-2\",\"urn:caderno:synthetic-environment:run-r1\"]"
+      ],
+      "detail": "[\"source-1\",\"urn:caderno:synthetic-environment:run-r1\"]",
+      "detailPresented": "P02_CHANGED_SAME_ID",
+      "notice": "2 fonte(s) aberta(s) pelo perfil candidato. Registros sintéticos e estados de revisão permanecem identificados. IDs repetidos entre fontes são mantidos separados; nenhum registro foi sobrescrito.",
+      "catalog_generation": 1,
+      "source_A_hash": "22947711f1f6dd5addaa490d38099aca704075ce86d5ab9cfcffe0ad89bb2126"
+    }
+  ]
+}

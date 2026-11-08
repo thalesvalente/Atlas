@@ -1,0 +1,723 @@
+{
+  "id": "ATLAS-CONVERGENCE-O2",
+  "status": "G2_DECISIONS_PASS_SCOPED_O3_RELEASED",
+  "observed_at_utc": "2026-11-08T22:28:31.291716+00:00",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "decisions": [
+    {
+      "pr": 6,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "P06 qualificava uma composição histórica. Sete oráculos semânticos passam sem alteração em main; instalação, HTTP e browser têm suites atuais. Não portar a antiga preservação de seleção B após mudança em A, substituída pela política posterior de invalidação do snapshot.",
+      "required_patch": [],
+      "human_gate": []
+    },
+    {
+      "pr": 7,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "A tabela P03 foi preservada; a integração aprovada é Native View. Metadados genéricos e cards p03-candidate/1 eram demonstradores isolados, não obrigação de implantar nova UI arbitrária.",
+      "required_patch": [],
+      "human_gate": []
+    },
+    {
+      "pr": 8,
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "Reter a finalidade de invalidar estado dependente de fonte/snapshot na superfície /. Há contraprovas atuais reais. Portar apenas o vínculo e a ordenação segura de consultas, preservando contratos e sem reintroduzir todo o router candidato.",
+      "required_patch": [
+        "P02-F001",
+        "P02-F002",
+        "P02-F003"
+      ],
+      "human_gate": []
+    },
+    {
+      "pr": 9,
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "Reutilizar análise e 28 jornadas sem promover candidatos a requisitos. Recuperar apenas comportamento atual demonstrável: identidade/snapshot/preferências via P02; rótulos indexação/observação; publicação do snapshot com origem declarada; orientação ADR aceita como direção e main consolidada. Não criar generic detail nem semântica científica persistida.",
+      "required_patch": [
+        "P00: rótulo indexação/observação, eventual publicação do snapshot com campo declarado, nota ADR/main/0.2.0 vs NativeView.",
+        "P02/P00: corrigir vínculo de seleção/respostas/preferências conforme RED real."
+      ],
+      "human_gate": []
+    },
+    {
+      "pr": 10,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Os 28 adicionais C2 qualificavam harness P03 isolado, 47 testes exatos e inatividade na app. A composição NativeView tem instalação/HTTP/browser próprios. Preservar os artefatos, substituir a infraestrutura por objetivos atuais identificados e não fingir equivalência integral de gates.",
+      "required_patch": [],
+      "human_gate": []
+    },
+    {
+      "pr": 11,
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "A composição herdada não deve ser portada em bloco. O comportamento global de snapshot é necessário na / atual e tem RED reproduzido; a correção é compartilhada com #8.",
+      "required_patch": [
+        "P02-F001",
+        "P02-F002",
+        "P02-F003"
+      ],
+      "human_gate": []
+    },
+    {
+      "pr": 12,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "C3 é gate documental preso aos pins técnico/documental históricos e às worksheets. Não transplantar/repinar seu coletor sobre outra árvore. Provas úteis do leitor e arquitetura são reutilizadas ou reexecutadas com escopo nominal.",
+      "required_patch": [],
+      "human_gate": []
+    },
+    {
+      "pr": 13,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Metadados tipados são cumpridos nas superfícies atuais com composição diversa. P03 preservado é uma reutilização real; o seletor arbitrário de propriedades e generic entity detail candidatos não são promessas do contrato001. A finalidade de isolamento da apresentação foi testada diretamente. As dependências C1 seguem #8/#11.",
+      "required_patch": [],
+      "human_gate": [
+        "Não amplia o aceite restrito #39; OLD/NEW privado permanece pendente."
+      ]
+    },
+    {
+      "pr": 14,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "O plano AP04 é sucedido por features004/007 e avaliação por capacidade. PAR005–010 têm cada uma destino/prova/contraprova. A decisão não concede retirada, migração nem equivalência privada não observada.",
+      "required_patch": [],
+      "human_gate": [
+        "Aceite privado OLD/NEW/Chrome Windows exato permanece separado onde não comprovado."
+      ]
+    },
+    {
+      "pr": 15,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Substituição somente da via de apresentação ativa por NativeView Files conforme feature004. Descriptor0.2.0 continua APPROVED_SCOPED no recibo humano exato; não é revogado, implementado por equivalência ou reescrito.",
+      "required_patch": [],
+      "human_gate": []
+    },
+    {
+      "pr": 16,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "A incorporação do consumidor gráfico efêmero isolado foi substituída pela via NativeView Files004/005/007. Descriptor0.2.0 permanece aprovado em seu escopo opcional, preservado no histórico; não se alega equivalência de APIs, aquisição, nonce ou TTL.",
+      "required_patch": [],
+      "human_gate": [
+        "Aceite OLD/NEW/zoom privado preservado; não requerido para classificar tecnicamente a rota incorporada."
+      ]
+    },
+    {
+      "pr": 17,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "A rota isolada de tabelas descriptor0.2.0 foi substituída pela leitura NativeView e P03/visualização editorial. Tipagem, estados e exportações atuais foram testados; as diferenças de TTL, quotas e escopo de exportação são explícitas e não revogam descriptor0.2.0.",
+      "required_patch": [],
+      "human_gate": [
+        "Aceite OLD/NEW privado permanece fora da evidência sintética."
+      ]
+    },
+    {
+      "pr": 18,
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "Retain pre-import source-origin boundary in current external adapter: two reproducible baseline counterexamples. Literal preservation/readonly boundaries are mapped to current implementation; HTML parser/O1/descriptor transport are not imported wholesale.",
+      "required_patch": {
+        "id": "P03-CURRENT-PRODUCER-PREIMPORT-001",
+        "owner": "P00",
+        "paths": [
+          "tools/export_native_notebook.py",
+          "tests/viewer/test_native_notebook_producer_boundary.py"
+        ],
+        "expected_behavior": "Before any initializer, validate the entire expected physical chain under selected code. Then resolve/load r4, r4.campaigns and terminal sequentially, checking effective spec origins/search paths and cached modules before each import executes. Trusted selected parents may execute to support namespaces. Reject symlink/reparse/ambient or cached foreign origins; restore sys.path after projection. Preserve legitimate namespaces, direct projection CLI and producer errors. This does not confine trusted producer code or eliminate adversarial TOCTOU.",
+        "red_evidence": "producer-origin-baseline-red.json",
+        "tests": "probe_producer_origin.py plus product regression tests chosen by P00",
+        "not_a_sandbox": true,
+        "implementation_status": "NOT_IMPLEMENTED_BY_P03; P00 advised"
+      },
+      "human_gate": "Private production O1/L1 remains separate, inactive and not accepted"
+    },
+    {
+      "pr": 19,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Adendo de dez documentos O1/O3 sucedido na composição da aplicação pelo NativeView. N01–N24 têm destino individual: invariantes comuns mantidos, exclusivos O1/TTL não atribuídos à via nova. Bug atual de origem pré-execução é tratado via #18/P03.",
+      "required_patch": [],
+      "human_gate": [
+        "Aceites privados/Windows/produção permanecem separados; não são necessários para dispor tecnicamente este adendo."
+      ]
+    },
+    {
+      "pr": 20,
+      "disposition": "REJECTED_WITH_REASON",
+      "rationale": "Reject direct incorporation of the O1 synthetic host-isolation subsystem into current producer-trusting Native View architecture. Each OS increment remains retrievable by immutable SHA; no equivalent-hard-budget or production qualification is claimed. Preserve historical succession failure.",
+      "required_patch": null,
+      "human_gate": "Any later production O1 acquisition needs explicit scope/succession authorization and exact final-host qualification"
+    },
+    {
+      "pr": 21,
+      "disposition": "DEFERRED_HUMAN_DECISION",
+      "rationale": "Gate normativo humano real: aprovar ou rejeitar proposta0.2.1 vinculada aos cinco blobs d5bdc86. Preservar os onze documentos e14 oráculos; nenhum NativeView/CI K decide isso.",
+      "required_patch": [],
+      "human_gate": [
+        "Decisão humana exata sobre descriptor0.2.1, cinco blobs d5bdc86 e gates contratuais pertinentes."
+      ]
+    },
+    {
+      "pr": 22,
+      "disposition": "REJECTED_WITH_REASON",
+      "rationale": "Reject importing/reusing the demonstrably inconsistent L0 receipt validator as a gate for the current product, where it has no path or consumer. Historical defects stay recorded, not fixed by declaration; original private L0 witness remains unaccepted.",
+      "required_patch": null,
+      "human_gate": "Exact private L0 witness and privacy-reviewed sanitized receipt not received"
+    },
+    {
+      "pr": 31,
+      "disposition": "REJECTED_WITH_REASON",
+      "rationale": "Rejeitar porte do gate genealógico F2/K para main: ele qualifica objeto documental exato, não execuçãoNativeView. Preservar guard terminal,binding,36K+32F2; não repinar,enfraquecer ou atribuir negativos à CI atual. Decisão sobre infraestrutura não rejeita nem aprova0.2.1.",
+      "required_patch": [],
+      "human_gate": []
+    }
+  ],
+  "counts": {
+    "SUPERSEDED_BY_DESIGN": 10,
+    "RETAIN_AND_IMPLEMENT": 4,
+    "DEFERRED_HUMAN_DECISION": 1,
+    "REJECTED_WITH_REASON": 3
+  },
+  "requirements": 84,
+  "author_handoff_hashes": {
+    "P01-MATRIX": "d26f129f6cb3d10a7306557db0abdd6333dc38e87763e3815ca71d2fa82c70f4",
+    "P01-HANDOFF": "35137f1a25f5c679e3f670cd2fe4ad3a0743924bf967a310f8d082821af5728a",
+    "P02-MATRIX": "55e73a38d929e2829eb6a1df3a132ee0c350594e3f2f7ba96c96db718ca3686c",
+    "P02-HANDOFF": "473931ed2d45a283beb9f87f802d5f216b792fa8b8eaa37c2cc512ee84161c95",
+    "P03-MATRIX": "272b4e45aab4c1d8b7f8a2e0801a564fdcab8556b3b887419715cdf976accd98",
+    "P03-HANDOFF": "e81fc5e189a9b1a125d4f608dff4ccd33ca7cd1121e7b51c8c907a09db52b1e1"
+  },
+  "independent_reviews": {
+    "P01->P02": {
+      "sha256": "03d78707f92512ccc2bf6f91dddbaec55c3703b8fd1b6166d9e936922fa58ff6",
+      "path": "agents/P01/P01-REVIEW-P02.json",
+      "receipt": {
+        "reviewer": "/root/p01_contracts",
+        "author": "/root/p02_ui",
+        "independence": "REAL_DISTINCT_NATIVE_AGENT_NON_AUTHOR_READ_ONLY_REVIEW",
+        "phase": "O1_CROSS_REVIEW",
+        "status": "PASS_SCOPED_ANALYSIS",
+        "product_status": "PARTIAL_BASELINE_DEFECTS_OPEN",
+        "reviewed_matrix_sha256": "55e73a38d929e2829eb6a1df3a132ee0c350594e3f2f7ba96c96db718ca3686c",
+        "reviewed_handoff_sha256": "473931ed2d45a283beb9f87f802d5f216b792fa8b8eaa37c2cc512ee84161c95",
+        "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+        "reviewed_at_utc": "2026-11-08T22:26:08.838327+00:00",
+        "read_artifacts": [
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-MATRIX.json",
+            "sha256": "55e73a38d929e2829eb6a1df3a132ee0c350594e3f2f7ba96c96db718ca3686c"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-HANDOFF.json",
+            "sha256": "473931ed2d45a283beb9f87f802d5f216b792fa8b8eaa37c2cc512ee84161c95"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-CHECKS.json",
+            "sha256": "a49f0b0b95c28c737f5f12043f65639be844683975041c0c05fe4b3d07089678"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-CI-EVIDENCE.json",
+            "sha256": "0644494b7d438af375e34be18a25d42ac5538c342ec9b27452d28e07a917ee87"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-SOURCES.json",
+            "sha256": "63b6d6c48f602a5d87b04fd6f7746347f3fee08b80af0f048e69cbcb8fc3b952"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_snapshot.mjs",
+            "sha256": "a939a431803b9793211245d0422c51226cf0539ce74a974e077609e4b960bd01"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_race.mjs",
+            "sha256": "15e33b9875580f785dc16db60550a71d05cd2ecb01b3c37f2f0de8640f67bf93"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_preferences.mjs",
+            "sha256": "6de0e7d3d84abc9b22f195593ccc2f7aa2eb7a1b590797392d23d848b0730fd8"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/app-snapshot-probe.json",
+            "sha256": "82e96645c2b3418b644123cbda45d1193254919905d0aa2d56b841b897c67a84"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/app-race-probe.json",
+            "sha256": "901816947d3277ef16d3ff2c7a1895a2cafc11877266fab326f290b06f382bc0"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/app-preferences-probe.json",
+            "sha256": "a185dedd33214f4526bbbdecc491141d87a6ef98339c856ba495503f4d38b58f"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/native-limits-probe.json",
+            "sha256": "8765f62c9ee2b951dbc003cdaa2df0109c47269296d507b9e854145ac08a02e5"
+          }
+        ],
+        "checks": [
+          {
+            "id": "R01",
+            "status": "PASS",
+            "method": "Read all29 compact requirement entries and original JSON; compare dispositions to current specs001/004/005/007 and historical source contract roles",
+            "result": "PR8/11 retain necessary snapshot corrections; PR13 own composition optional candidates superseded; PR16/17 active route superseded without revoking0.2.0."
+          },
+          {
+            "id": "R02",
+            "status": "PASS",
+            "method": "Read three witness harnesses and JSON receipts; inspect real main app.js/Catalog transitions and preference scoping",
+            "result": "Actual functions executed with presentation stubs/controlledfetch, not reimplemented state logic. Exit0 means reproduced defect, correctly separated from productPASS and browserPASS."
+          },
+          {
+            "id": "R03",
+            "status": "PASS",
+            "method": "Recalculate every17 artifact checksum in P02 handoff and38 Git blob refs in P02 source inventory",
+            "result": "17/17 artifact hashes match;38/38 source blobs match Git objects."
+          },
+          {
+            "id": "R04",
+            "status": "PASS",
+            "method": "Read CHECKS and native/UX CI evidence; compare29 requirement references to IDs and test scope",
+            "result": "53 checks counted as15+3+14+17+4;3 defect witnesses separate.10000node reader proof not misrepresented as10000render or256MiBheap/30s SLA. Current baselineCI not finalcandidateCI."
+          },
+          {
+            "id": "R05",
+            "status": "PASS",
+            "method": "Inspect native_notebook table export functions and source-bound native model tests/CI report",
+            "result": "All filtered rows exported independently of visible page; JSON/typedCSV preserve original tokens; protectedCSV lossiness declared. Difference from full-table F3B explicitly preserved."
+          },
+          {
+            "id": "R06",
+            "status": "PASS",
+            "method": "Inspect main native_rebuild.js and P02 requirement8-06/11-02",
+            "result": "GET verification does not accept changed bytes; observed_at must not reset state. Proposed more conservative explicitrebuild reset is documented, not falsely called historicalalgorithm equivalence."
+          },
+          {
+            "id": "R07",
+            "status": "PASS",
+            "method": "Read research004 items2–5 and compare F3A/P03 provenance",
+            "result": "Explicit current design chooses File presentation, preserves P03, rejects manufacturing native_id from source_key to reuse F3A descriptor, and keeps F3A intact."
+          }
+        ],
+        "blocking_findings": [],
+        "nonblocking_notes": [
+          {
+            "id": "P01-P02-N01",
+            "target": "P02-16-01 and P02-16-03 supporting sources",
+            "recommendation": "Include research004 items2–4 in integrated evidence as strongest explicit design rationale for superseding the F3A route. This review supplies exact pinned source, so no need reopen frozen matrix solely for this addition.",
+            "source": {
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/research.md",
+              "blob": "2a17f4f5c6752d187276f1e23d3a1cdbc0a84635",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/research.md"
+            }
+          },
+          {
+            "id": "P01-P02-N02",
+            "target": "P02-8-06 proposed epoch",
+            "recommendation": "Final implementation must prove fresh Catalog/source reorder invalidation and same-epoch page reload behavior. generation/indexed_at are current fields, not a claimed cryptographic session nonce; test the chosen binding and do not imply0.2.0 token semantics."
+          }
+        ],
+        "required_downstream": [
+          "P00 implements F001/F002/F003 against genuine RED tests, preserving GET versus explicitrebuild distinction",
+          "P00 exact final SHA CI and independent code review; existing O1 analysisPASS is not productPASS",
+          "Preserve private OLD/NEW/ChromeWindows gates, ARC09 freeze and0.2.0 optional approval"
+        ],
+        "new_product_tests_by_reviewer": "NOT_RUN_NOT_NEEDED_FOR_O1_CONTRACT_REVIEW; original execution logs/harnesses inspected, source/handoff hashes independently verified",
+        "mutations": "Only this reviewer receipt in agents/P01; no product or P02 authored artifact changed"
+      }
+    },
+    "P02->P03": {
+      "sha256": "f07087e0a2dd4b91ff95b33d6fad76e55d704bbf6ae9e274392eb9e05c5b7160",
+      "path": "agents/P02/P02-REVIEW-P03.json",
+      "receipt": {
+        "reviewer": "/root/p02_ui",
+        "author": "/root/p03_reader",
+        "status": "PASS_SCOPED_O1_ANALYSIS",
+        "product_status": "PARTIAL_KNOWN_CURRENT_PRODUCER_ORIGIN_FIX_REQUIRED",
+        "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+        "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+        "reviewed_matrix_sha256": "272b4e45aab4c1d8b7f8a2e0801a564fdcab8556b3b887419715cdf976accd98",
+        "reviewed_handoff_sha256": "e81fc5e189a9b1a125d4f608dff4ccd33ca7cd1121e7b51c8c907a09db52b1e1",
+        "requirement_reviews": [
+          {
+            "id": "P03-18-01",
+            "author_disposition": "RETAIN_AND_IMPLEMENT",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-18-02",
+            "author_disposition": "EQUIVALENT_IN_MAIN",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-18-03",
+            "author_disposition": "SUPERSEDED_BY_DESIGN",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-18-04",
+            "author_disposition": "EQUIVALENT_IN_MAIN",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-18-05",
+            "author_disposition": "EQUIVALENT_IN_MAIN",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-18-06",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-18-07",
+            "author_disposition": "DEFERRED_HUMAN_DECISION",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-20-01",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-20-02",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-20-03",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-20-04",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-20-05",
+            "author_disposition": "DEFERRED_HUMAN_DECISION",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-20-06",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-22-01",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-22-02",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-22-03",
+            "author_disposition": "REJECTED_WITH_REASON",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          },
+          {
+            "id": "P03-22-04",
+            "author_disposition": "DEFERRED_HUMAN_DECISION",
+            "review": "ACCEPTED_SCOPED",
+            "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+          }
+        ],
+        "artifact_hashes_verified": 13,
+        "source_pins_verified": 43,
+        "source_test_receipts": {
+          "normal": 32,
+          "optimized": 32,
+          "same_test_ids": true,
+          "distinct": 32,
+          "all_pass": true,
+          "execution": "Author receipts authenticated; not rerun by P02"
+        },
+        "independent_executions": [
+          {
+            "case": "module_symlink",
+            "expected": "source outside selected root rejected before execution",
+            "returncode": 2,
+            "stdout": "",
+            "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+            "outside_module_executed": true,
+            "package_published": false,
+            "result": "RED",
+            "review_expectation": "Baseline must reproduce out-of-root execution despite BLOCKED and without publishing package",
+            "review_check": "PASS"
+          },
+          {
+            "case": "ambient_package_shadows_selected_namespace",
+            "expected": "source outside selected root rejected before execution",
+            "returncode": 2,
+            "stdout": "",
+            "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+            "outside_module_executed": true,
+            "package_published": false,
+            "result": "RED",
+            "review_expectation": "Baseline must reproduce out-of-root execution despite BLOCKED and without publishing package",
+            "review_check": "PASS"
+          },
+          {
+            "case": "selected_regular_producer_positive",
+            "review_check": "PASS",
+            "returncode": 0,
+            "selected_project_called": true,
+            "package_published": true,
+            "stdout": "{\"status\": \"EXPORTED\", \"output\": \"/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/p03-positive-w9n5hdik/package\", \"revision\": \"projection-sha256:4beba2ce13976b7bd8b24937703ca2e7057f4cc38c17c2bdf7e61bd6b7d26e66\", \"entries\": 2, \"projection_sha256\": \"4beba2ce13976b7bd8b24937703ca2e7057f4cc38c17c2bdf7e61bd6b7d26e66\", \"provider_calls\": 0, \"scientific_approval\": \"NOT_EVALUATED\"}\n",
+            "stderr": "",
+            "scope": "New P02 synthetic positive check; trusted selected package; not host sandbox certification"
+          }
+        ],
+        "new_blocking_findings": [],
+        "known_open_current_findings": [
+          "P03-CURRENT-PRODUCER-PREIMPORT-001"
+        ],
+        "implementation_approval": "NOT_APPLICABLE_PRODUCT_PATCH_NOT_YET_WRITTEN",
+        "final_sha_ci": "PENDING_P00",
+        "private_acceptance": "NOT_RUN_UNCHANGED",
+        "local_gate": "LOCAL_NOT_REQUIRED",
+        "ownership": "P02 wrote only its own review/probe files; product and P03 files read-only",
+        "artifacts": [
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-REVIEW-P03.md",
+            "sha256": "b9b4780d75b1532a50f97a9288c762c232a6b2143408b156bc6e44913fef09f4"
+          },
+          {
+            "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-REVIEW-P03-PROBES.json",
+            "sha256": "6e1f33cf307f089fec2809bdaccf2cd4a6d409847eb94a3d88b0451a36fe6978"
+          }
+        ]
+      }
+    },
+    "P03->P01": {
+      "sha256": "cd917057e390bd97d88f9f959c8dedab5c08ccdcb7f1287f9865abb31b7a1130",
+      "path": "agents/P03/P03-REVIEW-P01.json",
+      "receipt": {
+        "schema": "atlas-independent-review/1",
+        "reviewer": "/root/p03_reader",
+        "author": "/root/p01_contracts",
+        "phase": "O1",
+        "independence": {
+          "author_of_subject": false,
+          "product_edits": 0,
+          "subject_edits": 0,
+          "shared_repo_read_only": true
+        },
+        "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+        "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+        "subject_matrix": {
+          "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-MATRIX.json",
+          "sha256": "d26f129f6cb3d10a7306557db0abdd6333dc38e87763e3815ca71d2fa82c70f4"
+        },
+        "subject_handoff": {
+          "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-HANDOFF.json",
+          "sha256": "35137f1a25f5c679e3f670cd2fe4ad3a0743924bf967a310f8d082821af5728a"
+        },
+        "status": "PASS_SCOPED",
+        "gate": "PASS_SCOPED_O1_TO_O2",
+        "product_status": "PARTIAL_KNOWN_PATCHES_AND_FINAL_CI_PENDING",
+        "summary": "10 disposições e38 requisitos aceitos no escopo expresso, com preservação dos contratos/gates humanos e dos históricos. Nenhum finding bloqueante novo.",
+        "evidence_validation": {
+          "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P03/P03-REVIEW-P01-EVIDENCE.json",
+          "sha256": "4f6ae92514fb3dccfac650a747479730679316058ba6fb150af14eca2334cf3f",
+          "status": "PASS",
+          "checks": 314,
+          "artifact_hashes": 22,
+          "source_pins": 57,
+          "coverage": {
+            "P01-JOURNEY-CROSSWALK.json": {
+              "count": 28,
+              "unique": 28,
+              "expected": 28
+            },
+            "P01-EXAMPLE-CROSSWALK.json": {
+              "count": 46,
+              "unique": 46,
+              "expected": 46
+            },
+            "P01-C2-28-FILES.json": {
+              "count": 28,
+              "unique": 28,
+              "expected": 28
+            },
+            "C2-P03-35-TEST-CROSSWALK.json": {
+              "count": 35,
+              "unique": 35,
+              "expected": 35
+            },
+            "P01-PAR005-010.json": {
+              "count": 6,
+              "unique": 6,
+              "expected": 6
+            },
+            "P01-N01-24.json": {
+              "count": 24,
+              "unique": 24,
+              "expected": 24
+            },
+            "P01-ARC09-FROZEN.json": {
+              "count": 5,
+              "unique": 5,
+              "expected": 5
+            },
+            "K-NEGATIVES-PRESERVED.json": {
+              "count": 68,
+              "unique": 68,
+              "expected": 68
+            }
+          }
+        },
+        "method": [
+          "Leitura não autora da matriz, handoff, checks, crosswalks e fontes correspondentes.",
+          "Verificação própria de hashes dos22artefatos,57pins, presença AST dos103métodos históricos e identidade dos5blobsARC09 no terminal.",
+          "Comparação da rota antigaO1/O3 com os contratos atuais004/007; revisão dos recibos humanos e do gate F2/K.",
+          "Inspeção direta app.js/Catalog/read_model para indexed_at/observed_at/date_published, além dos recibos semânticos P06/P09.",
+          "Preservação dos testes históricos já validados; não atribuir execução nova ou CI final ao reuso."
+        ],
+        "prs": [
+          {
+            "pr": 6,
+            "disposition": "SUPERSEDED_BY_DESIGN",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 4,
+            "reason": "Preservação 64/64 confirmada no parecer anterior sobre a mesma main; 7 semânticas em dois modos são execução atual limitada. Suites wheel/browser históricas não viram PASS atual por equivalência nominal."
+          },
+          {
+            "pr": 7,
+            "disposition": "SUPERSEDED_BY_DESIGN",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 4,
+            "reason": "Tabela P03 conserva blobs; 35 métodos históricos pertencem ao DTO/harness antigo. NativeView satisfaz apresentação por sua rota própria, sem exigir detalhador genérico de entidades não aprovado."
+          },
+          {
+            "pr": 9,
+            "disposition": "RETAIN_AND_IMPLEMENT",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 5,
+            "reason": "J09 tem bug verificável: app.js nomeia indexed_at como observação, enquanto Catalog separa os dois tempos. J10 usa date_published declarado já existente, sem inferir data de criação/evento. J27 é orientação atual compatível com recibo ADR. Vínculo de seleção/preferências pertence às correções P02; painel genérico retraído permanece fora do escopo."
+          },
+          {
+            "pr": 10,
+            "disposition": "SUPERSEDED_BY_DESIGN",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 4,
+            "reason": "28 arquivos próprios têm pins e destino. Qualificação por wheel/HTTP/browser persiste com mecanismos atuais; política histórica 47/zero-skip e demonstrador inativo não é declarada equivalente nem imposta à composição NativeView."
+          },
+          {
+            "pr": 12,
+            "disposition": "SUPERSEDED_BY_DESIGN",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 3,
+            "reason": "Reuso dos 28/46/9/11 preserva limites por camada. Coletor de 51 blobs/82 hashes e pins C3 é histórico; reescrevê-los para coincidir com a main destruiria a prova, sem ganho atual."
+          },
+          {
+            "pr": 14,
+            "disposition": "SUPERSEDED_BY_DESIGN",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 3,
+            "reason": "PAR005–010 têm sucessores concretos de apresentação e contraprovas de população/identidade/autoridade. Aceite privado OLD/NEW/ChromeWindows segue separado de paridade sintética remota."
+          },
+          {
+            "pr": 15,
+            "disposition": "SUPERSEDED_BY_DESIGN",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 4,
+            "reason": "A supersessão se refere apenas à incorporação da via ativa. Descriptor externo 0.2.0 permanece aprovado e segregado. NativeView em Files não é FileAPI RAM/TTL3600 nem implanta quotas/O1 antigos. A nova rota aparece expressamente em spec004 plan/research e spec007."
+          },
+          {
+            "pr": 19,
+            "disposition": "SUPERSEDED_BY_DESIGN",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 4,
+            "reason": "24 controles N01–N24 possuem destino e limitações. N14 remete ao RED import-origin de P03/#18; N18 aos RED de P02. A classificação não apaga essas correções nem promete sandbox/hard-budget/TTL da via histórica."
+          },
+          {
+            "pr": 21,
+            "disposition": "DEFERRED_HUMAN_DECISION",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 3,
+            "reason": "Os cinco blobs normativos congelados são idênticos em d5bd e no terminal #21. Nenhuma aprovação 0.2.1 foi inferida dos recibos humanos 0.2.0/ADR, da CI ou da PR40. DEFERRED_HUMAN_DECISION é gate real."
+          },
+          {
+            "pr": 31,
+            "disposition": "REJECTED_WITH_REASON",
+            "verdict": "ACCEPTED_SCOPED",
+            "requirements_reviewed": 4,
+            "reason": "Gate F2/K exige genealogia/blobs/épocas autorizadas diferentes da main. Rejeitar portá-lo preserva o corpus fixado, incluindo negativos importantes e controles positivos, sem enfraquecimento ou repin. Não se afirma que 68 métodos foram reexecutados: reutilização histórica e replay parcial33/36 continuam distintos."
+          }
+        ],
+        "findings": [],
+        "notes": [
+          {
+            "id": "P03-QA-P01-001",
+            "severity": "INFO",
+            "topic": "Contagem do corpus K/F2",
+            "detail": "Os68IDs compreendem métodos positivos e negativos. O arquivo preserva cada ID corretamente; a integração deve descrevê-los como68métodos/casos de regressão, não68negativos exclusivos. Isso não bloqueia a disposição.",
+            "required_action": "Precisão de redação no agregado; matriz congelada não precisa ser regravada."
+          },
+          {
+            "id": "P03-QA-P01-002",
+            "severity": "INFO",
+            "topic": "Cobertura e evidência executada",
+            "detail": "As314verificações deste recibo são checagens de evidência/pins/cobertura, não314testes de produto. Os16testes únicos de P01 foram executados por seu autor em cada modo; revisão verificou fonte/recibos e não os promoveu a instalaçãowheel/browser."
+          }
+        ],
+        "pending_product_actions": [
+          {
+            "owner": "P00",
+            "scope": "J09/J10/J27 labels/orientation",
+            "status": "PENDING_PATCH_QA"
+          },
+          {
+            "owner": "P00 (P02 findings)",
+            "scope": "response/snapshot/preferences context binding",
+            "status": "PENDING_PATCH_QA"
+          },
+          {
+            "owner": "P00 (P03 finding)",
+            "scope": "reject nonselected producer origin before execution",
+            "status": "PENDING_PATCH_QA"
+          },
+          {
+            "owner": "P00",
+            "scope": "CI at final tested SHA and portability/handoff",
+            "status": "PENDING_O3"
+          }
+        ],
+        "preserved_human_gates": [
+          "ARC09/0.2.1 explicit version-bound human decision",
+          "Private OLD/NEW/ChromeWindows acceptance if later required; no fabricated private/source witness",
+          "Production O1 acquisition/OS authorization if that retired route is ever reactivated"
+        ],
+        "relation_to_pr40": "PR40 at7ac3e76 is separate/frozen; this review neither repeats nor alters its24 recovered cases.",
+        "local_required": false,
+        "limitations": [
+          "No merge/deploy/release authorization.",
+          "No private host/data, OS sandbox certification or human acceptance.",
+          "No equivalence of historicalO1/O3 TTL to NativeView.",
+          "O1 gate permits composition; it does not certify corrected product or final CI."
+        ]
+      }
+    }
+  },
+  "single_writer": "/root",
+  "product_gate": "NOT_YET_QUALIFIED_REPAIRS_AND_FINAL_CI_REQUIRED",
+  "integration_clarifications": [
+    "P03-18-05 equivalence is only viewer/producer separation and HTTP paths; O1 production guard remains P03-20-05 human gate, no sandbox equivalence",
+    "Same-byte rebuild intentionally invalidates UI epoch, replacing historical same-byte binding policy; GET verification retains epoch",
+    "No generic entity detail expansion or descriptor0.2.1 activation; producer initializer remains trusted"
+  ],
+  "next_branch": "fix/atlas-convergence18-20261108"
+}
