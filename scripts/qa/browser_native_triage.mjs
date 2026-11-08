@@ -183,6 +183,27 @@ try {
     const groupedJSON = await downloadText('JSON das linhas selecionadas');
     const groupedCSV = await downloadText('CSV tipado das linhas');
     assert.equal(groupedJSON, '[' + expected.table_rows_raw_json.join(',') + ']');
+    const region = page.locator('.requirement-group').first();
+    assert.equal(await region.evaluate(node => node.tagName), 'DETAILS');
+    assert.equal(await region.getAttribute('open'), '');
+    const visibleBefore = await page.locator('[data-row-id]:visible').count(), regionRows = await region.locator('[data-row-id]').count();
+    await region.locator(':scope > summary').click();
+    await page.waitForFunction(() => !document.querySelector('.requirement-group').open);
+    assert.equal(await page.locator('[data-row-id]:visible').count(), visibleBefore - regionRows);
+    assert.equal(await page.locator('[data-row-id]').count(), expected.table_rows, 'Collapse hides presentation without removing population');
+    assert.equal(await downloadText('JSON das linhas selecionadas'), groupedJSON);
+    assert.equal(await downloadText('CSV tipado das linhas'), groupedCSV);
+    await page.locator('#native-search').fill('inventado');
+    assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), false, 'A filter rerender preserves collapse');
+    await page.locator('#native-clear').click();
+    assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), false);
+    await page.locator('#native-table-detail').click();
+    const target = page.locator('#native-detail-body').getByRole('button', {name: 'synthetic-rf-00 · table_uid', exact: true});
+    await revealNativeControl(page, target);await target.click();
+    assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), true, 'Locating a row opens its nucleus');
+    await page.locator('#native-detail-body').getByRole('button', {name: '← Voltar à seleção anterior', exact: true}).click();
+    assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), false, 'Contextual return restores the former disclosure choice');
+    await page.locator('#native-close-detail').click();
     await grouping.selectOption('original');
     assert.equal(await page.locator('.requirement-group').count(), 0);
     const originalIds = await page.locator('[data-row-id]').evaluateAll(nodes => nodes.map(node => node.dataset.rowId));
@@ -193,6 +214,11 @@ try {
     report.requirement_grouping = {groups: 3, rows: groupedIds.length, export_order_unchanged: true,
       json_sha256: createHash('sha256').update(groupedJSON).digest('hex'), csv_sha256: createHash('sha256').update(groupedCSV).digest('hex')};
     await grouping.selectOption('nucleus');
+    assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), false, 'Organization changes retain scoped collapse state');
+    await page.locator('.requirement-group').first().locator(':scope > summary').focus();
+    await page.keyboard.press('Enter');
+    assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), true, 'Native summary supports keyboard expansion');
+    report.requirement_grouping.disclosure_state_and_exports_preserved = true;
   });
 
   await check('T01_M1_1_is_a_39_row_table_with_typed_search_reason_not_a_run', async () => {

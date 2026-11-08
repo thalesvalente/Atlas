@@ -5,9 +5,9 @@ import {buildNativeNavigation} from './native_navigation.js';
 import {mountLineage} from './native_lineage.js';
 import {makePresentation,recordMatches,recordSort,norm,literalText,catalogTitle,catalogStatus,TABLE_FILTER_FIELDS,tableFilterOptions,tableMatchesFilters,typedTableCsv,groupRequirementRows} from './native_legacy_model.js';
 import {mountEditorialTree} from './native_legacy_tree.js';
-import {renderRecordIndex,renderRecordPresentation,renderPresentationDetail,renderReadingTable,renderDatasetNotice,renderRelationPresentation,renderCatalog,ASSET_COLLECTIONS} from './native_legacy_views.js';
+import {renderRecordIndex,renderRecordPresentation,renderPresentationDetail,renderReadingTable,renderDatasetNotice,renderRelationPresentation,renderCatalog,renderRequirementGroup,ASSET_COLLECTIONS} from './native_legacy_views.js';
 const $=id=>document.getElementById(id),own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-const state={sources:[],source:null,pane:'tree',treeMode:'editorial',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],presentation:null,editorial:{},tableView:'reading',tableGrouping:'nucleus',columnOrder:'presentation',tableFilters:{},assetGroup:'product_items',relationMode:'records'};
+const state={sources:[],source:null,pane:'tree',treeMode:'editorial',page:0,table:null,columnPage:0,graph:null,lineage:null,request:0,navigation:null,detail:null,history:[],presentation:null,editorial:{},tableView:'reading',tableGrouping:'nucleus',nucleusOpen:new Map(),columnOrder:'presentation',tableFilters:{},assetGroup:'product_items',relationMode:'records'};
 const el=(tag,text=null,cls='')=>{const n=document.createElement(tag);if(text!==null)n.textContent=String(text);if(cls)n.className=cls;return n;};
 const button=(text,fn)=>{const b=el('button',text);b.type='button';b.addEventListener('click',fn);return b;};
 let detailTrigger=null,triage=null;
@@ -115,7 +115,7 @@ function exactOccurrenceJSON(e){
     head.slice(offset+1);
 }
 function navigation(){return state.navigation??=buildNativeNavigation(entries());}
-function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,treeMode:state.treeMode,page:state.page,table:state.table,columnPage:state.columnPage,tableView:state.tableView,tableGrouping:state.tableGrouping,columnOrder:state.columnOrder,tableFilters:{...state.tableFilters},assetGroup:state.assetGroup,relationMode:state.relationMode,detail:state.detail,triageFilters:triage.filters(),search:$('native-search').value,family:$('native-family').value,status:$('native-status').value,kind:$('native-kind').value};}
+function currentContext(){return{source:state.source.id,snapshot:state.source.metadata_sha256,pane:state.pane,treeMode:state.treeMode,page:state.page,table:state.table,columnPage:state.columnPage,tableView:state.tableView,tableGrouping:state.tableGrouping,nucleusOpen:new Map(state.nucleusOpen),columnOrder:state.columnOrder,tableFilters:{...state.tableFilters},assetGroup:state.assetGroup,relationMode:state.relationMode,detail:state.detail,triageFilters:triage.filters(),search:$('native-search').value,family:$('native-family').value,status:$('native-status').value,kind:$('native-kind').value};}
 function pagedLinks(host,items,draw){
   let page=0;const content=el('div'),controls=el('div',null,'pager');host.append(content,controls);
   const show=()=>{content.replaceChildren();for(const item of items.slice(page*40,(page+1)*40))content.append(draw(item));controls.replaceChildren();if(items.length>40){const previous=button('← Vínculos',()=>{page--;show();}),next=button('Vínculos →',()=>{page++;show();});previous.disabled=page===0;next.disabled=(page+1)*40>=items.length;controls.append(previous,el('span',`${page*40+1}–${Math.min((page+1)*40,items.length)} de ${items.length}`),next);}};show();
@@ -133,6 +133,10 @@ function openOccurrence(uid){
   if(target.kind==='row'){
     const original=entries().filter(e=>e.kind==='row'&&e.table_uid===target.table_uid),ordered=state.tableGrouping==='nucleus'?groupRequirementRows(original,{sourceId:state.source.id,snapshot:state.source.metadata_sha256}).flatMap(group=>group.rows):original;
     state.page=Math.floor(Math.max(0,ordered.findIndex(row=>row.uid===target.uid))/100);
+    if(state.tableGrouping==='nucleus'){
+      const group=groupRequirementRows(original,{sourceId:state.source.id,snapshot:state.source.metadata_sha256}).find(group=>group.rows.some(row=>row.uid===target.uid));
+      if(group)state.nucleusOpen.set(group.key,true);
+    }
   }
   else if(['record','relation','asset','collection'].includes(target.kind)){
     const population=target.kind==='record'?visibleRecords().sort(recordSort).map(r=>r.entry):entries().filter(e=>e.kind===target.kind&&(e.kind!=='collection'||e.group!=='$structure')&&(e.kind!=='asset'||e.group===state.assetGroup)&&(e.kind!=='relation'||state.relationMode==='technical'||e.group==='edges')&&matches(e));
@@ -146,6 +150,7 @@ function returnToSelection(){
   const saved=state.history.pop();if(!saved)return;
   if(saved.source!==state.source?.id||saved.snapshot!==state.source?.metadata_sha256){state.history=[];message('O snapshot mudou; selecione novamente a ocorrência.',true);return;}
   Object.assign(state,{pane:saved.pane,treeMode:saved.treeMode,page:saved.page,table:saved.table,columnPage:saved.columnPage,tableView:saved.tableView,tableGrouping:saved.tableGrouping??'nucleus',columnOrder:saved.columnOrder,tableFilters:{...saved.tableFilters},assetGroup:saved.assetGroup,relationMode:saved.relationMode,detail:null});
+  state.nucleusOpen=new Map(saved.nucleusOpen??state.nucleusOpen);
   contextualFilterOptions();
   triage.restoreFilters(saved.triageFilters||{query:saved.search,family:saved.family,result_group:saved.status,kind:saved.kind});
   render();const target=navigation().byUid.get(saved.detail);if(target){if(state.pane==='tree'&&state.graph)state.graph.locate(target.uid);detail(target,false);}
@@ -274,8 +279,7 @@ function showTables(host){
   if(state.tableGrouping==='nucleus'){
     const visible=new Set(windowRows.map(row=>row.uid));
     for(const group of nucleusGroups){const groupRows=group.rows.filter(row=>visible.has(row.uid));if(!groupRows.length)continue;
-      const section=el('section',null,'requirement-group');section.dataset.nucleusGroup=group.key;
-      section.append(el('h3',`Núcleo: ${group.label} · ${groupRows.length} nesta página de ${group.rows.length} linhas do grupo na seleção`));drawRows(section,groupRows);host.append(section);
+      renderRequirementGroup(host,group,groupRows,drawRows,state.nucleusOpen,()=>triage.syncBatch());
     }
   }else drawRows(host,windowRows);
   host.querySelectorAll('[data-row-id]').forEach(tr=>{tr.tabIndex=0;const row=windowRows.find(r=>r.uid===tr.getAttribute('data-row-id'));tr.setAttribute('aria-label','Detalhes da linha '+(row.ordinal+1));tr.addEventListener('click',()=>detail(row));tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();detail(row);}});});

@@ -159,10 +159,11 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
         const clear = page.locator('.triage-select-actions #native-clear-batch');
         assert.equal(await clear.count(), 1, 'Deselect-all is beside select-visible/filter, outside More actions');
         assert.equal(await clear.locator('xpath=ancestor::details').count(), 0);
-        const geometry = await page.locator('.catalog-reading tbody td').first().evaluate(cell => {
-          const label = cell.querySelector('.triage-check'), title = cell.querySelector('.rowlink');
+        const geometry = await page.locator('.catalog-reading tbody tr').first().evaluate(row => {
+          const selection = row.children[0], cell = row.children[1], label = selection.querySelector('.triage-check'), title = cell.querySelector('.rowlink');
           const checkBounds = label.getBoundingClientRect(), titleBounds = title.getBoundingClientRect();
-          return {text: cell.textContent, accessibleName: label.querySelector('input').getAttribute('aria-label'),
+          return {text: cell.textContent, selectionText: selection.textContent, selectionColumnWidth: selection.getBoundingClientRect().width,
+            accessibleName: label.querySelector('input').getAttribute('aria-label'),
             gap: titleBounds.left - checkBounds.right, below: titleBounds.top - checkBounds.bottom,
             label: {x: checkBounds.x, y: checkBounds.y, width: checkBounds.width, height: checkBounds.height,
               display: getComputedStyle(label).display, marginBottom: getComputedStyle(label).marginBottom},
@@ -171,8 +172,12 @@ export async function runReadabilityChecks({browser, check, protectNetwork, repo
             documentOverflow: document.documentElement.scrollWidth - innerWidth};
         });
         report.visual_readability.push({viewport: width, catalog_selection: geometry});
-        assert.match(geometry.text, /^Selecionar\s+\S/, 'Selection text does not join the document title');
+        assert.equal(geometry.selectionText.trim(), '', 'Only the checkbox is visible in each selection cell');
+        assert.ok(geometry.text.trim().length > 0, 'Document title has its own nonempty column');
         assert.match(geometry.accessibleName, /^Selecionar /);
+        assert.equal(await page.getByRole('columnheader', {name: 'Seleção', exact: true}).count(), 1);
+        assert.ok(geometry.selectionColumnWidth <= 80 && geometry.label.width >= 36 && geometry.label.height >= 36,
+          `Selection uses a narrow column with an accessible hit target: ${JSON.stringify(geometry)}`);
         assert.ok(geometry.gap >= 8 || geometry.below >= 4,
           `Selection and title have a visible gap or separate lines at ${width}px: ${JSON.stringify(geometry)}`);
         assert.ok(geometry.documentOverflow <= 1, 'Catalog spacing must keep horizontal scrolling inside the table region');

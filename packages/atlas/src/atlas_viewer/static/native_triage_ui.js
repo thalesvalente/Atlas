@@ -156,10 +156,11 @@ export class NativeTriageUI {
   decorate(){
     for(const node of $('native-content').querySelectorAll('tr[data-uid],li[data-uid],article[data-uid],details[data-uid]')){
       const entry=this.model.byUid.get(node.dataset.uid);if(!entry||node.querySelector('[data-batch-uid]'))continue;
-      const cell=node.tagName==='TR'?node.firstElementChild:null,host=cell?(cell.querySelector('.catalog-identity')||cell):node;
+      const cell=node.tagName==='TR'?node.firstElementChild:null,host=cell||node,catalog=!!cell?.classList.contains('catalog-select-cell');
       if(host){
-        const control=this.checkControl(entry);
-        if(node.tagName==='TR')host.prepend(control,document.createTextNode(' '));
+        const control=this.checkControl(entry,catalog?'':'Selecionar');
+        if(catalog){const input=control.querySelector('input');input.setAttribute('aria-label',input.getAttribute('aria-label')+' · '+entry.uid);host.prepend(control);}
+        else if(node.tagName==='TR')host.prepend(control,document.createTextNode(' '));
         else host.prepend(control);
       }
     }

@@ -336,8 +336,8 @@ test('catalog includes classical products and preserves explicit null/empty/unkn
     let selected;
     renderCatalog(host, [product], model, e => { selected = e; });
     const row = tags(host, 'tbody')[0].children[0];
-    assert.equal(row.children[0].textContent, NULL);
-    assert.equal(row.children[2].textContent, NULL);
+    assert.equal(row.children[1].textContent, NULL);
+    assert.equal(row.children[3].textContent, NULL);
     tags(row, 'button')[0].click();
     assert.equal(selected, product);
   });
@@ -679,7 +679,7 @@ test('dataset notice keeps explicit states and meaningful warnings without orpha
 
 test('product catalog restores declared execution and stage before opaque identities',()=>{
  const e=entry('context-product','asset',{id:'opaque-id',native_id:'RF-001',run_id:null,execution_id:'execution-declared',stage_id:'infer_nuclei',atlas_record_id:'opaque-record',group_id:'opaque-group',status:'LOADED',publication:null,human_review:'NOT_ASSESSED'},{group:'product_items'}),model=makePresentation([e]),before=e.raw_json;
- withDOM(host=>{renderCatalog(host,[e],model,()=>{});const cells=tags(host,'tbody')[0].children[0].children;assert.ok(cells[1].textContent.includes('Execução'));assert.ok(cells[1].textContent.includes('execution-declared'));assert.ok(cells[1].textContent.includes('Estágio'));assert.ok(cells[1].textContent.includes('infer_nuclei'));assert.ok(tags(cells[1],'details').length);assert.ok(cells[1].textContent.includes('opaque-record'));assert.ok(cells[2].textContent.includes('LOADED'));assert.ok(cells[2].textContent.includes(NULL));assert.equal(e.raw_json,before);});
+ withDOM(host=>{renderCatalog(host,[e],model,()=>{});const cells=tags(host,'tbody')[0].children[0].children;assert.ok(cells[2].textContent.includes('Execução'));assert.ok(cells[2].textContent.includes('execution-declared'));assert.ok(cells[2].textContent.includes('Estágio'));assert.ok(cells[2].textContent.includes('infer_nuclei'));assert.ok(tags(cells[2],'details').length);assert.ok(cells[2].textContent.includes('opaque-record'));assert.ok(cells[3].textContent.includes('LOADED'));assert.ok(cells[3].textContent.includes(NULL));assert.equal(e.raw_json,before);});
 });
 
 

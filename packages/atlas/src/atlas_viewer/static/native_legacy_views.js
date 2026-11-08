@@ -72,7 +72,7 @@ function catalogContext(host,data){
   const declared=fields.filter(([key])=>own(data,key));if(declared.length)stateLines(host,data,declared);else host.append(element('span','Contexto não declarado','sub'));
 }
 export function renderCatalog(host,entries,model,select){
-  const body=tableFrame(host,['Produto / documento / referência','Execução / estágio / escopo','Estado documental declarado','Acesso'],'catalog-reading');
+  const body=tableFrame(host,['Seleção','Produto / documento / referência','Execução / estágio / escopo','Estado documental declarado','Acesso'],'catalog-reading');
   for(const entry of entries){
     const value=model.read(entry),data=objectData(value),tr=element('tr');tr.dataset.uid=entry.uid;
     const name=element('td'),title=catalogTitle(data),identity=element('div',undefined,'catalog-identity');
@@ -84,6 +84,17 @@ export function renderCatalog(host,entries,model,select){
     if(values.childElementCount){identities.append(values);context.append(identities);}
     const status=element('td');badge(status,catalogStatus(data));
     if(['publication','human_review','availability','experimental_binding'].some(key=>own(data,key))){const more=element('details');more.append(element('summary','Publicação, revisão e disponibilidade'));stateLines(more,data,[['publication','Publicação'],['human_review','Revisão humana'],['availability','Disponibilidade'],['experimental_binding','Vínculo experimental']]);status.append(more);}
-    const access=element('td');access.append(action('Referência e detalhes',()=>select(entry)));tr.append(name,context,status,access);body.append(tr);
+    const access=element('td'),selection=element('td',undefined,'catalog-select-cell');access.append(action('Referência e detalhes',()=>select(entry)));tr.append(selection,name,context,status,access);body.append(tr);
   }
+}
+
+export function renderRequirementGroup(host,group,rows,draw,openState=new Map(),changed=()=>{}){
+  const region=element('details',undefined,'requirement-group'),summary=element('summary',`Núcleo: ${group.label} · ${rows.length} nesta página de ${group.rows.length} linhas do grupo na seleção`);
+  region.dataset.nucleusGroup=group.key;region.open=openState.get(group.key)??true;region.append(summary);
+  region.addEventListener('toggle',()=>{
+    if(!region.isConnected)return;
+    if(!region.open&&region.contains(document.activeElement)&&!summary.contains(document.activeElement))summary.focus();
+    openState.set(group.key,region.open);changed();
+  });
+  draw(region,rows);host.append(region);return region;
 }

@@ -17,8 +17,9 @@ const staticRoot=process.env.ATLAS_TRIAGE_STATIC_ROOT?
 const {NativeTriageUI}=await import(new URL('native_triage_ui.js',staticRoot));
 const {createTriageModel,SelectionLedger}=await import(new URL('native_triage_model.js',staticRoot));
 const {nativeFragments}=await import(new URL('native_navigation.js',staticRoot));
-const {makePresentation}=await import(new URL('native_legacy_model.js',staticRoot));
-const {renderCatalog}=await import(new URL('native_legacy_views.js',staticRoot));
+const {makePresentation,groupRequirementRows}=await import(new URL('native_legacy_model.js',staticRoot));
+const views=await import(new URL('native_legacy_views.js',staticRoot));
+const {renderCatalog}=views;
 const controllerText=readFileSync(new URL('native_notebook.js',staticRoot),'utf8');
 const matchesStart=controllerText.indexOf('function matches(e,context=null){');
 const matchesEnd=controllerText.indexOf('\nfunction message(',matchesStart);
@@ -97,7 +98,7 @@ class MemoryNode{
     for(const listener of this._listeners.get(event.type)||[])listener(event);return true;}
   click(){if(this.disabled)return;this.focus();this.dispatchEvent({type:'click'});}
   focus(){if(this.isConnected&&!this.disabled)this.ownerDocument.activeElement=this;}
-  getClientRects(){let node=this;while(node){if(node.hidden)return[];node=node.parentNode;}return this.isConnected?[this.getBoundingClientRect()]:[];}
+  getClientRects(){let node=this;while(node){if(node.hidden)return[];const parent=node.parentNode;if(parent?.localName==='details'&&parent.open===false&&node!==parent.children.find(child=>child.localName==='summary'))return[];node=parent;}return this.isConnected?[this.getBoundingClientRect()]:[];}
   getBoundingClientRect(){return {left:0,top:0,right:100,bottom:40,width:100,height:40};}
   setCustomValidity(value){this.validationMessage=value;}
   reportValidity(){return !this.validationMessage;}
@@ -245,15 +246,52 @@ test('UX-UI-06 catalog selection text remains separate from the document title a
   const asset=entry('document',{title:'Documento sintético'},'asset',{group:'resource_documents'}),s=source([asset]),before=JSON.stringify(s);
   ui.source=s;ui.ledger=new SelectionLedger(s);ui.model=createTriageModel(s);host.replaceChildren();
   let opened=null;renderCatalog(host,[asset],makePresentation([asset]),value=>{opened=value;});ui.decorate();
-  const name=host.querySelector('td'),control=name.querySelector('input'),title=name.querySelector('button');
-  assert(name.querySelector('.catalog-identity'),'Catalog title and checkbox share a compact wrapping identity group');
-  assert.equal(control.parentNode.parentNode,name.querySelector('.catalog-identity'));
-  assert.match(name.textContent,/^Selecionar\s+Documento sintético$/,'Selection label must not concatenate with the document name');
+  const cells=host.querySelector('tr[data-uid]').children,selection=cells[0],name=cells[1],control=selection.querySelector('input'),title=name.querySelector('button');
+  assert.equal(cells.length,5,'The catalog has a dedicated narrow selection column');
+  assert.equal(selection.textContent,'','Per-row selection text is redundant with the column header');
+  assert.equal(name.querySelector('input'),null,'Document identity occupies its own column');
+  assert.equal(name.textContent,'Documento sintético');
   assert.equal(title.textContent,'Documento sintético');title.click();assert.equal(opened,asset);
   assert.match(control.getAttribute('aria-label'),/^Selecionar Documento sintético/);
   control.checked=true;control.dispatchEvent({type:'change'});assert.equal(ui.ledger.has(asset),true);
   assert.equal(JSON.stringify(s),before);
 }));
+
+test('UX-UI-08 catalog checkbox names remain unique for duplicate document titles without visible labels',()=>withUI({pane:'assets',select:false},({ui,host})=>{
+  const items=['one','two'].map(uid=>entry(uid,{title:'Same invented document'},'asset',{group:'resource_documents'})),s=source(items);
+  ui.source=s;ui.model=createTriageModel(s);ui.ledger=new SelectionLedger(s);host.replaceChildren();renderCatalog(host,items,makePresentation(items),()=>{});ui.decorate();
+  const checks=host.querySelectorAll('input');assert.equal(checks.length,2);
+  assert.equal(new Set(checks.map(input=>input.getAttribute('aria-label'))).size,2);
+  assert.ok(host.querySelectorAll('.catalog-select-cell').every(cell=>cell.textContent===''));
+}));
+
+test('UX-UI-09 nucleus disclosures default open and preserve scoped state without changing selection or visible semantics',()=>withUI({pane:'tables'},({ui,host,a,b})=>{
+  assert.equal(typeof views.renderRequirementGroup,'function');
+  const open=new Map(),group={key:'source:snapshot:table:nucleus',label:'Declared nucleus',rows:[a,b]},before=JSON.stringify(ui.source);
+  const draw=(target,rows)=>rows.forEach(row=>target.append(ui.checkControl(row)));
+  let region=views.renderRequirementGroup(host,group,[a,b],draw,open,()=>ui.syncBatch());ui.afterRender([a,b]);
+  assert.equal(region.tagName,'DETAILS');assert.equal(region.open,true);assert.match(region.querySelector('summary').textContent,/Declared nucleus/);
+  assert.equal(ui.visibleEntries().length,2);region.querySelector('input').focus();region.open=false;region.dispatchEvent({type:'toggle'});
+  assert.equal(open.get(group.key),false);assert.equal(ui.visibleEntries().length,0);assert.equal(ui.ledger.size,2);
+  assert.equal(document.activeElement,region.querySelector('summary'),'Collapsing focused content restores focus to its visible summary');
+  host.replaceChildren();region=views.renderRequirementGroup(host,group,[a],draw,open,()=>ui.syncBatch());
+  assert.equal(region.open,false,'Filtering/pagination rerenders retain the group choice');
+  const other=views.renderRequirementGroup(host,{...group,key:'other-source:snapshot:table:nucleus'},[b],draw,open);
+  assert.equal(other.open,true,'Another source/snapshot/table group does not inherit collapse');
+  region.open=true;region.dispatchEvent({type:'toggle'});assert.equal(open.get(group.key),true);
+  host.replaceChildren();region.open=false;region.dispatchEvent({type:'toggle'});assert.equal(open.get(group.key),true,'Detached events do not overwrite current disclosure state');
+  assert.equal(JSON.stringify(ui.source),before);
+}));
+
+test('UX-UI-09 locating a row explicitly opens only its nucleus group in the current snapshot',()=>{
+  const rows=[entry('target',{nucleus_id:'A',cells:{Nome:'A'}},'row',{table_uid:'T',ordinal:0}),entry('other',{nucleus_id:'B',cells:{Nome:'B'}},'row',{table_uid:'T',ordinal:1})];
+  const source={id:'fixture-source',metadata_sha256:'fixture-snapshot'},groups=groupRequirementRows(rows,{sourceId:source.id,snapshot:source.metadata_sha256});
+  const state={source,detail:null,tableGrouping:'nucleus',nucleusOpen:new Map(groups.map(group=>[group.key,false])),history:[]};
+  const start=controllerText.indexOf('function openOccurrence(uid){'),end=controllerText.indexOf('\nfunction returnToSelection(',start);let selected;
+  const open=vm.runInNewContext('('+controllerText.slice(start,end)+')',{state,entries:()=>rows,navigation:()=>({byUid:new Map(rows.map(row=>[row.uid,row]))}),
+    triage:{resetFilters:()=>{}},groupRequirementRows,render:()=>{},detail:entry=>{selected=entry;},$:()=>({scrollIntoView:()=>{}})},{timeout:1000});
+  open('target');assert.equal(selected,rows[0]);assert.equal(state.nucleusOpen.get(groups[0].key),true);assert.equal(state.nucleusOpen.get(groups[1].key),false);
+});
 
 test('UX-UI-07 overview separates declared source metrics from local selection and annotation state',()=>withUI({pane:'search'},({ui,host,a,b})=>{
   const metadata=entry('structure',{records:[],result_tables:[],product_items:[],storage_observations:[],frontier_catalog:[],coverage:{}},'collection',{group:'$structure'}),

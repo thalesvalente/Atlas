@@ -87,13 +87,14 @@
 .legacy-port .record-reading th:nth-child(3),.legacy-port .record-reading td:nth-child(3){width:17%}
 .legacy-port .record-reading th:nth-child(4),.legacy-port .record-reading td:nth-child(4){width:25%;min-width:0}
 .legacy-port .record-reading th:nth-child(5),.legacy-port .record-reading td:nth-child(5){width:14%}
-.legacy-port .catalog-reading th:nth-child(1),.legacy-port .catalog-reading td:nth-child(1){width:30%;min-width:0;max-width:none}
+.legacy-port .catalog-reading th:nth-child(1),.legacy-port .catalog-reading td:nth-child(1){width:52px;min-width:52px;max-width:52px;padding:7px 6px;text-align:center}
 .legacy-port .catalog-reading th:nth-child(2),.legacy-port .catalog-reading td:nth-child(2){width:28%;min-width:0;max-width:none}
-.legacy-port .catalog-reading th:nth-child(3),.legacy-port .catalog-reading td:nth-child(3){width:25%}
-.legacy-port .catalog-reading th:nth-child(4),.legacy-port .catalog-reading td:nth-child(4){width:17%}
+.legacy-port .catalog-reading th:nth-child(3),.legacy-port .catalog-reading td:nth-child(3){width:24%}
+.legacy-port .catalog-reading th:nth-child(4),.legacy-port .catalog-reading td:nth-child(4){width:28%}
+.legacy-port .catalog-reading th:nth-child(5),.legacy-port .catalog-reading td:nth-child(5){width:auto}
 .legacy-port .record-reading .declared-states,.legacy-port .catalog-reading .declared-states{grid-template-columns:minmax(60px,40%) minmax(0,1fr);gap:2px 6px;margin:2px 0}
-.legacy-port .catalog-reading td:nth-child(2)>.declared-states{display:flex;flex-wrap:wrap;gap:2px 6px}
-.legacy-port .catalog-reading td:nth-child(2)>.declared-states dd{margin-right:8px;max-width:100%}
+.legacy-port .catalog-reading td:nth-child(3)>.declared-states{display:flex;flex-wrap:wrap;gap:2px 6px}
+.legacy-port .catalog-reading td:nth-child(3)>.declared-states dd{margin-right:8px;max-width:100%}
 .legacy-port .catalog-reading details{margin:3px 0;padding:0;border:0}
 .legacy-port .record-reading .sub,.legacy-port .catalog-reading .sub{margin:3px 0}
 .legacy-port .record-reading .record-id{margin-top:2px}
@@ -148,10 +149,11 @@
 .triage .triage-check{display:inline-flex;flex-direction:row;align-items:center;justify-content:center;gap:6px;min-width:36px;min-height:36px;cursor:pointer;margin:0;color:#244f65;font-size:11px;flex-shrink:0}
 .triage .triage-check input{width:20px;height:20px;min-height:20px;margin:0;accent-color:#226c81}.triage .record-reading .triage-check{display:flex;justify-content:flex-start;margin-bottom:5px}
 .triage .catalog-identity{display:flex;align-items:center;flex-wrap:wrap;column-gap:10px;row-gap:6px}
-.triage .catalog-identity .triage-check{flex:none;margin:0}
+.triage .catalog-select-cell .triage-check{margin:0;min-width:36px;min-height:36px}
 .triage .catalog-identity .rowlink{flex:1 1 110px;min-width:0}
 .triage .triage-metric>span{display:block;margin:5px 0}.triage .triage-metric .muted{line-height:1.4;font-size:12px}
-.triage .requirement-group{margin:16px 0}.triage .requirement-group>h3{font-size:15px;margin:0 0 8px;overflow-wrap:anywhere}
+.triage .requirement-group{margin:16px 0}.triage .requirement-group>summary{font-size:15px;line-height:1.4;min-height:36px;padding:8px 0;cursor:pointer;overflow-wrap:anywhere}
+@media(max-width:720px){.triage .catalog-select-cell .triage-check,.triage .requirement-group>summary{min-height:44px;min-width:44px}}
 .triage .svg-batch{cursor:pointer;outline:none}.triage .svg-batch:focus-visible rect{stroke:#145fa0;stroke-width:3}.triage .svg-batch[aria-checked=true] rect{fill:#1a627c}.triage .svg-batch text{pointer-events:none}
 .triage .triage-plan-intent{font-size:12px;display:block;margin:10px 0}.triage .triage-plan-intent select{display:block;width:100%;min-height:42px;margin-top:5px}
 .triage .triage-protection{padding:9px 11px;background:#fff6e3;border-left:3px solid #946b1f;font-size:12px;overflow-wrap:anywhere}
