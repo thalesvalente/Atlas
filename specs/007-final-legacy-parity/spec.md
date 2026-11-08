@@ -87,3 +87,17 @@ agrupamento dos requisitos pelo núcleo informado. A continuação permanece em 
   locais; verificam ausência/zero e agregações com denominadores diferentes.
 - SC-008: agrupamento mantém a mesma população e conteúdo exportado, enquanto
   catálogo continua legível e compacto nas larguras qualificadas pela CI.
+
+## Refinamentos finais solicitados pelo operador
+
+O operador confirmou os ajustes anteriores e pediu dois refinamentos delimitados:
+
+- FR-015: oferecer coluna estreita exclusiva para seleção no catálogo, com caixa
+  por linha e cabeçalho único. Remover texto visível repetitivo sem perder nome
+  acessível, alvo de interação, teclado, seleção ou acesso ao documento.
+- FR-016: permitir expandir/recolher cada região de núcleo, preservando a escolha
+  na sessão por fonte/revisão/tabela/grupo. Paginação e filtros não alteram os
+  dados; localizar uma linha revela seu grupo quando necessário. Recolher uma
+  região não modifica seleção, população, identidades ou exportações.
+- SC-009: testes cobrem coluna compacta/acessível, alternância de regiões,
+  preservação de contexto e exportação integral com grupos recolhidos.

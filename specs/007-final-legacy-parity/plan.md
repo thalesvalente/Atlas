@@ -51,3 +51,9 @@ Acesso centralizado a campos declarados evita heurísticas por nome de projeto.
 P03 revisa semântica dos contadores, ausência/zero, completos campos e população
 agrupada. P00 mantém manifesto sucessor, instalação isolada e CI/review por novo
 SHA; a sessão de reteste manual permanece separada da automação bloqueada.
+
+A confirmação parcial do operador é preservada como evidência da revisão vista.
+O catálogo ganha célula própria de seleção, sem alterar seus outros campos.
+Regiões de núcleo usam controle semântico de expansão e estado local escopado;
+nenhuma preferência de exibição é gravada no Caderno ou tratada como ciência.
+O localizador revela a região-alvo e conserva o retorno contextual.
