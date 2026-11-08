@@ -198,8 +198,14 @@ try {
     await page.locator('#native-clear').click();
     assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), false);
     await page.locator('#native-table-detail').click();
-    const target = page.locator('#native-detail-body').getByRole('button', {name: 'synthetic-rf-00 · table_uid', exact: true});
-    await revealNativeControl(page, target);await target.click();
+    // Discover the DOM target while its native disclosure ancestors are closed.
+    // Then open their actual summaries and interact through a visible role.
+    const targetName = 'synthetic-rf-00 · table_uid';
+    const hiddenTarget = page.locator('#native-detail-body').getByRole('button', {name: targetName, exact: true, includeHidden: true});
+    assert.equal(await hiddenTarget.count(), 1, 'The preserved row reference exists before disclosure');
+    await revealNativeControl(page, hiddenTarget);
+    const target = page.locator('#native-detail-body').getByRole('button', {name: targetName, exact: true});
+    assert.equal(await target.isVisible(), true, 'Native summaries reveal the target before clicking');await target.click();
     assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), true, 'Locating a row opens its nucleus');
     await page.locator('#native-detail-body').getByRole('button', {name: '← Voltar à seleção anterior', exact: true}).click();
     assert.equal(await page.locator('.requirement-group').first().evaluate(node => node.open), false, 'Contextual return restores the former disclosure choice');

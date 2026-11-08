@@ -112,15 +112,24 @@ try{
   for(const width of [1440,390,320]){
     await page.setViewportSize({width,height:1000});
     const layout=await page.locator('.catalog-reading').evaluate(wrap=>{
-      const rows=[...wrap.querySelectorAll('tbody tr')],first=rows[0];
+      const rows=[...wrap.querySelectorAll('tbody tr')],first=rows[0],selection=first.children[0],title=first.children[1].querySelector('button.rowlink'),hit=selection.querySelector('.triage-check').getBoundingClientRect();
+      const names=rows.map(row=>row.children[0].querySelector('input')?.getAttribute('aria-label'));
       return {viewport:innerWidth,documentWidth:document.documentElement.scrollWidth,wrapWidth:wrap.clientWidth,tableWidth:wrap.scrollWidth,
-        rows:rows.length,rowHeight:first.getBoundingClientRect().height,headers:wrap.querySelectorAll('th').length,
+        rows:rows.length,rowHeight:first.getBoundingClientRect().height,headers:[...wrap.querySelectorAll('th')].map(node=>node.textContent),
+        fiveCells:rows.every(row=>row.children.length===5),selectionColumnWidth:selection.getBoundingClientRect().width,
+        checkboxOnly:rows.every(row=>row.children[0].querySelectorAll('input[type="checkbox"]').length===1&&row.children[0].textContent.trim()===''&&!row.children[1].querySelector('input')),
+        checkboxNamesUnique:names.every(name=>/^Selecionar \S/.test(name||''))&&new Set(names).size===rows.length,
+        checkboxTarget:{width:hit.width,height:hit.height},
         focusableRegion:wrap.tabIndex===0&&wrap.getAttribute('role')==='region',
-        titleVisible:getComputedStyle(first.querySelector('button')).display!=='none',
-        actionHeight:first.querySelector('button').getBoundingClientRect().height};
+        titleVisible:!!title&&getComputedStyle(title).display!=='none',
+        actionHeight:title.getBoundingClientRect().height};
     });
     report.layout.push(layout);
-    assert.equal(layout.rows,12);assert.equal(layout.headers,4);assert.equal(layout.focusableRegion,true);assert.equal(layout.titleVisible,true);
+    assert.equal(layout.rows,12);assert.deepEqual(layout.headers,['Seleção','Produto / documento / referência','Execução / estágio / escopo','Estado documental declarado','Acesso']);
+    assert.equal(layout.fiveCells,true);assert.equal(layout.checkboxOnly,true);assert.equal(layout.checkboxNamesUnique,true);
+    assert.ok(layout.selectionColumnWidth<=80,'Selection stays in a narrow dedicated column');
+    const minimumHit=width<=720?44:36;assert.ok(layout.checkboxTarget.width>=minimumHit&&layout.checkboxTarget.height>=minimumHit,'Checkbox labels retain accessible pointer targets');
+    assert.equal(layout.focusableRegion,true);assert.equal(layout.titleVisible,true);
     assert.ok(layout.documentWidth<=width+1,'Horizontal overflow must be contained in the table region');
     assert.ok(layout.actionHeight>=24,'Readable compact controls retain a 24px target');
     if(width===1440){assert.ok(layout.tableWidth<=layout.wrapWidth+1,'Normal desktop catalog must fit its work surface');assert.ok(layout.rowHeight<115,'Compact synthetic catalog row');}
