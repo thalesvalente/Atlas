@@ -51,3 +51,9 @@ identifica quantas linhas aparecem na página e quantas pertencem à seleção.
 Valores ausentes, NULL e texto vazio não são reunidos em um valor inventado.
 Os filtros e a paginação permanecem operacionais. JSON e CSV tipado usam todas
 as linhas filtradas na ordem original, independentemente do agrupamento visual.
+
+Cada núcleo pode ser expandido ou recolhido pelo seu título, inclusive por
+teclado. A escolha permanece durante a sessão para aquela fonte e revisão;
+localizar uma linha revela seu grupo. Recolher não remove linhas das exportações
+nem altera a seleção. O catálogo apresenta uma coluna estreita de caixas de
+seleção, com nomes acessíveis individuais e título do documento em célula própria.

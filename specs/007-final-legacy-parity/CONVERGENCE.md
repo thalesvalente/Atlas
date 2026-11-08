@@ -134,3 +134,15 @@ agora nomeiam a área ampla que abrem, preservando contexto e contagens. A
 contraprova independente de navegação passou; regressão Node 142/142. Não resta
 lacuna de código conhecida neste recorte após revisão local; CI/review do SHA
 sucessor e prova manual continuam separados do resultado técnico anterior.
+
+O operador confirmou explicitamente o escopo funcional observado na revisão
+anterior e solicitou dois refinamentos finais: coluna exclusiva de seleção e
+regiões de núcleo recolhíveis. FR-015/016 e SC-009 estão cobertos por T022–T024;
+a análise passa a 25 requisitos/critérios e 24 tasks. O aceite parcial é
+preservado, sem atribuí-lo automaticamente ao código sucessor ou à ciência.
+
+RED de quatro contraprovas, GREEN focal 64/64 e Node 145/145; QA não autora
+executou 24 casos de modelo/DOM, incluindo regiões tipadas e contexto/paginação,
+sem perder UID, fonte, seleção ou exportação. A coluna tem cabeçalho único e
+nomes acessíveis individuais; recolher só altera visibilidade. O novo SHA recebe
+renderização, CI e revisão próprias, sem transferência do PASS anterior.

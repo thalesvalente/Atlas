@@ -72,10 +72,10 @@ T017–T019 compartilham P01 como único writer; T020 depende das três entregas
 
 ## Phase 7: Refinamentos finais confirmados pelo operador
 
-- [ ] T022 [US1] Separar coluna compacta de seleção no catálogo em
+- [x] T022 [US1] Separar coluna compacta de seleção no catálogo em
   native_legacy_views.js/native_triage_ui.js/native_legacy_integration.css,
   preservando nomes acessíveis, teclado, seleção e documento (FR-015).
-- [ ] T023 [US1] Tornar regiões de núcleo expansíveis/recolhíveis em
+- [x] T023 [US1] Tornar regiões de núcleo expansíveis/recolhíveis em
   native_notebook.js, com estado por contexto e localização que revela a linha;
   testar população/seleção/exportação invariantes (FR-016, SC-009).
 - [ ] T024 Qualificar T022/T023 por QA não autora e novo SHA em CI/review;
