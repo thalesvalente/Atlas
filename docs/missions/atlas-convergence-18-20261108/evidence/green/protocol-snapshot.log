@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: verification keeps the previous snapshot selection, detail and source filters
+ok 1 - verification keeps the previous snapshot selection, detail and source filters
+  ---
+  duration_ms: 7.23421
+  type: 'test'
+  ...
+# Subtest: explicit new epoch clears old identities even when declared IDs and bytes survive
+ok 2 - explicit new epoch clears old identities even when declared IDs and bytes survive
+  ---
+  duration_ms: 1.857526
+  type: 'test'
+  ...
+# Subtest: restarted Catalog cannot inherit identities just because generation restarts at one
+ok 3 - restarted Catalog cannot inherit identities just because generation restarts at one
+  ---
+  duration_ms: 1.517765
+  type: 'test'
+  ...
+# Subtest: a changed source invalidates the complete comparison while another source stays intact
+ok 4 - a changed source invalidates the complete comparison while another source stays intact
+  ---
+  duration_ms: 2.200743
+  type: 'test'
+  ...
+# Subtest: a reload of the same epoch can restore source-scoped preferences
+ok 5 - a reload of the same epoch can restore source-scoped preferences
+  ---
+  duration_ms: 3.000066
+  type: 'test'
+  ...
+# Subtest: a new epoch restores free filters but never source-ordinal preferences
+ok 6 - a new epoch restores free filters but never source-ordinal preferences
+  ---
+  duration_ms: 1.663384
+  type: 'test'
+  ...
+# Subtest: legacy preferences without a snapshot binding do not rebind ordinal source IDs
+ok 7 - legacy preferences without a snapshot binding do not rebind ordinal source IDs
+  ---
+  duration_ms: 1.065774
+  type: 'test'
+  ...
+# Subtest: verification requested during rebuild waits for the completed rebuild
+ok 8 - verification requested during rebuild waits for the completed rebuild
+  ---
+  duration_ms: 1.34178
+  type: 'test'
+  ...
+# Subtest: rebuild requested during a verification is preserved and runs afterward
+ok 9 - rebuild requested during a verification is preserved and runs afterward
+  ---
+  duration_ms: 1.772017
+  type: 'test'
+  ...
+# Subtest: failed verification does not strand a queued explicit rebuild
+ok 10 - failed verification does not strand a queued explicit rebuild
+  ---
+  duration_ms: 1.653539
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 102.864386

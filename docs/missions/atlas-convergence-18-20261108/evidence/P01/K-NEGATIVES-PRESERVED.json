@@ -1,0 +1,546 @@
+[
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_accepts_exact_addition_and_authorized_control_modification",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_extra_path",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_missing_authorized_path",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_final_historical_document_change",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_changed_then_reverted_historical_document",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_extra_path_added_then_removed",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_pinned_object_substitution",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_false_pinned_hash_for_matching_blob",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_symlink_mode",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_executable_document_mode",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_gitlink_object",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_unauthorized_rename",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_added_document_deleted_then_readded",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_unrelated_ancestry",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_merge_ancestry_even_with_only_authorized_paths",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_info_grafts_hiding_reverted_forbidden_commit",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_environment_graft_file_hiding_reverted_forbidden_commit",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_raw_parent_traversal_rejects_graft_even_without_metadata_gate",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_replace_ref_or_uses_raw_forbidden_history",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_shallow_view_even_when_baseline_ancestry_appears_valid",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_accepts_canonical_full_path_manifest_from_git_blobs",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_content_hash_tampering",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_path_traversal_in_manifest",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_duplicate_path",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_missing_entry",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSuccessorGitTests::test_rejects_manifest_unordered_entries",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSpecKitSuccessorTests::test_accepts_only_exact_historical_collector_error_with_source_authorization",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSpecKitSuccessorTests::test_rejects_additional_or_missing_historical_speckit_errors",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KSpecKitSuccessorTests::test_rejects_failed_infrastructure_authorization_before_loading_speckit",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_authorizes_all_source_except_literal_hash_table",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_executable_hash_table",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_executable_statement_sharing_table_line",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_duplicate_literal_table_keys",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_non_utf8_codec_before_execution",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_accepts_independently_pinned_control_inventory",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_k_doc_ci.py::KGuardSourcePreflightTests::test_rejects_rehashed_external_control_even_with_matching_own_test_hash",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "9ab38777cd0917943b43b487251ea8d9266e9954",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_positive_c4_ap04_f1_f2_epochs_and_restricted_successor",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_exact_frozen_epoch_tree_and_parent_are_required",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_frozen_epoch_transient_change_and_revert_cannot_replace_pinned_history",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_unlisted_docs_scripts_workflows_tests_and_protocol_are_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_all_nineteen_documents_reject_edits_even_with_rehashed_overlay",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_documents_deletion_and_rename_are_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_all_nineteen_documents_reject_executable_symlink_and_gitlink_modes",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_repair_transient_unauthorized_change_reverted_remains_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_protected_governance_product_audits_manifests_and_reader_are_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_overlay_must_be_exact_canonical_and_owned",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_manifest_missing_duplicate_traversal_folder_reorder_and_wrong_hash_are_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_dispatch_test_and_oracle_changes_are_red_after_manifest_rehash",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_transient_unapproved_control_revision_reverted_remains_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_repair_mode_removal_and_unexpected_parent_are_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_branch_name_lookalike_cannot_authorize_unlisted_payload",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2EpochAdversarialTests::test_workflow_bypass_and_unpinned_action_mutations_are_red_after_rehash",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_guard_source_has_independent_authorization",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_control_table_expression_is_rejected_before_import",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_shared_line_semicolon_cannot_hide_execution_in_excluded_table",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_non_utf8_codec_cannot_hide_execution",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_control_inventory_and_test_bytes_are_independently_pinned",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_prior_control_revisions_match_exact_reviewed_9777_git_objects",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_production_epochs_classify_exact_c4_ap04_f1_f2_by_git_identity",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_production_nineteen_document_blobs_hashes_and_modes_are_frozen",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_security_guards_contain_no_optimized_away_assert",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_inherited_collection_rejects_subsets_and_preserves_exact_191_ids",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_test_receipts_reject_previous_sha_subsets_duplicates_and_skips",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_atlas021_stage_matrix_preserves_full_source_and_installed_qualification",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2IndependentPreflightTests::test_workflow_bypasses_unpinned_actions_and_wrong_selection_are_red",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2GitObjectBatchTests::test_batch_preserves_binary_blob_and_commit_payloads_in_request_order",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2GitObjectBatchTests::test_batch_rejects_missing_truncated_extra_wrong_identity_type_size_and_content",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  },
+  {
+    "id": "tests/qa/test_atlas_parity04_f2_doc_ci.py::F2GitObjectBatchTests::test_batch_requests_and_commit_headers_fail_closed",
+    "sha": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+    "blob": "da9bd3128fe144a8e0c7b9cd48751dc8f01745dc",
+    "disposition": "PRESERVE_PINNED_HISTORICAL_GUARD_NOT_PORT_MAIN",
+    "execution_this_turn": "NOT_RUN_REUSE_PRIOR",
+    "counterevidence": "Historical37jobs green and prior partial33/36K replay are distinct proofs; not a new68 test execution or0.2.1 approval."
+  }
+]

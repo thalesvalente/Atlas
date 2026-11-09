@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/qa/verify_a01_reuse_successor.py"
+  ],
+  "exit_code": 0,
+  "base_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "scope": "source tree; no installation; root candidate diff",
+  "log": "a01-preservation.log"
+}

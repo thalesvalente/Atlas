@@ -1,0 +1,233 @@
+{
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "sources": {
+    "H08_NAV": {
+      "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "path": "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+      "blob": "0362bb65817de3758ea87736020dcaf8c3700f4b",
+      "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/parity02_p02_navigation.py"
+    },
+    "H08_STATE": {
+      "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "path": "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+      "blob": "4146f7f16c0b84b3b2a9ad16b7c1ad59d875f412",
+      "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/static/parity02_p02_state.js"
+    },
+    "H08_CONTRACT": {
+      "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/contracts/navigation.md",
+      "blob": "80543555d16292c14b98908a434fe8af784847f6",
+      "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/specs/004-atlas-parity-c0/workstreams/p02-c0/contracts/navigation.md"
+    },
+    "H11_JS": {
+      "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "path": "scripts/qa/atlas_parity02_p06_composed_state_tests.mjs",
+      "blob": "269d52047ee94127752029fe2244fa39a284146e",
+      "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/scripts/qa/atlas_parity02_p06_composed_state_tests.mjs"
+    },
+    "H11_PY": {
+      "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "path": "tests/qa/test_atlas_parity02_p06_composed_navigation.py",
+      "blob": "26c0901dbc79d2ab16c84ec10fd8af809a126eaf",
+      "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/tests/qa/test_atlas_parity02_p06_composed_navigation.py"
+    },
+    "H13_COMPOSE": {
+      "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "path": "packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js",
+      "blob": "6392850777fd8a30d936fd84cfd4047dc51d3a64",
+      "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js"
+    },
+    "H13_PY": {
+      "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "path": "tests/viewer/test_atlas_parity03_p03_composition.py",
+      "blob": "d5f81d578d2045cbab8d2fd08b438f738a21421f",
+      "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/tests/viewer/test_atlas_parity03_p03_composition.py"
+    },
+    "H13_JS": {
+      "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "path": "tests/viewer/atlas_parity03_p03_composition_cases.mjs",
+      "blob": "7b8a9199c74121536f407563ee8f1a2655fa18a5",
+      "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/tests/viewer/atlas_parity03_p03_composition_cases.mjs"
+    },
+    "H16_GRAPH": {
+      "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+      "blob": "a7b12176801f0207aae7ed3b8469b9142d6da334",
+      "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js"
+    },
+    "H16_CONTRACT": {
+      "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+      "blob": "f010f8e2190b0853713c5c68a881ed72759f3e36",
+      "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md"
+    },
+    "H16_C1": {
+      "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md",
+      "blob": "7473d972748309a465c386305c3964169b8bf375",
+      "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md"
+    },
+    "H16_RESULT": {
+      "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md",
+      "blob": "54e87a39d91bf45d6524a973643d66bd60a4999a",
+      "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md"
+    },
+    "H17_TABLE": {
+      "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+      "blob": "4dcea6da23ddf950970eaede7b652581669eb177",
+      "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js"
+    },
+    "H17_CONTRACT": {
+      "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "path": "docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md",
+      "blob": "58fdbdb209b34e1b431ccd77b29e64f5b91fc973",
+      "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md"
+    },
+    "C_APP": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/app.js",
+      "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+    },
+    "C_CATALOG": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/catalog.py",
+      "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+    },
+    "C_NOTEBOOK": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+      "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+    },
+    "C_NATIVE_READER": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+      "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+    },
+    "C_NAV": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_navigation.js",
+      "blob": "1756f8b3c8c08e5164cae3c164802761f18c1946",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_navigation.js"
+    },
+    "C_TRIAGE": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_triage_model.js",
+      "blob": "48dd420213185980239587d485f9ecb534bc8bb9",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_triage_model.js"
+    },
+    "C_REBUILD": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_rebuild.js",
+      "blob": "391d85ab543e6aa257ee929c3e19a024f0d7677d",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_rebuild.js"
+    },
+    "C_GRAPH": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_graph.js",
+      "blob": "0dcd0227fadc77aabdeaaaac51a9a4d13a900a2a",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_graph.js"
+    },
+    "C_LINEAGE": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_lineage.js",
+      "blob": "cef0e65cffb9f75984bb2375bd58c972391129ba",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_lineage.js"
+    },
+    "C_LEGACY": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+      "blob": "c0fced5f4893be6e0ea52bf935dd20dbd6932332",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_model.js"
+    },
+    "C_VIEWS": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+      "blob": "b0971359d2e7406d0ace7e38b370b4a3c96a6e4f",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_views.js"
+    },
+    "C_P03": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+      "blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/parity02_p03_table.js"
+    },
+    "C_P03_CSS": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+      "blob": "0fe2568ec80e40825bcd3e08e0d1eade09d03c5f",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/parity02_p03_table.css"
+    },
+    "S001": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/001-atlas021-protocol-interface/spec.md",
+      "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+    },
+    "S004": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/004-native-notebook-experience/spec.md",
+      "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+    },
+    "S005": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/005-experiment-triage/spec.md",
+      "blob": "422b8b76f386fae634c2efdf0cf6693949dc868b",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/005-experiment-triage/spec.md"
+    },
+    "S007": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/007-final-legacy-parity/spec.md",
+      "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+    },
+    "C_NATIVE_CONTRACT": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+      "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+    },
+    "T_TRIAGE": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/test_native_triage.mjs",
+      "blob": "abffac149e71721f8197f46dea05987d30d35cb7",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/test_native_triage.mjs"
+    },
+    "T_NAV": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/test_native_navigation.mjs",
+      "blob": "e63f63a87e1fa103af49d6c9af710120bb6c37f4",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/test_native_navigation.mjs"
+    },
+    "T_LEGACY": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/test_native_legacy.mjs",
+      "blob": "6140e80bb226b75593b276437e6f67e99e51f4bc",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/test_native_legacy.mjs"
+    },
+    "T_BROWSER": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/browser.mjs",
+      "blob": "d86bc75571667a8770593475225ed3ffd2bccb0a",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/browser.mjs"
+    },
+    "T_NATIVE_BROWSER": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/browser_native_notebook.mjs",
+      "blob": "493a654e6979ee1a712f3ecb7c9bc104e83dc968",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/browser_native_notebook.mjs"
+    },
+    "T_GRAPH_BROWSER": {
+      "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "path": "scripts/qa/browser_native_graph.mjs",
+      "blob": "fa63fab44ee4b4f217816babcfb924f79eff99c5",
+      "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/browser_native_graph.mjs"
+    }
+  }
+}

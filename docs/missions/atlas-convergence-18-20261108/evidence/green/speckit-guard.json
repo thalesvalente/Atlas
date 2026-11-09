@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/qa/speckit_audit.py",
+    "--allow-presentation-delta"
+  ],
+  "exit_code": 1,
+  "base_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "scope": "source tree; no installation; root candidate diff",
+  "log": "speckit-guard.log"
+}

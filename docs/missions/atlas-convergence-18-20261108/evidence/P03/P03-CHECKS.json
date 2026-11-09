@@ -1,0 +1,84 @@
+{
+  "id": "P03-CHECKS-20261108",
+  "author": "/root/p03_reader",
+  "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "tested_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "environment": "Chat remote Linux / Python 3.12.14 / source-tree imports; no packages installed",
+  "current_execution": [
+    {
+      "command": "python -B agents/P03/run_main_checks.py",
+      "exit_code": 0,
+      "optimization": 0,
+      "tests_run": 32,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log": "main-source-tests-normal.log",
+      "record": "main-source-tests-normal.json"
+    },
+    {
+      "command": "python -B -O agents/P03/run_main_checks.py",
+      "exit_code": 0,
+      "optimization": 1,
+      "tests_run": 32,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log": "main-source-tests-optimized.log",
+      "record": "main-source-tests-optimized.json"
+    },
+    {
+      "command": "python -B scripts/qa/architecture_audit.py . --protocol packages/protocol/src/caderno_protocol --viewer packages/atlas/src/atlas_viewer --viewer-module atlas_viewer",
+      "exit_code": 0,
+      "result": "PASS_SCOPED",
+      "findings": []
+    },
+    {
+      "command": "python -B agents/P03/probe_producer_origin.py --repo <Atlas checkout>",
+      "exit_code": 1,
+      "result": "RED: two module-origin counterexamples in actual current main",
+      "record": "producer-origin-baseline-red.json"
+    }
+  ],
+  "distinct_existing_test_ids": 32,
+  "optimization_runs_not_additive": true,
+  "historical_evidence_reused": {
+    "source": "Prior authenticated PR19 dossie agents/P02/P02-COUNTERPROOFS.json",
+    "sha256": "35aa4755bbd706188df37a2af1f061e3dc0ab93a8057625270e139cae029cc72",
+    "states": "PR18 eight pre-I/O checks passed; PR20 guard blocked production; PR22 two defects reproduced. These are historical, not current product QA."
+  },
+  "new_main_presence_probe": "main-presence-and-os-deltas.json",
+  "findings": [
+    {
+      "id": "P03-CURRENT-PRODUCER-PREIMPORT-001",
+      "severity": "HIGH",
+      "scope": "Explicit selected-producer origin guard runs after module execution",
+      "status": "OPEN_PENDING_P00_FIX",
+      "baseline": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "source": {
+        "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+        "path": "tools/export_native_notebook.py",
+        "blob": "58e68daaffe5054258b60e67192802553cb0cf21",
+        "sha256": "be4a6f26f0ab85c226118638aa742b763f3ca43f560a78270cd3a542748936b9",
+        "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/tools/export_native_notebook.py"
+      },
+      "positive_boundary": "The process returns BLOCKED and publishes no package",
+      "negative_boundary": "Out-of-root code already executed in two independently constructed synthetic cases",
+      "risk_limit": "Selected producer remains trusted; no claim of sandbox or anti-TOCTOU certification"
+    }
+  ],
+  "not_run": [
+    "installed-wheel tests in Chat (source-only environment; no installation authorized)",
+    "personal Windows host or private corpus",
+    "L0 witness/private publication",
+    "historical O1 production acquisition",
+    "final patched SHA CI before P00 delivers patch"
+  ],
+  "prior_ci_scope": "Existing main CI 19 jobs at tested baseline observed by P00; no credit to unpublished/future SHA",
+  "spec_kit": {
+    "helpers": "Features001/004/007 executed by P00 and reused from O0",
+    "read_analysis": "contract/spec/plan/tasks crosswalk under unchanged constitution",
+    "cli": "NOT_RUN_UNAVAILABLE",
+    "new_installation": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "command": [
+    "node",
+    "--test",
+    "scripts/qa/test_protocol_snapshot.mjs"
+  ],
+  "exit_code": 1,
+  "tests": 10,
+  "pass": 3,
+  "fail": 7,
+  "test_sha256": "a57269959ef861dc82dab7af137099afc705e2eddb7ae33e4643adb340e351e7",
+  "log": "protocol-snapshot-complete-regression.log",
+  "scope": "real app.js in controlled DOM VM; not browser QA"
+}

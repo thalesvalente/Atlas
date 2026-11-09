@@ -1,0 +1,101 @@
+{
+  "id": "P03-HANDOFF-20261108",
+  "executor": "/root/p03_reader",
+  "status": "EXECUTED_PARTIAL_CURRENT_FIX_REQUIRED",
+  "scope_prs": [
+    18,
+    20,
+    22
+  ],
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "decisions": {
+    "18": "RETAIN_AND_IMPLEMENT",
+    "20": "REJECTED_WITH_REASON",
+    "22": "REJECTED_WITH_REASON"
+  },
+  "current_bug": "P03-CURRENT-PRODUCER-PREIMPORT-001",
+  "changes_to_product": false,
+  "single_product_writer": "P00",
+  "tests": {
+    "unique_ids": 32,
+    "normal": "32 PASS, 0 FAIL/ERROR/SKIP",
+    "optimized": "32 PASS, 0 FAIL/ERROR/SKIP",
+    "new_negative": "2 RED cases confirmed; not fixed by P03"
+  },
+  "human_decisions_preserved": [
+    "Private production O1/L1 remains separate, inactive and not accepted",
+    "Any later production O1 acquisition needs explicit scope/succession authorization and exact final-host qualification",
+    "Exact private L0 witness and privacy-reviewed sanitized receipt not received"
+  ],
+  "local_status": "LOCAL_NOT_REQUIRED_FOR_CURRENT_RETAINED_BEHAVIORS",
+  "cross_review_status": "READY_FOR_P02",
+  "artifacts": [
+    {
+      "path": "P03-MATRIX.json",
+      "sha256": "272b4e45aab4c1d8b7f8a2e0801a564fdcab8556b3b887419715cdf976accd98",
+      "bytes": 51938
+    },
+    {
+      "path": "P03-MATRIX.md",
+      "sha256": "de8c84fd477e4892c51fdc6c9820a79db11efc773c36f64d6d5cfe12ceb6e584",
+      "bytes": 35381
+    },
+    {
+      "path": "P03-CHECKS.json",
+      "sha256": "9348be214b5770ef94985003956efc92d471eda064b1fcc6bd666c4dc86ade25",
+      "bytes": 3621
+    },
+    {
+      "path": "P03-SOURCES.json",
+      "sha256": "28d21c5ee8ec872f7270546ffd27f9386e144a00cfb962a984c1fcc8f5e3d67e",
+      "bytes": 17714
+    },
+    {
+      "path": "main-presence-and-os-deltas.json",
+      "sha256": "926ef8c0f8594e4571b09ca8fc1c48828934e1988283fb6e2260bfd1a880ab44",
+      "bytes": 3438
+    },
+    {
+      "path": "producer-origin-baseline-red.json",
+      "sha256": "a8a073f5881b8a190d443841ac22422cfbda324b105807f46a61afebb346d7fa",
+      "bytes": 940
+    },
+    {
+      "path": "probe_producer_origin.py",
+      "sha256": "33c07d5ebd32db38a8fe57129fc09bc871220b5543a80ff97a71458635aba618",
+      "bytes": 3716
+    },
+    {
+      "path": "current-producer-preimport-red.json",
+      "sha256": "70292da52e6364afcf930c27cbd0213fab15ef50748af48409efd6df1a16f1df",
+      "bytes": 732
+    },
+    {
+      "path": "run_main_checks.py",
+      "sha256": "1e73f0a4d04c93617a4d03aa8199d0c64bb5b292ea2a1aa3f5d9e5098a486968",
+      "bytes": 3723
+    },
+    {
+      "path": "main-source-tests-normal.json",
+      "sha256": "fda8bd3396eb7b209bee2122892a021740481cd8ce36aff16887a9babdf29b07",
+      "bytes": 6488
+    },
+    {
+      "path": "main-source-tests-optimized.json",
+      "sha256": "406c32d3373c6c6717e00fcf5b0dc0ade456c2074f9cbdd80bd7387609fed64b",
+      "bytes": 6491
+    },
+    {
+      "path": "main-source-tests-normal.log",
+      "sha256": "3f7328a89620b9b0085d69f1934821557ff494f1f0539c4f5a680c533e3f5a1c",
+      "bytes": 5356
+    },
+    {
+      "path": "main-source-tests-optimized.log",
+      "sha256": "a949b58d75beb7f58ae6a0f2f447d0a11c318a3b7aff1500514286b6249d33e1",
+      "bytes": 5356
+    }
+  ],
+  "remote_mutations": [],
+  "private_source_access": false
+}

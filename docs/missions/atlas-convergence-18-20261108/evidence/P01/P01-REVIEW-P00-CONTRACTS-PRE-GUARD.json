@@ -1,0 +1,316 @@
+{
+  "schema": "atlas-independent-review/1",
+  "reviewer": "/root/p01_contracts",
+  "author": "/root",
+  "independence": "REAL_DISTINCT_NON_AUTHOR_PRODUCT_REVIEW",
+  "phase": "O3_CONTRACTS",
+  "status": "PASS_SCOPED_CURRENT_PRODUCT_DIFF",
+  "gate": "CONTRACT_SCOPE_AND_PRESERVATION_PASS; HANDOFF_DOCS_AND_FINAL_SHA_PENDING",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "observed_head": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "branch": "fix/atlas-convergence18-20261108",
+  "reviewed_at_utc": "2026-11-08T22:37:15.342948+00:00",
+  "tested_sha": null,
+  "working_files": [
+    {
+      "path": ".github/workflows/atlas021.yml",
+      "working_blob": "531d61d65398cd8552e9750637c523f946e7d21d",
+      "sha256": "8a32dad77e5881b0f363e486b2a10b051b462b0bf15181ec861dbdf9d2325b64",
+      "bytes": 5092,
+      "baseline_blob": "1a4ea4dc79ef084067974567f042a2d4ac558495"
+    },
+    {
+      "path": "README.md",
+      "working_blob": "f4f1dcc7eef39c0b011480399b2fff388e0b8980",
+      "sha256": "bc2df80185d6fe2248dc5dd0ba118fe52aafbea4923fd9e8f964953bce91fdff",
+      "bytes": 11254,
+      "baseline_blob": "79f1ce63ae6980c798f798ac4e15f21698dceb71"
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/app.js",
+      "working_blob": "a47568daf391498910dcf81fa52f8b805bf847fa",
+      "sha256": "38a09b5c54d899f583ac8bfa5453b104403eba52c5dfdd9e53dc4652f02638af",
+      "bytes": 22956,
+      "baseline_blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3"
+    },
+    {
+      "path": "scripts/qa/browser.mjs",
+      "working_blob": "e64c70170f41b3f3a82357d7007262e991b85f6a",
+      "sha256": "64add6d4c117d23062ae04afdbd18f4114eed56bad692439ea1b5878db4b2ff8",
+      "bytes": 31149,
+      "baseline_blob": "d86bc75571667a8770593475225ed3ffd2bccb0a"
+    },
+    {
+      "path": "scripts/qa/test_protocol_snapshot.mjs",
+      "working_blob": "f4e9e283f9b5d7a1993a115b79ce7289c5d9eea8",
+      "sha256": "a57269959ef861dc82dab7af137099afc705e2eddb7ae33e4643adb340e351e7",
+      "bytes": 8635,
+      "baseline_blob": null
+    },
+    {
+      "path": "specs/001-atlas021-protocol-interface/tasks.md",
+      "working_blob": "21e01717eb63055f40aec7e3053952cd17e7fa36",
+      "sha256": "29f02405c88746f533c51cc68562c954f58bc541f077d594f9741d020f61b724",
+      "bytes": 6143,
+      "baseline_blob": "21c7e01ab38b043512cd12753ba9eb24986f8d8c"
+    },
+    {
+      "path": "specs/004-native-notebook-experience/tasks.md",
+      "working_blob": "1d34592d6fbaac70d2c829efc4e4f6ce11d1dba1",
+      "sha256": "7ed94be700c9ef1d193a01d1a077230d4952360c759809c2c57f0ea690a31761",
+      "bytes": 11538,
+      "baseline_blob": "e3096e05810aac6bef5e2d3615fe205752b870e2"
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_producer_origin.py",
+      "working_blob": "4add852e69be2b798859725406c0656b37fb21e5",
+      "sha256": "1a8eb77401ddbe32dfce7b71f272f191c948abdbdbbbec17a61cb29b8d1ac0cf",
+      "bytes": 7032,
+      "baseline_blob": null
+    },
+    {
+      "path": "tools/export_native_notebook.py",
+      "working_blob": "c348606572e185dec1e368622be33233c0f50cd0",
+      "sha256": "cf52b36dcdd19e67f8114577b603815e8ec13c9c8ede00c43ac68f5164e2096e",
+      "bytes": 19275,
+      "baseline_blob": "58e68daaffe5054258b60e67192802553cb0cf21"
+    }
+  ],
+  "checks": [
+    {
+      "id": "C01",
+      "status": "PASS",
+      "scope": "README",
+      "finding": "Main consolidada e recibos históricos apresentados sem falso Draft atual. #39 aceite restrito preservado e sem expansão OLD/NEW/release."
+    },
+    {
+      "id": "C02",
+      "status": "PASS",
+      "scope": "Human receipt attribution",
+      "finding": "README usa #5/6406839421 para direção ADR0002 e #15/6539419419 para opção0.2.0. #39/6715128638 confere no readback O0. Não há promoção científica/0.2.1."
+    },
+    {
+      "id": "C03",
+      "status": "PASS",
+      "scope": "NativeView versus0.2.0",
+      "finding": "README distingue interfaces e conserva contrato opcional aprovado; nenhuma implementação/revogação implícita ou normaARC09 modificada."
+    },
+    {
+      "id": "C04",
+      "status": "PASS",
+      "scope": "Tasks001/004",
+      "finding": "Arquivos anteriores são prefixos byte-idênticos dos novos; tarefas adicionadas em Phase8, sem mudar decisões históricas/checkboxes anteriores. T028–030001 e T030004 referem apenas bugs observados/testes autorizados; status ainda pendente está correto antes deCI."
+    },
+    {
+      "id": "C05",
+      "status": "PASS",
+      "scope": "Temporal presentation",
+      "finding": "app.js usa indexed_at e observed_at separados, date_published declarado com rótulo de publicação de pacote. Sem inferir criação/evento ou adicionar generic entity detail."
+    },
+    {
+      "id": "C06",
+      "status": "PASS",
+      "scope": "Workflow",
+      "finding": "Única mudança de workflow adiciona execuçãoNode da regressão; não exclui checks, não altera SHApins/dependências ou regras de erro."
+    },
+    {
+      "id": "C07",
+      "status": "PASS",
+      "scope": "Protected tree",
+      "finding": "12protocol+12governance+2P03+6historicalmissionfiles byte-idênticos; cada grupo pode sobrepor-se conceitualmente, counts não são testesproduto. 20refsO0 incluindoPR40/30 permanecem exatas;5ARC09normativos intactos."
+    },
+    {
+      "id": "C08",
+      "status": "PASS",
+      "scope": "Mutation and source scope",
+      "finding": "Diff restrito a9paths produto/testes/docs autorizados nesta leitura. Nenhum corpus,credencial,licença,produtorcientífico ou normativo incluído. Revisor não editou produto."
+    },
+    {
+      "id": "C09",
+      "status": "PASS",
+      "scope": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "protected_evidence": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-PROTECTED-BASELINE.json",
+  "remote_ref_checks": [
+    {
+      "pr": 40,
+      "ref": "refs/remotes/origin/docs/atlas-pending24-portability-20261108",
+      "expected": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+      "observed": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+      "same": true
+    },
+    {
+      "pr": 31,
+      "ref": "refs/remotes/origin/ci/atlas-ap04-c4-k-successor-p02-native-20261104",
+      "expected": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "observed": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "same": true
+    },
+    {
+      "pr": 30,
+      "ref": "refs/remotes/origin/ci/atlas-ap04-c4-k-successor-20261104",
+      "expected": "95012ba70a288feb9562fb7869afc8d219627c19",
+      "observed": "95012ba70a288feb9562fb7869afc8d219627c19",
+      "same": true
+    },
+    {
+      "pr": 22,
+      "ref": "refs/remotes/origin/docs/ap04-f4-l0-codex-desktop-handoff-20261101",
+      "expected": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "observed": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "same": true
+    },
+    {
+      "pr": 21,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-f4-key-identity-20261101",
+      "expected": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "observed": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "same": true
+    },
+    {
+      "pr": 20,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f4-c2-os-isolation-20261101",
+      "expected": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "observed": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "same": true
+    },
+    {
+      "pr": 19,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-f4-reader003-20261031",
+      "expected": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "observed": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "same": true
+    },
+    {
+      "pr": 18,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f4-external-reader-20261031",
+      "expected": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "observed": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "same": true
+    },
+    {
+      "pr": 17,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f3b-tables-20261031",
+      "expected": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "observed": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "same": true
+    },
+    {
+      "pr": 16,
+      "ref": "refs/remotes/origin/feat/atlas-parity04-f3a-graph-20261031",
+      "expected": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "observed": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "same": true
+    },
+    {
+      "pr": 15,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-f2-legacy-contract-20261030",
+      "expected": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "observed": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "same": true
+    },
+    {
+      "pr": 14,
+      "ref": "refs/remotes/origin/docs/atlas-parity04-plan-of-record-20261030",
+      "expected": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "observed": "47c94d27aeb7717eebb30804f01cd2cd33507c8a",
+      "same": true
+    },
+    {
+      "pr": 13,
+      "ref": "refs/remotes/origin/integrate/atlas-parity03-c4-full-candidate-20261027",
+      "expected": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "observed": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "same": true
+    },
+    {
+      "pr": 12,
+      "ref": "refs/remotes/origin/qa/atlas-parity03-c3-contract-gate-20261027",
+      "expected": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "observed": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f",
+      "same": true
+    },
+    {
+      "pr": 11,
+      "ref": "refs/remotes/origin/integrate/atlas-parity03-c1-core-20261027",
+      "expected": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "observed": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "same": true
+    },
+    {
+      "pr": 10,
+      "ref": "refs/remotes/origin/qa/atlas-parity03-c2-p03-gates-20261027",
+      "expected": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "observed": "f625f8be40156fd9fe4572a0ac2074910efd96cf",
+      "same": true
+    },
+    {
+      "pr": 9,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p01-contracts-20261027",
+      "expected": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "observed": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+      "same": true
+    },
+    {
+      "pr": 8,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p02-c0-20261027",
+      "expected": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "observed": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "same": true
+    },
+    {
+      "pr": 7,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p03-components-20261027",
+      "expected": "ead1f753f52f22035326b7366dd2231c62775765",
+      "observed": "ead1f753f52f22035326b7366dd2231c62775765",
+      "same": true
+    },
+    {
+      "pr": 6,
+      "ref": "refs/remotes/origin/work/atlas-parity02-p06-qa-20261027",
+      "expected": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "observed": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48",
+      "same": true
+    }
+  ],
+  "arc09_checks": [
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+      "blob": "351335256804a41a4f0638c0943937e5ef9cced3",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+      "blob": "1504abff97f25431a50cafe280c2c8e94450ec14",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+      "blob": "b3fb57b91263e6ea7686039f46400eecf30815b9",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+      "blob": "a3b43305f78926675113b1012520bfb92ceed31a",
+      "same": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+      "blob": "49dc02a5fed21d9f6cca074e8511dd006f6fda2c",
+      "same": true
+    }
+  ],
+  "findings": [],
+  "pending_gates": [
+    "Novo docs/missions/atlas-convergence-18-20261108 ainda não existe nesta leitura; revisar handoff/matriz/publicação quandoP00avisar.",
+    "Link README para handoff deve resolver no commit final.",
+    "Confirmar hashes destes arquivos no SHA final publicado; mudanças posteriores exigem reviewdelta.",
+    "Revisões P02UI/P03origem e testes/CI final independentes não são substituídos por este parecer."
+  ],
+  "product_qa": "PENDING_OTHER_REVIEWERS_AND_FINAL_CI",
+  "historical_matrices": "P01/P02 O1 frozen artifact hashes unchanged",
+  "merge_authorized": false,
+  "release_deploy_branch_deletion_authorized": false
+}

@@ -1,0 +1,28 @@
+{
+  "status": "BASELINE_RACE_REPRODUCED",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "scope": "actual app.js load with synthetic delayed fetch; no browser/HTTP timing claim",
+  "defect": "P02-F002: concurrent visibility verification can overwrite the completed explicit rebuild with an older catalog",
+  "requests": [
+    {
+      "url": "/api/catalog",
+      "method": "GET"
+    },
+    {
+      "url": "/api/reindex",
+      "method": "POST"
+    },
+    {
+      "url": "/api/catalog",
+      "method": "GET"
+    }
+  ],
+  "afterRebuild": {
+    "generation": 3,
+    "name": "P02_CHANGED_SAME_ID"
+  },
+  "afterDelayedVerification": {
+    "generation": 1,
+    "name": "Coleta simulada A"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "schema": "atlas-independent-review/1",
+  "reviewer": "/root/p03_reader",
+  "author": "/root/p01_contracts",
+  "phase": "O1",
+  "independence": {
+    "author_of_subject": false,
+    "product_edits": 0,
+    "subject_edits": 0,
+    "shared_repo_read_only": true
+  },
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "subject_matrix": {
+    "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-MATRIX.json",
+    "sha256": "d26f129f6cb3d10a7306557db0abdd6333dc38e87763e3815ca71d2fa82c70f4"
+  },
+  "subject_handoff": {
+    "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/P01-HANDOFF.json",
+    "sha256": "35137f1a25f5c679e3f670cd2fe4ad3a0743924bf967a310f8d082821af5728a"
+  },
+  "status": "PASS_SCOPED",
+  "gate": "PASS_SCOPED_O1_TO_O2",
+  "product_status": "PARTIAL_KNOWN_PATCHES_AND_FINAL_CI_PENDING",
+  "summary": "10 disposições e38 requisitos aceitos no escopo expresso, com preservação dos contratos/gates humanos e dos históricos. Nenhum finding bloqueante novo.",
+  "evidence_validation": {
+    "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P03/P03-REVIEW-P01-EVIDENCE.json",
+    "sha256": "4f6ae92514fb3dccfac650a747479730679316058ba6fb150af14eca2334cf3f",
+    "status": "PASS",
+    "checks": 314,
+    "artifact_hashes": 22,
+    "source_pins": 57,
+    "coverage": {
+      "P01-JOURNEY-CROSSWALK.json": {
+        "count": 28,
+        "unique": 28,
+        "expected": 28
+      },
+      "P01-EXAMPLE-CROSSWALK.json": {
+        "count": 46,
+        "unique": 46,
+        "expected": 46
+      },
+      "P01-C2-28-FILES.json": {
+        "count": 28,
+        "unique": 28,
+        "expected": 28
+      },
+      "C2-P03-35-TEST-CROSSWALK.json": {
+        "count": 35,
+        "unique": 35,
+        "expected": 35
+      },
+      "P01-PAR005-010.json": {
+        "count": 6,
+        "unique": 6,
+        "expected": 6
+      },
+      "P01-N01-24.json": {
+        "count": 24,
+        "unique": 24,
+        "expected": 24
+      },
+      "P01-ARC09-FROZEN.json": {
+        "count": 5,
+        "unique": 5,
+        "expected": 5
+      },
+      "K-NEGATIVES-PRESERVED.json": {
+        "count": 68,
+        "unique": 68,
+        "expected": 68
+      }
+    }
+  },
+  "method": [
+    "Leitura não autora da matriz, handoff, checks, crosswalks e fontes correspondentes.",
+    "Verificação própria de hashes dos22artefatos,57pins, presença AST dos103métodos históricos e identidade dos5blobsARC09 no terminal.",
+    "Comparação da rota antigaO1/O3 com os contratos atuais004/007; revisão dos recibos humanos e do gate F2/K.",
+    "Inspeção direta app.js/Catalog/read_model para indexed_at/observed_at/date_published, além dos recibos semânticos P06/P09.",
+    "Preservação dos testes históricos já validados; não atribuir execução nova ou CI final ao reuso."
+  ],
+  "prs": [
+    {
+      "pr": 6,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 4,
+      "reason": "Preservação 64/64 confirmada no parecer anterior sobre a mesma main; 7 semânticas em dois modos são execução atual limitada. Suites wheel/browser históricas não viram PASS atual por equivalência nominal."
+    },
+    {
+      "pr": 7,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 4,
+      "reason": "Tabela P03 conserva blobs; 35 métodos históricos pertencem ao DTO/harness antigo. NativeView satisfaz apresentação por sua rota própria, sem exigir detalhador genérico de entidades não aprovado."
+    },
+    {
+      "pr": 9,
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 5,
+      "reason": "J09 tem bug verificável: app.js nomeia indexed_at como observação, enquanto Catalog separa os dois tempos. J10 usa date_published declarado já existente, sem inferir data de criação/evento. J27 é orientação atual compatível com recibo ADR. Vínculo de seleção/preferências pertence às correções P02; painel genérico retraído permanece fora do escopo."
+    },
+    {
+      "pr": 10,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 4,
+      "reason": "28 arquivos próprios têm pins e destino. Qualificação por wheel/HTTP/browser persiste com mecanismos atuais; política histórica 47/zero-skip e demonstrador inativo não é declarada equivalente nem imposta à composição NativeView."
+    },
+    {
+      "pr": 12,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 3,
+      "reason": "Reuso dos 28/46/9/11 preserva limites por camada. Coletor de 51 blobs/82 hashes e pins C3 é histórico; reescrevê-los para coincidir com a main destruiria a prova, sem ganho atual."
+    },
+    {
+      "pr": 14,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 3,
+      "reason": "PAR005–010 têm sucessores concretos de apresentação e contraprovas de população/identidade/autoridade. Aceite privado OLD/NEW/ChromeWindows segue separado de paridade sintética remota."
+    },
+    {
+      "pr": 15,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 4,
+      "reason": "A supersessão se refere apenas à incorporação da via ativa. Descriptor externo 0.2.0 permanece aprovado e segregado. NativeView em Files não é FileAPI RAM/TTL3600 nem implanta quotas/O1 antigos. A nova rota aparece expressamente em spec004 plan/research e spec007."
+    },
+    {
+      "pr": 19,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 4,
+      "reason": "24 controles N01–N24 possuem destino e limitações. N14 remete ao RED import-origin de P03/#18; N18 aos RED de P02. A classificação não apaga essas correções nem promete sandbox/hard-budget/TTL da via histórica."
+    },
+    {
+      "pr": 21,
+      "disposition": "DEFERRED_HUMAN_DECISION",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 3,
+      "reason": "Os cinco blobs normativos congelados são idênticos em d5bd e no terminal #21. Nenhuma aprovação 0.2.1 foi inferida dos recibos humanos 0.2.0/ADR, da CI ou da PR40. DEFERRED_HUMAN_DECISION é gate real."
+    },
+    {
+      "pr": 31,
+      "disposition": "REJECTED_WITH_REASON",
+      "verdict": "ACCEPTED_SCOPED",
+      "requirements_reviewed": 4,
+      "reason": "Gate F2/K exige genealogia/blobs/épocas autorizadas diferentes da main. Rejeitar portá-lo preserva o corpus fixado, incluindo negativos importantes e controles positivos, sem enfraquecimento ou repin. Não se afirma que 68 métodos foram reexecutados: reutilização histórica e replay parcial33/36 continuam distintos."
+    }
+  ],
+  "findings": [],
+  "notes": [
+    {
+      "id": "P03-QA-P01-001",
+      "severity": "INFO",
+      "topic": "Contagem do corpus K/F2",
+      "detail": "Os68IDs compreendem métodos positivos e negativos. O arquivo preserva cada ID corretamente; a integração deve descrevê-los como68métodos/casos de regressão, não68negativos exclusivos. Isso não bloqueia a disposição.",
+      "required_action": "Precisão de redação no agregado; matriz congelada não precisa ser regravada."
+    },
+    {
+      "id": "P03-QA-P01-002",
+      "severity": "INFO",
+      "topic": "Cobertura e evidência executada",
+      "detail": "As314verificações deste recibo são checagens de evidência/pins/cobertura, não314testes de produto. Os16testes únicos de P01 foram executados por seu autor em cada modo; revisão verificou fonte/recibos e não os promoveu a instalaçãowheel/browser."
+    }
+  ],
+  "pending_product_actions": [
+    {
+      "owner": "P00",
+      "scope": "J09/J10/J27 labels/orientation",
+      "status": "PENDING_PATCH_QA"
+    },
+    {
+      "owner": "P00 (P02 findings)",
+      "scope": "response/snapshot/preferences context binding",
+      "status": "PENDING_PATCH_QA"
+    },
+    {
+      "owner": "P00 (P03 finding)",
+      "scope": "reject nonselected producer origin before execution",
+      "status": "PENDING_PATCH_QA"
+    },
+    {
+      "owner": "P00",
+      "scope": "CI at final tested SHA and portability/handoff",
+      "status": "PENDING_O3"
+    }
+  ],
+  "preserved_human_gates": [
+    "ARC09/0.2.1 explicit version-bound human decision",
+    "Private OLD/NEW/ChromeWindows acceptance if later required; no fabricated private/source witness",
+    "Production O1 acquisition/OS authorization if that retired route is ever reactivated"
+  ],
+  "relation_to_pr40": "PR40 at7ac3e76 is separate/frozen; this review neither repeats nor alters its24 recovered cases.",
+  "local_required": false,
+  "limitations": [
+    "No merge/deploy/release authorization.",
+    "No private host/data, OS sandbox certification or human acceptance.",
+    "No equivalence of historicalO1/O3 TTL to NativeView.",
+    "O1 gate permits composition; it does not certify corrected product or final CI."
+  ]
+}

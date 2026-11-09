@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "scope": "native reader synthetic quotas; no browser or private-corpus claim",
+  "checks": [
+    {
+      "nodes": 10000,
+      "protocol_valid": true,
+      "native_status": "READY",
+      "errors": [],
+      "entries": 10002,
+      "seconds": 0.3778359219977574,
+      "rendering": "NOT_RUN_IN_THIS_PROBE"
+    },
+    {
+      "nodes": 10001,
+      "result": "REJECTED_ATOMICALLY_BEFORE_PUBLICATION",
+      "error": "NATIVE_NODE_LIMIT",
+      "output_exists": false,
+      "stage": "exporter_shared_native_validator"
+    },
+    {
+      "entries": 100001,
+      "result": "REJECTED_ATOMICALLY",
+      "error": "NATIVE_ENTRY_LIMIT"
+    }
+  ]
+}

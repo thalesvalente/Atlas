@@ -301,9 +301,15 @@ try {
   for(const source of catalog.sources) {
     assert.ok(sourcesText.includes(source.name));
     assert.ok(sourcesText.includes(source.status));
+    const declared=await page.locator('#card-'+source.id).locator('dt').filter({hasText:'Publicação declarada do pacote'}).evaluate(node=>node.nextElementSibling.textContent);
+    assert.equal(declared,String(source.read_model?.source?.date_published ?? 'Ausente'));
   }
   if(catalog.sources.length)assert.ok(sourcesText.includes('NOT_VERIFIED'));
   record('source_validity_is_distinct_from_authenticity');
+  const indexLabel=await page.locator('#indexed-at').innerText();
+  assert.ok(indexLabel.startsWith('Indexado em: '+catalog.indexed_at+' · Consulta em: '));
+  assert.ok(Number.isFinite(Date.parse(indexLabel.split(' · Consulta em: ')[1])));
+  record('index_observation_and_declared_publication_are_distinct');
   await page.getByTestId('dossier-nav').click();
   assert.ok(await page.getByTestId('dossier').isVisible());
   const downloadPromise=page.waitForEvent('download');
@@ -334,6 +340,34 @@ try {
     assert.equal(res.status(),405);
   }
   record('http_host_origin_and_fixed_source_allowlist');
+  if(runs.length) {
+    await page.bringToFront();
+    await page.locator('.nav-button[data-view="explore"]').click();
+    await page.getByRole('button',{name:'Limpar',exact:true}).click();
+    for(const control of await page.getByTestId('run-select').all())if(await control.isChecked())await control.uncheck();
+    // Include both sources when present; filtering one must not silently rebind
+    // or preserve the hidden source's selection across a later rebuild.
+    const selectionIndices=[...new Set(runs.map(r=>r.source))].slice(0,4).map(source=>runs.findIndex(r=>r.source===source));
+    for(const index of selectionIndices)await page.getByTestId('run-select').nth(index).check();
+    const first=runs[0],projectKey=JSON.stringify([first.source,first.project_id]),experimentKey=JSON.stringify([first.source,first.experiment_id]);
+    await page.getByTestId('project-filter').selectOption(projectKey);
+    await page.getByTestId('experiment-filter').selectOption(experimentKey);
+    await page.getByTestId('search').fill(first.id);
+    await page.getByTestId('status-filter').selectOption(first.status);
+    await page.getByTestId('run-open').first().click();
+    const selectedText=await page.locator('#selected-count').innerText();
+    const detailBefore=await page.getByTestId('detail').innerText();
+    const verification=page.waitForResponse(r=>r.url()===origin+'/api/catalog'&&r.request().method()==='GET');
+    assert.equal(await page.evaluate(()=>document.visibilityState),'visible');
+    await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));
+    assert.equal((await verification).status(),200);
+    await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
+    assert.equal(await page.locator('#selected-count').innerText(),selectedText);
+    assert.equal(await page.getByTestId('detail').innerText(),detailBefore);
+    assert.equal(await page.getByTestId('project-filter').inputValue(),projectKey);
+    assert.equal(await page.getByTestId('experiment-filter').inputValue(),experimentKey);
+    record('verification_retains_snapshot_context');
+  }
   const reindexResponse=page.waitForResponse(r=>r.url()===origin+'/api/reindex'&&r.request().method()==='POST');
   await page.getByTestId('reindex').click();
   assert.equal((await reindexResponse).status(),200);
@@ -342,6 +376,18 @@ try {
   assert.ok(after.generation>catalog.generation);
   assert.deepEqual(after.sources.map(s=>s.read_model),catalog.sources.map(s=>s.read_model));
   record('explicit_reindex_preserves_source_records');
+  if(runs.length) {
+    assert.equal(await page.locator('#selected-count').innerText(),'Nenhuma execução selecionada');
+    assert.equal(await page.getByTestId('detail').isVisible(),false);
+    assert.equal(await page.locator('#detail-content').innerText(),'');
+    assert.equal(await page.getByTestId('project-filter').inputValue(),'');
+    assert.equal(await page.getByTestId('experiment-filter').inputValue(),'');
+    assert.equal(await page.getByTestId('search').inputValue(),runs[0].id);
+    assert.equal(await page.getByTestId('status-filter').inputValue(),runs[0].status);
+    assert.equal(await page.locator('[data-testid="run-select"]:checked').count(),0);
+    record('reindex_invalidates_complete_context_but_keeps_free_filters');
+    await page.getByRole('button',{name:'Limpar',exact:true}).click();
+  }
   await page.goto(url,{waitUntil:'networkidle'});
   await page.keyboard.press('Tab');
   assert.ok(await page.evaluate(()=>document.activeElement.classList.contains('skip')));

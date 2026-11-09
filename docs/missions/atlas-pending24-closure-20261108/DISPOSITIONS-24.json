@@ -1,0 +1,615 @@
+{
+  "schema": "atlas-pending24-dispositions/1",
+  "date": "2026-11-08",
+  "scope": "24 preserved engineering files; semantic review and recovery map. Actual execution, CI and retirement receipts are recorded in PR comments.",
+  "main_preserved_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "arc09": "HUMAN_PENDING_FROZEN_UNCHANGED",
+  "counts": {
+    "SEMANTICALLY_SUPERSEDED": 14,
+    "NEW_VALUE_PUBLISH": 2,
+    "REMOTE_BYTE_IDENTICAL": 8,
+    "BLOCKED_PRIVATE_OR_HUMAN": 0
+  },
+  "files": [
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "bfe49cd9c452b19cc675d976f86c91ba837e45aea3e1625dba794120c9b44f4a",
+      "source_bytes": 4728,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "2f970ce30505fdf9a4ab73349a1ff468e06dc4abb1e0f478af9f829f19f6cfd3",
+        "bytes": 4340,
+        "git_blob": "6b6abd135a35fa8a0ad50091174231445e762daa"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "7b866f342d1475ad84de005f582349bf5126478b2f86e8cb927c1c4225a7ed7e",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto conserva rejeição atômica de parent vazio/tipo inválido/quota, três nulls explícitos, suíte 1–12 e proteção 0.2.0; detalha raiz contraditória e ciclo como gap.",
+      "counterevidence": "Os cinco N referidos localmente serão preservados no suplemento; o blob ARC09 permanece congelado.",
+      "frozen_arc09": true,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/COMPATIBILITY-AND-MIGRATION-LESS.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "1dc781c719a5ffcb5dbedde9f4349b193d7bdac24a87a6dda8bb3db0f9d1748a",
+      "source_bytes": 8067,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "5942bee6e4bb2ce02b9eda7b61d48a256015204caf19e6c09291edec86020a38",
+        "bytes": 6910,
+        "git_blob": "dcbe88d6b9c036517b64aaae40e5448f6b757919"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "70ab936b8ddfca1379c3163d1c0dfb3cb955268b69d53a3fd6044b1de22a3d59",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto reconcilia 10 casos principais e4 suplementares, D150/50/50, nulls J/K, literal L e bases M; PKEY contém todos os inputs inválidos.",
+      "counterevidence": "PKEY é tabela documental; os inputs JSON concretos N1–N5 são extraídos separadamente. Não substituir a contagem congelada14 por19.",
+      "frozen_arc09": true,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/CURRENT-CONTRACT-COUNTEREXAMPLES.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DECISION-REQUEST.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "663f6686e51196d6a85322ed50986e9fbda1c0e7a26f70a14db0b7267e613885",
+      "source_bytes": 2989,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "eb0c4eafb8b7b7d3c9444f0bc0d632070b74ea2fa4a505ba668d911392e4b90c",
+        "bytes": 2369,
+        "git_blob": "e5f94172ca8577c4d7b7c08761c038de9dd3e7b5"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "4aa7cbec4e71a2b5537fd8045220427951a3a3a6e1be16a5bc13d58f9b3765d0",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto fixa commit/tree e cinco blobs do objeto ARC09; local espera decision_candidate_commit null e seis paths não vinculados.",
+      "counterevidence": "Republicar o pedido local restauraria identidade incompleta; aprovação humana continua pendente.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DECISION-REQUEST.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "07f2b2cb076309d3f576ed9f0ba419b0e902b43c8951cd974b5b36d15ff19ee6",
+      "source_bytes": 14423,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "2eb7154c04c419ad6ac0de200caf8f4f3ba360794a8a200643bc611122d0d775",
+        "bytes": 13088,
+        "git_blob": "d4c962d0f2a3f8b48c9b5cca5c3866bd8910f233"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "7887023a09e1110d55b491dd26cf046e3116cf3951e69d2cd181a78bec099f85",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto preserva rejeição de parent inválido, limite65536, null triple, quatro campos novos e separação native/structural; define melhor contexto null, raiz e TREE_CYCLE.",
+      "counterevidence": "Fragmento adicional local de nó é ilustração incompleta sem requisito necessário exclusivo; não substituir o objeto congelado.",
+      "frozen_arc09": true,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DESCRIPTOR-0.2.1-CANDIDATE.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/HANDOFF.json",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "9fb0118ef36db9fbdf3e206e91c101df5d69244a3d5413b128559959484d7102",
+      "source_bytes": 3958,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "17e3883e05d5ad457960f1bed05e245ec0ad74b525b29b36d0df2015c08b8d44",
+        "bytes": 2263,
+        "git_blob": "7443d87ff9ed9626dfd812bd3885357a53c7bd36"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "cbb45127d67f04efe8334d812f58575e6a5f21d29910a10ac77ad6748accec45",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto v2 fixa cinco hashes/blobs, quatro campos, inventário14/PKEY12,15 findings e gates; local v1 ainda tem commit null e blobs vazios.",
+      "counterevidence": "Inventário19 pertence ao pacote alternativo e suplemento; relato histórico não é execução atual.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/HANDOFF.json"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/INDEPENDENT-REVIEW.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "3e04a7a31d68874591b46a8f35b44ce322e8609c2ba40344c8be6f2e10288050",
+      "source_bytes": 4278,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "8c6577c77b92897700819187dbfa4002efb8138eeda6bd40d55ef1630aef025e",
+        "bytes": 3447,
+        "git_blob": "4be17d9db8a51469837b2d1164f1e7327d5ef54c"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "70bbdf43c5282cb4d38e5e5d00864921b5b2a1d1caa1469d6441ef930c038479",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto inclui quatro reviews,15 findings e disposições, os seis findings locais e checker reproduzível abrangente do objeto real.",
+      "counterevidence": "Menção local a auditor não confere revisão ao SHA remoto; revisão histórica integral ARC09 permanece separada desta QA de portabilidade.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/INDEPENDENT-REVIEW.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/MANIFEST.sha256",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "9aa452a68ba1087d41087fa81da32973c5e5909f4af53c30b487c878ff76e235",
+      "source_bytes": 1655,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "eb1aa65e5d6601a1819198f5e7c76a686b857dbb9febe7fd5ca0f3000267cefa",
+        "bytes": 1386,
+        "git_blob": "8cef4bc6f7da3f4f095be7a7bb34f41fb0637ae4"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "e7a77aaa906bfb074195538d6d29b576ceb521ea8ab8547209eb643449761577",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Manifesto remoto cobre exatamente10 membros do pacote congelado; hashes conferidos. Local12/12 é consistente mas vincula outro pacote.",
+      "counterevidence": "N1–N5 e seu checker terão recuperação própria no suplemento; não alterar manifesto histórico.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/MANIFEST.sha256"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "87d78c96d3e70005a1860833adfd56bb5e6e962ed8af588f1add7162b1f1fe5f",
+      "source_bytes": 3598,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "097603251a0d77cdf0678476ae672a7c258ecb34d8a7b4873ae59de7f70b3d6b",
+        "bytes": 3496,
+        "git_blob": "4c8abc57e15fa8df14e57be586b4a9187a13ec52"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "73e48e6a1ed0ccfc9685ce9a68f71af43d8dee85d6651a991e35ae0660ebc54b",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto enumera os quatro campos incluindo parent_key_presence e ambos de reference, conserva O0–O3, quotas, isolamento, governança e rollback.",
+      "counterevidence": "Recomendação de O1 não é autorização; remoto aprimora ausência/null/ciclo/raiz sem relaxar pins.",
+      "frozen_arc09": true,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/OPTIONS-AND-RISK.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/RESULT.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "73114c34f39fde6e6596b16e11ea1b14ace5796fe2846a39353ab877b1b34bb6",
+      "source_bytes": 7177,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "74a92b747177e46a5b84e3ddc735499aca6b4c2f11069898f80c88853d4fb19f",
+        "bytes": 5217,
+        "git_blob": "e6bf4bad7bba783c17c958cb4aa698e7a43e8e17"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "c8d2cb366dcddfbd010efa7a8cfdb297610e1b0cfba3efd8b307bc2affc2226f",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto conserva conclusão técnica, contrato vigente, limites de evidência, quatro campos, guards pendentes e separação revisão/ARC09.",
+      "counterevidence": "Relato local de19 oráculos e13 arquivos descreve pacote não publicado; extrair só delta útil em vez de publicar recibo obsoleto.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/RESULT.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/SYNTHETIC-IDENTITY-FIXTURES.json",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "95d48b2ca41f87978f4c16bd7cd4ba802cc7736ff07c6f347635703ae4d507ee",
+      "source_bytes": 70760,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": true,
+        "sha256": "db20cff9f93c000b980ed346483375cb8b6a5c7be193c72431637a1efca43e25",
+        "bytes": 67629,
+        "git_blob": "49dc02a5fed21d9f6cca074e8511dd006f6fda2c"
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": "db20cff9f93c000b980ed346483375cb8b6a5c7be193c72431637a1efca43e25",
+      "decision": "NEW_VALUE_PUBLISH",
+      "reason": "Extrair somente cinco inputs N1–N5: parent_key vazio,17,false,objeto,array; oráculos REJECT_ATOMIC sem emissão parcial. Os14 A..M são estruturalmente iguais ao remoto.",
+      "counterevidence": "PKEY03..07 já contém a semântica, mas os inputs JSON tipados são úteis para testes futuros. Suplemento não normativo, sem tocar fixture congelado.",
+      "frozen_arc09": true,
+      "recovery": {
+        "commit": "THIS_SUPPLEMENT_COMMIT",
+        "path": "docs/missions/atlas-pending24-closure-20261108/PARENT-KEY-NEGATIVE-ORACLES.json"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/DOCUMENTARY-CHECKS.py",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "9bfeb11b9a71d555191515da255354b378afbcabff90e21f46c465942574061e",
+      "source_bytes": 11490,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": false,
+        "sha256": null,
+        "bytes": null,
+        "git_blob": null
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": null,
+      "decision": "NEW_VALUE_PUBLISH",
+      "reason": "Extrair verificação exata de valor e tipo dos cinco N e controles negativos em memória para checker segregado.",
+      "counterevidence": "Corpo antigo depende de13 arquivos,seis paths e binding pendente; não publicar cru. Os demais checks estão no checker remoto e hashes exatos. Não há defeito de encoding no original.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "THIS_SUPPLEMENT_COMMIT",
+        "path": "docs/missions/atlas-pending24-closure-20261108/verify_oracles.py"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P01",
+      "source_path": "docs/missions/atlas-parity-04/f4-c2-key-identity/P01-EXECUTION.md",
+      "source_base_sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+      "source_sha256": "d72eb53e1cbd7794b482e1cce0a06a6d6c8911bfda2c839800626391f30a23dc",
+      "source_bytes": 5757,
+      "original_base_blob": {
+        "sha": "508ccb257a44dc66da13d1edfec7f00ef5231d09",
+        "exists": false,
+        "sha256": null,
+        "bytes": null,
+        "git_blob": null
+      },
+      "reviewed_remote_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+      "reviewed_remote_sha256": null,
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Valor operacional necessário está em RESULT/HANDOFF/DECISION/INDEPENDENT remotos: findings, owners, guards, checker e gates.",
+      "counterevidence": "Local mistura plano e alegações históricas do pacote13 com binding ainda null/vazio; N e verificação serão preservados diretamente.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+        "path": "docs/missions/atlas-parity-04/f4-c2-key-identity/RESULT.md"
+      },
+      "independent_semantic_reviewer": "review_p01"
+    },
+    {
+      "front": "P02",
+      "source_path": ".github/workflows/atlas-parity02.yml",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "4af24eca5ac8838b7cde70837e2a280dad8b5e5501185338806cc766533b1b4e",
+      "source_bytes": 7729,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "d165bdd580d748418fdf24cbc513f1442ac2744874f30a2219169c60c11262a7",
+        "bytes": 7007,
+        "git_blob": "75c18dd50d87c16a0f49e9a69c89dae4c445503f"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "4af24eca5ac8838b7cde70837e2a280dad8b5e5501185338806cc766533b1b4e",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": ".github/workflows/atlas-parity02.yml"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": ".github/workflows/atlas-parity03-p03-gates.yml",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "bf9866bad49b578e5d7b11cabcb4205cd6f753fb8e7cc3926bb4cf4d01ead7f0",
+      "source_bytes": 9381,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "d6f4e39d86e3ee8d3fbc81cec09f4b42b476fa4c5b3c0ca7a694c7ca9bcde652",
+        "bytes": 7808,
+        "git_blob": "e0b92e541ae93c4f2439cebc6981b14fa74a072c"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "bf9866bad49b578e5d7b11cabcb4205cd6f753fb8e7cc3926bb4cf4d01ead7f0",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": ".github/workflows/atlas-parity03-p03-gates.yml"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": ".github/workflows/atlas-parity04-doc.yml",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "e59dc02fe16cd9565ba7d4152c6aba0435f53c091e6de2c69173a35dcd31f260",
+      "source_bytes": 3181,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "abc9d3a672bd9382e9a45b08a2436105e21e53d82583bc564eb99f9f45281115",
+        "bytes": 2664,
+        "git_blob": "fa6d1271c880255dfe8e87ca98f413c1aa226821"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "e59dc02fe16cd9565ba7d4152c6aba0435f53c091e6de2c69173a35dcd31f260",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": ".github/workflows/atlas-parity04-doc.yml"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": ".github/workflows/atlas003-speckit.yml",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "205281c0ef8c75a188fea2236a4dbe7fc82b588d27606612d504846b297dd068",
+      "source_bytes": 3634,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "cea45f4f2bb97999e69335ea295bfddded25fcae7bacb37ea0ef711c420ba388",
+        "bytes": 3289,
+        "git_blob": "b4629f453babf6b7414505da3f9f9870bded1145"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "205281c0ef8c75a188fea2236a4dbe7fc82b588d27606612d504846b297dd068",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": ".github/workflows/atlas003-speckit.yml"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": ".github/workflows/atlas021.yml",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "03aac2ea8243e8799edfd9bff66a9bb670e5fd0320b480a342311bb16448a2e8",
+      "source_bytes": 8240,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "1f4e7ad52a597ea30fa7f581a3dd494d63c4615d5ccd52847d027276b75def7e",
+        "bytes": 7817,
+        "git_blob": "b0ab10b1b1102af5b4fc8c12b63563744591c35f"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "03aac2ea8243e8799edfd9bff66a9bb670e5fd0320b480a342311bb16448a2e8",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": ".github/workflows/atlas021.yml"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": "scripts/qa/atlas_parity02_p06_installed_checks.py",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "e59663002278ce231dfbd65b8f5242e49977ce6eab6a877346a2fc79e0d30c5e",
+      "source_bytes": 7964,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "3b06d6a6271680007f4688e74c1fd31f274780128eadbf8cf2985eefb508ffc3",
+        "bytes": 6165,
+        "git_blob": "1507ea11f9c58e884ecadb5b486578f09d577a23"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "e59663002278ce231dfbd65b8f5242e49977ce6eab6a877346a2fc79e0d30c5e",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": "scripts/qa/atlas_parity02_p06_installed_checks.py"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": "scripts/qa/atlas_parity03_c4_ci.py",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "206052c28d341c399037c6900a912c2310899e1af77134b7ce2d75444137f031",
+      "source_bytes": 24452,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "940e0960e055235abbfc95e85ae8e4a817c5ad934206205299d228aea035639f",
+        "bytes": 24334,
+        "git_blob": "3cd57782fa9c1defdd86d09a98a83f3be7d8747f"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "206052c28d341c399037c6900a912c2310899e1af77134b7ce2d75444137f031",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": "scripts/qa/atlas_parity03_c4_ci.py"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": "scripts/run_checks.py",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "7f54ba3033c3ef88fd42781bd7d62aae83ab99d23a825848a35098f16d447a05",
+      "source_bytes": 2025,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": true,
+        "sha256": "87f4adb90dfc8281033e25e52f0b37d13ea662d3151ce8f697629850a247568a",
+        "bytes": 1437,
+        "git_blob": "c5a21f86e91e3a55d514fb54818ee146eedbce39"
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "7f54ba3033c3ef88fd42781bd7d62aae83ab99d23a825848a35098f16d447a05",
+      "decision": "REMOTE_BYTE_IDENTICAL",
+      "reason": "SHA256 dos bytes locais igual ao blob Git confirmado no HEAD publicado da PR31. Delta desde F2 lido: sucessão K delimitada e fallbacks históricos preservados.",
+      "counterevidence": "Caminho coincidente não foi usado como prova; comparação por bytes/hash e ref exato. Nenhuma republicação necessária.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": "scripts/run_checks.py"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": "docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "3ce8829dfe5e9de13afd465f1dc3f88ac642a61c3a7038df6fb2618c8061f0b9",
+      "source_bytes": 294,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": false,
+        "sha256": null,
+        "bytes": null,
+        "git_blob": null
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "24cdb857746b481257f90972c0602cf5b77377286d8be5607224872d1dda4fb7",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Stub local finalized=false com mapas vazios e identidades null; remoto fixa P0138f7b076, tree/parent, seis commits, onze blobs e recibo público.",
+      "counterevidence": "Restaurar local apagaria vinculação efetiva; não há aprovação arquitetural no binding remoto.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": "docs/missions/atlas-parity-04/c4-k-successor-ci/K-BINDING.json"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": "docs/missions/atlas-parity-04/c4-k-successor-ci/RESULT.md",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "810df48460869ff5d8651876dc946b44ad82547604623f4546a8f07ecc7560e3",
+      "source_bytes": 4091,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": false,
+        "sha256": null,
+        "bytes": null,
+        "git_blob": null
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "35effe6a75ddd846824bf2ff374acd63830cc1e50cb3b57eeea143b28008d948",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto conserva baseline e limites, acrescenta entrada terminal P01, branch efetiva, preservação PR30, época técnica falha, correção grafts e SpecKit estreito.",
+      "counterevidence": "Local anuncia13 documentos/oito controles; remoto reconcilia onze ADDs reais/manifesto10/nove controles. Dois ausentes avaliados individualmente em P01.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": "docs/missions/atlas-parity-04/c4-k-successor-ci/RESULT.md"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": "scripts/qa/atlas_parity04_k_doc_ci.py",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "47ea7febd31972e58114b32fa2bd42e56191c7a6b8418e39af829f75615a8810",
+      "source_bytes": 20606,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": false,
+        "sha256": null,
+        "bytes": null,
+        "git_blob": null
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "04c4cbc4e445ebb1274fe7d357d63a9b1443b381677f528ff306afc551008de6",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto finaliza APPROVED_HASHES, onze docs reais, preflight independente, commits brutos/OIDs e recusa grafts/replace/shallow; inventário de regressões e sucessor SpecKit estrito.",
+      "counterevidence": "Nenhuma função/classe local removida; guards path/mode/ownership/manifesto e intermediários preservados. Época falha aceita só por identidades exatas.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": "scripts/qa/atlas_parity04_k_doc_ci.py"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    },
+    {
+      "front": "P02",
+      "source_path": "tests/qa/test_atlas_parity04_k_doc_ci.py",
+      "source_base_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+      "source_sha256": "05649d7bade6e414f4823feafa493ea3d3a346adb976a497283e5caeef2aad44",
+      "source_bytes": 18249,
+      "original_base_blob": {
+        "sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3",
+        "exists": false,
+        "sha256": null,
+        "bytes": null,
+        "git_blob": null
+      },
+      "reviewed_remote_commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+      "reviewed_remote_sha256": "e40684899bbe6624c354052ebee63cacd91ac38cb22b6191736260665130643d",
+      "decision": "SEMANTICALLY_SUPERSEDED",
+      "reason": "Remoto finaliza placeholder EXPECTED_GUARD_SHA256 e inventário externo; preserva todos28 testes locais e acrescenta8 de genealogia e SpecKit.",
+      "counterevidence": "Comparação AST: nenhum teste local removido e nenhum corpo dos28 alterado; remoto36 testes.",
+      "frozen_arc09": false,
+      "recovery": {
+        "commit": "6d854b5471473d8548c9e9b271db55a52301ee1c",
+        "path": "tests/qa/test_atlas_parity04_k_doc_ci.py"
+      },
+      "independent_semantic_reviewer": "review_p02"
+    }
+  ]
+}

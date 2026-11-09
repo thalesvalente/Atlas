@@ -1,0 +1,212 @@
+{
+  "owner": "P02",
+  "status": "PARTIAL_CURRENT_DEFECTS_REQUIRE_P00_PATCH",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "executed_pass_checks": 53,
+  "baseline_defect_witnesses": 3,
+  "definition": "53 = 15 Catalog/native + 3 quotas + 14 triage + 17 navigation + 4 legacy; defect witnesses deliberately assert reproduced flaws and exit0. Not a browser PASS.",
+  "checks": [
+    {
+      "id": "EXEC-CATALOG",
+      "status": "PASS",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python probe_source_contracts.py",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02",
+      "exit_code": 0,
+      "cases": 15,
+      "receipt": "source-contract-probes.json",
+      "scope": "Actual Catalog/native reader on public synthetic copies; no browser or private host",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "receipt_sha256": "b570041600b9836588ef5b47e6ea25eb773c16f4ff348acb4fbca294938b839f"
+    },
+    {
+      "id": "EXEC-LIMITS",
+      "status": "PASS",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python probe_native_limits.py",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02",
+      "exit_code": 0,
+      "cases": 3,
+      "receipt": "native-limits-probe.json",
+      "scope": "10000-node READY; 10001-node atomic rejection; 100001-entry rejection; no 10000-node browser claim",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "receipt_sha256": "8765f62c9ee2b951dbc003cdaa2df0109c47269296d507b9e854145ac08a02e5"
+    },
+    {
+      "id": "EXEC-TRIAGE",
+      "status": "PASS",
+      "command": "node --test --test-name-pattern='selection|snapshot|source|lexeme|typed|1200' scripts/qa/test_native_triage.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/repo",
+      "exit_code": 0,
+      "cases": 14,
+      "fail": 0,
+      "skip": 0,
+      "observed_duration_ms": 203.15,
+      "scope": "Real current pure-domain tests; not DOM/browser",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "EXEC-NAV",
+      "status": "PASS_SCOPED",
+      "command": "node scripts/qa/test_native_navigation.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/repo",
+      "exit_code": 0,
+      "cases": 17,
+      "scope": "Real current pure navigation checks; not DOM/browser",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "EXEC-LEGACY",
+      "status": "PASS",
+      "command": "node --test --test-name-pattern='typed CSV|nucleus presentation pages|requirements group|ambiguous endpoints' scripts/qa/test_native_legacy.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/repo",
+      "exit_code": 0,
+      "cases": 4,
+      "fail": 0,
+      "skip": 0,
+      "observed_duration_ms": 148.837,
+      "scope": "requirements group scope/types; all filtered occurrence pages; typed CSV absent/null/empty/numeric/formula/row identity; ambiguous lineage edges",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "RED-SNAPSHOT",
+      "status": "BASELINE_DEFECT_REPRODUCED",
+      "product_result": "FAIL_EXPECTED_CONTRACT",
+      "command": "node probe_app_snapshot.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02",
+      "exit_code": 0,
+      "receipt": "app-snapshot-probe.json",
+      "finding": "P02-F001",
+      "scope": "Actual updateCatalog; DOM drawing stubbed; four actual Catalog scenarios, not browser",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "receipt_sha256": "82e96645c2b3418b644123cbda45d1193254919905d0aa2d56b841b897c67a84"
+    },
+    {
+      "id": "RED-RACE",
+      "status": "BASELINE_RACE_REPRODUCED",
+      "product_result": "FAIL_EXPECTED_CONTRACT",
+      "command": "node probe_app_race.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02",
+      "exit_code": 0,
+      "receipt": "app-race-probe.json",
+      "finding": "P02-F002",
+      "scope": "Actual load/updateCatalog with controlled fetch promises; deterministic response ordering, not browser timing",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "receipt_sha256": "901816947d3277ef16d3ff2c7a1895a2cafc11877266fab326f290b06f382bc0"
+    },
+    {
+      "id": "RED-PREFS",
+      "status": "BASELINE_PREFERENCE_REBIND_REPRODUCED",
+      "product_result": "FAIL_EXPECTED_CONTRACT",
+      "command": "node probe_app_preferences.mjs",
+      "cwd": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02",
+      "exit_code": 0,
+      "receipt": "app-preferences-probe.json",
+      "finding": "P02-F003",
+      "scope": "Actual save/restore/filter functions, two VM sessions, real reordered Catalog DTOs; not browser",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "receipt_sha256": "a185dedd33214f4526bbbdecc491141d87a6ef98339c856ba495503f4d38b58f"
+    },
+    {
+      "id": "BROWSER-RUNTIME",
+      "status": "BLOCKED",
+      "command": "Python Playwright chromium.launch(headless=True, executable_path='/usr/bin/chromium')",
+      "exit_code": 1,
+      "scope": "Runtime capability probe only",
+      "observed_error": "FATAL:chrome/browser/process_singleton_posix.cc:297 Check failed: . socket() failed: Operation not permitted (1); ptrace not permitted",
+      "cached_playwright_browser": "NOT_AVAILABLE at /home/agent/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+      "response": "No installation, no bypass/retry; existing Actions Chromium qualifies final SHA remotely",
+      "local_required": false,
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "CI-NATIVE",
+      "status": "VERIFIED_REUSED",
+      "receipt": "P02-CI-EVIDENCE.json",
+      "run_id": 42429516868,
+      "job_id": 128575079794,
+      "scope": "Installed wheel NativeView/graph/navigation/lineage on baseline SHA only",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "receipt_sha256": "0644494b7d438af375e34be18a25d42ac5538c342ec9b27452d28e07a917ee87"
+    },
+    {
+      "id": "CI-UX",
+      "status": "VERIFIED_REUSED",
+      "receipt": "P02-CI-EVIDENCE.json",
+      "run_id": 42429516778,
+      "job_id": 128575079409,
+      "scope": "Installed application synthetic UX on baseline SHA only",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "receipt_sha256": "0644494b7d438af375e34be18a25d42ac5538c342ec9b27452d28e07a917ee87"
+    },
+    {
+      "id": "CI-FINAL",
+      "status": "PENDING",
+      "owner": "P00",
+      "scope": "New product SHA requires Actions after patch; prior baseline CI cannot qualify it",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "PRIVATE-OLD-NEW",
+      "status": "NOT_RUN",
+      "scope": "Private Windows Chrome usage/zoom; restricted #39 acceptance preserved, no expansion",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "SPECIFY-CLI",
+      "status": "NOT_RUN",
+      "reason": "Not installed; no installation authorized; P00 used versioned Spec Kit skill and prerequisite helpers001/004/007 exit0",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "HARNESS-probe_source_contracts.py",
+      "status": "HASHED",
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_source_contracts.py",
+      "sha256": "b5f16e39d398cc4b413495b971d368cfb35bb2c1055da78d80bc2749e8c3fbf0",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "HARNESS-probe_native_limits.py",
+      "status": "HASHED",
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_native_limits.py",
+      "sha256": "38e07bb98269f5d11ea8068d27781c93ec6f4acdc2f483336b6120be98c187fa",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "HARNESS-probe_app_snapshot.mjs",
+      "status": "HASHED",
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_snapshot.mjs",
+      "sha256": "a939a431803b9793211245d0422c51226cf0539ce74a974e077609e4b960bd01",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "HARNESS-probe_app_race.mjs",
+      "status": "HASHED",
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_race.mjs",
+      "sha256": "15e33b9875580f785dc16db60550a71d05cd2ecb01b3c37f2f0de8640f67bf93",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    },
+    {
+      "id": "HARNESS-probe_app_preferences.mjs",
+      "status": "HASHED",
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_preferences.mjs",
+      "sha256": "6de0e7d3d84abc9b22f195593ccc2f7aa2eb7a1b590797392d23d848b0730fd8",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad"
+    }
+  ],
+  "harness_corrections": [
+    {
+      "probe": "probe_source_contracts.py",
+      "first_attempt": "FAIL_WRONG_EXPECTED_ERROR_NAME",
+      "actual_public_error": "NATIVE_SNAPSHOT_CHANGED_OR_INVALID",
+      "correction": "Expected error corrected to existing public export_source contract; no product patch; final run exit0."
+    },
+    {
+      "probe": "probe_native_limits.py",
+      "first_attempt": "FAIL_UNCAUGHT_EXPECTED_EARLY_REJECTION",
+      "actual_public_error": "NATIVE_NODE_LIMIT raised by exporter shared validator before reader",
+      "correction": "Recorded early atomic rejection, verified no output publication; final run exit0."
+    }
+  ],
+  "historical_results": "Reused prior 19-PR audit without repinning historic workflows. #8 retains3 failures; #16/#17 focal4Chromium cells PASS and6global workflow failures remain historical facts.",
+  "independent_review": "PENDING_P01"
+}

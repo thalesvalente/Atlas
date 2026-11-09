@@ -1,0 +1,127 @@
+[
+  {
+    "id": "P01-P09-READER-PROBES-0",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-c",
+      "import runpy,json; x=runpy.run_path('/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/sources/9/docs/contracts/atlas-parity-02/p01/validate_examples.py'); print(json.dumps(x[\"reader_probes\"](),indent=2))"
+    ],
+    "product_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+    "test_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "mode": "normal",
+    "exit_code": 0,
+    "log": "P09-READER-PROBES-ON-MAIN-0.log",
+    "log_sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+    "status": "PASS",
+    "results": [
+      {
+        "id": "CURRENT_ENTITIES",
+        "status": "PASS",
+        "detail": "All 13 declared graph entities survive in entities."
+      },
+      {
+        "id": "DOCUMENT_PRODUCT_NOT_RUNS",
+        "status": "PASS",
+        "detail": "Document, product and table-file metadata do not create additional runs."
+      },
+      {
+        "id": "MENTION_NEUTRAL_ORDER",
+        "status": "PASS",
+        "detail": "Duplicate mention deduplicated in order, with zero experimental edges inferred."
+      },
+      {
+        "id": "UNKNOWN_VALUES_TIMES",
+        "status": "PASS",
+        "detail": "Absent value, declared precision and unknown event time are preserved."
+      },
+      {
+        "id": "TABLE_METADATA_ONLY",
+        "status": "PASS",
+        "detail": "A table file is representable as metadata; no typed grid is fabricated."
+      },
+      {
+        "id": "SOURCE_SCOPED_COLLISION",
+        "status": "PASS",
+        "detail": "Same entity IDs in two sources retain different source-local titles."
+      },
+      {
+        "id": "ORDINAL_REORDER_LIMIT",
+        "status": "PASS",
+        "detail": "Reordering changes which bytes source-1 denotes; stable identity is not asserted."
+      },
+      {
+        "id": "INVALID_SOURCE_NOT_INDEXED",
+        "status": "PASS",
+        "detail": "The current reader rejects a missing target; no alternate source is searched."
+      },
+      {
+        "id": "INPUT_BYTES_UNCHANGED",
+        "status": "PASS",
+        "detail": "Observed synthetic inputs are byte-identical after these reads."
+      }
+    ]
+  },
+  {
+    "id": "P01-P09-READER-PROBES-1",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-O",
+      "-c",
+      "import runpy,json; x=runpy.run_path('/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P01/sources/9/docs/contracts/atlas-parity-02/p01/validate_examples.py'); print(json.dumps(x[\"reader_probes\"](),indent=2))"
+    ],
+    "product_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+    "test_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7",
+    "mode": "optimized",
+    "exit_code": 0,
+    "log": "P09-READER-PROBES-ON-MAIN-1.log",
+    "log_sha256": "e4cfe5d165a17817b256b8b0ceac18ce3dc3ad10d7425be435d01aa76de36c31",
+    "status": "PASS",
+    "results": [
+      {
+        "id": "CURRENT_ENTITIES",
+        "status": "PASS",
+        "detail": "All 13 declared graph entities survive in entities."
+      },
+      {
+        "id": "DOCUMENT_PRODUCT_NOT_RUNS",
+        "status": "PASS",
+        "detail": "Document, product and table-file metadata do not create additional runs."
+      },
+      {
+        "id": "MENTION_NEUTRAL_ORDER",
+        "status": "PASS",
+        "detail": "Duplicate mention deduplicated in order, with zero experimental edges inferred."
+      },
+      {
+        "id": "UNKNOWN_VALUES_TIMES",
+        "status": "PASS",
+        "detail": "Absent value, declared precision and unknown event time are preserved."
+      },
+      {
+        "id": "TABLE_METADATA_ONLY",
+        "status": "PASS",
+        "detail": "A table file is representable as metadata; no typed grid is fabricated."
+      },
+      {
+        "id": "SOURCE_SCOPED_COLLISION",
+        "status": "PASS",
+        "detail": "Same entity IDs in two sources retain different source-local titles."
+      },
+      {
+        "id": "ORDINAL_REORDER_LIMIT",
+        "status": "PASS",
+        "detail": "Reordering changes which bytes source-1 denotes; stable identity is not asserted."
+      },
+      {
+        "id": "INVALID_SOURCE_NOT_INDEXED",
+        "status": "PASS",
+        "detail": "The current reader rejects a missing target; no alternate source is searched."
+      },
+      {
+        "id": "INPUT_BYTES_UNCHANGED",
+        "status": "PASS",
+        "detail": "Observed synthetic inputs are byte-identical after these reads."
+      }
+    ]
+  }
+]

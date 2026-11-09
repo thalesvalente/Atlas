@@ -1,0 +1,149 @@
+{
+  "owner": "/root/p02_ui",
+  "integrator": "/root",
+  "phase": "O1",
+  "status": "READY_FOR_P01_CROSS_REVIEW_PRODUCT_PARTIAL",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "prs": [
+    {
+      "pr": 8,
+      "head_sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "disposition": "RETAIN_AND_IMPLEMENT"
+    },
+    {
+      "pr": 11,
+      "head_sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "disposition": "RETAIN_AND_IMPLEMENT"
+    },
+    {
+      "pr": 13,
+      "head_sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "disposition": "SUPERSEDED_BY_DESIGN"
+    },
+    {
+      "pr": 16,
+      "head_sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "disposition": "SUPERSEDED_BY_DESIGN"
+    },
+    {
+      "pr": 17,
+      "head_sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "disposition": "SUPERSEDED_BY_DESIGN"
+    }
+  ],
+  "requirements": 29,
+  "executed_pass_checks": 53,
+  "open_baseline_findings": [
+    "P02-F001",
+    "P02-F002",
+    "P02-F003"
+  ],
+  "required_product_writer": "P00",
+  "product_edits": "NONE",
+  "remote_mutations": "NONE",
+  "independent_review": "PENDING_P01",
+  "pr40_relation": {
+    "sha": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+    "disposition": "24_FILE_RECOVERY_ALREADY_RESOLVED_REUSED_NO_REWORK",
+    "mutation": "NONE"
+  },
+  "local_gate": {
+    "status": "LOCAL_NOT_REQUIRED",
+    "reason": "All current synthetic defects and fixes can execute in Chat runtime plus GitHub/Actions; runtime browser limitation has existing Actions alternative. Private acceptance is a separate existing human gate, not used to send ordinary work to CodexLocal."
+  },
+  "ci": "REUSED_BASELINE; FINAL_SHA_PENDING_P00",
+  "human_boundaries": [
+    "No descriptor0.2.0revocation; optional scope retained",
+    "No ARC09/0.2.1activation or frozen blob rewrite",
+    "No expansion of #39restricted acceptance; private OLD/NEW/zoom pending",
+    "No merge/deploy/release/branch deletion"
+  ],
+  "artifacts": [
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-MATRIX.json",
+      "sha256": "55e73a38d929e2829eb6a1df3a132ee0c350594e3f2f7ba96c96db718ca3686c",
+      "bytes": 91320
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-MATRIX.md",
+      "sha256": "5266d507aa4be9190b1b9190ca49a20a4b141dd67749e62347f15cf74defc8a7",
+      "bytes": 52895
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-CHECKS.json",
+      "sha256": "a49f0b0b95c28c737f5f12043f65639be844683975041c0c05fe4b3d07089678",
+      "bytes": 9886
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-CI-EVIDENCE.json",
+      "sha256": "0644494b7d438af375e34be18a25d42ac5538c342ec9b27452d28e07a917ee87",
+      "bytes": 24225
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-SOURCES.json",
+      "sha256": "63b6d6c48f602a5d87b04fd6f7746347f3fee08b80af0f048e69cbcb8fc3b952",
+      "bytes": 13855
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_source_contracts.py",
+      "sha256": "b5f16e39d398cc4b413495b971d368cfb35bb2c1055da78d80bc2749e8c3fbf0",
+      "bytes": 6115
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_native_limits.py",
+      "sha256": "38e07bb98269f5d11ea8068d27781c93ec6f4acdc2f483336b6120be98c187fa",
+      "bytes": 2708
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_snapshot.mjs",
+      "sha256": "a939a431803b9793211245d0422c51226cf0539ce74a974e077609e4b960bd01",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_race.mjs",
+      "sha256": "15e33b9875580f785dc16db60550a71d05cd2ecb01b3c37f2f0de8640f67bf93",
+      "bytes": 3092
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/probe_app_preferences.mjs",
+      "sha256": "6de0e7d3d84abc9b22f195593ccc2f7aa2eb7a1b590797392d23d848b0730fd8",
+      "bytes": 3668
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/source-contract-probes.json",
+      "sha256": "b570041600b9836588ef5b47e6ea25eb773c16f4ff348acb4fbca294938b839f",
+      "bytes": 154880
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/native-limits-probe.json",
+      "sha256": "8765f62c9ee2b951dbc003cdaa2df0109c47269296d507b9e854145ac08a02e5",
+      "bytes": 726
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/app-snapshot-probe.json",
+      "sha256": "82e96645c2b3418b644123cbda45d1193254919905d0aa2d56b841b897c67a84",
+      "bytes": 3259
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/app-race-probe.json",
+      "sha256": "901816947d3277ef16d3ff2c7a1895a2cafc11877266fab326f290b06f382bc0",
+      "bytes": 707
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/app-preferences-probe.json",
+      "sha256": "a185dedd33214f4526bbbdecc491141d87a6ef98339c856ba495503f4d38b58f",
+      "bytes": 1382
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/catalog_scenarios.json",
+      "sha256": "b16a935756a177440113b206bd3f944c46132474adc92a1e369333a0d6793730",
+      "bytes": 484420
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/native_scenarios.json",
+      "sha256": "20cfc612392f56fa861f180989787bcbbaa35e33eaf44c29db128d419b559ec9",
+      "bytes": 13207
+    }
+  ]
+}

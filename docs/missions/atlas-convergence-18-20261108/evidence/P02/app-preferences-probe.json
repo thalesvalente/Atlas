@@ -1,0 +1,37 @@
+{
+  "status": "BASELINE_PREFERENCE_REBIND_REPRODUCED",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "scope": "actual app.js savePreferences/restorePreferences/filteredRuns in VM; public synthetic Catalog DTOs; not browser QA",
+  "defect": "P02-F003: persisted source-N project/experiment filters silently bind to another package after source ordering changes across sessions",
+  "stored": {
+    "query": "run",
+    "project": "[\"source-1\",\"urn:caderno:synthetic-environment:project-water\"]",
+    "experiment": "[\"source-1\",\"urn:caderno:synthetic-environment:experiment-river\"]",
+    "status": ""
+  },
+  "selectedBefore": [
+    {
+      "source": "source-1",
+      "id": "urn:caderno:synthetic-environment:run-r1",
+      "name": "P02_CHANGED_SAME_ID"
+    },
+    {
+      "source": "source-1",
+      "id": "urn:caderno:synthetic-environment:run-r2",
+      "name": "Coleta simulada B — parcial"
+    }
+  ],
+  "selectedAfter": [
+    {
+      "source": "source-1",
+      "id": "urn:caderno:synthetic-environment:run-r1",
+      "name": "Coleta simulada A"
+    },
+    {
+      "source": "source-1",
+      "id": "urn:caderno:synthetic-environment:run-r2",
+      "name": "Coleta simulada B — parcial"
+    }
+  ],
+  "expected": "Retain source-agnostic query/status, restore source-scoped filters only under the same catalog epoch; otherwise reset them explicitly."
+}

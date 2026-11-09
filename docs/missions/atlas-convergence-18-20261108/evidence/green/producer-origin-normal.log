@@ -1,0 +1,13 @@
+test_ambient_regular_package_cannot_shadow_selected_namespace (__main__.ProducerOriginTests.test_ambient_regular_package_cannot_shadow_selected_namespace) ... ok
+test_missing_selected_module_does_not_run_parent_initializer (__main__.ProducerOriginTests.test_missing_selected_module_does_not_run_parent_initializer) ... ok
+test_namespace_selected_producer_remains_supported (__main__.ProducerOriginTests.test_namespace_selected_producer_remains_supported) ... ok
+test_parent_initializer_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_parent_initializer_symlink_is_rejected_before_execution) ... ok
+test_producer_package_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_producer_package_symlink_is_rejected_before_execution) ... ok
+test_regular_selected_producer_exports_without_changing_notebook (__main__.ProducerOriginTests.test_regular_selected_producer_exports_without_changing_notebook) ... ok
+test_source_directory_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_source_directory_symlink_is_rejected_before_execution) ... ok
+test_terminal_module_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_terminal_module_symlink_is_rejected_before_execution) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.497s
+
+OK

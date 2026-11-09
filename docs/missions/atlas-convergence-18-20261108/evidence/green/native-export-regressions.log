@@ -1,0 +1,18 @@
+test_chunking_retains_order_and_snapshot (test_native_notebook.NativeNotebookTests.test_chunking_retains_order_and_snapshot) ... ok
+test_every_field_roundtrips_without_mutating_projection_or_package (test_native_notebook.NativeNotebookTests.test_every_field_roundtrips_without_mutating_projection_or_package) ... ok
+test_existing_destination_and_source_overlap_rejected (test_native_notebook.NativeNotebookTests.test_existing_destination_and_source_overlap_rejected) ... ok
+test_fsync_failure_keeps_final_path_unpublished_and_allows_retry (test_native_notebook.NativeNotebookTests.test_fsync_failure_keeps_final_path_unpublished_and_allows_retry) ... ok
+test_incompressible_over_budget_fails_without_truncation (test_native_notebook.NativeNotebookTests.test_incompressible_over_budget_fails_without_truncation) ... ok
+test_large_repeated_legacy_caderno_uses_bounded_compressed_transport (test_native_notebook.NativeNotebookTests.test_large_repeated_legacy_caderno_uses_bounded_compressed_transport) ... ok
+test_long_valid_destination_name_does_not_affect_staging_component (test_native_notebook.NativeNotebookTests.test_long_valid_destination_name_does_not_affect_staging_component) ... ok
+test_noncanonical_table_json_rejected_even_when_payload_hashes_are_updated (test_native_notebook.NativeNotebookTests.test_noncanonical_table_json_rejected_even_when_payload_hashes_are_updated) ... ok
+test_protocol_and_native_reader_use_same_export_without_producer_installed (test_native_notebook.NativeNotebookTests.test_protocol_and_native_reader_use_same_export_without_producer_installed) ... ok
+test_publish_cannot_replace_an_existing_destination (test_native_notebook.NativeNotebookTests.test_publish_cannot_replace_an_existing_destination) ... ok
+test_tampered_payload_invalidates_whole_source (test_native_notebook.NativeNotebookTests.test_tampered_payload_invalidates_whole_source) ... ok
+test_wrong_projection_and_unknown_version_fail_closed (test_native_notebook.NativeNotebookTests.test_wrong_projection_and_unknown_version_fail_closed) ... ok
+test_zip_uses_same_readonly_protocol (test_native_notebook.NativeNotebookTests.test_zip_uses_same_readonly_protocol) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.796s
+
+OK

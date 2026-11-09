@@ -1,0 +1,109 @@
+{
+  "main_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "main_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "tracked_paths": 306,
+  "absence_probes": [
+    {
+      "marker": "tools/atlas_legacy_presentation",
+      "path_hits": [],
+      "content_hits": []
+    },
+    {
+      "marker": "validate_sanitized.py",
+      "path_hits": [],
+      "content_hits": []
+    },
+    {
+      "marker": "f4-l0-codex-desktop-20261101",
+      "path_hits": [],
+      "content_hits": []
+    },
+    {
+      "marker": "F4_L0_SOURCE_NOT_AUTHORIZED",
+      "path_hits": [],
+      "content_hits": []
+    },
+    {
+      "marker": "F4_L0_REAL_SOURCE_SHAPE_WITNESSED_SCOPED",
+      "path_hits": [],
+      "content_hits": []
+    },
+    {
+      "marker": "privacy_review",
+      "path_hits": [],
+      "content_hits": []
+    },
+    {
+      "marker": "PRODUCTION_ACQUISITION_BLOCKED",
+      "path_hits": [],
+      "content_hits": []
+    }
+  ],
+  "historical_B_deltas": [
+    {
+      "path": "tools/atlas_legacy_presentation/os_linux_isolation.py",
+      "pr18_blob": "bdb1efe3361ff78643143c4e4a316606eba05561",
+      "pr20_blob": "bdb1efe3361ff78643143c4e4a316606eba05561",
+      "byte_identical": true,
+      "changed_or_added_top_level_definitions": [],
+      "removed_top_level_definitions": []
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_supervisor.py",
+      "pr18_blob": "699a547811df63dd45e514e2906a27a5d51c97c0",
+      "pr20_blob": "0fbfd44546a59395efe8d77ed99d75b6f694cd0c",
+      "byte_identical": false,
+      "changed_or_added_top_level_definitions": [
+        "run_synthetic_probe",
+        "_probe_owned"
+      ],
+      "removed_top_level_definitions": []
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_windows_acl.py",
+      "pr18_blob": "570d94b624629193a5a7c66ea79bf2819069f866",
+      "pr20_blob": "4b3d26c26f359fae7e05ed3fc33a1bba42b375a0",
+      "byte_identical": false,
+      "changed_or_added_top_level_definitions": [
+        "verify_private_scratch",
+        "verify_private_child",
+        "create_private_scratch"
+      ],
+      "removed_top_level_definitions": []
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_windows_job.py",
+      "pr18_blob": "7e058ba358ed879da36a4725557fa6e5c1dcc656",
+      "pr20_blob": "41954d2346121059b905098c0ee6a0292bd29a0b",
+      "byte_identical": false,
+      "changed_or_added_top_level_definitions": [
+        "run_synthetic_job",
+        "_StartupEx",
+        "_SecurityCapabilities",
+        "_InheritAttributes",
+        "_SidAndAttributes",
+        "_numeric_handle",
+        "_AppContainerLaunch"
+      ],
+      "removed_top_level_definitions": []
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_worker.py",
+      "pr18_blob": "e0a80c6bfdfcce6ba998fbd95e2e7c945ff8b4fa",
+      "pr20_blob": "bdfcbf53d64152b3265e1b8fb711eb97f3335b46",
+      "byte_identical": false,
+      "changed_or_added_top_level_definitions": [
+        "_report",
+        "_is_job_breakaway_denial",
+        "_NativeChild",
+        "_native_breakaway_challenge",
+        "main",
+        "_windows_broker_worker"
+      ],
+      "removed_top_level_definitions": []
+    }
+  ],
+  "scope": "source presence and target identity; not a proof of absent equivalent behavior by filename alone",
+  "baseline_producer_origin_bug": "producer-origin-baseline-red.json",
+  "historical_validator_findings_reused": "P02-COUNTERPROOFS.json in authenticated prior audit"
+}

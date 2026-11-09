@@ -1,0 +1,568 @@
+{
+  "owner": "/root/p01_contracts",
+  "status": "O1_EXECUTED_REVIEW_READY",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "rows": [
+    {
+      "pr": 6,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "P06 qualificava uma composição histórica. Sete oráculos semânticos passam sem alteração em main; instalação, HTTP e browser têm suites atuais. Não portar a antiga preservação de seleção B após mudança em A, substituída pela política posterior de invalidação do snapshot.",
+      "requirements": [
+        {
+          "id": "P06-PROTECTED",
+          "historical": "64 arquivos protegidos, incluindo 12 do protocolo.",
+          "current": "Igualdade de bytes e modos main reutilizada do parecer anterior; não alterar protocolo.",
+          "tests": [
+            "PR19/P01 protected predicate64/64"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Prova limitada ao escopo indicado; sem equivalência de toda a PR."
+        },
+        {
+          "id": "P06-SEMANTICS",
+          "historical": "Sete cenários de precisão, ausência, estados, tempos, menções, colisões e fontes inválidas.",
+          "current": "7/7 PASS normal e -O contra SDK/Catalog main.",
+          "tests": [
+            "P01-P06-SEMANTICS-0",
+            "P01-P06-SEMANTICS-1"
+          ],
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "counterevidence": "Execução sobre fontes Python; não é instalação de wheel ou browser."
+        },
+        {
+          "id": "P06-WHEEL-HTTP",
+          "historical": "Produto instalado sem R4, HTTP fixo e fontes imutáveis.",
+          "current": "clean_install.py e testes catalog_server/native_notebook_http qualificam o produto atual.",
+          "tests": [
+            "main CI42429516799",
+            "tests/viewer/test_catalog_server.py",
+            "tests/viewer/test_native_notebook_http.py"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "CI main reutilizada, não reexecução dos harnesses históricos."
+        },
+        {
+          "id": "P06-BROWSER",
+          "historical": "Seleção/rebuild, teclado, reflow e inércia.",
+          "current": "Browser atual deve receber regressões dos defeitos P02 no SHA final.",
+          "tests": [
+            "scripts/qa/browser.mjs",
+            "P02-F001/F002"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Main ainda tem os defeitos observados por P02. O antigo oráculo keep-B conflita com invalidação global C1; não declarar equivalência integral."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [],
+      "historical_sha": "9b0a500b6612d260a9f9bd8a4c8da1be4841cf48"
+    },
+    {
+      "pr": 7,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "A tabela P03 foi preservada; a integração aprovada é Native View. Metadados genéricos e cards p03-candidate/1 eram demonstradores isolados, não obrigação de implantar nova UI arbitrária.",
+      "requirements": [
+        {
+          "id": "P03-TABLE",
+          "historical": "JS/CSS p03-table/1 congelados, tipos, ordenação e ausência.",
+          "current": "Dois assets byte-idênticos em main, exigidos pela feature004 FR009.",
+          "tests": [
+            "PR19/P01 table42 cases PASS",
+            "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+            "specs/004-native-notebook-experience/spec.md"
+          ],
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "counterevidence": "Prova limitada ao escopo indicado; sem equivalência de toda a PR."
+        },
+        {
+          "id": "P03-METADATA",
+          "historical": "DTO de metadados/refs/autoridade e componentes isolados.",
+          "current": "SDK/read_model/Catalog e NativeView preservam informações de suas superfícies, sem inferir produto de File/MIME.",
+          "tests": [
+            "P01-P09-READER-PROBES-0",
+            "tests/viewer/test_related_references.py",
+            "tests/viewer/test_native_notebook_parity.py"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Não há detalhe genérico de toda entidade na UI raiz; spec001 FR003 refere-se à jornada de runs/evidências."
+        },
+        {
+          "id": "P03-SYNTHETIC",
+          "historical": "p03-candidate/1 marcado synthetic=true, sem novo contrato persistido.",
+          "current": "Não portar cards demo como semântica de produto. NativeView usa entradas de apresentação declaradas.",
+          "tests": [
+            "specs/004-native-notebook-experience/spec.md",
+            "scripts/qa/test_native_legacy.mjs"
+          ],
+          "disposition": "REJECTED_WITH_REASON",
+          "counterevidence": "Conservar demonstradores nos refs históricos; não atribuir sua visibilidade à main."
+        },
+        {
+          "id": "P03-ISOLATION",
+          "historical": "Apresentação não invalida pacote; harness fora da main app.",
+          "current": "P02 demonstrou protocolo READY/native INVALID com 15 checks; composição ativa substitui VISIBLE_IN_MAIN_APP=false.",
+          "tests": [
+            "P02-CHECKS.json",
+            "C2-P03-35-TEST-CROSSWALK.json"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "35 métodos históricos não são automaticamente 35 métodos atuais."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [],
+      "historical_sha": "ead1f753f52f22035326b7366dd2231c62775765"
+    },
+    {
+      "pr": 9,
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "Reutilizar análise e 28 jornadas sem promover candidatos a requisitos. Recuperar apenas comportamento atual demonstrável: identidade/snapshot/preferências via P02; rótulos indexação/observação; publicação do snapshot com origem declarada; orientação ADR aceita como direção e main consolidada. Não criar generic detail nem semântica científica persistida.",
+      "requirements": [
+        {
+          "id": "P01-28-JOURNEYS",
+          "historical": "28 linhas, incluindo candidatos de apresentação e evolução persistida.",
+          "current": "28/28 mapeadas mantendo classe original e limite de requisito aprovado.",
+          "tests": [
+            "P01-JOURNEY-CROSSWALK.json"
+          ],
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "counterevidence": "J14–16 não obrigam novo detalhe arbitrário. J18/J19/J28 não autorizam protocolo novo."
+        },
+        {
+          "id": "P01-READER-PROBES",
+          "historical": "Nove probes do leitor público.",
+          "current": "9/9 PASS normal e -O sobre main sem alteração dos probes.",
+          "tests": [
+            "P01-P09-READER-PROBES-0",
+            "P01-P09-READER-PROBES-1"
+          ],
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "counterevidence": "ORDINAL_REORDER_LIMIT confirma que source-N muda de alvo, não segurança da preferência na UI."
+        },
+        {
+          "id": "P01-TIMES",
+          "historical": "Indexação, observação e publicação têm papéis distintos.",
+          "current": "Main possui campos separados; app chama indexed_at de Índice observado. Corrigir esse rótulo e manter publicação sem fallback para criação/evento.",
+          "tests": [
+            "packages/atlas/src/atlas_viewer/catalog.py",
+            "packages/atlas/src/atlas_viewer/static/app.js",
+            "packages/protocol/src/caderno_protocol/read_model.py"
+          ],
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "counterevidence": "Expor date_published é melhoria compatível; não elevar toda jornada candidata a obrigação."
+        },
+        {
+          "id": "P01-ADR",
+          "historical": "Estado de aceite deve corresponder à decisão humana versionada.",
+          "current": "Recibo #5 aceita ADR0002 v1.0 como direção; adicionar orientação atual sem editar normativos/tasks históricos.",
+          "tests": [
+            "HUMAN-APPROVAL-READBACK.json #5/6406839421"
+          ],
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "counterevidence": "Candidato pode continuar indicando pré-release. Aceite da direção não libera release ou ciência."
+        },
+        {
+          "id": "P01-WORKSHEETS",
+          "historical": "46 exemplos de perfil e worksheets de apresentação/tabela/cobertura.",
+          "current": "Casos individualizados, sem sidecar obrigatório ou equivalência dos expected_errors à API NativeView.",
+          "tests": [
+            "P01-EXAMPLE-CROSSWALK.json",
+            "PR19/P01 historical46 PASS"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Os 46 não foram reexecutados neste turno; reuso explícito."
+        }
+      ],
+      "required_patch": [
+        "P00: rótulo indexação/observação, eventual publicação do snapshot com campo declarado, nota ADR/main/0.2.0 vs NativeView.",
+        "P02/P00: corrigir vínculo de seleção/respostas/preferências conforme RED real."
+      ],
+      "human_gate": [],
+      "historical_sha": "2cd0e4686fb7456cb7c114bd778bb32a6bd9fad7"
+    },
+    {
+      "pr": 10,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Os 28 adicionais C2 qualificavam harness P03 isolado, 47 testes exatos e inatividade na app. A composição NativeView tem instalação/HTTP/browser próprios. Preservar os artefatos, substituir a infraestrutura por objetivos atuais identificados e não fingir equivalência integral de gates.",
+      "requirements": [
+        {
+          "id": "C2-28-FILES",
+          "historical": "1 workflow,15 evidências,7 scripts,5 specs, além de 57 herdados P03.",
+          "current": "28/28 com objetivo, blob e destino específico.",
+          "tests": [
+            "P01-C2-28-FILES.json"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Prova limitada ao escopo indicado; sem equivalência de toda a PR."
+        },
+        {
+          "id": "C2-47-NO-SKIP",
+          "historical": "12 SDK+35 P03 únicos; zero skip/expectedFailure.",
+          "current": "Preservar inventário; suites atuais qualificam sua própria composição.",
+          "tests": [
+            "C2-P03-35-TEST-CROSSWALK.json",
+            "scripts/run_checks.py",
+            ".github/workflows/atlas021.yml"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "run_checks.py aceita skips se unittest successful. Não alegar zero-skip47 transferido."
+        },
+        {
+          "id": "C2-FROZEN-INACTIVE",
+          "historical": "25 blobs P03 congelados/219 herdados e nenhuma ativação na main app.",
+          "current": "Feature004 FR009 preserva tabela pública; integração nativa ativa substitui isolamento da demonstração.",
+          "tests": [
+            "specs/004-native-notebook-experience/spec.md"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Main não preserva todos os 25 paths nem VISIBLE_IN_MAIN_APP=false."
+        },
+        {
+          "id": "C2-BUILD-HTTP-BROWSER",
+          "historical": "Wheel instalado, rotas fixas, Chromium real, precisão, foco, quotas, inércia.",
+          "current": "clean_install, catalog/native HTTP e browser nativo atual atendem produto corrente.",
+          "tests": [
+            "scripts/qa/clean_install.py",
+            "scripts/qa/browser_native_notebook.mjs",
+            "scripts/qa/browser_native_graph.mjs",
+            "main CI42429516799/42429516868/42429516778"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Não atribuir ao browser atual todos os cenários do demonstrador ou aceite privado OLD/NEW."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [],
+      "historical_sha": "f625f8be40156fd9fe4572a0ac2074910efd96cf"
+    },
+    {
+      "pr": 12,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "C3 é gate documental preso aos pins técnico/documental históricos e às worksheets. Não transplantar/repinar seu coletor sobre outra árvore. Provas úteis do leitor e arquitetura são reutilizadas ou reexecutadas com escopo nominal.",
+      "requirements": [
+        {
+          "id": "C3-PINS",
+          "historical": "51 blobs técnicos,82 hashes, pins 3a308ee/2cd0e.",
+          "current": "Manter recibos e manifesto no ref; O0 confirma SHAs/comentários.",
+          "tests": [
+            "PR19/P01 C3 gate",
+            "O0-CONTRACT.json"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Main não deve satisfazer o layout dos 82 históricos."
+        },
+        {
+          "id": "C3-28-46-9-11",
+          "historical": "28 jornadas,46 exemplos,9 probes,11 testes de referências.",
+          "current": "Crosswalk28/46, nove probes atuais PASS; referências atuais mapeadas nominalmente.",
+          "tests": [
+            "P01-JOURNEY-CROSSWALK.json",
+            "P01-EXAMPLE-CROSSWALK.json",
+            "P01-P09-READER-PROBES-0/1",
+            "tests/viewer/test_related_references.py"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Worksheet não é produto; contagem não prova navegador."
+        },
+        {
+          "id": "C3-OPT-ARCH",
+          "historical": "Normal/-O e fronteiras de arquitetura.",
+          "current": "Probes novos nos dois modos e CI atual Windows/Ubuntu; testes de importações/produtor/execução escondida.",
+          "tests": [
+            "P01-P06-SEMANTICS-0/1",
+            "P01-P09-READER-PROBES-0/1",
+            "tests/qa/test_architecture_boundaries.py"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Nenhuma exceção antiga de guard é transplantada."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [],
+      "historical_sha": "c0b42a17710fdf3cef3ec4ea13c840796d57d18f"
+    },
+    {
+      "pr": 14,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "O plano AP04 é sucedido por features004/007 e avaliação por capacidade. PAR005–010 têm cada uma destino/prova/contraprova. A decisão não concede retirada, migração nem equivalência privada não observada.",
+      "requirements": [
+        {
+          "id": "AP04-PAR005-010",
+          "historical": "Produtos/documentos/grafo/tempos/cobertura/storage.",
+          "current": "Seis capacidades individualizadas com fontes declaradas e provas atuais.",
+          "tests": [
+            "P01-PAR005-010.json",
+            "specs/004-native-notebook-experience/spec.md",
+            "specs/007-final-legacy-parity/spec.md"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Campo não declarado permanece desconhecido; agrupamento editorial não é ciência."
+        },
+        {
+          "id": "AP04-AUTHORITY",
+          "historical": "Fonte readonly, SDK independente, execução/revisão/integridade separados.",
+          "current": "Arquitetura e suites atuais preservam fronteiras; direção NativeView consta plan/research004.",
+          "tests": [
+            "tests/qa/test_architecture_boundaries.py",
+            "P01-P06-SEMANTICS-0",
+            "tests/viewer/test_native_notebook.py"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Não reescrever plano histórico para fingir execução; não apagar decisões humanas."
+        },
+        {
+          "id": "AP04-PLAN",
+          "historical": "Frentes históricas e contrato FileAPI opcional.",
+          "current": "Via atual substitui O1/manualO3 por File de apresentação em Caderno; contrato0.2.0 continua válido no seu escopo.",
+          "tests": [
+            "specs/004-native-notebook-experience/plan.md",
+            "specs/004-native-notebook-experience/research.md"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Sucessão técnica da composição não aposenta normativo0.2.0."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [
+        "Aceite privado OLD/NEW/Chrome Windows exato permanece separado onde não comprovado."
+      ],
+      "historical_sha": "47c94d27aeb7717eebb30804f01cd2cd33507c8a"
+    },
+    {
+      "pr": 15,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Substituição somente da via de apresentação ativa por NativeView Files conforme feature004. Descriptor0.2.0 continua APPROVED_SCOPED no recibo humano exato; não é revogado, implementado por equivalência ou reescrito.",
+      "requirements": [
+        {
+          "id": "F2-APPROVAL",
+          "historical": "0.2.0 aprovado no pacote c3ea1e82938fd61cc5a22fee973352715a5bb527.",
+          "current": "Recibo #15 preservado; NativeView usa formato/transporte próprios.",
+          "tests": [
+            "HUMAN-APPROVAL-READBACK.json #15/6539419419",
+            "specs/004-native-notebook-experience/contracts/native-view.md"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Aprovação de opção não obriga ativá-la na arquitetura posterior."
+        },
+        {
+          "id": "F2-O1-O3-TTL",
+          "historical": "Reader externo opcional→descriptor→FileAPI manual→RAM/TTL≤3600.",
+          "current": "Via atual é projeção externa opt-in→Files Caderno→SDK→NativeView.",
+          "tests": [
+            "specs/004-native-notebook-experience/plan.md",
+            "tests/viewer/test_native_notebook_http.py"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "NativeView não satisfaz por equivalência TTL0.2.0, sandboxO1 ou tokens manuais; são exclusivos da opção não ativada."
+        },
+        {
+          "id": "F2-IDENTITY-LOSS",
+          "historical": "UID/nativeID/contexto,collision/null/unresolved/lexemas distintos.",
+          "current": "NativeView preserva UID/nativeID/source_key/rawJSON e paridade por campo.",
+          "tests": [
+            "tests/viewer/test_native_notebook_parity.py",
+            "scripts/qa/test_native_legacy.mjs"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Não implementa os quatro campos candidatos0.2.1."
+        },
+        {
+          "id": "F2-QUOTAS",
+          "historical": "Quotas0.2.0 e inércia/CSV protegido.",
+          "current": "NativeView tem quotas próprias:32MiB armazenado,8MiB/chunk,256MiB expansão,hash/ordem/contagem,typedCSV.",
+          "tests": [
+            "specs/004-native-notebook-experience/contracts/native-view.md",
+            "tests/viewer/test_native_notebook.py",
+            "scripts/qa/test_native_legacy.mjs"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Não renomear quotasNativeView como quotas0.2.0."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [],
+      "historical_sha": "54bb16d350f7bc34fafb95438bd64a2397d58bf3"
+    },
+    {
+      "pr": 19,
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Adendo de dez documentos O1/O3 sucedido na composição da aplicação pelo NativeView. N01–N24 têm destino individual: invariantes comuns mantidos, exclusivos O1/TTL não atribuídos à via nova. Bug atual de origem pré-execução é tratado via #18/P03.",
+      "requirements": [
+        {
+          "id": "F4-C0-ROUTES",
+          "historical": "Via Caderno e opção O1/FileAPI segregadas, sem produtor no viewer.",
+          "current": "NativeView usa Files verificados na viaCaderno; exportador fica externo; O3 manual não ativado.",
+          "tests": [
+            "specs/004-native-notebook-experience/plan.md",
+            "tests/qa/test_architecture_boundaries.py",
+            "tests/viewer/test_native_notebook_http.py"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Ausência de tools/atlas_legacy_presentation na main não é defeito."
+        },
+        {
+          "id": "F4-C0-N24",
+          "historical": "24 invariantes de identidade/lossless/export/inércia/I/O/contexto/autoridade.",
+          "current": "N01–N24 individualizados, com bug P03/P02 explicitamente pendente de patch.",
+          "tests": [
+            "P01-N01-24.json"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "N14 origem preexec e N18 binding de snapshot não estão resolvidos pela classificação documental."
+        },
+        {
+          "id": "F4-C0-HARDLIMITS",
+          "historical": "O1 até3 arquivos64MiB/192MiB,30s/256MiB hardbudget,WindowsTOCTOU/UNC/ADS.",
+          "current": "O1 não portado. Exporter atual usa checkout confiável explicitamente escolhido; origem deve ser conferida antes da importação.",
+          "tests": [
+            "P03 symlink RED; P00 patch/test pending",
+            "specs/004-native-notebook-experience/plan.md"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Não alegar sandbox contra código malicioso, hardbudgetWindows ou corpusprivado testados."
+        },
+        {
+          "id": "F4-C0-FRESHNESS-TTL",
+          "historical": "TTL/reimport/reindex invalidam contexto; frescor depende reobservação.",
+          "current": "NativeView pinsha/revisão/digest e reindex explícito; TTL0.2.0 continua exclusivo da opção manual.",
+          "tests": [
+            "tests/viewer/test_native_notebook_parity.py",
+            "tests/viewer/test_native_notebook_http.py",
+            "P02-F001/F002"
+          ],
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "counterevidence": "Hash autoconsistente não prova origem/frescor; não equivaler TTL."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [
+        "Aceites privados/Windows/produção permanecem separados; não são necessários para dispor tecnicamente este adendo."
+      ],
+      "historical_sha": "d498504cd2c4d230088f86e04e55624bbe32df79"
+    },
+    {
+      "pr": 21,
+      "disposition": "DEFERRED_HUMAN_DECISION",
+      "rationale": "Gate normativo humano real: aprovar ou rejeitar proposta0.2.1 vinculada aos cinco blobs d5bdc86. Preservar os onze documentos e14 oráculos; nenhum NativeView/CI K decide isso.",
+      "requirements": [
+        {
+          "id": "ARC09-FROZEN5",
+          "historical": "Cinco normativos no d5bdc86ef68cad2f5d503945ca788c3a74df4839.",
+          "current": "Blobs preservados, sem alteração ou incorporação em main.",
+          "tests": [
+            "P01-ARC09-FROZEN.json"
+          ],
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "counterevidence": "source_key na NativeView não é aprovação0.2.1."
+        },
+        {
+          "id": "ARC09-ORACLES",
+          "historical": "14 oráculos e12linhasPKEY,quatro campos candidatos.",
+          "current": "Proposta documental não instalada; #40 mantém suplementoN1–N5 separado.",
+          "tests": [
+            "PR19/P03 documentary14oracle PASS",
+            "PR40 separate supplement"
+          ],
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "counterevidence": "PASS de checker documental não é produto0.2.1 executado."
+        },
+        {
+          "id": "ARC09-HUMAN",
+          "historical": "APPROVE/REJECT version-bound eG4/G5/G6.",
+          "current": "Nenhum recibo0.2.1 observado; manter PENDING_HUMAN.",
+          "tests": [
+            "O0 readback",
+            "HUMAN-APPROVAL-READBACK.json"
+          ],
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "counterevidence": "CIverde#31 e fechamento administrativo não respondem à decisão."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [
+        "Decisão humana exata sobre descriptor0.2.1, cinco blobs d5bdc86 e gates contratuais pertinentes."
+      ],
+      "historical_sha": "38f7b07602ed407e1fca54a5053861f7605dd9f5"
+    },
+    {
+      "pr": 31,
+      "disposition": "REJECTED_WITH_REASON",
+      "rationale": "Rejeitar porte do gate genealógico F2/K para main: ele qualifica objeto documental exato, não execuçãoNativeView. Preservar guard terminal,binding,36K+32F2; não repinar,enfraquecer ou atribuir negativos à CI atual. Decisão sobre infraestrutura não rejeita nem aprova0.2.1.",
+      "requirements": [
+        {
+          "id": "K-TERMINAL",
+          "historical": "F2=54bb16d,K=38f7b076,11docs,seisépocas e13infraautorizados.",
+          "current": "Guardar no branch histórico qualificado; main tem genealogia/layout distintos.",
+          "tests": [
+            "PR19/P03 terminalbinding and37jobsSUCCESS",
+            "K-NEGATIVES-PRESERVED.json"
+          ],
+          "disposition": "REJECTED_WITH_REASON",
+          "counterevidence": "Rejeição do guard em main seria esperada, não bug a consertar."
+        },
+        {
+          "id": "K-GIT-NEGATIVES",
+          "historical": "Grafts/replaces/shallow/ancestry/merge/pathmodos/blobs e proibido revertido.",
+          "current": "Preservar controles no escopoexato; nova retomadaK exige requalificação.",
+          "tests": [
+            "K-NEGATIVES-PRESERVED.json"
+          ],
+          "disposition": "REJECTED_WITH_REASON",
+          "counterevidence": "Não alegar36/36 novos testes: auditoria anterior replay33/36 e CIhistórica completa são provas diferentes."
+        },
+        {
+          "id": "K-PREFLIGHT-MANIFEST",
+          "historical": "Manifesto canônico,hashsexternos,fonte preexec,nega hashtableexecutável/codec/rehash.",
+          "current": "Preservar código/testes sem executar gate candidato no buildmain sem necessidade deconsumoK.",
+          "tests": [
+            "PR19/P03",
+            "K-NEGATIVES-PRESERVED.json"
+          ],
+          "disposition": "REJECTED_WITH_REASON",
+          "counterevidence": "Integridade do guard não confere autoridade normativa."
+        },
+        {
+          "id": "K-SPECKIT-SUCCESSION",
+          "historical": "Exceção literal autorizada ao coletor histórico; #30 pinantigo sucedido por#31terminal.",
+          "current": "Não transportar exceção histórica nem repetir#30. SpecKit helpers atuais executados porP00; CLIausente NOT_RUN.",
+          "tests": [
+            "O0 SpecKit001/004/007",
+            "PR19/P03 #30 disposition"
+          ],
+          "disposition": "REJECTED_WITH_REASON",
+          "counterevidence": "36K não são44 testes#30; manter limites adicionais disponíveis para seleção futura."
+        }
+      ],
+      "required_patch": [],
+      "human_gate": [],
+      "historical_sha": "6d854b5471473d8548c9e9b271db55a52301ee1c"
+    }
+  ],
+  "source_inventory": "P01-ALL-SOURCES.json",
+  "crosswalks": [
+    "P01-JOURNEY-CROSSWALK.json",
+    "P01-EXAMPLE-CROSSWALK.json",
+    "P01-C2-28-FILES.json",
+    "C2-P03-35-TEST-CROSSWALK.json",
+    "P01-PAR005-010.json",
+    "P01-N01-24.json",
+    "P01-ARC09-FROZEN.json",
+    "K-NEGATIVES-PRESERVED.json"
+  ],
+  "independent_review": "PENDING_P03",
+  "relation_to_pr40": "PR40 Draft7ac3e76d immutable separate;24 resolved dispositions reused, not reopened",
+  "limitations": [
+    "No product writes,remote mutations,installs,private access",
+    "Final candidate QA/CI belongs to P00 O3, baseline green is not final green",
+    "Generic entity detail recommendation withdrawn after approved-scope check",
+    "0.2.0 approved optional;0.2.1 frozen unapproved"
+  ],
+  "disposition_counts": {
+    "SUPERSEDED_BY_DESIGN": 7,
+    "RETAIN_AND_IMPLEMENT": 1,
+    "DEFERRED_HUMAN_DECISION": 1,
+    "REJECTED_WITH_REASON": 1
+  },
+  "requirements_count": 38
+}

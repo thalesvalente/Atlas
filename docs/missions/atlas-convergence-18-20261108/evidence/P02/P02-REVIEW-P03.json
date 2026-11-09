@@ -1,0 +1,179 @@
+{
+  "reviewer": "/root/p02_ui",
+  "author": "/root/p03_reader",
+  "status": "PASS_SCOPED_O1_ANALYSIS",
+  "product_status": "PARTIAL_KNOWN_CURRENT_PRODUCER_ORIGIN_FIX_REQUIRED",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "reviewed_matrix_sha256": "272b4e45aab4c1d8b7f8a2e0801a564fdcab8556b3b887419715cdf976accd98",
+  "reviewed_handoff_sha256": "e81fc5e189a9b1a125d4f608dff4ccd33ca7cd1121e7b51c8c907a09db52b1e1",
+  "requirement_reviews": [
+    {
+      "id": "P03-18-01",
+      "author_disposition": "RETAIN_AND_IMPLEMENT",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-18-02",
+      "author_disposition": "EQUIVALENT_IN_MAIN",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-18-03",
+      "author_disposition": "SUPERSEDED_BY_DESIGN",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-18-04",
+      "author_disposition": "EQUIVALENT_IN_MAIN",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-18-05",
+      "author_disposition": "EQUIVALENT_IN_MAIN",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-18-06",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-18-07",
+      "author_disposition": "DEFERRED_HUMAN_DECISION",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-20-01",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-20-02",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-20-03",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-20-04",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-20-05",
+      "author_disposition": "DEFERRED_HUMAN_DECISION",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-20-06",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-22-01",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-22-02",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-22-03",
+      "author_disposition": "REJECTED_WITH_REASON",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    },
+    {
+      "id": "P03-22-04",
+      "author_disposition": "DEFERRED_HUMAN_DECISION",
+      "review": "ACCEPTED_SCOPED",
+      "reason": "Scope, counterevidence, source pins and pending human boundary supported; see P02-REVIEW-P03.md"
+    }
+  ],
+  "artifact_hashes_verified": 13,
+  "source_pins_verified": 43,
+  "source_test_receipts": {
+    "normal": 32,
+    "optimized": 32,
+    "same_test_ids": true,
+    "distinct": 32,
+    "all_pass": true,
+    "execution": "Author receipts authenticated; not rerun by P02"
+  },
+  "independent_executions": [
+    {
+      "case": "module_symlink",
+      "expected": "source outside selected root rejected before execution",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+      "outside_module_executed": true,
+      "package_published": false,
+      "result": "RED",
+      "review_expectation": "Baseline must reproduce out-of-root execution despite BLOCKED and without publishing package",
+      "review_check": "PASS"
+    },
+    {
+      "case": "ambient_package_shadows_selected_namespace",
+      "expected": "source outside selected root rejected before execution",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+      "outside_module_executed": true,
+      "package_published": false,
+      "result": "RED",
+      "review_expectation": "Baseline must reproduce out-of-root execution despite BLOCKED and without publishing package",
+      "review_check": "PASS"
+    },
+    {
+      "case": "selected_regular_producer_positive",
+      "review_check": "PASS",
+      "returncode": 0,
+      "selected_project_called": true,
+      "package_published": true,
+      "stdout": "{\"status\": \"EXPORTED\", \"output\": \"/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/p03-positive-w9n5hdik/package\", \"revision\": \"projection-sha256:4beba2ce13976b7bd8b24937703ca2e7057f4cc38c17c2bdf7e61bd6b7d26e66\", \"entries\": 2, \"projection_sha256\": \"4beba2ce13976b7bd8b24937703ca2e7057f4cc38c17c2bdf7e61bd6b7d26e66\", \"provider_calls\": 0, \"scientific_approval\": \"NOT_EVALUATED\"}\n",
+      "stderr": "",
+      "scope": "New P02 synthetic positive check; trusted selected package; not host sandbox certification"
+    }
+  ],
+  "new_blocking_findings": [],
+  "known_open_current_findings": [
+    "P03-CURRENT-PRODUCER-PREIMPORT-001"
+  ],
+  "implementation_approval": "NOT_APPLICABLE_PRODUCT_PATCH_NOT_YET_WRITTEN",
+  "final_sha_ci": "PENDING_P00",
+  "private_acceptance": "NOT_RUN_UNCHANGED",
+  "local_gate": "LOCAL_NOT_REQUIRED",
+  "ownership": "P02 wrote only its own review/probe files; product and P03 files read-only",
+  "artifacts": [
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-REVIEW-P03.md",
+      "sha256": "b9b4780d75b1532a50f97a9288c762c232a6b2143408b156bc6e44913fef09f4"
+    },
+    {
+      "path": "/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/P02-REVIEW-P03-PROBES.json",
+      "sha256": "6e1f33cf307f089fec2809bdaccf2cd4a6d409847eb94a3d88b0451a36fe6978"
+    }
+  ]
+}

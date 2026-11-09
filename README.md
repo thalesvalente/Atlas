@@ -2,17 +2,20 @@
 
 **Interface local para explorar registros científicos, sem alterar o acervo.**
 
-Candidata de fechamento: [PR Draft #25](https://github.com/thalesvalente/Atlas/pull/25).
-Árvore/linhagem, busca, vínculos com retorno, tabelas/exports e Windows foram
-conferidos com o Caderno real; [matriz e checklist](specs/004-native-notebook-experience/final-close.md).
-O recibo terminal fixa o SHA/CI/Codex/QA. Aceite humano permanece pendente.
+Base consolidada: [main em `8f8fe01`](https://github.com/thalesvalente/Atlas/commit/8f8fe01c3041361aa2607194d66af6a640d834ad).
+O fechamento da [PR #25](https://github.com/thalesvalente/Atlas/pull/25) e sua
+[matriz e checklist](specs/004-native-notebook-experience/final-close.md) são recibos
+históricos de engenharia. A [PR #39 recebeu aceite restrito de apresentação](https://github.com/thalesvalente/Atlas/pull/39#issuecomment-6715128638);
+isso não amplia os demais gates humanos de paridade OLD/NEW, promoção ou release.
+As disposições das contribuições anteriores e os reparos posteriores estão no
+[handoff de convergência](docs/missions/atlas-convergence-18-20261108/ATLAS-CONVERGENCE-HANDOFF.md).
 
-Esta candidata possui uma experiência **nativa do Caderno**, além da consulta pelo protocolo público. A projeção original do R4 é reutilizada por um adaptador externo; a nova interface usa DOM/SVG e o componente P03, não um iframe ou o JavaScript do renderer antigo. O R4 e o Caderno existentes permanecem intactos. PR Draft: sem release, promoção científica ou autorização de migração/limpeza.
+O Atlas possui uma experiência **nativa do Caderno**, além da consulta pelo protocolo público. A projeção original do R4 é reutilizada por um adaptador externo; a interface usa DOM/SVG e o componente P03. O R4 e o Caderno existentes permanecem intactos. A integração técnica não concede release, promoção científica ou autorização de migração/limpeza.
 
 ## Iniciar o Atlas NOVO — independente do R4
 
 A aplicação reengenheirada é `atlas-viewer`, no repositório **thalesvalente/Atlas**.
-Instale os dois pacotes do checkout desta PR (Python 3.11+):
+Instale os dois pacotes do checkout selecionado (Python 3.11+):
 
 ```powershell
 python -m pip install ./packages/protocol ./packages/atlas
@@ -123,6 +126,8 @@ O Atlas R4 antigo continua referência operacional até equivalência conferida 
 O payload de apresentação `atlas-native-view/1` é conteúdo de Files verificados no perfil já existente; não redefine o protocolo científico ou inventa atividades para nós legados. Campos originais são reconstruídos e conferidos por digest. O wheel do Atlas não inclui o produtor privado. Fontes somente leitura, saídas derivadas em diretório novo, sem providers, bancos obrigatórios ou SaaS.
 
 [ADR-0001](docs/architecture/ADR-0001-atlas-protocol-producers-storage.md) e [contrato A/B](docs/coordination/AB-CONTRACT.md) permanecem vinculantes. Digest é integridade observada, não autenticidade, aprovação científica ou confirmação de presença dos documentos externos.
+
+A [ADR-0002 v1.0 foi aceita como direção de estabilização](https://github.com/thalesvalente/Atlas/pull/5#issuecomment-6406839421), no escopo e versão daquele recibo. O [descriptor externo 0.2.0 foi aprovado em escopo opcional](https://github.com/thalesvalente/Atlas/pull/15#issuecomment-6539419419) e continua preservado: Native View Files é outra interface, sem implementação ou revogação implícita desse contrato. A proposta ARC-09/0.2.1 continua congelada e depende de decisão humana própria.
 
 ## Consulta pelo protocolo existente
 

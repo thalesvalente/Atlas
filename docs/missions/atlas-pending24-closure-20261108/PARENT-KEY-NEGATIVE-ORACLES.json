@@ -1,0 +1,113 @@
+{
+  "schema": "atlas-parent-key-documentary-supplement/1",
+  "synthetic": true,
+  "private_data": false,
+  "normative": false,
+  "product_0_2_1_executed": false,
+  "arc09_approved": false,
+  "frozen_proposal_commit": "d5bdc86ef68cad2f5d503945ca788c3a74df4839",
+  "proposal_readback_commit": "38f7b07602ed407e1fca54a5053861f7605dd9f5",
+  "source_fixture_sha256": "95d48b2ca41f87978f4c16bd7cd4ba802cc7736ff07c6f347635703ae4d507ee",
+  "cases": [
+    {
+      "id": "N1",
+      "data_origin": "INVENTED_ONLY_ADDED_P01_2026_11_04",
+      "input": {
+        "node": {
+          "key": "child-N1",
+          "ui_id": "ui-child-N1",
+          "native_id": null,
+          "kind": "Stage",
+          "label": "Synthetic invalid parent",
+          "parent_key": ""
+        }
+      },
+      "expected_future": {
+        "import_result": "REJECT_ATOMIC",
+        "descriptor_emitted": false,
+        "parent_key_presence_emitted": false,
+        "partial_tree_emitted": false
+      }
+    },
+    {
+      "id": "N2",
+      "data_origin": "INVENTED_ONLY_ADDED_P01_2026_11_04",
+      "input": {
+        "node": {
+          "key": "child-N2",
+          "ui_id": "ui-child-N2",
+          "native_id": null,
+          "kind": "Stage",
+          "label": "Synthetic invalid parent",
+          "parent_key": 17
+        }
+      },
+      "expected_future": {
+        "import_result": "REJECT_ATOMIC",
+        "descriptor_emitted": false,
+        "parent_key_presence_emitted": false,
+        "partial_tree_emitted": false
+      }
+    },
+    {
+      "id": "N3",
+      "data_origin": "INVENTED_ONLY_ADDED_P01_2026_11_04",
+      "input": {
+        "node": {
+          "key": "child-N3",
+          "ui_id": "ui-child-N3",
+          "native_id": null,
+          "kind": "Stage",
+          "label": "Synthetic invalid parent",
+          "parent_key": false
+        }
+      },
+      "expected_future": {
+        "import_result": "REJECT_ATOMIC",
+        "descriptor_emitted": false,
+        "parent_key_presence_emitted": false,
+        "partial_tree_emitted": false
+      }
+    },
+    {
+      "id": "N4",
+      "data_origin": "INVENTED_ONLY_ADDED_P01_2026_11_04",
+      "input": {
+        "node": {
+          "key": "child-N4",
+          "ui_id": "ui-child-N4",
+          "native_id": null,
+          "kind": "Stage",
+          "label": "Synthetic invalid parent",
+          "parent_key": {}
+        }
+      },
+      "expected_future": {
+        "import_result": "REJECT_ATOMIC",
+        "descriptor_emitted": false,
+        "parent_key_presence_emitted": false,
+        "partial_tree_emitted": false
+      }
+    },
+    {
+      "id": "N5",
+      "data_origin": "INVENTED_ONLY_ADDED_P01_2026_11_04",
+      "input": {
+        "node": {
+          "key": "child-N5",
+          "ui_id": "ui-child-N5",
+          "native_id": null,
+          "kind": "Stage",
+          "label": "Synthetic invalid parent",
+          "parent_key": []
+        }
+      },
+      "expected_future": {
+        "import_result": "REJECT_ATOMIC",
+        "descriptor_emitted": false,
+        "parent_key_presence_emitted": false,
+        "partial_tree_emitted": false
+      }
+    }
+  ]
+}

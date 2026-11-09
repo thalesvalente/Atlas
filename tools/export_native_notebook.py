@@ -9,7 +9,7 @@ import argparse
 from collections import defaultdict
 from datetime import datetime, timezone
 import hashlib
-import importlib
+from importlib import machinery, util
 import json
 import os
 from pathlib import Path
@@ -184,6 +184,97 @@ def safe_root(path: Path) -> Path:
     return path.resolve(strict=True)
 
 
+def _producer_origin(spec, expected: Path, *, package: bool) -> None:
+    """Check the effective import target without running its loader."""
+    if spec is None:
+        raise ImportError("PRODUCER_MODULE_UNAVAILABLE")
+    origin = spec.origin
+    if package:
+        initializer = expected / "__init__.py"
+        if initializer.exists():
+            if origin is None or safe_root(Path(origin)) != initializer:
+                raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+        elif origin is not None:
+            raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+        locations = list(spec.submodule_search_locations or ())
+        if not locations or any(safe_root(Path(p)) != expected for p in locations):
+            raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+    elif (origin is None or safe_root(Path(origin)) != expected
+          or spec.submodule_search_locations is not None):
+        raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+
+
+def _loaded_producer_origin(module, expected: Path, *, package: bool) -> None:
+    """Cached modules and initialized package paths must obey the same boundary."""
+    _producer_origin(getattr(module, "__spec__", None), expected, package=package)
+    expected_file = expected / "__init__.py" if package else expected
+    actual_file = getattr(module, "__file__", None)
+    if expected_file.exists():
+        if actual_file is None or safe_root(Path(actual_file)) != expected_file:
+            raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+    elif actual_file is not None:
+        raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+    if package:
+        locations = list(getattr(module, "__path__", ()))
+        if not locations or any(safe_root(Path(p)) != expected for p in locations):
+            raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
+
+
+def project_selected_producer(code: Path, notebook: Path):
+    """Load only the selected producer chain; its code/dependencies remain trusted.
+
+    This is an origin guard, not a sandbox or protection against a trusted
+    initializer deliberately changing import hooks or files during execution.
+    """
+    src = safe_root(code / "src")
+    layout = [("r4", src / "r4", True),
+              ("r4.campaigns", src / "r4/campaigns", True),
+              ("r4.campaigns.notebook_query_projection",
+               src / "r4/campaigns/notebook_query_projection.py", False)]
+    # Validate the whole physical chain before *any* package initializer runs.
+    for _, expected, package in layout:
+        safe_root(expected)
+        if package:
+            if not expected.is_dir():
+                raise ValueError("PRODUCER_PACKAGE_DIRECTORY_REQUIRED")
+            initializer = expected / "__init__.py"
+            if initializer.exists() or initializer.is_symlink():
+                safe_root(initializer)
+        elif not expected.is_file():
+            raise ValueError("PRODUCER_MODULE_FILE_REQUIRED")
+    original_path = sys.path[:]
+    sys.path.insert(0, str(src))
+    try:
+        parent = None
+        for name, expected, package in layout:
+            if name in sys.modules:
+                module = sys.modules[name]
+                _loaded_producer_origin(module, expected, package=package)
+            else:
+                # Resolve children only after their parent exists: namespace
+                # packages use that parent's real __path__ for resolution.
+                search = sys.path if parent is None else parent.__path__
+                spec = machinery.PathFinder.find_spec(name, search)
+                _producer_origin(spec, expected, package=package)
+                module = util.module_from_spec(spec)
+                sys.modules[name] = module
+                try:
+                    # Execute exactly the validated spec, not a second finder.
+                    spec.loader.exec_module(module)
+                    if sys.modules.get(name) is not module:
+                        raise ValueError("PRODUCER_MODULE_REPLACED_DURING_IMPORT")
+                    _loaded_producer_origin(module, expected, package=package)
+                except BaseException:
+                    sys.modules.pop(name, None)
+                    raise
+            if parent is not None:
+                setattr(parent, name.rsplit(".", 1)[1], module)
+            parent = module
+        return parent.project(notebook)
+    finally:
+        sys.path[:] = original_path
+
+
 
 def _sync_directory(path: Path) -> None:
     """Flush directory entries on POSIX; Windows fsyncs each file."""
@@ -270,11 +361,7 @@ def main(argv=None):
             if args.notebook_root is None: parser.error("--notebook-root é obrigatório com --r4-code")
             code, notebook = safe_root(args.r4_code), safe_root(args.notebook_root)
             roots = [code, notebook]
-            sys.path.insert(0, str(code / "src"))
-            producer = importlib.import_module("r4.campaigns.notebook_query_projection")
-            if not Path(producer.__file__).resolve().is_relative_to(code / "src"):
-                raise ValueError("PRODUCER_MODULE_OUTSIDE_SELECTED_CODE")
-            data = producer.project(notebook)
+            data = project_selected_producer(code, notebook)
         else:
             source_file = safe_root(args.projection)
             roots = [source_file.parent]

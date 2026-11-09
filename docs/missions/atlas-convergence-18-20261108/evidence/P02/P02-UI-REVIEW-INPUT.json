@@ -1,0 +1,21 @@
+{
+  "head": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "head_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "branch": "fix/atlas-convergence18-20261108",
+  "files": [
+    {
+      "path": "packages/atlas/src/atlas_viewer/static/app.js",
+      "preimage_blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+      "worktree_blob": "a47568daf391498910dcf81fa52f8b805bf847fa",
+      "sha256": "38a09b5c54d899f583ac8bfa5453b104403eba52c5dfdd9e53dc4652f02638af",
+      "bytes": 22956
+    },
+    {
+      "path": "scripts/qa/test_protocol_snapshot.mjs",
+      "preimage_blob": null,
+      "worktree_blob": "f4e9e283f9b5d7a1993a115b79ce7289c5d9eea8",
+      "sha256": "a57269959ef861dc82dab7af137099afc705e2eddb7ae33e4643adb340e351e7",
+      "bytes": 8635
+    }
+  ]
+}

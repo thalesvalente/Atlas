@@ -1,0 +1,774 @@
+[
+  {
+    "id": "current-profile-minimal",
+    "file": "current-profile-minimal.json",
+    "format": "CADERNO_CURRENT",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "EQUIVALENT_IN_MAIN",
+    "current": "Perfil atual inalterado; semântica do validador preservada.",
+    "tests": [
+      "protocol adversarial current-profile validation",
+      "P09 current reader probes"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "current-profile-second-source",
+    "file": "current-profile-second-source.json",
+    "format": "CADERNO_CURRENT",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "EQUIVALENT_IN_MAIN",
+    "current": "Perfil atual inalterado; semântica do validador preservada.",
+    "tests": [
+      "protocol adversarial current-profile validation",
+      "P09 current reader probes"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-current-missing-reference",
+    "file": "negative-current-missing-reference.json",
+    "format": "CADERNO_CURRENT",
+    "expected_valid": false,
+    "expected_errors": [
+      "SDK:MISSING_REFERENCE"
+    ],
+    "disposition": "EQUIVALENT_IN_MAIN",
+    "current": "Perfil atual inalterado; semântica do validador preservada.",
+    "tests": [
+      "protocol adversarial current-profile validation",
+      "P09 current reader probes"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-current-synthetic-approval",
+    "file": "negative-current-synthetic-approval.json",
+    "format": "CADERNO_CURRENT",
+    "expected_valid": false,
+    "expected_errors": [
+      "SDK:SYNTHETIC_APPROVAL"
+    ],
+    "disposition": "EQUIVALENT_IN_MAIN",
+    "current": "Perfil atual inalterado; semântica do validador preservada.",
+    "tests": [
+      "protocol adversarial current-profile validation",
+      "P09 current reader probes"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-current-missing-value-reason",
+    "file": "negative-current-missing-value-reason.json",
+    "format": "CADERNO_CURRENT",
+    "expected_valid": false,
+    "expected_errors": [
+      "SDK:MISSING_VALUE_REASON"
+    ],
+    "disposition": "EQUIVALENT_IN_MAIN",
+    "current": "Perfil atual inalterado; semântica do validador preservada.",
+    "tests": [
+      "protocol adversarial current-profile validation",
+      "P09 current reader probes"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "presentation-minimal",
+    "file": "presentation-minimal.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "presentation-contextual-collision",
+    "file": "presentation-contextual-collision.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "presentation-explicit-input",
+    "file": "presentation-explicit-input.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-mention-as-input",
+    "file": "negative-mention-as-input.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "RELATION_SEMANTICS"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-cross-source-resolution",
+    "file": "negative-cross-source-resolution.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "CROSS_SOURCE_RELATION"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-document-as-run",
+    "file": "negative-document-as-run.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "ENTITY_KIND"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-duplicate-contextual-id",
+    "file": "negative-duplicate-contextual-id.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "DUPLICATE_CONTEXTUAL_ID"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-stable-ordinal-link",
+    "file": "negative-stable-ordinal-link.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "ORDINAL_STABILITY"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-event-from-file-time",
+    "file": "negative-event-from-file-time.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "TIME_ROLE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-timezone-missing",
+    "file": "negative-timezone-missing.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "TIME_FORMAT"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-unknown-time-precision",
+    "file": "negative-unknown-time-precision.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "TIME_UNKNOWN"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-input-subject-document",
+    "file": "negative-input-subject-document.json",
+    "format": "ATLAS_P01_PRESENTATION_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "RELATION_SUBJECT"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "table-typed-minimal",
+    "file": "table-typed-minimal.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "table-incompatible-explicit",
+    "file": "table-incompatible-explicit.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "table-semantic-unknown",
+    "file": "table-semantic-unknown.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-type",
+    "file": "negative-table-type.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "CELL_TYPE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-order",
+    "file": "negative-table-order.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "ROW_ORDER"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-column-order",
+    "file": "negative-table-column-order.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COLUMN_ORDER"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-missing-reason",
+    "file": "negative-table-missing-reason.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "CELL_MISSING_REASON"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-lexical-loss",
+    "file": "negative-table-lexical-loss.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "CELL_LEXEME"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-comparison-unit",
+    "file": "negative-table-comparison-unit.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COMPARISON_COMPATIBILITY"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-comparison-missing",
+    "file": "negative-table-comparison-missing.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COMPARISON_COMPATIBILITY"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-unknown-semantic",
+    "file": "negative-table-unknown-semantic.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COMPARISON_COMPATIBILITY"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-table-promoted-protocol",
+    "file": "negative-table-promoted-protocol.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "TABLE_CONTRACT_CLASS"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Intenção de tipos/ausência/exatidão/ordem é atendida por P03/NativeView; worksheet não é API científica.",
+    "tests": [
+      "native_legacy typed CSV/literal values/reading order",
+      "P03 table protected component"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "coverage-minimal",
+    "file": "coverage-minimal.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "coverage-denominator-unknown",
+    "file": "coverage-denominator-unknown.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "coverage-empty-universe",
+    "file": "coverage-empty-universe.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": true,
+    "expected_errors": [],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-unknown-zero",
+    "file": "negative-coverage-unknown-zero.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "UNKNOWN_NOT_NULL"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-no-unknown-reason",
+    "file": "negative-coverage-no-unknown-reason.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "UNKNOWN_REASON"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-denominator-scope",
+    "file": "negative-coverage-denominator-scope.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "DENOMINATOR_SCOPE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-denominator-unit",
+    "file": "negative-coverage-denominator-unit.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "DENOMINATOR_UNIT"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-fractional-count",
+    "file": "negative-coverage-fractional-count.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COUNT_TYPE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-negative-count",
+    "file": "negative-coverage-negative-count.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COUNT_TYPE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-boolean-count",
+    "file": "negative-coverage-boolean-count.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COUNT_TYPE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-subset-exceeds",
+    "file": "negative-coverage-subset-exceeds.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "SUBSET_COUNT"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-required-sidecar",
+    "file": "negative-coverage-required-sidecar.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "SIDECAR_AUTHORITY"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-inferred-collection",
+    "file": "negative-coverage-inferred-collection.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COLLECTION_INFERENCE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-known-without-evidence",
+    "file": "negative-coverage-known-without-evidence.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "COUNT_EVIDENCE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-loss-mismatch",
+    "file": "negative-coverage-loss-mismatch.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "LOSS_COUNT"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-coverage-zero-denominator-percent",
+    "file": "negative-coverage-zero-denominator-percent.json",
+    "format": "ATLAS_P01_COVERAGE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "RATIO_UNDEFINED"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Populações declaradas por origem; ausência não vira zero, denominadores não são inferidos; sem sidecar obrigatório.",
+    "tests": [
+      "spec007 FR013/SC007",
+      "native_legacy overview test"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  },
+  {
+    "id": "negative-json-numeric-overflow",
+    "file": "negative-json-numeric-overflow.json",
+    "format": "ATLAS_P01_TABLE_EXAMPLE",
+    "expected_valid": false,
+    "expected_errors": [
+      "JSON_NONFINITE"
+    ],
+    "disposition": "SUPERSEDED_BY_DESIGN",
+    "current": "Invariantes de referência/contexto/tempo e inércia têm validação SDK/NativeView; DTO documental não adotado como transporte.",
+    "tests": [
+      "related_references suite",
+      "P06 semantics",
+      "native parity"
+    ],
+    "execution": "HISTORICAL_46_PASS_REUSED_NOT_REEXECUTED",
+    "counterevidence": "Não atribuir expected_errors do worksheet ao parser NativeView. Correlação por intenção, sem cobertura integral automática."
+  }
+]

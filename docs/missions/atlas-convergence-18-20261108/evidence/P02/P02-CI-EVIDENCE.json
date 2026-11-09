@@ -1,0 +1,551 @@
+{
+  "status": "VERIFIED_REUSED_BASELINE_ONLY",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "final_patch_sha_ci": "PENDING_P00_O3",
+  "jobs": [
+    {
+      "evidence_file": "/workspace/scratch/c50b5f701290/atlas-pr19/evidence/o0/main-log-128575079794.json",
+      "sha256": "a3de7e5cdfc24f1883e6dc554a2cc276ba8177d33a77ced1b531baff81ab6771",
+      "run_id": 42429516868,
+      "job_id": 128575079794,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42429516868/job/128575079794",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "provenance": "REUSED_PRIOR_AUDIT_LOG; O0_REVALIDATED_JOB_SHA_AND_SUCCESS; NOT_A_NEW_P02_RUN",
+      "reports": [
+        {
+          "status": "PASS_SCOPED",
+          "checks": [
+            "declared_aliases_string_only",
+            "unique_context_links",
+            "ambiguous_aliases_not_first_match",
+            "explicit_null_without_fallback",
+            "transport_table_membership",
+            "resources_missing_and_null",
+            "exact_nested_evidence_lexemes",
+            "numeric_identity_not_coerced_to_string_reference",
+            "source_snapshot_isolation",
+            "explicit_array_object_numeric_keys_never_fall_back",
+            "exact_large_numeric_key_retained_without_interpretation",
+            "absent_key_only_allows_endpoint_fallback",
+            "keyed_navigation_lineage_same_candidates_and_collisions",
+            "same_id_self_collision_not_unique",
+            "lineage_collection_scope_excludes_foreign_keys",
+            "keyed_references_never_use_native_ids_or_aliases",
+            "unkeyed_typed_id_and_declared_alias_policy_matches_lineage"
+          ]
+        },
+        {
+          "status": "PASS_SCOPED",
+          "checks": [
+            "exporter_output_reaches_installed_native_ui_with_readable_tree_without_iframe",
+            "large_tree_initial_focus_progressively_reveals_siblings",
+            "double_click_and_keyboard_toggle_preserve_node_target_and_focus",
+            "search_reaches_last_node_beyond_initial_24_siblings",
+            "all_1202_nodes_searchable_with_zoom_and_minimap",
+            "wide_titles_and_long_keys_fit_cards_without_changing_original_identity",
+            "duplicate_ids_preserved_status_filter_and_text_only_details",
+            "reused_p03_exact_numbers_null_missing_and_all_pages",
+            "table_detail_and_occurrence_export_contain_all_rows_exactly_without_rounding",
+            "json_rows_not_rounded_and_csv_formula_neutralized",
+            "typed_csv_download_preserves_all_127_selected_rows_presence_types_and_numeric_tokens",
+            "resources_relations_timeline_and_unknown_collections_available",
+            "source_switch_clears_selection_and_full_export_matches_original_projection",
+            "explicit_update_button_rebuilds_fixed_source_catalog",
+            "mobile_reflow_no_page_errors_and_no_external_requests"
+          ],
+          "errors": [],
+          "external_requests": [],
+          "last_download_control": "Exportar projeção exata ↓"
+        },
+        {
+          "status": "PASS_SCOPED",
+          "scope": "INSTALLED_NATIVE_UI_ENGINEERING_NOT_PRIVATE_HOST_PARITY",
+          "checks": [
+            "global_tree_search_no_match_hidden_node_location_and_clear_population",
+            "declared_alias_journey_node_record_table_row_exact_evidence_and_return",
+            "source_switch_invalidates_navigation_history_and_alias_context",
+            "explicit_composite_endpoint_key_is_not_interpreted_or_fallen_back",
+            "general_structural_keys_preserve_record_node_collisions",
+            "general_structural_keys_reach_unique_records",
+            "lineage_structural_keys_remain_scoped_to_lineage_nodes",
+            "table_search_includes_row_identifiers_and_trims_query",
+            "table_metadata_search_reaches_other_tables_and_preserves_rows",
+            "table_family_status_filters_use_declared_context_and_empty_selection",
+            "filtered_table_exact_json_and_formula_safe_csv_preserved",
+            "filters_include_declared_resource_facets",
+            "empty_collections_and_exact_global_scalars_are_consultable",
+            "full_projection_export_matches_original_bytes",
+            "all_screens_long_values_reflow_1440",
+            "all_screens_long_values_reflow_390",
+            "all_screens_long_values_reflow_320"
+          ],
+          "errors": [],
+          "external_requests": []
+        },
+        {
+          "status": "PASS_SCOPED",
+          "scope": "SYNTHETIC_LINEAGE_COMPONENT_NOT_PRIVATE_HOST_ACCEPTANCE",
+          "checks": [
+            "scoped_keys_collisions_null_missing_and_composite_endpoints_stay_distinct",
+            "large_integer_lexemes_string_ids_and_explicit_aliases_never_coerce",
+            "typed_svg_edges_and_endpoint_keyboard_selection_reach_original_occurrences",
+            "ambiguous_reference_requires_explicit_candidate_selection",
+            "pagination_and_integral_search_reach_last_relation_beyond_first_window",
+            "type_filter_zoom_and_keyboard_pan_work",
+            "self_reference_preserves_one_endpoint_occurrence",
+            "mobile_layout_text_only_types_no_errors_and_no_external_requests"
+          ],
+          "errors": [],
+          "external_requests": []
+        },
+        {
+          "status": "PASS_SCOPED",
+          "scope": "ISOLATED_NATIVE_GRAPH_SYNTHETIC_ONLY",
+          "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+          "baseline_ref": null,
+          "checks": [
+            "pr24_progressive_25_then_49_and_full_population_retained",
+            "last_of_1202_locatable_outside_initial_window",
+            "double_click_space_and_stable_focus",
+            "tree_keyboard_right_left_up_down_home_end_enter",
+            "search_result_ancestral_path_and_empty_search_feedback",
+            "mouse_pan_wheel_zoom_floor_and_minimap_nodes",
+            "focus_of_retained_offscreen_node_recenters_after_fit",
+            "all_2911_synthetic_branches_reachable_and_immutable",
+            "mobile_390_navigation_zoom_floor_and_no_document_overflow",
+            "null_ids_colliding_native_ids_orphans_and_declared_cycles_preserved",
+            "fresh_double_click_survives_detail_callback_reflow_and_single_click_selects_once",
+            "cancel_pending_selection_is_idempotent_preserves_visual_state_and_does_not_disable_future_callbacks",
+            "destroy_removes_graph_and_listeners",
+            "long_words_word_lists_and_unicode_use_bounded_measurement_without_losing_identity_or_search",
+            "no_page_errors_or_external_requests"
+          ],
+          "metrics": {
+            "star_initial": {
+              "viewport": {
+                "width": 1440,
+                "height": 1000
+              },
+              "cards": [
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.7999267578125
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.7999267578125
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.7999267578125
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.7999267578125
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.39999389648438,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.4000244140625,
+                  "height": 91.79998779296875
+                }
+              ],
+              "meta": "1202 nós carregados · 25 no foco atual · 21 na janela · zoom 85% (mínimo legível 85%) · 1177 recolhidos ou progressivos, todos disponíveis na busca · 0 nós em ciclo.",
+              "focus": null,
+              "overflow": false
+            },
+            "desktop_min_zoom": 0.85,
+            "star_all_1202": {
+              "total": 1202,
+              "failures": [],
+              "p95_ms": 0.5999999999985448,
+              "max_ms": 5.100000000005821,
+              "total_ms": 436.79999999999563,
+              "unchanged": true
+            },
+            "branches_initial": {
+              "viewport": {
+                "width": 1440,
+                "height": 1000
+              },
+              "cards": [
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                },
+                {
+                  "width": 284,
+                  "height": 108
+                }
+              ],
+              "meta": "2911 nós carregados · 11 no foco atual · 11 na janela · zoom 100% (mínimo legível 85%) · 2900 recolhidos ou progressivos, todos disponíveis na busca · 0 nós em ciclo.",
+              "focus": null,
+              "overflow": false
+            },
+            "branches_all_2911": {
+              "total": 2911,
+              "failures": [],
+              "p95_ms": 0.6999999999970896,
+              "max_ms": 37.89999999999418,
+              "total_ms": 1446.2000000002736,
+              "unchanged": true
+            },
+            "mobile_initial": {
+              "viewport": {
+                "width": 390,
+                "height": 844
+              },
+              "cards": [
+                {
+                  "width": 241.40000915527344,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.40000915527344,
+                  "height": 91.79998779296875
+                },
+                {
+                  "width": 241.40000915527344,
+                  "height": 91.7999267578125
+                },
+                {
+                  "width": 241.40000915527344,
+                  "height": 91.79998779296875
+                }
+              ],
+              "meta": "2911 nós carregados · 11 no foco atual · 4 na janela · zoom 85% (mínimo legível 85%) · 2900 recolhidos ou progressivos, todos disponíveis na busca · 0 nós em ciclo.",
+              "focus": null,
+              "overflow": false
+            },
+            "mobile_min_zoom": 0.85,
+            "identity_cycles_null_collisions": {
+              "total": 8,
+              "failures": [],
+              "p95_ms": 0.7000000000116415,
+              "max_ms": 0.7000000000116415,
+              "total_ms": 2.6000000000058208,
+              "unchanged": true
+            },
+            "single_click_callback_latency_ms": [
+              635,
+              632
+            ],
+            "slow_double_click_gap_ms": 454.8999999999942,
+            "benchmark_star": {
+              "mount_ms": 6.399999999994179,
+              "last_locate_ms": 17.80000000000291,
+              "expand_all_ms": 17.90000000000873,
+              "pan_p95_ms": 1.1000000000058208,
+              "pan_max_ms": 3,
+              "graph_cards_in_dom": 21,
+              "mini_nodes": 1202
+            },
+            "benchmark_branches": {
+              "mount_ms": 9.5,
+              "last_locate_ms": 6.19999999999709,
+              "expand_all_ms": 40.5,
+              "pan_p95_ms": 0.9000000000087311,
+              "pan_max_ms": 1,
+              "graph_cards_in_dom": 10,
+              "mini_nodes": 2911
+            },
+            "long-word": {
+              "mount_ms": 3.8999999999941792,
+              "calls": 17,
+              "max_codepoints": 161,
+              "original_title_codepoints": 16397,
+              "original_key_codepoints": 16396
+            },
+            "long-words": {
+              "mount_ms": 3.5,
+              "calls": 50,
+              "max_codepoints": 161,
+              "original_title_codepoints": 40973,
+              "original_key_codepoints": 16396
+            }
+          },
+          "errors": [],
+          "external_requests": [],
+          "screenshots": [
+            "after-star-desktop.png",
+            "after-branches-desktop.png",
+            "after-branches-selected-desktop.png",
+            "after-branches-mobile.png",
+            "after-branches-selected-mobile.png",
+            "after-star-mobile.png"
+          ],
+          "performance_guidance_ms": {
+            "mount": 1000,
+            "interaction_p95": 100,
+            "product_sla": false
+          },
+          "timing_scope": "Synchronous graph handlers plus forced SVG layout; browser startup, network and asynchronous paint excluded",
+          "performance_observations": [],
+          "source_sha256": {
+            "native_graph_js": "c2d57be9cc80903f3f59467f576d3e9c460e915c3048ab2f654704599d7cc372",
+            "native_notebook_css": "a2655eeab1bae7acba575f7e115dd50efd5a5a6b28458f28b70b167b191390e1"
+          },
+          "tested_files_dirty": false
+        }
+      ]
+    },
+    {
+      "evidence_file": "/workspace/scratch/c50b5f701290/atlas-pr19/evidence/o0/main-log-128575079409.json",
+      "sha256": "c0c6fa45a0c260f0c44fd2b61dde013c1b166b86b99dd1731cd7280dc5ed77b1",
+      "run_id": 42429516778,
+      "job_id": 128575079409,
+      "url": "https://github.com/thalesvalente/Atlas/actions/runs/42429516778/job/128575079409",
+      "tested_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "provenance": "REUSED_PRIOR_AUDIT_LOG; O0_REVALIDATED_JOB_SHA_AND_SUCCESS; NOT_A_NEW_P02_RUN",
+      "reports": [
+        {
+          "status": "PASS_SCOPED",
+          "scope": "INSTALLED_APPLICATION_UX_SYNTHETIC_ONLY",
+          "browser_channel": "chromium",
+          "checks": [
+            "installed_application_css_and_native_text_only_assets",
+            "desktop_work_surface_above_fold_population_revision_still_accessible",
+            "required_graph_cancel_api_is_available",
+            "editorial_selection_unobscured_and_legible_with_details_1440",
+            "editorial_selection_unobscured_and_legible_with_details_1024",
+            "editorial_selection_unobscured_and_legible_with_details_800",
+            "mobile_editorial_comfortable_camera_keeps_root_title_inside_map",
+            "editorial_selection_unobscured_and_legible_with_details_390",
+            "editorial_selection_unobscured_and_legible_with_details_320",
+            "ported_editorial_occurrences_exact_export_camera_focus_and_context_return",
+            "editorial_view_restores_explicit_structural_tree",
+            "keyboard_detail_focus_escape_return_selection_and_distinct_null_missing_empty_states",
+            "record_table_row_structural_links_exact_identity_and_context_return",
+            "escape_after_two_context_returns_restores_recreated_record_trigger",
+            "all_nine_row_column_windows_205_rows_65_columns_exact_and_keyboard_focus",
+            "whole_selection_csv_rows_occurrence_projection_downloads_byte_exact",
+            "row_search_beyond_first_page_and_p03_long_value_fallback_without_loss",
+            "context_return_rebuilds_technical_family_and_status_options_before_restoring_selection",
+            "source_switch_clears_scope_and_all_empty_sections_are_explicit",
+            "record_tree_fallback_enter_arrows_preserve_treeitem_focus",
+            "record_tree_fallback_parent_context_return_restores_child_focus_and_arrow_up",
+            "tree_context_return_escape_restores_exact_node_focus_viewport_arrows_1440",
+            "required_graph_cancel_visible_escape_keeps_detail_hidden_selection_camera_1440",
+            "tree_context_return_close_restores_exact_node_focus_viewport_arrows_1440",
+            "required_graph_cancel_visible_close_keeps_detail_hidden_selection_camera_1440",
+            "required_graph_cancel_hidden_escape_keeps_detail_hidden_selection_camera_1440",
+            "late_link_record_escape_actual_page_uid_focus_viewport_1440",
+            "late_link_record_close_actual_page_uid_focus_viewport_1440",
+            "late_link_asset_escape_actual_page_uid_focus_viewport_1440",
+            "late_link_relation_escape_actual_page_uid_focus_viewport_1440",
+            "late_link_collection_escape_actual_page_uid_focus_viewport_1440",
+            "all_non_graph_sections_reflow_1440",
+            "mobile_work_surface_reachable_without_full_screen_of_navigation_390",
+            "tree_context_return_escape_restores_exact_node_focus_viewport_arrows_390",
+            "required_graph_cancel_visible_escape_keeps_detail_hidden_selection_camera_390",
+            "tree_context_return_close_restores_exact_node_focus_viewport_arrows_390",
+            "required_graph_cancel_visible_close_keeps_detail_hidden_selection_camera_390",
+            "required_graph_cancel_hidden_escape_keeps_detail_hidden_selection_camera_390",
+            "mobile_context_return_close_restores_recreated_record_trigger_390",
+            "mobile_record_table_detail_focus_visible_escape_restores_visible_trigger_390",
+            "late_link_record_escape_actual_page_uid_focus_viewport_390",
+            "late_link_record_close_actual_page_uid_focus_viewport_390",
+            "late_link_asset_close_actual_page_uid_focus_viewport_390",
+            "late_link_relation_close_actual_page_uid_focus_viewport_390",
+            "late_link_collection_close_actual_page_uid_focus_viewport_390",
+            "all_non_graph_sections_reflow_390",
+            "mobile_work_surface_reachable_without_full_screen_of_navigation_320",
+            "tree_context_return_escape_restores_exact_node_focus_viewport_arrows_320",
+            "required_graph_cancel_visible_escape_keeps_detail_hidden_selection_camera_320",
+            "tree_context_return_close_restores_exact_node_focus_viewport_arrows_320",
+            "required_graph_cancel_visible_close_keeps_detail_hidden_selection_camera_320",
+            "required_graph_cancel_hidden_escape_keeps_detail_hidden_selection_camera_320",
+            "mobile_context_return_close_restores_recreated_record_trigger_320",
+            "mobile_record_table_detail_focus_visible_escape_restores_visible_trigger_320",
+            "late_link_record_escape_actual_page_uid_focus_viewport_320",
+            "late_link_record_close_actual_page_uid_focus_viewport_320",
+            "late_link_asset_escape_actual_page_uid_focus_viewport_320",
+            "late_link_relation_escape_actual_page_uid_focus_viewport_320",
+            "late_link_collection_escape_actual_page_uid_focus_viewport_320",
+            "all_non_graph_sections_reflow_320",
+            "http_failure_clears_stale_sources_and_recovers_explicitly",
+            "changed_synthetic_metadata_invalidates_snapshot_explicit_reindex_restores_consistency",
+            "no_javascript_errors_or_automatic_external_requests"
+          ],
+          "errors": [],
+          "external_requests": [],
+          "screenshots": [
+            "browser-application-report-desktop.png",
+            "browser-application-report-mobile-390.png",
+            "browser-application-report-mobile-390-table.png",
+            "browser-application-report-mobile-320.png",
+            "browser-application-report-mobile-320-table.png"
+          ],
+          "graph_cancel_gate": {
+            "required": true,
+            "status": "PASS_SCOPED",
+            "cases": [
+              {
+                "width": 1440,
+                "close": "Escape",
+                "panel_initially_visible": true,
+                "status": "PASS",
+                "closed_before_callback_ms": 7.5
+              },
+              {
+                "width": 1440,
+                "close": "Close",
+                "panel_initially_visible": true,
+                "status": "PASS",
+                "closed_before_callback_ms": 37.70000000001164
+              },
+              {
+                "width": 1440,
+                "close": "Escape",
+                "panel_initially_visible": false,
+                "status": "PASS",
+                "closed_before_callback_ms": 6.300000000017462
+              },
+              {
+                "width": 390,
+                "close": "Escape",
+                "panel_initially_visible": true,
+                "status": "PASS",
+                "closed_before_callback_ms": 4.900000000023283
+              },
+              {
+                "width": 390,
+                "close": "Close",
+                "panel_initially_visible": true,
+                "status": "PASS",
+                "closed_before_callback_ms": 34.39999999999418
+              },
+              {
+                "width": 390,
+                "close": "Escape",
+                "panel_initially_visible": false,
+                "status": "PASS",
+                "closed_before_callback_ms": 4.300000000017462
+              },
+              {
+                "width": 320,
+                "close": "Escape",
+                "panel_initially_visible": true,
+                "status": "PASS",
+                "closed_before_callback_ms": 4.7999999999883585
+              },
+              {
+                "width": 320,
+                "close": "Close",
+                "panel_initially_visible": true,
+                "status": "PASS",
+                "closed_before_callback_ms": 34.60000000000582
+              },
+              {
+                "width": 320,
+                "close": "Escape",
+                "panel_initially_visible": false,
+                "status": "PASS",
+                "closed_before_callback_ms": 4.699999999982538
+              }
+            ]
+          },
+          "last_download_control": "Exportar esta ocorrência"
+        }
+      ]
+    }
+  ]
+}

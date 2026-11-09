@@ -1,0 +1,143 @@
+✔ verification keeps the previous snapshot selection, detail and source filters (8.091859ms)
+✖ explicit new epoch clears old identities even when declared IDs and bytes survive (2.716929ms)
+✖ restarted Catalog cannot inherit identities just because generation restarts at one (2.209325ms)
+✖ a changed source invalidates the complete comparison while another source stays intact (2.076505ms)
+✔ a reload of the same epoch can restore source-scoped preferences (3.34274ms)
+✖ a new epoch restores free filters but never source-ordinal preferences (2.321383ms)
+✖ legacy preferences without a snapshot binding do not rebind ordinal source IDs (1.745097ms)
+✖ verification requested during rebuild waits for the completed rebuild (1.484455ms)
+✖ rebuild requested during a verification is preserved and runs afterward (1.529532ms)
+✔ failed verification does not strand a queued explicit rebuild (1.532727ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 3
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.10381
+
+✖ failing tests:
+
+test at ../staging/test_protocol_snapshot.mjs:65:1
+✖ explicit new epoch clears old identities even when declared IDs and bytes survive (2.716929ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_protocol_snapshot.mjs:68:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../staging/test_protocol_snapshot.mjs:74:1
+✖ restarted Catalog cannot inherit identities just because generation restarts at one (2.209325ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_protocol_snapshot.mjs:77:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../staging/test_protocol_snapshot.mjs:81:1
+✖ a changed source invalidates the complete comparison while another source stays intact (2.076505ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_protocol_snapshot.mjs:91:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../staging/test_protocol_snapshot.mjs:103:1
+✖ a new epoch restores free filters but never source-ordinal preferences (2.321383ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '["source-1","project"]'
+  - ''
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_protocol_snapshot.mjs:106:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '["source-1","project"]',
+    expected: '',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../staging/test_protocol_snapshot.mjs:110:1
+✖ legacy preferences without a snapshot binding do not rebind ordinal source IDs (1.745097ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '["source-1","project"]'
+  - ''
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_protocol_snapshot.mjs:112:26)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '["source-1","project"]',
+    expected: '',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../staging/test_protocol_snapshot.mjs:116:1
+✖ verification requested during rebuild waits for the completed rebuild (1.484455ms)
+  AssertionError [ERR_ASSERTION]: Only initial GET and active POST may be in flight
+  
+  3 !== 2
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_protocol_snapshot.mjs:119:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../staging/test_protocol_snapshot.mjs:128:1
+✖ rebuild requested during a verification is preserved and runs afterward (1.529532ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 2
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_protocol_snapshot.mjs:130:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

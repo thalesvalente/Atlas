@@ -1,0 +1,25 @@
+{
+  "status": "FAIL",
+  "baseline": "a6e57c9c6748b4a0d50b554613c93e2b8a785554",
+  "preserved_original_files": 94,
+  "authorized_presentation_changes": [
+    ".github/workflows/atlas021.yml",
+    "docs/coordination/publication-policy.md",
+    "packages/atlas/src/atlas_viewer/server.py",
+    "packages/atlas/src/atlas_viewer/static/app.js",
+    "packages/atlas/src/atlas_viewer/static/index.html",
+    "packages/atlas/src/atlas_viewer/static/style.css",
+    "packages/protocol/src/caderno_protocol/read_model.py",
+    "scripts/ci/run_browser.py",
+    "scripts/qa/browser.mjs",
+    "tests/viewer/test_catalog_server.py"
+  ],
+  "presentation_delta_enabled": true,
+  "managed_files": 28,
+  "official_skills": 10,
+  "python_scripts": 6,
+  "errors": [
+    "Preserved baseline changed: specs/001-atlas021-protocol-interface/tasks.md"
+  ],
+  "scope": "repository integrity and generated assets; no operational or scientific approval"
+}

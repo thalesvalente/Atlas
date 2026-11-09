@@ -1,0 +1,1605 @@
+{
+  "owner": "P02",
+  "phase": "O1",
+  "analysis_status": "EXECUTED_READY_FOR_INDEPENDENT_REVIEW",
+  "product_status": "PARTIAL_CURRENT_DEFECTS_OPEN",
+  "repository": "thalesvalente/Atlas",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "scope_prs": [
+    8,
+    11,
+    13,
+    16,
+    17
+  ],
+  "requirement_count": 29,
+  "dispositions": {
+    "8": "RETAIN_AND_IMPLEMENT",
+    "11": "RETAIN_AND_IMPLEMENT",
+    "13": "SUPERSEDED_BY_DESIGN",
+    "16": "SUPERSEDED_BY_DESIGN",
+    "17": "SUPERSEDED_BY_DESIGN"
+  },
+  "prs": [
+    {
+      "pr": 8,
+      "title": "C0 navegação e vínculo de sessão/snapshot",
+      "head_sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+      "state": "CLOSED_UNMERGED_REF_PRESERVED",
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "Reter a finalidade de invalidar estado dependente de fonte/snapshot na superfície /. Há contraprovas atuais reais. Portar apenas o vínculo e a ordenação segura de consultas, preservando contratos e sem reintroduzir todo o router candidato.",
+      "required_patch": [
+        "P02-F001",
+        "P02-F002",
+        "P02-F003"
+      ],
+      "human_gate": [],
+      "requirements": [
+        {
+          "id": "P02-8-01",
+          "historical": "IDs são pares fonte+ID, nunca ID científico global.",
+          "current": "/ já mantém source_id+run_id e separa IDs repetidos entre fontes; /notebook usa fonte/revisão/digest/UID/tipo.",
+          "current_contract": "001 FR-019; 004 FR-004; 005 FR-005",
+          "tests": [
+            "EXEC-CATALOG",
+            "EXEC-TRIAGE",
+            "EXEC-NAV"
+          ],
+          "counterevidence": "Mesmo par fonte+ID não basta quando bytes/sessão mudam; ver02/03.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H08_STATE",
+              "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+              "blob": "4146f7f16c0b84b3b2a9ad16b7c1ad59d875f412",
+              "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/static/parity02_p02_state.js"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_TRIAGE",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_triage_model.js",
+              "blob": "48dd420213185980239587d485f9ecb534bc8bb9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_triage_model.js"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-8-02",
+          "historical": "snapshot_binding usa nonce de sessão e lista ordenada de snapshots; divergência invalida detalhe/seleção.",
+          "current": "/ updateCatalog retém chaves ainda presentes e reapresenta a execução substituída. Rebuild A alterado com mesmo ID conserva A+B selecionados; detalhe muda silenciosamente. /notebook já invalida contexto na troca de revisão/fonte.",
+          "current_contract": "001 FR-007/019/020; contexto global de #8/#11; política de snapshot005 separada",
+          "tests": [
+            "RED-SNAPSHOT",
+            "EXEC-CATALOG",
+            "EXEC-TRIAGE"
+          ],
+          "counterevidence": "GET que apenas verifica e marca CHANGED conserva read_model antigo: não deve aceitar nova versão nem apagar seleção só por observed_at.",
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "evidence": [
+            {
+              "source": "H08_NAV",
+              "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+              "path": "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+              "blob": "0362bb65817de3758ea87736020dcaf8c3700f4b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/parity02_p02_navigation.py"
+            },
+            {
+              "source": "H08_STATE",
+              "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+              "blob": "4146f7f16c0b84b3b2a9ad16b7c1ad59d875f412",
+              "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/static/parity02_p02_state.js"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            },
+            {
+              "source": "C_TRIAGE",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_triage_model.js",
+              "blob": "48dd420213185980239587d485f9ecb534bc8bb9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_triage_model.js"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            }
+          ],
+          "required_patch": [
+            "P02-F001"
+          ]
+        },
+        {
+          "id": "P02-8-03",
+          "historical": "Binding não atravessa reinício de sessão ou mudança da ordem de fontes.",
+          "current": "/ persiste filtros project/experiment por source-N ordinal sem binding. Em nova sessão [B,A], os mesmos IDs restaurados selecionam B onde antes era A.",
+          "current_contract": "001 FR-007/019/020; nenhuma autoridade científica inferida",
+          "tests": [
+            "RED-PREFS",
+            "RED-SNAPSHOT"
+          ],
+          "counterevidence": "query/status são preferências sem identidade de fonte e podem sobreviver. Mesma epoch pode restaurar filtros de fonte; novo catálogo não pode reatribuí-los.",
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "evidence": [
+            {
+              "source": "H08_NAV",
+              "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+              "path": "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+              "blob": "0362bb65817de3758ea87736020dcaf8c3700f4b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/parity02_p02_navigation.py"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            }
+          ],
+          "required_patch": [
+            "P02-F003"
+          ]
+        },
+        {
+          "id": "P02-8-04",
+          "historical": "Navegação rejeita contexto obsoleto em vez de recuperar IDs indiscriminadamente.",
+          "current": "Chamadas reais load(true) e load(false) simultâneas permitem GET antigo sobrescrever POST já concluído: geração3→1.",
+          "current_contract": "001 FR-007/020; preservação do snapshot aceito",
+          "tests": [
+            "RED-RACE"
+          ],
+          "counterevidence": "Última requisição iniciada não é garantia de estado mais novo: GET disparado depois do POST pode observar estado anterior no servidor. Serializar/coalescer e drenar ordem intencional.",
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "evidence": [
+            {
+              "source": "H08_STATE",
+              "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p02_state.js",
+              "blob": "4146f7f16c0b84b3b2a9ad16b7c1ad59d875f412",
+              "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/static/parity02_p02_state.js"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            }
+          ],
+          "required_patch": [
+            "P02-F002"
+          ]
+        },
+        {
+          "id": "P02-8-05",
+          "historical": "Hash de URL v1 transporta view/detail/selection/filtros, com scope; sem autenticação.",
+          "current": "/ usa estado interno e preferências; /notebook histórico e navegação internos vinculados à fonte/snapshot. Não oferece aquele protocolo de hash.",
+          "current_contract": "004 FR-004/006; 005 FR-005; 007 FR-006 capacidade, não identidade de controles",
+          "tests": [
+            "EXEC-NAV",
+            "CI-NATIVE",
+            "CI-UX"
+          ],
+          "counterevidence": "Ausência de hash não prova equivalência exata. Não há atual requisito de links compartilháveis hashv1; reintroduzi-lo ampliaria superfície candidata sem necessidade do bug.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H08_CONTRACT",
+              "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+              "path": "specs/004-atlas-parity-c0/workstreams/p02-c0/contracts/navigation.md",
+              "blob": "80543555d16292c14b98908a434fe8af784847f6",
+              "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/specs/004-atlas-parity-c0/workstreams/p02-c0/contracts/navigation.md"
+            },
+            {
+              "source": "C_NAV",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_navigation.js",
+              "blob": "1756f8b3c8c08e5164cae3c164802761f18c1946",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_navigation.js"
+            },
+            {
+              "source": "C_NOTEBOOK",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-8-06",
+          "historical": "Binding histórico conserva hash em rebuild sem alteração de bytes; expira em nova sessão.",
+          "current": "Política proposta pelo integrador usa epoch generation+indexed_at para invalidar a cada rebuild explícito; observed_at de GET não entra. /notebook já recarrega a UI em rebuild.",
+          "current_contract": "001 FR-007/020; 004/005 identidade de snapshot",
+          "tests": [
+            "RED-SNAPSHOT",
+            "EXEC-CATALOG"
+          ],
+          "counterevidence": "Deliberada política mais conservadora; não chamar algoritmo byte-idêntico nem tornar TTL candidato requisito do protocolo. Novo Catalog deve mudar epoch mesmo geração1 com IDs iguais.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H08_NAV",
+              "sha": "db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533",
+              "path": "packages/atlas/src/atlas_viewer/parity02_p02_navigation.py",
+              "blob": "0362bb65817de3758ea87736020dcaf8c3700f4b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/db6e8b64c28e756d0a2ff4fd1cd90f404c6c0533/packages/atlas/src/atlas_viewer/parity02_p02_navigation.py"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            },
+            {
+              "source": "C_REBUILD",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_rebuild.js",
+              "blob": "391d85ab543e6aa257ee929c3e19a024f0d7677d",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_rebuild.js"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            }
+          ],
+          "required_patch": []
+        }
+      ]
+    },
+    {
+      "pr": 11,
+      "title": "C1 composição e invalidação global",
+      "head_sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+      "state": "CLOSED_UNMERGED_REF_PRESERVED",
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "A composição herdada não deve ser portada em bloco. O comportamento global de snapshot é necessário na / atual e tem RED reproduzido; a correção é compartilhada com #8.",
+      "required_patch": [
+        "P02-F001",
+        "P02-F002",
+        "P02-F003"
+      ],
+      "human_gate": [],
+      "requirements": [
+        {
+          "id": "P02-11-01",
+          "historical": "Mudança em A invalida toda seleção do scope global, incluindo B inalterada; bytes de B continuam íntegros.",
+          "current": "/ mantém A+B após rebuild A; B read_model permaneceu idêntico no probe. Necessário limpar seleção/detalhe de todo o catálogo.",
+          "current_contract": "001 FR-007/019/020; regra explícita composta C1",
+          "tests": [
+            "RED-SNAPSHOT",
+            "EXEC-CATALOG"
+          ],
+          "counterevidence": "Integridade de B não torna a seleção no antigo scope global válida. /notebook tem seleção vinculada a snapshot próprio, sem prova de equivalência automática entre superfícies.",
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "evidence": [
+            {
+              "source": "H11_JS",
+              "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+              "path": "scripts/qa/atlas_parity02_p06_composed_state_tests.mjs",
+              "blob": "269d52047ee94127752029fe2244fa39a284146e",
+              "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/scripts/qa/atlas_parity02_p06_composed_state_tests.mjs"
+            },
+            {
+              "source": "H11_PY",
+              "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+              "path": "tests/qa/test_atlas_parity02_p06_composed_navigation.py",
+              "blob": "26c0901dbc79d2ab16c84ec10fd8af809a126eaf",
+              "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/tests/qa/test_atlas_parity02_p06_composed_navigation.py"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            }
+          ],
+          "required_patch": [
+            "P02-F001"
+          ]
+        },
+        {
+          "id": "P02-11-02",
+          "historical": "Uma simples consulta não é aceitação de fonte alterada.",
+          "current": "Catalog verify marca CHANGED, conserva original; reconstrução explícita atualiza read_model e geração.",
+          "current_contract": "001 FR-007/020",
+          "tests": [
+            "EXEC-CATALOG",
+            "RED-SNAPSHOT"
+          ],
+          "counterevidence": "Não resetar por timestamp observed_at; apenas epoch aceita. Fonte alterada no disco continua visível como snapshot anterior, com aviso.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H11_PY",
+              "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+              "path": "tests/qa/test_atlas_parity02_p06_composed_navigation.py",
+              "blob": "26c0901dbc79d2ab16c84ec10fd8af809a126eaf",
+              "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/tests/qa/test_atlas_parity02_p06_composed_navigation.py"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-11-03",
+          "historical": "Composição garante invalidação e não mistura state entre respostas.",
+          "current": "/ precisa ordenar load/reindex e vincular preferências fonte-específicas à epoch; bugs F002/F003 são extensão atual do risco de reatribuição.",
+          "current_contract": "001 FR-007/019/020",
+          "tests": [
+            "RED-RACE",
+            "RED-PREFS"
+          ],
+          "counterevidence": "Não alterar a API de fontes fixadas ou implantar daemon/TTL; o reparo pode ficar no estado do shell.",
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "evidence": [
+            {
+              "source": "H11_JS",
+              "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+              "path": "scripts/qa/atlas_parity02_p06_composed_state_tests.mjs",
+              "blob": "269d52047ee94127752029fe2244fa39a284146e",
+              "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/scripts/qa/atlas_parity02_p06_composed_state_tests.mjs"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            }
+          ],
+          "required_patch": [
+            "P02-F002",
+            "P02-F003"
+          ]
+        },
+        {
+          "id": "P02-11-04",
+          "historical": "Gates C1 incluem contratos congelados e teste browser do wheel histórico.",
+          "current": "Specs001/004/005/007 e Actions atuais qualificam superfícies atuais. CI main verde não detectou estes novos cenários; novos testes devem entrar no gate do wheel/Node.",
+          "current_contract": "007 FR-011; O0 CI SHA final",
+          "tests": [
+            "CI-NATIVE",
+            "CI-UX",
+            "CI-FINAL"
+          ],
+          "counterevidence": "Não repinar guards históricos nem converter execução Node em teclado/DOM/browser PASS. O19 parecer histórico segue íntegro.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H11_JS",
+              "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+              "path": "scripts/qa/atlas_parity02_p06_composed_state_tests.mjs",
+              "blob": "269d52047ee94127752029fe2244fa39a284146e",
+              "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/scripts/qa/atlas_parity02_p06_composed_state_tests.mjs"
+            },
+            {
+              "source": "H11_PY",
+              "sha": "326b92ae27effb6941801ed3e9af5c07aa90fb95",
+              "path": "tests/qa/test_atlas_parity02_p06_composed_navigation.py",
+              "blob": "26c0901dbc79d2ab16c84ec10fd8af809a126eaf",
+              "url": "https://github.com/thalesvalente/Atlas/blob/326b92ae27effb6941801ed3e9af5c07aa90fb95/tests/qa/test_atlas_parity02_p06_composed_navigation.py"
+            },
+            {
+              "source": "T_BROWSER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/qa/browser.mjs",
+              "blob": "d86bc75571667a8770593475225ed3ffd2bccb0a",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/browser.mjs"
+            },
+            {
+              "source": "T_NATIVE_BROWSER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/qa/browser_native_notebook.mjs",
+              "blob": "493a654e6979ee1a712f3ecb7c9bc104e83dc968",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/browser_native_notebook.mjs"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        }
+      ]
+    },
+    {
+      "pr": 13,
+      "title": "C4 composição de propriedades e erro isolado",
+      "head_sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+      "state": "CLOSED_UNMERGED_REF_PRESERVED",
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "Metadados tipados são cumpridos nas superfícies atuais com composição diversa. P03 preservado é uma reutilização real; o seletor arbitrário de propriedades e generic entity detail candidatos não são promessas do contrato001. A finalidade de isolamento da apresentação foi testada diretamente. As dependências C1 seguem #8/#11.",
+      "required_patch": [],
+      "human_gate": [
+        "Não amplia o aceite restrito #39; OLD/NEW privado permanece pendente."
+      ],
+      "requirements": [
+        {
+          "id": "P02-13-01",
+          "historical": "Seleção explícita de propriedades antecede tabela/comparação C4 e fica vinculada a catálogo/fonte/snapshot/run.",
+          "current": "/ apresenta todas as propriedades da execução explicitamente aberta e compara2–4runs escolhidos; /notebook escolhe tabela/linhas e mantém contexto. Não existe seletor genérico C4 na /.",
+          "current_contract": "001 FR-003/004; 004 FR-009; 007 FR-006",
+          "tests": [
+            "CI-NATIVE",
+            "CI-UX",
+            "EXEC-LEGACY"
+          ],
+          "counterevidence": "Controles não são idênticos. FR-003 é detalhe de runs/evidências, não mandato de arbitrary generic non-run detail. A proposta p03-candidate/1 não vira promessa de produto.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H13_COMPOSE",
+              "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+              "path": "packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js",
+              "blob": "6392850777fd8a30d936fd84cfd4047dc51d3a64",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_NOTEBOOK",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-13-02",
+          "historical": "Números lexicais, false/zero/ausência/precisão e tipos/unidades incompatíveis permanecem distintos.",
+          "current": "/ utiliza display_value e não compara unidades/tipos incompatíveis; NativeView conserva raw_json e campos tipados; P03 tabelas exatas e CSV tipado preservam lexemas.",
+          "current_contract": "001 FR-003/004; 004 FR-005; 007 FR-003",
+          "tests": [
+            "EXEC-CATALOG",
+            "EXEC-TRIAGE",
+            "EXEC-LEGACY",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "CSV protegido é conveniência potencialmente lossy; apenas JSON/CSV tipado sustentam reversibilidade. Não usar parecido visual como prova.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H13_COMPOSE",
+              "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+              "path": "packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js",
+              "blob": "6392850777fd8a30d936fd84cfd4047dc51d3a64",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_P03",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+              "blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/parity02_p03_table.js"
+            },
+            {
+              "source": "C_LEGACY",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "blob": "c0fced5f4893be6e0ea52bf935dd20dbd6932332",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_model.js"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-13-03",
+          "historical": "MetadataError de apresentação não invalida report/read_model/status científico da fonte.",
+          "current": "Fonte sintética com native_id adulterado e digest de File coerente continua protocolo READY/valid; NativeView INVALID NATIVE_DISPLAY_VALUE_MISMATCH. Read_model protocolo antes/depois idêntico.",
+          "current_contract": "004 FR-006/009 e Native View contrato; protocolo separado de apresentação",
+          "tests": [
+            "EXEC-CATALOG"
+          ],
+          "counterevidence": "Este teste é camada real Catalog/reader, não DOM. O erro nativo rejeita toda apresentação da fonte, sem truncar; não equivale ao mesmo objeto MetadataError C4.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H13_PY",
+              "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+              "path": "tests/viewer/test_atlas_parity03_p03_composition.py",
+              "blob": "d5f81d578d2045cbab8d2fd08b438f738a21421f",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/tests/viewer/test_atlas_parity03_p03_composition.py"
+            },
+            {
+              "source": "C_CATALOG",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/catalog.py",
+              "blob": "cc9c1c3a35aa8d4ede8c4e454a5884d2f0b5d135",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/catalog.py"
+            },
+            {
+              "source": "C_NATIVE_READER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "source": "C_NATIVE_CONTRACT",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-13-04",
+          "historical": "Assets P03 públicos mantêm tabela tipada e conteúdo hostil inerte.",
+          "current": "parity02_p03_table.js/css seguem exatamente preservados e reutilizados pela inspeção nativa; camada editorial nova é reversível.",
+          "current_contract": "004 FR-009; 005 FR-010",
+          "tests": [
+            "CI-NATIVE",
+            "EXEC-LEGACY"
+          ],
+          "counterevidence": "Preservação de dois assets não significa reaproveitamento de toda composição C4.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H13_COMPOSE",
+              "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+              "path": "packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js",
+              "blob": "6392850777fd8a30d936fd84cfd4047dc51d3a64",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js"
+            },
+            {
+              "source": "C_P03",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+              "blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/parity02_p03_table.js"
+            },
+            {
+              "source": "C_P03_CSS",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.css",
+              "blob": "0fe2568ec80e40825bcd3e08e0d1eade09d03c5f",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/parity02_p03_table.css"
+            },
+            {
+              "source": "C_NOTEBOOK",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-13-05",
+          "historical": "Composição C4 herda C1 e seus guards de snapshot.",
+          "current": "Os riscos herdados atuais da / estão nominalmente cobertos por #8/#11 e F001–003; /notebook já tem ledger e histórico isolados.",
+          "current_contract": "001 FR-019/020; 005 FR-005",
+          "tests": [
+            "RED-SNAPSHOT",
+            "RED-RACE",
+            "RED-PREFS",
+            "EXEC-TRIAGE",
+            "EXEC-NAV"
+          ],
+          "counterevidence": "Não encerrar os bugs herdados só porque a disposição da contribuição própria C4 é supersessão. P00 deverá fechar a dependência compartilhada em O3.",
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "evidence": [
+            {
+              "source": "H13_COMPOSE",
+              "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+              "path": "packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js",
+              "blob": "6392850777fd8a30d936fd84cfd4047dc51d3a64",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/packages/atlas/src/atlas_viewer/static/parity03_p03_composition.js"
+            },
+            {
+              "source": "C_APP",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/app.js",
+              "blob": "1bb3b07b8e05dbc5e5438b0528bc4c60212121f3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/app.js"
+            },
+            {
+              "source": "C_TRIAGE",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_triage_model.js",
+              "blob": "48dd420213185980239587d485f9ecb534bc8bb9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_triage_model.js"
+            },
+            {
+              "source": "C_NAV",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_navigation.js",
+              "blob": "1756f8b3c8c08e5164cae3c164802761f18c1946",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_navigation.js"
+            }
+          ],
+          "required_patch": [
+            "P02-F001",
+            "P02-F002",
+            "P02-F003"
+          ]
+        },
+        {
+          "id": "P02-13-06",
+          "historical": "Qualificação sintética C4 não constitui aceite de Chrome privado/OLD-NEW.",
+          "current": "Actions main exercitam teclado/foco/mobile/exportações sintéticas, inclusive UI instalada. Aceite real de host e zoom não é requalificado.",
+          "current_contract": "004 SC-005; 007 FR-007/011",
+          "tests": [
+            "CI-NATIVE",
+            "CI-UX",
+            "PRIVATE-OLD-NEW"
+          ],
+          "counterevidence": "P02 navegador runtime bloqueado; nenhuma alegação de execução Windows real nesta frente.",
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "evidence": [
+            {
+              "source": "H13_JS",
+              "sha": "72d9b94e613a57c82a5afd309796f44b271e2185",
+              "path": "tests/viewer/atlas_parity03_p03_composition_cases.mjs",
+              "blob": "7b8a9199c74121536f407563ee8f1a2655fa18a5",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72d9b94e613a57c82a5afd309796f44b271e2185/tests/viewer/atlas_parity03_p03_composition_cases.mjs"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        }
+      ]
+    },
+    {
+      "pr": 16,
+      "title": "F3A consumidor gráfico e escala",
+      "head_sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+      "state": "CLOSED_UNMERGED_REF_PRESERVED",
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "A incorporação do consumidor gráfico efêmero isolado foi substituída pela via NativeView Files004/005/007. Descriptor0.2.0 permanece aprovado em seu escopo opcional, preservado no histórico; não se alega equivalência de APIs, aquisição, nonce ou TTL.",
+      "required_patch": [],
+      "human_gate": [
+        "Aceite OLD/NEW/zoom privado preservado; não requerido para classificar tecnicamente a rota incorporada."
+      ],
+      "requirements": [
+        {
+          "id": "P02-16-01",
+          "historical": "Módulo F3A consome descriptor0.2.0 em memória via mount/getState/select/setData/dispose; integração/leitura pertence F4.",
+          "current": "Produto ativo /notebook consome Files NativeView verificados em fontes fixadas. / é viewer de protocolo e não tenta interpretar descriptors como produto automaticamente.",
+          "current_contract": "004 FR-003/006; 005 FR-010; 007 FR-006",
+          "tests": [
+            "EXEC-CATALOG",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "Nenhum endpoint de descriptor0.2.0 equivalente implementado. A disposição escolhe rota atual autorizada, preservando contrato0.2.0 opcional e sem ativar ARC09/0.2.1.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H16_GRAPH",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "blob": "a7b12176801f0207aae7ed3b8469b9142d6da334",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js"
+            },
+            {
+              "source": "H16_CONTRACT",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md",
+              "blob": "f010f8e2190b0853713c5c68a881ed72759f3e36",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/GRAPH-CONTRACT.md"
+            },
+            {
+              "source": "C_NATIVE_CONTRACT",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            },
+            {
+              "source": "C_NATIVE_READER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S005",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/005-experiment-triage/spec.md",
+              "blob": "422b8b76f386fae634c2efdf0cf6693949dc868b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/005-experiment-triage/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-16-02",
+          "historical": "Nonce por sessão128bits, source/snapshot/nav/occurrence, TTL e dispose invalidam tokens.",
+          "current": "NativeView valida source/metadata/revision/digest e ledger; mudança torna entrada/exportação indisponível até rebuild explícito. Não há timer descriptor efêmero nem tokens de memória F3A.",
+          "current_contract": "004 FR-004/006; 005 FR-005/010",
+          "tests": [
+            "EXEC-CATALOG",
+            "EXEC-TRIAGE",
+            "EXEC-NAV",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "TTL3600 não se transfere a pacotes declarados e verificados. Contraprovas de sessão/snapshot substituem finalidade no produto, não o contrato literal F3A. / tem reparo separado F001–003.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H16_GRAPH",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "blob": "a7b12176801f0207aae7ed3b8469b9142d6da334",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js"
+            },
+            {
+              "source": "H16_C1",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md",
+              "blob": "7473d972748309a465c386305c3964169b8bf375",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md"
+            },
+            {
+              "source": "C_NATIVE_READER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "source": "C_TRIAGE",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_triage_model.js",
+              "blob": "48dd420213185980239587d485f9ecb534bc8bb9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_triage_model.js"
+            },
+            {
+              "source": "C_NAV",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_navigation.js",
+              "blob": "1756f8b3c8c08e5164cae3c164802761f18c1946",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_navigation.js"
+            },
+            {
+              "source": "C_REBUILD",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_rebuild.js",
+              "blob": "391d85ab543e6aa257ee929c3e19a024f0d7677d",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_rebuild.js"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-16-03",
+          "historical": "Preserva IDs tipados/colisões, relações declaradas, órfãos/ciclos; nunca cria identidade científica.",
+          "current": "UID de apresentação distinto de native_id/source_key; aliases só strings declaradas, chaves estruturais explícitas não fazem fallback; colisões requerem escolha.",
+          "current_contract": "004 FR-004; 005 FR-010",
+          "tests": [
+            "EXEC-NAV",
+            "EXEC-TRIAGE",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "Organização editorial por família não vira causalidade; lineage distinto da árvore.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H16_GRAPH",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "blob": "a7b12176801f0207aae7ed3b8469b9142d6da334",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js"
+            },
+            {
+              "source": "C_NAV",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_navigation.js",
+              "blob": "1756f8b3c8c08e5164cae3c164802761f18c1946",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_navigation.js"
+            },
+            {
+              "source": "C_LINEAGE",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_lineage.js",
+              "blob": "cef0e65cffb9f75984bb2375bd58c972391129ba",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_lineage.js"
+            },
+            {
+              "source": "C_GRAPH",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_graph.js",
+              "blob": "0dcd0227fadc77aabdeaaaac51a9a4d13a900a2a",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_graph.js"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-16-04",
+          "historical": "C1 virtualiza mantendo envelope até10000nós/100000arestas; stress2911/1595 sintético.32MiB físicos limita combinações,10000/100000≈81MiB é rejeitado.",
+          "current": "NativeView aceita10000nós/100000entradas; quotas32MiB físico,8MiBFile/bloco,256MiBlógico.10000nós chegou READY,10001 recusado antes publicação;100001entradas recusadas.",
+          "current_contract": "004 FR-007/013 e NativeView contrato",
+          "tests": [
+            "EXEC-LIMITS",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "Quotas são diferentes:100000entradas não é promessa de100000arestas. Reader10000não prova renderização10000, heap256MiB ou SLA30s.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H16_C1",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md",
+              "blob": "7473d972748309a465c386305c3964169b8bf375",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md"
+            },
+            {
+              "source": "H16_RESULT",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md",
+              "blob": "54e87a39d91bf45d6524a973643d66bd60a4999a",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md"
+            },
+            {
+              "source": "C_NATIVE_CONTRACT",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            },
+            {
+              "source": "C_NATIVE_READER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-16-05",
+          "historical": "Pan/zoom/seleção e janela de render não descartam dados; último nó alcançável.",
+          "current": "Grafo atual revela25→49 no foco inicial e alcança1202, busca global e2911ramos sintéticos; invariância dos dados verificada em Actions no SHA baseline.",
+          "current_contract": "004 FR-013/SC-007; 007 FR-006",
+          "tests": [
+            "CI-NATIVE"
+          ],
+          "counterevidence": "Não usar números reader10000como prova de render10000. Limite de zoom e leitura privada continua gate separado.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H16_GRAPH",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "blob": "a7b12176801f0207aae7ed3b8469b9142d6da334",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js"
+            },
+            {
+              "source": "H16_C1",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md",
+              "blob": "7473d972748309a465c386305c3964169b8bf375",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/F4-C1-CONTRACT.md"
+            },
+            {
+              "source": "C_GRAPH",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_graph.js",
+              "blob": "0dcd0227fadc77aabdeaaaac51a9a4d13a900a2a",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_graph.js"
+            },
+            {
+              "source": "T_GRAPH_BROWSER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/qa/browser_native_graph.mjs",
+              "blob": "fa63fab44ee4b4f217816babcfb924f79eff99c5",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/browser_native_graph.mjs"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-16-06",
+          "historical": "Acessibilidade, texto inerte, foco e eventos limpos no dispose.",
+          "current": "Actions atual verifica teclado arrows/Home/End/Enter, Space/doubleclick, foco, mobile390, cancel/destroy, strings longas, sem requisições externas/page errors.",
+          "current_contract": "001 FR-015; 005 FR-009",
+          "tests": [
+            "CI-NATIVE",
+            "CI-UX"
+          ],
+          "counterevidence": "Somente ambiente Chromium Actions sintético; runtime P02 bloqueado e nenhum PASS de PC privado.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H16_GRAPH",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js",
+              "blob": "a7b12176801f0207aae7ed3b8469b9142d6da334",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/packages/atlas/src/atlas_viewer/static/parity04_f3a_graph.js"
+            },
+            {
+              "source": "C_GRAPH",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_graph.js",
+              "blob": "0dcd0227fadc77aabdeaaaac51a9a4d13a900a2a",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_graph.js"
+            },
+            {
+              "source": "T_GRAPH_BROWSER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/qa/browser_native_graph.mjs",
+              "blob": "fa63fab44ee4b4f217816babcfb924f79eff99c5",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/browser_native_graph.mjs"
+            },
+            {
+              "source": "S001",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/001-atlas021-protocol-interface/spec.md",
+              "blob": "039a217eba8cabd65554447ab51694b382855ac2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/001-atlas021-protocol-interface/spec.md"
+            },
+            {
+              "source": "S005",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/005-experiment-triage/spec.md",
+              "blob": "422b8b76f386fae634c2efdf0cf6693949dc868b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/005-experiment-triage/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-16-07",
+          "historical": "F3A sintético e possível reprodução F1 real têm autoridades distintas.",
+          "current": "Reutilizar evidência sintética; sem adquirir corpus privado ou ratificar aceite amplo.",
+          "current_contract": "004 SC-005; 007 FR-007",
+          "tests": [
+            "PRIVATE-OLD-NEW"
+          ],
+          "counterevidence": "A disposição técnica não completa gate humano; #39 restrito permanece exato.",
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "evidence": [
+            {
+              "source": "H16_RESULT",
+              "sha": "4764eb0ebb38cd272b1a5e5fafbb103e72b8e105",
+              "path": "docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md",
+              "blob": "54e87a39d91bf45d6524a973643d66bd60a4999a",
+              "url": "https://github.com/thalesvalente/Atlas/blob/4764eb0ebb38cd272b1a5e5fafbb103e72b8e105/docs/missions/atlas-parity-04/f3a-graph/F4-C1-RESULT.md"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        }
+      ]
+    },
+    {
+      "pr": 17,
+      "title": "F3B tabelas, estados e exportação",
+      "head_sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+      "state": "CLOSED_UNMERGED_REF_PRESERVED",
+      "disposition": "SUPERSEDED_BY_DESIGN",
+      "rationale": "A rota isolada de tabelas descriptor0.2.0 foi substituída pela leitura NativeView e P03/visualização editorial. Tipagem, estados e exportações atuais foram testados; as diferenças de TTL, quotas e escopo de exportação são explícitas e não revogam descriptor0.2.0.",
+      "required_patch": [],
+      "human_gate": [
+        "Aceite OLD/NEW privado permanece fora da evidência sintética."
+      ],
+      "requirements": [
+        {
+          "id": "P02-17-01",
+          "historical": "F3B é consumidor descriptor0.2.0 isolado sem server/Catalog/SDK; estados e tokens escopados.",
+          "current": "NativeView Files usa servidor/SDK fixos e seleção explícita de tabela; UI distingue coleções vazias, filtro sem resultados e fonte inválida/desatualizada.",
+          "current_contract": "004 FR-006/009; 005 FR-010; 007 FR-006",
+          "tests": [
+            "EXEC-CATALOG",
+            "CI-NATIVE",
+            "CI-UX"
+          ],
+          "counterevidence": "Não alegar API descriptor0.2.0 presente nem interpretar qualquer File como produto.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H17_TABLE",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+              "blob": "4dcea6da23ddf950970eaede7b652581669eb177",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js"
+            },
+            {
+              "source": "H17_CONTRACT",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md",
+              "blob": "58fdbdb209b34e1b431ccd77b29e64f5b91fc973",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md"
+            },
+            {
+              "source": "C_NOTEBOOK",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+            },
+            {
+              "source": "C_NATIVE_READER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S005",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/005-experiment-triage/spec.md",
+              "blob": "422b8b76f386fae634c2efdf0cf6693949dc868b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/005-experiment-triage/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-17-02",
+          "historical": "Mantém missing/null/vazio, false/zero, lexemas numéricos e ordenação exata por tipo com BigInt.",
+          "current": "P03 preservado e modelos nativos usam texto lexical/exactJSON; typedCSV preserva presença,tipo e identidade de linhas. Busca e páginas cobrem toda população selecionada.",
+          "current_contract": "004 FR-005/009; 007 FR-003",
+          "tests": [
+            "EXEC-LEGACY",
+            "EXEC-TRIAGE",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "CSV protegido simplifica tipos e ausência; não é serialização reversível. Números grandes não podem passar por Number para exportação exata.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H17_TABLE",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+              "blob": "4dcea6da23ddf950970eaede7b652581669eb177",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js"
+            },
+            {
+              "source": "C_P03",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+              "blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/parity02_p03_table.js"
+            },
+            {
+              "source": "C_LEGACY",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "blob": "c0fced5f4893be6e0ea52bf935dd20dbd6932332",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_model.js"
+            },
+            {
+              "source": "C_VIEWS",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "blob": "b0971359d2e7406d0ace7e38b370b4a3c96a6e4f",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_views.js"
+            },
+            {
+              "source": "S004",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-17-03",
+          "historical": "JSON descriptor integral e CSV de toda tabela na ordemoriginal, independentemente do filtro.",
+          "current": "Botões atuais dizem JSON/CSV tipado das linhas selecionadas; exportam TODAS as linhas filtradas, não só página. Detalhe/exportação de ocorrência da tabela inclui todas as linhas originais; projeção exata integral disponível.",
+          "current_contract": "004 FR-009; 007 FR-003/006",
+          "tests": [
+            "EXEC-LEGACY",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "É mudança explícita de escopo dos botões de linhas; não equivalência literal com CSV F3B de toda tabela.127linhas filtradas e205linhas/65colunas qualificadas por Actions, sem exportação limitada à página.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H17_CONTRACT",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md",
+              "blob": "58fdbdb209b34e1b431ccd77b29e64f5b91fc973",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md"
+            },
+            {
+              "source": "H17_TABLE",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+              "blob": "4dcea6da23ddf950970eaede7b652581669eb177",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js"
+            },
+            {
+              "source": "C_NOTEBOOK",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+            },
+            {
+              "source": "C_VIEWS",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "blob": "b0971359d2e7406d0ace7e38b370b4a3c96a6e4f",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_views.js"
+            },
+            {
+              "source": "C_LEGACY",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_model.js",
+              "blob": "c0fced5f4893be6e0ea52bf935dd20dbd6932332",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_model.js"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-17-04",
+          "historical": "Reimportação mesmo bytes, TTL e dispose invalidam sessão/seleção efêmeras.",
+          "current": "Nativo faz reindex explícito com reload da UI; mudança de digest/revisão/fonte invalida ledger/histórico/exportação; mesma revisão sem mudança preserva referências. Sem timer F3B.",
+          "current_contract": "004 FR-006; 005 FR-005",
+          "tests": [
+            "EXEC-CATALOG",
+            "EXEC-TRIAGE",
+            "EXEC-NAV",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "Não transformar TTL histórico em requisito novo nem prometer semântica de nonce idêntica. Correção / separada8/11.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H17_TABLE",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+              "blob": "4dcea6da23ddf950970eaede7b652581669eb177",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js"
+            },
+            {
+              "source": "H17_CONTRACT",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md",
+              "blob": "58fdbdb209b34e1b431ccd77b29e64f5b91fc973",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md"
+            },
+            {
+              "source": "C_REBUILD",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_rebuild.js",
+              "blob": "391d85ab543e6aa257ee929c3e19a024f0d7677d",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_rebuild.js"
+            },
+            {
+              "source": "C_TRIAGE",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_triage_model.js",
+              "blob": "48dd420213185980239587d485f9ecb534bc8bb9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_triage_model.js"
+            },
+            {
+              "source": "C_NAV",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_navigation.js",
+              "blob": "1756f8b3c8c08e5164cae3c164802761f18c1946",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_navigation.js"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-17-05",
+          "historical": "Envelope128tabelas/256colunas/100000linhas/depth20/32MiB; exceder falha sem truncar.",
+          "current": "NativeView total100000entradas/10000nós com limites físicos/lógicos; todas linhas consultáveis via janela e exports completos; excedentes falham antes publicação.",
+          "current_contract": "004 FR-007/009 e NativeView contrato",
+          "tests": [
+            "EXEC-LIMITS",
+            "EXEC-LEGACY",
+            "CI-NATIVE"
+          ],
+          "counterevidence": "Envelope não é equivalente coluna-a-coluna; não prometer100000linhas além do overhead de outras entradas. Sem silently firstN.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "evidence": [
+            {
+              "source": "H17_CONTRACT",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md",
+              "blob": "58fdbdb209b34e1b431ccd77b29e64f5b91fc973",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/docs/missions/atlas-parity-04/f3b-tables/TABLE-CONTRACT.md"
+            },
+            {
+              "source": "C_NATIVE_CONTRACT",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            },
+            {
+              "source": "C_NATIVE_READER",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "source": "C_NOTEBOOK",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+            }
+          ],
+          "required_patch": []
+        },
+        {
+          "id": "P02-17-06",
+          "historical": "Conteúdo hostil é texto; CSV neutraliza fórmulas/controles; foco e estados acessíveis.",
+          "current": "CSV protegido neutraliza fórmula; typedCSV tem cells tipadas e JSON fiel. Actions roda foco de detalhes, Escape/restauração, responsividade320/390, vazio explícito e nenhum request externo.",
+          "current_contract": "001 FR-015; 005 FR-009; 007 FR-003",
+          "tests": [
+            "EXEC-LEGACY",
+            "CI-NATIVE",
+            "CI-UX"
+          ],
+          "counterevidence": "Nem execução de fórmula nem valor falsamente seguro inferido. Browser privado não observado; baselineCI não qualifica novoSHA.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "evidence": [
+            {
+              "source": "H17_TABLE",
+              "sha": "72118073cc72b4d3cdca21fcc64c18cf742ae384",
+              "path": "packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js",
+              "blob": "4dcea6da23ddf950970eaede7b652581669eb177",
+              "url": "https://github.com/thalesvalente/Atlas/blob/72118073cc72b4d3cdca21fcc64c18cf742ae384/packages/atlas/src/atlas_viewer/static/parity04_f3b_tables.js"
+            },
+            {
+              "source": "C_P03",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/parity02_p03_table.js",
+              "blob": "f4c2bab174576caf9a6a5d564cb34f0483f0e316",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/parity02_p03_table.js"
+            },
+            {
+              "source": "C_NOTEBOOK",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_notebook.js",
+              "blob": "972abb3428271d549e9d3d505b6191a6000289ad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_notebook.js"
+            },
+            {
+              "source": "C_VIEWS",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/static/native_legacy_views.js",
+              "blob": "b0971359d2e7406d0ace7e38b370b4a3c96a6e4f",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/static/native_legacy_views.js"
+            },
+            {
+              "source": "S007",
+              "sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/007-final-legacy-parity/spec.md",
+              "blob": "e9cea60b68e45c170a6f85a66efa83ee6cabf6c8",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/007-final-legacy-parity/spec.md"
+            }
+          ],
+          "required_patch": []
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "P02-F001",
+      "severity": "HIGH_INTEGRITY",
+      "status": "OPEN_REPRODUCED_BASELINE",
+      "surface": "/",
+      "description": "Seleção/detalhe fonte+ID atravessam mudança de snapshot/restart e reapresentam dados novos sem nova escolha.",
+      "receipt": "app-snapshot-probe.json",
+      "minimal_patch": "Vincular estado de seleção/detalhe e filtros fonte-específicos a epoch do catálogo aceito (generation+indexed_at); limpar no rebuild/restart e manter em GET verificação mesmaepoch.",
+      "required_negative_controls": [
+        "same-source/same-run-id changed content",
+        "A changed/B unchanged: both selections cleared",
+        "same-bytes explicit rebuild clears by chosen epoch policy",
+        "GET observed_at-only/changed flag retains original selection/detail",
+        "fresh Catalog generation1 does not reuse previous epoch"
+      ]
+    },
+    {
+      "id": "P02-F002",
+      "severity": "HIGH_INTEGRITY",
+      "status": "OPEN_REPRODUCED_BASELINE",
+      "surface": "/",
+      "description": "GET concorrente atrasado substitui POST rebuild maisnovo.",
+      "receipt": "app-race-probe.json",
+      "minimal_patch": "Serializar/coalescer consultas e rebuilds, evitar respostasantigas substituírem novaepoch e preservar pedidos de rebuild explícitos.",
+      "required_negative_controls": [
+        "GET in-flight then POST must not lose rebuild",
+        "POST in-flight then visibility GET cannot rollback",
+        "last-request-wins alone is insufficient",
+        "failure does not wedge queue or discard next requested action"
+      ]
+    },
+    {
+      "id": "P02-F003",
+      "severity": "MEDIUM_INTEGRITY",
+      "status": "OPEN_REPRODUCED_BASELINE",
+      "surface": "/",
+      "description": "Filtros project/experiment em localStorage usam source-N ordinal e mudam de significado ao reordenar fontes em nova sessão.",
+      "receipt": "app-preferences-probe.json",
+      "minimal_patch": "Persistir binding de epoch com preferências source-scoped; restaurar project/experiment somente na mesmaepoch, limpar ao trocar. Query/status continuam preferências independentes.",
+      "required_negative_controls": [
+        "reordered sources with colliding project/experiment IDs do not silently select other source",
+        "sameepoch page reload restores scoped filters",
+        "unknown/legacy preference epoch fails closed only for source-scoped fields",
+        "query/status survive epoch reset"
+      ]
+    }
+  ],
+  "shared_patch_owner": "P00_ONLY",
+  "review": {
+    "author": "/root/p02_ui",
+    "independent_reviewer": "/root/p01_contracts",
+    "status": "PENDING"
+  },
+  "reuse": {
+    "prior_audit": "/workspace/scratch/c50b5f701290/atlas-pr19",
+    "prior_19_comments": "O0 revalidated exact unchanged; all reused; no claim rewritten or erased",
+    "pr40": {
+      "sha": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+      "disposition": "24_FILE_RECOVERY_ALREADY_RESOLVED_REUSED_NO_REWORK",
+      "mutation": "NONE"
+    }
+  },
+  "human_boundaries": [
+    "No descriptor0.2.0revocation; optional scope retained",
+    "No ARC09/0.2.1activation or frozen blob rewrite",
+    "No expansion of #39restricted acceptance; private OLD/NEW/zoom pending",
+    "No merge/deploy/release/branch deletion"
+  ],
+  "local_gate": {
+    "status": "LOCAL_NOT_REQUIRED",
+    "reason": "All current synthetic defects and fixes can execute in Chat runtime plus GitHub/Actions; runtime browser limitation has existing Actions alternative. Private acceptance is a separate existing human gate, not used to send ordinary work to CodexLocal."
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "artifacts": [
+    {
+      "path": "P03-MATRIX.json",
+      "match": true
+    },
+    {
+      "path": "P03-MATRIX.md",
+      "match": true
+    },
+    {
+      "path": "P03-CHECKS.json",
+      "match": true
+    },
+    {
+      "path": "P03-SOURCES.json",
+      "match": true
+    },
+    {
+      "path": "main-presence-and-os-deltas.json",
+      "match": true
+    },
+    {
+      "path": "producer-origin-baseline-red.json",
+      "match": true
+    },
+    {
+      "path": "probe_producer_origin.py",
+      "match": true
+    },
+    {
+      "path": "current-producer-preimport-red.json",
+      "match": true
+    },
+    {
+      "path": "run_main_checks.py",
+      "match": true
+    },
+    {
+      "path": "main-source-tests-normal.json",
+      "match": true
+    },
+    {
+      "path": "main-source-tests-optimized.json",
+      "match": true
+    },
+    {
+      "path": "main-source-tests-normal.log",
+      "match": true
+    },
+    {
+      "path": "main-source-tests-optimized.log",
+      "match": true
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "AGENTS.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "docs/architecture/ADR-0001-atlas-protocol-producers-storage.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "docs/coordination/publication-policy.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/003-producer-selective-preview/spec.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/003-producer-selective-preview/plan.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/003-producer-selective-preview/tasks.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/003-producer-selective-preview/contracts/reader.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/004-native-notebook-experience/spec.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/004-native-notebook-experience/plan.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/004-native-notebook-experience/tasks.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/004-native-notebook-experience/research.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/007-final-legacy-parity/spec.md",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/export_native_notebook.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "scripts/atlas_launch.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/native_values.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "packages/atlas/src/atlas_viewer/server.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "scripts/qa/architecture_audit.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tests/viewer/test_native_notebook.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_http.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_review.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_parity.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_producer_boundary.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tests/viewer/test_native_notebook_launcher.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tests/qa/test_architecture_boundaries.py",
+      "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/reader.py",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/production.py",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/parser.py",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/legacy_v5_descriptor.py",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/semantics.py",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/descriptor.schema.json",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-composition/SOURCE-BLOB-PROVENANCE.json",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-c2-composition/RESULT.md",
+      "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_linux_isolation.py",
+      "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_supervisor.py",
+      "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_windows_acl.py",
+      "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_windows_job.py",
+      "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "tools/atlas_legacy_presentation/os_worker.py",
+      "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/validate_sanitized.py",
+      "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/PROMPT-CODEX-LOCAL-L0.md",
+      "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "blob_match": true,
+      "sha256_match": true
+    },
+    {
+      "path": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+      "ref": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "blob_match": true,
+      "sha256_match": true
+    }
+  ],
+  "source_tests_receipt_crosscheck": {
+    "normal": 32,
+    "optimized": 32,
+    "same_test_ids": true,
+    "distinct": 32,
+    "all_pass": true,
+    "execution": "Author receipts authenticated; not rerun by P02"
+  },
+  "observations": [
+    {
+      "case": "module_symlink",
+      "expected": "source outside selected root rejected before execution",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+      "outside_module_executed": true,
+      "package_published": false,
+      "result": "RED",
+      "review_expectation": "Baseline must reproduce out-of-root execution despite BLOCKED and without publishing package",
+      "review_check": "PASS"
+    },
+    {
+      "case": "ambient_package_shadows_selected_namespace",
+      "expected": "source outside selected root rejected before execution",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "{\"status\": \"BLOCKED\", \"error\": \"PRODUCER_MODULE_OUTSIDE_SELECTED_CODE\"}\n",
+      "outside_module_executed": true,
+      "package_published": false,
+      "result": "RED",
+      "review_expectation": "Baseline must reproduce out-of-root execution despite BLOCKED and without publishing package",
+      "review_check": "PASS"
+    },
+    {
+      "case": "selected_regular_producer_positive",
+      "review_check": "PASS",
+      "returncode": 0,
+      "selected_project_called": true,
+      "package_published": true,
+      "stdout": "{\"status\": \"EXPORTED\", \"output\": \"/workspace/scratch/34abaf002e3a/atlas-convergence/agents/P02/p03-positive-w9n5hdik/package\", \"revision\": \"projection-sha256:4beba2ce13976b7bd8b24937703ca2e7057f4cc38c17c2bdf7e61bd6b7d26e66\", \"entries\": 2, \"projection_sha256\": \"4beba2ce13976b7bd8b24937703ca2e7057f4cc38c17c2bdf7e61bd6b7d26e66\", \"provider_calls\": 0, \"scientific_approval\": \"NOT_EVALUATED\"}\n",
+      "stderr": "",
+      "scope": "New P02 synthetic positive check; trusted selected package; not host sandbox certification"
+    }
+  ],
+  "reviewer": "/root/p02_ui",
+  "author": "/root/p03_reader",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_head_unchanged": true,
+  "product_status": "",
+  "status": "PASS_SCOPED_REVIEW_PROBES"
+}

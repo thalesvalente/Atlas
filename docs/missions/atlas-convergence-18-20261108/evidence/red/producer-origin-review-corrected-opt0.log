@@ -1,0 +1,75 @@
+test_ambient_regular_package_cannot_shadow_selected_namespace (__main__.ProducerOriginTests.test_ambient_regular_package_cannot_shadow_selected_namespace) ... FAIL
+test_missing_selected_module_does_not_run_parent_initializer (__main__.ProducerOriginTests.test_missing_selected_module_does_not_run_parent_initializer) ... FAIL
+test_namespace_selected_producer_remains_supported (__main__.ProducerOriginTests.test_namespace_selected_producer_remains_supported) ... ok
+test_parent_initializer_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_parent_initializer_symlink_is_rejected_before_execution) ... FAIL
+test_producer_package_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_producer_package_symlink_is_rejected_before_execution) ... FAIL
+test_regular_selected_producer_exports_without_changing_notebook (__main__.ProducerOriginTests.test_regular_selected_producer_exports_without_changing_notebook) ... ok
+test_source_directory_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_source_directory_symlink_is_rejected_before_execution) ... FAIL
+test_terminal_module_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_terminal_module_symlink_is_rejected_before_execution) ... FAIL
+
+======================================================================
+FAIL: test_ambient_regular_package_cannot_shadow_selected_namespace (__main__.ProducerOriginTests.test_ambient_regular_package_cannot_shadow_selected_namespace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 135, in test_ambient_regular_package_cannot_shadow_selected_namespace
+    self.assert_blocked_before_execution(self.invoke(ambient))
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 81, in assert_blocked_before_execution
+    self.assertFalse(self.marker.exists(), "Producer code ran before the origin gate rejected it")
+AssertionError: True is not false : Producer code ran before the origin gate rejected it
+
+======================================================================
+FAIL: test_missing_selected_module_does_not_run_parent_initializer (__main__.ProducerOriginTests.test_missing_selected_module_does_not_run_parent_initializer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 142, in test_missing_selected_module_does_not_run_parent_initializer
+    self.assert_blocked_before_execution(self.invoke())
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 81, in assert_blocked_before_execution
+    self.assertFalse(self.marker.exists(), "Producer code ran before the origin gate rejected it")
+AssertionError: True is not false : Producer code ran before the origin gate rejected it
+
+======================================================================
+FAIL: test_parent_initializer_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_parent_initializer_symlink_is_rejected_before_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 111, in test_parent_initializer_symlink_is_rejected_before_execution
+    self.assert_blocked_before_execution(self.invoke())
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 78, in assert_blocked_before_execution
+    self.assertEqual(completed.returncode, 2, completed.stdout + completed.stderr)
+AssertionError: 0 != 2 : {"status": "EXPORTED", "output": "/tmp/atlas-origin-j2f989o8/derived-package", "revision": "projection-sha256:35f981bb8b4c90a17290031a0bee50307072bf7ea78f5386cef34e4908ec96b5", "entries": 2, "projection_sha256": "35f981bb8b4c90a17290031a0bee50307072bf7ea78f5386cef34e4908ec96b5", "provider_calls": 0, "scientific_approval": "NOT_EVALUATED"}
+{"producer_python_optimize": 0}
+
+
+======================================================================
+FAIL: test_producer_package_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_producer_package_symlink_is_rejected_before_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 118, in test_producer_package_symlink_is_rejected_before_execution
+    self.assert_blocked_before_execution(self.invoke())
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 81, in assert_blocked_before_execution
+    self.assertFalse(self.marker.exists(), "Producer code ran before the origin gate rejected it")
+AssertionError: True is not false : Producer code ran before the origin gate rejected it
+
+======================================================================
+FAIL: test_source_directory_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_source_directory_symlink_is_rejected_before_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 127, in test_source_directory_symlink_is_rejected_before_execution
+    self.assert_blocked_before_execution(self.invoke())
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 81, in assert_blocked_before_execution
+    self.assertFalse(self.marker.exists(), "Producer code ran before the origin gate rejected it")
+AssertionError: True is not false : Producer code ran before the origin gate rejected it
+
+======================================================================
+FAIL: test_terminal_module_symlink_is_rejected_before_execution (__main__.ProducerOriginTests.test_terminal_module_symlink_is_rejected_before_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 103, in test_terminal_module_symlink_is_rejected_before_execution
+    self.assert_blocked_before_execution(self.invoke())
+  File "/workspace/scratch/34abaf002e3a/atlas-convergence/staging/test_native_notebook_producer_origin.py", line 81, in assert_blocked_before_execution
+    self.assertFalse(self.marker.exists(), "Producer code ran before the origin gate rejected it")
+AssertionError: True is not false : Producer code ran before the origin gate rejected it
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.531s
+
+FAILED (failures=6)

@@ -1,0 +1,714 @@
+{
+  "id": "P03-ATLAS-CONVERGENCE-READER-OS-L0-20261108",
+  "author": "/root/p03_reader",
+  "status": "EXECUTED_PARTIAL_CURRENT_FIX_REQUIRED",
+  "baseline_sha": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+  "baseline_tree": "6f6083d05fff569f0ba5c46ba45d62056155246f",
+  "decision_scope": "New technical disposition for incorporation into the consolidated Atlas product; historical approved external descriptor 0.2.0 is not revoked, reclassified or implemented implicitly.",
+  "sources": "P03-SOURCES.json",
+  "prs": [
+    {
+      "pr": 18,
+      "head_sha": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+      "requirements": [
+        {
+          "id": "P03-18-01",
+          "historical": "Aquisição O1 só depois do gate e da identidade da fonte; importação não pode executar alvo fora da seleção explícita.",
+          "current": "O exportador externo importa o produtor antes de verificar __file__. Um módulo symlink externo e um pacote ambiente que sombreia namespace selecionado executam código e só então retornam BLOCKED.",
+          "evidence": [
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/reader.py",
+              "blob": "850c822c18d20835c39a2031841bbb56b4086a6d",
+              "sha256": "ca91ff677be905df00b6820d81313e57b06f03808c3b7a954765709f4adc649a",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/reader.py"
+            },
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/production.py",
+              "blob": "b17c456b8f9907caeb85017541b0a4d18a9c18aa",
+              "sha256": "90b9567dcb8bd3fb4efb6bd1aff1039315c73066a7db55cd5e485b596aa760d2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/production.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "tools/export_native_notebook.py",
+              "blob": "58e68daaffe5054258b60e67192802553cb0cf21",
+              "sha256": "be4a6f26f0ab85c226118638aa742b763f3ca43f560a78270cd3a542748936b9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/tools/export_native_notebook.py"
+            }
+          ],
+          "tests": [
+            "producer-origin-baseline-red.json :: module_symlink",
+            "producer-origin-baseline-red.json :: ambient_package_shadows_selected_namespace"
+          ],
+          "counterevidence": "Dois processos sintéticos retornaram exit 2/PRODUCER_MODULE_OUTSIDE_SELECTED_CODE, mas o marcador fora da raiz foi criado; nenhum pacote foi publicado. A recusa posterior não desfaz execução.",
+          "disposition": "RETAIN_AND_IMPLEMENT",
+          "rationale": "Preservar a obrigação de origem: pré-validar a cadeia física selecionada antes de qualquer inicializador e conferir a resolução efetiva/origem antes de executar cada módulo r4, r4.campaigns e terminal em sequência. Pais confiáveis podem ser carregados para resolver namespaces. Testar namespaces legítimos, symlinks e módulos ambientais/cacheados. Correção no adaptador atual; não portar parser O1 nem anunciar sandbox.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-18-02",
+          "historical": "Mapper conserva ocorrências, campos, números grandes, null/ausência/zero, estados desconhecidos e dados não mapeados.",
+          "current": "Native View conserva raw_json e reconstrução integral; UID de apresentação separado de native_id/source_key; o leitor confere campos/células contra a origem e digest.",
+          "evidence": [
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/legacy_v5_descriptor.py",
+              "blob": "720795496e25457f8e19f44652573bfee1800659",
+              "sha256": "4b80632a6b66449ea3c6a281529c62411d4a7bef2ed568c8e61253b96f0cd175",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/legacy_v5_descriptor.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "tools/export_native_notebook.py",
+              "blob": "58e68daaffe5054258b60e67192802553cb0cf21",
+              "sha256": "be4a6f26f0ab85c226118638aa742b763f3ca43f560a78270cd3a542748936b9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/tools/export_native_notebook.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "sha256": "d63f37904bc76bdc5944d77c94f0f9a76ffd77df2b93e26c088374602591dbad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            }
+          ],
+          "tests": [
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_protocol_and_native_reader_use_same_export_without_producer_installed",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_every_field_roundtrips_without_mutating_projection_or_package",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook_review.NativeReviewTests.test_explicit_null_identity_is_not_a_structural_id",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook_parity.NativeParityTests.test_all_fields_types_presence_and_homonymous_ids_roundtrip"
+          ],
+          "counterevidence": "Não se declara equivalência de toda a semântica descriptor 0.2.0. Native View não forja native_id a partir de source_key e conserva informação mesmo sem representação científica no perfil.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "rationale": "Equivalência limitada à obrigação de conservação literal e identidade contextual exercitada pelas fixtures; representação e formato permanecem distintos.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-18-03",
+          "historical": "Parser v5/HTML e serialização atlas-legacy-presentation 0.2.0, quotas O1 e TTL de até uma hora para importação File API/O3.",
+          "current": "Feature 004 escolheu projeção existente da API produtora e Files Native View no pacote científico validado, sem parser de HTML nem File API de descriptor.",
+          "evidence": [
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/parser.py",
+              "blob": "44aaf50bc5c554cb89ff80255288233e2cdc6335",
+              "sha256": "a0afcaa7a26d445b6fb882d5ac3632ad31b5305c277bf3c83fe370bc2d912451",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/parser.py"
+            },
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/descriptor.schema.json",
+              "blob": "e87767710b6eafd32d57fc68d5294610b0038571",
+              "sha256": "eea70b9e67a0df4a46b30d6ac36346e827774c7eb3d0b2b1ea07e1a2bd71f6ed",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/descriptor.schema.json"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/research.md",
+              "blob": "2a17f4f5c6752d187276f1e23d3a1cdbc0a84635",
+              "sha256": "f553cf029c3a56e72c4776af25067a0328d9d16571bc63dc0106f418ca6074ea",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/research.md"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "sha256": "ac5ec42a49e13f7123d67e83f13837a18f890a31557ef7f6e91b91696d5fd5fc",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            }
+          ],
+          "tests": [
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_wrong_projection_and_unknown_version_fail_closed",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_large_repeated_legacy_caderno_uses_bounded_compressed_transport",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook_http.NativeHTTPTests.test_export_is_bound_to_selected_source_and_snapshot"
+          ],
+          "counterevidence": "Native View não implementa TTL gerado por O1, File API/RAM O3 ou limite OS de 256 MiB/30s. Seu limite lógico descomprimido de 256 MiB não é teto de memória residente. Descriptor 0.2.0 continua aprovado no escopo externo original.",
+          "disposition": "SUPERSEDED_BY_DESIGN",
+          "rationale": "Decisão técnica desta convergência: a experiência atual utiliza a via já especificada e consolidada de projeção/pacote. A gramática HTML/descriptor não é transportada à main. Não é revogação normativa do contrato externo nem afirmação de equivalência de transportes.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-18-04",
+          "historical": "Fontes só leitura; scratch próprio, saída separada e sem sobrescrever fonte, sem promover ciência.",
+          "current": "Exportação atual exige destino novo e disjunto, publica diretório completo atomicamente; consumidor reconstrói bytes sem mutar fonte e marca scientific_approval NOT_EVALUATED.",
+          "evidence": [
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "tools/export_native_notebook.py",
+              "blob": "58e68daaffe5054258b60e67192802553cb0cf21",
+              "sha256": "be4a6f26f0ab85c226118638aa742b763f3ca43f560a78270cd3a542748936b9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/tools/export_native_notebook.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "sha256": "d63f37904bc76bdc5944d77c94f0f9a76ffd77df2b93e26c088374602591dbad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/spec.md",
+              "blob": "85748f53fb4432c5384bec2005babd5efad3dad2",
+              "sha256": "ac5ec42a49e13f7123d67e83f13837a18f890a31557ef7f6e91b91696d5fd5fc",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/spec.md"
+            }
+          ],
+          "tests": [
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_every_field_roundtrips_without_mutating_projection_or_package",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_existing_destination_and_source_overlap_rejected",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_fsync_failure_keeps_final_path_unpublished_and_allows_retry",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_publish_cannot_replace_an_existing_destination"
+          ],
+          "counterevidence": "Essas provas cobrem fontes sintéticas e publicação atômica. O código produtor escolhido é confiável; a missão não certifica ausência de escritas por código produtor hostil nem TOCTOU adversarial.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "rationale": "Obrigação de não modificar a fonte e de não promover ciência demonstrada no adaptador/consumidor atuais, mantendo o limite de confiança declarado.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-18-05",
+          "historical": "Reader e supervisor B devem permanecer externos ao viewer; guard de produção falha fechado antes de qualquer path/open.",
+          "current": "Wheel/runtime viewer não importa r4 nem dispõe de subprocess. Só a ferramenta externa explicitamente invocada carrega a API produtora; HTTP não aceita fontes arbitrárias.",
+          "evidence": [
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/production.py",
+              "blob": "b17c456b8f9907caeb85017541b0a4d18a9c18aa",
+              "sha256": "90b9567dcb8bd3fb4efb6bd1aff1039315c73066a7db55cd5e485b596aa760d2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/production.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/qa/architecture_audit.py",
+              "blob": "1f4446dd85b55e2cd8b1e6063bc1eca24fd30b67",
+              "sha256": "6468dd834a39047b206668d38354fd1dd670cc2fc1fd3fa95806f95b7139a022",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/qa/architecture_audit.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/server.py",
+              "blob": "05cbf5584561bb74ebded60c001df7b835ad864a",
+              "sha256": "cb50d7a06163dd15e055820a4bf818405c759de14d00d73e01b7165f70cf19e3",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/server.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/atlas_launch.py",
+              "blob": "7cda6e8ef8d8a1fce04ae0611814561652b38c32",
+              "sha256": "eeae8c80431467d5dd72b828cdcb2bc5d797e8b73dcc7fd6b2a447a70abb24dd",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/atlas_launch.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "actual architecture_audit.py :: PASS_SCOPED, zero findings",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_architecture_boundaries.ArchitectureGuardTests.test_process_execution_capability_is_rejected_in_viewer",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_architecture_boundaries.ArchitectureGuardTests.test_private_dependency_hidden_in_helper_is_rejected",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook_http.NativeHTTPTests.test_export_is_bound_to_selected_source_and_snapshot"
+          ],
+          "counterevidence": "Separação produtor/viewer não equivale ao sandbox do O1. A origem externa ainda tem o defeito P03-18-01; portanto não há PASS global de segurança do exportador neste baseline.",
+          "disposition": "EQUIVALENT_IN_MAIN",
+          "rationale": "Equivalência apenas da fronteira de responsabilidade do viewer e da rejeição de paths pelo HTTP. O defeito de origem é mantido como correção própria.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-18-06",
+          "historical": "Composição de B histórico em bc5b634d, anterior a quatro módulos terminais de #20.",
+          "current": "Main não usa os cinco módulos B nem tem o parser O1; não se pode atribuir à #18 os controles posteriores nem importar a #20 em bloco.",
+          "evidence": [
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/production.py",
+              "blob": "b17c456b8f9907caeb85017541b0a4d18a9c18aa",
+              "sha256": "90b9567dcb8bd3fb4efb6bd1aff1039315c73066a7db55cd5e485b596aa760d2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/production.py"
+            },
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "docs/missions/atlas-parity-04/f4-c2-composition/SOURCE-BLOB-PROVENANCE.json",
+              "blob": "a88d85929abb7f306786c942edfe3cf638c32409",
+              "sha256": "76f17e95de43db04f6a858184da0d4f14a18e38c42dedb90e3d1ed537c7c231f",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/docs/missions/atlas-parity-04/f4-c2-composition/SOURCE-BLOB-PROVENANCE.json"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "main-presence-and-os-deltas.json :: exact five-module blob comparison",
+            "authenticated prior P02-COMPOSITION-PROOF.json reused"
+          ],
+          "counterevidence": "os_linux_isolation.py é byte-idêntico; os_supervisor.py, os_windows_acl.py, os_windows_job.py e os_worker.py são diferentes. Os testes atuais do produto não qualificam os quatro deltas históricos.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Rejeitada a composição automática dos módulos antigos/terminais no produto atual. Preservar ambos os conjuntos por SHA para eventual projeto O1 autorizado.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-18-07",
+          "historical": "Aquisição privada O1/L1/G4 depende de escopo de fonte e isolamento efetivo, sem sintético usado como permissão.",
+          "current": "A convergência usa somente fixtures sintéticas; nenhuma fonte privada ou aquisição O1 foi ativada.",
+          "evidence": [
+            {
+              "ref": "86aec49d793d10c1d0b35db58fda747e0febdb23",
+              "path": "tools/atlas_legacy_presentation/production.py",
+              "blob": "b17c456b8f9907caeb85017541b0a4d18a9c18aa",
+              "sha256": "90b9567dcb8bd3fb4efb6bd1aff1039315c73066a7db55cd5e485b596aa760d2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/86aec49d793d10c1d0b35db58fda747e0febdb23/tools/atlas_legacy_presentation/production.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            }
+          ],
+          "tests": [
+            "authenticated prior P02-COUNTERPROOFS.json :: PR18 pre-I/O tests reused",
+            "private host acquisition NOT_RUN"
+          ],
+          "counterevidence": "Um read-model atual funcional e CI verde não liberam a aquisição histórica nem validam corpus real.",
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "rationale": "Objeto humano exato: reativação de aquisição de fonte privada O1/L1 no escopo declarado e qualificação de host. Consequência: essa via permanece sem uso produtivo e sem aceite.",
+          "human_gate": "PRIVATE_PRODUCTION_ACQUISITION_NOT_AUTHORIZED; independent of repairing the current public exporter"
+        }
+      ],
+      "disposition": "RETAIN_AND_IMPLEMENT",
+      "rationale": "Retain pre-import source-origin boundary in current external adapter: two reproducible baseline counterexamples. Literal preservation/readonly boundaries are mapped to current implementation; HTML parser/O1/descriptor transport are not imported wholesale.",
+      "required_patch": {
+        "id": "P03-CURRENT-PRODUCER-PREIMPORT-001",
+        "owner": "P00",
+        "paths": [
+          "tools/export_native_notebook.py",
+          "tests/viewer/test_native_notebook_producer_boundary.py"
+        ],
+        "expected_behavior": "Before any initializer, validate the entire expected physical chain under selected code. Then resolve/load r4, r4.campaigns and terminal sequentially, checking effective spec origins/search paths and cached modules before each import executes. Trusted selected parents may execute to support namespaces. Reject symlink/reparse/ambient or cached foreign origins; restore sys.path after projection. Preserve legitimate namespaces, direct projection CLI and producer errors. This does not confine trusted producer code or eliminate adversarial TOCTOU.",
+        "red_evidence": "producer-origin-baseline-red.json",
+        "tests": "probe_producer_origin.py plus product regression tests chosen by P00",
+        "not_a_sandbox": true,
+        "implementation_status": "NOT_IMPLEMENTED_BY_P03; P00 advised"
+      },
+      "human_gate": "Private production O1/L1 remains separate, inactive and not accepted"
+    },
+    {
+      "pr": 20,
+      "head_sha": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+      "requirements": [
+        {
+          "id": "P03-20-01",
+          "historical": "Isolamento Linux e limite RLIMIT_AS do worker sintético.",
+          "current": "Consumidor atual lê pacote validado; produtor confiável roda fora do viewer. Nenhuma alegação de sandbox Linux, limite de RSS ou equivalente acompanha Native View.",
+          "evidence": [
+            {
+              "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+              "path": "tools/atlas_legacy_presentation/os_linux_isolation.py",
+              "blob": "bdb1efe3361ff78643143c4e4a316606eba05561",
+              "sha256": "b67e4a84c31d407a065dfdb24a2a042f5454348947bbfb8c09567f7538112a2c",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8621147c544ecdd61eeb6586c8ed7b45b81c33ef/tools/atlas_legacy_presentation/os_linux_isolation.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "main-presence-and-os-deltas.json :: os_linux_isolation.py byte-identical to PR18",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_incompressible_over_budget_fails_without_truncation"
+          ],
+          "counterevidence": "Quota de bytes/lógico é distinta de limite de memória de processo. O módulo Linux histórico não teve delta terminal e não está embutido no produto atual.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Não incorporar um mecanismo de isolamento sem consumidor no produto nem transferir sua certificação. Preservar o módulo histórico como evidência reutilizável no escopo próprio.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-20-02",
+          "historical": "Windows Job Object/AppContainer, capacidades de rede ausentes e herança restrita de handles para worker sintético.",
+          "current": "Não existe worker O1 a qualificar na main. Launcher de produto confiável tem fronteira de processo e encerramento próprios, sem alegação de AppContainer.",
+          "evidence": [
+            {
+              "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+              "path": "tools/atlas_legacy_presentation/os_windows_job.py",
+              "blob": "41954d2346121059b905098c0ee6a0292bd29a0b",
+              "sha256": "7fa568b771f63409974d1bb3765977493b0e8f0a407d7af62cb22aee4721d98f",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8621147c544ecdd61eeb6586c8ed7b45b81c33ef/tools/atlas_legacy_presentation/os_windows_job.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/atlas_launch.py",
+              "blob": "7cda6e8ef8d8a1fce04ae0611814561652b38c32",
+              "sha256": "eeae8c80431467d5dd72b828cdcb2bc5d797e8b73dcc7fd6b2a447a70abb24dd",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/atlas_launch.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "main-presence-and-os-deltas.json :: run_synthetic_job, _StartupEx, _SecurityCapabilities, _InheritAttributes, _AppContainerLaunch",
+            "historical Actions 41780695244 preserved, Windows 43 passed / 2 skipped"
+          ],
+          "counterevidence": "CI histórica sintética não torna aquisição produtiva pronta; `JobMemoryLimit` cobre committed bytes totais, não a mesma métrica de RLIMIT_AS Linux. Quatro módulos terminais não foram incorporados pela #18.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "A porta automática ampliaria mecanismos do host sem requisito atual, fora da função do viewer (ARC-07) e sem fechar a qualificação histórica. Manter a contribuição recuperável, sem ativá-la.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-20-03",
+          "historical": "DACL/ACL de scratch e herança verificada para filhos; novos checks verify_private_child.",
+          "current": "Saídas do adaptador atual são novas e disjuntas; cache temporário pertence ao launcher. Não se promete que isso seja equivalente a DACL do worker sob ameaça adversarial.",
+          "evidence": [
+            {
+              "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+              "path": "tools/atlas_legacy_presentation/os_windows_acl.py",
+              "blob": "4b3d26c26f359fae7e05ed3fc33a1bba42b375a0",
+              "sha256": "712c4f951e6d2b760a4610c4336a8f51c24a7104c0ba406bad52d2dbdcafe0b2",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8621147c544ecdd61eeb6586c8ed7b45b81c33ef/tools/atlas_legacy_presentation/os_windows_acl.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "tools/export_native_notebook.py",
+              "blob": "58e68daaffe5054258b60e67192802553cb0cf21",
+              "sha256": "be4a6f26f0ab85c226118638aa742b763f3ca43f560a78270cd3a542748936b9",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/tools/export_native_notebook.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "scripts/atlas_launch.py",
+              "blob": "7cda6e8ef8d8a1fce04ae0611814561652b38c32",
+              "sha256": "eeae8c80431467d5dd72b828cdcb2bc5d797e8b73dcc7fd6b2a447a70abb24dd",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/scripts/atlas_launch.py"
+            }
+          ],
+          "tests": [
+            "main-presence-and-os-deltas.json :: verify_private_scratch, verify_private_child, create_private_scratch",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_existing_destination_and_source_overlap_rejected"
+          ],
+          "counterevidence": "A verificação sintética de fonte intacta não qualifica ACL/DACL do Windows nem segurança de código confiável malicioso.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Não recuperar a camada de ACL sem ativação autorizada do modelo de ameaça O1. Conservar o incremento exato da #20 para uma decisão futura específica.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-20-04",
+          "historical": "Provas causais de negação de leitura/breakaway, morte do supervisor e broker/worker Windows.",
+          "current": "Runtime viewer não executa processos; ferramenta externa usa produtor escolhido pelo operador. Os testes sintéticos de processo históricos pertencem ao O1 suspenso.",
+          "evidence": [
+            {
+              "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+              "path": "tools/atlas_legacy_presentation/os_worker.py",
+              "blob": "bdfcbf53d64152b3265e1b8fb711eb97f3335b46",
+              "sha256": "98db077c901334740332d47d6df545edd12175ca83413329fef432d0a55758f4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8621147c544ecdd61eeb6586c8ed7b45b81c33ef/tools/atlas_legacy_presentation/os_worker.py"
+            },
+            {
+              "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+              "path": "tools/atlas_legacy_presentation/os_supervisor.py",
+              "blob": "0fbfd44546a59395efe8d77ed99d75b6f694cd0c",
+              "sha256": "56aa2bb59db353682d8071390f1f8faac695625acfbbb719ff65156cdaa8345c",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8621147c544ecdd61eeb6586c8ed7b45b81c33ef/tools/atlas_legacy_presentation/os_supervisor.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "main-presence-and-os-deltas.json :: _probe_owned, _report, _is_job_breakaway_denial, _NativeChild, _native_breakaway_challenge, _windows_broker_worker",
+            "historical Actions 41780695244 preserved, Ubuntu 27 passed / 18 skipped"
+          ],
+          "counterevidence": "Não declarar os controles atuais equivalentes. O novo defeito de origem requer preflight, mas não justifica instalar todo o sandbox ou alegar isolamento de host.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Guardar os oráculos e suas versões de código no histórico; não executar testes de um subsistema ausente para fabricar cobertura do produto.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-20-05",
+          "historical": "Produção bloqueada por require_production_acquisition; testes de runner não qualificam parser real dentro dos limites.",
+          "current": "Nenhuma aquisição O1 foi ativada. A rota atual de produtor confiável permanece explicitamente distinta.",
+          "evidence": [
+            {
+              "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+              "path": "tools/atlas_legacy_presentation/os_supervisor.py",
+              "blob": "0fbfd44546a59395efe8d77ed99d75b6f694cd0c",
+              "sha256": "56aa2bb59db353682d8071390f1f8faac695625acfbbb719ff65156cdaa8345c",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8621147c544ecdd61eeb6586c8ed7b45b81c33ef/tools/atlas_legacy_presentation/os_supervisor.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            }
+          ],
+          "tests": [
+            "authenticated prior P02-COUNTERPROOFS.json :: PRODUCTION_ACQUISITION_BLOCKED reused"
+          ],
+          "counterevidence": "A retirada do guard, sucesso de sintéticos, nova PR ou aprovação de outro escopo não autoriza produção.",
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "rationale": "Objeto humano: escopo de aquisição produtiva exato, ameaça/limites a sustentar e autorização para nova sucessão. Sem esse ato não se integra o worker nem se fornece recibo operacional de fonte privada.",
+          "human_gate": "O1_PRODUCTION_ACTIVATION_AND_SCOPE_PENDING"
+        },
+        {
+          "id": "P03-20-06",
+          "historical": "Sucessão histórica sofreu C2_B_UNAUTHORIZED_SUCCESSOR_PATH e DELTA_MISMATCH no workflow final.",
+          "current": "A main consolidada tem sua própria linhagem e CI, que não repara nem apaga esse evento histórico.",
+          "evidence": [
+            {
+              "ref": "8621147c544ecdd61eeb6586c8ed7b45b81c33ef",
+              "path": "tools/atlas_legacy_presentation/os_supervisor.py",
+              "blob": "0fbfd44546a59395efe8d77ed99d75b6f694cd0c",
+              "sha256": "56aa2bb59db353682d8071390f1f8faac695625acfbbb719ff65156cdaa8345c",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8621147c544ecdd61eeb6586c8ed7b45b81c33ef/tools/atlas_legacy_presentation/os_supervisor.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "https://github.com/thalesvalente/Atlas/actions/runs/41780695244",
+            "https://github.com/thalesvalente/Atlas/pull/20#issuecomment-6623622827"
+          ],
+          "counterevidence": "Windows e Ubuntu tiveram testes verdes enquanto o workflow total permaneceu FAILURE; trocar pins para apagar o resultado seria incorreto.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Não incorporar a candidata histórica como qualificada. Uma recuperação futura requer decisão de sucessão explícita e avaliação de seus próprios diffs/SHAs, preservando o FAIL original.",
+          "human_gate": null
+        }
+      ],
+      "disposition": "REJECTED_WITH_REASON",
+      "rationale": "Reject direct incorporation of the O1 synthetic host-isolation subsystem into current producer-trusting Native View architecture. Each OS increment remains retrievable by immutable SHA; no equivalent-hard-budget or production qualification is claimed. Preserve historical succession failure.",
+      "required_patch": null,
+      "human_gate": "Any later production O1 acquisition needs explicit scope/succession authorization and exact final-host qualification"
+    },
+    {
+      "pr": 22,
+      "head_sha": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+      "requirements": [
+        {
+          "id": "P03-22-01",
+          "historical": "verify aceita SOURCE_NOT_AUTHORIZED com source_read=true, contrariando a matriz do recibo L0.",
+          "current": "Validador, pasta L0, estados e consumidor desses recibos estão ausentes dos 306 paths main; o runtime Native View não recebe essa forma de receipt.",
+          "evidence": [
+            {
+              "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+              "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/validate_sanitized.py",
+              "blob": "bcc32187e4767de178f2ada6fbbd50deab17670f",
+              "sha256": "2644d0d038ef8880c9590cac3053ebf5578d0717be16a3f43eac0b4401251551",
+              "url": "https://github.com/thalesvalente/Atlas/blob/dea0f736f20ef006be326b0aa3cf0551fda2dbe2/docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/validate_sanitized.py"
+            },
+            {
+              "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+              "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/PROMPT-CODEX-LOCAL-L0.md",
+              "blob": "5880cdab61e95e987fa62eea84a57bc083d8abc8",
+              "sha256": "09c9b0d8a82aa855253d334a727ccc76df2978bf8009ba47bddcd9c333dc6a28",
+              "url": "https://github.com/thalesvalente/Atlas/blob/dea0f736f20ef006be326b0aa3cf0551fda2dbe2/docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/PROMPT-CODEX-LOCAL-L0.md"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            }
+          ],
+          "tests": [
+            "main-presence-and-os-deltas.json :: absent validator/state markers",
+            "authenticated prior P02-COUNTERPROOFS.json :: P02-22-F01 reproduced and reused"
+          ],
+          "counterevidence": "Ausência do path sozinha não seria suficiente. Foram confrontados contrato/rotas atuais: entrada é File validado do pacote, sem mecanismo L0, e HTTP recusa path arbitrário. Defeito permanece no HEAD histórico, sem correção alegada.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Rejeitar incorporar/reutilizar o validador inseguro como gate do produto. Não criar patch em caminho inexistente apenas para fechar uma tarefa histórica.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-22-02",
+          "historical": "verify aceita WITNESSED quando privacy_review=PENDING ou REJECTED.",
+          "current": "Produto atual não interpreta WITNESSED/privacidade como atestado nem usa esse validador; scientific_approval permanece NOT_EVALUATED.",
+          "evidence": [
+            {
+              "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+              "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/validate_sanitized.py",
+              "blob": "bcc32187e4767de178f2ada6fbbd50deab17670f",
+              "sha256": "2644d0d038ef8880c9590cac3053ebf5578d0717be16a3f43eac0b4401251551",
+              "url": "https://github.com/thalesvalente/Atlas/blob/dea0f736f20ef006be326b0aa3cf0551fda2dbe2/docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/validate_sanitized.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "packages/atlas/src/atlas_viewer/native_notebook.py",
+              "blob": "752128d90064b3e03f4dd9ab16b45dd74570dd89",
+              "sha256": "d63f37904bc76bdc5944d77c94f0f9a76ffd77df2b93e26c088374602591dbad",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/packages/atlas/src/atlas_viewer/native_notebook.py"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "main-presence-and-os-deltas.json :: absence of WITNESSED/privacy_review",
+            "authenticated prior P02-COUNTERPROOFS.json :: P02-22-F02 two variants reused",
+            "main-source-tests-normal.json + main-source-tests-optimized.json :: test_native_notebook.NativeNotebookTests.test_protocol_and_native_reader_use_same_export_without_producer_installed"
+          ],
+          "counterevidence": "O controle histórico de pin C2-D errado era recusado; isso não saneava as combinações de estados. A nova decisão não declara o validador corrigido.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Não reusar o receipt validator para autorizar acesso/publicação. Eventual retomada específica exigirá corrigir e testar toda a matriz de estados antes de consumo.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-22-03",
+          "historical": "Prompt menciona PROFILE_VARIANT_UNVERIFIED fora de STATUSES/schema; instruções QA não são execução.",
+          "current": "Nenhum desses estados/gates é importado pelo produto atual; a convergência possui seu próprio recibo e QA distintas.",
+          "evidence": [
+            {
+              "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+              "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/validate_sanitized.py",
+              "blob": "bcc32187e4767de178f2ada6fbbd50deab17670f",
+              "sha256": "2644d0d038ef8880c9590cac3053ebf5578d0717be16a3f43eac0b4401251551",
+              "url": "https://github.com/thalesvalente/Atlas/blob/dea0f736f20ef006be326b0aa3cf0551fda2dbe2/docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/validate_sanitized.py"
+            },
+            {
+              "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+              "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/PROMPT-CODEX-LOCAL-L0.md",
+              "blob": "5880cdab61e95e987fa62eea84a57bc083d8abc8",
+              "sha256": "09c9b0d8a82aa855253d334a727ccc76df2978bf8009ba47bddcd9c333dc6a28",
+              "url": "https://github.com/thalesvalente/Atlas/blob/dea0f736f20ef006be326b0aa3cf0551fda2dbe2/docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/PROMPT-CODEX-LOCAL-L0.md"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": "specs/004-native-notebook-experience/contracts/native-view.md",
+              "blob": "c3ebd5d916b757a866b0ef04c0ddeea6295f5cf9",
+              "sha256": "f6babfb6eb6536b7b65f3e062c5345017d1c802c77231b214468609939b1e4c4",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/specs/004-native-notebook-experience/contracts/native-view.md"
+            }
+          ],
+          "tests": [
+            "authenticated prior PR22 audit comment and source pins reused",
+            "main-presence-and-os-deltas.json"
+          ],
+          "counterevidence": "Não transformar publicação de template, prompt ou relatório em testemunho real. PR40 resolve 24 artefatos de engenharia, não a QA científica L0.",
+          "disposition": "REJECTED_WITH_REASON",
+          "rationale": "Preservar documentos históricos por SHA e não introduzir esquema inconsistente na cadeia atual de evidências.",
+          "human_gate": null
+        },
+        {
+          "id": "P03-22-04",
+          "historical": "Testemunho privado de três fontes F1 e QA local não autora precisam de escopo exato, integridade e revisão de privacidade.",
+          "current": "A missão atual não acessou os arquivos e não recebeu prova nova desse testemunho. O gate histórico permanece separado do produto e da PR40.",
+          "evidence": [
+            {
+              "ref": "dea0f736f20ef006be326b0aa3cf0551fda2dbe2",
+              "path": "docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/PROMPT-CODEX-LOCAL-L0.md",
+              "blob": "5880cdab61e95e987fa62eea84a57bc083d8abc8",
+              "sha256": "09c9b0d8a82aa855253d334a727ccc76df2978bf8009ba47bddcd9c333dc6a28",
+              "url": "https://github.com/thalesvalente/Atlas/blob/dea0f736f20ef006be326b0aa3cf0551fda2dbe2/docs/missions/atlas-parity-04/f4-l0-codex-desktop-20261101/PROMPT-CODEX-LOCAL-L0.md"
+            },
+            {
+              "ref": "8f8fe01c3041361aa2607194d66af6a640d834ad",
+              "path": ".specify/memory/constitution.md",
+              "blob": "3aaec964d5f6831519c3efdf9117d7748fdc0af6",
+              "sha256": "5792e1cf6aec64bd2409867ce14139ce7bfcbf11c20226871a3f85dd7a8e913b",
+              "url": "https://github.com/thalesvalente/Atlas/blob/8f8fe01c3041361aa2607194d66af6a640d834ad/.specify/memory/constitution.md"
+            }
+          ],
+          "tests": [
+            "historical private witness NOT_RUN; no acquisition in this mission"
+          ],
+          "counterevidence": "Fixtures, autoria do pacote, CI ou readback público não provam conteúdo/mtime/privacidade de fontes privadas.",
+          "disposition": "DEFERRED_HUMAN_DECISION",
+          "rationale": "Objeto humano: autorização e apresentação do recibo sanitizado da revisão L0 correspondente àquelas fontes exatas; sem isso não há promoção L1/G4. Esta convergência não necessita reativar esse trabalho para corrigir o exportador público.",
+          "human_gate": "L0_PRIVATE_WITNESS_SCOPE_AND_RECEIPT_PENDING"
+        }
+      ],
+      "disposition": "REJECTED_WITH_REASON",
+      "rationale": "Reject importing/reusing the demonstrably inconsistent L0 receipt validator as a gate for the current product, where it has no path or consumer. Historical defects stay recorded, not fixed by declaration; original private L0 witness remains unaccepted.",
+      "required_patch": null,
+      "human_gate": "Exact private L0 witness and privacy-reviewed sanitized receipt not received"
+    }
+  ],
+  "interface_with_pr19": {
+    "owner": "P01",
+    "pr": 19,
+    "head_sha": "d498504cd2c4d230088f86e04e55624bbe32df79",
+    "source": {
+      "ref": "d498504cd2c4d230088f86e04e55624bbe32df79",
+      "path": "specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md",
+      "blob": "4cba947bd931b2c932198076f143068967ce909c",
+      "sha256": "abb3b5ea8defe08aefa3829a0737fe45a1f04952bd99e9914e8b64dbc7e462aa",
+      "url": "https://github.com/thalesvalente/Atlas/blob/d498504cd2c4d230088f86e04e55624bbe32df79/specs/003-producer-selective-preview/contracts/reader.ap04-legacy-presentation-v0.2.md"
+    },
+    "finding": "O3 File API/RAM/TTL and Native View Files are different interfaces. A technical decision to use current package path cannot be described as implementing or normatively retiring 0.2.0. Descriptor side remains scoped external/history; no fallback or schema substitution.",
+    "communicated_to": "/root/p01_contracts"
+  },
+  "pr40": {
+    "sha": "7ac3e76d12f6d2e59d235458dc122d85850cf499",
+    "unchanged": true,
+    "relationship": "24 recoveries already resolved; no overlap with current exporter correction. PR40 is not L0 witness or production approval."
+  },
+  "local_gate": {
+    "status": "LOCAL_NOT_REQUIRED",
+    "reason": "Main-origin defect, synthetic regressions and historical-source dispositions are reproducible in Chat/Actions without private datasets, personal drive, GUI or device. No current retained behavior depends on the personal computer.",
+    "private_reservations": "Historical L0/O1 private witness/activation and OLD/NEW accepted-scope limits are preserved, not invoked, waived or promoted in this mission."
+  },
+  "review": {
+    "independent_reviewer": "/root/p02_ui",
+    "status": "WAITING_FOR_CROSS_REVIEW",
+    "product_final_sha_qa": "PENDING_P00_IMPLEMENTATION_AND_CI"
+  }
+}

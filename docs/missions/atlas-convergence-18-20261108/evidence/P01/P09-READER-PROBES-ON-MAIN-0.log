@@ -1,0 +1,47 @@
+[
+  {
+    "id": "CURRENT_ENTITIES",
+    "status": "PASS",
+    "detail": "All 13 declared graph entities survive in entities."
+  },
+  {
+    "id": "DOCUMENT_PRODUCT_NOT_RUNS",
+    "status": "PASS",
+    "detail": "Document, product and table-file metadata do not create additional runs."
+  },
+  {
+    "id": "MENTION_NEUTRAL_ORDER",
+    "status": "PASS",
+    "detail": "Duplicate mention deduplicated in order, with zero experimental edges inferred."
+  },
+  {
+    "id": "UNKNOWN_VALUES_TIMES",
+    "status": "PASS",
+    "detail": "Absent value, declared precision and unknown event time are preserved."
+  },
+  {
+    "id": "TABLE_METADATA_ONLY",
+    "status": "PASS",
+    "detail": "A table file is representable as metadata; no typed grid is fabricated."
+  },
+  {
+    "id": "SOURCE_SCOPED_COLLISION",
+    "status": "PASS",
+    "detail": "Same entity IDs in two sources retain different source-local titles."
+  },
+  {
+    "id": "ORDINAL_REORDER_LIMIT",
+    "status": "PASS",
+    "detail": "Reordering changes which bytes source-1 denotes; stable identity is not asserted."
+  },
+  {
+    "id": "INVALID_SOURCE_NOT_INDEXED",
+    "status": "PASS",
+    "detail": "The current reader rejects a missing target; no alternate source is searched."
+  },
+  {
+    "id": "INPUT_BYTES_UNCHANGED",
+    "status": "PASS",
+    "detail": "Observed synthetic inputs are byte-identical after these reads."
+  }
+]
