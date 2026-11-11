@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import os
+import secrets
 from pathlib import Path
 import stat
 import sys
@@ -242,6 +243,26 @@ def _protect_sources(target: Path, selected: list[str], previous: dict[str, Any]
             raise SourceConfigError("ATLAS_CONFIG_INSIDE_SOURCE")
 
 
+def _create_temporary_config(parent: Path) -> tuple[int, str]:
+    """Create one exclusive config temporary without unbounded Windows ACL retries.
+
+    CPython's tempfile.mkstemp can retry PermissionError many times on
+    Windows when os.access(W_OK) incorrectly reports a writable directory.
+    Direct O_EXCL creation fails promptly on that ACL denial. Retry only
+    actual name collisions, with a strict bound.
+    """
+    if sys.platform != "win32":
+        return tempfile.mkstemp(prefix=".atlas-sources-", suffix=".tmp", dir=parent)
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0)
+    for _ in range(8):
+        candidate = parent / (".atlas-sources-" + secrets.token_hex(16) + ".tmp")
+        try:
+            return os.open(candidate, flags, 0o600), str(candidate)
+        except FileExistsError:
+            continue
+    raise OSError("ATLAS_CONFIG_TEMP_NAME_UNAVAILABLE")
+
+
 def save_sources(sources: list[str],
                  config_path: str | os.PathLike[str] | None = None) -> None:
     """Validate all choices, then atomically replace only the preference JSON.
@@ -264,8 +285,7 @@ def save_sources(sources: list[str],
             raise SourceConfigError("ATLAS_CONFIG_TOO_LARGE")
         target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         # mkstemp creates an exclusive regular file with user-only POSIX mode.
-        descriptor, temporary = tempfile.mkstemp(prefix=".atlas-sources-", suffix=".tmp",
-                                                  dir=target.parent)
+        descriptor, temporary = _create_temporary_config(target.parent)
         try:
             with os.fdopen(descriptor, "wb") as stream:
                 stream.write(encoded)

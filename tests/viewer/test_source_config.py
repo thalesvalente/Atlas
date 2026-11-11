@@ -336,7 +336,7 @@ class SourceConfigTests(unittest.TestCase):
     def test_write_fsync_and_replace_failures_preserve_previous_bytes(self):
         config.save_sources([str(self.source)], self.path)
         before = self.path.read_bytes()
-        for target in ("Path.mkdir", "tempfile.mkstemp", "os.fsync", "os.replace"):
+        for target in ("Path.mkdir", "_create_temporary_config", "os.fsync", "os.replace"):
             with self.subTest(target=target):
                 with patch("atlas_viewer.source_config." + target,
                            side_effect=OSError("operator-private-location")):
@@ -344,6 +344,52 @@ class SourceConfigTests(unittest.TestCase):
                         config.save_sources([], self.path)
                 self.assertEqual(self.path.read_bytes(), before)
                 self.assertEqual(list(self.path.parent.iterdir()), [self.path])
+
+    def test_windows_acl_create_denial_returns_one_safe_error_without_retry(self):
+        config.save_sources([str(self.source)], self.path)
+        previous = self.path.read_bytes()
+        original_open = os.open
+        attempts = []
+
+        def deny_only_new_files(path, flags, *args, **kwargs):
+            if flags & os.O_CREAT:
+                attempts.append(str(path))
+                raise PermissionError("synthetic sensitive directory")
+            return original_open(path, flags, *args, **kwargs)
+
+        # Force the Windows branch even on a POSIX CI host. On Windows the
+        # unbounded tempfile path must never be reached on ACL denial.
+        with patch.object(config.sys, "platform", "win32"), \
+             patch.object(config.tempfile, "mkstemp",
+                          side_effect=AssertionError("UNBOUNDED_TEMPFILE_RETRY")), \
+             patch.object(config.os, "open", side_effect=deny_only_new_files):
+            with self.assertRaisesRegex(config.SourceConfigError,
+                                        "^ATLAS_CONFIG_WRITE_FAILED$"):
+                config.save_sources([], self.path)
+        self.assertEqual(len(attempts), 1)
+        self.assertEqual(self.path.read_bytes(), previous)
+        self.assertEqual(list(self.path.parent.iterdir()), [self.path])
+
+    def test_windows_temp_name_collision_is_bounded_and_recoverable(self):
+        original_open = os.open
+        attempted = []
+
+        def one_collision(path, flags, *args, **kwargs):
+            if flags & os.O_CREAT:
+                attempted.append(str(path))
+                if len(attempted) == 1:
+                    raise FileExistsError("synthetic name collision")
+            return original_open(path, flags, *args, **kwargs)
+
+        with patch.object(config.sys, "platform", "win32"), \
+             patch.object(config.secrets, "token_hex",
+                          side_effect=["a" * 32, "b" * 32]), \
+             patch.object(config.os, "open", side_effect=one_collision):
+            config.save_sources([str(self.source)], self.path)
+        self.assertEqual(len(attempted), 2)
+        self.assertEqual(json.loads(self.path.read_bytes())["sources"],
+                         [str(self.source.resolve())])
+        self.assertEqual(list(self.path.parent.iterdir()), [self.path])
 
     def test_partial_write_failure_removes_only_temporary_and_preserves_old_file(self):
         config.save_sources([str(self.source)], self.path)
