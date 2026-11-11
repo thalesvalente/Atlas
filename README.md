@@ -29,10 +29,47 @@ Abra o **produto novo**, sem executar/importar R4 ou exigir o código Atlas009:
 
 O navegador abre **http://127.0.0.1:8765/notebook**. `-View Protocol`
 abre a visão genérica do protocolo em `/`; `-Source` pode listar até
-16 pacotes explicitamente escolhidos. Sem `-Source` a interface abre **vazia**,
-sem inventar um acervo. O servidor fica somente em 127.0.0.1 e encerra
+16 pacotes explicitamente escolhidos. Sem `-Source`, usa a **configuração local
+salva**, quando houver. Sem configuração, a interface abre **vazia** e orienta
+como escolher uma fonte. `-NoConfig` abre sem consultar a configuração salva.
+O servidor fica somente em 127.0.0.1 e encerra
 com Ctrl+C. O comando `python -m atlas_viewer serve --source ...` é a
 alternativa direta, sem PowerShell.
+
+### Salvar as fontes e reutilizar nas próximas inicializações
+
+Escolha manualmente um pacote compatível e salve a seleção uma vez:
+
+```powershell
+& .\scripts\ABRIR-ATLAS.ps1 -Configure -Source 'CAMINHO_DO_PACOTE_CADERNO_COMPATIVEL'
+& .\scripts\ABRIR-ATLAS.ps1
+```
+
+`-Configure` valida e salva as fontes, sem abrir servidor. Para trocar de disco,
+repita o primeiro comando com o novo caminho. Múltiplas fontes são uma lista
+explícita: `-Source @('PACOTE_A', 'PACOTE_B')`; a lista salva é substituída por
+inteiro. `-Source` sem `-Configure` continua valendo somente para aquela execução.
+
+A alternativa pela CLI funciona em Windows e Linux:
+
+```sh
+atlas config set --source CAMINHO_DO_PACOTE
+atlas serve
+atlas config show
+atlas config clear
+```
+
+A configuração é JSON local por usuário: `%LOCALAPPDATA%\Atlas\sources.json`
+no Windows; `$XDG_CONFIG_HOME/atlas/sources.json` ou
+`~/.config/atlas/sources.json` no Linux. `-Config ARQUIVO` / `--config ARQUIVO`
+seleciona outro arquivo. A ordem é **fonte explícita → arquivo indicado →
+configuração padrão**, sem mesclar seleções. `-ShowConfig` consulta sem abrir
+fontes; `-ShowPaths` revela caminhos apenas quando combinado com `-ShowConfig`.
+`-ClearSources` salva uma lista vazia e preserva todos os pacotes.
+
+Fonte ausente ou configuração inválida produz erro e orientação de reconfiguração;
+o Atlas não procura substitutos. O arquivo local não deve entrar no Git nem nos
+recibos públicos. [Guia de configuração e troca de computador](specs/008-portable-source-config/quickstart.md).
 
 **Acesso imediato ao Caderno legado no Atlas novo (sem migração persistente):**
 

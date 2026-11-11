@@ -31,15 +31,27 @@
 
 ## Gates de implementação e QA
 
-- [ ] Backend e CLI implementados e testados em ambiente declarado.
-- [ ] Launchers integrados e testados, sem serviços nos comandos de gestão.
-- [ ] Contraprovas de persistência, precedência, isolamento, dedup e privacidade executadas.
-- [ ] Smoke `scripts/qa/portable_source_config_smoke.py` e regressões pertinentes de catálogo/launcher/instalação executados.
-- [ ] Revisão independente não autora concluída no snapshot final; findings resolvidos ou explícitos.
+- [x] Backend e CLI implementados e testados em ambiente declarado.
+- [x] Launchers integrados e testados, sem serviços nos comandos de gestão.
+- [x] Contraprovas de persistência, precedência, isolamento, dedup e privacidade executadas.
+- [x] Smoke `scripts/qa/portable_source_config_smoke.py` e regressões pertinentes de catálogo/launcher/instalação executados no Linux instalado.
+- [x] Revisão independente não autora concluída no snapshot final; findings resolvidos ou explícitos.
 - [ ] Branch/commits e PR Draft publicados; base protegida pelo escopo preservada.
 - [ ] Actions observadas no SHA correto; Codex Review registrado como executado, pendente ou não disponível.
 - [ ] Handoff local inclui SHA exato, testes sintéticos e critérios de aceite.
 - [ ] Windows PowerShell 5.1/7 e instalação isolada efetivamente testados: `LOCAL_TEST_NOT_RUN`.
+
+## Recibo da revisão
+
+[QA independente](qa-review.md): backend/CLI 44 testes (43 PASS, 1 SKIP),
+launcher 21 (15 PASS, 6 SKIP), 21 contraprovas adicionais e smoke instalado
+23/23 PASS no Linux/Python 3.12.14. Recibos P00 da suíte completa normal e
+`-O` conferidos: cada um com 204 descobertos, 194 PASS, 10 SKIP e exit 0.
+As suites focais são subconjuntos e não devem ser somadas ao total.
+PowerShell real e Windows do operador
+continuam separados. P00-F01/P01-F01 e ajuste documental LOW foram resolvidos
+e reavaliados; hashes vinculados ao parecer. Publicação e handoff terminal
+ainda têm gates próprios T019/T020 neste snapshot.
 
 ## Limites
 

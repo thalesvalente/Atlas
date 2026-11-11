@@ -21,6 +21,8 @@ privados não integram fixtures, logs públicos, commits nem a configuração de
 Formato JSON UTF-8 estrito: `{"version":1,"sources":["CAMINHO_DO_PACOTE"]}`.
 `version` é inteiro exato 1, não booleano. `sources` é lista ordenada de 0–16
 strings não vazias; chaves desconhecidas/duplicadas e tipos inesperados falham.
+Limites locais: 64 KiB para o JSON e 4096 caracteres por caminho. BOM UTF-8
+de editor Windows é aceito; outras codificações e números não finitos falham.
 
 | Origem | Localização/base | Ausência |
 |---|---|---|
@@ -56,6 +58,9 @@ duplicados sem duplicar a leitura completa do pacote feita pelo catálogo.
 `save_sources([])` persiste seleção vazia; demais gravações validam todos os
 pacotes via SDK antes de criar/substituir configuração. Resumo padrão informa
 estado/quantidade sem paths; `show_paths=True` é exposição local opt-in.
+A exibição não abre pacotes e continua disponível se as fontes foram movidas.
+Arquivo existente malformado ou alheio não é sobrescrito por set/clear: preservar
+e reparar manualmente ou escolher novo `--config`.
 
 ### Comandos e integração
 

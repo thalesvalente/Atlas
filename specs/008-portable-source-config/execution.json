@@ -1,0 +1,153 @@
+{
+  "scope": "CHAT implementation; synthetic data only",
+  "base_sha": "43f7aaafedac7e8b124188baa51b888cee74c13c",
+  "base_tree": "1645cc3edda61cc6372faef21af014f698583934",
+  "branch": "feat/atlas-portable-source-config-20261110",
+  "executed_utc": "2026-11-11T00:42:13.553593+00:00",
+  "normal": {
+    "optimized": false,
+    "suites": [
+      {
+        "suite": "packages/protocol/tests",
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 1
+      },
+      {
+        "suite": "tests/qa",
+        "tests": 55,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "suite": "tests/viewer",
+        "tests": 137,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 9
+      }
+    ],
+    "status": "PASS",
+    "exit_code": 0,
+    "command": [
+      "python",
+      "scripts/run_checks.py"
+    ],
+    "python": "3.12.14",
+    "platform": "Linux",
+    "scope": "installed wheels; no R4; public synthetic fixtures",
+    "source_config_sha256": "81c9d0917780cc75bf1b4977c32ef10068a0dc0cd55085d67604a43e6f86c9bd"
+  },
+  "optimized": {
+    "optimized": true,
+    "suites": [
+      {
+        "suite": "packages/protocol/tests",
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 1
+      },
+      {
+        "suite": "tests/qa",
+        "tests": 55,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "suite": "tests/viewer",
+        "tests": 137,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 9
+      }
+    ],
+    "status": "PASS",
+    "exit_code": 0,
+    "command": [
+      "python",
+      "-O",
+      "scripts/run_checks.py"
+    ],
+    "python": "3.12.14",
+    "platform": "Linux",
+    "scope": "installed wheels; no R4; public synthetic fixtures",
+    "source_config_sha256": "81c9d0917780cc75bf1b4977c32ef10068a0dc0cd55085d67604a43e6f86c9bd"
+  },
+  "independent_smoke": {
+    "status": "PASS_SCOPED",
+    "scope": "installed-portable-source-configuration",
+    "python": "3.12.14",
+    "platform": "linux",
+    "checks": [
+      "installed_without_r4",
+      "first_use_empty",
+      "show_missing_default",
+      "configure_one",
+      "persisted_source_reused",
+      "show_redacted",
+      "missing_saved_source",
+      "replace_moved_path",
+      "moved_path_reused",
+      "malformed_config_rejected",
+      "explicit_source_overrides_malformed_config",
+      "duplicate_source_rejected",
+      "too_many_sources_rejected",
+      "failed_updates_preserve_configuration",
+      "relative_to_config_directory",
+      "configure_multiple",
+      "multiple_sources_reused",
+      "reject_config_inside_source",
+      "launcher_reuses_relative_config",
+      "launcher_empty_does_not_reload_default",
+      "clear_saved_sources",
+      "cleared_selection_empty",
+      "source_bytes_unchanged"
+    ],
+    "check_count": 23,
+    "data": "PUBLIC_SYNTHETIC_FIXTURE_ONLY",
+    "windows_runtime": "LOCAL_TEST_NOT_RUN",
+    "powershell": "NOT_RUN_BY_THIS_SCRIPT",
+    "scientific_acceptance": "NOT_EVALUATED"
+  },
+  "build": {
+    "python": "3.12.14",
+    "setuptools": "84.2.1",
+    "wheel": "0.48.0",
+    "tools": "preinstalled",
+    "new_external_dependencies": false,
+    "project_wheels_installed_in_disposable_venv": true,
+    "pinned_clean_install_script": "NOT_RUN_IN_CHAT; build module absent; CI uses repository pins"
+  },
+  "native_agents": [
+    {
+      "executor": "/root/p01_contracts_qa",
+      "role": "specification and independent non-author runtime QA",
+      "invoked": true
+    },
+    {
+      "executor": "/root/p02_source_config",
+      "role": "backend and own tests",
+      "invoked": true
+    },
+    {
+      "executor": "/root/p03_launchers",
+      "role": "launchers, operations docs and own tests",
+      "invoked": true
+    }
+  ],
+  "finding_status": {
+    "P00-F01": "RESOLVED_RED_GREEN_NONAUTHOR_RETEST",
+    "P01-F01": "RESOLVED_RED_GREEN_NONAUTHOR_RETEST",
+    "P01-D01": "RESOLVED_DOCUMENTATION"
+  },
+  "windows_operator": "LOCAL_TEST_NOT_RUN",
+  "merge": "NOT_AUTHORIZED_NOT_RUN",
+  "private_sources": "NOT_READ",
+  "scientific_acceptance": "NOT_EVALUATED",
+  "ci": "REMOTE_PUBLICATION_RECEIPT_IN_PR",
+  "codex_review": "REMOTE_PUBLICATION_RECEIPT_IN_PR"
+}
