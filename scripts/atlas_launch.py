@@ -22,14 +22,6 @@ import urllib.request
 import webbrowser
 
 
-def _validated_source(value: str) -> str:
-    path = Path(value).expanduser().absolute()
-    if not path.exists():
-        raise ValueError("ATLAS_SOURCE_NOT_FOUND")
-    return str(path)
-
-
-
 def _safe_adapter_reason(stderr: str) -> str:
     """Return only structural codes, never source paths or free-form private data."""
     for line in reversed(stderr.splitlines()[-20:]):
@@ -100,7 +92,10 @@ def _start_viewer(sources: list[str], port: int, view: str, no_open: bool,
     # loopback, so it cannot expose this notebook outside the local computer.
     with socket.socket() as probe:
         probe.bind(("127.0.0.1", port))
-    cmd = [sys.executable, "-I", "-m", "atlas_viewer", "serve", "--port", str(port)]
+    # The parent has already selected sources. In particular, an explicitly
+    # empty selection must not make the child reload the default config.
+    cmd = [sys.executable, "-I", "-X", "utf8", "-m", "atlas_viewer", "serve", "--no-config",
+           "--port", str(port)]
     for source in sources:
         cmd.extend(("--source", source))
     process = subprocess.Popen(cmd, stdin=subprocess.DEVNULL)
@@ -138,6 +133,8 @@ def _start_viewer(sources: list[str], port: int, view: str, no_open: bool,
         print("ATLAS_NOVO_READY: " + url, flush=True)
         if not sources:
             print("ATLAS_EMPTY_CATALOG: nenhuma fonte declarada; sem dados inventados.", flush=True)
+            print("ATLAS_CONFIG_HINT: salve uma fonte com --configure --source CAMINHO "
+                  "ou atlas config set --source CAMINHO.", flush=True)
         if not no_open and not probe_only:
             webbrowser.open(url)
         if probe_only:
@@ -160,7 +157,21 @@ def _start_viewer(sources: list[str], port: int, view: str, no_open: bool,
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Atlas novo + adaptador local opcional")
-    parser.add_argument("--source", action="append", default=[])
+    parser.add_argument("--source", action="append", default=None,
+                        help="Fonte explícita; substitui a seleção salva nesta execução")
+    config_choice = parser.add_mutually_exclusive_group()
+    config_choice.add_argument("--config", help="Arquivo JSON local de configuração")
+    config_choice.add_argument("--no-config", action="store_true",
+                               help="Não ler configuração; usa somente --source explícitas")
+    config_action = parser.add_mutually_exclusive_group()
+    config_action.add_argument("--configure", action="store_true",
+                               help="Salva as --source escolhidas e encerra sem abrir servidor")
+    config_action.add_argument("--show-config", action="store_true",
+                               help="Mostra o estado da configuração sem abrir servidor")
+    config_action.add_argument("--clear-sources", action="store_true",
+                               help="Salva uma seleção vazia, preservando os pacotes")
+    parser.add_argument("--show-paths", action="store_true",
+                        help="Inclui caminhos locais apenas com --show-config")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--view", choices=("Notebook", "Protocol"), default="Notebook")
     parser.add_argument("--no-open", action="store_true")
@@ -173,11 +184,50 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("ATLAS_INVALID_PORT")
     if bool(options.legacy_code_root) != bool(options.legacy_notebook_root):
         parser.error("ATLAS_LEGACY_REQUIRES_BOTH_EXPLICIT_ROOTS")
-    if len(options.source) + bool(options.legacy_code_root) > 16:
+    manages_config = options.configure or options.show_config or options.clear_sources
+    if manages_config and options.legacy_code_root:
+        parser.error("ATLAS_CONFIG_LEGACY_CONFLICT")
+    if manages_config and options.no_config:
+        parser.error("ATLAS_CONFIG_MODE_CONFLICT")
+    if options.show_paths and not options.show_config:
+        parser.error("ATLAS_SHOW_PATHS_REQUIRES_SHOW_CONFIG")
+    if options.configure and not options.source:
+        parser.error("ATLAS_CONFIG_REQUIRES_SOURCE")
+    if (options.show_config or options.clear_sources) and options.source is not None:
+        parser.error("ATLAS_CONFIG_MODE_CONFLICT")
+    if len(options.source or []) + bool(options.legacy_code_root) > 16:
         parser.error("ATLAS_MAX_16_EXPLICIT_SOURCES")
+    try:
+        from atlas_viewer.source_config import (
+            SourceConfigError, config_summary, resolve_sources, save_sources,
+        )
+    except ImportError:
+        print("ATLAS_SOURCE_CONFIG_NOT_INSTALLED: atualize os pacotes do checkout "
+              "selecionado antes de usar este launcher.", file=sys.stderr)
+        return 2
     scratch: tempfile.TemporaryDirectory[str] | None = None
     try:
-        selected = [_validated_source(source) for source in options.source]
+        if options.configure:
+            save_sources(options.source, options.config)
+            print("ATLAS_CONFIG_SAVED: seleção local atualizada; fontes preservadas.")
+            return 0
+        if options.clear_sources:
+            save_sources([], options.config)
+            print("ATLAS_CONFIG_CLEARED: seleção vazia salva; fontes preservadas.")
+            return 0
+        if options.show_config:
+            print(json.dumps(config_summary(options.config, show_paths=options.show_paths),
+                             ensure_ascii=False, indent=2, allow_nan=False))
+            return 0
+        if options.no_config or (options.legacy_code_root and
+                                 options.source is None and options.config is None):
+            # An explicitly chosen legacy producer keeps its historical scope;
+            # it never silently gains unrelated sources from a saved config.
+            selected = resolve_sources(options.source or [])
+        else:
+            selected = resolve_sources(options.source, options.config)
+        if len(selected) + bool(options.legacy_code_root) > 16:
+            raise ValueError("ATLAS_MAX_16_EXPLICIT_SOURCES")
         if options.legacy_code_root:
             # This derived session cache belongs to this invocation only;
             # its original source is never moved, migrated or overwritten.
@@ -187,8 +237,17 @@ def main(argv: list[str] | None = None) -> int:
                                             Path(scratch.name)))
         return _start_viewer(selected, options.port, options.view,
                              options.no_open, options.probe_only)
+    except SourceConfigError as exc:
+        print("ATLAS_NOVO_BLOCKED: " + str(exc) +
+              ". Reconfigure com --configure --source CAMINHO; "
+              "use --config ARQUIVO quando aplicável.", file=sys.stderr)
+        return 2
     except (OSError, ValueError, RuntimeError) as exc:
-        print("ATLAS_NOVO_BLOCKED: " + str(exc), file=sys.stderr)
+        # OS exception strings may contain local filenames. Keep a structural
+        # code, including the existing adapter/server codes, in shared logs.
+        code = re.match(r"ATLAS_[A-Z0-9_:-]+(?=$|[\s(])", str(exc))
+        reason = code.group(0) if code else "ATLAS_LOCAL_IO_FAILED"
+        print("ATLAS_NOVO_BLOCKED: " + reason, file=sys.stderr)
         return 2
     finally:
         if scratch is not None:

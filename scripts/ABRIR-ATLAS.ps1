@@ -6,7 +6,13 @@ param(
     [string]$LegacyCodeRoot,
     [string]$LegacyNotebookRoot,
     [switch]$NoOpen,
-    [switch]$ProbeOnly
+    [switch]$ProbeOnly,
+    [string]$Config,
+    [switch]$Configure,
+    [switch]$ShowConfig,
+    [switch]$ShowPaths,
+    [switch]$ClearSources,
+    [switch]$NoConfig
 )
 # This is the Atlas NEW product launcher, not the historical R4 renderer.
 # The optional legacy reader is invoked out-of-process by atlas_launch.py.
@@ -19,14 +25,28 @@ $launcher = Join-Path $PSScriptRoot 'atlas_launch.py'
 if (-not (Test-Path -LiteralPath $launcher -PathType Leaf)) {
     throw 'ATLAS_NOVO_LAUNCHER_MISSING'
 }
-& $python.Source -I -c 'import atlas_viewer, caderno_protocol'
+& $python.Source -I -X utf8 -c 'import atlas_viewer, caderno_protocol'
 if ($LASTEXITCODE -ne 0) {
     throw 'ATLAS_NOVO_NOT_INSTALLED: instale packages/protocol e packages/atlas antes de abrir.'
 }
 $arguments = @('--port', [string]$Port, '--view', $View)
 foreach ($item in $Source) {
+    if ([string]::IsNullOrWhiteSpace($item)) {
+        throw 'ATLAS_SOURCE_PATH_INVALID'
+    }
     $arguments += @('--source', [string]$item)
 }
+if ($PSBoundParameters.ContainsKey('Config')) {
+    if ([string]::IsNullOrWhiteSpace($Config)) {
+        throw 'ATLAS_CONFIG_PATH_INVALID'
+    }
+    $arguments += @('--config', $Config)
+}
+if ($Configure) { $arguments += '--configure' }
+if ($ShowConfig) { $arguments += '--show-config' }
+if ($ShowPaths) { $arguments += '--show-paths' }
+if ($ClearSources) { $arguments += '--clear-sources' }
+if ($NoConfig) { $arguments += '--no-config' }
 if (-not [string]::IsNullOrWhiteSpace($LegacyCodeRoot)) {
     $arguments += @('--legacy-code-root', $LegacyCodeRoot)
 }
@@ -37,7 +57,7 @@ if ($NoOpen) { $arguments += '--no-open' }
 if ($ProbeOnly) { $arguments += '--probe-only' }
 # Pass only ordinary arguments, not an embedded Python program. This works
 # in Windows PowerShell 5.1's legacy native argument mode and in pwsh 7.
-& $python.Source -I -B $launcher @arguments
+& $python.Source -I -X utf8 -B $launcher @arguments
 if ($LASTEXITCODE -ne 0) {
     throw ('ATLAS_NOVO_SESSION_FAILED: exit ' + $LASTEXITCODE)
 }
