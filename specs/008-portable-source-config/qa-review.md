@@ -129,3 +129,81 @@ A CI final e revisão Codex, quando disponíveis, têm SHA/status próprios.
 | `README.md` | `24ff20bc77078036688e132e7530e19800c43ba4b209cd82dc3a08e0b89859f2` |
 
 Recibo independente de smoke (somente dados sintéticos): SHA-256 `b051434b533900688ffd7c337f6b39ddf98f22288dcfca5827ea5ce0428e5b84`.
+
+## Adendo pós-CI — caminhos canônicos e timeout do navegador
+
+Este adendo preserva os resultados e hashes históricos acima, referentes à
+candidata `e7b0a56b17a3400c2b73b052c05fff84becd677a`. Não concede PASS global
+enquanto o reteste remoto no próximo SHA estiver pendente.
+
+### Expectativas de caminhos no Windows
+
+P01 leu os logs `ci-130238953072.log` (10 falhas) e `ci-130238953175.log`
+(11 falhas, incluindo o caso de 16 fontes). Todas essas falhas mostravam a
+mesma divergência: a entrada temporária usava alias Windows 8.3, enquanto a
+API devolvia o caminho absoluto canônico, conforme o contrato aprovado.
+As falhas ocorreram em igualdade textual das expectativas dos testes.
+P00 conferiu adicionalmente os jobs otimizados `130238953128` (11 falhas) e
+`130238953690` (10), relatando os mesmos casos e nenhum outro ERROR; esses
+dois logs não foram executados nem inspecionados por P01. Os quatro jobs
+Windows afetados são requalificados pela próxima CI.
+
+P02 e P03 corrigiram apenas as expectativas, usando `Path.resolve()`. P01
+revisou os diffs: entradas continuam originais, igualdade continua exata,
+ordem, cardinalidade e Unicode continuam verificados. Não houve mudança de
+runtime, skips, workflows, protocolo ou fontes para obter resultado verde.
+
+P01 reexecutou os testes modificados em Linux/Python 3.12.14:
+
+| Execução | Config/CLI | Launcher | Exit |
+|---|---|---|---|
+| Normal | 44 descobertos, 43 PASS, 1 SKIP | 21 descobertos, 15 PASS, 6 SKIP | 0 |
+| `-O` | 44 descobertos, 43 PASS, 1 SKIP | 21 descobertos, 15 PASS, 6 SKIP | 0 |
+
+São 65 testes por modo, 58 PASS e 7 SKIP; os SKIPs são dependências de Windows
+ou PowerShell. O reteste Windows pela CI do novo SHA permanece obrigatório.
+As identidades atuais dos dois testes substituem suas entradas históricas na
+tabela anterior; os demais oito arquivos auditados mantêm os mesmos bytes:
+
+| Arquivo alterado pós-CI | SHA-256 revisado |
+|---|---|
+| `tests/viewer/test_source_config.py` | `b5696702f12ff8b77bd79fc336ab07082a64f1296fff128c9480c85ee87f2805` |
+| `tests/viewer/test_native_notebook_source_config_launcher.py` | `1bea61c9c6ead65af4518f53743f608870f2b4d306d9691558f00c6507e71cc6` |
+
+### Timeout do cenário original: INCONCLUSIVE / PENDING
+
+No run `42933864055`, job `130238952728`, o cenário
+`original-reference-inert-native-surface` completou a verificação da rota
+inerte e a abertura normal de `/notebook`. O recibo mostrou zero erros de
+página e zero requisições HTTP externas. A falha seguinte foi o timeout de
+30 segundos em `scripts/qa/browser_original.mjs:51`, aguardando
+`popup.waitForLoadState('domcontentloaded')` após Ctrl-click do link nativo.
+O log de espera registrou `networkidle`, mas não registrou URL, readyState
+ou eventos do documento do popup; isso não demonstra a causa raiz.
+
+P01 confirmou que `browser_original.mjs`, `scripts/ci/run_browser.py`, servidor
+e arquivos estáticos permanecem iguais à base `43f7aaaf…` e à candidata e7b0.
+O runner original usa seleção vazia sem `--no-config`; isso merece isolamento
+na investigação, mas não há evidência de configuração herdada no job. Os
+comandos de instalação desse job não executam `config set`.
+
+A reprodução diagnóstica de P00 no CHAT foi **BLOCKED antes de abrir página**:
+`process_singleton_posix` falhou em `socket()` com `Operation not permitted`;
+o log também registrou `ptrace` negado. Não é reprodução do timeout de CI,
+não prova sua correção e não justifica chamá-lo de flake. Não houve contorno
+das restrições do runtime.
+
+Próximo passo: reteste natural do mesmo cenário, sem alterações, no SHA que
+publicar as expectativas Windows corrigidas. Se o timeout reaparecer, colher
+URL/readyState, eventos de navegação e lifecycle, responses/requestfailed e
+trace do popup em diagnóstico separado; comparar aba ativa/background antes
+de propor reparo. Preservar as asserções de rota inerte, ausência de execução
+HTML, navegação e requisições externas. Não mudar produto, baseline, versões
+de ferramentas ou skips às cegas. Windows do operador segue `LOCAL_TEST_NOT_RUN`.
+
+### Identidade das evidências consultadas no adendo
+
+- `ci-130238953072.log`: SHA-256 `d167cd1e3aa8001344bef6a08c38dae7748ff75c0c12eab5c781e369b93bb146`.
+- `ci-130238953175.log`: SHA-256 `ce97bbef6cc89f024bc85d547c79ce3761bce9b1aba2d86f977b60b276a6d534`.
+- `ci-130238952728.log`: SHA-256 `a543a423af259e320d4bf7f8bc803fe7791bc5c50ffecdfbffc0643e446cc8bc`.
+- `browser-original-diagnostic.log`: SHA-256 `2214123937f71efb80a13dc0fabc47280f4185a04f3ff0a4f015a0a798ad2122`.

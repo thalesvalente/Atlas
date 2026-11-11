@@ -180,7 +180,10 @@ class SourceConfigTests(unittest.TestCase):
             shutil.copytree(self.source, source)
             values.append(str(source))
         config.save_sources(values, self.path)
-        self.assertEqual(config.resolve_sources(config_path=self.path), values)
+        # Windows TEMP may use an 8.3 alias; the contract persists canonical
+        # absolute paths. Keep the original inputs and compare the exact order.
+        expected = [str(Path(value).resolve()) for value in values]
+        self.assertEqual(config.resolve_sources(config_path=self.path), expected)
 
     def test_duplicate_directory_metadata_and_dot_alias_are_rejected(self):
         aliases = [str(self.source), str(self.source / "."), str(self.source / "ro-crate-metadata.json")]

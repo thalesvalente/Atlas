@@ -84,7 +84,9 @@ class SourceSelectionLauncherTests(unittest.TestCase):
         self.configure(default=True)
         code, _, error, viewer = self.invoke([])
         self.assertEqual(code, 0, error)
-        self.assertEqual(viewer.call_args.args[0], [str(self.source)])
+        # Windows temporary roots may use an 8.3 alias. The public contract
+        # returns the canonical absolute path, while the input remains as given.
+        self.assertEqual(viewer.call_args.args[0], [str(self.source.resolve())])
         self.assertEqual(digests(self.source), self.before)
 
     def test_config_file_with_relative_source_uses_its_parent_not_cwd(self):
@@ -97,7 +99,7 @@ class SourceSelectionLauncherTests(unittest.TestCase):
         with chdir(elsewhere):
             code, _, error, viewer = self.invoke(["--config", str(self.config)])
         self.assertEqual(code, 0, error)
-        self.assertEqual(viewer.call_args.args[0], [str(self.source)])
+        self.assertEqual(viewer.call_args.args[0], [str(self.source.resolve())])
 
     def test_explicit_source_does_not_read_malformed_selected_config(self):
         self.config.parent.mkdir()
@@ -106,7 +108,7 @@ class SourceSelectionLauncherTests(unittest.TestCase):
             "--source", str(self.source), "--config", str(self.config),
         ])
         self.assertEqual(code, 0, error)
-        self.assertEqual(viewer.call_args.args[0], [str(self.source)])
+        self.assertEqual(viewer.call_args.args[0], [str(self.source.resolve())])
         self.assertEqual(self.config.read_text(encoding="utf-8"), "{broken")
 
     def test_move_then_reconfigure_replaces_saved_path(self):
@@ -123,7 +125,7 @@ class SourceSelectionLauncherTests(unittest.TestCase):
         self.configure(moved)
         code, _, error, viewer = self.invoke(["--config", str(self.config)])
         self.assertEqual(code, 0, error)
-        self.assertEqual(viewer.call_args.args[0], [str(moved)])
+        self.assertEqual(viewer.call_args.args[0], [str(moved.resolve())])
         self.assertEqual(digests(moved), self.before)
 
     def test_show_is_redacted_until_paths_are_explicitly_requested(self):
@@ -142,7 +144,7 @@ class SourceSelectionLauncherTests(unittest.TestCase):
         ])
         self.assertEqual(code, 0, error)
         shown = json.loads(output)
-        self.assertEqual(shown["sources"], [str(self.source)])
+        self.assertEqual(shown["sources"], [str(self.source.resolve())])
         viewer.assert_not_called()
         self.assertEqual(self.config.read_bytes(), before)
 
@@ -167,7 +169,7 @@ class SourceSelectionLauncherTests(unittest.TestCase):
         self.assertEqual(viewer.call_args.args[0], [])
         code, _, error, viewer = self.invoke(["--no-config", "--source", str(self.source)])
         self.assertEqual(code, 0, error)
-        self.assertEqual(viewer.call_args.args[0], [str(self.source)])
+        self.assertEqual(viewer.call_args.args[0], [str(self.source.resolve())])
 
     def test_conflicting_modes_fail_without_writes_or_server(self):
         cases = [
@@ -224,7 +226,7 @@ class SourceSelectionLauncherTests(unittest.TestCase):
             ])
         self.assertEqual(code, 0, error)
         self.assertEqual(viewer.call_args.args[0], ["explicit-temporary-export"])
-        self.assertEqual(source_config.resolve_sources(), [str(self.source)])
+        self.assertEqual(source_config.resolve_sources(), [str(self.source.resolve())])
 
     def test_legacy_can_append_to_explicit_config_without_saving_export(self):
         self.configure()
@@ -236,7 +238,7 @@ class SourceSelectionLauncherTests(unittest.TestCase):
                 "--legacy-notebook-root", "explicit-notebook",
             ])
         self.assertEqual(code, 0, error)
-        self.assertEqual(viewer.call_args.args[0], [str(self.source), "explicit-temporary-export"])
+        self.assertEqual(viewer.call_args.args[0], [str(self.source.resolve()), "explicit-temporary-export"])
         self.assertEqual(self.config.read_bytes(), before)
 
     def test_operating_system_errors_do_not_disclose_paths(self):
@@ -322,7 +324,8 @@ class PowerShellSourceConfigMixin:
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         selected = json.loads(self.config.read_text(encoding="utf-8"))["sources"]
-        self.assertEqual(selected, [str(self.source), str(self.other)])
+        # Keep exact canonical paths and order, including all Unicode segments.
+        self.assertEqual(selected, [str(self.source.resolve()), str(self.other.resolve())])
         shown = self.invoke_ps("-ShowConfig -ShowPaths -Config $env:ATLAS_TEST_CONFIG")
         self.assertEqual(shown.returncode, 0, shown.stdout + shown.stderr)
         self.assertEqual(json.loads(shown.stdout)["sources"], selected)
